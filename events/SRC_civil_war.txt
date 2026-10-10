@@ -1,0 +1,563 @@
+# ============================================================================
+# 叙拉古 (SRC) · 开局事件链【叙拉古内战】（2026-09-19）
+# namespace src_cw · 事件 1..16 为四幕 + 终幕，17 是「暂缓修正案」的复机会，20 是【改革派凯旋！】
+#
+# 触发条件：开局第 7 天由 common/on_actions/SRC_civilwar_on_actions.txt 的 on_daily_SRC 弹事件 1；
+#   之后各幕按原稿标注的天数在选项的 hidden_effect 里排下一场。
+# 分支不改变链条长度，只改数值与旗标（避免 2^8 组合）；唯一改变流程的是事件 1 的 B 分支：
+#   它中止链条并上「灰厅的沉默」，90 天后由事件 17 再给一次回到事件 2 的机会。
+# 内战在哪落地：SR1 / SR2 的建政、割州、部队与宣战全部集中在事件 16 的 B 分支。
+#
+# 2026-09-19 二改（用户要求「大幅度增加负面效果」）：
+#   ① 链条里**每一个选项**至少扣 §R-10%§! 基础稳定度，越往后越重（终幕 -15%、开战 -25%）。
+#      原先那些 +2%/+3%/+5% 的正向稳定度全部去掉，代价改由政治点、战争支持度、人力、经验承担。
+#   ② 走和平路线（事件 16 选 A 签署宪法、不打内战）额外获得限期精神
+#      §Y家族可能会倒闭，但绝不会变质§!：每周稳定度 §R-1%§!，持续 365 天。
+#      ——家族没被武力清算，就继续在体制内烂着。
+#
+# ⚠ country_event 一律不写 major = yes（见 [[hoi4-major-event-scope-leak]]）
+#
+# 2026-09-23 AI 取向（人机叙拉古「必定打内战」）：
+#   双选项事件全部补了 ai_chance —— 走 A 的一侧给 100，其余 30~50；
+#   事件 1 的 B（中止链条 + 灰厅的沉默）与事件 16 的 A（和平过渡）除权重 0 外
+#   还叠了 trigger = { is_ai = no }，AI 连选项都看不到，只剩 16.B 全面内战可点。
+#   A 分支的偏好口径是「哪一侧攒战争支持度/陆军经验，AI 就走哪一侧」：
+#   3.A/6.A 给陆军经验（换更强编制），2.A/4.A/8.A/10.A 给战争支持度（抬高投降界限）。
+#   注入脚本 E:/tmp/src_cw_ai_chance.cjs（幂等，改权重改那张表重跑）。
+# ============================================================================
+add_namespace = src_cw
+
+# ── 第一幕 · 事件 1：灰厅的否决（开局第 7 天）──
+country_event = {
+	id = src_cw.1
+	title = src_cw.1.t
+	desc = src_cw.1.d
+	picture = GFX_report_event_VIC_council
+
+	is_triggered_only = yes
+
+	option = { # A 坚持改革
+		name = src_cw.1.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.12
+		add_political_power = -30
+		set_country_flag = SRC_cw_flag_reform_path
+		custom_effect_tooltip = src_cw.1.a.tt
+		hidden_effect = {
+			country_event = { id = src_cw.2 days = 3 }
+		}
+	}
+
+	option = { # B 暂缓修正案
+		name = src_cw.1.b
+		ai_chance = {
+			base = 0
+		}
+
+		# AI 绝不走这条路（权重 0 + is_ai 闸门双保险）
+		trigger = {
+			is_ai = no
+		}
+		add_stability = -0.10
+		add_political_power = 20
+		add_ideas = SRC_grey_hall_concession
+		set_country_flag = SRC_cw_flag_stalled
+		custom_effect_tooltip = src_cw.1.b.tt
+		hidden_effect = {
+			country_event = { id = src_cw.17 days = 90 }
+		}
+	}
+}
+
+# ── 第一幕 · 事件 2：威尼斯的走私船 ──
+country_event = {
+	id = src_cw.2
+	title = src_cw.2.t
+	desc = src_cw.2.d
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	is_triggered_only = yes
+
+	option = { # A 强行扣留
+		name = src_cw.2.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.12
+		add_war_support = 0.05
+		add_manpower = -5000
+		set_country_flag = SRC_cw_flag_venice_broken
+		hidden_effect = {
+			country_event = { id = src_cw.3 days = 5 }
+		}
+	}
+
+	option = { # B 谈判放行
+		name = src_cw.2.b
+		ai_chance = {
+			base = 50
+		}
+		add_stability = -0.10
+		add_political_power = -20
+		set_country_flag = SRC_cw_flag_venice_alert
+		hidden_effect = {
+			country_event = { id = src_cw.3 days = 5 }
+		}
+	}
+}
+
+# ── 第一幕 · 事件 3：萨卢佐的私兵 ──
+country_event = {
+	id = src_cw.3
+	title = src_cw.3.t
+	desc = src_cw.3.d
+	picture = GFX_report_event_Generic_Manor_Hall
+
+	is_triggered_only = yes
+
+	option = { # A 压下私兵
+		name = src_cw.3.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.10
+		army_experience = 25
+		add_political_power = -25
+		set_country_flag = SRC_cw_flag_dmitri_loyal
+		hidden_effect = {
+			country_event = { id = src_cw.4 days = 3 }
+		}
+	}
+
+	option = { # B 默认集结
+		name = src_cw.3.b
+		ai_chance = {
+			base = 40
+		}
+		add_stability = -0.14
+		add_war_support = 0.05
+		set_country_flag = SRC_cw_flag_dmitri_family
+		hidden_effect = {
+			country_event = { id = src_cw.4 days = 3 }
+		}
+	}
+}
+
+# ── 第一幕 · 事件 4：卡西米尔的最后通牒 ──
+country_event = {
+	id = src_cw.4
+	title = src_cw.4.t
+	desc = src_cw.4.d
+	picture = GFX_report_event_Generic_Lungmen_Office
+
+	is_triggered_only = yes
+
+	option = { # A 三天期限
+		name = src_cw.4.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.15
+		add_political_power = -40
+		add_war_support = 0.03
+		set_country_flag = SRC_cw_flag_casimir_out
+		custom_effect_tooltip = src_cw.4.a.tt
+		hidden_effect = {
+			country_event = { id = src_cw.5 days = 7 }
+		}
+	}
+
+	option = { # B 延长谈判
+		name = src_cw.4.b
+		ai_chance = {
+			base = 40
+		}
+		add_stability = -0.10
+		add_political_power = -15
+		set_country_flag = SRC_cw_flag_casimir_in
+		hidden_effect = {
+			country_event = { id = src_cw.5 days = 7 }
+		}
+	}
+}
+
+# ── 第二幕 · 事件 5：拉维妮娅的法槌 ──
+country_event = {
+	id = src_cw.5
+	title = src_cw.5.t
+	desc = src_cw.5.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_cw.5.a
+		add_stability = -0.12
+		add_political_power = -30
+		add_war_support = 0.05
+		set_country_flag = SRC_cw_flag_court_authority
+		hidden_effect = {
+			country_event = { id = src_cw.6 days = 5 }
+		}
+	}
+}
+
+# ── 第二幕 · 事件 6：德米特里的选择 ──
+country_event = {
+	id = src_cw.6
+	title = src_cw.6.t
+	desc = src_cw.6.d
+	picture = GFX_report_event_Generic_Mansion_Room
+
+	is_triggered_only = yes
+
+	option = { # A 选择莱昂图索
+		name = src_cw.6.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.10
+		add_political_power = 20
+		army_experience = 15
+		set_country_flag = SRC_cw_flag_dmitri_loyal
+		hidden_effect = {
+			country_event = { id = src_cw.7 days = 5 }
+		}
+	}
+
+	option = { # B 选择家族
+		name = src_cw.6.b
+		ai_chance = {
+			base = 30
+		}
+		add_stability = -0.15
+		add_war_support = 0.05
+		add_political_power = -35
+		set_country_flag = SRC_cw_flag_dmitri_family
+		hidden_effect = {
+			country_event = { id = src_cw.7 days = 5 }
+		}
+	}
+}
+
+# ── 第二幕 · 事件 7：伊雷妮的卡车 ──
+country_event = {
+	id = src_cw.7
+	title = src_cw.7.t
+	desc = src_cw.7.d
+	picture = GFX_report_event_Generic_Workers_Union
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_cw.7.a
+		add_stability = -0.12
+		add_manpower = 20000
+		add_war_support = 0.05
+		set_country_flag = SRC_cw_flag_union_armed
+		hidden_effect = {
+			country_event = { id = src_cw.8 days = 3 }
+		}
+	}
+}
+
+# ── 第二幕 · 事件 8：拉普兰德的赌局 ──
+country_event = {
+	id = src_cw.8
+	title = src_cw.8.t
+	desc = src_cw.8.d
+	picture = GFX_report_event_UFE_Glenwolf
+
+	is_triggered_only = yes
+
+	option = { # A 德克萨斯选边新沃尔西尼
+		name = src_cw.8.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.12
+		add_war_support = 0.04
+		add_political_power = -20
+		set_country_flag = SRC_cw_flag_lappland_enemy
+		hidden_effect = {
+			country_event = { id = src_cw.9 days = 7 }
+		}
+	}
+
+	option = { # B 德克萨斯拒绝选择
+		name = src_cw.8.b
+		ai_chance = {
+			base = 40
+		}
+		add_stability = -0.10
+		add_political_power = -10
+		set_country_flag = SRC_cw_flag_lappland_neutral
+		hidden_effect = {
+			country_event = { id = src_cw.9 days = 7 }
+		}
+	}
+}
+
+# ── 第三幕 · 事件 9：第一枪 ──
+country_event = {
+	id = src_cw.9
+	title = src_cw.9.t
+	desc = src_cw.9.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_cw.9.a
+		add_stability = -0.18
+		add_war_support = 0.10
+		army_experience = 30
+		add_political_power = -40
+		set_country_flag = SRC_cw_flag_shots_fired
+		custom_effect_tooltip = src_cw.9.a.tt
+		hidden_effect = {
+			country_event = { id = src_cw.10 days = 3 }
+		}
+	}
+}
+
+# ── 第三幕 · 事件 10：巨狼之口出动 ──
+country_event = {
+	id = src_cw.10
+	title = src_cw.10.t
+	desc = src_cw.10.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	option = { # A 家族联军退出灰厅
+		name = src_cw.10.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.15
+		add_war_support = 0.05
+		set_country_flag = SRC_cw_flag_greyhall_dead
+		hidden_effect = {
+			country_event = { id = src_cw.11 days = 5 }
+		}
+	}
+
+	option = { # B 家族联军暂时停手
+		name = src_cw.10.b
+		ai_chance = {
+			base = 40
+		}
+		add_stability = -0.12
+		add_political_power = -20
+		set_country_flag = SRC_cw_flag_low_intensity
+		hidden_effect = {
+			country_event = { id = src_cw.11 days = 5 }
+		}
+	}
+}
+
+# ── 第三幕 · 事件 11：西西里夫人的沉默 ──
+country_event = {
+	id = src_cw.11
+	title = src_cw.11.t
+	desc = src_cw.11.d
+	picture = GFX_report_event_Generic_Palace_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_cw.11.a
+		add_stability = -0.10
+		add_political_power = -25
+		set_country_flag = SRC_cw_flag_madam_listens
+		hidden_effect = {
+			country_event = { id = src_cw.12 days = 3 }
+		}
+	}
+}
+
+# ── 第三幕 · 事件 12：德克萨斯的抉择 ──
+country_event = {
+	id = src_cw.12
+	title = src_cw.12.t
+	desc = src_cw.12.d
+	picture = GFX_report_event_REU_The_New_Rifle
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_cw.12.a
+		add_stability = -0.14
+		add_manpower = 15000
+		add_war_support = 0.05
+		set_country_flag = SRC_cw_flag_texas_with_us
+		hidden_effect = {
+			country_event = { id = src_cw.13 days = 10 }
+		}
+	}
+}
+
+# ── 第四幕 · 事件 13：移动城市分裂 ──
+country_event = {
+	id = src_cw.13
+	title = src_cw.13.t
+	desc = src_cw.13.d
+	picture = GFX_report_event_Generic_Chernobog_Skyline
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_cw.13.a
+		add_stability = -0.20
+		add_war_support = 0.08
+		add_political_power = -40
+		set_country_flag = SRC_cw_flag_cities_split
+		custom_effect_tooltip = src_cw.13.a.tt
+		hidden_effect = {
+			country_event = { id = src_cw.14 days = 7 }
+		}
+	}
+}
+
+# ── 第四幕 · 事件 14：罗德岛介入 ──
+country_event = {
+	id = src_cw.14
+	title = src_cw.14.t
+	desc = src_cw.14.d
+	picture = GFX_report_event_Generic_RI_Doctors_Office
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_cw.14.a
+		add_stability = -0.12
+		add_manpower = 20000
+		add_political_power = -20
+		set_country_flag = SRC_cw_flag_rodis_in
+		hidden_effect = {
+			country_event = { id = src_cw.15 days = 10 }
+		}
+	}
+}
+
+# ── 第四幕 · 事件 15：狼之主的选择 ──
+country_event = {
+	id = src_cw.15
+	title = src_cw.15.t
+	desc = src_cw.15.d
+	picture = GFX_report_event_REU_Wendigo_With_Rabbit
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_cw.15.a
+		add_stability = -0.14
+		army_experience = 30
+		add_war_support = 0.03
+		add_political_power = -25
+		set_country_flag = SRC_cw_flag_wolves_watch
+		hidden_effect = {
+			country_event = { id = src_cw.16 days = 180 }
+		}
+	}
+}
+
+# ── 终幕 · 事件 16：灰厅圆桌的最后一次会议 ──
+country_event = {
+	id = src_cw.16
+	title = src_cw.16.t
+	desc = src_cw.16.d
+	picture = GFX_report_event_VIC_council
+
+	is_triggered_only = yes
+
+	option = { # A 签署宪法：和平过渡，但家族烂在体制里
+		name = src_cw.16.a
+		ai_chance = {
+			base = 0
+		}
+
+		# AI 绝不走这条路（权重 0 + is_ai 闸门双保险）
+		trigger = {
+			is_ai = no
+		}
+		add_stability = -0.15
+		add_war_support = -0.05
+		add_political_power = 30
+		SRC_reform_victory_grant_effect = yes
+		add_timed_idea = {
+			idea = SRC_family_rot
+			days = 365
+		}
+		custom_effect_tooltip = src_cw.16.a.tt
+	}
+
+	option = { # B 拒绝签署 → 全面内战
+		name = src_cw.16.b
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.25
+		SRC_civil_war_breakout_effect = yes
+		custom_effect_tooltip = src_cw.16.b.tt
+	}
+}
+
+# ── 事件 1 选「暂缓修正案」后的复机会 ──
+country_event = {
+	id = src_cw.17
+	title = src_cw.17.t
+	desc = src_cw.17.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	option = { # 重新推动修正案 → 回到事件 2
+		name = src_cw.17.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.12
+		add_political_power = -50
+		remove_ideas = SRC_grey_hall_concession
+		set_country_flag = SRC_cw_flag_reform_path
+		clr_country_flag = SRC_cw_flag_stalled
+		hidden_effect = {
+			country_event = { id = src_cw.2 days = 3 }
+		}
+	}
+
+	option = { # 认了 → 链条就此收束，拿不到「改革派凯旋！」
+		name = src_cw.17.b
+		ai_chance = {
+			base = 0
+		}
+
+		# AI 绝不走这条路（权重 0 + is_ai 闸门双保险）
+		trigger = {
+			is_ai = no
+		}
+		add_stability = -0.10
+		add_political_power = 40
+		custom_effect_tooltip = src_cw.17.b.tt
+	}
+}
+
+# ── 事件 20：改革派凯旋！（内战打完、SR1 与 SR2 都不存在时由 on_monthly_SRC 弹）──
+country_event = {
+	id = src_cw.20
+	title = src_cw.20.t
+	desc = src_cw.20.d
+	picture = GFX_report_event_ideal
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_cw.20.a
+		SRC_reform_victory_grant_effect = yes
+		add_political_power = 50
+	}
+}

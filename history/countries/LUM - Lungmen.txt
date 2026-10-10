@@ -1,0 +1,453 @@
+capital = 1069
+
+set_convoys = 0
+set_stability = 0.5
+set_war_support = 0.2
+set_research_slots = 2
+starting_train_buffer = 1
+set_fuel_ratio = 0.8
+add_command_power = 0
+
+oob = "LUM_Start"
+
+recruit_character = LUM_Wei_Zunwu
+recruit_character = LUM_Liu_Baoguo
+recruit_character = LUM_Wei_Gaakhong
+recruit_character = LUM_Merlin_Swire
+recruit_character = LUM_Touh_Yauhlahm
+recruit_character = LUM_Sung_Hohnihn
+
+add_ideas = {
+	disarmed_nation
+	free_trade
+	civilian_economy
+	special_region
+
+	no_voting
+	working_law_14h
+	behavior_control
+	subsistence_agriculture
+	small_production_line
+	high_illiteracy_rate
+	inefficient_administration
+	rampant_poverty
+
+	LUM_East_Terra_economic_center
+}
+
+#龙门机制变量
+set_variable = {
+	var = LUM.LUM_Lungmen_business_LungmenBi
+	value = 300000
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_business_earned
+	value = 0
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_business_credibility
+	value = 0.8
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_business_LungmenBi_prospective
+	value = 0
+}
+add_to_variable = {
+	var = LUM.LUM_Lungmen_business_LungmenBi_prospective
+	value = LUM.LUM_Lungmen_business_earned
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.LUM_Lungmen_business_LungmenBi
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 0.2
+}
+multiply_temp_variable = {
+	var = temp1
+	value = LUM.LUM_Lungmen_business_credibility
+}
+add_to_variable = {
+	var = LUM.LUM_Lungmen_business_LungmenBi_prospective
+	value = temp1
+}
+#投资决议消耗龙门币（每天更新）
+set_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_civilian_construction_investment_cost
+	value = 50000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 3
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_civilian_construction_investment_cost
+	value = temp1
+}
+
+set_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_Kuranta_speed_running_gambling_cost
+	value = 20000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 3
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_Kuranta_speed_running_gambling_cost
+	value = temp1
+}
+
+set_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_give_cheap_loans_cost
+	value = 80000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 3
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_give_cheap_loans_cost
+	value = temp1
+}
+
+set_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_buy_civilian_company_cost
+	value = 120000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 3
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_buy_civilian_company_cost
+	value = temp1
+}
+
+set_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_give_high_interest_loan_cost
+	value = 155000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 3
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_give_high_interest_loan_cost
+	value = temp1
+}
+
+set_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_solve_business_conflict_cost
+	value = 65000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 3
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_solve_business_conflict_cost
+	value = temp1
+}
+
+set_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_underground_arms_market_cost
+	value = 300000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 3
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_underground_arms_market_cost
+	value = temp1
+}
+
+set_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_take_over_large_construction_project_cost
+	value = 400000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 3
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_business_LUM_take_over_large_construction_project_cost
+	value = temp1
+}
+
+#买卖日用品花费
+set_variable = {
+	var = LUM.LUM_Lungmen_consumer_small_cost
+	value = 50000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 4
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_consumer_small_cost
+	value = temp1
+}
+
+set_variable = {
+	var = LUM.LUM_Lungmen_consumer_medium_cost
+	value = 120000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 4.5
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_consumer_medium_cost
+	value = temp1
+}
+
+set_variable = {
+	var = LUM.LUM_Lungmen_consumer_large_cost
+	value = 200000
+}
+set_temp_variable = {
+	var = temp1
+	value = LUM.modifier@consumer_goods_factor
+}
+subtract_from_temp_variable = {
+	var = temp1
+	value = 0.25
+}
+multiply_temp_variable = {
+	var = temp1
+	value = 5
+}
+add_to_temp_variable = {
+	var = temp1
+	value = 1
+}
+multiply_variable = {
+	var = LUM.LUM_Lungmen_consumer_large_cost
+	value = temp1
+}
+
+#龙门动乱镇压
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_suppression_police_control
+	value = 5
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_suppression_rebel_control
+	value = 5
+}
+
+#龙门暴乱叛乱
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_rebel_level_violence
+	value = 10
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_rebel_favor_point
+	value = 0
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_rebel_power_point
+	value = 0
+}
+
+#龙门暴乱调查提交答案
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_clue1_guessed
+	value = 0
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_clue1_1_guessed
+	value = 0
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_clue2_guessed
+	value = 0
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_clue3_guessed
+	value = 0
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_clue3_1_guessed
+	value = 0
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_clue4_guessed
+	value = 0
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_clue4_1_guessed
+	value = 0
+}
+set_variable = {
+	var = LUM.LUM_Lungmen_chaos_clue5_guessed
+	value = 0
+}
+
+set_politics = {
+	ruling_party = conservatism
+	elections_allowed = no
+}
+
+set_popularities = {
+	socialism = 5
+	progressivism = 5
+	liberalism = 40
+	conservatism = 50
+}
+
+set_technology = {
+	infantry_weapons = 1
+	infantry_weapons1 = 1
+	infantry_weapons2 = 1
+
+	support_weapons = 1
+	support_weapons2 = 1
+
+	tech_logistics_company = 1
+	tech_logistics_company2 = 1
+
+	tech_recon = 1
+	tech_support = 1
+
+	LRD_tech_shengchan_0 = 1
+	improved_machine_tools = 1
+
+	concentrated_industry = 1
+	concentrated_industry2 = 1
+
+	construction1 = 1
+	construction2 = 1
+
+	LRD_tech_jisuanji_0 = 1
+	LRD_tech_jisuanji_1 = 1
+	crystal_electronic_unit = 1
+	basic_computing_machine = 1
+
+	basic_smart_robotarm = 1
+	MSA_radar = 1
+	PESA_radar = 1
+}

@@ -1,0 +1,98 @@
+
+######################
+## 伊比利亚 月度钩子 ##
+######################
+
+on_actions = {
+	on_monthly_IBR = {
+		effect = {
+			#海嗣威胁度累积
+			if = {
+				limit = {
+					has_idea = IBR_threat_of_deep_sea_church_surge
+				}
+				add_to_variable = { var = IBR_deep_threat value = 3 }
+			}
+			else = {
+				if = {
+					limit = {
+						has_idea = IBR_threat_of_deep_sea_church
+					}
+					add_to_variable = { var = IBR_deep_threat value = 1 }
+				}
+			}
+			#爆发期间威胁继续累积
+			if = {
+				limit = {
+					has_country_flag = IBR_seaspawn_active
+				}
+				add_to_variable = { var = IBR_deep_threat value = 2 }
+			}
+			#威胁度达到阈值：恐鱼入侵爆发
+			if = {
+				limit = {
+					check_variable = {
+						var = IBR_deep_threat
+						value = 99
+						compare = greater_than
+					}
+					NOT = {
+						has_country_flag = IBR_seaspawn_active
+					}
+				}
+				set_country_flag = IBR_seaspawn_active
+				country_event = { id = ibr.80 }
+				hidden_effect = {
+					news_event = { id = worldnews_ibr.6 }
+				}
+			}
+			#爆发期间的持续破坏
+			if = {
+				limit = {
+					has_country_flag = IBR_seaspawn_active
+				}
+				add_stability = -0.005
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+					}
+					add_manpower = -3000
+				}
+			}
+			#沿海怪谈（随机小事件）
+			if = {
+				limit = {
+					check_variable = {
+						var = IBR_deep_threat
+						value = 40
+						compare = greater_than
+					}
+					NOT = {
+						has_country_flag = IBR_seaspawn_active
+					}
+					random = {
+						chance = 4
+					}
+				}
+				country_event = { id = ibr.81 }
+			}
+			#威胁度上下限
+			clamp_variable = { var = IBR_deep_threat min = 0 max = 150 }
+		}
+	}
+}
+
+######################
+## 伊比利亚 开局钩子 ##
+######################
+
+on_actions = {
+	on_startup = {
+		effect = {
+			IBR = {
+				#堕天使事件链
+				country_event = { id = ibr.108 days = 1 }
+			}
+		}
+	}
+}

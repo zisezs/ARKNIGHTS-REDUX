@@ -1,0 +1,23 @@
+add_namespace = yanse
+
+######################
+## 大炎 · 超事件 ##
+######################
+
+#岁怒 —— 触发条件：事件链「西北都护府异变」完结
+#（链终幕当场向 YAN / YNW 各发一次，YAN_monthly_tick 再兜一次底，见
+#  common/scripted_effects/YNW_upheaval_scripted_effects.txt）
+news_event = {
+	id = yanse.1
+	title = yanse.1.t
+	desc = yanse.1.d
+	picture = GFX_report_event_YAN_sui_nu
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = yanse.1.a
+		SE_YAN_SUI_NU_EFFECT = yes
+	}
+}

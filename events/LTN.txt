@@ -1,0 +1,32 @@
+add_namespace = test_ltn
+
+#莱塔尼亚邀请加入阵营
+country_event = {
+	id = test_ltn.1
+	title = test_ltn.1.t
+	desc = test_ltn.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_ltn.1.a
+
+		if = {
+			limit = {
+				GUL = {
+					is_ally_with = CLB
+				}
+			}
+			add_to_faction = VIC
+		}
+
+		if = {
+			limit = {
+				VIC = {
+					is_ally_with = CLB
+				}
+			}
+			add_to_faction = GUL
+		}
+	}
+}

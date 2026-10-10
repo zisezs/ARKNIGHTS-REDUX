@@ -1,0 +1,20 @@
+# 大炎·奇迹工程 —— 决议分类
+# 分类页顶部的小面板（scripted_gui = YAN_Miracle_Entry）是终端入口 + 全国精神读数；
+# 下面只有 YAN_miracle_terminal 一条玩家决议，其余 9 条计时施工令平时不可见。
+YAN_Miracle_Category = {
+	icon = GFX_decision_category_generic_industry
+
+	allowed = {
+		original_tag = YAN
+	}
+
+	visible = {
+		always = yes
+	}
+
+	visible_when_empty = yes
+
+	scripted_gui = YAN_Miracle_Entry
+
+	priority = 7
+}

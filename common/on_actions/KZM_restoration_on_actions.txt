@@ -1,0 +1,61 @@
+# ============================================================================
+# 卡西米尔 (KZM) · 复国骑士团 —— 月度钩子
+#
+# 只做两件事：
+#   1) 整盘重数 KZM_bastion_num（挂着【复国骑士团根据地】的州数）。
+#      绝不 ±1 记账：割地、和会、亡国都不经过我们的脚本，记账一定会漂。
+#   2) 按阈值结算地图外军工厂：>6 / >10 / >16 三档，各发一次事件、各置一个旗标。
+#
+# 用 on_monthly_KZM（原版口径：该国作用域、每月一次）。
+# 不用 on_monthly + every_country —— 那会把次数乘上场上国家数量（SRC 已踩过）。
+# 同名 on_action 跨文件合并，所以新建本文件。
+# ============================================================================
+on_actions = {
+
+	on_monthly_KZM = {
+		effect = {
+			# ---- 领袖位纠偏（一次性，专治老存档：台上是引擎随机捏的人而不是玛恩纳）----
+			KZM_resto_fix_leader = yes
+
+			if = {
+				limit = {
+					has_country_flag = KZM_resto_started
+				}
+				KZM_resto_count_bastions = yes
+			}
+
+			# ---- 第一档：根据地超过 6 个州 ----
+			if = {
+				limit = {
+					has_country_flag = KZM_resto_started
+					NOT = { has_country_flag = KZM_bastion_arsenal_1 }
+					check_variable = { KZM_bastion_num > 6 }
+				}
+				set_country_flag = KZM_bastion_arsenal_1
+				country_event = { id = kzm_resto.6 }
+			}
+
+			# ---- 第二档：超过 10 个 ----
+			if = {
+				limit = {
+					has_country_flag = KZM_bastion_arsenal_1
+					NOT = { has_country_flag = KZM_bastion_arsenal_2 }
+					check_variable = { KZM_bastion_num > 10 }
+				}
+				set_country_flag = KZM_bastion_arsenal_2
+				country_event = { id = kzm_resto.7 }
+			}
+
+			# ---- 第三档：超过 16 个 ----
+			if = {
+				limit = {
+					has_country_flag = KZM_bastion_arsenal_2
+					NOT = { has_country_flag = KZM_bastion_arsenal_3 }
+					check_variable = { KZM_bastion_num > 16 }
+				}
+				set_country_flag = KZM_bastion_arsenal_3
+				country_event = { id = kzm_resto.8 }
+			}
+		}
+	}
+}

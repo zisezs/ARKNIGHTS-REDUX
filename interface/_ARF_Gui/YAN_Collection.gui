@@ -1,0 +1,1606 @@
+guiTypes = {
+
+	# ======================================================================
+	#  大炎·珍玩集册 —— 全屏图鉴面板（白底黑字 · 图册质感）
+	#  · 由 common/scripted_guis/YAN_Collection_GUI.txt 驱动
+	#  · 显示条件：国家旗标 YAN_col_open 且 YAN_col_view = 0
+	#  · 后写的控件压在先写的上面（所以水印先写、结果卡最后写）
+	#  · ⚠️ iconType/buttonType 没有 size 键：显示尺寸 = 贴图原生尺寸
+	#  · 字体名必须存在于顶层 bitmapfonts 块，否则静默回退默认字体
+	# ======================================================================
+	containerWindowType = {
+		name = "YAN_Collection_Window"
+		position = { x = 0 y = 0 }
+		size = { width = 1200 height = 700 }
+		orientation = center
+		origo = center
+		moveable = no
+		click_to_front = yes
+
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_YAN_col_ui_bg"
+		}
+
+		# ---------------- 顶栏 ----------------
+			iconType = {
+				name = "YAN_Col_TitleBg"
+				position = { x = 30 y = 18 }
+				spriteType = "GFX_YAN_col_ui_titlebg"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Title"
+				position = { x = 48 y = 27 }
+				font = "YAN_Col_title26"
+				text = "YAN_COL_TITLE"
+				maxWidth = 274
+				maxHeight = 32
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Seal"
+				position = { x = 338 y = 20 }
+				spriteType = "GFX_YAN_col_ui_seal"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Subtitle"
+				position = { x = 402 y = 34 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_SUBTITLE"
+				maxWidth = 290
+				maxHeight = 22
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Progress"
+				position = { x = 700 y = 22 }
+				font = "YAN_Col_text20"
+				text = "[YAN_GetColProgress]"
+				maxWidth = 430
+				maxHeight = 28
+				format = right
+				pdx_tooltip = YAN_COL_PROGRESS_TT
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_PipOff_1"
+				position = { x = 850 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_PipOff_2"
+				position = { x = 880 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_PipOff_3"
+				position = { x = 910 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_PipOff_4"
+				position = { x = 940 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_PipOff_5"
+				position = { x = 970 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_PipOff_6"
+				position = { x = 1000 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_PipOff_7"
+				position = { x = 1030 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_PipOff_8"
+				position = { x = 1060 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_PipOff_9"
+				position = { x = 1090 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_PipOff_10"
+				position = { x = 1120 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pip_1"
+				position = { x = 850 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pip_2"
+				position = { x = 880 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pip_3"
+				position = { x = 910 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pip_4"
+				position = { x = 940 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pip_5"
+				position = { x = 970 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pip_6"
+				position = { x = 1000 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pip_7"
+				position = { x = 1030 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pip_8"
+				position = { x = 1060 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pip_9"
+				position = { x = 1090 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pip_10"
+				position = { x = 1120 y = 56 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Close"
+				position = { x = 1142 y = 22 }
+				quadTextureSprite = "GFX_YAN_col_ui_close"
+				clicksound = click_default
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Help"
+				position = { x = 402 y = 56 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_HELP"
+				maxWidth = 430
+				maxHeight = 20
+				alwaystransparent = yes
+			}
+
+		# ---------------- 左侧：分类页签 ----------------
+			instantTextBoxType = {
+				name = "YAN_Col_TabHead"
+				position = { x = 34 y = 126 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_CAT_HEAD"
+				maxWidth = 150
+				maxHeight = 20
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Tab_1"
+				position = { x = 30 y = 148 }
+				quadTextureSprite = "GFX_YAN_col_ui_tab"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Tab_1_Sel"
+				position = { x = 30 y = 148 }
+				spriteType = "GFX_YAN_col_ui_tabs"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Tab_1_Text"
+				position = { x = 40 y = 156 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_TAB_1"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Tab_2"
+				position = { x = 30 y = 192 }
+				quadTextureSprite = "GFX_YAN_col_ui_tab"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Tab_2_Sel"
+				position = { x = 30 y = 192 }
+				spriteType = "GFX_YAN_col_ui_tabs"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Tab_2_Text"
+				position = { x = 40 y = 200 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_TAB_2"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Tab_3"
+				position = { x = 30 y = 236 }
+				quadTextureSprite = "GFX_YAN_col_ui_tab"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Tab_3_Sel"
+				position = { x = 30 y = 236 }
+				spriteType = "GFX_YAN_col_ui_tabs"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Tab_3_Text"
+				position = { x = 40 y = 244 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_TAB_3"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Tab_4"
+				position = { x = 30 y = 280 }
+				quadTextureSprite = "GFX_YAN_col_ui_tab"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Tab_4_Sel"
+				position = { x = 30 y = 280 }
+				spriteType = "GFX_YAN_col_ui_tabs"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Tab_4_Text"
+				position = { x = 40 y = 288 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_TAB_4"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Tab_5"
+				position = { x = 30 y = 324 }
+				quadTextureSprite = "GFX_YAN_col_ui_tab"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Tab_5_Sel"
+				position = { x = 30 y = 324 }
+				spriteType = "GFX_YAN_col_ui_tabs"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Tab_5_Text"
+				position = { x = 40 y = 332 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_TAB_5"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Tab_6"
+				position = { x = 30 y = 368 }
+				quadTextureSprite = "GFX_YAN_col_ui_tab"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Tab_6_Sel"
+				position = { x = 30 y = 368 }
+				spriteType = "GFX_YAN_col_ui_tabs"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Tab_6_Text"
+				position = { x = 40 y = 376 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_TAB_6"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Tab_7"
+				position = { x = 30 y = 412 }
+				quadTextureSprite = "GFX_YAN_col_ui_tab"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Tab_7_Sel"
+				position = { x = 30 y = 412 }
+				spriteType = "GFX_YAN_col_ui_tabs"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Tab_7_Text"
+				position = { x = 40 y = 420 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_TAB_7"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Tab_8"
+				position = { x = 30 y = 456 }
+				quadTextureSprite = "GFX_YAN_col_ui_tab"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Tab_8_Sel"
+				position = { x = 30 y = 456 }
+				spriteType = "GFX_YAN_col_ui_tabs"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Tab_8_Text"
+				position = { x = 40 y = 464 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_TAB_8"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Tab_9"
+				position = { x = 30 y = 500 }
+				quadTextureSprite = "GFX_YAN_col_ui_tab"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Tab_9_Sel"
+				position = { x = 30 y = 500 }
+				spriteType = "GFX_YAN_col_ui_tabs"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Tab_9_Text"
+				position = { x = 40 y = 508 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_TAB_9"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				alwaystransparent = yes
+			}
+
+		# ---------------- 左下：筛选 ----------------
+			instantTextBoxType = {
+				name = "YAN_Col_FilterHead"
+				position = { x = 34 y = 548 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_FILTER_HEAD"
+				maxWidth = 150
+				maxHeight = 20
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_F_All"
+				position = { x = 30 y = 570 }
+				quadTextureSprite = "GFX_YAN_col_ui_filter"
+				clicksound = click_default
+				pdx_tooltip = YAN_COL_F_ALL_TT
+			}
+			iconType = {
+				name = "YAN_Col_F_All_Sel"
+				position = { x = 30 y = 570 }
+				spriteType = "GFX_YAN_col_ui_filters"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_F_All_Text"
+				position = { x = 40 y = 578 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_F_ALL"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				pdx_tooltip = YAN_COL_F_ALL_TT
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_F_Own"
+				position = { x = 30 y = 612 }
+				quadTextureSprite = "GFX_YAN_col_ui_filter"
+				clicksound = click_default
+				pdx_tooltip = YAN_COL_F_OWN_TT
+			}
+			iconType = {
+				name = "YAN_Col_F_Own_Sel"
+				position = { x = 30 y = 612 }
+				spriteType = "GFX_YAN_col_ui_filters"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_F_Own_Text"
+				position = { x = 40 y = 620 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_F_OWN"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				pdx_tooltip = YAN_COL_F_OWN_TT
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_F_Up"
+				position = { x = 30 y = 654 }
+				quadTextureSprite = "GFX_YAN_col_ui_filter"
+				clicksound = click_default
+				pdx_tooltip = YAN_COL_F_UP_TT
+			}
+			iconType = {
+				name = "YAN_Col_F_Up_Sel"
+				position = { x = 30 y = 654 }
+				spriteType = "GFX_YAN_col_ui_filters"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_F_Up_Text"
+				position = { x = 40 y = 662 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_F_UP"
+				maxWidth = 132
+				maxHeight = 24
+				format = centre
+				pdx_tooltip = YAN_COL_F_UP_TT
+				alwaystransparent = yes
+			}
+
+		# ---------------- 主卡 ----------------
+			iconType = {
+				name = "YAN_Col_Card"
+				position = { x = 200 y = 110 }
+				spriteType = "GFX_YAN_col_ui_card"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Watermark"
+				position = { x = 890 y = 148 }
+				spriteType = "GFX_YAN_col_ui_watermark"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Frame"
+				position = { x = 224 y = 132 }
+				spriteType = "GFX_YAN_col_ui_frame0"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Icon"
+				position = { x = 230 y = 138 }
+				spriteType = "GFX_YAN_col_icon_001"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Lock"
+				position = { x = 230 y = 138 }
+				spriteType = "GFX_YAN_col_ui_lock"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Ribbon"
+				position = { x = 236 y = 270 }
+				spriteType = "GFX_YAN_col_ui_ribbon0"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Ribbon_Text"
+				position = { x = 236 y = 275 }
+				font = "YAN_Col_text16"
+				text = "[YAN_GetColRarity]"
+				maxWidth = 104
+				maxHeight = 22
+				vertical_alignment = centre
+				format = centre
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Name"
+				position = { x = 420 y = 130 }
+				font = "YAN_Col_title26"
+				text = "[YAN_GetColName]"
+				maxWidth = 730
+				maxHeight = 34
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Meta"
+				position = { x = 420 y = 170 }
+				font = "YAN_Col_text16"
+				text = "[YAN_GetColMeta]"
+				maxWidth = 420
+				maxHeight = 22
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Status"
+				position = { x = 420 y = 198 }
+				font = "YAN_Col_text20"
+				text = "[YAN_GetColStatus]"
+				maxWidth = 290
+				maxHeight = 26
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_TierHead"
+				position = { x = 730 y = 202 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_LABEL_TIER"
+				maxWidth = 60
+				maxHeight = 20
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Tier"
+				position = { x = 795 y = 200 }
+				font = "YAN_Col_text16"
+				text = "[YAN_GetColTierTrack]"
+				maxWidth = 375
+				maxHeight = 24
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Desc"
+				position = { x = 420 y = 230 }
+				font = "YAN_Col_text16"
+				text = "[YAN_GetColDesc]"
+				maxWidth = 730
+				maxHeight = 78
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Divider_1"
+				position = { x = 224 y = 318 }
+				spriteType = "GFX_YAN_col_ui_divider"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Plate_Ark"
+				position = { x = 224 y = 342 }
+				spriteType = "GFX_YAN_col_ui_plate"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_ArkHead"
+				position = { x = 242 y = 350 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_SECTION_ARK"
+				maxWidth = 228
+				maxHeight = 22
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Ark"
+				position = { x = 244 y = 384 }
+				font = "YAN_Col_text16"
+				text = "[YAN_GetColArk]"
+				maxWidth = 890
+				maxHeight = 66
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Divider_2"
+				position = { x = 224 y = 452 }
+				spriteType = "GFX_YAN_col_ui_divider"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Plate_Hoi4"
+				position = { x = 224 y = 476 }
+				spriteType = "GFX_YAN_col_ui_plate"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Hoi4Head"
+				position = { x = 242 y = 484 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_SECTION_HOI4"
+				maxWidth = 228
+				maxHeight = 22
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Hoi4"
+				position = { x = 244 y = 518 }
+				font = "YAN_Col_text16"
+				text = "[YAN_GetColHoi4]"
+				maxWidth = 890
+				maxHeight = 74
+				alwaystransparent = yes
+			}
+
+		# ---------------- 底部：翻页 / 位置 / 总加成 / 寻珍 ----------------
+			buttonType = {
+				name = "YAN_Col_Prev"
+				position = { x = 210 y = 626 }
+				quadTextureSprite = "GFX_YAN_col_ui_btnprev"
+				clicksound = click_default
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Prev_Text"
+				position = { x = 210 y = 626 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BTN_PREV"
+				maxWidth = 140
+				maxHeight = 40
+				vertical_alignment = centre
+				format = centre
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Pos"
+				position = { x = 360 y = 626 }
+				spriteType = "GFX_YAN_col_ui_plaque"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Pos_Text"
+				position = { x = 360 y = 626 }
+				font = "YAN_Col_text20"
+				text = "[YAN_GetColPos]"
+				maxWidth = 200
+				maxHeight = 40
+				vertical_alignment = centre
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Next"
+				position = { x = 570 y = 626 }
+				quadTextureSprite = "GFX_YAN_col_ui_btnnext"
+				clicksound = click_default
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Next_Text"
+				position = { x = 570 y = 626 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BTN_NEXT"
+				maxWidth = 140
+				maxHeight = 40
+				vertical_alignment = centre
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Summary"
+				position = { x = 730 y = 626 }
+				quadTextureSprite = "GFX_YAN_col_ui_btn"
+				clicksound = click_default
+				pdx_tooltip = YAN_COL_BONUS_TT
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Summary_Text"
+				position = { x = 730 y = 626 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BTN_SUMMARY"
+				maxWidth = 150
+				maxHeight = 40
+				vertical_alignment = centre
+				format = centre
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Draw"
+				position = { x = 900 y = 624 }
+				quadTextureSprite = "GFX_YAN_col_ui_btnw"
+				clicksound = click_default
+				pdx_tooltip = YAN_COL_DRAW_TT
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Draw_Text"
+				position = { x = 900 y = 624 }
+				font = "YAN_Col_text20"
+				text = "[YAN_GetDrawLabel]"
+				maxWidth = 200
+				maxHeight = 44
+				vertical_alignment = centre
+				format = centre
+				pdx_tooltip = YAN_COL_DRAW_TT
+				alwaystransparent = yes
+			}
+
+		# ---------------- 开箱结果卡（放最后 = 压在最上层） ----------------
+			buttonType = {
+				name = "YAN_Col_Result"
+				position = { x = 0 y = 0 }
+				quadTextureSprite = "GFX_YAN_col_ui_dim"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Result_Card"
+				position = { x = 290 y = 200 }
+				spriteType = "GFX_YAN_col_ui_result"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Result_Title"
+				position = { x = 290 y = 224 }
+				font = "YAN_Col_title26"
+				text = "[YAN_GetResultTitle]"
+				maxWidth = 620
+				maxHeight = 32
+				format = centre
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Result_Frame"
+				position = { x = 324 y = 262 }
+				spriteType = "GFX_YAN_col_ui_frame0"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Result_Icon"
+				position = { x = 330 y = 268 }
+				spriteType = "GFX_YAN_col_icon_001"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Result_Name"
+				position = { x = 520 y = 292 }
+				font = "YAN_Col_text16"
+				text = "[YAN_GetColName]"
+				maxWidth = 380
+				maxHeight = 26
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Result_Kind"
+				position = { x = 520 y = 332 }
+				font = "YAN_Col_text16"
+				text = "[YAN_GetResultKind]"
+				maxWidth = 366
+				maxHeight = 24
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Result_Empty"
+				position = { x = 310 y = 366 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_RESULT_EMPTY"
+				maxWidth = 580
+				maxHeight = 28
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Result_Ok"
+				position = { x = 530 y = 430 }
+				quadTextureSprite = "GFX_YAN_col_ui_btnw"
+				clicksound = click_default
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Result_Ok_Text"
+				position = { x = 530 y = 430 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BTN_OK"
+				maxWidth = 200
+				maxHeight = 44
+				vertical_alignment = centre
+				format = centre
+				alwaystransparent = yes
+			}
+	}
+
+
+	# ======================================================================
+	#  集册总加成 —— 独立窗口（12 项全部列出，两列各 6 行）
+	#  · 显示条件：YAN_col_open 且 YAN_col_view = 1（与图鉴窗口互斥，不会叠窗）
+	#  · 数值由本地化里的 [?变量] 直接打印，见 ARF_YAN_Collection_Bonus_l_...yml
+	# ======================================================================
+	containerWindowType = {
+		name = "YAN_Collection_Summary_Window"
+		position = { x = 0 y = 0 }
+		size = { width = 1200 height = 700 }
+		orientation = center
+		origo = center
+		moveable = no
+		click_to_front = yes
+
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_YAN_col_ui_bg"
+		}
+			iconType = {
+				name = "YAN_Col_Sum_Card"
+				position = { x = 110 y = 90 }
+				spriteType = "GFX_YAN_col_ui_card"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Sum_Seal"
+				position = { x = 996 y = 108 }
+				spriteType = "GFX_YAN_col_ui_seal"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_Title"
+				position = { x = 140 y = 128 }
+				font = "YAN_Col_title26"
+				text = "YAN_COL_SUMMARY_TITLE"
+				maxWidth = 400
+				maxHeight = 34
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_Sub"
+				position = { x = 140 y = 166 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_SUMMARY_SUB"
+				maxWidth = 860
+				maxHeight = 22
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Sum_Close"
+				position = { x = 1054 y = 104 }
+				quadTextureSprite = "GFX_YAN_col_ui_close"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Col_Sum_Div"
+				position = { x = 134 y = 192 }
+				spriteType = "GFX_YAN_col_ui_divider"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_HeadA"
+				position = { x = 140 y = 216 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_SUMMARY_H_A"
+				maxWidth = 216
+				maxHeight = 22
+				format = centre
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_HeadB"
+				position = { x = 606 y = 216 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_SUMMARY_H_B"
+				maxWidth = 216
+				maxHeight = 22
+				format = centre
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_A0"
+				position = { x = 140 y = 246 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_army_attack"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_A0"
+				position = { x = 368 y = 246 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_army_attack"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_A0"
+				position = { x = 482 y = 248 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_army_attack"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_A1"
+				position = { x = 140 y = 280 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_army_defence"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_A1"
+				position = { x = 368 y = 280 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_army_defence"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_A1"
+				position = { x = 482 y = 282 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_army_defence"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_A2"
+				position = { x = 140 y = 314 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_army_org"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_A2"
+				position = { x = 368 y = 314 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_army_org"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_A2"
+				position = { x = 482 y = 316 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_army_org"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_A3"
+				position = { x = 140 y = 348 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_army_exp"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_A3"
+				position = { x = 368 y = 348 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_army_exp"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_A3"
+				position = { x = 482 y = 350 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_army_exp"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_A4"
+				position = { x = 140 y = 382 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_training"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_A4"
+				position = { x = 368 y = 382 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_training"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_A4"
+				position = { x = 482 y = 384 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_training"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_A5"
+				position = { x = 140 y = 416 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_conscription"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_A5"
+				position = { x = 368 y = 416 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_conscription"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_A5"
+				position = { x = 482 y = 418 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_conscription"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_B0"
+				position = { x = 606 y = 246 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_industrial"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_B0"
+				position = { x = 834 y = 246 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_industrial"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_B0"
+				position = { x = 948 y = 248 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_industrial"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_B1"
+				position = { x = 606 y = 280 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_production"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_B1"
+				position = { x = 834 y = 280 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_production"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_B1"
+				position = { x = 948 y = 282 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_production"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_B2"
+				position = { x = 606 y = 314 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_research"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_B2"
+				position = { x = 834 y = 314 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_research"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_B2"
+				position = { x = 948 y = 316 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_research"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_B3"
+				position = { x = 606 y = 348 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_stability"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_B3"
+				position = { x = 834 y = 348 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_stability"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_B3"
+				position = { x = 948 y = 350 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_stability"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_B4"
+				position = { x = 606 y = 382 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_pp_factor"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_B4"
+				position = { x = 834 y = 382 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BV_pp_factor"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_B4"
+				position = { x = 948 y = 384 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_pp_factor"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_L_B5"
+				position = { x = 606 y = 416 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BL_pp_gain"
+				maxWidth = 216
+				maxHeight = 22
+				format = right
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_V_B5"
+				position = { x = 834 y = 416 }
+				font = "YAN_Col_text20"
+				text = "[YAN_GetBonusPpd]"
+				maxWidth = 104
+				maxHeight = 26
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_M_B5"
+				position = { x = 948 y = 418 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_BM_pp_gain"
+				maxWidth = 112
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Sum_Div2"
+				position = { x = 134 y = 452 }
+				spriteType = "GFX_YAN_col_ui_divider"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_Foot"
+				position = { x = 140 y = 470 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_SUMMARY_FOOT"
+				maxWidth = 930
+				maxHeight = 22
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Sum_Back"
+				position = { x = 500 y = 626 }
+				quadTextureSprite = "GFX_YAN_col_ui_btnw"
+				clicksound = click_default
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Sum_Back_Text"
+				position = { x = 500 y = 626 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BTN_BACK"
+				maxWidth = 200
+				maxHeight = 44
+				vertical_alignment = centre
+				format = centre
+				alwaystransparent = yes
+			}
+	}
+
+
+	# ======================================================================
+	#  决议分类页里的入口面板（context_type = decision_category）
+	# ======================================================================
+	containerWindowType = {
+		name = "YAN_Collection_Entry_GUI"
+		size = { width = 100% height = 258 }
+		position = { x = 0 y = 0 }
+			iconType = {
+				name = "YAN_Col_Entry_Bg"
+				position = { x = 0 y = 0 }
+				spriteType = "GFX_YAN_col_ui_entry"
+				pdx_tooltip = YAN_COL_ENTRY_DESC
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Seal"
+				position = { x = 14 y = 8 }
+				spriteType = "GFX_YAN_col_ui_seal"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_TitleBg"
+				position = { x = 62 y = 6 }
+				spriteType = "GFX_YAN_col_ui_titlebg"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_Title"
+				position = { x = 112 y = 14 }
+				font = "YAN_Col_title26"
+				text = "YAN_COL_ENTRY_TITLE"
+				maxWidth = 260
+				maxHeight = 34
+				format = centre
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_Progress_V"
+				position = { x = 16 y = 58 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_ENTRY_COUNT"
+				maxWidth = 160
+				maxHeight = 24
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_PipOff_1"
+				position = { x = 186 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_PipOff_2"
+				position = { x = 216 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_PipOff_3"
+				position = { x = 246 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_PipOff_4"
+				position = { x = 276 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_PipOff_5"
+				position = { x = 306 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_PipOff_6"
+				position = { x = 336 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_PipOff_7"
+				position = { x = 366 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_PipOff_8"
+				position = { x = 396 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_PipOff_9"
+				position = { x = 426 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_PipOff_10"
+				position = { x = 456 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Pip_1"
+				position = { x = 186 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Pip_2"
+				position = { x = 216 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Pip_3"
+				position = { x = 246 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Pip_4"
+				position = { x = 276 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Pip_5"
+				position = { x = 306 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Pip_6"
+				position = { x = 336 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Pip_7"
+				position = { x = 366 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Pip_8"
+				position = { x = 396 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Pip_9"
+				position = { x = 426 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Col_Entry_Pip_10"
+				position = { x = 456 y = 62 }
+				spriteType = "GFX_YAN_col_ui_pip_on"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_Tier"
+				position = { x = 16 y = 84 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_ENTRY_TIER"
+				maxWidth = 470
+				maxHeight = 20
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Entry_Btn"
+				position = { x = 16 y = 110 }
+				quadTextureSprite = "GFX_YAN_col_ui_btnw"
+				clicksound = click_default
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_Btn_Text"
+				position = { x = 16 y = 110 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_ENTRY_BTN"
+				maxWidth = 200
+				maxHeight = 44
+				vertical_alignment = centre
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Col_Entry_Sum_Btn"
+				position = { x = 240 y = 110 }
+				quadTextureSprite = "GFX_YAN_col_ui_btnw"
+				clicksound = click_default
+				pdx_tooltip = YAN_COL_BONUS_TT
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_Sum_Btn_Text"
+				position = { x = 240 y = 110 }
+				font = "YAN_Col_text20"
+				text = "YAN_COL_BTN_SUMMARY"
+				maxWidth = 200
+				maxHeight = 44
+				vertical_alignment = centre
+				format = centre
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_L_MIL"
+				position = { x = 16 y = 162 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_ENTRY_L_MIL"
+				maxWidth = 56
+				maxHeight = 20
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_S_MIL"
+				position = { x = 76 y = 162 }
+				font = "YAN_Col_text16_grn"
+				text = "YAN_COL_ENTRY_S_MIL"
+				maxWidth = 412
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_L_EQ"
+				position = { x = 16 y = 182 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_ENTRY_L_EQ"
+				maxWidth = 56
+				maxHeight = 20
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_S_EQ"
+				position = { x = 76 y = 182 }
+				font = "YAN_Col_text16_grn"
+				text = "YAN_COL_ENTRY_S_EQ"
+				maxWidth = 412
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_L_NAT"
+				position = { x = 16 y = 202 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_ENTRY_L_NAT"
+				maxWidth = 56
+				maxHeight = 20
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_S_NAT"
+				position = { x = 76 y = 202 }
+				font = "YAN_Col_text16_grn"
+				text = "YAN_COL_ENTRY_S_NAT"
+				maxWidth = 412
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_L_GOV"
+				position = { x = 16 y = 222 }
+				font = "YAN_Col_text16"
+				text = "YAN_COL_ENTRY_L_GOV"
+				maxWidth = 56
+				maxHeight = 20
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Col_Entry_S_GOV"
+				position = { x = 76 y = 222 }
+				font = "YAN_Col_text16_grn"
+				text = "YAN_COL_ENTRY_S_GOV"
+				maxWidth = 412
+				maxHeight = 20
+				pdx_tooltip = YAN_COL_BONUS_TT
+				alwaystransparent = yes
+			}
+	}
+}

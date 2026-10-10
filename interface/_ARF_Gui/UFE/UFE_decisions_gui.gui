@@ -1,0 +1,112 @@
+
+
+guiTypes = {
+
+	containerWindowType = {
+		name = "UFE_special_units_decisions_ui_window"
+		position = { x = 0 y = 0 }
+		size = { width = 100% height= 101 }
+
+		iconType = {
+			name ="UFE_special_units_decisions_ui_window_picture"
+			position = { x = 7 y = -15 }
+			spriteType = "GFX_UFE_special_units_decisions_ui_window_picture"
+		}
+		
+		instantTextBoxType = {
+			name ="UFE_special_units_decisions_text"
+			position = { x = 125 y = -15 }
+			font = "hoi_16mbs"
+			text = "UFE_special_units_decisions_desc"
+			format = left
+			maxHeight = 24
+			maxwidth = 360
+		}
+		
+		instantTextBoxType = {
+			name ="UFE_special_units_modifier"
+			position = { x = 7 y = -15 }
+			maxwidth = 114
+			maxHeight = 101
+			pdx_tooltip = UFE_special_units_modifier_tt
+			pdx_tooltip_delayed = "UFE_special_units_modifier_desc_tooltip"
+		}
+		
+	}
+	
+	containerWindowType = {
+		name = "UFE_stability_and_army_control_decisions_window"
+		position = { x = 0 y = 0 }
+		size = { width = 100% height= 200 }
+
+		iconType = {
+			name = "UFE_stability_bar_progress"
+			position = { x = 90 y = 30 }
+			orientation = LEFT
+		}
+		
+		iconType = {
+			name = "UFE_army_control_bar_progress"
+			position = { x = 90 y = 80 }
+			orientation = LEFT
+		}
+		
+		instantTextBoxType = {
+			name ="UFE_stability_name"
+			position = { x = 90 y = 15 }
+			font = "hoi_16mbs"
+			text = "UFE_stability_name_text"
+			format = left
+			maxHeight = 24
+			maxwidth = 328
+		}
+		
+		instantTextBoxType = {
+			name ="UFE_army_control_name"
+			position = { x = 90 y = 65 }
+			font = "hoi_16mbs"
+			text = "UFE_army_control_name_text"
+			format = left
+			maxHeight = 24
+			maxwidth = 328
+		}
+		
+		instantTextBoxType = {
+			name ="UFE_stability_bar_modifier"
+			position = { x = 90 y = 30 }
+			maxwidth = 328
+			maxHeight = 24
+			pdx_tooltip = UFE_stability_bar_modifier_tt
+			pdx_tooltip_delayed = "UFE_stability_bar_modifier_desc_tooltip"
+		}
+		
+		instantTextBoxType = {
+			name ="UFE_army_control_bar_modifier"
+			position = { x = 90 y = 80 }
+			maxwidth = 328
+			maxHeight = 24
+			pdx_tooltip = UFE_army_control_bar_modifier_tt
+			pdx_tooltip_delayed = "UFE_army_control_modifier_desc_tooltip"
+		}
+		
+		instantTextBoxType = {
+			name ="UFE_stability_problem"
+			position = { x = 45 y = 120 }
+			font = "hoi_16mbs"
+			text = "UFE_stability_problem_text"
+			format = center
+			maxHeight = 24
+			maxwidth = 432
+		}
+		
+		instantTextBoxType = {
+			name ="UFE_army_control_problem"
+			position = { x = 45 y = 150 }
+			font = "hoi_16mbs"
+			text = "UFE_army_control_problem_text"
+			format = center
+			maxHeight = 24
+			maxwidth = 432
+		}
+	}
+}

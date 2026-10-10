@@ -1,0 +1,199 @@
+# ==============================================================================
+#  莱塔尼亚 ·「金律乐章 · 调律台」 —— 贴图与字体注册
+#
+#  贴图由 docs/gen_ltn_law_assets.cjs 程序化生成（无 AI 生图），
+#  产物目录 gfx/interface/LTN_law/。**手改会被覆盖。**
+#
+#  ⚠️ iconType / buttonType 没有 size 键：显示尺寸 = 贴图原生尺寸。
+#  ⚠️ 多帧贴图一律横向排布：noOfFrames = N ⇒ 单帧宽 = 图宽 / N，
+#     帧号与面板变量一一对应（见 interface/_ARF_Gui/LTN_law.gui）。
+#  ⚠️ 面板是深色底 → 这里另开一套浅色字体（LTN_law_*），
+#     不要沿用 YAN_Col_*（那是深字配宣纸白）。
+# ==============================================================================
+
+spriteTypes = {
+
+	spriteType = {
+		name = "GFX_LTN_law_bg"
+		texturefile = "gfx/interface/LTN_law/LTN_law_bg.png"
+		noOfFrames = 1
+	}
+	# 音孔刻度条：帧 0..4 = 点亮 0..4 段
+	spriteType = {
+		name = "GFX_LTN_law_bar"
+		texturefile = "gfx/interface/LTN_law/LTN_law_bar.png"
+		noOfFrames = 5
+	}
+	# 调性拨片：帧 0 = 宽容 / 帧 1 = 严苛
+	spriteType = {
+		name = "GFX_LTN_law_tone"
+		texturefile = "gfx/interface/LTN_law/LTN_law_tone.png"
+		noOfFrames = 2
+	}
+	# 声部灯：帧 0 = 金 / 帧 1 = 暗金 / 帧 2 = 红
+	spriteType = {
+		name = "GFX_LTN_law_lamp"
+		texturefile = "gfx/interface/LTN_law/LTN_law_lamp.png"
+		noOfFrames = 3
+	}
+	# 失范风险条：帧 0..10
+	spriteType = {
+		name = "GFX_LTN_law_risk"
+		texturefile = "gfx/interface/LTN_law/LTN_law_risk.png"
+		noOfFrames = 11
+	}
+
+	spriteType = {
+		name = "GFX_LTN_law_btn100"
+		texturefile = "gfx/interface/LTN_law/LTN_law_btn100.png"
+		noOfFrames = 1
+	}
+	spriteType = {
+		name = "GFX_LTN_law_btn140"
+		texturefile = "gfx/interface/LTN_law/LTN_law_btn140.png"
+		noOfFrames = 1
+	}
+	spriteType = {
+		name = "GFX_LTN_law_btn200"
+		texturefile = "gfx/interface/LTN_law/LTN_law_btn200.png"
+		noOfFrames = 1
+	}
+
+	spriteType = {
+		name = "GFX_LTN_law_card"
+		texturefile = "gfx/interface/LTN_law/LTN_law_card.png"
+		noOfFrames = 1
+	}
+	spriteType = {
+		name = "GFX_LTN_law_card_on"
+		texturefile = "gfx/interface/LTN_law/LTN_law_card_on.png"
+		noOfFrames = 1
+	}
+	spriteType = {
+		name = "GFX_LTN_law_card_conf"
+		texturefile = "gfx/interface/LTN_law/LTN_law_card_conf.png"
+		noOfFrames = 1
+	}
+	spriteType = {
+		name = "GFX_LTN_law_card_lock"
+		texturefile = "gfx/interface/LTN_law/LTN_law_card_lock.png"
+		noOfFrames = 1
+	}
+
+	# 透明点击层（盖在刻度条 / 调性拨片上，只吃鼠标不吃画面）
+	spriteType = {
+		name = "GFX_LTN_law_clickbar"
+		texturefile = "gfx/interface/LTN_law/LTN_law_clickbar.png"
+		noOfFrames = 1
+	}
+	spriteType = {
+		name = "GFX_LTN_law_clicktone"
+		texturefile = "gfx/interface/LTN_law/LTN_law_clicktone.png"
+		noOfFrames = 1
+	}
+
+	# 民族精神【金律的和谐】图标
+	spriteType = {
+		name = "GFX_idea_LTN_dyn_law_harmony"
+		texturefile = "gfx/interface/LTN_law/LTN_law_idea.png"
+		noOfFrames = 1
+	}
+
+	# 民族精神【征收音孔】图标
+	spriteType = {
+		name = "GFX_idea_LTN_dyn_law_dials"
+		texturefile = "gfx/interface/LTN_law/LTN_law_dial_idea.png"
+		noOfFrames = 1
+	}
+}
+
+bitmapfonts = {
+
+	bitmapfont = {
+		name = "LTN_law_title26"
+		fontfiles = { "gfx/fonts/hoi_30header" }
+		color = 0xffeadfc2
+		textcolors = {
+			W = { 234 223 194 }
+			G = { 201 162 39 }
+			Y = { 201 162 39 }
+			R = { 198 84 84 }
+			B = { 128 168 196 }
+			T = { 170 162 148 }
+		}
+	}
+	bitmapfont_override = {
+		name = "LTN_law_title26"
+		fontfiles = {
+			"gfx/fonts/hoi_30header"
+			"gfx/fonts/Arial_20s"
+		}
+		languages = { "l_simp_chinese" }
+	}
+
+	bitmapfont = {
+		name = "LTN_law_text18"
+		fontfiles = { "gfx/fonts/hoi_18mbs" }
+		color = 0xffd8d2c4
+		textcolors = {
+			W = { 216 210 196 }
+			G = { 201 162 39 }
+			Y = { 201 162 39 }
+			R = { 198 84 84 }
+			B = { 128 168 196 }
+			T = { 168 160 146 }
+		}
+	}
+	bitmapfont_override = {
+		name = "LTN_law_text18"
+		fontfiles = {
+			"gfx/fonts/hoi_18mbs"
+			"gfx/fonts/Arial_14s"
+		}
+		languages = { "l_simp_chinese" }
+	}
+
+	bitmapfont = {
+		name = "LTN_law_text16"
+		fontfiles = { "gfx/fonts/hoi_16mbs" }
+		color = 0xffb9b2a2
+		textcolors = {
+			W = { 200 194 180 }
+			G = { 201 162 39 }
+			Y = { 201 162 39 }
+			R = { 198 84 84 }
+			B = { 128 168 196 }
+			T = { 150 144 132 }
+		}
+	}
+	bitmapfont_override = {
+		name = "LTN_law_text16"
+		fontfiles = {
+			"gfx/fonts/hoi_16mbs"
+			"gfx/fonts/Arial_14s"
+		}
+		languages = { "l_simp_chinese" }
+	}
+
+	bitmapfont = {
+		name = "LTN_law_gold16"
+		fontfiles = { "gfx/fonts/hoi_16mbs" }
+		color = 0xffc9a227
+		textcolors = {
+			W = { 216 210 196 }
+			G = { 201 162 39 }
+			Y = { 201 162 39 }
+			R = { 198 84 84 }
+			B = { 128 168 196 }
+			T = { 168 160 146 }
+		}
+	}
+	bitmapfont_override = {
+		name = "LTN_law_gold16"
+		fontfiles = {
+			"gfx/fonts/hoi_16mbs"
+			"gfx/fonts/Arial_14s"
+		}
+		languages = { "l_simp_chinese" }
+	}
+}

@@ -1,0 +1,49 @@
+add_namespace = test_cam
+
+country_event = {
+	id = test_cam.1 #高棉攻打努珊西亚
+	title = test_cam.1.t
+	desc = test_cam.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_cam.1.a
+		declare_war_on = {
+			target = NUS
+			type = annex_everything
+		}
+	}
+}
+
+country_event = {
+	id = test_cam.2 #高棉攻打满贾帕希
+	title = test_cam.2.t
+	desc = test_cam.2.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_cam.2.a
+		declare_war_on = {
+			target = KAL
+			type = annex_everything
+		}
+	}
+}
+
+country_event = {
+	id = test_cam.3 #高棉皇帝去世
+	title = test_cam.3.t
+	desc = test_cam.3.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_cam.3.a
+		retire_character = CAM_Suryavarman_II
+		news_event = {
+			id = worldnews_cam.1
+		}
+	}
+}

@@ -1,0 +1,671 @@
+######################
+## 乌萨斯帝国 · 军事国策树簇（共享国策）
+## 由 common/national_focus/URS.txt 的 URS_political_reform 以 shared_focus 引用并入主树
+## 坐标区 y = 20..26（政治树占 y = 0..18），两棵树同屏显示
+## 生成器：docs/_urs_mil_build.py（改数据表重跑，勿手改产物）
+######################
+#
+# 25 个国策 = 起点 1「蒙尘的军团荣誉」+ 四条主线各 6：
+#   陆军制度改革  x = -9    军事贵族审查 → 集团军编制重整 → 内卫忠诚条例
+#                          → 首都卫戍整编 → 谢钦兵团改制 → 总参谋部集权
+#   装备迭代      x = -3    源石弩箭量产 → 术师装备升级 → 陆行舰改造
+#                          → 加密通讯网络 → 库茨金娜试制 → 石棺武器化
+#   思想品德建设  x = +3    骏鹰传统复兴 → 皇帝的利刃教条 → 军功贵族再造
+#                          → 圣愚宣讲入营 → 战争术师守则 → 乌萨斯战吼
+#   军事工业改革  x = +9    卡托加军工复产 → 源石配给制 → 奥卡替代材料
+#                          → 第三局技术下放 → 零号项目 → 冬季资源调配紧急法
+#
+#   四条主线自起点 (0,20) 并列展开，行内 y = 21..26；左右关于 x=0 镜像。
+#
+# 【共享民族精神】URS_legion_reborn「乌萨斯军团浴火重生！」
+#   四条主线的全部加成塞进这一个动态修正（common/dynamic_modifiers/
+#   URS_dynamic_modifiers.txt），逐条 add_to_variable 原地成长。
+#   与政治树的「乌萨斯还不能死！」是两个独立容器，可同时生效。
+#
+# 【复活的旧机制】URS_empire_army_loyalty（帝国军忠诚度 0..100）
+#   脚本本地化与五档文案早已存在（誓死效忠/忠心耿耿/保持平静/
+#   满腹牢骚/叛变意图），但旧军改决议下线后无写入点。
+#   起点置 40（满腹牢骚），国策与决议逐条增减；
+#   决议分类 URS_military_decisions 的面板文案内嵌实时读数。
+#
+# 【决议钩子】common/decisions/URS_Military_Reform_Decisions.txt
+#   扩大贵族审查 ← 军事贵族审查 ｜ 削编第四集团军 ← 集团军编制重整
+#   军营清场 ← 圣愚宣讲入营 ｜ 统一指挥 ← 总参谋部集权
+#   卡托加复产动员 ← 卡托加军工复产 ｜ 石棺能源并网 ← 零号项目
+#   忠诚阅兵 ← 起点（需忠诚度 > 79）
+#
+######################
+
+shared_focus = { #1. 蒙尘的军团荣誉
+	id = URS_legion_dishonored
+	icon = GFX_focus_URS_legion_dishonored
+	x = 0
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_dynamic_modifier = { modifier = URS_legion_reborn }
+		if = {
+			limit = { NOT = { has_variable = URS_empire_army_loyalty } }
+			set_variable = { URS_empire_army_loyalty = 40 }
+		}
+		custom_effect_tooltip = URS_tt_mil_loyalty_init
+		if = {
+			limit = { NOT = { has_variable = URS_demonic_corruption } }
+			set_variable = { URS_demonic_corruption = 0 }
+		}
+		if = {
+			limit = { NOT = { has_variable = URS_fool_support } }
+			set_variable = { URS_fool_support = 0 }
+		}
+		if = {
+			limit = { NOT = { has_variable = URS_coup_risk } }
+			set_variable = { URS_coup_risk = 0 }
+		}
+		set_country_flag = URS_mil_reform_started
+		army_experience = 50
+		custom_effect_tooltip = URS_tt_mil_panel
+	}
+}
+
+shared_focus = { #2. 军事贵族审查
+	id = URS_mil_aristocrat_audit
+	icon = GFX_focus_URS_mil_aristocrat_audit
+	x = -9
+	y = 21
+	cost = 4
+	prerequisite = {
+		focus = URS_legion_dishonored
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_pp_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_pp_var_p10
+		add_to_variable = { var = URS_legion_stability_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_stability_var_m5
+		add_to_variable = { var = URS_empire_army_loyalty value = -10 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m10
+		set_country_flag = URS_mil_aristocrat_audit
+	}
+}
+
+shared_focus = { #3. 集团军编制重整
+	id = URS_mil_army_reorganized
+	icon = GFX_focus_URS_mil_army_reorganized
+	x = -9
+	y = 22
+	cost = 4
+	prerequisite = {
+		focus = URS_mil_aristocrat_audit
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_org_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_org_var_p10
+		add_to_variable = { var = URS_legion_conscription_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_conscription_var_p10
+		add_to_variable = { var = URS_empire_army_loyalty value = -10 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m10
+		set_country_flag = URS_mil_army_reorganized
+	}
+}
+
+shared_focus = { #4. 内卫忠诚条例
+	id = URS_mil_guards_act
+	icon = GFX_focus_URS_mil_guards_act
+	x = -9
+	y = 23
+	cost = 5
+	prerequisite = {
+		focus = URS_mil_army_reorganized
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_suppress_var value = -0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_suppress_var_m10
+		add_to_variable = { var = URS_legion_pp_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_pp_var_p10
+		add_to_variable = { var = URS_empire_army_loyalty value = 5 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p5
+		set_country_flag = URS_mil_guards_act
+	}
+}
+
+shared_focus = { #5. 首都卫戍整编
+	id = URS_mil_capital_garrison
+	icon = GFX_focus_URS_mil_capital_garrison
+	x = -9
+	y = 24
+	cost = 5
+	prerequisite = {
+		focus = URS_mil_guards_act
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_stability_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_stability_var_p10
+		add_to_variable = { var = URS_legion_conscription_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_conscription_var_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = 10 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p10
+		set_country_flag = URS_mil_capital_garrison
+	}
+}
+
+shared_focus = { #6. 谢钦兵团改制
+	id = URS_mil_freecorps
+	icon = GFX_focus_URS_mil_freecorps
+	x = -9
+	y = 25
+	cost = 5
+	prerequisite = {
+		focus = URS_mil_capital_garrison
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_conscription_var value = 0.15 }
+		custom_effect_tooltip = URS_tt_mil_legion_conscription_var_p15
+		add_to_variable = { var = URS_legion_org_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_org_var_p5
+		add_to_variable = { var = URS_legion_xp_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_xp_var_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = 15 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p15
+		set_country_flag = URS_mil_freecorps
+	}
+}
+
+shared_focus = { #7. 总参谋部集权
+	id = URS_mil_general_staff
+	icon = GFX_focus_URS_mil_general_staff
+	x = -9
+	y = 26
+	cost = 6
+	prerequisite = {
+		focus = URS_mil_freecorps
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_org_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_org_var_p10
+		add_to_variable = { var = URS_legion_command_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_command_var_p10
+		add_to_variable = { var = URS_empire_army_loyalty value = -10 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m10
+		set_country_flag = URS_mil_general_staff
+	}
+}
+
+shared_focus = { #8. 源石弩箭量产
+	id = URS_mil_bolt_industry
+	icon = GFX_focus_URS_mil_bolt_industry
+	x = -3
+	y = 21
+	cost = 4
+	prerequisite = {
+		focus = URS_legion_dishonored
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_attack_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_attack_var_p5
+		add_to_variable = { var = URS_legion_industry_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_industry_var_p5
+		set_country_flag = URS_mil_bolt_industry
+	}
+}
+
+shared_focus = { #9. 术师装备升级
+	id = URS_mil_caster_gear
+	icon = GFX_focus_URS_mil_caster_gear
+	x = -3
+	y = 22
+	cost = 4
+	prerequisite = {
+		focus = URS_mil_bolt_industry
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_breakthrough_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_breakthrough_var_p10
+		add_to_variable = { var = URS_legion_attack_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_attack_var_p5
+		add_to_variable = { var = URS_demonic_corruption value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_demonic_corruption_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = -5 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m5
+		set_country_flag = URS_mil_caster_gear
+	}
+}
+
+shared_focus = { #10. 陆行舰改造
+	id = URS_mil_landship
+	icon = GFX_focus_URS_mil_landship
+	x = -3
+	y = 23
+	cost = 4
+	prerequisite = {
+		focus = URS_mil_caster_gear
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_winter_var value = -0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_winter_var_m10
+		add_to_variable = { var = URS_legion_supply_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_supply_var_m5
+		set_country_flag = URS_mil_landship
+	}
+}
+
+shared_focus = { #11. 加密通讯网络
+	id = URS_mil_secure_net
+	icon = GFX_focus_URS_mil_secure_net
+	x = -3
+	y = 24
+	cost = 5
+	prerequisite = {
+		focus = URS_mil_landship
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_command_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_command_var_p10
+		add_to_variable = { var = URS_legion_intel_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_intel_var_p10
+		add_to_variable = { var = URS_empire_army_loyalty value = 5 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p5
+		set_country_flag = URS_mil_secure_net
+	}
+}
+
+shared_focus = { #12. 库茨金娜试制
+	id = URS_mil_kutsukina
+	icon = GFX_focus_URS_mil_kutsukina
+	x = -3
+	y = 25
+	cost = 5
+	prerequisite = {
+		focus = URS_mil_secure_net
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_attack_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_attack_var_p10
+		add_to_variable = { var = URS_legion_breakthrough_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_breakthrough_var_p5
+		add_to_variable = { var = URS_demonic_corruption value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_demonic_corruption_p10
+		set_country_flag = URS_mil_kutsukina
+	}
+}
+
+shared_focus = { #13. 石棺武器化
+	id = URS_mil_sarcophagus
+	icon = GFX_focus_URS_mil_sarcophagus
+	x = -3
+	y = 26
+	cost = 6
+	prerequisite = {
+		focus = URS_mil_kutsukina
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_attack_var value = 0.15 }
+		custom_effect_tooltip = URS_tt_mil_legion_attack_var_p15
+		add_to_variable = { var = URS_demonic_corruption value = 0.15 }
+		custom_effect_tooltip = URS_tt_mil_demonic_corruption_p15
+		add_to_variable = { var = URS_empire_army_loyalty value = -5 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m5
+		set_country_flag = URS_mil_sarcophagus
+	}
+}
+
+shared_focus = { #14. 骏鹰传统复兴
+	id = URS_mil_griffin_rites
+	icon = GFX_focus_URS_mil_griffin_rites
+	x = 3
+	y = 21
+	cost = 4
+	prerequisite = {
+		focus = URS_legion_dishonored
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_ws_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_ws_var_p5
+		add_to_variable = { var = URS_legion_stability_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_stability_var_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = 10 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p10
+		set_country_flag = URS_mil_griffin_rites
+	}
+}
+
+shared_focus = { #15. 皇帝的利刃教条
+	id = URS_mil_blade_creed
+	icon = GFX_focus_URS_mil_blade_creed
+	x = 3
+	y = 22
+	cost = 4
+	prerequisite = {
+		focus = URS_mil_griffin_rites
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_stability_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_stability_var_p5
+		add_to_variable = { var = URS_legion_suppress_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_suppress_var_m5
+		add_to_variable = { var = URS_empire_army_loyalty value = 10 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p10
+		set_country_flag = URS_mil_blade_creed
+	}
+}
+
+shared_focus = { #16. 军功贵族再造
+	id = URS_mil_merit_ranks
+	icon = GFX_focus_URS_mil_merit_ranks
+	x = 3
+	y = 23
+	cost = 4
+	prerequisite = {
+		focus = URS_mil_blade_creed
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_xp_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_xp_var_p10
+		add_to_variable = { var = URS_legion_command_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_command_var_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = 15 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p15
+		set_country_flag = URS_mil_merit_ranks
+	}
+}
+
+shared_focus = { #17. 圣愚宣讲入营
+	id = URS_mil_preachers
+	icon = GFX_focus_URS_mil_preachers
+	x = 3
+	y = 24
+	cost = 5
+	prerequisite = {
+		focus = URS_mil_merit_ranks
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_ws_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_ws_var_p10
+		add_to_variable = { var = URS_legion_stability_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_stability_var_m5
+		add_to_variable = { var = URS_fool_support value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_fool_support_p10
+		add_to_variable = { var = URS_empire_army_loyalty value = -15 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m15
+		set_country_flag = URS_mil_preachers
+	}
+}
+
+shared_focus = { #18. 战争术师守则
+	id = URS_mil_caster_code
+	icon = GFX_focus_URS_mil_caster_code
+	x = 3
+	y = 25
+	cost = 5
+	prerequisite = {
+		focus = URS_mil_preachers
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_attack_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_attack_var_p5
+		add_to_variable = { var = URS_legion_org_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_org_var_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = -10 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m10
+		set_country_flag = URS_mil_caster_code
+	}
+}
+
+shared_focus = { #19. 乌萨斯战吼
+	id = URS_mil_warcry
+	icon = GFX_focus_URS_mil_warcry
+	x = 3
+	y = 26
+	cost = 6
+	prerequisite = {
+		focus = URS_mil_caster_code
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_ws_var value = 0.15 }
+		custom_effect_tooltip = URS_tt_mil_legion_ws_var_p15
+		add_to_variable = { var = URS_fool_support value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_fool_support_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = 10 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p10
+		set_country_flag = URS_mil_warcry
+	}
+}
+
+shared_focus = { #20. 卡托加军工复产
+	id = URS_mil_katoga_reopened
+	icon = GFX_focus_URS_mil_katoga_reopened
+	x = 9
+	y = 21
+	cost = 4
+	prerequisite = {
+		focus = URS_legion_dishonored
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_industry_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_industry_var_p10
+		add_to_variable = { var = URS_empire_army_loyalty value = 5 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p5
+		set_country_flag = URS_mil_katoga_reopened
+	}
+}
+
+shared_focus = { #21. 源石配给制
+	id = URS_mil_ore_rationing
+	icon = GFX_focus_URS_mil_ore_rationing
+	x = 9
+	y = 22
+	cost = 4
+	prerequisite = {
+		focus = URS_mil_katoga_reopened
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_industry_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_industry_var_p10
+		add_to_variable = { var = URS_legion_consumer_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_consumer_var_p5
+		add_to_variable = { var = URS_legion_stability_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_stability_var_m5
+		add_to_variable = { var = URS_empire_army_loyalty value = -10 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m10
+		set_country_flag = URS_mil_ore_rationing
+	}
+}
+
+shared_focus = { #22. 奥卡替代材料
+	id = URS_mil_originium_sub
+	icon = GFX_focus_URS_mil_originium_sub
+	x = 9
+	y = 23
+	cost = 4
+	prerequisite = {
+		focus = URS_mil_ore_rationing
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_industry_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_industry_var_p10
+		add_to_variable = { var = URS_legion_research_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_research_var_p5
+		set_country_flag = URS_mil_originium_sub
+	}
+}
+
+shared_focus = { #23. 第三局技术下放
+	id = URS_mil_bureau_tech
+	icon = GFX_focus_URS_mil_bureau_tech
+	x = 9
+	y = 24
+	cost = 5
+	prerequisite = {
+		focus = URS_mil_originium_sub
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_research_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_research_var_p10
+		add_to_variable = { var = URS_legion_intel_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_mil_legion_intel_var_p5
+		set_country_flag = URS_mil_bureau_tech
+	}
+}
+
+shared_focus = { #24. 零号项目
+	id = URS_mil_project_zero
+	icon = GFX_focus_URS_mil_project_zero
+	x = 9
+	y = 25
+	cost = 5
+	prerequisite = {
+		focus = URS_mil_bureau_tech
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_industry_var value = 0.15 }
+		custom_effect_tooltip = URS_tt_mil_legion_industry_var_p15
+		add_to_variable = { var = URS_demonic_corruption value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_demonic_corruption_p10
+		add_to_variable = { var = URS_empire_army_loyalty value = -5 }
+		custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m5
+		set_country_flag = URS_mil_project_zero
+	}
+}
+
+shared_focus = { #25. 冬季资源调配紧急法
+	id = URS_mil_winter_law
+	icon = GFX_focus_URS_mil_winter_law
+	x = 9
+	y = 26
+	cost = 6
+	prerequisite = {
+		focus = URS_mil_project_zero
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_legion_industry_var value = 0.15 }
+		custom_effect_tooltip = URS_tt_mil_legion_industry_var_p15
+		add_to_variable = { var = URS_legion_consumer_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_consumer_var_p10
+		add_to_variable = { var = URS_legion_stability_var value = -0.1 }
+		custom_effect_tooltip = URS_tt_mil_legion_stability_var_m10
+		set_country_flag = URS_mil_winter_law
+	}
+}

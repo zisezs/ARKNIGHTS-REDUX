@@ -1,0 +1,30 @@
+######################
+## 主席办公室 月度钩子 ##
+######################
+
+on_actions = {
+	on_monthly_REU = {
+		effect = {
+		# 十万火急！：月度兜底（卡兹戴尔红军在战争中就自动完成根节点）
+		REU_Kazdel_Urgency_Check = yes
+
+		# 怒号光明：战争结束兜底（卡兹戴尔王国/罗阇国由卡兹戴尔红军吞并）
+		REU_Roar_Light_War_End_Check = yes
+
+			# 保证老存档 / 中途接手的变量都存在
+			if = {
+				limit = { has_country_flag = REU_ludmila_unlocked }
+				REU_Ludmila_Init_Variables = yes
+
+				# 决议的一次使用次数按月重置
+				clr_country_flag = REU_ludmila_used_chocolate
+				clr_country_flag = REU_ludmila_used_paperwork
+				clr_country_flag = REU_ludmila_used_snow
+
+				# 一个月过去，对话自然收尾
+				clr_country_flag = REU_ludmila_office_open
+				clr_country_flag = REU_ludmila_talked_today
+			}
+		}
+	}
+}

@@ -1,0 +1,353 @@
+scripted_gui = {
+	rhl_rocket_console = {
+		context_type = player_context
+		window_name = "rhl_rc_window"
+		dirty = RHL_r_dirty
+		visible = {
+			has_country_flag = RHL_rocket_module_unlocked
+			has_variable = RHL_r_open
+		}
+		effects = {
+			rhl_rc_close_click = {
+			clear_variable = RHL_r_open
+			}
+			rhl_rc_help_click = {
+			country_event = { id = rhl_rocket.59 days = 1 }
+			}
+			rhl_rc_stages_1_click = {
+			set_variable = { RHL_r_n_stages = 1 }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_stages_2_click = {
+			set_variable = { RHL_r_n_stages = 2 }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_stages_3_click = {
+			set_variable = { RHL_r_n_stages = 3 }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_pick_b_s1_click = {
+			set_variable = { RHL_r_sel_type = 1 }
+			set_variable = { RHL_r_sel_idx = 0 }
+			}
+			rhl_rc_pick_b_m1_click = {
+			set_variable = { RHL_r_sel_type = 1 }
+			set_variable = { RHL_r_sel_idx = 1 }
+			}
+			rhl_rc_pick_b_l1_click = {
+			set_variable = { RHL_r_sel_type = 1 }
+			set_variable = { RHL_r_sel_idx = 2 }
+			}
+			rhl_rc_pick_b_m2_click = {
+			set_variable = { RHL_r_sel_type = 1 }
+			set_variable = { RHL_r_sel_idx = 3 }
+			}
+			rhl_rc_pick_e_a1_click = {
+			set_variable = { RHL_r_sel_type = 2 }
+			set_variable = { RHL_r_sel_idx = 0 }
+			}
+			rhl_rc_pick_e_a2_click = {
+			set_variable = { RHL_r_sel_type = 2 }
+			set_variable = { RHL_r_sel_idx = 1 }
+			}
+			rhl_rc_pick_e_c1_click = {
+			set_variable = { RHL_r_sel_type = 2 }
+			set_variable = { RHL_r_sel_idx = 2 }
+			}
+			rhl_rc_pick_e_b1_click = {
+			set_variable = { RHL_r_sel_type = 2 }
+			set_variable = { RHL_r_sel_idx = 3 }
+			}
+			rhl_rc_pick_e_d1_click = {
+			set_variable = { RHL_r_sel_type = 2 }
+			set_variable = { RHL_r_sel_idx = 4 }
+			}
+			rhl_rc_pick_e_e1_click = {
+			set_variable = { RHL_r_sel_type = 2 }
+			set_variable = { RHL_r_sel_idx = 5 }
+			}
+			rhl_rc_pick_p_loxeth_click = {
+			set_variable = { RHL_r_sel_type = 3 }
+			set_variable = { RHL_r_sel_idx = 0 }
+			}
+			rhl_rc_pick_p_loxkero_click = {
+			set_variable = { RHL_r_sel_type = 3 }
+			set_variable = { RHL_r_sel_idx = 1 }
+			}
+			rhl_rc_pick_p_nitric_click = {
+			set_variable = { RHL_r_sel_type = 3 }
+			set_variable = { RHL_r_sel_idx = 2 }
+			}
+			rhl_rc_pick_p_h2o2_click = {
+			set_variable = { RHL_r_sel_type = 3 }
+			set_variable = { RHL_r_sel_idx = 3 }
+			}
+			rhl_rc_s1_body_click = {
+			if = { limit = { check_variable = { RHL_r_sel_type = 1 } } set_variable = { RHL_r_b1_idx = RHL_r_sel_idx } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_s1_engine_click = {
+			if = { limit = { check_variable = { RHL_r_sel_type = 2 } } set_variable = { RHL_r_e1_idx = RHL_r_sel_idx }
+				set_variable = { RHL_r_n1 = 1 } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_s1_prop_click = {
+			if = { limit = { check_variable = { RHL_r_sel_type = 3 } } set_variable = { RHL_r_p1_idx = RHL_r_sel_idx } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_s2_body_click = {
+			if = { limit = { check_variable = { RHL_r_sel_type = 1 } } set_variable = { RHL_r_b2_idx = RHL_r_sel_idx } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_s2_engine_click = {
+			if = { limit = { check_variable = { RHL_r_sel_type = 2 } } set_variable = { RHL_r_e2_idx = RHL_r_sel_idx }
+				set_variable = { RHL_r_n2 = 1 } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_s2_prop_click = {
+			if = { limit = { check_variable = { RHL_r_sel_type = 3 } } set_variable = { RHL_r_p2_idx = RHL_r_sel_idx } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_s3_body_click = {
+			if = { limit = { check_variable = { RHL_r_sel_type = 1 } } set_variable = { RHL_r_b3_idx = RHL_r_sel_idx } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_s3_engine_click = {
+			if = { limit = { check_variable = { RHL_r_sel_type = 2 } } set_variable = { RHL_r_e3_idx = RHL_r_sel_idx }
+				set_variable = { RHL_r_n3 = 1 } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_s3_prop_click = {
+			if = { limit = { check_variable = { RHL_r_sel_type = 3 } } set_variable = { RHL_r_p3_idx = RHL_r_sel_idx } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_payload_0_click = {
+			set_variable = { RHL_r_payload_idx = 0 }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_payload_1_click = {
+			set_variable = { RHL_r_payload_idx = 1 }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_payload_2_click = {
+			set_variable = { RHL_r_payload_idx = 2 }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_payload_3_click = {
+			set_variable = { RHL_r_payload_idx = 3 }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_mission_prev_click = {
+			if = { limit = { check_variable = { RHL_r_mission_idx > 0 } } subtract_from_variable = { RHL_r_mission_idx = 1 } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_mission_next_click = {
+			if = { limit = { check_variable = { RHL_r_mission_idx < 4 } } add_to_variable = { RHL_r_mission_idx = 1 } }
+			RHL_r_recompute = yes
+			}
+			rhl_rc_validate_click = {
+			RHL_r_validate_design = yes
+			}
+			rhl_rc_launch_click = {
+			RHL_r_launch_resolve = yes
+			}
+			rhl_rc_auto_click = {
+			RHL_r_auto_design = yes
+			}
+			rhl_rc_reset_click = {
+			RHL_r_reset_design = yes
+			}
+		}
+		triggers = {
+			rhl_rc_s3_prop_visible = {
+			check_variable = { RHL_r_n_stages > 2 }
+			}
+			rhl_rc_s3_engine_visible = {
+			check_variable = { RHL_r_n_stages > 2 }
+			}
+			rhl_rc_s3_body_visible = {
+			check_variable = { RHL_r_n_stages > 2 }
+			}
+			rhl_rc_txt_row3_visible = {
+			check_variable = { RHL_r_n_stages > 2 }
+			}
+			rhl_rc_s2_prop_visible = {
+			check_variable = { RHL_r_n_stages > 1 }
+			}
+			rhl_rc_s2_engine_visible = {
+			check_variable = { RHL_r_n_stages > 1 }
+			}
+			rhl_rc_s2_body_visible = {
+			check_variable = { RHL_r_n_stages > 1 }
+			}
+			rhl_rc_txt_row2_visible = {
+			check_variable = { RHL_r_n_stages > 1 }
+			}
+			rhl_rc_auto_click_enabled = {
+			always = yes
+			}
+			rhl_rc_pick_b_m2_click_enabled = {
+			check_variable = { RHL_rocket_successes > 1 }
+			}
+			rhl_rc_pick_e_b1_click_enabled = {
+			check_variable = { RHL_rocket_successes > 0 }
+			}
+			rhl_rc_pick_e_d1_click_enabled = {
+			check_variable = { RHL_rocket_successes > 2 }
+			}
+			rhl_rc_pick_e_e1_click_enabled = {
+			check_variable = { RHL_rocket_successes > 4 }
+			}
+			rhl_rc_payload_0_click_enabled = {
+			always = yes
+			}
+			rhl_rc_payload_1_click_enabled = {
+			always = yes
+			}
+			rhl_rc_payload_2_click_enabled = {
+			OR = {
+				check_variable = { RHL_r_mission_idx = 3 }
+				check_variable = { RHL_r_mission_idx = 4 }
+			}
+			}
+			rhl_rc_payload_3_click_enabled = {
+			OR = {
+				check_variable = { RHL_r_mission_idx = 3 }
+				check_variable = { RHL_r_mission_idx = 4 }
+			}
+			}
+			rhl_rc_mission_prev_click_enabled = {
+			always = yes
+			}
+			rhl_rc_mission_next_click_enabled = {
+			always = yes
+			}
+			rhl_rc_launch_click_enabled = {
+			check_variable = { RHL_r_valid = 1 }
+			has_political_power > 99
+			NOT = { has_idea = RHL_rocket_production_drain }
+			}
+			rhl_rc_slot1_body_icon_visible = {
+			check_variable = { RHL_r_b1_idx > -1 }
+			}
+			rhl_rc_slot1_body_hl_visible = {
+			check_variable = { RHL_r_sel_type = 1 }
+			}
+			rhl_rc_slot1_engine_icon_visible = {
+			check_variable = { RHL_r_e1_idx > -1 }
+			}
+			rhl_rc_slot1_engine_hl_visible = {
+			check_variable = { RHL_r_sel_type = 2 }
+			}
+			rhl_rc_slot1_prop_icon_visible = {
+			check_variable = { RHL_r_p1_idx > -1 }
+			}
+			rhl_rc_slot1_prop_hl_visible = {
+			check_variable = { RHL_r_sel_type = 3 }
+			}
+			rhl_rc_slot2_body_icon_visible = {
+			check_variable = { RHL_r_n_stages > 1 }
+			check_variable = { RHL_r_b2_idx > -1 }
+			}
+			rhl_rc_slot2_body_hl_visible = {
+			check_variable = { RHL_r_n_stages > 1 }
+			check_variable = { RHL_r_sel_type = 1 }
+			}
+			rhl_rc_slot2_engine_icon_visible = {
+			check_variable = { RHL_r_n_stages > 1 }
+			check_variable = { RHL_r_e2_idx > -1 }
+			}
+			rhl_rc_slot2_engine_hl_visible = {
+			check_variable = { RHL_r_n_stages > 1 }
+			check_variable = { RHL_r_sel_type = 2 }
+			}
+			rhl_rc_slot2_prop_icon_visible = {
+			check_variable = { RHL_r_n_stages > 1 }
+			check_variable = { RHL_r_p2_idx > -1 }
+			}
+			rhl_rc_slot2_prop_hl_visible = {
+			check_variable = { RHL_r_n_stages > 1 }
+			check_variable = { RHL_r_sel_type = 3 }
+			}
+			rhl_rc_slot3_body_icon_visible = {
+			check_variable = { RHL_r_n_stages > 2 }
+			check_variable = { RHL_r_b3_idx > -1 }
+			}
+			rhl_rc_slot3_body_hl_visible = {
+			check_variable = { RHL_r_n_stages > 2 }
+			check_variable = { RHL_r_sel_type = 1 }
+			}
+			rhl_rc_slot3_engine_icon_visible = {
+			check_variable = { RHL_r_n_stages > 2 }
+			check_variable = { RHL_r_e3_idx > -1 }
+			}
+			rhl_rc_slot3_engine_hl_visible = {
+			check_variable = { RHL_r_n_stages > 2 }
+			check_variable = { RHL_r_sel_type = 2 }
+			}
+			rhl_rc_slot3_prop_icon_visible = {
+			check_variable = { RHL_r_n_stages > 2 }
+			check_variable = { RHL_r_p3_idx > -1 }
+			}
+			rhl_rc_slot3_prop_hl_visible = {
+			check_variable = { RHL_r_n_stages > 2 }
+			check_variable = { RHL_r_sel_type = 3 }
+			}
+			rhl_rc_sel_hl_b_s1_visible = {
+			AND = {
+				check_variable = { RHL_r_sel_type = 1 }
+				check_variable = { RHL_r_sel_idx = 0 }
+			}
+			}
+			rhl_rc_sel_hl_b_m1_visible = {
+			AND = {
+				check_variable = { RHL_r_sel_type = 1 }
+				check_variable = { RHL_r_sel_idx = 1 }
+			}
+			}
+			rhl_rc_sel_hl_b_l1_visible = {
+			AND = {
+				check_variable = { RHL_r_sel_type = 1 }
+				check_variable = { RHL_r_sel_idx = 2 }
+			}
+			}
+			rhl_rc_sel_hl_b_m2_visible = {
+			AND = {
+				check_variable = { RHL_r_sel_type = 1 }
+				check_variable = { RHL_r_sel_idx = 3 }
+			}
+			}
+		}
+		properties = {
+			rhl_rc_slot1_body_icon = { frame = RHL_r_b1_idx }
+			rhl_rc_slot1_engine_icon = { frame = RHL_r_e1_idx }
+			rhl_rc_slot1_prop_icon = { frame = RHL_r_p1_idx }
+			rhl_rc_slot2_body_icon = { frame = RHL_r_b2_idx }
+			rhl_rc_slot2_engine_icon = { frame = RHL_r_e2_idx }
+			rhl_rc_slot2_prop_icon = { frame = RHL_r_p2_idx }
+			rhl_rc_slot3_body_icon = { frame = RHL_r_b3_idx }
+			rhl_rc_slot3_engine_icon = { frame = RHL_r_e3_idx }
+			rhl_rc_slot3_prop_icon = { frame = RHL_r_p3_idx }
+			rhl_rc_gauge_dv = { frame = RHL_r_dv_frame }
+			rhl_rc_gauge_req = { frame = RHL_r_req_frame }
+			rhl_rc_payload_sel0 = { frame = RHL_r_payloadsel0_frame }
+			rhl_rc_payload_sel1 = { frame = RHL_r_payloadsel1_frame }
+			rhl_rc_payload_sel2 = { frame = RHL_r_payloadsel2_frame }
+			rhl_rc_payload_sel3 = { frame = RHL_r_payloadsel3_frame }
+			rhl_rc_payload_icon = { frame = RHL_r_payload_idx }
+		}
+	}
+	rhl_rocket_entry = {
+		context_type = player_context
+		window_name = "rhl_rc_entry_window"
+		parent_window_token = top_bar
+		visible = {
+			has_country_flag = RHL_rocket_module_unlocked
+		}
+		effects = {
+			rhl_rc_entry_button_click = {
+			set_variable = { RHL_r_open = 1 }
+			}
+		}
+	}
+}

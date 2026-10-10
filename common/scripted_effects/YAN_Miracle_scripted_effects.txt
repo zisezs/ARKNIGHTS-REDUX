@@ -1,0 +1,1228 @@
+# ==============================================================================
+#  大炎·奇迹工程 —— scripted_effects
+#  生成物，真源 docs/yan_miracle_data.cjs
+#
+#  面板状态（全部国家 scope 变量）
+#    YAN_mir_proj                  1..9  当前浏览的工程
+#    YAN_mir_sid                   州 id    当前选址（0 = 本工程暂无可选之州）
+#    YAN_mir_view                  0 卷宗 / 1 台账
+#    YAN_mir_site_ok               0/1      当前选址是否合格
+#    YAN_mir_site_count / _rank             本工程可选州总数 / 当前选址排位
+#    YAN_mir_chk_1..3                  0 不适用 / 1 满足 / 2 不满足
+#    YAN_mir_site_<key>            州 id    该工程正在营的那一处（竣工后清零）
+#    YAN_mir_s<n>_<key>            州 id    该工程第 n 处台账（已落成）
+#    YAN_mir_done_<key> / YAN_mir_total     该工程处数 / 全国总处数（上限 19）
+#    YAN_mir_np_<bucket>                    全国精神读数（浮点），_p = ×100 取整后备显
+# ==============================================================================
+
+# ---------------- 开 / 关 / 切视图 ----------------
+YAN_Mir_Open = {
+	if = {
+		limit = { has_country_flag = yan_mir_open }
+		YAN_Mir_Close = yes
+	}
+	else = {
+		set_country_flag = yan_mir_open
+		if = {
+			limit = { NOT = { check_variable = { YAN_mir_proj > 0 } } }
+			set_variable = { YAN_mir_proj = 1 }
+		}
+		if = {
+			limit = { NOT = { any_controlled_state = { has_state_flag = yan_mir_cursor } } }
+			YAN_Mir_PickFirst = yes
+		}
+		YAN_Mir_Recalc = yes
+		YAN_Mir_SyncSite = yes
+	}
+}
+
+YAN_Mir_Close = {
+	clr_country_flag = yan_mir_open
+}
+
+YAN_Mir_ShowRoster = {
+	set_variable = { YAN_mir_view = 1 }
+}
+
+YAN_Mir_ShowDossier = {
+	set_variable = { YAN_mir_view = 0 }
+}
+
+# ---------------- 全量重算：不维护增量，就不会和旗标 / 台账失步 ----------------
+YAN_Mir_Recalc = {
+	set_variable = { YAN_mir_total = 0 }
+	set_variable = { YAN_mir_active_count = 0 }
+	set_variable = { YAN_mir_np_rsd = 0 }
+	set_variable = { YAN_mir_np_pp = 0 }
+	set_variable = { YAN_mir_np_ifac = 0 }
+	set_variable = { YAN_mir_np_idoc = 0 }
+	set_variable = { YAN_mir_np_bld = 0 }
+	set_variable = { YAN_mir_np_atk = 0 }
+	set_variable = { YAN_mir_np_def = 0 }
+	set_variable = { YAN_mir_np_sup = 0 }
+	set_variable = { YAN_mir_np_stab = 0 }
+	set_variable = { YAN_mir_done_guangsha = 0 }
+	set_variable = { YAN_mir_done_rongjin = 0 }
+	set_variable = { YAN_mir_done_dujiang = 0 }
+	set_variable = { YAN_mir_done_zhuancao = 0 }
+	set_variable = { YAN_mir_done_zhenyue = 0 }
+	set_variable = { YAN_mir_done_feiyun = 0 }
+	set_variable = { YAN_mir_done_sitian = 0 }
+	set_variable = { YAN_mir_done_yumen = 0 }
+	set_variable = { YAN_mir_done_longmen = 0 }
+
+	if = {
+		limit = { check_variable = { YAN_mir_s1_guangsha > 0 } }
+			add_to_variable = { YAN_mir_done_guangsha = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_stab = 0.02 }
+			add_to_variable = { YAN_mir_np_pp = 0.02 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s2_guangsha > 0 } }
+			add_to_variable = { YAN_mir_done_guangsha = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_stab = 0.02 }
+			add_to_variable = { YAN_mir_np_pp = 0.02 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s3_guangsha > 0 } }
+			add_to_variable = { YAN_mir_done_guangsha = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_stab = 0.02 }
+			add_to_variable = { YAN_mir_np_pp = 0.02 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s1_rongjin > 0 } }
+			add_to_variable = { YAN_mir_done_rongjin = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_ifac = 0.03 }
+			add_to_variable = { YAN_mir_np_bld = 0.01 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s2_rongjin > 0 } }
+			add_to_variable = { YAN_mir_done_rongjin = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_ifac = 0.03 }
+			add_to_variable = { YAN_mir_np_bld = 0.01 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s1_dujiang > 0 } }
+			add_to_variable = { YAN_mir_done_dujiang = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_sup = -0.02 }
+			add_to_variable = { YAN_mir_np_bld = 0.01 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s2_dujiang > 0 } }
+			add_to_variable = { YAN_mir_done_dujiang = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_sup = -0.02 }
+			add_to_variable = { YAN_mir_np_bld = 0.01 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s3_dujiang > 0 } }
+			add_to_variable = { YAN_mir_done_dujiang = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_sup = -0.02 }
+			add_to_variable = { YAN_mir_np_bld = 0.01 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s1_zhuancao > 0 } }
+			add_to_variable = { YAN_mir_done_zhuancao = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_ifac = 0.02 }
+			add_to_variable = { YAN_mir_np_sup = -0.02 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s2_zhuancao > 0 } }
+			add_to_variable = { YAN_mir_done_zhuancao = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_ifac = 0.02 }
+			add_to_variable = { YAN_mir_np_sup = -0.02 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s1_zhenyue > 0 } }
+			add_to_variable = { YAN_mir_done_zhenyue = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_ifac = 0.04 }
+			add_to_variable = { YAN_mir_np_atk = 0.02 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s2_zhenyue > 0 } }
+			add_to_variable = { YAN_mir_done_zhenyue = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_ifac = 0.04 }
+			add_to_variable = { YAN_mir_np_atk = 0.02 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s1_feiyun > 0 } }
+			add_to_variable = { YAN_mir_done_feiyun = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_idoc = 0.05 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s2_feiyun > 0 } }
+			add_to_variable = { YAN_mir_done_feiyun = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_idoc = 0.05 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s1_sitian > 0 } }
+			add_to_variable = { YAN_mir_done_sitian = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_rsd = 0.05 }
+			add_to_variable = { YAN_mir_np_pp = 0.03 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s1_yumen > 0 } }
+			add_to_variable = { YAN_mir_done_yumen = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_def = 0.04 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s2_yumen > 0 } }
+			add_to_variable = { YAN_mir_done_yumen = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_def = 0.04 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s3_yumen > 0 } }
+			add_to_variable = { YAN_mir_done_yumen = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_def = 0.04 }
+	}
+	if = {
+		limit = { check_variable = { YAN_mir_s1_longmen > 0 } }
+			add_to_variable = { YAN_mir_done_longmen = 1 }
+			add_to_variable = { YAN_mir_total = 1 }
+			add_to_variable = { YAN_mir_np_ifac = 0.08 }
+			add_to_variable = { YAN_mir_np_pp = 0.03 }
+			add_to_variable = { YAN_mir_np_bld = 0.02 }
+			add_to_variable = { YAN_mir_np_stab = 0.02 }
+	}
+
+	# 在营几项（入口面板的一行读数）
+	if = {
+		limit = { has_country_flag = yan_mir_act_guangsha }
+			add_to_variable = { YAN_mir_active_count = 1 }
+	}
+	if = {
+		limit = { has_country_flag = yan_mir_act_rongjin }
+			add_to_variable = { YAN_mir_active_count = 1 }
+	}
+	if = {
+		limit = { has_country_flag = yan_mir_act_dujiang }
+			add_to_variable = { YAN_mir_active_count = 1 }
+	}
+	if = {
+		limit = { has_country_flag = yan_mir_act_zhuancao }
+			add_to_variable = { YAN_mir_active_count = 1 }
+	}
+	if = {
+		limit = { has_country_flag = yan_mir_act_zhenyue }
+			add_to_variable = { YAN_mir_active_count = 1 }
+	}
+	if = {
+		limit = { has_country_flag = yan_mir_act_feiyun }
+			add_to_variable = { YAN_mir_active_count = 1 }
+	}
+	if = {
+		limit = { has_country_flag = yan_mir_act_sitian }
+			add_to_variable = { YAN_mir_active_count = 1 }
+	}
+	if = {
+		limit = { has_country_flag = yan_mir_act_yumen }
+			add_to_variable = { YAN_mir_active_count = 1 }
+	}
+	if = {
+		limit = { has_country_flag = yan_mir_act_longmen }
+			add_to_variable = { YAN_mir_active_count = 1 }
+	}
+
+	# 读数：所有 np 增量都是 0.01 的整数倍，×100 后 round 就是整数百分比
+	set_variable = { YAN_mir_np_rsd_p = YAN_mir_np_rsd }
+	multiply_variable = { YAN_mir_np_rsd_p = 100 }
+	round_variable = YAN_mir_np_rsd_p
+	set_variable = { YAN_mir_np_pp_p = YAN_mir_np_pp }
+	multiply_variable = { YAN_mir_np_pp_p = 100 }
+	round_variable = YAN_mir_np_pp_p
+	set_variable = { YAN_mir_np_ifac_p = YAN_mir_np_ifac }
+	multiply_variable = { YAN_mir_np_ifac_p = 100 }
+	round_variable = YAN_mir_np_ifac_p
+	set_variable = { YAN_mir_np_idoc_p = YAN_mir_np_idoc }
+	multiply_variable = { YAN_mir_np_idoc_p = 100 }
+	round_variable = YAN_mir_np_idoc_p
+	set_variable = { YAN_mir_np_bld_p = YAN_mir_np_bld }
+	multiply_variable = { YAN_mir_np_bld_p = 100 }
+	round_variable = YAN_mir_np_bld_p
+	set_variable = { YAN_mir_np_atk_p = YAN_mir_np_atk }
+	multiply_variable = { YAN_mir_np_atk_p = 100 }
+	round_variable = YAN_mir_np_atk_p
+	set_variable = { YAN_mir_np_def_p = YAN_mir_np_def }
+	multiply_variable = { YAN_mir_np_def_p = 100 }
+	round_variable = YAN_mir_np_def_p
+	set_variable = { YAN_mir_np_sup_p = YAN_mir_np_sup }
+	multiply_variable = { YAN_mir_np_sup_p = 100 }
+	round_variable = YAN_mir_np_sup_p
+	set_variable = { YAN_mir_np_stab_p = YAN_mir_np_stab }
+	multiply_variable = { YAN_mir_np_stab_p = 100 }
+	round_variable = YAN_mir_np_stab_p
+}
+
+# ---------------- 把当前选址的档案同步进国家变量 ----------------
+# ---------------- 把当前游标的档案同步进国家变量 ----------------
+# 游标 = 恰好挂在一个州身上的 yan_mir_cursor 州旗标。**不做州 id 比对**：
+#   check_variable = { id = ... } 在州作用域没有可信先例，state = <scope> 也只认 scope 目标。
+# 州名显示另走一路：YAN_mir_sid / YAN_mir_site_<key> / YAN_mir_s<n>_<key> 是「存了州 id 的变量」，
+# 本地化写 [?变量.GetName] —— 原版 NSB 就是这么打州名的（[?SOV.SOV_defections_army_state.GetName]）。
+YAN_Mir_SyncSite = {
+	set_variable = { YAN_mir_site_ok = 0 }
+	set_variable = { YAN_mir_site_count = 0 }
+	set_variable = { YAN_mir_site_rank = 0 }
+	set_variable = { YAN_mir_seen = 0 }
+	set_variable = { YAN_mir_chk_1 = 0 }
+	set_variable = { YAN_mir_chk_2 = 0 }
+	set_variable = { YAN_mir_chk_3 = 0 }
+
+	every_controlled_state = {
+		limit = { YAN_Mir_State_Eligible = yes }
+		add_to_variable = { ROOT.YAN_mir_site_count = 1 }
+		# 还没见到游标 → 这一处排在游标前面，排位 +1
+		if = {
+			limit = { check_variable = { ROOT.YAN_mir_seen = 0 } }
+			add_to_variable = { ROOT.YAN_mir_site_rank = 1 }
+		}
+		if = {
+			limit = { has_state_flag = yan_mir_cursor }
+			set_variable = { ROOT.YAN_mir_seen = 1 }
+			set_variable = { ROOT.YAN_mir_sid = THIS.id }
+			set_variable = { ROOT.YAN_mir_site_ok = 1 }
+			# 逐项判定：1 = 满足，2 = 不满足，0 = 本工程不问这一条
+			if = {
+				limit = {
+					check_variable = { ROOT.YAN_mir_proj = 1 compare = equals }
+				}
+				set_variable = { ROOT.YAN_mir_chk_1 = 2 }
+				if = {
+					limit = {
+						is_core_of = ROOT
+					}
+					set_variable = { ROOT.YAN_mir_chk_1 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_2 = 2 }
+				if = {
+					limit = {
+						is_capital = no
+					}
+					set_variable = { ROOT.YAN_mir_chk_2 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_3 = 2 }
+				if = {
+					limit = {
+						infrastructure < 5
+					}
+					set_variable = { ROOT.YAN_mir_chk_3 = 1 }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ROOT.YAN_mir_proj = 2 compare = equals }
+				}
+				set_variable = { ROOT.YAN_mir_chk_1 = 2 }
+				if = {
+					limit = {
+						is_core_of = ROOT
+					}
+					set_variable = { ROOT.YAN_mir_chk_1 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_2 = 2 }
+				if = {
+					limit = {
+						OR = {
+							industrial_complex > 2
+							arms_factory > 2
+						}
+					}
+					set_variable = { ROOT.YAN_mir_chk_2 = 1 }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ROOT.YAN_mir_proj = 3 compare = equals }
+				}
+				set_variable = { ROOT.YAN_mir_chk_1 = 2 }
+				if = {
+					limit = {
+						is_core_of = ROOT
+					}
+					set_variable = { ROOT.YAN_mir_chk_1 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_2 = 2 }
+				if = {
+					limit = {
+						is_coastal = no
+					}
+					set_variable = { ROOT.YAN_mir_chk_2 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_3 = 2 }
+				if = {
+					limit = {
+						infrastructure > 1
+					}
+					set_variable = { ROOT.YAN_mir_chk_3 = 1 }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ROOT.YAN_mir_proj = 4 compare = equals }
+				}
+				set_variable = { ROOT.YAN_mir_chk_1 = 2 }
+				if = {
+					limit = {
+						is_core_of = ROOT
+					}
+					set_variable = { ROOT.YAN_mir_chk_1 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_2 = 2 }
+				if = {
+					limit = {
+						OR = {
+							is_coastal = yes
+							naval_base > 0
+						}
+					}
+					set_variable = { ROOT.YAN_mir_chk_2 = 1 }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ROOT.YAN_mir_proj = 5 compare = equals }
+				}
+				set_variable = { ROOT.YAN_mir_chk_1 = 2 }
+				if = {
+					limit = {
+						is_core_of = ROOT
+					}
+					set_variable = { ROOT.YAN_mir_chk_1 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_2 = 2 }
+				if = {
+					limit = {
+						arms_factory > 1
+					}
+					set_variable = { ROOT.YAN_mir_chk_2 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_3 = 2 }
+				if = {
+					limit = {
+						infrastructure > 2
+					}
+					set_variable = { ROOT.YAN_mir_chk_3 = 1 }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ROOT.YAN_mir_proj = 6 compare = equals }
+				}
+				set_variable = { ROOT.YAN_mir_chk_1 = 2 }
+				if = {
+					limit = {
+						is_core_of = ROOT
+					}
+					set_variable = { ROOT.YAN_mir_chk_1 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_2 = 2 }
+				if = {
+					limit = {
+						is_coastal = yes
+					}
+					set_variable = { ROOT.YAN_mir_chk_2 = 1 }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ROOT.YAN_mir_proj = 7 compare = equals }
+				}
+				set_variable = { ROOT.YAN_mir_chk_1 = 2 }
+				if = {
+					limit = {
+						OR = {
+							is_capital = yes
+							AND = {
+								is_core_of = ROOT
+								industrial_complex > 3
+							}
+						}
+					}
+					set_variable = { ROOT.YAN_mir_chk_1 = 1 }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ROOT.YAN_mir_proj = 8 compare = equals }
+				}
+				set_variable = { ROOT.YAN_mir_chk_1 = 2 }
+				if = {
+					limit = {
+						is_core_of = ROOT
+					}
+					set_variable = { ROOT.YAN_mir_chk_1 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_2 = 2 }
+				if = {
+					limit = {
+						is_in_home_area = no
+					}
+					set_variable = { ROOT.YAN_mir_chk_2 = 1 }
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { ROOT.YAN_mir_proj = 9 compare = equals }
+				}
+				set_variable = { ROOT.YAN_mir_chk_1 = 2 }
+				if = {
+					limit = {
+						is_core_of = ROOT
+					}
+					set_variable = { ROOT.YAN_mir_chk_1 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_2 = 2 }
+				if = {
+					limit = {
+						infrastructure > 4
+					}
+					set_variable = { ROOT.YAN_mir_chk_2 = 1 }
+				}
+				set_variable = { ROOT.YAN_mir_chk_3 = 2 }
+				if = {
+					limit = {
+						OR = {
+							industrial_complex > 3
+							arms_factory > 3
+						}
+					}
+					set_variable = { ROOT.YAN_mir_chk_3 = 1 }
+				}
+			}
+		}
+	}
+}
+
+# ---------------- 游标搬移：dir 1 = 下一处 / -1 = 上一处 / 0 = 第一处 ----------------
+# 两趟法：第一趟给合格州编序号并记下游标的序号，第二趟按目标序号落旗。
+# 全程只比整数序号，不碰州 id，所以不依赖任何没把握的语法。
+YAN_Mir_Cycle = {
+	every_state = {
+		limit = { has_state_flag = yan_mir_cursor }
+		clr_state_flag = yan_mir_cursor
+		set_state_flag = yan_mir_old_cursor
+	}
+	set_variable = { YAN_mir_ord = 0 }
+	set_variable = { YAN_mir_cur_ord = 0 }
+	every_controlled_state = {
+		limit = { YAN_Mir_State_Eligible = yes }
+		add_to_variable = { ROOT.YAN_mir_ord = 1 }
+		if = {
+			limit = { has_state_flag = yan_mir_old_cursor }
+			set_variable = { ROOT.YAN_mir_cur_ord = ROOT.YAN_mir_ord }
+		}
+	}
+	set_variable = { YAN_mir_target_ord = 0 }
+	if = {
+		limit = { check_variable = { YAN_mir_ord > 0 } }
+		set_variable = { YAN_mir_target_ord = 1 }
+		if = {
+			limit = { check_variable = { YAN_mir_cur_ord > 0 } }
+			set_variable = { YAN_mir_target_ord = YAN_mir_cur_ord }
+			if = {
+				limit = { check_variable = { YAN_mir_dir > 0 } }
+				add_to_variable = { YAN_mir_target_ord = 1 }
+				if = {
+					limit = { check_variable = { YAN_mir_target_ord > YAN_mir_ord } }
+					set_variable = { YAN_mir_target_ord = 1 }
+				}
+			}
+			if = {
+				limit = { check_variable = { YAN_mir_dir < 0 } }
+				subtract_from_variable = { YAN_mir_target_ord = 1 }
+				if = {
+					limit = { NOT = { check_variable = { YAN_mir_target_ord > 0 } } }
+					set_variable = { YAN_mir_target_ord = YAN_mir_ord }
+				}
+			}
+		}
+	}
+	set_variable = { YAN_mir_ord = 0 }
+	set_variable = { YAN_mir_placed = 0 }
+	every_controlled_state = {
+		limit = { YAN_Mir_State_Eligible = yes }
+		add_to_variable = { ROOT.YAN_mir_ord = 1 }
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_placed = 0 }
+				check_variable = { ROOT.YAN_mir_ord = ROOT.YAN_mir_target_ord compare = equals }
+			}
+			set_state_flag = yan_mir_cursor
+			set_variable = { ROOT.YAN_mir_placed = 1 }
+		}
+	}
+	every_state = {
+		limit = { has_state_flag = yan_mir_old_cursor }
+		clr_state_flag = yan_mir_old_cursor
+	}
+	YAN_Mir_SyncSite = yes
+}
+
+YAN_Mir_PickFirst = {
+	set_variable = { YAN_mir_dir = 0 }
+	YAN_Mir_Cycle = yes
+}
+
+YAN_Mir_Next = {
+	set_variable = { YAN_mir_dir = 1 }
+	YAN_Mir_Cycle = yes
+}
+
+YAN_Mir_Prev = {
+	set_variable = { YAN_mir_dir = -1 }
+	YAN_Mir_Cycle = yes
+}
+
+# ---------------- 换工程：游标重新落到本工程可选清单的第一处 ----------------
+YAN_Mir_SelectProj = {
+	YAN_Mir_PickFirst = yes
+}
+
+# ---------------- 开工：扣政点、记下施工州、置旗标、点亮计时施工令 ----------------
+YAN_Mir_BreakGround = {
+	if = {
+		limit = { YAN_Mir_Can_Start = yes }
+			# 广厦万间
+			if = {
+				limit = {
+					check_variable = { YAN_mir_proj = 1 compare = equals }
+				}
+				add_political_power = -60
+				set_variable = { YAN_mir_site_guangsha = YAN_mir_sid }
+				every_state = {
+					limit = { has_state_flag = yan_mir_building_guangsha }
+					clr_state_flag = yan_mir_building_guangsha
+				}
+				every_controlled_state = {
+					limit = { has_state_flag = yan_mir_cursor }
+					set_state_flag = yan_mir_building_guangsha
+				}
+				set_country_flag = yan_mir_act_guangsha
+				activate_decision = YAN_mir_build_guangsha
+				YAN_Mir_SyncSite = yes
+				YAN_Mir_Recalc = yes
+			}
+			# 熔金巨炉
+			if = {
+				limit = {
+					check_variable = { YAN_mir_proj = 2 compare = equals }
+				}
+				add_political_power = -80
+				set_variable = { YAN_mir_site_rongjin = YAN_mir_sid }
+				every_state = {
+					limit = { has_state_flag = yan_mir_building_rongjin }
+					clr_state_flag = yan_mir_building_rongjin
+				}
+				every_controlled_state = {
+					limit = { has_state_flag = yan_mir_cursor }
+					set_state_flag = yan_mir_building_rongjin
+				}
+				set_country_flag = yan_mir_act_rongjin
+				activate_decision = YAN_mir_build_rongjin
+				YAN_Mir_SyncSite = yes
+				YAN_Mir_Recalc = yes
+			}
+			# 都江金堤
+			if = {
+				limit = {
+					check_variable = { YAN_mir_proj = 3 compare = equals }
+				}
+				add_political_power = -70
+				set_variable = { YAN_mir_site_dujiang = YAN_mir_sid }
+				every_state = {
+					limit = { has_state_flag = yan_mir_building_dujiang }
+					clr_state_flag = yan_mir_building_dujiang
+				}
+				every_controlled_state = {
+					limit = { has_state_flag = yan_mir_cursor }
+					set_state_flag = yan_mir_building_dujiang
+				}
+				set_country_flag = yan_mir_act_dujiang
+				activate_decision = YAN_mir_build_dujiang
+				YAN_Mir_SyncSite = yes
+				YAN_Mir_Recalc = yes
+			}
+			# 转漕长渠
+			if = {
+				limit = {
+					check_variable = { YAN_mir_proj = 4 compare = equals }
+				}
+				add_political_power = -75
+				set_variable = { YAN_mir_site_zhuancao = YAN_mir_sid }
+				every_state = {
+					limit = { has_state_flag = yan_mir_building_zhuancao }
+					clr_state_flag = yan_mir_building_zhuancao
+				}
+				every_controlled_state = {
+					limit = { has_state_flag = yan_mir_cursor }
+					set_state_flag = yan_mir_building_zhuancao
+				}
+				set_country_flag = yan_mir_act_zhuancao
+				activate_decision = YAN_mir_build_zhuancao
+				YAN_Mir_SyncSite = yes
+				YAN_Mir_Recalc = yes
+			}
+			# 镇岳军械城
+			if = {
+				limit = {
+					check_variable = { YAN_mir_proj = 5 compare = equals }
+				}
+				add_political_power = -100
+				set_variable = { YAN_mir_site_zhenyue = YAN_mir_sid }
+				every_state = {
+					limit = { has_state_flag = yan_mir_building_zhenyue }
+					clr_state_flag = yan_mir_building_zhenyue
+				}
+				every_controlled_state = {
+					limit = { has_state_flag = yan_mir_cursor }
+					set_state_flag = yan_mir_building_zhenyue
+				}
+				set_country_flag = yan_mir_act_zhenyue
+				activate_decision = YAN_mir_build_zhenyue
+				YAN_Mir_SyncSite = yes
+				YAN_Mir_Recalc = yes
+			}
+			# 飞云船坞
+			if = {
+				limit = {
+					check_variable = { YAN_mir_proj = 6 compare = equals }
+				}
+				add_political_power = -90
+				set_variable = { YAN_mir_site_feiyun = YAN_mir_sid }
+				every_state = {
+					limit = { has_state_flag = yan_mir_building_feiyun }
+					clr_state_flag = yan_mir_building_feiyun
+				}
+				every_controlled_state = {
+					limit = { has_state_flag = yan_mir_cursor }
+					set_state_flag = yan_mir_building_feiyun
+				}
+				set_country_flag = yan_mir_act_feiyun
+				activate_decision = YAN_mir_build_feiyun
+				YAN_Mir_SyncSite = yes
+				YAN_Mir_Recalc = yes
+			}
+			# 司天观星台
+			if = {
+				limit = {
+					check_variable = { YAN_mir_proj = 7 compare = equals }
+				}
+				add_political_power = -70
+				set_variable = { YAN_mir_site_sitian = YAN_mir_sid }
+				every_state = {
+					limit = { has_state_flag = yan_mir_building_sitian }
+					clr_state_flag = yan_mir_building_sitian
+				}
+				every_controlled_state = {
+					limit = { has_state_flag = yan_mir_cursor }
+					set_state_flag = yan_mir_building_sitian
+				}
+				set_country_flag = yan_mir_act_sitian
+				activate_decision = YAN_mir_build_sitian
+				YAN_Mir_SyncSite = yes
+				YAN_Mir_Recalc = yes
+			}
+			# 玉门塞垣
+			if = {
+				limit = {
+					check_variable = { YAN_mir_proj = 8 compare = equals }
+				}
+				add_political_power = -100
+				set_variable = { YAN_mir_site_yumen = YAN_mir_sid }
+				every_state = {
+					limit = { has_state_flag = yan_mir_building_yumen }
+					clr_state_flag = yan_mir_building_yumen
+				}
+				every_controlled_state = {
+					limit = { has_state_flag = yan_mir_cursor }
+					set_state_flag = yan_mir_building_yumen
+				}
+				set_country_flag = yan_mir_act_yumen
+				activate_decision = YAN_mir_build_yumen
+				YAN_Mir_SyncSite = yes
+				YAN_Mir_Recalc = yes
+			}
+			# 移动城市·龙门
+			if = {
+				limit = {
+					check_variable = { YAN_mir_proj = 9 compare = equals }
+				}
+				add_political_power = -140
+				set_variable = { YAN_mir_site_longmen = YAN_mir_sid }
+				every_state = {
+					limit = { has_state_flag = yan_mir_building_longmen }
+					clr_state_flag = yan_mir_building_longmen
+				}
+				every_controlled_state = {
+					limit = { has_state_flag = yan_mir_cursor }
+					set_state_flag = yan_mir_building_longmen
+				}
+				set_country_flag = yan_mir_act_longmen
+				activate_decision = YAN_mir_build_longmen
+				YAN_Mir_SyncSite = yes
+				YAN_Mir_Recalc = yes
+			}
+	}
+}
+
+# ---------------- 竣工：落成真建筑 + 挂永久州级 BUFF + 记进台账 ----------------
+YAN_Mir_Finish_guangsha = {
+	clr_country_flag = yan_mir_act_guangsha
+	set_variable = { YAN_mir_built = 0 }
+	# 靠开工时挂在施工州上的 yan_mir_building_<key> 旗标找到建造地（不做州 id 比对）
+	every_controlled_state = {
+		limit = { has_state_flag = yan_mir_building_guangsha }
+		add_building_construction = { type = industrial_complex level = 2 instant_build = yes }
+		add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+		add_dynamic_modifier = { modifier = yan_mir_dm_guangsha }
+		clr_state_flag = yan_mir_building_guangsha
+		set_state_flag = yan_mir_site_guangsha
+		set_variable = { ROOT.YAN_mir_built = 1 }
+		set_variable = { ROOT.YAN_mir_slot_taken = 0 }
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s1_guangsha > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s1_guangsha = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s2_guangsha > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s2_guangsha = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s3_guangsha > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s3_guangsha = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+	}
+	# 施工期间该州易手 → 这一期作废：不落成、不记台账，只把在施记录清掉
+	if = {
+		limit = { NOT = { check_variable = { YAN_mir_built > 0 } } }
+		set_variable = { YAN_mir_site_guangsha = 0 }
+	}
+	# 第一处落成时才挂全国精神，之后只改它的变量，绝不重复 add
+	if = {
+		limit = {
+			NOT = { has_country_flag = yan_mir_spirit }
+			check_variable = { YAN_mir_built > 0 }
+		}
+		set_country_flag = yan_mir_spirit
+		add_dynamic_modifier = { modifier = yan_miracle_spirit }
+	}
+	YAN_Mir_Recalc = yes
+	YAN_Mir_SyncSite = yes
+}
+
+YAN_Mir_Finish_rongjin = {
+	clr_country_flag = yan_mir_act_rongjin
+	set_variable = { YAN_mir_built = 0 }
+	# 靠开工时挂在施工州上的 yan_mir_building_<key> 旗标找到建造地（不做州 id 比对）
+	every_controlled_state = {
+		limit = { has_state_flag = yan_mir_building_rongjin }
+		add_building_construction = { type = arms_factory level = 3 instant_build = yes }
+		add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		add_dynamic_modifier = { modifier = yan_mir_dm_rongjin }
+		clr_state_flag = yan_mir_building_rongjin
+		set_state_flag = yan_mir_site_rongjin
+		set_variable = { ROOT.YAN_mir_built = 1 }
+		set_variable = { ROOT.YAN_mir_slot_taken = 0 }
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s1_rongjin > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s1_rongjin = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s2_rongjin > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s2_rongjin = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+	}
+	# 施工期间该州易手 → 这一期作废：不落成、不记台账，只把在施记录清掉
+	if = {
+		limit = { NOT = { check_variable = { YAN_mir_built > 0 } } }
+		set_variable = { YAN_mir_site_rongjin = 0 }
+	}
+	# 第一处落成时才挂全国精神，之后只改它的变量，绝不重复 add
+	if = {
+		limit = {
+			NOT = { has_country_flag = yan_mir_spirit }
+			check_variable = { YAN_mir_built > 0 }
+		}
+		set_country_flag = yan_mir_spirit
+		add_dynamic_modifier = { modifier = yan_miracle_spirit }
+	}
+	YAN_Mir_Recalc = yes
+	YAN_Mir_SyncSite = yes
+}
+
+YAN_Mir_Finish_dujiang = {
+	clr_country_flag = yan_mir_act_dujiang
+	set_variable = { YAN_mir_built = 0 }
+	# 靠开工时挂在施工州上的 yan_mir_building_<key> 旗标找到建造地（不做州 id 比对）
+	every_controlled_state = {
+		limit = { has_state_flag = yan_mir_building_dujiang }
+		add_building_construction = { type = infrastructure level = 2 instant_build = yes }
+		add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		add_dynamic_modifier = { modifier = yan_mir_dm_dujiang }
+		clr_state_flag = yan_mir_building_dujiang
+		set_state_flag = yan_mir_site_dujiang
+		set_variable = { ROOT.YAN_mir_built = 1 }
+		set_variable = { ROOT.YAN_mir_slot_taken = 0 }
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s1_dujiang > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s1_dujiang = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s2_dujiang > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s2_dujiang = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s3_dujiang > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s3_dujiang = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+	}
+	# 施工期间该州易手 → 这一期作废：不落成、不记台账，只把在施记录清掉
+	if = {
+		limit = { NOT = { check_variable = { YAN_mir_built > 0 } } }
+		set_variable = { YAN_mir_site_dujiang = 0 }
+	}
+	# 第一处落成时才挂全国精神，之后只改它的变量，绝不重复 add
+	if = {
+		limit = {
+			NOT = { has_country_flag = yan_mir_spirit }
+			check_variable = { YAN_mir_built > 0 }
+		}
+		set_country_flag = yan_mir_spirit
+		add_dynamic_modifier = { modifier = yan_miracle_spirit }
+	}
+	YAN_Mir_Recalc = yes
+	YAN_Mir_SyncSite = yes
+}
+
+YAN_Mir_Finish_zhuancao = {
+	clr_country_flag = yan_mir_act_zhuancao
+	set_variable = { YAN_mir_built = 0 }
+	# 靠开工时挂在施工州上的 yan_mir_building_<key> 旗标找到建造地（不做州 id 比对）
+	every_controlled_state = {
+		limit = { has_state_flag = yan_mir_building_zhuancao }
+		add_building_construction = { type = rail_way level = 2 instant_build = yes }
+		add_building_construction = { type = supply_node level = 1 instant_build = yes }
+		add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+		add_dynamic_modifier = { modifier = yan_mir_dm_zhuancao }
+		clr_state_flag = yan_mir_building_zhuancao
+		set_state_flag = yan_mir_site_zhuancao
+		set_variable = { ROOT.YAN_mir_built = 1 }
+		set_variable = { ROOT.YAN_mir_slot_taken = 0 }
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s1_zhuancao > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s1_zhuancao = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s2_zhuancao > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s2_zhuancao = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+	}
+	# 施工期间该州易手 → 这一期作废：不落成、不记台账，只把在施记录清掉
+	if = {
+		limit = { NOT = { check_variable = { YAN_mir_built > 0 } } }
+		set_variable = { YAN_mir_site_zhuancao = 0 }
+	}
+	# 第一处落成时才挂全国精神，之后只改它的变量，绝不重复 add
+	if = {
+		limit = {
+			NOT = { has_country_flag = yan_mir_spirit }
+			check_variable = { YAN_mir_built > 0 }
+		}
+		set_country_flag = yan_mir_spirit
+		add_dynamic_modifier = { modifier = yan_miracle_spirit }
+	}
+	YAN_Mir_Recalc = yes
+	YAN_Mir_SyncSite = yes
+}
+
+YAN_Mir_Finish_zhenyue = {
+	clr_country_flag = yan_mir_act_zhenyue
+	set_variable = { YAN_mir_built = 0 }
+	# 靠开工时挂在施工州上的 yan_mir_building_<key> 旗标找到建造地（不做州 id 比对）
+	every_controlled_state = {
+		limit = { has_state_flag = yan_mir_building_zhenyue }
+		add_building_construction = { type = arms_factory level = 4 instant_build = yes }
+		add_building_construction = { type = anti_air_building level = 1 instant_build = yes }
+		add_dynamic_modifier = { modifier = yan_mir_dm_zhenyue }
+		clr_state_flag = yan_mir_building_zhenyue
+		set_state_flag = yan_mir_site_zhenyue
+		set_variable = { ROOT.YAN_mir_built = 1 }
+		set_variable = { ROOT.YAN_mir_slot_taken = 0 }
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s1_zhenyue > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s1_zhenyue = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s2_zhenyue > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s2_zhenyue = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+	}
+	# 施工期间该州易手 → 这一期作废：不落成、不记台账，只把在施记录清掉
+	if = {
+		limit = { NOT = { check_variable = { YAN_mir_built > 0 } } }
+		set_variable = { YAN_mir_site_zhenyue = 0 }
+	}
+	# 第一处落成时才挂全国精神，之后只改它的变量，绝不重复 add
+	if = {
+		limit = {
+			NOT = { has_country_flag = yan_mir_spirit }
+			check_variable = { YAN_mir_built > 0 }
+		}
+		set_country_flag = yan_mir_spirit
+		add_dynamic_modifier = { modifier = yan_miracle_spirit }
+	}
+	YAN_Mir_Recalc = yes
+	YAN_Mir_SyncSite = yes
+}
+
+YAN_Mir_Finish_feiyun = {
+	clr_country_flag = yan_mir_act_feiyun
+	set_variable = { YAN_mir_built = 0 }
+	# 靠开工时挂在施工州上的 yan_mir_building_<key> 旗标找到建造地（不做州 id 比对）
+	every_controlled_state = {
+		limit = { has_state_flag = yan_mir_building_feiyun }
+		add_building_construction = { type = dockyard level = 2 instant_build = yes }
+		add_building_construction = { type = naval_base level = 1 instant_build = yes }
+		add_dynamic_modifier = { modifier = yan_mir_dm_feiyun }
+		clr_state_flag = yan_mir_building_feiyun
+		set_state_flag = yan_mir_site_feiyun
+		set_variable = { ROOT.YAN_mir_built = 1 }
+		set_variable = { ROOT.YAN_mir_slot_taken = 0 }
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s1_feiyun > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s1_feiyun = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s2_feiyun > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s2_feiyun = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+	}
+	# 施工期间该州易手 → 这一期作废：不落成、不记台账，只把在施记录清掉
+	if = {
+		limit = { NOT = { check_variable = { YAN_mir_built > 0 } } }
+		set_variable = { YAN_mir_site_feiyun = 0 }
+	}
+	# 第一处落成时才挂全国精神，之后只改它的变量，绝不重复 add
+	if = {
+		limit = {
+			NOT = { has_country_flag = yan_mir_spirit }
+			check_variable = { YAN_mir_built > 0 }
+		}
+		set_country_flag = yan_mir_spirit
+		add_dynamic_modifier = { modifier = yan_miracle_spirit }
+	}
+	YAN_Mir_Recalc = yes
+	YAN_Mir_SyncSite = yes
+}
+
+YAN_Mir_Finish_sitian = {
+	clr_country_flag = yan_mir_act_sitian
+	set_variable = { YAN_mir_built = 0 }
+	# 靠开工时挂在施工州上的 yan_mir_building_<key> 旗标找到建造地（不做州 id 比对）
+	every_controlled_state = {
+		limit = { has_state_flag = yan_mir_building_sitian }
+		add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+		add_dynamic_modifier = { modifier = yan_mir_dm_sitian }
+		clr_state_flag = yan_mir_building_sitian
+		set_state_flag = yan_mir_site_sitian
+		set_variable = { ROOT.YAN_mir_built = 1 }
+		set_variable = { ROOT.YAN_mir_slot_taken = 0 }
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s1_sitian > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s1_sitian = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+	}
+	# 施工期间该州易手 → 这一期作废：不落成、不记台账，只把在施记录清掉
+	if = {
+		limit = { NOT = { check_variable = { YAN_mir_built > 0 } } }
+		set_variable = { YAN_mir_site_sitian = 0 }
+	}
+	# 第一处落成时才挂全国精神，之后只改它的变量，绝不重复 add
+	if = {
+		limit = {
+			NOT = { has_country_flag = yan_mir_spirit }
+			check_variable = { YAN_mir_built > 0 }
+		}
+		set_country_flag = yan_mir_spirit
+		add_dynamic_modifier = { modifier = yan_miracle_spirit }
+	}
+	YAN_Mir_Recalc = yes
+	YAN_Mir_SyncSite = yes
+}
+
+YAN_Mir_Finish_yumen = {
+	clr_country_flag = yan_mir_act_yumen
+	set_variable = { YAN_mir_built = 0 }
+	# 靠开工时挂在施工州上的 yan_mir_building_<key> 旗标找到建造地（不做州 id 比对）
+	every_controlled_state = {
+		limit = { has_state_flag = yan_mir_building_yumen }
+		add_building_construction = { type = bunker level = 4 instant_build = yes }
+		add_building_construction = { type = anti_air_building level = 2 instant_build = yes }
+		add_dynamic_modifier = { modifier = yan_mir_dm_yumen }
+		clr_state_flag = yan_mir_building_yumen
+		set_state_flag = yan_mir_site_yumen
+		set_variable = { ROOT.YAN_mir_built = 1 }
+		set_variable = { ROOT.YAN_mir_slot_taken = 0 }
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s1_yumen > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s1_yumen = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s2_yumen > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s2_yumen = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s3_yumen > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s3_yumen = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+	}
+	# 施工期间该州易手 → 这一期作废：不落成、不记台账，只把在施记录清掉
+	if = {
+		limit = { NOT = { check_variable = { YAN_mir_built > 0 } } }
+		set_variable = { YAN_mir_site_yumen = 0 }
+	}
+	# 第一处落成时才挂全国精神，之后只改它的变量，绝不重复 add
+	if = {
+		limit = {
+			NOT = { has_country_flag = yan_mir_spirit }
+			check_variable = { YAN_mir_built > 0 }
+		}
+		set_country_flag = yan_mir_spirit
+		add_dynamic_modifier = { modifier = yan_miracle_spirit }
+	}
+	YAN_Mir_Recalc = yes
+	YAN_Mir_SyncSite = yes
+}
+
+YAN_Mir_Finish_longmen = {
+	clr_country_flag = yan_mir_act_longmen
+	set_variable = { YAN_mir_built = 0 }
+	# 靠开工时挂在施工州上的 yan_mir_building_<key> 旗标找到建造地（不做州 id 比对）
+	every_controlled_state = {
+		limit = { has_state_flag = yan_mir_building_longmen }
+		add_building_construction = { type = industrial_complex level = 3 instant_build = yes }
+		add_building_construction = { type = arms_factory level = 3 instant_build = yes }
+		add_building_construction = { type = infrastructure level = 2 instant_build = yes }
+		add_building_construction = { type = rail_way level = 1 instant_build = yes }
+		add_dynamic_modifier = { modifier = yan_mir_dm_longmen }
+		clr_state_flag = yan_mir_building_longmen
+		set_state_flag = yan_mir_site_longmen
+		set_variable = { ROOT.YAN_mir_built = 1 }
+		set_variable = { ROOT.YAN_mir_slot_taken = 0 }
+		if = {
+			limit = {
+				check_variable = { ROOT.YAN_mir_slot_taken = 0 }
+				NOT = { check_variable = { ROOT.YAN_mir_s1_longmen > 0 } }
+			}
+			set_variable = { ROOT.YAN_mir_s1_longmen = THIS.id }
+			set_variable = { ROOT.YAN_mir_slot_taken = 1 }
+		}
+	}
+	# 施工期间该州易手 → 这一期作废：不落成、不记台账，只把在施记录清掉
+	if = {
+		limit = { NOT = { check_variable = { YAN_mir_built > 0 } } }
+		set_variable = { YAN_mir_site_longmen = 0 }
+	}
+	# 第一处落成时才挂全国精神，之后只改它的变量，绝不重复 add
+	if = {
+		limit = {
+			NOT = { has_country_flag = yan_mir_spirit }
+			check_variable = { YAN_mir_built > 0 }
+		}
+		set_country_flag = yan_mir_spirit
+		add_dynamic_modifier = { modifier = yan_miracle_spirit }
+	}
+	YAN_Mir_Recalc = yes
+	YAN_Mir_SyncSite = yes
+}
+

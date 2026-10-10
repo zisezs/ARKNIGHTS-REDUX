@@ -1,0 +1,184 @@
+# set_variable = { KMG_global_building_slots_factor_var = 0.25 }
+
+#战乱经济 #确认工会地位决议 共6次 每次补一轮 结束时恢复到初始
+KMG_War_Economic_Effect = { 
+	enable = { always = yes }
+	icon = "GFX_idea_KMG_War_Economic_Effect"
+
+	consumer_goods_factor = KMG_consumer_goods_factor_var #生活消费品系数 每月+5%（配给制-2.5%） 最高100% 结束时设定-25%
+	production_speed_buildings_factor = KMG_production_speed_buildings_factor_var #建造速度 每月-5% 最高-100% 结束时设定+15%
+	line_change_production_efficiency_factor = KMG_line_change_production_efficiency_factor_var #生产效率保持 每月-3% 最高-60% 结束时设定+15%
+	production_factory_efficiency_gain_factor = KMG_production_factory_efficiency_gain_factor_var #生产效率增长 每月-5% 最高-100% 结束时设定+25%
+	production_factory_max_efficiency_factor = KMG_production_factory_max_efficiency_factor_var #生产效率上限 每月-2% 最高-40% 结束时设定+30%
+	industrial_capacity_factory = KMG_industrial_capacity_factory_var #工厂产出 每月-7.5%（配给制+2.5%） 最高-100% 结束时设定+25%
+	stability_factor = KMG_stability_factor_var #稳定度 每月-5% 最高-100% 结束时设定+15%
+
+}
+
+#最高经济委员会
+KMG_Supreme_Economic_Council = { 
+	enable = { always = yes }
+	icon = "GFX_idea_KMG_supreme_economic_council"
+
+	global_building_slots_factor = KMG_global_building_slots_factor_var #当地工业值
+	consumer_goods_factor = KMG_consumer_goods_factor_var #生活消费品系数
+	production_speed_buildings_factor = KMG_production_speed_buildings_factor_var #建造速度
+	conversion_cost_civ_to_mil_factor = KMG_conversion_cost_civ_to_mil_factor_var #民转军花费
+	conversion_cost_mil_to_civ_factor = KMG_conversion_cost_mil_to_civ_factor_var #军转民花费
+	line_change_production_efficiency_factor = KMG_line_change_production_efficiency_factor_var #生产效率保持
+	production_factory_efficiency_gain_factor = KMG_production_factory_efficiency_gain_factor_var #生产效率增长
+	production_factory_max_efficiency_factor = KMG_production_factory_max_efficiency_factor_var #生产效率上限
+	local_resources_factor = KMG_local_resources_factor_var #战略资源获取系数
+	industrial_capacity_factory = KMG_industrial_capacity_factory_var #工厂产出
+	monthly_population = KMG_monthly_population_var #月度人口
+	production_speed_industrial_complex_factor = KMG_production_speed_industrial_complex_factor_var #民工建设速度
+	production_speed_arms_factory_factor = KMG_production_speed_arms_factory_factor_var #军工建设速度
+	stability_factor = KMG_stability_factor_var #稳定度
+	research_speed_factor = KMG_research_speed_factor_var #科研速度
+
+}
+#寡头经济体制
+KMG_Oligarchic_economic_system = { 
+	enable = { always = yes }
+	icon = "GFX_idea_KMG_oligarchic_economic_system"
+
+	industrial_capacity_factory = KMG_industrial_capacity_factory_var #工厂产出
+	production_factory_start_efficiency_factor = KMG_line_change_production_efficiency_factor_var #基础生产效率
+	line_change_production_efficiency_factor = KMG_line_change_production_efficiency_factor_var #生产效率保持
+	production_factory_efficiency_gain_factor = KMG_production_factory_efficiency_gain_factor_var #生产效率增长
+	production_factory_max_efficiency_factor = KMG_production_factory_max_efficiency_factor_var #生产效率上限
+	production_speed_arms_factory_factor = KMG_production_speed_arms_factory_factor_var #军工建设速度
+	production_speed_industrial_complex_factor = KMG_production_speed_industrial_complex_factor_var #民工建设速度
+	consumer_goods_factor = KMG_consumer_goods_factor_var #生活消费品系数
+	local_resources_factor = KMG_local_resources_factor_var #战略资源获取系数
+	resource_trade_cost_bonus_per_factory = resource_trade_cost_bonus_per_factory_var #每个投入贸易的民用工厂额外获取到的资源，简单来说就是这个数值加1，一个民用工厂就能买到8+1单位的资源
+	fuel_gain_factor_from_states = KMG_fuel_gain_factor_from_states_var #从石油获得的燃油系数
+	political_power_gain = KMG_political_power_gain_var #每日获得的政治点
+}
+
+#战火之殇 #建军原则决议 共10次，每次补一轮
+KMG_Damage_of_War = { 
+	enable = { always = yes }
+	icon = "GFX_idea_KMG_Damage_of_War"
+
+	conscription_factor = KMG_conscription_factor_war_var #10% +5%（扩大征募规模）
+	weekly_manpower = KMG_weekly_manpower_var #-1000 +250（制定战争计划） +250（扩大征募规模） +500（国民突击队）
+	conscription = KMG_conscription_var #-0.001 每月减0.001最高-1% +0.002（扩大征募规模）
+	army_attack_factor = KMG_army_attack_factor_var #陆军攻击 初始+10%
+	army_defence_factor = KMG_army_defence_factor_var #陆军防御 初始+10%
+	breakthrough_factor = KMG_breakthrough_factor_var #陆军突破 初始+10%
+}
+
+#意志取胜
+KMG_Victory_of_will = { 
+	enable = { always = yes }
+	icon = "GFX_idea_KMG_the_will_to_win"
+	
+	conscription_factor = KMG_conscription_factor_war_var
+	weekly_manpower = KMG_weekly_manpower_var #-750 -250
+	conscription = KMG_conscription_var #-0.001 每月减0.001最高-1%
+	
+	army_org_regain = KMG_army_org_regain_var #陆军组织度恢复
+	land_reinforce_rate = KMG_land_reinforce_rate_var #增援率
+	experience_loss_factor = KMG_experience_loss_factor_var #有经验的士兵损失
+	experience_gain_army_unit_factor = KMG_experience_gain_army_unit_factor_var #陆军师经验增长
+	experience_gain_army_factor = KMG_experience_gain_army_factor_var #陆军经验增长
+	org_loss_when_moving = KMG_org_loss_when_moving_var #移动中组织度损失
+	army_attack_factor = KMG_army_attack_factor_var #陆军攻击
+	army_defence_factor = KMG_army_defence_factor_var #陆军防御
+	army_org_factor = KMG_army_org_factor_var #组织度
+	breakthrough_factor = KMG_breakthrough_factor_var #陆军突破
+	planning_speed = KMG_planning_speed_var #计划速度
+	training_time_factor = KMG_training_time_factor_var #训练时间
+	resistance_damage_to_garrison = KMG_resistance_damage_to_garrison_var #驻军所受伤害
+	army_strength_factor_var = KMG_army_strength_factor_var #HP
+	coordination_bonus = KMG_coordination_bonus_vat #协同性
+	supply_consumption_factor = KMG_supply_consumption_factor_var #补给消耗
+	recon_factor = KMG_recon_factor_var #侦察
+	initiative_factor = KMG_initiative_factor_var #主动性
+	army_speed_factor = KMG_army_speed_factor_var #陆军师速度
+	max_planning_factor = KMG_max_planning_factor_var #计划加成上限
+	attrition_for_controller = KMG_military_attrition_for_controller_var #陆军师损耗
+	#空军
+	enemy_army_bonus_air_superiority_factor = KMG_enemy_army_bonus_air_superiority_factor_var #-0.1 #敌方空中支援
+	air_superiority_bonus_in_combat = KMG_air_superiority_bonus_in_combat_var #0.15 #战斗中空优加成
+	air_weather_penalty = KMG_air_weather_penalty_var #-0.2 #恶劣天气惩罚
+	air_night_penalty = KMG_air_night_penalty_var #-0.25 #夜间行动惩罚
+	air_ace_generation_chance_factor = KMG_air_ace_generation_chance_factor_var #0.12 #王牌飞行员产生几率
+	air_accidents_factor = KMG_air_accidents_factor_var #-0.2 #空军事故概率
+	air_mission_efficiency = KMG_air_mission_efficiency_var #0.1 #空军任务效率
+	air_power_projection_factor = KMG_air_power_projection_factor_var #0.1 #跨空域力量投射修正系数
+	air_cas_efficiency = KMG_air_cas_efficiency_var #密接支援任务效率
+	ground_attack_factor = KMG_ground_attack_factor_var #对地攻击系数
+}
+#先锋之军
+KMG_Vanguard_army = { 
+	enable = { always = yes }
+	icon = "GFX_idea_KMG_vanguard_army"
+	
+	conscription_factor = KMG_conscription_factor_war_var #每月-5% 最高-50%
+	weekly_manpower = KMG_weekly_manpower_var #-750 -250
+	conscription = KMG_conscription_var #-0.001 每月减0.001最高-1%
+	
+	army_attack_factor = KMG_army_attack_factor_var #陆军攻击
+	army_defence_factor = KMG_army_defence_factor_var #陆军防御
+	breakthrough_factor = KMG_breakthrough_factor_var #陆军突破
+	land_doctrine_cost_factor = KMG_land_doctrine_cost_factor_var #陆军学说花费
+	experience_gain_army_unit_factor = KMG_xperience_gain_army_unit_factor_var #陆军师经验增长
+	planning_speed = KMG_planning_speed_var #计划速度
+	army_attack_speed_factor = KMG_army_attack_speed_factor_var #陆军师进攻速度
+	army_speed_factor = KMG_army_speed_factor_var #陆军师速度
+	army_leader_cost_factor = KMG_army_leader_cost_factor_var #为陆军招募将领的pp成本
+	army_advisor_cost_factor = KMG_army_advisor_cost_factor_var #军事顾问的pp成本
+	command_power_gain = KMG_command_power_gain_var #每日指挥点数增长
+	max_dig_in = KMG_max_dig_in_var #堑壕 5.0
+	dig_in_speed_factor = KMG_dig_in_speed_factor_var #堑壕速度 15%
+	army_artillery_attack_factor = KMG_army_artillery_attack_factor_dynamic_var #10%
+	army_artillery_defence_factor = KMG_army_artillery_defence_factor_dynamic_var #5%
+	coordination_bonus = KMG_coordination_bonus_vat #协同性
+	experience_gain_factor = KMG_experience_gain_factor_var #指挥官经验增长
+	#空军
+	enemy_army_bonus_air_superiority_factor = KMG_enemy_army_bonus_air_superiority_factor_var #-0.1
+	air_superiority_bonus_in_combat = KMG_air_superiority_bonus_in_combat_var #0.15
+	air_weather_penalty = KMG_air_weather_penalty_var #-0.2
+	air_night_penalty = KMG_air_night_penalty_var #-0.25
+	air_ace_generation_chance_factor = KMG_air_ace_generation_chance_factor_var #0.12
+	air_accidents_factor = KMG_air_accidents_factor_var #-0.2
+	air_mission_efficiency = KMG_air_mission_efficiency_var #0.05
+	air_power_projection_factor = KMG_air_power_projection_factor_var #0.1
+} 
+#乌萨斯共和人民党
+KMG_URPP = { 
+	enable = { always = yes }
+	icon = "GFX_idea_KMG_URPP"
+
+	party_popularity_stability_factor = KMG_party_popularity_stability_factor_var #党派支持度对稳定性修正
+	political_power_factor = KMG_political_power_factor_var #每日政治点增长修正
+	political_power_gain = KMG_political_power_gain_ex_var #每日政治点增长
+	conscription_factor = KMG_conscription_factor_ex_var #适役人口
+	compliance_growth = KMG_compliance_growth_var #顺从度增长
+	war_support_weekly = KMG_war_support_weekly_var #每周战争支持度
+	army_org_regain = KMG_army_org_regain_ex_var #陆军组织度恢复
+	stability_factor = KMG_stability_factor_ex_var #稳定度
+	war_support_factor = KMG_war_support_factor_ex_var #战争支持度
+	local_non_core_manpower = KMG_local_non_core_manpower_var #非核心人力
+	intelligence_agency_defense = KMG_intelligence_agency_defense_var #反间谍
+	enemy_operative_detection_chance_factor = KMG_enemy_operative_detection_chance_factor_var #敌方间谍被发现概率
+	drift_defence_factor = KMG_drift_defence_factor_var #意识形态变化抵制力度
+	weekly_manpower = KMG_weekly_manpower_ex_var #每周人力
+	mobilization_laws_cost_factor = KMG_mobilization_laws_cost_factor_var #征兵法案花费
+	trade_laws_cost_factor = KMG_trade_laws_cost_factor_var #贸易法案花费
+	economy_cost_factor = KMG_economy_cost_factor_var #经济法案花费
+	political_advisor_cost_factor = KMG_political_advisor_cost_factor_var #顾问花费
+	monthly_population = KMG_monthly_population_var #月度人口
+	research_speed_factor = KMG_research_speed_factor_ex_var #科研速度
+	max_command_power = KMG_max_command_power_var #最大指挥点数
+	production_factory_efficiency_gain_factor = KMG_production_factory_efficiency_gain_factor_ex_var #生产效率增长c
+	production_factory_max_efficiency_factor = KMG_production_factory_max_efficiency_factor_ex_var #生产效率上限c
+	weekly_casualties_war_support = KMG_weekly_casualties_war_support_var #伤亡对战争支持度影响
+	resistance_target = KMG_resistance_target_var #抵抗度增长
+	industrial_capacity_factory = KMG_URPP_industrial_capacity_factory_var #工厂产出
+	industrial_capacity_dockyard = KMG_URPP_industrial_capacity_dockyard_var #海军船坞产出
+	line_change_production_efficiency_factor = KMG_URPP_line_change_production_efficiency_factor_var #生产效率保持
+	army_org_factor = KMG_URPP_army_org_factor_var #陆军师组织度
+}

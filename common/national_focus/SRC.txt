@@ -1,0 +1,1668 @@
+######################################################
+# 叙拉古 (SRC) 国策树 —— 民主的胜利：叙拉古联邦共和国
+# 政体路线：新沃尔西尼模式（企业技术官僚）/ 哥伦比亚模式（自由主义）
+#
+# 排版：起始 (0,0) → 四条分支各 7 格（双翼成组、主线成链，Δx=2）→ 横向整合 5 格 → 终局 1 格
+#   分支中心 x = -9 / -3 / +3 / +9；y=1 单头 → y=2 双翼 → y=3 汇聚 → y=4 双翼 → y=5 尾
+#   整合 y=6，终局 y=7
+#
+# 产业国策树（经济）以 shared_focus 形式并入本树：定义在 SRC_economy_shared.txt，
+#   23 格 = 总起 1 + 三支各 7 + 终局 1，坐标区 y = 9..15、分支中心 x = -6 / 0 / +6，
+#   横向仍收在 ±8 内（包围盒 17 列 × 16 行）。
+#
+# 长期加成一律走动态修正（四条路线大 BUFF + 市民积分体系），
+#   数值写成变量、由 add_to_variable 原地成长；一次性效果才直接写。
+# 按用户约定：一般不实装「解锁科技」与外交类效果（市场准入/关系修正/宣战结盟），
+#   这些语义只留在文案里。
+#   ⚠ 例外：对外扩张国策树（SRC_expansion_shared.txt，y = 17..22）经用户明确同意
+#     按「真做」处理 —— 真的宣战、真的附庸、真的建军、真的拉阵营，见该文件头部注释。
+#
+# 图标：方框 + 意大利语缩写（100x88），清单见 docs/SRC_国策图标表.md
+######################################################
+focus_tree = {
+	id = SRC_federal_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 20
+			original_tag = SRC
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = SRC_year_one_new_volsinii
+	}
+
+	############################################################
+	# 产业国策树（shared_focus 引用）
+	# 定义在 common/national_focus/SRC_economy_shared.txt，23 个共享国策。
+	# 坐标区 y = 9..15（政治树占 y = 0..7），两棵树同屏显示，横向仍收在 x = ±8 内。
+	############################################################
+
+	# ---- 总起 ----
+	shared_focus = SRC_eco_grey_hall_plan
+	# ---- 分支一 · 传统根基 ----
+	shared_focus = SRC_eco_family_census
+	shared_focus = SRC_eco_forestry_fishery
+	shared_focus = SRC_eco_saluzzo_wine
+	shared_focus = SRC_eco_musical_revival
+	shared_focus = SRC_eco_pizza_nation
+	shared_focus = SRC_eco_catering_network
+	shared_focus = SRC_eco_trad_golden_age
+	# ---- 分支二 · 新工业 ----
+	shared_focus = SRC_eco_urban_act
+	shared_focus = SRC_eco_columbia_mobile_tech
+	shared_focus = SRC_eco_volsinii_port
+	shared_focus = SRC_eco_secondary_core
+	shared_focus = SRC_eco_transport_authority
+	shared_focus = SRC_eco_mobile_shipyard
+	shared_focus = SRC_eco_new_industrial_era
+	# ---- 分支三 · 商业与秩序 ----
+	shared_focus = SRC_eco_guns_order
+	shared_focus = SRC_eco_bellone_merge
+	shared_focus = SRC_eco_tariff_charter
+	shared_focus = SRC_eco_anti_kazimierz
+	shared_focus = SRC_eco_golden_plains
+	shared_focus = SRC_eco_logistics_monopoly
+	shared_focus = SRC_eco_trade_hegemony
+	# ---- 终局 ----
+	shared_focus = SRC_eco_golden_age
+
+	############################################################
+	# 对外扩张国策树（shared_focus 引用）
+	# 定义在 common/national_focus/SRC_expansion_shared.txt，9 个共享国策。
+	# 坐标区 y = 17..22（政治树占 y = 0..7、产业树占 y = 9..15，y = 16 留作分隔），
+	# 横向收在 x = ±4 内。1100 年 1 月 1 日之后才起步。
+	############################################################
+
+	# ---- 总起 ----
+	shared_focus = SRC_exp_wolflings
+	# ---- 左路 · 选帝侯之路 ----
+	shared_focus = SRC_exp_wolf_culture
+	shared_focus = SRC_exp_leithanien_claims
+	shared_focus = SRC_exp_elector
+	# ---- 右路 · 边疆与进军 ----
+	shared_focus = SRC_exp_identity
+	shared_focus = SRC_exp_frontier_purge
+	shared_focus = SRC_exp_great_advance
+	# ---- 总结与终局 ----
+	shared_focus = SRC_exp_legion_triumph
+	shared_focus = SRC_exp_glorious_citizens
+
+	############################################################
+	# 起始：新沃尔西尼建成一周年
+	############################################################
+	focus = {
+		id = SRC_year_one_new_volsinii
+		icon = GFX_focus_SRC_year_one_new_volsinii
+		x = 0
+		y = 0
+		cost = 2
+		available_if_capitulated = yes
+		# 前提：开局事件链【叙拉古内战】走完，灰厅被改革派拿下
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SRC_tt_need_reform_victory
+				has_idea = SRC_reform_victory
+			}
+		}
+		ai_will_do = {
+			base = 20
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_year_one
+			add_political_power = 60
+			add_stability = 0.05
+			custom_effect_tooltip = SRC_tt_year_one_leader
+			custom_effect_tooltip = SRC_tt_year_one_fury
+			custom_effect_tooltip = SRC_tt_civic_open
+			custom_effect_tooltip = SRC_tt_year_one_capital
+			unlock_decision_category_tooltip = SRC_reform_category
+			hidden_effect = {
+				SRC_leontuzzo_takeover_effect = yes
+				add_ideas = SRC_old_guard_fury
+				set_country_flag = SRC_flag_old_guard_fury
+				add_dynamic_modifier = { modifier = SRC_civic_points_system }
+				add_to_variable = { SRC_civic_points = 10 }
+				clamp_variable = { var = SRC_civic_points min = 0 max = 100 }
+				set_capital = {
+					state = 534
+					remember_old_capital = no
+				}
+				country_event = { id = src_federal.1 days = 2 }
+							country_event = { id = src_federal.101 days = 1 }
+			}
+		}
+	}
+
+	############################################################
+	# 分支一 · 家族的去势（x=-9）
+	############################################################
+	focus = {
+		id = SRC_new_urban_law_enforced
+		icon = GFX_focus_SRC_new_urban_law_enforced
+		x = -7
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_year_one_new_volsinii
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_law_enforced
+			add_political_power = 40
+			add_stability = -0.02
+			custom_effect_tooltip = SRC_tt_unlock_background_check
+
+			custom_effect_tooltip = SRC_tt_nm_pp
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_new_model }
+							country_event = { id = src_federal.102 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_new_model_modify_tt
+			add_to_variable = {
+				SRC_nm_stab = 0.02
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				SRC_nm_pp = 0.01
+				tooltip = political_power_gain_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_purge_family_remnants
+		icon = GFX_focus_SRC_purge_family_remnants
+		x = -8
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_new_urban_law_enforced
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_families_purged
+			add_war_support = 0.05
+			army_experience = 25
+			custom_effect_tooltip = SRC_tt_nm_order
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_new_model }
+				country_event = { id = src_federal.2 days = 4 random = 6 }
+							country_event = { id = src_federal.103 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_new_model_modify_tt
+			add_to_variable = {
+				SRC_nm_stab = 0.04
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				SRC_nm_pp = 0.02
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				SRC_nm_ws = 0.05
+				tooltip = war_support_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_absorb_truck_union
+		icon = GFX_focus_SRC_absorb_truck_union
+		x = -6
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_new_urban_law_enforced
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_union_absorbed
+			add_political_power = 30
+			custom_effect_tooltip = SRC_tt_irene_cabinet
+			custom_effect_tooltip = SRC_tt_nm_pp
+			custom_effect_tooltip = SRC_tt_nm_logistics
+			hidden_effect = {
+				activate_advisor = SRC_Irene
+				add_dynamic_modifier = { modifier = SRC_dyn_new_model }
+				capital_scope = {
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+							country_event = { id = src_federal.104 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_new_model_modify_tt
+			add_to_variable = {
+				SRC_nm_pp = 0.01
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				SRC_nm_supply = -0.15
+				tooltip = supply_consumption_factor_tt
+			}
+			add_to_variable = {
+				SRC_nm_infra = 0.15
+				tooltip = production_speed_infrastructure_factor_tt
+			}
+			add_to_variable = {
+				SRC_nm_fac = 0.04
+				tooltip = industrial_capacity_factory_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_dismantle_underground_economy
+		icon = GFX_focus_SRC_dismantle_underground_economy
+		x = -7
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_purge_family_remnants
+		}
+		prerequisite = {
+			focus = SRC_absorb_truck_union
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_underground_broken
+			add_political_power = 50
+			add_stability = 0.03
+
+			custom_effect_tooltip = SRC_tt_nm_pp
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_new_model }
+				add_to_variable = { SRC_civic_points = 10 }
+				clamp_variable = { var = SRC_civic_points min = 0 max = 100 }
+				country_event = { id = src_federal.3 days = 5 random = 8 }
+							country_event = { id = src_federal.105 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_new_model_modify_tt
+			add_to_variable = {
+				SRC_nm_stab = 0.02
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				SRC_nm_pp = 0.01
+				tooltip = political_power_gain_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_madam_silence
+		icon = GFX_focus_SRC_madam_silence
+		x = -8
+		y = 4
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_dismantle_underground_economy
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_grey_hall_observer
+			add_political_power = 70
+			add_war_support = 0.03
+			custom_effect_tooltip = SRC_tt_unlock_grey_hall_note
+			custom_effect_tooltip = SRC_tt_nm_ws
+			custom_effect_tooltip = SRC_tt_nm_drift
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_new_model }
+							country_event = { id = src_federal.106 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_new_model_modify_tt
+			add_to_variable = {
+				SRC_nm_ws = 0.03
+				tooltip = war_support_factor_tt
+			}
+			add_to_variable = {
+				SRC_nm_drift = 0.05
+				tooltip = democratic_drift_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_grey_hall_reform
+		icon = GFX_focus_SRC_grey_hall_reform
+		x = -6
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_dismantle_underground_economy
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_grey_hall_reformed
+			add_political_power = 60
+			add_stability = 0.03
+			custom_effect_tooltip = SRC_tt_nm_pp_hi
+
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_new_model }
+							country_event = { id = src_federal.107 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_new_model_modify_tt
+			add_to_variable = {
+				SRC_nm_pp = 0.02
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				SRC_nm_stab = 0.02
+				tooltip = stability_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_families_corporatized
+		icon = GFX_focus_SRC_families_corporatized
+		x = -7
+		y = 5
+		cost = 7
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 20
+		}
+		prerequisite = {
+			focus = SRC_madam_silence
+		}
+		prerequisite = {
+			focus = SRC_grey_hall_reform
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_families_corporatized
+			add_political_power = 80
+			add_stability = 0.05
+			custom_effect_tooltip = SRC_tt_old_guard_over
+			if = {
+				limit = {
+					has_idea = SRC_Twelve_Families
+				}
+				remove_ideas = SRC_Twelve_Families
+			}
+			custom_effect_tooltip = SRC_tt_nm_corporate
+			hidden_effect = {
+				remove_ideas = SRC_old_guard_fury
+				clr_country_flag = SRC_flag_old_guard_fury
+				add_dynamic_modifier = { modifier = SRC_dyn_new_model }
+							country_event = { id = src_federal.108 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_new_model_modify_tt
+			add_to_variable = {
+				SRC_nm_stab = 0.02
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				SRC_nm_pp = 0.06
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				SRC_nm_ws = 0.03
+				tooltip = war_support_factor_tt
+			}
+			add_to_variable = {
+				SRC_nm_fac = 0.11
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_to_variable = {
+				SRC_nm_train = -0.2
+				tooltip = training_time_factor_tt
+			}
+		}
+	}
+
+	############################################################
+	# 分支二 · 世界渴望之城（x=-3）
+	############################################################
+	focus = {
+		id = SRC_port_expansion
+		icon = GFX_focus_SRC_port_expansion
+		x = -3
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_year_one_new_volsinii
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_port_expanded
+			add_political_power = 40
+			custom_effect_tooltip = SRC_tt_port_buildings
+
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_city_of_desires }
+				capital_scope = {
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+				random_owned_state = {
+					limit = {
+						NOT = {
+							is_capital = yes
+						}
+						free_building_slots = {
+							building = infrastructure
+							size > 1
+						}
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+				}
+							country_event = { id = src_federal.109 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_city_of_desires_modify_tt
+			add_to_variable = {
+				SRC_cd_dock = 0.04
+				tooltip = industrial_capacity_dockyard_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_mobile_city_network
+		icon = GFX_focus_SRC_mobile_city_network
+		x = -4
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_port_expansion
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_city_networked
+			add_political_power = 35
+			custom_effect_tooltip = SRC_tt_unlock_city_league
+
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_city_of_desires }
+							country_event = { id = src_federal.110 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_city_of_desires_modify_tt
+			add_to_variable = {
+				SRC_cd_build = 0.04
+				tooltip = production_speed_buildings_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_columbia_tech_investment
+		icon = GFX_focus_SRC_columbia_tech_investment
+		x = -2
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_port_expansion
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_columbia_invest
+			add_tech_bonus = {
+				bonus = 0.75
+				uses = 2
+				category = industry
+			}
+			custom_effect_tooltip = SRC_tt_casimir_pressure
+			custom_effect_tooltip = SRC_tt_cd_tech_import
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_city_of_desires }
+							country_event = { id = src_federal.111 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_city_of_desires_modify_tt
+			add_to_variable = {
+				SRC_cd_res = 0.06
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				SRC_cd_cons = 0.02
+				tooltip = consumer_goods_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_civic_points_autonomy
+		icon = GFX_focus_SRC_civic_points_autonomy
+		x = -3
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_mobile_city_network
+		}
+		prerequisite = {
+			focus = SRC_columbia_tech_investment
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_civic_points_law
+			add_political_power = 50
+			custom_effect_tooltip = SRC_tt_unlock_community
+			custom_effect_tooltip = SRC_tt_unlock_registration
+
+			custom_effect_tooltip = SRC_tt_cp_pp
+			custom_effect_tooltip = SRC_tt_cp_cons
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_civic_points_system }
+				add_to_variable = { SRC_civic_points = 15 }
+				clamp_variable = { var = SRC_civic_points min = 0 max = 100 }
+							country_event = { id = src_federal.112 days = 1 }
+			}
+			custom_effect_tooltip = SRC_civic_points_system_modify_tt
+			add_to_variable = {
+				SRC_cp_stab = 0.04
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				SRC_cp_pp = 0.04
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				SRC_cp_cons = -0.05
+				tooltip = consumer_goods_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_new_art_district
+		icon = GFX_focus_SRC_new_art_district
+		x = -4
+		y = 4
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 12
+		}
+		prerequisite = {
+			focus = SRC_civic_points_autonomy
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_art_district
+			add_political_power = 30
+			add_stability = 0.05
+			custom_effect_tooltip = SRC_tt_cd_culture
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_city_of_desires }
+							country_event = { id = src_federal.113 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_city_of_desires_modify_tt
+			add_to_variable = {
+				SRC_cd_cons = -0.05
+				tooltip = consumer_goods_factor_tt
+			}
+			add_to_variable = {
+				SRC_cd_stab = 0.08
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				SRC_cd_pp = 0.09
+				tooltip = political_power_gain_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_central_terra_trade_hub
+		icon = GFX_focus_SRC_central_terra_trade_hub
+		x = -2
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 12
+		}
+		prerequisite = {
+			focus = SRC_civic_points_autonomy
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_trade_hub
+			add_political_power = 40
+			custom_effect_tooltip = SRC_tt_trade_hub_states
+			custom_effect_tooltip = SRC_tt_cd_hub
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_city_of_desires }
+				capital_scope = {
+					add_extra_state_shared_building_slots = 2
+				}
+				random_owned_state = {
+					limit = {
+						NOT = {
+							is_capital = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+				}
+							country_event = { id = src_federal.114 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_city_of_desires_modify_tt
+			add_to_variable = {
+				SRC_cd_fac = 0.08
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_to_variable = {
+				SRC_cd_dock = 0.11
+				tooltip = industrial_capacity_dockyard_tt
+			}
+			add_to_variable = {
+				SRC_cd_cons = -0.08
+				tooltip = consumer_goods_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_city_of_desires_blueprint
+		icon = GFX_focus_SRC_city_of_desires_blueprint
+		x = -3
+		y = 5
+		cost = 7
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 20
+		}
+		prerequisite = {
+			focus = SRC_new_art_district
+		}
+		prerequisite = {
+			focus = SRC_central_terra_trade_hub
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_city_of_desires
+			add_political_power = 100
+			add_stability = 0.08
+			add_war_support = 0.05
+
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_city_of_desires }
+				country_event = { id = src_federal.4 days = 6 random = 10 }
+							country_event = { id = src_federal.115 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_city_of_desires_modify_tt
+			add_to_variable = {
+				SRC_cd_res = 0.02
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				SRC_cd_build = 0.04
+				tooltip = production_speed_buildings_factor_tt
+			}
+			add_to_variable = {
+				SRC_cd_fac = 0.03
+				tooltip = industrial_capacity_factory_tt
+			}
+		}
+	}
+
+	############################################################
+	# 分支三 · 荆棘之路（x=3）
+	############################################################
+	focus = {
+		id = SRC_united_court_independent
+		icon = GFX_focus_SRC_united_court_independent
+		x = 3
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_year_one_new_volsinii
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_court_independent
+			add_political_power = 45
+			add_stability = 0.03
+
+			custom_effect_tooltip = SRC_tt_tr_weekly
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_thorn_road_end }
+							country_event = { id = src_federal.116 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_thorn_road_end_modify_tt
+			add_to_variable = {
+				SRC_tr_stab = 0.02
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				SRC_tr_weekly = 0.002
+				tooltip = SRC_tr_weekly_value_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_lavinia_judicial_reform
+		icon = GFX_focus_SRC_lavinia_judicial_reform
+		x = 2
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_united_court_independent
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_judicial_reform
+			add_political_power = 50
+			custom_effect_tooltip = SRC_tt_lavinia_cabinet
+			custom_effect_tooltip = SRC_tt_unlock_emergency_trial
+			custom_effect_tooltip = SRC_tt_tr_pp
+			hidden_effect = {
+				activate_advisor = SRC_Lavinia_Falcone
+				add_dynamic_modifier = { modifier = SRC_dyn_thorn_road_end }
+							country_event = { id = src_federal.117 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_thorn_road_end_modify_tt
+			add_to_variable = {
+				SRC_tr_pp = 0.02
+				tooltip = political_power_gain_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_judge_academy
+		icon = GFX_focus_SRC_judge_academy
+		x = 4
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_united_court_independent
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_judge_academy
+			add_political_power = 35
+			add_stability = 0.04
+			custom_effect_tooltip = SRC_tt_academy_buildings
+			custom_effect_tooltip = SRC_tt_tr_cons
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_thorn_road_end }
+				capital_scope = {
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+							country_event = { id = src_federal.118 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_thorn_road_end_modify_tt
+			add_to_variable = {
+				SRC_tr_cons = 0.02
+				tooltip = conscription_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_infected_rights_law
+		icon = GFX_focus_SRC_infected_rights_law
+		x = 3
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_lavinia_judicial_reform
+		}
+		prerequisite = {
+			focus = SRC_judge_academy
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_infected_rights
+			add_political_power = 55
+			add_manpower = 45000
+			custom_effect_tooltip = SRC_tt_rodis_law
+			custom_effect_tooltip = SRC_tt_tr_cons
+
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_thorn_road_end }
+				add_to_variable = { SRC_civic_points = 10 }
+				clamp_variable = { var = SRC_civic_points min = 0 max = 100 }
+							country_event = { id = src_federal.119 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_thorn_road_end_modify_tt
+			add_to_variable = {
+				SRC_tr_cons = 0.02
+				tooltip = conscription_factor_tt
+			}
+			add_to_variable = {
+				SRC_tr_res = 0.18
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				SRC_tr_orgregain = 0.2
+				tooltip = army_org_regain_tt
+			}
+			add_to_variable = {
+				SRC_tr_consumer = -0.02
+				tooltip = consumer_goods_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_civic_equality_act
+		icon = GFX_focus_SRC_civic_equality_act
+		x = 2
+		y = 4
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 12
+		}
+		prerequisite = {
+			focus = SRC_infected_rights_law
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_equality_act
+			add_political_power = 45
+			add_stability = 0.06
+			custom_effect_tooltip = SRC_tt_equality
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_thorn_road_end }
+							country_event = { id = src_federal.120 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_thorn_road_end_modify_tt
+			add_to_variable = {
+				SRC_tr_stab = 0.05
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				SRC_tr_cons = 0.06
+				tooltip = conscription_factor_tt
+			}
+			add_to_variable = {
+				SRC_tr_consumer = -0.08
+				tooltip = consumer_goods_factor_tt
+			}
+			add_to_variable = {
+				SRC_tr_drift = 0.05
+				tooltip = democratic_drift_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_local_elections_pilot
+		icon = GFX_focus_SRC_local_elections_pilot
+		x = 4
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 12
+		}
+		prerequisite = {
+			focus = SRC_infected_rights_law
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_elections_pilot
+			add_political_power = 60
+			custom_effect_tooltip = SRC_tt_election_points
+			custom_effect_tooltip = SRC_tt_tr_pp_hi
+			custom_effect_tooltip = SRC_tt_cp_pp
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_thorn_road_end }
+				add_dynamic_modifier = { modifier = SRC_civic_points_system }
+				add_to_variable = { SRC_civic_points = 10 }
+				clamp_variable = { var = SRC_civic_points min = 0 max = 100 }
+							country_event = { id = src_federal.121 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_thorn_road_end_modify_tt
+			add_to_variable = {
+				SRC_tr_pp = 0.03
+				tooltip = political_power_gain_tt
+			}
+			custom_effect_tooltip = SRC_civic_points_system_modify_tt
+			add_to_variable = {
+				SRC_cp_pp = 0.04
+				tooltip = political_power_gain_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_federal_constitution_draft
+		icon = GFX_focus_SRC_federal_constitution_draft
+		x = 3
+		y = 5
+		cost = 7
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 20
+		}
+		prerequisite = {
+			focus = SRC_civic_equality_act
+		}
+		prerequisite = {
+			focus = SRC_local_elections_pilot
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_constitution_draft
+			add_political_power = 80
+			add_stability = 0.05
+			add_war_support = -0.03
+			custom_effect_tooltip = SRC_tt_unlock_convention
+			custom_effect_tooltip = SRC_tt_families_fury
+			custom_effect_tooltip = SRC_tt_constitution
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_thorn_road_end }
+							country_event = { id = src_federal.122 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_thorn_road_end_modify_tt
+			add_to_variable = {
+				SRC_tr_stab = 0.04
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				SRC_tr_pp = 0.06
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				SRC_tr_drift = 0.1
+				tooltip = democratic_drift_tt
+			}
+			add_to_variable = {
+				SRC_tr_weekly = 0.002
+				tooltip = SRC_tr_weekly_value_tt
+			}
+		}
+	}
+
+	############################################################
+	# 分支四 · 铳与秩序的新解（x=9）
+	############################################################
+	focus = {
+		id = SRC_police_department_rebuild
+		icon = GFX_focus_SRC_police_department_rebuild
+		x = 7
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_year_one_new_volsinii
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_police_rebuilt
+			add_political_power = 40
+			add_stability = 0.04
+			custom_effect_tooltip = SRC_tt_unlock_police_sweep
+			custom_effect_tooltip = SRC_tt_go_def
+			custom_effect_tooltip = SRC_tt_go_org
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_guns_and_order }
+							country_event = { id = src_federal.123 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_guns_and_order_modify_tt
+			add_to_variable = {
+				SRC_go_def = 0.02
+				tooltip = army_defence_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_org = 0.02
+				tooltip = army_org_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_armed_political_education
+		icon = GFX_focus_SRC_armed_political_education
+		x = 6
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_police_department_rebuild
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_political_education
+			add_political_power = 45
+			add_war_support = 0.06
+			army_experience = 30
+			custom_effect_tooltip = SRC_tt_go_att
+			custom_effect_tooltip = SRC_tt_go_org
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_guns_and_order }
+							country_event = { id = src_federal.124 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_guns_and_order_modify_tt
+			add_to_variable = {
+				SRC_go_att = 0.03
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_org = 0.02
+				tooltip = army_org_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_penguin_logistics_assist
+		icon = GFX_focus_SRC_penguin_logistics_assist
+		x = 8
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_police_department_rebuild
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_penguin_logistics
+			add_political_power = 35
+			custom_effect_tooltip = SRC_tt_beast_lord_warning
+			custom_effect_tooltip = SRC_tt_penguin_log
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_guns_and_order }
+							country_event = { id = src_federal.125 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_guns_and_order_modify_tt
+			add_to_variable = {
+				SRC_go_train = -0.03
+				tooltip = training_time_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_intel = 0.15
+				tooltip = intel_network_gain_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_operative = 2
+				tooltip = operative_slot_tt
+			}
+			add_to_variable = {
+				SRC_go_supply = -0.15
+				tooltip = supply_consumption_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_counter_wolf_lords
+		icon = GFX_focus_SRC_counter_wolf_lords
+		x = 7
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_armed_political_education
+		}
+		prerequisite = {
+			focus = SRC_penguin_logistics_assist
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_wolf_pact
+			add_political_power = 55
+			add_stability = 0.05
+			custom_effect_tooltip = SRC_tt_wolf_swap
+			custom_effect_tooltip = SRC_tt_unlock_werewolf_liaison
+			custom_effect_tooltip = SRC_tt_werewolf_pact
+			hidden_effect = {
+				if = {
+					limit = {
+						has_idea = SRC_Wild_Hunt
+					}
+					remove_ideas = SRC_Wild_Hunt
+				}
+				add_dynamic_modifier = { modifier = SRC_dyn_guns_and_order }
+							country_event = { id = src_federal.126 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_guns_and_order_modify_tt
+			add_to_variable = {
+				SRC_go_def = 0.02
+				tooltip = army_defence_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_org = 0.02
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_ws = 0.08
+				tooltip = war_support_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_attrition = -0.15
+				tooltip = attrition_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_national_guard
+		icon = GFX_focus_SRC_national_guard
+		x = 6
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_counter_wolf_lords
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_national_guard
+			add_political_power = 50
+			add_manpower = 30000
+			custom_effect_tooltip = SRC_tt_guard_template
+			custom_effect_tooltip = SRC_tt_guard_spirit
+			hidden_effect = {
+				division_template = {
+					name = "叙拉古国民卫队"
+					is_locked = no
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+						infantry = { x = 2 y = 0 }
+						infantry = { x = 2 y = 1 }
+					}
+					support = {
+						engineer = { x = 0 y = 0 }
+						artillery = { x = 0 y = 1 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "division_template = \"叙拉古国民卫队\" start_experience_factor = 0.25 start_equipment_factor = 1"
+						owner = ROOT
+						count = 3
+					}
+				}
+				add_dynamic_modifier = { modifier = SRC_dyn_guns_and_order }
+							country_event = { id = src_federal.127 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_guns_and_order_modify_tt
+			add_to_variable = {
+				SRC_go_cons = 0.11
+				tooltip = conscription_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_train = -0.06
+				tooltip = training_time_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_def = 0.03
+				tooltip = army_defence_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_guns_and_order_redefined
+		icon = GFX_focus_SRC_guns_and_order_redefined
+		x = 8
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 15
+		}
+		prerequisite = {
+			focus = SRC_counter_wolf_lords
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_guns_order_redefined
+			add_political_power = 65
+			add_war_support = 0.05
+			custom_effect_tooltip = SRC_tt_dmitri_deputy
+			custom_effect_tooltip = SRC_tt_go_att
+			custom_effect_tooltip = SRC_tt_go_def
+			custom_effect_tooltip = SRC_tt_go_org
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_guns_and_order }
+							country_event = { id = src_federal.128 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_guns_and_order_modify_tt
+			add_to_variable = {
+				SRC_go_att = 0.03
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_def = 0.02
+				tooltip = army_defence_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_org = 0.02
+				tooltip = army_org_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_militarization_of_state_forces
+		icon = GFX_focus_SRC_militarization_of_state_forces
+		x = 7
+		y = 5
+		cost = 7
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 20
+		}
+		prerequisite = {
+			focus = SRC_national_guard
+		}
+		prerequisite = {
+			focus = SRC_guns_and_order_redefined
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_forces_nationalized
+			add_political_power = 70
+			add_war_support = 0.08
+			army_experience = 50
+			custom_effect_tooltip = SRC_tt_family_arms_absorbed
+			custom_effect_tooltip = SRC_tt_go_att
+			custom_effect_tooltip = SRC_tt_go_train
+			custom_effect_tooltip = SRC_tt_go_cons
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_guns_and_order }
+							country_event = { id = src_federal.129 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_guns_and_order_modify_tt
+			add_to_variable = {
+				SRC_go_att = 0.03
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_train = -0.03
+				tooltip = training_time_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_cons = 0.04
+				tooltip = conscription_factor_tt
+			}
+		}
+	}
+
+	############################################################
+	# 横向整合（y=6）
+	############################################################
+	focus = {
+		id = SRC_mobile_cities_league
+		icon = GFX_focus_SRC_mobile_cities_league
+		x = -8
+		y = 6
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 12
+		}
+		prerequisite = {
+			focus = SRC_families_corporatized
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_city_league
+			add_political_power = 60
+			add_stability = 0.04
+
+			hidden_effect = {
+				add_to_variable = { SRC_civic_points = 10 }
+				clamp_variable = { var = SRC_civic_points min = 0 max = 100 }
+				every_owned_state = {
+					limit = {
+						is_core_of = ROOT
+						NOT = {
+							is_capital = yes
+						}
+						free_building_slots = {
+							building = infrastructure
+							size > 0
+						}
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+							country_event = { id = src_federal.134 days = 1 }
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_casimir_capital_response
+		icon = GFX_focus_SRC_casimir_capital_response
+		x = -4
+		y = 6
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 12
+		}
+		prerequisite = {
+			focus = SRC_city_of_desires_blueprint
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_casimir_answered
+			add_political_power = 55
+			custom_effect_tooltip = SRC_tt_unlock_franchise
+
+			custom_effect_tooltip = SRC_tt_cd_cons
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_city_of_desires }
+							country_event = { id = src_federal.132 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_city_of_desires_modify_tt
+			add_to_variable = {
+				SRC_cd_fac = 0.03
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_to_variable = {
+				SRC_cd_cons = -0.05
+				tooltip = consumer_goods_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_leytonia_shadow_response
+		icon = GFX_focus_SRC_leytonia_shadow_response
+		x = 0
+		y = 6
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 12
+		}
+		prerequisite = {
+			focus = SRC_federal_constitution_draft
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_leytonia_answered
+			add_political_power = 50
+			add_manpower = 25000
+			custom_effect_tooltip = SRC_tt_exile_zh
+			custom_effect_tooltip = SRC_tt_exile_buff
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_city_of_desires }
+							country_event = { id = src_federal.133 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_city_of_desires_modify_tt
+			add_to_variable = {
+				SRC_cd_res = 0.05
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				SRC_cd_pp = 0.06
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				SRC_cd_stab = -0.01
+				tooltip = stability_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_rhodes_island_agreement
+		icon = GFX_focus_SRC_rhodes_island_agreement
+		x = 4
+		y = 6
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 12
+		}
+		prerequisite = {
+			focus = SRC_federal_constitution_draft
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_rodis_pact
+			add_political_power = 45
+			add_manpower = 40000
+			add_stability = 0.04
+			custom_effect_tooltip = SRC_tt_rodis_port
+			custom_effect_tooltip = SRC_tt_tr_cons
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = SRC_dyn_thorn_road_end }
+				capital_scope = {
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+							country_event = { id = src_federal.131 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_thorn_road_end_modify_tt
+			add_to_variable = {
+				SRC_tr_cons = 0.02
+				tooltip = conscription_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = SRC_texas_returns
+		icon = GFX_focus_SRC_texas_returns
+		x = 8
+		y = 6
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 12
+		}
+		prerequisite = {
+			focus = SRC_militarization_of_state_forces
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_texas_returned
+			add_political_power = 50
+			add_war_support = 0.04
+			custom_effect_tooltip = SRC_tt_unlock_texas_run
+			custom_effect_tooltip = SRC_tt_go_org
+			custom_effect_tooltip = SRC_tt_go_train
+			hidden_effect = {
+				activate_advisor = SRC_Texas_army_chief
+				add_dynamic_modifier = { modifier = SRC_dyn_guns_and_order }
+							country_event = { id = src_federal.130 days = 1 }
+			}
+			custom_effect_tooltip = SRC_dyn_guns_and_order_modify_tt
+			add_to_variable = {
+				SRC_go_org = 0.02
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				SRC_go_train = -0.03
+				tooltip = training_time_factor_tt
+			}
+		}
+	}
+
+	############################################################
+	# 终局：新沃尔西尼模式的胜利
+	############################################################
+	focus = {
+		id = SRC_new_volsinii_model_victory
+		icon = GFX_focus_SRC_new_volsinii_model_victory
+		x = 0
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 30
+		}
+		prerequisite = {
+			focus = SRC_mobile_cities_league
+		}
+		prerequisite = {
+			focus = SRC_casimir_capital_response
+		}
+		prerequisite = {
+			focus = SRC_leytonia_shadow_response
+		}
+		prerequisite = {
+			focus = SRC_rhodes_island_agreement
+		}
+		prerequisite = {
+			focus = SRC_texas_returns
+		}
+		completion_reward = {
+			set_country_flag = SRC_flag_federal_victory
+			add_stability = 0.15
+			add_war_support = 0.1
+			add_political_power = 150
+			custom_effect_tooltip = SRC_tt_finale_polity
+			custom_effect_tooltip = SRC_tt_finale_spirits
+			custom_effect_tooltip = SRC_tt_finale_cores
+			hidden_effect = {
+				SRC_legacy_spirits_clear_effect = yes
+				SRC_federal_republic_proclaim_effect = yes
+				SRC_finale_spirit_boost_effect = yes
+				every_state = {
+					limit = {
+						is_owned_by = SRC
+					}
+					add_core_of = SRC
+				}
+				news_event = { id = src_federal_news.1 hours = 3 }
+				news_event = { id = srcse.1 }
+				country_event = { id = src_federal.9 days = 3 }
+							country_event = { id = src_federal.135 days = 1 }
+			}
+		}
+	}
+
+# ---- 拉维妮娅线（荆棘王座）shared_focus 引用 自动生成 起 ----
+	# 定义在 common/national_focus/SRC_lavinia_shared.txt，37 个共享国策。
+	# 坐标区 y = 24..31（政治 0..7 / 产业 9..15 / 扩张 17..22，y = 23 留作分隔），横向收在 x = ±8。
+	# 闸门：1101.9.1 继任事件选「拉维妮娅是亲密战友！」置 SRC_lv_flag_succession，
+	#   三棵老树不受影响，照常可点（用户 2026-09-19 定稿）。
+	shared_focus = SRC_lv_succession
+	shared_focus = SRC_lv_special_court
+	shared_focus = SRC_lv_judge_police
+	shared_focus = SRC_lv_court_centralized
+	shared_focus = SRC_lv_emergency_trials
+	shared_focus = SRC_lv_presumption_guilt
+	shared_focus = SRC_lv_thorn_glove_law
+	shared_focus = SRC_lv_law_is_order
+	shared_focus = SRC_lv_twelve_settlement
+	shared_focus = SRC_lv_saluzzo_trial
+	shared_focus = SRC_lv_venezia_trial
+	shared_focus = SRC_lv_rossati_trial
+	shared_focus = SRC_lv_bellone_audit
+	shared_focus = SRC_lv_corporate_prosecution
+	shared_focus = SRC_lv_grey_hall_dissolved
+	shared_focus = SRC_lv_national_registry
+	shared_focus = SRC_lv_points_and_punishment
+	shared_focus = SRC_lv_labour_camps
+	shared_focus = SRC_lv_city_prison_plan
+	shared_focus = SRC_lv_penitence_quota
+	shared_focus = SRC_lv_guilt_by_association
+	shared_focus = SRC_lv_everyone_a_cell
+	shared_focus = SRC_lv_penitence_economy
+	shared_focus = SRC_lv_forced_labour
+	shared_focus = SRC_lv_reeducation_school
+	shared_focus = SRC_lv_thorn_education
+	shared_focus = SRC_lv_new_siracusan
+	shared_focus = SRC_lv_dialectic_of_sin
+	shared_focus = SRC_lv_everyone_pays
+	shared_focus = SRC_lv_texas_position
+	shared_focus = SRC_lv_dmitri_loyalty
+	shared_focus = SRC_lv_lappland_stance
+	shared_focus = SRC_lv_madam_legacy
+	shared_focus = SRC_lv_wolf_lords_neutral
+	shared_focus = SRC_lv_foreign_reaction
+	shared_focus = SRC_lv_rodus_ultimatum
+	shared_focus = SRC_lv_thorn_throne
+# ---- 拉维妮娅线（荆棘王座）shared_focus 引用 自动生成 止 ----
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}

@@ -1,0 +1,26 @@
+# ============================================================================
+# 深池（DUB）专属兵种科技：死火行尸
+# ----------------------------------------------------------------------------
+# 与其它专属兵种同一套口径：allow = { always = no } ⇒ 不进任何国家的可研究列表，
+# 只能被 set_technology 授予（这里由法案【死火复生】的 on_add 发）。
+# 不带 folder ⇒ 不在科技页画格子（folder 指向没占用的坐标会报 Found no grid box）。
+# 不需要 enable_equipments：行尸吃的是原版 infantry_equipment，深池开局就有。
+# ============================================================================
+
+technologies = {
+
+	dub_dead_fire_walker_tech = {
+
+		allow = {
+			always = no
+		}
+
+		enable_subunits = {
+			dub_dead_fire_walker
+		}
+
+		research_cost = 1
+		start_year = 1076
+	}
+
+}

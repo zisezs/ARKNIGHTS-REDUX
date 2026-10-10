@@ -1,0 +1,90 @@
+# ==============================================================================
+#  丧钟为暴君而鸣 —— "弑君者"特别军事行动
+#  由国策「REU_Operation_Regicide」解锁（国内旗标：REU_regicide_unlocked）。
+#  本文件为「针对国家」的决议：选定目标后，处刑人将送走该国的现任领导人。
+# ==============================================================================
+
+REU_Regicide_Category = {
+
+	# 「核心圈」情报简报 —— 可反复进行的准备性决议
+	REU_regicide_intel_briefing = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			has_country_flag = REU_regicide_unlocked
+		}
+
+		available = {
+			has_country_flag = REU_regicide_unlocked
+		}
+
+		cost = 30
+		days_re_enable = 90
+
+		complete_effect = {
+			add_command_power = 25
+			custom_effect_tooltip = REU_regicide_intel_briefing_tt
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# "弑君者"特别军事行动 —— 针对国家，清除目标国现任领导人
+	REU_regicide_special_operation = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			has_country_flag = REU_regicide_unlocked
+		}
+
+		available = {
+			has_country_flag = REU_regicide_unlocked
+		}
+
+		target_root_trigger = {
+			has_country_flag = REU_regicide_unlocked
+		}
+
+		targets = { URS VIC YAN KZM IBR LTN GUL SIE SRC KJG LIG CLB }
+
+		target_trigger = {
+			FROM = {
+				exists = yes
+				NOT = { has_country_flag = REU_regicide_victim }
+				NOT = { is_in_faction_with = ROOT }
+			}
+		}
+
+		cost = 150
+		days_remove = 30
+		days_re_enable = 90
+
+		complete_effect = {
+			custom_effect_tooltip = REU_regicide_special_operation_tt
+		}
+
+		remove_effect = {
+			FROM = {
+				kill_country_leader = yes
+				set_country_flag = REU_regicide_victim
+				add_stability = -0.10
+				add_war_support = -0.05
+			}
+			add_war_support = 0.05
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+}

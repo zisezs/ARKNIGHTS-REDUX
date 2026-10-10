@@ -1,0 +1,333 @@
+# ============================================================================
+# 叙拉古内战（2026-09-19）—— 事件链共用的脚本效果
+# 作用域：COUNTRY（除注明外）
+# 内战走脚本式建国，不用 start_civil_war（它会乱发 D-tag，见 [[hoi4-scripted-country-spawn]]）
+#
+# 2026-09-19 修三个 bug：
+#  1) 师模板原先单放 common/units/SRC_civilwar_divisions.txt —— division_template 在
+#     common/units/ 里不被解析（error.log: Unexpected token: division_template ×3），三个模板
+#     全部没注册，create_unit 自然什么也没造出来。改成像 REU 给 KAC 那样，在效果内、
+#     对应国家作用域里现建模板再 create_unit。
+#  2) SR1/SR2 没有国家颜色：地图色带取自执政党，而 SR2 历史里 ruling_party = liberalism
+#     配的却是 conservative_subtype（属 conservatism 组），领袖与执政党不匹配 → 没有执政领袖
+#     → 没有色。现在建政当场重跑 set_capital + set_politics + set_popularities +
+#     create_country_leader，四者口径统一：
+#       SR1 = authoritarianism / oligarchy_subtype
+#       SR2 = conservatism     / conservative_subtype
+#  3) 「改革派凯旋！」反复弹：见 common/on_actions/SRC_civilwar_on_actions.txt 的守卫旗标。
+# ============================================================================
+
+# ---- 内战爆发：守旧派家族联军 SR1 + 博尔扎诺分离主义者 SR2 ----
+# SR1 拿 585 / 578 / 561，SR2 拿 510 / 532 / 498；首都 534 与其余 12 州留在 SRC 手里
+SRC_civil_war_breakout_effect = {
+	set_global_flag = SRC_civil_war_on
+	set_country_flag = SRC_flag_civil_war
+
+	########## 守旧派家族联军 ##########
+	SR1 = {
+		transfer_state = 585
+		transfer_state = 578
+		transfer_state = 561
+
+		set_capital = {
+			state = 585
+			remember_old_capital = no
+		}
+		set_politics = {
+			ruling_party = authoritarianism
+			last_election = "1094.6.1.12"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_popularities = {
+			communism = 0
+			socialism = 0
+			progressivism = 0
+			liberalism = 0
+			conservatism = 25
+			authoritarianism = 60
+			despotism = 10
+			fascism = 5
+			mysticism = 0
+			special = 0
+		}
+		create_country_leader = {
+			name = SR1_Alberto_Ribelle
+			desc = SR1_Alberto_Ribelle_desc
+			picture = "gfx/leaders/_unknown/404_unknown.dds"
+			expire = "1965.1.1.1"
+			ideology = oligarchy_subtype
+		}
+
+		# 打手战团：4 民兵团
+		division_template = {
+			name = "打手战团"
+			is_locked = no
+			regiments = {
+				militia = { x = 0 y = 0 }
+				militia = { x = 0 y = 1 }
+				militia = { x = 1 y = 0 }
+				militia = { x = 1 y = 1 }
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "division_template = \"打手战团\" start_experience_factor = 0.05 start_equipment_factor = 1"
+				owner = SR1
+				count = 10
+			}
+		}
+	}
+
+	########## 博尔扎诺分离主义者 ##########
+	SR2 = {
+		transfer_state = 510
+		transfer_state = 532
+		transfer_state = 498
+
+		set_capital = {
+			state = 510
+			remember_old_capital = no
+		}
+		set_politics = {
+			ruling_party = conservatism
+			last_election = "1094.6.1.12"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_popularities = {
+			communism = 0
+			socialism = 0
+			progressivism = 0
+			liberalism = 30
+			conservatism = 45
+			authoritarianism = 15
+			despotism = 0
+			fascism = 10
+			mysticism = 0
+			special = 0
+		}
+		create_country_leader = {
+			name = SR2_Rettore_Provinciale
+			desc = SR2_Rettore_Provinciale_desc
+			picture = "gfx/leaders/_unknown/404_unknown.dds"
+			expire = "1965.1.1.1"
+			ideology = conservative_subtype
+		}
+
+		# 博尔扎诺干涉军：4 步兵团 + 炮兵连
+		division_template = {
+			name = "博尔扎诺干涉军"
+			is_locked = no
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+			}
+			support = {
+				artillery = { x = 0 y = 0 }
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "division_template = \"博尔扎诺干涉军\" start_experience_factor = 0.2 start_equipment_factor = 1"
+				owner = SR2
+				count = 10
+			}
+		}
+	}
+
+	########## 核心 ##########
+	585 = {
+		add_core_of = SR1
+		remove_core_of = SRC
+	}
+	578 = {
+		add_core_of = SR1
+		remove_core_of = SRC
+	}
+	561 = {
+		add_core_of = SR1
+		remove_core_of = SRC
+	}
+	510 = {
+		add_core_of = SR2
+		remove_core_of = SRC
+	}
+	532 = {
+		add_core_of = SR2
+		remove_core_of = SRC
+	}
+	498 = {
+		add_core_of = SR2
+		remove_core_of = SRC
+	}
+
+	########## 新沃尔西尼防暴部队：6 民兵团 + 1 工兵连，首都 20 个师 ##########
+	division_template = {
+		name = "沃尔西尼防暴部队"
+		is_locked = no
+		regiments = {
+			militia = { x = 0 y = 0 }
+			militia = { x = 0 y = 1 }
+			militia = { x = 0 y = 2 }
+			militia = { x = 1 y = 0 }
+			militia = { x = 1 y = 1 }
+			militia = { x = 1 y = 2 }
+		}
+		support = {
+			engineer = { x = 0 y = 0 }
+		}
+	}
+	capital_scope = {
+		create_unit = {
+			division = "division_template = \"沃尔西尼防暴部队\" start_experience_factor = 0.15 start_equipment_factor = 1"
+			owner = ROOT
+			count = 20
+		}
+	}
+
+	declare_war_on = {
+		target = SR1
+		type = civil_war
+	}
+	declare_war_on = {
+		target = SR2
+		type = civil_war
+	}
+
+	# 守旧派家族与卡西米尔资本的顾问离任
+	SRC_civil_war_purge_advisors_effect = yes
+
+	add_stability = -0.15
+	add_war_support = 0.15
+	add_political_power = -50
+
+	########## 人机专属补偿（2026-09-23，玩家一侧完全不变）##########
+	# 为什么要这一段：SRC 打完十四幕链条手里是 0 稳定度 + 25 个缺装师，对面 20 个满装师，
+	# 而且开局就 45% 的军工被割走（20 座里丢掉 9 座）。玩家会自己调度，AI 不会 ——
+	# 它会在缺装中把内战拖成消耗战然后投降。所以只给人机补三样：
+	# 装备池（当天就能把师拉满）、战争支持度（投降界限的分子）、陆军经验（立刻换代编制）。
+	if = {
+		limit = {
+			is_ai = yes
+		}
+		# 放开编制设计器，AI 才可能按 common/ai_templates/SRC_templates.txt 换强编制
+		country_lock_all_division_template = no
+
+		# 25 个师约需 8200 支枪 + 支援连火炮；给到 2.5 万足够铺满并留出补充余量
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_0
+			amount = 25000
+			producer = SRC
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment_0
+			amount = 2500
+			producer = SRC
+		}
+
+		add_war_support = 0.25
+		army_experience = 90
+		add_political_power = 150
+	}
+}
+
+# ---- 移除守旧派顾问 ----
+# 与 REU.txt 里 remove_advisor_role 的既有写法一致：直接摘角色，不做 has_idea 预判
+# （顾问的 idea_token 不是 ideas 块，has_idea 判不了他们）。没在任的最多留一行日志，
+# 本效果整局只跑一次，不会像国策 tooltip 那样反复求值。
+SRC_civil_war_purge_advisors_effect = {
+	remove_advisor_role = {
+		character = SRC_Alberto_Saluzzo
+		slot = political_advisor
+	}
+	remove_advisor_role = {
+		character = SRC_Fabrizio_Venezia
+		slot = political_advisor
+	}
+	remove_advisor_role = {
+		character = SRC_Antonio_Venezia
+		slot = political_advisor
+	}
+	remove_advisor_role = {
+		character = SRC_Giovanna_Rossati
+		slot = political_advisor
+	}
+	remove_advisor_role = {
+		character = SRC_Shalay
+		slot = political_advisor
+	}
+}
+
+# ---- 授予「改革派凯旋！」（事件 16 的 A 分支 / 内战终结事件共用，幂等）----
+SRC_reform_victory_grant_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_idea = SRC_reform_victory
+			}
+		}
+		add_ideas = SRC_reform_victory
+	}
+	if = {
+		limit = {
+			has_idea = SRC_grey_hall_concession
+		}
+		remove_ideas = SRC_grey_hall_concession
+	}
+	clr_country_flag = SRC_cw_flag_stalled
+	set_country_flag = SRC_cw_flag_victory_done
+	set_global_flag = SRC_civil_war_done
+
+	# 改革派凯旋 = 军队国家化：家族再也把持不住编制，放开师级编制设计器
+	# （history/countries/SRC - Siracusa.txt 里 country_lock_all_division_template = yes 的解药。
+	#  和上面人机爆发内战当天的那次解重复无害，玩家两条路线都能拿到。）
+	country_lock_all_division_template = no
+}
+
+# ---- 人机内战兜底：叛军被逐出全部领地却还没被议和吃掉时，直接吞并 ----
+# 只在 SRC 是 AI 时由 common/on_actions/SRC_civilwar_on_actions.txt 调用，玩家照旧走和会。
+# annex_country 不给核心（见 [[hoi4-annex-cosmetic-gotchas]]），而爆发时那 6 个州被
+# remove_core_of = SRC 摘过，所以吞回来必须逐州补回来。
+SRC_crush_rebels_effect = {
+	if = {
+		limit = {
+			has_war_with = SR1
+			SR1 = {
+				NOT = {
+					any_owned_state = {
+						is_controlled_by = SR1
+					}
+				}
+			}
+		}
+		annex_country = {
+			target = SR1
+			transfer_troops = no
+		}
+		585 = { add_core_of = SRC }
+		578 = { add_core_of = SRC }
+		561 = { add_core_of = SRC }
+	}
+	if = {
+		limit = {
+			has_war_with = SR2
+			SR2 = {
+				NOT = {
+					any_owned_state = {
+						is_controlled_by = SR2
+					}
+				}
+			}
+		}
+		annex_country = {
+			target = SR2
+			transfer_troops = no
+		}
+		510 = { add_core_of = SRC }
+		532 = { add_core_of = SRC }
+		498 = { add_core_of = SRC }
+	}
+}

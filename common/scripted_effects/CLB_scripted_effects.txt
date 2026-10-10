@@ -1,0 +1,1321 @@
+CLB_state_election_poll = {
+	set_variable = { state_communism_pop = CLB.party_popularity@communism }
+	set_variable = { state_socialism_pop = CLB.party_popularity@socialism }
+	set_variable = { state_progressivism_pop = CLB.party_popularity@progressivism }
+	set_variable = { state_liberalism_pop = CLB.party_popularity@liberalism }
+	set_variable = { state_conservatism_pop = CLB.party_popularity@conservatism }
+	set_variable = { state_authoritarianism_pop = CLB.party_popularity@authoritarianism }
+	set_variable = { state_fascism_pop = CLB.party_popularity@fascism }
+
+	add_to_variable = { state_communism_pop = FROM.state_communism_pop_addition }
+	add_to_variable = { state_socialism_pop = FROM.state_socialism_pop_addition }
+	add_to_variable = { state_progressivism_pop = FROM.state_progressivism_pop_addition }
+	add_to_variable = { state_liberalism_pop = FROM.state_liberalism_pop_addition }
+	add_to_variable = { state_conservatism_pop = FROM.state_conservatism_pop_addition }
+	add_to_variable = { state_authoritarianism_pop = FROM.state_authoritarianism_pop_addition }
+	add_to_variable = { state_fascism_pop = FROM.state_fascism_pop_addition }
+
+	set_variable = { state_total_pop = state_communism_pop }
+	add_to_variable = { state_total_pop = state_socialism_pop }
+	add_to_variable = { state_total_pop = state_progressivism_pop }
+	add_to_variable = { state_total_pop = state_liberalism_pop }
+	add_to_variable = { state_total_pop = state_conservatism_pop }
+	add_to_variable = { state_total_pop = state_authoritarianism_pop }
+	add_to_variable = { state_total_pop = state_fascism_pop }
+
+	if = {
+		limit = { check_variable = { state_total_pop = 0 } }
+		set_variable = { state_total_pop = 1 }   #临时置1，避免除零错误
+	}
+
+	set_variable = { state_communism_pop_percent = state_communism_pop }
+	divide_variable = { state_communism_pop_percent = state_total_pop }
+
+	set_variable = { state_socialism_pop_percent = state_socialism_pop }
+	divide_variable = { state_socialism_pop_percent = state_total_pop }
+
+	set_variable = { state_progressivism_pop_percent = state_progressivism_pop }
+	divide_variable = { state_progressivism_pop_percent = state_total_pop }
+
+	set_variable = { state_liberalism_pop_percent = state_liberalism_pop }
+	divide_variable = { state_liberalism_pop_percent = state_total_pop }
+
+	set_variable = { state_conservatism_pop_percent = state_conservatism_pop }
+	divide_variable = { state_conservatism_pop_percent = state_total_pop }
+
+	set_variable = { state_authoritarianism_pop_percent = state_authoritarianism_pop }
+	divide_variable = { state_authoritarianism_pop_percent = state_total_pop }
+
+	set_variable = { state_fascism_pop_percent = state_fascism_pop }
+	divide_variable = { state_fascism_pop_percent = state_total_pop }
+
+	#截取民调时间
+	set_variable = { state_poll_date = global.date }
+}
+
+CLB_state_vote = {
+
+	clr_state_flag = CLB_vote_communism_flag
+	clr_state_flag = CLB_vote_socialism_flag
+	clr_state_flag = CLB_vote_progressivism_flag
+	clr_state_flag = CLB_vote_liberalism_flag
+	clr_state_flag = CLB_vote_conservatism_flag
+	clr_state_flag = CLB_vote_authoritarianism_flag
+	clr_state_flag = CLB_vote_fascism_flag
+	clr_state_flag = CLB_vote_A_flag
+	clr_state_flag = CLB_vote_B_flag
+
+	set_variable = { state_communism_pop = CLB.party_popularity@communism }
+	set_variable = { state_socialism_pop = CLB.party_popularity@socialism }
+	set_variable = { state_progressivism_pop = CLB.party_popularity@progressivism }
+	set_variable = { state_liberalism_pop = CLB.party_popularity@liberalism }
+	set_variable = { state_conservatism_pop = CLB.party_popularity@conservatism }
+	set_variable = { state_authoritarianism_pop = CLB.party_popularity@authoritarianism }
+	set_variable = { state_fascism_pop = CLB.party_popularity@fascism }
+
+	add_to_variable = { state_communism_pop = FROM.state_communism_pop_addition }
+	add_to_variable = { state_socialism_pop = FROM.state_socialism_pop_addition }
+	add_to_variable = { state_progressivism_pop = FROM.state_progressivism_pop_addition }
+	add_to_variable = { state_liberalism_pop = FROM.state_liberalism_pop_addition }
+	add_to_variable = { state_conservatism_pop = FROM.state_conservatism_pop_addition }
+	add_to_variable = { state_authoritarianism_pop = FROM.state_authoritarianism_pop_addition }
+	add_to_variable = { state_fascism_pop = FROM.state_fascism_pop_addition }
+
+	random_list = {
+		state_communism_pop = {
+			set_state_flag = CLB_vote_communism_flag
+		}
+		state_socialism_pop = {
+			set_state_flag = CLB_vote_socialism_flag
+		}
+		state_progressivism_pop = {
+			set_state_flag = CLB_vote_progressivism_flag
+		}
+		state_liberalism_pop = {
+			set_state_flag = CLB_vote_liberalism_flag
+		}
+		state_conservatism_pop = {
+			set_state_flag = CLB_vote_conservatism_flag
+		}
+		state_authoritarianism_pop = {
+			set_state_flag = CLB_vote_authoritarianism_flag
+		}
+		state_fascism_pop = {
+			set_state_flag = CLB_vote_fascism_flag
+		}
+	}
+
+	if = {
+		limit = {
+			has_state_flag = CLB_vote_communism_flag
+		}
+		CLB = {
+			add_to_variable = { communism_all_votes = PREV.elector_votes }
+		}
+		if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_communism_in_A_flag
+				}
+			}
+			set_state_flag = CLB_vote_A_flag
+		}
+		else_if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_communism_in_B_flag
+				}
+			}
+			set_state_flag = CLB_vote_B_flag
+		}
+	}
+	else_if = {
+		limit = {
+			has_state_flag = CLB_vote_socialism_flag
+		}
+		CLB = {
+			add_to_variable = { socialism_all_votes = PREV.elector_votes }
+		}
+		if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_socialism_in_A_flag
+				}
+			}
+			set_state_flag = CLB_vote_A_flag
+		}
+		else_if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_socialism_in_B_flag
+				}
+			}
+			set_state_flag = CLB_vote_B_flag
+		}
+	}
+	else_if = {
+		limit = {
+			has_state_flag = CLB_vote_progressivism_flag
+		}
+		CLB = {
+			add_to_variable = { progressivism_all_votes = PREV.elector_votes }
+		}
+		if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_progressivism_in_A_flag
+				}
+			}
+			set_state_flag = CLB_vote_A_flag
+		}
+		else_if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_progressivism_in_B_flag
+				}
+			}
+			set_state_flag = CLB_vote_B_flag
+		}
+	}
+	else_if = {
+		limit = {
+			has_state_flag = CLB_vote_liberalism_flag
+		}
+		CLB = {
+			add_to_variable = { liberalism_all_votes = PREV.elector_votes }
+		}
+		if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_liberalism_in_A_flag
+				}
+			}
+			set_state_flag = CLB_vote_A_flag
+		}
+		else_if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_liberalism_in_B_flag
+				}
+			}
+			set_state_flag = CLB_vote_B_flag
+		}
+	}
+	else_if = {
+		limit = {
+			has_state_flag = CLB_vote_conservatism_flag
+		}
+		CLB = {
+			add_to_variable = { conservatism_all_votes = PREV.elector_votes }
+		}
+		if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_conservatism_in_A_flag
+				}
+			}
+			set_state_flag = CLB_vote_A_flag
+		}
+		else_if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_conservatism_in_B_flag
+				}
+			}
+			set_state_flag = CLB_vote_B_flag
+		}
+	}
+	else_if = {
+		limit = {
+			has_state_flag = CLB_vote_authoritarianism_flag
+		}
+		CLB = {
+			add_to_variable = { authoritarianism_all_votes = PREV.elector_votes }
+		}
+		if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_authoritarianism_in_A_flag
+				}
+			}
+			set_state_flag = CLB_vote_A_flag
+		}
+		else_if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_authoritarianism_in_B_flag
+				}
+			}
+			set_state_flag = CLB_vote_B_flag
+		}
+	}
+	else_if = {
+		limit = {
+			has_state_flag = CLB_vote_fascism_flag
+		}
+		CLB = {
+			add_to_variable = { fascism_all_votes = PREV.elector_votes }
+		}
+		if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_fascism_in_A_flag
+				}
+			}
+			set_state_flag = CLB_vote_A_flag
+		}
+		else_if = {
+			limit = {
+				CLB = {
+					has_country_flag = CLB_fascism_in_B_flag
+				}
+			}
+			set_state_flag = CLB_vote_B_flag
+		}
+	}
+	
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					CLB = {
+						has_country_flag = CLB_communism_in_A_flag
+					}
+					has_state_flag = CLB_vote_communism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_socialism_in_A_flag
+					}
+					has_state_flag = CLB_vote_socialism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_progressivism_in_A_flag
+					}
+					has_state_flag = CLB_vote_progressivism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_liberalism_in_A_flag
+					}
+					has_state_flag = CLB_vote_liberalism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_conservatism_in_A_flag
+					}
+					has_state_flag = CLB_vote_conservatism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_authoritarianism_in_A_flag
+					}
+					has_state_flag = CLB_vote_authoritarianism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_fascism_in_A_flag
+					}
+					has_state_flag = CLB_vote_fascism_flag
+				}
+			}
+		}
+		set_state_flag = CLB_vote_A_flag
+		CLB = {
+			add_to_variable = { A_all_votes = PREV.elector_votes }
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					CLB = {
+						has_country_flag = CLB_communism_in_B_flag
+					}
+					has_state_flag = CLB_vote_communism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_socialism_in_B_flag
+					}
+					has_state_flag = CLB_vote_socialism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_progressivism_in_B_flag
+					}
+					has_state_flag = CLB_vote_progressivism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_liberalism_in_B_flag
+					}
+					has_state_flag = CLB_vote_liberalism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_conservatism_in_B_flag
+					}
+					has_state_flag = CLB_vote_conservatism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_authoritarianism_in_B_flag
+					}
+					has_state_flag = CLB_vote_authoritarianism_flag
+				}
+				AND = {
+					CLB = {
+						has_country_flag = CLB_fascism_in_B_flag
+					}
+					has_state_flag = CLB_vote_fascism_flag
+				}
+			}
+		}
+		set_state_flag = CLB_vote_B_flag
+		CLB = {
+			add_to_variable = { B_all_votes = PREV.elector_votes }
+		}
+	}
+}
+
+CLB_election_start = {
+	set_variable = { communism_all_votes = 0 }
+	set_variable = { socialism_all_votes = 0 }
+	set_variable = { progressivism_all_votes = 0 }
+	set_variable = { liberalism_all_votes = 0 }
+	set_variable = { conservatism_all_votes = 0 }
+	set_variable = { authoritarianism_all_votes = 0 }
+	set_variable = { fascism_all_votes = 0 }
+
+	clr_country_flag = CLB_communism_win_election_flag
+	clr_country_flag = CLB_socialism_win_election_flag
+	clr_country_flag = CLB_liberalism_win_election_flag
+	clr_country_flag = CLB_fascism_win_election_flag
+	clr_country_flag = CLB_A_win_election_flag
+	clr_country_flag = CLB_B_win_election_flag
+}
+
+CLB_election_results = {
+	set_variable = { A_all_votes = 0 }
+	set_variable = { B_all_votes = 0 }
+	add_to_variable = { election_num = 1 }
+
+	if = {
+		limit = {
+			has_country_flag = CLB_communism_in_A_flag
+		}
+		add_to_variable = { A_all_votes = communism_all_votes }
+	}
+	if = {
+		limit = {
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+		add_to_variable = { A_all_votes = socialism_all_votes }
+	}
+	if = {
+		limit = {
+			has_country_flag = CLB_progressivism_in_A_flag
+		}
+		add_to_variable = { A_all_votes = progressivism_all_votes }
+	}
+	if = {
+		limit = {
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+		add_to_variable = { A_all_votes = liberalism_all_votes }
+	}
+
+	if = {
+		limit = {
+			has_country_flag = CLB_liberalism_in_B_flag
+		}
+		add_to_variable = { B_all_votes = liberalism_all_votes }
+	}
+	if = {
+		limit = {
+			has_country_flag = CLB_conservatism_in_B_flag
+		}
+		add_to_variable = { B_all_votes = conservatism_all_votes }
+	}
+	if = {
+		limit = {
+			has_country_flag = CLB_authoritarianism_in_B_flag
+		}
+		add_to_variable = { B_all_votes = authoritarianism_all_votes }
+	}
+	if = {
+		limit = {
+			has_country_flag = CLB_fascism_in_B_flag
+		}
+		add_to_variable = { B_all_votes = fascism_all_votes }
+	}
+
+	#找出得票最多的意识形态（平票全显示）
+	set_temp_variable = { max_votes = A_all_votes }
+
+	if = {
+		limit = { check_variable = { B_all_votes > max_votes } }
+		set_temp_variable = { max_votes = B_all_votes }
+	}
+	if = {
+		limit = { check_variable = { communism_all_votes > max_votes } }
+		set_temp_variable = { max_votes = communism_all_votes }
+	}
+	if = {
+		limit = { check_variable = { socialism_all_votes > max_votes } }
+		set_temp_variable = { max_votes = socialism_all_votes }
+	}
+	if = {
+		limit = { check_variable = { liberalism_all_votes > max_votes } }
+		set_temp_variable = { max_votes = liberalism_all_votes }
+	}
+	if = {
+		limit = { check_variable = { fascism_all_votes > max_votes } }
+		set_temp_variable = { max_votes = fascism_all_votes }
+	}
+
+	#输出所有等于最高票数的意识形态
+	set_variable = { win_election_parties = 0 }
+	if = {
+		limit = { check_variable = { communism_all_votes = max_votes } }
+		set_country_flag = CLB_communism_win_election_flag
+		add_to_variable = { win_election_parties = 1 }
+	}
+	if = {
+		limit = { check_variable = { socialism_all_votes = max_votes } }
+		set_country_flag = CLB_socialism_win_election_flag
+		add_to_variable = { win_election_parties = 1 }
+	}
+	if = {
+		limit = { check_variable = { liberalism_all_votes = max_votes } }
+		set_country_flag = CLB_liberalism_win_election_flag
+		add_to_variable = { win_election_parties = 1 }
+	}
+	if = {
+		limit = { check_variable = { fascism_all_votes = max_votes } }
+		set_country_flag = CLB_fascism_win_election_flag
+		add_to_variable = { win_election_parties = 1 }
+	}
+	if = {
+		limit = { check_variable = { A_all_votes = max_votes } }
+		set_country_flag = CLB_A_win_election_flag
+		add_to_variable = { win_election_parties = 1 }
+	}
+	if = {
+		limit = { check_variable = { B_all_votes = max_votes } }
+		set_country_flag = CLB_B_win_election_flag
+		add_to_variable = { win_election_parties = 1 }
+	}
+}
+
+CLB_clear_nomination = {
+	clr_country_flag = CLB_Northwood_nominated
+	clr_country_flag = CLB_Brighton_nominated
+	clr_country_flag = CLB_AOC_nominated
+	clr_country_flag = CLB_Gernis_nominated
+	clr_country_flag = CLB_Carpenter_nominated
+	clr_country_flag = CLB_Gerald_nominated
+	clr_country_flag = CLB_Upwood_nominated
+	clr_country_flag = CLB_Kristen_nominated
+	clr_country_flag = CLB_William_nominated
+	clr_country_flag = CLB_Chaney_nominated
+	clr_country_flag = CLB_Graham_nominated
+	clr_country_flag = CLB_Charles_nominated
+	clr_country_flag = CLB_Lee_nominated
+	clr_country_flag = CLB_JD_nominated
+
+	clr_country_flag = CLB_Northwood_nominated_vice
+	clr_country_flag = CLB_Silas_nominated_vice
+	clr_country_flag = CLB_AOC_nominated_vice
+	clr_country_flag = CLB_Franca_nominated_vice
+	clr_country_flag = CLB_Bobby_nominated_vice
+	clr_country_flag = CLB_Haines_nominated_vice
+	clr_country_flag = CLB_Priestley_nominated_vice
+	clr_country_flag = CLB_Hill_nominated_vice
+	clr_country_flag = CLB_Alessandro_nominated_vice
+	clr_country_flag = CLB_Gordon_nominated_vice
+	clr_country_flag = CLB_Lizard_nominated_vice
+	clr_country_flag = CLB_Eichenfeller_nominated_vice
+	clr_country_flag = CLB_Chaney_nominated_vice
+	clr_country_flag = CLB_JD_nominated_vice
+	clr_country_flag = CLB_Clancy_nominated_vice
+}
+
+CLB_clear_term = {
+	clr_country_flag = CLB_Marino_Cuomo_term_flag
+	clr_country_flag = CLB_Michael_Brighton_term_moderate_flag
+	clr_country_flag = CLB_Gernis_Williams_term_flag
+	clr_country_flag = CLB_Bobby_Fray_term_flag
+	clr_country_flag = CLB_William_Flemington_term_FPP_flag
+	clr_country_flag = CLB_Dwayne_Charles_term_flag
+	clr_country_flag = CLB_Hattie_Lee_term_flag
+	clr_country_flag = CLB_Michael_Brighton_term_radical_flag
+	clr_country_flag = CLB_William_Flemington_term_LP_flag
+	clr_country_flag = CLB_Kristen_Wright_term_flag
+	clr_country_flag = CLB_Jerome_Carpenter_term_flag
+	clr_country_flag = CLB_Abigail_Orleans_Calnis_term_flag
+	clr_country_flag = CLB_Fiona_Upwood_term_flag
+	clr_country_flag = CLB_Joanna_Dylan_Lewis_term_flag
+	clr_country_flag = CLB_George_Huey_Winkle_Graham_term_flag
+	clr_country_flag = CLB_Raymond_Chaney_term_flag
+	clr_country_flag = CLB_Tom_Northwood_term_flag
+	clr_country_flag = CLB_Gavin_Cristiano_Alessandro_term_flag
+}
+
+CLB_change_leader = {
+	if = {
+		limit = {
+			check_variable = { election_num = 1	}
+		}
+		if = {
+			limit = {
+				has_country_flag = CLB_A_win_election_flag
+			}
+			if = {
+				limit = {
+					has_country_flag = CLB_Brighton_nominated
+					has_country_flag = CLB_socialism_in_A_flag
+				}
+				country_event = {
+					id = inauguration_clb.1
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Gernis_nominated
+					has_country_flag = CLB_socialism_in_A_flag
+				}
+				country_event = {
+					id = inauguration_clb.2
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Gerald_nominated
+					has_country_flag = CLB_liberalism_in_A_flag
+				}
+				country_event = {
+					id = inauguration_clb.3
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_William_nominated
+					has_country_flag = CLB_liberalism_in_A_flag
+				}
+				country_event = {
+					id = inauguration_clb.4
+					days = 5 #77
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = CLB_B_win_election_flag
+			}
+			if = {
+				limit = {
+					has_country_flag = CLB_Charles_nominated
+				}
+				country_event = {
+					id = inauguration_clb.5
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Lee_nominated
+				}
+				country_event = {
+					id = inauguration_clb.6
+					days = 5 #77
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = CLB_socialism_win_election_flag
+			}
+			if = {
+				limit = {
+					has_country_flag = CLB_Brighton_nominated
+				}
+				country_event = {
+					id = inauguration_clb.7
+					days = 5 #77
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = CLB_liberalism_win_election_flag
+			}
+			if = {
+				limit = {
+					has_country_flag = CLB_William_nominated
+				}
+				country_event = {
+					id = inauguration_clb.8
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Kristen_nominated
+				}
+				country_event = {
+					id = inauguration_clb.9
+					days = 5 #77
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { election_num = 2	}
+		}
+		if = {
+			limit = {
+				has_country_flag = CLB_A_win_election_flag
+			}
+			if = {
+				limit = {
+					has_country_flag = CLB_Carpenter_nominated
+				}
+				country_event = {
+					id = inauguration_clb.10
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_AOC_nominated
+				}
+				country_event = {
+					id = inauguration_clb.11
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Brighton_nominated
+					has_country_flag = CLB_socialism_in_A_flag
+				}
+				country_event = {
+					id = inauguration_clb.12
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Gerald_nominated
+				}
+				country_event = {
+					id = inauguration_clb.13
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Upwood_nominated
+				}
+				country_event = {
+					id = inauguration_clb.14
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_William_nominated
+					has_country_flag = CLB_liberalism_in_A_flag
+				}
+				country_event = {
+					id = inauguration_clb.15
+					days = 5 #77
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = CLB_B_win_election_flag
+			}
+			if = {
+				limit = {
+					has_country_flag = CLB_JD_nominated
+				}
+				country_event = {
+					id = inauguration_clb.16
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Graham_nominated
+				}
+				country_event = {
+					id = inauguration_clb.17
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Chaney_nominated
+				}
+				country_event = {
+					id = inauguration_clb.18
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Charles_nominated
+					NOT = {
+						has_country_leader = {
+							character = CLB_Dwayne_Charles
+							ruling_only = yes
+						}
+					}
+				}
+				country_event = {
+					id = inauguration_clb.19
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Charles_nominated
+					has_country_leader = {
+						character = CLB_Dwayne_Charles
+						ruling_only = yes
+					}
+				}
+				country_event = {
+					id = inauguration_clb.20
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Lee_nominated
+					has_country_leader = {
+						character = CLB_Hattie_Lee
+						ruling_only = yes
+					}
+				}
+				country_event = {
+					id = inauguration_clb.21
+					days = 5 #77
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = CLB_socialism_win_election_flag
+			}
+			if = {
+				limit = {
+					has_country_flag = CLB_Gernis_nominated
+				}
+				country_event = {
+					id = inauguration_clb.22
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Northwood_nominated
+				}
+				country_event = {
+					id = inauguration_clb.23
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Brighton_nominated
+				}
+				country_event = {
+					id = inauguration_clb.24
+					days = 5 #77
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = CLB_liberalism_win_election_flag
+			}
+			if = {
+				limit = {
+					has_country_flag = CLB_Kristen_nominated
+				}
+				country_event = {
+					id = inauguration_clb.25
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Alessandro_nominated
+				}
+				country_event = {
+					id = inauguration_clb.26
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_Kristen_nominated
+					has_country_leader = {
+						character = CLB_Kristen_Wright
+						ruling_only = yes
+					}
+				}
+				country_event = {
+					id = inauguration_clb.27
+					days = 5 #77
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CLB_William_nominated
+				}
+				country_event = {
+					id = inauguration_clb.28
+					days = 5 #77
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { election_num = 3	}
+		}
+		#就职事件days = 77
+	}
+}
+
+CLB_house_election = {
+	set_variable = { house_communism_seats_new = 432 } #因为这种计算会有±3的误差，所以-3按比例分席位，然后再补
+	set_variable = { house_socialism_seats_new = 432 }
+	set_variable = { house_progressivism_seats_new = 432 }
+	set_variable = { house_liberalism_seats_new = 432 }
+	set_variable = { house_conservatism_seats_new = 432 }
+	set_variable = { house_authoritarianism_seats_new = 432 }
+	set_variable = { house_fascism_seats_new = 432 }
+
+	multiply_variable = { house_communism_seats_new = CLB.party_popularity@communism }
+	multiply_variable = { house_socialism_seats_new = CLB.party_popularity@socialism }
+	multiply_variable = { house_progressivism_seats_new = CLB.party_popularity@progressivism }
+	multiply_variable = { house_liberalism_seats_new = CLB.party_popularity@liberalism }
+	multiply_variable = { house_conservatism_seats_new = CLB.party_popularity@conservatism }
+	multiply_variable = { house_authoritarianism_seats_new = CLB.party_popularity@authoritarianism }
+	multiply_variable = { house_fascism_seats_new = CLB.party_popularity@fascism }
+
+	round_variable = house_communism_seats_new
+	round_variable = house_socialism_seats_new
+	round_variable = house_progressivism_seats_new
+	round_variable = house_liberalism_seats_new
+	round_variable = house_conservatism_seats_new
+	round_variable = house_authoritarianism_seats_new
+	round_variable = house_fascism_seats_new
+
+	set_variable = { house_sum_seats_new = house_communism_seats_new }
+	add_to_variable = { house_sum_seats_new = house_socialism_seats_new }
+	add_to_variable = { house_sum_seats_new = house_progressivism_seats_new }
+	add_to_variable = { house_sum_seats_new = house_liberalism_seats_new }
+	add_to_variable = { house_sum_seats_new = house_conservatism_seats_new }
+	add_to_variable = { house_sum_seats_new = house_authoritarianism_seats_new }
+	add_to_variable = { house_sum_seats_new = house_fascism_seats_new }
+
+	set_variable = { house_seats_left = 435 }
+	subtract_from_variable = { house_seats_left = house_sum_seats_new }
+
+	for_loop_effect = {
+		end = house_seats_left
+		random_list = {
+			house_communism_seats_new = {
+				add_to_variable = { house_communism_seats_new = 1 }
+			}
+			house_socialism_seats_new = {
+				add_to_variable = { house_socialism_seats_new = 1 }
+			}
+			house_progressivism_seats_new = {
+				add_to_variable = { house_progressivism_seats_new = 1 }
+			}
+			house_liberalism_seats_new = {
+				add_to_variable = { house_liberalism_seats_new = 1 }
+			}
+			house_conservatism_seats_new = {
+				add_to_variable = { house_conservatism_seats_new = 1 }
+			}
+			house_authoritarianism_seats_new = {
+				add_to_variable = { house_authoritarianism_seats_new = 1 }
+			}
+			house_fascism_seats_new = {
+				add_to_variable = { house_fascism_seats_new = 1 }
+			}
+		}
+	}
+}
+
+CLB_house_seats_change = {
+	set_variable = { house_communism_seats = house_communism_seats_new }
+	set_variable = { house_socialism_seats = house_socialism_seats_new  }
+	set_variable = { house_progressivism_seats = house_progressivism_seats_new  }
+	set_variable = { house_liberalism_seats = house_liberalism_seats_new  }
+	set_variable = { house_conservatism_seats = house_conservatism_seats_new  }
+	set_variable = { house_authoritarianism_seats = house_authoritarianism_seats_new  }
+	set_variable = { house_fascism_seats = house_fascism_seats_new  }
+}
+
+CLB_senate_election_1 = {
+	set_variable = { senate_communism_seats_new_1 = 30 }
+	set_variable = { senate_socialism_seats_new_1 = 30 }
+	set_variable = { senate_progressivism_seats_new_1 = 30 }
+	set_variable = { senate_liberalism_seats_new_1 = 30 }
+	set_variable = { senate_conservatism_seats_new_1 = 30 }
+	set_variable = { senate_authoritarianism_seats_new_1 = 30 }
+	set_variable = { senate_fascism_seats_new_1 = 30 }
+
+	multiply_variable = { senate_communism_seats_new_1 = CLB.party_popularity@communism }
+	multiply_variable = { senate_socialism_seats_new_1 = CLB.party_popularity@socialism }
+	multiply_variable = { senate_progressivism_seats_new_1 = CLB.party_popularity@progressivism }
+	multiply_variable = { senate_liberalism_seats_new_1 = CLB.party_popularity@liberalism }
+	multiply_variable = { senate_conservatism_seats_new_1 = CLB.party_popularity@conservatism }
+	multiply_variable = { senate_authoritarianism_seats_new_1 = CLB.party_popularity@authoritarianism }
+	multiply_variable = { senate_fascism_seats_new_1 = CLB.party_popularity@fascism }
+
+	round_variable = senate_communism_seats_new_1
+	round_variable = senate_socialism_seats_new_1
+	round_variable = senate_progressivism_seats_new_1
+	round_variable = senate_liberalism_seats_new_1
+	round_variable = senate_conservatism_seats_new_1
+	round_variable = senate_authoritarianism_seats_new_1
+	round_variable = senate_fascism_seats_new_1
+
+	set_variable = { senate_sum_seats_new_1 = senate_communism_seats_new_1 }
+	add_to_variable = { senate_sum_seats_new_1 = senate_socialism_seats_new_1 }
+	add_to_variable = { senate_sum_seats_new_1 = senate_progressivism_seats_new_1 }
+	add_to_variable = { senate_sum_seats_new_1 = senate_liberalism_seats_new_1 }
+	add_to_variable = { senate_sum_seats_new_1 = senate_conservatism_seats_new_1 }
+	add_to_variable = { senate_sum_seats_new_1 = senate_authoritarianism_seats_new_1 }
+	add_to_variable = { senate_sum_seats_new_1 = senate_fascism_seats_new_1 }
+
+	set_variable = { senate_seats_new_1_left = 33 }
+	subtract_from_variable = { senate_seats_new_1_left = senate_sum_seats_new_1 }
+
+	for_loop_effect = {
+		end = senate_seats_new_1_left
+		random_list = {
+			senate_communism_seats_new_1 = {
+				add_to_variable = { senate_communism_seats_new_1 = 1 }
+			}
+			senate_socialism_seats_new_1 = {
+				add_to_variable = { senate_socialism_seats_new_1 = 1 }
+			}
+			senate_progressivism_seats_new_1 = {
+				add_to_variable = { senate_progressivism_seats_new_1 = 1 }
+			}
+			senate_liberalism_seats_new_1 = {
+				add_to_variable = { senate_liberalism_seats_new_1 = 1 }
+			}
+			senate_conservatism_seats_new_1 = {
+				add_to_variable = { senate_conservatism_seats_new_1 = 1 }
+			}
+			senate_authoritarianism_seats_new_1 = {
+				add_to_variable = { senate_authoritarianism_seats_new_1 = 1 }
+			}
+			senate_fascism_seats_new_1 = {
+				add_to_variable = { senate_fascism_seats_new_1 = 1 }
+			}
+		}
+	}
+}
+
+CLB_senate_seats_change_1 = {
+	set_variable = { senate_communism_seats_1 = senate_communism_seats_new_1 }
+	set_variable = { senate_socialism_seats_1 = senate_socialism_seats_new_1 }
+	set_variable = { senate_progressivism_seats_1 = senate_progressivism_seats_new_1 }
+	set_variable = { senate_liberalism_seats_1 = senate_liberalism_seats_new_1 }
+	set_variable = { senate_conservatism_seats_1 = senate_conservatism_seats_new_1 }
+	set_variable = { senate_authoritarianism_seats_1 = senate_authoritarianism_seats_new_1 }
+	set_variable = { senate_fascism_seats_1 = senate_fascism_seats_new_1 }
+}
+
+CLB_senate_election_2 = {
+	set_variable = { senate_communism_seats_new_2 = 30 }
+	set_variable = { senate_socialism_seats_new_2 = 30 }
+	set_variable = { senate_progressivism_seats_new_2 = 30 }
+	set_variable = { senate_liberalism_seats_new_2 = 30 }
+	set_variable = { senate_conservatism_seats_new_2 = 30 }
+	set_variable = { senate_authoritarianism_seats_new_2 = 30 }
+	set_variable = { senate_fascism_seats_new_2 = 30 }
+
+	multiply_variable = { senate_communism_seats_new_2 = CLB.party_popularity@communism }
+	multiply_variable = { senate_socialism_seats_new_2 = CLB.party_popularity@socialism }
+	multiply_variable = { senate_progressivism_seats_new_2 = CLB.party_popularity@progressivism }
+	multiply_variable = { senate_liberalism_seats_new_2 = CLB.party_popularity@liberalism }
+	multiply_variable = { senate_conservatism_seats_new_2 = CLB.party_popularity@conservatism }
+	multiply_variable = { senate_authoritarianism_seats_new_2 = CLB.party_popularity@authoritarianism }
+	multiply_variable = { senate_fascism_seats_new_2 = CLB.party_popularity@fascism }
+
+	round_variable = senate_communism_seats_new_2
+	round_variable = senate_socialism_seats_new_2
+	round_variable = senate_progressivism_seats_new_2
+	round_variable = senate_liberalism_seats_new_2
+	round_variable = senate_conservatism_seats_new_2
+	round_variable = senate_authoritarianism_seats_new_2
+	round_variable = senate_fascism_seats_new_2
+
+	set_variable = { senate_sum_seats_new_2 = senate_communism_seats_new_2 }
+	add_to_variable = { senate_sum_seats_new_2 = senate_socialism_seats_new_2 }
+	add_to_variable = { senate_sum_seats_new_2 = senate_progressivism_seats_new_2 }
+	add_to_variable = { senate_sum_seats_new_2 = senate_liberalism_seats_new_2 }
+	add_to_variable = { senate_sum_seats_new_2 = senate_conservatism_seats_new_2 }
+	add_to_variable = { senate_sum_seats_new_2 = senate_authoritarianism_seats_new_2 }
+	add_to_variable = { senate_sum_seats_new_2 = senate_fascism_seats_new_2 }
+
+	set_variable = { senate_seats_new_2_left = 33 }
+	subtract_from_variable = { senate_seats_new_2_left = senate_sum_seats_new_2 }
+
+	for_loop_effect = {
+		end = senate_seats_new_2_left
+		random_list = {
+			senate_communism_seats_new_2 = {
+				add_to_variable = { senate_communism_seats_new_2 = 1 }
+			}
+			senate_socialism_seats_new_2 = {
+				add_to_variable = { senate_socialism_seats_new_2 = 1 }
+			}
+			senate_progressivism_seats_new_2 = {
+				add_to_variable = { senate_progressivism_seats_new_2 = 1 }
+			}
+			senate_liberalism_seats_new_2 = {
+				add_to_variable = { senate_liberalism_seats_new_2 = 1 }
+			}
+			senate_conservatism_seats_new_2 = {
+				add_to_variable = { senate_conservatism_seats_new_2 = 1 }
+			}
+			senate_authoritarianism_seats_new_2 = {
+				add_to_variable = { senate_authoritarianism_seats_new_2 = 1 }
+			}
+			senate_fascism_seats_new_2 = {
+				add_to_variable = { senate_fascism_seats_new_2 = 1 }
+			}
+		}
+	}
+}
+
+CLB_senate_seats_change_2 = {
+	set_variable = { senate_communism_seats_2 = senate_communism_seats_new_2 }
+	set_variable = { senate_socialism_seats_2 = senate_socialism_seats_new_2 }
+	set_variable = { senate_progressivism_seats_2 = senate_progressivism_seats_new_2 }
+	set_variable = { senate_liberalism_seats_2 = senate_liberalism_seats_new_2 }
+	set_variable = { senate_conservatism_seats_2 = senate_conservatism_seats_new_2 }
+	set_variable = { senate_authoritarianism_seats_2 = senate_authoritarianism_seats_new_2 }
+	set_variable = { senate_fascism_seats_2 = senate_fascism_seats_new_2 }
+}
+
+CLB_senate_election_3 = {
+	set_variable = { senate_communism_seats_new_3 = 31 }
+	set_variable = { senate_socialism_seats_new_3 = 31 }
+	set_variable = { senate_progressivism_seats_new_3 = 31 }
+	set_variable = { senate_liberalism_seats_new_3 = 31 }
+	set_variable = { senate_conservatism_seats_new_3 = 31 }
+	set_variable = { senate_authoritarianism_seats_new_3 = 31 }
+	set_variable = { senate_fascism_seats_new_3 = 31 }
+
+	multiply_variable = { senate_communism_seats_new_3 = CLB.party_popularity@communism }
+	multiply_variable = { senate_socialism_seats_new_3 = CLB.party_popularity@socialism }
+	multiply_variable = { senate_progressivism_seats_new_3 = CLB.party_popularity@progressivism }
+	multiply_variable = { senate_liberalism_seats_new_3 = CLB.party_popularity@liberalism }
+	multiply_variable = { senate_conservatism_seats_new_3 = CLB.party_popularity@conservatism }
+	multiply_variable = { senate_authoritarianism_seats_new_3 = CLB.party_popularity@authoritarianism }
+	multiply_variable = { senate_fascism_seats_new_3 = CLB.party_popularity@fascism }
+
+	round_variable = senate_communism_seats_new_3
+	round_variable = senate_socialism_seats_new_3
+	round_variable = senate_progressivism_seats_new_3
+	round_variable = senate_liberalism_seats_new_3
+	round_variable = senate_conservatism_seats_new_3
+	round_variable = senate_authoritarianism_seats_new_3
+	round_variable = senate_fascism_seats_new_3
+
+	set_variable = { senate_sum_seats_new_3 = senate_communism_seats_new_3 }
+	add_to_variable = { senate_sum_seats_new_3 = senate_socialism_seats_new_3 }
+	add_to_variable = { senate_sum_seats_new_3 = senate_progressivism_seats_new_3 }
+	add_to_variable = { senate_sum_seats_new_3 = senate_liberalism_seats_new_3 }
+	add_to_variable = { senate_sum_seats_new_3 = senate_conservatism_seats_new_3 }
+	add_to_variable = { senate_sum_seats_new_3 = senate_authoritarianism_seats_new_3 }
+	add_to_variable = { senate_sum_seats_new_3 = senate_fascism_seats_new_3 }
+
+	set_variable = { senate_seats_new_3_left = 34 }
+	subtract_from_variable = { senate_seats_new_3_left = senate_sum_seats_new_3 }
+
+	for_loop_effect = {
+		end = senate_seats_new_3_left
+		random_list = {
+			senate_communism_seats_new_3 = {
+				add_to_variable = { senate_communism_seats_new_3 = 1 }
+			}
+			senate_socialism_seats_new_3 = {
+				add_to_variable = { senate_socialism_seats_new_3 = 1 }
+			}
+			senate_progressivism_seats_new_3 = {
+				add_to_variable = { senate_progressivism_seats_new_3 = 1 }
+			}
+			senate_liberalism_seats_new_3 = {
+				add_to_variable = { senate_liberalism_seats_new_3 = 1 }
+			}
+			senate_conservatism_seats_new_3 = {
+				add_to_variable = { senate_conservatism_seats_new_3 = 1 }
+			}
+			senate_authoritarianism_seats_new_3 = {
+				add_to_variable = { senate_authoritarianism_seats_new_3 = 1 }
+			}
+			senate_fascism_seats_new_3 = {
+				add_to_variable = { senate_fascism_seats_new_3 = 1 }
+			}
+		}
+	}
+}
+
+CLB_senate_seats_change_3 = {
+	set_variable = { senate_communism_seats_3 = senate_communism_seats_new_3 }
+	set_variable = { senate_socialism_seats_3 = senate_socialism_seats_new_3 }
+	set_variable = { senate_progressivism_seats_3 = senate_progressivism_seats_new_3 }
+	set_variable = { senate_liberalism_seats_3 = senate_liberalism_seats_new_3 }
+	set_variable = { senate_conservatism_seats_3 = senate_conservatism_seats_new_3 }
+	set_variable = { senate_authoritarianism_seats_3 = senate_authoritarianism_seats_new_3 }
+	set_variable = { senate_fascism_seats_3 = senate_fascism_seats_new_3 }
+}
+
+CLB_senate_reload = {
+	set_variable = { senate_communism_seats = senate_communism_seats_1 }
+	add_to_variable = { senate_communism_seats = senate_communism_seats_2 }
+	add_to_variable = { senate_communism_seats = senate_communism_seats_3 }
+	set_variable = { senate_socialism_seats = senate_socialism_seats_1 }
+	add_to_variable = { senate_socialism_seats = senate_socialism_seats_2 }
+	add_to_variable = { senate_socialism_seats = senate_socialism_seats_3 }
+	set_variable = { senate_progressivism_seats = senate_progressivism_seats_1 }
+	add_to_variable = { senate_progressivism_seats = senate_progressivism_seats_2 }
+	add_to_variable = { senate_progressivism_seats = senate_progressivism_seats_3 }
+	set_variable = { senate_liberalism_seats = senate_liberalism_seats_1 }
+	add_to_variable = { senate_liberalism_seats = senate_liberalism_seats_2 }
+	add_to_variable = { senate_liberalism_seats = senate_liberalism_seats_3 }
+	set_variable = { senate_conservatism_seats = senate_conservatism_seats_1 }
+	add_to_variable = { senate_conservatism_seats = senate_conservatism_seats_2 }
+	add_to_variable = { senate_conservatism_seats = senate_conservatism_seats_3 }
+	set_variable = { senate_authoritarianism_seats = senate_authoritarianism_seats_1 }
+	add_to_variable = { senate_authoritarianism_seats = senate_authoritarianism_seats_2 }
+	add_to_variable = { senate_authoritarianism_seats = senate_authoritarianism_seats_3 }
+	set_variable = { senate_fascism_seats = senate_fascism_seats_1 }
+	add_to_variable = { senate_fascism_seats = senate_fascism_seats_2 }
+	add_to_variable = { senate_fascism_seats = senate_fascism_seats_3 }
+}
+
+CLB_bill_pass_or_not = {
+	if = {
+		limit = {
+			check_variable = { house_votes > 217 }
+			check_variable = { senate_votes > 59 }
+		}
+		CLB_bill_pass = yes
+	}
+	else_if = {
+		limit = {
+			OR = {
+				check_variable = { house_votes < 218 }
+				check_variable = { senate_votes < 51 }
+			}
+		}
+		#CLB_bill_not_pass = yes
+		#法案不通过，没想好有什么效果
+	}
+	else_if = {
+		limit = {
+			house_votes > 217
+			check_variable = { house_votes > 217 }
+			check_variable = { senate_votes < 60 }
+			OR = {
+				AND = {
+					communism > 0.15
+					check_variable = { support_bill_communism < 0.1 }
+				}
+				AND = {
+					socialism > 0.15
+					check_variable = { support_bill_socialism < 0.1 }
+				}
+				AND = {
+					progressivism > 0.15
+					check_variable = { support_bill_progressivism < 0.1 }
+				}
+				AND = {
+					liberalism > 0.15
+					check_variable = { support_bill_liberalism < 0.1 }
+				}
+				AND = {
+					conservatism > 0.15
+					check_variable = { support_bill_conservatism < 0.1 }
+				}
+				AND = {
+					authoritarianism > 0.15
+					check_variable = { support_bill_authoritarianism < 0.1 }
+				}
+				AND = {
+					fascism > 0.15
+					check_variable = { support_bill_fascism < 0.1 }
+				}
+			}
+		}
+		activate_mission = CLB_filibuster
+	}
+}
+
+CLB_bill_pass = {
+	if = {
+		limit = {
+			has_country_flag = CLB_bill_BILLNAMETEXT
+		}
+		add_ideas = CLB_bill_BILLNAMETEXT
+	}
+}
+
+CLB_bill_BILLNAMETEXT_on_start = { #开局存储对应法案的各党支持度
+	set_variable = { support_BILLNAMETEXT_communism = 0.1 }
+	set_variable = { support_BILLNAMETEXT_socialism = 0.1 }
+	set_variable = { support_BILLNAMETEXT_progressivism = 0.1 }
+	set_variable = { support_BILLNAMETEXT_liberalism = 0.1 }
+	set_variable = { support_BILLNAMETEXT_conservatism = 0.1 }
+	set_variable = { support_BILLNAMETEXT_authoritarianism = 0.1 }
+	set_variable = { support_BILLNAMETEXT_fascism = 0.1 }
+}
+
+CLB_bill_BILLNAMETEXT = { #BILLNAMETEXT替换成法案名
+	set_variable = { support_bill_communism = support_BILLNAMETEXT_communism }
+	set_variable = { support_bill_socialism = support_BILLNAMETEXT_socialism }
+	set_variable = { support_bill_progressivism = support_BILLNAMETEXT_progressivism }
+	set_variable = { support_bill_liberalism = support_BILLNAMETEXT_liberalism }
+	set_variable = { support_bill_conservatism = support_BILLNAMETEXT_conservatism }
+	set_variable = { support_bill_authoritarianism = support_BILLNAMETEXT_authoritarianism }
+	set_variable = { support_bill_fascism = support_BILLNAMETEXT_fascism }
+
+	set_country_flag = CLB_bill_BILLNAMETEXT
+}
+
+CLB_bill_BILLNAMETEXT_storage = {
+	set_variable = { support_BILLNAMETEXT_communism = support_bill_communism }
+	set_variable = { support_BILLNAMETEXT_socialism = support_bill_socialism }
+	set_variable = { support_BILLNAMETEXT_progressivism = support_bill_progressivism }
+	set_variable = { support_BILLNAMETEXT_liberalism = support_bill_liberalism }
+	set_variable = { support_BILLNAMETEXT_conservatism = support_bill_conservatism }
+	set_variable = { support_BILLNAMETEXT_authoritarianism = support_bill_authoritarianism }
+	set_variable = { support_BILLNAMETEXT_fascism = support_bill_fascism }
+	
+	clr_country_flag = CLB_bill_BILLNAMETEXT
+}

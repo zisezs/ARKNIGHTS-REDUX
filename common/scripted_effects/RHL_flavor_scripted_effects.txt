@@ -1,0 +1,250 @@
+# 莱茵生命（RHL）· 总部趣味事件月度调度
+# 由 common/on_actions/RHL_flavor_on_actions.txt 每月调用。
+# 规则：
+#   1. 每 60 天最多尝试一次；
+#   2. 40 个事件加权随机抽取，已发生过的不再进入奖池；
+#   3. 全部触发完毕后不再抽签。
+# 适用：original_tag = RHL，或走「企业国 · 莱茵生命十科」路线的 CLB。
+
+RHL_flavor_monthly = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = rhl_flavor_cooldown }
+			OR = {
+				original_tag = RHL
+				AND = {
+					original_tag = CLB
+					has_country_flag = CLB_flag_td_active
+				}
+			}
+			NOT = { has_country_flag = rhl_flavor_all_done }
+		}
+		set_country_flag = { flag = rhl_flavor_cooldown days = 60 value = 1 }
+		random_list = {
+			# ── 生态科 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev1_done } }
+				country_event = { id = rhl_flavor.1 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev2_done } }
+				country_event = { id = rhl_flavor.2 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev33_done } }
+				country_event = { id = rhl_flavor.33 days = 1 }
+			}
+			# ── 能量科 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev4_done } }
+				country_event = { id = rhl_flavor.4 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev5_done } }
+				country_event = { id = rhl_flavor.5 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev27_done } }
+				country_event = { id = rhl_flavor.27 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev29_done } }
+				country_event = { id = rhl_flavor.29 days = 1 }
+			}
+			# ── 源石技艺应用科 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev6_done } }
+				country_event = { id = rhl_flavor.6 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev7_done } }
+				country_event = { id = rhl_flavor.7 days = 1 }
+			}
+			# ── 结构科 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev8_done } }
+				country_event = { id = rhl_flavor.8 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev9_done } }
+				country_event = { id = rhl_flavor.9 days = 1 }
+			}
+			# ── 工程科 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev3_done } }
+				country_event = { id = rhl_flavor.3 days = 1 }
+			}
+			# ── 防卫科 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev10_done } }
+				country_event = { id = rhl_flavor.10 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev11_done } }
+				country_event = { id = rhl_flavor.11 days = 1 }
+			}
+			1 = {
+				trigger = {
+					NOT = { has_country_flag = rhl_flavor_ev30_done }
+				}
+				country_event = { id = rhl_flavor.30 days = 1 }
+			}
+			# ── 商务科 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev12_done } }
+				country_event = { id = rhl_flavor.12 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev13_done } }
+				country_event = { id = rhl_flavor.13 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev37_done } }
+				country_event = { id = rhl_flavor.37 days = 1 }
+			}
+			# ── 人事科 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev14_done } }
+				country_event = { id = rhl_flavor.14 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev15_done } }
+				country_event = { id = rhl_flavor.15 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev26_done } }
+				country_event = { id = rhl_flavor.26 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev38_done } }
+				country_event = { id = rhl_flavor.38 days = 1 }
+			}
+			# ── 科考科 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev16_done } }
+				country_event = { id = rhl_flavor.16 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev17_done } }
+				country_event = { id = rhl_flavor.17 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev40_done } }
+				country_event = { id = rhl_flavor.40 days = 1 }
+			}
+			# ── 总辖厅 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev18_done } }
+				country_event = { id = rhl_flavor.18 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev19_done } }
+				country_event = { id = rhl_flavor.19 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev20_done } }
+				country_event = { id = rhl_flavor.20 days = 1 }
+			}
+			# ── 特聘与客串 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev21_done } }
+				country_event = { id = rhl_flavor.21 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev22_done } }
+				country_event = { id = rhl_flavor.22 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev23_done } }
+				country_event = { id = rhl_flavor.23 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev24_done } }
+				country_event = { id = rhl_flavor.24 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev25_done } }
+				country_event = { id = rhl_flavor.25 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev28_done } }
+				country_event = { id = rhl_flavor.28 days = 1 }
+			}
+			# ── 全员事件 ──
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev31_done } }
+				country_event = { id = rhl_flavor.31 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev32_done } }
+				country_event = { id = rhl_flavor.32 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev34_done } }
+				country_event = { id = rhl_flavor.34 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev35_done } }
+				country_event = { id = rhl_flavor.35 days = 1 }
+			}
+			1 = {
+				trigger = { NOT = { has_country_flag = rhl_flavor_ev36_done } }
+				country_event = { id = rhl_flavor.36 days = 1 }
+			}
+			# ── 战时限定（无战事时自然落空） ──
+			3 = {
+				trigger = {
+					has_war = yes
+					NOT = { has_country_flag = rhl_flavor_ev39_done }
+				}
+				country_event = { id = rhl_flavor.39 days = 1 }
+			}
+		}
+		# 记账：已全部发生过的事件计数（供维护排查，不影响逻辑）
+		if = {
+			limit = {
+				has_country_flag = rhl_flavor_ev1_done
+				has_country_flag = rhl_flavor_ev2_done
+				has_country_flag = rhl_flavor_ev3_done
+				has_country_flag = rhl_flavor_ev4_done
+				has_country_flag = rhl_flavor_ev5_done
+				has_country_flag = rhl_flavor_ev6_done
+				has_country_flag = rhl_flavor_ev7_done
+				has_country_flag = rhl_flavor_ev8_done
+				has_country_flag = rhl_flavor_ev9_done
+				has_country_flag = rhl_flavor_ev10_done
+				has_country_flag = rhl_flavor_ev11_done
+				has_country_flag = rhl_flavor_ev12_done
+				has_country_flag = rhl_flavor_ev13_done
+				has_country_flag = rhl_flavor_ev14_done
+				has_country_flag = rhl_flavor_ev15_done
+				has_country_flag = rhl_flavor_ev16_done
+				has_country_flag = rhl_flavor_ev17_done
+				has_country_flag = rhl_flavor_ev18_done
+				has_country_flag = rhl_flavor_ev19_done
+				has_country_flag = rhl_flavor_ev20_done
+				has_country_flag = rhl_flavor_ev21_done
+				has_country_flag = rhl_flavor_ev22_done
+				has_country_flag = rhl_flavor_ev23_done
+				has_country_flag = rhl_flavor_ev24_done
+				has_country_flag = rhl_flavor_ev25_done
+				has_country_flag = rhl_flavor_ev26_done
+				has_country_flag = rhl_flavor_ev27_done
+				has_country_flag = rhl_flavor_ev28_done
+				has_country_flag = rhl_flavor_ev29_done
+				has_country_flag = rhl_flavor_ev30_done
+				has_country_flag = rhl_flavor_ev31_done
+				has_country_flag = rhl_flavor_ev32_done
+				has_country_flag = rhl_flavor_ev33_done
+				has_country_flag = rhl_flavor_ev34_done
+				has_country_flag = rhl_flavor_ev35_done
+				has_country_flag = rhl_flavor_ev36_done
+				has_country_flag = rhl_flavor_ev37_done
+				has_country_flag = rhl_flavor_ev38_done
+				has_country_flag = rhl_flavor_ev39_done
+				has_country_flag = rhl_flavor_ev40_done
+			}
+			set_country_flag = rhl_flavor_all_done
+		}
+	}
+}

@@ -1,0 +1,99 @@
+#根据地建设
+REU_base_construction_decisions = {
+	icon = GFX_decision_category_SOV_merge_designers
+	picture = GFX_decision_cat_picture_REU_base_construction_decisions
+	allowed = {
+		original_tag = REU
+	}
+	visible = {
+		has_country_flag = REU_base_construction
+	}
+	visible_when_empty = yes
+	scripted_gui = REU_base_construction_decisions
+	priority = 4
+}
+
+#渗透行动
+REU_infiltration_decisions = {
+	icon = GFX_decision_category_border_war
+	allowed = {
+		original_tag = REU
+	}
+	visible = {
+		any_other_country = {
+			ursus_area_country = yes
+			exists = yes
+		}
+	}
+	visible_when_empty = yes
+	priority = 2
+}
+
+#乌萨斯其他势力反渗透
+NOT_REU_counter_infiltration = {
+	icon = GFX_decision_category_border_war
+	allowed = {
+		OR = {
+			original_tag = URS
+			original_tag = KMG
+			original_tag = UFE
+		}
+	}
+	visible = {
+		has_country_flag = NOT_REU_counter_infiltration
+	}
+	visible_when_empty = yes
+	priority = 2
+}
+
+#宣传部
+REU_propaganda_decisions = {
+
+	icon = GFX_decision_category_SOV_propaganda
+
+	allowed = {
+		original_tag = REU
+	}
+	visible = {
+		has_country_flag = REU_first_Soviets_Congress_flag
+	}
+
+	priority = 3
+}
+
+#调试决议
+REU_test_Decisions_GUI = {
+
+	icon = GFX_REU_decision_category_test
+
+	allowed = {
+		original_tag = REU
+	}
+	visible = {
+		is_debug = yes
+		is_ai = no
+	}
+	visible_when_empty = yes
+	priority = 1
+}
+
+#杂项决议
+REU_misc_decisions = {
+
+	icon = GFX_REU_decision_category_test
+
+	allowed = {
+		original_tag = REU
+		not = {
+			has_country_flag = REU_misc_decisions_hidden_flag
+		}
+	}
+	visible = {
+		is_ai = no
+		not = {
+			has_country_flag = REU_misc_decisions_hidden_flag
+		}
+	}
+	visible_when_empty = yes
+	priority = 1
+}

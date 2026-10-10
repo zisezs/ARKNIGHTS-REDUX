@@ -1,0 +1,306 @@
+# ══════════════════════════════════════════════════════════════════════
+#  【克丽斯腾归来！】配套事件 rhl_kr.1 ~ rhl_kr.18
+#  【由 docs/gen_rhl_kristen.cjs 生成，勿手改】文案真源 docs/rhl_kristen_data.cjs
+#  一格一条 is_triggered_only 的 country_event；不写 major = yes
+#  （那会把事件发给所有大国、并在各自作用域里跑一遍选项）。
+#  标题直接复用国策名键；每个选项都显式写 name —— 不写的话第 4 个选项会自动
+#  叫 <id>.d，跟 desc 抢同一个本地化键。
+# ══════════════════════════════════════════════════════════════════════
+add_namespace = rhl_kr
+
+country_event = {
+	id = rhl_kr.1
+	title = RHL_kr_plan_dead
+	desc = rhl_kr.1.d
+	picture = GFX_report_event_Generic_Lungmen_Office
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.1.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.2
+	title = RHL_kr_vanished
+	desc = rhl_kr.2.d
+	picture = GFX_report_event_Generic_Courthouse
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.2.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.3
+	title = RHL_kr_shame
+	desc = rhl_kr.3.d
+	picture = GFX_RHL_rocket_news_fail
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.3.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.4
+	title = RHL_kr_drawings
+	desc = rhl_kr.4.d
+	picture = GFX_RHL_rocket_news_fail
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.4.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.5
+	title = RHL_kr_persuade
+	desc = rhl_kr.5.d
+	picture = GFX_report_event_Generic_Lungmen_Office
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.5.a
+		custom_effect_tooltip = RHL_kr_vtt_pp_p05
+		hidden_effect = {
+			add_to_variable = { RHL_kr_pp = 0.05 }
+		}
+	}
+
+	option = {
+		name = rhl_kr.5.b
+		custom_effect_tooltip = RHL_kr_vtt_arms_p05
+		custom_effect_tooltip = RHL_kr_vtt_ind_p05
+		hidden_effect = {
+			add_to_variable = { RHL_kr_arms = 0.05 }
+			add_to_variable = { RHL_kr_ind = 0.05 }
+		}
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.6
+	title = RHL_kr_silence
+	desc = rhl_kr.6.d
+	picture = GFX_report_event_Generic_Courthouse
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.6.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.7
+	title = RHL_kr_nominate
+	desc = rhl_kr.7.d
+	picture = GFX_RHL_rocket_news_success
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.7.a
+		custom_effect_tooltip = RHL_kr_vtt_pp_p05
+		custom_effect_tooltip = RHL_kr_vtt_stab_p05
+		hidden_effect = {
+			add_to_variable = { RHL_kr_pp = 0.05 }
+			add_to_variable = { RHL_kr_stab = 0.05 }
+		}
+		RHL_kr_make_chancellor = yes
+	}
+
+	option = {
+		name = rhl_kr.7.b
+		custom_effect_tooltip = RHL_kr_vtt_research_p05
+		custom_effect_tooltip = RHL_kr_vtt_ws_p05
+		hidden_effect = {
+			add_to_variable = { RHL_kr_research = 0.05 }
+			add_to_variable = { RHL_kr_ws = 0.05 }
+		}
+		RHL_kr_make_chancellor = yes
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.8
+	title = RHL_kr_reclaim
+	desc = rhl_kr.8.d
+	picture = GFX_RHL_rocket_news_success
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.8.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.9
+	title = RHL_kr_reopen_construct
+	desc = rhl_kr.9.d
+	picture = GFX_RHL_rocket_news_success
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.9.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.10
+	title = RHL_kr_nation_power
+	desc = rhl_kr.10.d
+	picture = GFX_RHL_rocket_news_success
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.10.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.11
+	title = RHL_kr_external_power
+	desc = rhl_kr.11.d
+	picture = GFX_RHL_rocket_news_success
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.11.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.12
+	title = RHL_kr_testsite
+	desc = rhl_kr.12.d
+	picture = GFX_RHL_rocket_news_fail
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.12.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.13
+	title = RHL_kr_full_burn
+	desc = rhl_kr.13.d
+	picture = GFX_RHL_rocket_news_fail
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.13.a
+		custom_effect_tooltip = RHL_kr_vtt_research_p05
+		hidden_effect = {
+			add_to_variable = { RHL_kr_research = 0.05 }
+		}
+	}
+
+	option = {
+		name = rhl_kr.13.b
+		custom_effect_tooltip = RHL_kr_vtt_stab_p05
+		custom_effect_tooltip = RHL_kr_vtt_pp_p05
+		hidden_effect = {
+			add_to_variable = { RHL_kr_stab = 0.05 }
+			add_to_variable = { RHL_kr_pp = 0.05 }
+		}
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.14
+	title = RHL_kr_seven_fifty_three
+	desc = rhl_kr.14.d
+	picture = GFX_RHL_rocket_news_success
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.14.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.15
+	title = RHL_kr_low_flight
+	desc = rhl_kr.15.d
+	picture = GFX_RHL_rocket_news_success
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.15.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.16
+	title = RHL_kr_knock_shell
+	desc = rhl_kr.16.d
+	picture = GFX_RHL_rocket_news_fail
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.16.a
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.17
+	title = RHL_kr_breach
+	desc = rhl_kr.17.d
+	picture = GFX_RHL_rocket_news_success
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.17.a
+		custom_effect_tooltip = RHL_kr_vtt_research_p05
+		custom_effect_tooltip = RHL_kr_vtt_air_p05
+		hidden_effect = {
+			add_to_variable = { RHL_kr_research = 0.05 }
+			add_to_variable = { RHL_kr_air = 0.05 }
+		}
+	}
+
+	option = {
+		name = rhl_kr.17.b
+		custom_effect_tooltip = RHL_kr_vtt_stab_p05
+		custom_effect_tooltip = RHL_kr_vtt_ind_p05
+		hidden_effect = {
+			add_to_variable = { RHL_kr_stab = 0.05 }
+			add_to_variable = { RHL_kr_ind = 0.05 }
+		}
+	}
+
+}
+
+country_event = {
+	id = rhl_kr.18
+	title = RHL_kr_one_grain
+	desc = rhl_kr.18.d
+	picture = GFX_RHL_rocket_news_success
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_kr.18.a
+	}
+
+}
+

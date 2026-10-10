@@ -1,0 +1,121 @@
+# 大炎军事国策树 · 军种精神刷新（八档累加）
+# 生成器：docs/_yan_mil_build.py（数据表在 docs/_yan_mil_spirits.py）
+#
+# 每个本军种国策完成时：add_to_variable { YAN_mil_<svc>_tier } 加 1，
+# 然后调用对应 refresh —— 先清掉全部 8 档，再按变量值补上当前档。
+# 因此与点击顺序无关：任一顺序点满 8 个该军种国策，终态档位一致。
+#
+# ⚠ 整体包在 hidden_effect 里：remove_ideas 会把 8 个档位**逐条**生成
+#   「失去民族精神…」tooltip（哪怕其中 7 个并不存在），在国策提示里刷屏。
+#   国策侧的效果说明由各自 completion_reward 的 custom_effect_tooltip 承担。
+
+YAN_mil_refresh_army = {
+	hidden_effect = {
+		remove_ideas = { YAN_mil_service_army_1 YAN_mil_service_army_2 YAN_mil_service_army_3 YAN_mil_service_army_4 YAN_mil_service_army_5 YAN_mil_service_army_6 YAN_mil_service_army_7 YAN_mil_service_army_8 }
+		if = {
+			limit = { check_variable = { YAN_mil_army_tier > 7 } }
+			add_ideas = YAN_mil_service_army_8
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_army_tier > 6 } }
+			add_ideas = YAN_mil_service_army_7
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_army_tier > 5 } }
+			add_ideas = YAN_mil_service_army_6
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_army_tier > 4 } }
+			add_ideas = YAN_mil_service_army_5
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_army_tier > 3 } }
+			add_ideas = YAN_mil_service_army_4
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_army_tier > 2 } }
+			add_ideas = YAN_mil_service_army_3
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_army_tier > 1 } }
+			add_ideas = YAN_mil_service_army_2
+		}
+		else = {
+			add_ideas = YAN_mil_service_army_1
+		}
+	}
+}
+
+YAN_mil_refresh_air = {
+	hidden_effect = {
+		remove_ideas = { YAN_mil_service_air_1 YAN_mil_service_air_2 YAN_mil_service_air_3 YAN_mil_service_air_4 YAN_mil_service_air_5 YAN_mil_service_air_6 YAN_mil_service_air_7 YAN_mil_service_air_8 }
+		if = {
+			limit = { check_variable = { YAN_mil_air_tier > 7 } }
+			add_ideas = YAN_mil_service_air_8
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_air_tier > 6 } }
+			add_ideas = YAN_mil_service_air_7
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_air_tier > 5 } }
+			add_ideas = YAN_mil_service_air_6
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_air_tier > 4 } }
+			add_ideas = YAN_mil_service_air_5
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_air_tier > 3 } }
+			add_ideas = YAN_mil_service_air_4
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_air_tier > 2 } }
+			add_ideas = YAN_mil_service_air_3
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_air_tier > 1 } }
+			add_ideas = YAN_mil_service_air_2
+		}
+		else = {
+			add_ideas = YAN_mil_service_air_1
+		}
+	}
+}
+
+YAN_mil_refresh_navy = {
+	hidden_effect = {
+		remove_ideas = { YAN_mil_service_navy_1 YAN_mil_service_navy_2 YAN_mil_service_navy_3 YAN_mil_service_navy_4 YAN_mil_service_navy_5 YAN_mil_service_navy_6 YAN_mil_service_navy_7 YAN_mil_service_navy_8 }
+		if = {
+			limit = { check_variable = { YAN_mil_navy_tier > 7 } }
+			add_ideas = YAN_mil_service_navy_8
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_navy_tier > 6 } }
+			add_ideas = YAN_mil_service_navy_7
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_navy_tier > 5 } }
+			add_ideas = YAN_mil_service_navy_6
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_navy_tier > 4 } }
+			add_ideas = YAN_mil_service_navy_5
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_navy_tier > 3 } }
+			add_ideas = YAN_mil_service_navy_4
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_navy_tier > 2 } }
+			add_ideas = YAN_mil_service_navy_3
+		}
+		else_if = {
+			limit = { check_variable = { YAN_mil_navy_tier > 1 } }
+			add_ideas = YAN_mil_service_navy_2
+		}
+		else = {
+			add_ideas = YAN_mil_service_navy_1
+		}
+	}
+}

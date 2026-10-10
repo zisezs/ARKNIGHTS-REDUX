@@ -1,0 +1,441 @@
+fire_concentration = {
+    track = combat_support
+    name = SUBDOCTRINE_FIRE_CONCENTRATION
+    description = SUBDOCTRINE_FIRE_CONCENTRATION_DESC
+    icon = GFX_doctrine_fire_concentration_medium
+
+    xp_cost = 100
+    xp_type = army
+
+    available = {
+        always = yes
+    }
+
+    ai_will_do = {
+
+        base = 1
+        modifier = {
+            factor = 75
+            original_tag = VWI
+        } 
+    }
+
+	# EFFECTS
+	enable_tactic = tactic_overwhelming_fire
+
+	category_line_artillery = {
+		max_organisation = 5
+		soft_attack = 0.05
+	}
+
+	rewards = {
+		standing_barrage = {
+		#1
+			category_line_artillery = {
+				defense = 0.1
+				breakthrough = 0.1
+			}
+			artillery_support = {
+				soft_attack = 0.1
+			}
+		}
+		predicted_fire = {
+		#2
+			category_line_artillery = {
+				soft_attack = 0.1
+			}
+		}
+		artillery_groups = {
+		#3
+			category_line_artillery = {
+				breakthrough = 0.1
+				defense = 0.1
+			}
+		}
+		dedicated_air_support = {
+		#4
+			category_anti_air = {
+				air_attack = 0.1
+			}
+		}
+		weakpoint_studies = {
+		#5
+			anti_tank_brigade = {
+				ap_attack = 0.1
+				hard_attack = 0.1
+			}
+			artillery_brigade = {
+				soft_attack = 0.1
+			}
+		}
+	}
+}
+
+flying_batteries = {
+    track = combat_support
+    name = SUBDOCTRINE_FLYING_BATTERIES
+    description = SUBDOCTRINE_FLYING_BATTERIES_DESC
+    icon = GFX_doctrine_flying_batteries_medium
+
+    xp_cost = 100
+    xp_type = army
+
+    available = {
+    
+    }
+    visible = {
+        has_dlc = "No Compromise, No Surrender"
+    }
+
+    
+    ai_will_do = {
+        base = 1
+
+        modifier = {
+            factor = 0 
+            NOT = { has_tech = rocket_artillery } 
+        }
+    }
+
+     # EFFECTS
+     effect = {
+        add_tech_bonus = {
+            bonus = 0.5
+            uses = 1
+            category = rocketry
+            name = SUBDOCTRINE_FLYING_BATTERIES
+        }
+    }
+
+    category_line_artillery = {
+        soft_attack = 0.1
+    }
+
+    rewards = {
+        deployment_drills = {
+            mot_rocket_artillery_brigade = {
+                max_organisation = 10
+            }
+            motorized_rocket_brigade = {
+                max_organisation = 10
+            }
+            mot_artillery_brigade = {
+                max_organisation = 10
+            }
+        }
+        counter_battery_tasks = {
+            
+            recon = {
+                battalion_mult = {
+                    category = category_line_artillery 
+                    soft_attack = 0.1
+                    defense = 0.1
+                }
+                recon = 0.25
+            }
+        }
+        ballistics_corrections = {
+			category_line_artillery = {
+				soft_attack = 0.1
+				breakthrough = 0.1
+			}
+
+        }
+        mobile_barrages = {
+            category_line_artillery = {
+                default_morale = 0.1
+                breakthrough = 0.05
+            }
+
+        }
+        wide_dispersal_positions = {
+            mot_rocket_artillery_brigade = {
+                max_organisation = 10
+            }
+            motorized_rocket_brigade = {
+                max_organisation = 10
+            }
+            mot_artillery_brigade = {
+                max_organisation = 10
+            }
+        }
+    }
+}
+
+air_cavalry = {
+    track = combat_support
+    name = SUBDOCTRINE_AIR_CAVALRY
+    description = SUBDOCTRINE_AIR_CAVALRY_DESC
+    icon = GFX_doctrine_air_cavalry_medium
+
+    xp_cost = 100
+    xp_type = army
+
+    available = {
+        
+    }
+    visible = {
+        has_dlc = "Gotterdammerung"
+    }   
+
+    ai_will_do = { base = 0 }
+
+     # EFFECTS
+    air_assault = {
+		hard_attack = 0.1
+		soft_attack = 0.1
+	}
+
+     rewards = {
+        airborne_observers = { 
+			air_assault = {
+				max_organisation = 5
+				default_morale = 0.1
+			}
+        }
+        service_and_support = {
+			air_assault = {
+				max_strength = 0.05
+			}
+        }
+        rescue_liasions = {
+			air_assault = {
+				max_strength = 0.05
+				default_morale = 0.05 
+			}
+        }
+
+        transport_assault = {
+            air_assault = {
+                maximum_speed = 0.2
+                breakthrough = 0.05
+                max_organisation = 10
+            }
+                
+        }
+        intervention_units = {
+			air_assault = {
+                max_organisation = 2
+                breakthrough = 0.05
+            }
+        }
+ 
+
+     }
+}
+
+self_propelled_support = {
+
+    track = combat_support
+    name = SUBDOCTRINE_SELF_PROPELLED_SUPPORT
+    description = SUBDOCTRINE_SELF_PROPELLED_SUPPORT_DESC
+    icon = GFX_doctrine_self_propelled_support_medium
+
+    xp_cost = 100
+    xp_type = army
+
+    available = {
+       
+    }
+
+    ai_will_do = { base = 0 }
+
+
+    category_tank_destroyer = {
+		default_morale = 0.2
+	}
+	category_sp_artillery = {
+		default_morale = 0.2
+	}
+	category_sp_anti_air = {
+		default_morale = 0.2
+	}
+
+
+    rewards = {
+
+        mobile_battery_management_platoons = {
+            category_tank_destroyer = {
+                max_organisation = 5
+            }
+            category_sp_artillery = {
+                max_organisation = 5
+            }
+            category_sp_anti_air = {
+                max_organisation = 5
+            }
+        }
+        screening_attacks = {
+            category_tank_destroyer = {
+                hard_attack = 0.05
+                default_morale = 0.2
+            }
+            category_sp_artillery = {
+                soft_attack = 0.05
+                default_morale = 0.2
+            }
+            category_sp_anti_air = {
+                air_attack = 0.05
+                default_morale = 0.2
+            }
+        }
+        all_terrain_mobility = {
+			category_tank_destroyer = {
+				maximum_speed = 0.2
+			}
+            category_sp_artillery = {
+                maximum_speed = 0.2
+            }
+            category_sp_anti_air = {
+                maximum_speed = 0.2
+            }
+        }
+        multirole_support_vehicles = {
+			category_tank_destroyer = {
+				breakthrough = 0.1
+			}
+            category_sp_artillery = {
+                breakthrough = 0.1
+            }
+            category_sp_anti_air = {
+                breakthrough = 0.1
+            }
+        }
+        shoot_and_scoot = {
+			category_tank_destroyer = {
+				hard_attack = 0.05
+                max_organisation = 5
+			}
+            category_sp_artillery = {
+                soft_attack = 0.05
+                max_organisation = 5
+            }
+            category_sp_anti_air = {
+                air_attack = 0.05
+                max_organisation = 5
+            }
+        }
+
+    }
+
+    
+}
+
+field_engineering = {
+    track = combat_support
+    name = SUBDOCTRINE_FIELD_ENGINEERING
+    description = SUBDOCTRINE_FIELD_ENGINEERING_DESC
+    icon = GFX_doctrine_field_engineering_medium
+
+    xp_cost = 100
+    xp_type = army
+
+    ai_will_do = { 
+        base = 1
+        modifier = {
+            factor = 75
+            original_tag = UFE
+        }
+		modifier = {
+            factor = 75
+            original_tag = GUL
+        }
+    }
+
+    engineer = {
+        river = {
+            movement = 0.2
+			attack = 0.05
+        }
+        forest = {
+            movement = 0.2
+			attack = 0.05
+        }
+    }
+	maintenance_company = {
+		battalion_mult = {
+			category = category_all_infantry
+			soft_attack = 0.05
+		}
+		reliability_factor = 0.02
+		equipment_capture_factor = 0.02
+	}
+
+    rewards = {
+        rapid_fire_lane_clearance = {
+            engineer = {
+                max_organisation = 5
+                battalion_mult = {
+                    category = category_all_infantry
+                    entrenchment = 0.1
+					add = yes
+                }
+            }
+            maintenance_company = {
+                max_organisation = 5
+				battalion_mult = {
+                    category = category_line_artillery
+                    max_strength = 5
+					add = yes
+                }
+            }
+        }
+        sapper_fieldcraft = {
+			engineer = {
+                battalion_mult = {
+                    category = category_all_infantry
+                    defense = 0.1
+					breakthrough = 0.1
+                }
+            }
+            maintenance_company = {
+                reliability_factor = 0.05
+				equipment_capture_factor = 0.05
+            }
+        }
+        engineerdug_gun_emplacements = {
+            engineer = {
+                battalion_mult = {
+                    category = category_line_artillery
+                    defense = 0.1
+					breakthrough = 0.1
+                }
+            }
+			maintenance_company = {
+                battalion_mult = {
+                    category = category_line_artillery
+					soft_attack = 0.1
+                }
+            }
+        }
+		smoke_projector_training = {
+			engineer = {
+                battalion_mult = {
+                    category = category_all_infantry
+                    breakthrough = 0.1
+                }
+            }
+            maintenance_company = {
+                battalion_mult = {
+                    category = category_all_infantry
+                    soft_attack = 0.1
+                }
+            }
+
+        }
+        charge_and_flame = {
+            engineer = {
+                max_organisation = 5 
+				battalion_mult = {
+					category = category_line_artillery
+					hard_attack = 0.1
+				}				
+            }
+            maintenance_company = {
+                reliability_factor = 0.05
+				equipment_capture_factor = 0.05
+            }
+        }
+
+    }
+}

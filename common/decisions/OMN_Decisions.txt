@@ -1,0 +1,1595 @@
+OMN_Grain_Decisions = {
+
+	OMN_grain_production = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			has_country_flag = OMN_grain_production
+		}
+
+		is_good = yes
+
+		days_mission_timeout = 30
+
+		timeout_effect = {
+			set_temp_variable = { grain = OMN_grain_production }
+			OMN_Grain_Number_Change = yes
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = OMN_grain_production
+					}
+					activate_mission = OMN_grain_production
+				}
+			}
+		}
+	}
+
+	OMN_reward_farmers = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			check_variable = { OMN_grain > 9 }
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = OMN_civil_war
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { grain_need = 10 }
+			check_variable = { OMN_grain > 9 }
+		}
+		custom_cost_text = decision_OMN_grain
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 14
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { OMN_grain = -10 }
+			}
+		}
+
+		remove_effect = {
+			add_stability = 0.04
+		}
+	}
+
+	OMN_forced_grain_requisition = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			has_stability > 0.3
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = OMN_civil_war
+			}
+		}
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 14
+
+		complete_effect = {
+			add_stability = -0.05
+		}
+
+		remove_effect = {
+			set_temp_variable = { grain = 5 }
+			OMN_Grain_Number_Change = yes
+		}
+	}
+
+	OMN_military_service_alternative = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			NOT = {
+				has_country_flag = OMN_civil_war
+			}
+		}
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 14
+
+		modifier = {
+			conscription_factor = -0.02
+		}
+
+		remove_effect = {
+			set_temp_variable = { grain = 2 }
+			OMN_Grain_Number_Change = yes
+		}
+	}
+
+	OMN_bribery_commissioner = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			NOT = {
+				has_decision = OMN_more_grain_tribute
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = OMN_civil_war
+			}
+		}
+
+		priority = 500
+		cost = 50
+		days_remove = 30
+		days_re_enable = 60
+
+		remove_effect = {
+			set_temp_variable = { grain = 10 }
+			OMN_Grain_Number_Change = yes
+		}
+	}
+
+	OMN_fertilizer_to_increase_production = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			AND = {
+				has_completed_focus = OMN_fertilizer_factory
+				NOT = {
+					has_country_flag = OMN_civil_war
+				}
+			}
+		}
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 14
+
+		modifier = {
+			consumer_goods_factor = 0.01
+		}
+
+		remove_effect = {
+			set_temp_variable = { grain = 2 }
+			OMN_Grain_Number_Change = yes
+		}
+
+	}
+	
+	OMN_exchange_matter = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			check_variable = { OMN_grain > 9 }
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = OMN_civil_war
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { grain_need = 10 }
+			check_variable = { OMN_grain > 9 }
+		}
+		custom_cost_text = decision_OMN_grain
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 14
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { OMN_grain = -10 }
+			}
+		}
+
+		modifier = {
+			consumer_goods_factor = -0.1
+		}
+	}
+
+	OMN_exchange_arms = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			check_variable = { OMN_grain > 4 }
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = OMN_civil_war
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { grain_need = 5 }
+			check_variable = { OMN_grain > 4 }
+		}
+		custom_cost_text = decision_OMN_grain
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 14
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { OMN_grain = -5 }
+			}
+		}
+
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 300
+			}
+			add_equipment_to_stockpile = {
+				type = arts_equipment
+				amount = 300
+			}
+		}
+	}
+
+	OMN_more_grain_tribute = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			check_variable = { OMN_grain > 7 }
+			NOT = {
+				has_decision = OMN_bribery_commissioner
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = OMN_civil_war
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { grain_need = 8 }
+			check_variable = { OMN_grain > 7 }
+		}
+		custom_cost_text = decision_OMN_grain
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { OMN_grain = -8 }
+			}
+		}
+
+		remove_effect = {
+			add_political_power = 50
+		}
+	}
+
+	OMN_selling_surplus_grain = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			check_variable = { OMN_grain > 4 }
+			NOT = {
+				has_decision = OMN_bribery_commissioner
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = OMN_civil_war
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { grain_need = 5 }
+			check_variable = { OMN_grain > 4 }
+		}
+		custom_cost_text = decision_OMN_grain
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 14
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { OMN_grain = -5 }
+			}
+		}
+
+		remove_effect = {
+			add_political_power = 20
+		}
+	}
+
+	OMN_purchase_grain = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = OMN_civil_war
+			}
+		}
+
+		priority = 500
+		cost = 50
+		days_remove = 30
+		days_re_enable = 14
+
+		remove_effect = {
+			set_temp_variable = { grain = 5 }
+			OMN_Grain_Number_Change = yes
+		}
+
+	}
+
+	OMN_send_helpers = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = OMN_after_civil_war
+		}
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 14
+
+		modifier = {
+			conscription_factor = -0.04
+		}
+
+		remove_effect = {
+			set_temp_variable = { grain = 2 }
+			OMN_Grain_Number_Change = yes
+		}
+	}
+
+	OMN_encouragement_program = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = OMN_after_civil_war
+		}
+
+		priority = 500
+		cost = 50
+		days_remove = 30
+		days_re_enable = 60
+
+		remove_effect = {
+			set_temp_variable = { grain = 10 }
+			OMN_Grain_Number_Change = yes
+		}
+	}
+
+	OMN_aid_refugees = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			check_variable = { OMN_grain > 7 }
+		}
+
+		visible = {
+			has_country_flag = OMN_after_civil_war
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { grain_need = 8 }
+			check_variable = { OMN_grain > 7 }
+		}
+		custom_cost_text = decision_OMN_grain
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 14
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { OMN_grain = -8 }
+			}
+		}
+
+		remove_effect = {
+			add_manpower = 17500
+		}
+	}
+
+	OMN_gift_surplus_grain = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			check_variable = { OMN_grain > 11 }
+		}
+
+		visible = {
+			has_country_flag = OMN_after_civil_war
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { grain_need = 12 }
+			check_variable = { OMN_grain > 11 }
+		}
+		custom_cost_text = decision_OMN_grain
+
+		priority = 500
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { OMN_grain = -12 }
+			}
+		}
+
+		remove_effect = {
+			add_political_power = 50
+		}
+	}
+}
+
+OMN_Civil_War_Decisions = {
+
+	OMN_battle_round = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			OR = {
+				has_country_flag = OMN_civil_war_chantashaw
+				has_country_flag = OMN_civil_war_aryusz
+			}
+		}
+
+		is_good = no
+
+		days_mission_timeout = 30
+
+		cancel_trigger = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = OMN_chantashaw_battle_round_check_tt
+					check_variable = { OMN_chantashaw_advantage > 8	}
+				}
+				custom_trigger_tooltip = {
+					tooltip = OMN_aryusz_battle_round_check_tt
+					check_variable = { OMN_aryusz_advantage > 8	}
+				}
+			}
+		}
+		
+		cancel_effect = {
+			add_to_variable = { OMN_round = 1 }
+			if = {
+				limit = {
+					check_variable = { OMN_chantashaw_advantage > 8	}
+				}
+				add_to_variable = { OMN_chantashaw_round_victory = 1 }
+				set_temp_variable = { chantashaw_manpower = 500 }
+				OMN_Chantashaw_Manpower_Change = yes
+				set_temp_variable = { aryusz_manpower = 800 }
+				OMN_Aryusz_Manpower_Change = yes
+			}
+			if = {
+				limit = {
+					check_variable = { OMN_aryusz_advantage > 8	}
+				}
+				add_to_variable = { OMN_aryusz_round_victory = 1 }
+				set_temp_variable = { chantashaw_manpower = 800 }
+				OMN_Chantashaw_Manpower_Change = yes
+				set_temp_variable = { aryusz_manpower = 500 }
+				OMN_Aryusz_Manpower_Change = yes
+			}
+			set_variable = { OMN_chantashaw_advantage = 5 }
+			set_variable = { OMN_aryusz_advantage = 4 }
+			if = {
+				limit = {
+					check_variable = { OMN_chantashaw_round_victory > 2	}
+				}
+				set_country_flag = OMN_chantashaw_victory
+				mark_focus_tree_layout_dirty = yes
+				hidden_effect = {
+					country_event = {
+						id = decision_omn.1
+					}
+				}
+				clr_country_flag = OMN_civil_war_chantashaw
+				clr_country_flag = OMN_civil_war_aryusz
+			}
+			if = {
+				limit = {
+					check_variable = { OMN_aryusz_round_victory > 2	}
+				}
+				set_country_flag = OMN_aryusz_victory
+				mark_focus_tree_layout_dirty = yes
+				hidden_effect = {
+					country_event = {
+						id = decision_omn.2
+					}
+				}
+				clr_country_flag = OMN_civil_war_chantashaw
+				clr_country_flag = OMN_civil_war_aryusz
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						OR = {
+							has_country_flag = OMN_civil_war_chantashaw
+							has_country_flag = OMN_civil_war_aryusz
+						}
+					}
+					activate_mission = OMN_battle_round
+				}
+			}
+		}
+
+		timeout_effect = {
+			add_to_variable = { OMN_round = 1 }
+			if = {
+				limit = {
+					check_variable = { OMN_chantashaw_advantage > OMN_aryusz_advantage	}
+				}
+				add_to_variable = { OMN_chantashaw_round_victory = 1 }
+				set_temp_variable = { chantashaw_manpower = 500 }
+				OMN_Chantashaw_Manpower_Change = yes
+				set_temp_variable = { aryusz_manpower = 800 }
+				OMN_Aryusz_Manpower_Change = yes
+			}
+			if = {
+				limit = {
+					check_variable = { OMN_aryusz_advantage > OMN_chantashaw_advantage	}
+				}
+				add_to_variable = { OMN_aryusz_round_victory = 1 }
+				set_temp_variable = { chantashaw_manpower = 800 }
+				OMN_Chantashaw_Manpower_Change = yes
+				set_temp_variable = { aryusz_manpower = 500 }
+				OMN_Aryusz_Manpower_Change = yes
+
+			}
+			set_variable = { OMN_chantashaw_advantage = 5 }
+			set_variable = { OMN_aryusz_advantage = 4 }
+			if = {
+				limit = {
+					check_variable = { OMN_chantashaw_round_victory > 2	}
+				}
+				set_country_flag = OMN_chantashaw_victory
+				mark_focus_tree_layout_dirty = yes
+				hidden_effect = {
+					country_event = {
+						id = decision_omn.1
+					}
+				}
+				clr_country_flag = OMN_civil_war_chantashaw
+				clr_country_flag = OMN_civil_war_aryusz
+			}
+			if = {
+				limit = {
+					check_variable = { OMN_aryusz_round_victory > 2	}
+				}
+				set_country_flag = OMN_aryusz_victory
+				mark_focus_tree_layout_dirty = yes
+				hidden_effect = {
+					country_event = {
+						id = decision_omn.2
+					}
+				}
+				clr_country_flag = OMN_civil_war_chantashaw
+				clr_country_flag = OMN_civil_war_aryusz
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						OR = {
+							has_country_flag = OMN_civil_war_chantashaw
+							has_country_flag = OMN_civil_war_aryusz
+						}
+					}
+					activate_mission = OMN_battle_round
+				}
+			}
+		}
+	}
+
+	OMN_enemy_action = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			OR = {
+				has_country_flag = OMN_civil_war_chantashaw
+				has_country_flag = OMN_civil_war_aryusz
+			}
+		}
+
+		is_good = no
+
+		days_mission_timeout = 14
+
+		timeout_effect = {
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = OMN_civil_war_chantashaw
+						check_variable = { OMN_chantashaw_advantage < 2	}
+					}
+				}
+				random_list = {
+					60 = {
+						add_to_variable = { OMN_aryusz_manpower = 150 }
+						add_to_variable = { OMN_aryusz_advantage = 1 }
+						subtract_from_variable = { OMN_chantashaw_advantage = 1 }
+					}
+					40 = {
+						if = {
+							limit = {
+								check_variable = { OMN_aryusz_manpower < 400 }
+							}
+							add_to_variable = { OMN_aryusz_manpower = 150 }
+							add_to_variable = { OMN_aryusz_advantage = 1 }
+							subtract_from_variable = { OMN_chantashaw_advantage = 1 }
+						}
+						else = {
+							add_to_variable = { OMN_aryusz_manpower = -400 }
+							add_to_variable = { OMN_aryusz_advantage = 2 }
+							subtract_from_variable = { OMN_chantashaw_advantage = 2 }
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = OMN_civil_war_aryusz
+						check_variable = { OMN_aryusz_advantage < 2	}
+					}
+				}
+				random_list = {
+					60 = {
+						add_to_variable = { OMN_chantashaw_manpower = 150 }
+						add_to_variable = { OMN_chantashaw_advantage = 1 }
+					}
+					40 = {
+						if = {
+							limit = {
+								check_variable = { OMN_chantashaw_manpower < 400 }
+							}
+							add_to_variable = { OMN_chantashaw_manpower = 150 }
+							add_to_variable = { OMN_chantashaw_advantage = 1 }
+							subtract_from_variable = { OMN_aryusz_advantage = 1 }
+						}
+						else = {
+							add_to_variable = { OMN_chantashaw_manpower = -400 }
+							add_to_variable = { OMN_chantashaw_advantage = 2 }
+							subtract_from_variable = { OMN_aryusz_advantage = 2 }
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = OMN_civil_war_chantashaw
+						check_variable = { OMN_chantashaw_advantage > 1	}
+					}
+				}
+				random_list = {
+					60 = {
+						add_to_variable = { OMN_aryusz_manpower = 200 }
+						add_to_variable = { OMN_aryusz_advantage = 1 }
+						subtract_from_variable = { OMN_chantashaw_advantage = 1 }
+					}
+					40 = {
+						if = {
+							limit = {
+								check_variable = { OMN_aryusz_manpower < 600 }
+							}
+							add_to_variable = { OMN_aryusz_manpower = 200 }
+							add_to_variable = { OMN_aryusz_advantage = 1 }
+							subtract_from_variable = { OMN_chantashaw_advantage = 1 }
+						}
+						else = {
+							add_to_variable = { OMN_aryusz_manpower = -600 }
+							add_to_variable = { OMN_aryusz_advantage = 2 }
+							subtract_from_variable = { OMN_chantashaw_advantage = 2 }
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = OMN_civil_war_aryusz
+						check_variable = { OMN_aryusz_advantage > 1	}
+					}
+				}
+				random_list = {
+					60 = {
+						add_to_variable = { OMN_chantashaw_manpower = 200 }
+						add_to_variable = { OMN_chantashaw_advantage = 1 }
+						subtract_from_variable = { OMN_aryusz_advantage = 1 }
+					}
+					40 = {
+						if = {
+							limit = {
+								check_variable = { OMN_chantashaw_manpower < 600 }
+							}
+							add_to_variable = { OMN_chantashaw_manpower = 200 }
+							add_to_variable = { OMN_chantashaw_advantage = 1 }
+							subtract_from_variable = { OMN_aryusz_advantage = 1 }
+						}
+						else = {
+							add_to_variable = { OMN_chantashaw_manpower = -600 }
+							add_to_variable = { OMN_chantashaw_advantage = 2 }
+							subtract_from_variable = { OMN_aryusz_advantage = 2 }
+						}
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						OR = {
+							has_country_flag = OMN_civil_war_chantashaw
+							has_country_flag = OMN_civil_war_aryusz
+						}
+					}
+					activate_mission = OMN_enemy_action
+				}
+			}
+		}
+	}
+
+	#武装部队
+	OMN_arm_troops = {
+		icon = generic_oppression
+
+		custom_cost_trigger = {
+			set_temp_variable = { ce = 500 }
+			has_equipment = {
+				infantry_equipment > 499
+			}
+		}
+		custom_cost_text = decision_OMN_infantry_equipment
+
+		days_remove = 7
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -500
+				}
+			}
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					has_country_flag = OMN_civil_war_chantashaw
+				}
+				set_temp_variable = { chantashaw_manpower = 300 }
+				OMN_Chantashaw_Manpower_Change = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = OMN_civil_war_aryusz
+				}
+				set_temp_variable = { aryusz_manpower = 300 }
+				OMN_Aryusz_Manpower_Change = yes
+			}
+		}
+	}
+
+	#操练民兵
+	OMN_train_militia = {
+		icon = generic_oppression
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 100 }
+			if = {
+				limit = {
+					has_country_flag = OMN_civil_war_chantashaw
+				}
+				check_variable = { OMN_chantashaw_manpower > 99 }
+			}
+			if = {
+				limit = {
+					has_country_flag = OMN_civil_war_aryusz
+				}
+				check_variable = { OMN_aryusz_manpower > 99 }
+			}
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 14
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = OMN_civil_war_chantashaw
+					}
+					subtract_from_variable = { OMN_chantashaw_manpower = 100 }
+				}
+				if = {
+					limit = {
+						has_country_flag = OMN_civil_war_aryusz
+					}
+					subtract_from_variable = { OMN_aryusz_manpower = 100 }
+				}
+			}
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					has_country_flag = OMN_civil_war_chantashaw
+				}
+				set_temp_variable = { chantashaw_manpower = 500 }
+				OMN_Chantashaw_Manpower_Change = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = OMN_civil_war_aryusz
+				}
+				set_temp_variable = { aryusz_manpower = 500 }
+				OMN_Aryusz_Manpower_Change = yes
+			}
+		}
+	}
+
+	#强征兵
+	OMN_chantashaw_force_conscription = {
+		icon = generic_oppression
+
+		visible = {
+			has_country_flag = OMN_civil_war_chantashaw
+		}
+
+		available = {
+			has_stability > 0
+		}
+
+		days_remove = 7
+		days_re_enable = 7
+
+		complete_effect = {
+			add_stability = -0.35
+		}
+		
+		remove_effect = {
+			set_temp_variable = { chantashaw_manpower = 300 }
+			OMN_Chantashaw_Manpower_Change = yes
+		}
+	}
+
+	#雇佣军队
+	OMN_chantashaw_hire_army = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_chantashaw
+		}
+
+		cost = 30
+		days_remove = 7
+		days_re_enable = 7
+
+		remove_effect = {
+			set_temp_variable = { chantashaw_manpower = 200 }
+			OMN_Chantashaw_Manpower_Change = yes
+		}
+	}
+	
+	#决胜强袭
+	OMN_chantashaw_definitive_strike = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_chantashaw
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = OMN_chantashaw_definitive_strike_check_tt
+				check_variable = { OMN_chantashaw_advantage > 7	}
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 120 }
+			check_variable = { OMN_chantashaw_manpower > 119 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 3
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_chantashaw_manpower = 120 }
+			}
+		}
+
+		remove_effect = {
+			set_temp_variable = { chantashaw_advantage = 3 }
+			OMN_Chantashaw_Advantage_Change = yes
+		}
+	}
+
+	#人海冲锋
+	OMN_chantashaw_huge_crowd_charge = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_chantashaw
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 300 }
+			check_variable = { OMN_chantashaw_manpower > 299 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 3
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_chantashaw_manpower = 300 }
+			}
+		}
+
+		remove_effect = {
+			set_temp_variable = { chantashaw_advantage = 2 }
+			OMN_Chantashaw_Advantage_Change = yes
+			random_list = {
+				20 = {
+					set_temp_variable = { aryusz_manpower = -400 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				80 = {
+					set_temp_variable = { aryusz_manpower = -200 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+			
+		}
+	}
+	#口袋战术
+	OMN_chantashaw_pocket_tactics = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_chantashaw
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = OMN_chantashaw_pocket_tactics_check_tt
+				check_variable = { OMN_chantashaw_advantage > 3	}
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 140 }
+			check_variable = { OMN_chantashaw_manpower > 139 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 3
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_chantashaw_manpower = 140 }
+			}
+		}
+
+		remove_effect = {
+			set_temp_variable = { chantashaw_advantage = -1 }
+			OMN_Chantashaw_Advantage_Change = yes
+			random_list = {
+				90 = {
+					set_temp_variable = { aryusz_manpower = -300 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				10 = {
+					set_temp_variable = { aryusz_manpower = -100 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+		}
+	}
+
+	#稳步推进
+	OMN_chantashaw_steady_progression = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_chantashaw
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 220 }
+			check_variable = { OMN_chantashaw_manpower > 219 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 7
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_chantashaw_manpower = 220 }
+			}
+		}
+
+		remove_effect = {
+			set_temp_variable = { chantashaw_advantage = 1 }
+			OMN_Chantashaw_Advantage_Change = yes
+			random_list = {
+				33 = {
+					set_temp_variable = { aryusz_manpower = -260 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				67 = {
+					set_temp_variable = { aryusz_manpower = -120 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+		}
+	}
+
+	#绞肉战
+	OMN_chantashaw_melee = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_chantashaw
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 380 }
+			check_variable = { OMN_chantashaw_manpower > 379 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 7
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_chantashaw_manpower = 380 }
+			}
+		}
+
+		remove_effect = {
+			
+			random_list = {
+				40 = {
+					set_temp_variable = { chantashaw_advantage = 1 }
+					OMN_Chantashaw_Advantage_Change = yes
+				}
+				60 = {
+					set_temp_variable = { chantashaw_manpower = -100 }
+					OMN_Chantashaw_Manpower_Change = yes
+				}
+			}
+			set_temp_variable = { aryusz_manpower = -600 }
+			OMN_Aryusz_Manpower_Change = yes
+		}
+	}
+
+	#赌注冲击
+	OMN_chantashaw_gambling_strike = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_chantashaw
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 200 }
+			check_variable = { OMN_chantashaw_manpower > 199 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 7
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_chantashaw_manpower = 200 }
+			}
+		}
+		
+		remove_effect = {
+			random_list = {
+				33 = {
+					set_temp_variable = { chantashaw_advantage = 2 }
+					OMN_Chantashaw_Advantage_Change = yes
+				}
+				67 = {
+					set_temp_variable = { chantashaw_manpower = -120 }
+					OMN_Chantashaw_Manpower_Change = yes
+				}
+			}
+			random_list = {
+				33 = {
+					set_temp_variable = { aryusz_manpower = -440 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				67 = {
+					set_temp_variable = { aryusz_manpower = -220 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+		}
+	}
+
+	#据点拔除
+	OMN_chantashaw_remove_foothold = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_chantashaw
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 180 }
+			check_variable = { OMN_chantashaw_manpower > 179 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 14
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_chantashaw_manpower = 180 }
+			}
+		}
+		
+		remove_effect = {
+			set_temp_variable = { chantashaw_advantage = 1 }
+			OMN_Chantashaw_Advantage_Change = yes
+			set_temp_variable = { aryusz_manpower = -300 }
+			OMN_Aryusz_Manpower_Change = yes
+			random_list = {
+				50 = {
+					set_temp_variable = { aryusz_manpower = -300 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				50 = {
+					set_temp_variable = { aryusz_manpower = -100 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+		}
+	}
+
+	#后方奇袭
+	OMN_chantashaw_surprise_attack_from_back = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_chantashaw
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 45 }
+			check_variable = { OMN_chantashaw_manpower > 44 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 14
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_chantashaw_manpower = 45 }
+			}
+		}
+		
+		remove_effect = {
+			set_temp_variable = { chantashaw_advantage = 1 }
+			OMN_Chantashaw_Advantage_Change = yes
+			random_list = {
+				10 = {
+					set_temp_variable = { aryusz_manpower = -200 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				90 = {
+					set_temp_variable = { aryusz_manpower = -50 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+		}
+	}
+
+	#亚利乌什玩家决议
+	#说服动摇者
+	OMN_aryusz_convince_wavers = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_aryusz
+		}
+
+		available = {
+			has_war_support > 0
+		}
+
+		days_remove = 3
+		days_re_enable = 7
+
+		complete_effect = {
+			add_war_support = -0.35
+		}
+
+		remove_effect = {
+			set_temp_variable = { aryusz_manpower = 300 }
+			OMN_Aryusz_Manpower_Change = yes
+		}
+	}
+	#收买人心
+	OMN_aryusz_buy_popularity = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_aryusz
+		}
+
+		cost = 30
+		days_remove = 7
+		days_re_enable = 7
+
+		remove_effect = {
+			set_temp_variable = { aryusz_manpower = 120 }
+			OMN_Aryusz_Manpower_Change = yes
+			set_temp_variable = { chantashaw_manpower = -120 }
+			OMN_Chantashaw_Manpower_Change = yes
+		}
+	}
+
+	#打破僵局
+	OMN_aryusz_break_deadlock = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_aryusz
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = OMN_aryusz_break_deadlock_check_tt
+				check_variable = { OMN_aryusz_advantage < 3	}
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 120 }
+			check_variable = { OMN_aryusz_manpower > 119 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 3
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_aryusz_manpower = 120 }
+			}
+		}
+
+		remove_effect = {
+			set_temp_variable = { aryusz_advantage = 2 }
+			OMN_Aryusz_Advantage_Change = yes
+		}
+	}
+	#正面攻击
+	OMN_aryusz_front_attack = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_aryusz
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 300 }
+			check_variable = { OMN_aryusz_manpower > 299 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 3
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_aryusz_manpower = 300 }
+			}
+		}
+
+		remove_effect = {
+			set_temp_variable = { aryusz_advantage = 2 }
+			OMN_Aryusz_Advantage_Change = yes
+			random_list = {
+				20 = {
+					set_temp_variable = { aryusz_manpower = 220 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				80 = {
+					set_temp_variable = { aryusz_manpower = 20 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+		}
+	}
+	#诱敌深入
+	OMN_aryusz_induce_enemy = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_aryusz
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = OMN_aryusz_induce_enemy_check_tt
+				check_variable = { OMN_aryusz_advantage > 3	}
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 140 }
+			check_variable = { OMN_aryusz_manpower > 139 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 3
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_aryusz_manpower = 140 }
+			}
+		}
+
+		remove_effect = {
+			set_temp_variable = { aryusz_advantage = -1 }
+			OMN_Aryusz_Advantage_Change = yes
+			random_list = {
+				90 = {
+					set_temp_variable = { aryusz_manpower = 400 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				10 = {
+					set_temp_variable = { aryusz_manpower = 200 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+		}
+	}
+	#稳扎稳打
+	OMN_aryusz_steady_progress = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_aryusz
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 220 }
+			check_variable = { OMN_aryusz_manpower > 219 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 3
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_aryusz_manpower = 220 }
+			}
+		}
+
+		remove_effect = {
+			set_temp_variable = { aryusz_advantage = 1 }
+			OMN_Aryusz_Advantage_Change = yes
+			random_list = {
+				50 = {
+					set_temp_variable = { aryusz_manpower = 160 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				50 = {
+					set_temp_variable = { aryusz_manpower = 30 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+		}
+	}
+	#突然袭击
+	OMN_aryusz_surprise_attack = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_aryusz
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 380 }
+			check_variable = { OMN_aryusz_manpower > 379 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 7
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_aryusz_manpower = 380 }
+			}
+		}
+
+		remove_effect = {
+			random_list = {
+				40 = {
+					set_temp_variable = { aryusz_advantage = 1 }
+					OMN_Aryusz_Advantage_Change = yes
+				}
+				60 = {
+					set_temp_variable = { aryusz_manpower = -40 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+			set_temp_variable = { aryusz_manpower = 180 }
+			OMN_Aryusz_Manpower_Change = yes
+		}
+	}
+	#放手一搏
+	OMN_aryusz_gambling_attack = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_aryusz
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 200 }
+			check_variable = { OMN_aryusz_manpower > 199 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 7
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_aryusz_manpower = 200 }
+			}
+		}
+
+		remove_effect = {
+			random_list = {
+				33 = {
+					set_temp_variable = { aryusz_manpower = 160 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				67 = {
+					set_temp_variable = { aryusz_manpower = 30 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+			random_list = {
+				33 = {
+					set_temp_variable = { aryusz_advantage = 2 }
+					OMN_Aryusz_Advantage_Change = yes
+				}
+				67 = {
+					set_temp_variable = { aryusz_advantage = 1 }
+					OMN_Aryusz_Advantage_Change = yes
+				}
+			}
+		}
+	}
+	#攻城拔寨
+	OMN_aryusz_attack_city = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_aryusz
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 180 }
+			check_variable = { OMN_aryusz_manpower > 179 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 14
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_aryusz_manpower = 180 }
+			}
+		}
+
+		remove_effect = {
+			set_temp_variable = { aryusz_advantage = 1 }
+			OMN_Aryusz_Advantage_Change = yes
+			random_list = {
+				50 = {
+					set_temp_variable = { aryusz_manpower = 300 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				50 = {
+					set_temp_variable = { aryusz_manpower = 220 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+		}
+	}
+	#出其不意
+	OMN_aryusz_by_surprise = {
+		icon = generic_oppression
+		
+		visible = {
+			has_country_flag = OMN_civil_war_aryusz
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { mp = 45 }
+			check_variable = { OMN_aryusz_manpower > 44 }
+		}
+		custom_cost_text = decision_OMN_manpower
+
+		days_remove = 14
+		days_re_enable = 7
+
+		complete_effect = {
+			hidden_effect = {
+				subtract_from_variable = { OMN_aryusz_manpower = 45 }
+			}
+		}
+
+		remove_effect = {
+			set_temp_variable = { aryusz_advantage = 1 }
+			OMN_Aryusz_Advantage_Change = yes
+			random_list = {
+				66 = {
+					set_temp_variable = { aryusz_manpower = 40 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+				34 = {
+					set_temp_variable = { aryusz_manpower = 10 }
+					OMN_Aryusz_Manpower_Change = yes
+				}
+			}
+		}
+	}
+}

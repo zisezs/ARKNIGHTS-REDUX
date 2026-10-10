@@ -1,0 +1,686 @@
+######################
+## 乌萨斯帝国 · 开局国策树（阶段一）「乌萨斯之梦」
+######################
+#
+# 生成器：E:/tmp/lud/gen_urs_trees.cjs（骨架）；2026-09-30 起 12 格效果手填，
+# 骨架里的 id / 图标 / 坐标 / 前置一个都没动。
+#
+# 布局：绝对坐标 x/y，1 行 = 1 级，根节点 乌萨斯之梦 在 (0,0)。
+#
+# 【本轮填的 12 格】乌萨斯之梦 / 问题之源 / 国家 / 军队 / 腐朽不堪 /
+#   剑拔弩张 / 五把空椅子 / 先是官员 / 后是齿轮 / 润滑油 / 内卫的沉默 / 孤家寡人。
+#   其余 13 格（民众·资源·声势浩大·油已尽·灯未枯·被奴役的工人·去挖·平等·
+#   面包·生存·生存之需·拨动指针·滴答）按用户口径**留空等后续设计稿**，
+#   只有名字与图标，不要顺手补内容。
+#
+# 【cost 是周不是天】cost × 7 = 游戏内天数。设计稿给的天数照此取整：
+#   20天=3(21天)、17天=2(14天)、12天=2(14天)。
+#
+# 【乌萨斯之梦 = 63 天，不是 70 天】2026-09-30 新增设定「开局时这一格已经点了
+#   一周」。HOI4 **没有**给国策预置进度的办法 —— history 只有
+#   `complete_national_focus`（整格直接完成），效果表里也只有
+#   complete / uncomplete / unlock / reduce_cost，没有 start / set_progress；
+#   `focus_progress` 是触发器，写不进去。所以只能用「少算一周」等价表达：
+#   cost = 9（63 天），比设计稿的 70 天少 7 天，观感上就是开局已经走过一周。
+#   （顺带：设计稿早期版本写的「开局剩余22天」同理做不了，已作废。）
+#
+# 军事簇 / 经济簇 / 发展度簇（共 75 条 shared_focus）挂在本树下方 y = 20..34，
+# 与原政治树同址，本文件只做引用，定义仍在各自的 _shared.txt 里。
+#
+focus_tree = {
+	id = URS_dream
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = URS
+		}
+	}
+
+	default = no
+
+	initial_show_position = {
+		focus = URS_dr_ursus_dream
+	}
+
+	shared_focus = URS_legion_dishonored
+	shared_focus = URS_mil_aristocrat_audit
+	shared_focus = URS_mil_army_reorganized
+	shared_focus = URS_mil_guards_act
+	shared_focus = URS_mil_capital_garrison
+	shared_focus = URS_mil_freecorps
+	shared_focus = URS_mil_general_staff
+	shared_focus = URS_mil_bolt_industry
+	shared_focus = URS_mil_caster_gear
+	shared_focus = URS_mil_landship
+	shared_focus = URS_mil_secure_net
+	shared_focus = URS_mil_kutsukina
+	shared_focus = URS_mil_sarcophagus
+	shared_focus = URS_mil_griffin_rites
+	shared_focus = URS_mil_blade_creed
+	shared_focus = URS_mil_merit_ranks
+	shared_focus = URS_mil_preachers
+	shared_focus = URS_mil_caster_code
+	shared_focus = URS_mil_warcry
+	shared_focus = URS_mil_katoga_reopened
+	shared_focus = URS_mil_ore_rationing
+	shared_focus = URS_mil_originium_sub
+	shared_focus = URS_mil_bureau_tech
+	shared_focus = URS_mil_project_zero
+	shared_focus = URS_mil_winter_law
+	shared_focus = URS_bread_demand
+	shared_focus = URS_eco_winter_act
+	shared_focus = URS_eco_originium_ration
+	shared_focus = URS_eco_noble_tax_exempt
+	shared_focus = URS_eco_currency_reform
+	shared_focus = URS_eco_assembly_budget
+	shared_focus = URS_eco_treasury_overhaul
+	shared_focus = URS_eco_bureau_tech_transfer
+	shared_focus = URS_eco_university_reform
+	shared_focus = URS_eco_miner_training
+	shared_focus = URS_eco_oka_research
+	shared_focus = URS_eco_sarcophagus_energy
+	shared_focus = URS_eco_caster_academy
+	shared_focus = URS_eco_katoga_unblocked
+	shared_focus = URS_eco_zergrad_autonomy
+	shared_focus = URS_eco_bresk_duchess
+	shared_focus = URS_eco_farnorth_control
+	shared_focus = URS_eco_army_economy_strip
+	shared_focus = URS_eco_noble_negotiation
+	shared_focus = URS_eco_energy_converter
+	shared_focus = URS_eco_katoga_production
+	shared_focus = URS_eco_zergrad_city
+	shared_focus = URS_eco_fuel_plants
+	shared_focus = URS_eco_heating_relief
+	shared_focus = URS_eco_consumer_goods
+
+
+	# 乌萨斯之梦（设计稿 70 天，扣掉开局已经走过的一周 = 63 天 = cost 9）
+	# 图标是本图唯一一张真图（94x86 未压缩 DDS），注册在 interface/_ARF_goals/URS_dream_goals.gfx；
+	# 其余 24 格仍是原版通用图，等后续设计稿再补。
+	focus = {
+		id = URS_dr_ursus_dream
+		icon = GFX_focus_URS_ursus_dream
+		cost = 9
+		x = 0
+		y = 0
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 100
+			custom_effect_tooltip = URS_dr_ursus_dream_head_start_tt
+			custom_effect_tooltip = URS_dr_ursus_dream_unlock_tt
+			# 设计稿这里写的是「隐藏效果 · 显示下个国策 问题之源」。
+			# 2026-09-30 试过用 allow_branch 做真隐藏，用户看到「开局树只剩一格」
+			# 直接判为 bug，故撤回：现在整棵树照常全显，问题之源靠前置解锁，
+			# 这一行只是把「接下来点哪格」讲清楚。
+		}
+	}
+
+	# 问题之源（20天 = cost 3）
+	focus = {
+		id = URS_dr_root_of_problems
+		icon = GFX_goal_generic_political_pressure
+		cost = 3
+		prerequisite = {
+			focus = URS_dr_ursus_dream
+		}
+		# 开局只露「乌萨斯之梦」一格，做完它才把这一格显出来
+		x = 0
+		y = 1
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+			URS_dr_vitte_in_office = yes
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			# 开局改革小游戏：四条进度 / 四种效率 / 筹码 全部在这里初值化。
+			URS_rf_init = yes
+			add_political_power = 50
+			custom_effect_tooltip = URS_dr_root_of_problems_unlock_tt
+		}
+	}
+
+	# 国家（17天）
+	focus = {
+		id = URS_dr_state
+		icon = GFX_goal_generic_political_pressure
+		cost = 2
+		prerequisite = {
+			focus = URS_dr_root_of_problems
+		}
+		x = -5
+		y = 2
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			subtract_from_variable = { URS_rf_p_state = 6 tooltip = URS_rf_p_state_tt }
+			subtract_from_variable = { URS_rf_chips = 1 tooltip = URS_rf_chips_tt }
+			add_political_power = -25
+			# 「后续将陆续收到三个事件，每一个事件将解锁下一个国策」
+			country_event = {
+				id = urs_dream.2
+				days = 3
+			}
+			country_event = {
+				id = urs_dream.3
+				days = 5
+			}
+			country_event = {
+				id = urs_dream.4
+				days = 7
+			}
+		}
+	}
+
+	# 军队（17天）
+	focus = {
+		id = URS_dr_army
+		icon = GFX_goal_generic_army_doctrines
+		cost = 2
+		prerequisite = {
+			focus = URS_dr_root_of_problems
+		}
+		x = 0
+		y = 2
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			add_to_variable = { URS_rf_chips = 3 tooltip = URS_rf_chips_tt }
+			add_political_power = -50
+			custom_effect_tooltip = URS_dr_army_unlock_tt
+			country_event = {
+				id = urs_dream.9
+			}
+		}
+	}
+
+	# 民众（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_people
+		icon = GFX_goal_generic_propaganda
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_root_of_problems
+		}
+		x = 8
+		y = 2
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 资源（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_resources
+		icon = GFX_goal_generic_oil_refinery
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_root_of_problems
+		}
+		x = 15
+		y = 2
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 腐朽不堪（17天）
+	focus = {
+		id = URS_dr_rotten
+		icon = GFX_goal_generic_dangerous_deal
+		cost = 2
+		prerequisite = {
+			focus = URS_dr_state
+		}
+		x = -5
+		y = 3
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+			# 由「乌萨斯之腐」选项解锁
+			has_country_flag = URS_dr_corruption_event
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_state = 8 tooltip = URS_rf_p_state_tt }
+			add_to_variable = { URS_rf_chips = 1 tooltip = URS_rf_chips_tt }
+			add_political_power = -20
+			if = {
+				limit = { has_idea = URS_dr_orders_stop_at_the_gate }
+				swap_ideas = {
+					remove_idea = URS_dr_orders_stop_at_the_gate
+					add_idea = URS_dr_orders_stop_at_the_gate_t2
+				}
+			}
+			country_event = {
+				id = urs_dream.5
+			}
+		}
+	}
+
+	# 剑拔弩张（12天）
+	focus = {
+		id = URS_dr_tension
+		icon = GFX_goal_generic_army_tanks
+		cost = 2
+		prerequisite = {
+			focus = URS_dr_army
+		}
+		x = 0
+		y = 3
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			add_to_variable = { URS_rf_chips = 1 tooltip = URS_rf_chips_tt }
+			add_political_power = -25
+			if = {
+				limit = { has_idea = URS_dr_nine_armies_seven_banners }
+				swap_ideas = {
+					remove_idea = URS_dr_nine_armies_seven_banners
+					add_idea = URS_dr_nine_armies_seven_banners_t2
+				}
+			}
+			if = {
+				limit = { has_idea = URS_dr_afterwave_of_rebellion }
+				swap_ideas = {
+					remove_idea = URS_dr_afterwave_of_rebellion
+					add_idea = URS_dr_afterwave_of_rebellion_t2
+				}
+			}
+			country_event = {
+				id = urs_dream.10
+			}
+		}
+	}
+
+	# 声势浩大（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_clamor
+		icon = GFX_goal_generic_propaganda
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_people
+		}
+		x = 8
+		y = 3
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 油已尽（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_oil_gone
+		icon = GFX_goal_generic_oil_refinery
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_resources
+		}
+		x = 14
+		y = 3
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 灯未枯（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_light_dim
+		icon = GFX_goal_generic_construct_infrastructure
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_resources
+		}
+		x = 16
+		y = 3
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 先是官员（17天）
+	focus = {
+		id = URS_dr_officials_first
+		icon = GFX_goal_generic_political_pressure
+		cost = 2
+		prerequisite = {
+			focus = URS_dr_rotten
+		}
+		x = -7
+		y = 4
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+			# 由「阴影下的人群」选项解锁
+			has_country_flag = URS_dr_officials_event
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			subtract_from_variable = { URS_rf_p_state = 4 tooltip = URS_rf_p_state_tt }
+			add_political_power = 20
+			if = {
+				limit = { has_idea = URS_dr_orders_stop_at_the_gate_t2 }
+				swap_ideas = {
+					remove_idea = URS_dr_orders_stop_at_the_gate_t2
+					add_idea = URS_dr_orders_stop_at_the_gate_t3
+				}
+			}
+			country_event = {
+				id = urs_dream.6
+			}
+		}
+	}
+
+	# 后是齿轮（17天）
+	focus = {
+		id = URS_dr_gear_after
+		icon = GFX_goal_generic_construction
+		cost = 2
+		prerequisite = {
+			focus = URS_dr_rotten
+		}
+		x = -3
+		y = 4
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+			# 由「生锈的齿轮」选项解锁
+			has_country_flag = URS_dr_gear_event
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_state = 5 tooltip = URS_rf_p_state_tt }
+			add_political_power = -25
+			if = {
+				limit = { has_idea = URS_dr_orders_stop_at_the_gate_t3 }
+				swap_ideas = {
+					remove_idea = URS_dr_orders_stop_at_the_gate_t3
+					add_idea = URS_dr_orders_stop_at_the_gate_t4
+				}
+			}
+			country_event = {
+				id = urs_dream.7
+			}
+		}
+	}
+
+	# 五把空椅子（20天 = cost 3）
+	focus = {
+		id = URS_dr_empty_chairs
+		icon = GFX_goal_generic_intelligence_exchange
+		cost = 3
+		prerequisite = {
+			focus = URS_dr_tension
+		}
+		x = 0
+		y = 4
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			add_to_variable = { URS_rf_chips = 1 tooltip = URS_rf_chips_tt }
+			add_political_power = -100
+			if = {
+				limit = { has_idea = URS_dr_afterwave_of_rebellion_t2 }
+				swap_ideas = {
+					remove_idea = URS_dr_afterwave_of_rebellion_t2
+					add_idea = URS_dr_afterwave_of_rebellion_t3
+				}
+			}
+			country_event = {
+				id = urs_dream.11
+			}
+		}
+	}
+
+	# 被奴役的工人…（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_slaved_workers
+		icon = GFX_goal_generic_consumer_goods
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_clamor
+		}
+		x = 8
+		y = 4
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 去挖…（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_dig
+		icon = GFX_goal_generic_construct_infrastructure
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_oil_gone
+		}
+		prerequisite = {
+			focus = URS_dr_light_dim
+		}
+		x = 15
+		y = 4
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 润滑油（设计稿未给天数，按同线 17 天取 cost 2）
+	focus = {
+		id = URS_dr_lubricant
+		icon = GFX_goal_generic_production2
+		cost = 2
+		prerequisite = {
+			focus = URS_dr_officials_first
+		}
+		prerequisite = {
+			focus = URS_dr_gear_after
+		}
+		x = -5
+		y = 5
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_state = 8 tooltip = URS_rf_p_state_tt }
+			add_to_variable = { URS_rf_chips = 3 tooltip = URS_rf_chips_tt }
+			add_political_power = 50
+			if = {
+				limit = { has_idea = URS_dr_orders_stop_at_the_gate_t4 }
+				swap_ideas = {
+					remove_idea = URS_dr_orders_stop_at_the_gate_t4
+					add_idea = URS_dr_orders_stop_at_the_gate_t5
+				}
+			}
+			country_event = {
+				id = urs_dream.8
+			}
+		}
+	}
+
+	# 内卫的沉默（设计稿未给天数，按同线 17 天取 cost 2）
+	focus = {
+		id = URS_dr_internal_silence
+		icon = GFX_goal_generic_intelligence_exchange
+		cost = 2
+		prerequisite = {
+			focus = URS_dr_empty_chairs
+		}
+		x = 0
+		y = 5
+
+		available = {
+			URS_dr_fyodor_in_power = yes
+		}
+		cancel_if_invalid = yes
+
+		completion_reward = {
+			add_to_variable = { URS_rf_chips = 1 tooltip = URS_rf_chips_tt }
+			add_political_power = -25
+		}
+	}
+
+	# 平等（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_equality
+		icon = GFX_goal_generic_propaganda
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_slaved_workers
+		}
+		x = 5
+		y = 5
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 面包（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_bread
+		icon = GFX_goal_generic_consumer_goods
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_slaved_workers
+		}
+		x = 8
+		y = 5
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 生存（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_survival
+		icon = GFX_goal_generic_consumer_goods
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_slaved_workers
+		}
+		x = 10
+		y = 5
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 孤家寡人（设计稿未给天数，按同线 17 天取 cost 2）
+	focus = {
+		id = URS_dr_lonely
+		icon = GFX_goal_generic_national_unity
+		cost = 2
+		prerequisite = {
+			focus = URS_dr_lubricant
+		}
+		prerequisite = {
+			focus = URS_dr_internal_silence
+		}
+		x = -3
+		y = 6
+
+		completion_reward = {
+			add_political_power = 25
+			country_event = {
+				id = urs_dream.12
+			}
+			# 「如果检测到生存之需完成，刷新国策树，解锁国策拨动指针」：
+			# 拨动指针的前置本来就是 孤家寡人 + 生存之需，走前置链即可；
+			# 这里只补一行提示文案，不做树刷新（HOI4 没有按触发刷树的写法）。
+			if = {
+				limit = { has_completed_focus = URS_dr_needs }
+				custom_effect_tooltip = URS_dr_lonely_pointer_tt
+			}
+		}
+	}
+
+	# 生存之需（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_needs
+		icon = GFX_goal_generic_consumer_goods
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_equality
+		}
+		prerequisite = {
+			focus = URS_dr_bread
+		}
+		prerequisite = {
+			focus = URS_dr_survival
+		}
+		prerequisite = {
+			focus = URS_dr_dig
+		}
+		x = 10
+		y = 6
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 拨动指针（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_pointer
+		icon = GFX_goal_generic_secret_weapon
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_lonely
+		}
+		prerequisite = {
+			focus = URS_dr_needs
+		}
+		x = 4
+		y = 7
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# 滴答…滴答…（占位：设计稿未给内容）
+	focus = {
+		id = URS_dr_tick
+		icon = GFX_goal_generic_secret_weapon
+		cost = 5
+		prerequisite = {
+			focus = URS_dr_pointer
+		}
+		x = 4
+		y = 8
+		# desc / completion_reward 待填（留空等后续设计稿）
+	}
+
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}

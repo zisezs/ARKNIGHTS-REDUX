@@ -1,0 +1,32 @@
+# ══════════════════════════════════════════════════════════════════════
+#  【企业国家！】变量建表
+#  【由 docs/gen_rhl_corp.cjs 生成，勿手改】
+#  ------------------------------------------------------------------
+#  add_to_variable 作用于未定义变量不会成立，所以三条支线各自的起始格
+#  先调一次本效果。守卫按变量本身判（NOT has_variable），不是按旗标：
+#  支线之间彼此独立，先点经济线不该把已攒的行政线数值清零。
+# ══════════════════════════════════════════════════════════════════════
+
+RHL_cp_init_admin = {
+	if = {
+		limit = { NOT = { has_variable = RHL_cp_admin_pp } }
+		set_variable = { RHL_cp_admin_pp = 0 }
+		set_variable = { RHL_cp_admin_stab = 0 }
+	}
+}
+
+RHL_cp_init_econ = {
+	if = {
+		limit = { NOT = { has_variable = RHL_cp_econ_ind } }
+		set_variable = { RHL_cp_econ_ind = 0 }
+		set_variable = { RHL_cp_econ_build = 0 }
+	}
+}
+
+RHL_cp_init_sci = {
+	if = {
+		limit = { NOT = { has_variable = RHL_cp_sci_res } }
+		set_variable = { RHL_cp_sci_res = 0 }
+		set_variable = { RHL_cp_sci_ws = 0 }
+	}
+}

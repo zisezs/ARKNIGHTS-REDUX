@@ -1,0 +1,112 @@
+ideas = {
+	regime_level = {
+		law = yes
+		use_list_view = yes
+
+		local_warlord = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				war_support_factor = 0.05
+				justify_war_goal_time = 0.1
+				enemy_justify_war_goal_time = -0.1
+				training_time_factor = 1
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		special_region = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				war_support_factor = -0.1
+				training_time_factor = 1
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		small_country = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				war_support_factor = -0.1
+				send_volunteer_size = 1
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		medium_country = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				war_support_factor = -0.05
+				send_volunteer_size = 2
+				justify_war_goal_time = -0.15
+				enemy_justify_war_goal_time = 0.15
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		major_country = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				war_support_factor = 0.05
+				send_volunteer_size = 3
+				justify_war_goal_time = -0.3
+				enemy_justify_war_goal_time = 0.3
+			}
+			
+			cancel_if_invalid = no
+		}
+	}
+}

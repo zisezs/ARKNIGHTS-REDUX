@@ -1,0 +1,631 @@
+# ============================================================================
+# 叙拉古 (SRC) · 管理法修正案（Emendamenti）
+# 全部由国策旗标解锁；计时决议三段式：cost（政治点，点下即扣）→ complete_effect（立即）
+#   → days_remove 天后 remove_effect（结算）。决议处于激活期即天然冷却，不可重复点。
+# 市民积分 SRC_civic_points（0~100）是门槛与消耗，脚本效果见
+#   common/scripted_effects/SRC_federal_effects.txt
+# ============================================================================
+SRC_reform_category = {
+
+	# ────────── 分支一 · 打击黑帮 ──────────
+	# 【背景审查】逐人核验登记，把家族的楔子从市政名册上划掉
+	SRC_dec_background_check = {
+		icon = GFX_decision_generic_arrest
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_law_enforced
+		}
+		available = {
+			NOT = {
+				has_war = yes
+			}
+		}
+		cost = 50
+		fire_only_once = no
+		days_remove = 30
+		complete_effect = {
+			custom_effect_tooltip = SRC_tt_dec_check_going
+		}
+		remove_effect = {
+			add_stability = 0.02
+			SRC_civic_points_up_5_effect = yes
+			custom_effect_tooltip = SRC_tt_points5
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 3
+			}
+		}
+	}
+
+	# 【灰厅照会】把新沃尔西尼的席位摆上圆桌，等灰厅自己改口
+	SRC_dec_grey_hall_note = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_grey_hall_observer
+		}
+		available = {
+			NOT = {
+				has_country_flag = SRC_flag_grey_hall_note_sent
+			}
+		}
+		fire_only_once = yes
+		cost = 40
+		days_remove = 30
+		complete_effect = {
+			set_country_flag = SRC_flag_grey_hall_note_sent
+		}
+		remove_effect = {
+			add_political_power = 120
+			add_stability = 0.02
+			SRC_civic_points_up_10_effect = yes
+			custom_effect_tooltip = SRC_tt_dec_note_done
+		}
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	# ────────── 分支二 · 建设城市 ──────────
+	# 【城市互联计划】用电缆、合同与法条把二十三座城串成一张网
+	SRC_dec_city_league = {
+		icon = GFX_decision_generic_construction
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_city_networked
+		}
+		available = {
+			num_of_civilian_factories > 2
+		}
+		cost = 50
+		fire_only_once = no
+		days_remove = 45
+		modifier = {
+			production_speed_infrastructure_factor = 0.2
+		}
+		remove_effect = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						is_capital = yes
+					}
+					free_building_slots = {
+						building = infrastructure
+						size > 1
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			SRC_civic_points_up_5_effect = yes
+			custom_effect_tooltip = SRC_tt_points5
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 4
+			}
+		}
+	}
+
+	# 【特许经营与关税】技术可以进来，资本必须守法
+	SRC_dec_franchise_tariff = {
+		icon = GFX_decision_generic_fundraising
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_casimir_answered
+		}
+		available = {
+			NOT = {
+				has_country_flag = SRC_flag_franchise_done
+			}
+		}
+		fire_only_once = yes
+		cost = 80
+		days_remove = 40
+		complete_effect = {
+			set_country_flag = SRC_flag_franchise_done
+		}
+		remove_effect = {
+			add_political_power = 60
+			add_to_variable = { SRC_cd_cons = -0.05 }
+			add_to_variable = { SRC_cd_fac = 0.01 }
+			SRC_civic_points_up_10_effect = yes
+			custom_effect_tooltip = SRC_tt_cd_cons
+			custom_effect_tooltip = SRC_tt_cd_fac_lo
+		}
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	# ────────── 分支三 · 荆棘之路 ──────────
+	# 【紧急审判】法槌不落则已，一落就要见血
+	SRC_dec_emergency_trial = {
+		icon = GFX_decision_generic_civil_support
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_judicial_reform
+		}
+		cost = 70
+		fire_only_once = no
+		days_remove = 25
+		remove_effect = {
+			add_political_power = 50
+			add_timed_idea = {
+			idea = SRC_timed_trial
+			days = 180
+		}
+			custom_effect_tooltip = SRC_tt_dec_trial_done
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 5
+			}
+		}
+	}
+
+	# 【自治社区】积分达标者议事，市政厅把一段街区分给居民自己
+	SRC_dec_autonomous_community = {
+		icon = GFX_decision_generic_consumer_goods
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_civic_points_law
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SRC_tt_need_points20
+				check_variable = {
+					var = SRC_civic_points
+					value = 20
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		cost = 60
+		fire_only_once = no
+		days_remove = 60
+		complete_effect = {
+			SRC_civic_points_down_10_effect = yes
+		}
+		remove_effect = {
+			add_timed_idea = {
+			idea = SRC_timed_community
+			days = 365
+		}
+			add_dynamic_modifier = { modifier = SRC_civic_points_system }
+			add_to_variable = { SRC_cp_stab = 0.02 }
+			add_to_variable = { SRC_cp_pp = 0.02 }
+			custom_effect_tooltip = SRC_tt_cp_stab_dec
+			custom_effect_tooltip = SRC_tt_cp_pp_dec
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 5
+			}
+		}
+	}
+
+	# 【市民登记处】给失去核心的街区重新盖章，把流失的忠诚登记回来
+	SRC_dec_civic_registration = {
+		icon = GFX_decision_generic_colonial_administration
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_civic_points_law
+		}
+		available = {
+			any_owned_state = {
+				NOT = {
+					is_core_of = ROOT
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = SRC_tt_need_points10
+				check_variable = {
+					var = SRC_civic_points
+					value = 10
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		cost = 90
+		fire_only_once = no
+		days_remove = 45
+		complete_effect = {
+			SRC_civic_points_down_10_effect = yes
+		}
+		remove_effect = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						is_core_of = ROOT
+					}
+				}
+				add_core_of = ROOT
+				custom_effect_tooltip = SRC_tt_dec_registered
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 6
+			}
+		}
+	}
+
+	# 【制宪会议】不同出身的人坐进同一间屋子
+	SRC_dec_constitutional_convention = {
+		icon = GFX_decision_generic_political_rally
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_constitution_draft
+		}
+		available = {
+			NOT = {
+				has_country_flag = SRC_flag_convention_done
+			}
+			has_government = authoritarianism
+		}
+		fire_only_once = yes
+		cost = 150
+		days_remove = 70
+		modifier = {
+			stability_factor = -0.05
+		}
+		complete_effect = {
+			set_country_flag = SRC_flag_convention_started
+			country_event = { id = src_federal.7 days = 2 }
+		}
+		remove_effect = {
+			set_country_flag = SRC_flag_convention_done
+			add_stability = 0.1
+			add_war_support = -0.05
+			SRC_civic_points_up_20_effect = yes
+			custom_effect_tooltip = SRC_tt_points20
+			custom_effect_tooltip = SRC_tt_convention_done
+			hidden_effect = {
+				SRC_federal_republic_proclaim_effect = yes
+				news_event = { id = src_federal_news.2 hours = 3 }
+			}
+		}
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	# ────────── 分支四 · 铳与秩序 ──────────
+	# 【治安扫荡】警察局的夜班名单上，家族的名字被划掉一批
+	SRC_dec_police_sweep = {
+		icon = GFX_decision_generic_police_action
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_police_rebuilt
+		}
+		cost = 40
+		fire_only_once = no
+		days_remove = 20
+		remove_effect = {
+			add_stability = 0.03
+			SRC_civic_points_up_5_effect = yes
+			custom_effect_tooltip = SRC_tt_points5
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 4
+			}
+		}
+	}
+
+	# 【荒野通行协议】猎狼人联络处的老规矩：城市归人类，荒野归狼群
+	SRC_dec_wolf_corridor = {
+		icon = GFX_decision_generic_forestry
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_wolf_pact
+		}
+		cost = 60
+		fire_only_once = no
+		days_remove = 30
+		remove_effect = {
+			add_timed_idea = {
+			idea = SRC_timed_hunt_pact
+			days = 240
+		}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 3
+			}
+		}
+	}
+
+	# ────────── 横向整合 ──────────
+	# 【特别运输线】企鹅物流的车队昼夜穿行，货舱里不止有包裹
+	SRC_dec_penguin_run = {
+		icon = GFX_decision_generic_trucks
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_texas_returned
+		}
+		cost = 40
+		fire_only_once = no
+		days_remove = 20
+		remove_effect = {
+			add_timed_idea = {
+			idea = SRC_timed_penguin_run
+			days = 120
+		}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 4
+			}
+		}
+	}
+
+	# ────────── 伟大建设工程 ──────────
+	# 【对新沃尔西尼的伟大建设工程！】三期连续的大工程：码头、高架、变电站与新区
+	SRC_dec_great_construction = {
+		icon = GFX_decision_generic_factory
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_flag_city_of_desires
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SRC_tt_great_project_left
+				check_variable = {
+					var = SRC_great_project
+					value = 3
+					compare = less_than
+				}
+			}
+		}
+		fire_only_once = no
+		cost = 120
+		days_remove = 270
+		modifier = {
+			industrial_capacity_factory = -0.15
+			consumer_goods_factor = 0.05
+		}
+		complete_effect = {
+			add_to_variable = { SRC_great_project = 1 }
+			custom_effect_tooltip = SRC_tt_great_project_going
+		}
+		remove_effect = {
+			capital_scope = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 3
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+						is_capital = yes
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_capital = no
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_stability = 0.05
+			SRC_civic_points_up_15_effect = yes
+			add_dynamic_modifier = { modifier = SRC_dyn_city_of_desires }
+			add_to_variable = { SRC_cd_build = 0.04 }
+			add_to_variable = { SRC_cd_fac = 0.02 }
+			custom_effect_tooltip = SRC_tt_points15
+			custom_effect_tooltip = SRC_tt_great_project_build
+			custom_effect_tooltip = SRC_tt_great_project_fac
+			custom_effect_tooltip = SRC_tt_great_project_done
+			hidden_effect = {
+				news_event = { id = src_federal_news.3 hours = 6 }
+			}
+		}
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	# ────────── 产业国策树解锁的三条决议 ──────────
+	# 【移动城市建造】一期一期往下盖：地基、轨道、变电站与新区（上限 3 期）
+	SRC_eco_dec_mobile_city = {
+		icon = GFX_decision_generic_construction
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_eco_flag_columbia_mobile_tech
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SRC_eco_tt_mobile_city_left
+				check_variable = {
+					var = SRC_eco_mobile_city_count
+					value = 3
+					compare = less_than
+				}
+			}
+			num_of_civilian_factories > 4
+		}
+		fire_only_once = no
+		cost = 80
+		days_remove = 180
+		modifier = {
+			production_speed_buildings_factor = -0.1
+			consumer_goods_factor = 0.04
+		}
+		complete_effect = {
+			add_to_variable = { SRC_eco_mobile_city_count = 1 }
+			custom_effect_tooltip = SRC_eco_tt_mobile_city_going
+		}
+		remove_effect = {
+			capital_scope = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			add_stability = 0.05
+			custom_effect_tooltip = SRC_eco_tt_mobile_city_done
+		}
+		ai_will_do = {
+			base = 5
+			modifier = {
+				is_ai = yes
+				factor = 4
+			}
+		}
+	}
+
+	# 【运输保障】伊雷妮的调度表：卡车、码头班次与陆行舰时刻
+	SRC_eco_dec_transport = {
+		icon = GFX_decision_generic_trucks
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_eco_flag_transport_authority
+		}
+		available = {
+			NOT = {
+				has_war = yes
+			}
+		}
+		fire_only_once = no
+		cost = 50
+		days_remove = 60
+		modifier = {
+			supply_consumption_factor = -0.15
+		}
+		complete_effect = {
+			custom_effect_tooltip = SRC_eco_tt_transport_going
+		}
+		remove_effect = {
+			random_owned_state = {
+				count = 2
+				limit = {
+					NOT = {
+						is_capital = yes
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_political_power = 50
+			SRC_civic_points_up_5_effect = yes
+			custom_effect_tooltip = SRC_tt_points5
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 3
+			}
+		}
+	}
+
+	# 【狼群商约】荒野归狼群，城市归合同：按吨位付费的护航
+	SRC_eco_dec_wolf_pact = {
+		icon = GFX_decision_generic_fundraising
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_eco_flag_guns_order
+		}
+		available = {
+			num_of_civilian_factories > 2
+		}
+		fire_only_once = no
+		cost = 60
+		days_remove = 70
+		modifier = {
+			consumer_goods_factor = 0.03
+		}
+		complete_effect = {
+			custom_effect_tooltip = SRC_eco_tt_wolf_pact_going
+		}
+		remove_effect = {
+			add_political_power = 130
+			add_manpower = 40000
+			add_stability = 0.03
+			custom_effect_tooltip = SRC_eco_tt_wolf_pact_done
+		}
+		ai_will_do = {
+			base = 8
+		}
+	}
+
+}

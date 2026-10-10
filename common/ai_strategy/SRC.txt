@@ -1,0 +1,338 @@
+# ==============================================================================
+# 叙拉古 (SRC) 专属 AI 战略（2026-09-23）
+#
+# 这份文件管两件事：
+#   1) 平时就把军队练成"步兵为骨干 + 少量装甲拳头"，而不是拿着开局的民团师用到投降；
+#   2) 一旦【叙拉古内战】开打（事件 16 的 B 分支，见 events/SRC_civil_war.txt），
+#      把全部战争意志压在 SR1/SR2 身上，且不再对外开第二条战线。
+#
+# 与全局层的关系（重要，否则数值会算错）：
+#   common/ai_strategy 下各块是**叠加**的，同一个 type+id 的 value 相加，
+#   所以这里只写增量。基线来自：
+#     · default.txt   ——  infantry 40 / militia 5 / armor 20 / motorized 10 /
+#                         mountaineers 4 / air_assault 3 / landship 2 / garrison 5 /
+#                         equipment_production_factor infantry 40、artillery 25
+#     · REC_global_ai ——  land_xp division_template 120、template_prio infantry 25、
+#                         ai_wanted_divisions_factor 25、equipment infantry 25/artillery 20/support 30、
+#                         front_control 邻国 rush priority 60、avoid_starting_wars -120
+#
+# 叙拉古的国情（门槛就按这个定档）：开局 19 州 22 民工厂 + 20 军工、1524 万人力；
+# 内战分裂后只剩 13 州 16 民 + 11 军工（守旧派拿走 9 座军工 = 45% 产能）。
+# 因此：① 步兵吃满配额、民团与摩托化压到 0；② 装甲从 20% 压下来（11 座军工喂不动
+# -default 给的盘子，宁可要满编步兵师也不要缺装坦克师）；③ 换代门槛见
+# common/ai_templates/SRC_templates.txt 的头注释。
+# ==============================================================================
+
+# ---- 1. 平时建军：把叙拉古从"警察国家"掰成"有骨干陆军的城市共和国" ----
+SRC_peacetime_army = {
+
+	allowed = {
+		original_tag = SRC
+	}
+	enable = {
+		original_tag = SRC
+	}
+	abort_when_not_enabled = yes
+
+	# —— 编制配额：步兵为绝对骨干 ——
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 30
+	}
+	# 内战前的城邦执法队/防暴部队全是民兵团，和平期不再补民兵（战争期由下一块临时加回）
+	ai_strategy = {
+		type = role_ratio
+		id = militia
+		value = -5
+	}
+	# 11~20 座军工养不起 default 给的 20% 装甲盘子，压到个位数、要就要满编
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = -12
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = -8
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = mountaineers
+		value = -4
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = air_assault
+		value = -3
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = landship
+		value = -2
+	}
+	# 叙拉古有家族盘踞与老一辈怒火这类掉核心的内部问题，驻军配额给足
+	ai_strategy = {
+		type = role_ratio
+		id = garrison
+		value = 8
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = suppression
+		value = 5
+	}
+
+	# —— 换代优先级：钱和 XP 花在步兵上，别去雕民兵师 ——
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = 20
+	}
+	ai_strategy = {
+		type = template_prio
+		id = militia
+		value = -40
+	}
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = -20
+	}
+
+	# —— 产能：先保证有枪，再保证有炮，最后才是装甲 ——
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 25
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 15
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = support
+		value = 15
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_tank
+		value = 15
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = -25
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = motorized
+		value = -30
+	}
+	# 无论如何留 2 座工厂产枪：叙拉古缺装的都是步兵装备
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = infantry
+		value = 2
+	}
+	# 开局装备是 infantry_equipment_0，别囤够旧的才换代
+	ai_strategy = {
+		type = production_upgrade_desire_offset
+		id = infantry_equipment_0
+		value = 100
+	}
+	ai_strategy = {
+		type = production_upgrade_desire_offset
+		id = artillery_equipment_0
+		value = 100
+	}
+
+	# —— 数量：1500 万人力，城市共和国的动员规模往上调 ——
+	ai_strategy = {
+		type = ai_wanted_divisions_factor
+		value = 40
+	}
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = 15
+	}
+
+	# —— 研发：ai_focuses 是死文件，只能逐项给权重（见 [[hoi4-ai-tuning-layer]]）——
+	#   口径是"把步兵武器/火炮/反坦克这条主链推到底"，而不是铺开装甲科技树。
+	ai_strategy = {
+		type = research_weight_factor
+		id = infantry_weapons_3
+		value = 30
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = infantry_weapons_improvement_1
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = artillery_2
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = artillery_3
+		value = 20
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = antitank_0
+		value = 60
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = antiair_0
+		value = 60
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = antitank_2
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = antitank_3
+		value = 20
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_support
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_signal_company
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_military_police
+		value = 30
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = light_tank_0
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = medium_tank_0
+		value = 20
+	}
+}
+
+# ---- 2. 内战期：全部意志压向 SR1/SR2，且不开第二条战线 ----
+# enable 用"正在和哪个叛政权打仗"，比读旗标准：旗标在战争结束后仍然挂着，
+# 会让这块战略在议和之后继续把 avoid_starting_wars 顶高、叙拉古就再也不敢动手了。
+SRC_civil_war_footing = {
+
+	allowed = {
+		original_tag = SRC
+	}
+	enable = {
+		OR = {
+			has_war_with = SR1
+			has_war_with = SR2
+		}
+	}
+	abort_when_not_enabled = yes
+
+	# 叛军战线：优先级 200 压过全局那条 60，ready 就冲（不等兵力优势）
+	ai_strategy = {
+		type = front_control
+		country_trigger = {
+			OR = {
+				tag = SR1
+				tag = SR2
+			}
+		}
+		ratio = 0.05
+		priority = 200
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+		manual_attack = yes
+	}
+	# 兵力向叛军战线集中、并且主动向前线要兵
+	ai_strategy = {
+		type = force_concentration_target_weight
+		country_trigger = {
+			OR = {
+				tag = SR1
+				tag = SR2
+			}
+		}
+		value = 60
+	}
+	ai_strategy = {
+		type = front_unit_request
+		country_trigger = {
+			OR = {
+				tag = SR1
+				tag = SR2
+			}
+		}
+		value = 60
+	}
+	# 目标就是把那 6 个州收回来
+	ai_strategy = {
+		type = conquer
+		id = SR1
+		value = 500
+	}
+	ai_strategy = {
+		type = conquer
+		id = SR2
+		value = 500
+	}
+	# 内战期绝不对外宣战/参战：全局是 -120（很敢打），这里顶成净 +480
+	ai_strategy = {
+		type = avoid_starting_wars
+		value = 600
+	}
+	# 除了正面，还要有人接管打下来的州
+	ai_strategy = {
+		type = role_ratio
+		id = garrison
+		value = 25
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = suppression
+		value = 20
+	}
+	# 战争初期缺枪少炮，民团训练 40 天、装备消耗只有一半，先拿来顶线
+	ai_strategy = {
+		type = role_ratio
+		id = militia
+		value = 10
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 35
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 20
+	}
+	# 扣着的预备队全部推上战线（全局 +20 在这里净为 0）
+	ai_strategy = {
+		type = spare_unit_factor
+		value = -20
+	}
+	ai_strategy = {
+		type = ai_wanted_divisions_factor
+		value = 30
+	}
+}

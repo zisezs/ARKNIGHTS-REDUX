@@ -1,0 +1,618 @@
+defined_text = {
+	name = CLB_A_party_name #大党A的名称（用于应对大党名称变化）
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Democratic_Party_flag
+		}
+		localization_key = CLB_Democratic_Party
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Socialist_Party_flag
+		}
+		localization_key = CLB_Socialist_Party
+	}
+	text = {
+		localization_key = CLB_Federal_Progressive_Party
+	}
+}
+
+defined_text = {
+	name = CLB_A_party_name_color #大党A的名称（彩色字体）
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Democratic_Party_flag
+		}
+		localization_key = CLB_Democratic_Party_color
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Socialist_Party_flag
+		}
+		localization_key = CLB_Socialist_Party_color
+	}
+	text = {
+		localization_key = CLB_Federal_Progressive_Party_color
+	}
+}
+
+defined_text = {
+	name = CLB_B_party_name #大党B的名称（用于应对大党名称变化）
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Democratic_Republican_Party_flag
+		}
+		localization_key = CLB_Democratic_Republican_Party
+	}
+	text = {
+		localization_key = CLB_Republican_Party
+	}
+}
+
+defined_text = {
+	name = CLB_B_party_name_color #大党B的名称（彩色字体）
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Republican_Party_flag
+		}
+		localization_key = CLB_Republican_Party_color
+	}
+	text = {
+		localization_key = CLB_Republican_Party_color
+	}
+}
+
+defined_text = {
+	name = CLB_state_vote_loc
+
+ 	text = {
+		trigger = {
+			FROM= {
+				has_state_flag = CLB_vote_communism_flag
+			}
+		}
+		localization_key = CLB_communism_party
+	}
+	text = {
+		trigger = {
+			FROM= {
+				has_state_flag = CLB_vote_socialism_flag
+			}
+		}
+		localization_key = CLB_socialism_party
+	}
+	text = {
+		trigger = {
+			FROM= {
+				has_state_flag = CLB_vote_progressivism_flag
+			}
+		}
+		localization_key = CLB_progressivism_party
+	}
+	text = {
+		trigger = {
+			FROM= {
+				has_state_flag = CLB_vote_liberalism_flag
+			}
+		}
+		localization_key = CLB_liberalism_party
+	}
+	text = {
+		trigger = {
+			FROM= {
+				has_state_flag = CLB_vote_conservatism_flag
+			}
+		}
+		localization_key = CLB_conservatism_party
+	}
+	text = {
+		trigger = {
+			FROM= {
+				has_state_flag = CLB_vote_authoritarianism_flag
+			}
+		}
+		localization_key = CLB_authoritarianism_party
+	}
+	text = {
+		trigger = {
+			FROM= {
+				has_state_flag = CLB_vote_fascism_flag
+			}
+		}
+		localization_key = CLB_fascism_party
+	}
+	text = {
+		localization_key = CLB_state_vote_none_loc
+	}
+}
+
+defined_text = {
+	name = CLB_election_communism #共产党是否独立参选
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_communism_in_A_flag
+		}
+		localization_key = empty_tt
+	}
+	text = {
+		localization_key = CLB_communism_candidates
+	}
+}
+
+defined_text = {
+	name = CLB_election_socialism #社会党是否独立参选
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+		localization_key = empty_tt
+	}
+	text = {
+		localization_key = CLB_socialism_candidates
+	}
+}
+
+defined_text = {
+	name = CLB_election_liberalism #自由党是否独立参选
+
+	text = {
+		trigger = {
+			OR = {
+				has_country_flag = CLB_liberalism_in_A_flag
+				has_country_flag = CLB_liberalism_in_B_flag
+			}
+		}
+		localization_key = empty_tt
+	}
+	text = {
+		localization_key = CLB_liberalism_candidates
+	}
+}
+
+defined_text = {
+	name = CLB_election_fascism #新秩序党是否独立参选
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_fascism_in_B_flag
+		}
+		localization_key = empty_tt
+	}
+	text = {
+		localization_key = CLB_fascism_candidates
+	}
+}
+
+defined_text = {
+	name = CLB_election_votes_communism #共产党是否独立参选
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_communism_in_A_flag
+		}
+		localization_key = empty_tt
+	}
+	text = {
+		localization_key = CLB_communism_votes
+	}
+}
+
+defined_text = {
+	name = CLB_election_votes_socialism #社会党是否独立参选
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+		localization_key = empty_tt
+	}
+	text = {
+		localization_key = CLB_socialism_votes
+	}
+}
+
+defined_text = {
+	name = CLB_election_votes_liberalism #自由党是否独立参选
+
+	text = {
+		trigger = {
+			OR = {
+				has_country_flag = CLB_liberalism_in_A_flag
+				has_country_flag = CLB_liberalism_in_B_flag
+			}
+		}
+		localization_key = empty_tt
+	}
+	text = {
+		localization_key = CLB_liberalism_votes
+	}
+}
+
+defined_text = {
+	name = CLB_election_votes_fascism #新秩序党是否独立参选
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_fascism_in_B_flag
+		}
+		localization_key = empty_tt
+	}
+	text = {
+		localization_key = CLB_fascism_votes
+	}
+}
+
+defined_text = {
+	name = CLB_A_party_presidential_candidate #A大党总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Brighton_nominated
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+		localization_key = CLB_Michael_Brighton
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_AOC_nominated
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+		localization_key = CLB_Abigail_Orleans_Calnis
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Gernis_nominated
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+		localization_key = CLB_Gernis_Williams
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Carpenter_nominated
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+		localization_key = CLB_Jerome_Carpenter
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Gerald_nominated
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+		localization_key = CLB_Gerald_Fray
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Upwood_nominated
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+		localization_key = CLB_Fiona_Upwood
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_William_nominated
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+		localization_key = CLB_William_Flemington
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_B_party_presidential_candidate #B大党总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Chaney_nominated
+		}
+		localization_key = CLB_Raymond_Chaney
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Graham_nominated
+		}
+		localization_key = CLB_George_Huey_Winkle_Graham
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Charles_nominated
+		}
+		localization_key = CLB_Dwayne_Charles
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Lee_nominated
+		}
+		localization_key = CLB_Hattie_Lee
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_JD_nominated
+		}
+		localization_key = CLB_Joanna_Dylan_Lewis
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_communism_presidential_candidate #共产党总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Forest_nominated
+		}
+		localization_key = CLB_Wesley_Forest
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_socialism_presidential_candidate #社会党总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Northwood_nominated
+		}
+		localization_key = CLB_Tom_Northwood
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Brighton_nominated
+		}
+		localization_key = CLB_Michael_Brighton
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Gernis_nominated
+		}
+		localization_key = CLB_Gernis_Williams
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_liberalism_presidential_candidate #自由党总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_William_nominated
+		}
+		localization_key = CLB_William_Flemington
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Kristen_nominated
+		}
+		localization_key = CLB_Kristen_Wright
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Alessandro_nominated
+		}
+		localization_key = CLB_Gavin_Cristiano_Alessandro
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_fascism_presidential_candidate #新秩序党总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Eifinger_nominated
+		}
+		localization_key = CLB_Joseph_Eifinger
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_A_party_vice_presidential_candidate #A大党副总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_AOC_nominated_vice
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+		localization_key = CLB_Abigail_Orleans_Calnis
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Bobby_nominated_vice
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+		localization_key = CLB_Bobby_Fray
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Franca_nominated_vice
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+		localization_key = CLB_Juliet_Franca
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Haines_nominated_vice
+		}
+		localization_key = CLB_Herbert_Haines
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Priestley_nominated_vice
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+		localization_key = CLB_Luz_Priestley
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Gordon_nominated_vice
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+		localization_key = CLB_Alice_Gordon
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Hill_nominated_vice
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+		localization_key = CLB_Hill_Flemington
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_B_party_vice_presidential_candidate #B大党副总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Chaney_nominated_vice
+		}
+		localization_key = CLB_Raymond_Chaney
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Alessandro_nominated_vice
+			has_country_flag = CLB_liberalism_in_B_flag
+		}
+		localization_key = CLB_Gavin_Cristiano_Alessandro
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Eichenfeller_nominated_vice
+		}
+		localization_key = CLB_Monica_Eichenfeller
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_JD_nominated_vice
+		}
+		localization_key = CLB_Joanna_Dylan_Lewis
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Clancy_nominated_vice
+			has_country_flag = CLB_fascism_in_B_flag
+		}
+		localization_key = CLB_Catherine_Clancy
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_communism_vice_presidential_candidate #共产党副总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Hatteberg_nominated_vice
+		}
+		localization_key = CLB_Grace_Hatteberg
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_socialism_vice_presidential_candidate #社会党副总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Northwood_nominated_vice
+		}
+		localization_key = CLB_Tom_Northwood
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Silas_nominated_vice
+		}
+		localization_key = CLB_Alyssa_Silas
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_AOC_nominated_vice
+			NOT = {
+				has_country_flag = CLB_socialism_in_A_flag
+			}
+		}
+		localization_key = CLB_Abigail_Orleans_Calnis
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_liberalism_vice_presidential_candidate #自由党副总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Gordon_nominated_vice
+			NOT = {
+				has_country_flag = CLB_liberalism_in_A_flag
+			}
+		}
+		localization_key =  CLB_Alice_Gordon
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Alessandro_nominated_vice
+			NOT = {
+				has_country_flag = CLB_liberalism_in_B_flag
+			}
+		}
+		localization_key = CLB_Gavin_Cristiano_Alessandro
+	}
+	text = {
+		trigger = {
+			has_country_flag = CLB_Lizard_nominated_vice
+		}
+		localization_key = CLB_Mark_Lizard
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_fascism_vice_presidential_candidate #新秩序党副总统候选人
+
+	text = {
+		trigger = {
+			has_country_flag = CLB_Arouet_nominated_vice
+		}
+		localization_key = CLB_Teresa_Arouet
+	}
+	text = {
+		localization_key = CLB_no_candidate
+	}
+}
+
+defined_text = {
+	name = CLB_Continental_Army_recon_tech_desc
+
+	text = {
+		localization_key = tech_effect|CLB_Continental_Army_recon_tech
+	}
+}

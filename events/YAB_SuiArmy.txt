@@ -1,0 +1,52 @@
+# ==============================================================================
+#  安北都护府 · 岁相显化（都护府叛乱）
+#  · sui_yab.1 岁相显化        安北都护府易帜「岁军」，建军三十师，对大炎宣战
+#  · sui_yab.2 新闻超事件      「岁相显化-都护府叛乱」世界广播（major）
+#  · 触发：history/countries/YAB - Yananbei.txt 的定时事件，开局后 66 个月
+#    （开局 1094.6.1 + 66 月 = 1099.12.1 硬日期）。
+#  · 改名/建军/宣战集中在 scripted effect YAB_sui_army_uprising
+#    （common/scripted_effects/YAB_sui_army_scripted_effects.txt）。
+#    与 yan_upheaval.4 同理：效果不能写成 major country_event，否则会在
+#    各大国作用域各跑一遍；世界广播由 sui_yab.2 news_event 承担。
+#  · 文风与设定参照《登临意》：白描、短句、克制。
+# ==============================================================================
+
+add_namespace = sui_yab
+
+# ------------------------------------------------------------------
+# 1 岁相显化 —— 安北都护府易帜
+# ------------------------------------------------------------------
+country_event = {
+	id = sui_yab.1
+	title = sui_yab.1.t
+	desc = sui_yab.1.d
+	picture = GFX_report_event_Generic_Snowfield_Twilight
+
+	is_triggered_only = yes
+
+	option = {
+		name = sui_yab.1.a
+		custom_effect_tooltip = sui_yab.1.tt
+		# 钉死作用域：改名/建军/宣战只准落在安北都护府身上
+		YAB = {
+			YAB_sui_army_uprising = yes
+		}
+	}
+}
+
+# ------------------------------------------------------------------
+# 2 新闻超事件：岁相显化-都护府叛乱
+# ------------------------------------------------------------------
+news_event = {
+	id = sui_yab.2
+	title = sui_yab.2.t
+	desc = sui_yab.2.d
+	picture = GFX_report_event_YAN_sui_nu
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = sui_yab.2.a
+	}
+}

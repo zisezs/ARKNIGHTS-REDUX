@@ -1,0 +1,1147 @@
+######################
+## 大炎 军事国策树簇（共享国策）
+## 由 common/national_focus/YAN.txt 的 YAN_national_focus 以 shared_focus 引用并入主树
+## 坐标区 y = 14..25（旧国策占 y = 0..11，互不重叠）
+## 生成器：docs/_yan_mil_build.py（改数据表重跑，勿手改产物）
+######################
+
+shared_focus = { #整军经武
+	id = YAN_mil_reform_root
+	icon = GFX_focus_YAN_mil_reform_root
+	x = 0
+	y = 14
+	cost = 0.5
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		add_dynamic_modifier = { modifier = YAN_mil_tianzhu }
+		army_experience = 100
+		navy_experience = 50
+		air_experience = 50
+		set_country_flag = YAN_mil_reform_started
+	}
+}
+
+shared_focus = { #民为邦本
+	id = YAN_mil_people
+	icon = GFX_focus_YAN_mil_people
+	x = -2
+	y = 15
+	cost = 0.5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_reform_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_stability_factor = 0.03
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_war_support_factor = 0.03
+			tooltip = war_support_factor_tt
+		}
+		country_event = { id = yan_mil.1 days = 1 }
+	}
+}
+
+shared_focus = { #秣马厉兵
+	id = YAN_mil_drill
+	icon = GFX_focus_YAN_mil_drill
+	x = 2
+	y = 15
+	cost = 0.5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_reform_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_army_org_factor = 0.05
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_war_support_factor = 0.05
+			tooltip = war_support_factor_tt
+		}
+		country_event = { id = yan_mil.2 days = 1 }
+	}
+}
+
+shared_focus = { #玉门论兵
+	id = YAN_mil_council
+	icon = GFX_focus_YAN_mil_council
+	x = 0
+	y = 16
+	cost = 1
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_people
+	}
+	prerequisite = {
+		focus = YAN_mil_drill
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_command_power_gain = 0.05
+			tooltip = command_power_gain_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_max_planning_factor = 0.05
+			tooltip = max_planning_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_land_reinforce_rate = 0.02
+			tooltip = land_reinforce_rate_tt
+		}
+		country_event = { id = yan_mil.3 days = 1 }
+	}
+}
+
+shared_focus = { #革故鼎新
+	id = YAN_mil_modernization
+	icon = GFX_focus_YAN_mil_modernization
+	x = 0
+	y = 17
+	cost = 1
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_council
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_training_time_factor = -0.05
+			tooltip = training_time_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_research_speed_factor = 0.03
+			tooltip = research_speed_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_command_cap_increase = 10
+			tooltip = YAN_mil_tz_command_cap_increase_value_tt
+		}
+		unlock_decision_category_tooltip = YAN_Military_Reform
+		unlock_decision_tooltip = YAN_mil_dec_army_exercise
+		unlock_decision_tooltip = YAN_mil_dec_navy_exercise
+		unlock_decision_tooltip = YAN_mil_dec_air_exercise
+		set_country_flag = YAN_mil_exercises_unlocked
+		country_event = { id = yan_mil.4 days = 1 }
+	}
+}
+
+shared_focus = { #御风而行
+	id = YAN_mil_air_root
+	icon = GFX_focus_YAN_mil_air_root
+	x = -15
+	y = 18
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_modernization
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_air_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_air_tier value = 1 }
+		YAN_mil_refresh_air = yes
+	}
+}
+
+shared_focus = { #司天观星
+	id = YAN_mil_air_warning
+	icon = GFX_focus_YAN_mil_air_warning
+	x = -17
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_air_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_air_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_air_tier value = 1 }
+		YAN_mil_refresh_air = yes
+	}
+}
+
+shared_focus = { #云骑临风
+	id = YAN_mil_air_craft
+	icon = GFX_focus_YAN_mil_air_craft
+	x = -15
+	y = 19
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_air_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_air_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_air_tier value = 1 }
+		YAN_mil_refresh_air = yes
+	}
+}
+
+shared_focus = { #无形之翼
+	id = YAN_mil_air_uav
+	icon = GFX_focus_YAN_mil_air_uav
+	x = -13
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_air_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_air_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_air_tier value = 1 }
+		YAN_mil_refresh_air = yes
+	}
+}
+
+shared_focus = { #万籁俱寂
+	id = YAN_mil_air_ew
+	icon = GFX_focus_YAN_mil_air_ew
+	x = -18
+	y = 21
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_air_warning
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_air_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_air_tier value = 1 }
+		YAN_mil_refresh_air = yes
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_decryption_factor = 0.05
+			tooltip = decryption_factor_tt
+		}
+	}
+}
+
+shared_focus = { #天工开物
+	id = YAN_mil_air_line
+	icon = GFX_focus_YAN_mil_air_line
+	x = -15
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_air_craft
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_air_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_air_tier value = 1 }
+		YAN_mil_refresh_air = yes
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_industrial_capacity_factory = 0.05
+			tooltip = industrial_capacity_factory_tt
+		}
+	}
+}
+
+shared_focus = { #鹰击长空
+	id = YAN_mil_air_rs
+	icon = GFX_focus_YAN_mil_air_rs
+	x = -12
+	y = 21
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_air_uav
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_air_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_air_tier value = 1 }
+		YAN_mil_refresh_air = yes
+	}
+}
+
+shared_focus = { #气吞万里
+	id = YAN_mil_air_supremacy
+	icon = GFX_focus_YAN_mil_air_supremacy
+	x = -15
+	y = 21
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_air_ew
+	}
+	prerequisite = {
+		focus = YAN_mil_air_line
+	}
+	prerequisite = {
+		focus = YAN_mil_air_rs
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_air_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_air_tier value = 1 }
+		YAN_mil_refresh_air = yes
+		air_experience = 50
+	}
+}
+
+shared_focus = { #楼船夜雪
+	id = YAN_mil_navy_root
+	icon = GFX_focus_YAN_mil_navy_root
+	x = -5
+	y = 18
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_modernization
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_navy_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_navy_tier value = 1 }
+		YAN_mil_refresh_navy = yes
+	}
+}
+
+shared_focus = { #艨艟巍峨
+	id = YAN_mil_navy_capital
+	icon = GFX_focus_YAN_mil_navy_capital
+	x = -7
+	y = 19
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_navy_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_navy_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_navy_tier value = 1 }
+		YAN_mil_refresh_navy = yes
+	}
+}
+
+shared_focus = { #百工维新
+	id = YAN_mil_navy_shipyard
+	icon = GFX_focus_YAN_mil_navy_shipyard
+	x = -5
+	y = 19
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_navy_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_navy_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_navy_tier value = 1 }
+		YAN_mil_refresh_navy = yes
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_industrial_capacity_dockyard = 0.05
+			tooltip = industrial_capacity_dockyard_tt
+		}
+	}
+}
+
+shared_focus = { #蛟龙出水
+	id = YAN_mil_navy_marines
+	icon = GFX_focus_YAN_mil_navy_marines
+	x = -3
+	y = 19
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_navy_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_navy_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_navy_tier value = 1 }
+		YAN_mil_refresh_navy = yes
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_army_attack_factor = 0.05
+			tooltip = army_attack_factor_tt
+		}
+	}
+}
+
+shared_focus = { #浮城载翼
+	id = YAN_mil_navy_carrier
+	icon = GFX_focus_YAN_mil_navy_carrier
+	x = -7
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_navy_capital
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_navy_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_navy_tier value = 1 }
+		YAN_mil_refresh_navy = yes
+	}
+}
+
+shared_focus = { #浮海攻坚
+	id = YAN_mil_navy_amphib
+	icon = GFX_focus_YAN_mil_navy_amphib
+	x = -3
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_navy_marines
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_navy_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_navy_tier value = 1 }
+		YAN_mil_refresh_navy = yes
+		every_army_leader = {
+			add_unit_leader_trait = naval_invader
+		}
+	}
+}
+
+shared_focus = { #渊龙入海
+	id = YAN_mil_navy_warships
+	icon = GFX_focus_YAN_mil_navy_warships
+	x = -5
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_navy_shipyard
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_navy_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_navy_tier value = 1 }
+		YAN_mil_refresh_navy = yes
+	}
+}
+
+shared_focus = { #沧溟万里
+	id = YAN_mil_navy_supremacy
+	icon = GFX_focus_YAN_mil_navy_supremacy
+	x = -5
+	y = 21
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_navy_carrier
+	}
+	prerequisite = {
+		focus = YAN_mil_navy_amphib
+	}
+	prerequisite = {
+		focus = YAN_mil_navy_shipyard
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_navy_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_navy_tier value = 1 }
+		YAN_mil_refresh_navy = yes
+		navy_experience = 100
+		add_doctrine_cost_reduction = { cost_reduction = 0.75 uses = 3 category = naval_doctrine }
+	}
+}
+
+shared_focus = { #沙场点兵
+	id = YAN_mil_army_root
+	icon = GFX_focus_YAN_mil_army_root
+	x = 5
+	y = 18
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_modernization
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_army_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_army_tier value = 1 }
+		YAN_mil_refresh_army = yes
+	}
+}
+
+shared_focus = { #校场演武
+	id = YAN_mil_army_livefire
+	icon = GFX_focus_YAN_mil_army_livefire
+	x = 7
+	y = 18
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_army_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_army_tier_up_tt
+
+		custom_effect_tooltip = YAN_mil_tt_army_army_org_regain_p10
+		custom_effect_tooltip = YAN_mil_tt_army_experience_loss_factor_m20
+		add_to_variable = { var = YAN_mil_army_tier value = 1 }
+		YAN_mil_refresh_army = yes
+		army_experience = 100
+	}
+}
+
+shared_focus = { #铁马冰河
+	id = YAN_mil_army_armor
+	icon = GFX_focus_YAN_mil_army_armor
+	x = 3
+	y = 18
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_army_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_army_tier_up_tt
+
+		custom_effect_tooltip = YAN_mil_tt_army_army_org_regain_p5
+
+		add_to_variable = { var = YAN_mil_army_tier value = 1 }
+		YAN_mil_refresh_army = yes
+	}
+}
+
+shared_focus = { #霹雳神机
+	id = YAN_mil_army_artillery
+	icon = GFX_focus_YAN_mil_army_artillery
+	x = 5
+	y = 19
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_army_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_army_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_army_tier value = 1 }
+		YAN_mil_refresh_army = yes
+	}
+}
+
+shared_focus = { #其疾如风
+	id = YAN_mil_army_mobile
+	icon = GFX_focus_YAN_mil_army_mobile
+	x = 3
+	y = 19
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_army_armor
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_army_tier_up_tt
+
+		custom_effect_tooltip = YAN_mil_tt_army_experience_loss_factor_m10
+		add_to_variable = { var = YAN_mil_army_tier value = 1 }
+		YAN_mil_refresh_army = yes
+	}
+}
+
+shared_focus = { #雷火俱发
+	id = YAN_mil_army_firepower
+	icon = GFX_focus_YAN_mil_army_firepower
+	x = 5
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_army_artillery
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_army_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_army_tier value = 1 }
+		YAN_mil_refresh_army = yes
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_ground_attack_factor = 0.1
+			tooltip = ground_attack_factor_tt
+		}
+	}
+}
+
+shared_focus = { #登坛点将
+	id = YAN_mil_army_officers
+	icon = GFX_focus_YAN_mil_army_officers
+	x = 7
+	y = 19
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_army_livefire
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_army_tier_up_tt
+
+		add_to_variable = { var = YAN_mil_army_tier value = 1 }
+		YAN_mil_refresh_army = yes
+		every_army_leader = {
+			add_skill_level = 1
+			add_unit_leader_trait = organizer
+			add_unit_leader_trait = skilled_staffer
+		}
+	}
+}
+
+shared_focus = { #金戈铁马
+	id = YAN_mil_army_elite
+	icon = GFX_focus_YAN_mil_army_elite
+	x = 5
+	y = 21
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_army_mobile
+	}
+	prerequisite = {
+		focus = YAN_mil_army_firepower
+	}
+	prerequisite = {
+		focus = YAN_mil_army_officers
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_mil_army_tier_up_tt
+
+		custom_effect_tooltip = YAN_mil_tt_army_experience_gain_army_unit_factor_p10
+
+		add_to_variable = { var = YAN_mil_army_tier value = 1 }
+		YAN_mil_refresh_army = yes
+		every_army_leader = {
+			add_unit_leader_trait = panzer_expert
+		}
+	}
+}
+
+shared_focus = { #天枢整军
+	id = YAN_mil_support_root
+	icon = GFX_focus_YAN_mil_support_root
+	x = 15
+	y = 18
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_modernization
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_research_speed_factor = 0.03
+			tooltip = research_speed_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_command_cap_increase = 5
+			tooltip = YAN_mil_tz_command_cap_increase_value_tt
+		}
+	}
+}
+
+shared_focus = { #粮草先行
+	id = YAN_mil_support_logistics
+	icon = GFX_focus_YAN_mil_support_logistics
+	x = 12
+	y = 19
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_support_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_army_org_factor = 0.1
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_army_org_regain = 0.1
+			tooltip = army_org_regain_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_attrition = -0.2
+			tooltip = attrition_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_supply_consumption_factor = -0.1
+			tooltip = supply_consumption_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_no_supply_grace = 96
+			tooltip = YAN_mil_tz_no_supply_grace_value_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_army_strength_factor = 0.1
+			tooltip = YAN_mil_tz_army_strength_factor_value_tt
+		}
+	}
+}
+
+shared_focus = { #星汉灿烂
+	id = YAN_mil_support_satellite
+	icon = GFX_focus_YAN_mil_support_satellite
+	x = 15
+	y = 19
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_support_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_spotting_chance = 0.1
+			tooltip = spotting_chance_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_recon_factor = 0.1
+			tooltip = recon_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_decryption_factor = 0.05
+			tooltip = decryption_factor_tt
+		}
+	}
+}
+
+shared_focus = { #运筹帷幄
+	id = YAN_mil_support_digital
+	icon = GFX_focus_YAN_mil_support_digital
+	x = 18
+	y = 19
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_support_root
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_army_org_factor = 0.05
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_recon_factor = 0.05
+			tooltip = recon_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_initiative_factor = 0.05
+			tooltip = initiative_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_positioning = 0.15
+			tooltip = positioning_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_naval_coordination = 0.1
+			tooltip = naval_coordination_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_spotting_chance = 0.1
+			tooltip = spotting_chance_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_air_mission_efficiency = 0.1
+			tooltip = air_mission_efficiency_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_air_superiority_efficiency = 0.1
+			tooltip = air_superiority_efficiency_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_air_intercept_efficiency = 0.1
+			tooltip = air_intercept_efficiency_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_air_cas_efficiency = 0.1
+			tooltip = air_cas_efficiency_tt
+		}
+	}
+}
+
+shared_focus = { #辎重辚辚
+	id = YAN_mil_support_units
+	icon = GFX_focus_YAN_mil_support_units
+	x = 13
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_support_logistics
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_land_reinforce_rate = 0.02
+			tooltip = land_reinforce_rate_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_army_org_regain = 0.05
+			tooltip = army_org_regain_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_supply_consumption_factor = -0.05
+			tooltip = supply_consumption_factor_tt
+		}
+	}
+}
+
+shared_focus = { #来者可追
+	id = YAN_mil_support_future
+	icon = GFX_focus_YAN_mil_support_future
+	x = 15
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_support_satellite
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+		add_research_slot = 1
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_research_speed_factor = 0.05
+			tooltip = research_speed_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_land_reinforce_rate = 0.02
+			tooltip = land_reinforce_rate_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_training_time_factor = -0.05
+			tooltip = training_time_factor_tt
+		}
+		add_doctrine_cost_reduction = { cost_reduction = 0.75 uses = 1 category = land_doctrine }
+		add_doctrine_cost_reduction = { cost_reduction = 0.75 uses = 1 category = air_doctrine }
+		add_doctrine_cost_reduction = { cost_reduction = 0.75 uses = 1 category = naval_doctrine }
+	}
+}
+
+shared_focus = { #天镜无隙
+	id = YAN_mil_support_cyber
+	icon = GFX_focus_YAN_mil_support_cyber
+	x = 17
+	y = 20
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_support_digital
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_intel_network_gain_factor = 0.1
+			tooltip = intel_network_gain_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_decryption_factor = 0.05
+			tooltip = decryption_factor_tt
+		}
+	}
+}
+
+shared_focus = { #不动如山
+	id = YAN_mil_support_steadfast
+	icon = GFX_focus_YAN_mil_support_steadfast
+	x = 15
+	y = 21
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_support_units
+	}
+	prerequisite = {
+		focus = YAN_mil_support_future
+	}
+	prerequisite = {
+		focus = YAN_mil_support_cyber
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_army_defence_factor = 0.1
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_army_org_factor = 0.1
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_max_dig_in = 0.3
+			tooltip = max_dig_in_tt
+		}
+	}
+}
+
+shared_focus = { #同袍同泽
+	id = YAN_mil_joint
+	icon = GFX_focus_YAN_mil_joint
+	x = 0
+	y = 23
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_air_supremacy
+	}
+	prerequisite = {
+		focus = YAN_mil_navy_supremacy
+	}
+	prerequisite = {
+		focus = YAN_mil_army_elite
+	}
+	prerequisite = {
+		focus = YAN_mil_support_steadfast
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_army_attack_factor = 0.05
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_army_defence_factor = 0.05
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_navy_screen_attack_factor = 0.05
+			tooltip = navy_screen_attack_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_air_agility_factor = 0.05
+			tooltip = air_agility_factor_tt
+		}
+		every_army_leader = {
+			add_skill_level = 1
+			add_unit_leader_trait = trickster
+			add_unit_leader_trait = expert_improviser
+		}
+		every_navy_leader = {
+			add_skill_level = 2
+			add_unit_leader_trait = air_controller
+			add_unit_leader_trait = flight_deck_manager
+			add_unit_leader_trait = dive_bomber
+			add_unit_leader_trait = superior_tactician
+			add_unit_leader_trait = spotter
+		}
+		country_event = { id = yan_mil.10 days = 1 }
+	}
+}
+
+shared_focus = { #共谋帷幄
+	id = YAN_mil_staff
+	icon = GFX_focus_YAN_mil_staff
+	x = 0
+	y = 24
+	cost = 3
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_joint
+	}
+	ai_will_do = {
+		factor = 100
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_command_power_gain = 0.05
+			tooltip = command_power_gain_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_max_planning_factor = 0.05
+			tooltip = max_planning_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_command_cap_increase = 10
+			tooltip = YAN_mil_tz_command_cap_increase_value_tt
+		}
+		every_army_leader = {
+			add_unit_leader_trait = expert_delegator
+		}
+	}
+}
+
+shared_focus = { #飞龙在天
+	id = YAN_mil_ascend
+	icon = GFX_focus_YAN_mil_ascend
+	x = 0
+	y = 25
+	cost = 1
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_mil_staff
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+
+		custom_effect_tooltip = YAN_mil_tianzhu_modify_tt
+		add_to_variable = {
+			YAN_mil_tz_stability_factor = 0.05
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_war_support_factor = 0.05
+			tooltip = war_support_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_army_attack_factor = 0.05
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_air_attack_factor = 0.05
+			tooltip = air_attack_factor_tt
+		}
+		add_to_variable = {
+			YAN_mil_tz_navy_screen_attack_factor = 0.05
+			tooltip = navy_screen_attack_factor_tt
+		}
+		add_stability = 0.05
+		add_war_support = 0.05
+		set_country_flag = YAN_mil_reform_complete
+		country_event = { id = yan_mil.11 days = 1 }
+	}
+}

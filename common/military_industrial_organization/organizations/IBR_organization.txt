@@ -1,0 +1,1276 @@
+# ==============================================================================
+#  伊比利亚 · 军工企业组织（MIO）
+#  --------------------------------------------------------------------------
+#  8 家：审判庭圣兵工坊 / 菲尼斯特雷要塞炮厂 / 皇家船台与索具总署 /
+#        无敌舰队特许公署 / 深海研究所 / 灯塔航空工坊 /
+#        军工统筹与自给署 / 盐地机械工造局
+#
+#  · 树骨架复用 00_generic_organization.txt 的 preset（include = ...），
+#    每家另有 initial_trait 与 6 条专属 add_trait（special_trait_background）。
+#  · 专属节点一律挂在预设父节点的空格（多为正下方 y+1），坐标经占用图核对，
+#    不与预设节点重叠；y<=5，落在可视区内。
+#  · 专属特质的进阶门控用伊比利亚自己的国策（IBR_...）。
+#  · 组织图标 = 国策图标同款「黑魂炭盘 + 铁框 + 余烬金角饰」（64x64 PNG），
+#    生成器 docs/gen_ibr_mio_icons.cjs，
+#    精灵定义 interface/military_industrial_organization/IBR_organization_icons.gfx。
+#  · 本地化：localisation/simp_chinese/ARF_IBR_military_industrial_organization_l_simp_chinese.yml
+# ==============================================================================
+
+
+# ==============================================================================
+# 1 · 审判庭圣兵工坊 —— 步兵装备（细剑 / 火枪）/ 实验性武器（提灯法杖）
+# ==============================================================================
+IBR_Ordenanza_organization = {
+	name = IBR_Ordenanza_organization
+	icon = GFX_ibr_mio_ordenanza
+	include = generic_infantry_equipment_organization
+
+	allowed = { original_tag = IBR }
+
+	equipment_type = {
+		infantry_equipment
+		arts_equipment
+	}
+	research_categories = {
+		infantry_weapons
+		gun_weapons
+		arts_weapons
+	}
+
+	initial_trait = {
+		token = IBR_mio_initial_ordenanza
+		name = IBR_mio_initial_ordenanza
+
+		limit_to_equipment_type = { infantry_equipment arts_equipment }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		equipment_bonus = {
+			soft_attack = 0.05
+		}
+	}
+
+	# 至高剑术 —— 细剑与决斗操典（挂 barrel_forging 下方）
+	add_trait = {
+		token = IBR_mio_trait_ordenanza_gaozhi
+		name = IBR_mio_trait_ordenanza_gaozhi
+		icon = GFX_generic_mio_department_icon_infantry_offense
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_advanced_barrel_forging
+		any_parent = { generic_mio_trait_advanced_barrel_forging }
+
+		available = {
+			FROM = { has_completed_focus = IBR_supreme_fencing_academy }
+		}
+
+		limit_to_equipment_type = { infantry_equipment arts_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.10
+			breakthrough = 0.10
+			defense = 0.05
+		}
+	}
+
+	# 提灯法杖工艺 —— 至高之术的兵器化（挂 quality_materials 下方）
+	add_trait = {
+		token = IBR_mio_trait_ordenanza_tideng
+		name = IBR_mio_trait_ordenanza_tideng
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_quality_materials
+		any_parent = { generic_mio_trait_quality_materials }
+
+		available = {
+			FROM = { has_completed_focus = IBR_lantern_staff_research }
+		}
+
+		limit_to_equipment_type = { arts_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.15
+			hard_attack = 0.10
+		}
+	}
+
+	# 火枪银铳 —— 制式手炮（挂 armor_piercing_rounds 下方）
+	add_trait = {
+		token = IBR_mio_trait_ordenanza_huochong
+		name = IBR_mio_trait_ordenanza_huochong
+		icon = GFX_generic_mio_trait_icon_ap_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_armor_piercing_rounds
+		any_parent = { generic_mio_trait_armor_piercing_rounds }
+
+		available = {
+			FROM = { has_completed_focus = IBR_hand_cannon_license }
+		}
+
+		limit_to_equipment_type = { infantry_equipment }
+
+		equipment_bonus = {
+			hard_attack = 0.10
+			ap_attack = 0.10
+			soft_attack = 0.05
+		}
+	}
+
+	# 圣物淬炼 —— 修院工坊的祝圣（挂 medium_machineguns 下方）
+	add_trait = {
+		token = IBR_mio_trait_ordenanza_shengwu
+		name = IBR_mio_trait_ordenanza_shengwu
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_medium_machineguns
+		any_parent = { generic_mio_trait_medium_machineguns }
+
+		limit_to_equipment_type = { infantry_equipment arts_equipment }
+
+		equipment_bonus = {
+			reliability = 0.10
+			build_cost_ic = -0.05
+		}
+	}
+
+	# 教区征发制式 —— 教区定额兵装（挂 reinforced_stocks 下方）
+	add_trait = {
+		token = IBR_mio_trait_ordenanza_jiaohui
+		name = IBR_mio_trait_ordenanza_jiaohui
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_reinforced_stocks
+		any_parent = { generic_mio_trait_reinforced_stocks }
+
+		production_bonus = {
+			production_capacity_factor = 0.10
+			production_efficiency_cap_factor = 0.05
+		}
+	}
+
+	# 圣战军械令 —— 审判庭亲授（挂 heavy_anti_armor_ammunition 下方）
+	add_trait = {
+		token = IBR_mio_trait_ordenanza_shengzhan
+		name = IBR_mio_trait_ordenanza_shengzhan
+		icon = GFX_generic_mio_trait_icon_unique
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_heavy_anti_armor_ammunition
+		any_parent = { generic_mio_trait_heavy_anti_armor_ammunition }
+
+		limit_to_equipment_type = { infantry_equipment arts_equipment }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+		equipment_bonus = {
+			soft_attack = 0.10
+			hard_attack = 0.10
+		}
+	}
+}
+
+
+# ==============================================================================
+# 2 · 菲尼斯特雷要塞炮厂 —— 火炮 / 高射炮 / 反坦克炮（岸防要塞炮术）
+# ==============================================================================
+IBR_Fortaleza_organization = {
+	name = IBR_Fortaleza_organization
+	icon = GFX_ibr_mio_fortaleza
+	include = generic_artillery_organization
+
+	allowed = { original_tag = IBR }
+
+	equipment_type = {
+		artillery_equipment
+		anti_air_equipment
+		anti_tank_equipment
+	}
+	research_categories = {
+		cat_artillery
+		mio_cat_all_artillery_equipment
+	}
+
+	initial_trait = {
+		token = IBR_mio_initial_fortaleza
+		name = IBR_mio_initial_fortaleza
+
+		limit_to_equipment_type = { artillery_equipment anti_air_equipment anti_tank_equipment }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		equipment_bonus = {
+			defense = 0.05
+		}
+	}
+
+	# 岸防校射法 —— 几何与算学上炮位
+	add_trait = {
+		token = IBR_mio_trait_fortaleza_anfang
+		name = IBR_mio_trait_fortaleza_anfang
+		icon = GFX_generic_mio_department_icon_artillery
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_improved_direct_fire_targeting
+		any_parent = { generic_mio_trait_improved_direct_fire_targeting }
+
+		limit_to_equipment_type = { artillery_equipment anti_air_equipment anti_tank_equipment }
+
+		equipment_bonus = {
+			defense = 0.10
+			soft_attack = 0.05
+		}
+	}
+
+	# 发潮火药改良 —— 药库通风与干燥
+	add_trait = {
+		token = IBR_mio_trait_fortaleza_chaoshi
+		name = IBR_mio_trait_fortaleza_chaoshi
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_improved_hydraulic_recoil_system
+		any_parent = { generic_mio_trait_improved_hydraulic_recoil_system }
+
+		limit_to_equipment_type = { artillery_equipment }
+
+		equipment_bonus = {
+			reliability = 0.15
+			build_cost_ic = -0.05
+		}
+	}
+
+	# 高射炮位 —— 灯塔防空圈
+	add_trait = {
+		token = IBR_mio_trait_fortaleza_gaoshe
+		name = IBR_mio_trait_fortaleza_gaoshe
+		icon = GFX_generic_mio_department_icon_anti_air
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_advanced_anti_air_targeting
+		any_parent = { generic_mio_trait_advanced_anti_air_targeting }
+
+		available = {
+			FROM = { has_completed_focus = IBR_coastal_defense_system }
+		}
+
+		limit_to_equipment_type = { anti_air_equipment }
+
+		equipment_bonus = {
+			air_attack = 0.15
+			reliability = 0.05
+		}
+	}
+
+	# 要塞炮术 —— 重炮穿甲
+	add_trait = {
+		token = IBR_mio_trait_fortaleza_yaosai
+		name = IBR_mio_trait_fortaleza_yaosai
+		icon = GFX_generic_mio_trait_icon_hard_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_big_guns
+		any_parent = { generic_mio_trait_big_guns }
+
+		limit_to_equipment_type = { artillery_equipment anti_tank_equipment }
+
+		equipment_bonus = {
+			hard_attack = 0.15
+			ap_attack = 0.10
+		}
+	}
+
+	# 炮位轮作 —— 铸炮车间
+	add_trait = {
+		token = IBR_mio_trait_fortaleza_paozuo
+		name = IBR_mio_trait_fortaleza_paozuo
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_gun_mass_production
+		any_parent = { generic_mio_trait_gun_mass_production }
+
+		production_bonus = {
+			production_capacity_factor = 0.10
+		}
+		equipment_bonus = {
+			defense = 0.05
+		}
+	}
+
+	# 兵工自给 —— 自产弹药与备件
+	add_trait = {
+		token = IBR_mio_trait_fortaleza_bingong
+		name = IBR_mio_trait_fortaleza_bingong
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_advanced_trajectory_calculations
+		any_parent = { generic_mio_trait_advanced_trajectory_calculations }
+
+		production_bonus = {
+			production_cost_factor = -0.10
+			production_efficiency_cap_factor = 0.05
+		}
+	}
+}
+
+
+# ==============================================================================
+# 3 · 皇家船台与索具总署 —— 护航舰 / 屏卫舰队（打捞 · 索具 · 夜袭）
+# ==============================================================================
+IBR_Marina_organization = {
+	name = IBR_Marina_organization
+	icon = GFX_ibr_mio_marina
+	include = generic_escort_ship_organization
+
+	allowed = { original_tag = IBR }
+
+	equipment_type = {
+		screen_ship
+	}
+	research_categories = {
+		mio_cat_tech_all_screen_ship_and_modules
+	}
+
+	initial_trait = {
+		token = IBR_mio_initial_marina
+		name = IBR_mio_initial_marina
+
+		limit_to_equipment_type = { screen_ship }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		equipment_bonus = {
+			anti_air_attack = 0.05
+		}
+	}
+
+	# 打捞复用 —— 沉船重上船台
+	add_trait = {
+		token = IBR_mio_trait_marina_dalao
+		name = IBR_mio_trait_marina_dalao
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_mass_production
+		any_parent = { generic_mio_trait_mass_production }
+
+		available = {
+			FROM = { has_completed_focus = IBR_salvage_ships }
+		}
+
+		limit_to_equipment_type = { screen_ship }
+
+		equipment_bonus = {
+			build_cost_ic = -0.05
+		}
+		production_bonus = {
+			production_cost_factor = -0.05
+		}
+	}
+
+	# 索具场扩建 —— 缆绳与帆布按季出产
+	add_trait = {
+		token = IBR_mio_trait_marina_suo
+		name = IBR_mio_trait_marina_suo
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_advanced_hydrodynamic_design
+		any_parent = { generic_mio_trait_advanced_hydrodynamic_design }
+
+		production_bonus = {
+			production_capacity_factor = 0.10
+			production_efficiency_cap_factor = 0.05
+		}
+	}
+
+	# 三桅船台 —— 新船台打桩
+	add_trait = {
+		token = IBR_mio_trait_marina_sanwei
+		name = IBR_mio_trait_marina_sanwei
+		icon = GFX_generic_mio_trait_icon_max_strength
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_fleet_escorts
+		any_parent = { generic_mio_trait_fleet_escorts }
+
+		available = {
+			FROM = { has_completed_focus = IBR_rebuild_shipyards }
+		}
+
+		limit_to_equipment_type = { screen_ship }
+
+		equipment_bonus = {
+			max_strength = 0.10
+			armor_value = 0.05
+		}
+	}
+
+	# 银船队护航 —— 会合点与集合灯塔
+	add_trait = {
+		token = IBR_mio_trait_marina_yinchuandui
+		name = IBR_mio_trait_marina_yinchuandui
+		icon = GFX_generic_mio_trait_icon_surface_detection
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_anti_air_ships
+		any_parent = { generic_mio_trait_anti_air_ships }
+
+		limit_to_equipment_type = { screen_ship }
+
+		equipment_bonus = {
+			anti_air_attack = 0.15
+			surface_detection = 0.05
+		}
+	}
+
+	# 快炮艇夜袭 —— 低干舷抛射管
+	add_trait = {
+		token = IBR_mio_trait_marina_kuaiting
+		name = IBR_mio_trait_marina_kuaiting
+		icon = GFX_generic_mio_trait_icon_naval_speed
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_improved_light_gun_mounting
+		any_parent = { generic_mio_trait_improved_light_gun_mounting }
+
+		limit_to_equipment_type = { screen_ship }
+
+		equipment_bonus = {
+			naval_speed = 0.10
+			lg_attack = 0.10
+		}
+	}
+
+	# 水手长期服役 —— 认得每个绳结的人
+	add_trait = {
+		token = IBR_mio_trait_marina_shuishi
+		name = IBR_mio_trait_marina_shuishi
+		icon = GFX_generic_mio_trait_icon_max_strength
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_submarine_hunters
+		any_parent = { generic_mio_trait_submarine_hunters }
+
+		limit_to_equipment_type = { screen_ship }
+
+		equipment_bonus = {
+			max_strength = 0.08
+			reliability = 0.10
+		}
+	}
+}
+
+
+# ==============================================================================
+# 4 · 无敌舰队特许公署 —— 主力舰 / 屏卫舰队（舷侧排炮 · 远洋）
+# ==============================================================================
+IBR_Armada_organization = {
+	name = IBR_Armada_organization
+	icon = GFX_ibr_mio_armada
+	include = generic_battle_line_ship_organization
+
+	allowed = { original_tag = IBR }
+
+	equipment_type = {
+		capital_ship
+		screen_ship
+	}
+	research_categories = {
+		mio_cat_tech_all_capital_ship_and_modules
+	}
+
+	initial_trait = {
+		token = IBR_mio_initial_armada
+		name = IBR_mio_initial_armada
+
+		limit_to_equipment_type = { capital_ship screen_ship }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		equipment_bonus = {
+			hg_attack = 0.05
+		}
+	}
+
+	# 舷侧排炮 —— 三层炮列
+	add_trait = {
+		token = IBR_mio_trait_armada_xiance
+		name = IBR_mio_trait_armada_xiance
+		icon = GFX_generic_mio_trait_icon_hg_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_primary_battery_layout
+		any_parent = { generic_mio_trait_primary_battery_layout }
+
+		available = {
+			FROM = { has_completed_focus = IBR_grand_fleet_concept }
+		}
+
+		limit_to_equipment_type = { capital_ship screen_ship }
+
+		equipment_bonus = {
+			hg_attack = 0.10
+			lg_attack = 0.05
+		}
+	}
+
+	# 装甲司令塔 —— 舰桥防护
+	add_trait = {
+		token = IBR_mio_trait_armada_zhuangjia
+		name = IBR_mio_trait_armada_zhuangjia
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_external_armor_belt
+		any_parent = { generic_mio_trait_external_armor_belt }
+
+		limit_to_equipment_type = { capital_ship }
+
+		equipment_bonus = {
+			armor_value = 0.10
+			max_strength = 0.05
+		}
+	}
+
+	# 远洋续航 —— 舷外储油
+	add_trait = {
+		token = IBR_mio_trait_armada_yuanyang
+		name = IBR_mio_trait_armada_yuanyang
+		icon = GFX_generic_mio_trait_icon_naval_range
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_secondary_battery_layout
+		any_parent = { generic_mio_trait_secondary_battery_layout }
+
+		limit_to_equipment_type = { capital_ship screen_ship }
+
+		equipment_bonus = {
+			naval_range = 0.15
+			reliability = 0.05
+		}
+	}
+
+	# 舰队旗令 —— 旗语与信号
+	add_trait = {
+		token = IBR_mio_trait_armada_qiling
+		name = IBR_mio_trait_armada_qiling
+		icon = GFX_generic_mio_trait_icon_surface_detection
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_combat_information_center
+		any_parent = { generic_mio_trait_combat_information_center }
+
+		limit_to_equipment_type = { capital_ship screen_ship }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+		equipment_bonus = {
+			max_strength = 0.05
+		}
+	}
+
+	# 重弹装填 —— 穿甲重弹
+	add_trait = {
+		token = IBR_mio_trait_armada_paodan
+		name = IBR_mio_trait_armada_paodan
+		icon = GFX_generic_mio_trait_icon_ap_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_super_heavy_shells
+		any_parent = { generic_mio_trait_super_heavy_shells }
+
+		limit_to_equipment_type = { capital_ship }
+
+		equipment_bonus = {
+			hg_armor_piercing = 0.10
+			hg_attack = 0.05
+		}
+	}
+
+	# 重铸无敌舰队 —— 舷号从第一号开始
+	add_trait = {
+		token = IBR_mio_trait_armada_chongzhu
+		name = IBR_mio_trait_armada_chongzhu
+		icon = GFX_generic_mio_trait_icon_unique
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_advanced_armor_design
+		any_parent = { generic_mio_trait_advanced_armor_design }
+
+		available = {
+			FROM = { has_completed_focus = IBR_golden_fleet_sails }
+		}
+
+		limit_to_equipment_type = { capital_ship screen_ship }
+
+		production_bonus = {
+			production_cost_factor = -0.10
+			production_efficiency_cap_factor = 0.05
+		}
+		equipment_bonus = {
+			armor_value = 0.05
+		}
+	}
+}
+
+
+# ==============================================================================
+# 5 · 深海研究所 —— 潜艇（海嗣生物学 · 深渊信标）
+# ==============================================================================
+IBR_Abismo_organization = {
+	name = IBR_Abismo_organization
+	icon = GFX_ibr_mio_abismo
+	include = generic_submarine_organization
+
+	allowed = { original_tag = IBR }
+
+	equipment_type = {
+		ship_hull_submarine
+	}
+	research_categories = {
+		naval_equipment
+		mio_cat_tech_all_submarine_and_modules
+	}
+
+	initial_trait = {
+		token = IBR_mio_initial_abismo
+		name = IBR_mio_initial_abismo
+
+		limit_to_equipment_type = { ship_hull_submarine }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.10
+		}
+		equipment_bonus = {
+			sub_detection = 0.05
+		}
+	}
+
+	# 海嗣甲壳 —— 几丁质舱壳
+	add_trait = {
+		token = IBR_mio_trait_abismo_jiaqiao
+		name = IBR_mio_trait_abismo_jiaqiao
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_simplified_pressure_hull_design
+		any_parent = { generic_mio_trait_simplified_pressure_hull_design }
+
+		limit_to_equipment_type = { ship_hull_submarine }
+
+		equipment_bonus = {
+			armor_value = 0.10
+			max_strength = 0.05
+		}
+	}
+
+	# 深渊信标 —— 声呐阵列
+	add_trait = {
+		token = IBR_mio_trait_abismo_xinbiao
+		name = IBR_mio_trait_abismo_xinbiao
+		icon = GFX_generic_mio_trait_icon_detection
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_advanced_sonar
+		any_parent = { generic_mio_trait_advanced_sonar }
+
+		available = {
+			FROM = { has_completed_focus = IBR_abyss_beacon }
+		}
+
+		limit_to_equipment_type = { ship_hull_submarine }
+
+		equipment_bonus = {
+			sub_detection = 0.10
+			surface_detection = 0.15
+		}
+	}
+
+	# 潜水钟潜航 —— 深潜耐压
+	add_trait = {
+		token = IBR_mio_trait_abismo_qianshui
+		name = IBR_mio_trait_abismo_qianshui
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_crash_dive_flood_tanks
+		any_parent = { generic_mio_trait_crash_dive_flood_tanks }
+
+		limit_to_equipment_type = { ship_hull_submarine }
+
+		equipment_bonus = {
+			naval_range = 0.15
+			reliability = 0.10
+		}
+	}
+
+	# 源石动力 —— 源石蒸汽轮机
+	add_trait = {
+		token = IBR_mio_trait_abismo_yuanshi
+		name = IBR_mio_trait_abismo_yuanshi
+		icon = GFX_generic_mio_trait_icon_naval_speed
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_submarine_mass_production
+		any_parent = { generic_mio_trait_submarine_mass_production }
+
+		limit_to_equipment_type = { ship_hull_submarine }
+
+		equipment_bonus = {
+			naval_speed = 0.10
+			max_strength = 0.05
+		}
+	}
+
+	# 海渊鱼雷 —— 重型鱼雷管
+	add_trait = {
+		token = IBR_mio_trait_abismo_yulei
+		name = IBR_mio_trait_abismo_yulei
+		icon = GFX_generic_mio_trait_icon_torpedo_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_large_torpedo_banks
+		any_parent = { generic_mio_trait_large_torpedo_banks }
+
+		limit_to_equipment_type = { ship_hull_submarine }
+
+		equipment_bonus = {
+			torpedo_attack = 0.10
+			sub_attack = 0.05
+		}
+	}
+
+	# 深渊变异 —— 海嗣样本武器化
+	add_trait = {
+		token = IBR_mio_trait_abismo_bianta
+		name = IBR_mio_trait_abismo_bianta
+		icon = GFX_generic_mio_trait_icon_unique
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_deck_guns
+		any_parent = { generic_mio_trait_deck_guns }
+
+		available = {
+			FROM = { has_completed_focus = IBR_seaborn_biology_research }
+		}
+
+		limit_to_equipment_type = { ship_hull_submarine }
+
+		equipment_bonus = {
+			torpedo_attack = 0.05
+			sub_visibility = -0.10
+			reliability = 0.05
+		}
+	}
+}
+
+
+# ==============================================================================
+# 6 · 灯塔航空工坊 —— 小型飞机（灯塔瞭望链 · 海岸巡逻）
+# ==============================================================================
+IBR_Faro_organization = {
+	name = IBR_Faro_organization
+	icon = GFX_ibr_mio_faro
+	include = generic_general_aircraft_organization
+
+	allowed = { original_tag = IBR }
+
+	equipment_type = {
+		mio_cat_eq_all_small_plane
+	}
+	research_categories = {
+		air_equipment
+	}
+
+	initial_trait = {
+		token = IBR_mio_initial_faro
+		name = IBR_mio_initial_faro
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		equipment_bonus = {
+			air_range = 0.05
+		}
+	}
+
+	# 灯塔瞭望链 —— 望楼警钟连成一线
+	add_trait = {
+		token = IBR_mio_trait_faro_liaowang
+		name = IBR_mio_trait_faro_liaowang
+		icon = GFX_generic_mio_trait_icon_air_range
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_high_speed_design
+		any_parent = { generic_mio_trait_high_speed_design }
+
+		available = {
+			FROM = { has_completed_focus = IBR_restore_lighthouse_network }
+		}
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		equipment_bonus = {
+			air_range = 0.10
+			surface_detection = 0.10
+		}
+	}
+
+	# 海岸巡逻 —— 盐滩低空巡航
+	add_trait = {
+		token = IBR_mio_trait_faro_haian
+		name = IBR_mio_trait_faro_haian
+		icon = GFX_generic_mio_trait_icon_air_agility
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_agility_wing_design
+		any_parent = { generic_mio_trait_agility_wing_design }
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		equipment_bonus = {
+			air_agility = 0.10
+			air_defence = 0.05
+		}
+	}
+
+	# 舰载改装 —— 舰队航空
+	add_trait = {
+		token = IBR_mio_trait_faro_jiandai
+		name = IBR_mio_trait_faro_jiandai
+		icon = GFX_generic_mio_trait_icon_naval_strike_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_naval_strike
+		any_parent = { generic_mio_trait_naval_strike }
+
+		available = {
+			FROM = { has_completed_focus = IBR_amphibious_design }
+		}
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		equipment_bonus = {
+			naval_strike_attack = 0.15
+			naval_strike_targetting = 0.05
+		}
+	}
+
+	# 高点护航 —— 高空截击
+	add_trait = {
+		token = IBR_mio_trait_faro_gaodian
+		name = IBR_mio_trait_faro_gaodian
+		icon = GFX_generic_mio_trait_icon_air_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_fighter_aircraft_production
+		any_parent = { generic_mio_trait_fighter_aircraft_production }
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		equipment_bonus = {
+			air_attack = 0.15
+			air_agility = 0.05
+		}
+	}
+
+	# 灯塔挂架 —— 岸基轰炸挂架
+	add_trait = {
+		token = IBR_mio_trait_faro_fashe
+		name = IBR_mio_trait_faro_fashe
+		icon = GFX_generic_mio_trait_icon_air_ground_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_bomb_trucks
+		any_parent = { generic_mio_trait_bomb_trucks }
+
+		limit_to_equipment_type = { mio_cat_eq_all_small_plane }
+
+		equipment_bonus = {
+			air_ground_attack = 0.10
+			air_bombing = 0.05
+		}
+	}
+
+	# 灯塔航空量产 —— 木骨蒙皮批量生产
+	add_trait = {
+		token = IBR_mio_trait_faro_liangchan
+		name = IBR_mio_trait_faro_liangchan
+		icon = GFX_generic_mio_trait_icon_efficiency_gain
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_bomber_aircraft_production
+		any_parent = { generic_mio_trait_bomber_aircraft_production }
+
+		production_bonus = {
+			production_capacity_factor = 0.10
+			production_efficiency_gain_factor = 0.05
+		}
+	}
+}
+
+
+# ==============================================================================
+# 7 · 军工统筹与自给署 —— 支援装备 / 摩托化（督练区 · 灯塔补给）
+# ==============================================================================
+IBR_Taller_organization = {
+	name = IBR_Taller_organization
+	icon = GFX_ibr_mio_taller
+	include = generic_support_equipment_organization
+
+	allowed = { original_tag = IBR }
+
+	equipment_type = {
+		support_equipment
+		motorized_equipment
+		infantry_equipment
+	}
+	research_categories = {
+		support_tech
+		engineers_tech
+		signal_company_tech
+		motorized_equipment
+	}
+
+	initial_trait = {
+		token = IBR_mio_initial_taller
+		name = IBR_mio_initial_taller
+
+		limit_to_equipment_type = { support_equipment motorized_equipment infantry_equipment }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.10
+		}
+		production_bonus = {
+			production_cost_factor = -0.03
+		}
+	}
+
+	# 军械自给作坊 —— 村镇定额炉火
+	add_trait = {
+		token = IBR_mio_trait_taller_zigei
+		name = IBR_mio_trait_taller_zigei
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_mass_production
+		any_parent = { generic_mio_trait_mass_production }
+
+		available = {
+			FROM = { has_completed_focus = IBR_military_industrial_draft }
+		}
+
+		limit_to_equipment_type = { support_equipment infantry_equipment }
+
+		production_bonus = {
+			production_capacity_factor = 0.10
+			production_efficiency_cap_factor = 0.05
+		}
+	}
+
+	# 督练区制度 —— 训练与军法归于一处
+	add_trait = {
+		token = IBR_mio_trait_taller_dulian
+		name = IBR_mio_trait_taller_dulian
+		icon = GFX_generic_mio_trait_icon_efficiency_gain
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_research_program
+		any_parent = { generic_mio_trait_research_program }
+
+		limit_to_equipment_type = { support_equipment infantry_equipment }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+		equipment_bonus = {
+			defense = 0.05
+		}
+	}
+
+	# 灯塔补给系统 —— 望楼补给节点
+	add_trait = {
+		token = IBR_mio_trait_taller_buji
+		name = IBR_mio_trait_taller_buji
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_light_mortar
+		any_parent = { generic_mio_trait_light_mortar }
+
+		limit_to_equipment_type = { support_equipment }
+
+		equipment_bonus = {
+			reliability = 0.10
+			defense = 0.10
+		}
+	}
+
+	# 盐地运输线 —— 内陆驼队与卡车
+	add_trait = {
+		token = IBR_mio_trait_taller_yanzhan
+		name = IBR_mio_trait_taller_yanzhan
+		icon = GFX_generic_mio_trait_icon_fuel_consumption
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_efficient_scale_up
+		any_parent = { generic_mio_trait_efficient_scale_up }
+
+		limit_to_equipment_type = { motorized_equipment }
+
+		equipment_bonus = {
+			maximum_speed = 0.10
+			fuel_consumption = -0.15
+		}
+	}
+
+	# 高地骑兵摩托化 —— 高原巡边换装
+	add_trait = {
+		token = IBR_mio_trait_taller_gaodi
+		name = IBR_mio_trait_taller_gaodi
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_high_quality_material_blend
+		any_parent = { generic_mio_trait_high_quality_material_blend }
+
+		limit_to_equipment_type = { motorized_equipment }
+
+		equipment_bonus = {
+			breakthrough = 0.10
+			reliability = 0.05
+		}
+	}
+
+	# 军械统筹 —— 全国产线并入一本账
+	add_trait = {
+		token = IBR_mio_trait_taller_tongchou
+		name = IBR_mio_trait_taller_tongchou
+		icon = GFX_generic_mio_trait_icon_resources
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_single_shot_man_portable_anti_tank_system
+		any_parent = { generic_mio_trait_single_shot_man_portable_anti_tank_system }
+
+		available = {
+			FROM = { has_completed_focus = IBR_arms_capacity_integration }
+		}
+
+		production_bonus = {
+			production_resource_need_factor = -0.10
+			production_capacity_factor = 0.05
+		}
+	}
+}
+
+
+# ==============================================================================
+# 8 · 盐地机械工造局 —— 机械化装备 / 装甲车（盐碱履带 · 两栖突袭）
+# ==============================================================================
+IBR_Sal_organization = {
+	name = IBR_Sal_organization
+	icon = GFX_ibr_mio_sal
+	include = generic_motorized_mechanized_organization
+
+	allowed = { original_tag = IBR }
+
+	equipment_type = {
+		mechanized_equipment
+		armored_car_equipment
+	}
+	research_categories = {
+		cat_mechanized_equipment
+		cat_armored_cars
+	}
+
+	initial_trait = {
+		token = IBR_mio_initial_sal
+		name = IBR_mio_initial_sal
+
+		limit_to_equipment_type = { mechanized_equipment armored_car_equipment }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		equipment_bonus = {
+			reliability = 0.05
+		}
+	}
+
+	# 盐碱履带 —— 抗腐蚀行走机构
+	add_trait = {
+		token = IBR_mio_trait_sal_lvdai
+		name = IBR_mio_trait_sal_lvdai
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_all_wheel_drive
+		any_parent = { generic_mio_trait_all_wheel_drive }
+
+		limit_to_equipment_type = { mechanized_equipment armored_car_equipment }
+
+		equipment_bonus = {
+			reliability = 0.10
+			maximum_speed = 0.05
+		}
+	}
+
+	# 盐地装甲 —— 模块化附加装甲
+	add_trait = {
+		token = IBR_mio_trait_sal_zhuangjia
+		name = IBR_mio_trait_sal_zhuangjia
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_closed_chassi
+		any_parent = { generic_mio_trait_closed_chassi }
+
+		available = {
+			FROM = { has_completed_focus = IBR_salt_mechanized_brigade }
+		}
+
+		limit_to_equipment_type = { mechanized_equipment }
+
+		equipment_bonus = {
+			armor_value = 0.10
+			defense = 0.10
+		}
+	}
+
+	# 装甲侦察 —— 轻装快速巡边
+	add_trait = {
+		token = IBR_mio_trait_sal_zhencha
+		name = IBR_mio_trait_sal_zhencha
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_steel_cargo_bed
+		any_parent = { generic_mio_trait_steel_cargo_bed }
+
+		limit_to_equipment_type = { armored_car_equipment }
+
+		equipment_bonus = {
+			maximum_speed = 0.10
+			soft_attack = 0.10
+		}
+	}
+
+	# 两栖突袭 —— 泅渡与滩头投送
+	add_trait = {
+		token = IBR_mio_trait_sal_liangqi
+		name = IBR_mio_trait_sal_liangqi
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_high_powered_engine
+		any_parent = { generic_mio_trait_high_powered_engine }
+
+		available = {
+			FROM = { has_completed_focus = IBR_amphibious_design }
+		}
+
+		limit_to_equipment_type = { mechanized_equipment }
+
+		equipment_bonus = {
+			breakthrough = 0.10
+			hardness = 0.05
+		}
+	}
+
+	# 底盘量产 —— 标准化底盘
+	add_trait = {
+		token = IBR_mio_trait_sal_dipan
+		name = IBR_mio_trait_sal_dipan
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_medium_machinegun_mounts
+		any_parent = { generic_mio_trait_medium_machinegun_mounts }
+
+		production_bonus = {
+			production_cost_factor = -0.10
+			production_efficiency_cap_factor = 0.05
+		}
+	}
+
+	# 高原骑兵团装甲化 —— 骑兵与铁甲合流
+	add_trait = {
+		token = IBR_mio_trait_sal_gaoyuan
+		name = IBR_mio_trait_sal_gaoyuan
+		icon = GFX_generic_mio_trait_icon_unique
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_armored_pulpit_mount
+		any_parent = { generic_mio_trait_armored_pulpit_mount }
+
+		limit_to_equipment_type = { mechanized_equipment armored_car_equipment }
+
+		equipment_bonus = {
+			breakthrough = 0.10
+			maximum_speed = 0.05
+			reliability = 0.05
+		}
+	}
+}

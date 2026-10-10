@@ -1,0 +1,412 @@
+
+
+# KMG_Moderates_Add_Low = {
+
+# 	custom_effect_tooltip = KMG_Moderates_Add_Low_tt
+# 	add_to_variable = { KMG_moderates = 1 }
+# 	KMG_Clique_Percentage = yes
+# }
+
+# KMG_Moderates_Add = {
+
+# 	custom_effect_tooltip = KMG_Moderates_Add_tt
+# 	add_to_variable = { KMG_moderates = 2 }
+# 	KMG_Clique_Percentage = yes
+# }
+
+# KMG_Centrists_Add_Low = {
+
+# 	custom_effect_tooltip = KMG_Centrists_Add_Low_tt
+# 	add_to_variable = { KMG_centrists = 1 }
+# 	KMG_Clique_Percentage = yes
+# }
+
+# KMG_Centrists_Add = {
+
+# 	custom_effect_tooltip = KMG_Centrists_Add_tt
+# 	add_to_variable = { KMG_centrists = 2 }
+# 	KMG_Clique_Percentage = yes
+# }
+
+# KMG_Radicals_Add_Low = {
+
+# 	custom_effect_tooltip = KMG_Radicals_Add_Low_tt
+# 	add_to_variable = { KMG_radicals = 1 }
+# 	KMG_Clique_Percentage = yes
+# }
+
+# KMG_Radicals_Add = {
+
+# 	custom_effect_tooltip = KMG_Radicals_Add_tt
+# 	add_to_variable = { KMG_radicals = 2 }
+# 	KMG_Clique_Percentage = yes
+# }
+
+# KMG_Clique_Percentage = {
+# 	set_temp_variable = { KMG_clique_total = KMG_moderates }
+# 	add_to_temp_variable = { KMG_clique_total = KMG_centrists }
+# 	add_to_temp_variable = { KMG_clique_total = KMG_radicals }
+# 	set_variable = { KMG_moderates_percentage = KMG_moderates }
+# 	divide_variable = { KMG_moderates_percentage = KMG_clique_total }
+# 	set_variable = { KMG_centrists_percentage = KMG_centrists }
+# 	divide_variable = { KMG_centrists_percentage = KMG_clique_total }
+# 	set_variable = { KMG_radicals_percentage = KMG_radicals }
+# 	divide_variable = { KMG_radicals_percentage = KMG_clique_total }
+# }
+
+KMG_empire_alert_change = {
+	custom_effect_tooltip = KMG_empire_alert_change_tt
+	add_to_variable = { KMG_empire_alert = alert }
+}
+
+#扣除buff
+KMG_ART_OF_CONQUEST_mission_1_effect = {
+	#初始
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_War_Economic_Effect
+			}
+			NOT = { has_completed_focus = KMG_implement_rationing_system }
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_War_Economic_Effect
+				add_idea = KMG_War_Economic_Effect_tool_one
+			}
+		}
+		KMG_ART_OF_CONQUEST_mission_1_var_effect = yes
+	}
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_War_Economic_Effect
+			}
+			has_completed_focus = KMG_implement_rationing_system
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_War_Economic_Effect
+				add_idea = KMG_War_Economic_Effect_tool_two
+			}
+		}
+		KMG_ART_OF_CONQUEST_mission_1_var_effect = yes
+	}
+	#委员会
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Supreme_Economic_Council
+			}
+			NOT = { has_completed_focus = KMG_implement_rationing_system }
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Supreme_Economic_Council_tool
+				add_idea = KMG_Supreme_Economic_Council_tool_one
+			}
+		}
+		KMG_ART_OF_CONQUEST_mission_1_var_effect = yes
+	}
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Supreme_Economic_Council
+			}
+			has_completed_focus = KMG_implement_rationing_system
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Supreme_Economic_Council_tool
+				add_idea = KMG_Supreme_Economic_Council_tool_two
+			}
+		}
+		KMG_ART_OF_CONQUEST_mission_1_var_effect = yes
+	}
+	#寡头
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Oligarchic_economic_system
+			}
+			NOT = { has_completed_focus = KMG_implement_rationing_system }
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Oligarchic_economic_system_tool
+				add_idea = KMG_Oligarchic_economic_system_tool_one
+			}
+		}
+		KMG_ART_OF_CONQUEST_mission_1_var_effect = yes
+	}
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Oligarchic_economic_system
+			}
+			has_completed_focus = KMG_implement_rationing_system
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Oligarchic_economic_system_tool
+				add_idea = KMG_Oligarchic_economic_system_tool_two
+			}
+		}
+		KMG_ART_OF_CONQUEST_mission_1_var_effect = yes
+	}
+}
+
+KMG_ART_OF_CONQUEST_mission_2_effect = {
+	#初始
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Damage_of_War
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Damage_of_War
+				add_idea = KMG_Damage_of_War_tool
+			}
+		}
+		KMG_ART_OF_CONQUEST_mission_2_var_effect = yes
+	}
+	#先锋
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Vanguard_army
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Vanguard_army_tool
+				add_idea = KMG_Vanguard_army_tool_one
+			}
+		}
+		KMG_ART_OF_CONQUEST_mission_2_var_effect = yes
+	}
+	#意志
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Victory_of_will
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Victory_of_will_tool
+				add_idea = KMG_Victory_of_will_tool_one
+			}
+		}
+		KMG_ART_OF_CONQUEST_mission_2_var_effect = yes
+	}
+}
+KMG_ART_OF_CONQUEST_mission_1_var_effect = {
+	if = {
+		limit = { 
+			NOT = { has_completed_focus = KMG_implement_rationing_system }
+		}
+		add_to_variable = { KMG_consumer_goods_factor_var = 0.05 }
+		add_to_variable = { KMG_production_speed_buildings_factor_var = -0.05 }
+		add_to_variable = { KMG_line_change_production_efficiency_factor_var = -0.03 }
+		add_to_variable = { KMG_production_factory_efficiency_gain_factor_var = -0.05 }
+		add_to_variable = { KMG_production_factory_max_efficiency_factor_var = -0.02 }
+		add_to_variable = { KMG_industrial_capacity_factory_var = -0.075 }
+		add_to_variable = { KMG_stability_factor_var = -0.05 }
+	}
+	if = {
+		limit = { 
+			has_completed_focus = KMG_implement_rationing_system
+		}
+		add_to_variable = { KMG_consumer_goods_factor_var = 0.025 }
+		add_to_variable = { KMG_production_speed_buildings_factor_var = -0.05 }
+		add_to_variable = { KMG_line_change_production_efficiency_factor_var = -0.03 }
+		add_to_variable = { KMG_production_factory_efficiency_gain_factor_var = -0.05 }
+		add_to_variable = { KMG_production_factory_max_efficiency_factor_var = -0.02 }
+		add_to_variable = { KMG_industrial_capacity_factory_var = -0.05 }
+		add_to_variable = { KMG_stability_factor_var = -0.05 }
+	}
+	KMG_CLAMP_ALL_VAR = yes
+}
+KMG_ART_OF_CONQUEST_mission_2_var_effect = {
+	add_to_variable = { KMG_conscription_var = -0.001 }
+	add_to_variable = { KMG_army_attack_factor_var = -0.01 }
+	add_to_variable = { KMG_army_defence_factor_var = -0.01 }
+	add_to_variable = { KMG_breakthrough_factor_var = -0.01 }
+	KMG_CLAMP_ALL_VAR = yes
+}
+
+#恢复buff
+KMG_ART_OF_CONQUEST_decision_1_effect = {
+	#初始
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_War_Economic_Effect
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_War_Economic_Effect_tool_two
+				add_idea = KMG_War_Economic_Effect
+			}
+		}
+		KMG_ART_OF_CONQUEST_decision_1_var_effect = yes
+	}
+	#委员会
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Supreme_Economic_Council
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Supreme_Economic_Council_tool_two
+				add_idea = KMG_Supreme_Economic_Council_tool
+			}
+		}
+		KMG_ART_OF_CONQUEST_decision_1_var_effect = yes
+	}
+	#寡头
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Oligarchic_economic_system
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Oligarchic_economic_system_tool_two
+				add_idea = KMG_Oligarchic_economic_system_tool
+			}
+		}
+		KMG_ART_OF_CONQUEST_decision_1_var_effect = yes
+	}
+}
+
+KMG_ART_OF_CONQUEST_decision_2_effect = {
+	#初始
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Damage_of_War
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Damage_of_War_tool
+				add_idea = KMG_Damage_of_War
+			}
+		}
+		KMG_ART_OF_CONQUEST_decision_2_var_effect = yes
+	}
+	#先锋
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Vanguard_army
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Vanguard_army_tool_one
+				add_idea = KMG_Vanguard_army_tool
+			}
+		}
+		KMG_ART_OF_CONQUEST_decision_2_var_effect = yes
+	}
+	#意志
+	if = {
+		limit = { 
+			has_dynamic_modifier = {
+				modifier = KMG_Victory_of_will
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = KMG_Victory_of_will_tool_one
+				add_idea = KMG_Victory_of_will_tool
+			}
+		}
+		KMG_ART_OF_CONQUEST_decision_2_var_effect = yes
+	}
+}
+KMG_ART_OF_CONQUEST_decision_1_var_effect = {
+	add_to_variable = { KMG_consumer_goods_factor_var = -0.025 }
+	add_to_variable = { KMG_production_speed_buildings_factor_var = 0.05 }
+	add_to_variable = { KMG_line_change_production_efficiency_factor_var = 0.03 }
+	add_to_variable = { KMG_production_factory_efficiency_gain_factor_var = 0.05 }
+	add_to_variable = { KMG_production_factory_max_efficiency_factor_var = 0.02 }
+	add_to_variable = { KMG_industrial_capacity_factory_var = 0.05 }
+	add_to_variable = { KMG_stability_factor_var = 0.05 }
+	KMG_CLAMP_ALL_VAR = yes
+}
+KMG_ART_OF_CONQUEST_decision_2_var_effect = {
+	add_to_variable = { KMG_conscription_var = 0.001 }
+	add_to_variable = { KMG_army_attack_factor_var = 0.01 }
+	add_to_variable = { KMG_army_defence_factor_var = 0.01 }
+	add_to_variable = { KMG_breakthrough_factor_var = 0.01 }
+	KMG_CLAMP_ALL_VAR = yes
+}
+KMG_CLAMP_ALL_VAR = {
+	#军事
+	clamp_variable = {
+		var = ROOT.KMG_conscription_var
+		min = -0.01
+		max = 0.05
+	}
+	clamp_variable = {
+		var = ROOT.KMG_army_attack_factor_var
+		min = -0.1
+		max = 0.3
+	}
+	clamp_variable = {
+		var = ROOT.KMG_army_defence_factor_var
+		min = -0.1
+		max = 0.3
+	}
+	clamp_variable = {
+		var = ROOT.KMG_breakthrough_factor_var
+		min = -0.1
+		max = 0.3
+	}
+	#经济
+	clamp_variable = {
+		var = ROOT.KMG_consumer_goods_factor_var
+		min = -1
+		max = 0.35
+	}
+	clamp_variable = {
+		var = ROOT.KMG_production_speed_buildings_factor_var
+		min = -0.3
+		max = 1
+	}
+	clamp_variable = {
+		var = ROOT.KMG_line_change_production_efficiency_factor_var
+		min = -0.4
+		max = 1
+	}
+	clamp_variable = {
+		var = ROOT.KMG_production_factory_efficiency_gain_factor_var
+		min = -0.4
+		max = 1
+	}
+	clamp_variable = {
+		var = ROOT.KMG_production_factory_max_efficiency_factor_var
+		min = -0.2
+		max = 1
+	}
+	clamp_variable = {
+		var = ROOT.KMG_industrial_capacity_factory_var
+		min = -0.4
+		max = 1
+	}
+	clamp_variable = {
+		var = ROOT.KMG_stability_factor_var
+		min = -0.3
+		max = 1
+	}
+}

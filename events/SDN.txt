@@ -1,0 +1,22 @@
+add_namespace = test_sdn
+
+country_event = {
+	id = test_sdn.1 #萨丁尼亚谈判合并
+	title = test_sdn.1.t
+	desc = test_sdn.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_sdn.1.a
+		FROM = {
+			annex_country = {
+				target = SDN
+				transfer_troops = yes
+			}
+		}
+	}
+	option = {
+		name = test_sdn.1.b
+	}
+}

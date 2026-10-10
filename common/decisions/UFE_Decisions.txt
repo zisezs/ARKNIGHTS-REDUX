@@ -1,0 +1,2628 @@
+UFE_picao_trade_decisions_category = {
+	#增加皮草征收（不可叠加） +500
+	UFE_picao_trade_decisions_1 = {
+		
+		icon = generic_assassination
+		
+		available = {
+			hidden_trigger = {
+				has_stability > 0.05
+				has_political_power > 49
+			}
+			custom_trigger_tooltip = {
+				tooltip = UFE_picao_trade_decisions_1_trigger_tt
+				NOT = {
+					has_idea = UFE_picao_trade_idea_3
+				}
+			}
+		}
+		
+		days_re_enable = 45
+		
+		ai_hint_pp_cost = 50
+		custom_cost_trigger = {
+			has_stability > 0.05
+			has_political_power > 49
+		}
+		custom_cost_text = decision_cost_st_5_pp_50
+		
+		complete_effect = {
+			hidden_effect = {
+				add_stability = -0.05
+				add_political_power = -50
+				if = {
+					limit = { has_idea = UFE_picao_trade_idea_2 }
+					swap_ideas = {
+						remove_idea = UFE_picao_trade_idea_2
+						add_idea = UFE_picao_trade_idea_3
+					}
+				}
+				if = {
+					limit = { has_idea = UFE_picao_trade_idea_1 }
+					swap_ideas = {
+						remove_idea = UFE_picao_trade_idea_1
+						add_idea = UFE_picao_trade_idea_2
+					}
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = UFE_picao_trade_idea_1
+					add_idea = UFE_picao_trade_idea_2
+				}
+			}
+			custom_effect_tooltip = decision_days_re_enable_45_tt
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 600
+				has_idea = UFE_picao_trade_idea_2
+			}
+			modifier = {
+				add = 6
+				has_idea = UFE_picao_trade_idea_1
+				has_country_leader = {
+					character = UFE_authoritarianism_leader
+					ruling_only = yes
+				}
+			}
+			modifier = {
+				factor = 0
+				focus_progress = {
+					focus = UFE_PiCaoMaoYi_YiChan
+					progress > 0.1
+				}
+			}
+		}
+		
+	}
+	#减少皮草征收（不可叠加） -500
+	UFE_picao_trade_decisions_2 = {
+		
+		cost = 50
+		
+		icon = generic_break_treaty
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = UFE_picao_trade_decisions_2_trigger_tt
+				OR = {
+					has_idea = UFE_picao_trade_idea_2
+					has_idea = UFE_picao_trade_idea_3
+				}
+			}
+		}
+		
+		days_re_enable = 45
+		
+		complete_effect = {
+			add_stability = 0.05
+			hidden_effect = {
+				if = {
+					limit = { has_idea = UFE_picao_trade_idea_2 }
+					swap_ideas = {
+						remove_idea = UFE_picao_trade_idea_2
+						add_idea = UFE_picao_trade_idea_1
+					}
+				}
+				if = {
+					limit = { has_idea = UFE_picao_trade_idea_3 }
+					swap_ideas = {
+						remove_idea = UFE_picao_trade_idea_3
+						add_idea = UFE_picao_trade_idea_2
+					}
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = UFE_picao_trade_idea_2
+					add_idea = UFE_picao_trade_idea_1
+				}
+			}
+			custom_effect_tooltip = decision_days_re_enable_45_tt
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				focus_progress = {
+					focus = UFE_PiCaoMaoYi_YiChan
+					progress > 0.1
+				}
+			}
+		}
+		
+	}
+	#搜刮皮草（扣稳定） +2000
+	UFE_picao_trade_decisions_3 = {
+		
+		icon = generic_prepare_civil_war
+		
+		available = {
+			hidden_trigger = {
+				has_stability > 0.05
+				has_political_power > 49
+			}
+		}
+		
+		days_re_enable = 45
+		
+		ai_hint_pp_cost = 50
+		custom_cost_trigger = {
+			has_stability > 0.05
+			has_political_power > 49
+		}
+		custom_cost_text = decision_cost_st_5_pp_50
+		
+		complete_effect = {
+			add_to_variable = { picao_var = 2000 }
+			hidden_effect = {
+				add_stability = -0.05
+				add_political_power = -50
+			}
+			custom_effect_tooltip = picao_var_add_2000_tt
+			custom_effect_tooltip = decision_days_re_enable_45_tt
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+		
+	}
+	#用皮草购置步兵装备 500
+	UFE_picao_trade_decisions_4 = {
+		
+		icon = generic_intelligence_operation
+		
+		available = {
+			hidden_trigger = {
+				check_variable = { picao_var > 499 }
+				has_political_power > 14
+			}
+		}
+		
+		days_re_enable = 45
+		
+		ai_hint_pp_cost = 15
+		custom_cost_trigger = {
+			check_variable = { picao_var > 499 }
+			has_political_power > 14
+		}
+		custom_cost_text = decision_cost_pc_500_pp_15
+		
+		complete_effect = {  
+			add_to_variable = { picao_var = -500 }
+			hidden_effect = {
+				add_political_power = -15
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment 
+				amount = 490
+				producer = URS 
+			}
+			custom_effect_tooltip = decision_days_re_enable_45_tt
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5.5
+				has_equipment = { infantry_equipment < 0 }	
+			}
+		}
+	}
+	#用皮草购置法术装备 500
+	UFE_picao_trade_decisions_5 = {
+		
+		icon = ger_military_buildup
+		
+		available = {
+			hidden_trigger = {
+				check_variable = { picao_var > 499 }
+				has_political_power > 14
+			}
+		}
+		
+		days_re_enable = 45
+		
+		ai_hint_pp_cost = 15
+		custom_cost_trigger = {
+			check_variable = { picao_var > 499 }
+			has_political_power > 14
+		}
+		custom_cost_text = decision_cost_pc_500_pp_15
+		
+		complete_effect = {  
+			add_to_variable = { picao_var = -500 }
+			hidden_effect = {
+				add_political_power = -15
+			}
+			add_equipment_to_stockpile = {
+				type = arts_equipment 
+				amount = 350
+				producer = URS 
+			}
+			custom_effect_tooltip = decision_days_re_enable_45_tt
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5.5
+				has_equipment = { arts_equipment < 0 }	
+			}
+		}
+		
+	}
+	#用皮草购置火炮 1000
+	UFE_picao_trade_decisions_6 = {
+		
+		icon = generic_ignite_civil_war
+		
+		available = {
+			hidden_trigger = {
+				check_variable = { picao_var > 999 }
+				has_political_power > 14
+			}
+		}
+		
+		days_re_enable = 90
+		
+		ai_hint_pp_cost = 15
+		custom_cost_trigger = {
+			check_variable = { picao_var > 999 }
+			has_political_power > 14
+		}
+		custom_cost_text = decision_cost_pc_1000_pp_15
+		
+		complete_effect = {  
+			add_to_variable = { picao_var = -1000 }
+			hidden_effect = {
+				add_political_power = -15
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment 
+				amount = 70
+				producer = URS 
+			}
+			custom_effect_tooltip = decision_days_re_enable_90_tt
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5.5
+				has_equipment = { artillery_equipment < 100 }	
+			}
+		}
+		
+	}
+	#用皮草购置科研图纸 2000
+	UFE_picao_trade_decisions_7 = {
+		
+		icon = generic_research
+		
+		available = {
+			hidden_trigger = {
+				check_variable = { picao_var > 1999 }
+				has_political_power > 14
+			}
+			custom_trigger_tooltip = {
+				tooltip = UFE_picao_trade_add_bonus_10_tt
+				check_variable = { UFE_picao_trade_add_bonus_var < 10 }
+			}
+		}
+		
+		days_re_enable = 90
+		
+		ai_hint_pp_cost = 15
+		custom_cost_trigger = {
+			check_variable = { picao_var > 1999 }
+			has_political_power > 14
+		}
+		custom_cost_text = decision_cost_pc_2000_pp_15
+		
+		complete_effect = {  
+			add_to_variable = { picao_var = -2000 }
+			add_to_variable = { UFE_picao_trade_add_bonus_var = 1 }
+			hidden_effect = {
+				add_political_power = -15
+			}
+			add_tech_bonus = {
+				name = UFE_picao_trade_decisions_7
+				bonus = 0.75
+				uses = 1
+				category = industry
+				category = rocketry
+				category = nuclear
+				category = electronics
+				category = infantry_weapons
+				category = mio_cat_all_artillery_equipment
+				category = mio_cat_tech_all_armor_and_modules
+			}
+			custom_effect_tooltip = decision_days_re_enable_90_tt
+		}
+		
+		ai_will_do = {
+			base = 400
+		}
+	}
+	
+	#用皮草换取投资（民工） 3000
+	UFE_picao_trade_decisions_8 = {
+		
+		icon = generic_construction
+		
+		available = {
+			hidden_trigger = {
+				check_variable = { picao_var > 2999 }
+				has_political_power > 14
+			}
+			custom_trigger_tooltip = {
+				tooltip = UFE_picao_trade_add_ic_10_tt
+				check_variable = { UFE_picao_trade_add_ic_var < 20 }
+			}
+		}
+		
+		days_re_enable = 120
+		
+		ai_hint_pp_cost = 15
+		custom_cost_trigger = {
+			check_variable = { picao_var > 2999 }
+			has_political_power > 14
+		}
+		custom_cost_text = decision_cost_pc_3000_pp_15
+		
+		complete_effect = {  
+			add_to_variable = { picao_var = -3000 }
+			add_to_variable = { UFE_picao_trade_add_ic_var = 1 }
+			hidden_effect = {
+				add_political_power = -15
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+			custom_effect_tooltip = decision_days_re_enable_120_tt
+		}
+		
+		ai_will_do = {
+			base = 600
+		}
+		
+	}
+	#用皮草引入产线（军工） 3000
+	UFE_picao_trade_decisions_9 = {
+		
+		icon = generic_merge_plant_materiel
+		
+		available = {
+			hidden_trigger = {
+				check_variable = { picao_var > 2999 }
+				has_political_power > 14
+			}
+			custom_trigger_tooltip = {
+				tooltip = UFE_picao_trade_add_ic_10_tt
+				check_variable = { UFE_picao_trade_add_ic_var < 20 }
+			}
+		}
+		
+		days_re_enable = 120
+		
+		ai_hint_pp_cost = 15
+		custom_cost_trigger = {
+			check_variable = { picao_var > 2999 }
+			has_political_power > 14
+		}
+		custom_cost_text = decision_cost_pc_3000_pp_15
+		
+		complete_effect = {  
+			add_to_variable = { picao_var = -3000 }
+			add_to_variable = { UFE_picao_trade_add_ic_var = 1 }
+			hidden_effect = {
+				add_political_power = -15
+			}
+			add_offsite_building = { type = arms_factory level = 1 }
+			custom_effect_tooltip = decision_days_re_enable_120_tt
+		}
+		
+		ai_will_do = {
+			base = 650
+		}
+	}
+}
+UFE_new_currency_decisions_category = {
+	#提升货币信用
+	UFE_new_currency_decisions_1 = {
+		icon = eng_trade_unions_support
+		
+		days_remove = UFE_new_currency_decisions_1_remove_days_var #360-90
+		
+		cost = 100
+		
+		available = {
+			num_of_civilian_factories_available_for_projects > 9
+			NOT = { has_country_flag = UFE_new_currency_decisions_flag }
+		}
+		
+		visible = { 
+			NOT = { has_idea = UFE_new_currency_idea_7 }
+			OR = {
+				has_idea = UFE_new_currency_idea_6
+				has_idea = UFE_new_currency_idea_5
+				has_idea = UFE_new_currency_idea_4
+				has_idea = UFE_new_currency_idea_3
+				has_idea = UFE_new_currency_idea_2
+				has_idea = UFE_new_currency_idea_1
+			}
+		}
+		
+		cancel_trigger = {
+			has_idea = UFE_new_currency_idea_7
+		}
+		
+		cancel_effect = {
+			clr_country_flag = UFE_new_currency_decisions_flag
+		}
+		
+		modifier = {
+			civilian_factory_use = 10
+			industrial_capacity_dockyard = -0.15
+			industrial_capacity_factory = -0.15
+		}
+		
+		complete_effect = {
+			set_country_flag = UFE_new_currency_decisions_flag
+		}
+		
+		remove_effect = {
+			clr_country_flag = UFE_new_currency_decisions_flag
+			UFE_new_currency_idea_add = yes
+		}
+		
+		ai_will_do = {
+			base = 400
+		}
+	}
+	#超额发行货币
+	UFE_new_currency_decisions_2 = {
+		icon = generic_fundraising
+		
+		days_remove = UFE_new_currency_decisions_2_remove_days_var #180+90
+		
+		cost = 50
+		
+		visible = { 
+			NOT = { has_idea = UFE_new_currency_idea_1 }
+			OR = {
+				has_idea = UFE_new_currency_idea_6
+				has_idea = UFE_new_currency_idea_5
+				has_idea = UFE_new_currency_idea_4
+				has_idea = UFE_new_currency_idea_3
+				has_idea = UFE_new_currency_idea_2
+				has_idea = UFE_new_currency_idea_7
+			}
+		}
+		
+		cancel_trigger = {
+			has_idea = UFE_new_currency_idea_1
+		}
+		
+		cancel_effect = {
+			clr_country_flag = UFE_new_currency_decisions_flag
+		}
+		
+		available = {
+			NOT = { has_country_flag = UFE_new_currency_decisions_flag }
+		}
+		
+		modifier = {
+			industrial_capacity_dockyard = 0.1
+			industrial_capacity_factory = 0.1
+			production_factory_max_efficiency_factor = 0.05
+			production_speed_industrial_complex_factor = 0.05
+			production_speed_arms_factory_factor = 0.05
+			custom_modifier_tooltip = UFE_new_currency_decisions_2_tt
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				add_offsite_building = { type = arms_factory level = 6 }
+			}
+			set_country_flag = UFE_new_currency_decisions_flag
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				add_offsite_building = { type = arms_factory level = -6 }
+			}
+			clr_country_flag = UFE_new_currency_decisions_flag
+			UFE_new_currency_idea_sub = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+	UFE_new_currency_decisions_debug1 = {
+		
+		visible = { 
+			OR = {
+				has_idea = UFE_new_currency_idea_6
+				has_idea = UFE_new_currency_idea_5
+				has_idea = UFE_new_currency_idea_4
+				has_idea = UFE_new_currency_idea_3
+				has_idea = UFE_new_currency_idea_2
+				has_idea = UFE_new_currency_idea_7
+				has_idea = UFE_new_currency_idea_1
+			}
+			is_debug = yes
+		}
+		
+		complete_effect = {
+			UFE_new_currency_idea_add = yes
+		}
+	}
+	UFE_new_currency_decisions_debug2 = {
+		
+		visible = { 
+			OR = {
+				has_idea = UFE_new_currency_idea_6
+				has_idea = UFE_new_currency_idea_5
+				has_idea = UFE_new_currency_idea_4
+				has_idea = UFE_new_currency_idea_3
+				has_idea = UFE_new_currency_idea_2
+				has_idea = UFE_new_currency_idea_7
+				has_idea = UFE_new_currency_idea_1
+			}
+			is_debug = yes
+		}
+		
+		complete_effect = {
+			if = {
+				limit = { has_idea = UFE_new_currency_idea_7 }
+				swap_ideas = {
+					remove_idea = UFE_new_currency_idea_7
+					add_idea = UFE_new_currency_idea_6
+				}
+			}
+			else_if = {
+				limit = { has_idea = UFE_new_currency_idea_2 }
+				swap_ideas = {
+					remove_idea = UFE_new_currency_idea_2
+					add_idea = UFE_new_currency_idea_1
+				}
+			}
+			else_if = {
+				limit = { has_idea = UFE_new_currency_idea_3 }
+				swap_ideas = {
+					remove_idea = UFE_new_currency_idea_3
+					add_idea = UFE_new_currency_idea_2
+				}
+			}
+			else_if = {
+				limit = { has_idea = UFE_new_currency_idea_4 }
+				swap_ideas = {
+					remove_idea = UFE_new_currency_idea_4
+					add_idea = UFE_new_currency_idea_3
+				}
+			}
+			else_if = {
+				limit = { has_idea = UFE_new_currency_idea_5 }
+				swap_ideas = {
+					remove_idea = UFE_new_currency_idea_5
+					add_idea = UFE_new_currency_idea_4
+				}
+			}
+			else_if = {
+				limit = { has_idea = UFE_new_currency_idea_6 }
+				swap_ideas = {
+					remove_idea = UFE_new_currency_idea_6
+					add_idea = UFE_new_currency_idea_5
+				}
+			}
+		}
+	}
+}
+UFE_vs_REU_leadership_decisions_category = {
+	#革命领导权博弈（160天，共五轮）
+	UFE_vs_REU_leadership_decisions_0 = {
+		
+		icon = revolt
+		
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		days_mission_timeout = 160
+		is_good = no
+		fire_only_once = yes
+		
+		timeout_effect = {
+			custom_effect_tooltip = UFE_vs_REU_leadership_decisions_0_tt
+			if = {
+				limit = { tag = UFE }
+				hidden_effect = { #判断最终输赢
+					if = {
+						limit = { check_variable = { REU.win_points > UFE.win_points } }
+						REU = { set_country_flag = we_win_leadership_flag }
+					}
+					if = {
+						limit = { check_variable = { REU.win_points < UFE.win_points } }
+						UFE = { set_country_flag = we_win_leadership_flag }
+					}
+				}
+			}
+		}
+	}
+	#政策宣传（消耗政治点）
+	UFE_vs_REU_leadership_decisions_1 = {
+		
+		icon = generic_speech
+		
+		days_remove = 30
+		
+		cost = 20
+		
+		visible = { 
+			NOT = { has_country_flag = UFE_vs_REU_leadership_end }
+			has_country_flag = start_UFE_vs_REU_leadership_flag
+		}
+		
+		available = { 
+			UFE = {
+				NOT = { has_country_flag = we_win_leadership_flag }
+			}
+			REU = {
+				NOT = { has_country_flag = we_win_leadership_flag }
+			}
+		}
+		
+		complete_effect = {
+			add_to_variable = { ROOT.win_points = 10 }
+			custom_effect_tooltip = UFE_vs_REU_leadership_decisions_1_tt
+		}
+		
+		modifier = {
+			political_power_cost = 0.25
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0
+				tag = REU
+				has_game_rule = {
+					rule = REU_and_UFE_ai_behavior
+					option = UFE_peace
+				}
+			}
+			modifier = {
+				factor = 0
+				tag = UFE
+				has_game_rule = {
+					rule = REU_and_UFE_ai_behavior
+					option = REU_peace
+				}
+			}
+		}
+
+	}
+	#救济周边地区的民众（消费品、建造、产能）
+	UFE_vs_REU_leadership_decisions_2 = {
+		
+		icon = generic_reorganize_irregulars
+		
+		days_remove = 30
+		
+		cost = 20
+		
+		visible = { 
+			NOT = { has_country_flag = UFE_vs_REU_leadership_end }
+			has_country_flag = start_UFE_vs_REU_leadership_flag
+		}
+		
+		available = { 
+			UFE = {
+				NOT = { has_country_flag = we_win_leadership_flag }
+			}
+			REU = {
+				NOT = { has_country_flag = we_win_leadership_flag }
+			}
+		}
+		
+		complete_effect = {
+			add_to_variable = { ROOT.win_points = 10 }
+			custom_effect_tooltip = UFE_vs_REU_leadership_decisions_1_tt
+		}
+		
+		modifier = {
+			consumer_goods_expected_value = 0.02
+			industrial_capacity_dockyard = -0.1
+			industrial_capacity_factory = -0.1
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+	#策划暴动（损失稳定度）
+	UFE_vs_REU_leadership_decisions_3 = {
+		
+		icon = FIN_stop_motti_tactics
+		
+		days_remove = 30
+		
+		cost = 20
+		
+		visible = { 
+			NOT = { has_country_flag = UFE_vs_REU_leadership_end }
+			has_country_flag = start_UFE_vs_REU_leadership_flag
+		}
+		
+		available = { 
+			UFE = {
+				NOT = { has_country_flag = we_win_leadership_flag }
+			}
+			REU = {
+				NOT = { has_country_flag = we_win_leadership_flag }
+			}
+		}
+		
+		complete_effect = {
+			add_to_variable = { ROOT.win_points = 10 }
+			custom_effect_tooltip = UFE_vs_REU_leadership_decisions_1_tt
+		}
+		
+		modifier = {
+			stability_weekly = -0.002
+			production_speed_industrial_complex_factor = -0.1
+			production_speed_arms_factory_factor = -0.1
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+	#胜利方行使主导权
+	UFE_vs_REU_leadership_decisions_4 = {
+		
+		icon = SWI_dismiss_council
+		
+		available = {
+			has_country_flag = we_win_leadership_flag
+			SKH = { exists = no }
+		}
+		
+		fire_only_once = yes
+		
+		target_trigger = {
+			FROM = {
+				OR = {
+					tag = REU
+					tag = UFE
+				}
+			}
+		}
+		visible = { #target_root_trigger
+			OR = {
+				tag = REU
+				tag = UFE
+			}
+			NOT = { has_country_flag = UFE_vs_REU_leadership_end }
+			has_country_flag = start_UFE_vs_REU_leadership_flag
+		}
+		
+		days_remove = 7
+		
+		remove_effect = {
+			FROM = {
+				country_event = {
+					id = UFE_special_events.7
+				}
+				set_country_flag = UFE_vs_REU_leadership_end
+			}
+			set_country_flag = UFE_vs_REU_leadership_end
+		}
+		
+		ai_will_do = {
+			base = 1
+		}
+	}
+	#debug
+	UFE_vs_REU_leadership_decisions_debug = {
+		
+		available = {
+			
+		}
+		
+		fire_only_once = yes
+		
+		target_trigger = {
+			FROM = {
+				OR = {
+					tag = REU
+					tag = UFE
+				}
+			}
+		}
+		visible = { #target_root_trigger
+			OR = {
+				tag = REU
+				tag = UFE
+			}
+			NOT = { has_country_flag = UFE_vs_REU_leadership_end }
+			has_country_flag = start_UFE_vs_REU_leadership_flag
+			is_debug = yes
+		}
+		
+		days_remove = 1
+		
+		remove_effect = {
+			FROM = {
+				country_event = {
+					id = UFE_special_events.7
+				}
+				set_country_flag = UFE_vs_REU_leadership_end
+			}
+			set_country_flag = UFE_vs_REU_leadership_end
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+}
+#革命风暴与社会矛盾
+UFE_social_stability_decisions_category = {
+	#矛盾张力（反动派密谋叛乱），社会矛盾张力抵达100%时会直接引爆叛乱
+	UFE_social_stability_decisions_1 = {
+		
+		icon = SOV_the_workers_dictatorship
+		
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		available = {
+			hidden_trigger = {
+				NOT = { has_country_flag = UFE_social_stability_flag }
+			}
+		}
+		
+		cancel_trigger = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		is_good = no
+		fire_only_once = yes
+		
+		days_mission_timeout = UFE.UFE_social_stability_decisions_1_days_var
+		
+		timeout_effect = {
+			if = {
+				limit = { 
+					any_character = {
+						has_character_flag = UFE_targeted_for_purge_flag
+					}
+				}
+				custom_effect_tooltip = UFE_social_stability_charactors_tt
+				character_list_tooltip = {
+					limit = {
+						has_character_flag = UFE_targeted_for_purge_flag
+					}
+				}
+			}
+			#增加
+			if = {
+				limit = { 
+					check_variable = { add_stability_var_effect_true_or_false = 1 }
+				}
+				UFE_stability_decision_var_add_effect = yes
+			}
+			if = {
+				limit = { 
+					check_variable = { add_army_control_var_effect_true_or_false = 1 }
+				}
+				UFE_army_control_decision_var_add_effect = yes
+			}
+			#减少
+			if = {
+				limit = { 
+					check_variable = { add_stability_var_effect_true_or_false = -1 }
+				}
+				UFE_stability_decision_var_sub_effect = yes
+			}
+			if = {
+				limit = { 
+					check_variable = { add_army_control_var_effect_true_or_false = -1 }
+				}
+				UFE_army_control_decision_var_sub_effect = yes
+			}
+			custom_effect_tooltip = redo_this_mission_decision_tt
+			hidden_effect = {
+				activate_mission = UFE_social_stability_decisions_1
+			}
+		}
+	}
+	#降低政策烈度（减矛盾）一次性
+	UFE_social_stability_decisions_2 = {
+		
+		icon = generic_arrest
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			custom_effect_tooltip = decision_fire_only_once_tt
+			UFE_stability_decision_var_sub_effect = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 2
+				check_variable = { UFE_stability_decision_var > 80 }
+			}
+		}
+		
+	}
+	#激进执行政策（加矛盾）一次性
+	UFE_social_stability_decisions_3 = {
+		
+		icon = SWI_consolidate_council_power
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			custom_effect_tooltip = decision_fire_only_once_tt
+			UFE_stability_decision_var_add_effect = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 2
+				check_variable = { UFE_stability_decision_var < 40 }
+			}
+		}
+		
+	}
+	#将领大清洗（加矛盾、军控+5%）一次性
+	UFE_social_stability_decisions_4 = {
+		
+		icon = generic_brainwash
+		
+		available = { has_completed_focus = UFE_TePaiYuan }
+		
+		fire_only_once = yes
+		
+		days_remove = 5
+		
+		remove_effect = {
+			custom_effect_tooltip = decision_fire_only_once_tt
+			UFE_stability_decision_var_add_effect = yes
+			UFE_army_control_decision_var_add_effect = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 2
+				check_variable = { UFE_stability_decision_var < 80 }
+				check_variable = { UFE_army_control_decision_var < 35 }
+			}
+		}
+		
+	}
+	#贿赂高级将领（加矛盾、军控+5%）一次性
+	UFE_social_stability_decisions_5 = {
+		
+		icon = generic_fundraising
+		
+		available = { has_completed_focus = UFE_JunFei_ZiZhu }
+		
+		fire_only_once = yes
+		
+		days_remove = 5
+		
+		remove_effect = {
+			custom_effect_tooltip = decision_fire_only_once_tt
+			UFE_stability_decision_var_add_effect = yes
+			UFE_army_control_decision_var_add_effect = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 2
+				check_variable = { UFE_stability_decision_var < 80 }
+				check_variable = { UFE_army_control_decision_var < 35 }
+			}
+		}
+		
+	}
+	#对地主贵族缓和（减矛盾、军控-5%）一次性
+	UFE_social_stability_decisions_6 = {
+		
+		icon = eng_trade_unions_demand
+		
+		available = { has_completed_focus = UFE_DiZhiZuoYi }
+		
+		fire_only_once = yes
+		
+		days_remove = 5
+		
+		remove_effect = {
+			custom_effect_tooltip = decision_fire_only_once_tt
+			UFE_stability_decision_var_sub_effect = yes
+			UFE_army_control_decision_var_sub_effect = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 2
+				check_variable = { UFE_stability_decision_var > 75 }
+				check_variable = { UFE_army_control_decision_var > 55 }
+			}
+		}
+		
+	}
+}
+UFE_special_units_decisions_category = { 
+	#猎兵扩招（加2山地铳；加部队组织度）
+	UFE_special_units_decisions_1 = {
+		icon = generic_military
+		
+		available = {
+			has_completed_focus = UFE_BenDiZhaoMu
+		}
+		
+		visible = {
+			
+		}
+		
+		ai_hint_pp_cost = 50
+		custom_cost_trigger = {
+			has_political_power > 49
+			has_army_experience > 24
+		}
+		custom_cost_text = decision_cost_armyXP_25_pp_50
+		
+		days_remove = 180
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			hidden_effect = {
+				add_political_power = -50
+				army_experience = -25
+			}
+		}
+		
+		remove_effect = {
+			swap_ideas = {
+				remove_idea = UFE_special_army_idea_1
+				add_idea = UFE_special_army_idea_2
+			}
+			hidden_effect = {
+				add_units_to_division_template = {
+					template_name = "自卫猎兵"
+					regiments = {
+						militia = 0
+						militia = 1
+					}
+				}
+			}
+			custom_effect_tooltip =  UFE_special_units_decisions_1_tt
+			set_country_flag = ufe_special_units_decisions_flag_1
+		}
+		
+		ai_will_do = {
+			base = 3.5
+		}
+	}
+	#猎兵支援现代化（加野战医院、侦察连；移动中组织度损失）
+	UFE_special_units_decisions_2 = {
+		icon = generic_intelligence_operation
+		
+		available = {
+			if = {
+				limit = { is_ai = no }
+				has_tech = tech_recon
+				has_tech = tech_field_hospital
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_KongZhi_TuFei
+		}
+		
+		ai_hint_pp_cost = 50
+		custom_cost_trigger = {
+			has_political_power > 49
+			has_army_experience > 24
+		}
+		custom_cost_text = decision_cost_armyXP_25_pp_50
+		
+		days_remove = 180
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			hidden_effect = {
+				add_political_power = -50
+				army_experience = -25
+			}
+		}
+		
+		remove_effect = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = UFE_special_army_idea_5
+					add_idea = UFE_special_army_idea_3
+				}
+			}
+			hidden_effect = {
+				add_ideas = UFE_special_army_idea_3
+				add_units_to_division_template = {
+					template_name = "自卫猎兵"
+					support = {
+						field_hospital = 0
+						recon = 0
+					}
+				}
+				if = {
+					limit = { is_ai = yes }
+					if = {
+						limit = { NOT = { has_tech = tech_recon } }
+						set_technology = {
+							tech_recon = 1
+						}
+					}
+					if = {
+						limit = { NOT = { has_tech = tech_field_hospital } }
+						set_technology = {
+							tech_field_hospital = 1
+						}
+						set_technology = {
+							tech_field_hospital2 = 1
+						}
+						add_units_to_division_template = {
+							template_name = "集团军总部"
+							support = { hq_field_hospital = 0 }
+						}
+					}
+				}
+			}
+			custom_effect_tooltip =  UFE_special_units_decisions_2_tt
+			set_country_flag = ufe_special_units_decisions_flag_2
+		}
+		
+		ai_will_do = {
+			base = 3.5
+		}
+	}
+	#猎兵工程支援（加工兵连、火炮支援连；堑壕速度和上限；特种攻防）
+	UFE_special_units_decisions_3 = {
+		icon = generic_ignite_civil_war
+		
+		available = {
+			if = {
+				limit = { is_ai = no }
+				has_tech = tech_engineers
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_KongZhi_TuFei
+		}
+		
+		ai_hint_pp_cost = 50
+		custom_cost_trigger = {
+			has_political_power > 49
+			has_army_experience > 24
+		}
+		custom_cost_text = decision_cost_armyXP_25_pp_50
+		
+		days_remove = 180
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			hidden_effect = {
+				add_political_power = -50
+				army_experience = -25
+			}
+		}
+		
+		remove_effect = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = UFE_special_army_idea_5
+					add_idea = UFE_special_army_idea_4
+				}
+			}
+			hidden_effect = {
+				set_technology = {
+					UFE_special_units_decisions_5_tech = 1
+					popup = no
+				}
+				add_units_to_division_template = {
+					template_name = "自卫猎兵"
+					support = {
+						engineer = 0
+						artillery = 0
+					}
+				}
+				if = {
+					limit = { is_ai = yes }
+					if = {
+						limit = { NOT = { has_tech = tech_engineers } }
+						set_technology = {
+							tech_engineers = 1
+						}
+					}
+				}
+			}
+			custom_effect_tooltip =  UFE_special_units_decisions_3_tt
+			set_country_flag = ufe_special_units_decisions_flag_3
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3.5
+				REU = { exists = no }
+				SKH = { exists = no }
+			}
+		}
+	}
+	#结合现代火力（加3炮兵；炮兵山地、森林、丘陵、河流、沼泽、平原攻击/移动/防御）
+	#需要猎兵训练强化
+	UFE_special_units_decisions_4 = {
+		icon = generic_protection
+		
+		available = {
+			has_country_flag = ufe_special_units_decisions_flag_5
+		}
+		
+		visible = {
+			has_completed_focus = UFE_KongZhi_TuFei
+		}
+		
+		ai_hint_pp_cost = 50
+		custom_cost_trigger = {
+			has_political_power > 49
+			has_army_experience > 24
+		}
+		custom_cost_text = decision_cost_armyXP_25_pp_50
+		
+		days_remove = 180
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			hidden_effect = {
+				add_political_power = -50
+				army_experience = -25
+			}
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_technology = {
+					UFE_special_units_decisions_3_tech = 1
+					popup = no
+				}
+				add_units_to_division_template = {
+					template_name = "自卫猎兵"
+					regiments = {
+						artillery_brigade = 2
+						artillery_brigade = 2
+						anti_air_brigade = 3
+					}
+				}
+			}
+			custom_effect_tooltip = UFE_special_units_decisions_4_tt
+			set_country_flag = ufe_special_units_decisions_flag_4
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3.5
+				REU = { exists = no }
+				KMG = { exists = no }
+				BAK = { exists = no }
+				SKH = { exists = no }
+			}
+		}
+	}
+	#猎兵训练强化（森林、河流、沼泽、平原加成；加2山地铳）
+	#需要猎兵扩招
+	UFE_special_units_decisions_5 = {
+		icon = generic_motorized
+		
+		available = {
+			has_country_flag = ufe_special_units_decisions_flag_1
+		}
+		
+		visible = {
+			has_completed_focus = UFE_KongZhi_TuFei
+		}
+		
+		ai_hint_pp_cost = 50
+		custom_cost_trigger = {
+			has_political_power > 49
+			has_army_experience > 24
+		}
+		custom_cost_text = decision_cost_armyXP_25_pp_50
+		
+		days_remove = 180
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			hidden_effect = {
+				add_political_power = -50
+				army_experience = -25
+			}
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				set_technology = {
+					UFE_special_units_decisions_2_tech = 1
+					popup = no
+				}
+				add_units_to_division_template = {
+					template_name = "自卫猎兵"
+					regiments = {
+						militia = 2
+						militia = 2
+					}
+				}
+			}
+			custom_effect_tooltip = UFE_special_units_decisions_5_tt
+			set_country_flag = ufe_special_units_decisions_flag_5
+		}
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3.5
+				REU = { exists = no }
+				KMG = { exists = no }
+				BAK = { exists = no }
+				SKH = { exists = no }
+			}
+		}
+	}
+	#猎兵反坦克能力（加反坦克支援连；山地部队穿甲深度+300%、对装甲伤害+250%）
+	UFE_special_units_decisions_6 = {
+		icon = generic_tank
+		
+		available = {
+			if = {
+				limit = { is_ai = no }
+				has_tech = antitank_0
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_KongZhi_TuFei
+		}
+		
+		ai_hint_pp_cost = 50
+		custom_cost_trigger = {
+			has_political_power > 49
+			has_army_experience > 24
+		}
+		custom_cost_text = decision_cost_armyXP_25_pp_50
+		
+		days_remove = 180
+		
+		fire_only_once = yes
+		
+		complete_effect = {
+			hidden_effect = {
+				add_political_power = -50
+				army_experience = -25
+			}
+		}
+		
+		remove_effect = {
+			hidden_effect = {
+				add_ideas = UFE_special_units_decisions_6_idea
+				set_technology = {
+					UFE_special_units_decisions_9_tech = 1
+					popup = no
+				}
+				if = {
+					limit = { is_ai = yes }
+					if = {
+						limit = { NOT = { has_tech = antitank_0 } }
+						set_technology = {
+							antitank_0 = 1
+						}
+					}
+				}
+				if = {
+					limit = { is_ai = yes }
+					if = {
+						limit = { NOT = { has_tech = tech_logistics_company } }
+						set_technology = {
+							tech_logistics_company = 1
+						}
+						add_units_to_division_template = {
+							template_name = "集团军总部"
+							support = { hq_logistics = 0 }
+						}
+					}
+					if = {
+						limit = { NOT = { has_tech = tech_logistics_company2 } }
+						set_technology = {
+							tech_logistics_company2 = 1
+						}
+					}
+				}
+				add_units_to_division_template = {
+					template_name = "自卫猎兵"
+					support = {
+						anti_tank = 0
+					}
+					regiments = {
+						anti_tank_brigade = 3
+					}
+				}
+			}
+			custom_effect_tooltip = UFE_special_units_decisions_6_tt
+			set_country_flag = ufe_special_units_decisions_flag_6
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	#军事重组
+	UFE_special_units_decisions_6x = {
+		icon = UFE_special_units_decisions_6x
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ufe_special_units_decisions_flag_123456_tt
+				has_country_flag = ufe_special_units_decisions_flag_6
+				has_country_flag = ufe_special_units_decisions_flag_5
+				has_country_flag = ufe_special_units_decisions_flag_4
+				has_country_flag = ufe_special_units_decisions_flag_3
+				has_country_flag = ufe_special_units_decisions_flag_2
+				has_country_flag = ufe_special_units_decisions_flag_1
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_KongZhi_TuFei
+		}
+		
+		cost = 25
+		days_remove = 30
+		
+		modifier = {
+			experience_gain_army = 0.15
+		}
+		
+		complete_effect = {
+			add_daily_mastery = {
+				amount = 0.5
+				days = 100
+				name =  UFE_special_units_decisions_6x
+				track = infantry					
+			}
+		}
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			custom_effect_tooltip = UFE_special_units_medals_tt
+			every_country_division = {
+				limit = { 
+					division_has_majority_template = militia
+				}
+				custom_effect_tooltip = add_UFE_special_units_tt
+				hidden_effect = {
+					add_history_entry = {
+						key = UFE_special_units_decisions_end
+						subject = "Test entry"
+						allow = yes
+					}
+					add_unit_medal_to_latest_entry = {
+						unit_medals = UFE_special_units
+					}
+					add_divisional_commander_xp = 100
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			show_ideas_tooltip = UFE_special_army_idea_6
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_country_flag = ufe_special_units_decisions_flag_end
+			set_division_template_lock = {
+				division_template = "自卫猎兵"
+				is_locked = no
+			}
+			unlock_subunit = militia
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	#军事工业园
+	#设计主战坦克
+	UFE_special_units_decisions_7 = {
+		icon = generic_merge_plant_tank
+		
+		available = {
+			OR = {
+				has_tech = artillery_1
+				has_tech = antitank_1
+			}
+			has_tech = medium_tank_0
+			has_tech = radio
+		}
+		
+		visible = {
+			has_completed_focus = UFE_JunShi_GongYe
+		}
+		
+		cost = 50
+		
+		days_remove = 35
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			UFE = {
+				mio:UFE_tank_organization = {
+					add_mio_size = 1
+				}
+			}
+			create_equipment_variant = {
+				name = "T-98"
+				type = medium_tank_chassis_0
+				design_team = mio:UFE_tank_organization
+				parent_version = 0
+				modules = {
+					main_armament_slot = tank_medium_cannon_2
+					turret_type_slot = tank_medium_three_man_tank_turret
+					suspension_type_slot = tank_torsion_bar_suspension
+					armor_type_slot = tank_welded_armor
+					engine_type_slot = tank_gasoline_engine
+					special_type_slot_1 = tank_radio_1
+					special_type_slot_2 = extra_ammo_storage
+					special_type_slot_3 = additional_machine_guns
+					special_type_slot_4 = smoke_launchers
+				}
+				upgrades = {
+					tank_nsb_engine_upgrade = 1
+					tank_nsb_armor_upgrade = 1
+				}
+			}
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = medium_tank_chassis_0
+					amount = 100
+					variant_name = "T-98"
+				}
+			}
+			custom_effect_tooltip = add_equipment_to_stockpile_100_tt
+		}
+		
+		ai_will_do = {
+			base = 3
+		}
+	}
+	#设计陆地巡洋舰
+	UFE_special_units_decisions_8 = {
+		icon = generic_merge_plant_ship
+		
+		available = {
+			OR = {
+				has_tech = artillery_1
+				has_tech = antitank_1
+			}
+			has_tech = landship_0
+			has_tech = radio
+		}
+		
+		visible = {
+			has_completed_focus = UFE_JunShi_GongYe
+		}
+		
+		cost = 50
+		
+		days_remove = 70
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			UFE = {
+				mio:UFE_tank_organization = {
+					add_mio_size = 1
+				}
+			}
+			create_equipment_variant = {
+				name = "K-100"
+				type = landship_chassis_0
+				design_team = mio:UFE_tank_organization
+				parent_version = 0
+				modules = {
+					main_armament_slot = tank_heavy_cannon_2
+					turret_type_slot = tank_super_heavy_three_man_tank_turret
+					suspension_type_slot = tank_torsion_bar_suspension
+					armor_type_slot = tank_welded_armor
+					engine_type_slot = tank_gasoline_engine
+					special_type_slot_1 = tank_radio_1
+					special_type_slot_2 = extra_ammo_storage
+					special_type_slot_3 = additional_machine_guns
+					special_type_slot_4 = smoke_launchers
+				}
+				upgrades = {
+					tank_nsb_engine_upgrade = 1
+					tank_nsb_armor_upgrade = 1
+				}
+			}
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = landship_chassis_0
+					amount = 10
+					variant_name = "K-100"
+				}
+			}
+			custom_effect_tooltip = add_equipment_to_stockpile_10_tt
+		}
+		
+		ai_will_do = {
+			base = 3
+		}
+	}
+	#设计战斗机
+	UFE_special_units_decisions_9 = {
+		icon = generic_merge_plant_aircraft
+		
+		available = {
+			has_tech = small_airframe_0
+			has_tech = aa_cannon_1
+			has_tech = radio
+		}
+		
+		visible = {
+			has_completed_focus = UFE_JunShi_GongYe
+		}
+		
+		cost = 50
+		
+		days_remove = 35
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			UFE = {
+				mio:UFE_aircraft_organization = {
+					add_mio_size = 1
+				}
+			}
+			create_equipment_variant = {
+				name = "MiG-21"
+				type = small_plane_airframe_0
+				design_team = mio:UFE_aircraft_organization
+				parent_version = 0
+				modules = {
+					fixed_main_weapon_slot = aircraft_cannon_1
+					fixed_aircraft_cannon_slot = aircraft_cannon_1
+					engine_type_slot = engine_1x
+					plane_wingform_slot = straight_wing
+					special_type_slot_1 = air_radio_1
+				}
+			}
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = small_plane_airframe_0
+					amount = 100
+					variant_name = "MiG-21"
+				}
+			}
+			custom_effect_tooltip = add_equipment_to_stockpile_100_tt
+		}
+		
+		ai_will_do = {
+			base = 3
+		}
+	}
+	#设计支援机
+	UFE_special_units_decisions_10 = {
+		icon = generic_merge_plant_materiel
+		
+		available = {
+			has_tech = small_airframe_0
+			has_tech = aa_cannon_1
+			has_tech = radio
+			has_tech = antitank_1
+		}
+		
+		visible = {
+			has_completed_focus = UFE_JunShi_GongYe
+		}
+		
+		cost = 50
+		
+		days_remove = 35
+		
+		fire_only_once = yes
+		
+		remove_effect = {
+			UFE = {
+				mio:UFE_aircraft_organization = {
+					add_mio_size = 1
+				}
+			}
+			create_equipment_variant = {
+				name = "Su-7BKL"
+				type = small_plane_cas_airframe_0
+				design_team = mio:UFE_aircraft_organization
+				parent_version = 1
+				modules = {
+					fixed_main_weapon_slot = air_to_ground_hardpoint_1
+					fixed_aircraft_cannon_slot = aircraft_cannon_1
+					engine_type_slot = engine_1x
+					plane_wingform_slot = straight_wing
+					special_type_slot_1 = air_radio_1
+				}
+			}
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = small_plane_cas_airframe_0
+					amount = 100
+					variant_name = "Su-7BKL"
+				}
+			}
+			custom_effect_tooltip = add_equipment_to_stockpile_100_tt
+		}
+		
+		ai_will_do = {
+			base = 3
+		}
+	}
+}
+#革命宣传
+UFE_revolutionary_propaganda_decision_decision_category = {
+	#共和主义
+	urs_promoting_republicanism = {
+	
+		icon = generic_nationalism
+		
+		available = {
+			has_war = yes
+			custom_trigger_tooltip = {
+				tooltip = any_enemy_country_is_feudal_country_tt
+				any_enemy_country = {
+					OR = {	
+						has_government = authoritarianism #威权主义
+						has_government = conservatism #保守主义
+						has_government = despotism #专制主义
+						has_government = fascism #法西斯主义
+						has_government = mysticism #神秘主义
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			
+		}
+		
+		ai_will_do = {
+			base = 250
+		}
+		
+		days_remove = 90
+		days_re_enable = 45
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			custom_modifier_tooltip = urs_promoting_republicanism_modifier_tt
+			custom_modifier_tooltip = feudal_monarchism_religiosity_feudal_aristocratic_autocratic_centralism_tt
+		}
+		
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = urs_propagating_republicanism_CD_flag }
+				clr_country_flag = urs_propagating_republicanism_CD_flag
+			}
+			set_country_flag = urs_propagating_republicanism_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			hidden_effect = {
+				every_enemy_country = {
+					limit = {
+						OR = {	
+							has_government = authoritarianism #威权主义
+							has_government = conservatism #保守主义
+							has_government = despotism #专制主义
+							has_government = fascism #法西斯主义
+							has_government = mysticism #神秘主义
+						}
+					}
+					add_timed_idea = {
+						idea = URS_republic_effect_short
+						days = 90
+					}
+					country_event = {
+						id = UFE_special_events.82
+						hours = 6
+					}
+				}
+			}
+			UFE_revolutionary_propaganda_cost_effect = yes
+		}
+		
+		remove_effect = {
+			clr_country_flag = urs_propagating_republicanism_flag
+			set_country_flag = urs_propagating_republicanism_CD_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+		}
+		
+	}
+	#革命热情
+	urs_propagating_revolutionism = {
+	
+		icon = generic_military
+		
+		available = {
+			has_war = yes
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			
+		}
+		
+		ai_will_do = {
+			base = 250
+		}
+		
+		days_remove = 90
+		days_re_enable = 45
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			army_attack_factor = 0.05
+			org_loss_when_moving = -0.1
+			resistance_damage_to_garrison = -0.15
+			resistance_target = -0.1
+		}
+		
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = urs_propagating_revolutionism_CD_flag }
+				clr_country_flag = urs_propagating_revolutionism_CD_flag
+			}
+			set_country_flag = urs_propagating_revolutionism_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+		}
+		
+		remove_effect = {
+			clr_country_flag = urs_propagating_revolutionism_flag
+			set_country_flag = urs_propagating_revolutionism_CD_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+		}
+		
+	}
+	#自由主义
+	urs_propagating_liberalism = {
+	
+		icon = generic_fundraising
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			
+		}
+		
+		ai_will_do = {
+			base = 250
+		}
+		
+		days_remove = 90
+		days_re_enable = 45
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			custom_modifier_tooltip = industrial_capacity_factory_dockyard_005_1_tt
+			hidden_modifier = {
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+			}
+			production_speed_buildings_factor = 0.05
+			trade_opinion_factor = 0.2
+		}
+		
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = urs_propagating_liberalism_CD_flag }
+				clr_country_flag = urs_propagating_liberalism_CD_flag
+			}
+			set_country_flag = urs_propagating_liberalism_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+		}
+		
+		remove_effect = {
+			clr_country_flag = urs_propagating_liberalism_flag
+			set_country_flag = urs_propagating_liberalism_CD_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+		}
+		
+	}
+	#天赋人权
+	urs_propagating_individualism = {
+	
+		icon = generic_disband_irregulars
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+		
+		days_remove = 90
+		days_re_enable = 45
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			conscription = -0.005
+			experience_loss_factor = -0.25
+			experience_gain_army = 0.25
+		}
+		
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = urs_propagating_individualism_CD_flag }
+				clr_country_flag = urs_propagating_individualism_CD_flag
+			}
+			set_country_flag = urs_propagating_individualism_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+		}
+		
+		remove_effect = {
+			clr_country_flag = urs_propagating_individualism_flag
+			set_country_flag = urs_propagating_individualism_CD_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+		}
+		
+	}
+	#平等主义
+	urs_propagating_egalitarianism = {
+	
+		icon = generic_political_rally
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			
+		}
+		
+		ai_will_do = {
+			base = 250
+		}
+		
+		days_remove = 90
+		days_re_enable = 45
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			army_defence_against_major_factor = 0.05
+			army_breakthrough_against_major_factor = 0.05
+			custom_modifier_tooltip = industrial_capacity_factory_dockyard_005_1_tt
+			hidden_modifier = {
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+			}
+			non_core_manpower = 0.05
+		}
+		
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = urs_propagating_egalitarianism_CD_flag }
+				clr_country_flag = urs_propagating_egalitarianism_CD_flag
+			}
+			set_country_flag = urs_propagating_egalitarianism_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+		}
+		
+		remove_effect = {
+			clr_country_flag = urs_propagating_egalitarianism_flag
+			set_country_flag = urs_propagating_egalitarianism_CD_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+		}
+		
+	}
+	#爱国主义
+	urs_propagating_patriotism = {
+	
+		icon = generic_civil_support
+		
+		available = {
+			has_war = yes
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			
+		}
+		
+		ai_will_do = {
+			base = 250
+		}
+		
+		days_remove = 90
+		days_re_enable = 45
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			custom_modifier_tooltip = army_core_attack_and_defence_factor_005_tt
+			hidden_modifier = {
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+			}
+			army_strength_factor = 0.1
+			attrition = -0.1
+		}
+		
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = urs_propagating_patriotism_CD_flag }
+				clr_country_flag = urs_propagating_patriotism_CD_flag
+			}
+			set_country_flag = urs_propagating_patriotism_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+		}
+		
+		remove_effect = {
+			clr_country_flag = urs_propagating_patriotism_flag
+			set_country_flag = urs_propagating_patriotism_CD_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+		}
+		
+	}
+	#法治主义
+	urs_propagating_legalism = {
+	
+		icon = SOV_academy_of_sciences
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+		
+		days_remove = 90
+		days_re_enable = 45
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			stability_factor = 0.05
+			war_support_weekly = 0.003
+			consumer_goods_expected_value = -0.02
+		}
+		
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = urs_propagating_legalism_CD_flag }
+				clr_country_flag = urs_propagating_legalism_CD_flag
+			}
+			set_country_flag = urs_propagating_legalism_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+		}
+		
+		remove_effect = {
+			clr_country_flag = urs_propagating_legalism_flag
+			set_country_flag = urs_propagating_legalism_CD_flag
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+		}
+		
+	}
+	##具体宣传事项
+	#群众政治
+	#鼓励群众支援前线
+	urs_propagating_extra_1 = {
+	
+		icon = eng_blackshirt_speech
+		
+		available = {
+			has_war = yes
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_QunZhong_ZhengZi
+		}
+		
+		ai_will_do = {
+			base = 300
+		}
+		
+		days_remove = 210
+		days_re_enable = 120
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			supply_node_range = 0.05
+			consumer_goods_expected_value = -0.025
+			weekly_manpower = 500
+		}
+		
+		complete_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+		}
+		
+		remove_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+			custom_effect_tooltip = decision_days_re_enable_120_tt
+		}
+	}
+	#发动人民纠察间谍
+	urs_propagating_extra_2 = {
+	
+		icon = generic_civil_support
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_QunZhong_ZhengZi
+		}
+		
+		ai_will_do = {
+			base = 150
+		}
+		
+		days_remove = 210
+		days_re_enable = 120
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			army_intel_to_others = -50
+			navy_intel_to_others = -50
+			airforce_intel_to_others = -50
+			civilian_intel_to_others = -50
+			foreign_subversive_activites = -0.25
+			encryption = 1
+			enemy_operative_detection_chance_factor = 0.75
+			enemy_operative_capture_chance_factor = 0.75
+		}
+		
+		complete_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+		}
+		
+		remove_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+			custom_effect_tooltip = decision_days_re_enable_120_tt
+		}
+	}
+	#人民战争不可战胜
+	urs_propagating_extra_3 = {
+	
+		icon = POL_organize_strike_two
+		
+		available = {
+			has_war = yes
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_QunZhong_ZhengZi
+		}
+		
+		ai_will_do = {
+			base = 400
+		}
+		
+		days_remove = 210
+		days_re_enable = 120
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			army_attack_factor = 0.02
+			army_defence_factor = 0.02
+		}
+		
+		complete_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+			custom_effect_tooltip = every_enemy_country_army_desertions_tt	
+			hidden_effect = {
+				every_enemy_country = {
+					every_owned_state = {
+						damage_units = {
+							state = THIS 
+							limit = { tag = PREV } 
+							damage = 0.05
+							ratio = yes  
+							army = yes
+						}
+					}
+					country_event = {
+						id = UFE_special_events.81
+						hours = 6
+					}
+				}
+				UFE = {
+					every_owned_state = {
+						damage_units = {
+							state = THIS 
+							limit = { has_war_with = UFE } 
+							damage = 0.05
+							ratio = yes  
+							army = yes
+						}
+					}
+				}
+			}
+		}
+		
+		remove_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+			custom_effect_tooltip = decision_days_re_enable_120_tt
+		}
+	}
+	#全面发展基础教育
+	urs_propagating_extra_4 = {
+	
+		icon = generic_research
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_QunZhong_ZhengZi
+		}
+		
+		ai_will_do = {
+			base = 250
+		}
+		
+		days_remove = 210
+		days_re_enable = 120
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			research_speed_factor = 0.06
+		}
+		
+		complete_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+			add_tech_bonus = {
+				name = urs_propagating_extra_4
+				bonus = 0.5
+				uses = 1
+				category = industry
+				category = rocketry
+				category = nuclear
+				category = electronics
+				category = infantry_weapons
+				category = mio_cat_all_artillery_equipment
+				category = mio_cat_tech_all_armor_and_modules
+			}
+		}
+		
+		remove_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+			custom_effect_tooltip = decision_days_re_enable_120_tt
+		}
+	}
+	#社会文化改造
+	#弘扬个人英雄主义
+	urs_propagating_extra_5 = {
+	
+		icon = ITA_reorganize_ascari
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_WenHuaGaiZao
+		}
+		
+		ai_will_do = {
+			base = 250
+		}
+		
+		days_remove = 210
+		days_re_enable = 120
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			army_attack_factor = 0.1
+		}
+		
+		complete_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+			every_army_leader = {
+				limit = { 
+					NOT = { has_trait = trait_reckless }
+				}
+				add_timed_unit_leader_trait = {
+					trait = trait_reckless
+					days = 210
+				}
+			}
+		}
+		
+		remove_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+			custom_effect_tooltip = decision_days_re_enable_120_tt
+		}
+	}
+	#科研去意识形态化
+	urs_propagating_extra_6 = {
+	
+		icon = generic_research
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_WenHuaGaiZao
+		}
+		
+		ai_will_do = {
+			base = 250
+		}
+		
+		days_remove = 210
+		days_re_enable = 120
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			research_speed_factor = 0.1
+		}
+		
+		complete_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+			add_tech_bonus = {
+				name = urs_propagating_extra_6
+				bonus = 0.2
+				uses = 1
+				category = industry
+				category = rocketry
+				category = nuclear
+				category = electronics
+				category = infantry_weapons
+				category = mio_cat_all_artillery_equipment
+				category = mio_cat_tech_all_armor_and_modules
+			}
+		}
+		
+		remove_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+			custom_effect_tooltip = decision_days_re_enable_120_tt
+		}
+	}
+	#要传颂企业家精神
+	urs_propagating_extra_7 = {
+	
+		icon = gre_investment_decisions
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_WenHuaGaiZao
+		}
+		
+		ai_will_do = {
+			base = 250
+		}
+		
+		days_remove = 210
+		days_re_enable = 120
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			production_factory_efficiency_gain_factor = 0.05
+			production_factory_max_efficiency_factor = 0.05
+		}
+		
+		complete_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 1
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		remove_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+			custom_effect_tooltip = decision_days_re_enable_120_tt
+		}
+	}
+	#社会分化与原子化
+	urs_propagating_extra_8 = {
+	
+		icon = generic_political_address
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = has_enough_times_limit_of_propagating_tt
+				check_variable = { UFE.ufe_times_using_of_propagating < UFE.ufe_times_limit_of_propagating }
+			}
+		}
+		
+		visible = {
+			has_completed_focus = UFE_WenHuaGaiZao
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+		
+		days_remove = 210
+		days_re_enable = 120
+		
+		cost = UFE.revolutionary_propaganda_cost_var
+		
+		modifier = {
+			conscription = -0.002
+			stability_factor = -0.05
+			party_popularity_stability_factor = 0.25
+			liberalism_drift = 0.1
+			political_power_gain = 0.35
+		}
+		
+		complete_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = 1 }
+			UFE_revolutionary_propaganda_cost_effect = yes
+			add_political_power = 25
+		}
+		
+		remove_effect = {
+			add_to_variable = { UFE.ufe_times_using_of_propagating = -1 }
+			custom_effect_tooltip = decision_days_re_enable_120_tt
+		}
+	}
+}

@@ -1,0 +1,707 @@
+defined_text = {
+	name = GetFirstLeader
+	text = {
+		trigger = {
+			has_country_flag = firstleader_president
+		}
+		localization_key = fl_president
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = firstleader_tsar
+		}
+		localization_key = fl_tsar
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = firstleader_kaiser
+		}
+		localization_key = fl_kaiser
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = firstleader_king
+		}
+		localization_key = fl_king
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = firstleader_queen
+		}
+		localization_key = fl_queen
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = firstleader_speaker
+		}
+		localization_key = fl_speaker
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = firstleader_regent
+		}
+		localization_key = fl_regent
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = firstleader_viscount
+		}
+		localization_key = fl_viscount
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = firstleader_duke
+		}
+		localization_key = fl_duke
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = firstleader_grand_duke
+		}
+		localization_key = fl_grand_duke
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = firstleader_commander_in_chief
+		}
+		localization_key = fl_commander_in_chief
+	}
+
+	text = {
+		localization_key = fl_leader
+	}
+}
+
+defined_text = {
+	name = GetSecondLeader
+	text = {
+		trigger = {
+			has_country_flag = secondleader_prime_minister
+		}
+		localization_key = sl_prime_minister
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = secondleader_premier
+		}
+		localization_key = sl_premier
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = secondleader_speaker
+		}
+		localization_key = sl_speaker
+	}
+
+	text = {
+		trigger = {
+			has_country_flag = secondleader_regent
+		}
+		localization_key = sl_regent
+	}
+
+	#公爵
+	text = {
+		trigger = {
+			has_country_flag = secondleader_duke
+		}
+		localization_key = sl_duke
+	}
+
+	#市长
+	text = {
+		trigger = {
+			has_country_flag = secondleader_mayor
+		}
+		localization_key = sl_mayor
+	}
+
+	#领导机构
+	text = {
+		trigger = {
+			has_country_flag = secondleader_leading_body
+		}
+		localization_key = sl_leading_body
+	}
+
+	#第五集团军司令 新阿列克谢 高尔察克 专属
+	text = {
+		trigger = {
+			has_country_flag = secondleader_5th_army_commander
+		}
+		localization_key = sl_5th_army_commander
+	}
+
+	text = {
+		localization_key = sl_second_in_command
+	}
+}
+
+defined_text = {
+	name = GetSecondLeaderName
+
+	#VCA 开斯特
+	text = {
+		trigger = {
+			has_idea = VCA_Mary_Caster_Victoria_second_in_command
+		}
+		localization_key = VCA_Mary_Caster_Victoria
+	}
+
+	text = {
+		trigger = {
+			has_idea = VCA_Paul_Hawker_second_in_command
+		}
+		localization_key = VCA_Paul_Hawker
+	}
+	
+	#VWI 温德米尔集团军
+	text = {
+		trigger = {
+			has_idea = VWI_Anfilis_Windermere_second_in_command
+		}
+		localization_key = VWI_Anfilis_Windermere
+	}
+
+	text = {
+		trigger = {
+			has_idea = VWI_Delphine_Windermere_second_in_command
+		}
+		localization_key = VWI_Delphine_Windermere
+	}
+
+	text = {
+		trigger = {
+			has_idea = VWI_Victoria_Army_Headquarters_second_in_command
+		}
+		localization_key = VWI_Victoria_Army_Headquarters
+	}
+	
+	#URS 乌萨斯帝国
+	text = {
+		trigger = {
+			has_idea = URS_Islam_Vitte_second_in_command
+		}
+		localization_key = URS_Islam_Vitte
+	}
+
+	#REU 整合运动
+	text = {
+		trigger = {
+			if = {
+				limit = { 
+					REU = {
+						exists = yes
+					}
+				}
+				has_idea = REU_Alina_second_in_command
+			}
+			else = { 
+				always = no
+			}
+		}
+		localization_key = REU_Alina
+	}
+
+	#KMG 克缅哥罗德
+	text = {
+		trigger = {
+			has_idea = KMG_Alexander_Katopov_second_in_command
+		}
+		localization_key = KMG_Alexander_Katopov
+	}
+
+	text = {
+		trigger = {
+			has_idea = KMG_Gabrielle_Levitova_second_in_command
+		}
+		localization_key = KMG_Gabrielle_Levitova
+	}
+
+	#KRS 克拉斯尼亚尔
+	text = {
+		trigger = {
+			has_idea = KRS_Yuri_Sayanov_second_in_command
+		}
+		localization_key = KRS_Yuri_Sayanov
+	}
+
+	#NAX 新阿列克谢
+	text = {
+		trigger = {
+			has_idea = NAX_Aleksandr_Kolchak_second_in_command
+		}
+		localization_key = NAX_Aleksandr_Kolchak
+	}
+	
+	#UFE/UFC 科雷马边疆区
+	#卡列维奇1/2
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_JiuGuoWeiYuanHui_flag }
+				has_idea = UFE_authoritarianism_second_two
+				else = { 
+					has_idea = UFE_authoritarianism_second
+				}
+			}
+		}
+		localization_key = UFE_authoritarianism_leader
+	}
+	#切尔尼雪夫斯基
+	text = {
+		trigger = {
+			has_idea = UFE_liberalism_second_early
+		}
+		localization_key = UFE_liberalism_leader
+	}
+	#赫尔岑
+	text = {
+		trigger = {
+			has_idea = UFE_liberalism_second_later
+		}
+		localization_key = UFE_liberalism_second_in_command
+	}
+	#圣朱萨斯卡娅
+	text = {
+		trigger = {
+			has_idea = UFE_liberalism_third_in_command_idea
+		}
+		localization_key = UFE_liberalism_third_in_command
+	}
+	#特鲁别茨克伊
+	text = {
+		trigger = {
+			has_idea = UFE_field_marshal_second_in_command
+		}
+		localization_key = UFE_field_marshal_1
+	}
+	#恰达耶夫
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_ShouCiDaXuan_flag }
+				has_idea = UFE_liberalism_advisor_2_second_in_command
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = UFE_liberalism_advisor_2
+	}
+	#普汀娜
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_civilwar_authoritarianism_tag_flag }
+				has_idea = UFE_liberalism_advisor_7_second_in_command
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = UFE_liberalism_advisor_7
+	}
+	#塔露拉
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_GongChanDang_flag }
+				has_idea = REU_Talulah_second_in_command
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = REU_Talulah
+	}
+}
+
+defined_text = {
+	name = GetSecondLeaderPortrait
+
+	#VCA 开斯特
+	text = {
+		trigger = {
+			has_idea = VCA_Mary_Caster_Victoria_second_in_command
+		}
+		localization_key = GFX_Mary_Caster_Victoria
+	}
+
+	text = {
+		trigger = {
+			has_idea = VCA_Paul_Hawker_second_in_command
+		}
+		localization_key = GFX_Paul_Hawker
+	}
+
+	#VWI 温德米尔集团军
+	text = {
+		trigger = {
+			has_idea = VWI_Anfilis_Windermere_second_in_command
+		}
+		localization_key = GFX_Anfilis_Windermere
+	}
+
+	text = {
+		trigger = {
+			has_idea = VWI_Delphine_Windermere_second_in_command
+		}
+		localization_key = GFX_Delphine_Windermere
+	}
+
+	text = {
+		trigger = {
+			has_idea = VWI_Victoria_Army_Headquarters_second_in_command
+		}
+		localization_key = GFX_Victoria_Army_Headquarters
+	}
+
+	#URS 乌萨斯帝国
+	text = {
+		trigger = {
+			has_idea = URS_Islam_Vitte_second_in_command
+		}
+		localization_key = GFX_Islam_Vitte
+	}
+	
+	#URS 乌萨斯帝国
+	text = {
+		trigger = {
+			has_idea = URS_Islam_Vitte_second_in_command
+		}
+		localization_key = GFX_Islam_Vitte
+	}
+
+	#REU 整合运动
+	text = {
+		trigger = {
+			if = {
+				limit = { 
+					REU = {
+						exists = yes
+					}
+				}
+				has_idea = REU_Alina_second_in_command
+			}
+			else = { 
+				always = no
+			}
+		}
+		localization_key = GFX_Alina
+	}
+
+	#KMG 克缅哥罗德
+	text = {
+		trigger = {
+			has_idea = KMG_Alexander_Katopov_second_in_command
+		}
+		localization_key = GFX_Alexander_Katopov
+	}
+
+	text = {
+		trigger = {
+			has_idea = KMG_Gabrielle_Levitova_second_in_command
+		}
+		localization_key = GFX_Gabrielle_Levitova
+	}
+
+	#KRS 克拉斯尼亚尔
+	text = {
+		trigger = {
+			has_idea = KRS_Yuri_Sayanov_second_in_command
+		}
+		localization_key = GFX_Yuri_Sayanov
+	}
+
+	#NAX 新阿列克谢
+	text = {
+		trigger = {
+			has_idea = NAX_Aleksandr_Kolchak_second_in_command
+		}
+		localization_key = GFX_Aleksandr_Kolchak
+	}
+	
+	#UFE/UFC 科雷马边疆区
+	#卡列维奇1/2
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_JiuGuoWeiYuanHui_flag }
+				has_idea = UFE_authoritarianism_second_two
+				else = { 
+					has_idea = UFE_authoritarianism_second
+				}
+			}
+		}
+		localization_key = GFX_portrait_UFE_authoritarianism_leader
+	}
+	#切尔尼雪夫斯基
+	text = {
+		trigger = {
+			has_idea = UFE_liberalism_second_early
+		}
+		localization_key = GFX_portrait_UFE_liberalism_leader
+	}
+	#赫尔岑
+	text = {
+		trigger = {
+			has_idea = UFE_liberalism_second_later
+		}
+		localization_key = GFX_portrait_UFE_liberalism_second_in_command
+	}
+	#圣朱萨斯卡娅
+	text = {
+		trigger = {
+			has_idea = UFE_liberalism_third_in_command_idea
+		}
+		localization_key = GFX_portrait_UFE_liberalism_third_in_command
+	}
+	#特鲁别茨克伊
+	text = {
+		trigger = {
+			has_idea = UFE_field_marshal_second_in_command
+		}
+		localization_key = GFX_portrait_UFE_field_marshal_1
+	}
+	#恰达耶夫
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_ShouCiDaXuan_flag }
+				has_idea = UFE_liberalism_advisor_2_second_in_command
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = GFX_portrait_UFE_liberalism_advisor_2
+	}
+	#普汀娜
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_civilwar_authoritarianism_tag_flag }
+				has_idea = UFE_liberalism_advisor_7_second_in_command
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = GFX_portrait_UFE_liberalism_advisor_7
+	}
+	#塔露拉
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_GongChanDang_flag }
+				has_idea = REU_Talulah_second_in_command
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = GFX_portrait_REU_Talulah
+	}
+}
+
+defined_text = {
+	name = GetSecondLeaderDesc
+
+	#VCA 开斯特
+	text = {
+		trigger = {
+			has_idea = VCA_Mary_Caster_Victoria_second_in_command
+		}
+		localization_key = VCA_Mary_Caster_Victoria_desc
+	}
+
+	text = {
+		trigger = {
+			has_idea = VCA_Paul_Hawker_second_in_command
+		}
+		localization_key = VCA_Paul_Hawker_desc
+	}
+
+	#VWI 温德米尔集团军
+	text = {
+		trigger = {
+			has_idea = VWI_Anfilis_Windermere_second_in_command
+		}
+		localization_key = VWI_Anfilis_Windermere_desc
+	}
+
+	text = {
+		trigger = {
+			has_idea = VWI_Delphine_Windermere_second_in_command
+		}
+		localization_key = VWI_Delphine_Windermere_royal_desc
+	}
+
+	text = {
+		trigger = {
+			has_idea = VWI_Victoria_Army_Headquarters_second_in_command
+		}
+		localization_key = VWI_Victoria_Army_Headquarters_desc
+	}
+
+	#REU 整合运动
+	text = {
+		trigger = {
+			if = {
+				limit = { 
+					REU = {
+						exists = yes
+					}
+				}
+				has_idea = REU_Alina_second_in_command
+			}
+			else = { 
+				always = no
+			}
+		}
+		localization_key = REU_Alina_desc2
+	}
+
+	#KMG 克缅哥罗德
+	text = {
+		trigger = {
+			has_idea = KMG_Alexander_Katopov_second_in_command
+		}
+		localization_key = KMG_Alexander_Katopov_desc
+	}
+
+	text = {
+		trigger = {
+			has_idea = KMG_Gabrielle_Levitova_second_in_command
+		}
+		localization_key = KMG_Gabrielle_Levitova_desc
+	}
+
+	#KRS 克拉斯尼亚尔
+	text = {
+		trigger = {
+			has_idea = KRS_Yuri_Sayanov_second_in_command
+		}
+		localization_key = KRS_Yuri_Sayanov_desc
+	}
+
+	#NAX 新阿列克谢
+	text = {
+		trigger = {
+			has_idea = NAX_Aleksandr_Kolchak_second_in_command
+		}
+		localization_key = NAX_Aleksandr_Kolchak_desc
+	}
+	
+	#UFE/UFC 科雷马边疆区
+	#卡列维奇1
+	text = {
+		trigger = {
+			if = {
+				limit = { 
+					NOT = {
+						has_country_flag = UFE_JiuGuoWeiYuanHui_flag 
+					}
+				}
+				has_idea = UFE_authoritarianism_second
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = UFE_authoritarianism_second_pure_desc
+	}
+	#卡列维奇2
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_JiuGuoWeiYuanHui_flag }
+				has_idea = UFE_authoritarianism_second_two
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = UFE_kalieweiqi_liberalism_leader_desc
+	}
+	#切尔尼雪夫斯基
+	text = {
+		trigger = {
+			has_idea = UFE_liberalism_second_early
+		}
+		localization_key = UFE_cheernixuefu_liberalism_leader_desc
+	}
+	#赫尔岑
+	text = {
+		trigger = {
+			has_idea = UFE_liberalism_second_later
+		}
+		localization_key = UFE_heercen_liberalism_leader_desc
+	}
+	#圣朱萨斯卡娅
+	text = {
+		trigger = {
+			has_idea = UFE_liberalism_third_in_command_idea
+		}
+		localization_key = UFE_liberalism_third_in_command_desc
+	}
+	#特鲁别茨克伊
+	text = {
+		trigger = {
+			has_idea = UFE_field_marshal_second_in_command
+		}
+		localization_key = UFE_field_marshal_second_in_command_pure_desc
+	}
+	#恰达耶夫
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_ShouCiDaXuan_flag }
+				has_idea = UFE_liberalism_advisor_2_second_in_command
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = UFE_liberalism_advisor_2_pure_desc
+	}
+	#普汀娜
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_civilwar_authoritarianism_tag_flag }
+				has_idea = UFE_liberalism_advisor_7_second_in_command
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = UFE_liberalism_advisor_7_pure_desc
+	}
+	#塔露拉
+	text = {
+		trigger = {
+			if = {
+				limit = { has_country_flag = UFE_GongChanDang_flag }
+				has_idea = REU_Talulah_second_in_command
+				else = { 
+					always = no
+				}
+			}
+		}
+		localization_key = REU_Talulah_red_army_desc
+	}
+}

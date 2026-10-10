@@ -1,0 +1,410 @@
+ideas = {
+	country = {
+		#初始军事debuff
+		VGO_military_debuff_idea = {
+
+			modifier = {
+				army_attack_factor = -0.15
+				special_forces_cap = 0.25
+			}
+		}
+
+		VGO_military_buff_idea = {
+
+			modifier = {
+				training_time_factor = -0.1
+				army_attack_factor = -0.15
+				experience_gain_army_factor = 0.1
+				special_forces_cap = 0.25
+			}
+		}
+
+		VGO_military_buff_dummy_idea = {
+			name = VGO_military_buff_idea
+
+			modifier = {
+				
+			}
+		}
+
+		VGO_knife_fighting_idea = {
+			name = VGO_military_buff_idea
+
+			modifier = {
+				special_forces_cap = 0.25
+				special_forces_attack_factor = 0.1
+				special_forces_defence_factor = 0.1
+			}
+		}
+		
+		#防空
+		VGO_building_air_defense_positions_idea = {
+			name = VGO_military_buff_idea
+
+			modifier = {
+				enemy_army_bonus_air_superiority_factor = -0.05
+				cas_damage_reduction = 0.05
+			}
+		}
+
+		VGO_strengthening_Karaton_line_idea = {
+			name = VGO_military_buff_idea
+
+			modifier = {
+				production_speed_bunker_factor = 0.25
+				land_bunker_effectiveness_factor = 0.15 
+				army_defence_factor = 0.05
+			}
+		}
+
+		VGO_arms_buildup_priority_idea = {
+			name = VGO_military_buff_idea
+
+			modifier = {
+				production_speed_arms_factory_factor = 0.1
+				conversion_cost_civ_to_mil_factor = -0.3
+				army_defence_factor = 0.05
+			}
+		}
+
+		VGO_deeper_trenches_idea = {
+			name = VGO_military_buff_idea
+
+			modifier = {
+				max_dig_in = 5
+				dig_in_speed_factor = 0.15
+			}
+		}
+
+		VGO_logistical_lifeline_idea = {
+			name = VGO_military_buff_idea
+
+			modifier = {
+				no_supply_grace = 48
+				supply_node_range = 0.1
+			}
+		}
+
+		VGO_innovating_military_concepts_idea = {
+			name = VGO_military_buff_idea
+
+			modifier = {
+				land_doctrine_cost_factor = -0.1
+			}
+		}
+
+		VGO_hold_on_firmly_there_is_a_way_idea = {
+			name = VGO_military_buff_idea
+
+			modifier = {
+				combat_width_factor = -0.1
+				army_org_factor = 0.05
+				army_defence_factor  = 0.1
+			}
+		}
+
+		VGO_rapid_arming_idea = {
+			name = VGO_rapid_arming
+			picture = URS_high_production
+
+			equipment_bonus = {
+			    artillery_equipment = {
+			        instant = yes
+			        soft_attack = -0.1
+			        build_cost_ic = -0.1
+			    }
+			    infantry_equipment = {
+			        instant = yes
+			        soft_attack = -0.1
+			        build_cost_ic = -0.1
+			    }
+			}
+		}
+		
+		#西部特别经济法案
+		VGO_western_economy_idea = {
+			
+			modifier = {
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+				military_industrial_organization_research_bonus = 0.1
+			}
+		}
+		
+		#初始经济debuff
+		VGO_economic_debuff_idea = {
+
+			modifier = {
+				industrial_capacity_factory = -0.25
+				production_factory_efficiency_gain_factor = -0.1
+				production_factory_max_efficiency_factor = -0.1
+				local_resources_factor = -0.2
+				local_building_slots_factor = -0.2
+			}
+		}
+
+		VGO_economic_buff_idea = {
+
+			modifier = {
+				industrial_capacity_factory = -0.25
+				production_factory_efficiency_gain_factor = -0.1
+				production_factory_max_efficiency_factor = -0.1
+				local_resources_factor = -0.2
+				local_building_slots_factor = -0.2
+				production_factory_start_efficiency_factor = 0.05
+				line_change_production_efficiency_factor = 0.05
+			}
+		}
+		
+		VGO_economic_buff_dummy_idea = {
+			name = VGO_economic_buff_idea
+
+			modifier = {
+				
+			}
+		}
+		
+		VGO_economic_buff_tool_1_idea = {
+			name = VGO_economic_buff_idea
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+				production_factory_efficiency_gain_factor = 0.01
+				production_factory_max_efficiency_factor = 0.01
+				production_factory_start_efficiency_factor = 0.02
+			}
+		}
+		
+		VGO_economic_buff_tool_2_idea = {
+			name = VGO_economic_buff_idea
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+				production_factory_efficiency_gain_factor = 0.01
+				production_factory_max_efficiency_factor = 0.01
+				production_factory_start_efficiency_factor = 0.01
+				line_change_production_efficiency_factor = 0.01
+			}
+		}
+		
+		VGO_economic_buff_tool_3_idea = {
+			name = VGO_economic_buff_idea
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+				production_factory_efficiency_gain_factor = 0.01
+				production_factory_max_efficiency_factor = 0.01
+				line_change_production_efficiency_factor = 0.02
+			}
+		}
+		
+		VGO_economic_buff_tool_4_idea = {
+			name = VGO_economic_buff_idea
+
+			modifier = {
+				consumer_goods_factor = -0.05
+				local_resources_factor = 0.05
+				global_building_slots_factor = 0.05
+			}
+		}
+		
+		VGO_economic_buff_tool_5_idea = {
+			name = VGO_economic_buff_idea
+
+			modifier = {
+				local_resources_factor = 0.1
+				global_building_slots_factor = 0.1
+				production_speed_arms_factory_factor = 0.1
+				production_speed_industrial_complex_factor = 0.1
+				production_factory_efficiency_gain_factor = 0.01
+				production_factory_max_efficiency_factor = 0.01
+			}
+		}
+		
+		VGO_economic_buff_tool_6_idea = {
+			name = VGO_economic_buff_idea
+
+			modifier = {
+				industrial_capacity_factory = 0.1
+				research_speed_factor = 0.05
+			}
+		}
+		
+		VGO_economic_buff_tool_7_idea = {
+			name = VGO_economic_buff_idea
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+			}
+		}
+		
+		VGO_economic_buff_tool_8_idea = {
+			name = VGO_economic_buff_idea
+
+			modifier = {
+				research_speed_factor = 0.02
+			}
+		}
+		
+		VGO_economic_buff_tool_9_idea = {
+			name = VGO_economic_buff_idea
+
+			modifier = {
+				research_speed_factor = 0.01
+			}
+		}
+		
+		VGO_state_buff_dummy_idea = {
+			name = VGO_state_buff_idea
+			modifier = {
+			}
+		}
+		
+		VGO_state_buff_tool_1_idea = {
+			name = VGO_state_buff_idea
+			modifier = {
+				local_factories = 0.1
+				state_production_speed_buildings_factor = 0.05
+				recruitable_population = 0.001
+			}
+		}
+		
+		VGO_state_buff_tool_2_idea = {
+			name = VGO_state_buff_idea
+			modifier = {
+				local_factories = 0.1
+				state_resources_factor = 0.1
+			}
+		}
+		
+		VGO_state_buff_tool_3_idea = {
+			name = VGO_state_buff_idea
+			modifier = {
+				state_production_speed_buildings_factor = 0.05
+				recruitable_population = 0.001
+			}
+		}
+		
+		VGO_state_buff_tool_4_idea = {
+			name = VGO_state_buff_idea
+			modifier = {
+				state_production_speed_buildings_factor = 0.05
+				local_building_slots = 1
+			}
+		}
+		
+		VGO_state_buff_tool_4_idea = {
+			name = VGO_state_buff_idea
+			modifier = {
+				state_production_speed_buildings_factor = 0.05
+				local_building_slots = 1
+			}
+		}
+		
+		VGO_state_buff_tool_5_idea = {
+			name = VGO_state_buff_idea
+			modifier = {
+				recruitable_population = 0.005
+			}
+		}
+
+		#政治团结（稳定政局）
+		VGO_Political_unity_1 = {
+			name = VGO_Political_unity
+			picture = UFE_lonely_democratic_power_idea
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.1
+			}
+		}
+
+		#政治团结（临时行政中心）
+		VGO_Political_unity_2 = {
+			name = VGO_Political_unity
+			picture = UFE_lonely_democratic_power_idea
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.1
+				administrative_development_monthly_modifier = 0.03
+			}
+		}
+
+		#政治团结（救济居民）
+		VGO_Political_unity_3 = {
+			name = VGO_Political_unity
+			picture = UFE_lonely_democratic_power_idea
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.1
+				administrative_development_monthly_modifier = 0.03
+				poverty_development_monthly_modifier = 0.02
+				agricultural_development_monthly_modifier = 0.01
+			}
+		}
+
+		#政治团结（获得地区议会支持）
+		VGO_Political_unity_4 = {
+			name = VGO_Political_unity
+			picture = UFE_lonely_democratic_power_idea
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.1
+				administrative_development_monthly_modifier = 0.03
+				war_support_factor = 0.1
+				political_advisor_cost_factor = -0.15
+			}
+		}
+
+		#政治团结（救济居民+获得地区议会支持）
+		VGO_Political_unity_5 = {
+			name = VGO_Political_unity
+			picture = UFE_lonely_democratic_power_idea
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.1
+				administrative_development_monthly_modifier = 0.03
+				poverty_development_monthly_modifier = 0.02
+				agricultural_development_monthly_modifier = 0.01
+				war_support_factor = 0.1
+				political_advisor_cost_factor = -0.15
+			}
+		}
+
+		#政治团结（非常时期，特殊手段）
+		VGO_Political_unity_6 = {
+			name = VGO_Political_unity
+			picture = UFE_lonely_democratic_power_idea
+			modifier = {
+				political_power_factor = 0.1
+				stability_factor = 0.1
+				administrative_development_monthly_modifier = 0.03
+				poverty_development_monthly_modifier = 0.02
+				agricultural_development_monthly_modifier = 0.01
+				war_stability_factor = 0.1
+				war_support_factor = 0.1
+				political_advisor_cost_factor = -0.15
+				mobilization_speed = 0.2
+			}
+		}
+
+		#政治团结（“我们能做到！”）
+		VGO_Political_unity_7 = {
+			name = VGO_Political_unity
+			picture = UFE_lonely_democratic_power_idea
+			modifier = {
+				political_power_factor = 0.1
+				stability_factor = 0.1
+				administrative_development_monthly_modifier = 0.03
+				poverty_development_monthly_modifier = 0.02
+				agricultural_development_monthly_modifier = 0.01
+				war_stability_factor = 0.1
+				political_advisor_cost_factor = -0.15
+				war_support_factor = 0.1
+				mobilization_speed = 0.2
+				production_speed_buildings_factor = 0.05
+				industrial_capacity_factory = 0.05
+				min_export = -0.1
+			}
+		}
+	}
+}

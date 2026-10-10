@@ -1,0 +1,869 @@
+# 大炎 ·「宰府朝议」：变量建表 / 会衔结算 / 每席「启动下一格」
+#  · 推进链：入口国策 → YAN_court_start_<席> → 金光 + 日期旗标 + 定时事件 → 完成 → 再启动下一格
+#  · 生成器：E:/tmp/sui12/gen_court.js
+
+YAN_court_init_vars = {
+	set_variable = { YAN_court_seat_1 = 0 }
+	set_variable = { YAN_court_shanshui_k1_var = 0 }
+	set_variable = { YAN_court_shanshui_k2_var = 0 }
+	set_variable = { YAN_court_shanshui_k3_var = 0 }
+	set_variable = { YAN_court_seat_2 = 0 }
+	set_variable = { YAN_court_changjie_k1_var = 0 }
+	set_variable = { YAN_court_changjie_k2_var = 0 }
+	set_variable = { YAN_court_changjie_k3_var = 0 }
+	set_variable = { YAN_court_seat_3 = 0 }
+	set_variable = { YAN_court_yanhuo_k1_var = 0 }
+	set_variable = { YAN_court_yanhuo_k2_var = 0 }
+	set_variable = { YAN_court_yanhuo_k3_var = 0 }
+	set_variable = { YAN_court_seat_4 = 0 }
+	set_variable = { YAN_court_xiange_k1_var = 0 }
+	set_variable = { YAN_court_xiange_k2_var = 0 }
+	set_variable = { YAN_court_xiange_k3_var = 0 }
+	set_variable = { YAN_court_seat_5 = 0 }
+	set_variable = { YAN_court_duanfang_k1_var = 0 }
+	set_variable = { YAN_court_duanfang_k2_var = 0 }
+	set_variable = { YAN_court_duanfang_k3_var = 0 }
+	set_variable = { YAN_court_seat_6 = 0 }
+	set_variable = { YAN_court_baigu_k1_var = 0 }
+	set_variable = { YAN_court_baigu_k2_var = 0 }
+	set_variable = { YAN_court_baigu_k3_var = 0 }
+	set_variable = { YAN_court_seat_7 = 0 }
+	set_variable = { YAN_court_zaifu_k1_var = 0 }
+	set_variable = { YAN_court_zaifu_k2_var = 0 }
+	set_variable = { YAN_court_zaifu_k3_var = 0 }
+	set_variable = { YAN_court_seat_8 = 0 }
+	set_variable = { YAN_court_bingge_k1_var = 0 }
+	set_variable = { YAN_court_bingge_k2_var = 0 }
+	set_variable = { YAN_court_bingge_k3_var = 0 }
+	set_variable = { YAN_court_seat_9 = 0 }
+	set_variable = { YAN_court_bei_k1_var = 0 }
+	set_variable = { YAN_court_bei_k2_var = 0 }
+	set_variable = { YAN_court_bei_k3_var = 0 }
+	set_variable = { YAN_court_seat_10 = 0 }
+	set_variable = { YAN_court_xifang_k1_var = 0 }
+	set_variable = { YAN_court_xifang_k2_var = 0 }
+	set_variable = { YAN_court_xifang_k3_var = 0 }
+	set_variable = { YAN_court_seat_11 = 0 }
+	set_variable = { YAN_court_dongfang_k1_var = 0 }
+	set_variable = { YAN_court_dongfang_k2_var = 0 }
+	set_variable = { YAN_court_dongfang_k3_var = 0 }
+	set_variable = { YAN_court_seat_12 = 0 }
+	set_variable = { YAN_court_nanfang_k1_var = 0 }
+	set_variable = { YAN_court_nanfang_k2_var = 0 }
+	set_variable = { YAN_court_nanfang_k3_var = 0 }
+	set_variable = { YAN_court_council_stab_var = 0 }
+	set_variable = { YAN_court_council_pp_var = 0 }
+	set_variable = { YAN_court_council_fac_var = 0 }
+	set_variable = { YAN_court_council_res_var = 0 }
+	set_variable = { YAN_court_sum_research_speed_factor_var = 0 }
+	set_variable = { YAN_court_sum_supply_consumption_factor_var = 0 }
+	set_variable = { YAN_court_sum_global_building_slots_factor_var = 0 }
+	set_variable = { YAN_court_sum_stability_factor_var = 0 }
+	set_variable = { YAN_court_sum_resistance_target_var = 0 }
+	set_variable = { YAN_court_sum_command_power_gain_var = 0 }
+	set_variable = { YAN_court_sum_recruitable_population_factor_var = 0 }
+	set_variable = { YAN_court_sum_consumer_goods_factor_var = 0 }
+	set_variable = { YAN_court_sum_political_power_gain_var = 0 }
+	set_variable = { YAN_court_sum_political_power_factor_var = 0 }
+	set_variable = { YAN_court_sum_industrial_capacity_factory_var = 0 }
+	set_variable = { YAN_court_sum_production_speed_buildings_factor_var = 0 }
+	set_variable = { YAN_court_sum_production_factory_max_efficiency_factor_var = 0 }
+	set_variable = { YAN_court_sum_conscription_factor_var = 0 }
+	set_variable = { YAN_court_sum_surrender_limit_var = 0 }
+	set_variable = { YAN_court_sum_army_defence_factor_var = 0 }
+	set_variable = { YAN_court_sum_army_org_factor_var = 0 }
+	set_variable = { YAN_court_sum_breakthrough_factor_var = 0 }
+	set_variable = { YAN_court_sum_army_attack_factor_var = 0 }
+	set_variable = { YAN_court_sum_training_time_factor_var = 0 }
+	set_variable = { YAN_court_sum_equipment_capture_factor_var = 0 }
+	set_variable = { YAN_court_sum_intel_network_gain_factor_var = 0 }
+	set_variable = { YAN_court_sum_war_support_factor_var = 0 }
+	set_variable = { YAN_court_seated = 0 }
+}
+
+# 会衔档位：在席 ≥5 初具 / ≥9 群臣在列 / 13 满朝（满朝另发事件）
+YAN_court_recalc = {
+	if = {
+		limit = { check_variable = { YAN_court_seated > 11 } }
+		set_variable = { YAN_court_council_stab_var = 0.12 }
+		set_variable = { YAN_court_council_pp_var = 0.12 }
+		set_variable = { YAN_court_council_fac_var = 0.03 }
+		set_variable = { YAN_court_council_res_var = 0.06 }
+		if = {
+			limit = { NOT = { has_country_flag = YAN_court_full } }
+			set_country_flag = YAN_court_full
+			country_event = { id = YAN_court.20 days = 1 }
+		}
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seated > 8 } }
+		set_variable = { YAN_court_council_stab_var = 0.08 }
+		set_variable = { YAN_court_council_pp_var = 0.08 }
+		set_variable = { YAN_court_council_fac_var = 0.02 }
+		set_variable = { YAN_court_council_res_var = 0.04 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seated > 4 } }
+		set_variable = { YAN_court_council_stab_var = 0.05 }
+		set_variable = { YAN_court_council_pp_var = 0.05 }
+		set_variable = { YAN_court_council_fac_var = 0.01 }
+		set_variable = { YAN_court_council_res_var = 0.02 }
+		if = {
+			limit = { NOT = { has_country_flag = YAN_court_first } }
+			set_country_flag = YAN_court_first
+			country_event = { id = YAN_court.21 days = 1 }
+		}
+	}
+	# 汇总：把各席三档变量 + 会衔档位加进「一个键一枚变量」，供合并后的精神读取
+	set_variable = { YAN_court_sum_research_speed_factor_var = 0 }
+	set_variable = { YAN_court_sum_supply_consumption_factor_var = 0 }
+	set_variable = { YAN_court_sum_global_building_slots_factor_var = 0 }
+	set_variable = { YAN_court_sum_stability_factor_var = 0 }
+	set_variable = { YAN_court_sum_resistance_target_var = 0 }
+	set_variable = { YAN_court_sum_command_power_gain_var = 0 }
+	set_variable = { YAN_court_sum_recruitable_population_factor_var = 0 }
+	set_variable = { YAN_court_sum_consumer_goods_factor_var = 0 }
+	set_variable = { YAN_court_sum_political_power_gain_var = 0 }
+	set_variable = { YAN_court_sum_political_power_factor_var = 0 }
+	set_variable = { YAN_court_sum_industrial_capacity_factory_var = 0 }
+	set_variable = { YAN_court_sum_production_speed_buildings_factor_var = 0 }
+	set_variable = { YAN_court_sum_production_factory_max_efficiency_factor_var = 0 }
+	set_variable = { YAN_court_sum_conscription_factor_var = 0 }
+	set_variable = { YAN_court_sum_surrender_limit_var = 0 }
+	set_variable = { YAN_court_sum_army_defence_factor_var = 0 }
+	set_variable = { YAN_court_sum_army_org_factor_var = 0 }
+	set_variable = { YAN_court_sum_breakthrough_factor_var = 0 }
+	set_variable = { YAN_court_sum_army_attack_factor_var = 0 }
+	set_variable = { YAN_court_sum_training_time_factor_var = 0 }
+	set_variable = { YAN_court_sum_equipment_capture_factor_var = 0 }
+	set_variable = { YAN_court_sum_intel_network_gain_factor_var = 0 }
+	set_variable = { YAN_court_sum_war_support_factor_var = 0 }
+	add_to_variable = { var = YAN_court_sum_research_speed_factor_var value = YAN_court_shanshui_k1_var }
+	add_to_variable = { var = YAN_court_sum_supply_consumption_factor_var value = YAN_court_shanshui_k2_var }
+	add_to_variable = { var = YAN_court_sum_global_building_slots_factor_var value = YAN_court_shanshui_k3_var }
+	add_to_variable = { var = YAN_court_sum_stability_factor_var value = YAN_court_changjie_k1_var }
+	add_to_variable = { var = YAN_court_sum_resistance_target_var value = YAN_court_changjie_k2_var }
+	add_to_variable = { var = YAN_court_sum_command_power_gain_var value = YAN_court_changjie_k3_var }
+	add_to_variable = { var = YAN_court_sum_recruitable_population_factor_var value = YAN_court_yanhuo_k1_var }
+	add_to_variable = { var = YAN_court_sum_consumer_goods_factor_var value = YAN_court_yanhuo_k2_var }
+	add_to_variable = { var = YAN_court_sum_political_power_gain_var value = YAN_court_yanhuo_k3_var }
+	add_to_variable = { var = YAN_court_sum_research_speed_factor_var value = YAN_court_xiange_k1_var }
+	add_to_variable = { var = YAN_court_sum_political_power_gain_var value = YAN_court_xiange_k2_var }
+	add_to_variable = { var = YAN_court_sum_political_power_factor_var value = YAN_court_xiange_k3_var }
+	add_to_variable = { var = YAN_court_sum_industrial_capacity_factory_var value = YAN_court_duanfang_k1_var }
+	add_to_variable = { var = YAN_court_sum_production_speed_buildings_factor_var value = YAN_court_duanfang_k2_var }
+	add_to_variable = { var = YAN_court_sum_production_factory_max_efficiency_factor_var value = YAN_court_duanfang_k3_var }
+	add_to_variable = { var = YAN_court_sum_recruitable_population_factor_var value = YAN_court_baigu_k1_var }
+	add_to_variable = { var = YAN_court_sum_conscription_factor_var value = YAN_court_baigu_k2_var }
+	add_to_variable = { var = YAN_court_sum_supply_consumption_factor_var value = YAN_court_baigu_k3_var }
+	add_to_variable = { var = YAN_court_sum_political_power_factor_var value = YAN_court_zaifu_k1_var }
+	add_to_variable = { var = YAN_court_sum_stability_factor_var value = YAN_court_zaifu_k2_var }
+	add_to_variable = { var = YAN_court_sum_surrender_limit_var value = YAN_court_zaifu_k3_var }
+	add_to_variable = { var = YAN_court_sum_army_defence_factor_var value = YAN_court_bingge_k1_var }
+	add_to_variable = { var = YAN_court_sum_army_org_factor_var value = YAN_court_bingge_k2_var }
+	add_to_variable = { var = YAN_court_sum_breakthrough_factor_var value = YAN_court_bingge_k3_var }
+	add_to_variable = { var = YAN_court_sum_army_attack_factor_var value = YAN_court_bei_k1_var }
+	add_to_variable = { var = YAN_court_sum_training_time_factor_var value = YAN_court_bei_k2_var }
+	add_to_variable = { var = YAN_court_sum_army_defence_factor_var value = YAN_court_bei_k3_var }
+	add_to_variable = { var = YAN_court_sum_research_speed_factor_var value = YAN_court_xifang_k1_var }
+	add_to_variable = { var = YAN_court_sum_production_factory_max_efficiency_factor_var value = YAN_court_xifang_k2_var }
+	add_to_variable = { var = YAN_court_sum_equipment_capture_factor_var value = YAN_court_xifang_k3_var }
+	add_to_variable = { var = YAN_court_sum_intel_network_gain_factor_var value = YAN_court_dongfang_k1_var }
+	add_to_variable = { var = YAN_court_sum_command_power_gain_var value = YAN_court_dongfang_k2_var }
+	add_to_variable = { var = YAN_court_sum_resistance_target_var value = YAN_court_dongfang_k3_var }
+	add_to_variable = { var = YAN_court_sum_industrial_capacity_factory_var value = YAN_court_nanfang_k1_var }
+	add_to_variable = { var = YAN_court_sum_production_speed_buildings_factor_var value = YAN_court_nanfang_k2_var }
+	add_to_variable = { var = YAN_court_sum_war_support_factor_var value = YAN_court_nanfang_k3_var }
+	add_to_variable = { var = YAN_court_sum_stability_factor_var value = YAN_court_council_stab_var }
+	add_to_variable = { var = YAN_court_sum_political_power_factor_var value = YAN_court_council_pp_var }
+	add_to_variable = { var = YAN_court_sum_industrial_capacity_factory_var value = YAN_court_council_fac_var }
+	add_to_variable = { var = YAN_court_sum_research_speed_factor_var value = YAN_court_council_res_var }
+}
+
+# 山水：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_shanshui = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_shanshui_s1
+				has_shine_effect_on_focus = YAN_court_shanshui_s2
+				has_shine_effect_on_focus = YAN_court_shanshui_s3
+				has_shine_effect_on_focus = YAN_court_shanshui_s4
+				has_shine_effect_on_focus = YAN_court_shanshui_s5
+				has_shine_effect_on_focus = YAN_court_shanshui_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_1 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_shanshui_s1 } }
+			activate_shine_on_focus = YAN_court_shanshui_s1
+			set_country_flag = { flag = YAN_court_shanshui_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.1 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_shanshui_s2 } }
+			activate_shine_on_focus = YAN_court_shanshui_s2
+			set_country_flag = { flag = YAN_court_shanshui_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.1 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_shanshui_s3 } }
+			activate_shine_on_focus = YAN_court_shanshui_s3
+			set_country_flag = { flag = YAN_court_shanshui_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.1 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_shanshui_s4 } }
+			activate_shine_on_focus = YAN_court_shanshui_s4
+			set_country_flag = { flag = YAN_court_shanshui_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.1 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_shanshui_s5 } }
+			activate_shine_on_focus = YAN_court_shanshui_s5
+			set_country_flag = { flag = YAN_court_shanshui_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.1 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_shanshui_s6 } }
+			activate_shine_on_focus = YAN_court_shanshui_s6
+			set_country_flag = { flag = YAN_court_shanshui_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.1 days = 365 }
+		}
+	}
+}
+
+# 长街：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_changjie = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_changjie_s1
+				has_shine_effect_on_focus = YAN_court_changjie_s2
+				has_shine_effect_on_focus = YAN_court_changjie_s3
+				has_shine_effect_on_focus = YAN_court_changjie_s4
+				has_shine_effect_on_focus = YAN_court_changjie_s5
+				has_shine_effect_on_focus = YAN_court_changjie_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_2 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_changjie_s1 } }
+			activate_shine_on_focus = YAN_court_changjie_s1
+			set_country_flag = { flag = YAN_court_changjie_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.2 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_changjie_s2 } }
+			activate_shine_on_focus = YAN_court_changjie_s2
+			set_country_flag = { flag = YAN_court_changjie_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.2 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_changjie_s3 } }
+			activate_shine_on_focus = YAN_court_changjie_s3
+			set_country_flag = { flag = YAN_court_changjie_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.2 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_changjie_s4 } }
+			activate_shine_on_focus = YAN_court_changjie_s4
+			set_country_flag = { flag = YAN_court_changjie_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.2 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_changjie_s5 } }
+			activate_shine_on_focus = YAN_court_changjie_s5
+			set_country_flag = { flag = YAN_court_changjie_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.2 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_changjie_s6 } }
+			activate_shine_on_focus = YAN_court_changjie_s6
+			set_country_flag = { flag = YAN_court_changjie_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.2 days = 365 }
+		}
+	}
+}
+
+# 烟火：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_yanhuo = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_yanhuo_s1
+				has_shine_effect_on_focus = YAN_court_yanhuo_s2
+				has_shine_effect_on_focus = YAN_court_yanhuo_s3
+				has_shine_effect_on_focus = YAN_court_yanhuo_s4
+				has_shine_effect_on_focus = YAN_court_yanhuo_s5
+				has_shine_effect_on_focus = YAN_court_yanhuo_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_3 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_yanhuo_s1 } }
+			activate_shine_on_focus = YAN_court_yanhuo_s1
+			set_country_flag = { flag = YAN_court_yanhuo_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.3 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_yanhuo_s2 } }
+			activate_shine_on_focus = YAN_court_yanhuo_s2
+			set_country_flag = { flag = YAN_court_yanhuo_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.3 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_yanhuo_s3 } }
+			activate_shine_on_focus = YAN_court_yanhuo_s3
+			set_country_flag = { flag = YAN_court_yanhuo_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.3 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_yanhuo_s4 } }
+			activate_shine_on_focus = YAN_court_yanhuo_s4
+			set_country_flag = { flag = YAN_court_yanhuo_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.3 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_yanhuo_s5 } }
+			activate_shine_on_focus = YAN_court_yanhuo_s5
+			set_country_flag = { flag = YAN_court_yanhuo_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.3 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_yanhuo_s6 } }
+			activate_shine_on_focus = YAN_court_yanhuo_s6
+			set_country_flag = { flag = YAN_court_yanhuo_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.3 days = 365 }
+		}
+	}
+}
+
+# 弦歌：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_xiange = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_xiange_s1
+				has_shine_effect_on_focus = YAN_court_xiange_s2
+				has_shine_effect_on_focus = YAN_court_xiange_s3
+				has_shine_effect_on_focus = YAN_court_xiange_s4
+				has_shine_effect_on_focus = YAN_court_xiange_s5
+				has_shine_effect_on_focus = YAN_court_xiange_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_4 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xiange_s1 } }
+			activate_shine_on_focus = YAN_court_xiange_s1
+			set_country_flag = { flag = YAN_court_xiange_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.4 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xiange_s2 } }
+			activate_shine_on_focus = YAN_court_xiange_s2
+			set_country_flag = { flag = YAN_court_xiange_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.4 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xiange_s3 } }
+			activate_shine_on_focus = YAN_court_xiange_s3
+			set_country_flag = { flag = YAN_court_xiange_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.4 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xiange_s4 } }
+			activate_shine_on_focus = YAN_court_xiange_s4
+			set_country_flag = { flag = YAN_court_xiange_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.4 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xiange_s5 } }
+			activate_shine_on_focus = YAN_court_xiange_s5
+			set_country_flag = { flag = YAN_court_xiange_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.4 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xiange_s6 } }
+			activate_shine_on_focus = YAN_court_xiange_s6
+			set_country_flag = { flag = YAN_court_xiange_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.4 days = 365 }
+		}
+	}
+}
+
+# 锻坊：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_duanfang = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_duanfang_s1
+				has_shine_effect_on_focus = YAN_court_duanfang_s2
+				has_shine_effect_on_focus = YAN_court_duanfang_s3
+				has_shine_effect_on_focus = YAN_court_duanfang_s4
+				has_shine_effect_on_focus = YAN_court_duanfang_s5
+				has_shine_effect_on_focus = YAN_court_duanfang_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_5 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_duanfang_s1 } }
+			activate_shine_on_focus = YAN_court_duanfang_s1
+			set_country_flag = { flag = YAN_court_duanfang_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.5 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_duanfang_s2 } }
+			activate_shine_on_focus = YAN_court_duanfang_s2
+			set_country_flag = { flag = YAN_court_duanfang_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.5 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_duanfang_s3 } }
+			activate_shine_on_focus = YAN_court_duanfang_s3
+			set_country_flag = { flag = YAN_court_duanfang_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.5 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_duanfang_s4 } }
+			activate_shine_on_focus = YAN_court_duanfang_s4
+			set_country_flag = { flag = YAN_court_duanfang_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.5 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_duanfang_s5 } }
+			activate_shine_on_focus = YAN_court_duanfang_s5
+			set_country_flag = { flag = YAN_court_duanfang_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.5 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_duanfang_s6 } }
+			activate_shine_on_focus = YAN_court_duanfang_s6
+			set_country_flag = { flag = YAN_court_duanfang_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.5 days = 365 }
+		}
+	}
+}
+
+# 百谷：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_baigu = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_baigu_s1
+				has_shine_effect_on_focus = YAN_court_baigu_s2
+				has_shine_effect_on_focus = YAN_court_baigu_s3
+				has_shine_effect_on_focus = YAN_court_baigu_s4
+				has_shine_effect_on_focus = YAN_court_baigu_s5
+				has_shine_effect_on_focus = YAN_court_baigu_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_6 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_baigu_s1 } }
+			activate_shine_on_focus = YAN_court_baigu_s1
+			set_country_flag = { flag = YAN_court_baigu_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.6 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_baigu_s2 } }
+			activate_shine_on_focus = YAN_court_baigu_s2
+			set_country_flag = { flag = YAN_court_baigu_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.6 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_baigu_s3 } }
+			activate_shine_on_focus = YAN_court_baigu_s3
+			set_country_flag = { flag = YAN_court_baigu_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.6 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_baigu_s4 } }
+			activate_shine_on_focus = YAN_court_baigu_s4
+			set_country_flag = { flag = YAN_court_baigu_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.6 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_baigu_s5 } }
+			activate_shine_on_focus = YAN_court_baigu_s5
+			set_country_flag = { flag = YAN_court_baigu_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.6 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_baigu_s6 } }
+			activate_shine_on_focus = YAN_court_baigu_s6
+			set_country_flag = { flag = YAN_court_baigu_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.6 days = 365 }
+		}
+	}
+}
+
+# 宰府：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_zaifu = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_zaifu_s1
+				has_shine_effect_on_focus = YAN_court_zaifu_s2
+				has_shine_effect_on_focus = YAN_court_zaifu_s3
+				has_shine_effect_on_focus = YAN_court_zaifu_s4
+				has_shine_effect_on_focus = YAN_court_zaifu_s5
+				has_shine_effect_on_focus = YAN_court_zaifu_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_7 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_zaifu_s1 } }
+			activate_shine_on_focus = YAN_court_zaifu_s1
+			set_country_flag = { flag = YAN_court_zaifu_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.7 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_zaifu_s2 } }
+			activate_shine_on_focus = YAN_court_zaifu_s2
+			set_country_flag = { flag = YAN_court_zaifu_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.7 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_zaifu_s3 } }
+			activate_shine_on_focus = YAN_court_zaifu_s3
+			set_country_flag = { flag = YAN_court_zaifu_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.7 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_zaifu_s4 } }
+			activate_shine_on_focus = YAN_court_zaifu_s4
+			set_country_flag = { flag = YAN_court_zaifu_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.7 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_zaifu_s5 } }
+			activate_shine_on_focus = YAN_court_zaifu_s5
+			set_country_flag = { flag = YAN_court_zaifu_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.7 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_zaifu_s6 } }
+			activate_shine_on_focus = YAN_court_zaifu_s6
+			set_country_flag = { flag = YAN_court_zaifu_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.7 days = 365 }
+		}
+	}
+}
+
+# 兵革：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_bingge = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_bingge_s1
+				has_shine_effect_on_focus = YAN_court_bingge_s2
+				has_shine_effect_on_focus = YAN_court_bingge_s3
+				has_shine_effect_on_focus = YAN_court_bingge_s4
+				has_shine_effect_on_focus = YAN_court_bingge_s5
+				has_shine_effect_on_focus = YAN_court_bingge_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_8 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bingge_s1 } }
+			activate_shine_on_focus = YAN_court_bingge_s1
+			set_country_flag = { flag = YAN_court_bingge_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.8 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bingge_s2 } }
+			activate_shine_on_focus = YAN_court_bingge_s2
+			set_country_flag = { flag = YAN_court_bingge_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.8 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bingge_s3 } }
+			activate_shine_on_focus = YAN_court_bingge_s3
+			set_country_flag = { flag = YAN_court_bingge_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.8 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bingge_s4 } }
+			activate_shine_on_focus = YAN_court_bingge_s4
+			set_country_flag = { flag = YAN_court_bingge_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.8 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bingge_s5 } }
+			activate_shine_on_focus = YAN_court_bingge_s5
+			set_country_flag = { flag = YAN_court_bingge_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.8 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bingge_s6 } }
+			activate_shine_on_focus = YAN_court_bingge_s6
+			set_country_flag = { flag = YAN_court_bingge_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.8 days = 365 }
+		}
+	}
+}
+
+# 北门：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_bei = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_bei_s1
+				has_shine_effect_on_focus = YAN_court_bei_s2
+				has_shine_effect_on_focus = YAN_court_bei_s3
+				has_shine_effect_on_focus = YAN_court_bei_s4
+				has_shine_effect_on_focus = YAN_court_bei_s5
+				has_shine_effect_on_focus = YAN_court_bei_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_9 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bei_s1 } }
+			activate_shine_on_focus = YAN_court_bei_s1
+			set_country_flag = { flag = YAN_court_bei_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.9 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bei_s2 } }
+			activate_shine_on_focus = YAN_court_bei_s2
+			set_country_flag = { flag = YAN_court_bei_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.9 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bei_s3 } }
+			activate_shine_on_focus = YAN_court_bei_s3
+			set_country_flag = { flag = YAN_court_bei_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.9 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bei_s4 } }
+			activate_shine_on_focus = YAN_court_bei_s4
+			set_country_flag = { flag = YAN_court_bei_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.9 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bei_s5 } }
+			activate_shine_on_focus = YAN_court_bei_s5
+			set_country_flag = { flag = YAN_court_bei_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.9 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_bei_s6 } }
+			activate_shine_on_focus = YAN_court_bei_s6
+			set_country_flag = { flag = YAN_court_bei_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.9 days = 365 }
+		}
+	}
+}
+
+# 西馆：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_xifang = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_xifang_s1
+				has_shine_effect_on_focus = YAN_court_xifang_s2
+				has_shine_effect_on_focus = YAN_court_xifang_s3
+				has_shine_effect_on_focus = YAN_court_xifang_s4
+				has_shine_effect_on_focus = YAN_court_xifang_s5
+				has_shine_effect_on_focus = YAN_court_xifang_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_10 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xifang_s1 } }
+			activate_shine_on_focus = YAN_court_xifang_s1
+			set_country_flag = { flag = YAN_court_xifang_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.10 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xifang_s2 } }
+			activate_shine_on_focus = YAN_court_xifang_s2
+			set_country_flag = { flag = YAN_court_xifang_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.10 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xifang_s3 } }
+			activate_shine_on_focus = YAN_court_xifang_s3
+			set_country_flag = { flag = YAN_court_xifang_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.10 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xifang_s4 } }
+			activate_shine_on_focus = YAN_court_xifang_s4
+			set_country_flag = { flag = YAN_court_xifang_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.10 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xifang_s5 } }
+			activate_shine_on_focus = YAN_court_xifang_s5
+			set_country_flag = { flag = YAN_court_xifang_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.10 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_xifang_s6 } }
+			activate_shine_on_focus = YAN_court_xifang_s6
+			set_country_flag = { flag = YAN_court_xifang_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.10 days = 365 }
+		}
+	}
+}
+
+# 东抚：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_dongfang = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_dongfang_s1
+				has_shine_effect_on_focus = YAN_court_dongfang_s2
+				has_shine_effect_on_focus = YAN_court_dongfang_s3
+				has_shine_effect_on_focus = YAN_court_dongfang_s4
+				has_shine_effect_on_focus = YAN_court_dongfang_s5
+				has_shine_effect_on_focus = YAN_court_dongfang_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_11 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_dongfang_s1 } }
+			activate_shine_on_focus = YAN_court_dongfang_s1
+			set_country_flag = { flag = YAN_court_dongfang_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.11 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_dongfang_s2 } }
+			activate_shine_on_focus = YAN_court_dongfang_s2
+			set_country_flag = { flag = YAN_court_dongfang_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.11 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_dongfang_s3 } }
+			activate_shine_on_focus = YAN_court_dongfang_s3
+			set_country_flag = { flag = YAN_court_dongfang_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.11 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_dongfang_s4 } }
+			activate_shine_on_focus = YAN_court_dongfang_s4
+			set_country_flag = { flag = YAN_court_dongfang_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.11 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_dongfang_s5 } }
+			activate_shine_on_focus = YAN_court_dongfang_s5
+			set_country_flag = { flag = YAN_court_dongfang_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.11 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_dongfang_s6 } }
+			activate_shine_on_focus = YAN_court_dongfang_s6
+			set_country_flag = { flag = YAN_court_dongfang_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.11 days = 365 }
+		}
+	}
+}
+
+# 南库：启动下一步（若无人在推进且还有未完成的格）
+YAN_court_start_nanfang = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_court_nanfang_s1
+				has_shine_effect_on_focus = YAN_court_nanfang_s2
+				has_shine_effect_on_focus = YAN_court_nanfang_s3
+				has_shine_effect_on_focus = YAN_court_nanfang_s4
+				has_shine_effect_on_focus = YAN_court_nanfang_s5
+				has_shine_effect_on_focus = YAN_court_nanfang_s6
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { check_variable = { YAN_court_seat_12 > 0 } }
+		if = {
+			limit = { NOT = { has_completed_focus = YAN_court_nanfang_s1 } }
+			activate_shine_on_focus = YAN_court_nanfang_s1
+			set_country_flag = { flag = YAN_court_nanfang_s1_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.12 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_nanfang_s2 } }
+			activate_shine_on_focus = YAN_court_nanfang_s2
+			set_country_flag = { flag = YAN_court_nanfang_s2_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.12 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_nanfang_s3 } }
+			activate_shine_on_focus = YAN_court_nanfang_s3
+			set_country_flag = { flag = YAN_court_nanfang_s3_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.12 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_nanfang_s4 } }
+			activate_shine_on_focus = YAN_court_nanfang_s4
+			set_country_flag = { flag = YAN_court_nanfang_s4_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.12 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_nanfang_s5 } }
+			activate_shine_on_focus = YAN_court_nanfang_s5
+			set_country_flag = { flag = YAN_court_nanfang_s5_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.12 days = 365 }
+		}
+		else_if = {
+			limit = { NOT = { has_completed_focus = YAN_court_nanfang_s6 } }
+			activate_shine_on_focus = YAN_court_nanfang_s6
+			set_country_flag = { flag = YAN_court_nanfang_s6_prog days = 365 value = 1 }
+			country_event = { id = YAN_court_work.12 days = 365 }
+		}
+	}
+}
+
+# 月度兜底：把「有人在席但没人在推进」的席位重新踢起来（幂等）
+YAN_court_advance = {
+	YAN_court_start_shanshui = yes
+	YAN_court_start_changjie = yes
+	YAN_court_start_yanhuo = yes
+	YAN_court_start_xiange = yes
+	YAN_court_start_duanfang = yes
+	YAN_court_start_baigu = yes
+	YAN_court_start_zaifu = yes
+	YAN_court_start_bingge = yes
+	YAN_court_start_bei = yes
+	YAN_court_start_xifang = yes
+	YAN_court_start_dongfang = yes
+	YAN_court_start_nanfang = yes
+}

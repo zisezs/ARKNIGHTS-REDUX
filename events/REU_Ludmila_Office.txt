@@ -1,0 +1,297 @@
+add_namespace = reu_ludmila
+
+# ============================================================
+#  柳德米拉的主席办公室
+#  · 正式解锁请在国策/事件的 effect 里写：REU_Ludmila_Unlock = yes
+#  · 控制台测试：event reu_ludmila.90
+# ============================================================
+
+# 解锁完成通知（由 REU_Ludmila_Unlock 调用）
+country_event = {
+	id = reu_ludmila.1
+	title = reu_ludmila.1.t
+	desc = reu_ludmila.1.d
+	picture = GFX_report_event_Generic_Lungmen_Office
+
+	is_triggered_only = yes
+
+	option = {
+		name = reu_ludmila.1.a
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# 好感 25：熟识
+country_event = {
+	id = reu_ludmila.3
+	title = reu_ludmila.3.t
+	desc = reu_ludmila.3.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = reu_ludmila.3.a
+		add_political_power = 25
+		custom_effect_tooltip = REU_ludmila_Office_TT_Tier1
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# 好感 50：信任
+country_event = {
+	id = reu_ludmila.4
+	title = reu_ludmila.4.t
+	desc = reu_ludmila.4.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+
+	option = {
+		name = reu_ludmila.4.a
+		add_political_power = 40
+		add_stability = 0.03
+		custom_effect_tooltip = REU_ludmila_Office_TT_Tier2
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# 好感 75：羁绊
+country_event = {
+	id = reu_ludmila.5
+	title = reu_ludmila.5.t
+	desc = reu_ludmila.5.d
+	picture = GFX_report_event_Generic_Ice_Lake
+
+	is_triggered_only = yes
+
+	option = {
+		name = reu_ludmila.5.a
+		add_political_power = 60
+		add_war_support = 0.03
+		custom_effect_tooltip = REU_ludmila_Office_TT_Tier3
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# 好感 100：挚友
+country_event = {
+	id = reu_ludmila.6
+	title = reu_ludmila.6.t
+	desc = reu_ludmila.6.d
+	picture = GFX_report_event_Generic_Cold_Forest
+
+	is_triggered_only = yes
+
+	option = {
+		name = reu_ludmila.6.a
+		add_political_power = 100
+		add_stability = 0.05
+		custom_effect_tooltip = REU_ludmila_Office_TT_Tier4
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+# 好感 100：见证索科洛夫与柳德米拉的婚礼
+country_event = {
+	id = reu_ludmila.7
+	title = reu_ludmila.7.t
+	desc = reu_ludmila.7.d
+	picture = GFX_report_event_Generic_Manor_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = reu_ludmila.7.a
+		add_political_power = 150
+		add_stability = 0.05
+		add_war_support = 0.05
+		custom_effect_tooltip = REU_ludmila_Office_TT_Wedding
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+
+# ------------------------------------------------------------
+#  调试：控制台 event reu_ludmila.90
+# ------------------------------------------------------------
+country_event = {
+	id = reu_ludmila.90
+	title = reu_ludmila.90.t
+	desc = reu_ludmila.90.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = reu_ludmila.90.o1
+		REU_Ludmila_Unlock = yes
+	}
+
+	option = {
+		name = reu_ludmila.90.o2
+		REU_Ludmila_Unlock = yes
+		REU_Ludmila_Open = yes
+	}
+
+	option = {
+		name = reu_ludmila.90.o3
+		set_variable = { REU_ludmila_delta = 20 }
+		REU_Ludmila_Add_Affection = yes
+	}
+
+	option = {
+		name = reu_ludmila.90.o4
+		set_variable = { REU_ludmila_affection = 100 }
+		set_variable = { REU_ludmila_delta = 0 }
+		REU_Ludmila_Refresh_Hearts = yes
+	}
+
+	option = {
+		name = reu_ludmila.90.o5
+		set_variable = { REU_ludmila_affection = 0 }
+		REU_Ludmila_Refresh_Hearts = yes
+		clr_country_flag = REU_ludmila_tier_1
+		clr_country_flag = REU_ludmila_tier_2
+		clr_country_flag = REU_ludmila_tier_3
+		clr_country_flag = REU_ludmila_tier_4
+	}
+
+	# 直接跳到「本章已结束」的间隙，用来单测右侧互动栏
+	option = {
+		name = reu_ludmila.90.o6
+		REU_Ludmila_Unlock = yes
+		REU_Ludmila_On_Session_End = yes
+		REU_Ludmila_Open = yes
+	}
+
+	# 直接播 1095 章回忆录，绕过决议的年份门槛
+	option = {
+		name = reu_ludmila.90.o7
+		set_variable = { REU_ludmila_node = 1000 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播 1096 章回忆录，绕过决议的年份门槛
+	option = {
+		name = reu_ludmila.90.o8
+		set_variable = { REU_ludmila_node = 1300 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播 1097 章回忆录，绕过决议的年份门槛
+	option = {
+		name = reu_ludmila.90.o9
+		set_variable = { REU_ludmila_node = 1600 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播 1098 章回忆录，绕过决议的年份门槛
+	option = {
+		name = reu_ludmila.90.o10
+		set_variable = { REU_ludmila_node = 1900 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播 1099 章回忆录，绕过决议的年份门槛
+	option = {
+		name = reu_ludmila.90.o11
+		set_variable = { REU_ludmila_node = 2200 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播 1100 章回忆录，绕过决议的年份门槛
+	option = {
+		name = reu_ludmila.90.o12
+		set_variable = { REU_ludmila_node = 2500 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播 1101 章回忆录，绕过决议的年份门槛
+	option = {
+		name = reu_ludmila.90.o13
+		set_variable = { REU_ludmila_node = 2800 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播 1102 章回忆录，绕过决议的年份门槛
+	option = {
+		name = reu_ludmila.90.o14
+		set_variable = { REU_ludmila_node = 3100 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播 1102 年冬回忆录（密信与政变），绕过决议的年份门槛
+	option = {
+		name = reu_ludmila.90.o15
+		set_variable = { REU_ludmila_node = 3400 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 只跑「政变上台」这一步（不进剧情）：换国家领袖为柳德米拉。
+	# 给老档用——已经看过 1102 冬那章、但当时因为旧写法没换成的那些档；新档正常走剧情会自动执行。
+	option = {
+		name = reu_ludmila.90.o16
+		REU_Ludmila_Coup_Take_Power = yes
+	}
+
+	# 直接播隐藏回忆 1095
+	option = {
+		name = reu_ludmila.90.o17
+		set_variable = { REU_ludmila_node = 3700 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播隐藏回忆 1096
+	option = {
+		name = reu_ludmila.90.o18
+		set_variable = { REU_ludmila_node = 4000 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播隐藏回忆 1097
+	option = {
+		name = reu_ludmila.90.o19
+		set_variable = { REU_ludmila_node = 4300 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播隐藏回忆 1098
+	option = {
+		name = reu_ludmila.90.o20
+		set_variable = { REU_ludmila_node = 4600 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播隐藏回忆 1099
+	option = {
+		name = reu_ludmila.90.o21
+		set_variable = { REU_ludmila_node = 4900 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播隐藏回忆 1100
+	option = {
+		name = reu_ludmila.90.o22
+		set_variable = { REU_ludmila_node = 5200 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+
+	# 直接播隐藏回忆 1101
+	option = {
+		name = reu_ludmila.90.o23
+		set_variable = { REU_ludmila_node = 5500 }
+		REU_Ludmila_Play_Chapter = yes
+	}
+}

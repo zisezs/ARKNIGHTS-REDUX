@@ -1,0 +1,1805 @@
+# ==============================================================================
+#  大炎·奇迹工程 —— 面板版式（生成物，真源 docs/gen_yan_miracle.cjs）
+#
+#  版式照 RELINK 活动页的档案库骨架：等宽编号条 / 白卡片 / 1px 灰线 /
+#  翻页箭头 / 挂锁 / 实色按钮条；配色是宣纸米白 + 朱印 + 描金。
+#
+#  主窗 1900x1150：玩家 2560x1440 + gui_scale 1.1 ⇒ 有效空间 2327x1309。
+#  中文全宽图集最大只有 Arial_26s（26px），所以放大给的是图幅与留白，不是字号。
+#
+#  ⚠️ iconType / buttonType 没有 size 键：显示尺寸 = 贴图原生尺寸，
+#     要改大小必须重烘贴图（docs/gen_yan_miracle_assets.cjs）。
+#  ⚠️ 后写的控件压在先写的上面 —— 台账浮层必须留在文件最后。
+#  ⚠️ 入口面板不随主窗放大（决议页宿主只有 ~502px），它用一整套 _sm 小贴图。
+# ==============================================================================
+
+guiTypes = {
+
+	containerWindowType = {
+		name = "YAN_Miracle_Entry_GUI"
+		position = { x = 0 y = 0 }
+		size = { width = 500 height = 252 }
+		orientation = center
+		origo = center
+		moveable = no
+
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_YAN_mir_entry_bg"
+		}
+
+			iconType = {
+				name = "YAN_Mir_Entry_TitleBg"
+				position = { x = 14 y = 10 }
+				spriteType = "GFX_YAN_mir_titlebar_sm"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Title"
+				position = { x = 24 y = 14 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_ENTRY_HEAD"
+				maxWidth = 280
+				maxHeight = 24
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Seal"
+				position = { x = 344 y = 4 }
+				spriteType = "GFX_YAN_mir_seal_sm"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Progress"
+				position = { x = 14 y = 50 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_PROGRESS"
+				maxWidth = 190
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_PipOff_1"
+				position = { x = 216 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_off_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Pip_1"
+				position = { x = 216 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_on_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_PipOff_2"
+				position = { x = 242 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_off_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Pip_2"
+				position = { x = 242 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_on_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_PipOff_3"
+				position = { x = 268 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_off_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Pip_3"
+				position = { x = 268 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_on_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_PipOff_4"
+				position = { x = 294 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_off_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Pip_4"
+				position = { x = 294 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_on_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_PipOff_5"
+				position = { x = 320 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_off_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Pip_5"
+				position = { x = 320 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_on_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_PipOff_6"
+				position = { x = 346 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_off_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Pip_6"
+				position = { x = 346 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_on_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_PipOff_7"
+				position = { x = 372 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_off_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Pip_7"
+				position = { x = 372 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_on_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_PipOff_8"
+				position = { x = 398 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_off_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Pip_8"
+				position = { x = 398 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_on_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_PipOff_9"
+				position = { x = 424 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_off_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Pip_9"
+				position = { x = 424 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_on_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_PipOff_10"
+				position = { x = 450 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_off_sm"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Entry_Pip_10"
+				position = { x = 450 y = 50 }
+				spriteType = "GFX_YAN_mir_pip_on_sm"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Active"
+				position = { x = 14 y = 70 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_ENTRY_ACTIVE"
+				maxWidth = 200
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Np_1"
+				position = { x = 14 y = 94 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NP_rsd"
+				maxWidth = 236
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Np_2"
+				position = { x = 258 y = 94 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NP_pp"
+				maxWidth = 236
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Np_3"
+				position = { x = 14 y = 111 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NP_ifac"
+				maxWidth = 236
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Np_4"
+				position = { x = 258 y = 111 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NP_idoc"
+				maxWidth = 236
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Np_5"
+				position = { x = 14 y = 128 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NP_bld"
+				maxWidth = 236
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Np_6"
+				position = { x = 258 y = 128 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NP_atk"
+				maxWidth = 236
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Np_7"
+				position = { x = 14 y = 145 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NP_def"
+				maxWidth = 236
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Np_8"
+				position = { x = 258 y = 145 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NP_sup"
+				maxWidth = 236
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Entry_Np_9"
+				position = { x = 14 y = 162 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NP_stab"
+				maxWidth = 236
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Entry_Open"
+				position = { x = 14 y = 196 }
+				quadTextureSprite = "GFX_YAN_mir_btn_flat_sm"
+				buttonText = "YAN_MIR_ENTRY_BTN"
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			buttonType = {
+				name = "YAN_Mir_Entry_Roster"
+				position = { x = 256 y = 196 }
+				quadTextureSprite = "GFX_YAN_mir_btn_flat_sm"
+				buttonText = "YAN_MIR_ENTRY_ROSTER"
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+	}
+
+	containerWindowType = {
+		name = "YAN_Miracle_Window"
+		position = { x = 0 y = 0 }
+		size = { width = 1900 height = 1150 }
+		orientation = center
+		origo = center
+		moveable = no
+		click_to_front = yes
+
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_YAN_mir_bg"
+		}
+
+			iconType = {
+				name = "YAN_Mir_IdStrip"
+				position = { x = 30 y = 14 }
+				spriteType = "GFX_YAN_mir_idstrip"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_IdText"
+				position = { x = 40 y = 18 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_HEAD"
+				maxWidth = 1700
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Close"
+				position = { x = 1826 y = 50 }
+				quadTextureSprite = "GFX_YAN_mir_close"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+				pdx_tooltip = YAN_MIR_CLOSE_TT
+			}
+			iconType = {
+				name = "YAN_Mir_TitleBg"
+				position = { x = 30 y = 52 }
+				spriteType = "GFX_YAN_mir_titlebar"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Title"
+				position = { x = 44 y = 54 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_TITLE"
+				maxWidth = 400
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Seal"
+				position = { x = 500 y = 48 }
+				spriteType = "GFX_YAN_mir_seal"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Subtitle"
+				position = { x = 560 y = 62 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_SUBTITLE"
+				maxWidth = 400
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardsHead"
+				position = { x = 30 y = 104 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_COL_CARDS"
+				maxWidth = 310
+				maxHeight = 24
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Card_1"
+				position = { x = 30 y = 136 }
+				quadTextureSprite = "GFX_YAN_mir_card"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Mir_CardSel_1"
+				position = { x = 30 y = 136 }
+				spriteType = "GFX_YAN_mir_card_sel"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardNum_1"
+				position = { x = 38 y = 142 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_GUANGSHA_ID_SHORT"
+				maxWidth = 120
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardName_1"
+				position = { x = 38 y = 160 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_GUANGSHA_CARDNAME"
+				maxWidth = 240
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardStat_1"
+				position = { x = 38 y = 194 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_GUANGSHA_CARD"
+				maxWidth = 240
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Badge_1"
+				position = { x = 288 y = 142 }
+				spriteType = "GFX_YAN_mir_badge"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Lock_1"
+				position = { x = 300 y = 164 }
+				spriteType = "GFX_YAN_mir_lock"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Card_2"
+				position = { x = 30 y = 228 }
+				quadTextureSprite = "GFX_YAN_mir_card"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Mir_CardSel_2"
+				position = { x = 30 y = 228 }
+				spriteType = "GFX_YAN_mir_card_sel"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardNum_2"
+				position = { x = 38 y = 234 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_RONGJIN_ID_SHORT"
+				maxWidth = 120
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardName_2"
+				position = { x = 38 y = 252 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_RONGJIN_CARDNAME"
+				maxWidth = 240
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardStat_2"
+				position = { x = 38 y = 286 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_RONGJIN_CARD"
+				maxWidth = 240
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Badge_2"
+				position = { x = 288 y = 234 }
+				spriteType = "GFX_YAN_mir_badge"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Lock_2"
+				position = { x = 300 y = 256 }
+				spriteType = "GFX_YAN_mir_lock"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Card_3"
+				position = { x = 30 y = 320 }
+				quadTextureSprite = "GFX_YAN_mir_card"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Mir_CardSel_3"
+				position = { x = 30 y = 320 }
+				spriteType = "GFX_YAN_mir_card_sel"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardNum_3"
+				position = { x = 38 y = 326 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_DUJIANG_ID_SHORT"
+				maxWidth = 120
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardName_3"
+				position = { x = 38 y = 344 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_DUJIANG_CARDNAME"
+				maxWidth = 240
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardStat_3"
+				position = { x = 38 y = 378 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_DUJIANG_CARD"
+				maxWidth = 240
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Badge_3"
+				position = { x = 288 y = 326 }
+				spriteType = "GFX_YAN_mir_badge"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Lock_3"
+				position = { x = 300 y = 348 }
+				spriteType = "GFX_YAN_mir_lock"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Card_4"
+				position = { x = 30 y = 412 }
+				quadTextureSprite = "GFX_YAN_mir_card"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Mir_CardSel_4"
+				position = { x = 30 y = 412 }
+				spriteType = "GFX_YAN_mir_card_sel"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardNum_4"
+				position = { x = 38 y = 418 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_ZHUANCAO_ID_SHORT"
+				maxWidth = 120
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardName_4"
+				position = { x = 38 y = 436 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_ZHUANCAO_CARDNAME"
+				maxWidth = 240
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardStat_4"
+				position = { x = 38 y = 470 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_ZHUANCAO_CARD"
+				maxWidth = 240
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Badge_4"
+				position = { x = 288 y = 418 }
+				spriteType = "GFX_YAN_mir_badge"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Lock_4"
+				position = { x = 300 y = 440 }
+				spriteType = "GFX_YAN_mir_lock"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Card_5"
+				position = { x = 30 y = 504 }
+				quadTextureSprite = "GFX_YAN_mir_card"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Mir_CardSel_5"
+				position = { x = 30 y = 504 }
+				spriteType = "GFX_YAN_mir_card_sel"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardNum_5"
+				position = { x = 38 y = 510 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_ZHENYUE_ID_SHORT"
+				maxWidth = 120
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardName_5"
+				position = { x = 38 y = 528 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_ZHENYUE_CARDNAME"
+				maxWidth = 240
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardStat_5"
+				position = { x = 38 y = 562 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_ZHENYUE_CARD"
+				maxWidth = 240
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Badge_5"
+				position = { x = 288 y = 510 }
+				spriteType = "GFX_YAN_mir_badge"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Lock_5"
+				position = { x = 300 y = 532 }
+				spriteType = "GFX_YAN_mir_lock"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Card_6"
+				position = { x = 30 y = 596 }
+				quadTextureSprite = "GFX_YAN_mir_card"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Mir_CardSel_6"
+				position = { x = 30 y = 596 }
+				spriteType = "GFX_YAN_mir_card_sel"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardNum_6"
+				position = { x = 38 y = 602 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_FEIYUN_ID_SHORT"
+				maxWidth = 120
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardName_6"
+				position = { x = 38 y = 620 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_FEIYUN_CARDNAME"
+				maxWidth = 240
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardStat_6"
+				position = { x = 38 y = 654 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_FEIYUN_CARD"
+				maxWidth = 240
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Badge_6"
+				position = { x = 288 y = 602 }
+				spriteType = "GFX_YAN_mir_badge"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Lock_6"
+				position = { x = 300 y = 624 }
+				spriteType = "GFX_YAN_mir_lock"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Card_7"
+				position = { x = 30 y = 688 }
+				quadTextureSprite = "GFX_YAN_mir_card"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Mir_CardSel_7"
+				position = { x = 30 y = 688 }
+				spriteType = "GFX_YAN_mir_card_sel"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardNum_7"
+				position = { x = 38 y = 694 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_SITIAN_ID_SHORT"
+				maxWidth = 120
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardName_7"
+				position = { x = 38 y = 712 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_SITIAN_CARDNAME"
+				maxWidth = 240
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardStat_7"
+				position = { x = 38 y = 746 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_SITIAN_CARD"
+				maxWidth = 240
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Badge_7"
+				position = { x = 288 y = 694 }
+				spriteType = "GFX_YAN_mir_badge"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Lock_7"
+				position = { x = 300 y = 716 }
+				spriteType = "GFX_YAN_mir_lock"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Card_8"
+				position = { x = 30 y = 780 }
+				quadTextureSprite = "GFX_YAN_mir_card"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Mir_CardSel_8"
+				position = { x = 30 y = 780 }
+				spriteType = "GFX_YAN_mir_card_sel"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardNum_8"
+				position = { x = 38 y = 786 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_YUMEN_ID_SHORT"
+				maxWidth = 120
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardName_8"
+				position = { x = 38 y = 804 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_YUMEN_CARDNAME"
+				maxWidth = 240
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardStat_8"
+				position = { x = 38 y = 838 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_YUMEN_CARD"
+				maxWidth = 240
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Badge_8"
+				position = { x = 288 y = 786 }
+				spriteType = "GFX_YAN_mir_badge"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Lock_8"
+				position = { x = 300 y = 808 }
+				spriteType = "GFX_YAN_mir_lock"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Card_9"
+				position = { x = 30 y = 872 }
+				quadTextureSprite = "GFX_YAN_mir_card"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Mir_CardSel_9"
+				position = { x = 30 y = 872 }
+				spriteType = "GFX_YAN_mir_card_sel"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardNum_9"
+				position = { x = 38 y = 878 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_LONGMEN_ID_SHORT"
+				maxWidth = 120
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardName_9"
+				position = { x = 38 y = 896 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_LONGMEN_CARDNAME"
+				maxWidth = 240
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_CardStat_9"
+				position = { x = 38 y = 930 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_LONGMEN_CARD"
+				maxWidth = 240
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Badge_9"
+				position = { x = 288 y = 878 }
+				spriteType = "GFX_YAN_mir_badge"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Lock_9"
+				position = { x = 300 y = 900 }
+				spriteType = "GFX_YAN_mir_lock"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PlateFrame"
+				position = { x = 360 y = 136 }
+				spriteType = "GFX_YAN_mir_plate_frame"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Plate"
+				position = { x = 368 y = 144 }
+				spriteType = "GFX_YAN_mir_plate_guangsha"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Name"
+				position = { x = 896 y = 140 }
+				font = "YAN_Mir_title26"
+				text = "[YAN_GetMirProjName]"
+				maxWidth = 384
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Id"
+				position = { x = 896 y = 176 }
+				font = "YAN_Mir_text14"
+				text = "[YAN_GetMirProjId]"
+				maxWidth = 384
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Rule1"
+				position = { x = 896 y = 198 }
+				spriteType = "GFX_YAN_mir_rule_384"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Days"
+				position = { x = 896 y = 206 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirProjDays]"
+				maxWidth = 384
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_PPCost"
+				position = { x = 896 y = 234 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirProjPP]"
+				maxWidth = 384
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Cap"
+				position = { x = 896 y = 262 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirProjCap]"
+				maxWidth = 384
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Status"
+				position = { x = 896 y = 294 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirStatus]"
+				maxWidth = 384
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Busy"
+				position = { x = 896 y = 322 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirBusy]"
+				maxWidth = 384
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Prose"
+				position = { x = 360 y = 520 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirProjProse]"
+				maxWidth = 920
+				maxHeight = 92
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_ReqHead"
+				position = { x = 360 y = 628 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_H_REQ"
+				maxWidth = 920
+				maxHeight = 24
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Rule2"
+				position = { x = 360 y = 656 }
+				spriteType = "GFX_YAN_mir_rule_920"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_ChkOk_1"
+				position = { x = 362 y = 666 }
+				spriteType = "GFX_YAN_mir_chk_ok"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_ChkNo_1"
+				position = { x = 362 y = 666 }
+				spriteType = "GFX_YAN_mir_chk_no"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_ChkTxt_1"
+				position = { x = 388 y = 664 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirChkTxt_1]"
+				maxWidth = 892
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_ChkOk_2"
+				position = { x = 362 y = 696 }
+				spriteType = "GFX_YAN_mir_chk_ok"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_ChkNo_2"
+				position = { x = 362 y = 696 }
+				spriteType = "GFX_YAN_mir_chk_no"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_ChkTxt_2"
+				position = { x = 388 y = 694 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirChkTxt_2]"
+				maxWidth = 892
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_ChkOk_3"
+				position = { x = 362 y = 726 }
+				spriteType = "GFX_YAN_mir_chk_ok"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_ChkNo_3"
+				position = { x = 362 y = 726 }
+				spriteType = "GFX_YAN_mir_chk_no"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_ChkTxt_3"
+				position = { x = 388 y = 724 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirChkTxt_3]"
+				maxWidth = 892
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_TtHead"
+				position = { x = 360 y = 766 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_H_TT"
+				maxWidth = 920
+				maxHeight = 24
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Rule3"
+				position = { x = 360 y = 794 }
+				spriteType = "GFX_YAN_mir_rule_920"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Tt"
+				position = { x = 360 y = 802 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirProjTt]"
+				maxWidth = 920
+				maxHeight = 216
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_SiteHead"
+				position = { x = 1310 y = 104 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_COL_SITE"
+				maxWidth = 560
+				maxHeight = 24
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Prev"
+				position = { x = 1312 y = 140 }
+				quadTextureSprite = "GFX_YAN_mir_arrow_l"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+				pdx_tooltip = YAN_MIR_PREV_TT
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_StateName"
+				position = { x = 1360 y = 146 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_STATE_LINE"
+				maxWidth = 460
+				maxHeight = 30
+				format = centre
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Next"
+				position = { x = 1830 y = 140 }
+				quadTextureSprite = "GFX_YAN_mir_arrow_r"
+				buttonText = " "
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+				pdx_tooltip = YAN_MIR_NEXT_TT
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Rank"
+				position = { x = 1310 y = 186 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_RANK_LINE"
+				maxWidth = 560
+				maxHeight = 16
+				format = centre
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Rule4"
+				position = { x = 1310 y = 210 }
+				spriteType = "GFX_YAN_mir_rule_560"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_VerdictOk"
+				position = { x = 1310 y = 220 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_VERDICT_OK"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_VerdictNo"
+				position = { x = 1310 y = 220 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_VERDICT_NO"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_NoSite"
+				position = { x = 1310 y = 248 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NOSITE"
+				maxWidth = 560
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_Go"
+				position = { x = 1380 y = 274 }
+				quadTextureSprite = "GFX_YAN_mir_btn_go"
+				buttonText = "YAN_MIR_GO"
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_GoTip"
+				position = { x = 1310 y = 344 }
+				font = "YAN_Mir_text20"
+				text = "[YAN_GetMirGoTip]"
+				maxWidth = 560
+				maxHeight = 46
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_SpiritHead"
+				position = { x = 1310 y = 420 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_SPIRIT_HEAD"
+				maxWidth = 560
+				maxHeight = 24
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Rule5"
+				position = { x = 1310 y = 448 }
+				spriteType = "GFX_YAN_mir_rule_560"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Np_1"
+				position = { x = 1310 y = 456 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_NP_rsd"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Np_2"
+				position = { x = 1310 y = 486 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_NP_pp"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Np_3"
+				position = { x = 1310 y = 516 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_NP_ifac"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Np_4"
+				position = { x = 1310 y = 546 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_NP_idoc"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Np_5"
+				position = { x = 1310 y = 576 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_NP_bld"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Np_6"
+				position = { x = 1310 y = 606 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_NP_atk"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Np_7"
+				position = { x = 1310 y = 636 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_NP_def"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Np_8"
+				position = { x = 1310 y = 666 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_NP_sup"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Np_9"
+				position = { x = 1310 y = 696 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_NP_stab"
+				maxWidth = 560
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_RosterBtn"
+				position = { x = 1400 y = 782 }
+				quadTextureSprite = "GFX_YAN_mir_btn_flat"
+				buttonText = "YAN_MIR_ROSTER"
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+			iconType = {
+				name = "YAN_Mir_Rule6"
+				position = { x = 1310 y = 846 }
+				spriteType = "GFX_YAN_mir_rule_560"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_NoteHead"
+				position = { x = 1310 y = 856 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_H_NOTE"
+				maxWidth = 560
+				maxHeight = 24
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Note"
+				position = { x = 1310 y = 886 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_NOTE"
+				maxWidth = 560
+				maxHeight = 128
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_Progress"
+				position = { x = 30 y = 1096 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_PROGRESS"
+				maxWidth = 260
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PipOff_1"
+				position = { x = 300 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Pip_1"
+				position = { x = 300 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PipOff_2"
+				position = { x = 336 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Pip_2"
+				position = { x = 336 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PipOff_3"
+				position = { x = 372 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Pip_3"
+				position = { x = 372 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PipOff_4"
+				position = { x = 408 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Pip_4"
+				position = { x = 408 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PipOff_5"
+				position = { x = 444 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Pip_5"
+				position = { x = 444 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PipOff_6"
+				position = { x = 480 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Pip_6"
+				position = { x = 480 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PipOff_7"
+				position = { x = 516 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Pip_7"
+				position = { x = 516 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PipOff_8"
+				position = { x = 552 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Pip_8"
+				position = { x = 552 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PipOff_9"
+				position = { x = 588 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Pip_9"
+				position = { x = 588 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_on"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_PipOff_10"
+				position = { x = 624 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_off"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_Pip_10"
+				position = { x = 624 y = 1095 }
+				spriteType = "GFX_YAN_mir_pip_on"
+				alwaystransparent = yes
+			}
+
+		containerWindowType = {
+			name = "YAN_Mir_Roster"
+			position = { x = 360 y = 136 }
+			size = { width = 930 height = 880 }
+			moveable = no
+
+			iconType = {
+				name = "YAN_Mir_RosterBg"
+				position = { x = 0 y = 0 }
+				spriteType = "GFX_YAN_mir_roster_bg"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RosterHead"
+				position = { x = 20 y = 16 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_ROSTER_TITLE"
+				maxWidth = 890
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_RosterRule"
+				position = { x = 20 y = 54 }
+				spriteType = "GFX_YAN_mir_rule_890"
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_RowBg_1"
+				position = { x = 20 y = 64 }
+				spriteType = "GFX_YAN_mir_card_row"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowName_1"
+				position = { x = 28 y = 68 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_GUANGSHA_CARDNAME"
+				maxWidth = 300
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowId_1"
+				position = { x = 28 y = 104 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_GUANGSHA_ID_SHORT"
+				maxWidth = 300
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowDone_1"
+				position = { x = 340 y = 68 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_GUANGSHA_CARD"
+				maxWidth = 200
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowLedger_1"
+				position = { x = 340 y = 98 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_GUANGSHA_LEDGER"
+				maxWidth = 540
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_RowBg_2"
+				position = { x = 20 y = 148 }
+				spriteType = "GFX_YAN_mir_card_row"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowName_2"
+				position = { x = 28 y = 152 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_RONGJIN_CARDNAME"
+				maxWidth = 300
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowId_2"
+				position = { x = 28 y = 188 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_RONGJIN_ID_SHORT"
+				maxWidth = 300
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowDone_2"
+				position = { x = 340 y = 152 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_RONGJIN_CARD"
+				maxWidth = 200
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowLedger_2"
+				position = { x = 340 y = 182 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_RONGJIN_LEDGER"
+				maxWidth = 540
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_RowBg_3"
+				position = { x = 20 y = 232 }
+				spriteType = "GFX_YAN_mir_card_row"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowName_3"
+				position = { x = 28 y = 236 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_DUJIANG_CARDNAME"
+				maxWidth = 300
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowId_3"
+				position = { x = 28 y = 272 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_DUJIANG_ID_SHORT"
+				maxWidth = 300
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowDone_3"
+				position = { x = 340 y = 236 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_DUJIANG_CARD"
+				maxWidth = 200
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowLedger_3"
+				position = { x = 340 y = 266 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_DUJIANG_LEDGER"
+				maxWidth = 540
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_RowBg_4"
+				position = { x = 20 y = 316 }
+				spriteType = "GFX_YAN_mir_card_row"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowName_4"
+				position = { x = 28 y = 320 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_ZHUANCAO_CARDNAME"
+				maxWidth = 300
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowId_4"
+				position = { x = 28 y = 356 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_ZHUANCAO_ID_SHORT"
+				maxWidth = 300
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowDone_4"
+				position = { x = 340 y = 320 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_ZHUANCAO_CARD"
+				maxWidth = 200
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowLedger_4"
+				position = { x = 340 y = 350 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_ZHUANCAO_LEDGER"
+				maxWidth = 540
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_RowBg_5"
+				position = { x = 20 y = 400 }
+				spriteType = "GFX_YAN_mir_card_row"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowName_5"
+				position = { x = 28 y = 404 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_ZHENYUE_CARDNAME"
+				maxWidth = 300
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowId_5"
+				position = { x = 28 y = 440 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_ZHENYUE_ID_SHORT"
+				maxWidth = 300
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowDone_5"
+				position = { x = 340 y = 404 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_ZHENYUE_CARD"
+				maxWidth = 200
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowLedger_5"
+				position = { x = 340 y = 434 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_ZHENYUE_LEDGER"
+				maxWidth = 540
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_RowBg_6"
+				position = { x = 20 y = 484 }
+				spriteType = "GFX_YAN_mir_card_row"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowName_6"
+				position = { x = 28 y = 488 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_FEIYUN_CARDNAME"
+				maxWidth = 300
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowId_6"
+				position = { x = 28 y = 524 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_FEIYUN_ID_SHORT"
+				maxWidth = 300
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowDone_6"
+				position = { x = 340 y = 488 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_FEIYUN_CARD"
+				maxWidth = 200
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowLedger_6"
+				position = { x = 340 y = 518 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_FEIYUN_LEDGER"
+				maxWidth = 540
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_RowBg_7"
+				position = { x = 20 y = 568 }
+				spriteType = "GFX_YAN_mir_card_row"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowName_7"
+				position = { x = 28 y = 572 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_SITIAN_CARDNAME"
+				maxWidth = 300
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowId_7"
+				position = { x = 28 y = 608 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_SITIAN_ID_SHORT"
+				maxWidth = 300
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowDone_7"
+				position = { x = 340 y = 572 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_SITIAN_CARD"
+				maxWidth = 200
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowLedger_7"
+				position = { x = 340 y = 602 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_SITIAN_LEDGER"
+				maxWidth = 540
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_RowBg_8"
+				position = { x = 20 y = 652 }
+				spriteType = "GFX_YAN_mir_card_row"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowName_8"
+				position = { x = 28 y = 656 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_YUMEN_CARDNAME"
+				maxWidth = 300
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowId_8"
+				position = { x = 28 y = 692 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_YUMEN_ID_SHORT"
+				maxWidth = 300
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowDone_8"
+				position = { x = 340 y = 656 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_YUMEN_CARD"
+				maxWidth = 200
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowLedger_8"
+				position = { x = 340 y = 686 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_YUMEN_LEDGER"
+				maxWidth = 540
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "YAN_Mir_RowBg_9"
+				position = { x = 20 y = 736 }
+				spriteType = "GFX_YAN_mir_card_row"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowName_9"
+				position = { x = 28 y = 740 }
+				font = "YAN_Mir_title26"
+				text = "YAN_MIR_LONGMEN_CARDNAME"
+				maxWidth = 300
+				maxHeight = 30
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowId_9"
+				position = { x = 28 y = 776 }
+				font = "YAN_Mir_text14"
+				text = "YAN_MIR_LONGMEN_ID_SHORT"
+				maxWidth = 300
+				maxHeight = 16
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowDone_9"
+				position = { x = 340 y = 740 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_LONGMEN_CARD"
+				maxWidth = 200
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "YAN_Mir_RowLedger_9"
+				position = { x = 340 y = 770 }
+				font = "YAN_Mir_text20"
+				text = "YAN_MIR_LONGMEN_LEDGER"
+				maxWidth = 540
+				maxHeight = 23
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "YAN_Mir_RosterClose"
+				position = { x = 550 y = 824 }
+				quadTextureSprite = "GFX_YAN_mir_btn_flat"
+				buttonText = "YAN_MIR_ROSTER_CLOSE"
+				buttonFont = "YAN_Mir_text20"
+				clicksound = click_default
+			}
+		}
+	}
+}

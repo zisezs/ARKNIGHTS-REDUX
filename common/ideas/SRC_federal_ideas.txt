@@ -1,0 +1,78 @@
+# ============================================================================
+# 叙拉古 (SRC) · 民主的胜利 —— 联邦路线民族精神
+#
+# 2026-09-19 精简：国策发的一次性精神（秩序恢复 / 物流控制 / 技术引进 / 叙拉古新文化 /
+#   泰拉中部贸易枢纽 / 平等之城 / 联邦宪法草案 / 罗德岛合作协议 / 流亡者庇护 /
+#   企鹅物流协助 / 猎狼人联络处 / 叙拉古国民卫队 / 家族法人化）已全部并入
+#   common/dynamic_modifiers/SRC_federal_dynamic_modifiers.txt 的四条路线精神。
+# 这里只留两类：
+#   1) 老一辈怒火中烧！——独立的负面精神，有结束时机与「市民登记处」决议交互；
+#   2) 决议授予的限期精神（add_timed_idea），到期自动消失，不适合并进永久路线。
+# 图标清单见 docs/SRC_国策图标表.md
+# ============================================================================
+ideas = {
+	country = {
+
+		# ---- 老一辈怒火中烧！：家族元老对「无家族城市」的公开敌意 ----
+		# 每约 90 天流失一座州的核心（结算见 common/on_actions/SRC_federal_on_actions.txt）
+		SRC_old_guard_fury = {
+			picture = SRC_old_guard_fury
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.2
+				custom_modifier_tooltip = SRC_old_guard_fury_tt
+			}
+		}
+
+		########################################
+		# 决议授予的限期精神（add_timed_idea）
+		# 图标复用既有精灵，不再新增贴图
+		########################################
+
+		# 【紧急审判】之后的 180 天：法官们说话有人听
+		SRC_timed_trial = {
+			picture = SRC_United_Court
+			removal_cost = -1
+
+			modifier = {
+				political_power_gain = 0.2
+				stability_factor = 0.05
+			}
+		}
+
+		# 【自治社区】一年之内，街区自己把日子过起来
+		SRC_timed_community = {
+			picture = SRC_Joint_Council
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_factory = 0.18
+				consumer_goods_factor = -0.08
+			}
+		}
+
+		# 【荒野通行协议】狼群给路，人类给规矩
+		SRC_timed_hunt_pact = {
+			picture = SRC_Wild_Hunt
+			removal_cost = -1
+
+			modifier = {
+				army_org_factor = 0.15
+				attrition = -0.3
+				supply_consumption_factor = -0.2
+			}
+		}
+
+		# 【特别运输线】企鹅物流的车队昼夜不歇
+		SRC_timed_penguin_run = {
+			picture = SRC_penguin_logistics
+			removal_cost = -1
+
+			modifier = {
+				supply_consumption_factor = -0.3
+				mobilization_laws_cost_factor = -0.35
+			}
+		}
+	}
+}

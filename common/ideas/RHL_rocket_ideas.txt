@@ -1,0 +1,125 @@
+# ══════════════════════════════════════════════════════════════════════
+#  莱茵生命 ·「地平弧光」计划 —— 国家精神【由 docs/gen_rhl_rocket.cjs 生成，勿手改】
+#  ------------------------------------------------------------------
+#  program_1/2/3 = 立项档，累计成功 3 / 6 次由事件 rhl_rocket.56 原地换档；
+#  perfection_1/2/3 = 工艺档，完美成功时由事件 rhl_rocket.55 换档；
+#  后三条是发射当口的临时状态，不进精神栏常驻位（timed_idea）。
+#  图标 64x64 PNG，见 gfx/interface/RHL_rocket/。
+# ══════════════════════════════════════════════════════════════════════
+ideas = {
+	country = {
+		RHL_spirit_rocket_program_1 = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_spirit_rocket_program_1
+			modifier = {
+				research_speed_factor = 0.05
+				war_support_factor = 0.02
+			}
+		}
+		RHL_spirit_rocket_program_2 = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_spirit_rocket_program_2
+			modifier = {
+				research_speed_factor = 0.08
+				war_support_factor = 0.04
+				political_power_factor = 0.08
+			}
+		}
+		RHL_spirit_rocket_program_3 = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_spirit_rocket_program_3
+			modifier = {
+				research_speed_factor = 0.12
+				war_support_factor = 0.06
+				political_power_factor = 0.10
+			}
+		}
+		RHL_rocket_production_drain = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_rocket_timed_drain
+			modifier = {
+				industrial_capacity_factory = -0.02
+				consumer_goods_factor = 0.015
+			}
+		}
+		RHL_rocket_boost_research_1 = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_rocket_timed_boost1
+			modifier = {
+				research_speed_factor = 0.02
+			}
+		}
+		RHL_rocket_boost_research_2 = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_rocket_timed_boost2
+			modifier = {
+				research_speed_factor = 0.04
+			}
+		}
+		RHL_spirit_rocket_perfection_1 = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_spirit_rocket_perfection_1
+			modifier = {
+				research_speed_factor = 0.02
+				production_speed_arms_factory_factor = 0.05
+			}
+		}
+		RHL_spirit_rocket_perfection_2 = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_spirit_rocket_perfection_2
+			modifier = {
+				research_speed_factor = 0.04
+				production_speed_arms_factory_factor = 0.08
+				political_power_factor = 0.05
+			}
+		}
+		RHL_spirit_rocket_perfection_3 = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_spirit_rocket_perfection_3
+			modifier = {
+				research_speed_factor = 0.06
+				production_speed_arms_factory_factor = 0.10
+				political_power_factor = 0.08
+			}
+		}
+		# —— 首次发射的两条短期状态：第一次成功 / 第一次失败各领一条，180 / 120 天 ——
+		# 修正符键全部经原版 common/ 核对过（写错键名不会报错，只会被静默丢掉）。
+		RHL_rocket_idea_first_light = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_rocket_se_light
+			modifier = {
+				research_speed_factor = 0.35
+				political_power_factor = 0.35
+				political_power_gain = 0.30
+				production_speed_arms_factory_factor = 0.20
+				production_speed_industrial_complex_factor = 0.20
+				industrial_capacity_factory = 0.10
+				stability_factor = 0.05
+				war_support_factor = 0.15
+			}
+		}
+		RHL_rocket_idea_first_fall = {
+			allowed = { always = yes }
+			removal_cost = -1
+			picture = GFX_RHL_rocket_se_fail
+			modifier = {
+				research_speed_factor = -0.25
+				political_power_factor = -0.30
+				industrial_capacity_factory = -0.10
+				consumer_goods_factor = 0.06
+				stability_factor = -0.10
+				war_support_factor = -0.15
+			}
+		}
+	}
+}

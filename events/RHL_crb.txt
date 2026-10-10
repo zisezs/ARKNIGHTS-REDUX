@@ -1,0 +1,245 @@
+add_namespace = rhl_crb
+
+# 莱茵生命（RHL）· 对哥伦比亚进行内科手术 —— 事件链
+# rhl_crb.1~14：七台手术的前/后事件（每台手术开始与完成各一个）
+# rhl_crb.15/16：终章·全身麻醉的全泰拉新闻
+# 注意：事件 id 的命名空间必须先在此声明，否则引擎逐个报
+# "Malformed token: rhl_crb.N"，全部事件（含 15/16 两条超事件）都不会注册。
+
+# ══════════ 第一刀 · 金融动脉 ══════════
+country_event = {
+	id = rhl_crb.1
+	title = rhl_crb.1.t
+	desc = rhl_crb.1.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.1.a
+		add_political_power = 25
+	}
+	option = {
+		name = rhl_crb.1.b
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+}
+
+country_event = {
+	id = rhl_crb.2
+	title = rhl_crb.2.t
+	desc = rhl_crb.2.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.2.a
+		add_stability = 0.01
+	}
+}
+
+# ══════════ 第二刀 · 媒体喉舌 ══════════
+country_event = {
+	id = rhl_crb.3
+	title = rhl_crb.3.t
+	desc = rhl_crb.3.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.3.a
+		add_war_support = 0.01
+	}
+	option = {
+		name = rhl_crb.3.b
+		add_political_power = 25
+	}
+}
+
+country_event = {
+	id = rhl_crb.4
+	title = rhl_crb.4.t
+	desc = rhl_crb.4.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.4.a
+		add_stability = 0.01
+	}
+}
+
+# ══════════ 第三刀 · 收治区改组 ══════════
+country_event = {
+	id = rhl_crb.5
+	title = rhl_crb.5.t
+	desc = rhl_crb.5.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.5.a
+		add_stability = 0.02
+	}
+	option = {
+		name = rhl_crb.5.b
+		add_political_power = 50
+	}
+}
+
+country_event = {
+	id = rhl_crb.6
+	title = rhl_crb.6.t
+	desc = rhl_crb.6.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.6.a
+		add_stability = 0.01
+	}
+}
+
+# ══════════ 第四刀 · 能源命脉 ══════════
+country_event = {
+	id = rhl_crb.7
+	title = rhl_crb.7.t
+	desc = rhl_crb.7.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.7.a
+		add_fuel = 250
+	}
+	option = {
+		name = rhl_crb.7.b
+		add_political_power = 25
+	}
+}
+
+country_event = {
+	id = rhl_crb.8
+	title = rhl_crb.8.t
+	desc = rhl_crb.8.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.8.a
+		add_stability = 0.01
+	}
+}
+
+# ══════════ 第五刀 · 国防订单 ══════════
+country_event = {
+	id = rhl_crb.9
+	title = rhl_crb.9.t
+	desc = rhl_crb.9.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.9.a
+		army_experience = 25
+	}
+	option = {
+		name = rhl_crb.9.b
+		add_war_support = 0.02
+	}
+}
+
+country_event = {
+	id = rhl_crb.10
+	title = rhl_crb.10.t
+	desc = rhl_crb.10.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.10.a
+		add_stability = 0.01
+	}
+}
+
+# ══════════ 第六刀 · 议会与官僚 ══════════
+country_event = {
+	id = rhl_crb.11
+	title = rhl_crb.11.t
+	desc = rhl_crb.11.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.11.a
+		add_political_power = 50
+	}
+	option = {
+		name = rhl_crb.11.b
+		add_stability = 0.02
+	}
+}
+
+country_event = {
+	id = rhl_crb.12
+	title = rhl_crb.12.t
+	desc = rhl_crb.12.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.12.a
+		add_political_power = 25
+	}
+}
+
+# ══════════ 第七刀 · 军方高层 ══════════
+country_event = {
+	id = rhl_crb.13
+	title = rhl_crb.13.t
+	desc = rhl_crb.13.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.13.a
+		army_experience = 25
+	}
+	option = {
+		name = rhl_crb.13.b
+		add_political_power = 50
+	}
+}
+
+country_event = {
+	id = rhl_crb.14
+	title = rhl_crb.14.t
+	desc = rhl_crb.14.d
+	is_triggered_only = yes
+
+	option = {
+		name = rhl_crb.14.a
+		add_stability = 0.02
+	}
+}
+
+# ══════════ 终章 · 全身麻醉（全泰拉新闻） ══════════
+news_event = {
+	id = rhl_crb.15
+	title = rhl_crb.15.t
+	desc = rhl_crb.15.d
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = rhl_crb.15.a
+		trigger = { tag = RHL }
+	}
+	option = {
+		name = rhl_crb.15.b
+		trigger = { NOT = { tag = RHL } }
+	}
+}
+
+news_event = {
+	id = rhl_crb.16
+	title = rhl_crb.16.t
+	desc = rhl_crb.16.d
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = rhl_crb.16.a
+		trigger = { tag = RHL }
+	}
+	option = {
+		name = rhl_crb.16.b
+		trigger = { NOT = { tag = RHL } }
+	}
+}

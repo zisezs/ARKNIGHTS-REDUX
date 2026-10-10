@@ -1,0 +1,210 @@
+
+######################
+## 伊比利亚 脚本效果 ##
+## 民族精神升级阶梯 ##
+######################
+
+# 黄金时代终将归来：1 → 4 逐级推进，无精神时获得一级
+# 树里有 7 个国策挂这条阶梯而满级只有 4 级：已满级时再调用什么都不做，不会叠加一级
+IBR_upgrade_golden_age_effect = {
+	if = {
+		limit = {
+			has_idea = IBR_golden_age_3
+		}
+		swap_ideas = {
+			remove_idea = IBR_golden_age_3
+			add_idea = IBR_golden_age_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = IBR_golden_age_2
+		}
+		swap_ideas = {
+			remove_idea = IBR_golden_age_2
+			add_idea = IBR_golden_age_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = IBR_golden_age_1
+		}
+		swap_ideas = {
+			remove_idea = IBR_golden_age_1
+			add_idea = IBR_golden_age_2
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = {
+				has_idea = IBR_golden_age_4
+			}
+		}
+		add_ideas = {
+			IBR_golden_age_1
+		}
+	}
+}
+
+# 审判之火重燃：1 → 4 逐级推进，无精神时获得一级（六个调用点，满级后不再叠加）
+IBR_upgrade_inquisition_fire_effect = {
+	if = {
+		limit = {
+			has_idea = IBR_inquisition_fire_3
+		}
+		swap_ideas = {
+			remove_idea = IBR_inquisition_fire_3
+			add_idea = IBR_inquisition_fire_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = IBR_inquisition_fire_2
+		}
+		swap_ideas = {
+			remove_idea = IBR_inquisition_fire_2
+			add_idea = IBR_inquisition_fire_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = IBR_inquisition_fire_1
+		}
+		swap_ideas = {
+			remove_idea = IBR_inquisition_fire_1
+			add_idea = IBR_inquisition_fire_2
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = {
+				has_idea = IBR_inquisition_fire_4
+			}
+		}
+		add_ideas = {
+			IBR_inquisition_fire_1
+		}
+	}
+}
+
+# 大深海舰队：1 → 5 逐级推进，无精神时获得一级（八个国策推级；愚人号·再航两个分支各写一次，一局只生效其一；满级后不再叠加）
+IBR_upgrade_deep_fleet_effect = {
+	if = {
+		limit = {
+			has_idea = IBR_deep_fleet_4
+		}
+		swap_ideas = {
+			remove_idea = IBR_deep_fleet_4
+			add_idea = IBR_deep_fleet_5
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = IBR_deep_fleet_3
+		}
+		swap_ideas = {
+			remove_idea = IBR_deep_fleet_3
+			add_idea = IBR_deep_fleet_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = IBR_deep_fleet_2
+		}
+		swap_ideas = {
+			remove_idea = IBR_deep_fleet_2
+			add_idea = IBR_deep_fleet_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = IBR_deep_fleet_1
+		}
+		swap_ideas = {
+			remove_idea = IBR_deep_fleet_1
+			add_idea = IBR_deep_fleet_2
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = {
+				has_idea = IBR_deep_fleet_5
+			}
+		}
+		add_ideas = {
+			IBR_deep_fleet_1
+		}
+	}
+}
+
+# 大静谧余波消退一级：余波 → 余波渐息 → 余波已散
+# 只推进一级，剩下的交给“修复灯塔”决议，避免国策把决议链整条吃掉
+IBR_calm_the_aftermath_effect = {
+	if = {
+		limit = {
+			has_idea = IBR_aftermath_of_Profound_Silence
+		}
+		swap_ideas = {
+			remove_idea = IBR_aftermath_of_Profound_Silence
+			add_idea = IBR_aftermath_mended
+		}
+		set_variable = {
+			var = IBR_lighthouse_restored
+			value = 1
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = IBR_aftermath_mended
+		}
+		swap_ideas = {
+			remove_idea = IBR_aftermath_mended
+			add_idea = IBR_aftermath_of_Profound_Silence_faded
+		}
+		set_variable = {
+			var = IBR_lighthouse_restored
+			value = 2
+		}
+	}
+}
+
+# 我的剑，将劈开海潮！：1 → 4 逐级推进，无精神时获得一级（四个国策推级：全国总动员令 / 阿戈尔援助协调 / 儿童灯塔教育 / 洗海覆潮行动，满级后不再叠加）
+IBR_upgrade_tide_splitter_effect = {
+	if = {
+		limit = {
+			has_idea = IBR_tide_splitter_3
+		}
+		swap_ideas = {
+			remove_idea = IBR_tide_splitter_3
+			add_idea = IBR_tide_splitter_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = IBR_tide_splitter_2
+		}
+		swap_ideas = {
+			remove_idea = IBR_tide_splitter_2
+			add_idea = IBR_tide_splitter_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = IBR_tide_splitter_1
+		}
+		swap_ideas = {
+			remove_idea = IBR_tide_splitter_1
+			add_idea = IBR_tide_splitter_2
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = {
+				has_idea = IBR_tide_splitter_4
+			}
+		}
+		add_ideas = {
+			IBR_tide_splitter_1
+		}
+	}
+}

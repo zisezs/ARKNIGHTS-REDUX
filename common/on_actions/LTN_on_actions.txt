@@ -1,0 +1,26 @@
+# ============================================================================
+# 莱塔尼亚 ·「金律乐章 · 调律台」—— on_actions
+#
+#  · on_startup     ：给 LTN 兜底初始化（老存档载入也安全，init 是幂等的）
+#  · on_monthly_LTN ：月度脉冲 —— 余波倒计时 -30、全量重算、失范压顶
+#
+# ⚠️ 不要写 on_monthly + every_country{original_tag = LTN}：
+#    本引擎里 on_monthly 按现存国家各触发一次（见 common/on_actions/YAN_on_actions.txt 的实证注释）。
+#    tag 后缀的 on_monthly_LTN 才是「LTN 的国家作用域、每月一次」。
+# ============================================================================
+on_actions = {
+
+	on_startup = {
+		effect = {
+			LTN = {
+				LTN_law_effect_init = yes
+			}
+		}
+	}
+
+	on_monthly_LTN = {
+		effect = {
+			LTN_law_effect_tick = yes
+		}
+	}
+}

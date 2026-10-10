@@ -1,0 +1,32 @@
+#权力平衡决议组
+VWI_balance_of_power_category = {
+	#承诺恢复民主
+	VWI_Promise_to_restore_democracy = {
+		icon = GFX_decision_SWI_swiss_democratic_tradition_campaign
+
+		cost = 100
+		days_remove = 150
+		days_re_enable = 50
+		
+		modifier = {
+			stability_factor = 0.05
+			war_support_factor = 0.05
+			power_balance_weekly = -0.005
+		}
+	}
+
+	#强化政府权威
+	VWI_Strengthen_government_authority = {
+		icon = GFX_decision_SWI_no_elected_president
+
+		cost = 100
+		days_remove = 150
+		days_re_enable = 50
+		
+		modifier = {
+			command_power_gain_mult = 0.1
+			army_morale_factor = 0.05
+			power_balance_weekly = 0.005
+		}
+	}	
+}

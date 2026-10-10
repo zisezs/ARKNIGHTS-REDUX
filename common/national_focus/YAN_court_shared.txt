@@ -1,0 +1,3940 @@
+######################
+## 大炎 ·「宰府朝议」核心集团（照原版 GER〈元首的核心圈〉重建，2026-09-24）
+######################
+#
+# 由 common/national_focus/YAN_national_focus 以 shared_focus 引用并入主树。
+# 坐标区 y = 3..10：入口（23 张人物头像，同席两两互斥）y=3 甲 / y=4 乙；
+#                   下属六格在 x 同列、y = 5..10（prerequisite = 两个入口 OR）。
+# 推进：署理人自推 —— activate_shine_on_focus 冒金光 + 日期旗标 YAN_court_<席>_s<格>_prog 记进度
+#       + 定时事件 365 天后 complete_national_focus；一格 365 天，全席同速。
+# 生成器：E:/tmp/sui12/gen_court.js（改数据表重跑，勿手改产物）
+######################
+
+	shared_focus = { #山水 · 易（博相 · 界园）
+		id = YAN_court_shanshui_e1
+		icon = GFX_focus_YAN_court_shanshui_e1
+		text_icon = YAN_court_focus_style
+		x = -16
+		y = 3
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_shanshui_e2
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_1 = 8 }
+			set_country_flag = YAN_court_seated_yi
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			set_country_flag = YAN_court_passed_laotianshi
+			YAN_court_recalc = yes
+			YAN_court_start_shanshui = yes
+			custom_effect_tooltip = YAN_court_seat_shanshui_tt
+		}
+	}
+
+	shared_focus = { #山水 · 老天师（天师府）
+		id = YAN_court_shanshui_e2
+		icon = GFX_focus_YAN_court_shanshui_e2
+		text_icon = YAN_court_focus_style
+		x = -16
+		y = 4
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_shanshui_e1
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_1 = 21 }
+			set_country_flag = YAN_court_seated_laotianshi
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_court_face_stab_tt
+			set_country_flag = YAN_court_passed_yi
+			YAN_court_recalc = yes
+			YAN_court_start_shanshui = yes
+			custom_effect_tooltip = YAN_court_seat_shanshui_tt
+		}
+	}
+
+	shared_focus = { #山水 · 钦天定历
+		id = YAN_court_shanshui_s1
+		icon = GFX_focus_YAN_court_shanshui_s1
+		text_icon = YAN_court_focus_style
+		x = -16
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_shanshui_e1
+			focus = YAN_court_shanshui_e2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_shanshui_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_shanshui_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_shanshui_k1_var value = 0.04 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_shanshui_k1_p4_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #山水 · 地脉成图
+		id = YAN_court_shanshui_s2
+		icon = GFX_focus_YAN_court_shanshui_s2
+		text_icon = YAN_court_focus_style
+		x = -16
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_shanshui_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_shanshui_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_shanshui_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_shanshui_k1_var value = 0.04 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_shanshui_k1_p4_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #山水 · 山川设驿
+		id = YAN_court_shanshui_s3
+		icon = GFX_focus_YAN_court_shanshui_s3
+		text_icon = YAN_court_focus_style
+		x = -16
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_shanshui_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_shanshui_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_shanshui_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_shanshui_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_shanshui_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #山水 · 邙山镇抚
+		id = YAN_court_shanshui_s4
+		icon = GFX_focus_YAN_court_shanshui_s4
+		text_icon = YAN_court_focus_style
+		x = -16
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_shanshui_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_shanshui_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_shanshui_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_shanshui_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_shanshui_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #山水 · 勘址经营
+		id = YAN_court_shanshui_s5
+		icon = GFX_focus_YAN_court_shanshui_s5
+		text_icon = YAN_court_focus_style
+		x = -16
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_shanshui_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_shanshui_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_shanshui_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_shanshui_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_shanshui_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #山水 · 天师开府
+		id = YAN_court_shanshui_s6
+		icon = GFX_focus_YAN_court_shanshui_s6
+		text_icon = YAN_court_focus_style
+		x = -16
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_shanshui_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_shanshui_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_shanshui_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_shanshui_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_shanshui_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_shanshui_done
+		}
+	}
+
+	shared_focus = { #长街 · 均（律相 · 炎律）
+		id = YAN_court_changjie_e1
+		icon = GFX_focus_YAN_court_changjie_e1
+		text_icon = YAN_court_focus_style
+		x = -14
+		y = 3
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_changjie_e2
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_2 = 4 }
+			set_country_flag = YAN_court_seated_jun
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			set_country_flag = YAN_court_passed_yucheng
+			YAN_court_recalc = yes
+			YAN_court_start_changjie = yes
+			custom_effect_tooltip = YAN_court_seat_changjie_tt
+		}
+	}
+
+	shared_focus = { #长街 · 虞澄（前大理寺少卿）
+		id = YAN_court_changjie_e2
+		icon = GFX_focus_YAN_court_changjie_e2
+		text_icon = YAN_court_focus_style
+		x = -14
+		y = 4
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_changjie_e1
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_2 = 20 }
+			set_country_flag = YAN_court_seated_yucheng
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_court_face_stab_tt
+			set_country_flag = YAN_court_passed_jun
+			YAN_court_recalc = yes
+			YAN_court_start_changjie = yes
+			custom_effect_tooltip = YAN_court_seat_changjie_tt
+		}
+	}
+
+	shared_focus = { #长街 · 修订炎律
+		id = YAN_court_changjie_s1
+		icon = GFX_focus_YAN_court_changjie_s1
+		text_icon = YAN_court_focus_style
+		x = -14
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_changjie_e1
+			focus = YAN_court_changjie_e2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_changjie_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_changjie_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_changjie_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_changjie_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #长街 · 决院直审
+		id = YAN_court_changjie_s2
+		icon = GFX_focus_YAN_court_changjie_s2
+		text_icon = YAN_court_focus_style
+		x = -14
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_changjie_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_changjie_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_changjie_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_changjie_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_changjie_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #长街 · 巡防改制
+		id = YAN_court_changjie_s3
+		icon = GFX_focus_YAN_court_changjie_s3
+		text_icon = YAN_court_focus_style
+		x = -14
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_changjie_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_changjie_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_changjie_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_changjie_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_changjie_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #长街 · 市籍清厘
+		id = YAN_court_changjie_s4
+		icon = GFX_focus_YAN_court_changjie_s4
+		text_icon = YAN_court_focus_style
+		x = -14
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_changjie_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_changjie_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_changjie_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_changjie_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_changjie_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #长街 · 三法分权
+		id = YAN_court_changjie_s5
+		icon = GFX_focus_YAN_court_changjie_s5
+		text_icon = YAN_court_focus_style
+		x = -14
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_changjie_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_changjie_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_changjie_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_changjie_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_changjie_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #长街 · 律学开科
+		id = YAN_court_changjie_s6
+		icon = GFX_focus_YAN_court_changjie_s6
+		text_icon = YAN_court_focus_style
+		x = -14
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_changjie_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_changjie_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_changjie_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_changjie_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_changjie_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_changjie_done
+		}
+	}
+
+	shared_focus = { #烟火 · 余（膳相 · 余味居）
+		id = YAN_court_yanhuo_e1
+		icon = GFX_focus_YAN_court_yanhuo_e1
+		text_icon = YAN_court_focus_style
+		x = -12
+		y = 3
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_yanhuo_e2
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_3 = 12 }
+			set_country_flag = YAN_court_seated_yu
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			set_country_flag = YAN_court_passed_liangxun
+			YAN_court_recalc = yes
+			YAN_court_start_yanhuo = yes
+			custom_effect_tooltip = YAN_court_seat_yanhuo_tt
+		}
+	}
+
+	shared_focus = { #烟火 · 梁洵（前尚蜀知府）
+		id = YAN_court_yanhuo_e2
+		icon = GFX_focus_YAN_court_yanhuo_e2
+		text_icon = YAN_court_focus_style
+		x = -12
+		y = 4
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_yanhuo_e1
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_3 = 16 }
+			set_country_flag = YAN_court_seated_liangxun
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_court_face_stab_tt
+			set_country_flag = YAN_court_passed_yu
+			YAN_court_recalc = yes
+			YAN_court_start_yanhuo = yes
+			custom_effect_tooltip = YAN_court_seat_yanhuo_tt
+		}
+	}
+
+	shared_focus = { #烟火 · 常平义仓
+		id = YAN_court_yanhuo_s1
+		icon = GFX_focus_YAN_court_yanhuo_s1
+		text_icon = YAN_court_focus_style
+		x = -12
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_yanhuo_e1
+			focus = YAN_court_yanhuo_e2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_yanhuo_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_yanhuo_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_yanhuo_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_yanhuo_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #烟火 · 平粜济民
+		id = YAN_court_yanhuo_s2
+		icon = GFX_focus_YAN_court_yanhuo_s2
+		text_icon = YAN_court_focus_style
+		x = -12
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_yanhuo_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_yanhuo_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_yanhuo_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_yanhuo_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_yanhuo_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #烟火 · 御膳定例
+		id = YAN_court_yanhuo_s3
+		icon = GFX_focus_YAN_court_yanhuo_s3
+		text_icon = YAN_court_focus_style
+		x = -12
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_yanhuo_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_yanhuo_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_yanhuo_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_yanhuo_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_yanhuo_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #烟火 · 市易通则
+		id = YAN_court_yanhuo_s4
+		icon = GFX_focus_YAN_court_yanhuo_s4
+		text_icon = YAN_court_focus_style
+		x = -12
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_yanhuo_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_yanhuo_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_yanhuo_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_yanhuo_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_yanhuo_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #烟火 · 百珍宴集
+		id = YAN_court_yanhuo_s5
+		icon = GFX_focus_YAN_court_yanhuo_s5
+		text_icon = YAN_court_focus_style
+		x = -12
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_yanhuo_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_yanhuo_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_yanhuo_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_yanhuo_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_yanhuo_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #烟火 · 万民同灶
+		id = YAN_court_yanhuo_s6
+		icon = GFX_focus_YAN_court_yanhuo_s6
+		text_icon = YAN_court_focus_style
+		x = -12
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_yanhuo_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_yanhuo_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_yanhuo_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_yanhuo_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_yanhuo_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_yanhuo_done
+		}
+	}
+
+	shared_focus = { #弦歌 · 颉（史相 · 太史阁）
+		id = YAN_court_xiange_e1
+		icon = GFX_focus_YAN_court_xiange_e1
+		text_icon = YAN_court_focus_style
+		x = -10
+		y = 3
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_xiange_e2
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_4 = 5 }
+			set_country_flag = YAN_court_seated_jie
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			set_country_flag = YAN_court_passed_xi
+			YAN_court_recalc = yes
+			YAN_court_start_xiange = yes
+			custom_effect_tooltip = YAN_court_seat_xiange_tt
+		}
+	}
+
+	shared_focus = { #弦歌 · 夕（艺相 · 画卷）
+		id = YAN_court_xiange_e2
+		icon = GFX_focus_YAN_court_xiange_e2
+		text_icon = YAN_court_focus_style
+		x = -10
+		y = 4
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_xiange_e1
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_4 = 11 }
+			set_country_flag = YAN_court_seated_xi
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			set_country_flag = YAN_court_passed_jie
+			YAN_court_recalc = yes
+			YAN_court_start_xiange = yes
+			custom_effect_tooltip = YAN_court_seat_xiange_tt
+		}
+	}
+
+	shared_focus = { #弦歌 · 史阁开馆
+		id = YAN_court_xiange_s1
+		icon = GFX_focus_YAN_court_xiange_s1
+		text_icon = YAN_court_focus_style
+		x = -10
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xiange_e1
+			focus = YAN_court_xiange_e2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xiange_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xiange_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xiange_k1_var value = 0.03 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xiange_k1_p3_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #弦歌 · 学宫复课
+		id = YAN_court_xiange_s2
+		icon = GFX_focus_YAN_court_xiange_s2
+		text_icon = YAN_court_focus_style
+		x = -10
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xiange_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xiange_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xiange_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xiange_k1_var value = 0.03 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xiange_k1_p3_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #弦歌 · 六部学院
+		id = YAN_court_xiange_s3
+		icon = GFX_focus_YAN_court_xiange_s3
+		text_icon = YAN_court_focus_style
+		x = -10
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xiange_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xiange_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xiange_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xiange_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xiange_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #弦歌 · 思贤配享
+		id = YAN_court_xiange_s4
+		icon = GFX_focus_YAN_court_xiange_s4
+		text_icon = YAN_court_focus_style
+		x = -10
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xiange_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xiange_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xiange_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xiange_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xiange_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #弦歌 · 书刀归阁
+		id = YAN_court_xiange_s5
+		icon = GFX_focus_YAN_court_xiange_s5
+		text_icon = YAN_court_focus_style
+		x = -10
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xiange_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xiange_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xiange_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xiange_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xiange_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #弦歌 · 画院设局
+		id = YAN_court_xiange_s6
+		icon = GFX_focus_YAN_court_xiange_s6
+		text_icon = YAN_court_focus_style
+		x = -10
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xiange_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xiange_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xiange_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xiange_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xiange_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_xiange_done
+		}
+	}
+
+	shared_focus = { #锻坊 · 年（工相 · 火炉）
+		id = YAN_court_duanfang_e1
+		icon = GFX_focus_YAN_court_duanfang_e1
+		text_icon = YAN_court_focus_style
+		x = -8
+		y = 3
+		cost = 2
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_5 = 9 }
+			set_country_flag = YAN_court_seated_nian
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			YAN_court_recalc = yes
+			YAN_court_start_duanfang = yes
+			custom_effect_tooltip = YAN_court_seat_duanfang_tt
+		}
+	}
+
+	shared_focus = { #锻坊 · 百灶工造
+		id = YAN_court_duanfang_s1
+		icon = GFX_focus_YAN_court_duanfang_s1
+		text_icon = YAN_court_focus_style
+		x = -8
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_duanfang_e1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_duanfang_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_duanfang_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_duanfang_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_duanfang_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #锻坊 · 源石主炮
+		id = YAN_court_duanfang_s2
+		icon = GFX_focus_YAN_court_duanfang_s2
+		text_icon = YAN_court_focus_style
+		x = -8
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_duanfang_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_duanfang_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_duanfang_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_duanfang_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_duanfang_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #锻坊 · 移动城坊
+		id = YAN_court_duanfang_s3
+		icon = GFX_focus_YAN_court_duanfang_s3
+		text_icon = YAN_court_focus_style
+		x = -8
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_duanfang_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_duanfang_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_duanfang_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_duanfang_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_duanfang_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #锻坊 · 龙骨船坞
+		id = YAN_court_duanfang_s4
+		icon = GFX_focus_YAN_court_duanfang_s4
+		text_icon = YAN_court_focus_style
+		x = -8
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_duanfang_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_duanfang_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_duanfang_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_duanfang_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_duanfang_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #锻坊 · 玄极巨兵
+		id = YAN_court_duanfang_s5
+		icon = GFX_focus_YAN_court_duanfang_s5
+		text_icon = YAN_court_focus_style
+		x = -8
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_duanfang_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_duanfang_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_duanfang_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_duanfang_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_duanfang_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #锻坊 · 机关传承
+		id = YAN_court_duanfang_s6
+		icon = GFX_focus_YAN_court_duanfang_s6
+		text_icon = YAN_court_focus_style
+		x = -8
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_duanfang_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_duanfang_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_duanfang_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_duanfang_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_duanfang_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_duanfang_done
+		}
+	}
+
+	shared_focus = { #百谷 · 黍（农相 · 大荒城）
+		id = YAN_court_baigu_e1
+		icon = GFX_focus_YAN_court_baigu_e1
+		text_icon = YAN_court_focus_style
+		x = -6
+		y = 3
+		cost = 2
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_6 = 6 }
+			set_country_flag = YAN_court_seated_shu
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			YAN_court_recalc = yes
+			YAN_court_start_baigu = yes
+			custom_effect_tooltip = YAN_court_seat_baigu_tt
+		}
+	}
+
+	shared_focus = { #百谷 · 大荒屯田
+		id = YAN_court_baigu_s1
+		icon = GFX_focus_YAN_court_baigu_s1
+		text_icon = YAN_court_focus_style
+		x = -6
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_baigu_e1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_baigu_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_baigu_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_baigu_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_baigu_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #百谷 · 水利渠网
+		id = YAN_court_baigu_s2
+		icon = GFX_focus_YAN_court_baigu_s2
+		text_icon = YAN_court_focus_style
+		x = -6
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_baigu_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_baigu_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_baigu_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_baigu_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_baigu_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #百谷 · 边军屯戍
+		id = YAN_court_baigu_s3
+		icon = GFX_focus_YAN_court_baigu_s3
+		text_icon = YAN_court_focus_style
+		x = -6
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_baigu_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_baigu_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_baigu_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_baigu_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_baigu_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #百谷 · 荒政备荒
+		id = YAN_court_baigu_s4
+		icon = GFX_focus_YAN_court_baigu_s4
+		text_icon = YAN_court_focus_style
+		x = -6
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_baigu_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_baigu_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_baigu_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_baigu_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_baigu_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #百谷 · 驰道粮运
+		id = YAN_court_baigu_s5
+		icon = GFX_focus_YAN_court_baigu_s5
+		text_icon = YAN_court_focus_style
+		x = -6
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_baigu_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_baigu_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_baigu_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_baigu_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_baigu_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #百谷 · 种籽改良
+		id = YAN_court_baigu_s6
+		icon = GFX_focus_YAN_court_baigu_s6
+		text_icon = YAN_court_focus_style
+		x = -6
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_baigu_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_baigu_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_baigu_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_baigu_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_baigu_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_baigu_done
+		}
+	}
+
+	shared_focus = { #宰府 · 太傅（三公 · 太傅）
+		id = YAN_court_zaifu_e1
+		icon = GFX_focus_YAN_court_zaifu_e1
+		text_icon = YAN_court_focus_style
+		x = -4
+		y = 3
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_zaifu_e2
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_7 = 13 }
+			set_country_flag = YAN_court_seated_taifu
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_court_face_stab_tt
+			set_country_flag = YAN_court_passed_weiyanwu
+			YAN_court_recalc = yes
+			YAN_court_start_zaifu = yes
+			custom_effect_tooltip = YAN_court_seat_zaifu_tt
+		}
+	}
+
+	shared_focus = { #宰府 · 魏彦吾（龙门总督）
+		id = YAN_court_zaifu_e2
+		icon = GFX_focus_YAN_court_zaifu_e2
+		text_icon = YAN_court_focus_style
+		x = -4
+		y = 4
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_zaifu_e1
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_7 = 19 }
+			set_country_flag = YAN_court_seated_weiyanwu
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_court_face_stab_tt
+			set_country_flag = YAN_court_passed_taifu
+			YAN_court_recalc = yes
+			YAN_court_start_zaifu = yes
+			custom_effect_tooltip = YAN_court_seat_zaifu_tt
+		}
+	}
+
+	shared_focus = { #宰府 · 六部考成
+		id = YAN_court_zaifu_s1
+		icon = GFX_focus_YAN_court_zaifu_s1
+		text_icon = YAN_court_focus_style
+		x = -4
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_zaifu_e1
+			focus = YAN_court_zaifu_e2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_zaifu_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_zaifu_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_zaifu_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_zaifu_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #宰府 · 黜陟进退
+		id = YAN_court_zaifu_s2
+		icon = GFX_focus_YAN_court_zaifu_s2
+		text_icon = YAN_court_focus_style
+		x = -4
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_zaifu_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_zaifu_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_zaifu_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_zaifu_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_zaifu_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #宰府 · 廷议定例
+		id = YAN_court_zaifu_s3
+		icon = GFX_focus_YAN_court_zaifu_s3
+		text_icon = YAN_court_focus_style
+		x = -4
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_zaifu_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_zaifu_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_zaifu_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_zaifu_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_zaifu_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #宰府 · 肃政巡按
+		id = YAN_court_zaifu_s4
+		icon = GFX_focus_YAN_court_zaifu_s4
+		text_icon = YAN_court_focus_style
+		x = -4
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_zaifu_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_zaifu_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_zaifu_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_zaifu_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_zaifu_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #宰府 · 宣政定权
+		id = YAN_court_zaifu_s5
+		icon = GFX_focus_YAN_court_zaifu_s5
+		text_icon = YAN_court_focus_style
+		x = -4
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_zaifu_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_zaifu_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_zaifu_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_zaifu_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_zaifu_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #宰府 · 用人之道
+		id = YAN_court_zaifu_s6
+		icon = GFX_focus_YAN_court_zaifu_s6
+		text_icon = YAN_court_focus_style
+		x = -4
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_zaifu_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_zaifu_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_zaifu_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_zaifu_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_zaifu_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_zaifu_done
+		}
+	}
+
+	shared_focus = { #兵革 · 重岳（守土相 · 玉门屏风）
+		id = YAN_court_bingge_e1
+		icon = GFX_focus_YAN_court_bingge_e1
+		text_icon = YAN_court_focus_style
+		x = -2
+		y = 3
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_bingge_e2
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_8 = 1 }
+			set_country_flag = YAN_court_seated_zhongyue
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			set_country_flag = YAN_court_passed_taiwei
+			YAN_court_recalc = yes
+			YAN_court_start_bingge = yes
+			custom_effect_tooltip = YAN_court_seat_bingge_tt
+		}
+	}
+
+	shared_focus = { #兵革 · 太尉（三公 · 太尉）
+		id = YAN_court_bingge_e2
+		icon = GFX_focus_YAN_court_bingge_e2
+		text_icon = YAN_court_focus_style
+		x = -2
+		y = 4
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_bingge_e1
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_8 = 14 }
+			set_country_flag = YAN_court_seated_taiwei
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_court_face_stab_tt
+			add_to_variable = { var = YAN_court_bingge_k3_var value = 0.05 }
+			set_country_flag = YAN_court_taiwei_sits
+			custom_effect_tooltip = YAN_court_taiwei_tt
+			set_country_flag = YAN_court_passed_zhongyue
+			YAN_court_recalc = yes
+			YAN_court_start_bingge = yes
+			custom_effect_tooltip = YAN_court_seat_bingge_tt
+		}
+	}
+
+	shared_focus = { #兵革 · 边军更戍
+		id = YAN_court_bingge_s1
+		icon = GFX_focus_YAN_court_bingge_s1
+		text_icon = YAN_court_focus_style
+		x = -2
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bingge_e1
+			focus = YAN_court_bingge_e2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bingge_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bingge_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bingge_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bingge_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #兵革 · 三关烽燧
+		id = YAN_court_bingge_s2
+		icon = GFX_focus_YAN_court_bingge_s2
+		text_icon = YAN_court_focus_style
+		x = -2
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bingge_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bingge_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bingge_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bingge_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bingge_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #兵革 · 禁军整肃
+		id = YAN_court_bingge_s3
+		icon = GFX_focus_YAN_court_bingge_s3
+		text_icon = YAN_court_focus_style
+		x = -2
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bingge_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bingge_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bingge_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bingge_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bingge_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #兵革 · 军府置簿
+		id = YAN_court_bingge_s4
+		icon = GFX_focus_YAN_court_bingge_s4
+		text_icon = YAN_court_focus_style
+		x = -2
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bingge_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bingge_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bingge_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bingge_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bingge_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #兵革 · 军功封赏
+		id = YAN_court_bingge_s5
+		icon = GFX_focus_YAN_court_bingge_s5
+		text_icon = YAN_court_focus_style
+		x = -2
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bingge_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bingge_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bingge_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bingge_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bingge_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #兵革 · 拓边置郡
+		id = YAN_court_bingge_s6
+		icon = GFX_focus_YAN_court_bingge_s6
+		text_icon = YAN_court_focus_style
+		x = -2
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bingge_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bingge_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bingge_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bingge_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bingge_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_bingge_done
+		}
+	}
+
+	shared_focus = { #北门 · 令（礼相 · 苍生为子）
+		id = YAN_court_bei_e1
+		icon = GFX_focus_YAN_court_bei_e1
+		text_icon = YAN_court_focus_style
+		x = 0
+		y = 3
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_bei_e2
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_9 = 3 }
+			set_country_flag = YAN_court_seated_ling
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			set_country_flag = YAN_court_passed_zuoxuanliao
+			YAN_court_recalc = yes
+			YAN_court_start_bei = yes
+			custom_effect_tooltip = YAN_court_seat_bei_tt
+		}
+	}
+
+	shared_focus = { #北门 · 左宣辽（玉门守将）
+		id = YAN_court_bei_e2
+		icon = GFX_focus_YAN_court_bei_e2
+		text_icon = YAN_court_focus_style
+		x = 0
+		y = 4
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_bei_e1
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_9 = 22 }
+			set_country_flag = YAN_court_seated_zuoxuanliao
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_court_face_stab_tt
+			set_country_flag = YAN_court_passed_ling
+			YAN_court_recalc = yes
+			YAN_court_start_bei = yes
+			custom_effect_tooltip = YAN_court_seat_bei_tt
+		}
+	}
+
+	shared_focus = { #北门 · 雪原哨探
+		id = YAN_court_bei_s1
+		icon = GFX_focus_YAN_court_bei_s1
+		text_icon = YAN_court_focus_style
+		x = 0
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bei_e1
+			focus = YAN_court_bei_e2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bei_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bei_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bei_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bei_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #北门 · 北地整军
+		id = YAN_court_bei_s2
+		icon = GFX_focus_YAN_court_bei_s2
+		text_icon = YAN_court_focus_style
+		x = 0
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bei_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bei_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bei_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bei_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bei_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #北门 · 关市榷场
+		id = YAN_court_bei_s3
+		icon = GFX_focus_YAN_court_bei_s3
+		text_icon = YAN_court_focus_style
+		x = 0
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bei_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bei_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bei_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bei_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bei_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #北门 · 北军冬训
+		id = YAN_court_bei_s4
+		icon = GFX_focus_YAN_court_bei_s4
+		text_icon = YAN_court_focus_style
+		x = 0
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bei_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bei_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bei_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bei_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bei_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #北门 · 筑城戍垒
+		id = YAN_court_bei_s5
+		icon = GFX_focus_YAN_court_bei_s5
+		text_icon = YAN_court_focus_style
+		x = 0
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bei_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bei_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bei_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bei_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bei_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #北门 · 北疆行省
+		id = YAN_court_bei_s6
+		icon = GFX_focus_YAN_court_bei_s6
+		text_icon = YAN_court_focus_style
+		x = 0
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_bei_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_bei_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_bei_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_bei_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_bei_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_bei_done
+		}
+	}
+
+	shared_focus = { #西馆 · 方（医相 · 权衡）
+		id = YAN_court_xifang_e1
+		icon = GFX_focus_YAN_court_xifang_e1
+		text_icon = YAN_court_focus_style
+		x = 2
+		y = 3
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_xifang_e2
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_10 = 10 }
+			set_country_flag = YAN_court_seated_fang
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			set_country_flag = YAN_court_passed_ningchunqiu
+			YAN_court_recalc = yes
+			YAN_court_start_xifang = yes
+			custom_effect_tooltip = YAN_court_seat_xifang_tt
+		}
+	}
+
+	shared_focus = { #西馆 · 宁辞秋（礼部侍郎）
+		id = YAN_court_xifang_e2
+		icon = GFX_focus_YAN_court_xifang_e2
+		text_icon = YAN_court_focus_style
+		x = 2
+		y = 4
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_xifang_e1
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_10 = 15 }
+			set_country_flag = YAN_court_seated_ningchunqiu
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_court_face_stab_tt
+			set_country_flag = YAN_court_passed_fang
+			YAN_court_recalc = yes
+			YAN_court_start_xifang = yes
+			custom_effect_tooltip = YAN_court_seat_xifang_tt
+		}
+	}
+
+	shared_focus = { #西馆 · 通译设馆
+		id = YAN_court_xifang_s1
+		icon = GFX_focus_YAN_court_xifang_s1
+		text_icon = YAN_court_focus_style
+		x = 2
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xifang_e1
+			focus = YAN_court_xifang_e2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xifang_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xifang_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xifang_k1_var value = 0.03 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xifang_k1_p3_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #西馆 · 条约档库
+		id = YAN_court_xifang_s2
+		icon = GFX_focus_YAN_court_xifang_s2
+		text_icon = YAN_court_focus_style
+		x = 2
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xifang_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xifang_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xifang_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xifang_k1_var value = 0.03 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xifang_k1_p3_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #西馆 · 西学东渐
+		id = YAN_court_xifang_s3
+		icon = GFX_focus_YAN_court_xifang_s3
+		text_icon = YAN_court_focus_style
+		x = 2
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xifang_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xifang_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xifang_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xifang_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xifang_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #西馆 · 器械仿制
+		id = YAN_court_xifang_s4
+		icon = GFX_focus_YAN_court_xifang_s4
+		text_icon = YAN_court_focus_style
+		x = 2
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xifang_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xifang_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xifang_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xifang_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xifang_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #西馆 · 边地通商
+		id = YAN_court_xifang_s5
+		icon = GFX_focus_YAN_court_xifang_s5
+		text_icon = YAN_court_focus_style
+		x = 2
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xifang_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xifang_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xifang_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xifang_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xifang_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #西馆 · 缴获立簿
+		id = YAN_court_xifang_s6
+		icon = GFX_focus_YAN_court_xifang_s6
+		text_icon = YAN_court_focus_style
+		x = 2
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_xifang_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_xifang_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_xifang_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_xifang_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_xifang_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_xifang_done
+		}
+	}
+
+	shared_focus = { #东抚 · 望（暗相 · 十九道）
+		id = YAN_court_dongfang_e1
+		icon = GFX_focus_YAN_court_dongfang_e1
+		text_icon = YAN_court_focus_style
+		x = 4
+		y = 3
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_dongfang_e2
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_11 = 2 }
+			set_country_flag = YAN_court_seated_wang
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			set_country_flag = YAN_court_passed_zuole
+			YAN_court_recalc = yes
+			YAN_court_start_dongfang = yes
+			custom_effect_tooltip = YAN_court_seat_dongfang_tt
+		}
+	}
+
+	shared_focus = { #东抚 · 左乐（秉烛人监正）
+		id = YAN_court_dongfang_e2
+		icon = GFX_focus_YAN_court_dongfang_e2
+		text_icon = YAN_court_focus_style
+		x = 4
+		y = 4
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_dongfang_e1
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_11 = 18 }
+			set_country_flag = YAN_court_seated_zuole
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_court_face_stab_tt
+			set_country_flag = YAN_court_passed_wang
+			YAN_court_recalc = yes
+			YAN_court_start_dongfang = yes
+			custom_effect_tooltip = YAN_court_seat_dongfang_tt
+		}
+	}
+
+	shared_focus = { #东抚 · 司岁情网
+		id = YAN_court_dongfang_s1
+		icon = GFX_focus_YAN_court_dongfang_s1
+		text_icon = YAN_court_focus_style
+		x = 4
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_dongfang_e1
+			focus = YAN_court_dongfang_e2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_dongfang_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_dongfang_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_dongfang_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_dongfang_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #东抚 · 秉烛巡视
+		id = YAN_court_dongfang_s2
+		icon = GFX_focus_YAN_court_dongfang_s2
+		text_icon = YAN_court_focus_style
+		x = 4
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_dongfang_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_dongfang_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_dongfang_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_dongfang_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_dongfang_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #东抚 · 密折直达
+		id = YAN_court_dongfang_s3
+		icon = GFX_focus_YAN_court_dongfang_s3
+		text_icon = YAN_court_focus_style
+		x = 4
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_dongfang_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_dongfang_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_dongfang_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_dongfang_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_dongfang_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #东抚 · 锁川勘界
+		id = YAN_court_dongfang_s4
+		icon = GFX_focus_YAN_court_dongfang_s4
+		text_icon = YAN_court_focus_style
+		x = 4
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_dongfang_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_dongfang_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_dongfang_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_dongfang_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_dongfang_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #东抚 · 缉事密档
+		id = YAN_court_dongfang_s5
+		icon = GFX_focus_YAN_court_dongfang_s5
+		text_icon = YAN_court_focus_style
+		x = 4
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_dongfang_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_dongfang_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_dongfang_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_dongfang_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_dongfang_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #东抚 · 落子无声
+		id = YAN_court_dongfang_s6
+		icon = GFX_focus_YAN_court_dongfang_s6
+		text_icon = YAN_court_focus_style
+		x = 4
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_dongfang_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_dongfang_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_dongfang_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_dongfang_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_dongfang_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_dongfang_done
+		}
+	}
+
+	shared_focus = { #南库 · 绩（贾相 · 账目）
+		id = YAN_court_nanfang_e1
+		icon = GFX_focus_YAN_court_nanfang_e1
+		text_icon = YAN_court_focus_style
+		x = 6
+		y = 3
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_nanfang_e2
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_12 = 7 }
+			set_country_flag = YAN_court_seated_ji
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			custom_effect_tooltip = YAN_court_face_trust_tt
+			set_country_flag = YAN_court_passed_chun
+			YAN_court_recalc = yes
+			YAN_court_start_nanfang = yes
+			custom_effect_tooltip = YAN_court_seat_nanfang_tt
+		}
+	}
+
+	shared_focus = { #南库 · 椿（司岁台监正）
+		id = YAN_court_nanfang_e2
+		icon = GFX_focus_YAN_court_nanfang_e2
+		text_icon = YAN_court_focus_style
+		x = 6
+		y = 4
+		cost = 2
+		mutually_exclusive = {
+			focus = YAN_court_nanfang_e1
+		}
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			set_variable = { YAN_court_seat_12 = 17 }
+			set_country_flag = YAN_court_seated_chun
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+				add_dynamic_modifier = { modifier = YAN_court_spirit }
+			}
+			add_to_variable = { YAN_court_seated = 1 }
+			add_political_power = 40
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_court_face_stab_tt
+			set_country_flag = YAN_court_passed_ji
+			YAN_court_recalc = yes
+			YAN_court_start_nanfang = yes
+			custom_effect_tooltip = YAN_court_seat_nanfang_tt
+		}
+	}
+
+	shared_focus = { #南库 · 矿政设局
+		id = YAN_court_nanfang_s1
+		icon = GFX_focus_YAN_court_nanfang_s1
+		text_icon = YAN_court_focus_style
+		x = 6
+		y = 5
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_nanfang_e1
+			focus = YAN_court_nanfang_e2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_nanfang_s1_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_nanfang_s1_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_nanfang_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_nanfang_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #南库 · 织造总局
+		id = YAN_court_nanfang_s2
+		icon = GFX_focus_YAN_court_nanfang_s2
+		text_icon = YAN_court_focus_style
+		x = 6
+		y = 6
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_nanfang_s1
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_nanfang_s2_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_nanfang_s2_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_nanfang_k1_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_nanfang_k1_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #南库 · 商队护卫
+		id = YAN_court_nanfang_s3
+		icon = GFX_focus_YAN_court_nanfang_s3
+		text_icon = YAN_court_focus_style
+		x = 6
+		y = 7
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_nanfang_s2
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_nanfang_s3_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_nanfang_s3_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_nanfang_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_nanfang_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #南库 · 南库储备
+		id = YAN_court_nanfang_s4
+		icon = GFX_focus_YAN_court_nanfang_s4
+		text_icon = YAN_court_focus_style
+		x = 6
+		y = 8
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_nanfang_s3
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_nanfang_s4_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_nanfang_s4_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_nanfang_k2_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_nanfang_k2_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #南库 · 账目总汇
+		id = YAN_court_nanfang_s5
+		icon = GFX_focus_YAN_court_nanfang_s5
+		text_icon = YAN_court_focus_style
+		x = 6
+		y = 9
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_nanfang_s4
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_nanfang_s5_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_nanfang_s5_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_nanfang_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_nanfang_k3_p5_tt
+			add_political_power = 15
+		}
+	}
+
+	shared_focus = { #南库 · 边市税务
+		id = YAN_court_nanfang_s6
+		icon = GFX_focus_YAN_court_nanfang_s6
+		text_icon = YAN_court_focus_style
+		x = 6
+		y = 10
+		cost = 52
+		prerequisite = {
+			focus = YAN_court_nanfang_s5
+		}
+		# GER 式：本格只由署理人推进；推进中把「已 N 天」写在 tooltip 里
+		available = {
+			if = {
+				limit = { has_country_flag = YAN_court_nanfang_s6_prog }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = YAN_court_work_in_progress_tt
+						FLAG_DAYS = [?YAN_court_nanfang_s6_prog:days]
+						FOCUS_DAYS = 365
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = { localization_key = YAN_court_only_advisor_tt }
+					always = no
+				}
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 0
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_court_nanfang_k3_var value = 0.05 }
+			YAN_court_recalc = yes
+			custom_effect_tooltip = YAN_court_nanfang_k3_p5_tt
+			add_political_power = 15
+			add_stability = 0.02
+			set_country_flag = YAN_court_nanfang_done
+		}
+	}

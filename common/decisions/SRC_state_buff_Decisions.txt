@@ -1,0 +1,183 @@
+# ============================================================================
+# 叙拉古 (SRC) · 地块 BUFF 决议
+#
+# 【镇压家族势力】：150 政治点，点下即摘掉一个随机地区的【家族盘踞】；
+#   days_remove = 30 只是占位冷却——决议处于激活期不可重复点。
+# 【新沃尔西尼模式】三期：抬 SRC_vm_fac（0.2 → 0.3 → 0.4 → 0.5），
+#   示范区 BUFF 读的就是这个国家变量，所以是原地成长，不换 BUFF、不叠层。
+#   本引擎没有 has_completed_decision，层级解锁一律走国家旗标。
+# ============================================================================
+
+SRC_family_purge_category = {
+
+	# 宪兵、法警与税务局同时进门，一次只拔一根钉子
+	SRC_dec_crack_down_families = {
+		icon = GFX_decision_generic_police_action
+
+		allowed = {
+			original_tag = SRC
+		}
+
+		available = {
+			any_owned_state = {
+				limit = {
+					has_dynamic_modifier = {
+						modifier = SRC_dyn_family_entrenchment
+					}
+				}
+			}
+		}
+
+		cost = 150
+		fire_only_once = no
+		days_remove = 30
+
+		complete_effect = {
+			custom_effect_tooltip = SRC_tt_crackdown_going
+			random_owned_state = {
+				limit = {
+					has_dynamic_modifier = {
+						modifier = SRC_dyn_family_entrenchment
+					}
+				}
+				remove_dynamic_modifier = {
+					modifier = SRC_dyn_family_entrenchment
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+}
+
+SRC_volsinii_model_category = {
+
+	# 第一期：冷库、泊位、变电站与街区的市政并轨
+	SRC_dec_vm_phase_one = {
+		icon = GFX_decision_generic_construction
+
+		allowed = {
+			original_tag = SRC
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = SRC_flag_vm_p1_done
+			}
+		}
+
+		available = {
+			capital_scope = {
+				has_dynamic_modifier = {
+					modifier = SRC_dyn_volsinii_model_zone
+				}
+			}
+		}
+
+		cost = 200
+		fire_only_once = yes
+		days_remove = 120
+
+		complete_effect = {
+			custom_effect_tooltip = SRC_tt_vm_phase_going
+		}
+
+		remove_effect = {
+			set_country_flag = SRC_flag_vm_p1_done
+			add_to_variable = { SRC_vm_fac = 0.1 }
+			custom_effect_tooltip = SRC_tt_vm_p1_done
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	# 第二期：把规矩伸进车间——学徒合同、工伤赔付与工会代表
+	SRC_dec_vm_phase_two = {
+		icon = GFX_decision_generic_factory
+
+		allowed = {
+			original_tag = SRC
+		}
+
+		visible = {
+			has_country_flag = SRC_flag_vm_p1_done
+			NOT = {
+				has_country_flag = SRC_flag_vm_p2_done
+			}
+		}
+
+		available = {
+			capital_scope = {
+				has_dynamic_modifier = {
+					modifier = SRC_dyn_volsinii_model_zone
+				}
+			}
+		}
+
+		cost = 250
+		fire_only_once = yes
+		days_remove = 150
+
+		complete_effect = {
+			custom_effect_tooltip = SRC_tt_vm_phase_going
+		}
+
+		remove_effect = {
+			set_country_flag = SRC_flag_vm_p2_done
+			add_to_variable = { SRC_vm_fac = 0.1 }
+			custom_effect_tooltip = SRC_tt_vm_p2_done
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	# 第三期：法院、警察、税务与市政在同一天换印章
+	SRC_dec_vm_phase_three = {
+		icon = GFX_decision_generic_political_rally
+
+		allowed = {
+			original_tag = SRC
+		}
+
+		visible = {
+			has_country_flag = SRC_flag_vm_p2_done
+			NOT = {
+				has_country_flag = SRC_flag_vm_p3_done
+			}
+		}
+
+		available = {
+			capital_scope = {
+				has_dynamic_modifier = {
+					modifier = SRC_dyn_volsinii_model_zone
+				}
+			}
+		}
+
+		cost = 300
+		fire_only_once = yes
+		days_remove = 180
+
+		complete_effect = {
+			custom_effect_tooltip = SRC_tt_vm_phase_going
+		}
+
+		remove_effect = {
+			set_country_flag = SRC_flag_vm_p3_done
+			add_to_variable = { SRC_vm_fac = 0.1 }
+			custom_effect_tooltip = SRC_tt_vm_p3_done
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+}

@@ -1,0 +1,676 @@
+types = {
+
+	REU_weapons_depot_raid = {
+
+		days_to_prepare = 15
+
+		speed_multiplier = 2.5
+
+		category = land_infiltration_raids
+
+		custom_map_icon = GFX_raid_target_icon_guerilla_raid
+
+		target_icon = GFX_other_target_icon
+
+		target_loc_key = raid_target_name_supply_hub
+
+		launch_sound = raid_land_launchable_sound
+
+		arrow = {
+			type = land
+		}
+
+	 	unit_model = {
+			entity = generic_motorized_vehicle_entity
+	 	}
+
+		ai_will_do = {
+			base = 5
+
+			modifier = {
+				factor = 1.5
+				has_equipment = {
+					infantry_equipment < 0
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_equipment = {
+					infantry_equipment < 2500
+				}
+			}
+			modifier = {
+				factor = 1.5
+				command_power > 50
+			}
+			modifier = {
+				factor = 1.5
+				command_power > 75
+			}
+			modifier = {
+				factor = 0.5
+				has_equipment = {
+					infantry_equipment > 5000
+				}
+			}
+			modifier = {
+				factor = 0.5
+				command_power < 50
+			}
+		}
+
+		command_power = 25
+
+		allowed = {
+			original_tag = REU
+		}
+
+		fire_only_once = no
+
+		visible = {
+			always = yes
+		}
+
+		show_target = {
+			var:target_state = {
+				controller = {
+					ursus_area_country = yes
+					NOT = {
+						original_tag = REU
+					}
+				}
+				any_neighbor_state = {
+					is_controlled_by = REU
+				}
+			}
+		}
+
+		available = {
+
+		}
+
+		launchable = {
+
+		}
+
+		cancel_trigger = {
+			var:target_state = {
+				controller = {
+					original_tag = REU
+				}
+			}
+		}
+
+		starting_point = {
+			building_types = { supply_node }
+			allow_faction_buildings = yes
+		}
+
+		unit_requirements = {
+			battalion_types = {
+				infantry = { min = 4 }
+			}
+		}
+		unit_requirements = {
+			battalion_types = {
+				militia = { min = 4 }
+			}
+		}
+		unit_requirements = {
+			battalion_types = {
+				mountaineers = { min = 4 }
+			}
+		}
+
+		additional_equipment = {
+		}
+
+		target_type = {
+			building = {
+				type = supply_node
+			}
+		}
+
+		success_factors = {
+			success = {
+				base = 0.75
+
+				# Raiding unit modifiers
+				experience = {
+					weight = 0.25
+					start_weight = -0.2
+					reference = 1.0
+				}
+
+				organisation = {
+					weight = 0.1
+					start_weight = -0.1
+					reference = 100
+				}
+				strength = {
+					weight = 0.1
+					start_weight = -0.1
+					reference = 1
+				}
+				recon = {
+					weight = 0.05
+					reference = 10
+				}
+
+				### Target Modifiers
+
+				resistance = {
+					reference = 100
+					start_reference = 15 # Resistance below 15 doesn't help
+					weight = 0.4
+				}
+				air_superiority = {
+					reference = 1
+					start_reference = 0.5
+					weight = 0.2
+				}
+
+				enemy_units = {
+					reference = 4 # More than 4 DIVs in the target Province shouldn't make any difference
+					weight = -0.4
+				}
+				intel = {
+					weight = 0.2
+					#start_reference = 50
+					reference = 100
+				}
+			}
+		}
+
+		success_levels = {
+			failure = {
+				victim_effects = {
+					var:target_state = {
+						if = {
+							limit = { supply_node > 0 }
+							damage_building = {
+								type = supply_node
+								damage = 1 # levels of damage
+								province = var:ROOT.target_province
+							}
+						}
+					}
+				}
+				actor_effects = {
+					if = {
+						limit = {
+							var:actor_country = {
+								has_country_flag = REU_raid_reduce_damage
+							}
+						}
+						# Damage to unit
+						raid_damage_units = {
+							org_damage = 0.45
+							str_damage = 0.45
+							ratio = yes
+						}
+					}
+					else = {
+						# Damage to unit
+						raid_damage_units = {
+							org_damage = 0.95
+							str_damage = 0.95
+							ratio = yes
+						}
+					}
+
+					# Unit Experience
+					raid_add_unit_experience = 0.05
+					add_raid_history_entry = yes
+				}
+				# Other unit effects
+				division_effects = {
+					add_divisional_commander_xp = 50
+				}
+				visual_effect = {
+					entity = "raid_failed_entity"
+					animation = "attack"
+				}
+			}
+			limited_success = {
+				victim_effects = {
+					var:target_state = {
+						if = {
+							limit = { supply_node > 0 }
+							damage_building = {
+								type = supply_node
+								damage = 1 # levels of damage
+								province = var:ROOT.target_province
+								repair_speed_modifier = -0.1
+							}
+						}
+					}
+					if = {
+						limit = {
+							var:actor_country = {
+								has_country_flag = REU_raid_add_equipments
+							}
+						}
+						var:victim_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = -200
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = -40
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = -100
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = -25
+							}
+						}
+					}
+					else = {
+						var:victim_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = -100
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = -20
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = -50
+							}
+						}
+					}
+				}
+
+				actor_effects = {
+
+ 					set_temp_variable = { REU_stolen_equipment_producer = var:victim_country }
+
+					if = {
+						limit = {
+							var:actor_country = {
+								has_country_flag = REU_raid_add_equipments
+							}
+						}
+						var:actor_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = 200
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = 40
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = 100
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = 25
+								producer = REU_stolen_equipment_producer
+							}
+						}
+					}
+					else = {
+						var:actor_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = 100
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = 20
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = 50
+								producer = REU_stolen_equipment_producer
+							}
+						}
+					}
+
+					if = {
+						limit = {
+							var:actor_country = {
+								has_country_flag = REU_raid_reduce_damage
+							}
+						}
+						# Damage to unit
+						raid_damage_units = {
+							org_damage = 0.15
+							ratio = yes
+						}
+					}
+					else = {
+						# Damage to unit
+						raid_damage_units = {
+							org_damage = 0.65
+							str_damage = 0.3
+							ratio = yes
+						}
+					}
+
+					# Unit Experience
+					raid_add_unit_experience = 0.15
+					add_raid_history_entry = yes
+				}
+				# Other unit effects
+				division_effects = {
+					add_divisional_commander_xp = 50
+				}
+				visual_effect = {
+					entity = "land_raids_limited_success_entity"
+					animation = "attack"
+				}
+			}
+			success = {
+				victim_effects = {
+					var:target_state = {
+						if = {
+							limit = { supply_node > 0 }
+							damage_building = {
+								type = supply_node
+								damage = 4 # levels of damage
+								province = var:ROOT.target_province
+								repair_speed_modifier = -0.25
+							}
+						}
+					}
+
+					if = {
+						limit = {
+							var:actor_country = {
+								has_country_flag = REU_raid_add_equipments
+							}
+						}
+						var:victim_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = -350
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = -70
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = -125
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = -50
+							}
+						}
+					}
+					else = {
+						var:victim_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = -250
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = -50
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = -75
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = -25
+							}
+						}
+					}
+				}
+
+				actor_effects = {
+
+					set_temp_variable = { REU_stolen_equipment_producer = var:victim_country }
+
+					if = {
+						limit = {
+							var:actor_country = {
+								has_country_flag = REU_raid_add_equipments
+							}
+						}
+						var:actor_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = 350
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = 70
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = 125
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = 50
+								producer = REU_stolen_equipment_producer
+							}
+						}
+					}
+					else = {
+						var:actor_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = 250
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = 50
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = 75
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = 25
+								producer = REU_stolen_equipment_producer
+							}
+						}
+					}
+
+					if = {
+						limit = {
+							var:actor_country = {
+								has_country_flag = REU_raid_reduce_damage
+							}
+						}
+					}
+					else = {
+						# Damage to unit
+						raid_damage_units = {
+							org_damage = 0.45
+							str_damage = 0.2
+							ratio = yes
+						}
+					}
+					
+					# Unit Experience
+					raid_add_unit_experience = 0.2
+					add_raid_history_entry = yes
+				}
+				# Other unit effects
+				division_effects = {
+					add_divisional_commander_xp = 50
+				}
+				visual_effect = {
+					entity = "land_raids_success_entity"
+					animation = "attack"
+				}
+			}
+			critical_success = {
+				victim_effects = {
+					var:target_state = {
+						if = {
+							limit = { supply_node > 0 }
+							damage_building = {
+								type = supply_node
+								damage = 6 # levels of damage
+								province = var:ROOT.target_province
+								repair_speed_modifier = -0.4
+							}
+						}
+					}
+
+					if = {
+						limit = {
+							var:actor_country = {
+								has_country_flag = REU_raid_add_equipments
+							}
+						}
+						var:victim_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = -600
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = -120
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = -200
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = -75
+							}
+						}
+					}
+					else = {
+						var:victim_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = -500
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = -100
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = -150
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = -50
+							}
+						}
+					}
+				}
+
+				actor_effects = {
+
+					set_temp_variable = { REU_stolen_equipment_producer = var:victim_country }
+
+					if = {
+						limit = {
+							var:actor_country = {
+								has_country_flag = REU_raid_add_equipments
+							}
+						}
+						var:actor_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = 600
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = 120
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = 200
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = 75
+								producer = REU_stolen_equipment_producer
+							}
+						}
+					}
+					else = {
+						var:actor_country = {
+							add_equipment_to_stockpile = {
+								type = infantry_equipment
+								amount = 500
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = arts_equipment
+								amount = 100
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = support_equipment
+								amount = 150
+								producer = REU_stolen_equipment_producer
+							}
+							add_equipment_to_stockpile = {
+								type = artillery_equipment
+								amount = 50
+								producer = REU_stolen_equipment_producer
+							}
+						}
+					}
+
+					if = {
+						limit = {
+							var:actor_country = {
+								has_country_flag = REU_raid_reduce_damage
+							}
+						}
+					}
+					else = {
+						# Damage to unit
+						raid_damage_units = {
+							org_damage = 0.25
+							str_damage = 0.15
+							ratio = yes
+						}
+					}
+
+					# Unit Experience
+					raid_add_unit_experience = 0.35
+					add_raid_history_entry = yes
+				}
+				# Other unit effects
+				division_effects = {
+					add_divisional_commander_xp = 50
+				}
+				visual_effect = {
+					entity = "land_raids_critical_success_entity"
+					animation = "attack"
+				}
+			}
+		}
+	}
+}

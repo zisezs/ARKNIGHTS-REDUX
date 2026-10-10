@@ -1,0 +1,77 @@
+spriteTypes = {
+
+	# ==============================================================================
+	#  大炎 · 军工企业组织图标 + 装备类型图标补漏
+	#  · 组织图标：国风方印（双线框 + 四角云雷纹）+ 专属纹样 + 底部两个篆字，64x64 RGBA PNG
+	#  · 贴图：gfx/interface/military_industrial_organization/YAN/<名>.png
+	#  · 生成器：docs/gen_mio_icons.cjs（四国共用一套管线，改徽记/改色重跑即可，勿手改 PNG）
+	#  · 版式与民族精神图标（docs/gen_yan_spirit_icons.py）同族：
+	#    steel 工造 / jade 善政 / azure 文事 / amber 武备 / crimson 沉疴 /
+	#    violet 岁陵 / imperial 皇权
+	# ==============================================================================
+
+	# ---------------- 1 工部监造司 ----------------
+	SpriteType = { name = "GFX_yan_mio_gongbu"       texturefile = "gfx/interface/military_industrial_organization/YAN/YAN_mio_gongbu.png" }
+	# ---------------- 2 天机阁 ----------------
+	SpriteType = { name = "GFX_yan_mio_tianji"       texturefile = "gfx/interface/military_industrial_organization/YAN/YAN_mio_tianji.png" }
+	# ---------------- 3 天师府·空间术法司 ----------------
+	SpriteType = { name = "GFX_yan_mio_kongjian"     texturefile = "gfx/interface/military_industrial_organization/YAN/YAN_mio_kongjian.png" }
+	# ---------------- 4 天师府·机关术造办 ----------------
+	SpriteType = { name = "GFX_yan_mio_jiguan"       texturefile = "gfx/interface/military_industrial_organization/YAN/YAN_mio_jiguan.png" }
+	# ---------------- 5 源石火锻局 ----------------
+	SpriteType = { name = "GFX_yan_mio_huoduan"      texturefile = "gfx/interface/military_industrial_organization/YAN/YAN_mio_huoduan.png" }
+	# ---------------- 6 司岁台·巨兽兵器科 ----------------
+	SpriteType = { name = "GFX_yan_mio_sisuitai"     texturefile = "gfx/interface/military_industrial_organization/YAN/YAN_mio_sisuitai.png" }
+	# ---------------- 7 御林卫·禁军装备司 ----------------
+	SpriteType = { name = "GFX_yan_mio_yulinwei"     texturefile = "gfx/interface/military_industrial_organization/YAN/YAN_mio_yulinwei.png" }
+	# ---------------- 8 北冥系术法军工局 ----------------
+	SpriteType = { name = "GFX_yan_mio_beiming"      texturefile = "gfx/interface/military_industrial_organization/YAN/YAN_mio_beiming.png" }
+	# ---------------- 9 钦天监·天灾兵器署 ----------------
+	SpriteType = { name = "GFX_yan_mio_qintianjian"  texturefile = "gfx/interface/military_industrial_organization/YAN/YAN_mio_qintianjian.png" }
+
+
+	# ==============================================================================
+	#  装备类型图标补漏
+	#  MIO 面板按 "GFX_military_industrial_organization_<装备类型>" 找图，
+	#  以下 token 是 mod / 原版有、但原版没配图的，照原版同类贴图补上，
+	#  否则部门页与装备列表里的图标会空掉（引擎不报错）。
+	# ==============================================================================
+
+	# 大炎 · 法术武器（沿用 ARF 已补的那张，此处不再重复定义）
+	# ---- 自行火炮底盘（自行火炮 / 自行反坦克炮）----
+	SpriteType = {
+		name = "GFX_military_industrial_organization_sp_artillery_chassis"
+		texturefile = "gfx/interface/military_industrial_organization/department_icons/generic_mio_department_icon_tank_general_spg.dds"
+	}
+	# ---- 自行高炮底盘 ----
+	SpriteType = {
+		name = "GFX_military_industrial_organization_sp_aa_chassis"
+		texturefile = "gfx/interface/military_industrial_organization/department_icons/generic_mio_department_icon_tank_general_aa.dds"
+	}
+	# ---- 陆行舰底盘（巨兽兵器）----
+	SpriteType = {
+		name = "GFX_military_industrial_organization_landship_chassis"
+		texturefile = "gfx/interface/military_industrial_organization/department_icons/generic_mio_department_icon_tank_heavy_tank_armor.dds"
+	}
+	# ---- 特殊兵种入场券 ----
+	SpriteType = {
+		name = "GFX_military_industrial_organization_special_unit_token"
+		texturefile = "gfx/interface/military_industrial_organization/department_icons/generic_mio_department_icon_infantry_offense.dds"
+	}
+	# ---- 核导弹 ----
+	SpriteType = {
+		name = "GFX_military_industrial_organization_nuclear_missile_equipment"
+		texturefile = "gfx/interface/military_industrial_organization/department_icons/generic_mio_department_icon_tank_general_spg.dds"
+	}
+	# ---- 弹道导弹 ----
+	SpriteType = {
+		name = "GFX_military_industrial_organization_ballistic_missile_equipment"
+		texturefile = "gfx/interface/military_industrial_organization/department_icons/generic_mio_department_icon_tank_general_spg.dds"
+	}
+	# ---- 地对空导弹 ----
+	SpriteType = {
+		name = "GFX_military_industrial_organization_sam_missile_equipment"
+		texturefile = "gfx/interface/military_industrial_organization/department_icons/generic_mio_department_icon_anti_air.dds"
+	}
+
+}

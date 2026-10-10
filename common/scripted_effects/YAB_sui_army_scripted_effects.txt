@@ -1,0 +1,132 @@
+# ==============================================================================
+#  安北都护府 · 岁相显化 —— 叛乱落地
+#  · YAB_sui_army_uprising   终幕：解除附属 / 易帜「岁军」/ 建军三十师 /
+#                            脱离阵营 / 对大炎宣战 / 世界广播
+#  · 调用点：events/YAB_SuiArmy.txt 的 sui_yab.1（1099.12.1 硬日期定时事件）
+#  · 沿用 YNW_upheaval_become_sui_state 踩过的坑：
+#     1) autonomy_yan_protectorate 带 can_not_declare_war —— 必须先解除附属，
+#        且不假设宗主是谁（从当前宗主手里放出来），declare_war_on 才不会被
+#        规则静默挡掉。
+#     2) HOI4 不允许对同阵营国家宣战 —— 先 leave_faction。
+#     3) 建军块用 YAB_sui_army_divisions_flag 去重，保证效果重跑不会重复刷师。
+#  · 完成旗标 YAB_sui_army_done_flag 放在整段最末尾：万一中途抛错，
+#    这里不会执行，便于排查（error.log）。
+# ==============================================================================
+
+# 终幕：ROOT = YAB
+YAB_sui_army_uprising = {
+	log = "YAB_sui_army: 进入岁相显化终幕"
+
+	# 都护府不再奉炎正朔。不假设宗主是谁：从「当前宗主」手里放出来。
+	if = {
+		limit = { is_subject = yes }
+		overlord = {
+			end_puppet = PREV
+		}
+	}
+	# 第二道保险：上面那招没生效的话，用原版也有先例的 release_puppet 再兜一次
+	if = {
+		limit = {
+			is_subject = yes
+			YAN = { exists = yes }
+		}
+		YAN = {
+			release_puppet = YAB
+		}
+	}
+	if = {
+		limit = { is_subject = yes }
+		log = "YAB_sui_army: 警告 —— 两道解除附属都没生效，仍是附属国"
+	}
+
+	# 易帜：安北都护府 → 岁军（cosmetic tag 本地化见
+	# localisation/simp_chinese/ARF_YAB_SuiArmy_l_simp_chinese.yml）
+	set_cosmetic_tag = YAB_sui_army
+
+	# 祂的袍泽从雪里站起来：先模板、再库存、后生成，顺序不能反。
+	# 整块用旗标去重 —— 效果重跑时不能重复刷 30 个师或重复塞装备
+	if = {
+		limit = { NOT = { has_country_flag = YAB_sui_army_divisions_flag } }
+		set_country_flag = YAB_sui_army_divisions_flag
+
+		division_template = {
+			name = "岁军"
+			is_locked = yes
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 0 y = 2 }
+				infantry = { x = 0 y = 3 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+				infantry = { x = 1 y = 2 }
+				infantry = { x = 1 y = 3 }
+				infantry = { x = 2 y = 0 }
+				infantry = { x = 2 y = 1 }
+				infantry = { x = 2 y = 2 }
+				infantry = { x = 2 y = 3 }
+				infantry = { x = 3 y = 0 }
+				infantry = { x = 3 y = 1 }
+				infantry = { x = 3 y = 2 }
+				infantry = { x = 3 y = 3 }
+			}
+		}
+		# 30 个师 × 1700/师（与 YNW 山海狂士的校准一致）再留余量
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 60000
+			producer = YAB
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"岁军\" division_template = \"岁军\" start_experience_factor = 0.3 start_equipment_factor = 1"
+				owner = YAB
+				count = 30
+			}
+		}
+		log = "YAB_sui_army: 岁军 30 个师已生成"
+	}
+
+	# 脱离阵营：都护府原本既是保护国、又可能在大炎的阵营里，
+	# 而 HOI4 不允许对同阵营国家宣战 —— 不退阵营的话下面的 declare_war_on 会被静默挡掉
+	if = {
+		limit = { is_in_faction = yes }
+		leave_faction = yes
+		log = "YAB_sui_army: 已脱离原阵营"
+	}
+
+	# 对大炎宣战：解除附属 + 脱离阵营之后才做得了。
+	# 若已随幽州之乱对大炎开战（test_yyz.1 链），这里自然跳过。
+	if = {
+		limit = {
+			YAN = { exists = yes }
+			is_subject = no
+			NOT = { has_war_with = YAN }
+		}
+		declare_war_on = {
+			target = YAN
+			type = annex_everything
+		}
+		log = "YAB_sui_army: 已对大炎宣战"
+	}
+
+	# 世界广播：大炎与岁军各发一次（news_event 引擎自带按国家去重，旗标再防一手）
+	hidden_effect = {
+		every_country = {
+			limit = {
+				exists = yes
+				OR = {
+					original_tag = YAN
+					original_tag = YAB
+				}
+				NOT = { has_country_flag = sui_yab_news_sent_flag }
+			}
+			set_country_flag = sui_yab_news_sent_flag
+			news_event = { id = sui_yab.2 }
+		}
+	}
+
+	# 全部走完才置完成旗标 —— 中途抛错时这里不会执行
+	set_country_flag = YAB_sui_army_done_flag
+	log = "YAB_sui_army: 终幕完成"
+}

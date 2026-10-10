@@ -1,0 +1,180 @@
+scripted_gui = {
+    URS_imperial_court_gui = {
+		context_type = decision_category
+		window_name = "URS_imperial_court_window"
+
+		effects = {
+			URS_imperial_court_panel1_button_click = {
+				set_country_flag = {
+					flag = URS_imperial_court_panel1_visible
+					value = 1
+				}
+				set_country_flag = {
+					flag = URS_imperial_court_panel2_visible
+					value = 0
+				}
+				set_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value = 0
+				}
+			}
+			URS_imperial_court_panel2_button_click = {
+				set_country_flag = {
+					flag = URS_imperial_court_panel1_visible
+					value = 0
+				}
+				set_country_flag = {
+					flag = URS_imperial_court_panel2_visible
+					value = 1
+				}
+				set_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value = 0
+				}
+			}
+			URS_imperial_court_panel3_button_click = {
+				set_country_flag = {
+					flag = URS_imperial_court_panel1_visible
+					value = 0
+				}
+				set_country_flag = {
+					flag = URS_imperial_court_panel2_visible
+					value = 0
+				}
+				set_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value = 1
+				}
+			}
+		}
+
+		triggers = {
+			URS_imperial_emperor_opinion_title_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel1_visible
+					value > 0
+				}
+			}
+			URS_imperial_court_emperor_opinion_progressbar_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel1_visible
+					value > 0
+				}
+			}
+			URS_imperial_party_unity_title_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel2_visible
+					value > 0
+				}
+			}
+			URS_imperial_reformist_party_title_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_reformist_party_orthodox_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_reformist_party_orthodox_progressbar_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_reformist_party_humanity_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_reformist_party_humanity_progressbar_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_reformist_party_progressive_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_reformist_party_progressive_progressbar_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_conservatist_party_title_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_conservatist_party_mild_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_conservatist_party_mild_progressbar_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_conservatist_party_iron_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_conservatist_party_iron_progressbar_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_conservatist_party_revival_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+			URS_imperial_conservatist_party_revival_progressbar_visible = {
+				has_country_flag = {
+					flag = URS_imperial_court_panel3_visible
+					value > 0
+				}
+			}
+		}
+
+		properties = {
+			URS_imperial_court_emperor_opinion_progressbar = {
+				frame = URS.URS_reformist_emperor_opinion
+			}
+			URS_imperial_reformist_party_orthodox_progressbar = {
+				frame = URS.URS_reformist_party_orthodox_attitude
+			}
+			URS_imperial_reformist_party_humanity_progressbar = {
+				frame = URS.URS_reformist_party_humanity_attitude
+			}
+			URS_imperial_reformist_party_progressive_progressbar = {
+				frame = URS.URS_reformist_party_progressive_attitude
+			}
+			URS_imperial_conservatist_party_mild_progressbar = {
+				frame = URS.URS_conservatist_party_mild_attitude
+			}
+			URS_imperial_conservatist_party_iron_progressbar = {
+				frame = URS.URS_conservatist_party_iron_attitude
+			}
+			URS_imperial_conservatist_party_revival_progressbar = {
+				frame = URS.URS_conservatist_party_revival_attitude
+			}
+		}
+	}
+}

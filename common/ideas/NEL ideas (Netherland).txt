@@ -1,0 +1,43 @@
+ideas = {
+    ### 国家精神 ###
+    country = {
+        #六十四年苦难岁月
+        NEL_Difficult_years = {
+            desc = NEL_Difficult_years_desc
+            picture = ""
+            modifier = {
+                stability_factor = -0.1
+                war_support_factor = -0.2
+            }
+        }
+        #莱塔尼亚的枷锁
+        NEL_Yoke_of_Leithanien = {
+            desc = NEL_Difficult_years_desc
+            picture = ""
+            modifier = {
+                custom_modifier_tooltip = lock_template
+                extra_trade_to_overlord_factor = 0.1
+                disabled_ideas = 1
+            }
+        }
+        #复国运动的影响
+        NEL_Influence_of_Zionist_movement = {
+            desc = NEL_Difficult_years_desc
+            picture = ""
+            modifier = {
+                compliance_growth = -0.5
+                resistance_growth = 0.15
+                custom_modifier_tooltip = Terrorist_incident
+            }
+        }
+        #缠斗不休的行政署
+        NEL_fights_endlessly_office = {
+            desc = NEL_Difficult_years_desc
+            picture = ""
+            modifier = {
+                political_power_factor = -0.05
+                administrative_development_monthly_modifier = -0.01
+            }
+        }
+    }
+}

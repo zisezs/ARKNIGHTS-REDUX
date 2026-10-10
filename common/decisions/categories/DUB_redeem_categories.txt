@@ -1,0 +1,18 @@
+# 塔拉复国决议分类（承载国：DUB 深池）
+# 配套：common/decisions/DUB_redeem_Decisions.txt
+# 图标已核：GFX_decision_category_generic_political_actions 存在于原版 decisions.gfx
+
+TAR_rd_redeem = {
+	icon = GFX_decision_category_generic_political_actions
+	allowed = {
+		original_tag = DUB
+	}
+	visible = {
+		OR = {
+			original_tag = DUB
+			has_country_flag = TAR_independence_flag
+			has_country_flag = TAR_redeem_open
+		}
+	}
+	priority = 20
+}

@@ -1,0 +1,366 @@
+# ============================================================================
+# 乌萨斯帝国 ·「费奥多尔初步改革」小游戏 —— 脚本层
+# ============================================================================
+#
+# 打开入口：国策 URS_dr_root_of_problems（问题之源）→ URS_rf_init = yes
+# 每周节拍：common/on_actions/URS_dream_on_actions.txt 的 on_weekly_URS
+# 决议面板：common/decisions/URS_Feodor_Reform_Decisions.txt
+#           + common/scripted_guis/URS_Feodor_Reform_GUI.txt
+#
+# ---------------------------- 变量表（均为国家变量） ----------------------------
+#   URS_rf_chips              改革筹码（设计稿里「改革资源点」与「改革筹码」
+#                             是同一个东西，统一叫筹码；50 政治点换 1 点）
+#
+#   URS_rf_p_state            国家改革进度   0..100
+#   URS_rf_p_army             军队改革进度   0..100
+#   URS_rf_p_people           群众改革进度   0..100
+#   URS_rf_p_resource         资源改革进度   0..100
+#
+#   URS_rf_e_state            国家改革效率   0..100
+#   URS_rf_e_army             军队改革效率   0..100
+#   URS_rf_e_people           群众改革效率   0..100
+#   URS_rf_e_resource         资源改革效率   0..100
+#
+#   反对派四组，每组三个量（单位都是「周」，与 35 天一轮的决议对齐）：
+#     URS_rf_opp_<组>_lock      当前蛰伏期，>0 时「XX行动中」决议不可点
+#     URS_rf_opp_<组>_pending   本轮一次性延迟（遏制用的 2 筹码，用完清零）
+#     URS_rf_opp_<组>_perm      永久延迟（更替用的 5 筹码，不清零）
+#   <组> = noble 旧贵族(国家) / mil 军事贵族(军队) / land 领地主(群众) / bur 资产官僚(资源)
+#
+# ---------------------------- 效率档位（设计稿口径） ----------------------------
+#   0..35  差    每周 +3 进度
+#   36..50 均衡  每周 +5 进度
+#   51..80 良好  每周 +6 进度
+#   81..100 高效 每周 +8 进度
+#
+#   注意：反对派「恶化效率 5~10」与玩家「改善效率 +10」都只改这个 0..100 的数，
+#   档位是读出来的，不另存。
+# ============================================================================
+
+
+# ---------------------------------------------------------------------------
+# 初始化 —— 问题之源完成时调用一次
+# ---------------------------------------------------------------------------
+URS_rf_init = {
+	set_variable = { URS_rf_chips = 5 }			# 设计稿：获取 5 点改革资源
+	set_variable = { URS_rf_p_state = 20 }
+	set_variable = { URS_rf_p_army = 10 }
+	set_variable = { URS_rf_p_people = 0 }
+	set_variable = { URS_rf_p_resource = 50 }
+
+	set_variable = { URS_rf_e_state = 45 }		# 均衡
+	set_variable = { URS_rf_e_army = 20 }		# 差
+	set_variable = { URS_rf_e_people = 20 }		# 差
+	set_variable = { URS_rf_e_resource = 45 }	# 均衡
+
+	set_variable = { URS_rf_opp_noble_lock = 0 }
+	set_variable = { URS_rf_opp_noble_pending = 0 }
+	set_variable = { URS_rf_opp_noble_perm = 0 }
+	set_variable = { URS_rf_opp_mil_lock = 0 }
+	set_variable = { URS_rf_opp_mil_pending = 0 }
+	set_variable = { URS_rf_opp_mil_perm = 0 }
+	set_variable = { URS_rf_opp_land_lock = 0 }
+	set_variable = { URS_rf_opp_land_pending = 0 }
+	set_variable = { URS_rf_opp_land_perm = 0 }
+	set_variable = { URS_rf_opp_bur_lock = 0 }
+	set_variable = { URS_rf_opp_bur_pending = 0 }
+	set_variable = { URS_rf_opp_bur_perm = 0 }
+
+	set_country_flag = URS_dr_reform_open
+}
+
+
+# ---------------------------------------------------------------------------
+# 每周推进：四条进度各按自己的效率档加一次，并做 0..100 收口
+# 兜底同步：反对派的 lock 每周 -1（周），到 0 就放行下一轮
+# ---------------------------------------------------------------------------
+URS_rf_weekly = {
+
+	# ---- 国家 ----
+	if = {
+		limit = { check_variable = { URS_rf_p_state < 100 } }
+		if = {
+			limit = { check_variable = { URS_rf_e_state < 36 } }
+			add_to_variable = { URS_rf_p_state = 3 }
+		}
+		else_if = {
+			limit = { check_variable = { URS_rf_e_state < 51 } }
+			add_to_variable = { URS_rf_p_state = 5 }
+		}
+		else_if = {
+			limit = { check_variable = { URS_rf_e_state < 81 } }
+			add_to_variable = { URS_rf_p_state = 6 }
+		}
+		else = {
+			add_to_variable = { URS_rf_p_state = 8 }
+		}
+	}
+
+	# ---- 军队 ----
+	if = {
+		limit = { check_variable = { URS_rf_p_army < 100 } }
+		if = {
+			limit = { check_variable = { URS_rf_e_army < 36 } }
+			add_to_variable = { URS_rf_p_army = 3 }
+		}
+		else_if = {
+			limit = { check_variable = { URS_rf_e_army < 51 } }
+			add_to_variable = { URS_rf_p_army = 5 }
+		}
+		else_if = {
+			limit = { check_variable = { URS_rf_e_army < 81 } }
+			add_to_variable = { URS_rf_p_army = 6 }
+		}
+		else = {
+			add_to_variable = { URS_rf_p_army = 8 }
+		}
+	}
+
+	# ---- 群众 ----
+	if = {
+		limit = { check_variable = { URS_rf_p_people < 100 } }
+		if = {
+			limit = { check_variable = { URS_rf_e_people < 36 } }
+			add_to_variable = { URS_rf_p_people = 3 }
+		}
+		else_if = {
+			limit = { check_variable = { URS_rf_e_people < 51 } }
+			add_to_variable = { URS_rf_p_people = 5 }
+		}
+		else_if = {
+			limit = { check_variable = { URS_rf_e_people < 81 } }
+			add_to_variable = { URS_rf_p_people = 6 }
+		}
+		else = {
+			add_to_variable = { URS_rf_p_people = 8 }
+		}
+	}
+
+	# ---- 资源 ----
+	if = {
+		limit = { check_variable = { URS_rf_p_resource < 100 } }
+		if = {
+			limit = { check_variable = { URS_rf_e_resource < 36 } }
+			add_to_variable = { URS_rf_p_resource = 3 }
+		}
+		else_if = {
+			limit = { check_variable = { URS_rf_e_resource < 51 } }
+			add_to_variable = { URS_rf_p_resource = 5 }
+		}
+		else_if = {
+			limit = { check_variable = { URS_rf_e_resource < 81 } }
+			add_to_variable = { URS_rf_p_resource = 6 }
+		}
+		else = {
+			add_to_variable = { URS_rf_p_resource = 8 }
+		}
+	}
+
+	# ---- 收口：进度与效率都卡在 0..100 ----
+	clamp_variable = { var = URS_rf_p_state min = 0 max = 100 }
+	clamp_variable = { var = URS_rf_p_army min = 0 max = 100 }
+	clamp_variable = { var = URS_rf_p_people min = 0 max = 100 }
+	clamp_variable = { var = URS_rf_p_resource min = 0 max = 100 }
+	clamp_variable = { var = URS_rf_e_state min = 0 max = 100 }
+	clamp_variable = { var = URS_rf_e_army min = 0 max = 100 }
+	clamp_variable = { var = URS_rf_e_people min = 0 max = 100 }
+	clamp_variable = { var = URS_rf_e_resource min = 0 max = 100 }
+
+	# 「某条线做完了」不另存旗标，一律拿 check_variable = { URS_rf_p_xxx < 100 } 的反面判，
+	# 面板的「已完成」、反对派决议的 cancel_trigger 都是这么读的。
+
+	# ---- 反对派蛰伏期 ----
+	if = {
+		limit = { check_variable = { URS_rf_opp_noble_lock > 0 } }
+		subtract_from_variable = { URS_rf_opp_noble_lock = 1 }
+	}
+	if = {
+		limit = { check_variable = { URS_rf_opp_mil_lock > 0 } }
+		subtract_from_variable = { URS_rf_opp_mil_lock = 1 }
+	}
+	if = {
+		limit = { check_variable = { URS_rf_opp_land_lock > 0 } }
+		subtract_from_variable = { URS_rf_opp_land_lock = 1 }
+	}
+	if = {
+		limit = { check_variable = { URS_rf_opp_bur_lock > 0 } }
+		subtract_from_variable = { URS_rf_opp_bur_lock = 1 }
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# 反对派行动：15% / 35% / 50% 概率扣 6 / 4 / 2 点对应进度，
+# 并把对应效率恶化 5~10。对应改革已完成（>=100）时整个效果空转。
+# ---------------------------------------------------------------------------
+
+# 旧贵族 → 国家
+URS_rf_strike_noble = {
+	if = {
+		limit = { check_variable = { URS_rf_p_state < 100 } }
+		random_list = {
+			15 = { subtract_from_variable = { URS_rf_p_state = 6 } }
+			35 = { subtract_from_variable = { URS_rf_p_state = 4 } }
+			50 = { subtract_from_variable = { URS_rf_p_state = 2 } }
+		}
+		random_list = {
+			40 = { subtract_from_variable = { URS_rf_e_state = 5 } }
+			35 = { subtract_from_variable = { URS_rf_e_state = 7 } }
+			25 = { subtract_from_variable = { URS_rf_e_state = 10 } }
+		}
+		clamp_variable = { var = URS_rf_p_state min = 0 max = 100 }
+		clamp_variable = { var = URS_rf_e_state min = 0 max = 100 }
+	}
+}
+
+# 军事贵族 → 军队
+URS_rf_strike_mil = {
+	if = {
+		limit = { check_variable = { URS_rf_p_army < 100 } }
+		random_list = {
+			15 = { subtract_from_variable = { URS_rf_p_army = 6 } }
+			35 = { subtract_from_variable = { URS_rf_p_army = 4 } }
+			50 = { subtract_from_variable = { URS_rf_p_army = 2 } }
+		}
+		random_list = {
+			40 = { subtract_from_variable = { URS_rf_e_army = 5 } }
+			35 = { subtract_from_variable = { URS_rf_e_army = 7 } }
+			25 = { subtract_from_variable = { URS_rf_e_army = 10 } }
+		}
+		clamp_variable = { var = URS_rf_p_army min = 0 max = 100 }
+		clamp_variable = { var = URS_rf_e_army min = 0 max = 100 }
+	}
+}
+
+# 领地主 → 群众
+URS_rf_strike_land = {
+	if = {
+		limit = { check_variable = { URS_rf_p_people < 100 } }
+		random_list = {
+			15 = { subtract_from_variable = { URS_rf_p_people = 6 } }
+			35 = { subtract_from_variable = { URS_rf_p_people = 4 } }
+			50 = { subtract_from_variable = { URS_rf_p_people = 2 } }
+		}
+		random_list = {
+			40 = { subtract_from_variable = { URS_rf_e_people = 5 } }
+			35 = { subtract_from_variable = { URS_rf_e_people = 7 } }
+			25 = { subtract_from_variable = { URS_rf_e_people = 10 } }
+		}
+		clamp_variable = { var = URS_rf_p_people min = 0 max = 100 }
+		clamp_variable = { var = URS_rf_e_people min = 0 max = 100 }
+	}
+}
+
+# 资产官僚 → 资源
+URS_rf_strike_bur = {
+	if = {
+		limit = { check_variable = { URS_rf_p_resource < 100 } }
+		random_list = {
+			15 = { subtract_from_variable = { URS_rf_p_resource = 6 } }
+			35 = { subtract_from_variable = { URS_rf_p_resource = 4 } }
+			50 = { subtract_from_variable = { URS_rf_p_resource = 2 } }
+		}
+		random_list = {
+			40 = { subtract_from_variable = { URS_rf_e_resource = 5 } }
+			35 = { subtract_from_variable = { URS_rf_e_resource = 7 } }
+			25 = { subtract_from_variable = { URS_rf_e_resource = 10 } }
+		}
+		clamp_variable = { var = URS_rf_p_resource min = 0 max = 100 }
+		clamp_variable = { var = URS_rf_e_resource min = 0 max = 100 }
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# 一轮反对派决议结束时的收口（remove_effect 与 cancel_effect 都调它）：
+# 先开火，再把「本轮一次性延迟 + 永久延迟」写进蛰伏期，pending 清零，
+# 并放掉「本轮在跑」的旗标 —— 好让 URS_rf_opp_arm 把下一轮重新点起来。
+# ---------------------------------------------------------------------------
+URS_rf_cycle_noble = {
+	URS_rf_strike_noble = yes
+	set_variable = { URS_rf_opp_noble_lock = URS_rf_opp_noble_pending }
+	add_to_variable = { URS_rf_opp_noble_lock = URS_rf_opp_noble_perm }
+	set_variable = { URS_rf_opp_noble_pending = 0 }
+	clr_country_flag = URS_rf_opp_noble_run
+}
+URS_rf_cycle_mil = {
+	URS_rf_strike_mil = yes
+	set_variable = { URS_rf_opp_mil_lock = URS_rf_opp_mil_pending }
+	add_to_variable = { URS_rf_opp_mil_lock = URS_rf_opp_mil_perm }
+	set_variable = { URS_rf_opp_mil_pending = 0 }
+	clr_country_flag = URS_rf_opp_mil_run
+}
+URS_rf_cycle_land = {
+	URS_rf_strike_land = yes
+	set_variable = { URS_rf_opp_land_lock = URS_rf_opp_land_pending }
+	add_to_variable = { URS_rf_opp_land_lock = URS_rf_opp_land_perm }
+	set_variable = { URS_rf_opp_land_pending = 0 }
+	clr_country_flag = URS_rf_opp_land_run
+}
+URS_rf_cycle_bur = {
+	URS_rf_strike_bur = yes
+	set_variable = { URS_rf_opp_bur_lock = URS_rf_opp_bur_pending }
+	add_to_variable = { URS_rf_opp_bur_lock = URS_rf_opp_bur_perm }
+	set_variable = { URS_rf_opp_bur_pending = 0 }
+	clr_country_flag = URS_rf_opp_bur_run
+}
+
+
+# ---------------------------------------------------------------------------
+# 每日唤醒：把「该出手了」的反对派决议重新点起来。
+#
+# 为什么需要它：HOI4 的计时决议要有人点才会进「进行中」，点完之后它自己
+# 不会再来一遍。设计稿写的是「完成时 重复激活决议旧贵族行动中」，所以这里
+# 用一个旗标记住「本轮在跑」，跑完由 URS_rf_cycle_* 放掉，第二天重新点。
+# 玩家中途手动取消也一样：取消走 cancel_effect → 同样收口 → 第二天重开，
+# 所以点「取消」躲不掉这一击。
+#
+# 号志守则：进入条件与决议自己的 visible/available 逐条对齐（同一个
+# URS_dr_reform_open / lock / 进度 < 100），对得上才点得起来。
+# ---------------------------------------------------------------------------
+URS_rf_opp_arm = {
+
+	# 旧贵族 → 国家
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_rf_opp_noble_run }
+			NOT = { check_variable = { URS_rf_opp_noble_lock > 0 } }
+			check_variable = { URS_rf_p_state < 100 }
+		}
+		set_country_flag = URS_rf_opp_noble_run
+		activate_decision = URS_rf_opp_noble
+	}
+
+	# 军事贵族 → 军队
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_rf_opp_mil_run }
+			NOT = { check_variable = { URS_rf_opp_mil_lock > 0 } }
+			check_variable = { URS_rf_p_army < 100 }
+		}
+		set_country_flag = URS_rf_opp_mil_run
+		activate_decision = URS_rf_opp_mil
+	}
+
+	# 领地主 → 群众
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_rf_opp_land_run }
+			NOT = { check_variable = { URS_rf_opp_land_lock > 0 } }
+			check_variable = { URS_rf_p_people < 100 }
+		}
+		set_country_flag = URS_rf_opp_land_run
+		activate_decision = URS_rf_opp_land
+	}
+
+	# 资产官僚 → 资源
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_rf_opp_bur_run }
+			NOT = { check_variable = { URS_rf_opp_bur_lock > 0 } }
+			check_variable = { URS_rf_p_resource < 100 }
+		}
+		set_country_flag = URS_rf_opp_bur_run
+		activate_decision = URS_rf_opp_bur
+	}
+}

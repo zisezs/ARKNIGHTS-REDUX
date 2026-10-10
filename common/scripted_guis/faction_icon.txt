@@ -1,0 +1,48 @@
+scripted_gui = {
+
+	politics_view_faction_icon = {
+		context_type = player_context
+		parent_window_token = politics_tab
+		window_name = "faction_icon_container"
+		
+		triggers = {
+			libertyland_treaty_organization_visible = {
+				has_faction_template = faction_template_libertyland_treaty_organization
+			}
+			zwillingstuerme_pakt_visible = {
+				has_faction_template = faction_template_zwillingstuerme_pakt
+			}
+			shenzhou_league_visible = {
+				has_faction_template = faction_template_shenzhou_league
+			}
+			communist_international_visible = {
+				has_faction_template = faction_template_communist_international
+			}
+
+			terra_balance_committee_visible = {
+				has_faction_template = faction_template_terra_balance_committee
+			}
+		}
+	}
+
+	diplomacy_view_faction_icon = {
+		context_type = selected_country_context
+		parent_window_token = selected_country_view_diplomacy
+		window_name = "faction_icon_container2"
+
+		triggers = {
+			libertyland_treaty_organization_visible = {
+				has_faction_template = faction_template_libertyland_treaty_organization
+			}
+			zwillingstuerme_pakt_visible = {
+				has_faction_template = faction_template_zwillingstuerme_pakt
+			}
+			shenzhou_league_visible = {
+				has_faction_template = faction_template_shenzhou_league
+			}
+			communist_international_visible = {
+				has_faction_template = faction_template_communist_international
+			}
+		}
+	}
+}

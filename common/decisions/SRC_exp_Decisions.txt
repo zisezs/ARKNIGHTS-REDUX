@@ -1,0 +1,180 @@
+# ============================================================================
+# 叙拉古 (SRC) · 对外扩张「七丘的狼崽子们」—— 决议
+# 分类 SRC_exp_category（common/decisions/categories/SRC_decision_categories.txt）
+#
+# 设计稿的「消耗 100 PP + 50 CP」「冷却 90 天」逐条落法：
+#   PP  → cost = N（点下即扣，引擎自己会拦）
+#   CP  → complete_effect 里 add_command_power = -50，available 里 command_power > 49
+#         （引擎没有「花费指挥点」这个字段，只能这么成对写）
+#   冷却 → days_re_enable = 90（一次性决议用 fire_only_once，不需要冷却）
+#
+# 计时决议三段式（cost → complete_effect → days_remove 天后 remove_effect），
+# 与 SRC_Decisions.txt 的管理法修正案写法一致。
+# 四条决议全部由 common/national_focus/SRC_expansion_shared.txt 的国策旗标解锁，
+# 具体效果见 common/scripted_effects/SRC_exp_effects.txt。
+# ============================================================================
+SRC_exp_category = {
+
+	# ──────────────────────────────────────────────────────────
+	# 一 · 对莱塔尼亚帝国宣战
+	# 解锁：【我早就是选帝侯了！】（SRC_exp_flag_elector）
+	# 前置国策已经以「帝国动员令」的名义把 50 个师的装备和兵员塞进了莱塔尼亚，
+	# 这里的宣战就是收网——莱塔尼亚抵抗崩盘 / 帝都陷落 / 打赢议和时，
+	# 由 on_weekly_SRC 把它收作附庸（三条任一，见 SRC_exp_on_actions.txt）。
+	# SRC_exp_flag_ltan_war = "这一局真的开过这场仗"，收网判定拿它当总闸。
+	# ──────────────────────────────────────────────────────────
+	SRC_exp_dec_war_ltn = {
+		icon = GFX_decision_generic_break_treaty
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_exp_flag_elector
+		}
+		available = {
+			country_exists = LTN
+			NOT = { has_war_with = LTN }
+			has_war_support > 0.5
+			has_stability > 0.4
+			command_power > 49
+		}
+		cost = 100
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		complete_effect = {
+			add_command_power = -50
+			set_country_flag = SRC_exp_flag_ltan_war
+			declare_war_on = {
+				target = LTN
+				type = annex_everything
+			}
+			custom_effect_tooltip = SRC_exp_dec_war_ltn_tt
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 5
+			}
+		}
+	}
+
+	# ──────────────────────────────────────────────────────────
+	# 二 · 整肃边疆家族
+	# 解锁：【打击边疆分裂主义】（SRC_exp_flag_frontier_purge）
+	# 30 天办完一个州：挂上州级「狼徽律法」精神，顺便把这个州直接入册
+	# （州旗标 SRC_exp_flag_purged 保证同一个州不会被反复整肃）
+	# ──────────────────────────────────────────────────────────
+	SRC_exp_dec_purge_frontier = {
+		icon = GFX_decision_generic_police_action
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_exp_flag_frontier_purge
+		}
+		available = {
+			any_owned_state = {
+				NOT = { has_state_flag = SRC_exp_flag_purged }
+				any_neighbor_state = {
+					NOT = { is_owned_by = ROOT }
+				}
+			}
+		}
+		cost = 50
+		fire_only_once = no
+		days_remove = 30
+		complete_effect = {
+			custom_effect_tooltip = SRC_exp_tt_purge_going
+			custom_effect_tooltip = SRC_exp_dec_purge_frontier_tt
+		}
+		remove_effect = {
+			SRC_exp_purge_frontier_effect = yes
+			custom_effect_tooltip = SRC_exp_tt_purge_done
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 3
+			}
+		}
+	}
+
+	# ──────────────────────────────────────────────────────────
+	# 三 · 遏制哥伦比亚人的扩张势头
+	# 解锁：【军团凯旋！】（SRC_exp_flag_legion_triumph）
+	# 双塔协定 = 莱塔尼亚主导的阵营（faction_template_zwillingstuerme_pakt）。
+	# 莱塔尼亚还在并主导阵营就请它拉叙拉古入伙；换别人当家或阵营已经散了，
+	# 就由叙拉古拿同一个模板自己重立门户、坐上主位。
+	# ⚠ 不打 is_in_faction 的卡：收网把莱塔尼亚变附庸时叙拉古就已经入主协定，
+	#   再卡一次会让这条决议永久点不亮（对哥伦比亚的好感惩罚和莱茵生命的宣战理由都在这）。
+	# ──────────────────────────────────────────────────────────
+	SRC_exp_dec_contain_columbia = {
+		icon = GFX_decision_generic_nationalism
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_exp_flag_legion_triumph
+		}
+		available = {
+			NOT = { has_war_with = LTN }
+			NOT = { has_war_with = CLB }
+		}
+		cost = 100
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		complete_effect = {
+			SRC_exp_join_twin_towers_effect = yes
+			custom_effect_tooltip = SRC_exp_dec_contain_columbia_tt
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 4
+			}
+		}
+	}
+
+	# ──────────────────────────────────────────────────────────
+	# 四 · 把没有核心的地区核心化
+	# 解锁：【光荣的叙拉古公民！】（SRC_exp_flag_glorious_citizens）
+	# 一次办一个州：完全控制 + 没有抵抗 + 还不是核心 → add_core_of
+	# 90 天冷却（days_re_enable），100 政治点 + 50 指挥点
+	# ──────────────────────────────────────────────────────────
+	SRC_exp_dec_core_states = {
+		icon = GFX_decision_generic_form_nation
+		allowed = {
+			original_tag = SRC
+		}
+		visible = {
+			has_country_flag = SRC_exp_flag_glorious_citizens
+		}
+		available = {
+			command_power > 49
+			any_owned_state = {
+				NOT = { is_core_of = ROOT }
+				is_fully_controlled_by = ROOT
+				has_resistance = no
+			}
+		}
+		cost = 100
+		fire_only_once = no
+		days_re_enable = 90
+		cancel_if_not_visible = yes
+		complete_effect = {
+			add_command_power = -50
+			SRC_exp_core_one_state_effect = yes
+			custom_effect_tooltip = SRC_exp_dec_core_states_tt
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 3
+			}
+		}
+	}
+}

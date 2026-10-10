@@ -1,0 +1,37 @@
+characters = {
+
+	KRS_Mikhail_Pavel = {
+		name = KRS_Mikhail_Pavel
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/KRS/Mikhail_Pavel.dds"
+			}
+		}
+		country_leader = {
+			desc = KRS_Mikhail_Pavel_desc
+			ideology = feudal_aristocracy_subtype
+			traits = { KRS_aging_viscount }
+		}
+	}
+
+	KRS_Yuri_Sayanov = {
+		name = KRS_Yuri_Sayanov
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/KRS/Yuri_Sayanov.dds"
+			}
+		}
+		country_leader = {
+			desc = KRS_Yuri_Sayanov_desc
+			ideology = conservative_liberalism_subtype
+			traits = { KRS_young_mayor KRS_faction_by_himself }
+		}
+		advisor = {
+			slot = second_in_command
+			idea_token = KRS_Yuri_Sayanov_second_in_command
+			traits = {  }
+			desc = KRS_Yuri_Sayanov_desc
+			can_be_fired = no
+		}
+	}
+}

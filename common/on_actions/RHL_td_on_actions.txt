@@ -1,0 +1,45 @@
+on_actions = {
+
+	# 莱茵生命（RHL）：十科量表的月度钳制
+	on_monthly = {
+		effect = {
+			every_country = {
+				limit = { original_tag = RHL }
+				RHL_td_monthly_tick = yes
+			}
+			# 超事件「莱茵生命企业国建立」兜底：触发条件仅为哥伦比亚联邦（CLB）不存在。
+			# 和会吞并、内战收编、改 tag 等不经 on_annex 的路径由月度检查补发；
+			# 与 on_annex 的即时触发共用 RHL_corporate_state_se_fired 防重旗标。
+			every_country = {
+				limit = {
+					original_tag = RHL
+					NOT = { has_country_flag = RHL_corporate_state_se_fired }
+					NOT = { country_exists = CLB }
+				}
+				set_country_flag = RHL_corporate_state_se_fired
+				news_event = { id = rhlse.1 }
+			}
+		}
+	}
+
+	# 超事件「莱茵生命企业国建立」即时触发：哥伦比亚联邦被吞并的瞬间。
+	# 触发条件仅为「哥伦比亚联邦不存在」，不再依赖 RHL_td_grand 或企业国 cosmetic tag。
+	# on_annex 中 ROOT = 吞并方，FROM = 被吞并方；此处仅在 CLB 被吞并时进入。
+	on_annex = {
+		effect = {
+			if = {
+				limit = {
+					FROM = { original_tag = CLB }
+				}
+				every_country = {
+					limit = {
+						original_tag = RHL
+						NOT = { has_country_flag = RHL_corporate_state_se_fired }
+					}
+					set_country_flag = RHL_corporate_state_se_fired
+					news_event = { id = rhlse.1 }
+				}
+			}
+		}
+	}
+}

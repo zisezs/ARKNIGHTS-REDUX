@@ -1,0 +1,1216 @@
+# AI plane design for testing
+
+generic_light_fighter = {
+	category = air
+
+	roles = {
+		air_light_fighter
+	}
+
+	priority = {
+		factor = 1000
+	}
+
+	light_fighter_0_default = {
+		priority = {
+			factor = 1
+			modifier = { 
+				has_tech = small_airframe_1
+				factor = 0 #let's not waste XP here
+			}
+		}
+
+		target_variant = {
+			match_value = 1000
+			type = small_plane_airframe_0
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				engine_type_slot = engine_1x
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			air_to_air_hardpoint_3
+			air_to_air_hardpoint_2
+			air_to_air_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+
+	light_fighter_1_default = {
+		priority = {
+			factor = 100
+			modifier = { 
+				has_tech = small_airframe_2
+				factor = 0 #let's not waste XP here
+			}
+		} 
+
+		target_variant = {
+			match_value = 2000
+			type = small_plane_airframe_1
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						air_to_air_hardpoint_3
+						air_to_air_hardpoint_2
+						air_to_air_hardpoint_1
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				engine_type_slot = {
+					jet_engine_4_1x
+					jet_engine_3_1x
+					jet_engine_2_1x
+					jet_engine_1_1x
+				}
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			air_to_air_hardpoint_3
+			air_to_air_hardpoint_2
+			air_to_air_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+
+	light_fighter_2_default = {
+		priority = {
+			factor = 10
+			modifier = {
+				has_tech = small_airframe_3
+				factor = 0 #let's not waste XP here
+			}
+		}
+
+		target_variant = {
+			match_value = 3000
+			type = small_plane_airframe_2
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						air_to_air_hardpoint_3
+						air_to_air_hardpoint_2
+						air_to_air_hardpoint_1
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_1x
+						jet_engine_3_1x
+						jet_engine_2_1x
+						jet_engine_1_1x
+					}
+				}
+				plane_wingform_slot = delta_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			air_to_air_hardpoint_3
+			air_to_air_hardpoint_2
+			air_to_air_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+
+	light_fighter_3_default = {
+		priority = {
+			factor = 10
+			modifier = {
+				has_tech = small_airframe_4
+				factor = 0 #let's not waste XP here
+			}
+		}
+
+		target_variant = {
+			match_value = 4000
+			type = small_plane_airframe_3
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						air_to_air_hardpoint_3
+						air_to_air_hardpoint_2
+						air_to_air_hardpoint_1
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_1x
+						jet_engine_3_1x
+						jet_engine_2_1x
+						jet_engine_1_1x
+					}
+				}
+				plane_wingform_slot = svariable_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			air_to_air_hardpoint_3
+			air_to_air_hardpoint_2
+			air_to_air_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+	light_fighter_4_default = {
+		priority = {
+			factor = 10
+		}
+
+		target_variant = {
+			match_value = 4000
+			type = small_plane_airframe_4
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						air_to_air_hardpoint_3
+						air_to_air_hardpoint_2
+						air_to_air_hardpoint_1
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_1x
+						jet_engine_3_1x
+						jet_engine_2_1x
+						jet_engine_1_1x
+					}
+				}
+				plane_wingform_slot = diamond_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			air_to_air_hardpoint_3
+			air_to_air_hardpoint_2
+			air_to_air_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+}
+
+generic_light_cas = {
+	category = air
+
+	roles = {
+		air_light_cas
+	}
+
+	priority = {
+		factor = 100
+	}
+
+	light_cas_0 = {
+		priority = {
+			factor = 100
+			modifier = {
+				has_tech = small_airframe_1
+				factor = 0 #let's not waste XP here
+			}	
+		}
+		target_variant = {
+			match_value = 1000
+			type = small_plane_cas_airframe_0
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						air_to_ground_hardpoint_3
+						air_to_ground_hardpoint_2
+						air_to_ground_hardpoint_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				engine_type_slot = engine_1x
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			air_to_ground_hardpoint_3
+			air_to_ground_hardpoint_2
+			air_to_ground_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+	light_cas_1 = {
+		priority = {
+			factor = 100
+			modifier = {
+				has_tech = small_airframe_2
+				factor = 0 #let's not waste XP here
+			}	
+		}
+		target_variant = {
+			match_value = 1000
+			type = small_plane_cas_airframe_1
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						air_to_ground_hardpoint_3
+						air_to_ground_hardpoint_2
+						air_to_ground_hardpoint_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_2x
+						jet_engine_3_2x
+						jet_engine_2_2x
+						jet_engine_1_2x
+					}
+				}
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			air_to_ground_hardpoint_3
+			air_to_ground_hardpoint_2
+			air_to_ground_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+	light_cas_2 = {
+		priority = {
+			factor = 200
+			modifier = {
+				has_tech = small_airframe_3
+				factor = 0 #let's not waste XP here
+			}
+		}
+		target_variant = {
+			match_value = 1500
+			type = small_plane_cas_airframe_2
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						air_to_ground_hardpoint_3
+						air_to_ground_hardpoint_2
+						air_to_ground_hardpoint_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_2x
+						jet_engine_3_2x
+						jet_engine_2_2x
+						jet_engine_1_2x
+					}
+				}
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+		allowed_modules = {
+			air_to_ground_hardpoint_3
+			air_to_ground_hardpoint_2
+			air_to_ground_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+	light_cas_3 = {
+		priority = {
+			factor = 200
+		}
+		target_variant = {
+			match_value = 2500
+			type = small_plane_cas_airframe_3
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						air_to_ground_hardpoint_3
+						air_to_ground_hardpoint_2
+						air_to_ground_hardpoint_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_2x
+						jet_engine_3_2x
+						jet_engine_2_2x
+						jet_engine_1_2x
+					}
+				}
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			air_to_ground_hardpoint_3
+			air_to_ground_hardpoint_2
+			air_to_ground_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+}
+
+generic_medium_tac_bomber = {
+	category = air
+
+	roles = {
+		air_medium_tac_bomber
+	}
+
+	priority = {
+		factor = 2000
+		modifier = {
+			num_of_factories < 100
+			factor = 0.5
+		}
+		modifier = {
+			num_of_factories < 50
+			factor = 0
+		}
+	}
+
+	# tac_bomber_0_default = {
+	# 	priority = {
+	# 		factor = 100
+	# 		modifier = {
+	# 			has_tech = medium_airframe_1
+	# 			factor = 0 #let's not waste XP here
+	# 		}
+	# 	}
+
+	# 	target_variant = {
+	# 		match_value = 2000
+	# 		type = medium_plane_tactical_bomber_airframe_0
+	# 		modules = {
+	# 		}
+	# 	}
+
+	# 	allowed_modules = {
+	# 	}
+	# }
+
+	medium_tac_bomber_1_default = {
+		priority = {
+			factor = 100
+			modifier = {
+				has_tech = medium_airframe_2
+				factor = 0 #let's not waste XP here
+			}
+		}
+
+		target_variant = {
+			match_value = 2000
+			type = medium_plane_tactical_bomber_airframe_1
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						medium_hardpoint_3
+						medium_hardpoint_2
+						medium_hardpoint_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_auxiliary_weapon_slot_1 = {
+					any_of = {
+						medium_hardpoint_3
+						medium_hardpoint_2
+						medium_hardpoint_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_2x
+						jet_engine_3_2x
+						jet_engine_2_2x
+						jet_engine_1_2x
+					}
+				}
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			medium_hardpoint_3
+			medium_hardpoint_2
+			medium_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			jet_engine_4_2x
+			jet_engine_3_2x
+			jet_engine_2_2x
+			jet_engine_1_2x
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+	medium_tac_bomber_2_default = {
+		priority = {
+			factor = 100
+			modifier = {
+				has_tech = medium_airframe_3
+				factor = 0 #let's not waste XP here
+			}
+		}
+
+		target_variant = {
+			match_value = 3000
+			type = medium_plane_tactical_bomber_airframe_2
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						medium_hardpoint_3
+						medium_hardpoint_2
+						medium_hardpoint_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_auxiliary_weapon_slot_1 = {
+					any_of = {
+						medium_hardpoint_3
+						medium_hardpoint_2
+						medium_hardpoint_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_2x
+						jet_engine_3_2x
+						jet_engine_2_2x
+						jet_engine_1_2x
+					}
+				}
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			medium_hardpoint_3
+			medium_hardpoint_2
+			medium_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			jet_engine_4_2x
+			jet_engine_3_2x
+			jet_engine_2_2x
+			jet_engine_1_2x
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+
+	medium_tac_bomber_3_default = {
+		priority = {
+			factor = 100
+			modifier = {
+				has_tech = medium_airframe_4
+				factor = 0 #let's not waste XP here
+			}
+		}
+
+		target_variant = {
+			match_value = 4000
+			type = medium_plane_tactical_bomber_airframe_3
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						medium_hardpoint_3
+						medium_hardpoint_2
+						medium_hardpoint_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_auxiliary_weapon_slot_1 = {
+					any_of = {
+						medium_hardpoint_3
+						medium_hardpoint_2
+						medium_hardpoint_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_2x
+						jet_engine_3_2x
+						jet_engine_2_2x
+						jet_engine_1_2x
+					}
+				}
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			medium_hardpoint_3
+			medium_hardpoint_2
+			medium_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			jet_engine_4_2x
+			jet_engine_3_2x
+			jet_engine_2_2x
+			jet_engine_1_2x
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+	medium_tac_bomber_4_default = {
+		priority = {
+			factor = 100
+		}
+
+		target_variant = {
+			match_value = 4000
+			type = medium_plane_tactical_bomber_airframe_4
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						medium_hardpoint_3
+						medium_hardpoint_2
+						medium_hardpoint_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_auxiliary_weapon_slot_1 = {
+					any_of = {
+						medium_hardpoint_3
+						medium_hardpoint_2
+						medium_hardpoint_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_2x
+						jet_engine_3_2x
+						jet_engine_2_2x
+						jet_engine_1_2x
+					}
+				}
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+			}
+		}
+
+		allowed_modules = {
+			medium_hardpoint_3
+			medium_hardpoint_2
+			medium_hardpoint_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			jet_engine_4_2x
+			jet_engine_3_2x
+			jet_engine_2_2x
+			jet_engine_1_2x
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+		}
+	}
+}
+
+generic_strat_bomber = {
+	category = air
+
+	roles = {
+		air_strat_bomber
+	}
+
+	priority = {
+		factor = 200
+		modifier = {
+			num_of_factories < 50
+			factor = 0
+		}
+	}
+
+	# strat_bomber_0_default = {
+	# 	priority = {
+	# 		factor = 5
+	# 		modifier = {
+	# 			has_tech = large_airframe_1
+	# 			factor = 0 #let's not waste XP here
+	# 		}
+	# 	}
+
+	# 	target_variant = {
+	# 		match_value = 500
+	# 		type = large_plane_airframe_0
+	# 		modules = {
+	# 		}
+	# 	}
+
+	# 	allowed_modules = {
+	# 	}
+	# }
+
+	# strat_bomber_1_default = {
+	# 	priority = {
+	# 		factor = 10
+	# 		modifier = {
+	# 			has_tech = large_airframe_2
+	# 			factor = 0 #let's not waste XP here
+	# 		}
+	# 	}
+
+	# 	target_variant = {
+	# 		match_value = 1000
+	# 		type = large_plane_airframe_1
+	# 		modules = {
+	# 		}
+	# 	}
+
+	# 	allowed_modules = {
+	# 	}
+	# }
+
+	strat_bomber_2_default = {
+		priority = {
+			factor = 10
+			modifier = {
+				has_tech = large_airframe_3
+				factor = 0 #let's not waste XP here
+			}
+		}
+
+		target_variant = {
+			match_value = 2000
+			type = large_plane_airframe_2
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						bomb_bay_3
+						bomb_bay_2
+						bomb_bay_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_auxiliary_weapon_slot_1 = {
+					any_of = {
+						bomb_bay_3
+						bomb_bay_2
+						bomb_bay_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_4x
+						jet_engine_3_4x
+						jet_engine_2_4x
+						jet_engine_1_4x
+					}
+				}
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+				special_type_slot_3 = fuel_tanks_large
+			}
+		}
+
+		allowed_modules = {
+			bomb_bay_3
+			bomb_bay_2
+			bomb_bay_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			jet_engine_4_4x
+			jet_engine_3_4x
+			jet_engine_2_4x
+			jet_engine_1_4x
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+			fuel_tanks_large
+		}
+	}
+
+	strat_bomber_3_default = {
+		priority = {
+			factor = 10
+		}
+
+		target_variant = {
+			match_value = 4000
+			type = large_plane_airframe_3
+			modules = {
+				fixed_main_weapon_slot = {
+					any_of = {
+						bomb_bay_3
+						bomb_bay_2
+						bomb_bay_1
+					}
+				}
+				fixed_aircraft_cannon_slot = {
+					any_of = {
+						aircraft_cannon_4
+						aircraft_cannon_3
+						aircraft_cannon_2
+						aircraft_cannon_1
+					}
+				}
+				fixed_auxiliary_weapon_slot_1 = {
+					any_of = {
+						bomb_bay_3
+						bomb_bay_2
+						bomb_bay_1
+					}
+				}
+				engine_type_slot = {
+					any_of = {
+						jet_engine_4_4x
+						jet_engine_3_4x
+						jet_engine_2_4x
+						jet_engine_1_4x
+					}
+				}
+				plane_wingform_slot = straight_wing
+				special_type_slot_1 = {
+					any_of = {
+						air_radio_3
+						air_radio_2
+						air_radio_1
+					}
+				}
+				special_type_slot_2 = {
+					any_of = {
+						air_radar_3
+						air_radar_2
+						air_radar_1
+					}
+				}
+				special_type_slot_3 = fuel_tanks_large
+			}
+		}
+
+		allowed_modules = {
+			bomb_bay_3
+			bomb_bay_2
+			bomb_bay_1
+			aircraft_cannon_4
+			aircraft_cannon_3
+			aircraft_cannon_2
+			aircraft_cannon_1
+			jet_engine_4_4x
+			jet_engine_3_4x
+			jet_engine_2_4x
+			jet_engine_1_4x
+			air_radio_3
+			air_radio_2
+			air_radio_1
+			air_radar_3
+			air_radar_2
+			air_radar_1
+			fuel_tanks_large
+		}
+	}
+}

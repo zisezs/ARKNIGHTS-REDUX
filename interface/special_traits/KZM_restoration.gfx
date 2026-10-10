@@ -1,0 +1,21 @@
+# ============================================================================
+# 卡西米尔 (KZM) · 复国骑士团 —— 将领特质图标注册
+#
+# 引擎按约定查 GFX_trait_<特质 id>，缺 sprite 就是空图标且零报错。
+# 本批不新做美术：texturefile 全部指向原版 23x33 人格特质贴图（mod 可直接引用本体文件），
+# 语义上尽量贴人。将来出图只改 texturefile，注册名不动。
+# 顾问特质（country_leader 库）不吃这套，它用块内的 sprite = N 索引。
+# ============================================================================
+spriteTypes = {
+	SpriteType = { name = "GFX_trait_KZM_trait_radiant_knight"		texturefile = "gfx/interface/traits/personal/trait_war_hero.dds"	transparencecheck = yes	legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_KZM_trait_drillmaster"			texturefile = "gfx/interface/traits/personal/trait_cavalry_officer.dds"	transparencecheck = yes	legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_KZM_trait_last_keshig"			texturefile = "gfx/interface/traits/personal/trait_samurai_lineage.dds"	transparencecheck = yes	legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_KZM_trait_unbroken_shield"		texturefile = "gfx/interface/traits/personal/trait_brave.dds"	transparencecheck = yes	legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_KZM_trait_red_pine_blaze"		texturefile = "gfx/interface/traits/personal/trait_reckless.dds"	transparencecheck = yes	legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_KZM_trait_ashlock_stone"		texturefile = "gfx/interface/traits/personal/trait_cautious.dds"	transparencecheck = yes	legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_KZM_trait_fartooth_longshot"	texturefile = "gfx/interface/traits/personal/trait_gunnery_expert.dds"	transparencecheck = yes	legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_KZM_trait_wildmane_ride"		texturefile = "gfx/interface/traits/personal/trait_armor_officer.dds"	transparencecheck = yes	legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_KZM_trait_fourth_rank_knight"	texturefile = "gfx/interface/traits/personal/trait_irregulars_officer.dds"	transparencecheck = yes	legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_KZM_trait_woods_arrow"			texturefile = "gfx/interface/traits/personal/trait_jaeger.dds"	transparencecheck = yes	legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_KZM_trait_blood_oath"			texturefile = "gfx/interface/traits/personal/trait_bold.dds"	transparencecheck = yes	legacy_lazy_load = no }
+}

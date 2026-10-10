@@ -1,0 +1,772 @@
+# ============================================================================
+# 卡西米尔联合领 (KZM) · 第十二次乌卡战争 —— 战时国策树【不畏苦暗】
+#
+# 结构（22 格，每格 cost = 4 周 = 28 天）：
+#
+#                         [长夜临光]  x=0  y=0
+#   左分支·未声张的怒火        中间·根据地        右分支·未照耀的荣光
+#   x=-6   x=-4              x=0              x=4    x=6
+#   A1     B1                M1               C1     D1     y=1
+#   A2     B2                M2               C2     D2     y=2
+#   A3     B3                M3               C3     D3     y=3
+#   A4<----B4                M4               C4<----D4      y=4
+#                         [极夜天曦]  x=0  y=5
+#
+#   · 左 8 格（A1..A4 / B1..B4）喂养国家级精神【未声张的怒火】KZM_dyn_unspoken_fury
+#   · 右 8 格（C1..C4 / D1..D4）喂养国家级精神【未照耀的荣光】KZM_dyn_unshone_glory
+#   · 中 4 格（M1..M4）各解锁一条决议，在四个片区里种州级地区特性
+#     【复国骑士团根据地】KZM_dyn_reso_bastion；超过 6 个州即触发地图外军工厂结算
+#   · 终幕【极夜天曦】1101.3.1 起可点：脱离附庸 → 换政体 → 玛恩纳上台 →
+#     改国名【卡西米尔复国骑士团】→ 解除占领军控制权 → 对乌萨斯宣战 → 起兵
+#
+# 排版口径：同行 Δx ≥ 2（节点容器 165x128、图标 100x88，Δx=1 会叠掉一半）；
+#           根节点落在包围盒水平中线（x 跨 -6..6，根在 0），极值列各有 4 格、无孤节点。
+# 图标：22 格自绘「圣骑士盾形边框 + 硬核战术波兰语」100x88（PNG 母版 + 上机用未压缩 DDS），
+#       注册 interface/_ARF_goals/KZM_goals.gfx，生成器 docs/gen_kzm_paladin_icons.cjs（勿手改贴图）。
+# 数值：每个精神共 6 个键，单项满档一律 ≤ ±25%；一个 reward 里同一变量只写一次。
+# ============================================================================
+
+focus_tree = {
+	id = KZM_restoration_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = KZM
+		}
+	}
+	default = no
+
+	initial_show_position = {
+		focus = KZM_the_long_night
+	}
+
+	# =====================================================================
+	# 起手：长夜临光
+	# =====================================================================
+	# 前提：第十一次乌卡战争打完，卡西米尔成了乌萨斯的傀儡国
+	focus = {
+		id = KZM_the_long_night
+		icon = GFX_focus_KZM_the_long_night
+		cost = 4
+		x = 0
+		y = 0
+		available_if_capitulated = yes
+		available = {
+			is_puppet_of = URS
+		}
+		ai_will_do = {
+			base = 100
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Margaret_Nearl
+			custom_effect_tooltip = KZM_the_long_night_recruit_tt
+			# <<< KZM_resto_staff
+			set_country_flag = KZM_resto_started
+			add_political_power = 60
+			add_war_support = 0.08
+			add_stability = 0.05
+			custom_effect_tooltip = KZM_tt_long_night
+			hidden_effect = {
+				country_event = { id = kzm_resto.1 }
+			}
+		}
+	}
+
+	# =====================================================================
+	# 左分支 · 未声张的怒火（8 格）
+	# =====================================================================
+
+	# A1 银枪的旧部
+	focus = {
+		id = KZM_silver_lance_veterans
+		icon = GFX_focus_KZM_silver_lance_veterans
+		cost = 4
+		prerequisite = { focus = KZM_the_long_night }
+		x = -6
+		y = 1
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Whislash
+			custom_effect_tooltip = KZM_silver_lance_veterans_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_silver_lance_veterans_tt
+			add_manpower = 55000
+			army_experience = 20
+			add_command_power = 30
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unspoken_fury }
+				add_to_variable = { var = KZM_fury_org value = 0.06 }
+				add_to_variable = { var = KZM_fury_war_support value = 0.06 }
+			}
+		}
+	}
+
+	# B1 金盏花与马克
+	focus = {
+		id = KZM_patriotic_shareholders
+		icon = GFX_focus_KZM_patriotic_shareholders
+		cost = 4
+		prerequisite = { focus = KZM_the_long_night }
+		x = -4
+		y = 1
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			custom_effect_tooltip = KZM_patriotic_shareholders_tt
+			add_political_power = 70
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 15000
+				producer = KZM
+			}
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unspoken_fury }
+				add_to_variable = { var = KZM_fury_capacity value = 0.08 }
+				add_to_variable = { var = KZM_fury_war_support value = 0.06 }
+			}
+		}
+	}
+
+	# A2 没有一面被丢下
+	focus = {
+		id = KZM_not_one_shield_left
+		icon = GFX_focus_KZM_not_one_shield_left
+		cost = 4
+		prerequisite = { focus = KZM_silver_lance_veterans }
+		x = -6
+		y = 2
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Maria_Nearl
+			custom_effect_tooltip = KZM_not_one_shield_left_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_not_one_shield_left_tt
+			add_stability = 0.06
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_1
+				amount = 12000
+				producer = KZM
+			}
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unspoken_fury }
+				add_to_variable = { var = KZM_fury_org value = 0.06 }
+				add_to_variable = { var = KZM_fury_stability value = 0.06 }
+			}
+		}
+	}
+
+	# B2 地窖与账簿
+	focus = {
+		id = KZM_cellars_and_ledgers
+		icon = GFX_focus_KZM_cellars_and_ledgers
+		cost = 4
+		prerequisite = { focus = KZM_patriotic_shareholders }
+		prerequisite = { focus = KZM_silver_lance_veterans }
+		x = -4
+		y = 2
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			custom_effect_tooltip = KZM_cellars_and_ledgers_tt
+			add_manpower = 40000
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 4000
+				producer = KZM
+			}
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unspoken_fury }
+				add_to_variable = { var = KZM_fury_capacity value = 0.08 }
+				add_to_variable = { var = KZM_fury_conscription value = 0.06 }
+			}
+		}
+	}
+
+	# A3 监正会的影子
+	focus = {
+		id = KZM_shadow_of_the_adeptus
+		icon = GFX_focus_KZM_shadow_of_the_adeptus
+		cost = 4
+		prerequisite = { focus = KZM_not_one_shield_left }
+		prerequisite = { focus = KZM_cellars_and_ledgers }
+		x = -6
+		y = 3
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			custom_effect_tooltip = KZM_shadow_of_the_adeptus_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_shadow_of_the_adeptus_tt
+			add_political_power = 80
+			if = {
+				limit = { has_idea = KZM_Deep_State }
+				swap_ideas = {
+					remove_idea = KZM_Deep_State
+					add_idea = KZM_Civil_Rights_Dissent_Was_Suppressed
+				}
+			}
+			else = {
+				add_stability = 0.05
+			}
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unspoken_fury }
+				add_to_variable = { var = KZM_fury_stability value = 0.06 }
+				add_to_variable = { var = KZM_fury_resistance value = 0.06 }
+			}
+		}
+	}
+
+	# B3 百里篝火
+	focus = {
+		id = KZM_hundred_li_campfires
+		icon = GFX_focus_KZM_hundred_li_campfires
+		cost = 4
+		prerequisite = { focus = KZM_cellars_and_ledgers }
+		x = -4
+		y = 3
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Proviso
+			recruit_character = KZM_Flametail
+			custom_effect_tooltip = KZM_hundred_li_campfires_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_hundred_li_campfires_tt
+			add_manpower = 90000
+			add_war_support = 0.08
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unspoken_fury }
+				add_to_variable = { var = KZM_fury_conscription value = 0.06 }
+				add_to_variable = { var = KZM_fury_resistance value = 0.06 }
+			}
+		}
+	}
+
+	# B4 让所有人都站起来
+	focus = {
+		id = KZM_let_them_all_stand
+		icon = GFX_focus_KZM_let_them_all_stand
+		cost = 4
+		prerequisite = { focus = KZM_hundred_li_campfires }
+		prerequisite = { focus = KZM_shadow_of_the_adeptus }
+		x = -4
+		y = 4
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Blood_Knight
+			custom_effect_tooltip = KZM_let_them_all_stand_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_let_them_all_stand_tt
+			add_stability = 0.08
+			add_political_power = 70
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unspoken_fury }
+				add_to_variable = { var = KZM_fury_conscription value = 0.06 }
+				add_to_variable = { var = KZM_fury_resistance value = 0.06 }
+				add_to_variable = { var = KZM_fury_war_support value = 0.06 }
+			}
+		}
+	}
+
+	# A4 未声张的怒火（左分支收束）
+	focus = {
+		id = KZM_unspoken_fury
+		icon = GFX_focus_KZM_unspoken_fury
+		cost = 4
+		prerequisite = { focus = KZM_shadow_of_the_adeptus }
+		prerequisite = { focus = KZM_let_them_all_stand }
+		x = -6
+		y = 4
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 80
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			custom_effect_tooltip = KZM_unspoken_fury_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_unspoken_fury_tt
+			add_war_support = 0.12
+			add_stability = 0.06
+			if = {
+				limit = { has_idea = KZM_Society_of_the_Spectacle_1 }
+				swap_ideas = {
+					remove_idea = KZM_Society_of_the_Spectacle_1
+					add_idea = KZM_Society_of_the_Spectacle_3
+				}
+			}
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unspoken_fury }
+				add_to_variable = { var = KZM_fury_org value = 0.06 }
+				add_to_variable = { var = KZM_fury_capacity value = 0.08 }
+				add_to_variable = { var = KZM_fury_stability value = 0.06 }
+				add_to_variable = { var = KZM_fury_resistance value = 0.06 }
+				add_to_variable = { var = KZM_fury_conscription value = 0.06 }
+				add_to_variable = { var = KZM_fury_war_support value = 0.06 }
+				set_country_flag = KZM_fury_complete
+			}
+		}
+	}
+
+	# =====================================================================
+	# 中间一列 · 复国骑士团根据地（4 格，各解锁一条决议）
+	# =====================================================================
+
+	# M1 大骑士领的暗桩
+	focus = {
+		id = KZM_capital_cells
+		icon = GFX_focus_KZM_capital_cells
+		cost = 4
+		prerequisite = { focus = KZM_the_long_night }
+		x = 0
+		y = 1
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 70
+		}
+		completion_reward = {
+			set_country_flag = KZM_resto_cell_heartland
+			add_political_power = 40
+			custom_effect_tooltip = KZM_tt_unlock_decision
+			unlock_decision_tooltip = KZM_resto_dec_heartland
+			hidden_effect = {
+				country_event = { id = kzm_resto.2 }
+			}
+		}
+	}
+
+	# M2 特锦赛的巡回线
+	focus = {
+		id = KZM_tournament_circuit
+		icon = GFX_focus_KZM_tournament_circuit
+		cost = 4
+		prerequisite = { focus = KZM_capital_cells }
+		x = 0
+		y = 2
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 70
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Ashlock
+			recruit_character = KZM_Fartooth
+			custom_effect_tooltip = KZM_tournament_circuit_recruit_tt
+			# <<< KZM_resto_staff
+			set_country_flag = KZM_resto_cell_arena
+			add_political_power = 40
+			custom_effect_tooltip = KZM_tt_unlock_decision
+			unlock_decision_tooltip = KZM_resto_dec_arena
+			hidden_effect = {
+				country_event = { id = kzm_resto.3 }
+			}
+		}
+	}
+
+	# M3 通往北部的必经之路
+	focus = {
+		id = KZM_road_to_the_north
+		icon = GFX_focus_KZM_road_to_the_north
+		cost = 4
+		prerequisite = { focus = KZM_tournament_circuit }
+		x = 0
+		y = 3
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 70
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Carol
+			recruit_character = KZM_Meteor
+			custom_effect_tooltip = KZM_road_to_the_north_recruit_tt
+			# <<< KZM_resto_staff
+			set_country_flag = KZM_resto_cell_highlands
+			add_political_power = 40
+			custom_effect_tooltip = KZM_tt_unlock_decision
+			unlock_decision_tooltip = KZM_resto_dec_highlands
+			hidden_effect = {
+				country_event = { id = kzm_resto.4 }
+			}
+		}
+	}
+
+	# M4 湖区与林间
+	focus = {
+		id = KZM_lakes_and_woods
+		icon = GFX_focus_KZM_lakes_and_woods
+		cost = 4
+		prerequisite = { focus = KZM_road_to_the_north }
+		x = 0
+		y = 4
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 70
+		}
+		completion_reward = {
+			set_country_flag = KZM_resto_cell_lakes
+			add_political_power = 40
+			custom_effect_tooltip = KZM_tt_unlock_decision
+			unlock_decision_tooltip = KZM_resto_dec_lakes
+			unlock_decision_tooltip = KZM_resto_dec_link_up
+			hidden_effect = {
+				country_event = { id = kzm_resto.5 }
+			}
+		}
+	}
+
+	# =====================================================================
+	# 右分支 · 未照耀的荣光（8 格）
+	# =====================================================================
+
+	# C1 骑士团的地窖
+	focus = {
+		id = KZM_knightly_cellars
+		icon = GFX_focus_KZM_knightly_cellars
+		cost = 4
+		prerequisite = { focus = KZM_the_long_night }
+		x = 4
+		y = 1
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Gravel
+			custom_effect_tooltip = KZM_knightly_cellars_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_knightly_cellars_tt
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 20000
+				producer = KZM
+			}
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unshone_glory }
+				add_to_variable = { var = KZM_glory_efficiency value = 0.06 }
+				add_to_variable = { var = KZM_glory_reinforce value = 0.06 }
+			}
+		}
+	}
+
+	# D1 辉煌盾的夜班
+	focus = {
+		id = KZM_night_shift_at_glorious
+		icon = GFX_focus_KZM_night_shift_at_glorious
+		cost = 4
+		prerequisite = { focus = KZM_the_long_night }
+		x = 6
+		y = 1
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			custom_effect_tooltip = KZM_night_shift_at_glorious_tt
+			capital_scope = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unshone_glory }
+				add_to_variable = { var = KZM_glory_efficiency value = 0.06 }
+				add_to_variable = { var = KZM_glory_attack value = 0.06 }
+			}
+		}
+	}
+
+	# C2 退役军官的讲习所
+	focus = {
+		id = KZM_retired_officer_lectures
+		icon = GFX_focus_KZM_retired_officer_lectures
+		cost = 4
+		prerequisite = { focus = KZM_knightly_cellars }
+		x = 4
+		y = 2
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			custom_effect_tooltip = KZM_retired_officer_lectures_tt
+			army_experience = 35
+			add_command_power = 50
+			custom_effect_tooltip = KZM_tt_generals
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unshone_glory }
+				add_to_variable = { var = KZM_glory_xp value = 0.06 }
+				add_to_variable = { var = KZM_glory_defence value = 0.06 }
+				random_list = {
+					50 = {
+						create_corps_commander = {
+							name = "卡西米尔老兵"
+							traits = { trickster }
+							skill = 2
+							attack_skill = 2
+							defense_skill = 3
+							planning_skill = 2
+							logistics_skill = 2
+						}
+					}
+					50 = {
+						create_corps_commander = {
+							name = "无封号的独立骑士"
+							traits = { trait_reckless }
+							skill = 2
+							attack_skill = 3
+							defense_skill = 2
+							planning_skill = 2
+							logistics_skill = 2
+						}
+					}
+				}
+			}
+		}
+	}
+
+	# D2 天马冲锋操典
+	focus = {
+		id = KZM_pegasus_charge_manual
+		icon = GFX_focus_KZM_pegasus_charge_manual
+		cost = 4
+		prerequisite = { focus = KZM_night_shift_at_glorious }
+		prerequisite = { focus = KZM_knightly_cellars }
+		x = 6
+		y = 2
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Viviana_Droste
+			custom_effect_tooltip = KZM_pegasus_charge_manual_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_pegasus_charge_manual_tt
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = 1200
+				producer = KZM
+			}
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unshone_glory }
+				add_to_variable = { var = KZM_glory_breakthrough value = 0.08 }
+				add_to_variable = { var = KZM_glory_attack value = 0.06 }
+			}
+		}
+	}
+
+	# C3 假番号
+	focus = {
+		id = KZM_false_banners
+		icon = GFX_focus_KZM_false_banners
+		cost = 4
+		prerequisite = { focus = KZM_retired_officer_lectures }
+		prerequisite = { focus = KZM_pegasus_charge_manual }
+		x = 4
+		y = 3
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Roy
+			custom_effect_tooltip = KZM_false_banners_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_false_banners_tt
+			custom_effect_tooltip = KZM_tt_muster_small
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unshone_glory }
+				add_to_variable = { var = KZM_glory_reinforce value = 0.06 }
+				add_to_variable = { var = KZM_glory_xp value = 0.06 }
+				KZM_resto_muster = yes
+			}
+		}
+	}
+
+	# D3 林间的集结
+	focus = {
+		id = KZM_muster_in_the_woods
+		icon = GFX_focus_KZM_muster_in_the_woods
+		cost = 4
+		prerequisite = { focus = KZM_pegasus_charge_manual }
+		x = 6
+		y = 3
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Monique
+			recruit_character = KZM_WildMane
+			custom_effect_tooltip = KZM_muster_in_the_woods_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_muster_in_the_woods_tt
+			add_offsite_building = { type = arms_factory level = 4 }
+			add_offsite_building = { type = industrial_complex level = 2 }
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unshone_glory }
+				add_to_variable = { var = KZM_glory_reinforce value = 0.06 }
+				add_to_variable = { var = KZM_glory_defence value = 0.06 }
+			}
+		}
+	}
+
+	# D4 最后一次冲锋
+	focus = {
+		id = KZM_the_last_charge
+		icon = GFX_focus_KZM_the_last_charge
+		cost = 4
+		prerequisite = { focus = KZM_muster_in_the_woods }
+		prerequisite = { focus = KZM_false_banners }
+		x = 6
+		y = 4
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 60
+		}
+		completion_reward = {
+			custom_effect_tooltip = KZM_the_last_charge_tt
+			army_experience = 45
+			add_war_support = 0.08
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unshone_glory }
+				add_to_variable = { var = KZM_glory_breakthrough value = 0.08 }
+				add_to_variable = { var = KZM_glory_xp value = 0.06 }
+				add_to_variable = { var = KZM_glory_attack value = 0.06 }
+			}
+		}
+	}
+
+	# C4 未照耀的荣光（右分支收束）
+	focus = {
+		id = KZM_unshone_glory
+		icon = GFX_focus_KZM_unshone_glory
+		cost = 4
+		prerequisite = { focus = KZM_false_banners }
+		prerequisite = { focus = KZM_the_last_charge }
+		x = 4
+		y = 4
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 80
+		}
+		completion_reward = {
+			custom_effect_tooltip = KZM_unshone_glory_tt
+			add_offsite_building = { type = arms_factory level = 6 }
+			if = {
+				limit = { has_idea = KZM_Prepare_for_Next_War }
+				remove_ideas = KZM_Prepare_for_Next_War
+			}
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = KZM_dyn_unshone_glory }
+				add_to_variable = { var = KZM_glory_attack value = 0.06 }
+				add_to_variable = { var = KZM_glory_defence value = 0.06 }
+				add_to_variable = { var = KZM_glory_breakthrough value = 0.08 }
+				add_to_variable = { var = KZM_glory_reinforce value = 0.06 }
+				add_to_variable = { var = KZM_glory_xp value = 0.06 }
+				add_to_variable = { var = KZM_glory_efficiency value = 0.06 }
+				set_country_flag = KZM_glory_complete
+			}
+		}
+	}
+
+	# =====================================================================
+	# 终幕：极夜天曦
+	# =====================================================================
+	focus = {
+		id = KZM_polar_dawn
+		icon = GFX_focus_KZM_polar_dawn
+		cost = 4
+		prerequisite = { focus = KZM_unspoken_fury }
+		prerequisite = { focus = KZM_unshone_glory }
+		prerequisite = { focus = KZM_lakes_and_woods }
+		x = 0
+		y = 5
+		available_if_capitulated = yes
+		available = {
+			# 1101.3.1 起可点（引擎没有 >=，写 > 前一天）
+			date > 1101.2.28
+			URS = { exists = yes }
+		}
+		ai_will_do = {
+			base = 200
+		}
+		completion_reward = {
+			# >>> KZM_resto_staff
+			recruit_character = KZM_Tola
+			custom_effect_tooltip = KZM_polar_dawn_recruit_tt
+			# <<< KZM_resto_staff
+			custom_effect_tooltip = KZM_tt_polar_dawn
+			hidden_effect = {
+				set_country_flag = KZM_polar_dawn_fired
+				country_event = { id = kzm_resto.20 }
+			# >>> KZM_twelfth_war_se
+			news_event = { id = kzmse.1 hours = 1 }
+			# <<< KZM_twelfth_war_se
+			}
+		}
+	}
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}

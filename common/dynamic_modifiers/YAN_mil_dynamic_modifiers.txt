@@ -1,0 +1,52 @@
+# 大炎军事国策树 · 动态 BUFF【朝野同心】
+# 生成器：docs/_yan_mil_build.py（数据表在 docs/_yan_mil_spirits.py）
+#
+# 承接三军精神之外的**全部**加成：
+#   · 主干 4（军制维新）+ 天枢 8（联勤/C4ISR）+ 三军协同 3；
+#   · 兵种分支里「不属于本兵种」而被剥离出来的键（如工业产能、破译、经验损失）。
+# 机制：每个修正符直读变量 YAN_mil_tz_<键>；相关国策完成时 add_to_variable 加数，
+#      数值原地成长、不换精神、无档位折算。
+# 挂载：整军经武（YAN_mil_reform_root）add_dynamic_modifier。
+# 文案键 = modifier id（YAN_mil_tianzhu / _desc）。
+#
+
+YAN_mil_tianzhu = {
+	icon = GFX_idea_YAN_mil_tianzhu
+
+	enable = { always = yes }
+
+	stability_factor = YAN_mil_tz_stability_factor        # 上限 0.1
+	war_support_factor = YAN_mil_tz_war_support_factor        # 上限 0.15
+	army_org_factor = YAN_mil_tz_army_org_factor        # 上限 0.3
+	command_power_gain = YAN_mil_tz_command_power_gain        # 上限 0.1
+	max_planning_factor = YAN_mil_tz_max_planning_factor        # 上限 0.1
+	land_reinforce_rate = YAN_mil_tz_land_reinforce_rate        # 上限 0.05
+	training_time_factor = YAN_mil_tz_training_time_factor        # 上限 -0.1
+	research_speed_factor = YAN_mil_tz_research_speed_factor        # 上限 0.1
+	command_cap_increase = YAN_mil_tz_command_cap_increase        # 上限 25
+	army_strength_factor = YAN_mil_tz_army_strength_factor        # 上限 0.1
+	army_org_regain = YAN_mil_tz_army_org_regain        # 上限 0.15
+	attrition = YAN_mil_tz_attrition        # 上限 -0.2
+	supply_consumption_factor = YAN_mil_tz_supply_consumption_factor        # 上限 -0.15
+	no_supply_grace = YAN_mil_tz_no_supply_grace        # 上限 96
+	spotting_chance = YAN_mil_tz_spotting_chance        # 上限 0.2
+	recon_factor = YAN_mil_tz_recon_factor        # 上限 0.15
+	decryption_factor = YAN_mil_tz_decryption_factor        # 上限 0.15
+	initiative_factor = YAN_mil_tz_initiative_factor        # 上限 0.05
+	positioning = YAN_mil_tz_positioning        # 上限 0.15
+	naval_coordination = YAN_mil_tz_naval_coordination        # 上限 0.1
+	air_mission_efficiency = YAN_mil_tz_air_mission_efficiency        # 上限 0.1
+	air_superiority_efficiency = YAN_mil_tz_air_superiority_efficiency        # 上限 0.1
+	air_intercept_efficiency = YAN_mil_tz_air_intercept_efficiency        # 上限 0.1
+	air_cas_efficiency = YAN_mil_tz_air_cas_efficiency        # 上限 0.1
+	intel_network_gain_factor = YAN_mil_tz_intel_network_gain_factor        # 上限 0.1
+	army_defence_factor = YAN_mil_tz_army_defence_factor        # 上限 0.15
+	max_dig_in = YAN_mil_tz_max_dig_in        # 上限 0.3
+	army_attack_factor = YAN_mil_tz_army_attack_factor        # 上限 0.15
+	navy_screen_attack_factor = YAN_mil_tz_navy_screen_attack_factor        # 上限 0.1
+	air_agility_factor = YAN_mil_tz_air_agility_factor        # 上限 0.05
+	air_attack_factor = YAN_mil_tz_air_attack_factor        # 上限 0.05
+	ground_attack_factor = YAN_mil_tz_ground_attack_factor        # 上限 0.1
+	industrial_capacity_factory = YAN_mil_tz_industrial_capacity_factory        # 上限 0.05
+	industrial_capacity_dockyard = YAN_mil_tz_industrial_capacity_dockyard        # 上限 0.05
+}

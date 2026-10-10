@@ -1,0 +1,2661 @@
+focus_tree = {
+	id = TAR_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = TAR
+		}
+	}
+	default = no
+
+    #公爵归来
+	focus = {
+		id = TAR_the_Duke_returns
+		icon = GFX_focus_TAR_the_Duke_returns
+		cost = 1
+		x = 0
+		y = 0
+
+		completion_reward = {
+			set_power_balance = {
+				id = TAR_power_balance
+				left_side = TAR_bop_iron_duke_side
+				right_side = TAR_bop_red_dragon_side
+				set_value = -0.1
+			}
+		}
+	}
+
+    #准备进军
+	focus = {
+		id = TAR_support_the_front_line
+		#icon = GFX_focus_TAR_support_the_front_line
+		icon = GFX_focus_generic_license_production
+		cost = 2
+        prerequisite = {
+			focus = TAR_the_Duke_returns
+		} 
+		x = -8
+		y = 1
+        relative_position_id = TAR_the_Duke_returns
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_debuff_idea
+					add_idea = TAR_military_buff_idea
+				}
+			}
+			unlock_decision_category_tooltip = VIC_military_construction_decisions
+			set_country_flag = VIC_military_construction_flag
+			every_subject_country = {
+				unlock_decision_category_tooltip = VIC_military_construction_decisions
+				set_country_flag = VIC_military_construction_flag
+			}
+			unlock_decision_tooltip = VIC_attack_VRA
+			unlock_decision_tooltip = VIC_attack_VRB
+			unlock_decision_tooltip = VIC_attack_VRC
+			unlock_decision_tooltip = VIC_attack_VRD
+			set_country_flag = VIC_suppress_rebellion
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			set_variable = { VIC_war_preparations = 10 }
+			hidden_effect = {
+				remove_ideas = TAR_military_debuff_idea
+				add_to_variable = {
+					var = TAR_military_war_support_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_military_max_command_power_dynamic_var
+					value = 20
+				}
+				add_dynamic_modifier = {
+					modifier = TAR_military_buff_dynamic_modifier
+				}
+			}
+		}
+	}
+
+    #码好棋子
+	focus = {
+		id = TAR_arrange_the_chess_pieces
+		#icon = GFX_focus_TAR_arrange_the_chess_pieces
+		icon = GFX_goal_generic_military_deal
+		cost = 2
+        prerequisite = {
+			focus = TAR_support_the_front_line
+		} 
+		x = -3
+		y = 1
+        relative_position_id = TAR_support_the_front_line
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			set_country_flag = VIC_add_group_support
+			unlock_decision_tooltip = VIC_add_Navy_support_TAR
+			unlock_decision_tooltip = VIC_add_Navy_support_guns_TAR
+			unlock_decision_tooltip = VIC_minus_Navy_support_VGO
+			unlock_decision_tooltip = VIC_add_Abercorn_support_TAR
+			unlock_decision_tooltip = VIC_add_Abercorn_support_guns_TAR
+			unlock_decision_tooltip = VIC_minus_Abercorn_support_VGO
+		}
+	}
+
+    #接触深池
+	focus = {
+		id = TAR_touching_deep_pools
+		#icon = GFX_focus_TAR_touching_deep_pools
+		icon = GFX_focus_SWE_refuge_from_war
+		cost = 5
+        prerequisite = {
+			focus = TAR_arrange_the_chess_pieces
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_arrange_the_chess_pieces
+
+		completion_reward = {
+			#add_ideas = TAR_
+			add_power_balance_value = {
+				id = TAR_power_balance
+				value = -0.1
+			}
+			DUB = {
+				hidden_effect = {
+					transfer_navy = {
+						target = TAR
+					}
+				}
+				every_owned_state = {
+					limit = { is_core_of = PREV }
+					add_core_of = TAR
+					remove_core_of = PREV
+				}
+				every_character = {
+					set_nationality = TAR
+				}
+				TAR = {
+					annex_country = {
+						target = PREV
+						transfer_troops = yes
+					}
+				}
+				
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+		}
+	}
+
+    #钢铁军团
+	focus = {
+		id = TAR_integrate_the_General_Staff
+		#icon = GFX_focus_TAR_integrate_the_General_Staff
+		icon = GFX_focus_generic_swooping_falcon
+		cost = 5
+        prerequisite = {
+			focus = TAR_support_the_front_line
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_support_the_front_line
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_buff_dummy_idea
+					add_idea = TAR_integrate_the_General_Staff_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			army_experience = 35
+			custom_effect_tooltip = unlock_army_chief_tooltip
+			show_ideas_tooltip = TAR_Taomaosi_Bala_army_chief
+			show_ideas_tooltip = TAR_John_McKee_army_chief
+			custom_effect_tooltip = unlock_high_command_tooltip
+			show_ideas_tooltip = TAR_Maylock_Bans_high_command
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_military_command_power_gain_mult_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_military_army_org_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = TAR_military_max_command_power_mult_dynamic_var
+					value = 0.3
+				}
+			}
+		}
+	}
+
+    #公爵的军工厂
+	focus = {
+		id = TAR_Duke_Arsenal
+		#icon = GFX_focus_TAR_Duke_Arsenal
+		icon = GFX_goal_generic_construct_mil_factory
+		cost = 5
+        prerequisite = {
+			focus = TAR_support_the_front_line
+		} 
+		x = 3
+		y = 1
+        relative_position_id = TAR_support_the_front_line
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+		}
+	}
+
+    #闪电攻势
+	focus = {
+		id = TAR_a_completely_new_military_mind
+		#icon = GFX_focus_TAR_a_completely_new_military_mind
+		icon = GFX_focus_generic_heavy_tank
+		cost = 5
+        prerequisite = {
+			focus = TAR_integrate_the_General_Staff
+		} 
+        mutually_exclusive = { focus = TAR_tried_and_tested_tactics }
+		x = -1
+		y = 1
+        relative_position_id = TAR_integrate_the_General_Staff
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_buff_dummy_idea
+					add_idea = TAR_shandian_gongshi_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_military_army_armor_attack_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_military_army_armor_defence_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_military_army_speed_factor_dynamic_var
+					value = 0.1
+				}
+			}
+			add_power_balance_value = {
+				id = TAR_power_balance
+				value = -0.1
+			}
+
+			add_power_balance_value = {
+				id = VCA_power_balance
+				value = -0.1
+			}
+		}
+	}
+
+    #稳步推进
+	focus = {
+		id = TAR_tried_and_tested_tactics
+		#icon = GFX_focus_TAR_tried_and_tested_tactics
+		icon = GFX_focus_generic_limited_social_mobilization
+		cost = 5
+        prerequisite = {
+			focus = TAR_integrate_the_General_Staff
+		}
+        mutually_exclusive = { focus = TAR_a_completely_new_military_mind }
+		x = 1
+		y = 1
+        relative_position_id = TAR_integrate_the_General_Staff
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_buff_dummy_idea
+					add_idea = TAR_motorized_Logistics_Department_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_military_army_armor_attack_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_military_army_armor_defence_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_military_max_planning_dynamic_var
+					value = 0.1
+				}
+			}
+			add_power_balance_value = {
+				id = TAR_power_balance
+				value = -0.2
+			}
+		}
+	}
+
+    #投资武器研发
+	focus = {
+		id = TAR_reorganization_of_the_land_fleet
+		#icon = GFX_focus_TAR_reorganization_of_the_land_fleet
+		icon = GFX_focus_generic_money_for_equipment
+		cost = 5
+        prerequisite = {
+			focus = TAR_Duke_Arsenal
+		} 
+		x = 2
+		y = 1
+        relative_position_id = TAR_Duke_Arsenal
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			unlock_decision_tooltip = VIC_MBT_research
+			unlock_decision_tooltip = VIC_armed_helicopter_research
+			unlock_decision_tooltip = VIC_infantry_weapons_research
+			unlock_decision_tooltip = VIC_arts_weapons_research
+			set_country_flag = VIC_weapons_research_flag
+		}
+	}
+
+    #速战速决
+	focus = {
+		id = TAR_motorized_Logistics_Department
+		#icon = GFX_focus_TAR_motorized_Logistics_Department
+		icon = GFX_focus_prc_infiltration
+		cost = 5
+        prerequisite = {
+			focus = TAR_a_completely_new_military_mind
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_a_completely_new_military_mind
+
+		completion_reward = {
+			custom_effect_tooltip = TAR_motorized_Logistics_Department_tt
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				set_technology = { TAR_special_armor_tech = 1 popup = no }
+				remove_dynamic_modifier = { modifier = TAR_military_buff_dynamic_modifier }
+				add_dynamic_modifier = { modifier = TAR_military_buff_dynamic_modifier2 }
+				add_to_variable = {
+					var = TAR_military_breakthrough_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+    #钢铁洪流
+	focus = {
+		id = TAR_emphasis_on_training
+		#icon = GFX_focus_TAR_emphasis_on_training
+		icon = GFX_focus_generic_mass_production
+		cost = 5
+        prerequisite = {
+            focus = TAR_tried_and_tested_tactics
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_tried_and_tested_tactics
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_buff_dummy_idea
+					add_idea = TAR_emphasis_on_training_idea
+				}
+			}
+			hidden_effect = {
+				add_ideas = TAR_armor_cost_idea
+				remove_dynamic_modifier = { modifier = TAR_military_buff_dynamic_modifier }
+				add_dynamic_modifier = { modifier = TAR_military_buff_dynamic_modifier4 }
+			}
+		}
+	}
+
+    #装甲巡洋舰
+	focus = {
+		id = TAR_new_high_speed_warships
+		#icon = GFX_focus_TAR_new_high_speed_warships
+		icon = GFX_focus_PHI_the_concrete_battleship
+		cost = 5
+        prerequisite = {
+			focus = TAR_reorganization_of_the_land_fleet
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_reorganization_of_the_land_fleet
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			add_tech_bonus = {
+				name = TAR_new_high_speed_warships
+				bonus = 2
+				uses = 2
+				category = landship
+			}
+		}
+	}
+
+    #贯彻机动作战
+	focus = {
+		id = TAR_mechanized_tactics
+		#icon = GFX_focus_TAR_mechanized_tactics
+		icon = GFX_focus_SOV_the_glory_of_the_red_army_alternative
+		cost = 5
+        prerequisite = {
+			focus = TAR_motorized_Logistics_Department
+		} 
+		x = -1
+		y = 1
+        relative_position_id = TAR_motorized_Logistics_Department
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_buff_dummy_idea
+					add_idea = TAR_mechanized_tactics_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			add_doctrine_cost_reduction = {
+				name = TAR_mechanized_tactics
+				cost_reduction = 0.5
+				uses = 1
+				category = cat_mobile_warfare
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_military_army_advisor_cost_factor_dynamic_var
+					value = -0.3
+				}
+                add_to_variable = {
+					var = TAR_military_experience_gain_army_factor_dynamic_var
+					value = 0.15
+				}
+                add_to_variable = {
+					var = TAR_military_doctrine_cost_factor_dynamic_var
+					value = -0.1
+				}
+			}
+		}
+	}
+
+    #野战医院改革
+	focus = {
+		id = TAR_absolute_elite
+		#icon = GFX_focus_TAR_absolute_elite
+		icon = GFX_focus_generic_field_hostpital
+		cost = 5
+        prerequisite = {
+			focus = TAR_emphasis_on_training
+			focus = TAR_motorized_Logistics_Department
+		} 
+		x = -1
+		y = 1
+        relative_position_id = TAR_emphasis_on_training
+
+		completion_reward = {
+			custom_effect_tooltip = TAR_absolute_elite_tt
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			army_experience = 75
+			hidden_effect = {
+				set_technology = { TAR_medical_tech = 1 popup = no }
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = TAR_military_buff_dynamic_modifier2 }
+					}
+					remove_dynamic_modifier = { modifier = TAR_military_buff_dynamic_modifier2 }
+					add_dynamic_modifier = { modifier = TAR_military_buff_dynamic_modifier3 }
+				}
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = TAR_military_buff_dynamic_modifier4 }
+					}
+					remove_dynamic_modifier = { modifier = TAR_military_buff_dynamic_modifier4 }
+					add_dynamic_modifier = { modifier = TAR_military_buff_dynamic_modifier5 }
+				}
+			}
+		}
+	}
+	
+	#严苛训练
+	focus = {
+		id = TAR_yanke_xunlian 
+		#icon = GFX_focus_TAR_absolute_elite
+		icon = GFX_focus_AST_call_that_a_knife
+		cost = 5
+        prerequisite = {
+			focus = TAR_absolute_elite
+		} 
+		prerequisite = {
+			focus = TAR_Blitzkrieg
+			focus = TAR_training_in_a_brutal_environment
+		} 
+		x = 0
+		y = 2
+        relative_position_id = TAR_absolute_elite
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_buff_dummy_idea
+					add_idea = TAR_TAR_yanke_xunlian_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_military_army_attack_and_defence_factor_dynamic_var
+					value = 0.05
+				}
+                add_to_variable = {
+					var = TAR_military_army_morale_factor_dynamic_var
+					value = 0.05
+				}
+                add_to_variable = {
+					var = TAR_military_training_time_army_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+    #计行合一
+	focus = {
+		id = TAR_expand_the_elite_establishment
+		#icon = GFX_focus_TAR_expand_the_elite_establishment
+		icon = GFX_focus_PER_communist_afghanistan_intervention
+		cost = 5
+        prerequisite = {
+			focus = TAR_emphasis_on_training
+		} 
+		x = 1
+		y = 1
+        relative_position_id = TAR_emphasis_on_training
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_buff_dummy_idea
+					add_idea = TAR_mechanized_tactics_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			add_doctrine_cost_reduction = {
+				name = TAR_expand_the_elite_establishment
+				cost_reduction = 0.5
+				uses = 1
+				category = cat_grand_battle_plan
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_military_army_advisor_cost_factor_dynamic_var
+					value = -0.3
+				}
+                add_to_variable = {
+					var = TAR_military_experience_gain_army_factor_dynamic_var
+					value = 0.15
+				}
+                add_to_variable = {
+					var = TAR_military_doctrine_cost_factor_dynamic_var
+					value = -0.1
+				}
+			}
+		}
+	}
+
+    #简化卡车生产线
+	focus = {
+		id = TAR_wellington_Air_Force_Academy
+		#icon = GFX_focus_TAR_wellington_Air_Force_Academy
+		icon = GFX_focus_generic_motor_cycle
+		cost = 5
+        prerequisite = {
+			focus = TAR_Duke_Arsenal
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_Duke_Arsenal
+
+		completion_reward = {
+			add_ideas = TAR_motorized_idea_cost_idea
+		}
+	}
+
+    #重视后勤
+	focus = {
+		id = TAR_Blitzkrieg
+		#icon = GFX_focus_TAR_Blitzkrieg
+		icon = GFX_focus_INS_import_lumber
+		cost = 5
+        prerequisite = {
+			focus = TAR_mechanized_tactics
+		}
+		x = 0
+		y = 1
+        relative_position_id = TAR_mechanized_tactics
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_buff_dummy_idea
+					add_idea = TAR_Blitzkrieg_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_military_out_of_supply_factor_dynamic_var
+					value = -0.1
+				}
+                add_to_variable = {
+					var = TAR_military_supply_consumption_factor_dynamic_var
+					value = -0.1
+				}
+                add_to_variable = {
+					var = TAR_military_supply_node_range_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_military_no_supply_grace_dynamic_var
+					value = 48
+				}
+			}
+		}
+	}
+
+    #重视防空
+	focus = { 
+		id = TAR_training_in_a_brutal_environment
+		#icon = GFX_focus_TAR_training_in_a_brutal_environment
+		icon = GFX_focus_PER_construct_air_defenses
+		cost = 5
+        prerequisite = {
+            focus = TAR_expand_the_elite_establishment
+		}  
+		x = 0
+		y = 1
+        relative_position_id = TAR_expand_the_elite_establishment
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_buff_dummy_idea
+					add_idea = TAR_training_in_a_brutal_environment_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+                add_to_variable = {
+					var = TAR_military_enemy_army_bonus_air_superiority_factor_dynamic_var
+					value = -0.05
+				}
+                add_to_variable = {
+					var = TAR_military_cas_damage_reduction_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+    #提拔年轻将领
+	focus = {
+		id = TAR_heavenly_punishment_is_down
+		#icon = GFX_focus_TAR_heavenly_punishment_is_down
+		icon = GFX_focus_generic_military_mission
+		cost = 5
+        prerequisite = {
+			focus = TAR_wellington_Air_Force_Academy
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_wellington_Air_Force_Academy
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_military_buff_dummy_idea
+					add_idea = TAR_heavenly_punishment_is_down_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_military_doctrine_cost_factor_dynamic_var
+					value = -0.25
+				}
+			}
+		}
+	}
+	
+	#纳斯尔沙军事学院
+	focus = {
+		id = TAR_nasiersha_junshixueyuan
+		#icon = GFX_focus_TAR_heavenly_punishment_is_down
+		icon = GFX_focus_research
+		cost = 8
+        prerequisite = {
+			focus = TAR_heavenly_punishment_is_down
+		} 
+		x = 1
+		y = 1
+        relative_position_id = TAR_heavenly_punishment_is_down
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+    #行动：维多利亚在燃烧
+	focus = {
+		id = TAR_Action_Victoria_is_burning
+		#icon = GFX_focus_TAR_Action_Victoria_is_burning
+		icon = GFX_focus_SIA_built_to_withstand_every_flame
+		cost = 5
+        prerequisite = {
+			focus = TAR_yanke_xunlian
+		} 
+
+		available = {
+			has_global_flag = VIC_joint_march_II_end
+			OR = {
+				VCA = {
+					exists = yes
+				}
+				VGO = {
+					exists = yes
+				}
+				VWI = {
+					exists = yes
+				}
+			}
+		}
+		
+		x = 0
+		y = 1
+        relative_position_id = TAR_yanke_xunlian
+
+		completion_reward = {
+			unlock_decision_tooltip = VIC_military_operation_against_VGO
+			unlock_decision_tooltip = VIC_military_operation_against_VCA
+			unlock_decision_tooltip = VIC_military_operation_against_VWI
+			set_country_flag = VIC_military_operation_flag
+		}
+	}
+
+    #红龙的维多利亚
+	focus = {
+		id = TAR_Victoria_of_the_Red_Dragon
+		#icon = GFX_focus_TAR_Victoria_of_the_Red_Dragon
+		icon = GFX_focus_SWE_organize_a_putsch
+		cost = 2
+        prerequisite = {
+			focus = TAR_the_Duke_returns
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_the_Duke_returns
+
+		completion_reward = {
+			unlock_decision_category_tooltip = VIC_divided_empire_decisions
+			set_country_flag = VIC_divided_empire_flag
+			every_subject_country = {
+				unlock_decision_category_tooltip = VIC_divided_empire_decisions
+				set_country_flag = VIC_divided_empire_flag
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_politics_debuff_idea
+					add_idea = TAR_politics_buff_idea
+				}
+			}
+			hidden_effect = {
+				remove_ideas = TAR_politics_debuff_idea
+				add_to_variable = {
+					var = TAR_politics_political_power_gain_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_politics_stability_factor_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_politics_stability_weekly_dynamic_var
+					value = 0.002
+				}
+				add_dynamic_modifier = {
+					modifier = TAR_politics_buff_dynamic_modifier
+				}
+			}
+		}
+	}
+
+    #保持公爵绝对权威
+	focus = {
+		id = TAR_maintain_the_absolute_authority_of_the_duke
+		#icon = GFX_focus_TAR_maintain_the_absolute_authority_of_the_duke
+		icon = GFX_focus_rom_handle_king
+		cost = 5
+        prerequisite = {
+			focus = TAR_Victoria_of_the_Red_Dragon
+		} 
+        mutually_exclusive = { focus = TAR_return_power_to_the_king }
+		x = -1
+		y = 1
+        relative_position_id = TAR_Victoria_of_the_Red_Dragon
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_politics_buff_dummy_idea
+					add_idea = TAR_maintain_the_absolute_authority_of_the_duke_idea
+				}
+			}
+			add_power_balance_value = {
+				id = TAR_power_balance
+				value = -0.1
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_politics_authoritarianism_drift_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = TAR_politics_despotism_drift_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+    #还权于王
+	focus = {
+		id = TAR_return_power_to_the_king
+		#icon = GFX_focus_TAR_return_power_to_the_king
+		icon = GFX_focus_AFG_retire_the_uncles
+		cost = 5
+        prerequisite = {
+			focus = TAR_Victoria_of_the_Red_Dragon
+		} 
+        mutually_exclusive = { focus = TAR_maintain_the_absolute_authority_of_the_duke }
+		x = 1
+		y = 1
+        relative_position_id = TAR_Victoria_of_the_Red_Dragon
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_politics_buff_dummy_idea
+					add_idea = TAR_return_power_to_the_king_idea
+				}
+			}
+			add_power_balance_value = {
+				id = TAR_power_balance
+				value = 0.1
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_politics_conservatism_drift_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = TAR_politics_despotism_drift_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+    #稳定时局
+	focus = {
+		id = TAR_stabilize_the_situation
+		#icon = GFX_focus_TAR_stabilize_the_situation
+		icon = GFX_focus_PER_embrace_opulence
+		cost = 5
+        prerequisite = {
+			focus = TAR_maintain_the_absolute_authority_of_the_duke
+            focus = TAR_return_power_to_the_king
+		} 
+		x = -1
+		y = 1
+        relative_position_id = TAR_return_power_to_the_king
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_politics_buff_dummy_idea
+					add_idea = TAR_stabilize_the_situation_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_politics_stability_factor_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_politics_stability_weekly_dynamic_var
+					value = 0.002
+				}
+			}
+		}
+	}
+
+    #发布戒严令
+	focus = {
+		id = TAR_martial_law_was_issued
+		#icon = GFX_focus_TAR_martial_law_was_issued
+		icon = GFX_goal_generic_forceful_treaty
+		cost = 5
+        prerequisite = {
+			focus = TAR_stabilize_the_situation
+		} 
+        mutually_exclusive = { focus = TAR_maintain_some_freedom }
+		x = -1
+		y = 1
+        relative_position_id = TAR_stabilize_the_situation
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_politics_buff_dummy_idea
+					add_idea = TAR_martial_law_was_issued_idea
+				}
+			}
+			add_power_balance_value = {
+				id = TAR_power_balance
+				value = -0.1
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_politics_mobilization_laws_cost_factor_dynamic_var
+					value = -0.25
+				}
+				add_to_variable = {
+					var = TAR_politics_trade_laws_cost_factor_dynamic_var
+					value = -0.25
+				}
+                add_to_variable = {
+					var = TAR_politics_economy_cost_factor_dynamic_var
+					value = -0.25
+				}
+				add_to_variable = {
+					var = TAR_politics_political_power_gain_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_politics_consumer_goods_factor_dynamic_var
+					value = -0.05
+				}
+				add_to_variable = {
+					var = TAR_politics_war_support_factor_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_politics_offensive_war_stability_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_politics_defensive_war_stability_factor_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_politics_authoritarianism_drift_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = TAR_politics_despotism_drift_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+    #维持一定自由
+	focus = {
+		id = TAR_maintain_some_freedom
+		#icon = GFX_focus_TAR_maintain_some_freedom
+		icon = GFX_focus_GER_expand_gestapo
+		cost = 5
+        prerequisite = {
+			focus = TAR_stabilize_the_situation
+		} 
+        mutually_exclusive = { focus = TAR_martial_law_was_issued }
+		x = 1
+		y = 1
+        relative_position_id = TAR_stabilize_the_situation
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_politics_buff_dummy_idea
+					add_idea = TAR_maintain_some_freedom_idea
+				}
+			}
+			add_power_balance_value = {
+				id = TAR_power_balance
+				value = 0.1
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_politics_mobilization_laws_cost_factor_dynamic_var
+					value = -0.25
+				}
+				add_to_variable = {
+					var = TAR_politics_trade_laws_cost_factor_dynamic_var
+					value = -0.25
+				}
+                add_to_variable = {
+					var = TAR_politics_economy_cost_factor_dynamic_var
+					value = -0.25
+				}
+				add_to_variable = {
+					var = TAR_politics_political_power_gain_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_politics_consumer_goods_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = TAR_politics_war_support_factor_dynamic_var
+					value = -0.1
+				}
+                add_to_variable = {
+					var = TAR_politics_offensive_war_stability_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = TAR_politics_defensive_war_stability_factor_dynamic_var
+					value = -0.1
+				}
+                add_to_variable = {
+					var = TAR_politics_conservatism_drift_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = TAR_politics_despotism_drift_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+    #帝国终将归来！
+	focus = {
+		id = TAR_the_Empire_will_return
+		#icon = GFX_focus_TAR_the_Empire_will_return
+		icon = GFX_focus_hol_united_netherlands
+		cost = 5
+        prerequisite = {
+			focus = TAR_martial_law_was_issued
+            focus = TAR_maintain_some_freedom
+		} 
+		x = -1
+		y = 3
+        relative_position_id = TAR_maintain_some_freedom
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_politics_buff_dummy_idea
+					add_idea = TAR_the_Empire_will_return_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_politics_war_support_factor_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_politics_stability_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_politics_compliance_growth_dynamic_var
+					value = 0.2
+				}
+                add_to_variable = {
+					var = TAR_politics_surrender_limit_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+    #掌控经济
+	focus = {
+		id = TAR_take_control_of_the_economy
+		#icon = GFX_focus_TAR_take_control_of_the_economy
+		icon = GFX_focus_generic_annex_country_2
+		cost = 2
+        prerequisite = {
+			focus = TAR_the_Duke_returns
+		} 
+		x = 5
+		y = 1
+        relative_position_id = TAR_the_Duke_returns
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_debuff_idea
+					add_idea = TAR_economy_buff_idea
+				}
+			}
+			unlock_decision_category_tooltip = VIC_economic_development_decisions
+			set_country_flag = VIC_economic_development_flag
+			every_subject_country = {
+				unlock_decision_category_tooltip = VIC_economic_development_decisions
+				set_country_flag = VIC_economic_development_flag
+			}
+			hidden_effect = {
+				remove_ideas = TAR_economy_debuff_idea
+				add_to_variable = {
+					var = TAR_economy_production_lack_of_resource_penalty_factor_dynamic_var
+					value = -0.15
+				}
+				add_dynamic_modifier = {
+					modifier = TAR_economy_buff_dynamic_modifier
+				}
+			}
+		}
+	}
+
+    #绝对军事管理
+	focus = {
+		id = TAR_absolute_military_management
+		#icon = GFX_focus_TAR_absolute_military_management
+		icon = GFX_goal_generic_build_tank
+		cost = 5
+        prerequisite = {
+			focus = TAR_take_control_of_the_economy
+		} 
+		x = -2
+		y = 1
+        relative_position_id = TAR_take_control_of_the_economy
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_absolute_military_management_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_political_power_gain_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_economy_mobilization_laws_cost_factor_dynamic_var
+					value = -0.25
+				}
+                add_to_variable = {
+					var = TAR_economy_trade_laws_cost_factor_dynamic_var
+					value = -0.25
+				}
+                add_to_variable = {
+					var = TAR_economy_economy_cost_factor_dynamic_var
+					value = -0.25
+				}
+                add_to_variable = {
+					var = TAR_economy_political_advisor_cost_factor_dynamic_var
+					value = -0.25
+				}
+			}
+		}
+	}
+
+    #控制必需品生产
+	focus = {
+		id = TAR_control_the_production_of_essential_goods
+		#icon = GFX_focus_TAR_control_the_production_of_essential_goods
+		icon = GFX_focus_DEN_no_regulations
+		cost = 5
+        prerequisite = {
+			focus = TAR_take_control_of_the_economy
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_take_control_of_the_economy
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_control_the_production_of_essential_goods_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_stability_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_economy_war_support_factor_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_economy_line_change_production_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = TAR_economy_consumer_goods_factor_dynamic_var
+					value = -0.05
+				}
+			}
+		}
+	}
+
+    #稳定工业动员
+	focus = {
+		id = TAR_tabilize_industrial_mobilization
+		#icon = GFX_focus_TAR_tabilize_industrial_mobilization
+		icon = GFX_focus_SOV_organize_wreckers
+		cost = 5
+        prerequisite = {
+			focus = TAR_take_control_of_the_economy
+		} 
+		x = 3
+		y = 1
+        relative_position_id = TAR_take_control_of_the_economy
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_tabilize_industrial_mobilization_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_industrial_capacity_factory_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_economy_production_factory_efficiency_gain_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+    #控制民用企业
+	focus = {
+		id = TAR_control_of_civilian_enterprises
+		#icon = GFX_focus_TAR_control_of_civilian_enterprises
+		icon = GFX_focus_CHI_promote_national_currency
+		cost = 5
+        prerequisite = {
+			focus = TAR_absolute_military_management
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_absolute_military_management
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_control_of_civilian_enterprises_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_consumer_goods_factor_dynamic_var
+					value = -0.1
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+		}
+	}
+
+    #重启配给制
+	focus = {
+		id = TAR_restart_rationing
+		#icon = GFX_focus_TAR_restart_rationing
+		icon = GFX_focus_generic_sympathetic_judges
+		cost = 5
+        prerequisite = {
+			focus = TAR_control_the_production_of_essential_goods
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_control_the_production_of_essential_goods
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_restart_rationing_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_consumer_goods_factor_dynamic_var
+					value = -0.05
+				}
+				add_to_variable = {
+					var = TAR_economy_production_factory_start_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+    #军事管理化
+	focus = {
+		id = TAR_military_administration
+		#icon = GFX_focus_TAR_military_administration
+		icon = GFX_goal_demand_sudetenland
+		cost = 5
+        prerequisite = {
+			focus = TAR_tabilize_industrial_mobilization
+		} 
+		x = -1
+		y = 1
+        relative_position_id = TAR_tabilize_industrial_mobilization
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_control_of_civilian_enterprises_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_consumer_goods_factor_dynamic_var
+					value = -0.1
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				}
+			}
+		}
+	}
+
+    #刺激军工发展
+	focus = {
+		id = TAR_stimulate_the_development_of_the_military_industry
+		#icon = GFX_focus_TAR_stimulate_the_development_of_the_military_industry
+		icon = GFX_goal_generic_small_arms
+		cost = 5
+        prerequisite = {
+			focus = TAR_tabilize_industrial_mobilization
+		} 
+		x = 1
+		y = 1
+        relative_position_id = TAR_tabilize_industrial_mobilization
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_stimulate_the_development_of_the_military_industry_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_production_speed_arms_factory_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_economy_production_speed_industrial_complex_factor_dynamic_var
+					value = -0.1
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				}
+			}
+		}
+	}
+
+    #延长工作时间
+	focus = {
+		id = TAR_extended_working_hours
+		#icon = GFX_focus_TAR_extended_working_hours
+		icon = GFX_focus_SIA_prepare_for_a_long_war
+		cost = 5
+        prerequisite = {
+			focus = TAR_control_of_civilian_enterprises
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_control_of_civilian_enterprises
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_extended_working_hours_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_line_change_production_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = TAR_economy_consumer_goods_factor_dynamic_var
+					value = -0.05
+				}
+			}
+		}
+	}
+
+    #进行物价战争
+	focus = {
+		id = TAR_wage_a_price_war
+		#icon = GFX_focus_TAR_wage_a_price_war
+		icon = GFX_focus_generic_reduce_unneccessary_expenditure
+		cost = 5
+        prerequisite = {
+			focus = TAR_restart_rationing
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_restart_rationing
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_wage_a_price_war_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_political_power_gain_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_economy_war_support_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = TAR_economy_consumer_goods_factor_dynamic_var
+					value = -0.05
+				}
+			}
+		}
+	}
+
+    #工厂集中制
+	focus = {
+		id = TAR_factory_centralization
+		#icon = GFX_focus_TAR_factory_centralization
+		icon = GFX_focus_GER_kdf_wagen
+		cost = 5
+        prerequisite = {
+			focus = TAR_military_administration
+		} 
+        prerequisite = {
+			focus = TAR_stimulate_the_development_of_the_military_industry
+		} 
+        mutually_exclusive = { focus = TAR_resilient_Factory }
+		x = 0
+		y = 1
+        relative_position_id = TAR_military_administration
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_factory_centralization_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_production_factory_efficiency_gain_factor_dynamic_var
+					value = 0.05
+				}
+                add_to_variable = {
+					var = TAR_economy_production_factory_max_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+    #弹性工厂
+	focus = {
+		id = TAR_resilient_Factory
+		#icon = GFX_focus_TAR_resilient_Factory
+		icon = GFX_focus_generic_public_works
+		cost = 5
+        prerequisite = {
+			focus = TAR_military_administration
+		} 
+        prerequisite = {
+			focus = TAR_stimulate_the_development_of_the_military_industry
+		} 
+        mutually_exclusive = { focus = TAR_factory_centralization }
+		x = 0
+		y = 1
+        relative_position_id = TAR_stimulate_the_development_of_the_military_industry
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_resilient_Factory_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_production_factory_start_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+                add_to_variable = {
+					var = TAR_economy_line_change_production_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+    #增加军事研究预算
+	focus = {
+		id = TAR_increase_the_budget_for_military_research
+		#icon = GFX_focus_TAR_increase_the_budget_for_military_research
+		icon = GFX_goal_tfv_generic_tech_sharing
+		cost = 5
+        prerequisite = {
+			focus = TAR_wage_a_price_war
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_wage_a_price_war
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_increase_the_budget_for_military_research_idea
+				}
+			}
+			add_research_slot = 1
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_research_speed_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+    #资源调配与出口部
+	focus = {
+		id = TAR_Resource_Deployment_Export_Department
+		#icon = GFX_focus_TAR_Resource_Deployment_Export_Department
+		icon = GFX_focus_GER_autarky_ambitions
+		cost = 5
+        prerequisite = {
+			focus = TAR_factory_centralization
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_factory_centralization
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_Resource_Deployment_Export_Department_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_local_resources_factor_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_economy_production_lack_of_resource_penalty_factor_dynamic_var
+					value = -0.15
+				}
+                add_to_variable = {
+					var = TAR_economy_min_export_dynamic_var
+					value = -0.1
+				}
+			}
+		}
+	}
+
+    #扩大工业指标
+	focus = {
+		id = TAR_expansion_of_industrial_indicators
+		#icon = GFX_focus_TAR_expansion_of_industrial_indicators
+		icon = GFX_focus_CHL_la_corporacion_araucania
+		cost = 5
+        prerequisite = {
+			focus = TAR_resilient_Factory
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_resilient_Factory
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_expansion_of_industrial_indicators_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_industrial_capacity_factory_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+    #吸纳失业工人
+	focus = {
+		id = TAR_absorb_unemployed_workers
+		#icon = GFX_focus_TAR_absorb_unemployed_workers
+		icon = GFX_focus_generic_full_employment
+		cost = 5
+        prerequisite = {
+			focus = TAR_extended_working_hours
+		} 
+        prerequisite = {
+			focus = TAR_increase_the_budget_for_military_research
+		} 
+		x = -1
+		y = 1
+        relative_position_id = TAR_increase_the_budget_for_military_research
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_absorb_unemployed_workers_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_consumer_goods_factor_dynamic_var
+					value = -0.05
+				}
+                add_to_variable = {
+					var = TAR_economy_stability_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+    #准备更多战争物资
+	focus = {
+		id = TAR_prepare_more_war_materials
+		#icon = GFX_focus_TAR_prepare_more_war_materials
+		icon = GFX_focus_CONGO_copper_cartridges
+		cost = 5
+        prerequisite = {
+			focus = TAR_increase_the_budget_for_military_research
+		} 
+		x = 1
+		y = 1
+        relative_position_id = TAR_increase_the_budget_for_military_research
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_prepare_more_war_materials_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_consumer_max_fuel_factor_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_economy_base_fuel_gain_factor_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_economy_production_speed_anti_air_building_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+    #强制合并工业
+	focus = {
+		id = TAR_forced_merger_of_industries
+		#icon = GFX_focus_TAR_forced_merger_of_industries
+		icon = GFX_focus_GER_prioritize_the_four_year_plan
+		cost = 8
+        prerequisite = {
+			focus = TAR_Resource_Deployment_Export_Department
+            focus = TAR_expansion_of_industrial_indicators
+		} 
+		x = -1
+		y = 1
+        relative_position_id = TAR_expansion_of_industrial_indicators
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_increase_the_budget_for_military_research_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_research_speed_factor_dynamic_var
+					value = 0.05
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				}
+			}
+		}
+	}
+
+    #为了胜利，不惜代价
+	focus = {
+		id = TAR_for_the_sake_of_victory_at_any_cost
+		#icon = GFX_focus_TAR_for_the_sake_of_victory_at_any_cost
+		icon = GFX_focus_ICE_embrace_the_workers_revolution
+		cost = 5
+        prerequisite = {
+			focus = TAR_absorb_unemployed_workers
+		}
+        prerequisite = {
+			focus = TAR_prepare_more_war_materials
+		} 
+		x = -1
+		y = 1
+        relative_position_id = TAR_prepare_more_war_materials
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_for_the_sake_of_victory_at_any_cost_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_local_building_slots_factor_dynamic_var
+					value = 0.15
+				}
+                add_to_variable = {
+					var = TAR_economy_production_factory_max_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+                add_to_variable = {
+					var = TAR_economy_industrial_capacity_factory_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+    #一切优先军队
+	focus = {
+		id = TAR_everything_takes_precedence_over_the_army
+		#icon = GFX_focus_TAR_everything_takes_precedence_over_the_army
+		icon = GFX_focus_generic_public_meetings
+		cost = 5
+        prerequisite = {
+			focus = TAR_forced_merger_of_industries
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_forced_merger_of_industries
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = TAR_economy_buff_dummy_idea
+					add_idea = TAR_everything_takes_precedence_over_the_army_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = TAR_economy_local_consumer_goods_factor_dynamic_var
+					value = -0.1
+				}
+                add_to_variable = {
+					var = TAR_economy_production_factory_efficiency_gain_factor_dynamic_var
+					value = 0.05
+				}
+                add_to_variable = {
+					var = TAR_economy_industrial_capacity_factory_dynamic_var
+					value = 0.1
+				}
+                add_to_variable = {
+					var = TAR_economy_stability_factor_dynamic_var
+					value = -0.1
+				}
+                add_to_variable = {
+					var = TAR_economy_monthly_population_dynamic_var
+					value = -0.1
+				}
+			}
+		}
+	}
+
+	#旧日荣光的归来
+	focus = {
+		id = TAR_Return_of_Former_Glory
+		icon = GFX_focus_TAR_Return_of_Former_Glory
+		cost = 5
+		x = 23
+		y = 0
+
+		allow_branch = {
+			has_global_flag = VIC_civil_war_start
+		}
+
+		completion_reward = {
+			
+		}
+	}
+
+	#铁摄政的梦想
+	focus = {
+		id = TAR_the_dream_of_the_iron_regent
+		#icon = GFX_focus_TAR_the_dream_of_the_iron_regent
+		icon = GFX_focus_IRQ_royal_iraqi_army_alt
+		cost = 5
+        prerequisite = {
+			focus = TAR_Return_of_Former_Glory
+		} 
+		mutually_exclusive = { focus = TAR_the_dragon_reigns_again }
+		x = -7
+		y = 1
+        relative_position_id = TAR_Return_of_Former_Glory
+
+		completion_reward = {
+			
+		}
+	}
+
+	#赋权军队
+	focus = {
+		id = TAR_empower_the_military
+		#icon = GFX_focus_TAR_empower_the_military
+		icon = GFX_focus_AFG_adopt_nufus
+		cost = 5
+        prerequisite = {
+			focus = TAR_the_dream_of_the_iron_regent
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_the_dream_of_the_iron_regent
+
+		completion_reward = {
+			
+		}
+	}
+
+	#提拔军事人才
+	focus = {
+		id = TAR_promote_military_talents
+		#icon = GFX_focus_TAR_promote_military_talents
+		icon = GFX_focus_CHL_departemento_de_las_tropas_nacistas_de_asalto
+		cost = 5
+        prerequisite = {
+			focus = TAR_empower_the_military
+		} 
+		mutually_exclusive = { focus = TAR_march_in_unison }
+		x = -2
+		y = 1
+        relative_position_id = TAR_empower_the_military
+
+		completion_reward = {
+			
+		}
+	}
+
+	#步伐一致
+	focus = {
+		id = TAR_march_in_unison
+		#icon = GFX_focus_TAR_march_in_unison
+		icon = GFX_focus_generic_strike_at_democracy2
+		cost = 5
+        prerequisite = {
+			focus = TAR_empower_the_military
+		} 
+		mutually_exclusive = { focus = TAR_promote_military_talents }
+		x = 0
+		y = 1
+        relative_position_id = TAR_empower_the_military
+
+		completion_reward = {
+			
+		}
+	}
+
+	#秩序再临
+	focus = {
+		id = TAR_order_restored
+		#icon = GFX_focus_TAR_order_restored
+		icon = GFX_focus_SWI_dissolve_the_federal_council
+		cost = 5
+        prerequisite = {
+			focus = TAR_empower_the_military
+		} 
+		x = 2
+		y = 1
+        relative_position_id = TAR_empower_the_military
+
+		completion_reward = {
+			
+		}
+	}
+
+	#军事化经济的复苏
+	focus = {
+		id = TAR_revival_of_the_militarized_economy
+		#icon = GFX_focus_TAR_revival_of_the_militarized_economy
+		icon = GFX_focus_CHL_domestic_production_of_the_willys_mb
+		cost = 5
+        prerequisite = {
+			focus = TAR_promote_military_talents
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_promote_military_talents
+
+		completion_reward = {
+			
+		}
+	}
+
+	#一国，一军，一个元帅
+	focus = {
+		id = TAR_one_country_one_army_one_marshal
+		#icon = GFX_focus_TAR_one_country_one_army_one_marshal
+		icon = GFX_focus_generic_diverse_army
+		cost = 5
+        prerequisite = {
+			focus = TAR_march_in_unison
+		} 
+		prerequisite = {
+			focus = TAR_order_restored
+		}
+		x = 1
+		y = 1
+        relative_position_id = TAR_march_in_unison
+
+		completion_reward = {
+			
+		}
+	}
+
+	#重启文官制度
+	focus = {
+		id = TAR_restart_the_civil_service_system
+		#icon = GFX_focus_TAR_restart_the_civil_service_system
+		icon = GFX_focus_generic_improve_the_administration
+		cost = 5
+        prerequisite = {
+			focus = TAR_revival_of_the_militarized_economy
+			focus = TAR_one_country_one_army_one_marshal
+		} 
+		mutually_exclusive = { focus = TAR_the_military_commands_the_government }
+		x = 0
+		y = 1
+        relative_position_id = TAR_revival_of_the_militarized_economy
+
+		completion_reward = {
+			
+		}
+	}
+
+	#军队指挥政府
+	focus = {
+		id = TAR_the_military_commands_the_government
+		#icon = GFX_focus_TAR_the_military_commands_the_government
+		icon = GFX_focus_generic_advanced_military_studies
+		cost = 5
+        prerequisite = {
+			focus = TAR_revival_of_the_militarized_economy
+			focus = TAR_one_country_one_army_one_marshal
+		} 
+		mutually_exclusive = { focus = TAR_restart_the_civil_service_system }
+		x = 2
+		y = 1
+        relative_position_id = TAR_revival_of_the_militarized_economy
+
+		completion_reward = {
+			
+		}
+	}
+
+	#老将不死，亦不凋零
+	focus = {
+		id = TAR_the_old_general_never_dies_nor_fades_away
+		#icon = GFX_focus_TAR_the_old_general_never_dies_nor_fades_away
+		icon = GFX_focus_generic_infiltration
+		cost = 5
+        prerequisite = {
+			focus = TAR_restart_the_civil_service_system
+			focus = TAR_the_military_commands_the_government
+		} 
+		x = 1
+		y = 1
+        relative_position_id = TAR_restart_the_civil_service_system
+
+		completion_reward = {
+			
+		}
+	}
+
+	#重建国家
+	focus = {
+		id = TAR_Rebuild_the_country
+		#icon = GFX_focus_TAR_Rebuild_the_country
+		icon = GFX_focus_generic_low_cost_housing
+		cost = 5
+        prerequisite = {
+			focus = TAR_the_dream_of_the_iron_regent
+			focus = TAR_the_dragon_reigns_again
+		} 
+		x = 5
+		y = 1
+        relative_position_id = TAR_the_dream_of_the_iron_regent
+
+		completion_reward = {
+			
+		}
+	}
+
+	#控制宣传
+	focus = {
+		id = TAR_Control_propaganda
+		#icon = GFX_focus_TAR_Control_propaganda
+		icon = GFX_focus_generic_radio_communication
+		cost = 5
+        prerequisite = {
+			focus = TAR_Rebuild_the_country
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_Rebuild_the_country
+
+		completion_reward = {
+			
+		}
+	}
+
+	#新经济计划
+	focus = {
+		id = TAR_New_economic_plan
+		#icon = GFX_focus_TAR_New_economic_plan
+		icon = GFX_focus_generic_military_industry
+		cost = 5
+        prerequisite = {
+			focus = TAR_Control_propaganda
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_Control_propaganda
+
+		completion_reward = {
+			
+		}
+	}
+
+	#抓住狮子的头
+	focus = {
+		id = TAR_Seize_the_lions_head
+		#icon = GFX_focus_TAR_Seize_the_lions_head
+		icon = GFX_focus_RAJ_seven_shackles
+		cost = 8
+        prerequisite = {
+			focus = TAR_New_economic_plan
+		} 
+		mutually_exclusive = { focus = TAR_Loosen_economic_control }
+		x = -1
+		y = 1
+        relative_position_id = TAR_New_economic_plan
+
+		completion_reward = {
+			
+		}
+	}
+
+	#放松经济管制
+	focus = {
+		id = TAR_Loosen_economic_control
+		#icon = GFX_focus_TAR_Loosen_economic_control
+		icon = GFX_focus_generic_industry_2
+		cost = 5
+        prerequisite = {
+			focus = TAR_New_economic_plan
+		} 
+		mutually_exclusive = { focus = TAR_Seize_the_lions_head }
+		x = 1
+		y = 1
+        relative_position_id = TAR_New_economic_plan
+
+		completion_reward = {
+			
+		}
+	}
+
+	#战争，只有战争
+	focus = {
+		id = TAR_War_only_war
+		#icon = GFX_focus_TAR_War_only_war
+		icon = GFX_focus_GER_wunderwaffe
+		cost = 5
+        prerequisite = {
+			focus = TAR_Seize_the_lions_head
+			focus = TAR_Loosen_economic_control
+		} 
+		x = 1
+		y = 1
+        relative_position_id = TAR_Seize_the_lions_head
+
+		completion_reward = {
+			
+		}
+	}
+
+	#加冕礼
+	focus = {
+		id = TAR_coronation
+		#icon = GFX_focus_TAR_coronation
+		icon = GFX_focus_generic_monarchist_sentiment
+		cost = 5
+		available = {
+			has_completed_focus = TAR_touching_deep_pools
+		}
+        prerequisite = {
+			focus = TAR_the_dream_of_the_iron_regent
+			focus = TAR_the_dragon_reigns_again
+		} 
+		x = -3
+		y = 1
+        relative_position_id = TAR_the_dragon_reigns_again
+
+		completion_reward = {
+			
+		}
+	}
+
+	#国王的演讲
+	focus = {
+		id = TAR_the_kings_speech
+		#icon = GFX_focus_TAR_the_kings_speech
+		icon = GFX_focus_SWE_radiotjanst
+		cost = 5
+        prerequisite = {
+			focus = TAR_coronation
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_coronation
+
+		completion_reward = {
+			
+		}
+	}
+
+	#王的造神运动
+	focus = {
+		id = TAR_the_kings_deification_movement
+		#icon = GFX_focus_TAR_the_kings_deification_movement
+		icon = GFX_focus_spa_no_compromise_on_carlist_ideals
+		cost = 5
+        prerequisite = {
+			focus = TAR_the_kings_speech
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_the_kings_speech
+
+		completion_reward = {
+			
+		}
+	}
+
+	#巨龙再次君临
+	focus = {
+		id = TAR_the_dragon_reigns_again
+		#icon = GFX_focus_AR_the_dragon_reigns_again
+		icon = GFX_focus_generic_phoenix
+		cost = 5
+		available = {
+			has_completed_focus = TAR_touching_deep_pools
+			power_balance_value = {
+				id = TAR_power_balance
+				value > 0.35
+			}
+		}
+        prerequisite = {
+			focus = TAR_Return_of_Former_Glory
+		} 
+		mutually_exclusive = { focus = TAR_the_dream_of_the_iron_regent }
+		x = 5
+		y = 1
+        relative_position_id = TAR_Return_of_Former_Glory
+
+		completion_reward = {
+			
+		}
+	}
+
+	#重建禁卫军
+	focus = {
+		id = TAR_Rebuild_the_Imperial_Guard
+		#icon = GFX_focus_TAR_Rebuild_the_Imperial_Guard
+		icon = GFX_focus_generic_manpower
+		cost = 5
+        prerequisite = {
+			focus = TAR_the_dragon_reigns_again
+		} 
+		x = -1
+		y = 1
+        relative_position_id = TAR_the_dragon_reigns_again
+
+		completion_reward = {
+			
+		}
+	}
+
+	#对王权的重新审视
+	focus = {
+		id = TAR_Re_examine_the_Royal_Power
+		#icon = GFX_focus_TAR_Re_examine_the_Royal_Power
+		icon = GFX_goal_generic_cavalry
+		cost = 5
+        prerequisite = {
+			focus = TAR_the_dragon_reigns_again
+		} 
+		x = 1
+		y = 1
+        relative_position_id = TAR_the_dragon_reigns_again
+
+		completion_reward = {
+			
+		}
+	}
+
+	#重建政府机关
+	focus = {
+		id = TAR_Rebuild_the_Government_Agencies
+		#icon = GFX_focus_TAR_Rebuild_the_Government_Agencies
+		icon = GFX_focus_generic_home_defense
+		cost = 5
+		available = {
+			593 = {
+				is_fully_controlled_by = ROOT
+			}
+		}
+        prerequisite = {
+			focus = TAR_Rebuild_the_Imperial_Guard
+		} 
+		prerequisite = {
+			focus = TAR_Re_examine_the_Royal_Power
+		} 
+		x = 1
+		y = 1
+        relative_position_id = TAR_Rebuild_the_Imperial_Guard
+
+		completion_reward = {
+			
+		}
+	}
+
+	#废除议会
+	focus = {
+		id = TAR_abolish_parliament
+		#icon = GFX_focus_TAR_abolish_parliament
+		icon = GFX_focus_LAT_suspend_constitution_of_latvia
+		cost = 5
+        prerequisite = {
+			focus = TAR_Rebuild_the_Government_Agencies
+		} 
+		mutually_exclusive = { focus = TAR_brand_new_civil_service_system }
+		x = 0
+		y = 1
+        relative_position_id = TAR_Rebuild_the_Government_Agencies
+
+		completion_reward = {
+			
+		}
+	}
+
+	#崭新的公务员系统
+	focus = {
+		id = TAR_brand_new_civil_service_system
+		#icon = GFX_focus_TAR_brand_new_civil_service_system
+		icon = GFX_focus_NOR_restore_public_trust_in_the_storting
+		cost = 5
+        prerequisite = {
+			focus = TAR_Rebuild_the_Government_Agencies
+		} 
+		mutually_exclusive = { focus = TAR_abolish_parliament }
+		x = 3
+		y = 1
+        relative_position_id = TAR_Rebuild_the_Government_Agencies
+
+		completion_reward = {
+			
+		}
+	}
+
+	#而帝国只需要国王
+	focus = {
+		id = TAR_the_empire_only_needs_a_king
+		#icon = GFX_focus_TAR_the_empire_only_needs_a_king
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		cost = 5
+        prerequisite = {
+			focus = TAR_the_kings_deification_movement
+		} 
+		prerequisite = {
+			focus = TAR_abolish_parliament
+		} 
+		x = -1
+		y = 1
+        relative_position_id = TAR_abolish_parliament
+
+		completion_reward = {
+			
+		}
+	}
+
+	#我们光荣的过去
+	focus = {
+		id = TAR_our_glorious_past
+		#icon = GFX_focus_TAR_our_glorious_past
+		icon = GFX_focus_generic_strike_at_democracy1
+		cost = 5
+        prerequisite = {
+			focus = TAR_abolish_parliament
+			focus = TAR_brand_new_civil_service_system
+		} 
+		x = 1
+		y = 1
+        relative_position_id = TAR_abolish_parliament
+
+		completion_reward = {
+			
+		}
+	}
+
+	#新《王权法案》
+	focus = {
+		id = TAR_new_royal_power_act
+		#icon = GFX_focus_TAR_new_royal_power_act
+		icon = GFX_focus_generic_treaty
+		cost = 5
+        prerequisite = {
+			focus = TAR_brand_new_civil_service_system
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_brand_new_civil_service_system
+
+		completion_reward = {
+			
+		}
+	}
+
+	#王权永恒
+	focus = {
+		id = TAR_eternal_royal_power
+		#icon = GFX_focus_TAR_eternal_royal_power
+		icon = GFX_focus_generic_monarchy_2
+		cost = 5
+        prerequisite = {
+			focus = TAR_the_empire_only_needs_a_king
+			focus = TAR_new_royal_power_act
+		} 
+		prerequisite = {
+			focus = TAR_our_glorious_past
+		} 
+		x = 0
+		y = 1
+        relative_position_id = TAR_our_glorious_past
+
+		completion_reward = {
+			
+		}
+	}
+
+	#我向她发誓，维多利亚
+	focus = {
+		id = TAR_I_Swear_to_Her_Victoria
+		#icon = GFX_focus_TAR_I_Swear_to_Her_Victoria
+		icon = GFX_focus_RAJ_the_sun_sets
+		cost = 5
+        prerequisite = {
+			focus = TAR_eternal_royal_power
+			focus = TAR_the_old_general_never_dies_nor_fades_away
+		} 
+
+		available = {
+			has_war = no
+		}
+
+		x = -8
+		y = 1
+        relative_position_id = TAR_eternal_royal_power
+
+		completion_reward = {
+			add_stability = 0.15
+			add_political_power = 200
+			# if = {
+			# 	limit = {
+			# 		has_country_flag = TAR_independence_flag
+			# 	}
+			# 	set_cosmetic_tag = Kingdom_of_Tara
+			# }
+			if = {
+				limit = {
+					has_country_flag = TAR_independence_flag
+				}
+				set_cosmetic_tag = Empire_of_Tara
+			}
+
+			hidden_effect = {
+				every_subject_country = {
+					hidden_effect = {
+						transfer_navy = {
+							target = TAR
+						}
+					}
+					every_owned_state = {
+						limit = { is_core_of = PREV }
+						add_core_of = TAR
+						remove_core_of = PREV
+					}
+					every_character = {
+						set_nationality = TAR
+					}
+					TAR = {
+						annex_country = {
+							target = PREV
+							transfer_troops = yes
+						}
+					}
+				}
+			}
+		}
+	}    
+}

@@ -1,0 +1,1917 @@
+add_namespace = test_clb
+add_namespace = event_clb
+add_namespace = hidden_clb
+add_namespace = election_clb
+add_namespace = elec_prim_clb
+add_namespace = inauguration_clb
+add_namespace = election_Congress_clb
+add_namespace = inauguration_Congress_clb
+add_namespace = military_clb
+
+#哥伦比亚吞并荒地
+country_event = {
+	id = test_clb.1
+	title = test_clb.1.t
+	desc = test_clb.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_clb.1.a
+
+		declare_war_on = {
+			target = CFC
+			type = annex_everything
+		}
+	}
+}
+
+#哥伦比亚邀请加入阵营
+country_event = {
+	id = test_clb.2
+	title = test_clb.2.t
+	desc = test_clb.2.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_clb.2.a
+
+		add_to_faction = VIC
+	}
+
+	option = {
+		name = test_clb.2.b
+
+		add_to_faction = GUL
+	}
+}
+
+#哥伦比亚邀请加入阵营
+country_event = {
+	id = test_clb.3
+	title = test_clb.3.t
+	desc = test_clb.3.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_clb.3.a
+		declare_war_on = {
+			target = LTN
+			type = annex_everything
+		}
+	}
+}
+
+#根据政党情况触发94年总统初选事件
+country_event = {
+	id = hidden_clb.1
+	title = hidden_clb.1.t
+	desc = hidden_clb.1.d
+
+	immediate = {
+		country_event = {
+			id = elec_prim_clb.1
+		}
+		country_event = {
+			id = elec_prim_clb.2
+			days = 25
+		}
+		if = {
+			limit = {
+				NOT	= {
+					has_country_flag = CLB_liberalism_in_A_flag
+				}
+			}
+			country_event = {
+				id = elec_prim_clb.3
+				days = 20
+			}
+		}
+		if = {
+			limit = {
+				NOT	= {
+					has_country_flag = CLB_socialism_in_A_flag
+				}
+			}
+			country_event = {
+				id = elec_prim_clb.4
+				days = 20
+			}
+		}
+		country_event = {
+			id = elec_prim_clb.5 #共产党初选
+			days = 15
+		}
+		country_event = {
+			id = elec_prim_clb.6 #新秩序党初选
+			days = 5
+		}
+	}
+
+	is_triggered_only = yes
+
+	hidden = yes
+
+	option = {
+		name = hidden_clb.1.a
+	}
+}
+
+#根据政党情况触发98年总统初选事件
+country_event = {
+	id = hidden_clb.2
+	title = hidden_clb.2.t
+	desc = hidden_clb.2.d
+
+	immediate = {
+		country_event = {
+			id = elec_prim_clb.7
+		}
+		country_event = {
+			id = elec_prim_clb.8
+			days = 25
+		}
+		if = {
+			limit = {
+				NOT	= {
+					OR = {
+						has_country_flag = CLB_liberalism_in_A_flag
+						has_country_flag = CLB_liberalism_in_B_flag
+					}
+				}
+			}
+			country_event = {
+				id = elec_prim_clb.9
+				days = 20
+			}
+		}
+		if = {
+			limit = {
+				NOT	= {
+					has_country_flag = CLB_socialism_in_A_flag
+				}
+			}
+			country_event = {
+				id = elec_prim_clb.10
+				days = 20
+			}
+		}
+		country_event = {
+			id = elec_prim_clb.11 #共产党初选
+			days = 15
+		}
+		country_event = {
+			id = elec_prim_clb.12 #新秩序党初选
+			days = 5
+		}
+	}
+
+	is_triggered_only = yes
+
+	hidden = yes
+
+	option = {
+		name = hidden_clb.2.a
+	}
+}
+
+#亚琛女士去世
+country_event = {
+	id = event_clb.1
+	title = event_clb.1.t
+	desc = event_clb.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_clb.1.a
+
+		retire_country_leader = yes
+
+		promote_character = {
+			character = CLB_Marino_Cuomo
+			ideology = progressivism_subtype
+		}
+
+		set_country_flag = CLB_Marino_Cuomo_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_emergency_successor
+
+		hidden_effect = {
+			country_event = {
+				id = event_clb.2
+				days = 10
+			}
+		}
+	}
+}
+
+#选择派别
+country_event = {
+	id = event_clb.2
+	title = event_clb.2.t
+	desc = event_clb.2.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_clb.2.a
+
+		clr_country_flag = CLB_liberalism_in_A_flag
+
+		activate_advisor = CLB_Gernis_Williams_second_in_command
+	}
+
+	option = {
+		name = event_clb.2.b
+
+		clr_country_flag = CLB_socialism_in_A_flag
+
+		activate_advisor = CLB_William_Flemington_second_in_command
+	}
+}
+
+#查尔斯选择1098年副总统候选人
+country_event = {
+	id = event_clb.114
+	title = event_clb.114.t
+	desc = event_clb.114.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_clb.114.a
+
+		set_country_flag = CLB_Charles_and_populist
+	}
+
+	option = {
+		name = event_clb.114.b
+
+		set_country_flag = CLB_Charles_and_conservatist
+	}
+
+	option = {
+		name = event_clb.114.c
+
+		trigger = {
+			NOT = {
+				has_government = socialism
+			}
+		}
+
+		set_country_flag = CLB_Charles_and_progressivist
+	}
+}
+
+#共和党提名候选人
+country_event = {
+	id = elec_prim_clb.1
+	title = elec_prim_clb.1.t
+	desc = elec_prim_clb.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.1.a
+
+		set_country_flag = CLB_Charles_nominated
+		set_country_flag = CLB_Chaney_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.1.b
+
+		set_country_flag = CLB_Lee_nominated
+		set_country_flag = CLB_JD_nominated_vice
+	}
+}
+
+#联邦进步党提名候选人（进步主义+社会主义）
+country_event = {
+	id = elec_prim_clb.2
+	title = elec_prim_clb.2.t
+	desc = {
+		text = elec_prim_clb.2.d_socialism_in
+		trigger = {
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+	}
+	desc = {
+		text = elec_prim_clb.2.d_liberalism_in
+		trigger = {
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.2.a
+
+		trigger = {
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+
+		set_country_flag = CLB_Brighton_nominated
+		set_country_flag = CLB_AOC_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.2.b
+
+		trigger = {
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+
+		set_country_flag = CLB_Gernis_nominated
+		set_country_flag = CLB_Bobby_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.2.c
+
+		trigger = {
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+
+		set_country_flag = CLB_Gerald_nominated
+		set_country_flag = CLB_Priestley_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.2.e
+
+		trigger = {
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+
+		set_country_flag = CLB_William_nominated
+		set_country_flag = CLB_Gordon_nominated_vice
+	}
+}
+
+#自由党单独参选，提名候选人组合
+country_event = {
+	id = elec_prim_clb.3
+	title = elec_prim_clb.3.t
+	desc = elec_prim_clb.3.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.3.a
+
+		set_country_flag = CLB_William_nominated
+		set_country_flag = CLB_Gordon_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.3.b
+
+		set_country_flag = CLB_Kristen_nominated
+		set_country_flag = CLB_Alessandro_nominated_vice
+	}
+}
+
+#社会党单独参选，选择副总统候选人
+country_event = {
+	id = elec_prim_clb.4
+	title = elec_prim_clb.4.t
+	desc = elec_prim_clb.4.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.4.a
+
+		set_country_flag = CLB_Brighton_nominated
+		set_country_flag = CLB_Silas_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.4.b
+
+		set_country_flag = CLB_Brighton_nominated
+		set_country_flag = CLB_Northwood_nominated_vice
+	}
+}
+
+#1094年共产党提名候选人
+country_event = {
+	id = elec_prim_clb.5
+	title = elec_prim_clb.5.t
+	desc = elec_prim_clb.5.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.5.a
+
+		set_country_flag = CLB_Forest_nominated
+		set_country_flag = CLB_Hatteberg_nominated_vice
+	}
+}
+
+#1094年新秩序党提名候选人
+country_event = {
+	id = elec_prim_clb.6
+	title = elec_prim_clb.6.t
+	desc = elec_prim_clb.6.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.6.a
+
+		set_country_flag = CLB_Eifinger_nominated
+		set_country_flag = CLB_Arouet_nominated_vice
+	}
+}
+
+#1098年共和党提名候选人
+country_event = {
+	id = elec_prim_clb.7
+	title = elec_prim_clb.7.t
+	desc = elec_prim_clb.7.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.7.a
+
+		trigger = {
+			has_government = progressivism
+		}
+
+		set_country_flag = CLB_JD_nominated
+		set_country_flag = CLB_Clancy_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.7.b
+		trigger = {
+			OR = {
+				has_government = progressivism
+				AND = {
+					has_government = liberalism
+					NOT = {
+						OR = {
+							has_country_flag = CLB_liberalism_in_A_flag
+							has_country_flag = CLB_liberalism_in_B_flag
+						}
+					}
+				}
+			}
+		}
+
+		set_country_flag = CLB_Graham_nominated
+		set_country_flag = CLB_Chaney_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.7.c
+
+		trigger = {
+			has_government = socialism
+			NOT = {
+				has_country_flag = CLB_Charles_and_conservatist #切尼已成为副总统候选人
+			}
+		}
+
+		set_country_flag = CLB_Chaney_nominated
+		set_country_flag = CLB_Alessandro_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.7.e
+
+		trigger = {
+			OR = {
+				has_government = socialism
+				AND = {
+					has_government = liberalism
+					has_country_flag = CLB_liberalism_in_A_flag
+				}
+			}
+		}
+
+		set_country_flag = CLB_Charles_nominated
+
+		if = {
+			limit = {
+				has_country_flag = CLB_Charles_and_populist
+			}
+			set_country_flag = CLB_JD_nominated_vice
+		}
+		else_if = {
+			limit = {
+				has_country_flag = CLB_Charles_and_conservatist
+			}
+			set_country_flag = CLB_Chaney_nominated_vice
+		}
+		else_if = {
+			limit = {
+				has_country_flag = CLB_Charles_and_progressivist
+			}
+			set_country_flag = CLB_Eichenfeller_nominated_vice
+		}
+	}
+
+	option = {
+		name = elec_prim_clb.7.f
+
+		trigger = {
+			has_country_leader = {
+				character = CLB_Dwayne_Charles
+				ruling_only = yes
+			}
+		}
+
+		set_country_flag = CLB_Charles_nominated
+		set_country_flag = CLB_Chaney_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.7.g
+
+		trigger = {
+			has_country_leader = {
+				character = CLB_Hattie_Lee
+				ruling_only = yes
+			}
+		}
+
+		set_country_flag = CLB_Lee_nominated
+		set_country_flag = CLB_JD_nominated_vice
+	}
+}
+
+#1098年联邦进步党提名候选人
+country_event = {
+	id = elec_prim_clb.8
+	title = elec_prim_clb.8.t
+	desc = elec_prim_clb.8.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.8.a
+
+		trigger = {
+			OR = {
+				has_government = conservatism
+				has_country_leader = {
+					character = CLB_Juliet_Franca
+					ruling_only = yes
+				}
+			}
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+
+		set_country_flag = CLB_Carpenter_nominated
+		set_country_flag = CLB_Haines_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.8.b
+
+		trigger = {
+			OR = {
+				has_government = conservatism
+				has_country_leader = {
+					character = CLB_Juliet_Franca
+					ruling_only = yes
+				}
+			}
+			has_country_flag = CLB_socialism_in_A_flag
+		}
+
+		set_country_flag = CLB_AOC_nominated
+		set_country_flag = CLB_Franca_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.8.c
+
+		trigger = {
+			has_country_leader = {
+				character = CLB_Mike_Brighton
+				ruling_only = yes
+			}
+			has_government = progressivism
+		}
+
+		set_country_flag = CLB_Brighton_nominated
+		set_country_flag = CLB_AOC_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.8.e
+
+		trigger = {
+			has_country_leader = {
+				character = CLB_Gerald_Fray
+				ruling_only = yes
+			}
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+
+		set_country_flag = CLB_Gerald_nominated
+		set_country_flag = CLB_Priestley_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.8.f
+
+		trigger = {
+			OR = {
+				has_government = conservatism
+				has_country_leader = {
+					character = CLB_Fiona_Upwood
+					ruling_only = yes
+				}
+			}
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+
+		set_country_flag = CLB_Upwood_nominated
+		set_country_flag = CLB_Haines_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.8.g
+
+		trigger = {
+			has_country_leader = {
+				character = CLB_William_Flemington
+				ruling_only = yes
+			}
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+
+		set_country_flag = CLB_William_nominated
+		set_country_flag = CLB_Hill_nominated_vice
+	}
+}
+
+#1098自由党提名总统候选人
+country_event = {
+	id = elec_prim_clb.9
+	title = elec_prim_clb.9.t
+	desc = elec_prim_clb.9.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.9.a
+
+		trigger = {
+			NOT = {
+				has_government = liberalism
+			}
+		}
+
+		set_country_flag = CLB_Kristen_nominated
+		set_country_flag = CLB_Alessandro_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.9.b
+
+		trigger = {
+			has_country_leader = {
+				character = CLB_Gavin_Cristiano_Alessandro
+				ruling_only = yes
+			}
+		}
+
+		set_country_flag = CLB_Alessandro_nominated
+		set_country_flag = CLB_Lizard_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.9.c
+
+		trigger = {
+			has_country_leader = {
+				character = CLB_Kristen_Wright
+				ruling_only = yes
+			}
+		}
+
+		set_country_flag = CLB_Kristen_nominated
+		set_country_flag = CLB_Alessandro_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.9.e
+
+		trigger = {
+			has_country_leader = {
+				character = CLB_William_Flemington
+				ruling_only = yes
+			}
+		}
+
+		set_country_flag = CLB_William_nominated
+		set_country_flag = CLB_Gordon_nominated_vice
+	}
+}
+
+#1098社会党提名总统候选人
+country_event = {
+	id = elec_prim_clb.10
+	title = elec_prim_clb.10.t
+	desc = elec_prim_clb.10.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.10.a
+
+		trigger = {
+			has_government = liberalism
+			NOT = {
+				has_country_flag = CLB_liberalism_in_A_flag
+			}
+		}
+
+		set_country_flag = CLB_Gernis_nominated
+		set_country_flag = CLB_AOC_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.10.b
+
+		trigger = {
+			has_government = liberalism
+			has_country_flag = CLB_liberalism_in_A_flag
+		}
+
+		set_country_flag = CLB_Northwood_nominated
+		set_country_flag = CLB_Silas_nominated_vice
+	}
+
+	option = {
+		name = elec_prim_clb.10.c
+
+		trigger = {
+			has_government = socialism
+		}
+
+		set_country_flag = CLB_Brighton_nominated
+		set_country_flag = CLB_Silas_nominated_vice
+		#set_country_flag = CLB_Northwood_nominated_vice 两人里选个副总统
+	}
+}
+
+#1098年共产党提名候选人
+country_event = {
+	id = elec_prim_clb.11
+	title = elec_prim_clb.11.t
+	desc = elec_prim_clb.11.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.11.a
+
+		set_country_flag = CLB_Forest_nominated
+		set_country_flag = CLB_Hatteberg_nominated_vice
+	}
+}
+
+#1098年新秩序党提名候选人
+country_event = {
+	id = elec_prim_clb.12
+	title = elec_prim_clb.12.t
+	desc = elec_prim_clb.12.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = elec_prim_clb.12.a
+
+		set_country_flag = CLB_Eifinger_nominated
+		set_country_flag = CLB_Arouet_nominated_vice
+	}
+}
+
+#迈克尔·布莱顿（FPP）就职 1095
+country_event = {
+	id = inauguration_clb.1
+	title = inauguration_clb.1.t
+	desc = inauguration_clb.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.1.a
+
+		set_politics = {
+			ruling_party = progressivism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Mike_Brighton
+			ideology = democratic_socialism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Michael_Brighton_term_moderate_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Michael_Brighton_term_moderate
+	}
+}
+
+#格尔尼斯·威廉姆斯就职 1095
+country_event = {
+	id = inauguration_clb.2
+	title = inauguration_clb.2.t
+	desc = inauguration_clb.2.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.2.a
+
+		set_politics = {
+			ruling_party = progressivism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Gernis_Williams
+			ideology = revisionist_syndicalism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Gernis_Williams_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Gernis_Williams_term
+	}
+}
+
+#杰拉德·弗雷就职 1095
+country_event = {
+	id = inauguration_clb.3
+	title = inauguration_clb.3.t
+	desc = inauguration_clb.3.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.3.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Gerald_Fray
+			ideology = progressive_liberalism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Bobby_Fray_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Bobby_Fray_term
+	}
+}
+
+#威廉·弗莱明顿（FPP）就职 1095
+country_event = {
+	id = inauguration_clb.4
+	title = inauguration_clb.4.t
+	desc = inauguration_clb.4.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.4.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_William_Flemington
+			ideology = market_liberalism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_William_Flemington_term_FPP_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_William_Flemington_term_FPP
+	}
+}
+
+#道恩·查尔斯就职 1095
+country_event = {
+	id = inauguration_clb.5
+	title = inauguration_clb.5.t
+	desc = inauguration_clb.5.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.5.a
+
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Dwayne_Charles
+			ideology = conservative_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Dwayne_Charles_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Dwayne_Charles_term
+	}
+}
+
+#海蒂·李就职 1095
+country_event = {
+	id = inauguration_clb.6
+	title = inauguration_clb.6.t
+	desc = inauguration_clb.6.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.6.a
+
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Hattie_Lee
+			ideology = populist_conservatism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Hattie_Lee_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Hattie_Lee_term
+	}
+}
+
+#迈克尔·布莱顿（SP）就职 1095
+country_event = {
+	id = inauguration_clb.7
+	title = inauguration_clb.7.t
+	desc = inauguration_clb.7.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.7.a
+
+		set_politics = {
+			ruling_party = socialism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Mike_Brighton
+			ideology = socialism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Michael_Brighton_term_radical_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Michael_Brighton_term_radical
+	}
+}
+
+#威廉·弗莱明顿（LP）就职 1095
+country_event = {
+	id = inauguration_clb.8
+	title = inauguration_clb.8.t
+	desc = inauguration_clb.8.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.8.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_William_Flemington
+			ideology = market_liberalism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_William_Flemington_term_LP_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_William_Flemington_term_LP
+	}
+}
+
+#克里斯滕·莱特就职 1095
+country_event = {
+	id = inauguration_clb.9
+	title = inauguration_clb.9.t
+	desc = inauguration_clb.9.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.9.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Kristen_Wright
+			ideology = technological_liberalism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Kristen_Wright_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Kristen_Wright_term
+	}
+}
+
+#杰罗姆·卡朋特就职 1099
+country_event = {
+	id = inauguration_clb.10
+	title = inauguration_clb.10.t
+	desc = inauguration_clb.10.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.10.a
+
+		set_politics = {
+			ruling_party = progressivism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Jerome_Carpenter
+			ideology = progressivism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Jerome_Carpenter_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Jerome_Carpenter_term
+	}
+}
+
+#阿比盖尔·奥尔良-卡尔尼斯就职 1099
+country_event = {
+	id = inauguration_clb.11
+	title = inauguration_clb.11.t
+	desc = inauguration_clb.11.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.11.a
+
+		set_politics = {
+			ruling_party = progressivism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Abigail_Orleans_Calnis
+			ideology = progressivism_subtype #等电锯那边的雅各宾主义意识形态适配
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Abigail_Orleans_Calnis_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus =CLB_Abigail_Orleans_Calnis_term
+	}
+}
+
+#迈克尔·布莱顿（FPP）连任就职 1099
+country_event = {
+	id = inauguration_clb.12
+	title = inauguration_clb.12.t
+	desc = inauguration_clb.12.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.12.a
+
+		set_politics = {
+			ruling_party = progressivism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Mike_Brighton
+			ideology = democratic_socialism_subtype
+		}
+	}
+}
+
+#杰拉德·弗雷连任就职 1099
+country_event = {
+	id = inauguration_clb.13
+	title = inauguration_clb.13.t
+	desc = inauguration_clb.13.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.13.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Gerald_Fray
+			ideology = progressive_liberalism_subtype
+		}
+	}
+}
+
+#菲奥娜·厄普伍德就职 1099
+country_event = {
+	id = inauguration_clb.14
+	title = inauguration_clb.14.t
+	desc = inauguration_clb.14.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.14.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Fiona_Upwood
+			ideology = progressive_liberalism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Fiona_Upwood_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Fiona_Upwood_term
+	}
+}
+
+#威廉·弗莱明顿（FPP）连任就职 1099
+country_event = {
+	id = inauguration_clb.15
+	title = inauguration_clb.15.t
+	desc = inauguration_clb.15.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.15.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_William_Flemington
+			ideology = market_liberalism_subtype
+		}
+	}
+}
+
+#乔安娜·D·李维斯就职 1099
+country_event = {
+	id = inauguration_clb.16
+	title = inauguration_clb.16.t
+	desc = inauguration_clb.16.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.16.a
+
+		set_politics = {
+			ruling_party = authoritarianism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Joanna_Dylan_Lewis
+			ideology = rightwing_populism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Joanna_Dylan_Lewis_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Joanna_Dylan_Lewis_term
+	}
+}
+
+#乔治·H·W·格拉汉姆就职 1099
+country_event = {
+	id = inauguration_clb.17
+	title = inauguration_clb.17.t
+	desc = inauguration_clb.17.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.17.a
+
+		set_politics = {
+			ruling_party = conservatism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_George_Huey_Winkle_Graham
+			ideology = neoconservatism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_George_Huey_Winkle_Graham_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_George_Huey_Winkle_Graham_term
+	}
+}
+
+#雷蒙德·切尼就职 1099
+country_event = {
+	id = inauguration_clb.18
+	title = inauguration_clb.18.t
+	desc = inauguration_clb.18.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.18.a
+
+		set_politics = {
+			ruling_party = conservatism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Raymond_Chaney
+			ideology = conservative_liberalism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Raymond_Chaney_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Raymond_Chaney_term
+	}
+}
+
+#道恩·查尔斯就职 1099
+country_event = {
+	id = inauguration_clb.19
+	title = inauguration_clb.19.t
+	desc = inauguration_clb.19.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.19.a
+
+		set_politics = {
+			ruling_party = conservatism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Dwayne_Charles
+			ideology = conservative_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Dwayne_Charles_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Dwayne_Charles_term
+	}
+}
+
+#道恩·查尔斯连任就职 1099
+country_event = {
+	id = inauguration_clb.20
+	title = inauguration_clb.20.t
+	desc = inauguration_clb.20.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.20.a
+
+		set_politics = {
+			ruling_party = conservatism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Dwayne_Charles
+			ideology = conservative_subtype
+		}
+	}
+}
+
+#海蒂·李连任就职 1099
+country_event = {
+	id = inauguration_clb.21
+	title = inauguration_clb.21.t
+	desc = inauguration_clb.21.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.21.a
+
+		set_politics = {
+			ruling_party = conservatism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Dwayne_Charles
+			ideology = populist_conservatism_subtype
+		}
+	}
+}
+
+#格尔尼斯·威廉姆斯就职 1099
+country_event = {
+	id = inauguration_clb.22
+	title = inauguration_clb.22.t
+	desc = inauguration_clb.22.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.22.a
+
+		set_politics = {
+			ruling_party = progressivism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Gernis_Williams
+			ideology = revisionist_syndicalism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Gernis_Williams_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Gernis_Williams_term
+	}
+}
+
+#汤姆·诺森伍德就职 1099
+country_event = {
+	id = inauguration_clb.23
+	title = inauguration_clb.23.t
+	desc = inauguration_clb.23.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.23.a
+
+		set_politics = {
+			ruling_party = socialism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Tom_Northwood
+			ideology = socialism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Tom_Northwood_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Tom_Northwood_term
+	}
+}
+
+#迈克尔·布莱顿连任就职 1099
+country_event = {
+	id = inauguration_clb.24
+	title = inauguration_clb.24.t
+	desc = inauguration_clb.24.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.24.a
+
+		set_politics = {
+			ruling_party = socialism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Mike_Brighton
+			ideology = socialism_subtype
+		}
+	}
+}
+
+#克里斯滕·莱特就职 1099
+country_event = {
+	id = inauguration_clb.25
+	title = inauguration_clb.25.t
+	desc = inauguration_clb.25.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.25.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Kristen_Wright
+			ideology = technological_liberalism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Kristen_Wright_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Kristen_Wright_term
+	}
+}
+
+#加文·C·亚历山德罗就职 1099
+country_event = {
+	id = inauguration_clb.26
+	title = inauguration_clb.26.t
+	desc = inauguration_clb.26.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.26.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Gavin_Cristiano_Alessandro
+			ideology = liberalism_subtype
+		}
+
+		CLB_clear_term = yes
+		set_country_flag = CLB_Gavin_Cristiano_Alessandro_term_flag
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = CLB_Gavin_Cristiano_Alessandro_term
+	}
+}
+
+#克里斯滕·莱特连任就职 1099
+country_event = {
+	id = inauguration_clb.27
+	title = inauguration_clb.27.t
+	desc = inauguration_clb.27.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.27.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_Kristen_Wright
+			ideology = technological_liberalism_subtype
+		}
+	}
+}
+
+#威廉·弗莱明顿（LP）连任就职 1099
+country_event = {
+	id = inauguration_clb.28
+	title = inauguration_clb.28.t
+	desc = inauguration_clb.28.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.28.a
+
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = yes
+		}
+
+		promote_character = {
+			character = CLB_William_Flemington
+			ideology = market_liberalism_subtype
+		}
+	}
+}
+
+#94年选举日
+country_event = {
+	id = election_clb.1
+	title = election_clb.1.t
+	desc = election_clb.1.d
+
+	immediate = {
+		hidden_effect = {
+			CLB_election_start = yes
+			every_owned_state = {
+				CLB_state_vote = yes
+			}
+			CLB_election_results = yes
+
+			force_update_map_mode = {
+				mapmode = election_map_mode
+			}
+
+			CLB_change_leader = yes
+
+			else = {
+				CLB_change_leader = yes
+			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = election_clb.1.a
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			has_country_flag = CLB_A_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.1.b
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			has_country_flag = CLB_B_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.1.c
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			NOT = {
+				has_country_flag = CLB_communism_in_A_flag
+			}
+			has_country_flag = CLB_communism_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.1.e
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			NOT = {
+				has_country_flag = CLB_socialism_in_A_flag
+			}
+			has_country_flag = CLB_socialism_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.1.f
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			NOT = {
+				OR = {
+					has_country_flag = CLB_liberalism_in_A_flag
+					has_country_flag = CLB_liberalism_in_B_flag
+				}
+			}
+			has_country_flag = CLB_liberalism_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.1.g
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			NOT = {
+				has_country_flag = CLB_fascism_in_B_flag
+			}
+			has_country_flag = CLB_fascism_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.1.h
+
+		trigger = {
+			check_variable = { win_election_parties > 1 }
+		}
+	}
+}
+
+#98年选举日
+country_event = {
+	id = election_clb.2
+	title = election_clb.2.t
+	desc = election_clb.2.d
+
+	immediate = {
+		hidden_effect = {
+			CLB_election_start = yes
+			every_owned_state = {
+				CLB_state_vote = yes
+			}
+			CLB_election_results = yes
+
+			force_update_map_mode = {
+				mapmode = election_map_mode
+			}
+
+			CLB_change_leader = yes
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = election_clb.2.a
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			has_country_flag = CLB_A_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.2.b
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			has_country_flag = CLB_B_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.2.c
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			NOT = {
+				has_country_flag = CLB_communism_in_A_flag
+			}
+			has_country_flag = CLB_communism_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.2.e
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			NOT = {
+				has_country_flag = CLB_socialism_in_A_flag
+			}
+			has_country_flag = CLB_socialism_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.2.f
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			NOT = {
+				OR = {
+					has_country_flag = CLB_liberalism_in_A_flag
+					has_country_flag = CLB_liberalism_in_B_flag
+				}
+			}
+			has_country_flag = CLB_liberalism_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.2.g
+		trigger = {
+			check_variable = { win_election_parties = 1 }
+			NOT = {
+				has_country_flag = CLB_fascism_in_B_flag
+			}
+			has_country_flag = CLB_fascism_win_election_flag
+		}
+
+		CLB_clear_nomination = yes #清除所有提名flag
+	}
+
+	option = {
+		name = election_clb.2.h
+
+		trigger = {
+			check_variable = { win_election_parties > 1 }
+		}
+	}
+}
+
+#国会选举（参议院第一批改选）
+country_event = {
+	id = election_Congress_clb.1
+	title = election_Congress_clb.1.t
+	desc = election_Congress_clb.1.d
+
+	immediate = {
+		hidden_effect = {
+			CLB_house_election = yes
+			CLB_senate_election_1 = yes
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = election_Congress_clb.1.a
+
+		custom_effect_tooltip = CLB_Congress_inauguration_next_year_tt
+	}
+}
+
+#国会选举（参议院第二批改选）
+country_event = {
+	id = election_Congress_clb.2
+	title = election_Congress_clb.2.t
+	desc = election_Congress_clb.2.d
+
+	immediate = {
+		hidden_effect = {
+			CLB_house_election = yes
+			CLB_senate_election_2 = yes
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = election_Congress_clb.2.a
+
+		custom_effect_tooltip = CLB_Congress_inauguration_next_year_tt
+	}
+}
+
+#国会选举（参议院第三批改选）
+country_event = {
+	id = election_Congress_clb.3
+	title = election_Congress_clb.3.t
+	desc = election_Congress_clb.3.d
+
+	immediate = {
+		hidden_effect = {
+			CLB_house_election = yes
+			CLB_senate_election_3 = yes
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = election_Congress_clb.3.a
+
+		custom_effect_tooltip = CLB_Congress_inauguration_next_year_tt
+	}
+}
+
+#国会议员就职（参议院第一批改选）
+country_event = {
+	id = inauguration_Congress_clb.1
+	title = inauguration_Congress_clb.1.t
+	desc = inauguration_Congress_clb.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_Congress_clb.1.a
+
+		CLB_house_seats_change = yes
+		CLB_senate_seats_change_1 = yes
+		CLB_senate_reload = yes
+		set_country_flag = CLB_bill_cancel
+		clr_country_flag = CLB_bill_cancel #使得法案相关决议取消
+	}
+}
+
+#国会议员就职（参议院第二批改选）
+country_event = {
+	id = inauguration_Congress_clb.2
+	title = inauguration_Congress_clb.2.t
+	desc = inauguration_Congress_clb.2.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_Congress_clb.2.a
+
+		CLB_house_seats_change = yes
+		CLB_senate_seats_change_2 = yes
+		CLB_senate_reload = yes
+		set_country_flag = CLB_bill_cancel
+		clr_country_flag = CLB_bill_cancel #使得法案相关决议取消
+	}
+}
+
+#国会议员就职（参议院第三批改选）
+country_event = {
+	id = inauguration_Congress_clb.3
+	title = inauguration_Congress_clb.3.t
+	desc = inauguration_Congress_clb.3.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_Congress_clb.3.a
+
+		CLB_house_seats_change = yes
+		CLB_senate_seats_change_3 = yes
+		CLB_senate_reload = yes
+		set_country_flag = CLB_bill_cancel
+		clr_country_flag = CLB_bill_cancel #使得法案相关决议取消
+	}
+}
+
+#步兵装备竞标
+country_event = {
+	id = military_clb.1
+	title = military_clb.1.t
+	desc = military_clb.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = military_clb.1.a
+
+		mio:CLB_Blacksteel_organization = {
+			add_mio_research_bonus = 0.1
+			add_mio_funds_gain_factor = 0.1
+			add_mio_funds = 1000
+		}
+	}
+
+	option = {
+		name = military_clb.1.b
+
+		mio:CLB_Raythean_organization = {
+			add_mio_research_bonus = 0.1
+			add_mio_funds_gain_factor = 0.1
+			add_mio_funds = 1000
+		}
+	}
+}

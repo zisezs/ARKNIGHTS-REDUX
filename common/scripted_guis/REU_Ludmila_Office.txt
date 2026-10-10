@@ -1,0 +1,187 @@
+# ==============================================================================
+#  柳德米拉的主席办公室 —— scripted_gui
+#  · REU_Ludmila_Office_Entry : 决议分类页里的「进入办公室」按钮
+#  · REU_Ludmila_Office_GUI   : 全屏 GALgame 对话面板
+#
+#  面板状态（两个变量决定哪些控件出现）：
+#    REU_ludmila_choice_group  : 0 = 无选项（点任意处继续）；N = 第 N 套选项
+#    REU_ludmila_chapter_state : 0 = 本章剧情推进中；1 = 间隙（本章已结束、下一章未开）
+#                                只有间隙时右侧「互动栏」才开放
+# ==============================================================================
+
+scripted_gui = {
+
+	# ---------------- 决议页入口 ----------------
+	# 回忆录决议所在的分类页里的小面板：显示爱心 + 进入办公室
+	REU_Ludmila_Office_Entry = {
+		context_type = decision_category
+		window_name = "REU_Ludmila_Office_Entry_GUI"
+
+		# 模块开关隐藏时（决议页开关），入口面板一并收起
+		visible = {
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		effects = {
+			REU_Lud_Open_click = {
+				# 老档 / 半路接手的档可能还没走开局解锁，这里补一次（幂等，会把正文拉到见面章节开头）
+				if = {
+					limit = { NOT = { has_country_flag = REU_ludmila_unlocked } }
+					REU_Ludmila_Unlock = yes
+				}
+				if = {
+					limit = { NOT = { has_country_flag = REU_ludmila_office_open } }
+					REU_Ludmila_Open = yes
+				}
+			}
+		}
+
+		triggers = {
+			REU_Lud_Open_click_enabled = {
+				# 1103 年之前那扇门还关着（回忆录可以照看，办公室进不去）
+				date > 1103.1.1
+				NOT = { has_country_flag = REU_ludmila_office_open }
+			}
+		}
+	}
+
+
+	# ---------------- 对话面板 ----------------
+	REU_Ludmila_Office_GUI = {
+		context_type = player_context
+		window_name = "REU_Ludmila_Office_Window"
+
+		visible = {
+			is_ai = no
+			has_country_flag = REU_ludmila_office_open
+		}
+
+		effects = {
+
+			# 点窗口任意空白处 / 右下角箭头 = 继续（间隙时 = 开始下一章）
+			REU_Lud_Advance_click = {
+				REU_Ludmila_Advance_Click = yes
+			}
+			REU_Lud_Next_click = {
+				REU_Ludmila_Advance_Click = yes
+			}
+
+			REU_Lud_Close_click = {
+				REU_Ludmila_Close = yes
+			}
+
+			REU_Lud_Choice_1_Btn_click = {
+				REU_Ludmila_Choice_1 = yes
+			}
+			REU_Lud_Choice_2_Btn_click = {
+				REU_Ludmila_Choice_2 = yes
+			}
+			REU_Lud_Choice_3_Btn_click = {
+				REU_Ludmila_Choice_3 = yes
+			}
+			REU_Lud_Choice_4_Btn_click = {
+				REU_Ludmila_Choice_4 = yes
+			}
+
+			# ---- 右侧互动栏：与决议共用同一套效果，PP 在这里自己扣 ----
+			REU_Lud_Gift_1_click = {
+				if = {
+					limit = {
+						has_political_power > 24
+						NOT = { has_country_flag = REU_ludmila_used_chocolate }
+					}
+					add_political_power = -25
+					REU_Ludmila_Gift_Chocolate = yes
+				}
+			}
+			REU_Lud_Gift_2_click = {
+				if = {
+					limit = {
+						has_political_power > 39
+						NOT = { has_country_flag = REU_ludmila_used_paperwork }
+					}
+					add_political_power = -40
+					REU_Ludmila_Gift_Paperwork = yes
+				}
+			}
+			REU_Lud_Gift_3_click = {
+				if = {
+					limit = {
+						has_political_power > 14
+						NOT = { has_country_flag = REU_ludmila_used_snow }
+					}
+					add_political_power = -15
+					REU_Ludmila_Gift_Snow = yes
+				}
+			}
+		}
+
+		triggers = {
+
+			# 无选项时才允许「点哪里都继续」
+			REU_Lud_Advance_visible = { check_variable = { REU_ludmila_choice_group = 0 compare = equals } }
+			REU_Lud_Next_visible = { check_variable = { REU_ludmila_choice_group = 0 compare = equals } }
+
+			# 有选项时才压暗背景
+			REU_Lud_Dim_visible = { NOT = { check_variable = { REU_ludmila_choice_group = 0 compare = equals } } }
+
+			REU_Lud_Choice_1_Btn_visible = { check_variable = { REU_ludmila_choice_group > 0 } }
+			REU_Lud_Choice_1_Text_visible = { check_variable = { REU_ludmila_choice_group > 0 } }
+			REU_Lud_Choice_2_Btn_visible = { check_variable = { REU_ludmila_choice_group > 0 } }
+			REU_Lud_Choice_2_Text_visible = { check_variable = { REU_ludmila_choice_group > 0 } }
+			REU_Lud_Choice_3_Btn_visible = { check_variable = { REU_ludmila_choice_group > 0 } }
+			REU_Lud_Choice_3_Text_visible = { check_variable = { REU_ludmila_choice_group > 0 } }
+			# 只有办公室那一章是四选项，闪回的两组都是三选项
+		REU_Lud_Choice_4_Btn_visible = { check_variable = { REU_ludmila_choice_group = 1 compare = equals } }
+			REU_Lud_Choice_4_Text_visible = { check_variable = { REU_ludmila_choice_group = 1 compare = equals } }
+
+			# ---- 互动栏：只在间隙出现，用过的条目自动消失 ----
+			REU_Lud_Gift_Head_visible = {
+				check_variable = { REU_ludmila_chapter_state = 1 compare = equals }
+				NOT = { has_country_flag = REU_ludmila_used_chocolate }
+				NOT = { has_country_flag = REU_ludmila_used_paperwork }
+				NOT = { has_country_flag = REU_ludmila_used_snow }
+			}
+			REU_Lud_Gift_HeadText_visible = {
+				check_variable = { REU_ludmila_chapter_state = 1 compare = equals }
+				NOT = { has_country_flag = REU_ludmila_used_chocolate }
+				NOT = { has_country_flag = REU_ludmila_used_paperwork }
+				NOT = { has_country_flag = REU_ludmila_used_snow }
+			}
+
+			REU_Lud_Gift_1_visible = { check_variable = { REU_ludmila_chapter_state = 1 compare = equals } NOT = { has_country_flag = REU_ludmila_used_chocolate } }
+			REU_Lud_Gift_1_Icon_visible = { check_variable = { REU_ludmila_chapter_state = 1 compare = equals } NOT = { has_country_flag = REU_ludmila_used_chocolate } }
+			REU_Lud_Gift_1_Text_visible = { check_variable = { REU_ludmila_chapter_state = 1 compare = equals } NOT = { has_country_flag = REU_ludmila_used_chocolate } }
+			REU_Lud_Gift_1_click_enabled = { has_political_power > 24 }
+
+			REU_Lud_Gift_2_visible = { check_variable = { REU_ludmila_chapter_state = 1 compare = equals } NOT = { has_country_flag = REU_ludmila_used_paperwork } }
+			REU_Lud_Gift_2_Icon_visible = { check_variable = { REU_ludmila_chapter_state = 1 compare = equals } NOT = { has_country_flag = REU_ludmila_used_paperwork } }
+			REU_Lud_Gift_2_Text_visible = { check_variable = { REU_ludmila_chapter_state = 1 compare = equals } NOT = { has_country_flag = REU_ludmila_used_paperwork } }
+			REU_Lud_Gift_2_click_enabled = { has_political_power > 39 }
+
+			REU_Lud_Gift_3_visible = { check_variable = { REU_ludmila_chapter_state = 1 compare = equals } NOT = { has_country_flag = REU_ludmila_used_snow } }
+			REU_Lud_Gift_3_Icon_visible = { check_variable = { REU_ludmila_chapter_state = 1 compare = equals } NOT = { has_country_flag = REU_ludmila_used_snow } }
+			REU_Lud_Gift_3_Text_visible = { check_variable = { REU_ludmila_chapter_state = 1 compare = equals } NOT = { has_country_flag = REU_ludmila_used_snow } }
+			REU_Lud_Gift_3_click_enabled = { has_political_power > 14 }
+		}
+
+		properties = {
+			# 场景层底图（0 = 主席办公室，1 = 1095 年冬天的谷仓……）
+			REU_Lud_Scene = {
+				image = "[REU_GetLudmilaScene]"
+			}
+			# 差分立绘
+			REU_Lud_Portrait = {
+				image = "[REU_GetLudmilaSprite]"
+			}
+			# 主角（心腹）立绘，0 = 不出现
+			REU_Lud_Portrait_Prota = {
+				image = "[REU_GetProtaSprite]"
+			}
+			# 好感度爱心：ui_hearts.png 是 5 帧横条（每帧 150x34）
+			REU_Lud_Hearts = {
+				frame = REU_ludmila_heart_frame
+			}
+		}
+	}
+}

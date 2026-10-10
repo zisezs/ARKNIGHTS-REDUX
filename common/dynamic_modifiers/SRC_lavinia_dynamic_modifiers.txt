@@ -1,0 +1,102 @@
+# ============================================================================
+# 叙拉古 (SRC) · 拉维妮娅线「荆棘王座——大审判时代」—— 成长型民族精神
+# 由 E:/tmp/src_lv_build.js 生成，**不要手改**（改数值请改数据表再重跑）。
+#
+# 机制与政治树同源：修正符数值直接写成国家变量，国策用 add_to_variable 原地累加。
+# 变量前缀按分支分家：SRC_lv_lo_ / SRC_lv_je_ / SRC_lv_pr_ / SRC_lv_pe_，
+#   绝不复用政治树（SRC_nm_/SRC_cd_/SRC_tr_/SRC_go_/SRC_cp_）、
+#   产业树（SRC_tg_/SRC_ni_/SRC_th_/SRC_ga_）、扩张树（SRC_exp_*）的变量池。
+# 挂载：分支首格 add_dynamic_modifier（幂等），之后每格只升档。
+#
+# 满档（每格每变量 3%~5% 一档，硬钳 ±20%）：
+#   法律即秩序  稳定度 +20% / 政治点获取 +20% / 战争支持度 +15% / 情报网络获取 +20%
+#   大审判时代  政治点获取 +15% / 民用工厂产能 +15% / 战争支持度 +15%
+#   人人有牢坐  民用工厂产能 +20% / 基建速度 +20% / 可征兵人口 +20% / 稳定度 -6%
+#   人人有罪赎  科研速度 +15% / 政治点获取 +20% / 民用工厂产能 +15% / 消费品消耗 +6%
+#   荆棘王座（终局）为固定数值，不参与成长，单项同样不超过 20%。
+# ============================================================================
+
+# ---- 法律即秩序 ----
+SRC_lv_dyn_law_order = {
+	icon = GFX_idea_SRC_lv_dyn_law_order
+
+	enable = {
+		always = yes
+	}
+
+	stability_factor = SRC_lv_lo_stab
+	political_power_gain = SRC_lv_lo_pp
+	war_support_factor = SRC_lv_lo_ws
+	intel_network_gain_factor = SRC_lv_lo_intel
+}
+# ---- 大审判时代 ----
+SRC_lv_dyn_judgment_era = {
+	icon = GFX_idea_SRC_lv_dyn_judgment_era
+
+	enable = {
+		always = yes
+	}
+
+	political_power_gain = SRC_lv_je_pp
+	industrial_capacity_factory = SRC_lv_je_fac
+	war_support_factor = SRC_lv_je_ws
+}
+# ---- 人人有牢坐 ----
+SRC_lv_dyn_prison_nation = {
+	icon = GFX_idea_SRC_lv_dyn_prison_nation
+
+	enable = {
+		always = yes
+	}
+
+	industrial_capacity_factory = SRC_lv_pr_fac
+	production_speed_infrastructure_factor = SRC_lv_pr_infra
+	recruitable_population_factor = SRC_lv_pr_recr
+	stability_factor = SRC_lv_pr_stab
+}
+# ---- 人人有罪赎 ----
+SRC_lv_dyn_penitence_economy = {
+	icon = GFX_idea_SRC_lv_dyn_penitence_economy
+
+	enable = {
+		always = yes
+	}
+
+	research_speed_factor = SRC_lv_pe_res
+	political_power_gain = SRC_lv_pe_pp
+	industrial_capacity_factory = SRC_lv_pe_fac
+	consumer_goods_factor = SRC_lv_pe_cons
+}
+
+# ---- 终局 · 荆棘王座（固定数值）----
+SRC_lv_dyn_thorn_throne = {
+	icon = GFX_idea_SRC_lv_dyn_thorn_throne
+
+	enable = {
+		always = yes
+	}
+
+	stability_factor = 0.15
+	political_power_gain = 0.15
+	war_support_factor = 0.2
+	industrial_capacity_factory = 0.15
+	conscription_factor = 0.15
+	research_speed_factor = 0.15
+	training_time_factor = -0.15
+	attrition = -0.15
+	consumer_goods_factor = -0.1
+	operative_slot = 2
+}
+
+# ---- 【审判者】的扣减半边（跟着当前稳定度走，由 on_monthly_SRC 刷新）----
+# 领袖特质本身给 +100%（common/country_leader/SRC_traits.txt 的 SRC_lv_judger），
+# 这里挂 -X，X = 当前稳定度（10% 一档）。两条相加 = 设计稿的「+100% - 稳定度」。
+SRC_lv_dyn_judger_scale = {
+	icon = GFX_idea_SRC_lv_dyn_judger_scale
+
+	enable = {
+		always = yes
+	}
+
+	political_power_gain = SRC_lv_judge_tax
+}

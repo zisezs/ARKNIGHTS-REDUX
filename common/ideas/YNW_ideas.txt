@@ -1,0 +1,56 @@
+ideas = {
+	country = {
+		# ==============================================================================
+		#  西北都护府 · 异变链专属精神
+		#  · YNW_bewitched_legions 链第三步挂上（军民已被蛊惑、号令开始失灵）
+		#  · YNW_sui_grace         终幕换上的长期精神，同时移除上一条
+		#  · 图标见 interface/ideas/YNW_ideas.gfx（沿用原版贴图，只换 SpriteType 名）
+		#  · 写法照 common/ideas/YAN_ideas (Yan).txt：只 picture + modifier
+		# ==============================================================================
+
+		# 山海众的祭坛一夜多过一座，营里的兵开始夜里自己走出去
+		YNW_bewitched_legions = {
+			picture = YNW_bewitched_legions
+
+			modifier = {
+				stability_factor = -0.25
+				political_power_factor = -0.15
+				army_morale_factor = 0.1
+				conscription_factor = 0.15
+				attrition = -0.1
+			}
+		}
+
+		# 岁国既立：他们不再是都护府的兵，是祂的袍泽
+		YNW_sui_grace = {
+			picture = YNW_sui_grace
+
+			modifier = {
+				war_support_factor = 0.5
+				conscription_factor = 0.4
+				non_core_manpower = 0.4
+				army_attack_factor = 0.15
+				army_defence_factor = 0.15
+				army_morale_factor = 0.2
+				training_time_factor = -0.3
+				attrition = -0.25
+
+				stability_factor = -0.4
+				political_power_factor = -0.25
+				industrial_capacity_factory = -0.2
+				supply_consumption_factor = -0.25
+			}
+		}
+
+		# 终幕：祂睁眼之后，这支军队不再需要粮道，也不再需要理由
+		YNW_sui_wrath = {
+			picture = YNW_sui_wrath
+
+			modifier = {
+				supply_consumption_factor = -0.9
+				army_org_factor = 0.5
+				army_infantry_attack_factor = 0.3
+			}
+		}
+	}
+}

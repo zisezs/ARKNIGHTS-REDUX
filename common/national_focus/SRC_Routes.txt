@@ -1,0 +1,47 @@
+######################
+## 叙拉古 三条路线（选国家界面路线卡片专用） ##
+######################
+#
+# 这三个节点不进叙拉古的正式国策树（SRC_federal_tree，给 original_tag = SRC 的 factor = 20），
+# 本树的 factor(1) 远低于它，任何国家都不会载入；
+# 它只为承载三条路线的 loc 与图标，供剧本书签 bm9 的 focuses 列表当路线卡片引用。
+#
+######################
+
+focus_tree = {
+	id = SRC_Routes
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 1
+			tag = SRC
+		}
+	}
+
+	default = no
+
+	focus = {
+		id = SRC_Route_Wasteland_Revelry
+		icon = GFX_focus_SRC_Route_Wasteland_Revelry
+		cost = 7
+		x = 0
+		y = 0
+	}
+
+	focus = {
+		id = SRC_Route_Untamed_Sprout
+		icon = GFX_focus_SRC_Route_Untamed_Sprout
+		cost = 7
+		x = 2
+		y = 0
+	}
+
+	focus = {
+		id = SRC_Route_White_Penance
+		icon = GFX_focus_SRC_Route_White_Penance
+		cost = 7
+		x = 4
+		y = 0
+	}
+}

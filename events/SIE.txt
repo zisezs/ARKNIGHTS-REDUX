@@ -1,0 +1,413 @@
+add_namespace = sie
+add_namespace = worldnews_sie
+
+#############
+###框架事件###
+#############
+
+#1097年汐斯塔黑曜石节
+country_event = {
+	id = sie.1
+	title = sie.1.t
+	desc = sie.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = sie.1.a
+		ai_chance = {
+			base = 10
+		}
+		country_event = {
+            id = worldnews_sie.1
+		}
+		country_event = {
+			id = sie.2
+			days = 20
+		}
+		country_event = {
+			id = sie.8
+			days = 100
+		}
+	}
+}
+
+#针对市长的阴谋？
+country_event = {
+	id = sie.2
+	title = sie.2.t
+	desc = sie.2.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = sie.2.a
+		ai_chance = {
+			base = 80
+		}
+        country_event = {
+			id = sie.3
+			days = 20
+		}
+	}
+
+	option = {
+		name = sie.2.b
+		ai_chance = {
+			base = 20
+		}
+		random_list = {
+			# 40 = {
+            #     country_event = {
+			# 		id = sie.5
+			# 		days = 60
+			# 	}           
+			# }
+			60 = {
+                country_event = {
+					id = sie.4
+					days = 60
+				}
+			}
+		}
+	}
+}
+
+#被挫败的阴谋
+country_event = {
+	id = sie.3
+	title = sie.3.t
+	desc = sie.3.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = sie.3.a
+		ai_chance = {
+			base = 10
+		}
+		add_popularity = {
+			ideology = authoritarianism
+			popularity = -1
+		}
+		add_country_leader_role = {
+	        character = SIE_Leaderless
+	        promote_leader = yes
+	        country_leader = {
+	            ideology = authoritarian_democracy_subtype
+	        }
+	    }
+        set_party_name = {
+			ideology = authoritarianism
+			name = "SIE_City_Council-Hardliner"
+			long_name = SIE_City_Council-Hardliner_long
+		}
+		retire_character = SIE_Cronin
+		remove_ideas = SIE_Cronin
+	}
+}
+
+#赫尔曼市长遭遇刺杀！
+country_event = {
+	id = sie.4
+	title = sie.4.t
+	desc = sie.4.d
+
+	is_triggered_only = yes
+
+	option = { #没死
+		name = sie.4.a
+		ai_chance = {
+			base = 20
+		}
+		add_political_power = -35
+		add_stability = -0.05
+		country_event = {
+            id = worldnews_sie.3
+		}
+		random_list = {
+			25 = {
+				#没调查出结果
+			}
+			75 = {
+				#调查出了结果
+				country_event = {
+					id = sie.6
+					days = 15
+				}
+			}
+		}
+	}
+
+	option = { #死了
+		name = sie.4.b
+		ai_chance = {
+			base = 30
+		}
+		add_political_power = -100
+		add_stability = -0.1
+		kill_country_leader = yes
+		country_event = {
+            id = worldnews_sie.4
+		}
+		country_event = {
+            id = sie.7
+			days = 720
+		}
+		swap_ideas = {
+			remove_idea = SIE_solitary_boat_of_south_Herman
+			add_idea = SIE_solitary_boat_of_south_Ceylon
+		}
+	}
+}
+
+#克洛宁政变！
+country_event = {
+	id = sie.5
+	title = sie.5.t
+	desc = sie.5.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = sie.5.a
+		ai_chance = {
+			base = 10
+		}
+		country_event = {
+            id = worldnews_sie.2
+		}
+		set_politics = {
+			ruling_party = authoritarianism
+		    elections_allowed = no
+		}
+		add_popularity = {
+			ideology = authoritarianism
+			popularity = 0.55
+		}
+		swap_ideas = {
+			remove_idea = SIE_solitary_boat_of_south_Herman
+			add_idea = SIE_solitary_boat_of_south_Cronin
+		}
+		swap_ideas = {
+			remove_idea = SIE_Economic_transformation
+			add_idea = SIE_Extractive_economy
+		}
+		set_country_flag = SIE_Cronin_Coup_flag
+	}
+}
+
+#浮出水面的隐秘阴谋
+country_event = {
+	id = sie.6
+	title = sie.6.t
+	desc = sie.6.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = sie.6.a
+		ai_chance = {
+			base = 10
+		}
+		add_popularity = {
+			ideology = authoritarianism
+			popularity = -1
+		}
+		add_country_leader_role = {
+	        character = SIE_Leaderless
+	        promote_leader = yes
+	        country_leader = {
+	            ideology = authoritarian_democracy_subtype
+	        }
+	    }
+        set_party_name = {
+			ideology = authoritarianism
+			name = "SIE_City_Council-Hardliner"
+			long_name = SIE_City_Council-Hardliner_long
+		}
+		retire_character = SIE_Cronin
+		remove_ideas = SIE_Cronin
+	}
+}
+
+#新的领航员
+country_event = {
+	id = sie.7
+	title = sie.7.t
+	desc = sie.7.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = sie.7.a
+		ai_chance = {
+			base = 10
+		}
+		swap_ruler_traits = {
+			remove = SIE_too_young_too_simple
+			add = SIE_The_Navigator
+		}
+	}
+}
+
+#汐斯塔的转型进程
+country_event = {
+	id = sie.8
+	title = sie.8.t
+	desc = sie.8.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = sie.8.a
+		ai_chance = {
+			base = 10
+		}
+		if = {
+			limit = {
+				not = {
+				  	has_country_flag = SIE_Cronin_Coup_flag
+				}
+			}
+	        country_event = {
+            	id = worldnews_sie.5
+				days = 660
+			}
+			country_event = {
+				id = sie.9
+				days = 300
+			}
+		}
+		else = {
+	        country_event = {
+            	id = worldnews_sie.6
+				days = 660
+			}					
+		}	
+	}
+}
+
+#汐斯塔的转型大获成功
+country_event = {
+	id = sie.9
+	title = sie.9.t
+	desc = sie.9.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = sie.9.a
+		ai_chance = {
+			base = 10
+		}
+		remove_ideas = SIE_volcano_issues
+		swap_ideas = {
+			remove_idea = SIE_Economic_transformation
+			add_idea = SIE_Southern_Trade_Port
+		}
+	}
+}
+
+#############
+###新闻事件###
+#############
+
+#汐斯塔黑曜石节开幕
+news_event = {
+	id = worldnews_sie.1
+	title = worldnews_sie.1.t
+	desc = worldnews_sie.1.d
+	picture = GFX_news_event_SIE_Obsidian_Festival
+
+	is_triggered_only = yes
+	major = yes 
+	
+	option = { 
+		name = worldnews_sie.1.a
+	}
+}
+
+#汐斯塔的突发政变
+news_event = {
+	id = worldnews_sie.2
+	title = worldnews_sie.2.t
+	desc = worldnews_sie.2.d
+	picture = GFX_news_event_SIE_Siesta_Down_Town_1
+
+	is_triggered_only = yes
+	major = yes 
+	
+	option = { 
+		name = worldnews_sie.2.a
+	}
+}
+
+#汐斯塔市长遇刺
+news_event = {
+	id = worldnews_sie.3
+	title = worldnews_sie.3.t
+	desc = worldnews_sie.3.d
+	picture = GFX_news_event_SIE_Siesta_Down_Town_2
+
+	is_triggered_only = yes
+	major = yes 
+	
+	option = { 
+		name = worldnews_sie.3.a
+	}
+}
+
+#汐斯塔市长遇刺身亡
+news_event = {
+	id = worldnews_sie.4
+	title = worldnews_sie.4.t
+	desc = worldnews_sie.4.d
+	picture = GFX_news_event_SIE_Siesta_Down_Town_2
+
+	is_triggered_only = yes
+	major = yes 
+	
+	option = { 
+		name = worldnews_sie.4.a
+	}
+}
+
+#旧汐斯塔火山爆发
+news_event = {
+	id = worldnews_sie.5
+	title = worldnews_sie.5.t
+	desc = worldnews_sie.5.d
+	picture = GFX_news_event_SIE_Volcano_1
+
+	is_triggered_only = yes
+	major = yes 
+	
+	option = { 
+		name = worldnews_sie.5.a
+	}
+}
+
+#汐斯塔之灾
+news_event = {
+	id = worldnews_sie.6
+	title = worldnews_sie.6.t
+	desc = worldnews_sie.6.d
+	picture = GFX_news_event_SIE_Volcano_2
+
+	is_triggered_only = yes
+	major = yes 
+	
+	option = { 
+		name = worldnews_sie.6.a
+		if = {
+			limit ={
+				original_tag = SIE
+			}
+			swap_ideas = {
+				remove_idea = SIE_volcano_issues
+				add_idea = SIE_Almost_destroyed
+			}
+		}
+	}
+}

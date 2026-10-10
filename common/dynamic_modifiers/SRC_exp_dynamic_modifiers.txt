@@ -1,0 +1,70 @@
+# ============================================================================
+# 叙拉古 (SRC) · 对外扩张树「七丘的狼崽子们」—— 动态修正（带 icon 即政治栏民族精神）
+#
+# 变量前缀 SRC_exp_*，与政治树（SRC_nm_ / SRC_cd_ / SRC_tr_ / SRC_go_ / SRC_cp_）、
+#   产业树（SRC_tg_ / SRC_ni_ / SRC_th_ / SRC_ga_）严格分家，不复用共享变量池。
+# 挂载：国策 completion_reward 的 add_dynamic_modifier（幂等）+ add_to_variable 原地成长。
+#
+# 满档（按项目口径单项不超过 ±20%；2026-09-20 把原 25% 档削到 15%。改数值要同步改这段注释、SRC_exp_tt_* 文案与
+#   docs/SRC_对外扩张树效果一览.md）：
+#   超级叙拉古人（一格一档，随四步成长）
+#     战争支持   +15%  = 0.09（总起）+0.03（狼性文化）+0.03（控诉暴行）
+#     稳定度     +15%  = 0.06（认同）+0.06（打击分裂）+0.03（控诉暴行）
+#     师团攻击   +15%  = 0.10（总起）+0.05（军团凯旋）
+#     宣战准备   -15%  / 非核心领土进攻 +5%          （总起）
+#     训练时间   -10%  / 陆军经验 +0.05每日          （狼性文化）
+#     核心化花费 -15%  / 驻军需求 -10%               （强化认同）
+#     每周稳定   +0.3%（非百分比，边疆噤声的净效果）  （打击分裂）
+#   光荣的叙拉古公民（终局一次性挂上，数值固定）
+#     核心化花费 -15% / 稳定度 +10% / 战争支持 +10% / 征兵 +20%
+#     ※ 设计稿的「非核心领土人力 +20%」在引擎里没有国家级对应物（non_core_manpower
+#       是 state 类修正符），按惯例换成国家级的 conscription_factor。
+#   狼徽律法（州级，整肃边疆家族决议逐州挂上，永久）
+#     可征兵人口 +20% / 当地人力 +20%
+# ============================================================================
+
+SRC_dyn_super_siracusan = {
+	icon = GFX_idea_SRC_dyn_super_siracusan
+
+	enable = {
+		always = yes
+	}
+
+	war_support_factor = SRC_exp_ws
+	army_attack_factor = SRC_exp_atk
+	justify_war_goal_time = SRC_exp_jwg
+	army_non_core_attack_factor = SRC_exp_ncatk
+	training_time_factor = SRC_exp_train
+	experience_gain_army = SRC_exp_axp
+	stability_factor = SRC_exp_stab
+	stability_weekly = SRC_exp_sw
+	political_power_cost = SRC_exp_ppc
+	required_garrison_factor = SRC_exp_garr
+}
+
+SRC_dyn_glorious_citizen = {
+	icon = GFX_idea_SRC_dyn_glorious_citizen
+
+	enable = {
+		always = yes
+	}
+
+	political_power_cost = -0.15
+	stability_factor = 0.10
+	war_support_factor = 0.10
+	conscription_factor = 0.20
+}
+
+# ---- 州级：狼徽换掉家族纹章之后，这片边疆才算在叙拉古名册上 ----
+SRC_dyn_state_wolf_law = {
+	icon = GFX_gul_resistance_state_modifier4
+
+	enable = {
+		always = yes
+	}
+
+	recruitable_population_factor = 0.20
+	local_manpower = 0.20
+
+	custom_modifier_tooltip = SRC_exp_tt_wolf_law_state
+}

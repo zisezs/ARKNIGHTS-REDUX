@@ -1,0 +1,158 @@
+ideas = {
+	poverty_rate = {
+		law = yes
+		use_list_view = yes
+
+		severe_poverty = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				monthly_population = -0.4
+				conscription_factor = -0.2
+				political_power_factor = -0.1
+				stability_factor = -0.1
+				war_support_factor = -0.05
+
+				custom_modifier_tooltip = poverty_rate_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		rampant_poverty = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				monthly_population = -0.2
+				conscription_factor = -0.1
+				political_power_factor = -0.05
+				stability_factor = -0.06
+				war_support_factor = -0.03
+				poverty_development_monthly_modifier = -0.02
+
+				custom_modifier_tooltip = poverty_rate_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		widespread_poverty = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				stability_factor = -0.02
+				war_support_factor = -0.01
+				poverty_development_monthly_modifier = -0.04
+
+				custom_modifier_tooltip = poverty_rate_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		low_poverty = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				monthly_population = 0.2
+				conscription_factor = 0.1
+				political_power_factor = 0.05
+				stability_factor = 0.02
+				war_support_factor = 0.01
+				poverty_development_monthly_modifier = -0.08
+
+				custom_modifier_tooltip = poverty_rate_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		very_low_poverty = {
+
+			removal_cost = -1
+
+			allowed_to_remove = {
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				monthly_population = 0.4
+				conscription_factor = 0.2
+				political_power_factor = 0.1
+				stability_factor = 0.06
+				war_support_factor = 0.03
+				poverty_development_monthly_modifier = -0.16
+
+				custom_modifier_tooltip = poverty_rate_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		no_poverty = {
+
+			removal_cost = -1
+
+			allowed_to_remove = {
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				monthly_population = 0.6
+				conscription_factor = 0.3
+				political_power_factor = 0.15
+				stability_factor = 0.1
+				war_support_factor = 0.05
+				poverty_development_monthly_modifier = -0.32
+
+				custom_modifier_tooltip = poverty_rate_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+	}
+}

@@ -1,0 +1,420 @@
+guiTypes = {
+
+	# ======================================================================
+	# 柳德米拉的主席办公室 —— GALgame 风格对话面板
+	#  · 由 common/scripted_guis/REU_Ludmila_Office.txt 驱动
+	#  · 显示条件：国家旗标 REU_ludmila_office_open
+	#  · 布局约定：窗口 1200x700；浅灰底板 + 深墨字（自建 *d 字体）
+	#    后写的控件压在先写的上面，所以「点任意处继续」要放在选项/互动按钮之前
+	# ======================================================================
+	containerWindowType = {
+		name = "REU_Ludmila_Office_Window"
+		position = { x = 0 y = 0 }
+		size = { width = 1200 height = 700 }
+		orientation = center
+		origo = center
+		moveable = no
+		click_to_front = yes
+
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_REU_Lud_bg"
+		}
+
+		# ---- 场景层：全屏底图，按 REU_ludmila_scene 切（0 = 主席办公室 / 1 = 1095 年谷仓） ----
+		# 窗口的 background 仍是办公室（兜底），这一层盖在上面并按需切换
+		iconType = {
+			name = "REU_Lud_Scene"
+			position = { x = 0 y = 0 }
+			spriteType = "GFX_REU_Lud_bg"
+			alwaystransparent = yes
+		}
+
+		# ---- 选项出现时压暗背景的遮罩（仅在选项模式可见） ----
+		iconType = {
+			name = "REU_Lud_Dim"
+			position = { x = 0 y = 0 }
+			spriteType = "GFX_REU_Lud_dim"
+			alwaystransparent = yes
+		}
+
+		# ---- 立绘（差分由 scripted_gui 的 properties.image 动态切换） ----
+		# 主角（玩家·心腹）：左侧、略小一档拉开纵深；写在她的立绘之前 = 压在下面
+		iconType = {
+			name = "REU_Lud_Portrait_Prota"
+			position = { x = 14 y = 88 }
+			spriteType = "GFX_REU_Lud_prota"
+			alwaystransparent = yes
+		}
+
+		iconType = {
+			name = "REU_Lud_Portrait"
+			position = { x = 380 y = 40 }
+			spriteType = "GFX_REU_Lud_uniform"
+			alwaystransparent = yes
+		}
+
+		# ---- 左上角地点标题（带描边底板） ----
+		iconType = {
+			name = "REU_Lud_Title_Bg"
+			position = { x = 24 y = 14 }
+			spriteType = "GFX_REU_Lud_titlebg"
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "REU_Lud_Title"
+			position = { x = 44 y = 22 }
+			font = "REU_Lud_title26d"
+			text = "[REU_GetLudmilaTitle]"
+			maxWidth = 280
+			maxHeight = 34
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+
+		# ---- 对话框（浅灰底，正文深墨色）----
+		iconType = {
+			name = "REU_Lud_TextBox"
+			position = { x = 0 y = 566 }
+			spriteType = "GFX_REU_Lud_textbox"
+			alwaystransparent = yes
+		}
+
+		# 说话人名牌：底边与对话框上沿齐平
+		iconType = {
+			name = "REU_Lud_Plate"
+			position = { x = 24 y = 514 }
+			spriteType = "GFX_REU_Lud_plate"
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "REU_Lud_Speaker"
+			position = { x = 40 y = 528 }
+			font = "REU_Lud_title26d"
+			text = "[REU_GetLudmilaSpeaker]"
+			maxWidth = 236
+			maxHeight = 30
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+
+		# 正文：1080 / 20px = 每行 54 个汉字，96 / 23px ≈ 4 行
+		instantTextBoxType = {
+			name = "REU_Lud_Text"
+			position = { x = 44 y = 580 }
+			font = "REU_Lud_text20d"
+			text = "[REU_GetLudmilaText]"
+			maxWidth = 1080
+			maxHeight = 96
+			format = left
+			alwaystransparent = yes
+		}
+
+		# ---- 右上角好感度胶囊（爱心 + 数字 + 阶段，一整块） ----
+		iconType = {
+			name = "REU_Lud_Aff_Bg"
+			position = { x = 770 y = 12 }
+			spriteType = "GFX_REU_Lud_affchip"
+			alwaystransparent = yes
+			pdx_tooltip = REU_Ludmila_Office_Affection_TT
+		}
+
+		# 爱心：5 帧横条（0~4 颗心），frame 由 scripted_gui 的 properties 驱动
+		iconType = {
+			name = "REU_Lud_Hearts"
+			position = { x = 782 y = 21 }
+			spriteType = "GFX_REU_Lud_hearts"
+			frame = 0
+			alwaystransparent = yes
+			pdx_tooltip = REU_Ludmila_Office_Affection_TT
+		}
+
+		instantTextBoxType = {
+			name = "REU_Lud_AffNum"
+			position = { x = 938 y = 22 }
+			font = "REU_Lud_title26d"
+			text = "REU_Ludmila_Office_AffNum"
+			maxWidth = 66
+			maxHeight = 32
+			fixedsize = yes
+			format = right
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "REU_Lud_Stage"
+			position = { x = 1012 y = 26 }
+			font = "REU_Lud_text20d"
+			text = "[REU_GetLudmilaStage]"
+			maxWidth = 118
+			maxHeight = 24
+			fixedsize = yes
+			format = centre
+			alwaystransparent = yes
+			pdx_tooltip = REU_Ludmila_Office_Affection_TT
+		}
+
+		# ---- 继续按钮：整块窗口都能点（选项/互动/关闭按钮压在它上面） ----
+		buttonType = {
+			name = "REU_Lud_Advance"
+			position = { x = 0 y = 0 }
+			quadTextureSprite = "GFX_REU_Lud_trans"
+			clicksound = click_default
+		}
+
+		# 对话框右下角「继续」箭头，仅在无选项时可见
+		buttonType = {
+			name = "REU_Lud_Next"
+			position = { x = 1136 y = 644 }
+			quadTextureSprite = "GFX_REU_Lud_next_btn"
+			clicksound = click_default
+			pdx_tooltip = REU_Ludmila_Office_Next_TT
+		}
+
+		# ---- 选项按钮：竖排在屏幕正中（4 个 52 高 + 10 间隔，整体垂直居中） ----
+		buttonType = {
+			name = "REU_Lud_Choice_1_Btn"
+			position = { x = 190 y = 231 }
+			quadTextureSprite = "GFX_REU_Lud_choice_btn"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Lud_Choice_1_Text"
+			position = { x = 214 y = 231 }
+			font = "REU_Lud_text20d"
+			text = "[REU_GetLudmilaChoice1]"
+			maxWidth = 772
+			maxHeight = 52
+			vertical_alignment = centre
+			format = left
+			alwaystransparent = yes
+		}
+
+		buttonType = {
+			name = "REU_Lud_Choice_2_Btn"
+			position = { x = 190 y = 293 }
+			quadTextureSprite = "GFX_REU_Lud_choice_btn"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Lud_Choice_2_Text"
+			position = { x = 214 y = 293 }
+			font = "REU_Lud_text20d"
+			text = "[REU_GetLudmilaChoice2]"
+			maxWidth = 772
+			maxHeight = 52
+			vertical_alignment = centre
+			format = left
+			alwaystransparent = yes
+		}
+
+		buttonType = {
+			name = "REU_Lud_Choice_3_Btn"
+			position = { x = 190 y = 355 }
+			quadTextureSprite = "GFX_REU_Lud_choice_btn"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Lud_Choice_3_Text"
+			position = { x = 214 y = 355 }
+			font = "REU_Lud_text20d"
+			text = "[REU_GetLudmilaChoice3]"
+			maxWidth = 772
+			maxHeight = 52
+			vertical_alignment = centre
+			format = left
+			alwaystransparent = yes
+		}
+
+		buttonType = {
+			name = "REU_Lud_Choice_4_Btn"
+			position = { x = 190 y = 417 }
+			quadTextureSprite = "GFX_REU_Lud_choice_btn"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Lud_Choice_4_Text"
+			position = { x = 214 y = 417 }
+			font = "REU_Lud_text20d"
+			text = "[REU_GetLudmilaChoice4]"
+			maxWidth = 772
+			maxHeight = 52
+			vertical_alignment = centre
+			format = left
+			alwaystransparent = yes
+		}
+
+		# ---- 右侧互动栏：只在「本章已结束、下一章未开始」的间隙出现 ----
+		iconType = {
+			name = "REU_Lud_Gift_Head"
+			position = { x = 880 y = 76 }
+			spriteType = "GFX_REU_Lud_gifthead"
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "REU_Lud_Gift_HeadText"
+			position = { x = 894 y = 82 }
+			font = "REU_Lud_text20d"
+			text = "REU_Ludmila_Office_Gift_Header"
+			maxWidth = 262
+			maxHeight = 23
+			fixedsize = yes
+			format = centre
+			alwaystransparent = yes
+		}
+
+		buttonType = {
+			name = "REU_Lud_Gift_1"
+			position = { x = 880 y = 116 }
+			quadTextureSprite = "GFX_REU_Lud_gift_btn"
+			clicksound = click_default
+			pdx_tooltip = REU_ludmila_gift_chocolate_desc
+		}
+		iconType = {
+			name = "REU_Lud_Gift_1_Icon"
+			position = { x = 892 y = 132 }
+			spriteType = "GFX_decision_generic_civil_support"
+			alwaystransparent = yes
+			pdx_tooltip = REU_ludmila_gift_chocolate_desc
+		}
+		instantTextBoxType = {
+			name = "REU_Lud_Gift_1_Text"
+			position = { x = 940 y = 124 }
+			font = "REU_Lud_text20d"
+			text = "REU_ludmila_gift_chocolate_ui"
+			maxWidth = 218
+			maxHeight = 48
+			vertical_alignment = centre
+			format = left
+			alwaystransparent = yes
+			pdx_tooltip = REU_ludmila_gift_chocolate_desc
+		}
+
+		buttonType = {
+			name = "REU_Lud_Gift_2"
+			position = { x = 880 y = 190 }
+			quadTextureSprite = "GFX_REU_Lud_gift_btn"
+			clicksound = click_default
+			pdx_tooltip = REU_ludmila_handle_paperwork_desc
+		}
+		iconType = {
+			name = "REU_Lud_Gift_2_Icon"
+			position = { x = 892 y = 206 }
+			spriteType = "GFX_decision_generic_speech"
+			alwaystransparent = yes
+			pdx_tooltip = REU_ludmila_handle_paperwork_desc
+		}
+		instantTextBoxType = {
+			name = "REU_Lud_Gift_2_Text"
+			position = { x = 940 y = 198 }
+			font = "REU_Lud_text20d"
+			text = "REU_ludmila_handle_paperwork_ui"
+			maxWidth = 218
+			maxHeight = 48
+			vertical_alignment = centre
+			format = left
+			alwaystransparent = yes
+			pdx_tooltip = REU_ludmila_handle_paperwork_desc
+		}
+
+		buttonType = {
+			name = "REU_Lud_Gift_3"
+			position = { x = 880 y = 264 }
+			quadTextureSprite = "GFX_REU_Lud_gift_btn"
+			clicksound = click_default
+			pdx_tooltip = REU_ludmila_watch_snow_desc
+		}
+		iconType = {
+			name = "REU_Lud_Gift_3_Icon"
+			position = { x = 892 y = 280 }
+			spriteType = "GFX_decision_generic_political_discourse"
+			alwaystransparent = yes
+			pdx_tooltip = REU_ludmila_watch_snow_desc
+		}
+		instantTextBoxType = {
+			name = "REU_Lud_Gift_3_Text"
+			position = { x = 940 y = 272 }
+			font = "REU_Lud_text20d"
+			text = "REU_ludmila_watch_snow_ui"
+			maxWidth = 218
+			maxHeight = 48
+			vertical_alignment = centre
+			format = left
+			alwaystransparent = yes
+			pdx_tooltip = REU_ludmila_watch_snow_desc
+		}
+
+		# ---- 关闭 ----
+		buttonType = {
+			name = "REU_Lud_Close"
+			position = { x = 1156 y = 14 }
+			quadTextureSprite = "GFX_REU_Lud_close_btn"
+			clicksound = click_default
+		}
+	}
+
+
+	# ======================================================================
+	# 决议分类页里的入口面板（context_type = decision_category，深色底）
+	# ======================================================================
+	containerWindowType = {
+		name = "REU_Ludmila_Office_Entry_GUI"
+		size = { width = 100% height = 190 }
+		position = { x = 0 y = 0 }
+
+		iconType = {
+			name = "REU_Lud_Entry_Bg"
+			position = { x = 20 y = 10 }
+			spriteType = "GFX_REU_Lud_entry_bg"
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "REU_Lud_Entry_Title"
+			position = { x = 44 y = 26 }
+			font = "REU_Lud_title26"
+			text = "REU_Ludmila_Office_Entry_Title"
+			maxWidth = 520
+			maxHeight = 32
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+
+		buttonType = {
+			name = "REU_Lud_Open"
+			position = { x = 44 y = 82 }
+			quadTextureSprite = "GFX_REU_Lud_entry_btn"
+			clicksound = click_default
+		}
+
+		instantTextBoxType = {
+			name = "REU_Lud_Open_Text"
+			position = { x = 44 y = 82 }
+			font = "REU_Lud_text20"
+			text = "[REU_GetLudmilaEntryLabel]"
+			maxWidth = 300
+			maxHeight = 56
+			fixedsize = yes
+			vertical_alignment = centre
+			format = centre
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "REU_Lud_Entry_Desc"
+			position = { x = 380 y = 66 }
+			font = "REU_Lud_text16"
+			text = "REU_Ludmila_Office_Entry_Desc"
+			maxWidth = 470
+			maxHeight = 104
+			format = left
+			alwaystransparent = yes
+		}
+	}
+}

@@ -1,0 +1,218 @@
+# ==============================================================================
+#  西北都护府 · 异变（事件链）
+#  · yan_upheaval.1 夜火      山海众在戈壁设坛献祭，试图唤醒岁相
+#  · yan_upheaval.2 界园      界园封印松动，岁兽的一缕意识渗入现实
+#  · yan_upheaval.3 同袍      民众与将士被蛊惑，炼作傀儡
+#  · yan_upheaval.4 蒙恩      终幕：易帜、改名岁国、蒙恩-睚上台
+#  · 启动判定见 common/scripted_effects/YNW_upheaval_scripted_effects.txt，
+#    挂在 YAN_monthly_tick 上：1098.1.1 硬日期门起链，不能更早。
+#  · 完结后置 global flag，YAN 侧的「岁怒」超事件由 events/YAN_super_events.txt 接。
+#  · 每一步都会推高大炎的岁兽苏醒度（YNW_upheaval_awakening_step），
+#    各选项的差异体现在「下一步隔多少天来」——纵容得越狠，链走得越快。
+#  · 文风与设定参照《登临意》：白描、短句、克制。
+# ==============================================================================
+
+add_namespace = yan_upheaval
+
+# ------------------------------------------------------------------
+# 1 夜火 —— 山海众频繁举行献祭
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_upheaval.1
+	title = yan_upheaval.1.t
+	desc = yan_upheaval.1.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	immediate = {
+		YNW_upheaval_awakening_step = yes
+		# 本步已经送到，重置停滞计数（on_monthly_YNW 靠它判断选项是否被引擎丢掉）
+		set_variable = { YNW_upheaval_stall = 0 }
+		log = "YNW_upheaval: 事件已送达"
+	}
+
+	option = {
+		name = yan_upheaval.1.a
+		ai_chance = {
+			base = 40
+		}
+		add_political_power = -40
+		army_experience = 10
+		set_country_flag = yan_upheaval_repressed_flag
+		hidden_effect = {
+			country_event = { id = yan_upheaval.2 days = 35 }
+		}
+	}
+
+	option = {
+		name = yan_upheaval.1.b
+		ai_chance = {
+			base = 35
+		}
+		add_political_power = -15
+		add_stability = -0.05
+		set_country_flag = yan_upheaval_banned_flag
+		hidden_effect = {
+			country_event = { id = yan_upheaval.2 days = 24 }
+		}
+	}
+
+	option = {
+		name = yan_upheaval.1.c
+		ai_chance = {
+			base = 25
+		}
+		add_stability = 0.05
+		set_country_flag = yan_upheaval_tolerated_flag
+		hidden_effect = {
+			country_event = { id = yan_upheaval.2 days = 12 }
+		}
+	}
+}
+
+# ------------------------------------------------------------------
+# 2 界园 —— 封印松动，一缕意识渗入现实
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_upheaval.2
+	title = yan_upheaval.2.t
+	desc = yan_upheaval.2.d
+	picture = GFX_report_event_Generic_Snowfield_Twilight
+
+	is_triggered_only = yes
+
+	immediate = {
+		YNW_upheaval_awakening_step = yes
+		# 本步已经送到，重置停滞计数（on_monthly_YNW 靠它判断选项是否被引擎丢掉）
+		set_variable = { YNW_upheaval_stall = 0 }
+		log = "YNW_upheaval: 事件已送达"
+	}
+
+	option = {
+		name = yan_upheaval.2.a
+		ai_chance = {
+			base = 45
+		}
+		add_political_power = -60
+		add_war_support = 0.05
+		set_country_flag = yan_upheaval_sealed_attempt_flag
+		hidden_effect = {
+			country_event = { id = yan_upheaval.3 days = 24 }
+		}
+	}
+
+	option = {
+		name = yan_upheaval.2.b
+		ai_chance = {
+			base = 40
+		}
+		add_political_power = -20
+		add_stability = -0.1
+		hidden_effect = {
+			country_event = { id = yan_upheaval.3 days = 14 }
+		}
+	}
+
+	option = {
+		name = yan_upheaval.2.c
+		ai_chance = {
+			base = 15
+		}
+		add_stability = -0.15
+		set_country_flag = yan_upheaval_heard_the_name_flag
+		hidden_effect = {
+			country_event = { id = yan_upheaval.3 days = 6 }
+		}
+	}
+}
+
+# ------------------------------------------------------------------
+# 3 同袍 —— 民众与将士被炼成傀儡
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_upheaval.3
+	title = yan_upheaval.3.t
+	desc = yan_upheaval.3.d
+	picture = GFX_report_event_Generic_Tundra_1
+
+	is_triggered_only = yes
+
+	immediate = {
+		YNW_upheaval_awakening_step = yes
+		add_ideas = YNW_bewitched_legions
+		# 本步已经送到，重置停滞计数（on_monthly_YNW 靠它判断选项是否被引擎丢掉）
+		set_variable = { YNW_upheaval_stall = 0 }
+		log = "YNW_upheaval: 事件已送达"
+	}
+
+	option = {
+		name = yan_upheaval.3.a
+		ai_chance = {
+			base = 40
+		}
+		add_war_support = 0.1
+		add_stability = -0.15
+		set_country_flag = yan_upheaval_hardline_flag
+		hidden_effect = {
+			country_event = { id = yan_upheaval.4 days = 14 }
+		}
+	}
+
+	option = {
+		name = yan_upheaval.3.b
+		ai_chance = {
+			base = 35
+		}
+		add_political_power = -50
+		add_stability = 0.05
+		set_country_flag = yan_upheaval_relief_flag
+		hidden_effect = {
+			country_event = { id = yan_upheaval.4 days = 10 }
+		}
+	}
+
+	option = {
+		name = yan_upheaval.3.c
+		ai_chance = {
+			base = 25
+		}
+		add_manpower = 25000
+		add_stability = -0.1
+		hidden_effect = {
+			country_event = { id = yan_upheaval.4 days = 6 }
+		}
+	}
+}
+
+# ------------------------------------------------------------------
+# 4 蒙恩 —— 终幕
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_upheaval.4
+	title = yan_upheaval.4.t
+	desc = yan_upheaval.4.d
+	picture = GFX_report_event_Generic_Ice_Lake
+
+	is_triggered_only = yes
+
+	# 事件一送到就登记「终幕待办」：万一选项点击被引擎丢掉，
+	# on_monthly_YNW 会凭这个旗标把转换补做，不至于卡在这里
+	immediate = {
+		set_country_flag = YNW_upheaval_final_pending_flag
+		set_variable = { YNW_upheaval_stall = 0 }
+		log = "YNW_upheaval: 终幕事件已送达"
+	}
+
+	# 注意：这里不能写 major = yes。country_event 的 major 会把事件发给所有大国、
+	# 且选项效果在各自国家作用域执行——终幕的改名/建军/宣战会在全地图各跑一遍。
+	# 世界广播由终幕里的 major news_event yanse.1 承担。
+	option = {
+		name = yan_upheaval.4.a
+		custom_effect_tooltip = yan_upheaval.4.tt
+		# 钉死作用域：改名/建军/宣战只准落在西北都护府身上
+		YNW = {
+			YNW_upheaval_become_sui_state = yes
+		}
+	}
+}

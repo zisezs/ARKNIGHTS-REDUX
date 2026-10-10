@@ -1,0 +1,431 @@
+add_namespace = ursus_kzmwar
+
+######################################################
+# 第十一次乌卡战争 · 乌萨斯侧专属链（事件）
+# 效果正文见 common/scripted_effects/URS_Kazimierz_War_scripted_effects.txt
+#
+# 编号约定：
+#   .1         决议弹出的整肃选择窗
+#   .2         引蛇出洞：选哪一路（只置 brewing 旗标，不发文书、不排期）
+#   .3         引蛇出洞：定日子（文书在此发出，起事排期也在此落下；最后一项反悔）
+#   .10–.15    六路叛军起义告急文书（.10 UCM / .11 ULB / .12 UFS / .13 KZC / .14 BUS / .15 BLT）
+#   .20        起义落地执行（择定的那一天；结算全写在 immediate，不依赖玩家点击）
+#   .30        乌萨斯对卡西米尔宣战的突袭预警（发给卡西米尔，2 天前）
+#   .31        正式宣战执行（并把备战度结算成战时精神）
+#   .40        自动获胜结算
+#   .42        平叛报捷（每平定一路发一次，给备战度与缴获）
+#   .50        战争爆发新闻。旧 worldnews_kzm.9 的正文写的是「卡西米尔抢先发动攻势」，
+#              与本链「帝国先手」相反，故另起一份；.9 随旧入口一起停用。
+#
+# 引擎坑：title / desc 都必须写成 key = 值。原第 23、69 行把 desc 键裸写了一行，
+#   结果是这两个选择窗连正文都没有（error.log: Unexpected token: ursus_kzmwar.1.d）。
+# 选项一律显式写 name，别漏 —— 第 4 个选项不写 name 就会 auto 成 ursus_kzmwar.X.d，
+#   与 desc 抢同一个 loc 键。
+######################################################
+
+# ── 整肃叛区：选择对象 ──
+country_event = {
+	id = ursus_kzmwar.1
+	title = ursus_kzmwar.1.t
+	desc = ursus_kzmwar.1.d
+	picture = GFX_report_event_Generic_Barracks
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.1.oa
+		URS_kzmwar_suppress_ucm = yes
+		ai_chance = { factor = 10 }
+	}
+	option = {
+		name = ursus_kzmwar.1.ob
+		URS_kzmwar_suppress_ulb = yes
+		ai_chance = { factor = 10 }
+	}
+	option = {
+		name = ursus_kzmwar.1.oc
+		URS_kzmwar_suppress_ufs = yes
+		ai_chance = { factor = 10 }
+	}
+	option = {
+		name = ursus_kzmwar.1.od
+		URS_kzmwar_suppress_kzc = yes
+		ai_chance = { factor = 20 }
+	}
+	option = {
+		name = ursus_kzmwar.1.oe
+		URS_kzmwar_suppress_bus = yes
+		ai_chance = { factor = 15 }
+	}
+	option = {
+		name = ursus_kzmwar.1.of
+		URS_kzmwar_suppress_blt = yes
+		ai_chance = { factor = 15 }
+	}
+	option = {
+		name = ursus_kzmwar.1.og
+		URS_kzmwar_suppress_all = yes
+		ai_chance = { factor = 30 }
+	}
+}
+
+# ── 引蛇出洞：选择引爆哪一路 ──
+country_event = {
+	id = ursus_kzmwar.2
+	title = ursus_kzmwar.2.t
+	desc = ursus_kzmwar.2.d
+	picture = GFX_report_event_Generic_explosion
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.2.oa
+		trigger = {
+			UCM = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ucm }
+		}
+		URS_kzmwar_brew_ucm = yes
+		country_event = { id = ursus_kzmwar.3 }
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ursus_kzmwar.2.ob
+		trigger = {
+			ULB = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ulb }
+		}
+		URS_kzmwar_brew_ulb = yes
+		country_event = { id = ursus_kzmwar.3 }
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ursus_kzmwar.2.oc
+		trigger = {
+			UFS = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ufs }
+		}
+		URS_kzmwar_brew_ufs = yes
+		country_event = { id = ursus_kzmwar.3 }
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ursus_kzmwar.2.od
+		trigger = {
+			KZC = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_kzc }
+		}
+		URS_kzmwar_brew_kzc = yes
+		country_event = { id = ursus_kzmwar.3 }
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ursus_kzmwar.2.oe
+		trigger = {
+			BUS = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_bus }
+		}
+		URS_kzmwar_brew_bus = yes
+		country_event = { id = ursus_kzmwar.3 }
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ursus_kzmwar.2.of
+		trigger = {
+			BLT = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_blt }
+		}
+		URS_kzmwar_brew_blt = yes
+		country_event = { id = ursus_kzmwar.3 }
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ursus_kzmwar.2.og
+		trigger = {
+			OR = {
+				AND = {
+					KZC = { exists = no }
+					NOT = { has_country_flag = URS_kzmwar_pacified_kzc }
+				}
+				AND = {
+					BUS = { exists = no }
+					NOT = { has_country_flag = URS_kzmwar_pacified_bus }
+				}
+				AND = {
+					BLT = { exists = no }
+					NOT = { has_country_flag = URS_kzmwar_pacified_blt }
+				}
+			}
+		}
+		URS_kzmwar_brew_kzc = yes
+		URS_kzmwar_brew_bus = yes
+		URS_kzmwar_brew_blt = yes
+		country_event = { id = ursus_kzmwar.3 }
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ursus_kzmwar.2.oh
+		ai_chance = { factor = 100 }
+	}
+}
+
+# ── 引蛇出洞：定起事之日 ──
+country_event = {
+	id = ursus_kzmwar.3
+	title = ursus_kzmwar.3.t
+	desc = ursus_kzmwar.3.d
+	picture = GFX_report_event_Generic_Military_Factory
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.3.oa
+		set_variable = { URS_kzmwar_erupt_delay = 0 }
+		URS_kzmwar_send_warnings = yes
+		URS_kzmwar_schedule_eruption = yes
+	}
+	option = {
+		name = ursus_kzmwar.3.ob
+		set_variable = { URS_kzmwar_erupt_delay = 30 }
+		URS_kzmwar_send_warnings = yes
+		URS_kzmwar_schedule_eruption = yes
+	}
+	option = {
+		name = ursus_kzmwar.3.oc
+		set_variable = { URS_kzmwar_erupt_delay = 60 }
+		URS_kzmwar_send_warnings = yes
+		URS_kzmwar_schedule_eruption = yes
+	}
+	option = {
+		name = ursus_kzmwar.3.od
+		set_variable = { URS_kzmwar_erupt_delay = 90 }
+		URS_kzmwar_send_warnings = yes
+		URS_kzmwar_schedule_eruption = yes
+	}
+	# 兜底一项不能带 trigger：前面全部选项被掐掉时，玩家总得能关掉这扇窗
+	option = {
+		name = ursus_kzmwar.3.oe
+		URS_kzmwar_cancel_brewing = yes
+	}
+}
+
+# ── 起义告急：乌萨斯苏维埃游击组织 ──
+country_event = {
+	id = ursus_kzmwar.10
+	title = ursus_kzmwar.10.t
+	desc = ursus_kzmwar.10.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.10.a
+	}
+}
+
+# ── 起义告急：自由乌萨斯阵线 ──
+country_event = {
+	id = ursus_kzmwar.11
+	title = ursus_kzmwar.11.t
+	desc = ursus_kzmwar.11.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.11.a
+	}
+}
+
+# ── 起义告急：乌萨斯民族军团 ──
+country_event = {
+	id = ursus_kzmwar.12
+	title = ursus_kzmwar.12.t
+	desc = ursus_kzmwar.12.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.12.a
+	}
+}
+
+# ── 起义告急：哥萨茨 ──
+country_event = {
+	id = ursus_kzmwar.13
+	title = ursus_kzmwar.13.t
+	desc = ursus_kzmwar.13.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.13.a
+	}
+}
+
+# ── 起义告急：别列斯尼亚 ──
+country_event = {
+	id = ursus_kzmwar.14
+	title = ursus_kzmwar.14.t
+	desc = ursus_kzmwar.14.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.14.a
+	}
+}
+
+# ── 起义告急：波罗的海 ──
+country_event = {
+	id = ursus_kzmwar.15
+	title = ursus_kzmwar.15.t
+	desc = ursus_kzmwar.15.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.15.a
+	}
+}
+
+# ── 起义落地：择定的那一天执行 ──
+# 结算全部放在 immediate，事件是否被点掉都不影响战争发生
+country_event = {
+	id = ursus_kzmwar.20
+	title = ursus_kzmwar.20.t
+	desc = ursus_kzmwar.20.d
+	picture = GFX_report_event_Generic_explosion
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = URS_kzmwar_erupt_scheduled
+			if = {
+				limit = { has_country_flag = URS_kzmwar_brewing_ucm }
+				clr_country_flag = URS_kzmwar_brewing_ucm
+				URS_kzmwar_erupt_ucm = yes
+			}
+			if = {
+				limit = { has_country_flag = URS_kzmwar_brewing_ulb }
+				clr_country_flag = URS_kzmwar_brewing_ulb
+				URS_kzmwar_erupt_ulb = yes
+			}
+			if = {
+				limit = { has_country_flag = URS_kzmwar_brewing_ufs }
+				clr_country_flag = URS_kzmwar_brewing_ufs
+				URS_kzmwar_erupt_ufs = yes
+			}
+			if = {
+				limit = { has_country_flag = URS_kzmwar_brewing_kzc }
+				clr_country_flag = URS_kzmwar_brewing_kzc
+				URS_kzmwar_erupt_kzc = yes
+			}
+			if = {
+				limit = { has_country_flag = URS_kzmwar_brewing_bus }
+				clr_country_flag = URS_kzmwar_brewing_bus
+				URS_kzmwar_erupt_bus = yes
+			}
+			if = {
+				limit = { has_country_flag = URS_kzmwar_brewing_blt }
+				clr_country_flag = URS_kzmwar_brewing_blt
+				URS_kzmwar_erupt_blt = yes
+			}
+		}
+	}
+
+	option = {
+		name = ursus_kzmwar.20.a
+	}
+}
+
+# ── 发给卡西米尔：乌萨斯即将宣战（提前 2 天）──
+country_event = {
+	id = ursus_kzmwar.30
+	title = ursus_kzmwar.30.t
+	desc = ursus_kzmwar.30.d
+	picture = GFX_report_event_german_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.30.a
+		add_war_support = 0.05
+	}
+}
+
+# ── 正式宣战执行 ──
+country_event = {
+	id = ursus_kzmwar.31
+	title = ursus_kzmwar.31.t
+	desc = ursus_kzmwar.31.d
+	picture = GFX_news_event_KZM_Army_1
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			URS_kzmwar_declare_now = yes
+		}
+	}
+
+	option = {
+		name = ursus_kzmwar.31.a
+	}
+}
+
+# ── 自动获胜结算 ──
+country_event = {
+	id = ursus_kzmwar.40
+	title = ursus_kzmwar.40.t
+	desc = ursus_kzmwar.40.d
+	picture = GFX_news_event_KZM_Street_2
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			URS_kzmwar_autovictory_settle = yes
+		}
+	}
+
+	option = {
+		name = ursus_kzmwar.40.a
+	}
+}
+
+# ── 平叛报捷：某路叛军的地盘重新回到帝国手里 ──
+country_event = {
+	id = ursus_kzmwar.42
+	title = ursus_kzmwar.42.t
+	desc = ursus_kzmwar.42.d
+	picture = GFX_report_event_Generic_Barracks
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_kzmwar.42.a
+	}
+}
+
+# ── 第十一次乌卡战争爆发（帝国先手）──
+news_event = {
+	id = ursus_kzmwar.50
+	title = ursus_kzmwar.50.t
+	desc = ursus_kzmwar.50.d
+	picture = GFX_news_event_KZM_Army_1
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = ursus_kzmwar.50.a
+		URS = {
+			add_war_support = 0.05
+		}
+	}
+}

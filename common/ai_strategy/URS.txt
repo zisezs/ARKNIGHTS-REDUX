@@ -1,0 +1,20 @@
+#URS大量训练装甲师
+URS_must_make_more_tank = {
+	allowed = { tag = URS }
+	enable = {
+		tag = URS
+	}
+
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -15
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 35
+	}
+}

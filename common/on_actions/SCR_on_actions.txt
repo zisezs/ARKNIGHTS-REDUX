@@ -1,0 +1,34 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			SCR = {
+				country_event = {
+					id = scr.1
+					days = 2
+				}
+			}
+		}
+	}
+	on_state_control_changed = {
+		effect = {
+			# 每征服一个地区，获得「灵感碎片」×1
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = SCR
+					}
+					FROM.FROM = {
+						NOT = { state = 867 }
+						NOT = { is_owned_by = SCR }
+					}
+				}
+				SCR = {
+					add_to_variable = {
+						var = SCR_inspiration
+						value = 1
+					}
+				}
+			}
+		}
+	}
+}

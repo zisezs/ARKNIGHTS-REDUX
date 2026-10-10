@@ -1,0 +1,36 @@
+# ══════════════════════════════════════════════════════════════════════
+#  民族精神【追星星的傻子】—— 18 格国策的全部加成合并到这一条
+#  【由 docs/gen_rhl_kristen.cjs 生成，勿手改】数值真源 docs/rhl_kristen_data.cjs
+#  带 icon 的国家级 dynamic_modifier 就是一条「精神」；数值写成变量、由国策原地累加，
+#  所以既不用换档也不会叠成两条。修正符键逐个对原版 common/ 核过（写错键不报错，只被丢掉）。
+#  ⚠ 本块**不写 name =**：dynamic_modifier 没有这个字段（原版全文搜不到），
+#    引擎会记一条 invalid modifier: name；显示名取的是 loc 键 = 本块 id，
+#    即 localisation 里的 RHL_kr_dyn_fool / RHL_kr_dyn_fool_desc。
+# ══════════════════════════════════════════════════════════════════════
+RHL_kr_dyn_fool = {
+	icon = GFX_idea_RHL_kr_fool
+	enable = { always = yes }
+
+	research_speed_factor = RHL_kr_research
+	political_power_gain = RHL_kr_pp
+	stability_factor = RHL_kr_stab
+	war_support_factor = RHL_kr_ws
+	production_speed_arms_factory_factor = RHL_kr_arms
+	industrial_capacity_factory = RHL_kr_ind
+	air_attack_factor = RHL_kr_air
+	fuel_gain_factor = RHL_kr_fuel
+}
+
+# ══════════════════════════════════════════════════════════════════════
+#  【孤星】—— 克里斯滕·莱特的领袖特质读不到变量，累计的这半边挂在这里。
+#  每发射一次火箭 +1% 科研速度，由 RHL_kr_lone_star_count 累加
+#  （发射结算在 common/scripted_effects/RHL_rocket_scripted_effects.txt 的 RHL_r_launch_resolve）。
+#  本块由 RHL_kr_make_chancellor 用 add_dynamic_modifier 挂上，所以不写 enable 条件。
+#  ⚠ 同样不写 name =：显示名取的是 loc 键 = 本块 id（RHL_kr_dyn_lone_star）。
+# ══════════════════════════════════════════════════════════════════════
+RHL_kr_dyn_lone_star = {
+	icon = GFX_idea_RHL_kr_lone_star
+	enable = { always = yes }
+
+	research_speed_factor = RHL_kr_launch_research
+}

@@ -1,0 +1,145 @@
+# 哥伦比亚 / 莱茵生命 —— 开局初始化与月度结算
+
+CLB_rhine_init = {
+	# 一次性（history 与 on_startup 都会调用，用旗标防重入）
+	if = {
+		limit = { NOT = { has_country_flag = CLB_flag_rhine_init_done } }
+		set_country_flag = CLB_flag_rhine_init_done
+
+		# 四大量表（不进精神，仅作读数与结局判定）
+		if = {
+			limit = { NOT = { has_variable = CLB_beast_acquiescence } }
+			set_variable = { CLB_beast_acquiescence = 40 }
+		}
+		if = {
+			limit = { NOT = { has_variable = CLB_maylander_influence } }
+			set_variable = { CLB_maylander_influence = 50 }
+		}
+		if = {
+			limit = { NOT = { has_variable = CLB_sky_fever } }
+			set_variable = { CLB_sky_fever = 10 }
+		}
+		if = {
+			limit = { NOT = { has_variable = CLB_neurotransmitter } }
+			set_variable = { CLB_neurotransmitter = 0 }
+		}
+
+		# 七条路线大精神的变量初值
+		if = {
+			limit = { NOT = { has_variable = CLB_pol_pp } }
+			set_variable = { CLB_pol_pp = 0 }
+			set_variable = { CLB_pol_stab = 0 }
+			set_variable = { CLB_pol_build = 0 }
+			set_variable = { CLB_pol_opinion = 0 }
+			set_variable = { CLB_pol_ws = 0 }
+			set_variable = { CLB_mil_atk = 0 }
+			set_variable = { CLB_mil_def = 0 }
+			set_variable = { CLB_mil_org = 0 }
+			set_variable = { CLB_mil_sf = 0 }
+			set_variable = { CLB_mil_xp = 0 }
+			set_variable = { CLB_mil_air = 0 }
+			set_variable = { CLB_mil_ws = 0 }
+			set_variable = { CLB_mil_stab = 0 }
+			set_variable = { CLB_int_detect = 0 }
+			set_variable = { CLB_int_extract = 0 }
+			set_variable = { CLB_int_pp = 0 }
+			set_variable = { CLB_int_stab = 0 }
+			set_variable = { CLB_bea_stab = 0 }
+			set_variable = { CLB_bea_research = 0 }
+			set_variable = { CLB_bea_cg = 0 }
+			set_variable = { CLB_bea_factory = 0 }
+			set_variable = { CLB_eco_factory = 0 }
+			set_variable = { CLB_eco_build = 0 }
+			set_variable = { CLB_eco_cg = 0 }
+			set_variable = { CLB_eco_stab = 0 }
+			set_variable = { CLB_eco_energy = 0 }
+			set_variable = { CLB_eco_fuel = 0 }
+			set_variable = { CLB_eco_ws = 0 }
+			set_variable = { CLB_ten_research = 0 }
+			set_variable = { CLB_ten_build = 0 }
+			set_variable = { CLB_ten_stab = 0 }
+			set_variable = { CLB_ten_detect = 0 }
+			set_variable = { CLB_end_research = 0 }
+			set_variable = { CLB_end_pp = 0 }
+			set_variable = { CLB_end_stab = 0 }
+			set_variable = { CLB_end_air = 0 }
+			set_variable = { CLB_end_cg = 0 }
+			set_variable = { CLB_end_ws = 0 }
+		}
+
+		# 开局民族精神（两块牌子；路线大精神在对应路线第一个国策完成时挂载）
+		add_dynamic_modifier = { modifier = CLB_dyn_dusk }
+		add_dynamic_modifier = { modifier = CLB_dyn_rhine_prep }
+	}
+}
+
+CLB_rhine_monthly_tick = {
+	# 钳制量程
+	clamp_variable = { var = CLB_beast_acquiescence min = 0 max = 100 }
+	clamp_variable = { var = CLB_maylander_influence min = 0 max = 100 }
+	clamp_variable = { var = CLB_sky_fever min = 0 max = 100 }
+	clamp_variable = { var = CLB_neurotransmitter min = 0 max = 100 }
+	# 天空热自然升温（持有天空贷经济时）
+	if = {
+		limit = { has_country_flag = CLB_flag_skyloan }
+		add_to_variable = { CLB_sky_fever = 0.5 }
+	}
+	# 梅兰德影响的自然漂移
+	if = {
+		limit = { has_country_flag = CLB_flag_rhine_state }
+		add_to_variable = { CLB_maylander_influence = -0.5 }
+	}
+	# 1099.1 孤星事件 / 1099.6 未许之地事件
+	if = {
+		limit = {
+			date > 1099.1.1
+			NOT = { has_country_flag = CLB_flag_event_lonely_star }
+		}
+		set_country_flag = CLB_flag_event_lonely_star
+		country_event = { id = clb_rhine.6 days = 1 }
+	}
+	if = {
+		limit = {
+			date > 1099.6.1
+			NOT = { has_country_flag = CLB_flag_event_uncharted }
+		}
+		set_country_flag = CLB_flag_event_uncharted
+		country_event = { id = clb_rhine.7 days = 1 }
+	}
+	# 结局判定
+	CLB_rhine_ending_check = yes
+}
+
+# 结局路线判定（七、结局路线）
+CLB_rhine_ending_check = {
+	if = {
+		limit = {
+			has_country_flag = CLB_flag_stargate
+			check_variable = { CLB_beast_acquiescence > 80 }
+			check_variable = { CLB_maylander_influence < 20 }
+			NOT = { has_country_flag = CLB_flag_ending_enterprise_utopia }
+		}
+		set_country_flag = CLB_flag_ending_enterprise_utopia
+		country_event = { id = clb_rhine.9 days = 1 }
+	}
+	if = {
+		limit = {
+			has_country_flag = CLB_flag_rhine_state
+			has_country_flag = CLB_flag_maylander_purged
+			check_variable = { CLB_beast_acquiescence > 90 }
+			NOT = { has_country_flag = CLB_flag_ending_beast_playground }
+		}
+		set_country_flag = CLB_flag_ending_beast_playground
+		country_event = { id = clb_rhine.10 days = 1 }
+	}
+	if = {
+		limit = {
+			check_variable = { CLB_pol_stab < -0.20 }
+			check_variable = { CLB_sky_fever < 20 }
+			check_variable = { CLB_maylander_influence > 80 }
+			NOT = { has_country_flag = CLB_flag_ending_skyfall }
+		}
+		set_country_flag = CLB_flag_ending_skyfall
+		country_event = { id = clb_rhine.11 days = 1 }
+	}
+}

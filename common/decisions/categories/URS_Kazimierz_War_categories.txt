@@ -1,0 +1,33 @@
+######################################################
+# 第十一次乌卡战争 · 决议分类
+# 决议正文见 common/decisions/URS_Kazimierz_War_Decisions.txt
+# ──────────────────────────────────────────────────────────────
+# 结构要点（与 Ursus_Unification_War_categories.txt 同一套，踩过坑）：
+#   · 分类的 icon / allowed / visible / visible_when_empty / priority 只能写在本文件；
+#     写进决议文件会 Unexpected token 并中断解析。
+#   · 决议必须写在决议文件里同名分类块「内部」，平铺到顶层会 Unknown category 整组静默消失。
+#
+# 开放对象：只有乌萨斯帝国本部（original_tag = URS）。卡西米尔侧的旧「向乌萨斯宣战」入口
+#           仍是注释状态，本链是第十一次乌卡战争的唯一入口。
+#
+# 2026-09-26 重制：删掉 visible = { date > 1100.6.1 }。本 mod 六个 bookmark 全是 1094.6.1，
+#   那行门槛让整组决议在开局后整整六年不可见，而 on_monthly_URS 的叛军进度照跑 ——
+#   玩家是在自己完全看不见的情况下被六路叛军挨个割走起义区的。现在整组开局即可见，
+#   节奏闸门全部下移成「备战度」这种玩家自己能挣、也能自己等的条件，不再有日期门槛，
+#   也不再有任何替玩家开战的兜底。
+######################################################
+
+URS_Kazimierz_War_Category = {
+
+	icon = GFX_decision_category_military_operation
+
+	allowed = {
+		original_tag = URS
+	}
+
+	visible_when_empty = yes
+
+	priority = {
+		base = 175
+	}
+}

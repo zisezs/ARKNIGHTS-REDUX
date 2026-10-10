@@ -1,0 +1,6044 @@
+focus_tree = {
+	id = CLB_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = CLB
+		}
+	}
+	default = no
+
+##马里诺·科莫线
+
+	#紧急继任者
+	focus = {
+		id = CLB_emergency_successor
+		icon = GFX_focus_CLB_emergency_successor
+		cost = 1
+
+		allow_branch = {
+			has_country_flag = CLB_Marino_Cuomo_term_flag
+		}
+
+		x = 4
+		y = 0
+		completion_reward = {
+		}
+	}
+
+	#稳定民众情绪
+	focus = {
+		id = CLB_stabilize_public
+		icon = GFX_focus_CLB_stabilize_public
+		cost = 4
+		prerequisite = {
+			focus = CLB_emergency_successor
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_emergency_successor
+		completion_reward = {
+		}
+	}
+
+	#维持政府运转
+	focus = {
+		id = CLB_maintain_government
+		icon = GFX_focus_CLB_maintain_government
+		cost = 4
+		prerequisite = {
+			focus = CLB_emergency_successor
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_emergency_successor
+		completion_reward = {
+		}
+	}
+
+	#与威廉姆斯的交易
+	focus = {
+		id = CLB_williams_deal
+		icon = GFX_focus_CLB_williams_deal
+		cost = 4
+		prerequisite = {
+			focus = CLB_stabilize_public
+		}
+		prerequisite = {
+			focus = CLB_maintain_government
+		}
+		mutually_exclusive = {
+			focus = CLB_aschen_legacy
+			focus = CLB_flemington_proposal
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_stabilize_public
+		completion_reward = {
+		}
+	}
+
+	#维护亚琛夫人的遗产
+	focus = {
+		id = CLB_aschen_legacy
+		icon = GFX_focus_CLB_aschen_legacy
+		cost = 4
+		prerequisite = {
+			focus = CLB_stabilize_public
+		}
+		prerequisite = {
+			focus = CLB_maintain_government
+		}
+		mutually_exclusive = {
+			focus = CLB_williams_deal
+			focus = CLB_flemington_proposal
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_stabilize_public
+		completion_reward = {
+		}
+	}
+
+	#弗莱明顿的提案
+	focus = {
+		id = CLB_flemington_proposal
+		icon = GFX_focus_CLB_flemington_proposal
+		cost = 4
+		prerequisite = {
+			focus = CLB_stabilize_public
+		}
+		prerequisite = {
+			focus = CLB_maintain_government
+		}
+		mutually_exclusive = {
+			focus = CLB_williams_deal
+			focus = CLB_aschen_legacy
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_maintain_government
+		completion_reward = {
+		}
+	}
+
+	#动员工会机器
+	focus = {
+		id = CLB_mobilize_unions
+		icon = GFX_focus_CLB_mobilize_unions
+		cost = 4
+		prerequisite = {
+			focus = CLB_williams_deal
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_williams_deal
+		completion_reward = {
+		}
+	}
+
+	#接受企业献金
+	focus = {
+		id = CLB_corporate_donations
+		icon = GFX_focus_CLB_corporate_donations
+		cost = 4
+		prerequisite = {
+			focus = CLB_flemington_proposal
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_flemington_proposal
+		completion_reward = {
+		}
+	}
+
+	#专注选举活动
+	focus = {
+		id = CLB_focus_election
+		icon = GFX_focus_CLB_focus_election
+		cost = 4
+		prerequisite = {
+			focus = CLB_mobilize_unions
+			focus = CLB_corporate_donations
+		}
+		mutually_exclusive = {
+			focus = CLB_dirty_tricks
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_mobilize_unions
+		completion_reward = {
+		}
+	}
+
+	#准备盘外招
+	focus = {
+		id = CLB_dirty_tricks
+		icon = GFX_focus_CLB_dirty_tricks
+		cost = 4
+		prerequisite = {
+			focus = CLB_mobilize_unions
+			focus = CLB_corporate_donations
+		}
+		mutually_exclusive = {
+			focus = CLB_focus_election
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_corporate_donations
+		completion_reward = {
+		}
+	}
+
+	
+##迈克尔·布莱顿温和线
+	
+	#迈克尔·布莱顿任期
+	focus = {
+		id = CLB_Michael_Brighton_term_moderate
+		icon = GFX_focus_CLB_Michael_Brighton_term_moderate
+		cost = 10
+
+		allow_branch = {
+			has_country_flag = CLB_Michael_Brighton_term_moderate_flag
+		}
+
+		x = 4
+		y = 0
+		completion_reward = {
+		}
+	}
+
+	#与选民见面
+	focus = {
+		id = CLB_meet_voters
+		icon = GFX_focus_CLB_meet_voters
+		cost = 10
+		prerequisite = {
+			focus = CLB_Michael_Brighton_term_moderate
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_Michael_Brighton_term_moderate
+		completion_reward = {
+		}
+	}
+
+	#向议员承诺
+	focus = {
+		id = CLB_promise_mp
+		icon = GFX_focus_CLB_promise_mp
+		cost = 10
+		prerequisite = {
+			focus = CLB_Michael_Brighton_term_moderate
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_Michael_Brighton_term_moderate
+		completion_reward = {
+		}
+	}
+
+	#强调社会正义
+	focus = {
+		id = CLB_emphasize_social_justice
+		icon = GFX_focus_CLB_emphasize_social_justice
+		cost = 10
+		prerequisite = {
+			focus = CLB_meet_voters
+			focus = CLB_promise_mp
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_meet_voters
+		completion_reward = {
+		}
+	}
+
+	#不平等问题
+	focus = {
+		id = CLB_inequality_issues
+		icon = GFX_focus_CLB_inequality_issues
+		cost = 10
+		prerequisite = {
+			focus = CLB_emphasize_social_justice
+		}
+		x = -3
+		y = 1
+		relative_position_id = CLB_emphasize_social_justice
+		completion_reward = {
+		}
+	}
+
+	#恢复经济秩序
+	focus = {
+		id = CLB_restore_economic_order
+		icon = GFX_focus_CLB_restore_economic_order
+		cost = 10
+		prerequisite = {
+			focus = CLB_emphasize_social_justice
+		}
+		x = 4
+		y = 1
+		relative_position_id = CLB_emphasize_social_justice
+		completion_reward = {
+		}
+	}
+
+	#教育平权议程
+	focus = {
+		id = CLB_education_equity_agenda
+		icon = GFX_focus_CLB_education_equity_agenda
+		cost = 10
+		prerequisite = {
+			focus = CLB_inequality_issues
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_inequality_issues
+		completion_reward = {
+		}
+	}
+
+	#联邦药品补助
+	focus = {
+		id = CLB_federal_drug_subsidy
+		icon = GFX_focus_CLB_federal_drug_subsidy
+		cost = 10
+		prerequisite = {
+			focus = CLB_inequality_issues
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_inequality_issues
+		completion_reward = {
+		}
+	}
+
+	#加强劳工部权力
+	focus = {
+		id = CLB_strengthen_labor_dept
+		icon = GFX_focus_CLB_strengthen_labor_dept
+		cost = 10
+		prerequisite = {
+			focus = CLB_restore_economic_order
+		}
+		x = -2
+		y = 1
+		relative_position_id = CLB_restore_economic_order
+		completion_reward = {
+		}
+	}
+
+	#乡村吸收就业
+	focus = {
+		id = CLB_rural_employment
+		icon = GFX_focus_CLB_rural_employment
+		cost = 10
+		prerequisite = {
+			focus = CLB_restore_economic_order
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_restore_economic_order
+		completion_reward = {
+		}
+	}
+
+	#扩大联邦雇员规模
+	focus = {
+		id = CLB_expand_federal_employees
+		icon = GFX_focus_CLB_expand_federal_employees
+		cost = 10
+		prerequisite = {
+			focus = CLB_restore_economic_order
+		}
+		x = 2
+		y = 1
+		relative_position_id = CLB_restore_economic_order
+		completion_reward = {
+		}
+	}
+
+	#高校升学配额
+	focus = {
+		id = CLB_college_quota
+		icon = GFX_focus_CLB_college_quota
+		cost = 10
+		prerequisite = {
+			focus = CLB_education_equity_agenda
+		}
+		mutually_exclusive = {
+			focus = CLB_basic_education
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_education_equity_agenda
+		completion_reward = {
+		}
+	}
+
+	#普惠性基础教育
+	focus = {
+		id = CLB_basic_education
+		icon = GFX_focus_CLB_basic_education
+		cost = 10
+		prerequisite = {
+			focus = CLB_education_equity_agenda
+		}
+		mutually_exclusive = {
+			focus = CLB_college_quota
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_education_equity_agenda
+		completion_reward = {
+		}
+	}
+
+	#界定企业医保责任
+	focus = {
+		id = CLB_employer_healthcare
+		icon = GFX_focus_CLB_employer_healthcare
+		cost = 10
+		prerequisite = {
+			focus = CLB_federal_drug_subsidy
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_federal_drug_subsidy
+		completion_reward = {
+		}
+	}
+
+	#落后产能出清
+	focus = {
+		id = CLB_eliminate_obsolete_capacity
+		icon = GFX_focus_CLB_eliminate_obsolete_capacity
+		cost = 10
+		prerequisite = {
+			focus = CLB_strengthen_labor_dept
+		}
+		prerequisite = {
+			focus = CLB_rural_employment
+		}
+		prerequisite = {
+			focus = CLB_expand_federal_employees
+		}
+		mutually_exclusive = {
+			focus = CLB_save_small_business
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_strengthen_labor_dept
+		completion_reward = {
+		}
+	}
+
+	#拯救中小企业
+	focus = {
+		id = CLB_save_small_business
+		icon = GFX_focus_CLB_save_small_business
+		cost = 10
+		prerequisite = {
+			focus = CLB_strengthen_labor_dept
+		}
+		prerequisite = {
+			focus = CLB_rural_employment
+		}
+		prerequisite = {
+			focus = CLB_expand_federal_employees
+		}
+		mutually_exclusive = {
+			focus = CLB_eliminate_obsolete_capacity
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_rural_employment
+		completion_reward = {
+		}
+	}
+
+	#打断贫困代际传递
+	focus = {
+		id = CLB_break_poverty_cycle
+		icon = GFX_focus_CLB_break_poverty_cycle
+		cost = 10
+		prerequisite = {
+			focus = CLB_college_quota
+			focus = CLB_basic_education
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_college_quota
+		completion_reward = {
+		}
+	}
+
+	#矿石病专门基金
+	focus = {
+		id = CLB_oripathy_foundation
+		icon = GFX_focus_CLB_oripathy_foundation
+		cost = 10
+		prerequisite = {
+			focus = CLB_employer_healthcare
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_basic_education
+		completion_reward = {
+		}
+	}
+
+	#提高富人税
+	focus = {
+		id = CLB_raise_wealth_tax
+		icon = GFX_focus_CLB_raise_wealth_tax
+		cost = 10
+		prerequisite = {
+			focus = CLB_employer_healthcare
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_employer_healthcare
+		completion_reward = {
+		}
+	}
+
+	#重启以工代赈
+	focus = {
+		id = CLB_restart_work_relief
+		icon = GFX_focus_CLB_restart_work_relief
+		cost = 10
+		prerequisite = {
+			focus = CLB_save_small_business
+			focus = CLB_eliminate_obsolete_capacity
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_eliminate_obsolete_capacity
+		completion_reward = {
+		}
+	}
+
+	#食物银行制度
+	focus = {
+		id = CLB_food_bank
+		icon = GFX_focus_CLB_food_bank
+		cost = 10
+		prerequisite = {
+			focus = CLB_save_small_business
+			focus = CLB_eliminate_obsolete_capacity
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_save_small_business
+		completion_reward = {
+		}
+	}
+
+	#建立国会反歧视委员会
+	focus = {
+		id = CLB_anti_discrimination_committee
+		icon = GFX_focus_CLB_anti_discrimination_committee
+		cost = 10
+		prerequisite = {
+			focus = CLB_break_poverty_cycle
+		}
+		prerequisite = {
+			focus = CLB_oripathy_foundation
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_break_poverty_cycle
+		completion_reward = {
+		}
+	}
+
+	#贫困社区环境优化
+	focus = {
+		id = CLB_poor_community_revitalization
+		icon = GFX_focus_CLB_poor_community_revitalization
+		cost = 10
+		prerequisite = {
+			focus = CLB_raise_wealth_tax
+		}
+		prerequisite = {
+			focus = CLB_restart_work_relief
+		}
+		prerequisite = {
+			focus = CLB_food_bank
+		}
+		x = 3
+		y = 1
+		relative_position_id = CLB_oripathy_foundation
+		completion_reward = {
+		}
+	}
+
+	#提高最低工资标准
+	focus = {
+		id = CLB_raise_min_wage_Michael_Brighton_moderate
+		icon = GFX_focus_CLB_raise_min_wage
+		cost = 10
+		prerequisite = {
+			focus = CLB_restart_work_relief
+		}
+		prerequisite = {
+			focus = CLB_food_bank
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_food_bank
+		completion_reward = {
+		}
+	}
+
+	#共同家园
+	focus = {
+		id = CLB_common_home
+		icon = GFX_focus_CLB_common_home
+		cost = 10
+		prerequisite = {
+			focus = CLB_anti_discrimination_committee
+		}
+		prerequisite = {
+			focus = CLB_poor_community_revitalization
+		}
+		prerequisite = {
+			focus = CLB_raise_min_wage_Michael_Brighton_moderate
+		}
+		x = 2
+		y = 1
+		relative_position_id = CLB_anti_discrimination_committee
+		completion_reward = {
+		}
+	}
+
+	#创造未来
+	focus = {
+		id = CLB_create_future
+		icon = GFX_focus_CLB_create_future
+		cost = 10
+		prerequisite = {
+			focus = CLB_anti_discrimination_committee
+		}
+		prerequisite = {
+			focus = CLB_poor_community_revitalization
+		}
+		prerequisite = {
+			focus = CLB_raise_min_wage_Michael_Brighton_moderate
+		}
+		x = 2
+		y = 1
+		relative_position_id = CLB_poor_community_revitalization
+		completion_reward = {
+		}
+	}
+
+	#所有人的哥伦比亚
+	focus = {
+		id = CLB_columbia_for_all
+		icon = GFX_focus_CLB_columbia_for_all
+		cost = 10
+		prerequisite = {
+			focus = CLB_common_home
+			focus = CLB_create_future
+		}
+		x = 2
+		y = 1
+		relative_position_id = CLB_common_home
+		completion_reward = {
+		}
+	}
+
+##迈克尔·布莱顿激进线
+
+	#迈克尔·布莱顿任期
+	focus = {
+		id = CLB_Michael_Brighton_term_radical
+		icon = GFX_focus_CLB_Michael_Brighton_term_radical
+		cost = 10
+
+		allow_branch = {
+			has_country_flag = CLB_Michael_Brighton_term_radical_flag
+		}
+
+		x = 4
+		y = 0
+		completion_reward = {
+		}
+	}
+
+	#诺森伍德副总统
+	focus = {
+		id = CLB_vp_northwood
+		icon = GFX_focus_CLB_vp_northwood
+		cost = 10
+		prerequisite = {
+			focus = CLB_Michael_Brighton_term_radical
+		}
+		mutually_exclusive = {
+			focus = CLB_vp_silas
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_Michael_Brighton_term_radical
+		completion_reward = {
+		}
+	}
+
+	#塞拉斯副总统
+	focus = {
+		id = CLB_vp_silas
+		icon = GFX_focus_CLB_vp_silas
+		cost = 10
+		prerequisite = {
+			focus = CLB_Michael_Brighton_term_radical
+		}
+		mutually_exclusive = {
+			focus = CLB_vp_northwood
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_Michael_Brighton_term_radical
+		completion_reward = {
+		}
+	}
+
+	#哥伦比亚行政体系改革
+	focus = {
+		id = CLB_admin_reform
+		icon = GFX_focus_CLB_admin_reform
+		cost = 10
+		prerequisite = {
+			focus = CLB_vp_northwood
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_vp_northwood
+		completion_reward = {
+		}
+	}
+
+	#赋权各级工会
+	focus = {
+		id = CLB_empower_unions
+		icon = GFX_focus_CLB_empower_unions
+		cost = 10
+		prerequisite = {
+			focus = CLB_vp_silas
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_vp_silas
+		completion_reward = {
+		}
+	}
+
+	#变革时刻
+	focus = {
+		id = CLB_moment_of_change
+		icon = GFX_focus_CLB_moment_of_change
+		cost = 10
+		prerequisite = {
+			focus = CLB_admin_reform
+			focus = CLB_empower_unions
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_admin_reform
+		completion_reward = {
+		}
+	}
+
+	#强化联邦权力
+	focus = {
+		id = CLB_strengthen_fed_power
+		icon = GFX_focus_CLB_strengthen_fed_power
+		cost = 10
+		prerequisite = {
+			focus = CLB_moment_of_change
+		}
+		x = -2
+		y = 1
+		relative_position_id = CLB_moment_of_change
+		completion_reward = {
+		}
+	}
+
+	#向贫困宣战
+	focus = {
+		id = CLB_war_on_poverty
+		icon = GFX_focus_CLB_war_on_poverty
+		cost = 10
+		prerequisite = {
+			focus = CLB_moment_of_change
+		}
+		x = 3
+		y = 1
+		relative_position_id = CLB_moment_of_change
+		completion_reward = {
+		}
+	}
+
+	#联邦监管机构
+	focus = {
+		id = CLB_fed_regulatory_agency
+		icon = GFX_focus_CLB_fed_regulatory_agency
+		cost = 10
+		prerequisite = {
+			focus = CLB_strengthen_fed_power
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_strengthen_fed_power
+		completion_reward = {
+		}
+	}
+
+	#敲打州权主义者
+	focus = {
+		id = CLB_crack_down_states_rights
+		icon = GFX_focus_CLB_crack_down_states_rights
+		cost = 10
+		prerequisite = {
+			focus = CLB_strengthen_fed_power
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_strengthen_fed_power
+		completion_reward = {
+		}
+	}
+
+	#破除州界投资壁垒
+	focus = {
+		id = CLB_remove_investment_barriers
+		icon = GFX_focus_CLB_remove_investment_barriers
+		cost = 10
+		prerequisite = {
+			focus = CLB_fed_regulatory_agency
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_fed_regulatory_agency
+		completion_reward = {
+		}
+	}
+
+	#国会反腐败委员会
+	focus = {
+		id = CLB_anti_corruption_committee
+		icon = GFX_focus_CLB_anti_corruption_committee
+		cost = 10
+		prerequisite = {
+			focus = CLB_fed_regulatory_agency
+		}
+		prerequisite = {
+			focus = CLB_crack_down_states_rights
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_fed_regulatory_agency
+		completion_reward = {
+		}
+	}
+
+	#推动各州治安法统一
+	focus = {
+		id = CLB_unify_public_security_law
+		icon = GFX_focus_CLB_unify_public_security_law
+		cost = 10
+		prerequisite = {
+			focus = CLB_crack_down_states_rights
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_crack_down_states_rights
+		completion_reward = {
+		}
+	}
+
+	#建立国营经济部门
+	focus = {
+		id = CLB_state_economic_dept
+		icon = GFX_focus_CLB_state_economic_dept
+		cost = 10
+		prerequisite = {
+			focus = CLB_anti_corruption_committee
+		}
+		mutually_exclusive = {
+			focus = CLB_legalize_unions
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_anti_corruption_committee
+		completion_reward = {
+		}
+	}
+
+	#法制化工会地位
+	focus = {
+		id = CLB_legalize_unions
+		icon = GFX_focus_CLB_legalize_unions
+		cost = 10
+		prerequisite = {
+			focus = CLB_anti_corruption_committee
+		}
+		mutually_exclusive = {
+			focus = CLB_state_economic_dept
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_anti_corruption_committee
+		completion_reward = {
+		}
+	}
+
+	#整合联邦执法机构
+	focus = {
+		id = CLB_integrate_fed_law_enforcement
+		icon = GFX_focus_CLB_integrate_fed_law_enforcement
+		cost = 10
+		prerequisite = {
+			focus = CLB_state_economic_dept
+		}
+		prerequisite = {
+			focus = CLB_legalize_unions
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_state_economic_dept
+		completion_reward = {
+		}
+	}
+
+	#乡村工业投资
+	focus = {
+		id = CLB_rural_industry_investment
+		icon = GFX_focus_CLB_rural_industry_investment
+		cost = 10
+		prerequisite = {
+			focus = CLB_war_on_poverty
+		}
+		x = -2
+		y = 1
+		relative_position_id = CLB_war_on_poverty
+		completion_reward = {
+		}
+	}
+
+	#扩大义务教育投入
+	focus = {
+		id = CLB_expand_compulsory_education
+		icon = GFX_focus_CLB_expand_compulsory_education
+		cost = 10
+		prerequisite = {
+			focus = CLB_war_on_poverty
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_war_on_poverty
+		completion_reward = {
+		}
+	}
+
+	#联邦救济体系
+	focus = {
+		id = CLB_fed_relief_system
+		icon = GFX_focus_CLB_fed_relief_system
+		cost = 10
+		prerequisite = {
+			focus = CLB_war_on_poverty
+		}
+		x = 2
+		y = 1
+		relative_position_id = CLB_war_on_poverty
+		completion_reward = {
+		}
+	}
+
+	#政府全权负责
+	focus = {
+		id = CLB_gov_full_responsibility
+		icon = GFX_focus_CLB_gov_full_responsibility
+		cost = 10
+		prerequisite = {
+			focus = CLB_rural_industry_investment
+		}
+		prerequisite = {
+			focus = CLB_expand_compulsory_education
+		}
+		prerequisite = {
+			focus = CLB_fed_relief_system
+		}
+		mutually_exclusive = {
+			focus = CLB_parliamentary_committee
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_rural_industry_investment
+		completion_reward = {
+		}
+	}
+
+	#授权议会专门委员会
+	focus = {
+		id = CLB_parliamentary_committee
+		icon = GFX_focus_CLB_parliamentary_committee
+		cost = 10
+		prerequisite = {
+			focus = CLB_rural_industry_investment
+		}
+		prerequisite = {
+			focus = CLB_expand_compulsory_education
+		}
+		prerequisite = {
+			focus = CLB_fed_relief_system
+		}
+		mutually_exclusive = {
+			focus = CLB_gov_full_responsibility
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_fed_relief_system
+		completion_reward = {
+		}
+	}
+
+	#强化反托拉斯法
+	focus = {
+		id = CLB_strengthen_antitrust
+		icon = GFX_focus_CLB_strengthen_antitrust
+		cost = 10
+		prerequisite = {
+			focus = CLB_gov_full_responsibility
+			focus = CLB_parliamentary_committee
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_gov_full_responsibility
+		completion_reward = {
+		}
+	}
+
+	#提高最低工资
+	focus = {
+		id = CLB_raise_min_wage_Michael_Brighton_radical
+		icon = GFX_focus_CLB_raise_min_wage
+		cost = 10
+		prerequisite = {
+			focus = CLB_gov_full_responsibility
+			focus = CLB_parliamentary_committee
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_parliamentary_committee
+		completion_reward = {
+		}
+	}
+
+	#高额富人税
+	focus = {
+		id = CLB_high_wealth_tax
+		icon = GFX_focus_CLB_high_wealth_tax
+		cost = 10
+		prerequisite = {
+			focus = CLB_strengthen_antitrust
+		}
+		prerequisite = {
+			focus = CLB_raise_min_wage_Michael_Brighton_radical
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_strengthen_antitrust
+		completion_reward = {
+		}
+	}
+
+	#胡萝卜：一揽子税收优惠
+	focus = {
+		id = CLB_carrot_tax_incentives
+		icon = GFX_focus_CLB_carrot_tax_incentives
+		cost = 10
+		prerequisite = {
+			focus = CLB_integrate_fed_law_enforcement
+		}
+		prerequisite = {
+			focus = CLB_high_wealth_tax
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_integrate_fed_law_enforcement
+		completion_reward = {
+		}
+	}
+
+	#大棒：强化企业审查
+	focus = {
+		id = CLB_stick_corp_scrutiny
+		icon = GFX_focus_CLB_stick_corp_scrutiny
+		cost = 10
+		prerequisite = {
+			focus = CLB_integrate_fed_law_enforcement
+		}
+		prerequisite = {
+			focus = CLB_high_wealth_tax
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_high_wealth_tax
+		completion_reward = {
+		}
+	}
+
+	#迈向福利国家
+	focus = {
+		id = CLB_towards_welfare_state
+		icon = GFX_focus_CLB_towards_welfare_state
+		cost = 10
+		prerequisite = {
+			focus = CLB_carrot_tax_incentives
+		}
+		prerequisite = {
+			focus = CLB_stick_corp_scrutiny
+		}
+		x = 2
+		y = 1
+		relative_position_id = CLB_carrot_tax_incentives
+		completion_reward = {
+		}
+	}
+
+##格尔尼斯·威廉姆斯线
+
+	#格尔尼斯·威廉姆斯任期
+	focus = {
+		id = CLB_Gernis_Williams_term
+		icon = GFX_focus_CLB_Gernis_Williams_term
+		cost = 10
+
+		allow_branch = {
+			has_country_flag = CLB_Gernis_Williams_term_flag
+		}
+
+		x = 4
+		y = 0
+		completion_reward = {
+		}
+	}
+
+	#折中选项
+	focus = {
+		id = CLB_compromise_option
+		icon = GFX_focus_CLB_compromise_option
+		cost = 10
+		prerequisite = {
+			focus = CLB_Gernis_Williams_term
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_Gernis_Williams_term
+		completion_reward = {
+		}
+	}
+
+	#不可告人的交易
+	focus = {
+		id = CLB_underhanded_deal
+		icon = GFX_focus_CLB_underhanded_deal
+		cost = 10
+		prerequisite = {
+			focus = CLB_compromise_option
+		}
+		x = -3
+		y = 1
+		relative_position_id = CLB_compromise_option
+		completion_reward = {
+		}
+	}
+
+	#安抚进步派
+	focus = {
+		id = CLB_appease_progressives
+		icon = GFX_focus_CLB_appease_progressives
+		cost = 10
+		prerequisite = {
+			focus = CLB_compromise_option
+		}
+		x = 3
+		y = 1
+		relative_position_id = CLB_compromise_option
+		completion_reward = {
+		}
+	}
+
+	#收集民主党人黑料
+	focus = {
+		id = CLB_dirt_on_dems
+		icon = GFX_focus_CLB_dirt_on_dems
+		cost = 10
+		prerequisite = {
+			focus = CLB_underhanded_deal
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_underhanded_deal
+		completion_reward = {
+		}
+	}
+
+	#贿赂自由党议员
+	focus = {
+		id = CLB_bribe_liberal_mps
+		icon = GFX_focus_CLB_bribe_liberal_mps
+		cost = 10
+		prerequisite = {
+			focus = CLB_underhanded_deal
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_underhanded_deal
+		completion_reward = {
+		}
+	}
+
+	#降低生活成本
+	focus = {
+		id = CLB_lower_cost_of_living
+		icon = GFX_focus_CLB_lower_cost_of_living
+		cost = 10
+		prerequisite = {
+			focus = CLB_appease_progressives
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_appease_progressives
+		completion_reward = {
+		}
+	}
+
+	#稳固工会基本盘
+	focus = {
+		id = CLB_secure_union_base
+		icon = GFX_focus_CLB_secure_union_base
+		cost = 10
+		prerequisite = {
+			focus = CLB_appease_progressives
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_appease_progressives
+		completion_reward = {
+		}
+	}
+
+	#塔拉裔黑帮关系
+	focus = {
+		id = CLB_tara_gang_ties
+		icon = GFX_focus_CLB_tara_gang_ties
+		cost = 10
+		prerequisite = {
+			focus = CLB_dirt_on_dems
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_dirt_on_dems
+		completion_reward = {
+		}
+	}
+
+	#与企业家勾兑
+	focus = {
+		id = CLB_collude_with_business
+		icon = GFX_focus_CLB_collude_with_business
+		cost = 10
+		prerequisite = {
+			focus = CLB_bribe_liberal_mps
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_bribe_liberal_mps
+		completion_reward = {
+		}
+	}
+
+	#推行“小费免税”
+	focus = {
+		id = CLB_tip_tax_exemption
+		icon = GFX_focus_CLB_tip_tax_exemption
+		cost = 10
+		prerequisite = {
+			focus = CLB_lower_cost_of_living
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_lower_cost_of_living
+		completion_reward = {
+		}
+	}
+
+	#旧工业区投资计划
+	focus = {
+		id = CLB_old_industrial_investment
+		icon = GFX_focus_CLB_old_industrial_investment
+		cost = 10
+		prerequisite = {
+			focus = CLB_lower_cost_of_living
+		}
+		prerequisite = {
+			focus = CLB_secure_union_base
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_lower_cost_of_living
+		completion_reward = {
+		}
+	}
+
+	#改善物流运转
+	focus = {
+		id = CLB_improve_logistics
+		icon = GFX_focus_CLB_improve_logistics
+		cost = 10
+		prerequisite = {
+			focus = CLB_secure_union_base
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_secure_union_base
+		completion_reward = {
+		}
+	}
+
+	#封杀极左派
+	focus = {
+		id = CLB_suppress_far_left
+		icon = GFX_focus_CLB_suppress_far_left
+		cost = 10
+		prerequisite = {
+			focus = CLB_tara_gang_ties
+		}
+		prerequisite = {
+			focus = CLB_collude_with_business
+		}
+		mutually_exclusive = {
+			focus = CLB_legal_war_conservatives
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_tara_gang_ties
+		completion_reward = {
+		}
+	}
+
+	#和保守派的法律战
+	focus = {
+		id = CLB_legal_war_conservatives
+		icon = GFX_focus_CLB_legal_war_conservatives
+		cost = 10
+		prerequisite = {
+			focus = CLB_tara_gang_ties
+		}
+		prerequisite = {
+			focus = CLB_collude_with_business
+		}
+		mutually_exclusive = {
+			focus = CLB_suppress_far_left
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_collude_with_business
+		completion_reward = {
+		}
+	}
+
+	#胜者书写历史
+	focus = {
+		id = CLB_victor_writes_history
+		icon = GFX_focus_CLB_victor_writes_history
+		cost = 10
+		prerequisite = {
+			focus = CLB_suppress_far_left
+			focus = CLB_legal_war_conservatives
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_suppress_far_left
+		completion_reward = {
+		}
+	}
+
+	#预算再平衡
+	focus = {
+		id = CLB_budget_rebalance
+		icon = GFX_focus_CLB_budget_rebalance
+		cost = 10
+		prerequisite = {
+			focus = CLB_tara_gang_ties
+		}
+		prerequisite = {
+			focus = CLB_collude_with_business
+		}
+		prerequisite = {
+			focus = CLB_tip_tax_exemption
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_tip_tax_exemption
+		completion_reward = {
+		}
+	}
+
+	#工人区环境改造
+	focus = {
+		id = CLB_workers_district_renewal
+		icon = GFX_focus_CLB_workers_district_renewal
+		cost = 10
+		prerequisite = {
+			focus = CLB_old_industrial_investment
+		}
+		prerequisite = {
+			focus = CLB_improve_logistics
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_improve_logistics
+		completion_reward = {
+		}
+	}
+
+	#工时修改倡议
+	focus = {
+		id = CLB_hours_reform_initiative
+		icon = GFX_focus_CLB_hours_reform_initiative
+		cost = 10
+		prerequisite = {
+			focus = CLB_budget_rebalance
+		}
+		prerequisite = {
+			focus = CLB_workers_district_renewal
+		}
+		x = 0
+		y = 2
+		relative_position_id = CLB_old_industrial_investment
+		completion_reward = {
+		}
+	}
+
+##鲍比·弗雷线
+
+	#临危受命
+	focus = {
+		id = CLB_emergency_appointment
+		icon = GFX_focus_CLB_emergency_appointment
+		cost = 10
+
+		allow_branch = {
+			has_country_flag = CLB_Bobby_Fray_term_flag
+		}
+
+		x = 4
+		y = 0
+		completion_reward = {
+		}
+	}
+
+	#开启对威廉姆斯调查
+	focus = {
+		id = CLB_investigate_williams
+		icon = GFX_focus_CLB_investigate_williams
+		cost = 10
+		prerequisite = {
+			focus = CLB_emergency_appointment
+		}
+		mutually_exclusive = {
+			focus = CLB_forget_this
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_emergency_appointment
+		completion_reward = {
+		}
+	}
+
+	#让我们把这件事忘了
+	focus = {
+		id = CLB_forget_this
+		icon = GFX_focus_CLB_forget_this
+		cost = 10
+		prerequisite = {
+			focus = CLB_emergency_appointment
+		}
+		mutually_exclusive = {
+			focus = CLB_investigate_williams
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_emergency_appointment
+		completion_reward = {
+		}
+	}
+
+	#与社会主义者交好
+	focus = {
+		id = CLB_befriend_socialists
+		icon = GFX_focus_CLB_befriend_socialists
+		cost = 10
+		prerequisite = {
+			focus = CLB_investigate_williams
+		}
+		mutually_exclusive = {
+			focus = CLB_Fray_family_connections
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_investigate_williams
+		completion_reward = {
+		}
+	}
+
+	#运用弗雷家族关系
+	focus = {
+		id = CLB_Fray_family_connections
+		icon = GFX_focus_CLB_Fray_family_connections
+		cost = 10
+		prerequisite = {
+			focus = CLB_forget_this
+		}
+		mutually_exclusive = {
+			focus = CLB_befriend_socialists
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_forget_this
+		completion_reward = {
+		}
+	}
+
+	#鲍比·弗雷的任期
+	focus = {
+		id = CLB_Bobby_Fray_term
+		icon = GFX_focus_CLB_Bobby_Fray_term
+		cost = 10
+		prerequisite = {
+			focus = CLB_befriend_socialists
+			focus = CLB_Fray_family_connections
+		}		
+		x = 1
+		y = 1
+		relative_position_id = CLB_befriend_socialists
+		completion_reward = {
+		}
+	}
+
+	#联邦集权改革
+	focus = {
+		id = CLB_fed_centralization_reform
+		icon = GFX_focus_CLB_fed_centralization_reform
+		cost = 10
+		prerequisite = {
+			focus = CLB_Bobby_Fray_term
+		}
+		x = -3
+		y = 1
+		relative_position_id = CLB_Bobby_Fray_term
+		completion_reward = {
+		}
+	}
+
+	#善良之治
+	focus = {
+		id = CLB_good_governance
+		icon = GFX_focus_CLB_good_governance
+		cost = 10
+		prerequisite = {
+			focus = CLB_Bobby_Fray_term
+		}
+		x = 3
+		y = 1
+		relative_position_id = CLB_Bobby_Fray_term
+		completion_reward = {
+		}
+	}
+
+	#调查腐败州长
+	focus = {
+		id = CLB_investigate_corrupt_governors
+		icon = GFX_focus_CLB_investigate_corrupt_governors
+		cost = 10
+		prerequisite = {
+			focus = CLB_fed_centralization_reform
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_fed_centralization_reform
+		completion_reward = {
+		}
+	}
+
+	#开动媒体机器
+	focus = {
+		id = CLB_media_machine
+		icon = GFX_focus_CLB_media_machine
+		cost = 10
+		prerequisite = {
+			focus = CLB_fed_centralization_reform
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_fed_centralization_reform
+		completion_reward = {
+		}
+	}
+
+	#破除不平等
+	focus = {
+		id = CLB_break_inequality
+		icon = GFX_focus_CLB_break_inequality
+		cost = 10
+		prerequisite = {
+			focus = CLB_good_governance
+		}
+		x = -2
+		y = 1
+		relative_position_id = CLB_good_governance
+		completion_reward = {
+		}
+	}
+
+	#深入底层社区
+	focus = {
+		id = CLB_deep_into_communities
+		icon = GFX_focus_CLB_deep_into_communities
+		cost = 10
+		prerequisite = {
+			focus = CLB_good_governance
+		}
+		x = 2
+		y = 1
+		relative_position_id = CLB_good_governance
+		completion_reward = {
+		}
+	}
+
+	#强化司法部权力
+	focus = {
+		id = CLB_strengthen_doj
+		icon = GFX_focus_CLB_strengthen_doj
+		cost = 10
+		prerequisite = {
+			focus = CLB_investigate_corrupt_governors
+		}
+		prerequisite = {
+			focus = CLB_media_machine
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_investigate_corrupt_governors
+		completion_reward = {
+		}
+	}
+
+	#感染者平权法案
+	focus = {
+		id = CLB_infected_equal_rights
+		icon = GFX_focus_CLB_infected_equal_rights
+		cost = 10
+		prerequisite = {
+			focus = CLB_break_inequality
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_break_inequality
+		completion_reward = {
+		}
+	}
+
+	#打击就业壁垒
+	focus = {
+		id = CLB_remove_employment_barriers
+		icon = GFX_focus_CLB_remove_employment_barriers
+		cost = 10
+		prerequisite = {
+			focus = CLB_break_inequality
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_break_inequality
+		completion_reward = {
+		}
+	}
+
+	#最高租金法案
+	focus = {
+		id = CLB_rent_control
+		icon = GFX_focus_CLB_rent_control
+		cost = 10
+		prerequisite = {
+			focus = CLB_deep_into_communities
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_deep_into_communities
+		completion_reward = {
+		}
+	}
+
+	#联邦食物银行
+	focus = {
+		id = CLB_fed_food_bank
+		icon = GFX_focus_CLB_fed_food_bank
+		cost = 10
+		prerequisite = {
+			focus = CLB_deep_into_communities
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_deep_into_communities
+		completion_reward = {
+		}
+	}
+
+	#动用非常手段
+	focus = {
+		id = CLB_extraordinary_measures
+		icon = GFX_focus_CLB_extraordinary_measures
+		cost = 10
+		prerequisite = {
+			focus = CLB_strengthen_doj
+		}
+		mutually_exclusive = {
+			focus = CLB_iron_fist
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_strengthen_doj
+		completion_reward = {
+		}
+	}
+
+	#法律铁腕
+	focus = {
+		id = CLB_iron_fist
+		icon = GFX_focus_CLB_iron_fist
+		cost = 10
+		prerequisite = {
+			focus = CLB_strengthen_doj
+		}
+		mutually_exclusive = {
+			focus = CLB_extraordinary_measures
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_strengthen_doj
+		completion_reward = {
+		}
+	}
+
+	#整顿警察队伍
+	focus = {
+		id = CLB_police_reform
+		icon = GFX_focus_CLB_police_reform
+		cost = 10
+		prerequisite = {
+			focus = CLB_infected_equal_rights
+		}
+		prerequisite = {
+			focus = CLB_remove_employment_barriers
+		}
+		mutually_exclusive = {
+			focus = CLB_combat_organized_crime
+		}
+		x = 1
+		y = 2
+		relative_position_id = CLB_infected_equal_rights
+		completion_reward = {
+		}
+	}
+
+	#提高最低工资
+	focus = {
+		id = CLB_raise_min_wage_Bobby_Fray
+		icon = GFX_focus_CLB_raise_min_wage
+		cost = 10
+		prerequisite = {
+			focus = CLB_remove_employment_barriers
+		}
+		mutually_exclusive = {
+			focus = CLB_basic_living_standard
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_remove_employment_barriers
+		completion_reward = {
+		}
+	}
+
+	#基础生活标准
+	focus = {
+		id = CLB_basic_living_standard
+		icon = GFX_focus_CLB_basic_living_standard
+		cost = 10
+		prerequisite = {
+			focus = CLB_rent_control
+		}
+		prerequisite = {
+			focus = CLB_fed_food_bank
+		}
+		mutually_exclusive = {
+			focus = CLB_raise_min_wage_Bobby_Fray
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_rent_control
+		completion_reward = {
+		}
+	}
+
+	#国税局执法改革
+	focus = {
+		id = CLB_irs_enforcement_reform
+		icon = GFX_focus_CLB_irs_enforcement_reform
+		cost = 10
+		prerequisite = {
+			focus = CLB_extraordinary_measures
+		}
+		prerequisite = {
+			focus = CLB_iron_fist
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_extraordinary_measures
+		completion_reward = {
+		}
+	}
+
+	#打击有组织犯罪
+	focus = {
+		id = CLB_combat_organized_crime
+		icon = GFX_focus_CLB_combat_organized_crime
+		cost = 10
+		prerequisite = {
+			focus = CLB_extraordinary_measures
+		}
+		prerequisite = {
+			focus = CLB_iron_fist
+		}
+		mutually_exclusive = {
+			focus = CLB_police_reform
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_iron_fist
+		completion_reward = {
+		}
+	}
+
+	#机会均等
+	focus = {
+		id = CLB_equal_opportunity
+		icon = GFX_focus_CLB_equal_opportunity
+		cost = 10
+		prerequisite = {
+			focus = CLB_raise_min_wage_Bobby_Fray
+			focus = CLB_basic_living_standard
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_raise_min_wage_Bobby_Fray
+		completion_reward = {
+		}
+	}
+
+	#更安全社区
+	focus = {
+		id = CLB_safer_communities
+		icon = GFX_focus_CLB_safer_communities
+		cost = 10
+		prerequisite = {
+			focus = CLB_irs_enforcement_reform
+		}
+		prerequisite = {
+			focus = CLB_combat_organized_crime
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_irs_enforcement_reform
+		completion_reward = {
+		}
+	}
+
+	#重塑政治秩序
+	focus = {
+		id = CLB_reshape_political_order
+		icon = GFX_focus_CLB_reshape_political_order
+		cost = 10
+		prerequisite = {
+			focus = CLB_safer_communities
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_safer_communities
+		completion_reward = {
+		}
+	}
+
+	#乡村环境问题
+	focus = {
+		id = CLB_rural_environment
+		icon = GFX_focus_CLB_rural_environment
+		cost = 10
+		prerequisite = {
+			focus = CLB_equal_opportunity
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_equal_opportunity
+		completion_reward = {
+		}
+	}
+
+	#保障拓荒者权利
+	focus = {
+		id = CLB_pioneer_rights
+		icon = GFX_focus_CLB_pioneer_rights
+		cost = 10
+		prerequisite = {
+			focus = CLB_equal_opportunity
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_equal_opportunity
+		completion_reward = {
+		}
+	}
+
+	#新城市倡议
+	focus = {
+		id = CLB_new_city_initiative
+		icon = GFX_focus_CLB_new_city_initiative
+		cost = 10
+		prerequisite = {
+			focus = CLB_rural_environment
+		}
+		prerequisite = {
+			focus = CLB_pioneer_rights
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_rural_environment
+		completion_reward = {
+		}
+	}
+
+	#希望的一瞥
+	focus = {
+		id = CLB_glimpse_of_hope
+		icon = GFX_focus_CLB_glimpse_of_hope
+		cost = 10
+		prerequisite = {
+			focus = CLB_reshape_political_order
+		}
+		prerequisite = {
+			focus = CLB_new_city_initiative
+		}
+		x = 3
+		y = 1
+		relative_position_id = CLB_reshape_political_order
+		completion_reward = {
+		}
+	}
+
+##通用经济线
+
+	#丰饶主义
+	focus = {
+		id = CLB_abundance
+		icon = GFX_focus_CLB_abundance
+		cost = 1
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = 3
+		y = 12
+
+		completion_reward = {
+
+		}
+	}
+
+	#完善养老保险体系
+	focus = {
+		id = CLB_perfect_pension_insurance_system
+		icon = GFX_focus_CLB_perfect_pension_insurance_system
+		cost = 5
+		prerequisite = {
+			focus = CLB_abundance
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = -4
+		y = 1
+		relative_position_id = CLB_abundance
+		completion_reward = {
+			
+		}
+	}
+
+	#全国医保体系
+	focus = {
+		id = CLB_national_health_insurance_system
+		icon = GFX_focus_CLB_national_health_insurance_system
+		cost = 5
+		prerequisite = {
+			focus = CLB_perfect_pension_insurance_system
+		}
+		mutually_exclusive = {
+			focus = CLB_strengthen_control_of_insurance_companies
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = -1
+		y = 1
+		relative_position_id = CLB_perfect_pension_insurance_system
+		completion_reward = {
+			
+		}
+	}
+
+	#加强对保险公司控制
+	focus = {
+		id = CLB_strengthen_control_of_insurance_companies
+		icon = GFX_focus_CLB_strengthen_control_of_insurance_companies
+		cost = 5
+		prerequisite = {
+			focus = CLB_perfect_pension_insurance_system
+		}
+		mutually_exclusive = {
+			focus = CLB_national_health_insurance_system
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = 1
+		y = 1
+		relative_position_id = CLB_perfect_pension_insurance_system
+		completion_reward = {
+			
+		}
+	}
+
+	#社区学校补贴
+	focus = {
+		id = CLB_community_school_subsidies
+		icon = GFX_focus_CLB_community_school_subsidies
+		cost = 5
+		prerequisite = {
+			focus = CLB_abundance
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = -1
+		y = 1
+		relative_position_id = CLB_abundance
+		completion_reward = {
+			
+		}
+	}
+
+	#农业基础设施提升
+	focus = {
+		id = CLB_agricultural_infrastructure_upgrade
+		icon = GFX_focus_CLB_agricultural_infrastructure_upgrade
+		cost = 5
+		prerequisite = {
+			focus = CLB_abundance
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = 1
+		y = 1
+		relative_position_id = CLB_abundance
+		completion_reward = {
+			
+		}
+	}
+
+	#西部开发规划法案
+	focus = {
+		id = CLB_western_development_planning_act
+		icon = GFX_focus_CLB_western_development_planning_act
+		cost = 5
+		prerequisite = {
+			focus = CLB_community_school_subsidies
+		}
+		prerequisite = {
+			focus = CLB_agricultural_infrastructure_upgrade
+		}
+		mutually_exclusive = {
+			focus = CLB_mobile_city_renewal_act
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = 0
+		y = 1
+		relative_position_id = CLB_community_school_subsidies
+		completion_reward = {
+			
+		}
+	}
+
+	#移动城市更新法案
+	focus = {
+		id = CLB_mobile_city_renewal_act
+		icon = GFX_focus_CLB_mobile_city_renewal_act
+		cost = 5
+		prerequisite = {
+			focus = CLB_community_school_subsidies
+		}
+		prerequisite = {
+			focus = CLB_agricultural_infrastructure_upgrade
+		}
+		mutually_exclusive = {
+			focus = CLB_western_development_planning_act
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = 0
+		y = 1
+		relative_position_id = CLB_agricultural_infrastructure_upgrade
+		completion_reward = {
+			
+		}
+	}
+
+	#西部中心都会区
+	focus = {
+		id = CLB_western_center_metropolis
+		icon = GFX_focus_CLB_western_center_metropolis
+		cost = 5
+		prerequisite = {
+			focus = CLB_western_development_planning_act
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = -1
+		y = 1
+		relative_position_id = CLB_western_development_planning_act
+		completion_reward = {
+			
+		}
+	}
+
+	#联邦拓荒计划
+	focus = {
+		id = CLB_federal_pioneering_plan
+		icon = GFX_focus_CLB_federal_pioneering_plan
+		cost = 5
+		prerequisite = {
+			focus = CLB_western_center_metropolis
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = 0
+		y = 1
+		relative_position_id = CLB_western_center_metropolis
+		completion_reward = {
+			
+		}
+	}
+
+	#哥伦比亚大铁路网
+	focus = {
+		id = CLB_columbia_grand_railway_network
+		icon = GFX_focus_CLB_columbia_grand_railway_network
+		cost = 5
+		prerequisite = { 
+			focus = CLB_western_development_planning_act 
+			focus = CLB_mobile_city_renewal_act 
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = 1
+		y = 1
+		relative_position_id = CLB_western_development_planning_act
+		completion_reward = {
+			
+		}
+	}
+
+	#廉价住房建设
+	focus = {
+		id = CLB_affordable_housing_construction
+		icon = GFX_focus_CLB_affordable_housing_construction
+		cost = 5
+		prerequisite = { 
+			focus = CLB_mobile_city_renewal_act 
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = 1
+		y = 1
+		relative_position_id = CLB_mobile_city_renewal_act
+		completion_reward = {
+			
+		}
+	}
+
+	#市营平价超市
+	focus = {
+		id = CLB_municipal_affordable_supermarkets
+		icon = GFX_focus_CLB_municipal_affordable_supermarkets
+		cost = 5
+		prerequisite = { 
+			focus = CLB_affordable_housing_construction 
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+			}
+		}
+
+		cancel_if_invalid = yes
+		
+		x = 0
+		y = 1
+		relative_position_id = CLB_affordable_housing_construction
+		completion_reward = {
+			
+		}
+	}
+
+	#感染者就业保障
+	focus = {
+		id = CLB_infected_employment_protection
+		icon = GFX_focus_CLB_infected_employment_protection
+		cost = 5
+		prerequisite = {
+			focus = CLB_inspire_confidence
+			focus = CLB_abundance
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+				has_government = liberalism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = 4
+		y = 1
+		relative_position_id = CLB_abundance
+		completion_reward = {
+			
+		}
+	}
+
+	#“违禁”药物再定义
+	focus = {
+		id = CLB_north_drug_redefinition
+		icon = GFX_focus_CLB_north_drug_redefinition
+		cost = 5
+		prerequisite = {
+			focus = CLB_infected_employment_protection
+		}
+		mutually_exclusive = {
+			focus = CLB_medical_industry_deregulation
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+				has_government = liberalism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_infected_employment_protection
+		completion_reward = {
+			
+		}
+	}
+
+	#医疗产业宽松化监管
+	focus = {
+		id = CLB_medical_industry_deregulation
+		icon = GFX_focus_CLB_medical_industry_deregulation
+		cost = 5
+		prerequisite = {
+			focus = CLB_infected_employment_protection
+		}
+		mutually_exclusive = {
+			focus = CLB_north_drug_redefinition
+		}
+
+		available = {
+			OR = {
+				has_government = socialism
+				has_government = progressivism
+				has_government = liberalism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_infected_employment_protection
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#鼓舞信心
+	focus = {
+		id = CLB_inspire_confidence
+		icon = GFX_focus_CLB_inspire_confidence
+		cost = 1
+
+		available = {
+			has_government = liberalism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 8
+		y = 0
+		relative_position_id = CLB_abundance
+
+		completion_reward = {
+			
+		}
+	}
+
+	#大学转型研讨
+	focus = {
+		id = CLB_university_transformation_discussion
+		icon = GFX_focus_CLB_university_transformation_discussion
+		cost = 5
+		prerequisite = {
+			focus = CLB_inspire_confidence
+		}
+
+		available = {
+			has_government = liberalism
+		}
+
+		cancel_if_invalid = yes
+
+		x = -2
+		y = 1
+		relative_position_id = CLB_inspire_confidence
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#哥伦比亚汽车文化
+	focus = {
+		id = CLB_columbia_automobile_culture
+		icon = GFX_focus_CLB_columbia_automobile_culture
+		cost = 5
+		prerequisite = {
+			focus = CLB_inspire_confidence
+		}
+
+		available = {
+			has_government = liberalism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 1
+		relative_position_id = CLB_inspire_confidence
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#巨企总部经济
+	focus = {
+		id = CLB_mega_enterprise_headquarters_economy
+		icon = GFX_focus_CLB_mega_enterprise_headquarters_economy
+		cost = 5
+		prerequisite = {
+			focus = CLB_inspire_confidence
+		}
+
+		available = {
+			has_government = liberalism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 2
+		y = 1
+		relative_position_id = CLB_inspire_confidence
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#圣塔洛路线
+	focus = {
+		id = CLB_santaros_route
+		icon = GFX_focus_CLB_santaros_route
+		cost = 5
+		prerequisite = {
+			focus = CLB_university_transformation_discussion
+		}
+		prerequisite = {
+			focus = CLB_columbia_automobile_culture
+		}
+		prerequisite = {
+			focus = CLB_mega_enterprise_headquarters_economy
+		}
+		mutually_exclusive = {
+			focus = CLB_santaros_route
+		}
+
+		available = {
+			has_government = liberalism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_university_transformation_discussion
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#特雷蒙路线
+	focus = {
+		id = CLB_tremon_route
+		icon = GFX_focus_CLB_tremon_route
+		cost = 5
+		prerequisite = {
+			focus = CLB_university_transformation_discussion
+		}
+		prerequisite = {
+			focus = CLB_columbia_automobile_culture
+		}
+		prerequisite = {
+			focus = CLB_mega_enterprise_headquarters_economy
+		}
+		mutually_exclusive = {
+			focus = CLB_santaros_route
+		}
+
+		available = {
+			has_government = liberalism
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_mega_enterprise_headquarters_economy
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#电子产品消费旺季
+	focus = {
+		id = CLB_electronics_consumption_boom
+		icon = GFX_focus_CLB_electronics_consumption_boom
+		cost = 5
+		prerequisite = {
+			focus = CLB_santaros_route
+		}
+
+		available = {
+			has_government = liberalism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 1
+		relative_position_id = CLB_santaros_route
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#产业链结构优化
+	focus = {
+		id = CLB_industry_chain_optimization
+		icon = GFX_focus_CLB_industry_chain_optimization
+		cost = 5
+		prerequisite = {
+			focus = CLB_tremon_route
+		}
+
+		available = {
+			has_government = liberalism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 1
+		relative_position_id = CLB_tremon_route
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#哥伦比亚文化霸权
+	focus = {
+		id = CLB_columbia_cultural_hegemony
+		icon = GFX_focus_CLB_columbia_cultural_hegemony
+		cost = 5
+		prerequisite = {
+			focus = CLB_electronics_consumption_boom
+			focus = CLB_industry_chain_optimization
+		}
+
+		available = {
+			has_government = liberalism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_electronics_consumption_boom
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#金融中心复苏计划
+	focus = {
+		id = CLB_financial_center_recovery_plan
+		icon = GFX_focus_CLB_financial_center_recovery_plan
+		cost = 5
+		prerequisite = {
+			focus = CLB_inspire_confidence
+			focus = CLB_return_to_stability
+		}
+
+		available = {
+			OR = {
+				has_government = liberalism
+				has_government = conservatism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = 4
+		y = 1
+		relative_position_id = CLB_inspire_confidence
+
+		completion_reward = {
+			
+		}
+	}
+
+	#保护散户投资
+	focus = {
+		id = CLB_protect_retail_investors
+		icon = GFX_focus_CLB_protect_retail_investors
+		cost = 5
+		prerequisite = {
+			focus = CLB_financial_center_recovery_plan
+		}
+		mutually_exclusive = {
+			focus = CLB_increase_statutory_shareholding_limit
+		}
+
+		available = {
+			OR = {
+				has_government = liberalism
+				has_government = conservatism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_financial_center_recovery_plan
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#提高持股比例法定上限
+	focus = {
+		id = CLB_increase_statutory_shareholding_limit
+		icon = GFX_focus_CLB_increase_statutory_shareholding_limit
+		cost = 5
+		prerequisite = {
+			focus = CLB_financial_center_recovery_plan
+		}
+		mutually_exclusive = {
+			focus = CLB_increase_statutory_shareholding_limit
+		}
+
+		available = {
+			OR = {
+				has_government = liberalism
+				has_government = conservatism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_financial_center_recovery_plan
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#回归稳健
+	focus = {
+		id = CLB_return_to_stability
+		icon = GFX_focus_CLB_return_to_stability
+		cost = 1
+
+		available = {
+			has_government = conservatism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 8
+		y = 0
+		relative_position_id = CLB_inspire_confidence
+
+		completion_reward = {
+			
+		}
+	}
+
+	#企业税削减计划
+	focus = {
+		id = CLB_enterprise_streamlining_plan
+		icon = GFX_focus_CLB_enterprise_streamlining_plan
+		cost = 5
+		prerequisite = {
+			focus = CLB_return_to_stability
+		}
+		mutually_exclusive = {
+			focus = CLB_national_tax_cut_proposal
+		}
+
+		available = {
+			has_government = conservatism
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_return_to_stability
+
+		completion_reward = {
+			
+		}
+	}
+
+	#全民减税议程
+	focus = {
+		id = CLB_national_tax_cut_proposal
+		icon = GFX_focus_CLB_national_tax_cut_proposal
+		cost = 5
+		prerequisite = {
+			focus = CLB_return_to_stability
+		}
+		mutually_exclusive = {
+			focus = CLB_enterprise_streamlining_plan
+		}
+
+		available = {
+			has_government = conservatism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_return_to_stability
+
+		completion_reward = {
+			
+		}
+	}
+
+	#反垄断法案修正案
+	focus = {
+		id = CLB_antitrust_amendment
+		icon = GFX_focus_CLB_antitrust_amendment
+		cost = 5
+		prerequisite = {
+			focus = CLB_enterprise_streamlining_plan
+		}
+
+		available = {
+			has_government = conservatism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 1
+		relative_position_id = CLB_enterprise_streamlining_plan
+
+		completion_reward = {
+			
+		}
+	}
+
+	#激发市民消费热情
+	focus = {
+		id = CLB_stimulate_citizen_consumption_enthusiasm
+		icon = GFX_focus_CLB_stimulate_citizen_consumption_enthusiasm
+		cost = 5
+		prerequisite = {
+			focus = CLB_national_tax_cut_proposal
+		}
+
+		available = {
+			has_government = conservatism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 1
+		relative_position_id = CLB_national_tax_cut_proposal
+
+		completion_reward = {
+			
+		}
+	}	
+
+	#深南都会建设
+	focus = {
+		id = CLB_shenzhen_metropolis_construction
+		icon = GFX_focus_CLB_shenzhen_metropolis_construction
+		cost = 5
+		prerequisite = {
+			focus = CLB_antitrust_amendment
+		}
+
+		available = {
+			has_government = conservatism
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_antitrust_amendment
+
+		completion_reward = {
+			
+		}
+	}
+
+	#政府集权结构优化
+	focus = {
+		id = CLB_government_centralization_optimization
+		icon = GFX_focus_CLB_government_centralization_optimization
+		cost = 5
+		prerequisite = {
+			focus = CLB_antitrust_amendment
+			focus = CLB_stimulate_citizen_consumption_enthusiasm
+		}
+
+		available = {
+			has_government = conservatism
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_stimulate_citizen_consumption_enthusiasm
+
+		completion_reward = {
+			
+		}
+	}
+
+	#联邦直辖研究机构
+	focus = {
+		id = CLB_federal_directly_controlled_research_agency
+		icon = GFX_focus_CLB_federal_directly_controlled_research_agency
+		cost = 5
+		prerequisite = {
+			focus = CLB_government_centralization_optimization
+		}
+
+		available = {
+			has_government = conservatism
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_government_centralization_optimization
+
+		completion_reward = {
+			
+		}
+	}
+
+	#公共交通市场化改革
+	focus = {
+		id = CLB_public_transport_market_reform
+		icon = GFX_focus_CLB_public_transport_market_reform
+		cost = 5
+		prerequisite = {
+			focus = CLB_government_centralization_optimization
+		}
+
+		available = {
+			has_government = conservatism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_government_centralization_optimization
+
+		completion_reward = {
+			
+		}
+	}
+
+	#拓宽资金补助
+	focus = {
+		id = CLB_broaden_financial_subsidies
+		icon = GFX_focus_CLB_broaden_financial_subsidies
+		cost = 5
+		prerequisite = {
+			focus = CLB_stimulate_citizen_consumption_enthusiasm
+		}
+
+		available = {
+			has_government = conservatism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_stimulate_citizen_consumption_enthusiasm
+
+		completion_reward = {
+			
+		}
+	}
+
+	#奖励能源开发
+	focus = {
+		id = CLB_pragmatic_energy_development
+		icon = GFX_focus_CLB_pragmatic_energy_development
+		cost = 5
+		prerequisite = {
+			focus = CLB_return_to_stability
+			focus = CLB_civic_will
+		}
+
+		available = {
+			OR = {
+				has_government = conservatism
+				has_government = authoritarianism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = 4
+		y = 1
+		relative_position_id = CLB_return_to_stability
+
+		completion_reward = {
+			
+		}
+	}
+
+	#放宽污染排放限额
+	focus = {
+		id = CLB_relax_pollution_emission_limits
+		icon = GFX_focus_CLB_relax_pollution_emission_limits
+		cost = 5
+		prerequisite = {
+			focus = CLB_pragmatic_energy_development
+		}
+		mutually_exclusive = {
+			focus = CLB_support_grain_enterprise_expansion
+		}
+
+		available = {
+			OR = {
+				has_government = conservatism
+				has_government = authoritarianism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_pragmatic_energy_development
+
+		completion_reward = {
+			
+		}
+	}
+
+	#支持粮食企业扩张
+	focus = {
+		id = CLB_support_grain_enterprise_expansion
+		icon = GFX_focus_CLB_support_grain_enterprise_expansion
+		cost = 5
+		prerequisite = {
+			focus = CLB_pragmatic_energy_development
+		}
+		mutually_exclusive = {
+			focus = CLB_relax_pollution_emission_limits
+		}
+
+		available = {
+			OR = {
+				has_government = conservatism
+				has_government = authoritarianism
+			}
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_pragmatic_energy_development
+
+		completion_reward = {
+			
+		}
+	}
+
+	#公民意志
+	focus = {
+		id = CLB_civic_will
+		icon = GFX_focus_CLB_civic_will
+		cost = 1
+
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 8
+		y = 0
+		relative_position_id = CLB_return_to_stability
+
+		completion_reward = {
+			
+		}
+	}
+
+	#哥伦比亚优先法案
+	focus = {
+		id = CLB_columbia_preferential_act
+		icon = GFX_focus_CLB_columbia_preferential_act
+		cost = 5
+		prerequisite = {
+			focus = CLB_civic_will
+		}
+
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 1
+		relative_position_id = CLB_civic_will
+
+		completion_reward = {
+			
+		}
+	}
+
+	#传统盟友关税豁免
+	focus = {
+		id = CLB_traditional_ally_tariff_exemption
+		icon = GFX_focus_CLB_traditional_ally_tariff_exemption
+		cost = 5
+		prerequisite = {
+			focus = CLB_columbia_preferential_act
+		}
+		mutually_exclusive = {
+			focus = CLB_local_enterprises_protection
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_columbia_preferential_act
+
+		completion_reward = {
+			
+		}
+	}
+
+	#本土企业全面保护
+	focus = {
+		id = CLB_local_enterprises_protection
+		icon = GFX_focus_CLB_local_enterprises_protection
+		cost = 5
+		prerequisite = {
+			focus = CLB_columbia_preferential_act
+		}
+		mutually_exclusive = {
+			focus = CLB_traditional_ally_tariff_exemption
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_columbia_preferential_act
+
+		completion_reward = {
+			
+		}
+	}
+
+	#施压国债交易
+	focus = {
+		id = CLB_force_government_debt_transaction
+		icon = GFX_focus_CLB_force_government_debt_transaction
+		cost = 5
+		prerequisite = {
+			focus = CLB_traditional_ally_tariff_exemption
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_traditional_ally_tariff_exemption
+
+		completion_reward = {
+			
+		}
+	}
+
+	#国际品牌，哥伦比亚制造
+	focus = {
+		id = CLB_international_brand_columbia_manufacturing
+		icon = GFX_focus_CLB_international_brand_columbia_manufacturing
+		cost = 5
+		prerequisite = {
+			focus = CLB_force_government_debt_transaction
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 1
+		relative_position_id = CLB_force_government_debt_transaction
+
+		completion_reward = {
+			
+		}
+	}
+
+	#西部拓荒投资税免
+	focus = {
+		id = CLB_western_pioneering_investment_tax_exemption
+		icon = GFX_focus_CLB_western_pioneering_investment_tax_exemption
+		cost = 5
+		prerequisite = {
+			focus = CLB_traditional_ally_tariff_exemption
+			focus = CLB_local_enterprises_protection
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 2
+		relative_position_id = CLB_columbia_preferential_act
+
+		completion_reward = {
+			
+		}
+	}
+
+	#伟大城市计划
+	focus = {
+		id = CLB_great_city_plan
+		icon = GFX_focus_CLB_great_city_plan
+		cost = 5
+		prerequisite = {
+			focus = CLB_western_pioneering_investment_tax_exemption
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 1
+		relative_position_id = CLB_western_pioneering_investment_tax_exemption
+
+		completion_reward = {
+			
+		}
+	}
+
+	#保护小农庄免受天灾
+	focus = {
+		id = CLB_protect_small_farmers_from_disasters
+		icon = GFX_focus_CLB_protect_small_farmers_from_disasters
+		cost = 5
+		prerequisite = {
+			focus = CLB_local_enterprises_protection
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_local_enterprises_protection
+
+		completion_reward = {
+			
+		}
+	}
+	
+	#小微企业复苏
+	focus = {
+		id = CLB_small_micro_enterprise_recovery
+		icon = GFX_focus_CLB_small_micro_enterprise_recovery
+		cost = 5
+		prerequisite = {
+			focus = CLB_protect_small_farmers_from_disasters
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 1
+		relative_position_id = CLB_protect_small_farmers_from_disasters
+
+		completion_reward = {
+			
+		}
+	}
+
+	#更人道的感染者隔离
+	focus = {
+		id = CLB_more_humane_infected_quarantine
+		icon = GFX_focus_CLB_more_humane_infected_quarantine
+		cost = 5
+		prerequisite = {
+			focus = CLB_return_to_stability
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 12
+		y = 1
+		relative_position_id = CLB_return_to_stability
+
+		completion_reward = {
+			
+		}
+	}
+
+	#新增务工签证类型
+	focus = {
+		id = CLB_new_work_visa_type
+		icon = GFX_focus_CLB_new_work_visa_type
+		cost = 5
+		prerequisite = {
+			focus = CLB_more_humane_infected_quarantine
+		}
+		mutually_exclusive = {
+			focus = CLB_protect_national_employment_opportunities
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = -1
+		y = 1
+		relative_position_id = CLB_more_humane_infected_quarantine
+
+		completion_reward = {
+			
+		}
+	}
+
+	#保护国民就业机会
+	focus = {
+		id = CLB_protect_national_employment_opportunities
+		icon = GFX_focus_CLB_protect_national_employment_opportunities
+		cost = 5
+		prerequisite = {
+			focus = CLB_more_humane_infected_quarantine
+		}
+		mutually_exclusive = {
+			focus = CLB_new_work_visa_type
+		}
+		
+		available = {
+			has_government = authoritarianism
+		}
+
+		cancel_if_invalid = yes
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_more_humane_infected_quarantine
+
+		completion_reward = {
+			
+		}
+	}
+
+##军事线
+
+	#国防改革预算编制
+	focus = {
+		id = CLB_national_defense_reform_budget_formulation
+		#icon = GFX_focus_CLB_national_defense_reform_budget_formulation
+		icon = GFX_focus_usa_build_the_pentagon
+		cost = 5
+
+		x = 47
+		y = 9
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_need_of_defense_reform
+				add_idea = CLB_national_defense_reform_committee_1
+			}
+
+			add_political_power = 100
+			army_experience = 25
+			navy_experience = 25
+			air_experience = 25
+		}
+	}
+
+	#哥伦比亚陆军改革
+	focus = {
+		id = CLB_Colombian_army_reform
+		#icon = GFX_focus_CLB_Colombian_army_reform
+		icon = GFX_goal_generic_axis_build_infantry
+		cost = 2
+		prerequisite = {
+			focus = CLB_national_defense_reform_budget_formulation
+		}
+		x = -7
+		y = 1
+		relative_position_id = CLB_national_defense_reform_budget_formulation
+
+		completion_reward = {
+			army_experience = 50
+		}
+	}
+
+	#朱姆菲尔德方案
+	focus = {
+		id = CLB_Zumfelde_plan
+		#icon = GFX_focus_CLB_Zumfelde_plan
+		icon = GFX_focus_chi_army_reform
+		cost = 6
+		prerequisite = {
+			focus = CLB_Colombian_army_reform
+		}
+		mutually_exclusive = {
+			focus = CLB_Gollison_plan
+		}
+		x = -4
+		y = 1
+		relative_position_id = CLB_Colombian_army_reform
+
+		completion_reward = {
+			add_ideas = CLB_Zumfelde_plan_1
+		}
+	}
+
+	#非对称作战理论
+	focus = {
+		id = CLB_asymmetric_warfare_theory
+		#icon = GFX_focus_CLB_asymmetric_warfare_theory
+		icon = GFX_goal_generic_major_war
+		cost = 6
+		prerequisite = {
+			focus = CLB_Zumfelde_plan
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_Zumfelde_plan
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_Zumfelde_plan_1
+				add_idea = CLB_Zumfelde_plan_2
+			}
+
+			# add_dynamic_modifier = {
+			# 	modifier = CLB_recon_combat_system_dynamic_modifier
+			# }
+
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = unlock_tech_effect_tt
+					TECH = country_culture|CLB_Continental_Army_recon_tech
+					TECH_BUFF = tech_effect|CLB_Continental_Army_recon_tech
+				}
+				set_technology = {
+					CLB_Continental_Army_recon_tech = 1
+				}
+			}
+		}
+	}
+
+	#修订训练手册
+	focus = {
+		id = CLB_revised_training_manual
+		#icon = GFX_focus_CLB_revised_training_manual
+		icon = GFX_focus_generic_army_doctrines_2
+
+		prerequisite = {
+			focus = CLB_asymmetric_warfare_theory
+		}
+		
+		x = 0
+		y = 1
+		cost = 6
+
+		relative_position_id = CLB_asymmetric_warfare_theory
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_Zumfelde_plan_2
+				add_idea = CLB_Zumfelde_plan_3
+			}
+		}
+	}
+
+	#赋权基层军官
+	focus = {
+		id = CLB_empower_junior_officers
+		#icon = GFX_focus_CLB_empower_junior_officers
+		icon = GFX_focus_generic_military_mission
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_Zumfelde_plan
+		}
+		relative_position_id = CLB_Zumfelde_plan
+
+		completion_reward = {
+			custom_effect_tooltip = unlocks_spirit_of_the_academy_tt
+			show_ideas_tooltip = quick_improvisation_spirit
+		}
+	}
+
+	#小规模编组
+	focus = {
+		id = CLB_small_scale_grouping
+		#icon = GFX_focus_CLB_small_scale_grouping
+		icon = GFX_focus_generic_little_entente
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_empower_junior_officers
+		}
+		relative_position_id = CLB_empower_junior_officers
+
+		completion_reward = {
+			army_experience = 50
+			add_daily_mastery = {
+				amount = 1
+				days = 180
+				name = CLB_small_scale_grouping
+				sub_doctrine = commandos
+			}
+
+			add_mastery_bonus = {
+				bonus = 0.5
+				days = 365
+				name = CLB_small_scale_grouping
+				sub_doctrine = commandos
+			}
+		}
+	}
+
+	#强调特种作战
+	focus = {
+		id = CLB_emphasize_special_operations
+		#icon = GFX_focus_CLB_emphasize_special_operations
+		icon = GFX_goal_generic_special_forces
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_revised_training_manual
+		}
+		prerequisite = {
+			focus = CLB_small_scale_grouping
+		}
+		relative_position_id = CLB_revised_training_manual
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_Zumfelde_plan_3
+				add_idea = CLB_Zumfelde_plan_4
+			}
+		}
+	}
+
+	#次世代装甲设计
+	focus = {
+		id = CLB_next_generation_armor_design
+		#icon = GFX_focus_CLB_next_generation_armor_design
+		icon = GFX_focus_generic_heavy_tank
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_emphasize_special_operations
+		}
+		relative_position_id = CLB_emphasize_special_operations
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = CLB_Zumfelde_plan_4
+				}
+				swap_ideas = {
+					remove_idea = CLB_Zumfelde_plan_4
+					add_idea = CLB_Zumfelde_plan_5
+				}
+			}
+			else = {
+				limit = {
+					has_idea = CLB_Zumfelde_plan_6
+				}
+				swap_ideas = {
+					remove_idea = CLB_Zumfelde_plan_6
+					add_idea = CLB_Zumfelde_plan_7
+				}
+			}
+		}
+	}
+
+	#法术武器研发
+	focus = {
+		id = CLB_arts_weapon_research
+		#icon = GFX_focus_CLB_arts_weapon_research
+		icon = GFX_goal_generic_army_artillery
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_emphasize_special_operations
+		}
+		relative_position_id = CLB_emphasize_special_operations
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = CLB_Zumfelde_plan_4
+				}
+				swap_ideas = {
+					remove_idea = CLB_Zumfelde_plan_4
+					add_idea = CLB_Zumfelde_plan_6
+				}
+			}
+			else = {
+				limit = {
+					has_idea = CLB_Zumfelde_plan_5
+				}
+				swap_ideas = {
+					remove_idea = CLB_Zumfelde_plan_5
+					add_idea = CLB_Zumfelde_plan_7
+				}
+			}
+
+			add_tech_bonus = {
+				bonus = 1
+				ahead_reduction = 1
+				uses = 2
+				category = arts_weapons
+			}
+		}
+	}
+
+	#全域部署
+	focus = {
+		id = CLB_all_area_deployment
+		#icon = GFX_focus_CLB_all_area_deployment
+		icon = GFX_goal_generic_more_territorial_claims
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_next_generation_armor_design
+		}
+		prerequisite = {
+			focus = CLB_arts_weapon_research
+		}
+		relative_position_id = CLB_next_generation_armor_design
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_Zumfelde_plan_7
+				add_idea = CLB_Continental_Army_a
+			}
+
+			if = {
+				limit = {
+					has_idea = CLB_national_defense_reform_committee_2
+				}
+				remove_ideas = CLB_national_defense_reform_committee_2
+			}
+			else_if = {
+				limit = {
+					has_idea = CLB_national_defense_reform_committee_1
+				}
+				swap_ideas = {
+					remove_idea = CLB_national_defense_reform_committee_1
+					add_idea = CLB_national_defense_reform_committee_2
+				}
+			}
+		}
+	}
+
+	
+	#歌利森方案
+	focus = {
+		id = CLB_Gollison_plan
+		#icon = GFX_focus_CLB_Gollison_plan
+		icon = GFX_focus_generic_license_production
+		cost = 6
+		prerequisite = {
+			focus = CLB_Colombian_army_reform
+		}
+		mutually_exclusive = {
+			focus = CLB_Zumfelde_plan
+		}
+		x = 4
+		y = 1
+		relative_position_id = CLB_Colombian_army_reform
+
+		completion_reward = {
+			add_ideas = CLB_Gollison_plan_1
+		}
+	}
+
+	#合成化编制
+	focus = {
+		id = CLB_synthetic_organization
+		#icon = GFX_focus_CLB_synthetic_organization
+		icon = GFX_focus_SWE_lynx_armored_car
+		x = -2
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_Gollison_plan
+		}
+		relative_position_id = CLB_Gollison_plan
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = CLB_Gollison_plan_1
+				}
+				swap_ideas = {
+					remove_idea = CLB_Gollison_plan_1
+					add_idea = CLB_Gollison_plan_2
+				}
+			}
+			else = {
+				limit = {
+					has_idea = CLB_Gollison_plan_3
+				}
+				swap_ideas = {
+					remove_idea = CLB_Gollison_plan_3
+					add_idea = CLB_Gollison_plan_4
+				}
+			}
+		}
+	}
+
+	#新一代装甲战术
+	focus = {
+		id = CLB_new_generation_armor_tactics
+		#icon = GFX_focus_CLB_new_generation_armor_tactics
+		icon = GFX_focus_SOV_the_glory_of_the_red_army_alternative
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_Gollison_plan
+		}
+		relative_position_id = CLB_Gollison_plan
+
+		completion_reward = {
+			army_experience = 50
+			add_daily_mastery = {
+				amount = 1
+				days = 180
+				name = CLB_new_generation_armor_tactics
+				sub_doctrine = streamlined_deployment
+			}
+
+			add_mastery_bonus = {
+				bonus = 0.5
+				days = 365
+				name = CLB_new_generation_armor_tactics
+				sub_doctrine = streamlined_deployment
+			}
+		}
+	}
+
+	#新式军官培训
+	focus = {
+		id = CLB_new_type_officer_training
+		#icon = GFX_focus_CLB_new_type_officer_training
+		icon = GFX_focus_generic_advisors
+		x = 2
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_Gollison_plan
+		}
+		relative_position_id = CLB_Gollison_plan
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = CLB_Gollison_plan_1
+				}
+				swap_ideas = {
+					remove_idea = CLB_Gollison_plan_1
+					add_idea = CLB_Gollison_plan_3
+				}
+			}
+			else = {
+				limit = {
+					has_idea = CLB_Gollison_plan_2
+				}
+				swap_ideas = {
+					remove_idea = CLB_Gollison_plan_2
+					add_idea = CLB_Gollison_plan_4
+				}
+			}
+		}
+	}
+	
+	#定期军事演习
+	focus = {
+		id = CLB_regular_military_exercises
+		#icon = GFX_focus_CLB_regular_military_exercises
+		icon = GFX_focus_generic_army_attack
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_synthetic_organization
+		}
+		prerequisite = {
+			focus = CLB_new_generation_armor_tactics
+		}
+		prerequisite = {
+			focus = CLB_new_type_officer_training
+		}
+		relative_position_id = CLB_new_generation_armor_tactics
+
+		completion_reward = {
+			army_experience = 50
+			swap_ideas = {
+				remove_idea = CLB_Gollison_plan_4
+				add_idea = CLB_Gollison_plan_5
+			}
+		}
+	}
+
+	#全面机械化
+	focus = {
+		id = CLB_full_mechanization
+		#icon = GFX_focus_CLB_full_mechanization
+		icon = GFX_focus_generic_mechanized
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = CLB_regular_military_exercises
+		}
+		relative_position_id = CLB_regular_military_exercises
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_Gollison_plan_5
+				add_idea = CLB_Gollison_plan_6
+			}
+		}
+	}
+
+	#扩充工程兵团
+	focus = {
+		id = CLB_expand_engineers
+		#icon = GFX_focus_CLB_expand_engineers
+		icon = GFX_goal_generic_construction2
+		cost = 6
+		prerequisite = {
+			focus = CLB_full_mechanization
+		}
+		x = -1
+		y = 1		
+		relative_position_id = CLB_full_mechanization
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = CLB_Gollison_plan_6
+				}
+				swap_ideas = {
+					remove_idea = CLB_Gollison_plan_6
+					add_idea = CLB_Gollison_plan_7
+				}
+			}
+			else = {
+				limit = {
+					has_idea = CLB_Gollison_plan_8
+				}
+				swap_ideas = {
+					remove_idea = CLB_Gollison_plan_8
+					add_idea = CLB_Gollison_plan_9
+				}
+			}
+
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = unlock_tech_effect_tt
+					TECH = country_culture|CLB_expand_engineers_tech
+					TECH_BUFF = tech_effect|CLB_expand_engineers_tech
+				}
+				set_technology = {
+					CLB_expand_engineers_tech = 1
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_tech_bonus = {
+				bonus = 1
+				ahead_reduction = 1
+				uses = 2
+				category = engineers_tech
+			}
+		}
+	}
+
+	#战略性炮兵
+	focus = {
+		id = CLB_strategic_artillery
+		#icon = GFX_focus_CLB_strategic_artillery
+		icon = GFX_focus_RAJ_mountain_guns
+		cost = 6
+		prerequisite = {
+			focus = CLB_full_mechanization
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_full_mechanization
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = CLB_Gollison_plan_6
+				}
+				swap_ideas = {
+					remove_idea = CLB_Gollison_plan_6
+					add_idea = CLB_Gollison_plan_8
+				}
+			}
+			else = {
+				limit = {
+					has_idea = CLB_Gollison_plan_7
+				}
+				swap_ideas = {
+					remove_idea = CLB_Gollison_plan_7
+					add_idea = CLB_Gollison_plan_9
+				}
+			}
+
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = unlock_tech_effect_tt
+					TECH = country_culture|CLB_Continental_Army_recon_tech
+					TECH_BUFF = tech_effect|CLB_Continental_Army_recon_tech
+				}
+				set_technology = {
+					CLB_Continental_Army_recon_tech = 1
+				}
+			}
+		}
+	}
+
+	#集成化指挥链路
+	focus = {
+		id = CLB_integrated_command_link
+		#icon = GFX_focus_CLB_integrated_command_link
+		icon = GFX_focus_GER_demonstration_of_military_achievements
+		cost = 6
+		prerequisite = {
+			focus = CLB_expand_engineers
+		}
+		prerequisite = {
+			focus = CLB_strategic_artillery
+		}
+		x = 0
+		y = 2
+		relative_position_id = CLB_full_mechanization
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_Gollison_plan_9
+				add_idea = CLB_Continental_Army_b
+			}
+
+			if = {
+				limit = {
+					has_idea = CLB_national_defense_reform_committee_2
+				}
+				remove_ideas = CLB_national_defense_reform_committee_2
+			}
+			else_if = {
+				limit = {
+					has_idea = CLB_national_defense_reform_committee_1
+				}
+				swap_ideas = {
+					remove_idea = CLB_national_defense_reform_committee_1
+					add_idea = CLB_national_defense_reform_committee_2
+				}
+			}
+		}
+	}
+
+	#步兵装备竞标
+	focus = {
+		id = CLB_infantry_equipment_bidding
+		#icon = GFX_focus_CLB_infantry_equipment_bidding
+		icon = GFX_focus_ETH_freedom_at_gunpoint
+		cost = 6
+		prerequisite = {
+			focus = CLB_Zumfelde_plan
+			focus = CLB_Gollison_plan
+		}
+		x = 0
+		y = 2
+		relative_position_id = CLB_Colombian_army_reform
+
+		completion_reward = {
+			add_ideas = CLB_infantry_equipment_replacement_1
+
+			country_event = {
+				id = military_clb.1
+			}
+
+			custom_effect_tooltip = event_allows_choice_tt
+			custom_effect_tooltip = event_choice_option_1_tt
+			effect_tooltip = {
+				mio:CLB_springfield_armory_organization = {
+					add_mio_research_bonus = 0.1
+					add_mio_funds_gain_factor = 0.1
+					add_mio_funds = 1000
+				}
+			}
+			custom_effect_tooltip = event_choice_option_2_tt
+			effect_tooltip = {
+				mio:CLB_colt_organisation = {
+					add_mio_research_bonus = 0.1
+					add_mio_funds_gain_factor = 0.1
+					add_mio_funds = 1000
+				}
+			}
+		}
+	}
+
+	#军用通信设备
+	focus = {
+		id = CLB_military_communication_equipment
+		#icon = GFX_focus_CLB_military_communication_equipment
+		icon = GFX_focus_generic_radio_communication
+		cost = 6
+		prerequisite = {
+			focus = CLB_infantry_equipment_bidding
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_infantry_equipment_bidding
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1
+				ahead_reduction = 1
+				uses = 2
+				category = signal_company_tech
+			}
+		}
+	}
+
+	#私营防务公司
+	focus = {
+		id = CLB_private_military_company
+		#icon = GFX_focus_CLB_private_military_company
+		icon = GFX_goal_generic_defence
+		cost = 6
+		prerequisite = {
+			focus = CLB_military_communication_equipment
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_military_communication_equipment
+
+		completion_reward = {
+			add_ideas = CLB_private_military_company_idea
+		}
+	}
+
+	#部属科研机构
+	focus = {
+		id = CLB_subordinate_research_institutions
+		#icon = GFX_focus_CLB_subordinate_research_institutions
+		icon = GFX_focus_research
+		cost = 6
+		prerequisite = {
+			focus = CLB_military_communication_equipment
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_military_communication_equipment
+
+		completion_reward = {
+			add_research_slot = 1
+
+			#等科技树重制之后再加实验设施
+			# add_building_construction = {
+			# 	type = land_facility
+			# 	level = 1
+			# 	instant_build = yes
+			# 	province = 
+			# }
+		}
+	}
+
+	#空中骑兵师
+	focus = {
+		id = CLB_air_cavalry
+		#icon = GFX_focus_CLB_air_cavalry
+		icon = GFX_focus_generic_early_helicopter
+		cost = 6
+		prerequisite = {
+			focus = CLB_private_military_company
+		}
+		prerequisite = {
+			focus = CLB_subordinate_research_institutions
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_private_military_company
+
+		completion_reward = {
+			add_ideas = CLB_air_cavalry_idea
+		}
+	}
+
+	#为自由而战
+	focus = {
+		id = CLB_fight_for_freedom
+		#icon = GFX_focus_CLB_fight_for_freedom
+		icon = GFX_focus_spr_torchbearers_of_tomorrow
+		cost = 6
+		prerequisite = {
+			focus = CLB_all_area_deployment
+			focus = CLB_integrated_command_link
+		}
+
+		available = {
+			has_global_flag = WWII_start
+		}
+
+		x = 4
+		y = 1
+		relative_position_id = CLB_all_area_deployment
+
+		completion_reward = {
+			add_ideas = CLB_fight_for_freedom_idea
+		}
+	}
+
+	#国民志愿服务团
+	focus = {
+		id = CLB_national_volunteer_service_corps
+		#icon = GFX_focus_CLB_national_volunteer_service_corps
+		icon = GFX_focus_generic_public_works
+		cost = 6
+		prerequisite = {
+			focus = CLB_fight_for_freedom
+		}
+		x = -2
+		y = 1
+		relative_position_id = CLB_fight_for_freedom
+
+		completion_reward = {
+			add_ideas = CLB_behind_the_front_lines_1
+		}
+	}
+
+	#预备役征召
+	focus = {
+		id = CLB_reserve_conscription
+		#icon = GFX_focus_CLB_reserve_conscription
+		icon = GFX_focus_generic_manpower
+		cost = 6
+		prerequisite = {
+			focus = CLB_national_volunteer_service_corps
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_national_volunteer_service_corps
+
+		completion_reward = {
+			add_ideas = CLB_reserve_conscription_idea
+		}
+	}
+
+	#在前线吃冰淇淋
+	focus = {
+		id = CLB_front_line_ice_cream
+		#icon = GFX_focus_CLB_front_line_ice_cream
+		icon = GFX_focus_generic_reinforcing_the_supply_network
+		cost = 6
+		prerequisite = {
+			focus = CLB_national_volunteer_service_corps
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_national_volunteer_service_corps
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_behind_the_front_lines_1
+				add_idea = CLB_behind_the_front_lines_2
+			}
+		}
+	}
+
+	#战地救护训练
+	focus = {
+		id = CLB_battlefield_medical_training
+		#icon = GFX_focus_CLB_battlefield_medical_training
+		icon = GFX_focus_generic_field_hostpital
+		cost = 6
+		prerequisite = {
+			focus = CLB_reserve_conscription
+		}
+		prerequisite = {
+			focus = CLB_front_line_ice_cream
+		}
+		x = 0
+		y = 2
+		relative_position_id = CLB_national_volunteer_service_corps
+
+		completion_reward = {
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = unlock_tech_effect_tt
+					TECH = country_culture|CLB_battlefield_medical_training_tech
+					TECH_BUFF = tech_effect|CLB_battlefield_medical_training_tech
+				}
+				set_technology = {
+					CLB_battlefield_medical_training_tech = 1
+				}
+			}
+		}
+	}
+
+	#民主兵工厂
+	focus = {
+		id = CLB_arsenal_of_democracy
+		#icon = GFX_focus_CLB_arsenal_of_democracy
+		icon = GFX_focus_generic_mass_production
+		cost = 6
+		prerequisite = {
+			focus = CLB_fight_for_freedom
+		}
+		x = 2
+		y = 1
+		relative_position_id = CLB_fight_for_freedom
+
+		completion_reward = {
+			add_ideas = CLB_arsenal_of_democracy_1
+		}
+	}
+	
+	#哥伦比亚汽车工业
+	focus = {
+		id = CLB_Colombian_automobile_industry
+		#icon = GFX_focus_CLB_Colombian_automobile_industry
+		icon = GFX_focus_generic_road_investment
+		cost = 6
+		prerequisite = {
+			focus = CLB_arsenal_of_democracy
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_arsenal_of_democracy
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_arsenal_of_democracy_1
+				add_idea = CLB_arsenal_of_democracy_2
+			}
+		}
+	}
+
+	#铳械实战化改进
+	focus = {
+		id = CLB_firearms_combat_improvement
+		#icon = GFX_focus_CLB_firearms_combat_improvement
+		icon = GFX_focus_focus_fra_maquis
+		cost = 6
+		prerequisite = {
+			focus = CLB_arsenal_of_democracy
+		}
+
+		available = {
+			has_completed_focus = CLB_infantry_equipment_bidding
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = CLB_arsenal_of_democracy
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_infantry_equipment_replacement_1
+				add_idea = CLB_infantry_equipment_replacement_2
+			}
+		}
+	}
+
+	#发行战争债券
+	focus = {
+		id = CLB_issue_war_bonds
+		#icon = GFX_focus_CLB_issue_war_bonds
+		icon = GFX_focus_generic_currency_reforms
+		cost = 6
+		prerequisite = {
+			focus = CLB_Colombian_automobile_industry
+		}
+		prerequisite = {
+			focus = CLB_firearms_combat_improvement
+		}
+		x = 0
+		y = 2
+		relative_position_id = CLB_arsenal_of_democracy
+
+		completion_reward = {
+			add_ideas = CLB_WWII_bonds
+
+			add_offsite_building = {
+				type = arms_factory
+				level = 1
+			}
+		}
+	}
+
+	#多国联合司令部
+	focus = {
+		id = CLB_multinational_joint_command
+		#icon = GFX_focus_CLB_multinational_joint_command
+		icon = GFX_focus_generic_commission
+		cost = 6
+		prerequisite = {
+			focus = CLB_battlefield_medical_training
+		}
+		prerequisite = {
+			focus = CLB_issue_war_bonds
+		}
+		x = 0
+		y = 4
+		relative_position_id = CLB_fight_for_freedom
+
+		completion_reward = {
+			custom_effect_tooltip = {
+				localization_key = faction_on_join_tt
+				FACTION = faction_libertyland_treaty_organization
+			}
+			effect_tooltip = {
+				add_ideas = LiTO_joint_command
+			}
+
+			hidden_effect = {
+				every_country = {
+					limit = {
+						has_faction_template = faction_template_libertyland_treaty_organization
+					}
+					add_ideas = LiTO_joint_command
+				}
+			}
+		}
+	}
+
+	#哥伦比亚空军
+	focus = {
+		id = CLB_Colombian_air_force
+		#icon = GFX_focus_CLB_Colombian_air_force
+		icon = GFX_goal_generic_air_doctrine
+		cost = 2
+		prerequisite = {
+			focus = CLB_national_defense_reform_budget_formulation
+		}
+		x = 5
+		y = 1
+		relative_position_id = CLB_national_defense_reform_budget_formulation
+
+		completion_reward = {
+			air_experience = 50
+		}
+	}
+
+	#不对称优势
+	focus = {
+		id = CLB_asymmetric_advantage
+		#icon = GFX_focus_CLB_asymmetric_advantage
+		icon = GFX_goal_generic_secret_weapon
+		cost = 6
+		prerequisite = {
+			focus = CLB_Colombian_air_force
+		}
+		mutually_exclusive = {
+			focus = CLB_air_ground_integrated_coordination
+		}
+		x = -3
+		y = 1
+		relative_position_id = CLB_Colombian_air_force
+
+		completion_reward = {
+			add_ideas = CLB_absolute_air_superiority_1
+		}
+	}
+
+	#24小时打击
+	focus = {
+		id = CLB_24h_strike
+		#icon = GFX_focus_CLB_24h_strike
+		icon = GFX_focus_generic_torpedo_production
+		cost = 6
+		prerequisite = {
+			focus = CLB_asymmetric_advantage
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_asymmetric_advantage
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_absolute_air_superiority_1
+				add_idea = CLB_absolute_air_superiority_2
+			}
+		}
+	}
+
+	#穿透性制空
+	focus = {
+		id = CLB_penetrating_air_superiority
+		#icon = GFX_focus_CLB_penetrating_air_superiority
+		icon = GFX_goal_generic_air_fighter2
+		cost = 6
+		prerequisite = {
+			focus = CLB_asymmetric_advantage
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_asymmetric_advantage
+
+		completion_reward = {
+			air_experience = 50
+
+			add_daily_mastery = {
+				amount = 1
+				days = 180
+				name = CLB_penetrating_air_superiority
+				track = fighter_aircraft
+			}
+
+			add_mastery_bonus = {
+				bonus = 0.5
+				days = 365
+				name = CLB_penetrating_air_superiority
+				track = fighter_aircraft
+			}
+		}
+	}
+
+	#战略轰炸机开发
+	focus = {
+		id = CLB_strategic_bomber_research
+		#icon = GFX_focus_CLB_strategic_bomber_research
+		icon = GFX_focus_GER_amerikabomber
+		cost = 6
+		prerequisite = {
+			focus = CLB_24h_strike
+		}
+		prerequisite = {
+			focus = CLB_penetrating_air_superiority
+		}
+		x = 0
+		y = 2
+		relative_position_id = CLB_asymmetric_advantage
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_absolute_air_superiority_2
+				add_idea = CLB_absolute_air_superiority_3
+			}
+		}
+	}
+
+	#战略威慑
+	focus = {
+		id = CLB_strategic_deterrence
+		#icon = GFX_focus_CLB_strategic_deterrence
+		icon = GFX_focus_generic_nighttime_bombing
+		cost = 5
+		prerequisite = {
+			focus = CLB_strategic_bomber_research
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_strategic_bomber_research
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_absolute_air_superiority_3
+				add_idea = CLB_absolute_air_superiority_4
+			}
+		}
+	}
+	
+	#地狱景观
+	focus = {
+		id = CLB_hellscape
+		#icon = GFX_focus_CLB_hellscape
+		icon = GFX_goal_generic_occupy_start_war
+		cost = 5
+		prerequisite = {
+			focus = CLB_strategic_deterrence
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_strategic_deterrence
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_absolute_air_superiority_4
+				add_idea = CLB_Air_Force_a
+			}
+
+			if = {
+				limit = {
+					has_idea = CLB_national_defense_reform_committee_2
+				}
+				remove_ideas = CLB_national_defense_reform_committee_2
+			}
+			else_if = {
+				limit = {
+					has_idea = CLB_national_defense_reform_committee_1
+				}
+				swap_ideas = {
+					remove_idea = CLB_national_defense_reform_committee_1
+					add_idea = CLB_national_defense_reform_committee_2
+				}
+			}
+		}
+	}
+
+	#空地一体协同
+	focus = {
+		id = CLB_air_ground_integrated_coordination
+		#icon = GFX_focus_CLB_air_ground_integrated_coordination
+		icon = GFX_focus_generic_armored_air_support
+		cost = 5
+		prerequisite = {
+			focus = CLB_Colombian_air_force
+		}
+		mutually_exclusive = {
+			focus = CLB_asymmetric_advantage
+		}
+		x = 3
+		y = 1
+		relative_position_id = CLB_Colombian_air_force
+
+		completion_reward = {
+			add_ideas = CLB_air_ground_coordination_1
+		}
+	}
+
+	#对地支援训练
+	focus = {
+		id = CLB_ground_support_training
+		#icon = GFX_focus_CLB_ground_support_training
+		icon = GFX_focus_generic_cryptologic_bomb
+		cost = 5
+		prerequisite = {
+			focus = CLB_air_ground_integrated_coordination
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_air_ground_integrated_coordination
+
+		completion_reward = {
+			air_experience = 50
+
+			add_daily_mastery = {
+				amount = 1
+				days = 180
+				name = CLB_penetrating_air_superiority
+				track = strike_aircraft
+			}
+
+			add_mastery_bonus = {
+				bonus = 0.5
+				days = 365
+				name = CLB_penetrating_air_superiority
+				track = strike_aircraft
+			}
+		}
+	}
+
+	#新型攻击机机体
+	focus = {
+		id = CLB_new_attack_aircraft_airframe
+		#icon = GFX_focus_CLB_new_attack_aircraft_airframe
+		icon = GFX_focus_generic_cas_aircraft
+		cost = 5
+		prerequisite = {
+			focus = CLB_air_ground_integrated_coordination
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_air_ground_integrated_coordination
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_air_ground_coordination_1
+				add_idea = CLB_air_ground_coordination_2
+			}
+		}
+	}
+
+	#空军引导员培训
+	focus = {
+		id = CLB_Air_Force_Forward_Air_Controller_Training
+		#icon = GFX_focus_CLB_Air_Force_Forward_Air_Controller_Training
+		icon = GFX_focus_generic_multi_role_aircraft
+		cost = 6
+		prerequisite = {
+			focus = CLB_ground_support_training
+		}
+		prerequisite = {
+			focus = CLB_new_attack_aircraft_airframe
+		}
+		x = 0
+		y = 2
+		relative_position_id = CLB_air_ground_integrated_coordination
+	
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_air_ground_coordination_2
+				add_idea = CLB_air_ground_coordination_3
+			}
+		}
+	}
+
+	#“鹰墙”
+	focus = {
+		id = CLB_eagle_wall
+		#icon = GFX_focus_CLB_eagle_wall
+		icon = GFX_focus_generic_escort_efficiency
+		cost = 6
+		prerequisite = {
+			focus = CLB_Air_Force_Forward_Air_Controller_Training
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_Air_Force_Forward_Air_Controller_Training
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_air_ground_coordination_3
+				add_idea = CLB_air_ground_coordination_4
+			}
+		}
+	}
+
+	#全天候1作战
+	focus = {
+		id = CLB_all_weather_operations
+		#icon = GFX_focus_CLB_all_weather_operations
+		icon = GFX_focus_generic_daytime_bombing
+		cost = 5
+		prerequisite = {
+			focus = CLB_eagle_wall
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_eagle_wall
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = CLB_air_ground_coordination_4
+				add_idea = CLB_Air_Force_b
+			}
+			
+			if = {
+				limit = {
+					has_idea = CLB_national_defense_reform_committee_2
+				}
+				remove_ideas = CLB_national_defense_reform_committee_2
+			}
+			else_if = {
+				limit = {
+					has_idea = CLB_national_defense_reform_committee_1
+				}
+				swap_ideas = {
+					remove_idea = CLB_national_defense_reform_committee_1
+					add_idea = CLB_national_defense_reform_committee_2
+				}
+			}
+		}
+	}
+
+	#先进机体研发
+	focus = {
+		id = CLB_advanced_airframe_research
+		#icon = GFX_focus_CLB_advanced_airframe_research
+		icon = GFX_focus_generic_air_research_boost
+		cost = 6
+		prerequisite = {
+			focus = CLB_asymmetric_advantage
+			focus = CLB_air_ground_integrated_coordination
+		}
+		x = 0
+		y = 2
+		relative_position_id = CLB_Colombian_air_force
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1
+				ahead_reduction = 1
+				uses = 2
+				category = air_equipment
+			}
+		}
+	}
+
+	#哥伦比亚航空兵学院
+	focus = {
+		id = CLB_aviation_academy
+		#icon = GFX_focus_CLB_aviation_academy
+		icon = GFX_focus_generic_military_academy
+		cost = 6
+		prerequisite = {
+			focus = CLB_advanced_airframe_research
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_advanced_airframe_research
+		
+		completion_reward = {
+			add_ideas = CLB_aviation_academy_idea
+		}
+	}
+
+	#西泰拉防空司令部
+	focus = {
+		id = CLB_west_Terra_air_defense_command
+		#icon = GFX_focus_CLB_west_Terra_air_defense_command
+		icon = GFX_focus_generic_air_defense
+		cost = 6
+		prerequisite = {
+			focus = CLB_aviation_academy
+		}
+		x = -1
+		y = 1
+		relative_position_id = CLB_aviation_academy
+
+		completion_reward = {
+			custom_effect_tooltip = {
+				localization_key = faction_on_join_tt
+				FACTION = faction_libertyland_treaty_organization
+			}
+			effect_tooltip = {
+				add_ideas = LiTO_west_Terra_air_defense_command
+			}
+
+			hidden_effect = {
+				every_country = {
+					limit = {
+						has_faction_template = faction_template_libertyland_treaty_organization
+					}
+					add_ideas = LiTO_west_Terra_air_defense_command
+				}
+			}
+			
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#增设军用机场
+	focus = {
+		id = CLB_add_military_airports
+		#icon = GFX_focus_CLB_add_military_airports
+		icon = GFX_focus_generic_copy_plane_designs
+		cost = 6
+		prerequisite = {
+			focus = CLB_aviation_academy
+		}
+		x = 1
+		y = 1
+		relative_position_id = CLB_aviation_academy
+
+		completion_reward = {
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#宣传王牌飞行员
+	focus = {
+		id = CLB_promote_ace_pilots
+		#icon = GFX_focus_CLB_promote_ace_pilots
+		icon = GFX_focus_SOV_flying_clubs
+		cost = 6
+		prerequisite = {
+			focus = CLB_west_Terra_air_defense_command
+		}
+		prerequisite = {
+			focus = CLB_add_military_airports
+		}
+		x = 0
+		y = 2
+		relative_position_id = CLB_aviation_academy
+
+		completion_reward = {
+			add_ideas = CLB_promote_ace_pilots_idea
+		}
+	}
+
+	#民主空运
+	focus = {
+		id = CLB_democratic_airlift
+		#icon = GFX_focus_CLB_democratic_airlift
+		icon = GFX_focus_generic_democratic_europe
+		cost = 6
+		prerequisite = {
+			focus = CLB_promote_ace_pilots
+		}
+		x = -2
+		y = 1
+		relative_position_id = CLB_promote_ace_pilots
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 2
+				uses = 1
+				category = transport_plane
+			}
+
+			add_ideas = CLB_democratic_airlift_idea
+		}
+	}
+
+	#次世代战机计划
+	focus = {
+		id = CLB_next_generation_fighter_program
+		#icon = GFX_focus_CLB_next_generation_fighter_program
+		icon = GFX_focus_generic_jet_planes
+		cost = 6
+		prerequisite = {
+			focus = CLB_promote_ace_pilots
+		}
+		x = 0
+		y = 1
+		relative_position_id = CLB_promote_ace_pilots
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1
+				ahead_reduction = 1
+				uses = 2
+				category = medium_air
+			}
+		}
+	}
+
+	#先进弹药研发
+	focus = {
+		id = CLB_Advanced_Munitions_Research_and_Development
+		#icon = GFX_focus_CLB_Advanced_Munitions_Research_and_Development
+		icon = GFX_goal_generic_scientific_exchange
+		cost = 6
+		prerequisite = {
+			focus = CLB_promote_ace_pilots
+		}
+		x = 2
+		y = 1
+		relative_position_id = CLB_promote_ace_pilots
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1
+				ahead_reduction = 1
+				uses = 2
+				category = plane_modules_tech
+			}
+		}
+	}
+	
+	#外交线
+
+	#我们在泰拉的舞台
+	focus = {
+		id = CLB_Our_Stage_on_Terra
+		#icon = GFX_focus_CLB_Our_Stage_on_Terra
+		icon = GFX_focus_generic_league_of_nations
+		x = 32
+		y = 0
+		cost = 5
+
+		available = {
+			always = no
+		}
+	}
+
+	#重申纳罗主义
+	focus = {
+		id = CLB_Reaffirm_Narroism
+		#icon = GFX_focus_CLB_Reaffirm_Narroism
+		icon = GFX_focus_generic_the_giant_wakes
+		x = -8
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus = CLB_Our_Stage_on_Terra
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#哥伦比娅的后花园
+	focus = {
+		id = CLB_Colombias_Backyard
+		#icon = GFX_focus_CLB_Colombias_Backyard
+		icon = GFX_goal_anschluss
+		x = -11
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = CLB_Reaffirm_Narroism
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#支持莫拉达克军方
+	focus = {
+		id = CLB_Support_Moratak_Military
+		#icon = GFX_focus_CLB_Support_Moratak_Military
+		icon = GFX_goal_generic_forceful_treaty
+		x = -12
+		y = 3
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Democratic_Consensus_with_Moratak
+		}
+		prerequisite = {
+			focus = CLB_Colombias_Backyard
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#与莫拉达克的民主共识
+	focus = {
+		id = CLB_Democratic_Consensus_with_Moratak
+		#icon = GFX_focus_CLB_Democratic_Consensus_with_Moratak
+		icon = GFX_focus_generic_world_peace
+		x = -10
+		y = 3
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Support_Moratak_Military
+		}
+		prerequisite = {
+			focus = CLB_Colombias_Backyard
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#清除克丘亚极端主义
+	focus = {
+		id = CLB_Eradicate_Quechua_Extremism
+		#icon = GFX_focus_CLB_Eradicate_Quechua_Extremism
+		icon = GFX_goal_generic_military_sphere
+		x = -12
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_Support_Moratak_Military
+			focus = CLB_Democratic_Consensus_with_Moratak
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#警惕瓦伊凡反哥伦比亚思潮
+	focus = {
+		id = CLB_Beware_of_Wyvern_Anti_Colombian_Sentiment
+		#icon = GFX_focus_CLB_Beware_of_Wyvern_Anti_Colombian_Sentiment
+		icon = GFX_goal_generic_territory_or_war
+		x = -10
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_Support_Moratak_Military
+			focus = CLB_Democratic_Consensus_with_Moratak
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#西陆经济共同体
+	focus = {
+		id = CLB_Westland_Economic_Community
+		#icon = GFX_focus_CLB_Westland_Economic_Community
+		icon = GFX_focus_generic_military_industry
+		x = -11
+		y = 5
+		cost = 5
+		prerequisite = {
+			focus = CLB_Eradicate_Quechua_Extremism
+		}
+		prerequisite = {
+			focus = CLB_Beware_of_Wyvern_Anti_Colombian_Sentiment
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#玻利瓦尔纷争
+	focus = {
+		id = CLB_Bolivar_Dispute
+		#icon = GFX_focus_CLB_Bolivar_Dispute
+		icon = GFX_focus_generic_strike_at_democracy1
+		x = -16
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus = CLB_Our_Stage_on_Terra
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#提供情报支持
+	focus = {
+		id = CLB_Provide_Intelligence_Support
+		#icon = GFX_focus_CLB_Provide_Intelligence_Support
+		icon = GFX_focus_generic_secret_agent_operative
+		x = -18
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = CLB_Bolivar_Dispute
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#扩大军事存在
+	focus = {
+		id = CLB_Expand_Military_Presence
+		#icon = GFX_focus_CLB_Expand_Military_Presence
+		icon = GFX_focus_generic_jungle_training
+		x = -16
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = CLB_Bolivar_Dispute
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#批准扩大空袭
+	focus = {
+		id = CLB_Approve_Expanded_Air_Strikes
+		#icon = GFX_focus_CLB_Approve_Expanded_Air_Strikes
+		icon = GFX_focus_generic_long_range_aircraft
+		x = -14
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = CLB_Bolivar_Dispute
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#等待骰子落下……
+	focus = {
+		id = CLB_Wait_for_the_Dice_to_Fall
+		#icon = GFX_focus_CLB_Wait_for_the_Dice_to_Fall
+		icon = GFX_focus_generic_provoke_border_clashes
+		x = -16
+		y = 3
+		cost = 5
+		prerequisite = {
+			focus = CLB_Provide_Intelligence_Support
+		}
+		prerequisite = {
+			focus = CLB_Expand_Military_Presence
+		}
+		prerequisite = {
+			focus = CLB_Approve_Expanded_Air_Strikes
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#维持现有边界
+	focus = {
+		id = CLB_Maintain_Existing_Borders
+		#icon = GFX_focus_CLB_Maintain_Existing_Borders
+		icon = GFX_goal_generic_attack_allies
+		x = -18
+		y = 4
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Agreement_with_Local_Forces
+			focus = CLB_Commitment_to_Continue_Supporting_Enterprises
+		}
+		prerequisite = {
+			focus = CLB_Wait_for_the_Dice_to_Fall
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#与本土势力的协议
+	focus = {
+		id = CLB_Agreement_with_Local_Forces
+		#icon = GFX_focus_CLB_Agreement_with_Local_Forces
+		icon = GFX_goal_molotov_ribbentrop_pact
+		x = -16
+		y = 4
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Commitment_to_Continue_Supporting_Enterprises
+			focus = CLB_Maintain_Existing_Borders
+		}
+		prerequisite = {
+			focus = CLB_Wait_for_the_Dice_to_Fall
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#承诺继续支持企业
+	focus = {
+		id = CLB_Commitment_to_Continue_Supporting_Enterprises
+		#icon = GFX_focus_CLB_Commitment_to_Continue_Supporting_Enterprises
+		icon = GFX_focus_generic_subjugation
+		x = -14
+		y = 4
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Agreement_with_Local_Forces
+			focus = CLB_Maintain_Existing_Borders
+		}
+		prerequisite = {
+			focus = CLB_Wait_for_the_Dice_to_Fall
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+	
+	#扩张对外情报部门
+	focus = {
+		id = CLB_Expand_External_Intelligence_Department
+		#icon = GFX_focus_CLB_Expand_External_Intelligence_Department
+		icon = GFX_focus_generic_secret_service_agency
+		x = 0
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus = CLB_Our_Stage_on_Terra
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#“D”作战分遣队
+	focus = {
+		id = CLB_D_Combat_Detachment
+		#icon = GFX_focus_CLB_D_Combat_Detachment
+		icon = GFX_focus_AST_call_that_a_knife
+		x = -1
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = CLB_Expand_External_Intelligence_Department
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+
+		completion_reward = {
+			add_potential_special_forces_tree = yes
+		}
+	}
+
+	#AI辅助情报分析
+	focus = {
+		id = CLB_AI_Assisted_Intelligence_Analysis
+		#icon = GFX_focus_CLB_AI_Assisted_Intelligence_Analysis
+		icon = GFX_goal_tfv_generic_tech_sharing
+		x = 1
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = CLB_Expand_External_Intelligence_Department
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#茨瓦纳战争
+	focus = {
+		id = CLB_Tswana_War
+		#icon = GFX_focus_CLB_Tswana_War
+		icon = GFX_focus_GER_support_the_proletarian_uprising
+		x = -5
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_Desert_Storm
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#砂乌第-准则源石公司
+	focus = {
+		id = CLB_Sawudi_Criterion_Source_Stone_Company
+		#icon = GFX_focus_CLB_Sawudi_Criterion_Source_Stone_Company
+		icon = GFX_focus_generic_industrialists
+		x = -3
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_Desert_Storm
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#深入阿卡胡拉
+	focus = {
+		id = CLB_Deep_into_Akahura
+		#icon = GFX_focus_CLB_Deep_into_Akahura
+		icon = GFX_focus_generic_jungle_troops
+		x = -1
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_Desert_Storm
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#阿加门与新阿加门
+	focus = {
+		id = CLB_Agamen_and_New_Agamen
+		#icon = GFX_focus_CLB_Agamen_and_New_Agamen
+		icon = GFX_focus_GRE_reviving_the_double_headed_eagle
+		x = -8
+		y = 5
+		cost = 5
+		prerequisite = {
+			focus = CLB_Disrupt_Anatolia_Order
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#多索雷斯的地位
+	focus = {
+		id = CLB_Status_of_Dosores
+		#icon = GFX_focus_CLB_Status_of_Dosores
+		icon = GFX_focus_PRC_urbanization
+		x = -8
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = CLB_Reaffirm_Narroism
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#沙尔-阿加德之隳
+	focus = {
+		id = CLB_Ruin_of_Shal_Agad
+		#icon = GFX_focus_CLB_Ruin_of_Shal_Agad
+		icon = GFX_focus_CZE_german_puppet
+		x = -5
+		y = 6
+		cost = 5
+		prerequisite = {
+			focus = CLB_Sunk_Cost
+			focus = CLB_Exploit_Victory
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#沙漠风暴
+	focus = {
+		id = CLB_Desert_Storm
+		#icon = GFX_focus_CLB_Desert_Storm
+		icon = GFX_focus_generic_desert_training
+		x = -3
+		y = 3
+		cost = 5
+		prerequisite = {
+			focus = CLB_Sargon_Adventure
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#沉没成本
+	focus = {
+		id = CLB_Sunk_Cost
+		#icon = GFX_focus_CLB_Sunk_Cost
+		icon = GFX_focus_generic_strike_at_democracy2
+		x = -6
+		y = 5
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Exploit_Victory
+		}
+		prerequisite = {
+			focus = CLB_Tswana_War
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#接管伊比利亚势力范围
+	focus = {
+		id = CLB_Take_Over_Iberian_Sphere_of_Influence
+		#icon = GFX_focus_CLB_Take_Over_Iberian_Sphere_of_Influence
+		icon = GFX_focus_generic_annex_country_2
+		x = -2
+		y = 5
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Intervene_in_Iberian_Situation
+			focus = CLB_Focus_on_Poliernia_Region
+		}
+		prerequisite = {
+			focus = CLB_Deep_into_Akahura
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#乘胜追击
+	focus = {
+		id = CLB_Exploit_Victory
+		#icon = GFX_focus_CLB_Exploit_Victory
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		x = -4
+		y = 5
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Sunk_Cost
+		}
+		prerequisite = {
+			focus = CLB_Tswana_War
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#介入伊比利亚局势
+	focus = {
+		id = CLB_Intervene_in_Iberian_Situation
+		#icon = GFX_focus_CLB_Intervene_in_Iberian_Situation
+		icon = GFX_focus_generic_full_social_mobilization
+		x = 0
+		y = 5
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Take_Over_Iberian_Sphere_of_Influence
+			focus = CLB_Focus_on_Poliernia_Region
+		}
+		prerequisite = {
+			focus = CLB_Deep_into_Akahura
+		}
+		prerequisite = {
+			focus = CLB_Survey_Iberian_Coast
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#确保运河领代表忠诚
+	focus = {
+		id = CLB_Ensure_Loyalty_of_Canal_Zone_Representatives
+		#icon = GFX_focus_CLB_Ensure_Loyalty_of_Canal_Zone_Representatives
+		icon = GFX_focus_generic_self_management
+		x = -5
+		y = 3
+		cost = 5
+		prerequisite = {
+			focus = CLB_Sargon_Adventure
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#破坏安纳托利亚秩序
+	focus = {
+		id = CLB_Disrupt_Anatolia_Order
+		#icon = GFX_focus_CLB_Disrupt_Anatolia_Order
+		icon = GFX_focus_FIN_motti_tactics
+		x = -8
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_Support_Minos_Demands
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#萨尔贡冒险
+	focus = {
+		id = CLB_Sargon_Adventure
+		#icon = GFX_focus_CLB_Sargon_Adventure
+		icon = GFX_goal_generic_occupy_states_ongoing_war
+		x = -5
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = CLB_Reaffirm_Narroism
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#支持米诺斯诉求
+	focus = {
+		id = CLB_Support_Minos_Demands
+		#icon = GFX_focus_CLB_Support_Minos_Demands
+		icon = GFX_focus_BRA_reach_out_to_military_dem
+		x = -8
+		y = 3
+		cost = 5
+		prerequisite = {
+			focus = CLB_Sargon_Adventure
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#自由灯塔
+	focus = {
+		id = CLB_Freedom_Lighthouse
+		#icon = GFX_focus_CLB_Freedom_Lighthouse
+		icon = GFX_goal_generic_propaganda
+		x = 6
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus = CLB_Our_Stage_on_Terra
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#拆解中陆堡垒
+	focus = {
+		id = CLB_Dismantle_Midland_Fortress
+		#icon = GFX_focus_CLB_Dismantle_Midland_Fortress
+		icon = GFX_focus_AUS_disregard_the_treaties
+		x = 5
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = CLB_Freedom_Lighthouse
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#潘诺尼亚豪赌
+	focus = {
+		id = CLB_Pannonia_Gamble
+		#icon = GFX_focus_CLB_Pannonia_Gamble
+		icon = GFX_focus_generic_election
+		x = 3
+		y = 3
+		cost = 5
+		prerequisite = {
+			focus = CLB_Dismantle_Midland_Fortress
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#勘测伊比利亚海岸
+	focus = {
+		id = CLB_Survey_Iberian_Coast
+		#icon = GFX_focus_CLB_Survey_Iberian_Coast
+		icon = GFX_goal_generic_position_armies
+		x = 1
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_Pannonia_Gamble
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#专注波利尔尼亚地区
+	focus = {
+		id = CLB_Focus_on_Poliernia_Region
+		#icon = GFX_focus_CLB_Focus_on_Poliernia_Region
+		icon = GFX_focus_generic_support_the_left_right
+		x = 2
+		y = 5
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Intervene_in_Iberian_Situation
+			focus = CLB_Take_Over_Iberian_Sphere_of_Influence
+		}
+		prerequisite = {
+			focus = CLB_Survey_Iberian_Coast
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#援助奥布雷诺威切
+	focus = {
+		id = CLB_Aid_Obrenoviche
+		#icon = GFX_focus_CLB_Aid_Obrenoviche
+		icon = GFX_focus_BRA_ethical_internationalism
+		x = 4
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_Pannonia_Gamble
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#叙拉古家族纽带
+	focus = {
+		id = CLB_Syracuse_Family_Ties
+		#icon = GFX_focus_CLB_Syracuse_Family_Ties
+		icon = GFX_focus_AFG_telegraph
+		x = 4
+		y = 5
+		cost = 5
+		prerequisite = {
+			focus = CLB_Aid_Obrenoviche
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#雷姆必拓跨大陆伙伴关系
+	focus = {
+		id = CLB_Colombia_RIM_Billiton_Cross_Continental_Partnership
+		#icon = GFX_goal_generic_intelligence_exchange
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 5
+		y = 3
+		cost = 5
+		prerequisite = {
+			focus = CLB_Dismantle_Midland_Fortress
+		}
+		prerequisite = {
+			focus = CLB_Counter_Ursus_Threat
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#对抗乌萨斯威胁
+	focus = {
+		id = CLB_Counter_Ursus_Threat
+		#icon = GFX_focus_CLB_Counter_Ursus_Threat
+		icon = GFX_focus_eng_expose_the_belly_of_the_bear
+		x = 8
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = CLB_Freedom_Lighthouse
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#要求阿卡迪亚承担义务
+	focus = {
+		id = CLB_Demand_Arcadia_Assume_Obligations
+		#icon = GFX_focus_CLB_Demand_Arcadia_Assume_Obligations
+		icon = GFX_goal_generic_military_deal
+		x = 8
+		y = 3
+		cost = 5
+		prerequisite = {
+			focus = CLB_Counter_Ursus_Threat
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#雪原的隐者
+	focus = {
+		id = CLB_Hermit_of_the_Snowfield
+		#icon = GFX_focus_CLB_Hermit_of_the_Snowfield
+		icon = GFX_focus_FIN_utilize_the_sami
+		x = 7
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_Demand_Arcadia_Assume_Obligations
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#暴政前线的骑士
+	focus = {
+		id = CLB_Knight_on_the_Frontline_of_Tyranny
+		#icon = GFX_focus_CLB_Knight_on_the_Frontline_of_Tyranny
+		icon = GFX_focus_POL_expand_polish_intelligence
+		x = 9
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_Demand_Arcadia_Assume_Obligations
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#我们在商业飞地的利益
+	focus = {
+		id = CLB_Our_Interests_in_the_Commercial_Enclave
+		#icon = GFX_focus_CLB_Our_Interests_in_the_Commercial_Enclave
+		icon = GFX_goal_generic_positive_trade_relations
+		x = 6
+		y = 5
+		cost = 5
+		prerequisite = {
+			focus = CLB_Hermit_of_the_Snowfield
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#联络东达利亚军阀
+	focus = {
+		id = CLB_Contact_Tundra_Warlords
+		#icon = GFX_focus_CLB_Contact_Tundra_Warlords
+		icon = GFX_focus_generic_phone
+		x = 8
+		y = 5
+		cost = 5
+		prerequisite = {
+			focus = CLB_Hermit_of_the_Snowfield
+		}
+		prerequisite = {
+			focus = CLB_Knight_on_the_Frontline_of_Tyranny
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#乌萨斯民主破晓
+	focus = {
+		id = CLB_Ursus_Democracy_Dawn
+		#icon = GFX_focus_CLB_Ursus_Democracy_Dawn
+		icon = GFX_focus_generic_social_democracy
+		x = 7
+		y = 6
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Dismember_the_Behemoth
+		}
+		prerequisite = {
+			focus = CLB_Contact_Tundra_Warlords
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#肢解巨兽
+	focus = {
+		id = CLB_Dismember_the_Behemoth
+		#icon = GFX_focus_CLB_Dismember_the_Behemoth
+		icon = GFX_focus_SOV_the_defense_of_moscow
+		x = 9
+		y = 6
+		cost = 5
+		mutually_exclusive = {
+			focus = CLB_Ursus_Democracy_Dawn
+		}
+		prerequisite = {
+			focus = CLB_Contact_Tundra_Warlords
+		}
+		relative_position_id = CLB_Our_Stage_on_Terra
+	}
+
+	#维多利亚崩塌
+	focus = {
+		id = CLB_Victoria_Collapse
+		#icon = GFX_focus_CLB_Victoria_Collapse
+		icon = GFX_focus_RAJ_a_private_military
+		x = 15
+		y = 1
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Our_Stage_on_Terra
+		}
+	}
+
+	#重申对汐斯塔市长的支持
+	focus = {
+		id = CLB_Reaffirm_Support_for_Mayor_of_Siesta
+		#icon = GFX_focus_CLB_Reaffirm_Support_for_Mayor_of_Siesta
+		icon = GFX_focus_ARG_defense_and_democracy
+		x = 11
+		y = 2
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Victoria_Collapse
+		}
+	}
+
+	#接管萨尔贡大坝
+	focus = {
+		id = CLB_Take_Over_Sargon_Dam
+		#icon = GFX_focus_CLB_Take_Over_Sargon_Dam
+		icon = GFX_focus_PRC_construct_the_banqiao_dam
+		x = 11
+		y = 3
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Reaffirm_Support_for_Mayor_of_Siesta
+		}
+	}
+
+	#联络高卢复国者
+	focus = {
+		id = CLB_Contact_Gaul_Restorationists
+		#icon = GFX_focus_CLB_Contact_Gaul_Restorationists
+		icon = GFX_focus_focus_fra_national_resistance_council
+		x = 14
+		y = 2
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Victoria_Collapse
+		}
+	}
+
+	#高卢遗民返乡
+	focus = {
+		id = CLB_Gaul_Exiles_Return_Home
+		#icon = GFX_focus_CLB_Gaul_Exiles_Return_Home
+		icon = GFX_focus_generic_immigration
+		x = 13
+		y = 3
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Contact_Gaul_Restorationists
+		}
+	}
+
+	#派遣特工渗透
+	focus = {
+		id = CLB_Deploy_Agents_to_Infiltrate
+		#icon = GFX_focus_CLB_Deploy_Agents_to_Infiltrate
+		icon = GFX_focus_generic_vatican_agents
+		x = 15
+		y = 3
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Contact_Gaul_Restorationists
+		}
+	}
+
+	#高卢租借法案
+	focus = {
+		id = CLB_Gaul_Lend_Lease_Act
+		#icon = GFX_focus_CLB_Gaul_Lend_Lease_Act
+		icon = GFX_focus_AFG_scavenging
+		x = 14
+		y = 4
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Gaul_Exiles_Return_Home
+		}
+		prerequisite = {
+			focus = CLB_Deploy_Agents_to_Infiltrate
+		}
+	}
+
+	#利用卡西米尔通道
+	focus = {
+		id = CLB_Utilize_Kazimierz_Corridor
+		#icon = GFX_focus_CLB_Utilize_Kazimierz_Corridor
+		icon = GFX_focus_POL_warsaw_main_station
+		x = 5
+		y = 4
+		cost = 5
+		relative_position_id = CLB_Freedom_Lighthouse
+		prerequisite = {
+			focus = CLB_Knight_on_the_Frontline_of_Tyranny
+			focus = CLB_Gaul_Lend_Lease_Act
+		}
+	}
+
+	#殊途
+	focus = {
+		id = CLB_Divergent_Paths
+		#icon = GFX_focus_CLB_Divergent_Paths
+		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
+		x = 5
+		y = 5
+		cost = 5
+		relative_position_id = CLB_Freedom_Lighthouse
+		mutually_exclusive = {
+			focus = CLB_Sixty_Year_Bond
+		}
+		prerequisite = {
+			focus = CLB_Utilize_Kazimierz_Corridor
+		}
+	}
+
+	#应对莱塔尼亚影响
+	focus = {
+		id = CLB_Counter_Leithania_Influence
+		#icon = GFX_focus_CLB_Counter_Leithania_Influence
+		icon = GFX_focus_generic_blue_flags
+		x = 13
+		y = 5
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		mutually_exclusive = {
+			focus = CLB_Beware_of_Gaul_Radicalization
+		}
+		prerequisite = {
+			focus = CLB_Gaul_Lend_Lease_Act
+		}
+	}
+
+	#警惕高卢激进化
+	focus = {
+		id = CLB_Beware_of_Gaul_Radicalization
+		#icon = GFX_focus_CLB_Beware_of_Gaul_Radicalization
+		icon = GFX_focus_generic_anti_fascist_diplomacy
+		x = 15
+		y = 5
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		mutually_exclusive = {
+			focus = CLB_Counter_Leithania_Influence
+		}
+		prerequisite = {
+			focus = CLB_Gaul_Lend_Lease_Act
+		}
+	}
+
+	#六十载羁绊
+	focus = {
+		id = CLB_Sixty_Year_Bond
+		#icon = GFX_focus_CLB_Sixty_Year_Bond
+		icon = GFX_focus_ARG_banco_central_de_la_republica_argentina
+		x = 8
+		y = 5
+		cost = 5
+		relative_position_id = CLB_Freedom_Lighthouse
+		mutually_exclusive = {
+			focus = CLB_Divergent_Paths
+		}
+		prerequisite = {
+			focus = CLB_Beware_of_Gaul_Radicalization
+			focus = CLB_Counter_Leithania_Influence
+		}
+	}
+
+	#寻找潜在盟友
+	focus = {
+		id = CLB_Search_for_Potential_Allies
+		#icon = GFX_focus_CLB_Search_for_Potential_Allies
+		icon = GFX_goal_generic_major_alliance
+		x = 18
+		y = 2
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Victoria_Collapse
+		}
+	}
+
+	#塔拉共和派
+	focus = {
+		id = CLB_Tara_Republicans
+		#icon = GFX_focus_CLB_Tara_Republicans
+		icon = GFX_focus_generic_treaty
+		x = 17
+		y = 3
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		mutually_exclusive = {
+			focus = CLB_Gaeland_Independence_Movement
+		}
+		prerequisite = {
+			focus = CLB_Search_for_Potential_Allies
+		}
+	}
+	
+	#盖尔兰独立运动
+	focus = {
+		id = CLB_Gaeland_Independence_Movement
+		#icon = GFX_focus_CLB_Gaeland_Independence_Movement
+		icon = GFX_focus_generic_workers
+		x = 19
+		y = 3
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		mutually_exclusive = {
+			focus = CLB_Tara_Republicans
+		}
+		prerequisite = {
+			focus = CLB_Search_for_Potential_Allies
+		}
+	}
+
+	#塔拉裔走私渠道
+	focus = {
+		id = CLB_Tara_Smuggling_Channels
+		#icon = GFX_focus_CLB_Tara_Smuggling_Channels
+		icon = GFX_focus_generic_turning_a_blind_eye
+		x = 17
+		y = 4
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Tara_Republicans
+		}
+	}
+
+	#跨越荒原的运输队
+	focus = {
+		id = CLB_Convoy_Across_the_Wasteland
+		#icon = GFX_focus_CLB_Convoy_Across_the_Wasteland
+		icon = GFX_focus_generic_supply_line
+		x = 19
+		y = 4
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Gaeland_Independence_Movement
+		}
+	}
+
+	#制造既定事实
+	focus = {
+		id = CLB_Create_Fait_Accompli
+		#icon = GFX_focus_CLB_Create_Fait_Accompli
+		icon = GFX_focus_BRA_rio_protocol
+		x = 18
+		y = 5
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Tara_Smuggling_Channels
+			focus = CLB_Convoy_Across_the_Wasteland
+		}
+	}
+
+	#顾念旧情
+	focus = {
+		id = CLB_Show_Consideration_for_Old_Ties
+		#icon = GFX_focus_CLB_Show_Consideration_for_Old_Ties
+		icon = GFX_focus_generic_university_2
+		x = 17
+		y = 6
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		mutually_exclusive = {
+			focus = CLB_Tear_Off_the_Mask
+		}
+		prerequisite = {
+			focus = CLB_Create_Fait_Accompli
+		}
+	}
+
+	#撕破假面
+	focus = {
+		id = CLB_Tear_Off_the_Mask
+		#icon = GFX_focus_CLB_Tear_Off_the_Mask
+		icon = GFX_focus_generic_conspiracy
+		x = 19
+		y = 6
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		mutually_exclusive = {
+			focus = CLB_Show_Consideration_for_Old_Ties
+		}
+		prerequisite = {
+			focus = CLB_Create_Fait_Accompli
+		}
+	}
+
+	#后翼弃兵
+	focus = {
+		id = CLB_Queen_s_Gambit
+		#icon = GFX_focus_CLB_Queen_s_Gambit
+		icon = GFX_focus_prc_infiltration
+		x = 15
+		y = 7
+		cost = 5
+		relative_position_id = CLB_Our_Stage_on_Terra
+		prerequisite = {
+			focus = CLB_Divergent_Paths
+			focus = CLB_Sixty_Year_Bond
+		}
+		prerequisite = {
+			focus = CLB_Show_Consideration_for_Old_Ties
+			focus = CLB_Tear_Off_the_Mask
+		}
+	}
+
+	initial_show_position = {
+		focus = CLB_life_11th_year
+	}
+}

@@ -1,0 +1,58 @@
+ideas = {
+	country = {
+		YAN_Mandate_of_heaven = {
+			picture = YAN_Mandate_of_heaven
+
+			modifier = {
+				stability_factor = 0.15
+				production_speed_buildings_factor = -0.2
+
+				# 天命维系国势：抵消每个发展档位自带的月度回落，把开局五维钉在本档
+				agricultural_development_monthly_modifier = 0.08
+				industrial_development_monthly_modifier = 0.16
+				educational_development_monthly_modifier = 0.08
+				administrative_development_monthly_modifier = 0.08
+				poverty_development_monthly_modifier = 0.16
+			}
+		}
+
+		YAN_Crossroad = {
+			picture = YAN_Crossroad
+			
+			modifier = {
+				consumer_goods_factor = 0.2
+				line_change_production_efficiency_factor = -0.15
+				production_factory_efficiency_gain_factor = -0.15
+			}
+
+			on_add = {
+				set_temp_variable = { infected_modifier_add_num = 0.05 }
+				Infected_Modifier_add = yes
+			}
+
+			on_remove = {
+				set_temp_variable = { infected_modifier_add_num = -0.05 }
+				Infected_Modifier_add = yes
+			}
+		}
+
+		YAN_Legacy_of_the_female_emperor_reforms = {
+			picture = YAN_Legacy_of_the_female_emperor_reforms
+
+			modifier = {
+				political_power_factor = 0.1
+				political_advisor_cost_factor = -0.3
+			}
+		}
+
+		YAN_Sui_signs = {
+			picture = YAN_Sui_signs
+
+			modifier = {
+				stability_factor = -0.1
+				research_speed_factor = -0.05
+				yan_sui_awakening_monthly_tt = 1
+			}
+		}
+	}
+}

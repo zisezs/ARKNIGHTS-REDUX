@@ -1,0 +1,632 @@
+######################
+## 乌萨斯帝国 · 经济国策树簇（共享国策）
+## 由 common/national_focus/URS.txt 的 URS_political_reform 以 shared_focus 引用并入主树
+## 坐标区 y = 28..34（政治树 y = 0..18，军事树 y = 20..26，三棵树同屏）
+## 生成器：docs/_urs_eco_build.py（改数据表重跑，勿手改产物）
+######################
+#
+# 25 个国策 = 总领 1「老爷，我们要面包！」+ 四条主线各 6：
+#   经济法案改革    x = -9    冬季资源调配紧急法 → 源石配给制 → 贵族免税权废除
+#                            → 金切尔文改革 → 公民大会经济权 → 帝国财政重整
+#   科研与教育      x = -3    第三局技术下放 → 圣骏堡大学改革 → 矿工技术培训
+#                            → 奥卡研究 → 石棺能源研究 → 战争术师学院
+#   地方与中央矛盾  x = +3    卡托加区解封 → 泽尔格勒自治权 → 布列斯克女大公
+#                            → 远北矿区控制 → 集团军经济剥离 → 地方贵族协商
+#   民用工业建设    x = +9    能源转换器推广 → 卡托加区复产 → 泽尔格勒明日之城
+#                            → 燃料工厂建设 → 居民取暖保障 → 消费品生产
+#
+#   四条主线自总领 (0,26) 并列展开，行内 y = 27..32；左右关于 x=0 镜像。
+#
+# 【跨线联动】三条支线不只吃行内前置，还可由别线解锁（prerequisite 块内并列＝OR）：
+#   奥卡研究      ← 矿工技术培训 或 源石配给制（配给制暴露矿脉枯竭）
+#   集团军经济剥离 ← 远北矿区控制 或 源石配给制（囤积物资被查实）
+#   卡托加区复产  ← 能源转换器推广 或 卡托加区解封
+#
+# 【共享民族精神】URS_good_life「乌萨斯人的美好生活！」
+#   四条主线的全部零碎加成都塞进这一个动态修正（common/dynamic_modifiers/
+#   URS_dynamic_modifiers.txt），逐条 add_to_variable 原地成长，共 15 条修饰符。
+#   与政治树「乌萨斯还不能死！」、军事树「乌萨斯军团浴火重生！」是三个独立容器。
+#
+# 【跨树计数器】
+#   URS_empire_army_loyalty（帝国军忠诚度 0..100）—— 已被军事树接活，
+#   决议面板实时显示档位。经济树「削减第四集团军／剥离集团军经济」会压低它，
+#   「矿工技术培训」会略微拉高；起点同样带 has_variable 保护地初始化。
+#   URS_demonic_corruption（邪魔污染度）—— 政治树累计的存量，
+#   石棺能源研究与奥卡研究各加 0.05，作为「烧感染者的命换电」的代价。
+#
+# 【与军事树的国策重名】经济树三条国策与军事树「军事工业改革」线同名：
+#   冬季资源调配紧急法 / 源石配给制 / 第三局技术下放。
+#   两者 id 不同（URS_eco_* vs URS_mil_*），可共存，但同屏会出现同名节点；
+#   如需彻底区分，建议把军事树那三条改成纯军械口径（如「军械产能调度」）。
+#
+######################
+
+shared_focus = { #1. 老爷，我们要面包！
+	id = URS_bread_demand
+	icon = GFX_focus_URS_bread_demand
+	x = 0
+	y = 28
+	cost = 3
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_dynamic_modifier = { modifier = URS_good_life }
+		if = {
+			limit = { NOT = { has_variable = URS_empire_army_loyalty } }
+			set_variable = { URS_empire_army_loyalty = 40 }
+		}
+		custom_effect_tooltip = URS_tt_eco_loyalty_init
+		if = {
+			limit = { NOT = { has_variable = URS_demonic_corruption } }
+			set_variable = { URS_demonic_corruption = 0 }
+		}
+		add_political_power = 25
+		add_to_variable = { var = URS_good_life_stability_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_stability_var_m5
+		custom_effect_tooltip = URS_tt_eco_panel
+	}
+}
+
+shared_focus = { #2. 冬季资源调配紧急法
+	id = URS_eco_winter_act
+	icon = GFX_focus_URS_eco_winter_act
+	x = -9
+	y = 29
+	cost = 4
+	prerequisite = {
+		focus = URS_bread_demand
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_industry_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_industry_var_p5
+		add_to_variable = { var = URS_good_life_consumer_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_consumer_var_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = -5 }
+		custom_effect_tooltip = URS_tt_eco_empire_army_loyalty_m5
+	}
+}
+
+shared_focus = { #3. 源石配给制
+	id = URS_eco_originium_ration
+	icon = GFX_focus_URS_eco_originium_ration
+	x = -9
+	y = 30
+	cost = 4
+	prerequisite = {
+		focus = URS_eco_winter_act
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_industry_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_industry_var_p5
+		add_to_variable = { var = URS_good_life_consumer_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_consumer_var_p5
+		add_to_variable = { var = URS_good_life_stability_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_stability_var_m5
+	}
+}
+
+shared_focus = { #4. 贵族免税权废除
+	id = URS_eco_noble_tax_exempt
+	icon = GFX_focus_URS_eco_noble_tax_exempt
+	x = -9
+	y = 31
+	cost = 5
+	prerequisite = {
+		focus = URS_eco_originium_ration
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_pp_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_pp_var_p5
+		add_to_variable = { var = URS_good_life_cost_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_cost_var_m5
+		add_to_variable = { var = URS_empire_army_loyalty value = -5 }
+		custom_effect_tooltip = URS_tt_eco_empire_army_loyalty_m5
+	}
+}
+
+shared_focus = { #5. 金切尔文改革
+	id = URS_eco_currency_reform
+	icon = GFX_focus_URS_eco_currency_reform
+	x = -9
+	y = 32
+	cost = 5
+	prerequisite = {
+		focus = URS_eco_noble_tax_exempt
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_pp_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_pp_var_p5
+		add_to_variable = { var = URS_good_life_opinion_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_opinion_var_p5
+		add_to_variable = { var = URS_good_life_cost_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_cost_var_m5
+	}
+}
+
+shared_focus = { #6. 公民大会经济权
+	id = URS_eco_assembly_budget
+	icon = GFX_focus_URS_eco_assembly_budget
+	x = -9
+	y = 33
+	cost = 5
+	prerequisite = {
+		focus = URS_eco_currency_reform
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_stability_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_stability_var_p10
+		add_to_variable = { var = URS_good_life_suppress_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_suppress_var_m5
+		add_to_variable = { var = URS_good_life_pp_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_pp_var_p5
+	}
+}
+
+shared_focus = { #7. 帝国财政重整
+	id = URS_eco_treasury_overhaul
+	icon = GFX_focus_URS_eco_treasury_overhaul
+	x = -9
+	y = 34
+	cost = 6
+	prerequisite = {
+		focus = URS_eco_assembly_budget
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_industry_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_industry_var_p5
+		add_to_variable = { var = URS_good_life_build_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_build_var_p10
+	}
+}
+
+shared_focus = { #8. 第三局技术下放
+	id = URS_eco_bureau_tech_transfer
+	icon = GFX_focus_URS_eco_bureau_tech_transfer
+	x = -3
+	y = 29
+	cost = 4
+	prerequisite = {
+		focus = URS_bread_demand
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_research_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_research_var_p10
+		add_to_variable = { var = URS_good_life_eff_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_eff_var_p5
+	}
+}
+
+shared_focus = { #9. 圣骏堡大学改革
+	id = URS_eco_university_reform
+	icon = GFX_focus_URS_eco_university_reform
+	x = -3
+	y = 30
+	cost = 4
+	prerequisite = {
+		focus = URS_eco_bureau_tech_transfer
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_research_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_research_var_p10
+		add_to_variable = { var = URS_good_life_stability_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_stability_var_p5
+	}
+}
+
+shared_focus = { #10. 矿工技术培训
+	id = URS_eco_miner_training
+	icon = GFX_focus_URS_eco_miner_training
+	x = -3
+	y = 31
+	cost = 4
+	prerequisite = {
+		focus = URS_eco_university_reform
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_research_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_research_var_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = 5 }
+		custom_effect_tooltip = URS_tt_eco_empire_army_loyalty_p5
+	}
+}
+
+shared_focus = { #11. 奥卡研究
+	id = URS_eco_oka_research
+	icon = GFX_focus_URS_eco_oka_research
+	x = -3
+	y = 32
+	cost = 5
+	prerequisite = {
+		focus = URS_eco_miner_training
+		focus = URS_eco_originium_ration
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_fuel_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_fuel_var_p10
+		add_to_variable = { var = URS_good_life_fuelgain_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_fuelgain_var_p10
+		add_to_variable = { var = URS_demonic_corruption value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_demonic_corruption_p5
+	}
+}
+
+shared_focus = { #12. 石棺能源研究
+	id = URS_eco_sarcophagus_energy
+	icon = GFX_focus_URS_eco_sarcophagus_energy
+	x = -3
+	y = 33
+	cost = 6
+	prerequisite = {
+		focus = URS_eco_oka_research
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_fuel_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_fuel_var_p5
+		add_to_variable = { var = URS_good_life_industry_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_industry_var_p5
+		add_to_variable = { var = URS_good_life_ws_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_ws_var_p5
+		add_to_variable = { var = URS_demonic_corruption value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_demonic_corruption_p5
+	}
+}
+
+shared_focus = { #13. 战争术师学院
+	id = URS_eco_caster_academy
+	icon = GFX_focus_URS_eco_caster_academy
+	x = -3
+	y = 34
+	cost = 6
+	prerequisite = {
+		focus = URS_eco_sarcophagus_energy
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_ws_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_ws_var_p10
+		add_to_variable = { var = URS_good_life_eff_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_eff_var_p5
+		add_to_variable = { var = URS_good_life_research_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_research_var_p5
+	}
+}
+
+shared_focus = { #14. 卡托加区解封
+	id = URS_eco_katoga_unblocked
+	icon = GFX_focus_URS_eco_katoga_unblocked
+	x = 3
+	y = 29
+	cost = 4
+	prerequisite = {
+		focus = URS_bread_demand
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_industry_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_industry_var_p5
+		add_to_variable = { var = URS_good_life_build_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_build_var_p5
+	}
+}
+
+shared_focus = { #15. 泽尔格勒自治权
+	id = URS_eco_zergrad_autonomy
+	icon = GFX_focus_URS_eco_zergrad_autonomy
+	x = 3
+	y = 30
+	cost = 4
+	prerequisite = {
+		focus = URS_eco_katoga_unblocked
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_suppress_var value = -0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_suppress_var_m10
+		add_to_variable = { var = URS_good_life_pp_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_pp_var_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = -5 }
+		custom_effect_tooltip = URS_tt_eco_empire_army_loyalty_m5
+	}
+}
+
+shared_focus = { #16. 布列斯克女大公
+	id = URS_eco_bresk_duchess
+	icon = GFX_focus_URS_eco_bresk_duchess
+	x = 3
+	y = 31
+	cost = 5
+	prerequisite = {
+		focus = URS_eco_zergrad_autonomy
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_pp_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_pp_var_p5
+		add_to_variable = { var = URS_good_life_opinion_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_opinion_var_p5
+	}
+}
+
+shared_focus = { #17. 远北矿区控制
+	id = URS_eco_farnorth_control
+	icon = GFX_focus_URS_eco_farnorth_control
+	x = 3
+	y = 32
+	cost = 5
+	prerequisite = {
+		focus = URS_eco_bresk_duchess
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_industry_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_industry_var_p5
+		add_to_variable = { var = URS_good_life_compliance_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_compliance_var_p5
+		add_to_variable = { var = URS_good_life_stability_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_stability_var_m5
+	}
+}
+
+shared_focus = { #18. 集团军经济剥离
+	id = URS_eco_army_economy_strip
+	icon = GFX_focus_URS_eco_army_economy_strip
+	x = 3
+	y = 33
+	cost = 6
+	prerequisite = {
+		focus = URS_eco_farnorth_control
+		focus = URS_eco_originium_ration
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_industry_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_industry_var_p5
+		add_to_variable = { var = URS_good_life_build_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_build_var_p5
+		add_to_variable = { var = URS_empire_army_loyalty value = -5 }
+		custom_effect_tooltip = URS_tt_eco_empire_army_loyalty_m5
+	}
+}
+
+shared_focus = { #19. 地方贵族协商
+	id = URS_eco_noble_negotiation
+	icon = GFX_focus_URS_eco_noble_negotiation
+	x = 3
+	y = 34
+	cost = 6
+	prerequisite = {
+		focus = URS_eco_army_economy_strip
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_stability_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_stability_var_p10
+		add_to_variable = { var = URS_good_life_suppress_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_suppress_var_m5
+		add_to_variable = { var = URS_good_life_cost_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_cost_var_m5
+	}
+}
+
+shared_focus = { #20. 能源转换器推广
+	id = URS_eco_energy_converter
+	icon = GFX_focus_URS_eco_energy_converter
+	x = 9
+	y = 29
+	cost = 4
+	prerequisite = {
+		focus = URS_bread_demand
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_consumer_var value = -0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_consumer_var_m10
+		add_to_variable = { var = URS_good_life_build_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_build_var_p5
+	}
+}
+
+shared_focus = { #21. 卡托加区复产
+	id = URS_eco_katoga_production
+	icon = GFX_focus_URS_eco_katoga_production
+	x = 9
+	y = 30
+	cost = 4
+	prerequisite = {
+		focus = URS_eco_energy_converter
+		focus = URS_eco_katoga_unblocked
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_industry_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_industry_var_p5
+		add_to_variable = { var = URS_good_life_eff_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_eff_var_p5
+	}
+}
+
+shared_focus = { #22. 泽尔格勒明日之城
+	id = URS_eco_zergrad_city
+	icon = GFX_focus_URS_eco_zergrad_city
+	x = 9
+	y = 31
+	cost = 5
+	prerequisite = {
+		focus = URS_eco_katoga_production
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_consumer_var value = -0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_consumer_var_m10
+		add_to_variable = { var = URS_good_life_stability_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_stability_var_p5
+	}
+}
+
+shared_focus = { #23. 燃料工厂建设
+	id = URS_eco_fuel_plants
+	icon = GFX_focus_URS_eco_fuel_plants
+	x = 9
+	y = 32
+	cost = 5
+	prerequisite = {
+		focus = URS_eco_zergrad_city
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_fuel_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_fuel_var_p10
+		add_to_variable = { var = URS_good_life_consumer_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_consumer_var_m5
+	}
+}
+
+shared_focus = { #24. 居民取暖保障
+	id = URS_eco_heating_relief
+	icon = GFX_focus_URS_eco_heating_relief
+	x = 9
+	y = 33
+	cost = 5
+	prerequisite = {
+		focus = URS_eco_fuel_plants
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_stability_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_stability_var_p5
+		add_to_variable = { var = URS_good_life_consumer_var value = -0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_consumer_var_m5
+		add_to_variable = { var = URS_good_life_pop_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_pop_var_p5
+	}
+}
+
+shared_focus = { #25. 消费品生产
+	id = URS_eco_consumer_goods
+	icon = GFX_focus_URS_eco_consumer_goods
+	x = 9
+	y = 34
+	cost = 6
+	prerequisite = {
+		focus = URS_eco_heating_relief
+	}
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 10
+	}
+
+	completion_reward = {
+		add_to_variable = { var = URS_good_life_consumer_var value = -0.15 }
+		custom_effect_tooltip = URS_tt_eco_good_life_consumer_var_m15
+		add_to_variable = { var = URS_good_life_pop_var value = 0.1 }
+		custom_effect_tooltip = URS_tt_eco_good_life_pop_var_p10
+		add_to_variable = { var = URS_good_life_stability_var value = 0.05 }
+		custom_effect_tooltip = URS_tt_eco_good_life_stability_var_p5
+	}
+}

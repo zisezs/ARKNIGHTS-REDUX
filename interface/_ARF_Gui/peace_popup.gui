@@ -1,0 +1,89 @@
+guiTypes = {
+	containerWindowType = {
+		name = "peace_popup_window"
+		position = { x = 0 y = 0 }
+		size = { width = 564 height = 300 }
+		orientation= center
+		origo = center
+		moveable = yes
+		fade_time = 200
+		fade_type = linear
+		click_to_front = yes
+
+		background = {
+			name = "Background"
+			quadTextureSprite ="GFX_tiled_plain_bg"
+		}
+
+		instantTextBoxType = {
+			name = "title"
+			position = { x = 100 y = 25 }
+			textureFile = ""
+			font = "hoi_36header"
+			borderSize = {x = 0 y = 0}
+			text = "PEACE_POPUP_TITLE"
+			maxWidth = 360
+			maxHeight = 40
+			fixedsize = yes
+			format = centre
+		}
+
+		instantTextBoxType = {
+			name = "description"
+			position = { x = 50 y = 86 }
+			font = "hoi_16mbs"
+			borderSize = {x = 0 y = 0}
+			text = "PEACE_POPUP_DESCRIPTION"
+			maxWidth = 460
+			maxHeight = 72
+			format = centre
+			vertical_alignment = centre
+		}
+
+		instantTextBoxType = {
+			name = "flavor"
+			position = { x = 50 y = 168 }
+			font = "hoi_16mbs"
+			text = "PEACE_POPUP_FLAVOR"
+			maxWidth = 460
+			maxHeight = 72
+			format = centre
+			vertical_alignment = centre
+		}
+		
+		iconType = {
+			name = "flag_1"
+			position = { x = 20 y = 17 }
+			quadTextureSprite = "GFX_player_flag"
+		}
+		# iconType = {
+		# 	name = "flag_1_overlay"
+		# 	position = { x = 18 y = 16 }
+		# 	spriteType = "GFX_flag_overlay_stateview_large"
+		# 	pdx_tooltip = PEACE_POPUP_FLAG1_TT
+		# }
+		
+		iconType = {
+			name = "flag_2"
+			position = { x = 463 y = 17 }
+			quadTextureSprite = "GFX_player_flag"
+		}
+		# iconType = {
+		# 	name = "flag_2_overlay"
+		# 	position = { x = 461 y = 16 }
+		# 	spriteType = "GFX_flag_overlay_stateview_large"
+		# 	pdx_tooltip = PEACE_POPUP_FLAG2_TT
+		# }
+
+		buttonType = {
+			name = "close_button"
+			position = { x=213 y =240}
+			quadTextureSprite ="GFX_sort_button_140x29"
+			buttonText = "PEACE_POPUP_CLOSE"
+			buttonFont = "hoi_16mbs"
+			shortcut = "RETURN"
+			#clicksound = click_ok
+			clicksound = click_default
+		}
+	}
+}

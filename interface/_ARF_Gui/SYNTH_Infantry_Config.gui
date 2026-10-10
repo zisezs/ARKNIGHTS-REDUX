@@ -1,0 +1,750 @@
+### 合成化步兵营 · 编队重组 —— 面板 GUI【步兵营配置界面】
+### 【由 docs/gen_synth_panel_gui.cjs 生成，勿手改】
+### 按钮标签由引擎按 buttonText 本地化键绘制，贴图内不含文字；
+### iconType/buttonType 无 size 键（尺寸=贴图原生尺寸）；后写控件压在先写上面。
+### 槽位徽记 = 每格 6 个单帧 iconType，靠 scripted_gui 的 _visible 触发器只留一个。
+guiTypes = {
+	containerWindowType = {
+		name = "synth_cfg_window"
+		orientation = center
+		origo = center
+		position = { x = 0 y = 0 }
+		size = { width = 1280 height = 720 }
+		moveable = yes
+		clipping = no
+		background = {
+			name = "bg"
+			quadTextureSprite = "GFX_synth_panel_bg"
+		}
+		instantTextBoxType = {
+			name = "synth_cfg_title"
+			position = { x = 40 y = 22 }
+			font = "hoi_18mbs"
+			text = "SYNTH_cfg_title"
+			format = left
+			maxWidth = 900
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_cfg_hint"
+			position = { x = 40 y = 52 }
+			font = "hoi_16mbs"
+			text = "SYNTH_cfg_hint"
+			format = left
+			maxWidth = 1000
+			maxHeight = 24
+		}
+		buttonType = {
+			name = "synth_slot_1"
+			quadTextureSprite = "GFX_synth_slot_btn"
+			position = { x = 120 y = 130 }
+			clicksound = click_default
+			pdx_tooltip = "SYNTH_slot_tt"
+		}
+		iconType = {
+			name = "synth_slot_1_icon_0"
+			spriteType = "GFX_synth_sq_icon_0"
+			position = { x = 152 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_1_icon_1"
+			spriteType = "GFX_synth_sq_icon_1"
+			position = { x = 152 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_1_icon_2"
+			spriteType = "GFX_synth_sq_icon_2"
+			position = { x = 152 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_1_icon_3"
+			spriteType = "GFX_synth_sq_icon_3"
+			position = { x = 152 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_1_icon_4"
+			spriteType = "GFX_synth_sq_icon_4"
+			position = { x = 152 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_1_icon_5"
+			spriteType = "GFX_synth_sq_icon_5"
+			position = { x = 152 y = 144 }
+		}
+		instantTextBoxType = {
+			name = "synth_slot_1_no"
+			position = { x = 130 y = 138 }
+			font = "hoi_16mbs"
+			text = "SYNTH_slot_no_1"
+			format = left
+			maxWidth = 40
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "synth_slot_1_name"
+			position = { x = 128 y = 218 }
+			font = "hoi_16mbs"
+			text = "[GetSynthSlotName1]"
+			format = center
+			maxWidth = 112
+			maxHeight = 22
+		}
+		buttonType = {
+			name = "synth_slot_2"
+			quadTextureSprite = "GFX_synth_slot_btn"
+			position = { x = 300 y = 130 }
+			clicksound = click_default
+			pdx_tooltip = "SYNTH_slot_tt"
+		}
+		iconType = {
+			name = "synth_slot_2_icon_0"
+			spriteType = "GFX_synth_sq_icon_0"
+			position = { x = 332 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_2_icon_1"
+			spriteType = "GFX_synth_sq_icon_1"
+			position = { x = 332 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_2_icon_2"
+			spriteType = "GFX_synth_sq_icon_2"
+			position = { x = 332 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_2_icon_3"
+			spriteType = "GFX_synth_sq_icon_3"
+			position = { x = 332 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_2_icon_4"
+			spriteType = "GFX_synth_sq_icon_4"
+			position = { x = 332 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_2_icon_5"
+			spriteType = "GFX_synth_sq_icon_5"
+			position = { x = 332 y = 144 }
+		}
+		instantTextBoxType = {
+			name = "synth_slot_2_no"
+			position = { x = 310 y = 138 }
+			font = "hoi_16mbs"
+			text = "SYNTH_slot_no_2"
+			format = left
+			maxWidth = 40
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "synth_slot_2_name"
+			position = { x = 308 y = 218 }
+			font = "hoi_16mbs"
+			text = "[GetSynthSlotName2]"
+			format = center
+			maxWidth = 112
+			maxHeight = 22
+		}
+		buttonType = {
+			name = "synth_slot_3"
+			quadTextureSprite = "GFX_synth_slot_btn"
+			position = { x = 480 y = 130 }
+			clicksound = click_default
+			pdx_tooltip = "SYNTH_slot_tt"
+		}
+		iconType = {
+			name = "synth_slot_3_icon_0"
+			spriteType = "GFX_synth_sq_icon_0"
+			position = { x = 512 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_3_icon_1"
+			spriteType = "GFX_synth_sq_icon_1"
+			position = { x = 512 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_3_icon_2"
+			spriteType = "GFX_synth_sq_icon_2"
+			position = { x = 512 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_3_icon_3"
+			spriteType = "GFX_synth_sq_icon_3"
+			position = { x = 512 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_3_icon_4"
+			spriteType = "GFX_synth_sq_icon_4"
+			position = { x = 512 y = 144 }
+		}
+		iconType = {
+			name = "synth_slot_3_icon_5"
+			spriteType = "GFX_synth_sq_icon_5"
+			position = { x = 512 y = 144 }
+		}
+		instantTextBoxType = {
+			name = "synth_slot_3_no"
+			position = { x = 490 y = 138 }
+			font = "hoi_16mbs"
+			text = "SYNTH_slot_no_3"
+			format = left
+			maxWidth = 40
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "synth_slot_3_name"
+			position = { x = 488 y = 218 }
+			font = "hoi_16mbs"
+			text = "[GetSynthSlotName3]"
+			format = center
+			maxWidth = 112
+			maxHeight = 22
+		}
+		buttonType = {
+			name = "synth_slot_4"
+			quadTextureSprite = "GFX_synth_slot_btn"
+			position = { x = 120 y = 300 }
+			clicksound = click_default
+			pdx_tooltip = "SYNTH_slot_tt"
+		}
+		iconType = {
+			name = "synth_slot_4_icon_0"
+			spriteType = "GFX_synth_sq_icon_0"
+			position = { x = 152 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_4_icon_1"
+			spriteType = "GFX_synth_sq_icon_1"
+			position = { x = 152 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_4_icon_2"
+			spriteType = "GFX_synth_sq_icon_2"
+			position = { x = 152 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_4_icon_3"
+			spriteType = "GFX_synth_sq_icon_3"
+			position = { x = 152 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_4_icon_4"
+			spriteType = "GFX_synth_sq_icon_4"
+			position = { x = 152 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_4_icon_5"
+			spriteType = "GFX_synth_sq_icon_5"
+			position = { x = 152 y = 314 }
+		}
+		instantTextBoxType = {
+			name = "synth_slot_4_no"
+			position = { x = 130 y = 308 }
+			font = "hoi_16mbs"
+			text = "SYNTH_slot_no_4"
+			format = left
+			maxWidth = 40
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "synth_slot_4_name"
+			position = { x = 128 y = 388 }
+			font = "hoi_16mbs"
+			text = "[GetSynthSlotName4]"
+			format = center
+			maxWidth = 112
+			maxHeight = 22
+		}
+		buttonType = {
+			name = "synth_slot_5"
+			quadTextureSprite = "GFX_synth_slot_btn"
+			position = { x = 300 y = 300 }
+			clicksound = click_default
+			pdx_tooltip = "SYNTH_slot_tt"
+		}
+		iconType = {
+			name = "synth_slot_5_icon_0"
+			spriteType = "GFX_synth_sq_icon_0"
+			position = { x = 332 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_5_icon_1"
+			spriteType = "GFX_synth_sq_icon_1"
+			position = { x = 332 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_5_icon_2"
+			spriteType = "GFX_synth_sq_icon_2"
+			position = { x = 332 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_5_icon_3"
+			spriteType = "GFX_synth_sq_icon_3"
+			position = { x = 332 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_5_icon_4"
+			spriteType = "GFX_synth_sq_icon_4"
+			position = { x = 332 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_5_icon_5"
+			spriteType = "GFX_synth_sq_icon_5"
+			position = { x = 332 y = 314 }
+		}
+		instantTextBoxType = {
+			name = "synth_slot_5_no"
+			position = { x = 310 y = 308 }
+			font = "hoi_16mbs"
+			text = "SYNTH_slot_no_5"
+			format = left
+			maxWidth = 40
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "synth_slot_5_name"
+			position = { x = 308 y = 388 }
+			font = "hoi_16mbs"
+			text = "[GetSynthSlotName5]"
+			format = center
+			maxWidth = 112
+			maxHeight = 22
+		}
+		buttonType = {
+			name = "synth_slot_6"
+			quadTextureSprite = "GFX_synth_slot_btn"
+			position = { x = 480 y = 300 }
+			clicksound = click_default
+			pdx_tooltip = "SYNTH_slot_tt"
+		}
+		iconType = {
+			name = "synth_slot_6_icon_0"
+			spriteType = "GFX_synth_sq_icon_0"
+			position = { x = 512 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_6_icon_1"
+			spriteType = "GFX_synth_sq_icon_1"
+			position = { x = 512 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_6_icon_2"
+			spriteType = "GFX_synth_sq_icon_2"
+			position = { x = 512 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_6_icon_3"
+			spriteType = "GFX_synth_sq_icon_3"
+			position = { x = 512 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_6_icon_4"
+			spriteType = "GFX_synth_sq_icon_4"
+			position = { x = 512 y = 314 }
+		}
+		iconType = {
+			name = "synth_slot_6_icon_5"
+			spriteType = "GFX_synth_sq_icon_5"
+			position = { x = 512 y = 314 }
+		}
+		instantTextBoxType = {
+			name = "synth_slot_6_no"
+			position = { x = 490 y = 308 }
+			font = "hoi_16mbs"
+			text = "SYNTH_slot_no_6"
+			format = left
+			maxWidth = 40
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "synth_slot_6_name"
+			position = { x = 488 y = 388 }
+			font = "hoi_16mbs"
+			text = "[GetSynthSlotName6]"
+			format = center
+			maxWidth = 112
+			maxHeight = 22
+		}
+		buttonType = {
+			name = "synth_slot_7"
+			quadTextureSprite = "GFX_synth_slot_btn"
+			position = { x = 120 y = 470 }
+			clicksound = click_default
+			pdx_tooltip = "SYNTH_slot_tt"
+		}
+		iconType = {
+			name = "synth_slot_7_icon_0"
+			spriteType = "GFX_synth_sq_icon_0"
+			position = { x = 152 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_7_icon_1"
+			spriteType = "GFX_synth_sq_icon_1"
+			position = { x = 152 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_7_icon_2"
+			spriteType = "GFX_synth_sq_icon_2"
+			position = { x = 152 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_7_icon_3"
+			spriteType = "GFX_synth_sq_icon_3"
+			position = { x = 152 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_7_icon_4"
+			spriteType = "GFX_synth_sq_icon_4"
+			position = { x = 152 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_7_icon_5"
+			spriteType = "GFX_synth_sq_icon_5"
+			position = { x = 152 y = 484 }
+		}
+		instantTextBoxType = {
+			name = "synth_slot_7_no"
+			position = { x = 130 y = 478 }
+			font = "hoi_16mbs"
+			text = "SYNTH_slot_no_7"
+			format = left
+			maxWidth = 40
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "synth_slot_7_name"
+			position = { x = 128 y = 558 }
+			font = "hoi_16mbs"
+			text = "[GetSynthSlotName7]"
+			format = center
+			maxWidth = 112
+			maxHeight = 22
+		}
+		buttonType = {
+			name = "synth_slot_8"
+			quadTextureSprite = "GFX_synth_slot_btn"
+			position = { x = 300 y = 470 }
+			clicksound = click_default
+			pdx_tooltip = "SYNTH_slot_tt"
+		}
+		iconType = {
+			name = "synth_slot_8_icon_0"
+			spriteType = "GFX_synth_sq_icon_0"
+			position = { x = 332 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_8_icon_1"
+			spriteType = "GFX_synth_sq_icon_1"
+			position = { x = 332 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_8_icon_2"
+			spriteType = "GFX_synth_sq_icon_2"
+			position = { x = 332 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_8_icon_3"
+			spriteType = "GFX_synth_sq_icon_3"
+			position = { x = 332 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_8_icon_4"
+			spriteType = "GFX_synth_sq_icon_4"
+			position = { x = 332 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_8_icon_5"
+			spriteType = "GFX_synth_sq_icon_5"
+			position = { x = 332 y = 484 }
+		}
+		instantTextBoxType = {
+			name = "synth_slot_8_no"
+			position = { x = 310 y = 478 }
+			font = "hoi_16mbs"
+			text = "SYNTH_slot_no_8"
+			format = left
+			maxWidth = 40
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "synth_slot_8_name"
+			position = { x = 308 y = 558 }
+			font = "hoi_16mbs"
+			text = "[GetSynthSlotName8]"
+			format = center
+			maxWidth = 112
+			maxHeight = 22
+		}
+		buttonType = {
+			name = "synth_slot_9"
+			quadTextureSprite = "GFX_synth_slot_btn"
+			position = { x = 480 y = 470 }
+			clicksound = click_default
+			pdx_tooltip = "SYNTH_slot_tt"
+		}
+		iconType = {
+			name = "synth_slot_9_icon_0"
+			spriteType = "GFX_synth_sq_icon_0"
+			position = { x = 512 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_9_icon_1"
+			spriteType = "GFX_synth_sq_icon_1"
+			position = { x = 512 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_9_icon_2"
+			spriteType = "GFX_synth_sq_icon_2"
+			position = { x = 512 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_9_icon_3"
+			spriteType = "GFX_synth_sq_icon_3"
+			position = { x = 512 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_9_icon_4"
+			spriteType = "GFX_synth_sq_icon_4"
+			position = { x = 512 y = 484 }
+		}
+		iconType = {
+			name = "synth_slot_9_icon_5"
+			spriteType = "GFX_synth_sq_icon_5"
+			position = { x = 512 y = 484 }
+		}
+		instantTextBoxType = {
+			name = "synth_slot_9_no"
+			position = { x = 490 y = 478 }
+			font = "hoi_16mbs"
+			text = "SYNTH_slot_no_9"
+			format = left
+			maxWidth = 40
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "synth_slot_9_name"
+			position = { x = 488 y = 558 }
+			font = "hoi_16mbs"
+			text = "[GetSynthSlotName9]"
+			format = center
+			maxWidth = 112
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "synth_legend_title"
+			position = { x = 660 y = 120 }
+			font = "hoi_18mbs"
+			text = "SYNTH_legend_title"
+			format = left
+			maxWidth = 400
+			maxHeight = 24
+		}
+		iconType = {
+			name = "synth_leg_icon_0"
+			spriteType = "GFX_synth_sq_icon_0"
+			position = { x = 664 y = 152 }
+		}
+		instantTextBoxType = {
+			name = "synth_leg_name_0"
+			position = { x = 736 y = 154 }
+			font = "hoi_16mbs"
+			text = "synth_sq_name_0"
+			format = left
+			maxWidth = 300
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_leg_eff_0"
+			position = { x = 736 y = 182 }
+			font = "hoi_16mbs"
+			text = "synth_sq_eff_0"
+			format = left
+			maxWidth = 480
+			maxHeight = 24
+		}
+		iconType = {
+			name = "synth_leg_icon_1"
+			spriteType = "GFX_synth_sq_icon_1"
+			position = { x = 664 y = 220 }
+		}
+		instantTextBoxType = {
+			name = "synth_leg_name_1"
+			position = { x = 736 y = 222 }
+			font = "hoi_16mbs"
+			text = "synth_sq_name_1"
+			format = left
+			maxWidth = 300
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_leg_eff_1"
+			position = { x = 736 y = 250 }
+			font = "hoi_16mbs"
+			text = "synth_sq_eff_1"
+			format = left
+			maxWidth = 480
+			maxHeight = 24
+		}
+		iconType = {
+			name = "synth_leg_icon_2"
+			spriteType = "GFX_synth_sq_icon_2"
+			position = { x = 664 y = 288 }
+		}
+		instantTextBoxType = {
+			name = "synth_leg_name_2"
+			position = { x = 736 y = 290 }
+			font = "hoi_16mbs"
+			text = "synth_sq_name_2"
+			format = left
+			maxWidth = 300
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_leg_eff_2"
+			position = { x = 736 y = 318 }
+			font = "hoi_16mbs"
+			text = "synth_sq_eff_2"
+			format = left
+			maxWidth = 480
+			maxHeight = 24
+		}
+		iconType = {
+			name = "synth_leg_icon_3"
+			spriteType = "GFX_synth_sq_icon_3"
+			position = { x = 664 y = 356 }
+		}
+		instantTextBoxType = {
+			name = "synth_leg_name_3"
+			position = { x = 736 y = 358 }
+			font = "hoi_16mbs"
+			text = "synth_sq_name_3"
+			format = left
+			maxWidth = 300
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_leg_eff_3"
+			position = { x = 736 y = 386 }
+			font = "hoi_16mbs"
+			text = "synth_sq_eff_3"
+			format = left
+			maxWidth = 480
+			maxHeight = 24
+		}
+		iconType = {
+			name = "synth_leg_icon_4"
+			spriteType = "GFX_synth_sq_icon_4"
+			position = { x = 664 y = 424 }
+		}
+		instantTextBoxType = {
+			name = "synth_leg_name_4"
+			position = { x = 736 y = 426 }
+			font = "hoi_16mbs"
+			text = "synth_sq_name_4"
+			format = left
+			maxWidth = 300
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_leg_eff_4"
+			position = { x = 736 y = 454 }
+			font = "hoi_16mbs"
+			text = "synth_sq_eff_4"
+			format = left
+			maxWidth = 480
+			maxHeight = 24
+		}
+		iconType = {
+			name = "synth_leg_icon_5"
+			spriteType = "GFX_synth_sq_icon_5"
+			position = { x = 664 y = 492 }
+		}
+		instantTextBoxType = {
+			name = "synth_leg_name_5"
+			position = { x = 736 y = 494 }
+			font = "hoi_16mbs"
+			text = "synth_sq_name_5"
+			format = left
+			maxWidth = 300
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_leg_eff_5"
+			position = { x = 736 y = 522 }
+			font = "hoi_16mbs"
+			text = "synth_sq_eff_5"
+			format = left
+			maxWidth = 480
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_total_title"
+			position = { x = 660 y = 568 }
+			font = "hoi_18mbs"
+			text = "SYNTH_total_title"
+			format = left
+			maxWidth = 400
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_tot_brk"
+			position = { x = 664 y = 602 }
+			font = "hoi_16mbs"
+			text = "SYNTH_tot_brk"
+			format = left
+			maxWidth = 280
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_tot_def"
+			position = { x = 664 y = 628 }
+			font = "hoi_16mbs"
+			text = "SYNTH_tot_def"
+			format = left
+			maxWidth = 280
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_tot_hp"
+			position = { x = 664 y = 654 }
+			font = "hoi_16mbs"
+			text = "SYNTH_tot_hp"
+			format = left
+			maxWidth = 280
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_tot_soft"
+			position = { x = 950 y = 602 }
+			font = "hoi_16mbs"
+			text = "SYNTH_tot_soft"
+			format = left
+			maxWidth = 280
+			maxHeight = 24
+		}
+		instantTextBoxType = {
+			name = "synth_tot_hard"
+			position = { x = 950 y = 628 }
+			font = "hoi_16mbs"
+			text = "SYNTH_tot_hard"
+			format = left
+			maxWidth = 280
+			maxHeight = 24
+		}
+		buttonType = {
+			name = "synth_reset"
+			quadTextureSprite = "GFX_synth_btn_140"
+			buttonText = "SYNTH_btn_reset"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 120 y = 624 }
+		}
+		buttonType = {
+			name = "synth_close"
+			quadTextureSprite = "GFX_synth_btn_140"
+			buttonText = "SYNTH_btn_close"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 280 y = 624 }
+		}
+	}
+}

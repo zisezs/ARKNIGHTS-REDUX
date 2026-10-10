@@ -1,0 +1,2085 @@
+add_namespace = event_reu
+# add_namespace = decision_reu
+# add_namespace = focus_reu
+# add_namespace = test_reu
+
+#国策触发事件
+
+#点燃星火
+country_event = {
+	id = event_reu.1
+	title = event_reu.1.t
+	desc = event_reu.1.d
+	picture = GFX_report_event_REU_Reunion_Camp
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.1.a
+		hidden_effect = {
+			country_event = {
+				id = event_reu.2
+				days = 14
+			}
+		}
+	}
+}
+
+#战士
+country_event = {
+	id = event_reu.2
+	title = event_reu.2.t
+	desc = event_reu.2.d
+	picture = GFX_report_event_REU_Talulah_Alina_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.2.a
+	}
+}
+
+#在那贝加尔湖边
+country_event = {
+	id = event_reu.3
+	title = event_reu.3.t
+	desc = event_reu.3.d
+	picture = GFX_report_event_Generic_Tundra_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.3.a
+		
+		hidden_effect = {
+			country_event = {
+				id = event_reu.4
+				days = 14
+			}
+		}
+	}
+}
+
+#诗，理智与高压气团
+country_event = {
+	id = event_reu.4
+	title = event_reu.4.t
+	desc = event_reu.4.d
+	picture = GFX_report_event_Generic_Snowfield_Twilight
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.4.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_reu.5
+				days = 14
+			}
+		}
+	}
+}
+
+#黑龙的计划
+country_event = {
+	id = event_reu.5
+	title = event_reu.5.t
+	desc = event_reu.5.d
+	picture = GFX_report_event_REU_Talulah_Frostnova
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.5.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_reu.6
+				days = 14
+			}
+		}
+	}
+}
+
+#独处时分
+country_event = {
+	id = event_reu.6
+	title = event_reu.6.t
+	desc = event_reu.6.d
+	picture = GFX_report_event_Generic_Cold_Forest
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.6.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_reu.7
+				days = 7
+			}
+		}
+	}
+}
+
+#人前人后
+country_event = {
+	id = event_reu.7
+	title = event_reu.7.t
+	desc = event_reu.7.d
+	picture = GFX_report_event_REU_Frostnova
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.7.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_reu.8
+				days = 21
+			}
+			country_event = {
+				id = event_reu.9
+				days = 35
+			}
+		}
+	}
+}
+
+#药
+country_event = {
+	id = event_reu.8
+	title = event_reu.8.t
+	desc = event_reu.8.d
+	picture = GFX_report_event_Generic_Surgery_Room
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.8.a
+		add_stability = 0.02
+		set_temp_variable = {
+				spl = -2
+			}
+			REU_supplies_add = yes
+	}
+	option = {
+		name = event_reu.8.b
+		add_stability = -0.02
+	}
+}
+
+#面包与野草
+country_event = {
+	id = event_reu.9
+	title = event_reu.9.t
+	desc = event_reu.9.d
+	picture = GFX_report_event_Generic_Tundra_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.9.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_reu.10
+				days = 7
+			}
+		}
+	}
+}
+
+#今晚吃鱼，明晚也吃鱼
+country_event = {
+	id = event_reu.10
+	title = event_reu.10.t
+	desc = event_reu.10.d
+	picture = GFX_report_event_REU_Fishing_Baikal
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.10.a
+	}
+}
+
+#囚笼困境
+country_event = {
+	id = event_reu.11
+	title = event_reu.11.t
+	desc = event_reu.11.d
+	picture = GFX_report_event_Generic_Snow_Village_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.11.a
+	}
+}
+
+#伏击
+country_event = {
+	id = event_reu.12
+	title = event_reu.12.t
+	desc = event_reu.12.d
+	picture = GFX_report_event_REU_fire_kids
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.12.a
+		hidden_effect = {
+			country_event = {
+				id = event_reu.13
+				days = 14
+			}
+		}
+	}
+}
+
+#老师的职责
+country_event = {
+	id = event_reu.13
+	title = event_reu.13.t
+	desc = event_reu.13.d
+	picture = GFX_report_event_REU_Talulah_Alina_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.13.a
+	}
+}
+
+# #决议事件
+# country_event = {
+# 	id = event_reu.15
+# 	title = event_reu.15.t
+# 	desc = event_reu.15.d
+# 	picture = GFX_report_event_REU_Reunion_Camp
+
+# 	is_triggered_only = yes
+	
+# 	option = {
+# 		name = event_reu.15.a
+# 		set_temp_variable = {
+# 			spl = 2
+# 		}
+# 		REU_supplies_add = yes
+# 	}
+# }
+
+# country_event = {
+# 	id = event_reu.16
+# 	title = event_reu.16.t
+# 	desc = event_reu.16.d
+# 	picture = GFX_report_event_REU_Reunion_Camp
+
+# 	is_triggered_only = yes
+	
+# 	option = {
+# 		name = event_reu.16.a
+# 	}
+# }
+
+# country_event = {
+# 	id = event_reu.17
+# 	title = event_reu.17.t
+# 	desc = event_reu.17.d
+# 	picture = GFX_report_event_REU_Reunion_Camp
+
+# 	is_triggered_only = yes
+	
+# 	option = {
+# 		name = event_reu.17.a
+# 		set_temp_variable = {
+# 			spl = 2
+# 		}
+# 		REU_supplies_add = yes
+# 	}
+# }
+
+# country_event = {
+# 	id = event_reu.18
+# 	title = event_reu.18.t
+# 	desc = event_reu.18.d
+# 	picture = GFX_report_event_REU_Reunion_Camp
+
+# 	is_triggered_only = yes
+	
+# 	option = {
+# 		name = event_reu.18.a
+# 		set_temp_variable = {
+# 			spl = 1
+# 		}
+# 		REU_supplies_add = yes
+# 	}
+# }
+
+# country_event = {
+# 	id = event_reu.19
+# 	title = event_reu.19.t
+# 	desc = event_reu.19.d
+# 	picture = GFX_report_event_REU_Reunion_Camp
+
+# 	is_triggered_only = yes
+
+# 	option = {
+# 		name = event_reu.19.a
+# 	}
+# }
+
+#麻烦事态
+country_event = {
+	id = event_reu.20
+	title = event_reu.20.t
+	desc = event_reu.20.d
+	picture = GFX_report_event_REU_Talulah_figure
+
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = REU_Alina_Not_Being_Attacked
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = REU_Light_the_spark
+					}
+				}
+				complete_national_focus = REU_Light_the_spark
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = REU_Looking_for_firewoodk
+					}
+				}
+				complete_national_focus = REU_Looking_for_firewood
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_completed_focus = REU_Lost
+							has_completed_focus = REU_Free
+						}
+					}
+				}
+				complete_national_focus = REU_Lost
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = REU_Nothing_to_eat
+					}
+				}
+				complete_national_focus = REU_Nothing_to_eat
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = REU_Establish_material_exchange_channels
+					}
+				}
+				complete_national_focus = REU_Establish_material_exchange_channels
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = REU_Fire_kid
+					}
+				}
+				complete_national_focus = REU_Fire_kid
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = REU_Promotion_team
+					}
+				}
+				complete_national_focus = REU_Promotion_team
+			}
+		}
+	}
+
+	option = {
+		name = event_reu.20.a
+		country_event = {
+			id = event_reu.21
+		}
+	}
+}
+
+#归来
+country_event = {
+	id = event_reu.21
+	title = event_reu.21.t
+	desc = event_reu.21.d
+	picture = GFX_report_event_Generic_Tundra_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.21.a
+		country_event = {
+			id = event_reu.22
+		}
+	}
+}
+
+#重逢，亦是初见
+country_event = {
+	id = event_reu.22
+	title = event_reu.22.t
+	desc = event_reu.22.d
+	picture = GFX_report_event_REU_Talulah_the_Elder_Sister
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.22.a
+		country_event = {
+			id = event_reu.23
+		}
+	}
+}
+
+#回家
+country_event = {
+	id = event_reu.23
+	title = event_reu.23.t
+	desc = event_reu.23.d
+	picture = GFX_report_event_REU_go_home
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.23.a
+		set_country_flag = REU_Sarkaz_red_army
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = REU_Light_from_Kazdel
+	}
+}
+
+#像乌萨斯人一样行事
+country_event = {
+	id = event_reu.24
+	title = event_reu.24.t
+	desc = event_reu.24.d
+	picture = GFX_report_event_Generic_Snow_Village_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.24.a
+	}
+}
+
+#初见，同归一梦
+country_event = {
+	id = event_reu.25
+	title = event_reu.25.t
+	desc = event_reu.25.d
+	picture = GFX_report_event_REU_Talulah_the_Elder_Sister
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.25.a
+		add_political_power = 15
+		hidden_effect = {
+			country_event = {
+				id = event_reu.26
+				days = 3
+			}
+		}
+	}
+}
+
+#红军会议记录：1094-12-XH（其一）
+country_event = {
+	id = event_reu.26
+	title = event_reu.26.t
+	desc = event_reu.26.d
+	picture = GFX_report_event_REU_Meeting_Room
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.26.a
+		country_event = {
+			id = event_reu.27
+		}
+	}
+}
+
+#红军会议记录：1094-12-XH（其四）
+country_event = {
+	id = event_reu.27
+	title = event_reu.27.t
+	desc = event_reu.27.d
+	picture = GFX_report_event_REU_Meeting_Room
+	
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.27.a
+		ai_chance = {
+			factor = 1
+		}
+		set_country_flag = choose_REU_One_by_more
+		hidden_effect = {
+			country_event = { id = event_reu.28 days = 3 }
+		}
+	}
+	option = {
+		name = event_reu.27.b
+		ai_chance = {
+			factor = 1
+		}
+		set_country_flag = choose_REU_One_by_one
+		hidden_effect = {
+			country_event = { id = event_reu.28 days = 3 }
+		}
+	}
+}
+
+#红军会议记录：1094-12-XH（其八）
+country_event = {
+	id = event_reu.28
+	title = event_reu.28.t
+	desc = event_reu.28.d
+	picture = GFX_report_event_REU_Meeting_Room
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.28.a
+		ai_chance = {
+			factor = 1
+		}
+		set_country_flag = choose_REU_Rely_on_transactions
+		hidden_effect = {
+			country_event = { id = event_reu.29 days = 1 }
+		}
+	}
+	option = {
+		name = event_reu.28.b
+		ai_chance = {
+			factor = 1
+		}
+		set_country_flag = choose_REU_Unremitting
+		hidden_effect = {
+			country_event = { id = event_reu.29 days = 1 }
+		}
+	}
+}
+
+#会议纪要：109412萨卡兹红军-整合运动联合会议
+country_event = {
+	id = event_reu.29
+	title = event_reu.29.t
+	desc = event_reu.29.d
+	picture = GFX_report_event_REU_Meeting_Room
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.29.a
+		hidden_effect = {
+			country_event = { id = event_reu.30 days = 5 }
+		}
+	}
+}
+
+#夜话
+country_event = {
+	id = event_reu.30
+	title = event_reu.30.t
+	desc = event_reu.30.d
+	picture = GFX_report_event_REU_Talulah_Alina_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.30.a
+	}
+}
+
+#引火之人（一）
+country_event = {
+	id = event_reu.31
+	title = event_reu.31.t
+	desc = event_reu.31.d
+	picture = GFX_report_event_REU_Knecht
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.31.a
+		country_event = {
+			id = event_reu.32
+		}
+	}
+}
+
+#引火之人（二）
+country_event = {
+	id = event_reu.32
+	title = event_reu.32.t
+	desc = event_reu.32.d
+	picture = GFX_report_event_REU_Knecht
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.32.a
+	}
+}
+
+#礼物
+country_event = {
+	id = event_reu.33
+	title = event_reu.33.t
+	desc = event_reu.33.d
+	picture = GFX_report_event_Generic_Snow_Village_2
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.33.a
+	}
+}
+
+#一封信
+country_event = {
+	id = event_reu.34
+	title = event_reu.34.t
+	desc = event_reu.34.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.34.a
+	}
+}
+
+#为什么要组织农民抗税运动
+country_event = {
+	id = event_reu.35
+	title = event_reu.35.t
+	desc = event_reu.35.d
+	picture = GFX_report_event_Generic_Socialist_Poster_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.35.a
+		country_event = {
+			id = event_reu.36
+		}
+	}
+}
+
+#农民抗税运动工作原则
+country_event = {
+	id = event_reu.36
+	title = event_reu.36.t
+	desc = event_reu.36.d
+	picture = GFX_report_event_Generic_Socialist_Poster_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.36.a
+	}
+}
+
+#公开辩论
+country_event = {
+	id = event_reu.37
+	title = event_reu.37.t
+	desc = event_reu.37.d
+	picture = GFX_report_event_REU_Meeting_Room
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.37.a
+	}
+}
+
+#乌萨斯经典罐头
+country_event = {
+	id = event_reu.38
+	title = event_reu.38.t
+	desc = event_reu.38.d
+	picture = GFX_report_event_REU_Kompot
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.38.a
+	}
+}
+
+#不要回头
+country_event = {
+	id = event_reu.39
+	title = event_reu.39.t
+	desc = event_reu.39.d
+	picture = GFX_report_event_Generic_Ursus_Streets
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.39.a
+	}
+}
+
+#冰雪相融
+country_event = {
+	id = event_reu.40
+	title = event_reu.40.t
+	desc = event_reu.40.d
+	picture = GFX_report_event_REU_W_The_Mercenary
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.40.a
+
+		country_event = {
+			id = event_reu.38
+			days = 5
+		}
+	}
+}
+
+#一个人的故事（一）
+country_event = {
+	id = event_reu.41
+	title = event_reu.41.t
+	desc = event_reu.41.d
+	picture = GFX_report_event_Generic_Tundra_2
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.41.a
+		country_event = {
+			id = event_reu.42
+			days = 1
+		}
+	}
+}
+
+#一个人的故事（二）
+country_event = {
+	id = event_reu.42
+	title = event_reu.42.t
+	desc = event_reu.42.d
+	picture = GFX_report_event_Generic_Snow_Village_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.42.a
+		country_event = {
+			id = event_reu.43
+			days = 1
+		}
+	}
+}
+
+#生命的方程
+country_event = {
+	id = event_reu.43
+	title = event_reu.43.t
+	desc = event_reu.43.d
+	picture = report_event_Generic_House
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.43.a
+	}
+}
+
+#初学者
+country_event = {
+	id = event_reu.44
+	title = event_reu.44.t
+	desc = event_reu.44.d
+	picture = GFX_report_event_REU_Alina
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.44.a
+	}
+}
+
+#书
+country_event = {
+	id = event_reu.45
+	title = event_reu.45.t
+	desc = event_reu.45.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.45.a
+	}
+}
+
+#饭后闲谈
+country_event = {
+	id = event_reu.46
+	title = event_reu.46.t
+	desc = event_reu.46.d
+	picture = GFX_report_event_REU_Premium_Chocolate
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.46.a
+
+		country_event = {
+			id = event_reu.47
+			days = 30
+		}
+	}
+}
+
+#少数派报告
+country_event = {
+	id = event_reu.47
+	title = event_reu.47.t
+	desc = event_reu.47.d
+	picture = GFX_report_event_Generic_Socialist_Poster_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.47.a
+
+		country_event = {
+			id = event_reu.48
+			days = 30
+		}
+	}
+}
+
+#意外事故
+country_event = {
+	id = event_reu.48
+	title = event_reu.48.t
+	desc = event_reu.48.d
+	picture = GFX_report_event_REU_Premium_Chocolate
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.48.a
+		retire_character = REU_Stepan_Andreevich_Kashov
+	}
+}
+
+#乌萨斯的原罪
+country_event = {
+	id = event_reu.49
+	title = event_reu.49.t
+	desc = event_reu.49.d
+	picture = GFX_report_event_Generic_Tundra_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.49.a
+		country_event = {
+			id = event_reu.50
+		}
+	}
+}
+
+#乌萨斯的至善
+country_event = {
+	id = event_reu.50
+	title = event_reu.50.t
+	desc = event_reu.50.d
+	picture = GFX_report_event_REU_Emperors_Blade_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.50.a
+		country_event = {
+			id = event_reu.51
+		}
+	}
+}
+
+#落雪，浸黑国土
+country_event = {
+	id = event_reu.51
+	title = event_reu.51.t
+	desc = event_reu.51.d
+	picture = GFX_report_event_REU_Emperors_Blade_2
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.51.a
+		set_country_flag = REU_Exterminate_start
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = REU_Emergency_meeting
+	}
+}
+
+#炬火，流落南境
+country_event = {
+	id = event_reu.52
+	title = event_reu.52.t
+	desc = event_reu.52.d
+	picture = GFX_report_event_REU_Meeting_Room
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.52.a
+		hidden_effect = {
+			country_event = {
+				id = event_reu.53
+				days = 10
+			}
+		}
+	}
+}
+
+#恨
+country_event = {
+	id = event_reu.53
+	title = event_reu.53.t
+	desc = event_reu.53.d
+	picture = report_event_Generic_Barn_And_Field
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.53.a
+		country_event = {
+			id = event_reu.54
+			days = 3
+		}
+	}
+}
+
+#火
+country_event = {
+	id = event_reu.54
+	title = event_reu.54.t
+	desc = event_reu.54.d
+	picture = report_event_Generic_Barn_And_Field
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.54.a
+		country_event = {
+			id = event_reu.55
+			days = 3
+		}
+	}
+}
+
+#原野
+country_event = {
+	id = event_reu.55
+	title = event_reu.55.t
+	desc = event_reu.55.d
+	picture = GFX_report_event_REU_Gallows
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.55.a
+		hidden_effect = {
+			country_event = {
+				id = event_reu.56
+				days = 5
+			}
+		}
+	}
+}
+
+#与过去诀别
+country_event = {
+	id = event_reu.56
+	title = event_reu.56.t
+	desc = event_reu.56.d
+	picture = GFX_report_event_Generic_Ursus_Streets
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.56.a
+	}
+}
+
+#游击队员a
+country_event = {
+	id = event_reu.57
+	title = event_reu.57.t
+	desc = event_reu.57.d
+	picture = GFX_report_event_Generic_Tundra_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.57.a
+	}
+}
+
+#游击队员b
+country_event = {
+	id = event_reu.58
+	title = event_reu.58.t
+	desc = event_reu.58.d
+	picture = GFX_report_event_Generic_Tundra_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.58.a
+	}
+}
+
+#最后一剂
+country_event = {
+	id = event_reu.59
+	title = event_reu.59.t
+	desc = event_reu.59.d
+	picture = GFX_report_event_Generic_Hospital_Suite
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.59.a
+	}
+}
+
+#会议后日程
+country_event = {
+	id = event_reu.60
+	title = event_reu.60.t
+	desc = event_reu.60.d
+	picture = GFX_report_event_REU_Meeting_Room
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.60.a
+	}
+}
+
+#一场即兴的演讲
+country_event = {
+	id = event_reu.61
+	title = event_reu.61.t
+	desc = event_reu.61.d
+	picture = GFX_report_event_Generic_Socialist_Poster_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.61.a
+	}
+}
+
+#吞下死难者的苦……
+country_event = {
+	id = event_reu.62
+	title = event_reu.62.t
+	desc = event_reu.62.d
+	picture = GFX_report_event_REU_Crownslayer
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.62.a
+	}
+}
+
+#《为什么要实行农村民主？》
+country_event = {
+	id = event_reu.63
+	title = event_reu.63.t
+	desc = event_reu.63.d
+	picture = GFX_report_event_Generic_Barn_And_Field
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.63.a
+	}
+}
+
+#基层扫盲工作队关于基层扫盲工作试点的工作报告
+country_event = {
+	id = event_reu.64
+	title = event_reu.64.t
+	desc = event_reu.64.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+	option = {
+		name = event_reu.64.a
+	}
+}
+
+#新手上路
+country_event = {
+	id = event_reu.65
+	title = event_reu.65.t
+	desc = event_reu.65.d
+	picture = GFX_report_event_Generic_Snowfield_Twilight
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.65.a
+	}
+}
+
+#老友来信
+country_event = {
+	id = event_reu.66
+	title = event_reu.66.t
+	desc = event_reu.66.d
+	picture = GFX_report_event_Generic_RI_Doctors_Office
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.66.a
+	}
+}
+
+#安东的新步枪
+country_event = {
+	id = event_reu.67
+	title = event_reu.67.t
+	desc = event_reu.67.d
+	picture = GFX_report_event_REU_The_New_Rifle
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.67.a
+	}
+}
+
+#重生的工厂
+country_event = {
+	id = event_reu.68
+	title = event_reu.68.t
+	desc = event_reu.68.d
+	picture = GFX_report_event_Generic_Military_Factory
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.68.a
+	}
+}
+
+#无人期待的剧目
+country_event = {
+	id = event_reu.69
+	title = event_reu.69.t
+	desc = event_reu.69.d
+	picture = GFX_report_event_Generic_School_Hall
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.69.a
+		country_event = {
+			id = event_reu.70
+			days = 2
+		}
+	}
+}
+
+#远方
+country_event = {
+	id = event_reu.70
+	title = event_reu.70.t
+	desc = event_reu.70.d
+	picture = GFX_report_event_REU_Koshelna
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.70.a
+		country_event = {
+			id = event_reu.71
+			days = 2
+		}
+	}
+}
+
+#星火
+country_event = {
+	id = event_reu.71
+	title = event_reu.71.t
+	desc = event_reu.71.d
+	picture = GFX_report_event_REU_Talulah_the_Elder_Sister
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.71.a
+	}
+}
+
+#传单
+country_event = {
+	id = event_reu.72
+	title = event_reu.72.t
+	desc = event_reu.72.d
+	picture = GFX_report_event_Generic_Ice_Lake
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.72.a
+	}
+}
+
+#行必要之恶……
+country_event = {
+	id = event_reu.73
+	title = event_reu.73.t
+	desc = event_reu.73.d
+	picture = GFX_report_event_REU_Koschei
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.73.a
+	}
+}
+
+#不错的回忆
+country_event = {
+	id = event_reu.74
+	title = event_reu.74.t
+	desc = event_reu.74.d
+	picture = GFX_report_event_REU_Frostnova
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.74.a
+	}
+}
+
+#“我们”
+country_event = {
+	id = event_reu.75
+	title = event_reu.75.t
+	desc = event_reu.75.d
+	picture = GFX_report_event_REU_Reunion_Camp
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.75.a
+	}
+}
+
+#集中营起义（一）
+country_event = {
+	id = event_reu.76
+	title = event_reu.76.t
+	desc = event_reu.76.d
+	picture = GFX_report_event_Generic_Tundra_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.76.a
+		country_event = {
+			id = event_reu.77
+		}
+	}
+}
+
+#集中营起义（二）
+country_event = {
+	id = event_reu.77
+	title = event_reu.77.t
+	desc = event_reu.77.d
+	picture = GFX_report_event_Generic_Socialist_Poster_2
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.77.a
+		
+		effect_tooltip = {
+			REU_Lukiy_Mikhailovich_Fyodorov = {
+				set_nationality = REU
+			}
+		}
+		annex_country = {
+			target = BRN
+			transfer_troops = yes
+		}
+		200 = {
+			add_core_of = REU
+			remove_core_of = BRN
+		}
+		281 = {
+			add_core_of = REU
+			remove_core_of = BRN
+		}
+
+		country_event = {
+			id = event_reu.97
+		}
+	}
+}
+
+#特殊情况
+country_event = {
+	id = event_reu.78
+	title = event_reu.78.t
+	desc = event_reu.78.d
+	picture = GFX_report_event_REU_Crownslayer
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.78.a
+		country_event = { id = event_reu.79 }
+	}
+}
+
+#叛匪与骑士
+country_event = {
+	id = event_reu.79
+	title = event_reu.79.t
+	desc = event_reu.79.d
+	picture = GFX_report_event_REU_Meeting_Room
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.79.a
+		country_event = { id = event_reu.80 }
+	}
+}
+
+#复仇者之谋
+country_event = {
+	id = event_reu.80
+	title = event_reu.80.t
+	desc = event_reu.80.d
+	picture = GFX_report_event_Generic_Tactical_Simulation
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.80.a
+		country_event = { id = event_reu.81 }
+	}
+}
+
+#客从何处来
+country_event = {
+	id = event_reu.81
+	title = event_reu.81.t
+	desc = event_reu.81.d
+	picture = GFX_report_event_Generic_Lungmen_Station
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.81.a
+		country_event = { id = event_reu.82 }
+	}
+}
+
+#迟早要还
+country_event = {
+	id = event_reu.82
+	title = event_reu.82.t
+	desc = event_reu.82.d
+	picture = GFX_report_event_REU_Chen_Determined
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.82.a
+		country_event = { id = event_reu.83 }
+	}
+}
+
+#第二个价码
+country_event = {
+	id = event_reu.83
+	title = event_reu.83.t
+	desc = event_reu.83.d
+	picture = GFX_report_event_REU_Governor_Wei
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.83.a
+		country_event = { id = event_reu.84 }
+	}
+}
+
+#第一锤：靶向药物
+country_event = {
+	id = event_reu.84
+	title = event_reu.84.t
+	desc = event_reu.84.d
+	picture = GFX_report_event_REU_Chen_The_Younger_Sister
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.84.a
+		country_event = { id = event_reu.85 }
+	}
+}
+
+#第二锤：异卵同生
+country_event = {
+	id = event_reu.85
+	title = event_reu.85.t
+	desc = event_reu.85.d
+	picture = GFX_report_event_Generic_Lungmen_Alley_Rainy
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.85.a
+		country_event = { id = event_reu.86 }
+	}
+}
+
+#第三锤：苦难摇篮
+country_event = {
+	id = event_reu.86
+	title = event_reu.86.t
+	desc = event_reu.86.d
+	picture = GFX_report_event_REU_Wendigo_With_Rabbit
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.86.a
+		country_event = { id = event_reu.87 }
+	}
+}
+
+#成交
+country_event = {
+	id = event_reu.87
+	title = event_reu.87.t
+	desc = event_reu.87.d
+	picture = GFX_report_event_Generic_Lungmen_Office
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.87.a
+		country_event = { id = event_reu.88 }
+	}
+}
+
+#第一阶段：坍塌
+country_event = {
+	id = event_reu.88
+	title = event_reu.88.t
+	desc = event_reu.88.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.88.a
+		country_event = { id = event_reu.89 }
+	}
+}
+
+#第二阶段：急性衰竭
+country_event = {
+	id = event_reu.89
+	title = event_reu.89.t
+	desc = event_reu.89.d
+	picture = GFX_report_event_Generic_Roit_News
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.89.a
+		country_event = { id = event_reu.90 }
+	}
+}
+
+#第三阶段：靶向药物
+country_event = {
+	id = event_reu.90
+	title = event_reu.90.t
+	desc = event_reu.90.d
+	picture = GFX_report_event_REU_Blaze
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.90.a
+		country_event = { id = event_reu.91 }
+	}
+}
+
+#第四阶段：局部坏死
+country_event = {
+	id = event_reu.91
+	title = event_reu.91.t
+	desc = event_reu.91.d
+	picture = GFX_report_event_Generic_Chernobog_Control_Tower
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.91.a
+		country_event = { id = event_reu.92 }
+	}
+}
+
+#怒号光明
+country_event = {
+	id = event_reu.92
+	title = event_reu.92.t
+	desc = event_reu.92.d
+	picture = GFX_report_event_Generic_Chernobog_Inbound
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.92.a
+		transfer_state = 202
+		SKH = {
+			transfer_state = 131
+			transfer_state = 98
+			transfer_state = 63
+		}
+		every_country = {
+			limit = {
+				ursus_unifier = yes
+			}
+			East_Ursus_Upheaval_Enable = yes
+		}
+		hidden_effect = {
+			KMG = {
+				country_event = {
+					id = event_kmg.4
+					days = 7
+				}
+				country_event = {
+					id = event_kmg.5
+					days = 14
+				}
+			}
+
+			KRS = {
+				country_event = {
+					id = test_kmg.1
+					days = 1
+				}
+			}
+
+			UEA = {
+				set_autonomy = {
+					target = CYB
+					autonomy_state = autonomy_puppet
+				}
+
+				set_autonomy = {
+					target = IST
+					autonomy_state = autonomy_puppet
+				}
+			}
+		}
+	}
+}
+
+#在梦中相遇（其一）
+country_event = {
+	id = event_reu.93
+	title = event_reu.93.t
+	desc = event_reu.93.d
+	picture = GFX_report_event_REU_Peterheim_High
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.93.a
+		country_event = {
+			id = event_reu.94
+			days = 2
+		}
+	}
+}
+
+#在梦中相遇（其二）
+country_event = {
+	id = event_reu.94
+	title = event_reu.94.t
+	desc = event_reu.94.d
+	picture = GFX_report_event_REU_Survivors
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.94.a
+		country_event = {
+			id = event_reu.95
+			days = 2
+		}
+	}
+}
+
+#被选择的
+country_event = {
+	id = event_reu.95
+	title = event_reu.95.t
+	desc = event_reu.95.d
+	picture = GFX_report_event_REU_Alina
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.95.a
+		country_event = {
+			id = event_reu.96
+			days = 2
+		}
+	}
+}
+
+#在春天之前
+country_event = {
+	id = event_reu.96
+	title = event_reu.96.t
+	desc = event_reu.96.d
+	picture = GFX_report_event_REU_Survivors
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.96.a
+	}
+}
+
+#捉拿扎涅采夫
+country_event = {
+	id = event_reu.97
+	title = event_reu.97.t
+	desc = event_reu.97.d
+	picture = GFX_report_event_REU_Gallows
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.97.a
+	}
+}
+
+#告全国劳动者书
+country_event = {
+	id = event_reu.98
+	title = event_reu.98.t
+	desc = event_reu.98.d
+	picture = GFX_report_event_Generic_Socialist_Poster_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.98.a
+		country_event = {
+			id = event_reu.99
+			days = 5
+		}
+	}
+}
+
+#SerB酒馆的普通周日
+country_event = {
+	id = event_reu.99
+	title = event_reu.99.t
+	desc = event_reu.99.d
+	picture = GFX_report_event_Generic_Bar
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.99.a
+	}
+}
+
+#隐藏事件，用于移除在一个宣传决议中为特定国家上的debuff
+country_event = {
+	id = event_reu.100
+	
+	hidden = yes
+
+	is_triggered_only = yes
+	
+	immediate = {
+		remove_ideas = REU_propaganda_idea
+	}
+}
+
+#注意！坦克
+country_event = {
+	id = event_reu.101
+	title = event_reu.101.t
+	desc = event_reu.101.d
+	picture = GFX_report_event_REU_Soviet_Tank
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.101.a
+	}
+}
+
+#苏维埃乌萨斯工人情报局关于乌萨斯全境解放战争的一点建议
+country_event = {
+	id = event_reu.102
+	title = event_reu.102.t
+	desc = event_reu.102.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.102.a
+	}
+}
+
+#疯狂星期六
+country_event = {
+	id = event_reu.103
+	title = event_reu.103.t
+	desc = event_reu.103.d
+	picture = GFX_report_event_Generic_Socialist_Poster_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.103.a
+	}
+}
+
+#跨过卢比孔河的新方法
+country_event = {
+	id = event_reu.104
+	title = event_reu.104.t
+	desc = event_reu.104.d
+	picture = GFX_report_event_Generic_Ice_Lake
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.104.a
+	}
+}
+
+#在入土前先站直
+country_event = {
+	id = event_reu.105
+	title = event_reu.105.t
+	desc = event_reu.105.d
+	picture = GFX_report_event_Generic_Socialist_Poster_2
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.105.a
+	}
+}
+
+#铁翼生风
+country_event = {
+	id = event_reu.106
+	title = event_reu.106.t
+	desc = event_reu.106.d
+	picture = GFX_report_event_Generic_Tundra_2
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.106.a
+	}
+}
+
+#学习如何战争
+country_event = {
+	id = event_reu.107
+	title = event_reu.107.t
+	desc = event_reu.107.d
+	picture = GFX_report_event_Generic_Barracks
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.107.a
+	}
+}
+
+#子夜之前
+country_event = {
+	id = event_reu.108
+	title = event_reu.108.t
+	desc = event_reu.108.d
+	picture = GFX_report_event_Generic_Snow_Village_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.108.a
+	}
+}
+
+#时代本质
+country_event = {
+	id = event_reu.109
+	title = event_reu.109.t
+	desc = event_reu.109.d
+	picture = GFX_report_event_Generic_School_Hall
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.109.a
+	}
+}
+
+#不了，同志
+country_event = {
+	id = event_reu.110
+	title = event_reu.110.t
+	desc = event_reu.110.d
+	picture = GFX_report_event_Generic_Snow_Village_2
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.110.a
+	}
+}
+
+#流水线上的人民炮弹
+country_event = {
+	id = event_reu.111
+	title = event_reu.111.t
+	desc = event_reu.111.d
+	picture = GFX_report_event_Generic_Military_Factory
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.111.a
+	}
+}
+
+#人民社长（一）
+country_event = {
+	id = event_reu.112
+	title = event_reu.112.t
+	desc = event_reu.112.d
+	picture = GFX_report_event_Generic_Barn_And_Field
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.112.a
+		country_event = {
+			id = event_reu.113
+		}
+	}
+}
+
+#人民社长（二）
+country_event = {
+	id = event_reu.113
+	title = event_reu.113.t
+	desc = event_reu.113.d
+	picture = GFX_report_event_Generic_Barn_And_Field
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.113.a
+	}
+}
+
+#萨卡兹红军归乡
+country_event = {
+	id = event_reu.114
+	title = event_reu.114.t
+	desc = event_reu.114.d
+	picture = GFX_report_event_REU_Knecht
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			KAC_red_army_go_home = yes
+		}
+	}
+	
+	option = {
+		name = event_reu.114.a
+
+		effect_tooltip = {
+			KAC_red_army_go_home = yes
+		}
+	}
+}
+
+#又一次的苦涩滋味（萨卡兹红军内战再次失败）
+country_event = {
+	id = event_reu.115
+	title = event_reu.115.t
+	desc = event_reu.115.d
+	picture = GFX_report_event_Generic_Snow_Village_2
+
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			KAC_red_army_come = yes
+		}
+	}
+	
+	option = {
+		name = event_reu.115.a
+
+		effect_tooltip = {
+			KAC_red_army_come = yes
+		}
+	}
+}
+
+#哈拉德·阿维尔的贺电
+country_event = {
+	id = event_reu.116
+	title = event_reu.116.t
+	desc = event_reu.116.d
+	picture = GFX_report_event_Generic_Socialist_Poster_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = event_reu.116.a
+	}
+}
+
+#新的军装
+country_event = {
+	id = event_reu.117
+	title = event_reu.117.t
+	desc = event_reu.117.d
+	picture = GFX_report_event_Generic_Socialist_Poster_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.117.a
+
+		add_ideas = REU_new_uniform
+
+		#塔露拉
+		REU_Talulah = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Talulah_stage_2 }
+				army = { large = GFX_portrait_REU_Talulah_stage_2 }
+			}
+		}
+		#阿丽娜
+		REU_Alina = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Alina_stage_2 }
+			}
+		}
+		#叶莲娜
+		REU_Yelena = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Yelena_stage_2 }
+				army = { large = GFX_portrait_REU_Yelena_stage_2 }
+			}
+		}
+		#柳德米拉
+		REU_Lyudmila = {
+			set_portraits = {
+				army = { large = GFX_portrait_REU_Lyudmila_stage_2 }
+			}
+		}
+		#浮士德
+		REU_Faust = {
+			set_portraits = {
+				army = { large = GFX_portrait_REU_Faust_stage_2 }
+			}
+		}
+		#碎骨
+		REU_Skullshatterer = {
+			set_portraits = {
+				army = { large = GFX_portrait_REU_Skullshatterer_stage_2 }
+			}
+		}
+	}
+}
+
+#一份被判定为危害整合运动、半撕毁的右派大字报
+country_event = {
+	id = event_reu.118
+	title = event_reu.118.t
+	desc = event_reu.118.d
+	picture = GFX_report_event_Generic_Socialist_Poster_1
+
+	is_triggered_only = no
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = REU
+		has_country_flag = Ursus_Unification
+		NOT = { has_war = yes }
+	}
+
+	mean_time_to_happen = {
+		days = 7
+	}
+
+	immediate = {
+		set_country_flag = REU_poster_delivered_flag
+	}
+
+	option = {
+		name = event_reu.118.a
+	}
+}

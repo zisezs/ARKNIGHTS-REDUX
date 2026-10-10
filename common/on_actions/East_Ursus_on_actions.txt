@@ -1,0 +1,35 @@
+on_actions = {
+    on_annex = {
+		effect = {
+			if = {
+				limit = { FROM = { ursus_unifier = yes } }
+				every_country = {
+					limit = {
+						ursus_unifier = yes
+					}
+					add_to_variable = { Upheaval_Contenders_Num_1 = -1 }
+				}
+				if = {
+					limit = { FROM = { east_tundria_ursus = yes } }
+					every_country = {
+						limit = {
+							has_country_flag = East_Ursus_Upheaval_Enabled
+							east_tundria_ursus = yes
+						}
+						add_to_variable = { Upheaval_Contenders_Num_2 = -1 }
+					}
+				}
+				else_if = {
+					limit = { FROM = { central_tundria_ursus = yes } }
+					every_country = {
+						limit = {
+							has_country_flag = East_Ursus_Upheaval_Enabled
+							central_tundria_ursus = yes
+						}
+						add_to_variable = { Upheaval_Contenders_Num_2 = -1 }
+					}
+				}
+			}
+		}
+	}
+}

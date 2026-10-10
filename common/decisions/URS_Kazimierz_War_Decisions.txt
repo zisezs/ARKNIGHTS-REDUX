@@ -1,0 +1,323 @@
+######################################################
+# 第十一次乌卡战争 · 乌萨斯侧专属决议（8 条）
+# 分类见 common/decisions/categories/URS_Kazimierz_War_categories.txt
+# 进度推进 / 起义 / 平叛 / 开战 / 自动获胜的实际逻辑全在
+#   common/scripted_effects/URS_Kazimierz_War_scripted_effects.txt
+#   common/on_actions/URS_Kazimierz_War_on_actions.txt
+#   common/dynamic_modifiers/URS_Kazimierz_War_dynamic_modifiers.txt
+#
+# 四段结构（2026-09-26 重制，全部由玩家主动引爆，没有任何替玩家下决心的兜底）：
+#   情报   URS_kzmwar_situation —— 常驻只读面板，实时读数写在 _desc 里
+#   安内   URS_kzmwar_crackdown 整肃（压进度）／URS_kzmwar_spark 引蛇出洞（选路 + 择日）
+#   备战   prep_mobilization / prep_logistics / prep_propaganda / ultimatum
+#          四条平行、可跳级、任选顺序，各自 +1 备战度（URS_kzmwar_prep_level）
+#   开战   URS_kzmwar_declare_war —— 只要备战度 ≥ 1 即可点，无日期门槛
+#
+# 平叛也是备战：每平定一路叛军同样 +1 备战度（见 URS_kzmwar_pacify_sweep），
+#   所以「先安内、再开战」是一条能被玩家主动经营的收益线，而不只是惩罚。
+#   备战度驱动战时精神 URS_kzmwar_war_spirit（上限按 6 档折算）。
+#
+# 引擎坑（本次修掉的）：
+#   · 决议没有 custom_description 这个键，写了会 Unexpected token 并且那一行整条作废
+#     —— 原第 36 / 286 行就是它，导致情报面板从来没渲染出过进度数字。实时读数请写 _desc。
+#   · complete_effect 是「点下去的当天」执行，days_remove 到点执行的是 remove_effect。
+#     所以备战度、备战旗标都写在 remove_effect（活儿干完才算数），写在 complete_effect
+#     会让 fire_only_once 的决议当场从列表里消失、倒计时也看不见。
+######################################################
+
+URS_Kazimierz_War_Category = {
+
+	# ── 常驻情报面板：六路叛乱进度 + 备战度 + 已平定路数 ──
+	URS_kzmwar_situation = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			always = yes
+		}
+
+		# 只读，不可点：真正的动作在「整肃叛区」「引蛇出洞」与四级备战里
+		available = {
+			always = no
+		}
+
+		cost = 0
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 安内 · 整肃叛区：选一路（或全线）压低进度 ──
+	URS_kzmwar_crackdown = {
+		icon = GFX_decision_generic_military
+
+		visible = {
+			OR = {
+				check_variable = { URS_revolt_ucm > 24 }
+				check_variable = { URS_revolt_ulb > 24 }
+				check_variable = { URS_revolt_ufs > 24 }
+				check_variable = { URS_revolt_kzc > 24 }
+				check_variable = { URS_revolt_bus > 24 }
+				check_variable = { URS_revolt_blt > 24 }
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URS_kzmwar_crackdown_on
+			}
+		}
+
+		cost = 75
+		days_remove = 30
+
+		modifier = {
+			political_power_factor = -0.15
+			stability_factor = -0.05
+		}
+
+		complete_effect = {
+			set_country_flag = URS_kzmwar_crackdown_on
+			country_event = { id = ursus_kzmwar.1 }
+		}
+
+		remove_effect = {
+			clr_country_flag = URS_kzmwar_crackdown_on
+		}
+
+		ai_will_do = {
+			base = 300
+			modifier = {
+				factor = 0
+				OR = {
+					check_variable = { URS_revolt_ucm < 65 }
+					check_variable = { URS_revolt_ulb < 65 }
+					check_variable = { URS_revolt_ufs < 65 }
+					check_variable = { URS_revolt_kzc < 65 }
+					check_variable = { URS_revolt_bus < 65 }
+					check_variable = { URS_revolt_blt < 65 }
+				}
+			}
+		}
+	}
+
+	# ── 安内 · 引蛇出洞：自己挑一路、自己定日子，让它现在就反 ──
+	URS_kzmwar_spark = {
+		icon = GFX_decision_generic_prepare_civil_war
+
+		# 还有一路「可以反、且这一辈子还没反过」时才露出来
+		visible = {
+			OR = {
+				AND = { UCM = { exists = no } NOT = { has_country_flag = URS_kzmwar_pacified_ucm } }
+				AND = { ULB = { exists = no } NOT = { has_country_flag = URS_kzmwar_pacified_ulb } }
+				AND = { UFS = { exists = no } NOT = { has_country_flag = URS_kzmwar_pacified_ufs } }
+				AND = { KZC = { exists = no } NOT = { has_country_flag = URS_kzmwar_pacified_kzc } }
+				AND = { BUS = { exists = no } NOT = { has_country_flag = URS_kzmwar_pacified_bus } }
+				AND = { BLT = { exists = no } NOT = { has_country_flag = URS_kzmwar_pacified_blt } }
+			}
+		}
+
+		# 已经有起事在路上时不许多头下令
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = URS_kzmwar_tt_no_pending
+				NOT = {
+					has_country_flag = URS_kzmwar_erupt_scheduled
+				}
+			}
+		}
+
+		cost = 60
+
+		complete_effect = {
+			country_event = { id = ursus_kzmwar.2 }
+		}
+
+		# 玩家工具：AI 不该主动在自己背后点火
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 备战一 · 边境军团动员（四级平行，可跳级、可只点其中一级）──
+	URS_kzmwar_prep_mobilization = {
+		icon = GFX_decision_generic_motorized
+
+		visible = {
+			NOT = {
+				has_country_flag = URS_kzmwar_prep_1
+			}
+		}
+
+		available = {
+			KZM = { exists = yes }
+			NOT = { has_war_with = KZM }
+		}
+
+		fire_only_once = yes
+		cost = 80
+		days_remove = 45
+
+		modifier = {
+			conversion_cost_civ_to_mil_factor = 0.2
+			conscription_factor = 0.15
+		}
+
+		# 行军要跑到点上才算数：备战旗标与备战度都写在 remove_effect
+		remove_effect = {
+			set_country_flag = URS_kzmwar_prep_1
+			URS_kzmwar_add_prep_level = yes
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+
+	# ── 备战二 · 铁道与后勤前推 ──
+	URS_kzmwar_prep_logistics = {
+		icon = GFX_decision_generic_tank
+
+		visible = {
+			NOT = {
+				has_country_flag = URS_kzmwar_prep_2
+			}
+		}
+
+		available = {
+			KZM = { exists = yes }
+			NOT = { has_war_with = KZM }
+		}
+
+		fire_only_once = yes
+		cost = 60
+		days_remove = 30
+
+		modifier = {
+			supply_consumption_factor = -0.1
+			production_speed_buildings_factor = 0.3
+		}
+
+		remove_effect = {
+			set_country_flag = URS_kzmwar_prep_2
+			URS_kzmwar_add_prep_level = yes
+		}
+
+		ai_will_do = {
+			base = 800
+		}
+	}
+
+	# ── 备战三 · 讨还血债的宣义动员 ──
+	URS_kzmwar_prep_propaganda = {
+		icon = GFX_decision_generic_nationalism
+
+		visible = {
+			NOT = {
+				has_country_flag = URS_kzmwar_prep_3
+			}
+		}
+
+		available = {
+			KZM = { exists = yes }
+			NOT = { has_war_with = KZM }
+		}
+
+		fire_only_once = yes
+		cost = 50
+		days_remove = 30
+
+		modifier = {
+			political_power_factor = -0.1
+			war_support_factor = 0.1
+		}
+
+		remove_effect = {
+			add_war_support = 0.1
+			set_country_flag = URS_kzmwar_prep_3
+			URS_kzmwar_add_prep_level = yes
+		}
+
+		ai_will_do = {
+			base = 800
+		}
+	}
+
+	# ── 备战四 · 对卡西米尔最后通牒（最短最便宜，但只差临门一脚）──
+	URS_kzmwar_ultimatum = {
+		icon = GFX_decision_generic_political_rally
+
+		visible = {
+			NOT = {
+				has_country_flag = URS_kzmwar_prep_4
+			}
+		}
+
+		available = {
+			KZM = { exists = yes }
+			NOT = { has_war_with = KZM }
+		}
+
+		fire_only_once = yes
+		cost = 40
+		days_remove = 15
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		remove_effect = {
+			set_country_flag = URS_kzmwar_prep_4
+			URS_kzmwar_add_prep_level = yes
+		}
+
+		ai_will_do = {
+			base = 600
+		}
+	}
+
+	# ── 开战：第十一次乌卡战争 ──
+	URS_kzmwar_declare_war = {
+		icon = GFX_decision_generic_army_support
+
+		visible = {
+			KZM = { exists = yes }
+			NOT = {
+				has_country_flag = URS_kzmwar_war_started
+			}
+		}
+
+		# 唯一的闸门是备战度：一级备战跑完就能点，点得越晚、备得越足，开打后的精神越强
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = URS_kzmwar_tt_needs_prep
+				check_variable = { URS_kzmwar_prep_level > 0 }
+			}
+			NOT = { has_war_with = KZM }
+		}
+
+		fire_only_once = yes
+		cost = 100
+
+		complete_effect = {
+			custom_effect_tooltip = URS_kzmwar_declare_war_tt
+			URS_kzmwar_open_hostilities = yes
+		}
+
+		ai_will_do = {
+			base = 60
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				check_variable = { URS_kzmwar_prep_level > 1 }
+			}
+			modifier = {
+				factor = 2
+				check_variable = { URS_kzmwar_prep_level > 3 }
+			}
+		}
+	}
+}

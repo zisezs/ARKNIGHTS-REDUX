@@ -1,0 +1,31 @@
+on_actions = {
+	# 叙拉古 · 灰厅-铳与秩序：稳定度联动修正挂载
+	# 修正定义见 common/dynamic_modifiers/SRC_dynamic_modifiers.txt
+	on_startup = {
+		effect = {
+			every_country = {
+				limit = { original_tag = SRC }
+				add_dynamic_modifier = { modifier = SRC_grey_hall_tier1 }
+				add_dynamic_modifier = { modifier = SRC_grey_hall_tier2 }
+				add_dynamic_modifier = { modifier = SRC_grey_hall_tier3 }
+				add_dynamic_modifier = { modifier = SRC_grey_hall_tier4 }
+			}
+		}
+	}
+
+	# 兜底：老存档、中途成立/变化的国家
+	on_monthly = {
+		effect = {
+			every_country = {
+				limit = {
+					original_tag = SRC
+					NOT = { has_dynamic_modifier = { modifier = SRC_grey_hall_tier1 } }
+				}
+				add_dynamic_modifier = { modifier = SRC_grey_hall_tier1 }
+				add_dynamic_modifier = { modifier = SRC_grey_hall_tier2 }
+				add_dynamic_modifier = { modifier = SRC_grey_hall_tier3 }
+				add_dynamic_modifier = { modifier = SRC_grey_hall_tier4 }
+			}
+		}
+	}
+}

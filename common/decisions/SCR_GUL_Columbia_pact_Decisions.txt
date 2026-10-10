@@ -1,0 +1,71 @@
+######################################################
+# 猩红剧团 (SCR) / 高卢 (GUL) 通用决议 — 分类「哥伦比亚联邦之约」
+# 结构注意：文件顶层就是「决议分类块」本身（同原版决议文件），
+# 绝对不要在外面包一层 decisions = {} —— 否则整个文件不被识别。
+#
+# add_to_faction 官方语义（原版 effects 文档）：
+#   阵营领袖TAG = { add_to_faction = 新成员TAG }
+# 必须由「阵营领袖」把新成员拉进自己的阵营。
+# 因此先跳到 CLB，再进 faction_leader（哥伦比亚所在阵营的
+# 现任领袖），把 ROOT（点决议的 SCR/GUL）拉入自由大陆公约组织。
+######################################################
+
+SCR_GUL_Columbia_pact_decisions = {
+
+	############################################################
+	# 加入哥伦比亚联邦所属的阵营
+	############################################################
+	SCR_GUL_join_columbia_pact_faction = {
+		icon = GFX_decision_generic_political_discourse
+		cost = 100
+		fire_only_once = yes
+
+		allowed = {
+			OR = {
+				original_tag = SCR
+				original_tag = GUL
+			}
+		}
+
+		visible = {
+			OR = {
+				original_tag = SCR
+				original_tag = GUL
+			}
+			CLB = {
+				exists = yes
+				is_in_faction = yes
+			}
+		}
+
+		available = {
+			NOT = {
+				is_in_faction = yes
+			}
+			NOT = {
+				has_war_with = CLB
+			}
+			NOT = {
+				any_other_country = {
+					is_in_faction_with = CLB
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = SCR_GUL_join_columbia_pact_faction_tt
+			hidden_effect = {
+				CLB = {
+					faction_leader = {
+						add_to_faction = ROOT
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+}

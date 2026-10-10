@@ -1,0 +1,571 @@
+East_Ursus_Upheaval_Enable = {
+
+	log = "[GetDateText]: [Root.GetName]: East_Ursus_Upheaval_Enable; Executing"
+
+	custom_effect_tooltip = East_Ursus_Upheaval_Enable_Tt
+	set_country_flag = East_Ursus_Upheaval_Enabled
+	set_country_flag = East_Ursus_Upheaval_Focus_Enabled
+
+	East_Ursus_Upheaval_Contenders_Setup = yes
+
+	set_variable = { Upheaval_Chaos = 0.2 }
+	set_variable = { Upheaval_Chaos_Progress = Upheaval_Chaos }
+	multiply_variable = { Upheaval_Chaos_Progress = 100 }
+
+	East_Ursus_Upheaval_Chaos_Modifier_Setup = yes
+
+	hidden_effect = {
+		add_dynamic_modifier = { modifier = East_Ursus_Upheaval_DynamicModifier_Chaos }
+	}
+
+	East_Ursus_Upheaval_Change_Color = yes
+
+	set_variable = { ursus_warlord_original_capital = capital }
+
+	mark_focus_tree_layout_dirty = yes
+
+	ai_focus_aggressive_factor = 0.5
+
+	log = "[GetDateText]: [Root.GetName]: East_Ursus_Upheaval_Enable; Finished execution"
+
+}
+
+East_Ursus_Upheaval_Disable = {
+
+	custom_effect_tooltip = East_Ursus_Upheaval_Disable_Tt
+	clr_country_flag = East_Ursus_Upheaval_Enabled
+	clear_array = Upheaval_Contenders
+	clear_variable = Upheaval_ContendersReal_Num
+	clear_array = Upheaval_PrepareWarOn
+
+	clear_variable = Upheaval_Chaos
+	clear_variable = Upheaval_Chaos_temp
+	clear_variable = Upheaval_Chaos_Modifier_conscription_factor
+	clear_variable = Upheaval_Chaos_Modifier_org_loss_when_moving
+	clear_variable = Upheaval_Chaos_Modifier_out_of_supply_factor
+	clear_variable = Upheaval_Chaos_Modifier_surrender_limit
+	clear_variable = Upheaval_Chaos_Modifier_stability_factor
+	clear_variable = Upheaval_Chaos_Modifier_war_support_factor
+	hidden_effect = {
+		remove_dynamic_modifier = { modifier = East_Ursus_Upheaval_DynamicModifier_Chaos }
+	}
+
+	set_country_flag = East_Ursus_Unification_After
+	mark_focus_tree_layout_dirty = yes
+	set_variable = { East_Ursus_infiltration_point = 5 }
+
+	URS = {
+		set_variable = { East_Ursus_North_west_infiltration = 0 }
+		set_variable = { East_Ursus_South_infiltration = 0 }
+		set_variable = { East_Ursus_Volga_infiltration = 0 }
+		set_variable = { East_Ursus_Berekar_infiltration = 0 }
+		set_variable = { East_Ursus_Saint_Grypherburg_infiltration = 0 }
+	}
+}
+
+East_Ursus_Upheaval_Contenders_Setup = {
+	hidden_effect = {
+		set_variable = { Upheaval_Contenders_Num_1 = 0 }
+		set_variable = { Upheaval_Contenders_Num_2 = 0 }
+		if = {
+			limit = { REU = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = REU }
+			if = {
+				limit = { east_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { SKH = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = SKH }
+			if = {
+				limit = { east_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { UFE = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = UFE }
+			if = {
+				limit = { east_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { KMG = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = KMG }
+			if = {
+				limit = { central_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { BAK = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = BAK }
+			if = {
+				limit = { central_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { OMN = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = OMN }
+			if = {
+				limit = { central_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { NAX = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = NAX }
+			if = {
+				limit = { central_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+	}
+}
+
+East_Ursus_Upheaval_Chaos_Modifier_Setup = {
+	if = {
+		limit = { check_variable = { Upheaval_Chaos > 0.9 } }
+		set_variable = { Upheaval_Chaos_temp = Upheaval_Chaos }
+		add_to_variable = { Upheaval_Chaos_temp = -0.3 }
+		set_variable = { Upheaval_Chaos_Modifier_conscription_factor = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_conscription_factor = -0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_org_loss_when_moving = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_org_loss_when_moving = 0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_out_of_supply_factor = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_out_of_supply_factor = 0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_surrender_limit = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Modifier_surrender_limit = -0.7 }
+
+		set_variable = { Upheaval_Chaos_Modifier_stability_factor = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Modifier_stability_factor = -0.7 }
+
+		set_variable = { Upheaval_Chaos_Modifier_war_support_factor = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Modifier_war_support_factor = -0.7 }
+	}
+	else_if = {
+		limit = { check_variable = { Upheaval_Chaos > 0.3 } }
+		set_variable = { Upheaval_Chaos_temp = Upheaval_Chaos }
+		add_to_variable = { Upheaval_Chaos_temp = -0.3 }
+		set_variable = { Upheaval_Chaos_Modifier_conscription_factor = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_conscription_factor = -0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_org_loss_when_moving = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_org_loss_when_moving = 0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_out_of_supply_factor = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_out_of_supply_factor = 0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_surrender_limit = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_surrender_limit = -0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_stability_factor = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Modifier_stability_factor = -0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_war_support_factor = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Modifier_war_support_factor = -0.5 }
+	}
+	else = {
+		set_variable = { Upheaval_Chaos_temp = 0.3 }
+		subtract_from_variable = { Upheaval_Chaos_temp = Upheaval_Chaos }
+		set_variable = { Upheaval_Chaos_Modifier_conscription_factor = Upheaval_Chaos_temp }
+
+		set_variable = { Upheaval_Chaos_Modifier_stability_factor = Upheaval_Chaos_temp }
+
+		set_variable = { Upheaval_Chaos_Modifier_war_support_factor = Upheaval_Chaos_temp }
+	}
+	force_update_dynamic_modifier = yes
+}
+
+East_Ursus_Upheaval_Change_Color = {
+	else_if = {
+		limit = {
+			original_tag = NAX
+		}
+		set_cosmetic_tag = NAX_upheaval
+	}
+	else_if = {
+		limit = {
+			original_tag = BAK
+		}
+		set_cosmetic_tag = BAK_upheaval
+	}
+	else_if = {
+		limit = {
+			original_tag = SKH
+		}
+		set_cosmetic_tag = SKH_upheaval
+	}
+}
+
+East_Ursus_Upheaval_Chaos_Add_Y = {
+	custom_effect_tooltip = East_Ursus_Upheaval_Chaos_Add_Y_Tt
+	add_to_variable = { Upheaval_Chaos = Y }
+	set_variable = { Upheaval_Chaos_Progress = Upheaval_Chaos }
+	multiply_variable = { Upheaval_Chaos_Progress = 100 }
+	clamp_variable = { var = Upheaval_Chaos min = 0 max = 1 }
+	East_Ursus_Upheaval_Chaos_Modifier_Setup = yes
+}
+
+East_Ursus_infiltrate_uprising = {
+
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_North_west_area = yes
+			URS = {
+				check_variable = { East_Ursus_North_west_infiltration = 1 }
+			}
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 2
+		}
+		damage_building = {
+			type = arms_factory
+			damage = 2
+		}
+	}
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_North_west_area = yes
+			URS = {
+				check_variable = { East_Ursus_North_west_infiltration > 1 }
+			}
+		}
+		ROOT = {
+			#set_state_controller = PREV
+			add_state_core = PREV
+			#set_variable = { troops_num = East_Ursus_North_west_infiltration }
+		}
+		# create_unit = {
+		# 	division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 	owner = ROOT
+		# }
+		# if = {
+		# 	limit = {
+		# 		URS = {
+		# 			check_variable = { East_Ursus_North_west_infiltration > 2 }
+		# 		}
+		# 	}
+		# 	create_unit = {
+		# 		division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 		owner = ROOT
+		# 	}
+		# }
+	}
+
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_South_area = yes
+			URS = {
+				check_variable = { East_Ursus_South_infiltration = 1 }
+			}
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 2
+		}
+		damage_building = {
+			type = arms_factory
+			damage = 2
+		}
+	}
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_South_area = yes
+			URS = {
+				check_variable = { East_Ursus_South_infiltration > 1 }
+			}
+		}
+		ROOT = {
+			#set_state_controller = PREV
+			add_state_core = PREV
+			#set_variable = { troops_num = East_Ursus_South_infiltration }
+		}
+		# create_unit = {
+		# 	division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 	owner = ROOT
+		# }
+		# if = {
+		# 	limit = {
+		# 		URS = {
+		# 			check_variable = { East_Ursus_South_infiltration > 2 }
+		# 		}
+		# 	}
+		# 	create_unit = {
+		# 		division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 		owner = ROOT
+		# 	}
+		# }
+	}
+
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Volga_area = yes
+			URS = {
+				check_variable = { East_Ursus_Volga_infiltration = 1 }
+			}
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 2
+		}
+		damage_building = {
+			type = arms_factory
+			damage = 2
+		}
+	}
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Volga_area = yes
+			URS = {
+				check_variable = { East_Ursus_Volga_infiltration > 1 }
+			}
+		}
+		ROOT = {
+			#set_state_controller = PREV
+			add_state_core = PREV
+			#set_variable = { troops_num = East_Ursus_Volga_infiltration }
+		}
+		# create_unit = {
+		# 	division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 	owner = ROOT
+		# }
+		# if = {
+		# 	limit = {
+		# 		URS = {
+		# 			check_variable = { East_Ursus_Volga_infiltration > 2 }
+		# 		}
+		# 	}
+		# 	create_unit = {
+		# 		division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 		owner = ROOT
+		# 	}
+		# }
+	}
+
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Berekar_area = yes
+			URS = {
+				check_variable = { East_Ursus_Berekar_infiltration = 1 }
+			}
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 2
+		}
+		damage_building = {
+			type = arms_factory
+			damage = 2
+		}
+	}
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Berekar_area = yes
+			URS = {
+				check_variable = { East_Ursus_Berekar_infiltration > 1 }
+			}
+		}		
+		ROOT = {
+			#set_state_controller = PREV
+			add_state_core = PREV
+			#set_variable = { troops_num = East_Ursus_Berekar_infiltration }
+		}
+		# create_unit = {
+		# 	division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 	owner = ROOT
+		# }
+		# if = {
+		# 	limit = {
+		# 		URS = {
+		# 			check_variable = { East_Ursus_Berekar_infiltration > 2 }
+		# 		}
+		# 	}
+		# 	create_unit = {
+		# 		division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 		owner = ROOT
+		# 	}
+		# }
+	}
+
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Saint_Grypherburg_area = yes
+			URS = {
+				check_variable = { East_Ursus_Saint_Grypherburg_infiltration = 1 }
+			}
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 2
+		}
+		damage_building = {
+			type = arms_factory
+			damage = 2
+		}
+	}
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Saint_Grypherburg_area = yes
+			URS = {
+				check_variable = { East_Ursus_Saint_Grypherburg_infiltration > 1 }
+			}
+		}
+		ROOT = {
+			#set_state_controller = PREV
+			add_state_core = PREV
+			#set_variable = { troops_num = East_Ursus_Saint_Grypherburg_infiltration }
+		}
+		# create_unit = {
+		# 	division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 	owner = ROOT
+		# }
+		# if = {
+		# 	limit = {
+		# 		URS = {
+		# 			check_variable = { East_Ursus_Saint_Grypherburg_infiltration > 2 }
+		# 		}
+		# 	}
+		# 	create_unit = {
+		# 		division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 		owner = ROOT
+		# 	}
+		# }
+	}
+}
+
+Ursus_area_uprising = {
+	every_state = {
+		limit = {
+			UCM_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		random_country = {
+			limit = {
+				ursus_unifier = yes
+				has_government = communism
+			}
+			PREV = {
+				add_core_of = PREV
+				force_enable_resistance = URS
+				start_resistance = URS
+				set_resistance = 65
+				set_compliance = 0
+			}
+		}
+	}
+	every_state = {
+		limit = {
+			ULB_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		random_country = {
+			limit = {
+				ursus_unifier = yes
+				OR = {
+					has_government = liberalism
+					original_tag = UFE
+				}
+			}
+			PREV = {
+				add_core_of = PREV
+				force_enable_resistance = URS
+				start_resistance = URS
+				set_resistance = 65
+				set_compliance = 0
+			}
+		}
+	}
+	every_state = {
+		limit = {
+			UFS_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		random_country = {
+			limit = {
+				ursus_unifier = yes
+				OR = {
+					has_government = fascism
+					original_tag = KMG
+				}
+			}
+			PREV = {
+				add_core_of = PREV
+				force_enable_resistance = URS
+				start_resistance = URS
+				set_resistance = 65
+				set_compliance = 0
+			}
+		}
+	}
+	every_state = {
+		limit = {
+			KZC_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		transfer_state_to = KZC
+	}
+	every_state = {
+		limit = {
+			BUS_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		transfer_state_to = BUS
+	}
+	every_state = {
+		limit = {
+			BLT_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		transfer_state_to = BLT
+	}
+	KZC = {
+		declare_war_on = { target = URS type = annex_everything }
+
+		inherit_technology = URS
+		load_oob = KZC_uprising
+	}
+	BUS = {
+		declare_war_on = { target = URS type = annex_everything }
+
+		inherit_technology = URS
+		load_oob = BUS_uprising
+	}
+	BLT = {
+		declare_war_on = { target = URS type = annex_everything }
+
+		inherit_technology = URS
+		load_oob = BLT_uprising
+	}
+}
+
+central_tundria_trade_influence_change = {
+	add_to_variable = { trade_influence = tit }
+	custom_effect_tooltip = central_tundria_trade_influence_change_tt
+}

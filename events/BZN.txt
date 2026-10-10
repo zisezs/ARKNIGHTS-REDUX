@@ -1,0 +1,46 @@
+add_namespace = test_bzn
+
+country_event = {
+	id = test_bzn.1 #博尔扎诺与萨丁尼亚谈判合并
+	title = test_bzn.1.t
+	desc = test_bzn.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_bzn.1.a
+		SDN = {
+			country_event = {
+				id = test_sdn.1
+				days = 15
+			}
+		}
+	}
+}
+
+country_event = {
+	id = test_bzn.2 #博尔扎诺宣战萨丁尼亚
+	title = test_bzn.2.t
+	desc = test_bzn.2.d
+
+	fire_only_once = yes
+
+	trigger = {
+		BZN = {
+			has_war = no
+			is_neighbor_of = SDN
+		}
+		original_tag = BZN
+		SRC = {
+			exists = no
+		}
+	}
+
+	option = {
+		name = test_bzn.2.a
+		declare_war_on = {
+			target = SDN
+			type = annex_everything
+		}
+	}
+}

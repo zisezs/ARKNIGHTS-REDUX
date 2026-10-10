@@ -1,0 +1,501 @@
+
+IBR_dawn_category = {
+
+	#排盐工程
+	IBR_drainage_works = {
+		icon = GFX_decision_generic_construction
+
+		available = {
+			has_country_flag = IBR_drainage_unlocked
+		}
+
+		cost = 75
+		cooldown = 180
+
+		complete_effect = {
+			add_stability = 0.01
+			random_owned_controlled_state = {
+				add_manpower = 20000
+			}
+			random_owned_controlled_state = {
+				add_manpower = 20000
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#铸币改革
+	IBR_coinage_reform = {
+		icon = GFX_decision_generic_fundraising
+
+		available = {
+			has_country_flag = IBR_coinage_unlocked
+			NOT = {
+				has_country_flag = IBR_coinage_done
+			}
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_flag = IBR_coinage_done
+			add_stability = 0.03
+			if = {
+				limit = { has_idea = IBR_golden_age_3 }
+				swap_ideas = { remove_idea = IBR_golden_age_3 add_idea = IBR_golden_age_4 }
+			}
+			else = {
+				if = {
+					limit = { has_idea = IBR_golden_age_2 }
+					swap_ideas = { remove_idea = IBR_golden_age_2 add_idea = IBR_golden_age_3 }
+				}
+				else = {
+					if = {
+						limit = { has_idea = IBR_golden_age_1 }
+						swap_ideas = { remove_idea = IBR_golden_age_1 add_idea = IBR_golden_age_2 }
+					}
+					else = {
+						add_ideas = { IBR_golden_age_1 }
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#惩戒军征召
+	IBR_penitent_recruitment = {
+		icon = GFX_decision_generic_military
+
+		available = {
+			has_country_flag = IBR_recruit_unlocked
+		}
+
+		cost = 75
+		cooldown = 90
+
+		complete_effect = {
+			capital_scope = {
+				create_unit = {
+					division = "division_template = \"惩戒军连队\" start_experience_factor = 0.3 start_equipment_factor = 0.7"
+					owner = IBR
+					count = 1
+				}
+			}
+			army_experience = 5
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#大阵编制令
+	IBR_grand_formation_decree = {
+		icon = GFX_decision_generic_army_support
+
+		available = {
+			has_country_flag = IBR_formation_unlocked
+		}
+
+		cost = 100
+		cooldown = 150
+
+		complete_effect = {
+			capital_scope = {
+				create_unit = {
+					division = "division_template = \"重装海岸大阵\" start_experience_factor = 0.4 start_equipment_factor = 0.7"
+					owner = IBR
+					count = 1
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#民兵动员
+	IBR_militia_mobilization = {
+		icon = GFX_decision_generic_reorganize_irregulars
+
+		available = {
+			has_country_flag = IBR_militia_unlocked
+		}
+
+		cost = 75
+		cooldown = 120
+
+		complete_effect = {
+			capital_scope = {
+				create_unit = {
+					division = "division_template = \"灯塔戍卫队\" start_experience_factor = 0.2 start_equipment_factor = 0.6"
+					owner = IBR
+					count = 2
+				}
+			}
+			add_war_support = 0.02
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#私掠船团
+	IBR_corsair_fleet = {
+		icon = GFX_decision_generic_naval
+
+		available = {
+			has_country_flag = IBR_corsair_unlocked
+		}
+
+		cost = 50
+		cooldown = 90
+
+		complete_effect = {
+			navy_experience = 15
+			add_political_power = 10
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#海嗣猎杀
+	IBR_deep_hunt = {
+		icon = GFX_decision_generic_operation
+
+		available = {
+			has_country_flag = IBR_hunt_unlocked
+		}
+
+		cost = 75
+		cooldown = 120
+
+		complete_effect = {
+			navy_experience = 20
+			army_experience = 10
+			add_war_support = 0.02
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#灯塔网络：修复下一座灯塔
+	IBR_restore_lighthouse = {
+		icon = GFX_decision_generic_electricity
+
+		available = {
+			NOT = {
+				has_country_flag = IBR_beacon_network_done
+			}
+		}
+
+		cost = 100
+		cooldown = 60
+
+		complete_effect = {
+			add_timed_idea = { idea = IBR_lighthouse_works days = 90 }
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					has_idea = IBR_aftermath_of_Profound_Silence
+				}
+				swap_ideas = {
+					remove_idea = IBR_aftermath_of_Profound_Silence
+					add_idea = IBR_aftermath_mended
+				}
+				set_variable = { var = IBR_lighthouse_restored value = 1 }
+			}
+			else = {
+				if = {
+					limit = {
+						has_idea = IBR_aftermath_mended
+					}
+					swap_ideas = {
+						remove_idea = IBR_aftermath_mended
+						add_idea = IBR_aftermath_of_Profound_Silence_faded
+					}
+					set_variable = { var = IBR_lighthouse_restored value = 2 }
+				}
+				else = {
+					remove_ideas = IBR_aftermath_of_Profound_Silence_faded
+					add_ideas = { IBR_beacon_network }
+					set_variable = { var = IBR_lighthouse_restored value = 3 }
+					set_country_flag = IBR_beacon_network_done
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	#审判庭决议：全面肃清
+	IBR_total_purge = {
+		icon = GFX_decision_generic_arrest
+
+		available = {
+			NOT = {
+				has_country_flag = IBR_inquisition_verdict_done
+			}
+			OR = {
+				has_idea = IBR_threat_of_deep_sea_church
+				has_idea = IBR_threat_of_deep_sea_church_surge
+			}
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_flag = IBR_inquisition_verdict_done
+			if = {
+				limit = {
+					has_idea = IBR_threat_of_deep_sea_church_surge
+				}
+				swap_ideas = {
+					remove_idea = IBR_threat_of_deep_sea_church_surge
+					add_idea = IBR_church_crushed
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						has_idea = IBR_threat_of_deep_sea_church
+					}
+					swap_ideas = {
+						remove_idea = IBR_threat_of_deep_sea_church
+						add_idea = IBR_church_crushed
+					}
+				}
+			}
+			add_ideas = { IBR_purge_scholar_drain }
+			if = {
+				limit = {
+					has_idea = IBR_golden_age_4
+				}
+				remove_ideas = IBR_golden_age_4
+			}
+			else = {
+				if = {
+					limit = {
+						has_idea = IBR_golden_age_3
+					}
+					remove_ideas = IBR_golden_age_3
+				}
+				else = {
+					if = {
+						limit = {
+							has_idea = IBR_golden_age_2
+						}
+						remove_ideas = IBR_golden_age_2
+					}
+					else = {
+						if = {
+							limit = {
+								has_idea = IBR_golden_age_1
+							}
+							remove_ideas = IBR_golden_age_1
+						}
+					}
+				}
+			}
+			add_stability = -0.03
+			add_to_variable = { var = IBR_deep_threat value = -50 }
+			clamp_variable = { var = IBR_deep_threat min = 0 }
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	#审判庭决议：温和改良
+	IBR_gentle_reform = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			NOT = {
+				has_country_flag = IBR_inquisition_verdict_done
+			}
+			has_idea = IBR_inquisition_iron_curtain
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_flag = IBR_inquisition_verdict_done
+			remove_ideas = IBR_inquisition_iron_curtain
+			add_timed_idea = { idea = IBR_reform_unrest days = 180 }
+			add_political_power = 50
+			add_to_variable = { var = IBR_deep_threat value = 10 }
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	#终结分裂！（限时 150 天）
+	IBR_end_the_schism = {
+		icon = GFX_decision_generic_form_nation
+
+		priority = 200
+
+		#出现条件：已完成【永恒灯塔】且尚未结算
+		visible = {
+			has_completed_focus = IBR_eternal_lighthouse
+			NOT = {
+				has_country_flag = IBR_end_the_schism_resolved
+			}
+		}
+
+		#倒计时起算：决议一出现即开始计时
+		activation = {
+			has_completed_focus = IBR_eternal_lighthouse
+			NOT = {
+				has_country_flag = IBR_end_the_schism_resolved
+			}
+		}
+
+		#可完成条件：天环骑士团与审判之剑军团均不存在
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = IBR_end_the_schism_tt
+				AND = {
+					NOT = { country_exists = TNR }
+					NOT = { country_exists = TBL }
+				}
+			}
+		}
+
+		cost = 50
+		is_good = yes
+		days_mission_timeout = 150
+
+		#完成：分裂终结
+		complete_effect = {
+			set_country_flag = IBR_end_the_schism_resolved
+			add_ideas = { IBR_schism_ended }
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 100
+			army_experience = 25
+			hidden_effect = {
+				news_event = { id = worldnews_ibr.9 }
+			}
+		}
+
+		#失败：触发超事件【深海猎人登陆伊比利亚】，30 天后阿戈尔军事管制区接管
+		timeout_effect = {
+			set_country_flag = IBR_end_the_schism_resolved
+			set_country_flag = IBR_end_the_schism_failed
+			hidden_effect = {
+				news_event = { id = ibrse.1 }
+			}
+			country_event = { id = ibr.200 days = 30 }
+			add_stability = -0.10
+			add_war_support = -0.10
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+	}
+}
+
+IBR_deep_category = {
+
+	#净化沿海祭坛
+	IBR_cleanse_altars = {
+		icon = GFX_decision_generic_wreckers
+
+		available = {
+			check_variable = {
+				var = IBR_deep_threat
+				value = 20
+				compare = greater_than
+			}
+		}
+
+		cost = 75
+		cooldown = 120
+
+		complete_effect = {
+			add_to_variable = { var = IBR_deep_threat value = -15 }
+			clamp_variable = { var = IBR_deep_threat min = 0 }
+			add_stability = 0.01
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	#围剿恐鱼
+	IBR_fight_seaspawn = {
+		icon = GFX_decision_generic_protection
+
+		available = {
+			has_country_flag = IBR_seaspawn_active
+		}
+
+		cost = 75
+		cooldown = 60
+
+		complete_effect = {
+			army_experience = 15
+			add_war_support = 0.03
+			clr_country_flag = IBR_seaspawn_active
+			set_variable = { var = IBR_deep_threat value = 25 }
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	#吞并波利尔尼亚
+	IBR_annex_pon = {
+		icon = GFX_decision_generic_form_nation
+
+		visible = {
+			PON = { exists = yes }
+		}
+
+		complete_effect = {
+			annex_country = {
+				target = PON
+				transfer_navy = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

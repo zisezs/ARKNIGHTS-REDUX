@@ -1,0 +1,80 @@
+# ==============================================================================
+#  让柳德米拉成为领导人 —— 政治决议
+#  · 分类见 common/decisions/categories/REU_decision_categroies.txt
+#    （REU_Lyudmila_Take_Power_Category，柳德米拉尚未执政时显示）
+#  · 目的：把「弑君者」柳德米拉推上国家领导人位置，并满足国策
+#    【柳德米拉笑到最后！】（REU_Lyudmila_laughs_last）的全部解锁条件：
+#      ① has_country_leader = { character = REU_Lyudmila ruling_only = yes }
+#      ② has_country_flag = REU_Talulah_Mad_Purge_Ended（原本全 mod 无来源）
+#  · 换在任领袖必须两步：retire_country_leader 退掉在任者 + promote_character 推她上党魁。
+#    （只 add_country_leader_role + promote_leader 推不动在任的那位——实测塔露拉会留在位上；
+#      且她定义里已有 bolshevism_subtype 领袖角色，重复 add 会报
+#      "Character already has a country leader role for ideology"。）
+#  · despotism 执政（常态，塔露拉走 resistance_group_subtype）：直接调既有例程
+#    REU_Ludmila_Coup_Take_Power（办公室脚本，自带在位保护），不动执政党。
+#  · 其他执政家族（如已完成革命的 communism）：先保证 communism 执政，
+#    再退职 + promote_character 推她（bolshevism_subtype）。
+# ==============================================================================
+
+REU_Lyudmila_Take_Power_Category = {
+
+	# ---- 让柳德米拉成为领导人（50 pp） ----
+	REU_lyudmila_take_power = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			has_character = REU_Lyudmila
+			NOT = { has_country_leader = { character = REU_Lyudmila ruling_only = yes } }
+		}
+
+		available = {
+			has_character = REU_Lyudmila
+			NOT = { has_country_leader = { character = REU_Lyudmila ruling_only = yes } }
+		}
+
+		cost = 50
+
+		complete_effect = {
+			custom_effect_tooltip = REU_lyudmila_take_power_tt
+			hidden_effect = {
+				if = {
+					limit = { has_government = despotism }
+					REU_Ludmila_Coup_Take_Power = yes
+				}
+				else = {
+					if = {
+						limit = { NOT = { has_government = communism } }
+						set_politics = {
+							ruling_party = communism
+						}
+					}
+					if = {
+						limit = { NOT = { has_country_leader = { character = REU_Lyudmila ruling_only = yes } } }
+						retire_country_leader = yes
+					}
+					promote_character = {
+						character = REU_Lyudmila
+						ideology = bolshevism_subtype
+					}
+				}
+				set_country_flag = REU_Talulah_Mad_Purge_Ended
+				# 弑君者威名：确保动态修正容器已挂（老档不走 on_startup 时兜底；旗标幂等）
+				if = {
+					limit = { NOT = { has_country_flag = REU_crownslayer_fame_dyn_added } }
+					set_country_flag = REU_crownslayer_fame_dyn_added
+					add_dynamic_modifier = {
+						modifier = REU_crownslayer_fame_modifier
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+}

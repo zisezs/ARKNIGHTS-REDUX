@@ -1,0 +1,358 @@
+# 大炎 · 军事国策树民族精神
+# 生成器：docs/_yan_mil_build.py（数据表在 docs/_yan_mil_spirits.py）
+# 三个军种精神**只含本兵种修正**（战斗/组织/机动/经验训练），无跨兵种零头：
+#   第 n 档 = 本兵种前 n 个国策（仅本兵种键）之和 × n/8；第 8 档 = 终值（5% 的倍数）
+#   档位由 YAN_mil_<svc>_tier 变量驱动，与点击顺序无关。
+#   其余加成（主干/天枢/协同 + 跨兵种键）全部在【朝野同心】动态 BUFF 里。
+
+ideas = {
+	country = {
+		# ============ 大炎帝国陆军（8 档累加；名称固定，描述随档位） ============
+		# 第 1 档 · 初制：步骑分列，合则为阵。兵出于民，器成于国。
+		YAN_mil_service_army_1 = {
+			picture = YAN_mil_service_army
+			modifier = {
+				experience_gain_army_factor = 0.1
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+		# 第 2 档 · 训战：罢一切虚文，专意训战。行军、攻坚、防御皆有定章。
+		YAN_mil_service_army_2 = {
+			picture = YAN_mil_service_army
+			modifier = {
+				experience_gain_army_factor = 0.1
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				army_org_factor = 0.1
+				army_org_regain = 0.1
+				experience_loss_factor = -0.2
+			}
+		}
+		# 第 3 档 · 铁甲：铁甲成阵，履冰河如平地。陆战之骨自此而立。
+		YAN_mil_service_army_3 = {
+			picture = YAN_mil_service_army
+			modifier = {
+				experience_gain_army_factor = 0.1
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				army_org_factor = 0.15
+				army_org_regain = 0.15
+				experience_loss_factor = -0.2
+				army_speed_factor = 0.05
+				army_armor_attack_factor = 0.05
+				army_armor_defence_factor = 0.05
+			}
+		}
+		# 第 4 档 · 神机：神机火炮列于阵后，声如霹雳，攻坚破垒非此不可。
+		YAN_mil_service_army_4 = {
+			picture = YAN_mil_service_army
+			modifier = {
+				experience_gain_army_factor = 0.1
+				army_attack_factor = 0.1
+				army_defence_factor = 0.05
+				army_org_factor = 0.15
+				army_org_regain = 0.15
+				experience_loss_factor = -0.2
+				army_speed_factor = 0.05
+				army_armor_attack_factor = 0.05
+				army_armor_defence_factor = 0.05
+				breakthrough_factor = 0.05
+			}
+		}
+		# 第 5 档 · 疾行：其疾如风，其徐如林。先至者胜，不与敌相持。
+		YAN_mil_service_army_5 = {
+			picture = YAN_mil_service_army
+			modifier = {
+				experience_gain_army_factor = 0.1
+				army_attack_factor = 0.1
+				army_defence_factor = 0.05
+				army_org_factor = 0.15
+				army_org_regain = 0.15
+				experience_loss_factor = -0.3
+				army_speed_factor = 0.05
+				army_armor_attack_factor = 0.05
+				army_armor_defence_factor = 0.05
+				breakthrough_factor = 0.05
+				recon_factor = 0.05
+				initiative_factor = 0.05
+			}
+		}
+		# 第 6 档 · 火网：侦得的便打得到。雷火俱发，无有先后，无有远近。
+		YAN_mil_service_army_6 = {
+			picture = YAN_mil_service_army
+			modifier = {
+				experience_gain_army_factor = 0.1
+				army_attack_factor = 0.1
+				army_defence_factor = 0.05
+				army_org_factor = 0.15
+				army_org_regain = 0.15
+				experience_loss_factor = -0.3
+				army_speed_factor = 0.05
+				army_armor_attack_factor = 0.05
+				army_armor_defence_factor = 0.05
+				breakthrough_factor = 0.05
+				recon_factor = 0.15
+				initiative_factor = 0.05
+			}
+		}
+		# 第 7 档 · 将弁：登坛点将，将弁再训。兵之强弱，半在于将。
+		YAN_mil_service_army_7 = {
+			picture = YAN_mil_service_army
+			modifier = {
+				experience_gain_army_factor = 0.1
+				army_attack_factor = 0.1
+				army_defence_factor = 0.05
+				army_org_factor = 0.15
+				army_org_regain = 0.15
+				experience_loss_factor = -0.3
+				army_speed_factor = 0.05
+				army_armor_attack_factor = 0.05
+				army_armor_defence_factor = 0.05
+				breakthrough_factor = 0.05
+				recon_factor = 0.15
+				initiative_factor = 0.1
+				planning_speed = 0.15
+				command_power_gain = 0.1
+				max_planning_factor = 0.15
+				land_reinforce_rate = 0.05
+				max_army_group_size = 1
+			}
+		}
+		# 第 8 档 · 成军：金戈铁马，步骑炮工合为一路。此大炎陆军之极致。
+		YAN_mil_service_army_8 = {
+			picture = YAN_mil_service_army
+			modifier = {
+				experience_gain_army_factor = 0.1
+				army_attack_factor = 0.15
+				army_defence_factor = 0.1
+				army_org_factor = 0.15
+				army_org_regain = 0.15
+				experience_loss_factor = -0.3
+				army_speed_factor = 0.15
+				army_armor_attack_factor = 0.15
+				army_armor_defence_factor = 0.15
+				breakthrough_factor = 0.15
+				recon_factor = 0.15
+				initiative_factor = 0.1
+				planning_speed = 0.15
+				command_power_gain = 0.1
+				max_planning_factor = 0.15
+				land_reinforce_rate = 0.05
+				max_army_group_size = 1
+				training_time_factor = -0.1
+				experience_gain_army_unit_factor = 0.1
+			}
+		}
+
+		# ============ 大炎帝国空军（8 档累加；名称固定，描述随档位） ============
+		# 第 1 档 · 立部：云骑既成，长空始有大炎之影。
+		YAN_mil_service_air_1 = {
+			picture = YAN_mil_service_air
+			modifier = {
+				air_mission_efficiency = 0.05
+				air_agility_factor = 0.05
+			}
+		}
+		# 第 2 档 · 司天：设观星之台于十二楼，敌机未至先见其影。
+		YAN_mil_service_air_2 = {
+			picture = YAN_mil_service_air
+			modifier = {
+				air_mission_efficiency = 0.05
+				air_agility_factor = 0.05
+				air_superiority_detect_factor = 0.1
+				air_defence_factor = 0.1
+			}
+		}
+		# 第 3 档 · 云骑：铸之以天工，试之以长空。不求其多，但求其锐。
+		YAN_mil_service_air_3 = {
+			picture = YAN_mil_service_air
+			modifier = {
+				air_mission_efficiency = 0.05
+				air_agility_factor = 0.15
+				air_superiority_detect_factor = 0.1
+				air_defence_factor = 0.1
+				air_attack_factor = 0.1
+			}
+		}
+		# 第 4 档 · 无形：不载人而能战，不见形而有威。以器械代血肉。
+		YAN_mil_service_air_4 = {
+			picture = YAN_mil_service_air
+			modifier = {
+				air_mission_efficiency = 0.05
+				air_agility_factor = 0.15
+				air_superiority_detect_factor = 0.1
+				air_defence_factor = 0.15
+				air_attack_factor = 0.1
+				ground_attack_factor = 0.1
+				naval_strike_attack_factor = 0.1
+			}
+		}
+		# 第 5 档 · 静默：凡电波所及皆可乱之，使敌目盲耳聋而我自如。
+		YAN_mil_service_air_5 = {
+			picture = YAN_mil_service_air
+			modifier = {
+				air_mission_efficiency = 0.15
+				air_agility_factor = 0.15
+				air_superiority_detect_factor = 0.1
+				air_defence_factor = 0.25
+				air_attack_factor = 0.1
+				ground_attack_factor = 0.1
+				naval_strike_attack_factor = 0.1
+			}
+		}
+		# 第 6 档 · 天工：开脉动之线，一机出而百机随，工不辍而料不积。
+		YAN_mil_service_air_6 = {
+			picture = YAN_mil_service_air
+			modifier = {
+				air_mission_efficiency = 0.2
+				air_agility_factor = 0.15
+				air_superiority_detect_factor = 0.1
+				air_defence_factor = 0.25
+				air_attack_factor = 0.1
+				ground_attack_factor = 0.1
+				naval_strike_attack_factor = 0.1
+			}
+		}
+		# 第 7 档 · 鹰击：侦与打合为一事。见即击，击即毁。
+		YAN_mil_service_air_7 = {
+			picture = YAN_mil_service_air
+			modifier = {
+				air_mission_efficiency = 0.2
+				air_agility_factor = 0.25
+				air_superiority_detect_factor = 0.1
+				air_defence_factor = 0.35
+				air_attack_factor = 0.1
+				ground_attack_factor = 0.2
+				naval_strike_attack_factor = 0.1
+			}
+		}
+		# 第 8 档 · 制天：制天权在握，万里山河皆在翼下。此后征战先决于天。
+		YAN_mil_service_air_8 = {
+			picture = YAN_mil_service_air
+			modifier = {
+				air_mission_efficiency = 0.3
+				air_agility_factor = 0.35
+				air_superiority_detect_factor = 0.2
+				air_defence_factor = 0.35
+				air_attack_factor = 0.2
+				ground_attack_factor = 0.2
+				naval_strike_attack_factor = 0.1
+				army_bonus_air_superiority_factor = 0.05
+			}
+		}
+
+		# ============ 大炎帝国海军（8 档累加；名称固定，描述随档位） ============
+		# 第 1 档 · 立部：楼船既造，海疆始有人守。
+		YAN_mil_service_navy_1 = {
+			picture = YAN_mil_service_navy
+			modifier = {
+				experience_gain_navy_factor = 0.1
+				navy_screen_attack_factor = 0.05
+				navy_screen_defence_factor = 0.05
+			}
+		}
+		# 第 2 档 · 艨艟：重甲巨舰，非复古之艨艟，而有其势。海战之骨在主力。
+		YAN_mil_service_navy_2 = {
+			picture = YAN_mil_service_navy
+			modifier = {
+				experience_gain_navy_factor = 0.1
+				navy_screen_attack_factor = 0.05
+				navy_screen_defence_factor = 0.05
+				navy_capital_ship_attack_factor = 0.1
+				navy_capital_ship_defence_factor = 0.1
+			}
+		}
+		# 第 3 档 · 百工：船坞易以新法，分段而作，以时程课功。
+		YAN_mil_service_navy_3 = {
+			picture = YAN_mil_service_navy
+			modifier = {
+				experience_gain_navy_factor = 0.1
+				navy_screen_attack_factor = 0.05
+				navy_screen_defence_factor = 0.05
+				navy_capital_ship_attack_factor = 0.1
+				navy_capital_ship_defence_factor = 0.1
+				sortie_efficiency = 0.05
+			}
+		}
+		# 第 4 档 · 蛟龙：水师之锐，能自浪中登岸，夺敌之要。此军只用于攻。
+		YAN_mil_service_navy_4 = {
+			picture = YAN_mil_service_navy
+			modifier = {
+				experience_gain_navy_factor = 0.1
+				navy_screen_attack_factor = 0.05
+				navy_screen_defence_factor = 0.05
+				navy_capital_ship_attack_factor = 0.1
+				navy_capital_ship_defence_factor = 0.1
+				sortie_efficiency = 0.05
+				amphibious_invasion = 0.15
+			}
+		}
+		# 第 5 档 · 浮城：以城为舰，以舰载翼。移动城邦之遗法移用于海上。
+		YAN_mil_service_navy_5 = {
+			picture = YAN_mil_service_navy
+			modifier = {
+				experience_gain_navy_factor = 0.1
+				navy_screen_attack_factor = 0.05
+				navy_screen_defence_factor = 0.05
+				navy_capital_ship_attack_factor = 0.1
+				navy_capital_ship_defence_factor = 0.1
+				sortie_efficiency = 0.15
+				amphibious_invasion = 0.15
+				navy_carrier_air_targetting_factor = 0.1
+				spotting_chance = 0.1
+			}
+		}
+		# 第 6 档 · 浮海：登岸非一事一器，乃全军之体系：备船、备粮、备向导、备天气。
+		YAN_mil_service_navy_6 = {
+			picture = YAN_mil_service_navy
+			modifier = {
+				experience_gain_navy_factor = 0.1
+				navy_screen_attack_factor = 0.05
+				navy_screen_defence_factor = 0.05
+				navy_capital_ship_attack_factor = 0.1
+				navy_capital_ship_defence_factor = 0.1
+				sortie_efficiency = 0.15
+				amphibious_invasion = 0.3
+				navy_carrier_air_targetting_factor = 0.1
+				spotting_chance = 0.1
+			}
+		}
+		# 第 7 档 · 渊龙：潜而不见，出则海震。不争一时之速，只求一击之重。
+		YAN_mil_service_navy_7 = {
+			picture = YAN_mil_service_navy
+			modifier = {
+				experience_gain_navy_factor = 0.1
+				navy_screen_attack_factor = 0.15
+				navy_screen_defence_factor = 0.15
+				navy_capital_ship_attack_factor = 0.1
+				navy_capital_ship_defence_factor = 0.1
+				sortie_efficiency = 0.15
+				amphibious_invasion = 0.3
+				navy_carrier_air_targetting_factor = 0.1
+				spotting_chance = 0.1
+				naval_damage_factor = 0.1
+				naval_defense_factor = 0.1
+			}
+		}
+		# 第 8 档 · 沧溟：海内既清，万里皆我行舟之地。自此大炎之海无他人之帆。
+		YAN_mil_service_navy_8 = {
+			picture = YAN_mil_service_navy
+			modifier = {
+				experience_gain_navy_factor = 0.1
+				navy_screen_attack_factor = 0.2
+				navy_screen_defence_factor = 0.2
+				navy_capital_ship_attack_factor = 0.15
+				navy_capital_ship_defence_factor = 0.15
+				sortie_efficiency = 0.15
+				amphibious_invasion = 0.3
+				navy_carrier_air_targetting_factor = 0.1
+				spotting_chance = 0.1
+				naval_damage_factor = 0.1
+				naval_defense_factor = 0.1
+				naval_coordination = 0.15
+			}
+		}
+
+	}
+}

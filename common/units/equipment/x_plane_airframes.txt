@@ -1,0 +1,219 @@
+# This file must be evaluated after the file(s) defining the archetypes being duplicated.
+# The equipment attributes alias, type, variant_name, and derived_variant_name are not duplicated.
+
+duplicate_archetypes = {
+
+	# small_plane
+
+	small_plane_cas_airframe = {
+		archetype = small_plane_airframe
+		type = cas
+		picture = archetype_CAS_equipment
+		variant_name = {
+			small_plane_cas_airframe_1 = small_CAS_equipment_1
+			small_plane_cas_airframe_2 = small_CAS_equipment_2
+			small_plane_cas_airframe_3 = small_CAS_equipment_3
+			small_plane_cas_airframe_4 = small_CAS_equipment_4
+		}
+		air_map_icon_frame = 2
+		interface_overview_category_index = 0
+		substitute = cv_small_plane_cas_airframe
+	}
+	cv_small_plane_cas_airframe = {
+		archetype = cv_small_plane_airframe
+		type = cas
+		ai_type = cv_cas
+		picture = archetype_CAS_equipment
+		variant_name = {
+			cv_small_plane_cas_airframe_1 = cv_small_CAS_equipment_1
+			cv_small_plane_cas_airframe_2 = cv_small_CAS_equipment_2
+			cv_small_plane_cas_airframe_3 = cv_small_CAS_equipment_3
+			cv_small_plane_cas_airframe_4 = cv_small_CAS_equipment_4
+		}
+		air_map_icon_frame = 17
+		interface_overview_category_index = 0
+	}
+
+	small_plane_naval_bomber_airframe = {
+		archetype = small_plane_airframe
+		type = naval_bomber
+		picture = archetype_heavy_fighter_equipment
+		variant_name = {
+			small_plane_naval_bomber_airframe_1 = small_nav_bomber_equipment_1
+			small_plane_naval_bomber_airframe_2 = small_nav_bomber_equipment_2
+			small_plane_naval_bomber_airframe_3 = small_nav_bomber_equipment_3
+			small_plane_naval_bomber_airframe_4 = small_nav_bomber_equipment_4
+		}
+		air_map_icon_frame = 3
+		interface_overview_category_index = 2
+		substitute = cv_small_plane_naval_bomber_airframe
+	}
+	cv_small_plane_naval_bomber_airframe = {
+		archetype = cv_small_plane_airframe
+		type = naval_bomber
+		ai_type = cv_naval_bomber
+		picture = archetype_heavy_fighter_equipment
+		variant_name = {
+			cv_small_plane_naval_bomber_airframe_1 = cv_small_nav_bomber_equipment_1
+			cv_small_plane_naval_bomber_airframe_2 = cv_small_nav_bomber_equipment_2
+			cv_small_plane_naval_bomber_airframe_3 = cv_small_nav_bomber_equipment_3
+			cv_small_plane_naval_bomber_airframe_4 = cv_small_nav_bomber_equipment_4
+		}
+		air_map_icon_frame = 18
+		interface_overview_category_index = 2
+		default_carrier_composition_weight = 1
+	}
+
+	small_plane_tactical_bomber_airframe = {
+		archetype = small_plane_airframe
+		type = tactical_bomber
+		picture = archetype_heavy_fighter_equipment
+		variant_name = {
+			small_plane_tactical_bomber_airframe_1 = small_tac_bomber_equipment_1
+			small_plane_tactical_bomber_airframe_2 = small_tac_bomber_equipment_2
+			small_plane_tactical_bomber_airframe_3 = small_tac_bomber_equipment_3
+			small_plane_tactical_bomber_airframe_4 = small_tac_bomber_equipment_4
+		}
+		air_map_icon_frame = 3
+		interface_overview_category_index = 2
+		substitute = cv_small_plane_tactical_bomber_airframe
+	}
+	cv_small_plane_tactical_bomber_airframe = {
+		archetype = cv_small_plane_airframe
+		type = tactical_bomber
+		picture = archetype_heavy_fighter_equipment
+		variant_name = {
+			cv_small_plane_tactical_bomber_airframe_1 = cv_small_tac_bomber_equipment_1
+			cv_small_plane_tactical_bomber_airframe_2 = cv_small_tac_bomber_equipment_2
+			cv_small_plane_tactical_bomber_airframe_3 = cv_small_tac_bomber_equipment_3
+			cv_small_plane_tactical_bomber_airframe_4 = cv_small_tac_bomber_equipment_4
+		}
+		air_map_icon_frame = 18
+		interface_overview_category_index = 2
+		default_carrier_composition_weight = 1
+	}
+
+	# medium_plane
+
+	medium_plane_tactical_bomber_airframe = {
+		archetype = medium_plane_airframe
+		type = tactical_bomber
+		for_each = {
+			air_superiority = { set = 1.25 }
+		}
+		sprite = light_plane
+		variant_name = {
+			medium_plane_tactical_bomber_airframe_1 = medium_tac_bomber_equipment_1
+			medium_plane_tactical_bomber_airframe_2 = medium_tac_bomber_equipment_2
+			medium_plane_tactical_bomber_airframe_3 = medium_tac_bomber_equipment_3
+			medium_plane_tactical_bomber_airframe_4 = medium_tac_bomber_equipment_4
+		}
+		air_map_icon_frame = 8
+		interface_overview_category_index = 3
+	}
+
+	medium_plane_cas_airframe = {
+		archetype = medium_plane_airframe
+		type = cas
+		for_each = {
+			air_superiority = { set = 1.25 }
+		}
+		sprite = light_plane
+		variant_name = {
+			medium_plane_cas_airframe_1 = medium_cas_equipment_1
+			medium_plane_cas_airframe_2 = medium_cas_equipment_2
+			medium_plane_cas_airframe_3 = medium_cas_equipment_3
+			medium_plane_cas_airframe_4 = medium_cas_equipment_4
+		}
+		air_map_icon_frame = 8
+		interface_overview_category_index = 3
+	}
+
+	medium_plane_naval_bomber_airframe = {
+		archetype = medium_plane_airframe
+		type = naval_bomber
+		for_each = {
+			air_superiority = { set = 1.25 }
+		}
+		sprite = light_plane
+		variant_name = {
+			medium_plane_naval_bomber_airframe_1 = medium_nav_bomber_equipment_1
+			medium_plane_naval_bomber_airframe_2 = medium_nav_bomber_equipment_2
+			medium_plane_naval_bomber_airframe_3 = medium_nav_bomber_equipment_3
+			medium_plane_naval_bomber_airframe_4 = medium_nav_bomber_equipment_4
+		}
+		air_map_icon_frame = 8
+		interface_overview_category_index = 3
+	}
+
+	# large_plane
+
+	large_plane_tactical_bomber_airframe = {
+		archetype = large_plane_airframe
+		type = tactical_bomber
+		for_each = {
+			air_superiority = { set = 1.25 }
+		}
+		sprite = light_plane
+		variant_name = {
+			large_plane_tactical_bomber_airframe_0 = large_tac_bomber_equipment_0
+			large_plane_tactical_bomber_airframe_1 = large_tac_bomber_equipment_1
+			large_plane_tactical_bomber_airframe_2 = large_tac_bomber_equipment_2
+			large_plane_tactical_bomber_airframe_3 = large_tac_bomber_equipment_3
+			large_plane_tactical_bomber_airframe_4 = large_tac_bomber_equipment_4
+		}
+		air_map_icon_frame = 8
+		interface_overview_category_index = 3
+	}
+
+	large_plane_cas_airframe = {
+		archetype = large_plane_airframe
+		type = cas
+		for_each = {
+			air_superiority = { set = 1.25 }
+		}
+		sprite = light_plane
+		variant_name = {
+			large_plane_cas_airframe_1 = large_cas_equipment_1
+			large_plane_cas_airframe_2 = large_cas_equipment_2
+			large_plane_cas_airframe_3 = large_cas_equipment_3
+			large_plane_cas_airframe_4 = large_cas_equipment_4
+		}
+		air_map_icon_frame = 8
+		interface_overview_category_index = 3
+	}
+
+	large_plane_naval_bomber_airframe = {
+		archetype = large_plane_airframe
+		type = naval_bomber
+		for_each = {
+			air_superiority = { set = 1.25 }
+		}
+		sprite = light_plane
+		variant_name = {
+			large_plane_naval_bomber_airframe_1 = large_nav_bomber_equipment_1
+			large_plane_naval_bomber_airframe_2 = large_nav_bomber_equipment_2
+			large_plane_naval_bomber_airframe_3 = large_nav_bomber_equipment_3
+			large_plane_naval_bomber_airframe_4 = large_nav_bomber_equipment_4
+		}
+		air_map_icon_frame = 8
+		interface_overview_category_index = 3
+	}
+	
+	large_plane_scout_plane_airframe = {
+		archetype = large_plane_airframe
+		type = scout_plane
+		for_each = {
+			air_superiority = { set = 1.25 }
+		}
+		sprite = light_plane
+		variant_name = {
+			large_plane_scout_plane_airframe_1 = large_scout_plane_equipment_1
+			large_plane_scout_plane_airframe_2 = large_scout_plane_equipment_2
+			large_plane_scout_plane_airframe_3 = large_scout_plane_equipment_3
+			large_plane_scout_plane_airframe_4 = large_scout_plane_equipment_4
+		}
+		air_map_icon_frame = 8
+		interface_overview_category_index = 3
+	}
+}

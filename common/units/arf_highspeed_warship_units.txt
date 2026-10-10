@@ -1,0 +1,247 @@
+# ============================================================================
+# 高速战舰：四类“陆上战舰”支援连
+# ----------------------------------------------------------------------------
+# 与“专属特殊兵种”同款约定：group = support、combat_width = 0、不写地形块；
+# 面板属性由各自的专用装备承载（见 arf_highspeed_warship_equipment.txt），
+# 所以这里不再写 soft_attack / defense / breakthrough 修正。
+# 装甲率与装甲厚度都来自装备（步兵装备为 0，只有这几艘船自己是装甲单位）。
+# ============================================================================
+
+sub_units = {
+
+	# 高速战舰-无畏舰
+	arf_dreadnought_warship = {
+		abbreviation = "DNW"
+		sprite = arf_dreadnought_warship
+		map_icon_category = infantry
+		priority = 0
+		ai_priority = 0
+		active = no
+
+		type = {
+			infantry
+			support
+		}
+
+		group = support
+
+		categories = {
+			category_support_battalions
+			category_army
+			category_all_armor
+		}
+
+		regimental = no
+		combat_width = 0
+
+		max_strength = 200
+		max_organisation = 50
+		default_morale = 0.3
+		manpower = 10000
+		training_time = 180
+
+		weight = 0.5
+		supply_consumption = 0.5
+		can_be_parachuted = no
+		maximum_speed = 6.4
+		reliability_factor = 0.1
+
+		essential = {
+			arf_dreadnought_equipment
+		}
+
+		need = {
+			arf_dreadnought_equipment = 1
+		}
+
+		# 支援连特性：陆军组织度+50%
+		battalion_mult = {
+			category = category_army
+			max_organisation = 0.5
+		}
+
+		# 支援连特性：城市地形适应+20%
+		urban = {
+			attack = 0.2
+			defence = 0.2
+			movement = 0.2
+		}
+
+		same_support_type = arf_dreadnought_warship
+	}
+
+	# 高速战舰-突击舰
+	arf_assault_warship = {
+		abbreviation = "ASW"
+		sprite = arf_assault_warship
+		map_icon_category = infantry
+		priority = 0
+		ai_priority = 0
+		active = no
+
+		type = {
+			infantry
+			support
+		}
+
+		group = support
+
+		categories = {
+			category_support_battalions
+			category_army
+			category_all_armor
+		}
+
+		regimental = no
+		combat_width = 0
+
+		max_strength = 100
+		max_organisation = 60
+		default_morale = 0.3
+		manpower = 6000
+		training_time = 180
+
+		weight = 0.3
+		supply_consumption = 0.35
+		can_be_parachuted = no
+		maximum_speed = 8.0
+		reliability_factor = 0.1
+
+		essential = {
+			arf_assault_ship_equipment
+		}
+
+		need = {
+			arf_assault_ship_equipment = 1
+		}
+
+		# 支援连特性：陆军突破+10%
+		battalion_mult = {
+			category = category_army
+			breakthrough = 0.1
+		}
+
+		# 支援连特性：平原地形适应+20%
+		plains = {
+			attack = 0.2
+			defence = 0.2
+			movement = 0.2
+		}
+
+		same_support_type = arf_assault_warship
+	}
+
+	# 高速战舰-炮舰
+	arf_gunboat_warship = {
+		abbreviation = "GNW"
+		sprite = arf_gunboat_warship
+		map_icon_category = infantry
+		priority = 0
+		ai_priority = 0
+		active = no
+
+		type = {
+			infantry
+			support
+		}
+
+		group = support
+
+		categories = {
+			category_support_battalions
+			category_army
+			category_all_armor
+		}
+
+		regimental = no
+		combat_width = 0
+
+		max_strength = 20
+		max_organisation = 45
+		default_morale = 0.3
+		manpower = 3000
+		training_time = 120
+
+		weight = 0.15
+		supply_consumption = 0.2
+		can_be_parachuted = no
+		maximum_speed = 7.0
+		reliability_factor = 0.1
+
+		essential = {
+			arf_gunboat_equipment
+		}
+
+		need = {
+			arf_gunboat_equipment = 1
+		}
+
+		# 支援连特性：陆军软攻+10%、陆军防御+10%
+		battalion_mult = {
+			category = category_army
+			soft_attack = 0.1
+			defense = 0.1
+		}
+
+		same_support_type = arf_gunboat_warship
+	}
+
+	# 高速战舰-辅助舰
+	arf_auxiliary_warship = {
+		abbreviation = "AUW"
+		sprite = arf_auxiliary_warship
+		map_icon_category = infantry
+		priority = 0
+		ai_priority = 0
+		active = no
+
+		type = {
+			infantry
+			support
+		}
+
+		group = support
+
+		categories = {
+			category_support_battalions
+			category_army
+			category_all_armor
+		}
+
+		regimental = no
+		combat_width = 0
+
+		max_strength = 20
+		max_organisation = 40
+		default_morale = 0.3
+		manpower = 1500
+		training_time = 120
+
+		weight = 0.1
+		supply_consumption = 0.1
+		can_be_parachuted = no
+		maximum_speed = 7.0
+
+		essential = {
+			arf_auxiliary_ship_equipment
+		}
+
+		need = {
+			arf_auxiliary_ship_equipment = 1
+		}
+
+		# 支援连特性：可靠性+20%（全师装备可靠性）
+		reliability_factor = 0.2
+
+		# 支援连特性：伤兵复原率+10%
+		casualty_trickleback = 0.1
+
+		# 支援连特性：组织度恢复+15%（近似）
+		battalion_mult = {
+			category = category_army
+			max_organisation = 0.15
+		}
+
+		same_support_type = arf_auxiliary_warship
+	}
+}

@@ -1,0 +1,31 @@
+#抵抗运动
+GUL_rebel_decisions = {
+
+	icon = GFX_EUU_decision_category
+
+	allowed = {
+		original_tag = GUL
+	}
+	visible = {
+		
+	}
+	priority = {
+		base = 150
+	}
+}
+
+GUL_revolution_decisions = {
+
+	icon = GFX_EUU_decision_category
+
+	allowed = {
+		original_tag = GUL
+	}
+	visible = {
+		VIC = { has_country_flag = VIC_joint_march_failed_flag }
+	}
+	visible_when_empty = yes
+	priority = {
+		base = 150
+	}
+}

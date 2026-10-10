@@ -1,0 +1,36 @@
+spriteTypes = {
+	# ========================================================================
+	# 乌萨斯「乌萨斯之梦」国策树（URS_dream）· 国策图标
+	# ------------------------------------------------------------------------
+	# 只放这一棵树（URS_dream / 阶段一）自己的图，别往老树那两份里塞。
+	#
+	# 装图：docs/_urs_dream_icon_install.cjs（默认就是当前口径 155x106 fill）
+	#   node docs/_urs_dream_icon_install.cjs                                  # 155x106
+	#   node docs/_urs_dream_icon_install.cjs --size 220x150 --mode native     # 原像素
+	#   node docs/_urs_dream_icon_install.cjs --size 94x86 --mode fitH          # 原版尺寸
+	#
+	# 【尺寸 = 155x106】2026-09-30 用户定档。
+	#   关键：**同一张贴图会被画在两个地方，取两处可用框的交集。**
+	#   ① 国策树：national_focus_item 的 buttonType "symbol"（centerposition = yes、
+	#      没有 size → 按贴图**原生尺寸居中**画）；列距 focus_spacing = { x = 96 y = 130 }。
+	#      宽度理论上限 94（原版图标清一色 94x86 就是为这个）。
+	#   ② 国策详情面板：national_focus_detail_view 的 iconType "symbol" 在 (42,88)
+	#      左上角对齐、同样是原生尺寸；右侧 x=205 起是「前置条件」底板、
+	#      下侧 y=220 起是「统计区」→ **净空只有 155x124**。
+	#   → 取交集得 155x106（源图 220x150 宽高比 1.467，155/106 = 1.462，几乎不变形）。
+	#   走过并被否决的两版：94x86（用户嫌小）、220x150 原像素（详情面板里压住前置条件）。
+	#   以后给本树其它格出图，同样按 155x106 出，否则详情面板会对不齐。
+	#
+	# 【格式】未压缩 32 位 BGRA DDS。本工程有过「PNG 国策图首帧全问号、DDS 正常」
+	#   的悬案（记忆 hoi4-focus-icon-lazy-load），所以国策图一律出 DDS。
+	#
+	# 【不做 shine 变体】原版是在 interface/goals_shine.gfx 里用 `<图标名>_shine`
+	#   后缀另起一个精灵，而同目录的 URS_goals_shine.gfx 用的是「同名覆盖」写法
+	#   （等于那套闪烁本来就没生效）。新图标跟着同树的其它格走，不特殊化。
+	# ========================================================================
+
+	SpriteType = {
+		name = "GFX_focus_URS_ursus_dream"
+		texturefile = "gfx/interface/goals/URS/URS_ursus_dream.dds"
+	}
+}

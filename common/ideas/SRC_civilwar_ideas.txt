@@ -1,0 +1,47 @@
+# ============================================================================
+# 叙拉古内战（2026-09-19）—— 开局事件链产出的两个精神
+# 图标复用原版精灵（interface/ideas.gfx 里的 GFX_idea_generic_*），不新增贴图
+# 数值口径与联邦树一致：单项累计不超过 ±20%（原 25% 档已于 2026-09-20 削到 15%）
+# ============================================================================
+ideas = {
+	country = {
+
+		# ---- 改革派凯旋！：灰厅圆桌被改革派拿下，起始国策的前提 ----
+		SRC_reform_victory = {
+			picture = generic_political_support
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = 0.15
+				political_power_gain = 0.20
+				war_support_factor = 0.10
+				consumer_goods_factor = -0.05
+			}
+		}
+
+		# ---- 灰厅的沉默：事件 1 选「暂缓修正案」的代价，改革窗口关闭 ----
+		SRC_grey_hall_concession = {
+			picture = generic_flexible_foreign_policy
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.05
+				political_power_gain = -0.10
+			}
+		}
+
+		# ---- 家族可能会倒闭，但绝不会变质 ----
+		# 走和平路线（事件 16 选 A 签署宪法、不打内战）的代价：家族没被武力清算，
+		# 就继续在体制内烂着。每周稳定度 -1%，add_timed_idea 挂 365 天后自动消失。
+		SRC_family_rot = {
+			picture = generic_political_support
+			removal_cost = -1
+
+			priority = 10
+
+			modifier = {
+				stability_weekly = -0.01
+			}
+		}
+	}
+}

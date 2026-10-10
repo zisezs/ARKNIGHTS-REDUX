@@ -1,0 +1,233 @@
+guiTypes = {
+
+	containerWindowType = {
+		name = "country_intro_container"
+		position = { x = 0 y = 0 }
+		size = { width = 720 height = 400 }
+		moveable = yes
+		orientation = CENTER
+		origo = center
+		clipping = no
+
+		background = { quadTextureSprite = "GFX_tiled_bg" }
+
+		buttonType = {
+			name = "tab_1"
+			position = { x = 20 y = 100 }
+			quadTextureSprite ="GFX_strategic_air_sort"
+			buttonText = "country_intro_tab_1"
+			font = "hoi_18mbs"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "tab_2"
+			position = { x = 20 y = 150 }
+			quadTextureSprite ="GFX_strategic_air_sort"
+			buttonText = "country_intro_tab_2"
+			font = "hoi_18mbs"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "tab_3"
+			position = { x = 20 y = 200 }
+			quadTextureSprite ="GFX_strategic_air_sort"
+			buttonText = "country_intro_tab_3"
+			font = "hoi_18mbs"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "tab_4"
+			position = { x = 20 y = 250 }
+			quadTextureSprite ="GFX_strategic_air_sort"
+			buttonText = "country_intro_tab_4"
+			font = "hoi_18mbs"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "tab_5"
+			position = { x = 20 y = 300 }
+			quadTextureSprite ="GFX_strategic_air_sort"
+			buttonText = "country_intro_tab_5"
+			font = "hoi_18mbs"
+			clicksound = click_default
+		}
+
+		buttonType = {
+			name = "mod_options_button"
+			position = { x = -120 y = -48 }
+			orientation = center_down
+
+			quadTextureSprite = "GFX_intro_screen_continue_button"
+			buttonText = "mod_options_button_text"
+			buttonFont = "hoi_24header"
+			clicksound = click_default
+			oversound = ui_menu_over
+			shortcut = "c"
+		}
+	}
+
+	containerWindowType = {
+		name = country_intro_tab_1_container
+		position = { x = 0 y = 436 }
+		size = { width = 720 height = 360 }
+		margin = { left = 16 right = 16 }
+		clipping = yes
+
+		## backdrop texticon scripted loc textbox
+		containerWindowType = {
+			name = "country_intro_tab_1_background"
+			size = { width = 172 height = 352 }
+
+			iconType = {
+				name = "country_intro_tab_1_background_icon"
+				#spriteType = "GFX_FRA_intro"
+				position = { x = 2 y = 2 }
+			}
+		}
+
+		containerWindowType = {
+			name = "country_intro_tab_1_text_container"
+			position = { x = 172 y = 0 }
+			margin = { left = 8 right = 8 }
+
+			instantTextboxType = {
+				name = "country_intro_tab_1_header"
+				text = "country_intro_tab_1_header"
+				position = { x = 0 y = 6 }
+				font = "hoi_20bs"
+				maxWidth = 500
+			}
+
+			instantTextboxType = {
+				name = "country_intro_tab_1_content"
+				text = "country_intro_tab_1_content"
+				position = { x = 0 y = 28 }
+				font = "hoi_18b"
+				maxWidth = 500
+				maxHeight = 292
+				scrollbartype = "standardtext_slider"
+			}
+		}
+	}
+
+	containerWindowType = {
+		name = country_intro_tab_2_container
+		position = { x = 0 y = 440 }
+		size = { width = 720 height = 352 }
+		margin = { left = 40 right = 40 }
+		clipping = yes
+
+		buttonType = {
+			name = "country_intro_tab_2_reveal_spoilers_button"
+			quadTextureSprite = "GFX_checkbox_button_264"
+			position = { x = -132 y = -78 }
+			orientation = center_down
+
+			buttonText = "country_intro_tab_2_reveal_spoilers_button"
+			buttonFont = "hoi_18mbs"
+			clicksound = click_default
+			oversound = ui_menu_over
+		}
+
+		instantTextboxType = {
+			name = "country_intro_tab_2_header"
+			text = "country_intro_tab_2_header"
+			position = { x = 0 y = 6 }
+			font = "hoi_20bs"
+			maxWidth = 642
+		}
+
+		instantTextboxType = {
+			name = "country_intro_tab_2_content"
+			text = "country_intro_tab_2_content"
+			position = { x = 0 y = 28 }
+			font = "hoi_18b"
+			maxWidth = 642
+			maxHeight = 285
+			scrollbartype = "standardtext_slider"
+		}
+	}
+
+	containerWindowType = {
+		name = country_intro_tab_3_container
+		position = { x = 0 y = 440 }
+		size = { width = 720 height = 352 }
+		margin = { left = 40 right = 40 }
+		clipping = yes
+
+		verticalScrollbar = "right_vertical_slider"
+		smooth_scrolling = yes
+
+		background = { spriteType = GFX_empty_paper } #dummy to enable scrollbar
+
+		instantTextboxType = {
+			name = "country_intro_tab_3_content"
+			text = "country_intro_tab_3_content"
+			position = { x = 0 y = 32 }
+			font = "hoi_18b"
+			maxWidth = 640
+		}
+
+		instantTextboxType = {
+			name = "country_intro_tab_3_content_0"
+			text = "country_intro_tab_3_content_0"
+			position = { x = 18 y = 50 }
+			font = "hoi_18b"
+			maxWidth = 622
+		}
+	}
+
+	containerWindowType = {
+		name = country_intro_tab_4_container
+		position = { x = 0 y = 440 }
+		size = { width = 720 height = 352 }
+		margin = { left = 40 right = 40 }
+		clipping = yes
+
+		#verticalScrollbar = "right_vertical_slider"
+
+		instantTextboxType = {
+			name = "country_intro_tab_4_upper_header"
+			text = "country_intro_tab_4_upper_header"
+			position = { x = -320 y = 6 }
+			orientation = center_up
+			format = centre
+			font = "hoi_20bs"
+			maxWidth = 640
+		}
+
+		instantTextboxType = {
+			name = "country_intro_tab_4_content_0"
+			text = "country_intro_tab_4_content_0"
+			position = { x = -320 y = 28 }
+			orientation = center_up
+			format = centre
+			font = "hoi_18b"
+			maxWidth = 640
+		}
+
+		instantTextboxType = {
+			name = "country_intro_tab_4_lower_header"
+			text = "country_intro_tab_4_lower_header"
+			position = { x = -320 y = 120 }
+			orientation = center_up
+			format = centre
+			font = "hoi_20bs"
+			maxWidth = 640
+		}
+
+		instantTextboxType = {
+			name = "country_intro_tab_4_content"
+			text = "country_intro_tab_4_content"
+			position = { x = -320 y = 142 }
+			orientation = center_up
+			format = centre
+			font = "hoi_18b"
+			maxWidth = 640
+		}
+	}
+}

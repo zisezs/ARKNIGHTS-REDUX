@@ -1,0 +1,139 @@
+# 大炎 ·「宰府朝议」面板（照原版 ger_inner_circle_inlay_window 重建）
+# 三层名字对齐：本文件顶层 key = focus_tree 里 inlay_window.id = YAN_court_inlay_window
+#                 window_name = interface/YAN_court_scripted_gui.gui 根容器名
+#                 scripted_images 键名 = gui 里 iconType 的 name
+# 生成器：E:/tmp/sui12/gen_court.js（改数据表重跑，勿手改产物）
+
+YAN_court_inlay_window = {
+	window_name = yan_court_ui_window
+
+	internal = yes
+	visible = {
+		has_country_flag = yan_sui_pact
+	}
+
+	scripted_images = {
+		# 真龙座
+		yan_court_leader_portrait = {
+			GFX_portrait_YAN_Wei_Zunli_panel = yes
+		}
+		# 第 1 席 · 山水
+		yan_court_seat_1_portrait = {
+			GFX_court_portrait_yi = { check_variable = { YAN_court_seat_1 = 8 } }
+			GFX_court_portrait_laotianshi = { check_variable = { YAN_court_seat_1 = 21 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_1_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_1 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 2 席 · 长街
+		yan_court_seat_2_portrait = {
+			GFX_court_portrait_jun = { check_variable = { YAN_court_seat_2 = 4 } }
+			GFX_court_portrait_yucheng = { check_variable = { YAN_court_seat_2 = 20 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_2_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_2 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 3 席 · 烟火
+		yan_court_seat_3_portrait = {
+			GFX_court_portrait_yu = { check_variable = { YAN_court_seat_3 = 12 } }
+			GFX_court_portrait_liangxun = { check_variable = { YAN_court_seat_3 = 16 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_3_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_3 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 4 席 · 弦歌
+		yan_court_seat_4_portrait = {
+			GFX_court_portrait_jie = { check_variable = { YAN_court_seat_4 = 5 } }
+			GFX_court_portrait_xi = { check_variable = { YAN_court_seat_4 = 11 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_4_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_4 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 5 席 · 锻坊
+		yan_court_seat_5_portrait = {
+			GFX_court_portrait_nian = { check_variable = { YAN_court_seat_5 = 9 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_5_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_5 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 6 席 · 百谷
+		yan_court_seat_6_portrait = {
+			GFX_court_portrait_shu = { check_variable = { YAN_court_seat_6 = 6 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_6_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_6 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 7 席 · 宰府
+		yan_court_seat_7_portrait = {
+			GFX_court_portrait_taifu = { check_variable = { YAN_court_seat_7 = 13 } }
+			GFX_court_portrait_weiyanwu = { check_variable = { YAN_court_seat_7 = 19 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_7_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_7 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 8 席 · 兵革
+		yan_court_seat_8_portrait = {
+			GFX_court_portrait_zhongyue = { check_variable = { YAN_court_seat_8 = 1 } }
+			GFX_court_portrait_taiwei = { check_variable = { YAN_court_seat_8 = 14 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_8_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_8 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 9 席 · 北门
+		yan_court_seat_9_portrait = {
+			GFX_court_portrait_ling = { check_variable = { YAN_court_seat_9 = 3 } }
+			GFX_court_portrait_zuoxuanliao = { check_variable = { YAN_court_seat_9 = 22 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_9_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_9 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 10 席 · 西馆
+		yan_court_seat_10_portrait = {
+			GFX_court_portrait_fang = { check_variable = { YAN_court_seat_10 = 10 } }
+			GFX_court_portrait_ningchunqiu = { check_variable = { YAN_court_seat_10 = 15 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_10_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_10 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 11 席 · 东抚
+		yan_court_seat_11_portrait = {
+			GFX_court_portrait_wang = { check_variable = { YAN_court_seat_11 = 2 } }
+			GFX_court_portrait_zuole = { check_variable = { YAN_court_seat_11 = 18 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_11_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_11 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+		# 第 12 席 · 南库
+		yan_court_seat_12_portrait = {
+			GFX_court_portrait_ji = { check_variable = { YAN_court_seat_12 = 7 } }
+			GFX_court_portrait_chun = { check_variable = { YAN_court_seat_12 = 17 } }
+			GFX_yan_seat_blank = yes
+		}
+		yan_court_seat_12_frame = {
+			GFX_yan_seat_frame = { check_variable = { YAN_court_seat_12 = 0 compare = not_equals } }
+			GFX_yan_seat_frame_empty = yes
+		}
+	}
+}

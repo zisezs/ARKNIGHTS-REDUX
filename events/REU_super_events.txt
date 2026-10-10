@@ -1,0 +1,23 @@
+add_namespace = reuse
+
+############################################
+## 感染者游击队（REU）超事件 ##
+## 苏维埃统一乌萨斯（乌萨斯帝国灭亡）
+## 触发：on_annex（吞并瞬间即时）+ on_monthly（兜底），见 common/on_actions/REU_on_actions.txt
+############################################
+
+#苏维埃统一乌萨斯
+news_event = {
+	id = reuse.1
+	title = reuse.1.t
+	desc = reuse.1.d
+	picture = GFX_report_event_REU_soviet_ursus
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = reuse.1.a
+		SE_REU_SOVIET_URSUS_EFFECT = yes
+	}
+}

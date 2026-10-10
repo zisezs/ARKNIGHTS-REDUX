@@ -1,0 +1,144 @@
+URS_Imperial_Court_Enable = {
+
+	set_country_flag = URS_imperial_court_decisions_flag
+
+	set_variable = { URS_reformist = 7 }
+	set_variable = { URS_conservative = 3 }
+	URS_Clique_Percentage = yes
+
+	set_variable = { URS_economic_recovery_point = 0 }
+	set_variable = { URS_social_stabilization_point = 0 }
+	set_variable = { URS_army_reformation_point = 0 }
+}
+
+URS_Reformist_Add = {
+	custom_effect_tooltip = URS_Reformist_Add_tt
+	add_to_variable = { URS_reformist = 1 }
+	URS_Clique_Percentage = yes
+}
+
+URS_Conservative_Add = {
+	custom_effect_tooltip = URS_Conservative_Add_tt
+	add_to_variable = { URS_conservative = 1 }
+	URS_Clique_Percentage = yes
+}
+
+URS_Clique_Percentage = {
+	set_temp_variable = { URS_clique_total = URS_reformist }
+	add_to_temp_variable = { URS_clique_total = URS_conservative }
+	set_variable = { URS_reformist_percentage = URS_reformist }
+	divide_variable = { URS_reformist_percentage = URS_clique_total }
+	set_variable = { URS_conservative_percentage = URS_conservative }
+	divide_variable = { URS_conservative_percentage = URS_clique_total }
+}
+
+URS_economic_recovery = {
+	if = {
+		limit = {
+			check_variable = { URS_economic_recovery_point > 2 }
+			has_idea = URS_destroyed_economy_3
+		}
+		swap_ideas = {
+			remove_idea = URS_destroyed_economy_3
+			add_idea = URS_destroyed_economy_2
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { URS_economic_recovery_point > 4 }
+			has_idea = URS_destroyed_economy_2
+		}
+		swap_ideas = {
+			remove_idea = URS_destroyed_economy_2
+			add_idea = URS_destroyed_economy_1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { URS_economic_recovery_point > 7 }
+			has_idea = URS_destroyed_economy_1
+		}
+		swap_ideas = {
+			remove_idea = URS_destroyed_economy_1
+			add_idea = URS_recovering_economy
+		}
+	}
+	else = {
+		custom_effect_tooltip = URS_economic_recovery_tt
+		add_to_variable = { URS_economic_recovery_point = 1 }
+	}
+}
+
+URS_social_stabilization = {
+	if = {
+		limit = {
+			check_variable = { URS_social_stabilization_point > 2 }
+			has_idea = URS_unstable_society_3
+		}
+		swap_ideas = {
+			remove_idea = URS_unstable_society_3
+			add_idea = URS_unstable_society_2
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { URS_social_stabilization_point > 4 }
+			has_idea = URS_unstable_society_2
+		}
+		swap_ideas = {
+			remove_idea = URS_unstable_society_2
+			add_idea = URS_unstable_society_1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { URS_social_stabilization_point > 7 }
+			has_idea = URS_unstable_society_1
+		}
+		swap_ideas = {
+			remove_idea = URS_unstable_society_1
+			add_idea = URS_stabilizing_social
+		}
+	}
+	else = {
+		custom_effect_tooltip = URS_social_stabilization_tt
+		add_to_variable = { URS_social_stabilization_point = 1 }
+	}
+}
+
+URS_army_reformation = {
+	if = {
+		limit = {
+			check_variable = { URS_army_reformation_point > 1 }
+			has_idea = URS_broken_army_3
+		}
+		swap_ideas = {
+			remove_idea = URS_broken_army_3
+			add_idea = URS_broken_army_2
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { URS_army_reformation_point > 3 }
+			has_idea = URS_broken_army_2
+		}
+		swap_ideas = {
+			remove_idea = URS_broken_army_2
+			add_idea = URS_broken_army_1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { URS_army_reformation_point > 6 }
+			has_idea = URS_broken_army_1
+		}
+		swap_ideas = {
+			remove_idea = URS_broken_army_1
+			add_idea = URS_reforming_army_1
+		}
+	}
+	else = {
+		custom_effect_tooltip = URS_army_reformation_tt
+		add_to_variable = { URS_army_reformation_point = 1 }
+	}
+}

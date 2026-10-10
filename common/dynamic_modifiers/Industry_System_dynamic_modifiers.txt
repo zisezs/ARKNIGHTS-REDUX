@@ -1,0 +1,23 @@
+infected_modifier = {
+	enable = { always = yes }
+
+	stability_factor = stability_modifier_rate
+    conscription_factor = conscription_modifier_rate
+    consumer_goods_factor = consumer_goods_modifier_rate
+	monthly_population = population_modifier_rate
+}
+
+building_excess_penalty_modifier = {
+	enable = { always = yes }
+
+	industrial_capacity_factory = building_excess_penalty
+	production_speed_buildings_factor = building_excess_penalty
+}
+
+power_surplus_shortage_modifier = {
+	enable = { always = yes }
+
+	industrial_capacity_factory = power_surplus_shortage
+	production_speed_buildings_factor = power_surplus_shortage
+	stability_factor = power_surplus_shortage
+}

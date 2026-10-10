@@ -1,0 +1,430 @@
+# ============================================================================
+# 本文件由 docs/gen_arf_warship_design.py 生成，手改会被覆盖。
+# ============================================================================
+# 高速战舰设计台 · 动态文字链
+# ⚠️ defined_text 取第一条命中：兜底项必须放最后。
+
+defined_text = {
+	name = ARF_WSd_GetName_gun
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_gun = 1 compare = equals } } localization_key = arf_wsd_gb_gun_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_gun = 2 compare = equals } } localization_key = arf_wsd_gb_gun_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_gun = 3 compare = equals } } localization_key = arf_wsd_gb_gun_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_gun = 4 compare = equals } } localization_key = arf_wsd_gb_gun_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_gun = 5 compare = equals } } localization_key = arf_wsd_gb_gun_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 1 compare = equals } } localization_key = arf_wsd_as_gun_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 2 compare = equals } } localization_key = arf_wsd_as_gun_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 3 compare = equals } } localization_key = arf_wsd_as_gun_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 4 compare = equals } } localization_key = arf_wsd_as_gun_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 5 compare = equals } } localization_key = arf_wsd_as_gun_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 6 compare = equals } } localization_key = arf_wsd_as_gun_6 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 1 compare = equals } } localization_key = arf_wsd_dr_gun_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 2 compare = equals } } localization_key = arf_wsd_dr_gun_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 3 compare = equals } } localization_key = arf_wsd_dr_gun_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 4 compare = equals } } localization_key = arf_wsd_dr_gun_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 5 compare = equals } } localization_key = arf_wsd_dr_gun_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 6 compare = equals } } localization_key = arf_wsd_dr_gun_6 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 7 compare = equals } } localization_key = arf_wsd_dr_gun_7 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_gun = 1 compare = equals } } localization_key = arf_wsd_ax_gun_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_gun = 2 compare = equals } } localization_key = arf_wsd_ax_gun_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_gun = 3 compare = equals } } localization_key = arf_wsd_ax_gun_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+}
+
+defined_text = {
+	name = ARF_WSd_GetEff_gun
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_gun = 1 compare = equals } } localization_key = arf_wsd_gb_gun_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_gun = 2 compare = equals } } localization_key = arf_wsd_gb_gun_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_gun = 3 compare = equals } } localization_key = arf_wsd_gb_gun_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_gun = 4 compare = equals } } localization_key = arf_wsd_gb_gun_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_gun = 5 compare = equals } } localization_key = arf_wsd_gb_gun_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 1 compare = equals } } localization_key = arf_wsd_as_gun_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 2 compare = equals } } localization_key = arf_wsd_as_gun_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 3 compare = equals } } localization_key = arf_wsd_as_gun_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 4 compare = equals } } localization_key = arf_wsd_as_gun_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 5 compare = equals } } localization_key = arf_wsd_as_gun_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_gun = 6 compare = equals } } localization_key = arf_wsd_as_gun_6_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 1 compare = equals } } localization_key = arf_wsd_dr_gun_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 2 compare = equals } } localization_key = arf_wsd_dr_gun_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 3 compare = equals } } localization_key = arf_wsd_dr_gun_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 4 compare = equals } } localization_key = arf_wsd_dr_gun_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 5 compare = equals } } localization_key = arf_wsd_dr_gun_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 6 compare = equals } } localization_key = arf_wsd_dr_gun_6_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_gun = 7 compare = equals } } localization_key = arf_wsd_dr_gun_7_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_gun = 1 compare = equals } } localization_key = arf_wsd_ax_gun_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_gun = 2 compare = equals } } localization_key = arf_wsd_ax_gun_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_gun = 3 compare = equals } } localization_key = arf_wsd_ax_gun_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+}
+
+defined_text = {
+	name = ARF_WSd_GetName_sec
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sec = 1 compare = equals } } localization_key = arf_wsd_gb_sec_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sec = 2 compare = equals } } localization_key = arf_wsd_gb_sec_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sec = 3 compare = equals } } localization_key = arf_wsd_gb_sec_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sec = 4 compare = equals } } localization_key = arf_wsd_gb_sec_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sec = 5 compare = equals } } localization_key = arf_wsd_gb_sec_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sec = 1 compare = equals } } localization_key = arf_wsd_as_sec_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sec = 2 compare = equals } } localization_key = arf_wsd_as_sec_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sec = 3 compare = equals } } localization_key = arf_wsd_as_sec_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sec = 4 compare = equals } } localization_key = arf_wsd_as_sec_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sec = 5 compare = equals } } localization_key = arf_wsd_as_sec_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sec = 1 compare = equals } } localization_key = arf_wsd_dr_sec_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sec = 2 compare = equals } } localization_key = arf_wsd_dr_sec_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sec = 3 compare = equals } } localization_key = arf_wsd_dr_sec_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sec = 4 compare = equals } } localization_key = arf_wsd_dr_sec_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sec = 5 compare = equals } } localization_key = arf_wsd_dr_sec_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sec = 1 compare = equals } } localization_key = arf_wsd_ax_sec_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sec = 2 compare = equals } } localization_key = arf_wsd_ax_sec_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sec = 3 compare = equals } } localization_key = arf_wsd_ax_sec_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+}
+
+defined_text = {
+	name = ARF_WSd_GetEff_sec
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sec = 1 compare = equals } } localization_key = arf_wsd_gb_sec_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sec = 2 compare = equals } } localization_key = arf_wsd_gb_sec_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sec = 3 compare = equals } } localization_key = arf_wsd_gb_sec_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sec = 4 compare = equals } } localization_key = arf_wsd_gb_sec_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sec = 5 compare = equals } } localization_key = arf_wsd_gb_sec_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sec = 1 compare = equals } } localization_key = arf_wsd_as_sec_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sec = 2 compare = equals } } localization_key = arf_wsd_as_sec_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sec = 3 compare = equals } } localization_key = arf_wsd_as_sec_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sec = 4 compare = equals } } localization_key = arf_wsd_as_sec_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sec = 5 compare = equals } } localization_key = arf_wsd_as_sec_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sec = 1 compare = equals } } localization_key = arf_wsd_dr_sec_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sec = 2 compare = equals } } localization_key = arf_wsd_dr_sec_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sec = 3 compare = equals } } localization_key = arf_wsd_dr_sec_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sec = 4 compare = equals } } localization_key = arf_wsd_dr_sec_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sec = 5 compare = equals } } localization_key = arf_wsd_dr_sec_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sec = 1 compare = equals } } localization_key = arf_wsd_ax_sec_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sec = 2 compare = equals } } localization_key = arf_wsd_ax_sec_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sec = 3 compare = equals } } localization_key = arf_wsd_ax_sec_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+}
+
+defined_text = {
+	name = ARF_WSd_GetName_arm
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_arm = 1 compare = equals } } localization_key = arf_wsd_gb_arm_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_arm = 2 compare = equals } } localization_key = arf_wsd_gb_arm_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_arm = 3 compare = equals } } localization_key = arf_wsd_gb_arm_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_arm = 4 compare = equals } } localization_key = arf_wsd_gb_arm_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_arm = 1 compare = equals } } localization_key = arf_wsd_as_arm_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_arm = 2 compare = equals } } localization_key = arf_wsd_as_arm_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_arm = 3 compare = equals } } localization_key = arf_wsd_as_arm_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_arm = 4 compare = equals } } localization_key = arf_wsd_as_arm_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_arm = 5 compare = equals } } localization_key = arf_wsd_as_arm_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 1 compare = equals } } localization_key = arf_wsd_dr_arm_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 2 compare = equals } } localization_key = arf_wsd_dr_arm_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 3 compare = equals } } localization_key = arf_wsd_dr_arm_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 4 compare = equals } } localization_key = arf_wsd_dr_arm_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 5 compare = equals } } localization_key = arf_wsd_dr_arm_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 6 compare = equals } } localization_key = arf_wsd_dr_arm_6 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_arm = 1 compare = equals } } localization_key = arf_wsd_ax_arm_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_arm = 2 compare = equals } } localization_key = arf_wsd_ax_arm_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_arm = 3 compare = equals } } localization_key = arf_wsd_ax_arm_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+}
+
+defined_text = {
+	name = ARF_WSd_GetEff_arm
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_arm = 1 compare = equals } } localization_key = arf_wsd_gb_arm_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_arm = 2 compare = equals } } localization_key = arf_wsd_gb_arm_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_arm = 3 compare = equals } } localization_key = arf_wsd_gb_arm_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_arm = 4 compare = equals } } localization_key = arf_wsd_gb_arm_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_arm = 1 compare = equals } } localization_key = arf_wsd_as_arm_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_arm = 2 compare = equals } } localization_key = arf_wsd_as_arm_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_arm = 3 compare = equals } } localization_key = arf_wsd_as_arm_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_arm = 4 compare = equals } } localization_key = arf_wsd_as_arm_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_arm = 5 compare = equals } } localization_key = arf_wsd_as_arm_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 1 compare = equals } } localization_key = arf_wsd_dr_arm_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 2 compare = equals } } localization_key = arf_wsd_dr_arm_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 3 compare = equals } } localization_key = arf_wsd_dr_arm_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 4 compare = equals } } localization_key = arf_wsd_dr_arm_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 5 compare = equals } } localization_key = arf_wsd_dr_arm_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_arm = 6 compare = equals } } localization_key = arf_wsd_dr_arm_6_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_arm = 1 compare = equals } } localization_key = arf_wsd_ax_arm_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_arm = 2 compare = equals } } localization_key = arf_wsd_ax_arm_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_arm = 3 compare = equals } } localization_key = arf_wsd_ax_arm_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+}
+
+defined_text = {
+	name = ARF_WSd_GetName_eng
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_eng = 1 compare = equals } } localization_key = arf_wsd_gb_eng_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_eng = 2 compare = equals } } localization_key = arf_wsd_gb_eng_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_eng = 3 compare = equals } } localization_key = arf_wsd_gb_eng_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_eng = 1 compare = equals } } localization_key = arf_wsd_as_eng_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_eng = 2 compare = equals } } localization_key = arf_wsd_as_eng_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_eng = 3 compare = equals } } localization_key = arf_wsd_as_eng_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_eng = 4 compare = equals } } localization_key = arf_wsd_as_eng_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_eng = 1 compare = equals } } localization_key = arf_wsd_dr_eng_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_eng = 2 compare = equals } } localization_key = arf_wsd_dr_eng_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_eng = 3 compare = equals } } localization_key = arf_wsd_dr_eng_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_eng = 4 compare = equals } } localization_key = arf_wsd_dr_eng_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_eng = 5 compare = equals } } localization_key = arf_wsd_dr_eng_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_eng = 1 compare = equals } } localization_key = arf_wsd_ax_eng_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_eng = 2 compare = equals } } localization_key = arf_wsd_ax_eng_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_eng = 3 compare = equals } } localization_key = arf_wsd_ax_eng_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_eng = 4 compare = equals } } localization_key = arf_wsd_ax_eng_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+}
+
+defined_text = {
+	name = ARF_WSd_GetEff_eng
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_eng = 1 compare = equals } } localization_key = arf_wsd_gb_eng_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_eng = 2 compare = equals } } localization_key = arf_wsd_gb_eng_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_eng = 3 compare = equals } } localization_key = arf_wsd_gb_eng_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_eng = 1 compare = equals } } localization_key = arf_wsd_as_eng_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_eng = 2 compare = equals } } localization_key = arf_wsd_as_eng_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_eng = 3 compare = equals } } localization_key = arf_wsd_as_eng_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_eng = 4 compare = equals } } localization_key = arf_wsd_as_eng_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_eng = 1 compare = equals } } localization_key = arf_wsd_dr_eng_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_eng = 2 compare = equals } } localization_key = arf_wsd_dr_eng_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_eng = 3 compare = equals } } localization_key = arf_wsd_dr_eng_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_eng = 4 compare = equals } } localization_key = arf_wsd_dr_eng_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_eng = 5 compare = equals } } localization_key = arf_wsd_dr_eng_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_eng = 1 compare = equals } } localization_key = arf_wsd_ax_eng_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_eng = 2 compare = equals } } localization_key = arf_wsd_ax_eng_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_eng = 3 compare = equals } } localization_key = arf_wsd_ax_eng_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_eng = 4 compare = equals } } localization_key = arf_wsd_ax_eng_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+}
+
+defined_text = {
+	name = ARF_WSd_GetName_fc
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_fc = 1 compare = equals } } localization_key = arf_wsd_gb_fc_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_fc = 2 compare = equals } } localization_key = arf_wsd_gb_fc_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_fc = 3 compare = equals } } localization_key = arf_wsd_gb_fc_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 1 compare = equals } } localization_key = arf_wsd_as_fc_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 2 compare = equals } } localization_key = arf_wsd_as_fc_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 3 compare = equals } } localization_key = arf_wsd_as_fc_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 4 compare = equals } } localization_key = arf_wsd_as_fc_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 5 compare = equals } } localization_key = arf_wsd_as_fc_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 6 compare = equals } } localization_key = arf_wsd_as_fc_6 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 1 compare = equals } } localization_key = arf_wsd_dr_fc_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 2 compare = equals } } localization_key = arf_wsd_dr_fc_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 3 compare = equals } } localization_key = arf_wsd_dr_fc_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 4 compare = equals } } localization_key = arf_wsd_dr_fc_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 5 compare = equals } } localization_key = arf_wsd_dr_fc_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 6 compare = equals } } localization_key = arf_wsd_dr_fc_6 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 7 compare = equals } } localization_key = arf_wsd_dr_fc_7 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_fc = 1 compare = equals } } localization_key = arf_wsd_ax_fc_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_fc = 2 compare = equals } } localization_key = arf_wsd_ax_fc_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_fc = 3 compare = equals } } localization_key = arf_wsd_ax_fc_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_fc = 4 compare = equals } } localization_key = arf_wsd_ax_fc_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_fc = 5 compare = equals } } localization_key = arf_wsd_ax_fc_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+}
+
+defined_text = {
+	name = ARF_WSd_GetEff_fc
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_fc = 1 compare = equals } } localization_key = arf_wsd_gb_fc_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_fc = 2 compare = equals } } localization_key = arf_wsd_gb_fc_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_fc = 3 compare = equals } } localization_key = arf_wsd_gb_fc_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 1 compare = equals } } localization_key = arf_wsd_as_fc_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 2 compare = equals } } localization_key = arf_wsd_as_fc_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 3 compare = equals } } localization_key = arf_wsd_as_fc_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 4 compare = equals } } localization_key = arf_wsd_as_fc_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 5 compare = equals } } localization_key = arf_wsd_as_fc_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_fc = 6 compare = equals } } localization_key = arf_wsd_as_fc_6_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 1 compare = equals } } localization_key = arf_wsd_dr_fc_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 2 compare = equals } } localization_key = arf_wsd_dr_fc_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 3 compare = equals } } localization_key = arf_wsd_dr_fc_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 4 compare = equals } } localization_key = arf_wsd_dr_fc_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 5 compare = equals } } localization_key = arf_wsd_dr_fc_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 6 compare = equals } } localization_key = arf_wsd_dr_fc_6_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_fc = 7 compare = equals } } localization_key = arf_wsd_dr_fc_7_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_fc = 1 compare = equals } } localization_key = arf_wsd_ax_fc_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_fc = 2 compare = equals } } localization_key = arf_wsd_ax_fc_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_fc = 3 compare = equals } } localization_key = arf_wsd_ax_fc_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_fc = 4 compare = equals } } localization_key = arf_wsd_ax_fc_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_fc = 5 compare = equals } } localization_key = arf_wsd_ax_fc_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+}
+
+defined_text = {
+	name = ARF_WSd_GetName_ammo
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_ammo = 1 compare = equals } } localization_key = arf_wsd_gb_ammo_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_ammo = 2 compare = equals } } localization_key = arf_wsd_gb_ammo_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_ammo = 3 compare = equals } } localization_key = arf_wsd_gb_ammo_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_ammo = 4 compare = equals } } localization_key = arf_wsd_gb_ammo_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_ammo = 5 compare = equals } } localization_key = arf_wsd_gb_ammo_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_ammo = 1 compare = equals } } localization_key = arf_wsd_as_ammo_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_ammo = 2 compare = equals } } localization_key = arf_wsd_as_ammo_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_ammo = 3 compare = equals } } localization_key = arf_wsd_as_ammo_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_ammo = 4 compare = equals } } localization_key = arf_wsd_as_ammo_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_ammo = 5 compare = equals } } localization_key = arf_wsd_as_ammo_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_ammo = 1 compare = equals } } localization_key = arf_wsd_dr_ammo_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_ammo = 2 compare = equals } } localization_key = arf_wsd_dr_ammo_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_ammo = 3 compare = equals } } localization_key = arf_wsd_dr_ammo_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_ammo = 4 compare = equals } } localization_key = arf_wsd_dr_ammo_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_ammo = 5 compare = equals } } localization_key = arf_wsd_dr_ammo_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_ammo = 1 compare = equals } } localization_key = arf_wsd_ax_ammo_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_ammo = 2 compare = equals } } localization_key = arf_wsd_ax_ammo_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_ammo = 3 compare = equals } } localization_key = arf_wsd_ax_ammo_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_ammo = 4 compare = equals } } localization_key = arf_wsd_ax_ammo_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+}
+
+defined_text = {
+	name = ARF_WSd_GetEff_ammo
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_ammo = 1 compare = equals } } localization_key = arf_wsd_gb_ammo_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_ammo = 2 compare = equals } } localization_key = arf_wsd_gb_ammo_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_ammo = 3 compare = equals } } localization_key = arf_wsd_gb_ammo_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_ammo = 4 compare = equals } } localization_key = arf_wsd_gb_ammo_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_ammo = 5 compare = equals } } localization_key = arf_wsd_gb_ammo_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_ammo = 1 compare = equals } } localization_key = arf_wsd_as_ammo_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_ammo = 2 compare = equals } } localization_key = arf_wsd_as_ammo_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_ammo = 3 compare = equals } } localization_key = arf_wsd_as_ammo_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_ammo = 4 compare = equals } } localization_key = arf_wsd_as_ammo_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_ammo = 5 compare = equals } } localization_key = arf_wsd_as_ammo_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_ammo = 1 compare = equals } } localization_key = arf_wsd_dr_ammo_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_ammo = 2 compare = equals } } localization_key = arf_wsd_dr_ammo_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_ammo = 3 compare = equals } } localization_key = arf_wsd_dr_ammo_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_ammo = 4 compare = equals } } localization_key = arf_wsd_dr_ammo_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_ammo = 5 compare = equals } } localization_key = arf_wsd_dr_ammo_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_ammo = 1 compare = equals } } localization_key = arf_wsd_ax_ammo_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_ammo = 2 compare = equals } } localization_key = arf_wsd_ax_ammo_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_ammo = 3 compare = equals } } localization_key = arf_wsd_ax_ammo_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_ammo = 4 compare = equals } } localization_key = arf_wsd_ax_ammo_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+}
+
+defined_text = {
+	name = ARF_WSd_GetName_sp
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sp = 1 compare = equals } } localization_key = arf_wsd_gb_sp_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sp = 2 compare = equals } } localization_key = arf_wsd_gb_sp_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sp = 3 compare = equals } } localization_key = arf_wsd_gb_sp_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sp = 4 compare = equals } } localization_key = arf_wsd_gb_sp_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sp = 1 compare = equals } } localization_key = arf_wsd_as_sp_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sp = 2 compare = equals } } localization_key = arf_wsd_as_sp_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sp = 3 compare = equals } } localization_key = arf_wsd_as_sp_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sp = 4 compare = equals } } localization_key = arf_wsd_as_sp_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sp = 5 compare = equals } } localization_key = arf_wsd_as_sp_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 1 compare = equals } } localization_key = arf_wsd_dr_sp_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 2 compare = equals } } localization_key = arf_wsd_dr_sp_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 3 compare = equals } } localization_key = arf_wsd_dr_sp_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 4 compare = equals } } localization_key = arf_wsd_dr_sp_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 5 compare = equals } } localization_key = arf_wsd_dr_sp_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 6 compare = equals } } localization_key = arf_wsd_dr_sp_6 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 1 compare = equals } } localization_key = arf_wsd_ax_sp_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 2 compare = equals } } localization_key = arf_wsd_ax_sp_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 3 compare = equals } } localization_key = arf_wsd_ax_sp_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 4 compare = equals } } localization_key = arf_wsd_ax_sp_4 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 5 compare = equals } } localization_key = arf_wsd_ax_sp_5 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 6 compare = equals } } localization_key = arf_wsd_ax_sp_6 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_NAME }
+}
+
+defined_text = {
+	name = ARF_WSd_GetEff_sp
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sp = 1 compare = equals } } localization_key = arf_wsd_gb_sp_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sp = 2 compare = equals } } localization_key = arf_wsd_gb_sp_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sp = 3 compare = equals } } localization_key = arf_wsd_gb_sp_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } check_variable = { arf_ws_gb_sp = 4 compare = equals } } localization_key = arf_wsd_gb_sp_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sp = 1 compare = equals } } localization_key = arf_wsd_as_sp_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sp = 2 compare = equals } } localization_key = arf_wsd_as_sp_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sp = 3 compare = equals } } localization_key = arf_wsd_as_sp_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sp = 4 compare = equals } } localization_key = arf_wsd_as_sp_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } check_variable = { arf_ws_as_sp = 5 compare = equals } } localization_key = arf_wsd_as_sp_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 1 compare = equals } } localization_key = arf_wsd_dr_sp_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 2 compare = equals } } localization_key = arf_wsd_dr_sp_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 3 compare = equals } } localization_key = arf_wsd_dr_sp_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 4 compare = equals } } localization_key = arf_wsd_dr_sp_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 5 compare = equals } } localization_key = arf_wsd_dr_sp_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } check_variable = { arf_ws_dr_sp = 6 compare = equals } } localization_key = arf_wsd_dr_sp_6_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 1 compare = equals } } localization_key = arf_wsd_ax_sp_1_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 2 compare = equals } } localization_key = arf_wsd_ax_sp_2_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 3 compare = equals } } localization_key = arf_wsd_ax_sp_3_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 4 compare = equals } } localization_key = arf_wsd_ax_sp_4_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 5 compare = equals } } localization_key = arf_wsd_ax_sp_5_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } check_variable = { arf_ws_ax_sp = 6 compare = equals } } localization_key = arf_wsd_ax_sp_6_e }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_EMPTY_EFF }
+}
+
+defined_text = {
+	name = ARF_WSd_GetTitle
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_SUM_TITLE_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_SUM_TITLE_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_SUM_TITLE_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_SUM_TITLE_4 }
+	text = { localization_key = ARF_WSD_SUM_TITLE_1 }
+}
+
+defined_text = {
+	name = ARF_WSd_GetDesc
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_SUM_DESC_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_SUM_DESC_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_SUM_DESC_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_SUM_DESC_4 }
+	text = { localization_key = ARF_WSD_SUM_DESC_1 }
+}
+
+defined_text = {
+	name = ARF_WSd_GetCost
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_SUM_COST_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_SUM_COST_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_SUM_COST_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_SUM_COST_4 }
+	text = { localization_key = ARF_WSD_SUM_COST_1 }
+}
+
+defined_text = {
+	name = ARF_WSd_GetDays
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_SUM_DAYS_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_SUM_DAYS_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_SUM_DAYS_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_SUM_DAYS_4 }
+	text = { localization_key = ARF_WSD_SUM_DAYS_1 }
+}
+
+defined_text = {
+	name = ARF_WSd_GetStats
+	text = { trigger = { check_variable = { arf_ws_cur = 1 compare = equals } } localization_key = ARF_WSD_SUM_STATS_1 }
+	text = { trigger = { check_variable = { arf_ws_cur = 2 compare = equals } } localization_key = ARF_WSD_SUM_STATS_2 }
+	text = { trigger = { check_variable = { arf_ws_cur = 3 compare = equals } } localization_key = ARF_WSD_SUM_STATS_3 }
+	text = { trigger = { check_variable = { arf_ws_cur = 4 compare = equals } } localization_key = ARF_WSD_SUM_STATS_4 }
+	text = { localization_key = ARF_WSD_SUM_STATS_1 }
+}

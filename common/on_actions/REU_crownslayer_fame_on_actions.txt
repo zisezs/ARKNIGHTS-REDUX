@@ -1,0 +1,15 @@
+# 弑君者威名：把条件型动态修正挂到 REU（容器常驻；生效条件写在动态修正的 enable 里）
+on_startup = {
+	effect = {
+		every_country = {
+			limit = {
+				original_tag = REU
+				NOT = { has_country_flag = REU_crownslayer_fame_dyn_added }
+			}
+			set_country_flag = REU_crownslayer_fame_dyn_added
+			add_dynamic_modifier = {
+				modifier = REU_crownslayer_fame_modifier
+			}
+		}
+	}
+}

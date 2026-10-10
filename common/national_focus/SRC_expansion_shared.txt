@@ -1,0 +1,367 @@
+######################
+## 叙拉古 (SRC) · 对外扩张国策树（共享国策）
+## 由 common/national_focus/SRC.txt 的 SRC_federal_tree 以 shared_focus 引用并入主树
+## 坐标区 y = 17..22（政治树 y = 0..7、产业树 y = 9..15，y = 16 留空作分隔），横向收在 x = ±4
+## 九格 = 起始 1 + 左路（选帝侯）3 + 右路（边疆与进军）3 + 总结 1 + 终局 1，每格 35 天（cost = 5）
+## 前置：1100 年 1 月 1 日之后（起始格的 available 卡日期，后面全部靠 prerequisite 继承）
+## 自检 E:/tmp/src_exp_check.js；排版预览 E:/tmp/src_exp_preview.js
+######################
+#
+# 【设计稿里那些游戏没有的东西，一律换成引擎真认的写法】
+#   「对相邻国家宣战时间 -15%」      → justify_war_goal_time = -0.15（国家级修正符，真实存在）
+#   「对莱塔尼亚宣战理由 +100%」     → 对该国全部核心州 add_claim_by（+ 把 justify_war_goal_time 的
+#                                     削减留在起始精神里）；引擎没有"针对某国的宣战理由强度"这种数
+#   「叛乱度 -15%」                → stability_weekly +0.3%（1.19 没有 own-territory unrest，
+#                                     用每周稳定度表达"边疆噤声"）
+#   「家族势力政治影响力 -20%」      → 市民积分 +10（本 mod 现成的"国家 vs 家族"刻度，见
+#                                     SRC_civic_points_up_10_effect）
+#   「核心化速度 +15%/+15%」        → political_power_cost -15%/-15%（给核心走的是政治点花费）
+#   「非核心领土人力 +20%」          → conscription_factor +20%（non_core_manpower 是州级修正符）
+#   「非核心领土驻军需求 -10%」      → required_garrison_factor -0.10
+#   「投降进度低于 20% 立刻停战+臣服」→ on_weekly_SRC 三条任一：抵抗崩盘（surrender_progress > 0.8）、
+#                                     帝都陷落、议和后我方仍握着莱塔尼亚核心州（城邦体量填不满
+#                                     大帝国的投降条，只认第一条就永远收不到网）；puppet 只停莱塔尼亚一家，
+#                                     双塔协定由叙拉古接手，见 SRC_exp_effects.txt 的收网注释
+#   「加入双塔协定」                → SRC_exp_twin_towers_take_seat_effect：阵营还在就让领袖
+#                                     add_to_faction，散了就由叙拉古 create_faction_from_template
+#                                     重立门户（SCR 先例 + 原版 LTN history），最后叙拉古坐主位
+#
+# 【长期加成全部走动态修正】common/dynamic_modifiers/SRC_exp_dynamic_modifiers.txt
+#   SRC_dyn_super_siracusan「超级叙拉古人」= 一格一档，四步成长，变量前缀 SRC_exp_*
+#   SRC_dyn_glorious_citizen「光荣的叙拉古公民」= 终局挂上，数值固定
+#   SRC_dyn_state_wolf_law「狼徽律法」= 州级，整肃边疆家族决议逐州挂上
+#
+# 【决议钩子】common/decisions/SRC_exp_Decisions.txt，分类 SRC_exp_category
+#   对莱塔尼亚宣战 ← 【我早就是选帝侯了！】
+#   整肃边疆家族   ← 【打击边疆分裂主义】
+#   遏制哥伦比亚人的扩张势头 ← 【军团凯旋！】
+#   把没有核心的地区核心化   ← 【光荣的叙拉古公民！】
+#
+######################
+
+shared_focus = { #1. 七丘的狼崽子们！（总起）
+	id = SRC_exp_wolflings
+	icon = GFX_focus_SRC_exp_wolflings
+	x = 0
+	y = 17
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 25
+	}
+
+	available = {
+		date > 1100.1.1
+	}
+
+	completion_reward = {
+		set_country_flag = SRC_exp_flag_wolflings
+		add_war_support = 0.05
+		custom_effect_tooltip = SRC_exp_tt_super_sir
+		unlock_decision_category_tooltip = SRC_exp_category
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = SRC_dyn_super_siracusan }
+		}
+		custom_effect_tooltip = SRC_dyn_super_siracusan_modify_tt
+		add_to_variable = {
+			SRC_exp_ws = 0.09
+			tooltip = war_support_factor_tt
+		}
+		add_to_variable = {
+			SRC_exp_atk = 0.1
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			SRC_exp_jwg = -0.15
+			tooltip = justify_war_goal_time_tt
+		}
+		add_to_variable = {
+			SRC_exp_ncatk = 0.05
+			tooltip = army_non_core_attack_factor_tt
+		}
+	}
+}
+
+############################################################
+# 左路 · 选帝侯之路（x = -4）：先砸碎金律，再让莱塔尼亚换个主人
+############################################################
+
+shared_focus = { #2. 灌输狼性文化
+	id = SRC_exp_wolf_culture
+	icon = GFX_focus_SRC_exp_wolf_culture
+	x = -4
+	y = 18
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_exp_wolflings
+	}
+
+	completion_reward = {
+		set_country_flag = SRC_exp_flag_wolf_culture
+		add_political_power = 40
+
+		custom_effect_tooltip = SRC_exp_tt_axp
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = SRC_dyn_super_siracusan }
+		}
+		custom_effect_tooltip = SRC_dyn_super_siracusan_modify_tt
+		add_to_variable = {
+			SRC_exp_ws = 0.03
+			tooltip = war_support_factor_tt
+		}
+		add_to_variable = {
+			SRC_exp_train = -0.1
+			tooltip = training_time_factor_tt
+		}
+		add_to_variable = {
+			SRC_exp_axp = 0.05
+			tooltip = experience_gain_army_tt
+		}
+	}
+}
+
+shared_focus = { #3. 控诉莱塔尼亚暴行
+	id = SRC_exp_leithanien_claims
+	icon = GFX_focus_SRC_exp_leithanien_claims
+	x = -4
+	y = 19
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_exp_wolf_culture
+	}
+
+	completion_reward = {
+		set_country_flag = SRC_exp_flag_leithanien_claims
+		add_political_power = 30
+		add_stability = 0.04
+
+		custom_effect_tooltip = SRC_exp_tt_claims_ltn
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = SRC_dyn_super_siracusan }
+			if = {
+				limit = {
+					country_exists = LTN
+				}
+				LTN = {
+					every_owned_state = {
+						limit = {
+							is_core_of = LTN
+						}
+						add_claim_by = SRC
+					}
+				}
+			}
+		}
+		custom_effect_tooltip = SRC_dyn_super_siracusan_modify_tt
+		add_to_variable = {
+			SRC_exp_ws = 0.03
+			tooltip = war_support_factor_tt
+		}
+		add_to_variable = {
+			SRC_exp_stab = 0.03
+			tooltip = stability_factor_tt
+		}
+	}
+}
+
+shared_focus = { #4. 我早就是选帝侯了！
+	id = SRC_exp_elector
+	icon = GFX_focus_SRC_exp_elector
+	x = -4
+	y = 20
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_exp_leithanien_claims
+	}
+
+	completion_reward = {
+		set_country_flag = SRC_exp_flag_elector
+		custom_effect_tooltip = SRC_exp_tt_elector_dec
+		custom_effect_tooltip = SRC_exp_tt_ltn_levee
+		custom_effect_tooltip = SRC_exp_tt_vassal_rule
+		hidden_effect = {
+			SRC_exp_ltn_reserve_levee_effect = yes
+		}
+	}
+}
+
+############################################################
+# 右路 · 边疆与进军（x = +4）：先把家里熔成一块铁，再出门打猎
+############################################################
+
+shared_focus = { #5. 强化叙拉古人认同
+	id = SRC_exp_identity
+	icon = GFX_focus_SRC_exp_identity
+	x = 4
+	y = 18
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_exp_wolflings
+	}
+
+	completion_reward = {
+		set_country_flag = SRC_exp_flag_identity
+		add_political_power = 30
+
+		custom_effect_tooltip = SRC_exp_tt_core_cost
+		custom_effect_tooltip = SRC_exp_tt_garrison
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = SRC_dyn_super_siracusan }
+		}
+		custom_effect_tooltip = SRC_dyn_super_siracusan_modify_tt
+		add_to_variable = {
+			SRC_exp_stab = 0.06
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			SRC_exp_ppc = -0.15
+			tooltip = political_power_cost_tt
+		}
+		add_to_variable = {
+			SRC_exp_garr = -0.1
+			tooltip = SRC_exp_garr_value_tt
+		}
+	}
+}
+
+shared_focus = { #6. 打击边疆分裂主义
+	id = SRC_exp_frontier_purge
+	icon = GFX_focus_SRC_exp_frontier_purge
+	x = 4
+	y = 19
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_exp_identity
+	}
+
+	completion_reward = {
+		set_country_flag = SRC_exp_flag_frontier_purge
+		add_political_power = 40
+
+		custom_effect_tooltip = SRC_exp_tt_weekly_stab
+
+		custom_effect_tooltip = SRC_exp_tt_frontier_dec
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = SRC_dyn_super_siracusan }
+			SRC_civic_points_up_10_effect = yes
+		}
+		custom_effect_tooltip = SRC_dyn_super_siracusan_modify_tt
+		add_to_variable = {
+			SRC_exp_stab = 0.06
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			SRC_exp_sw = 0.003
+			tooltip = SRC_exp_sw_value_tt
+		}
+	}
+}
+
+shared_focus = { #7. 准备伟大进军
+	id = SRC_exp_great_advance
+	icon = GFX_focus_SRC_exp_great_advance
+	x = 4
+	y = 20
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_exp_frontier_purge
+	}
+
+	completion_reward = {
+		set_country_flag = SRC_exp_flag_great_advance
+		add_war_support = 0.15
+		custom_effect_tooltip = SRC_exp_tt_wargoal_bzn
+		custom_effect_tooltip = SRC_exp_tt_wargoal_mra
+		custom_effect_tooltip = SRC_exp_tt_advance_levee
+		hidden_effect = {
+			SRC_exp_advance_wargoal_effect = yes
+		}
+	}
+}
+
+############################################################
+# 中段总结与终局
+############################################################
+
+shared_focus = { #8. 军团凯旋！
+	id = SRC_exp_legion_triumph
+	icon = GFX_focus_SRC_exp_legion_triumph
+	x = 0
+	y = 21
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 25
+	}
+	prerequisite = {
+		focus = SRC_exp_elector
+	}
+	prerequisite = {
+		focus = SRC_exp_great_advance
+	}
+
+	completion_reward = {
+		set_country_flag = SRC_exp_flag_legion_triumph
+		add_political_power = 50
+		army_experience = 25
+
+		custom_effect_tooltip = SRC_exp_tt_contain_dec
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = SRC_dyn_super_siracusan }
+		}
+		custom_effect_tooltip = SRC_dyn_super_siracusan_modify_tt
+		add_to_variable = {
+			SRC_exp_atk = 0.05
+			tooltip = army_attack_factor_tt
+		}
+	}
+}
+
+shared_focus = { #9. 光荣的叙拉古公民！
+	id = SRC_exp_glorious_citizens
+	icon = GFX_focus_SRC_exp_glorious_citizens
+	x = 0
+	y = 22
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 30
+	}
+	prerequisite = {
+		focus = SRC_exp_legion_triumph
+	}
+
+	completion_reward = {
+		set_country_flag = SRC_exp_flag_glorious_citizens
+		add_stability = 0.05
+		custom_effect_tooltip = SRC_exp_tt_glorious_spirit
+		custom_effect_tooltip = SRC_exp_tt_core_dec
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = SRC_dyn_glorious_citizen }
+		}
+	}
+}

@@ -1,0 +1,655 @@
+# ==============================================================================
+#  我和柳德米拉的回忆录 —— 决议系统
+#  · 一条决议 = 一章回忆；**开局即解锁**（不挂旗标，靠年份 date 门槛逐章开放）
+#  · 决议只负责「开门」：先把 node 设成该章首节点，再调 REU_Ludmila_Play_Chapter
+#    台词、立绘、场景全在 common/scripted_effects 的台词表里，本文件不写剧情
+#  · 分类页里的「进入主席办公室」入口面板见 common/scripted_guis（同一分类）
+#  · 末条【模块开关】= 隐藏/显示整个模块（分类保留，只收起其余决议与入口）：
+#    由每条决议 visible/available 里的 NOT = { has_country_flag = REU_ludmila_module_hidden }
+#    与入口面板的 visible 共同实现（2026-09-13 增，维护说明见 docs/REU_Ludmila_Office_对话引擎指南.md §6.9）
+#
+#  【加一章回忆录 = 改四处】
+#   1. scripted_effects：按章节编号写该章 node（编号规则见该文件头）
+#   2. scripted_localisation：REU_GetLudmilaText 里补 node → loc key
+#   3. localisation：写中文
+#   4. 本文件：复制下面任意一块，改 id / 年份 / node / 图标 / 本地化 key
+#      （visible/available 里的模块开关 NOT 从句照抄保留）
+#
+#  【年份门槛】date > 该年 1 月 1 日。开局是 1094.6.1，所以 1095 章要到 1095 年才可点。
+#             只写了一半的章节把 complete_effect 留成 WIP 提示即可，玩家点它是空操作。
+# ==============================================================================
+
+REU_Ludmila_Memoir_Category = {
+
+	# ---- 1095：雪夜谷仓与第一个贪污犯（已写完） ----
+	REU_ludmila_memory_1095 = {
+		icon = GFX_decision_generic_arrest
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			date > 1095.1.1
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			date > 1095.1.1
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Chapter_1095
+			# 首次观看结算好感；之后随时可以重看，不重复加
+			if = {
+				limit = { NOT = { has_country_flag = REU_ludmila_memory_1095_seen } }
+				set_country_flag = REU_ludmila_memory_1095_seen
+				set_variable = { REU_ludmila_delta = 2 }
+				REU_Ludmila_Add_Affection = yes
+			}
+			set_variable = { REU_ludmila_node = 1000 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 1096：秋日麦穗与焦黑的大列巴（已写完） ----
+	REU_ludmila_memory_1096 = {
+		icon = GFX_decision_generic_consumer_goods
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			date > 1096.1.1
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			date > 1096.1.1
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Chapter_1096
+			# 首次观看结算好感；之后随时可以重看，不重复加
+			if = {
+				limit = { NOT = { has_country_flag = REU_ludmila_memory_1096_seen } }
+				set_country_flag = REU_ludmila_memory_1096_seen
+				set_variable = { REU_ludmila_delta = 3 }
+				REU_Ludmila_Add_Affection = yes
+			}
+			set_variable = { REU_ludmila_node = 1300 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 1097：阳光与尘埃下的移动城市（已写完） ----
+	REU_ludmila_memory_1097 = {
+		icon = GFX_decision_generic_construction
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			date > 1097.1.1
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			date > 1097.1.1
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Chapter_1097
+			# 首次观看结算好感；之后随时可以重看，不重复加
+			if = {
+				limit = { NOT = { has_country_flag = REU_ludmila_memory_1097_seen } }
+				set_country_flag = REU_ludmila_memory_1097_seen
+				set_variable = { REU_ludmila_delta = 4 }
+				REU_Ludmila_Add_Affection = yes
+			}
+			set_variable = { REU_ludmila_node = 1600 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 1098：来，把夜校保护好！（已写完） ----
+	REU_ludmila_memory_1098 = {
+		icon = GFX_decision_generic_research
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			date > 1098.1.1
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			date > 1098.1.1
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Chapter_1098
+			# 首次观看结算好感；之后随时可以重看，不重复加
+			if = {
+				limit = { NOT = { has_country_flag = REU_ludmila_memory_1098_seen } }
+				set_country_flag = REU_ludmila_memory_1098_seen
+				set_variable = { REU_ludmila_delta = 5 }
+				REU_Ludmila_Add_Affection = yes
+			}
+			set_variable = { REU_ludmila_node = 1900 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 1099：奇妙的源石工业与奇妙的丝袜（已写完） ----
+	REU_ludmila_memory_1099 = {
+		icon = GFX_decision_generic_industry
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			date > 1099.1.1
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			date > 1099.1.1
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Chapter_1099
+			# 首次观看结算好感；之后随时可以重看，不重复加
+			if = {
+				limit = { NOT = { has_country_flag = REU_ludmila_memory_1099_seen } }
+				set_country_flag = REU_ludmila_memory_1099_seen
+				set_variable = { REU_ludmila_delta = 5 }
+				REU_Ludmila_Add_Affection = yes
+			}
+			set_variable = { REU_ludmila_node = 2200 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 1100：军阀与暴君的宴会潜入记（已写完） ----
+	REU_ludmila_memory_1100 = {
+		icon = GFX_decision_generic_intelligence_operation
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			date > 1100.1.1
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			date > 1100.1.1
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Chapter_1100
+			# 首次观看结算好感；之后随时可以重看，不重复加
+			if = {
+				limit = { NOT = { has_country_flag = REU_ludmila_memory_1100_seen } }
+				set_country_flag = REU_ludmila_memory_1100_seen
+				set_variable = { REU_ludmila_delta = 6 }
+				REU_Ludmila_Add_Affection = yes
+			}
+			set_variable = { REU_ludmila_node = 2500 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 1101：白面包与黑火药（已写完） ----
+	REU_ludmila_memory_1101 = {
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			date > 1101.1.1
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			date > 1101.1.1
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Chapter_1101
+			# 首次观看结算好感；之后随时可以重看，不重复加
+			if = {
+				limit = { NOT = { has_country_flag = REU_ludmila_memory_1101_seen } }
+				set_country_flag = REU_ludmila_memory_1101_seen
+				set_variable = { REU_ludmila_delta = 6 }
+				REU_Ludmila_Add_Affection = yes
+			}
+			set_variable = { REU_ludmila_node = 2800 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 1102：暴君不只在外面！（已写完） ----
+	REU_ludmila_memory_1102 = {
+		icon = GFX_decision_generic_police_action
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			date > 1102.1.1
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			date > 1102.1.1
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Chapter_1102
+			# 首次观看结算好感；之后随时可以重看，不重复加
+			if = {
+				limit = { NOT = { has_country_flag = REU_ludmila_memory_1102_seen } }
+				set_country_flag = REU_ludmila_memory_1102_seen
+				set_variable = { REU_ludmila_delta = 7 }
+				REU_Ludmila_Add_Affection = yes
+			}
+			set_variable = { REU_ludmila_node = 3100 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 1102 冬：密信与政变（第 9 条，紧接着 1102 章同一个冬天） ----
+	REU_ludmila_memory_1102_winter = {
+		icon = GFX_decision_generic_police_action
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			date > 1102.12.1
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			date > 1102.12.1
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Chapter_1102_winter
+			# 首次观看结算好感；之后随时可以重看，不重复加（政变本身由章节末句触发，带一次性旗标）
+			if = {
+				limit = { NOT = { has_country_flag = REU_ludmila_memory_1102_winter_seen } }
+				set_country_flag = REU_ludmila_memory_1102_winter_seen
+				set_variable = { REU_ludmila_delta = 8 }
+				REU_Ludmila_Add_Affection = yes
+			}
+			set_variable = { REU_ludmila_node = 3400 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 隐藏回忆 1095（看完 1095 年那一章才出现；不影响好感度） ----
+	REU_ludmila_hidden_1095 = {
+		icon = GFX_decision_generic_police_action
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			has_country_flag = REU_ludmila_memory_1095_seen
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			has_country_flag = REU_ludmila_memory_1095_seen
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Hidden
+			set_variable = { REU_ludmila_node = 3700 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 隐藏回忆 1096（看完 1096 年那一章才出现；不影响好感度） ----
+	REU_ludmila_hidden_1096 = {
+		icon = GFX_decision_generic_police_action
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			has_country_flag = REU_ludmila_memory_1096_seen
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			has_country_flag = REU_ludmila_memory_1096_seen
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Hidden
+			set_variable = { REU_ludmila_node = 4000 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 隐藏回忆 1097（看完 1097 年那一章才出现；不影响好感度） ----
+	REU_ludmila_hidden_1097 = {
+		icon = GFX_decision_generic_police_action
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			has_country_flag = REU_ludmila_memory_1097_seen
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			has_country_flag = REU_ludmila_memory_1097_seen
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Hidden
+			set_variable = { REU_ludmila_node = 4300 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 隐藏回忆 1098（看完 1098 年那一章才出现；不影响好感度） ----
+	REU_ludmila_hidden_1098 = {
+		icon = GFX_decision_generic_police_action
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			has_country_flag = REU_ludmila_memory_1098_seen
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			has_country_flag = REU_ludmila_memory_1098_seen
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Hidden
+			set_variable = { REU_ludmila_node = 4600 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 隐藏回忆 1099（看完 1099 年那一章才出现；不影响好感度） ----
+	REU_ludmila_hidden_1099 = {
+		icon = GFX_decision_generic_police_action
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			has_country_flag = REU_ludmila_memory_1099_seen
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			has_country_flag = REU_ludmila_memory_1099_seen
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Hidden
+			set_variable = { REU_ludmila_node = 4900 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 隐藏回忆 1100（看完 1100 年那一章才出现；不影响好感度） ----
+	REU_ludmila_hidden_1100 = {
+		icon = GFX_decision_generic_police_action
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			has_country_flag = REU_ludmila_memory_1100_seen
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			has_country_flag = REU_ludmila_memory_1100_seen
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Hidden
+			set_variable = { REU_ludmila_node = 5200 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 隐藏回忆 1101（看完 1101 年那一章才出现；不影响好感度） ----
+	REU_ludmila_hidden_1101 = {
+		icon = GFX_decision_generic_police_action
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			has_country_flag = REU_ludmila_memory_1101_seen
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		available = {
+			has_country_flag = REU_ludmila_memory_1101_seen
+			NOT = { has_country_flag = REU_ludmila_office_open }
+			NOT = { has_country_flag = REU_ludmila_module_hidden }
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			custom_effect_tooltip = REU_ludmila_TT_Hidden
+			set_variable = { REU_ludmila_node = 5500 }
+			REU_Ludmila_Play_Chapter = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 模块开关：隐藏 / 显示整个 galgame 模块（分类保留，只收起其余内容） ----
+	REU_ludmila_module_toggle = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			is_ai = no
+		}
+
+		available = {
+			is_ai = no
+		}
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = REU_ludmila_module_hidden }
+				custom_effect_tooltip = REU_ludmila_TT_Module_Show
+				clr_country_flag = REU_ludmila_module_hidden
+			}
+			else = {
+				custom_effect_tooltip = REU_ludmila_TT_Module_Hide
+				set_country_flag = REU_ludmila_module_hidden
+				# 面板正开着就顺手关掉（REU_Ludmila_Close 只清 office_open，幂等）
+				if = {
+					limit = { has_country_flag = REU_ludmila_office_open }
+					REU_Ludmila_Close = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+}

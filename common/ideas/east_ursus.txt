@@ -1,0 +1,84 @@
+ideas = {
+	country = {
+		Internal_guard_surveillance = {
+			picture = Internal_guard_surveillance
+			name = Internal_guard_surveillance
+
+			cancel = {
+				has_country_flag = East_Ursus_Upheaval_Enabled
+			}
+
+			modifier = {
+				war_support_factor = -0.1
+	 			stability_factor = -0.1
+	 			political_power_gain = -0.1
+				production_speed_buildings_factor = -0.15
+				training_time_factor = 0.5
+			}
+		}
+
+		Tundra_Outcast = {
+			picture = Tundra_Outcast
+
+			cancel = {
+				has_country_flag = East_Ursus_Upheaval_Enabled
+			}
+
+			modifier = {
+				war_support_factor = -0.1
+	 			stability_factor = -0.1
+	 			political_power_gain = -0.1
+				production_speed_buildings_factor = -0.25
+				training_time_army_factor = 0.5
+			}
+		}
+		
+		Upheaval_increased_factory_output = {
+			picture = heavy_industrial_zone
+
+			cancel = {
+				NOT = {
+					OR = {
+						has_country_flag = East_Ursus_Upheaval_Enabled
+						has_country_flag = East_Ursus_Upheaval_2_Enabled
+					}
+				}
+			}
+
+			modifier = {
+				industrial_capacity_factory = 0.15
+				production_factory_max_efficiency_factor = 0.15
+			}
+		}
+
+		Upheaval_boosting_morale = {
+			picture = heavy_industrial_zone
+
+			cancel = {
+				NOT = {
+					OR = {
+						has_country_flag = East_Ursus_Upheaval_Enabled
+						has_country_flag = East_Ursus_Upheaval_2_Enabled
+					}
+				}
+			}
+
+			modifier = {
+				army_morale_factor = 0.05
+				army_attack_factor = 0.15
+				army_defence_factor = 0.15
+			}
+		}
+
+		upheaval_capital_lost = {
+
+			cancel = {
+				controls_state = var:ursus_warlord_original_capital
+			}
+
+			modifier = {
+				forced_surrender_limit = -0.3
+			}
+		}
+	}
+}

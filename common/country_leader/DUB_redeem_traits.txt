@@ -1,0 +1,132 @@
+######################
+## 深池（DUB）顾问与将领特质
+## 配套：common/characters/DUB_redeem.txt、localisation/simp_chinese/ARF_DUB_l_simp_chinese.yml
+## 口径：全部用 documentation/modifiers_documentation.md 里查得到的键；
+##       名字带 ? 的（special_forces_cap_factor / enemy_partisan_effect / war_support_drift）官方清单没有，一律不用。
+######################
+leader_traits = {
+
+	# ── 校官：赤铁近卫队长，同时是爱布拉娜的近侍——全篇最大的制度漏洞 ──
+	DUB_double_oath = {
+		random = no
+		army_core_defence_factor = 0.12
+		training_time_factor = -0.15
+		resistance_target = 0.05
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 涅梅丝：离群的守灵人，如今管着城里的安置 ──
+	DUB_wake_keeper = {
+		random = no
+		stability_factor = 0.10
+		resistance_target = -0.10
+		political_power_gain = 0.05
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 莫兰：卡迈河谷的吟游诗人，唯一还肯填词的人 ──
+	DUB_lyricist = {
+		random = no
+		war_support_factor = 0.12
+		stability_factor = 0.05
+		conscription_factor = 0.05
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 布莉吉：游牧人，替所有人生火报信 ──
+	DUB_road_sense = {
+		random = no
+		supply_consumption_factor = -0.10
+		army_speed_factor = 0.06
+		recon_factor = 0.12
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 艾玛：粮店老板出身，被逼成走私链的最末一环 ──
+	DUB_grain_counter = {
+		random = no
+		consumer_goods_factor = -0.12
+		production_speed_buildings_factor = 0.12
+		monthly_population = 0.05
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 「会计」：六头领之一，火的账本由他记 ──
+	DUB_fire_ledger = {
+		random = no
+		mobilization_speed = 0.20
+		industrial_capacity_factory = 0.06
+		war_support_factor = -0.05
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 「毒药学者」：六头领之一，她的那一份从不摆上桌 ──
+	DUB_slow_poison = {
+		random = no
+		intel_network_gain_factor = 0.25
+		operation_cost = -0.10
+		agency_upgrade_time = -0.15
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 「雄辩家」：六头领之一，宣言要广播到附近五六座城市 ──
+	DUB_loud_declarations = {
+		random = no
+		war_support_factor = 0.15
+		political_power_gain = 0.06
+		stability_factor = -0.05
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 严肃的守灵人：话事人，句子短得像戒律 ──
+	DUB_vigil_rule = {
+		random = no
+		army_morale_factor = 0.10
+		training_time_factor = -0.10
+		stability_factor = -0.05
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 维恩：给流民记账的人，名字在他笔下比在户籍里多 ──
+	DUB_refugee_roll = {
+		random = no
+		conscription_factor = 0.12
+		weekly_manpower = 900
+		stability_factor = -0.03
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 歌唱家：作家，把没写完的那份报告书念给人听 ──
+	DUB_bitter_archive = {
+		random = no
+		research_speed_factor = 0.10
+		experience_gain_army = 0.10
+		stability_factor = -0.03
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 高参：灰队（火攻与巷战） ──
+	DUB_ash_brigade = {
+		random = no
+		army_infantry_attack_factor = 0.12
+		breakthrough_factor = 0.06
+		land_reinforce_rate = 0.10
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 高参：辎重与道路 ──
+	DUB_convoy_routes = {
+		random = no
+		supply_consumption_factor = -0.12
+		no_supply_grace = 24
+		ai_will_do = { factor = 1 }
+	}
+
+	# ── 高参：缴获与再装备（「强盗」的本职） ──
+	DUB_taken_not_given = {
+		random = no
+		equipment_capture_factor = 0.15
+		production_factory_max_efficiency_factor = 0.05
+		ai_will_do = { factor = 1 }
+	}
+}

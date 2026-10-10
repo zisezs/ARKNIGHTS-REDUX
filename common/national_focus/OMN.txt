@@ -1,0 +1,1702 @@
+focus_tree = {
+	id = OMN_start
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = OMN
+		}
+	}
+	default = no
+
+	#这里的黎明静悄悄
+	focus = {
+		id = OMN_the_dawn_here_is_quiet
+		icon = GFX_focus_OMN_the_dawn_here_is_quiet
+		cost = 1
+		x = 0
+		y = 0
+
+		completion_reward = {
+			OMN_Grain_Production_Enable = yes
+			add_stability = 0.05
+			country_event = {
+				id = focus_omn.1
+			}
+		}
+	}
+
+	#有限机械化
+	focus = {
+		id = OMN_limited_mechanization
+		icon = GFX_focus_OMN_limited_mechanization
+		cost = 2
+		prerequisite = {
+			focus = OMN_the_dawn_here_is_quiet
+		}
+		mutually_exclusive = { focus = OMN_improve_village_community_system }
+
+		x = -6
+		y = 1
+		relative_position_id = OMN_the_dawn_here_is_quiet
+
+		completion_reward = {
+			set_temp_variable = { grain_production = 5 }
+			OMN_Grain_Production_Change = yes
+			set_temp_variable = { dev_rate_agr = 0.1 }
+			Agricultural_Level_Rate_Add = yes
+		}
+	}
+
+	#改良村社制度
+	focus = {
+		id = OMN_improve_village_community_system
+		icon = GFX_focus_OMN_improve_village_community_system
+		cost = 2
+		prerequisite = {
+			focus = OMN_the_dawn_here_is_quiet
+		}
+		mutually_exclusive = { focus = OMN_limited_mechanization }
+
+		x = -4
+		y = 1
+		relative_position_id = OMN_the_dawn_here_is_quiet
+
+		completion_reward = {
+			add_political_power = 35
+			add_stability = 0.05
+			set_temp_variable = { grain_production = 2 }
+			OMN_Grain_Production_Change = yes
+			set_temp_variable = { dev_rate_agr = 0.1 }
+			Agricultural_Level_Rate_Add = yes
+			country_event = {
+				id = focus_omn.2
+			}
+		}
+	}
+
+	#新型采矿设备
+	focus = {
+		id = OMN_new_mining_equipment
+		icon = GFX_focus_OMN_new_mining_equipment
+		cost = 2
+		prerequisite = {
+			focus = OMN_limited_mechanization
+			focus = OMN_improve_village_community_system
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = OMN_limited_mechanization
+
+		completion_reward = {
+			set_temp_variable = { dev_rate_ind = 0.1 }
+			Industrial_Level_Rate_Add = yes
+			160 = {
+				add_resource = {
+					type = steel
+					amount = 3
+				}
+				add_resource = {
+					type = oil
+					amount = 3
+				}
+			}
+		}
+	}
+
+	#工作制改良
+	focus = {
+		id = OMN_working_hours_improvement
+		icon = GFX_focus_OMN_working_hours_improvement
+		cost = 2
+		prerequisite = {
+			focus = OMN_limited_mechanization
+			focus = OMN_improve_village_community_system
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = OMN_improve_village_community_system
+
+		completion_reward = {
+			add_political_power = 30
+			swap_ideas = {
+				remove_idea = working_law_14h
+				add_idea = working_law_12h
+			}
+			add_ideas = OMN_work_two_shifts
+		}
+	}
+
+	#化肥工厂
+	focus = {
+		id = OMN_fertilizer_factory
+		icon = GFX_focus_OMN_fertilizer_factory
+		cost = 2
+		prerequisite = {
+			focus = OMN_new_mining_equipment
+		}
+		prerequisite = {
+			focus = OMN_working_hours_improvement
+		}
+		mutually_exclusive = { focus = OMN_highly_tolerant_crops }
+
+		x = 0
+		y = 1
+		relative_position_id = OMN_new_mining_equipment
+
+		completion_reward = {
+			set_temp_variable = { grain_production = 2 }
+			OMN_Grain_Production_Change = yes
+			set_temp_variable = { dev_rate_agr = 0.1 }
+			Agricultural_Level_Rate_Add = yes
+			160 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#推广高耐性作物
+	focus = {
+		id = OMN_highly_tolerant_crops
+		icon = GFX_focus_OMN_highly_tolerant_crops
+		cost = 2
+		prerequisite = {
+			focus = OMN_new_mining_equipment
+		}
+		prerequisite = {
+			focus = OMN_working_hours_improvement
+		}
+		mutually_exclusive = { focus = OMN_fertilizer_factory }
+
+		x = 0
+		y = 1
+		relative_position_id = OMN_working_hours_improvement
+
+		completion_reward = {
+			set_temp_variable = { grain_production = 5 }
+			OMN_Grain_Production_Change = yes
+			set_temp_variable = { dev_rate_agr = 0.2 }
+			Agricultural_Level_Rate_Add = yes
+			country_event = {
+				id = focus_omn.3
+			}
+		}
+	}
+
+	#大换血
+	focus = {
+		id = OMN_great_change
+		icon = GFX_focus_OMN_great_change
+		cost = 2
+		prerequisite = {
+			focus = OMN_the_dawn_here_is_quiet
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = OMN_the_dawn_here_is_quiet
+
+		completion_reward = {
+			add_stability = -0.2
+			add_manpower = -3000
+			add_political_power = 100
+			country_event = {
+				id = focus_omn.4
+			}
+		}
+	}
+
+	#任用新贵族
+	focus = {
+		id = OMN_appoint_new_nobles
+		icon = GFX_focus_OMN_appoint_new_nobles
+		cost = 2
+		prerequisite = {
+			focus = OMN_great_change
+		}
+		mutually_exclusive = { focus = OMN_officer_corps_governs }
+
+		x = 0
+		y = 1
+		relative_position_id = OMN_great_change
+
+		completion_reward = {
+			add_stability = 0.1
+			add_political_power = 35
+		}
+	}
+
+	#军官团执政
+	focus = {
+		id = OMN_officer_corps_governs
+		icon = GFX_focus_OMN_officer_corps_governs
+		cost = 2
+		prerequisite = {
+			focus = OMN_great_change
+		}
+		mutually_exclusive = { focus = OMN_appoint_new_nobles }
+
+		x = 2
+		y = 1
+		relative_position_id = OMN_great_change
+
+		completion_reward = {
+			add_war_support = 0.1
+			add_political_power = 35
+			country_event = {
+				id = focus_omn.5
+			}
+		}
+	}
+
+	#行政方法改革
+	focus = {
+		id = OMN_administrative_methods_reform
+		icon = GFX_focus_OMN_administrative_methods_reform
+		cost = 2
+		prerequisite = {
+			focus = OMN_appoint_new_nobles
+			focus = OMN_officer_corps_governs
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_officer_corps_governs
+
+		completion_reward = {
+			add_political_power = 20
+			set_temp_variable = { dev_rate_adm = 0.2 }
+			Administrative_Efficiency_Rate_Add = yes
+		}
+	}
+
+	#村社办事处
+	focus = {
+		id = OMN_village_office
+		icon = GFX_focus_OMN_village_office
+		cost = 2
+		prerequisite = {
+			focus = OMN_limited_mechanization
+			focus = OMN_improve_village_community_system
+		}
+		prerequisite = {
+			focus = OMN_great_change
+		}
+
+		x = -2
+		y = 1
+		relative_position_id = OMN_great_change
+
+		completion_reward = {
+			add_stability = -0.1
+			add_political_power = 35
+			add_command_power = 50
+			if = {
+				limit = {
+					has_completed_focus = OMN_limited_mechanization
+				}
+				country_event = {
+					id = focus_omn.6
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = OMN_improve_village_community_system
+				}
+				country_event = {
+					id = focus_omn.7
+				}
+			}
+		}
+	}
+
+	#连通全地区		
+	focus = {
+		id = OMN_connect_all_regions
+		icon = GFX_focus_OMN_connect_all_regions
+		cost = 2
+		prerequisite = {
+			focus = OMN_village_office
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_village_office
+
+		completion_reward = {
+			every_core_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			set_temp_variable = { dev_rate_adm = 0.1 }
+			Administrative_Efficiency_Rate_Add = yes
+		}
+	}
+
+	#筹备地下军工厂	
+	focus = {
+		id = OMN_underground_military_factories
+		icon = GFX_focus_OMN_underground_military_factories
+		cost = 2
+		prerequisite = {
+			focus = OMN_the_dawn_here_is_quiet
+		}
+
+		x = 5
+		y = 1
+		relative_position_id = OMN_the_dawn_here_is_quiet
+
+		completion_reward = {
+			set_temp_variable = { dev_rate_ind = 0.2 }
+			Industrial_Level_Rate_Add = yes
+			swap_ideas = {
+				remove_idea = OMN_peaceful_threshing_ground_1
+				add_idea = OMN_peaceful_threshing_ground_2
+			}
+		}
+	}
+
+	#分割军队
+	focus = {
+		id = OMN_divide_the_army
+		icon = GFX_focus_OMN_divide_the_army
+		cost = 2
+		prerequisite = {
+			focus = OMN_underground_military_factories
+		}
+		mutually_exclusive = { focus = OMN_hybrid_division }
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_underground_military_factories
+
+		completion_reward = {
+			add_manpower = 40000
+			add_political_power = 40
+			add_stability = 0.1
+		}
+	}
+
+	#杂种师
+	focus = {
+		id = OMN_hybrid_division
+		icon = GFX_focus_OMN_hybrid_division
+		cost = 2
+		prerequisite = {
+			focus = OMN_underground_military_factories
+		}
+		mutually_exclusive = { focus = OMN_divide_the_army }
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_underground_military_factories
+
+		completion_reward = {
+			add_manpower = 50000			
+		}
+	}
+
+	#组建射击军
+	focus = {
+		id = OMN_form_shooting_army
+		icon = GFX_focus_OMN_form_shooting_army
+		cost = 2
+		prerequisite = {
+			focus = OMN_divide_the_army
+			focus = OMN_hybrid_division
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_divide_the_army
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 3000
+			}
+		}
+	}
+
+	#下一个七月计划
+	focus = {
+		id = OMN_next_july_plan
+		icon = GFX_focus_OMN_next_july_plan
+		cost = 2
+		prerequisite = {
+			focus = OMN_fertilizer_factory
+			focus = OMN_highly_tolerant_crops
+		}
+		prerequisite = {
+			focus = OMN_administrative_methods_reform
+		}
+		prerequisite = {
+			focus = OMN_connect_all_regions
+		}
+		prerequisite = {
+			focus = OMN_form_shooting_army
+		}
+
+		x = 0
+		y = 4
+		relative_position_id = OMN_the_dawn_here_is_quiet
+
+		select_effect = {
+			country_event = {
+				id = focus_omn.8
+				days = 7
+			}
+		}
+	}
+
+	#转移粮食储备
+	focus = {
+		id = OMN_transfer_food_reserves
+		icon = GFX_focus_OMN_transfer_food_reserves
+		cost = 2
+		prerequisite = {
+			focus = OMN_next_july_plan
+		}
+
+		x = -5
+		y = 1
+		relative_position_id = OMN_next_july_plan
+
+		completion_reward = {
+			add_stability = -0.2
+			set_temp_variable = { grain = 20 }
+			OMN_Grain_Number_Change = yes
+			country_event = {
+				id = focus_omn.9
+			}
+		}
+	}
+
+	#安抚农民
+	focus = {
+		id = OMN_appease_farmers
+		icon = GFX_focus_OMN_appease_farmers
+		cost = 2
+		prerequisite = {
+			focus = OMN_transfer_food_reserves
+		}
+		mutually_exclusive = { focus = OMN_village_picket }
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_transfer_food_reserves
+
+		completion_reward = {
+			set_temp_variable = { grain = -10 }
+			OMN_Grain_Number_Change = yes
+			add_stability = 0.05
+		}
+	}
+
+	#村社纠察部
+	focus = {
+		id = OMN_village_picket
+		icon = GFX_focus_OMN_village_picket
+		cost = 2
+		prerequisite = {
+			focus = OMN_transfer_food_reserves
+		}
+		mutually_exclusive = { focus = OMN_appease_farmers }
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_transfer_food_reserves
+
+		completion_reward = {
+			add_stability = 0.1
+			add_manpower = -20000
+			country_event = {
+				id = focus_omn.10
+			}
+		}
+	}
+
+	#农村地区戒严
+	focus = {
+		id = OMN_village_martial_law
+		icon = GFX_focus_OMN_village_martial_law
+		cost = 2
+		prerequisite = {
+			focus = OMN_appease_farmers
+			focus = OMN_village_picket
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = OMN_transfer_food_reserves
+
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+
+	#封锁信息
+	focus = {
+		id = OMN_block_information
+		icon = GFX_focus_OMN_block_information
+		cost = 2
+		prerequisite = {
+			focus = OMN_next_july_plan
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = OMN_next_july_plan
+
+		completion_reward = {
+			add_stability = 0.02
+			add_war_support = 0.05
+		}
+	}
+
+	#揪出嫌疑人
+	focus = {
+		id = OMN_find_the_suspect
+		icon = GFX_focus_OMN_find_the_suspect
+		cost = 2
+		prerequisite = {
+			focus = OMN_block_information
+		}
+
+		x = -2
+		y = 1
+		relative_position_id = OMN_block_information
+
+		completion_reward = {
+			add_political_power = 50
+			country_event = {
+				id = focus_omn.11
+			}
+		}
+	}
+
+	#借题发挥
+	focus = {
+		id = OMN_make_use_of_topic
+		icon = GFX_focus_OMN_make_use_of_topic
+		cost = 2
+		prerequisite = {
+			focus = OMN_block_information
+		}
+		mutually_exclusive = { focus = OMN_a_chance }
+
+		x = 0
+		y = 1
+		relative_position_id = OMN_block_information
+
+		completion_reward = {
+			add_stability = -0.1
+			set_temp_variable = { grain = 30 }
+			OMN_Grain_Number_Change = yes
+		}
+	}
+
+	#一个机会
+	focus = {
+		id = OMN_a_chance
+		icon = GFX_focus_OMN_a_chance
+		cost = 2
+		prerequisite = {
+			focus = OMN_block_information
+		}
+		mutually_exclusive = { focus = OMN_make_use_of_topic }
+
+		x = 2
+		y = 1
+		relative_position_id = OMN_block_information
+
+		completion_reward = {
+			add_stability = 0.1
+			add_political_power = 40
+		}
+	}
+
+	#无事发生
+	focus = {
+		id = OMN_nothing_happened
+		icon = GFX_focus_OMN_nothing_happened
+		cost = 2
+		prerequisite = {
+			focus = OMN_find_the_suspect
+		}
+		prerequisite = {
+			focus = OMN_make_use_of_topic
+			focus = OMN_a_chance
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = OMN_block_information
+
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_political_power = 65
+		}
+	}
+
+	#审问军队叛逃者
+	focus = {
+		id = OMN_interrogating_army_defectors
+		icon = GFX_focus_OMN_interrogating_army_defectors
+		cost = 2
+		prerequisite = {
+			focus = OMN_next_july_plan
+		}
+
+		x = 5
+		y = 1
+		relative_position_id = OMN_next_july_plan
+
+		completion_reward = {
+			country_event = {
+				id = focus_omn.12
+			}
+		}
+	}
+
+	#调查“绿军”
+	focus = {
+		id = OMN_investigating_green_army
+		icon = GFX_focus_OMN_investigating_green_army
+		cost = 2
+		prerequisite = {
+			focus = OMN_interrogating_army_defectors
+		}
+		mutually_exclusive = { focus = OMN_seize_militia_armed_forces }
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_interrogating_army_defectors
+
+		completion_reward = {
+			add_command_power = 100
+			country_event = {
+				id = focus_omn.13
+			}
+		}
+	}
+
+	#查封民兵武装
+	focus = {
+		id = OMN_seize_militia_armed_forces
+		icon = GFX_focus_OMN_seize_militia_armed_forces
+		cost = 2
+		prerequisite = {
+			focus = OMN_interrogating_army_defectors
+		}
+		mutually_exclusive = { focus = OMN_investigating_green_army }
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_interrogating_army_defectors
+
+		completion_reward = {
+			add_stability = -0.1
+			add_manpower = -10000
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2000
+			}
+		}
+	}
+
+	#巩固各地据点
+	focus = {
+		id = OMN_strengthen_strongholds
+		icon = GFX_focus_OMN_strengthen_strongholds
+		cost = 2
+		prerequisite = {
+			focus = OMN_investigating_green_army
+			focus = OMN_seize_militia_armed_forces
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = OMN_interrogating_army_defectors
+
+		completion_reward = {
+			every_core_state = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						limit_to_victory_point = 1
+					}
+				}
+			}
+		}
+	}
+
+	#大难将至
+	focus = {
+		id = OMN_disaster_is_coming
+		icon = GFX_focus_OMN_disaster_is_coming
+		cost = 2
+		prerequisite = {
+			focus = OMN_village_martial_law
+		}
+		prerequisite = {
+			focus = OMN_nothing_happened
+		}
+		prerequisite = {
+			focus = OMN_strengthen_strongholds
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = OMN_nothing_happened
+
+		completion_reward = {
+			country_event = {
+				id = focus_omn.14
+			}
+		}
+	}
+}
+
+focus_tree = {
+	id = OMN_for_whom_the_bell_tolls
+	country = {
+		factor = 0
+	}
+	default = no
+
+	#白兽奔行于荒野
+	focus = {
+		id = OMN_run_through_the_wilderness
+		icon = GFX_focus_OMN_run_through_the_wilderness
+		cost = 1
+		x = 0
+		y = 0
+
+		completion_reward = {
+			OMN_Civil_War_Enable = yes
+		}
+	}
+
+	#丧钟为众者而鸣
+	focus = {
+		id = OMN_the_bell_tolls_for_many
+		icon = GFX_focus_OMN_the_bell_tolls_for_many
+		cost = 1
+		prerequisite = {
+			focus = OMN_run_through_the_wilderness
+		}
+		mutually_exclusive = { focus = OMN_the_bell_tolls_for_few }
+
+		x = -4
+		y = 1
+		relative_position_id = OMN_run_through_the_wilderness
+
+		completion_reward = {
+			add_political_power = 100
+			add_ideas = OMN_divided_omnodar
+		}
+	}
+
+	#雇佣旧贵族亲卫
+	focus = {
+		id = OMN_hire_bodyguards_of_old_nobles
+		icon = GFX_focus_OMN_hire_bodyguards_of_old_nobles
+		cost = 2
+		prerequisite = {
+			focus = OMN_the_bell_tolls_for_many
+		}
+		mutually_exclusive = { focus = OMN_paid_conscription }
+
+		x = -2
+		y = 1
+		relative_position_id = OMN_the_bell_tolls_for_many
+
+		completion_reward = {
+			set_temp_variable = { chantashaw_manpower = 500 }
+			OMN_Chantashaw_Manpower_Change = yes
+		}
+	}
+
+	#有偿征兵制
+	focus = {
+		id = OMN_paid_conscription
+		icon = GFX_focus_OMN_paid_conscription
+		cost = 2
+		prerequisite = {
+			focus = OMN_the_bell_tolls_for_many
+		}
+		mutually_exclusive = { focus = OMN_hire_bodyguards_of_old_nobles }
+
+		x = 2
+		y = 1
+		relative_position_id = OMN_the_bell_tolls_for_many
+
+		completion_reward = {
+			set_temp_variable = { chantashaw_manpower = 800 }
+			OMN_Chantashaw_Manpower_Change = yes
+			set_temp_variable = { chantashaw_advantage = 1 }
+			OMN_Chantashaw_Advantage_Change = yes
+		}
+	}
+
+	#征募感染者
+	focus = {
+		id = OMN_recruiting_infecteds
+		icon = GFX_focus_OMN_recruiting_infecteds
+		cost = 2
+		prerequisite = {
+			focus = OMN_hire_bodyguards_of_old_nobles
+			focus = OMN_paid_conscription
+		}
+
+		x = -2
+		y = 2
+		relative_position_id = OMN_the_bell_tolls_for_many
+
+		completion_reward = {
+			set_temp_variable = { chantashaw_manpower = 450 }
+			OMN_Chantashaw_Manpower_Change = yes
+			add_stability = -0.22
+		}
+	}
+
+	#征募城市民
+	focus = {
+		id = OMN_recruiting_citizens
+		icon = GFX_focus_OMN_recruiting_citizens
+		cost = 2
+		prerequisite = {
+			focus = OMN_hire_bodyguards_of_old_nobles
+			focus = OMN_paid_conscription
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = OMN_the_bell_tolls_for_many
+
+		completion_reward = {
+			set_temp_variable = { chantashaw_manpower = 450 }
+			OMN_Chantashaw_Manpower_Change = yes
+			add_war_support = -0.22
+		}
+	}
+
+	#征募重刑犯
+	focus = {
+		id = OMN_recruiting_felons
+		icon = GFX_focus_OMN_recruiting_felons
+		cost = 2
+		prerequisite = {
+			focus = OMN_hire_bodyguards_of_old_nobles
+			focus = OMN_paid_conscription
+		}
+
+		x = 2
+		y = 2
+		relative_position_id = OMN_the_bell_tolls_for_many
+
+		completion_reward = {
+			set_temp_variable = { chantashaw_manpower = 700 }
+			OMN_Chantashaw_Manpower_Change = yes
+			add_stability = -0.14
+			add_war_support = -0.17
+		}
+	}
+
+	#夺取军事工厂
+	focus = {
+		id = OMN_seize_military_factories
+		icon = GFX_focus_OMN_seize_military_factories
+		cost = 2
+		prerequisite = {
+			focus = OMN_recruiting_infecteds
+		}
+		prerequisite = {
+			focus = OMN_recruiting_citizens
+		}
+		prerequisite = {
+			focus = OMN_recruiting_felons
+		}
+		mutually_exclusive = { focus = OMN_perish_together }
+
+		x = -2
+		y = 1
+		relative_position_id = OMN_recruiting_citizens
+
+		completion_reward = {
+			set_temp_variable = { chantashaw_manpower = -330 }
+			OMN_Chantashaw_Manpower_Change = yes
+			swap_ideas = {
+ 				remove_idea = OMN_divided_omnodar
+				add_idea = OMN_divided_omnodar_1
+ 			}
+		}
+	}
+
+	#同归于尽
+	focus = {
+		id = OMN_perish_together
+		icon = GFX_focus_OMN_perish_together
+		cost = 2
+		prerequisite = {
+			focus = OMN_recruiting_infecteds
+		}
+		prerequisite = {
+			focus = OMN_recruiting_citizens
+		}
+		prerequisite = {
+			focus = OMN_recruiting_felons
+		}
+		mutually_exclusive = { focus = OMN_seize_military_factories }
+
+		x = 2
+		y = 1
+		relative_position_id = OMN_recruiting_citizens
+
+		completion_reward = {
+			set_temp_variable = { chantashaw_advantage = 3 }
+			OMN_Chantashaw_Advantage_Change = yes
+			swap_ideas = {
+ 				remove_idea = OMN_divided_omnodar
+				add_idea = OMN_divided_omnodar_2
+ 			}
+		}
+	}
+
+	#突袭大教堂区
+	focus = {
+		id = OMN_assault_on_cathedral
+		icon = GFX_focus_OMN_assault_on_cathedral
+		cost = 2
+		prerequisite = {
+			focus = OMN_seize_military_factories
+			focus = OMN_perish_together
+		}
+
+		x = -1
+		y = 2
+		relative_position_id = OMN_recruiting_citizens
+
+		completion_reward = {
+			set_temp_variable = { chantashaw_advantage = 5 }
+			OMN_Chantashaw_Advantage_Change = yes
+			set_temp_variable = { chantashaw_manpower = -770 }
+			OMN_Chantashaw_Manpower_Change = yes
+		}
+	}
+
+	#焚烧农业仓库
+	focus = {
+		id = OMN_burn_agricultural_warehouses
+		icon = GFX_focus_OMN_burn_agricultural_warehouses
+		cost = 2
+		prerequisite = {
+			focus = OMN_seize_military_factories
+			focus = OMN_perish_together
+		}
+
+		x = 1
+		y = 2
+		relative_position_id = OMN_recruiting_citizens
+
+		completion_reward = {
+			set_temp_variable = { chantashaw_advantage = 5 }
+			OMN_Chantashaw_Advantage_Change = yes
+			set_temp_variable = { dev_rate_agr = 0.2 }
+			Agricultural_Level_Rate_Minus = yes
+		}
+	}
+
+	#丧钟为寡者而鸣
+	focus = {
+		id = OMN_the_bell_tolls_for_few
+		icon = GFX_focus_OMN_the_bell_tolls_for_few
+		cost = 1
+		prerequisite = {
+			focus = OMN_run_through_the_wilderness
+		}
+		mutually_exclusive = { focus = OMN_the_bell_tolls_for_many }
+
+		x = 4
+		y = 1
+		relative_position_id = OMN_run_through_the_wilderness
+
+		completion_reward = {
+			add_political_power = 100
+			add_ideas = OMN_divided_omnodar
+		}
+	}
+
+	#联合旧贵族
+	focus = {
+		id = OMN_unite_old_nobles
+		icon = GFX_focus_OMN_unite_old_nobles
+		cost = 2
+		prerequisite = {
+			focus = OMN_the_bell_tolls_for_few
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_the_bell_tolls_for_few
+
+		completion_reward = {
+			add_political_power = 65
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 400
+			}
+		}
+	}
+
+	#接纳军队逃兵
+	focus = {
+		id = OMN_accept_deserters
+		icon = GFX_focus_OMN_accept_deserters
+		cost = 2
+		prerequisite = {
+			focus = OMN_the_bell_tolls_for_few
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_the_bell_tolls_for_few
+
+		completion_reward = {
+			set_temp_variable = { aryusz_advantage = 2 }
+			OMN_Aryusz_Advantage_Change = yes
+			set_temp_variable = { aryusz_manpower = 265 }
+			OMN_Aryusz_Manpower_Change = yes
+		}
+	}
+
+	#平等配给
+	focus = {
+		id = OMN_equal_rationing
+		icon = GFX_focus_OMN_equal_rationing
+		cost = 2
+		prerequisite = {
+			focus = OMN_unite_old_nobles
+		}
+		prerequisite = {
+			focus = OMN_accept_deserters
+		}
+		mutually_exclusive = { focus = OMN_soldiers_first }
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_unite_old_nobles
+
+		completion_reward = {
+			add_political_power = 35
+			add_stability = 0.12
+		}
+	}
+
+	#士兵优先
+	focus = {
+		id = OMN_soldiers_first
+		icon = GFX_focus_OMN_soldiers_first
+		cost = 2
+		prerequisite = {
+			focus = OMN_unite_old_nobles
+		}
+		prerequisite = {
+			focus = OMN_accept_deserters
+		}
+		mutually_exclusive = { focus = OMN_equal_rationing }
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_accept_deserters
+
+		completion_reward = {
+			add_political_power = 35
+			add_war_support = 0.12
+		}
+	}
+
+	#武装劳改犯
+	focus = {
+		id = OMN_arm_prisoners
+		icon = GFX_focus_OMN_arm_prisoners
+		cost = 2
+		prerequisite = {
+			focus = OMN_equal_rationing
+			focus = OMN_soldiers_first
+		}
+
+		x = -2
+		y = 3
+		relative_position_id = OMN_the_bell_tolls_for_few
+
+		completion_reward = {
+			set_temp_variable = { aryusz_manpower = 450 }
+			OMN_Aryusz_Manpower_Change = yes
+			add_command_power = -30
+			add_political_power = -25
+		}
+	}
+
+	#武装平信徒
+	focus = {
+		id = OMN_arm_believers
+		icon = GFX_focus_OMN_arm_believers
+		cost = 2
+		prerequisite = {
+			focus = OMN_equal_rationing
+			focus = OMN_soldiers_first
+		}
+
+		x = 0
+		y = 3
+		relative_position_id = OMN_the_bell_tolls_for_few
+
+		completion_reward = {
+			set_temp_variable = { aryusz_manpower = 450 }
+			OMN_Aryusz_Manpower_Change = yes
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -800
+			}
+			add_manpower = -40000
+		}
+	}
+
+	#武装感染者
+	focus = {
+		id = OMN_arm_infecteds
+		icon = GFX_focus_OMN_arm_infecteds
+		cost = 2
+		prerequisite = {
+			focus = OMN_equal_rationing
+			focus = OMN_soldiers_first
+		}
+
+		x = 2
+		y = 3
+		relative_position_id = OMN_the_bell_tolls_for_few
+
+		completion_reward = {
+			set_temp_variable = { aryusz_manpower = 450 }
+			OMN_Aryusz_Manpower_Change = yes
+			add_stability = -0.17
+			add_war_support = -0.16
+		}
+	}
+
+	#信真理为道
+	focus = {
+		id = OMN_way_of_truth_belief
+		icon = GFX_focus_OMN_way_of_truth_belief
+		cost = 2
+		prerequisite = {
+			focus = OMN_arm_prisoners
+		}
+		prerequisite = {
+			focus = OMN_arm_believers
+		}
+		prerequisite = {
+			focus = OMN_arm_infecteds
+		}
+		mutually_exclusive = { focus = OMN_contemporary_crusaders }
+
+		x = -2
+		y = 1
+		relative_position_id = OMN_arm_believers
+
+		completion_reward = {
+			add_command_power = 40
+			add_political_power = 75
+			add_stability = 0.3
+			add_war_support = 0.3
+		}
+	}
+
+	#当代十字军
+	focus = {
+		id = OMN_contemporary_crusaders
+		icon = GFX_focus_OMN_contemporary_crusaders
+		cost = 2
+		prerequisite = {
+			focus = OMN_arm_prisoners
+		}
+		prerequisite = {
+			focus = OMN_arm_believers
+		}
+		prerequisite = {
+			focus = OMN_arm_infecteds
+		}
+		mutually_exclusive = { focus = OMN_way_of_truth_belief }
+
+		x = 2
+		y = 1
+		relative_position_id = OMN_arm_believers
+
+		completion_reward = {
+			set_temp_variable = { chantashaw_advantage = 1 }
+			OMN_Chantashaw_Advantage_Change = yes
+			add_manpower = -40000
+			add_stability = -0.12
+			add_war_support = 0.13
+		}
+	}
+
+	#一切照常？
+	focus = {
+		id = OMN_everything_as_usual
+		icon = GFX_focus_OMN_everything_as_usual
+		cost = 2
+
+		available = {
+			has_country_flag = OMN_chantashaw_victory
+		}
+		allow_branch = {
+			has_country_flag = OMN_chantashaw_victory
+		}
+
+		x = 10
+		y = 0
+		relative_position_id = OMN_run_through_the_wilderness
+
+		completion_reward = {
+			add_stability = 0.1
+			hidden_effect = {
+				news_event = {
+					id = news_omn.1
+				}
+			}
+		}
+	}
+
+	#清理绿军残余
+	focus = {
+		id = OMN_clean_up_green_army_remnants
+		icon = GFX_focus_OMN_clean_up_green_army_remnants
+		cost = 2
+		prerequisite = {
+			focus = OMN_everything_as_usual
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_everything_as_usual
+
+		completion_reward = {
+			add_stability = 0.15
+			add_war_support = 0.15
+		}
+	}
+
+	#全面宗教禁令
+	focus = {
+		id = OMN_total_religious_ban
+		icon = GFX_focus_OMN_total_religious_ban
+		cost = 2
+		prerequisite = {
+			focus = OMN_everything_as_usual
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_everything_as_usual
+
+		completion_reward = {
+			add_political_power = 20
+			add_popularity = {
+				ideology = despotism
+				popularity = 0.5
+			}
+			country_event = {
+				id = focus_omn.15
+			}
+		}
+	}
+
+	#恢复农业生产
+	focus = {
+		id = OMN_resume_agricultural_production_chantashaw
+		icon = GFX_focus_OMN_resume_agricultural_production_chantashaw
+		cost = 2
+		prerequisite = {
+			focus = OMN_clean_up_green_army_remnants
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_clean_up_green_army_remnants
+
+		completion_reward = {
+			set_temp_variable = { dev_rate_agr = 0.2 }
+			Agricultural_Level_Rate_Add = yes
+			add_ideas = OMN_agricultural_production_recovering
+		}
+	}
+
+	#集中剩余农村人口
+	focus = {
+		id = OMN_concentrate_rural_population
+		icon = GFX_focus_OMN_concentrate_rural_population
+		cost = 2
+		prerequisite = {
+			focus = OMN_clean_up_green_army_remnants
+		}
+		prerequisite = {
+			focus = OMN_total_religious_ban
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = OMN_everything_as_usual
+
+		completion_reward = {
+			add_political_power = 25
+			every_core_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#工厂修复计划
+	focus = {
+		id = OMN_factory_restoration_plan_chantashaw
+		icon = GFX_focus_OMN_factory_restoration_plan_chantashaw
+		cost = 2
+		prerequisite = {
+			focus = OMN_total_religious_ban
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_total_religious_ban
+
+		completion_reward = {
+			add_political_power = 25
+			every_core_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#重建社会基层建设
+	focus = {
+		id = OMN_rebuilding_construction_chantashaw
+		icon = GFX_focus_OMN_rebuilding_construction_chantashaw
+		cost = 2
+		prerequisite = {
+			focus = OMN_resume_agricultural_production_chantashaw
+		}
+		prerequisite = {
+			focus = OMN_concentrate_rural_population
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_concentrate_rural_population
+
+		completion_reward = {
+			add_political_power = 30
+			set_temp_variable = { dev_rate_adm = 0.2 }
+			Administrative_Efficiency_Rate_Add = yes
+		}
+	}
+
+	#宣忠誓言
+	focus = {
+		id = OMN_pledge_of_allegiance
+		icon = GFX_focus_OMN_pledge_of_allegiance
+		cost = 2
+		prerequisite = {
+			focus = OMN_concentrate_rural_population
+		}
+		prerequisite = {
+			focus = OMN_factory_restoration_plan_chantashaw
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_concentrate_rural_population
+
+		completion_reward = {
+			add_political_power = 40
+			add_stability = 0.05
+			add_war_support = 0.05
+			country_event = {
+				id = focus_omn.17
+			}
+		}
+	}
+
+	#改头换面
+	focus = {
+		id = OMN_makeover
+		icon = GFX_focus_OMN_makeover
+		cost = 2
+		prerequisite = {
+			focus = OMN_rebuilding_construction_chantashaw
+		}
+		prerequisite = {
+			focus = OMN_pledge_of_allegiance
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = OMN_concentrate_rural_population
+
+		completion_reward = {
+			add_political_power = 50
+			set_cosmetic_tag = OMN_Perunsk
+			hidden_effect = {
+				news_event = {
+					id = news_omn.3
+				}
+			}
+		}
+	}
+
+	#神圣的胜利
+	focus = {
+		id = OMN_sacred_victory
+		icon = GFX_focus_OMN_sacred_victory
+		cost = 2
+
+		available = {
+			has_country_flag = OMN_aryusz_victory
+		}
+		allow_branch = {
+			has_country_flag = OMN_aryusz_victory
+		}
+
+		x = 10
+		y = 0
+		relative_position_id = OMN_run_through_the_wilderness
+
+		completion_reward = {
+			add_stability = 0.1
+			hidden_effect = {
+				news_event = {
+					id = news_omn.2
+				}
+			}
+		}
+	}
+
+	#清理前政府残余
+	focus = {
+		id = OMN_clean_up_former_government_remnants
+		icon = GFX_focus_OMN_clean_up_former_government_remnants
+		cost = 2
+		prerequisite = {
+			focus = OMN_sacred_victory
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_sacred_victory
+
+		completion_reward = {
+			add_stability = 0.15
+			add_war_support = 0.15
+		}
+	}
+
+	#宗教、面包与新法
+	focus = {
+		id = OMN_religion_bread_new_law
+		icon = GFX_focus_OMN_religion_bread_new_law
+		cost = 2
+		prerequisite = {
+			focus = OMN_sacred_victory
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_sacred_victory
+
+		completion_reward = {
+			add_political_power = 50
+			add_popularity = {
+				ideology = conservatism
+				popularity = 0.5
+			}
+			country_event = {
+				id = focus_omn.16
+			}
+		}
+	}
+
+	#恢复农业生产
+	focus = {
+		id = OMN_resume_agricultural_production_aryusz
+		icon = GFX_focus_OMN_resume_agricultural_production_aryusz
+		cost = 2
+		prerequisite = {
+			focus = OMN_clean_up_former_government_remnants
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_clean_up_former_government_remnants
+
+		completion_reward = {
+			set_temp_variable = { dev_rate_agr = 0.2 }
+			Agricultural_Level_Rate_Add = yes
+			add_ideas = OMN_agricultural_production_recovering
+		}
+	}
+
+	#改善农民处境
+	focus = {
+		id = OMN_improve_farmers_situation
+		icon = GFX_focus_OMN_improve_farmers_situation
+		cost = 2
+		prerequisite = {
+			focus = OMN_clean_up_former_government_remnants
+		}
+		prerequisite = {
+			focus = OMN_religion_bread_new_law
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = OMN_sacred_victory
+
+		completion_reward = {
+			add_political_power = 25
+			every_core_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#工厂修复计划
+	focus = {
+		id = OMN_factory_restoration_plan_aryusz
+		icon = GFX_focus_OMN_factory_restoration_plan_aryusz
+		cost = 2
+		prerequisite = {
+			focus = OMN_religion_bread_new_law
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_religion_bread_new_law
+
+		completion_reward = {
+			add_political_power = 25
+			every_core_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#重建社会基层建设
+	focus = {
+		id = OMN_rebuilding_construction_aryusz
+		icon = GFX_focus_OMN_rebuilding_construction_aryusz
+		cost = 2
+		prerequisite = {
+			focus = OMN_resume_agricultural_production_aryusz
+		}
+		prerequisite = {
+			focus = OMN_improve_farmers_situation
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = OMN_improve_farmers_situation
+
+		completion_reward = {
+			add_political_power = 30
+			set_temp_variable = { dev_rate_adm = 0.2 }
+			Administrative_Efficiency_Rate_Add = yes
+		}
+	}
+
+	#洗礼仪式
+	focus = {
+		id = OMN_christening
+		icon = GFX_focus_OMN_christening
+		cost = 2
+		prerequisite = {
+			focus = OMN_improve_farmers_situation
+		}
+		prerequisite = {
+			focus = OMN_factory_restoration_plan_aryusz
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = OMN_improve_farmers_situation
+
+		completion_reward = {
+			add_political_power = 40
+			add_stability = 0.05
+			add_war_support = 0.05
+			country_event = {
+				id = focus_omn.18
+			}
+		}
+	}
+
+	#神圣的国度
+	focus = {
+		id = OMN_holy_country
+		icon = GFX_focus_OMN_holy_country
+		cost = 2
+		prerequisite = {
+			focus = OMN_rebuilding_construction_aryusz
+		}
+		prerequisite = {
+			focus = OMN_christening
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = OMN_improve_farmers_situation
+
+		completion_reward = {
+			add_political_power = 50
+			set_cosmetic_tag = OMN_Holy_Ursus_Heavenly_Kindom
+			hidden_effect = {
+				news_event = {
+					id = news_omn.4
+				}
+			}
+		}
+	}
+}

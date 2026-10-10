@@ -1,0 +1,108 @@
+﻿l_simp_chinese:
+
+# 莱塔尼亚 ·「金律乐章 · 调律台」【生成物，真源 docs/gen_ltn_law.cjs】
+
+ # 决议分类与入口
+ LTN_law_decisions: "金律殿堂 · 调律台"
+ LTN_law_decisions_desc: "《金律乐章》既是宪章、也是术式、也是一首每年要在女皇庆典上奏响的曲子。动一个音符，九个大区的法律、军制与法术都会跟着变。"
+ LTN_law_dec_open: "召集群臣，调律"
+ LTN_law_dec_open_desc: "展开当前版乐章：九条声部线、三大篇章的条款卡，与右栏的结算台。改完可以预演，也可以直接奏响。"
+ LTN_law_dec_close: "合上总谱"
+ LTN_law_dec_close_desc: "把总谱收起来。余波期内入口会变灰，等尘埃落定再开。"
+
+ # 面板 · 顶栏
+ LTN_LAW_TITLE: "金律乐章 · 第 [?LTN_law_version] 版"
+ LTN_law_tier_0: "§G大同§!"
+ LTN_law_tier_1: "§G和谐§!"
+ LTN_law_tier_2: "§W平淡§!"
+ LTN_law_tier_3: "§Y走音§!"
+ LTN_law_tier_4: "§R失范§!"
+ LTN_law_risk_txt: "失范风险 [?LTN_law_risk] / 10"
+
+ # 面板 · 九大区
+ LTN_law_region_1: "海登施威尔"
+ LTN_law_region_2: "恩瓦德"
+ LTN_law_region_3: "厄登赫尔"
+ LTN_law_region_4: "鲁珀坎"
+ LTN_law_region_5: "施彤领"
+ LTN_law_region_6: "瓦瑟领"
+ LTN_law_region_7: "福特冈"
+ LTN_law_region_8: "奥施登海姆"
+ LTN_law_region_9: "凯普拉尼"
+
+ # 面板 · 音孔与调性
+ LTN_law_tt_tax: "赋税音孔：高档国税多、民心掉；低档留成多、民心高。点击循环 0→4。\n★ 4 档：每区 +0.9% 建造速度；1 档及以下：每区 -1.1% 建造速度。"
+ LTN_law_tt_levy: "兵役音孔：高档中央征兵多、选帝侯不满；低档私兵保留。点击循环 0→4。\n★ 4 档：每区 +0.9% 可征募人口；1 档及以下：每区 -1.1% 可征募人口。"
+ LTN_law_tt_arts: "法术征用音孔：高档术师与法器被抽调到中央；低档本地产出繁荣。点击循环 0→4。\n★ 4 档：每区 +0.9% 研究速度；1 档及以下：每区 -1.1% 研究速度。"
+ LTN_law_tt_tone: "调性拨片：宽容 = 允许旧俗（民心高，但乐章有偏差）；严苛 = 强制同轨（音准，但民心掉）。"
+ LTN_law_v1_mood_txt: "民心 [?LTN_law_voice_1_mood]"
+ LTN_law_v2_mood_txt: "民心 [?LTN_law_voice_2_mood]"
+ LTN_law_v3_mood_txt: "民心 [?LTN_law_voice_3_mood]"
+ LTN_law_v4_mood_txt: "民心 [?LTN_law_voice_4_mood]"
+ LTN_law_v5_mood_txt: "民心 [?LTN_law_voice_5_mood]"
+ LTN_law_v6_mood_txt: "民心 [?LTN_law_voice_6_mood]"
+ LTN_law_v7_mood_txt: "民心 [?LTN_law_voice_7_mood]"
+ LTN_law_v8_mood_txt: "民心 [?LTN_law_voice_8_mood]"
+ LTN_law_v9_mood_txt: "民心 [?LTN_law_voice_9_mood]"
+
+ # 面板 · 结算栏
+ LTN_law_sum_head: "结算栏"
+ LTN_law_sum_harmony: "和谐度　[?LTN_law_harmony|0]"
+ LTN_law_sum_source: "民心合计　[?LTN_law_source]"
+ LTN_law_sum_dev: "乐章偏差（宽容声部）　[?LTN_law_dev]"
+ LTN_law_sum_cr: "共鸣 [?LTN_law_res_count]　/　冲突 [?LTN_law_conf_count]"
+ LTN_law_sum_conf: "§Y共鸣§!：平民入塔学堂 + 抑制剂官费；金律法卫扩编 + 军乐制式。\n§R冲突§!：女皇之声扩权 遇上宽容声部过半；金律法卫扩编 遇上高赋税声部过半。"
+ LTN_law_fc_stable: "〔稳〕"
+ LTN_law_fc_risky: "〔险〕"
+ LTN_law_fc_crash: "〔崩〕"
+ LTN_law_cooldown_txt: "§Y余波未平（剩 [?LTN_law_cooldown] 天）§!"
+ LTN_law_cost_hint: "征收合计：兵役 [?LTN_dial_pop_i|0]%　赋税 [?LTN_dial_build_i|0]%　法术 [?LTN_dial_res_i|0]%\n预演 25 政治点｜奏响 50 政治点并进入 90 天余波"
+ LTN_law_btn_preview: "预 演"
+ LTN_law_btn_preview_tt: "先听一遍：合奏会指出哪几条声部在走音。花 25 政治点，可反复。"
+ LTN_law_btn_enact: "奏 响"
+ LTN_law_btn_enact_tt: "当着全国的面颁布这一版乐章。版本号 +1，随即进入 90 天余波，期间不可再调。"
+ LTN_law_btn_reset: "复 位"
+ LTN_law_btn_reset_tt: "把音孔拨回中位、调性拨回宽容、撤下全部条款卡 —— 清空本轮草稿。"
+
+ # 面板 · 条款卡
+ LTN_law_cards_title: "三大篇章 · 条款卡（点击启用 / 停用）"
+ LTN_law_card_pleb: "平民入高塔学堂"
+ LTN_law_card_pleb_tt: "【法理】平民与贵族坐在同一个教室，是几百年争取来的资格。研究 +4%。与「抑制剂官费」共鸣。"
+ LTN_law_card_herald: "女皇之声扩权"
+ LTN_law_card_herald_tt: "【法理】女皇之声可传谕侯爵、接管案件。稳定 +4%。但若宽容声部过半，诸侯会集体抵制。"
+ LTN_law_card_siracusa: "重新插入叙拉古声部"
+ LTN_law_card_siracusa_tt: "【法理】把 969 年被剔除的第九声部重新插回去。需要先完成「译谱」。稳定 +5%、研究 +3%。"
+ LTN_law_card_inhib: "抑制剂纳入官费"
+ LTN_law_card_inhib_tt: "【生计】抑制剂纳入官费，感染者用药不再是私事。反渗透 +4%。与「平民入塔学堂」共鸣。"
+ LTN_law_card_theatre: "放开剧院剧目"
+ LTN_law_card_theatre_tt: "【生计】放开剧院剧目，不再指定配给。政治点 +2%。"
+ LTN_law_card_guard: "金律法卫扩编"
+ LTN_law_card_guard_tt: "【武备】金律法卫扩编。陆军攻击 +5%。与「军乐制式」共鸣；但高赋税声部过半会引发地方抗税。"
+ LTN_law_card_band: "军乐制式"
+ LTN_law_card_band_tt: "【武备】每团配乐团，士气高、机动低。防御 +5%。与「金律法卫扩编」共鸣。"
+
+ # 面板 · 乐章史
+ LTN_law_hist_title: "乐章史"
+ LTN_law_hist_version: "当前演奏版本：第 [?LTN_law_version] 版"
+ LTN_law_hist_body: "第 1 版　建国时的乐章，九声部齐全，法理、生计、武备三篇初定。\n第 2 版　969 年，巫王剔去叙拉古声部。失去一个声部之后，乐章不再稳定，各大区纷纷陷入混乱。\n第 3 版 起　由此往后，每一版都写在你的名下。\n\n上一版颁布时的读数：和谐度 [?LTN_law_hist_last_harmony|0]、民心合计 [?LTN_law_hist_last_source]、乐章偏差 [?LTN_law_hist_last_dev]。\n现在这一版的和谐度是 [?LTN_law_harmony|0]。\n\n每奏响一次，版本号 +1；改律次数越多，失范风险的基线越高。\n想把这一版留在庆典之前，就得提前排期——余波期内，调律台是关着的。"
+
+ # 面板 · 底栏页签
+ LTN_law_tab_main: "调律台"
+ LTN_law_tab_cards: "条款卡"
+ LTN_law_tab_hist: "乐章史"
+ LTN_law_tab_close: "合 上"
+
+ # 民族精神
+ LTN_dyn_law_harmony: "金律的和谐"
+ LTN_dyn_law_harmony_desc: "九个声部合不合得上，人民心里最清楚。乐章准，国本稳；乐章散，帝国也就开始散了。"
+ LTN_dyn_law_dials: "金律 · 征收音孔"
+ LTN_dyn_law_dials_desc: "九大区的三类征收音孔：兵役决定可征募人口，赋税决定建造速度，法术决定研究速度。每区拉满（4 档）+0.9%，压到最低（1 档及以下）-1.1%。"
+
+ # 事件
+ LTN_law.1.t: "《金律乐章》颁布"
+ LTN_law.1.d: "以双塔之名，《金律乐章》第 [?LTN_law_version] 版，于今日颁布。九个大区的抄本正在送往各地的高塔。"
+ LTN_law.1.a: "愿帝国的荣光更加耀眼。"
+ LTN_law.2.t: "失范"
+ LTN_law.2.d: "乐章不再稳定。某处大区已拒绝按新谱缴税，变调的旋律正沿着共鸣管线一路传向崔林特尔梅。"
+ LTN_law.2.a: "记下这一笔。"
+ LTN_law.2.b: "再听一遍，找出走音的那一条声部。"

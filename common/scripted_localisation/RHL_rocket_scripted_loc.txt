@@ -1,0 +1,39 @@
+# ══════════════════════════════════════════════════════════════════════
+#  莱茵生命 ·「地平弧光」计划 —— 面板动态文案【由 docs/gen_rhl_rocket.cjs 生成，勿手改】
+#  ------------------------------------------------------------------
+#  defined_text 取第一条命中，所以无 trigger 的兜底必须写在最后。
+#  作用域 = 国家（scripted_gui 的 player_context），判定用的变量全部由
+#  common/scripted_effects/RHL_rocket_scripted_effects.txt 的 RHL_r_recompute 刷新。
+# ══════════════════════════════════════════════════════════════════════
+
+# 当前瞄准的任务 + 它需要的 Δv（五档互斥，靠 mission_idx 选）
+defined_text = {
+	name = GetRHLRocketMission
+	text = { trigger = { check_variable = { RHL_r_mission_idx = 0 } } localization_key = "RHL_rocket_mission_line_0" }
+	text = { trigger = { check_variable = { RHL_r_mission_idx = 1 } } localization_key = "RHL_rocket_mission_line_1" }
+	text = { trigger = { check_variable = { RHL_r_mission_idx = 2 } } localization_key = "RHL_rocket_mission_line_2" }
+	text = { trigger = { check_variable = { RHL_r_mission_idx = 3 } } localization_key = "RHL_rocket_mission_line_3" }
+	text = { localization_key = "RHL_rocket_mission_line_4" }
+}
+
+# 校验状态：把散在 loc 里没人引用的 err_* 串成一行结论
+defined_text = {
+	name = GetRHLRocketStatus
+	text = { trigger = { NOT = { check_variable = { RHL_r_validated = 1 } } } localization_key = "RHL_rocket_status_idle" }
+	text = { trigger = { check_variable = { RHL_r_err_twr = 1 } } localization_key = "RHL_rocket_err_twr" }
+	text = { trigger = { check_variable = { RHL_r_err_engine = 1 } } localization_key = "RHL_rocket_err_engine" }
+	text = { trigger = { check_variable = { RHL_r_err_dv = 1 } } localization_key = "RHL_rocket_err_dv" }
+	text = { trigger = { check_variable = { RHL_r_err_tank = 1 } } localization_key = "RHL_rocket_err_tank" }
+	text = { localization_key = "RHL_rocket_status_ok" }
+}
+
+# 上一次发射的结果（结算时写进 RHL_r_last_outcome，1 = 灾难 … 5 = 完美）
+defined_text = {
+	name = GetRHLRocketLast
+	text = { trigger = { check_variable = { RHL_r_last_outcome = 0 } } localization_key = "RHL_rocket_last_none" }
+	text = { trigger = { check_variable = { RHL_r_last_outcome = 1 } } localization_key = "RHL_rocket_last_1" }
+	text = { trigger = { check_variable = { RHL_r_last_outcome = 2 } } localization_key = "RHL_rocket_last_2" }
+	text = { trigger = { check_variable = { RHL_r_last_outcome = 3 } } localization_key = "RHL_rocket_last_3" }
+	text = { trigger = { check_variable = { RHL_r_last_outcome = 4 } } localization_key = "RHL_rocket_last_4" }
+	text = { localization_key = "RHL_rocket_last_5" }
+}

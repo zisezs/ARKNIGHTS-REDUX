@@ -1,0 +1,118 @@
+# 哥伦比亚 / 莱茵生命 —— 民族精神
+# 第三步：原先按机制分散的 11 条路线动态精神，按所属路线合并为 7 条大型民族精神。
+# 变量由 history / 国策 / 决议 / 事件写入，挂载点见各路线第一个国策的 completion_reward。
+# 计量表（兽主默许 / 梅兰德影响 / 天空热 / 递质覆盖）不进精神，仅作结局判定与决议读数。
+
+CLB_dyn_dusk = {
+	name = CLB_dyn_dusk
+	icon = GFX_idea_generic_economic_crisis
+	enable = { always = yes }
+
+	stability_factor = -0.1
+	political_power_gain = -0.05
+}
+
+CLB_dyn_rhine_prep = {
+	name = CLB_dyn_rhine_prep
+	icon = GFX_idea_generic_economic_increase
+	enable = { always = yes }
+
+	research_speed_factor = 0.1
+	production_speed_buildings_factor = 0.05
+	stability_factor = -0.05
+}
+
+# ── 1/7 politics｜莱茵生命合众国（挂载：CLB_life_11th_year） ──
+CLB_dyn_r_politics = {
+	name = CLB_dyn_r_politics
+	icon = GFX_idea_generic_democratic_drift_bonus
+	enable = { always = yes }
+
+	political_power_gain = CLB_pol_pp
+	stability_factor = CLB_pol_stab
+	production_speed_buildings_factor = CLB_pol_build
+	opinion_gain_monthly_factor = CLB_pol_opinion
+	war_support_factor = CLB_pol_ws
+}
+
+# ── 2/7 military｜莱茵国防军（挂载：CLB_defense_dept_expansion） ──
+CLB_dyn_r_military = {
+	name = CLB_dyn_r_military
+	icon = GFX_idea_generic_production_bonus
+	enable = { always = yes }
+
+	army_attack_factor = CLB_mil_atk
+	army_defence_factor = CLB_mil_def
+	army_org_factor = CLB_mil_org
+	special_forces_attack_factor = CLB_mil_sf
+	experience_gain_army = CLB_mil_xp
+	air_attack_factor = CLB_mil_air
+	air_defence_factor = CLB_mil_air
+	war_support_factor = CLB_mil_ws
+	stability_factor = CLB_mil_stab
+}
+
+# ── 3/7 intel｜梅兰德的阴影（挂载：CLB_mejia_orphans） ──
+CLB_dyn_r_intel = {
+	name = CLB_dyn_r_intel
+	icon = GFX_idea_generic_spy_intel
+	enable = { always = yes }
+
+	enemy_operative_detection_chance_factor = CLB_int_detect
+	own_operative_intel_extraction_rate = CLB_int_extract
+	political_power_gain = CLB_int_pp
+	stability_factor = CLB_int_stab
+}
+
+# ── 4/7 beast｜兽主的默许（挂载：CLB_skyloan_pilot） ──
+CLB_dyn_r_beast = {
+	name = CLB_dyn_r_beast
+	icon = GFX_idea_generic_deal_with_the_devil
+	enable = { always = yes }
+
+	stability_factor = CLB_bea_stab
+	research_speed_factor = CLB_bea_research
+	consumer_goods_factor = CLB_bea_cg
+	industrial_capacity_factory = CLB_bea_factory
+}
+
+# ── 5/7 economy｜天空贷经济（挂载：CLB_justin_board） ──
+CLB_dyn_r_economy = {
+	name = CLB_dyn_r_economy
+	icon = GFX_idea_generic_improved_industries
+	enable = { always = yes }
+
+	industrial_capacity_factory = CLB_eco_factory
+	production_speed_buildings_factor = CLB_eco_build
+	consumer_goods_factor = CLB_eco_cg
+	stability_factor = CLB_eco_stab
+	energy_gain_factor = CLB_eco_energy
+	fuel_gain_factor = CLB_eco_fuel
+	war_support_factor = CLB_eco_ws
+}
+
+# ── 6/7 science｜十科合议厅（挂载：CLB_ten_departments_council） ──
+CLB_dyn_r_science = {
+	name = CLB_dyn_r_science
+	icon = GFX_idea_generic_research_bonus
+	enable = { always = yes }
+
+	research_speed_factor = CLB_ten_research
+	production_speed_buildings_factor = CLB_ten_build
+	stability_factor = CLB_ten_stab
+	enemy_operative_detection_chance_factor = CLB_ten_detect
+}
+
+# ── 7/7 endgame｜万星园与星门（挂载：CLB_wanxingyuan_phase2） ──
+CLB_dyn_r_endgame = {
+	name = CLB_dyn_r_endgame
+	icon = GFX_idea_generic_air_research
+	enable = { always = yes }
+
+	research_speed_factor = CLB_end_research
+	political_power_gain = CLB_end_pp
+	stability_factor = CLB_end_stab
+	air_attack_factor = CLB_end_air
+	consumer_goods_factor = CLB_end_cg
+	war_support_factor = CLB_end_ws
+}

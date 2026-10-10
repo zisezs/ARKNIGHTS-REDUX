@@ -1,0 +1,36 @@
+YAN_Fool_Threat_Category = {
+
+	# 清除邪魔威胁 —— 大炎对圣愚帝国宣战（1102.1.1 起启用）
+	# 由事件 fool_urs.7「老天师的疑虑」解锁（置 YAN_fool_threat_unlocked）
+	YAN_purge_demonic_threat = {
+
+		icon = GFX_decision_category_generic_danger
+
+		available = {
+			date > 1102.1.1
+			URS = {
+				exists = yes
+				has_country_leader = {
+					character = URS_The_Fool
+				}
+			}
+			NOT = { has_war_with = URS }
+		}
+
+		visible = {
+			has_country_flag = YAN_fool_threat_unlocked
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "YAN: 清除邪魔威胁——对乌萨斯宣战"
+			declare_war_on = {
+				target = URS
+				type = annex_everything
+			}
+			add_war_support = 0.10
+		}
+	}
+}

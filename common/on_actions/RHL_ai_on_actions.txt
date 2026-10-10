@@ -1,0 +1,39 @@
+######################################################
+# 莱茵生命（RHL）· AI 专属隐藏效果
+# ──────────────────────────────────────────────────────────────
+# 1099 年一次性给「AI 手上的莱茵生命」2000 政治点。
+#
+# 为什么需要：本次把三套决议的 AI 权重统一提到 factor = 10000（必定优先点）——
+#   · 内科手术 8 条（RHL_crb_decisions，政治点合计 1075）
+#   · 泰拉平衡委员会 6 条（RHL_bal_committee_decisions）
+#   · 莱茵生命·作战 13 条宣战（RHL_war_decisions，每条 50）
+# 这些决议的政治点开销远超 AI 的正常积累速度，不给补贴 AI 会「权重很高但永远点不起」。
+# 2000 点一次性发放，用于覆盖内科手术全流程 + 建阵营 + 宣战组的启动开销。
+#
+# 实现要点：
+#   · 落点 on_monthly —— 与 common/on_actions/RHL_td_on_actions.txt 的月度钩子同款写法
+#     （on_actions = { } 外层包裹是原版标准写法，见原版 common/on_actions/00_on_actions.txt）。
+#   · is_ai = yes 写在 limit 里：只有 AI 拿得到，玩家不受影响。
+#   · 旗标 RHL_ai_pp_1099 防重，只用一次。
+#   · date > 1098.12.31 = 从 1099 年 1 月 1 日起生效（本 mod 开局 1094.6.1）。
+######################################################
+
+on_actions = {
+
+	on_monthly = {
+		effect = {
+			every_country = {
+				limit = {
+					original_tag = RHL
+					is_ai = yes
+					date > 1098.12.31
+					NOT = {
+						has_country_flag = RHL_ai_pp_1099
+					}
+				}
+				add_political_power = 2000
+				set_country_flag = RHL_ai_pp_1099
+			}
+		}
+	}
+}

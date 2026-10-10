@@ -1,0 +1,225 @@
+# ==============================================================
+# 乌萨斯帝国 · 军事国策树「军团浴火重生」决议组
+# --------------------------------------------------------------
+#  分类 URS_military_decisions 声明在
+#  common/decisions/categories/URS_decision_categroies.txt；
+#  本文件的顶层块名就是该分类键。
+#
+#  分类名与面板文案复用旧文件里现成的孤儿键（ARF_URS_l_simp_chinese.yml
+#  的 URS_military_decisions / _desc），本文件不重复定义。
+#
+#  忠诚度杠杆：一次性决议改 URS_empire_army_loyalty，
+#  持续决议只给临时 modifier（避免每次重放都再改一次数值）。
+# ==============================================================
+
+URS_military_decisions = {
+
+	# 扩大贵族审查
+	URS_mil_dec_aristocrat_expand = {
+		icon = GFX_decision_generic_arrest
+
+		visible = {
+			has_country_flag = URS_mil_aristocrat_audit
+			NOT = { has_country_flag = URS_mil_audit_expanded }
+		}
+
+		available = {
+			check_variable = {
+				var = URS_empire_army_loyalty
+				value = 25
+				compare = greater_than
+			}
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = URS_mil_dec_aristocrat_expand_tt
+			hidden_effect = {
+				add_political_power = 50
+				add_stability = -0.05
+				add_to_variable = { var = URS_empire_army_loyalty value = -15 }
+				custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m15
+				set_country_flag = URS_mil_audit_expanded
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# 削编第四集团军
+	URS_mil_dec_fourth_army = {
+		icon = GFX_decision_generic_disband_irregulars
+
+		visible = {
+			has_country_flag = URS_mil_army_reorganized
+			NOT = { has_country_flag = URS_mil_fourth_cut }
+		}
+
+		cost = 75
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = URS_mil_dec_fourth_army_tt
+			hidden_effect = {
+				add_to_variable = { var = URS_legion_org_var value = 0.05 }
+				custom_effect_tooltip = URS_tt_mil_legion_org_var_p5
+				add_to_variable = { var = URS_empire_army_loyalty value = -20 }
+				custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m20
+				add_to_variable = { var = URS_coup_risk value = 0.1 }
+				custom_effect_tooltip = URS_tt_mil_coup_risk_p10
+				set_country_flag = URS_mil_fourth_cut
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# 军营清场
+	URS_mil_dec_barrack_clearing = {
+		icon = GFX_decision_generic_police_action
+
+		visible = {
+			has_country_flag = URS_mil_preachers
+			NOT = { has_country_flag = URS_mil_barrack_cleared }
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = URS_mil_dec_barrack_clearing_tt
+			hidden_effect = {
+				add_stability = 0.05
+				add_to_variable = { var = URS_empire_army_loyalty value = 20 }
+				custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p20
+				add_to_variable = { var = URS_fool_support value = -0.1 }
+				custom_effect_tooltip = URS_tt_mil_fool_support_m10
+				set_country_flag = URS_mil_barrack_cleared
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# 统一指挥
+	URS_mil_dec_unified_command = {
+		icon = GFX_decision_generic_military
+
+		visible = {
+			has_country_flag = URS_mil_general_staff
+			NOT = { has_country_flag = URS_mil_command_unified }
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = URS_mil_dec_unified_command_tt
+			hidden_effect = {
+				add_to_variable = { var = URS_legion_command_var value = 0.05 }
+				custom_effect_tooltip = URS_tt_mil_legion_command_var_p5
+				add_to_variable = { var = URS_empire_army_loyalty value = 20 }
+				custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_p20
+				set_country_flag = URS_mil_command_unified
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# 卡托加复产动员
+	URS_mil_dec_katoga_mobilize = {
+		icon = GFX_decision_generic_factory
+
+		visible = {
+			has_country_flag = URS_mil_katoga_reopened
+		}
+
+		cost = 50
+		days_remove = 180
+		days_re_enable = 60
+
+		modifier = {
+			industrial_capacity_factory = 0.1
+		}
+
+		custom_effect_tooltip = URS_mil_dec_katoga_mobilize_tt
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# 石棺能源并网
+	URS_mil_dec_sarcophagus_grid = {
+		icon = GFX_decision_generic_electricity
+
+		visible = {
+			has_country_flag = URS_mil_project_zero
+			NOT = { has_country_flag = URS_mil_grid_linked }
+		}
+
+		cost = 75
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = URS_mil_dec_sarcophagus_grid_tt
+			hidden_effect = {
+				add_to_variable = { var = URS_legion_industry_var value = 0.1 }
+				custom_effect_tooltip = URS_tt_mil_legion_industry_var_p10
+				add_to_variable = { var = URS_demonic_corruption value = 0.1 }
+				custom_effect_tooltip = URS_tt_mil_demonic_corruption_p10
+				add_to_variable = { var = URS_empire_army_loyalty value = -10 }
+				custom_effect_tooltip = URS_tt_mil_empire_army_loyalty_m10
+				set_country_flag = URS_mil_grid_linked
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# 忠诚阅兵
+	URS_mil_dec_loyalty_review = {
+		icon = GFX_decision_generic_army_support
+
+		visible = {
+			has_country_flag = URS_mil_reform_started
+		}
+
+		available = {
+			check_variable = {
+				var = URS_empire_army_loyalty
+				value = 79
+				compare = greater_than
+			}
+		}
+
+		cost = 50
+		days_remove = 180
+		days_re_enable = 90
+
+		modifier = {
+			army_attack_factor = 0.1
+			army_org_factor = 0.1
+		}
+
+		custom_effect_tooltip = URS_mil_dec_loyalty_review_tt
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+}

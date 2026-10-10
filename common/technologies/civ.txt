@@ -1,0 +1,3605 @@
+# =====================================================================
+# 工业与电子（民用页 civ_folder）
+# 科技树整体移植自「国家熔炉 - TFR科技重置」(workshop 3805156659) 的 civ.txt
+# 年份已换算到重铸明日时间线（原始 2018 -> 1090，偏移 -928）
+# 建筑引用已映射到本模组建筑：power_plant -> originium_powerplant, energy_farm -> new_energy_powerplant
+# =====================================================================
+
+technologies = {
+	##雷达
+	MSA_radar = {
+		research_cost = 2.5
+		start_year = 1090
+		
+		enable_building = {
+			building = radar_station
+			level = 1
+		}
+		enable_equipment_modules = {
+			ship_radar_1
+			ship_fire_control_system_0
+			tank_radio_1
+			ship_fire_control_system_1
+		}
+		path = {
+			leads_to_tech = PESA_radar
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 0 }
+		}
+		
+		categories = {
+			radar_tech
+			electronics
+			industry
+		}
+
+		ai_will_do = {
+			base = 8
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	PESA_radar = {
+		
+		research_cost = 2.5
+		start_year = 1092
+		enable_building = {
+			building = radar_station
+			level = 2
+		}
+		enable_equipment_modules = {
+			tank_radio_2
+			ship_radar_2
+			arf_originium_datalink
+		}
+		path = {
+			leads_to_tech = AESA_radar
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 4 }
+		}
+		
+		categories = {
+			radar_tech
+			electronics
+			industry
+		}
+
+		ai_will_do = {
+			base = 8
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+				OR = {
+					has_tech = gen_two_fighter_equipment
+					has_tech = gen_one_strat_bomber_equipment
+				}
+			}
+		}
+	}
+	AESA_radar = {
+		AWACS_factor = 0.1
+		research_cost = 2.5
+		start_year = 1095
+		
+		enable_building = {
+			building = radar_station
+			level = 3
+		}
+		enable_equipment_modules = {
+			tank_radio_3
+			ship_radar_3
+			arf_originium_radar
+		}
+		path = {
+			leads_to_tech = GaN_radar
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 10 }
+		}
+		
+		categories = {
+			radar_tech
+			electronics
+			industry
+		}
+
+		ai_will_do = {
+			base = 8
+			modifier = {
+				factor = 10
+				date > 1094.9.1
+				OR = {
+					has_tech = gen_four_fighter_equipment
+					has_tech = gen_two_strat_bomber_equipment
+				}
+			}
+		}
+	}
+	
+	GaN_radar = {
+		AWACS_factor = 0.1
+		research_cost = 2.5
+		start_year = 1097
+		
+		air_defence_factor = 0.05
+		air_attack_factor = 0.05
+		naval_strike_targetting_factor = 0.05
+		surface_detection = 0.05
+		naval_detection = 0.05
+		navy_anti_air_attack = 0.05
+		naval_light_gun_hit_chance_factor = 0.05
+		naval_heavy_gun_hit_chance_factor = 0.05
+		path = {
+			leads_to_tech = GaO_radar
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 14 }
+		}
+		
+		categories = {
+			radar_tech
+			electronics
+			industry
+		}
+
+		ai_will_do = {
+			base = 8
+			modifier = {
+				factor = 10
+				date > 1096.9.1
+			}
+		}
+	}
+	GaO_radar = {
+		AWACS_factor = 0.1
+		research_cost = 2.5
+		start_year = 1099
+		
+		
+		air_defence_factor = 0.05
+		air_attack_factor = 0.05
+		naval_strike_targetting_factor = 0.05
+		surface_detection = 0.05
+		naval_detection = 0.05
+		navy_anti_air_attack = 0.05
+		naval_light_gun_hit_chance_factor = 0.05
+		naval_heavy_gun_hit_chance_factor = 0.05
+		path = {
+			leads_to_tech = DAR_radar
+			research_cost_coeff = 1
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 17 }
+		}
+		
+		categories = {
+			radar_tech
+			electronics
+			industry
+		}
+
+		ai_will_do = {
+			base = 8
+			modifier = {
+				factor = 10
+				date > 1098.9.1
+			}
+		}
+	}
+	DAR_radar = {
+		
+		research_cost = 2.5
+		start_year = 1100
+		
+		enable_building = {
+			building = radar_station
+			level = 4
+		}
+		enable_equipment_modules = {
+			ship_radar_4
+		}
+		path = {
+			leads_to_tech = MR_super_surface_radar
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 20 }
+		}
+		
+		categories = {
+			radar_tech
+			electronics
+			industry
+		}
+
+		ai_will_do = {
+			base = 8
+			modifier = {
+				factor = 10
+				date > 1099.9.1
+				OR = {
+					has_tech = gen_five_fighter_equipment
+					has_tech = gen_three_strat_bomber_equipment
+				}
+			}
+		}
+	}
+	MR_super_surface_radar = {
+		research_cost = 2.5
+		start_year = 1104
+		
+		enable_building = {
+			building = radar_station
+			level = 5
+		}
+		path = {
+			leads_to_tech = QR_quantum_radar
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 30 }
+		}
+		
+		categories = {
+			radar_tech
+			electronics
+			industry
+		}
+
+		ai_will_do = {
+			base = 8
+			modifier = {
+				factor = 10
+				date > 1103.9.1
+				has_tech = gen_six_fighter_equipment
+			}
+		}
+	}
+	QR_quantum_radar = {
+		research_cost = 2.5
+		start_year = 1110
+		
+		enable_building = {
+			building = radar_station
+			level = 6
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 36 }
+		}
+		
+		categories = {
+			radar_tech
+			electronics
+			industry
+		}
+
+		ai_will_do = {
+			base = 8
+			modifier = {
+				factor = 10
+				date > 1109.9.1
+			}
+		}
+	}
+	##生产
+	LRD_tech_shengchan_1 = { #数字化机床
+
+		production_factory_max_efficiency_factor = 0.05
+		business_value_factor = 0.01
+
+		research_cost = 2.5
+		start_year = 1092
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 0 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_shengchan_0
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_gongye_0
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_0
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_0 = { #多层产房
+		production_factory_max_efficiency_factor = 0.05
+		business_value_factor = 0.01
+
+		research_cost = 2.5
+		start_year = 1092
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 2 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shengchan_2
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_2 = { #工业机器人
+		production_factory_max_efficiency_factor = 0.05
+		business_value_factor = 0.01
+
+		research_cost = 2.5
+		start_year = 1094
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 4 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shengchan_3
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_3 = { #3D喷射打印
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_factory_max_efficiency_factor = 0.05
+		business_value_factor = 0.01
+		research_cost = 2.5
+		start_year = 1096
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 6 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shengchan_4
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1095.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_4 = { #AI辅助设计
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_factory_max_efficiency_factor = 0.05
+		business_value_factor = 0.01
+		research_cost = 2.5
+		start_year = 1098
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 8 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_shengchan_5
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1097.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_5 = { #集成化机床
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_factory_max_efficiency_factor = 0.05
+		production_factory_efficiency_gain_factor = 0.05
+		business_value_factor = 0.01
+		industrial_refit_speed_factor = 0.4
+		research_cost = 2.5
+		start_year = 1100
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 10 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_shengchan_6
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1099.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_6 = { #客制化生产线
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_factory_max_efficiency_factor = 0.05
+		business_value_factor = 0.01
+		industrial_refit_speed_factor = 0.4
+		research_cost = 2.5
+		start_year = 1102
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 12 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shengchan_7
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1101.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_7 = { #云上工业
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_factory_max_efficiency_factor = 0.05
+		business_value_factor = 0.01
+		research_cost = 2.5
+		start_year = 1104
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 14 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shengchan_8
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1103.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_8 = { #信息集成处理
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_factory_max_efficiency_factor = 0.075
+		business_value_factor = 0.01
+		research_cost = 2.5
+		start_year = 1106
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 16 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shengchan_9
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1105.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_9 = { #无人化生产
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_factory_max_efficiency_factor = 0.075
+		business_value_factor = 0.01
+		research_cost = 2.5
+		start_year = 1108
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 18 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shengchan_10
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1107.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_10 = { #黑灯工业区
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_factory_max_efficiency_factor = 0.075
+		business_value_factor = 0.01
+		research_cost = 2.5
+		start_year = 1110
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 20 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shengchan_11
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1109.9.1
+			}
+		}
+	}
+	LRD_tech_shengchan_11 = { #工业5.0
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		local_building_slots_factor = 0.15
+		production_factory_max_efficiency_factor = 0.1
+		business_value_factor = 0.01
+		research_cost = 2.5
+		start_year = 1112
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 22 }
+		}
+		
+		categories = {
+			industry
+			cat_production
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1111.9.1
+			}
+		}
+	}
+	##工业
+	LRD_tech_gongye_0 = { #生产运作管理
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		
+		research_cost = 2.5
+		start_year = 1092
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 2 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_gongye_1
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	LRD_tech_gongye_1 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		dockyard_upkeep_factor = 0.02
+		military_factory_upkeep_factor = 0.02
+		
+		research_cost = 2.5
+		start_year = 1094
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 4 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_gongye_2
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+	LRD_tech_gongye_2 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		dockyard_upkeep_factor = 0.025
+		military_factory_upkeep_factor = 0.025
+		
+		research_cost = 2.5
+		start_year = 1096
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 6 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_gongye_3
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1095.9.1
+			}
+		}
+	}
+	LRD_tech_gongye_3 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		dockyard_upkeep_factor = 0.03
+		military_factory_upkeep_factor = 0.03
+		
+		research_cost = 2.5
+		start_year = 1098
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 8 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_gongye_4
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1097.9.1
+			}
+		}
+	}
+	LRD_tech_gongye_4 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		dockyard_upkeep_factor = 0.03
+		military_factory_upkeep_factor = 0.03
+		
+		research_cost = 2.5
+		start_year = 1100
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 10 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_gongye_5
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1099.9.1
+			}
+		}
+	}
+	LRD_tech_gongye_5 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		dockyard_upkeep_factor = 0.04
+		military_factory_upkeep_factor = 0.04
+		
+		research_cost = 2.5
+		start_year = 1102
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 12 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_gongye_6
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1101.9.1
+			}
+		}
+	}
+	LRD_tech_gongye_6 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		dockyard_upkeep_factor = 0.04
+		military_factory_upkeep_factor = 0.04
+		
+		research_cost = 2.5
+		start_year = 1104
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 14 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_gongye_7
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1103.9.1
+			}
+		}
+	}
+	LRD_tech_gongye_7 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		dockyard_upkeep_factor = 0.045
+		military_factory_upkeep_factor = 0.045
+		
+		research_cost = 2.5
+		start_year = 1106
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 16 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_gongye_8
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_7
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1105.9.1
+			}
+		}
+	}
+	LRD_tech_gongye_8 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		dockyard_upkeep_factor = 0.045
+		military_factory_upkeep_factor = 0.045
+		
+		research_cost = 2.5
+		start_year = 1108
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 18 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_gongye_9
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1107.9.1
+			}
+		}
+	}
+	LRD_tech_gongye_9 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		dockyard_upkeep_factor = 0.05
+		military_factory_upkeep_factor = 0.05
+		
+		research_cost = 2.5
+		start_year = 1110
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 20 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_gongye_10
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1109.9.1
+			}
+		}
+	}
+	LRD_tech_gongye_10 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		industrial_capacity_factory = 0.075
+		industrial_capacity_dockyard = 0.075
+		production_factory_start_efficiency_factor = 0.02
+		line_change_production_efficiency_factor = 0.05
+		industry_air_damage_factor = -0.025
+		dockyard_upkeep_factor = 0.05
+		military_factory_upkeep_factor = 0.05
+		
+		research_cost = 2.5
+		start_year = 1112
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 22 }
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 10
+				date > 1111.9.1
+			}
+		}
+	}
+
+	##计算机
+	LRD_tech_jisuanji_0 = { #芯片构型设计
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.05
+		production_factory_efficiency_gain_factor = 0.025
+		research_cost = 2.5
+		start_year = 1093
+
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 2 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_1
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			computing_tech
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	LRD_tech_jisuanji_1 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.03
+		production_factory_efficiency_gain_factor = 0.025
+		research_cost = 2.5
+		start_year = 1094
+
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 4 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_2
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			computing_tech
+		}
+		
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+	LRD_tech_jisuanji_2 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.03
+		production_factory_efficiency_gain_factor = 0.025
+		research_cost = 2.5
+		start_year = 1096
+
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 6 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_3
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			computing_tech
+		}
+		
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1095.9.1
+			}
+		}
+	}
+	LRD_tech_jisuanji_3 = { #
+
+		enable_equipment_modules = {
+			arf_autonomous_pilot
+		}
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.02
+		production_factory_efficiency_gain_factor = 0.05
+		research_cost = 2.5
+		start_year = 1098
+
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 8 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_4
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			computing_tech
+		}
+		
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1097.9.1
+			}
+		}
+	}
+	LRD_tech_jisuanji_4 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.05
+		production_factory_efficiency_gain_factor = 0.025
+		research_cost = 2.5
+		start_year = 1100
+
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 10 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_5
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			computing_tech
+		}
+		
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1099.9.1
+			}
+		}
+	}
+	LRD_tech_jisuanji_5 = { #
+
+		enable_equipment_modules = {
+			arf_drone_swarm_controller
+		}
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+
+		research_cost = 2.5
+		start_year = 1102
+		research_speed_factor = 0.05
+		production_factory_efficiency_gain_factor = 0.03
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 12 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_6
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			computing_tech
+		}
+		
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1101.9.1
+			}
+		}
+	}
+	LRD_tech_jisuanji_6 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.1
+		production_factory_efficiency_gain_factor = 0.05
+		research_cost = 2.5
+		start_year = 1104
+
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 14 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_7
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			computing_tech
+		}
+		
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1103.9.1
+			}
+		}
+	}
+	LRD_tech_jisuanji_7 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.1
+		production_factory_efficiency_gain_factor = 0.1
+		research_cost = 2.5
+		start_year = 1106
+
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 16 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_8
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			computing_tech
+		}
+		
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1105.9.1
+			}
+		}
+	}
+	LRD_tech_jisuanji_8 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.05
+		production_factory_efficiency_gain_factor = 0.05
+		research_cost = 2.5
+		start_year = 1108
+
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 18 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_9
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			computing_tech
+		}
+		
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1107.9.1
+			}
+		}
+	}
+	LRD_tech_jisuanji_9 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.075
+		production_factory_efficiency_gain_factor = 0.025
+		research_cost = 2.5
+		start_year = 1110
+
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 20 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_jisuanji_10
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			computing_tech
+		}
+		
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1109.9.1
+			}
+		}
+	}
+	LRD_tech_jisuanji_10 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.05
+		production_factory_efficiency_gain_factor = 0.125
+		research_cost = 2.5
+		start_year = 1112
+
+		folder = {
+			name = civ_folder
+			position = { x = 8 y = 22 }
+		}
+		
+		categories = {
+			industry
+			computing_tech
+		}
+		
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1111.9.1
+			}
+		}
+	}
+
+	#土木
+	LRD_tech_tumu_0 = { #
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		
+		research_cost = 2.5
+		start_year = 1090
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 0 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_tumu_1
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shiyou_a
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_1 = { #智能建筑
+		production_speed_buildings_factor = 0.1
+		industry_repair_factor = 0.05
+		
+		
+		research_cost = 2.5
+		start_year = 1092
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 2 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_tumu_2
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_2 = { 
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		research_cost = 2.5
+		start_year = 1093
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 4 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_tumu_3
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_3 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		research_cost = 2.5
+		start_year = 1096
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 6 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_tumu_4
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1095.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_4 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		fuel_consumption_factor = -0.05
+		research_cost = 2.5
+		start_year = 1098
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 8 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_tumu_5
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1097.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_5 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		research_cost = 2.5
+		start_year = 1100
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 10 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_tumu_6
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1099.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_6 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+
+		research_cost = 2.5
+		start_year = 1102
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 12 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_tumu_7
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1101.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_7 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		research_cost = 2.5
+		start_year = 1104
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 14 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_tumu_8
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1103.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_8 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		research_cost = 2.5
+		start_year = 1106
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 16 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_tumu_9
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1105.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_9 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		research_cost = 2.5
+		start_year = 1108
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 18 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_tumu_10
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1107.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_10 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+
+		research_cost = 2.5
+		start_year = 1110
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 20 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_tumu_11
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1109.9.1
+			}
+		}
+	}
+	LRD_tech_tumu_11 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_speed_buildings_factor = 0.05
+		industry_repair_factor = 0.05
+		
+		research_cost = 2.5
+		start_year = 1112
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 22 }
+		}
+		
+		categories = {
+			industry
+		}
+
+		ai_will_do = {
+			base = 18
+			modifier = {
+				factor = 10
+				date > 1111.9.1
+			}
+		}
+	}
+
+	#石油
+	LRD_tech_shiyou_a = { #
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.05
+		max_fuel_factor = 0.05
+		enable_building = {
+			building = fuel_silo
+			level = 1
+		}
+		research_cost = 2
+		start_year = 1090
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 0 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shiyou_1
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_1 = { #
+
+		production_oil_factor = 0.2
+		fuel_gain_factor = 0.1
+		max_fuel_factor = 0.05
+		enable_building = {
+			building = synthetic_refinery
+			level = 3
+		}
+
+		research_cost = 2.5
+		start_year = 1092
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 2 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shiyou_2
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_2 = { 
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.05
+		max_fuel_factor = 0.05
+		research_cost = 2.5
+		start_year = 1094
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 4 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shiyou_3
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_3 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.05
+		max_fuel_factor = 0.05
+		research_cost = 2.5
+		start_year = 1096
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 6 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shiyou_4
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1095.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_4 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.05
+		max_fuel_factor = 0.05
+		research_cost = 2.5
+		start_year = 1098
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 8 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_shiyou_5
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1097.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_5 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.05
+		max_fuel_factor = 0.05
+		local_resources_factor = 0.1
+		research_cost = 2.5
+		start_year = 1100
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 10 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_shiyou_6
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1099.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_6 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.1
+		max_fuel_factor = 0.05
+		research_cost = 2.5
+		start_year = 1102
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 12 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shiyou_7
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1101.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_7 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.05
+		max_fuel_factor = 0.05
+		local_resources_factor = 0.1
+		research_cost = 2.5
+		start_year = 1104
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 14 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shiyou_8
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1103.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_8 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.05
+		max_fuel_factor = 0.05
+		research_cost = 2.5
+		start_year = 1106
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 16 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shiyou_9
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_synth_oil
+		}
+				
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1105.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_9 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.05
+		max_fuel_factor = 0.05
+		research_cost = 2.5
+		start_year = 1108
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 18 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shiyou_10
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1107.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_10 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.05
+		max_fuel_factor = 0.05
+		local_resources_factor = 0.1
+		research_cost = 2.5
+		start_year = 1110
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 20 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_shiyou_11
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1109.9.1
+			}
+		}
+	}
+	LRD_tech_shiyou_11 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		production_oil_factor = 0.05
+		fuel_gain_factor = 0.05
+		max_fuel_factor = 0.05
+		research_cost = 2.5
+		start_year = 1112
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 22 }
+		}
+		
+		categories = {
+			industry
+			cat_synth_oil
+		}
+		
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				date > 1111.9.1
+			}
+		}
+	}
+
+	#生物科学
+	LRD_tech_bio_0 = { #
+		research_speed_factor = 0.01
+		consumer_goods_factor = -0.01
+		research_cost = 2.5
+		start_year = 1087
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 0 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_bio_1
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = LRD_tech_biotech_1
+			research_cost_coeff = 1
+		}
+		categories = {
+			industry
+			biological
+		}
+
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	LRD_tech_bio_1 = { #
+		research_speed_factor = 0.02
+		consumer_goods_factor = -0.01
+		research_cost = 2.5
+		start_year = 1092
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 2 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_bio_2
+			research_cost_coeff = 1
+		}
+		
+
+		categories = {
+			industry
+			biological
+		}
+
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+	LRD_tech_bio_2 = { 
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.02
+		consumer_goods_factor = -0.01
+		research_cost = 2.5
+		start_year = 1094
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 4 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_bio_3
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological
+		}
+		
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+	LRD_tech_bio_3 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.02
+		consumer_goods_factor = -0.01
+		research_cost = 2.5
+		start_year = 1096
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 6 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_bio_4
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological
+		}
+		
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1095.9.1
+			}
+		}
+	}
+	LRD_tech_bio_4 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.04
+		consumer_goods_factor = -0.01
+		research_cost = 2.5
+		start_year = 1098
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 8 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_bio_5
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			biological
+		}
+		
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1097.9.1
+			}
+		}
+	}
+	LRD_tech_bio_5 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.05
+		consumer_goods_factor = -0.01
+		research_cost = 2.5
+		start_year = 1100
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 10 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_bio_6
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			biological
+		}
+		
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1099.9.1
+			}
+		}
+	}
+	LRD_tech_bio_6 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.03
+		consumer_goods_factor = -0.01
+		research_cost = 2.5
+		start_year = 1102
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 12 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_bio_7
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological
+		}
+		
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1101.9.1
+			}
+		}
+	}
+	LRD_tech_bio_7 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.1
+		consumer_goods_factor = -0.01
+		research_cost = 2.5
+		start_year = 1104
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 14 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_bio_8
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological
+		}
+		
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1103.9.1
+			}
+		}
+	}
+	LRD_tech_bio_8 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.04
+		consumer_goods_factor = -0.01
+		research_cost = 2.5
+		start_year = 1106
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 16 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_bio_9
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological
+		}
+		
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1105.9.1
+			}
+		}
+	}
+	LRD_tech_bio_9 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.05
+		consumer_goods_factor = -0.01
+		research_cost = 3
+		start_year = 1108
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 18 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_bio_10
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological
+		}
+		
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1107.9.1
+			}
+		}
+	}
+	LRD_tech_bio_10 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.05
+		consumer_goods_factor = -0.01
+		stability_factor = -0.1
+		research_cost = 3
+		start_year = 1110
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 20 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_bio_11
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological
+		}
+		
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1109.9.1
+			}
+		}
+	}
+	LRD_tech_bio_11 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.15
+		consumer_goods_factor = -0.03
+		stability_factor = -0.15
+		research_cost = 3
+		start_year = 1112
+
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 22 }
+		}
+		
+		categories = {
+			industry
+			biological
+		}
+		
+		ai_will_do = {
+			base = 16
+			modifier = {
+				factor = 10
+				date > 1111.9.1
+			}
+		}
+	}
+
+	#生物技术
+	LRD_tech_biotech_1 = { #
+
+		monthly_population = 0.02
+		casualty_trickleback = 0.01
+		army_org_regain = 0.03
+
+		research_cost = 2.5
+		start_year = 1093
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 2 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_biotech_2
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1092.9.1
+			}
+		}
+	}
+	LRD_tech_biotech_2 = { 
+		on_research_complete = {
+			set_temp_variable = {
+				var = farming_development_var_temp
+				value = 0.05
+			}
+			add_farming_development = yes
+		}
+		show_effect_as_desc = yes
+		farming_development_monthly = 0.02
+		supply_consumption_factor = -0.025
+		research_cost = 2.5
+		start_year = 1094
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 4 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_biotech_3
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+	LRD_tech_biotech_3 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		monthly_population = 0.02
+		casualty_trickleback = 0.01
+		army_org_regain = 0.03
+		research_cost = 2.5
+		start_year = 1096
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 6 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_biotech_4
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1095.9.1
+			}
+		}
+	}
+	LRD_tech_biotech_4 = { #
+	on_research_complete = {
+		set_temp_variable = {
+			var = farming_development_var_temp
+			value = 0.05
+		}
+		add_farming_development = yes
+	}
+	show_effect_as_desc = yes
+	farming_development_monthly = 0.02
+	business_value_factor = 0.03
+	consumer_goods_expected_value = -0.01
+		research_cost = 2.5
+		start_year = 1098
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 8 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_biotech_5
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1097.9.1
+			}
+		}
+	}
+	LRD_tech_biotech_5 = { #
+	
+	show_effect_as_desc = yes
+	army_org_regain = 0.05
+	casualty_trickleback = 0.03
+
+		research_cost = 2.5
+		start_year = 1100
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 10 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_biotech_6
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1099.9.1
+			}
+		}
+	}
+	LRD_tech_biotech_6 = { #
+	on_research_complete = {
+		set_temp_variable = {
+			var = farming_development_var_temp
+			value = 0.05
+		}
+		add_farming_development = yes
+	}
+	show_effect_as_desc = yes
+	farming_development_monthly = 0.05
+	business_value_factor = 0.03
+		
+		research_cost = 2.5
+		start_year = 1102
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 12 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_biotech_7
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1101.9.1
+			}
+		}
+	}
+	LRD_tech_biotech_7 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		business_value_factor = 0.03
+		industrial_capacity_factory = 0.05
+		production_factory_max_efficiency_factor = 0.05
+		
+		research_cost = 2.5
+		start_year = 1104
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 14 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_biotech_8
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1103.9.1
+			}
+		}
+	}
+	LRD_tech_biotech_8 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		monthly_population = 0.05
+		research_cost = 2.5
+		start_year = 1106
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 16 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_biotech_9
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1105.9.1
+			}
+		}
+	}
+	LRD_tech_biotech_9 = { #
+		on_research_complete = {
+			set_temp_variable = {
+				var = farming_development_var_temp
+				value = 0.05
+			}
+			add_farming_development = yes
+		}
+		show_effect_as_desc = yes
+		farming_development_monthly = 0.1
+		consumer_goods_expected_value = -0.02
+
+		research_cost = 3
+		start_year = 1108
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 18 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_biotech_10
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1107.9.1
+			}
+		}
+	}
+	LRD_tech_biotech_10 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		monthly_population = 0.05
+		casualty_trickleback = 0.03
+		army_org_regain = 0.05
+		research_cost = 2.5
+		start_year = 1110
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 20 }
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_biotech_11
+			research_cost_coeff = 1
+		}
+		
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1109.9.1
+			}
+		}
+	}
+	LRD_tech_biotech_11 = { #
+		on_research_complete = {
+			
+		}
+		show_effect_as_desc = yes
+		research_speed_factor = 0.1
+		industrial_capacity_factory = 0.1
+		business_value_factor = 0.02
+		research_cost = 2.5
+		start_year = 1112
+
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 22 }
+		}
+		
+		categories = {
+			industry
+			biological_technology
+		}
+		
+		ai_will_do = {
+			base = 12
+			modifier = {
+				factor = 10
+				date > 1111.9.1
+			}
+		}
+	}
+
+	#能源与动力
+	LRD_tech_energy_1 = { #
+
+
+		enable_equipment_modules = {
+			arf_phase_shifter
+		}
+		research_cost = 3
+		start_year = 1092
+
+		enable_building = {
+			building = originium_powerplant
+			level = 1
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 3 y = 0 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_energy_2
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = LRD_tech_energy_chuneng
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			energy
+		}
+
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1091.9.1
+			}
+		}
+	}
+
+	LRD_tech_energy_chuneng = { #
+
+		research_cost = 3
+		start_year = 1093
+
+		enable_building = {
+			building = nuclear_reactor
+			level = 1
+		}
+		enable_building = {
+			building = new_energy_powerplant
+			level = 1
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 0 }
+		}
+		categories = {
+			energy
+		}
+
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1092.9.1
+			}
+		}
+	}
+
+	LRD_tech_energy_2 = { #
+
+		research_cost = 2.5
+		start_year = 1094
+
+		folder = {
+			name = civ_folder
+			position = { x = 3 y = 2 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_energy_A0
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = LRD_tech_energy_B0
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = LRD_tech_energy_C0
+			research_cost_coeff = 1
+		}
+		production_cost_nuclear_reactor_factor = -0.1
+		production_cost_power_plant_factor = -0.1
+		production_cost_energy_farm_factor = -0.1
+		categories = {
+			energy
+		}
+
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+
+	LRD_tech_energy_A0 = { #
+
+		research_cost = 3
+		start_year = 1094
+
+		folder = {
+			name = civ_folder
+			position = { x = 1 y = 4 }
+		}
+
+		allow = {
+			has_tech = LRD_tech_energy_chuneng
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_energy_A1
+			research_cost_coeff = 1
+		}
+		enable_building = {
+			building = originium_powerplant
+			level = 2
+		}
+		categories = {
+			energy
+		}
+
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+	LRD_tech_energy_A1 = { #
+
+		research_cost = 3
+		start_year = 1096
+
+		folder = {
+			name = civ_folder
+			position = { x = 1 y = 6 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_energy_A2
+			research_cost_coeff = 1
+		}
+		enable_building = {
+			building = originium_powerplant
+			level = 3
+		}
+		categories = {
+			energy
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1095.9.1
+			}
+		}
+	}
+	LRD_tech_energy_A2 = { #
+
+		research_cost = 3
+		start_year = 1099
+
+		folder = {
+			name = civ_folder
+			position = { x = 1 y = 9 }
+		}
+		production_cost_power_plant_factor = -0.1
+		path = {
+			leads_to_tech = LRD_tech_energy_A3
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			energy
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1098.9.1
+			}
+		}
+	}
+
+	LRD_tech_energy_A3 = { #
+
+		research_cost = 3
+		start_year = 1102
+		enable_building = {
+			building = originium_powerplant
+			level = 4
+		}
+		folder = {
+			name = civ_folder
+			position = { x = 1 y = 12 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_energy_3
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			energy
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1101.9.1
+			}
+		}
+	}
+	LRD_tech_energy_B0 = { #
+
+		research_cost = 3
+		start_year = 1094
+
+		folder = {
+			name = civ_folder
+			position = { x = 3 y = 4 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_energy_B1
+			research_cost_coeff = 1
+		}
+		production_cost_nuclear_reactor_factor = -0.10
+		categories = {
+			energy
+		}
+
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+	LRD_tech_energy_B1 = { #
+
+		research_cost = 4
+		start_year = 1096
+
+		folder = {
+			name = civ_folder
+			position = { x = 3 y = 6 }
+		}
+		enable_building = {
+			building = nuclear_reactor
+			level = 2
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_energy_B2
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			energy
+			nuclear
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1095.9.1
+			}
+		}
+	}
+	LRD_tech_energy_B2 = { #
+
+		research_cost = 4
+		start_year = 1099
+
+		folder = {
+			name = civ_folder
+			position = { x = 3 y = 9 }
+		}
+		production_cost_nuclear_reactor_factor = -0.10
+		path = {
+			leads_to_tech = LRD_tech_energy_B3
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			energy
+			nuclear
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1098.9.1
+			}
+		}
+	}
+
+	LRD_tech_energy_B3 = { #
+
+		research_cost = 4.5
+		start_year = 1102
+
+		folder = {
+			name = civ_folder
+			position = { x = 3 y = 12 }
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_energy_3
+			research_cost_coeff = 1
+		}
+		enable_building = {
+			building = nuclear_reactor
+			level = 3
+		}
+		categories = {
+			energy
+			nuclear
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1101.9.1
+			}
+		}
+	}
+	LRD_tech_energy_C0 = { #
+
+		research_cost = 3
+		start_year = 1094
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 4 }
+		}
+
+		allow = {
+			has_tech = LRD_tech_energy_chuneng
+		}
+		
+		path = {
+			leads_to_tech = LRD_tech_energy_C1
+			research_cost_coeff = 1
+		}
+		enable_building = {
+			building = new_energy_powerplant
+			level = 2
+		}
+		categories = {
+			energy
+		}
+
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1093.9.1
+			}
+		}
+	}
+	LRD_tech_energy_C1 = { #
+
+		research_cost = 3
+		start_year = 1096
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 6 }
+		}
+		enable_building = {
+			building = new_energy_powerplant
+			level = 3
+		}
+		path = {
+			leads_to_tech = LRD_tech_energy_C2
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			energy
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1095.9.1
+			}
+		}
+	}
+	LRD_tech_energy_C2 = { #
+
+		research_cost = 3
+		start_year = 1099
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 9 }
+		}
+		production_cost_energy_farm_factor = -0.1
+		path = {
+			leads_to_tech = LRD_tech_energy_C3
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			energy
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1098.9.1
+			}
+		}
+	}
+
+	LRD_tech_energy_C3 = { #
+
+		research_cost = 3
+		start_year = 1102
+
+		folder = {
+			name = civ_folder
+			position = { x = 5 y = 12 }
+		}
+		enable_building = {
+			building = new_energy_powerplant
+			level = 4
+		}
+		path = {
+			leads_to_tech = LRD_tech_energy_3
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			energy
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1101.9.1
+			}
+		}
+	}
+
+	LRD_tech_energy_3 = { #
+
+		research_cost = 3
+		start_year = 1106
+
+		folder = {
+			name = civ_folder
+			position = { x = 3 y = 15 }
+		}
+		production_speed_energy_farm_factor = 0.1
+		production_speed_power_plant_factor = 0.1
+		production_speed_nuclear_reactor_factor = 0.1
+		path = {
+			leads_to_tech = LRD_tech_energy_4
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			energy
+		}
+	}
+
+	LRD_tech_energy_4 = { #
+
+		research_cost = 3
+		start_year = 1108
+
+		folder = {
+			name = civ_folder
+			position = { x = 3 y = 18 }
+		}
+		industrial_capacity_dockyard = 0.1
+		industrial_capacity_factory = 0.1
+		path = {
+			leads_to_tech = LRD_tech_energy_5
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			energy
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1107.9.1
+			}
+		}
+	}
+
+	LRD_tech_energy_5 = { #
+
+		research_cost = 3
+		start_year = 1112
+
+		folder = {
+			name = civ_folder
+			position = { x = 3 y = 22 }
+		}
+		local_building_slots_factor = 0.1
+
+		categories = {
+			energy
+		}
+		
+		ai_will_do = {
+			base = 14
+			modifier = {
+				factor = 10
+				date > 1111.9.1
+			}
+		}
+	}
+}

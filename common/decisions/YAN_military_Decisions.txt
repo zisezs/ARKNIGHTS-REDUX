@@ -1,0 +1,91 @@
+# 大炎军改决议（精简：军改演习一组）
+# 生成器：docs/_yan_mil_build.py（改数据表重跑，勿手改产物）
+# 分类声明在 common/decisions/categories/YAN_military_categories.txt
+
+YAN_Military_Reform = {
+
+	# 校场秋点兵
+	YAN_mil_dec_army_exercise = {
+		icon = GFX_decision_generic_army_support
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+		}
+		available = {
+			has_country_flag = YAN_mil_exercises_unlocked
+		}
+		cost = 25
+		cooldown = 120
+		complete_effect = {
+			army_experience = 25
+			add_war_support = 0.01
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# 楼船夜雪
+	YAN_mil_dec_navy_exercise = {
+		icon = GFX_decision_generic_military
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+		}
+		available = {
+			has_country_flag = YAN_mil_exercises_unlocked
+		}
+		cost = 25
+		cooldown = 120
+		complete_effect = {
+			navy_experience = 25
+			add_war_support = 0.01
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# 长空砺翼
+	YAN_mil_dec_air_exercise = {
+		icon = GFX_decision_generic_air
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+		}
+		available = {
+			has_country_flag = YAN_mil_exercises_unlocked
+		}
+		cost = 25
+		cooldown = 120
+		complete_effect = {
+			air_experience = 25
+			add_war_support = 0.01
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# 三军合演
+	YAN_mil_dec_grand_manoeuvre = {
+		icon = GFX_decision_generic_decision
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+		}
+		available = {
+			has_country_flag = YAN_mil_exercises_unlocked
+			has_completed_focus = YAN_mil_joint
+		}
+		cost = 50
+		cooldown = 180
+		complete_effect = {
+			army_experience = 40
+			navy_experience = 40
+			air_experience = 40
+			add_war_support = 0.02
+			add_stability = 0.01
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+}

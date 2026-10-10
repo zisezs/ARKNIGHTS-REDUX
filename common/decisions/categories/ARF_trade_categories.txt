@@ -1,0 +1,22 @@
+# ============================================================================
+# 本文件由 docs/gen_arf_trade.py 生成，手改会被覆盖。
+# ============================================================================
+# 国际贸易 · 决议分类
+# 分类页顶部的入口面板由 scripted_gui 提供（与「高速战舰设计局」「主席办公室」同款挂法）。
+# icon 合法值只有 crisis / danger / economy / foreign_policy / political_actions / propaganda。
+
+ARF_trade_category = {
+
+	icon = GFX_decision_category_generic_economy
+
+	visible = {
+		always = yes
+	}
+	visible_when_empty = yes
+
+	scripted_gui = ARF_Trade_Entry
+
+	priority = {
+		base = 21
+	}
+}

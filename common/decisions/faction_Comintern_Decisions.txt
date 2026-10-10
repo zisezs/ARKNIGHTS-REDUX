@@ -1,0 +1,90 @@
+#共产国际决议组
+Comintern_decisions = {
+
+	#共产国际阵营建立
+	Comintern_faction_establish = {
+
+		visible = {
+			NOT = {
+				any_country = {
+					has_faction_template = faction_template_communist_international
+				}
+			}
+			has_government = communism
+		}
+
+		available = {
+			is_major = yes
+			has_idea = major_country
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			create_faction_from_template = faction_template_communist_international
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	#加入共产国际阵营
+	Comintern_faction_join = {
+
+		visible = {
+			any_other_country = {
+				has_faction_template = faction_template_communist_international
+			}
+			NOT = {
+				has_faction_template = faction_template_communist_international
+			}
+			has_government = communism
+		}
+
+		available = {
+			has_war = no
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			every_other_country = {
+				limit = {
+					has_faction_template = faction_template_communist_international
+					is_faction_leader = yes
+				}
+				add_to_faction = ROOT
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	#干涉卡兹戴尔内战
+	Comintern_faction_intervention_Kazdel = {
+
+		visible = {
+			#has_faction_template = faction_template_communist_international
+			has_global_flag = Kazdel_civil_war_flag
+			KAC = {
+				exists = yes
+			}
+			NOT = {
+				original_tag = KAC
+			}
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_flag = can_send_volunteers_to_KAC
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+}

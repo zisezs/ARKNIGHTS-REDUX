@@ -1,0 +1,209 @@
+# ==============================================================================
+#  大炎·珍玩集册 —— 寻珍决议
+#  · 9 条分类寻珍 + 1 条全品类寻珍；花政治力量，随机取一件「未集齐」的收藏品
+#  · 重复寻得同一件 = 升一档（现代的→近代的→古代的→史前的）
+#  · 抽卡与升阶逻辑全在 common/scripted_effects/YAN_Collection_scripted_effects.txt
+# ==============================================================================
+
+YAN_Collection_Category = {
+
+	YAN_col_draw_1 = {
+		icon = GFX_decision_generic_fundraising
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { YAN_col_cat_1_has_candidates = yes }
+
+		cost = 25
+		days_remove = 0
+
+		custom_effect_tooltip = YAN_COL_DEC_1_TT
+
+		complete_effect = {
+			set_variable = { YAN_col_draw_cat = 1 }
+			YAN_Collection_Draw = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	YAN_col_draw_2 = {
+		icon = GFX_decision_generic_arms_crate
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { YAN_col_cat_2_has_candidates = yes }
+
+		cost = 25
+		days_remove = 0
+
+		custom_effect_tooltip = YAN_COL_DEC_2_TT
+
+		complete_effect = {
+			set_variable = { YAN_col_draw_cat = 2 }
+			YAN_Collection_Draw = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	YAN_col_draw_3 = {
+		icon = GFX_decision_generic_military
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { YAN_col_cat_3_has_candidates = yes }
+
+		cost = 25
+		days_remove = 0
+
+		custom_effect_tooltip = YAN_COL_DEC_3_TT
+
+		complete_effect = {
+			set_variable = { YAN_col_draw_cat = 3 }
+			YAN_Collection_Draw = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	YAN_col_draw_4 = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { YAN_col_cat_4_has_candidates = yes }
+
+		cost = 25
+		days_remove = 0
+
+		custom_effect_tooltip = YAN_COL_DEC_4_TT
+
+		complete_effect = {
+			set_variable = { YAN_col_draw_cat = 4 }
+			YAN_Collection_Draw = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	YAN_col_draw_5 = {
+		icon = GFX_decision_generic_consumer_goods
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { YAN_col_cat_5_has_candidates = yes }
+
+		cost = 25
+		days_remove = 0
+
+		custom_effect_tooltip = YAN_COL_DEC_5_TT
+
+		complete_effect = {
+			set_variable = { YAN_col_draw_cat = 5 }
+			YAN_Collection_Draw = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	YAN_col_draw_6 = {
+		icon = GFX_decision_generic_army_support
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { YAN_col_cat_6_has_candidates = yes }
+
+		cost = 25
+		days_remove = 0
+
+		custom_effect_tooltip = YAN_COL_DEC_6_TT
+
+		complete_effect = {
+			set_variable = { YAN_col_draw_cat = 6 }
+			YAN_Collection_Draw = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	YAN_col_draw_7 = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { YAN_col_cat_7_has_candidates = yes }
+
+		cost = 25
+		days_remove = 0
+
+		custom_effect_tooltip = YAN_COL_DEC_7_TT
+
+		complete_effect = {
+			set_variable = { YAN_col_draw_cat = 7 }
+			YAN_Collection_Draw = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	YAN_col_draw_8 = {
+		icon = GFX_decision_generic_research
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { YAN_col_cat_8_has_candidates = yes }
+
+		cost = 25
+		days_remove = 0
+
+		custom_effect_tooltip = YAN_COL_DEC_8_TT
+
+		complete_effect = {
+			set_variable = { YAN_col_draw_cat = 8 }
+			YAN_Collection_Draw = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	YAN_col_draw_9 = {
+		icon = GFX_decision_generic_political_rally
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { YAN_col_cat_9_has_candidates = yes }
+
+		cost = 25
+		days_remove = 0
+
+		custom_effect_tooltip = YAN_COL_DEC_9_TT
+
+		complete_effect = {
+			set_variable = { YAN_col_draw_cat = 9 }
+			YAN_Collection_Draw = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	YAN_col_draw_all = {
+		icon = GFX_decision_generic_speech
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { YAN_col_any_candidate = yes }
+
+		cost = 60
+		days_remove = 0
+
+		custom_effect_tooltip = YAN_COL_DEC_ALL_TT
+
+		complete_effect = {
+			set_variable = { YAN_col_draw_cat = 0 }
+			YAN_Collection_Draw = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+}

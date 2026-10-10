@@ -1,0 +1,43 @@
+# ==============================================================================
+#  第十一次乌卡战争 · 乌萨斯侧钩子
+#  · 逻辑正文见 common/scripted_effects/URS_Kazimierz_War_scripted_effects.txt
+#  · 国家作用域钩子（on_monthly_URS / on_weekly_URS）原版即用，见
+#    Hearts of Iron IV/common/on_actions/00_on_actions.txt 的 on_monthly_CZE 先例。
+#  · 本 mod 的 on_actions 是 replace_path 过来的，原版钩子不会自动跑，
+#    所有推进都得自己挂 —— 这里只挂 URS 一家，开销可忽略。
+#
+#  2026-09-26 重制：月度趟子里的「开战兜底」URS_kzmwar_backstop 已删，
+#  现在这两个钩子只做三件事 —— 涨叛乱进度、判定酝酿起义、结算平叛与自动获胜。
+#  要不要向卡西米尔开战，完全由玩家的 URS_kzmwar_declare_war 决定。
+# ==============================================================================
+
+on_actions = {
+
+	# 开局先把六个进度变量与备战度立起来，否则情报面板第一天是空的
+	# （on_startup 的作用域是 global，不是每国各跑一次 —— 见 ARF_trade_on_actions.txt 的注释）
+	on_startup = {
+		effect = {
+			URS = {
+				if = {
+					limit = { NOT = { has_country_flag = URS_kzmwar_inited } }
+					set_country_flag = URS_kzmwar_inited
+					URS_kzmwar_init = yes
+				}
+			}
+		}
+	}
+
+	# 每月：六路叛军进度推进、到点酝酿起义、平叛报捷
+	on_monthly_URS = {
+		effect = {
+			URS_kzmwar_monthly_tick = yes
+		}
+	}
+
+	# 每周：卡西米尔投降度过阈值即自动判胜（阈值 0.65，见 URS_kzmwar_weekly_check）
+	on_weekly_URS = {
+		effect = {
+			URS_kzmwar_weekly_check = yes
+		}
+	}
+}

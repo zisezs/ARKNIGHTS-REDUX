@@ -1,0 +1,314 @@
+#革命民主派
+UFE_revolution_democratic = {
+	name = "UFE_revolution_democratic_AT"
+	desc = "Essentially revolution democratic behaviour for UFE"
+
+	allowed = {
+		original_tag = UFE
+	}
+	enable = {
+		tag = UFE
+	}
+	abort = {
+		OR = {
+			has_completed_focus = UFE_ZhenYaPinMin
+			has_game_rule = {
+				rule = UFE_ai_behavior
+				option = RIHGT
+			}
+		}
+	}
+
+	ai_national_focuses = {
+		UFE_ZhengZhiHeZuo
+		UFE_PiCaoMaoYi_YiChan #最优先完成的国策
+		
+		UFE_JinJi_ZhengZhao
+		UFE_YingDuiSapLuan
+		UFE_QingLi_KeYi
+		UFE_ZhenYa_ShouDuan
+		UFE_ZhiAn_BuDui
+		UFE_AnFu_MinZhong #尽快消除骚乱
+		
+		UFE_GeLunWoFu_de_MingYun
+		UFE_ZuiHouYiTongJin
+		UFE_YinDao_YuanZhuMin_CiSha
+		UFE_JianQingFuDan
+		UFE_KaLieWeiQi
+		UFE_TuZhuHuanHe
+		UFE_SheHuiWenDing
+		UFE_ShiFang_ZhengZhiFan
+		UFE_KaLieWeiQi_GangLing
+		UFE_JiCengZuZhi
+		UFE_DangDiGanBu
+		UFE_TuGai
+		UFE_QiTingKaSiKe
+		UFE_CuJin_JiShi
+		UFE_YuanLiaoGongYe
+		UFE_XiuBuTieLu
+		UFE_ZhengZhiGuWen
+		UFE_KongZhi_TuFei
+		UFE_BenDiZhaoMu
+		UFE_BenDiBaoKan
+		UFE_SaoMangBan
+		UFE_BenDiJunGuan
+		UFE_ZhengGuiJun #获取军事buff
+		
+		UFE_DongBuZuoZhan #作战修正
+		UFE_ZhongBuZuoZhan
+		UFE_XiBuZuoZhan
+		UFE_SanBingYouYong
+		UFE_KuoDa_ZhengBing
+		
+		UFE_YouDai_ZhengCe #增强工业实力
+		UFE_KuoJianDaXue
+		UFE_ChuLi_CaiZheng
+		UFE_XinHuoBi
+		UFE_KuoDaShiChang
+		UFE_XinYong
+		UFE_NongCunXinDai
+		UFE_CunShe_MinBing
+		UFE_DiFangMinBing
+		UFE_GongRenJieShe
+		UFE_GongHui
+		
+		UFE_QuanMin_DongYuan #准备开战
+		UFE_QingBao_HuoQu
+		UFE_JunShi_XueYuan
+		UFE_PaoBing_ZhuYi
+		UFE_ZhuangJia
+		UFE_BuBing_ZhuangBei
+		UFE_HuoPao_GaiLiang
+		UFE_JunShi_GongYe
+		UFE_ShengChanXian
+		UFE_Dui_DiGuo_ZuoZhan
+		
+		UFE_QueBao_JunDui 
+		UFE_GuanChe_YuanZe
+		UFE_TePaiYuan
+		UFE_DiFang_QuanLi
+		UFE_QingXi_BangLianZhuYi
+		UFE_QiDong_ZhiXian
+		UFE_LeftWings
+		UFE_ZhiChiPinMin #革命民主派
+		UFE_ZhengDunDuiWu
+		UFE_ZanShi_XuanZhi
+		UFE_JiuGuoWeiYuanHui
+		UFE_ZhengGui_YinHang
+		UFE_DaJi_TouJi
+		UFE_ZhongYangYinHang
+		UFE_YueShu_JunGong
+		UFE_XuanYang_Fa
+		UFE_JinJiFaLing
+		UFE_ZuiGao_FaYuan
+		UFE_KongBuZhengCe
+		UFE_GanBuNianQingHua
+		UFE_LiYong_XueZhe
+		UFE_GuanLiaoJiGou
+		UFE_QiangDiao_XiaoLv
+		UFE_FanDui_ShiBai
+		UFE_JiTiCunShe
+		UFE_GongChanDang
+		UFE_QunZhong_ZhengZi
+		UFE_BuXuYao_XueZhe
+		UFE_ZhiXing_XianJia
+		UFE_RenMIn_JuLeBu
+		UFE_JiTi_ChuangXin
+		UFE_ZhongZhi_XianJia
+		UFE_JieShu_KongBu
+		UFE_HuiFu_XuanJu
+		UFE_GeMing_JiaoYu
+		UFE_DuZhanDui
+		UFE_RenQuan
+		UFE_JinBuZiYou
+		UFE_JiTi_ZiYou
+		UFE_BaoWei_WeiYuanHui
+		UFE_ShengChanJianShe_MinBingTuan
+	}
+
+	research = {
+		infantry_weapons = 40.0
+		infantry_tech = 15.0
+		armor = 15
+		artillery = 15.0
+		support_tech = 15
+	}
+
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+	
+	traits = {
+		UFE_liberalism_advisor_1_trait = 15
+		UFE_liberalism_advisor_5_trait = 15
+		UFE_liberalism_advisor_4_trait = 15
+		UFE_field_marshal_2_trait = 15
+		UFE_liberalism_theorist_2_trait = 10
+		army_supply_trait = 10
+		UFE_corps_commander_5_trait = 10
+		army_artillery_2 = 10
+		UFE_navy_chief_1_trait = 8
+		UFE_air_chief_1_trait = 8
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 500
+	}
+}
+#原教旨自由主义
+UFE_liberalism_democratic = {
+	name = "UFE_liberalism_democratic_AT"
+	desc = "Essentially liberalism democratic behaviour for UFE"
+
+	allowed = {
+		original_tag = UFE
+	}
+	enable = {
+		OR = {
+			has_completed_focus = UFE_ZhenYaPinMin
+			has_game_rule = {
+				rule = UFE_ai_behavior
+				option = RIHGT
+			}
+		}
+	}
+	abort = {
+		has_completed_focus = UFE_ZhiChiPinMin
+	}
+
+	ai_national_focuses = {
+		UFE_ZhengZhiHeZuo
+		UFE_PiCaoMaoYi_YiChan #最优先完成的国策
+		
+		UFE_JinJi_ZhengZhao
+		UFE_YingDuiSapLuan
+		UFE_QingLi_KeYi
+		UFE_ZhenYa_ShouDuan
+		UFE_ZhiAn_BuDui
+		UFE_AnFu_MinZhong #尽快消除骚乱
+		
+		UFE_GeLunWoFu_de_MingYun
+		UFE_ZuiHouYiTongJin
+		UFE_YinDao_YuanZhuMin_CiSha
+		UFE_JianQingFuDan
+		UFE_KaLieWeiQi
+		UFE_TuZhuHuanHe
+		UFE_SheHuiWenDing
+		UFE_ShiFang_ZhengZhiFan
+		UFE_KaLieWeiQi_GangLing
+		UFE_JiCengZuZhi
+		UFE_DangDiGanBu
+		UFE_TuGai
+		UFE_QiTingKaSiKe
+		UFE_CuJin_JiShi
+		UFE_YuanLiaoGongYe
+		UFE_XiuBuTieLu
+		UFE_ZhengZhiGuWen
+		UFE_KongZhi_TuFei
+		UFE_BenDiZhaoMu
+		UFE_BenDiBaoKan
+		UFE_SaoMangBan
+		UFE_BenDiJunGuan
+		UFE_ZhengGuiJun #获取军事buff
+		
+		UFE_DongBuZuoZhan #作战修正
+		UFE_ZhongBuZuoZhan
+		UFE_XiBuZuoZhan
+		UFE_SanBingYouYong
+		UFE_KuoDa_ZhengBing
+		
+		UFE_YouDai_ZhengCe #增强工业实力
+		UFE_KuoJianDaXue
+		UFE_ChuLi_CaiZheng
+		UFE_XinHuoBi
+		UFE_KuoDaShiChang
+		UFE_XinYong
+		UFE_NongCunXinDai
+		UFE_CunShe_MinBing
+		UFE_DiFangMinBing
+		UFE_GongRenJieShe
+		UFE_GongHui
+		
+		UFE_QuanMin_DongYuan #准备开战
+		UFE_QingBao_HuoQu
+		UFE_JunShi_XueYuan
+		UFE_PaoBing_ZhuYi
+		UFE_ZhuangJia
+		UFE_BuBing_ZhuangBei
+		UFE_HuoPao_GaiLiang
+		UFE_JunShi_GongYe
+		UFE_Dui_DiGuo_ZuoZhan
+		UFE_ShengChanXian
+		
+		UFE_QueBao_JunDui
+		UFE_GuanChe_YuanZe
+		UFE_TePaiYuan
+		UFE_DiFang_QuanLi
+		UFE_QingXi_BangLianZhuYi
+		UFE_QiDong_ZhiXian
+		UFE_LeftWings
+		UFE_ZhongYangYinHang
+		UFE_ZhenYaPinMin #经典自由派
+		UFE_ShouCiDaXuan
+		UFE_DiZhiZuoYi
+		UFE_YueShu_JunGong
+		UFE_FanDui_ShiBai
+		UFE_DuZhanDui
+		UFE_ZiYouFangRen
+		UFE_ZhiChiShiYe
+		UFE_JunFei_ZiZhu
+		UFE_JunDui_JingShang
+		UFE_LiYong_XueZhe
+		UFE_ZhiChi_JiGuan
+		UFE_BaoWei_WeiYuanHui
+		UFE_ZiYou_ShiChang
+		UFE_DaPo_JiCeng
+		UFE_WenHuaGaiZao
+		UFE_QiangDiao_GeRenZiYou
+		UFE_WuMingHua
+		UFE_QuYiShiXingTai
+		UFE_JingDian_ZiYou
+		UFE_YouXian_FuLi
+		UFE_TeWu_JiGuan
+		UFE_RenQuan
+	}
+
+	research = {
+		infantry_weapons = 40.0
+		infantry_tech = 15.0
+		armor = 15
+		artillery = 15.0
+		support_tech = 15
+	}
+
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+	
+	traits = {
+		UFE_liberalism_advisor_8_trait = 15
+		UFE_liberalism_advisor_1_trait = 15
+		UFE_liberalism_advisor_5_trait = 15
+		army_chief_defensive_1 = 15
+		UFE_liberalism_theorist_2_trait = 10
+		army_supply_trait = 10
+		UFE_corps_commander_5_trait = 10
+		army_artillery_2 = 10
+		UFE_navy_chief_1_trait = 8
+		UFE_air_chief_1_trait = 8
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 500
+	}
+}

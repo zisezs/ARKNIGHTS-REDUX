@@ -1,0 +1,143 @@
+ideas = {
+	educational_level = {
+		law = yes
+		use_list_view = yes
+
+		illiteracy_widespread = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				research_speed_factor = -0.15
+				consumer_goods_factor = -0.05
+				experience_gain_army_factor  = -0.15
+				experience_gain_navy_factor  = -0.15
+				experience_gain_air_factor  = -0.15
+				production_factory_efficiency_gain_factor = -0.05
+				production_factory_max_efficiency_factor = -0.05
+				line_change_production_efficiency_factor = -0.05
+
+				custom_modifier_tooltip = educational_level_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		high_illiteracy_rate = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				research_speed_factor = -0.05
+				consumer_goods_factor = -0.025
+				experience_gain_army_factor  = -0.05
+				experience_gain_navy_factor  = -0.05
+				experience_gain_air_factor  = -0.05
+				production_factory_efficiency_gain_factor = -0.025
+				production_factory_max_efficiency_factor = -0.025
+				line_change_production_efficiency_factor = -0.025
+				educational_development_monthly_modifier = -0.02
+
+				custom_modifier_tooltip = educational_level_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		basic_literacy = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				consumer_goods_factor = -0.01
+				educational_development_monthly_modifier = -0.04
+
+				custom_modifier_tooltip = educational_level_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		primary_education = {
+
+			removal_cost = -1
+
+			allowed_to_remove = { 
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				research_speed_factor = 0.05
+				consumer_goods_factor = 0.01
+				experience_gain_army_factor  = 0.05
+				experience_gain_navy_factor  = 0.05
+				experience_gain_air_factor  = 0.05
+				production_factory_efficiency_gain_factor = 0.025
+				production_factory_max_efficiency_factor = 0.025
+				line_change_production_efficiency_factor = 0.025
+				educational_development_monthly_modifier = -0.08
+
+				custom_modifier_tooltip = educational_level_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+
+		higher_education = {
+
+			removal_cost = -1
+
+			allowed_to_remove = {
+				always = no 
+			}
+
+			available = { 
+				always = no 
+			}
+
+			modifier = {
+				research_speed_factor = 0.1
+				consumer_goods_factor = 0.025
+				experience_gain_army_factor  = 0.1
+				experience_gain_navy_factor  = 0.1
+				experience_gain_air_factor  = 0.1
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.05
+				line_change_production_efficiency_factor = 0.05
+				educational_development_monthly_modifier = -0.16
+
+				custom_modifier_tooltip = educational_level_modifier_tooltip
+			}
+			
+			cancel_if_invalid = no
+		}
+	}
+}

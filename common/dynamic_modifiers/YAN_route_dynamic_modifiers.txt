@@ -1,0 +1,98 @@
+# ==============================================================================
+#  大炎 · 路线动态精神（TFR 式：数值 = 变量，国策往里加数即"升级"）
+#  · 机制：dynamic_modifier 的每个修正符写成变量；国策里程碑只做
+#      add_dynamic_modifier = { modifier = YAN_route_x }
+#      add_to_variable = { var = YAN_route_x_..._var value = 增量 }
+#    精神数值原地成长，无需换精神。
+#  · icon 用 GFX_idea_YAN_Route_*，所以在政治/修正符栏里显示为一个民族精神。
+#  · 变量无需预设：HOI4 把未定义变量按 0 处理。
+#  · 文案键 = modifier id（YAN_route_politics / _desc），见 ARF_YAN_Rework_l_simp_chinese.yml。
+#  · 分档增量：一档=基础值，二档/三档=在上一档基础上的增量（国策侧写增量）。
+# ==============================================================================
+
+# ---------------- 政治线：承平之治 ----------------
+YAN_route_politics = {
+	icon = GFX_idea_YAN_Route_politics
+
+	enable = { always = yes }
+
+	stability_factor = YAN_route_politics_stability_var
+	political_power_factor = YAN_route_politics_pp_var
+	political_advisor_cost_factor = YAN_route_politics_advisor_cost_var
+	resistance_target = YAN_route_politics_resistance_var
+}
+
+# ---------------- 岁兽线：岁陵司秉烛 ----------------
+YAN_route_sui = {
+	icon = GFX_idea_YAN_Route_sui
+
+	enable = { always = yes }
+
+	stability_factor = YAN_route_sui_stability_var
+	research_speed_factor = YAN_route_sui_research_var
+	intel_network_gain_factor = YAN_route_sui_intel_var
+	yan_attack_vs_behemoth_tt = YAN_route_sui_behemoth_var
+	yan_agent_advisor_unlock_tt = YAN_route_sui_agent_unlock_var
+}
+
+# ---------------- 军事线：禁军整训 ----------------
+YAN_route_military = {
+	icon = GFX_idea_YAN_Route_military
+
+	enable = { always = yes }
+
+	army_attack_factor = YAN_route_military_attack_var
+	army_defence_factor = YAN_route_military_defence_var
+	experience_gain_army = YAN_route_military_army_xp_var
+	training_time_factor = YAN_route_military_training_var
+	army_org_factor = YAN_route_military_org_var
+	breakthrough_factor = YAN_route_military_breakthrough_var
+}
+
+# ---------------- 工业线：百灶工造 ----------------
+YAN_route_industry = {
+	icon = GFX_idea_YAN_Route_industry
+
+	enable = { always = yes }
+
+	industrial_capacity_factory = YAN_route_industry_civ_factory_var
+	production_speed_buildings_factor = YAN_route_industry_build_speed_var
+	production_factory_max_efficiency_factor = YAN_route_industry_max_efficiency_var
+	industrial_capacity_dockyard = YAN_route_industry_dockyard_var
+}
+
+# ---------------- 科研线：百灶学宫 ----------------
+YAN_route_research = {
+	icon = GFX_idea_YAN_Route_research
+
+	enable = { always = yes }
+
+	research_speed_factor = YAN_route_research_speed_var
+	yan_originium_research_tt = YAN_route_research_originium_var
+	yan_medical_research_tt = YAN_route_research_medical_var
+}
+
+# ---------------- 地方线：十九宣政司 ----------------
+YAN_route_local = {
+	icon = GFX_idea_YAN_Route_local
+
+	enable = { always = yes }
+
+	stability_factor = YAN_route_local_stability_var
+	recruitable_population_factor = YAN_route_local_population_var
+	supply_consumption_factor = YAN_route_local_supply_var
+	yan_agriculture_research_tt = YAN_route_local_agriculture_var
+	monthly_population = YAN_route_local_monthly_pop_var
+}
+
+# ---------------- 外交线：四方馆 ----------------
+YAN_route_diplomacy = {
+	icon = GFX_idea_YAN_Route_diplomacy
+
+	enable = { always = yes }
+
+	opinion_gain_monthly = YAN_route_diplomacy_opinion_var
+	research_speed_factor = YAN_route_diplomacy_research_var
+	yan_diplomatic_relation_tt = YAN_route_diplomacy_relation_var
+	improve_relations_maintain_cost_factor = YAN_route_diplomacy_improve_var
+}

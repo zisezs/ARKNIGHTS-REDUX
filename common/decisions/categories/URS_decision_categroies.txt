@@ -1,0 +1,37 @@
+URS_imperial_court_decisions = {
+	icon = GFX_URS_decision_category_imperial_court
+	allowed = {
+		original_tag = URS
+	}
+	visible = {
+		has_country_flag = URS_imperial_court_decisions_flag
+	}
+	visible_when_empty = yes
+	priority = 10
+}
+
+URS_economic_recovery_decisions = {
+	icon = GFX_URS_decision_category_economic_recovery
+	allowed = {
+		original_tag = URS
+	}
+	visible = {
+		has_country_flag = URS_economic_recovery_decisions_flag
+	}
+	visible_when_empty = yes
+	priority = 3
+}
+
+URS_area_management_decisions = {
+	icon = GFX_URS_decision_category_economic_recovery
+	allowed = {
+		original_tag = URS
+	}
+	visible = {
+		# 2026-09-15：原门槛为 has_completed_focus = URS_victory_of_Octobrist_party，
+		# 该旧国策随政治树重制被删除 → 改为旗标，由新树「大清洗」/「维特的独裁」置位。
+		has_country_flag = URS_area_management_enabled
+	}
+	visible_when_empty = yes
+	priority = 3
+}

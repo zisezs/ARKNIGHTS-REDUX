@@ -1,0 +1,358 @@
+# ============================================================================
+# 乌萨斯帝国 ·「费奥多尔初步改革」决议组
+# ============================================================================
+#
+# 分类 URS_dr_reform_decisions 声明在
+#   common/decisions/categories/URS_dream_categories.txt
+# 本文件的顶层块名就是该分类键。
+#
+# 解锁路径：国策「问题之源」完成后 URS_rf_init 置 URS_dr_reform_open。
+# 面板：scripted_gui 挂在分类上（common/scripted_guis/URS_Feodor_Reform_GUI.txt）。
+#
+# 筹码口径：设计稿开头写「改革资源点」、面板写「改革筹码」，是同一个东西，
+#   本文件统一按筹码算，变量名 URS_rf_chips。
+#
+# 四组反对派 ←→ 四条改革线（设计稿就是按这个顺序一一对应的）：
+#   旧贵族   → 国家   军事贵族 → 军队   领地主 → 群众   资产官僚 → 资源
+#
+# 决议分三层：
+#   ① 50 政治点 → 1 筹码（唯一来源）
+#   ② 2 筹码一层：遏制（本轮蛰伏 +4 周） / 改善（对应效率 +10）
+#   ③ 5 筹码一层：对应的反对派**永久**多蛰伏 4 周
+#   ④ 4 条「XX行动中」是 35 天一轮的计时决议，完成即自动重开；
+#      完成后结算一次「反对派行动」，并进入 pending+perm 周的蛰伏。
+#
+# ai_will_do 一律 base = 0：这套是给玩家玩的，AI 不点。
+# ============================================================================
+
+URS_dr_reform_decisions = {
+
+	# ======================= ① 筹码兑换 =======================
+
+	URS_rf_exchange = {
+		icon = GFX_decision_generic_fundraising
+
+		visible = { has_country_flag = URS_dr_reform_open }
+
+		cost = 50
+		days_remove = 0
+
+		complete_effect = {
+			add_to_variable = { URS_rf_chips = 1 tooltip = URS_rf_chips_tt }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ================= ② 2 筹码 · 遏制（一次性 +4 周蛰伏） =================
+
+	URS_rf_contain_noble = {
+		icon = GFX_decision_generic_monarchy
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 2 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 2 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_opp_noble_pending = 4 tooltip = URS_rf_opp_delay_tt }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_contain_mil = {
+		icon = GFX_decision_generic_army_support
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 2 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 2 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_opp_mil_pending = 4 tooltip = URS_rf_opp_delay_tt }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_contain_land = {
+		icon = GFX_decision_generic_colonial_administration
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 2 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 2 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_opp_land_pending = 4 tooltip = URS_rf_opp_delay_tt }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_contain_bur = {
+		icon = GFX_decision_generic_industry
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 2 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 2 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_opp_bur_pending = 4 tooltip = URS_rf_opp_delay_tt }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ================= ② 2 筹码 · 改善对应改革效率（+10） =================
+
+	URS_rf_boost_state = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 2 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 2 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_e_state = 10 tooltip = URS_rf_e_state_tt }
+			clamp_variable = { var = URS_rf_e_state min = 0 max = 100 }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_boost_army = {
+		icon = GFX_decision_generic_military
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 2 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 2 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_e_army = 10 tooltip = URS_rf_e_army_tt }
+			clamp_variable = { var = URS_rf_e_army min = 0 max = 100 }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_boost_people = {
+		icon = GFX_decision_generic_construction
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 2 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 2 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_e_people = 10 tooltip = URS_rf_e_people_tt }
+			clamp_variable = { var = URS_rf_e_people min = 0 max = 100 }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_boost_resource = {
+		icon = GFX_decision_generic_consumer_goods
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 2 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 2 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_e_resource = 10 tooltip = URS_rf_e_resource_tt }
+			clamp_variable = { var = URS_rf_e_resource min = 0 max = 100 }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ============ ③ 5 筹码 · 对应反对派永久多蛰伏 4 周 ============
+
+	URS_rf_purge_officials = {
+		icon = GFX_decision_generic_political_address
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 5 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 5 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_opp_noble_perm = 4 tooltip = URS_rf_opp_perm_tt }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_purge_generals = {
+		icon = GFX_decision_generic_army_support
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 5 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 5 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_opp_mil_perm = 4 tooltip = URS_rf_opp_perm_tt }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_purge_landlords = {
+		icon = GFX_decision_generic_national_unity
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 5 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 5 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_opp_land_perm = 4 tooltip = URS_rf_opp_perm_tt }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_purge_bureaucrats = {
+		icon = GFX_decision_generic_arrest
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = { NOT = { check_variable = { URS_rf_chips < 5 } } }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			subtract_from_variable = { URS_rf_chips = 5 tooltip = URS_rf_chips_tt }
+			add_to_variable = { URS_rf_opp_bur_perm = 4 tooltip = URS_rf_opp_perm_tt }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ============ ④ 4 条 35 天一轮的「XX行动中」计时决议 ============
+	#
+	# 完成（或中途取消）时都会跑一次「反对派行动」并把本轮蛰伏写进去，
+	# 所以玩家点「取消」并不能躲掉这一击，也不算免费重置。
+	# 对应改革线做完（>=100）时决议自己消失，且效果空转。
+
+	URS_rf_opp_noble = {
+		icon = GFX_decision_generic_monarchy
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = {
+			NOT = { check_variable = { URS_rf_opp_noble_lock > 0 } }
+			check_variable = { URS_rf_p_state < 100 }
+		}
+
+		cost = 0
+		days_remove = 35
+		days_re_enable = 0
+
+		remove_effect = { URS_rf_cycle_noble = yes }
+		cancel_effect = { URS_rf_cycle_noble = yes }
+
+		cancel_trigger = {
+			NOT = { check_variable = { URS_rf_p_state < 100 } }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_opp_mil = {
+		icon = GFX_decision_generic_military
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = {
+			NOT = { check_variable = { URS_rf_opp_mil_lock > 0 } }
+			check_variable = { URS_rf_p_army < 100 }
+		}
+
+		cost = 0
+		days_remove = 35
+		days_re_enable = 0
+
+		remove_effect = { URS_rf_cycle_mil = yes }
+		cancel_effect = { URS_rf_cycle_mil = yes }
+
+		cancel_trigger = {
+			NOT = { check_variable = { URS_rf_p_army < 100 } }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_opp_land = {
+		icon = GFX_decision_generic_colonial_administration
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = {
+			NOT = { check_variable = { URS_rf_opp_land_lock > 0 } }
+			check_variable = { URS_rf_p_people < 100 }
+		}
+
+		cost = 0
+		days_remove = 35
+		days_re_enable = 0
+
+		remove_effect = { URS_rf_cycle_land = yes }
+		cancel_effect = { URS_rf_cycle_land = yes }
+
+		cancel_trigger = {
+			NOT = { check_variable = { URS_rf_p_people < 100 } }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	URS_rf_opp_bur = {
+		icon = GFX_decision_generic_industry
+
+		visible = { has_country_flag = URS_dr_reform_open }
+		available = {
+			NOT = { check_variable = { URS_rf_opp_bur_lock > 0 } }
+			check_variable = { URS_rf_p_resource < 100 }
+		}
+
+		cost = 0
+		days_remove = 35
+		days_re_enable = 0
+
+		remove_effect = { URS_rf_cycle_bur = yes }
+		cancel_effect = { URS_rf_cycle_bur = yes }
+
+		cancel_trigger = {
+			NOT = { check_variable = { URS_rf_p_resource < 100 } }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+}

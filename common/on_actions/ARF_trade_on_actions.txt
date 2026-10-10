@@ -1,0 +1,30 @@
+# ============================================================================
+# 本文件由 docs/gen_arf_trade.py 生成，手改会被覆盖。
+# ============================================================================
+# 国际贸易 · 钩子
+# ⚠️ on_startup 默认作用域是 none（不是每国各一次）→ 必须自己 every_country。
+# ⚠️ on_monthly 是「每国各触发一次」→ 靠 ARF_Trade_Gate 的日闸门保证全局只结算一趟。
+# ⚠️ 同名 on_action 跨文件是**合并**，这里只追加，不影响别处已有的 on_monthly / on_startup。
+
+on_actions = {
+
+	on_startup = {
+		effect = {
+			every_country = {
+				limit = { exists = yes }
+				ARF_Trade_Init = yes
+			}
+			every_country = {
+				limit = { exists = yes }
+				ARF_Trade_Cold_Start = yes
+			}
+		}
+	}
+
+	on_monthly = {
+		effect = {
+			ARF_Trade_Gate = yes
+		}
+	}
+
+}

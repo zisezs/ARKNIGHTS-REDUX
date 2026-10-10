@@ -1,0 +1,33 @@
+# ============================================================================
+# 乌萨斯帝国 ·「费奥多尔初步改革」小游戏 —— 周期节拍
+# ============================================================================
+#
+# on_weekly_URS 是引擎原生支持的按国家钩子（这个模组里 on_weekly_SRC /
+# on_weekly_UFE / on_weekly_URS 已有先例），作用域就是该国，不需要再套
+# every_country —— 套了会把次数乘上场上国家数。
+#
+# 闸门：只有开了小游戏（URS_dr_reform_open，由国策「问题之源」置位）才跑。
+# ============================================================================
+on_actions = {
+
+	# 每周：四条改革线按各自的效率往前推一格
+	on_weekly_URS = {
+		effect = {
+			if = {
+				limit = { has_country_flag = URS_dr_reform_open }
+				URS_rf_weekly = yes
+			}
+		}
+	}
+
+	# 每日：把「该出手了」的反对派计时决议重新点起来
+	# （HOI4 的计时决议不会自己重来，详见 URS_rf_opp_arm 的注释）
+	on_daily_URS = {
+		effect = {
+			if = {
+				limit = { has_country_flag = URS_dr_reform_open }
+				URS_rf_opp_arm = yes
+			}
+		}
+	}
+}

@@ -1,0 +1,77 @@
+add_namespace = test_yyz
+
+country_event = {
+	id = test_yyz.1 #幽州谋反，炎国内战
+	title = test_yyz.1.t
+	desc = test_yyz.1.d
+	picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_yyz.1.a
+		YAN = {
+			end_puppet = YYZ
+			end_puppet = HGS
+			end_puppet = TNT
+			end_puppet = ANA
+			end_puppet = DKK
+			end_puppet = MAJ
+		}
+		leave_faction = yes
+		set_cosmetic_tag = YYZ_rebellion
+		declare_war_on = {
+			target = YAN
+			type = annex_everything
+		}
+		HGS = {
+			leave_faction = yes
+		}
+		TNT = {
+			leave_faction = yes
+		}
+		ANA = {
+			leave_faction = yes
+		}
+		DKK = {
+			leave_faction = yes
+		}
+		MAJ = {
+			leave_faction = yes
+		}
+		NHS = {
+			country_event = {
+				id = test_nhs.2
+				days = 15
+			}
+		}
+		HAP = {
+			country_event = {
+				id = test_hap.1
+				days = 15
+			}
+		}
+		ANA = {
+			country_event = {
+				id = test_ana.1
+				days = 15
+			}
+		}
+		YAB = {
+			if = {
+				limit = {
+					has_country_flag = YAB_rebellion
+				}
+				YAN = {
+					end_puppet = YAB
+				}
+				leave_faction = yes
+				set_cosmetic_tag = YAB_rebellion
+				declare_war_on = {
+					target = YAN
+					type = annex_everything
+				}
+			}
+		}
+	}
+}

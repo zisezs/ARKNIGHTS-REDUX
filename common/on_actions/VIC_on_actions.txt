@@ -1,0 +1,69 @@
+on_actions = {
+    on_annex = {
+		effect = {
+			if = {
+				limit = {
+					FROM = {
+						victoria_unifier = yes
+					}
+					NOT = {
+						has_global_flag = VIC_civil_war_end
+					}
+				}
+				set_global_flag = VIC_one_duke_left
+			}
+			if = {
+				limit = {
+					FROM = {
+						OR = {
+							victoria_unifier = yes
+							victoria_dukes_puppets = yes
+						}
+					}
+				}
+				FROM = {
+					every_core_state = {
+						add_resistance_target = {
+							amount = -30
+							occupied = FROM
+							tooltip = VIC_defeated_force_tt
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						original_tag = VCA
+						has_character = VIC_Alexandrina_Vina_Victoria
+					}
+					country_exists = VWI
+					VWI = {
+						NOT = {
+							has_completed_focus = VWI_we_will_meet_again
+						}
+					}
+				}
+				VCA = {	
+					VIC_Alexandrina_Vina_Victoria = {
+						set_nationality = VWI
+					}
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						original_tag = VWI
+						has_character = VIC_Alexandrina_Vina_Victoria
+					}
+					country_exists = VCA
+				}
+				VWI = {	
+					VIC_Alexandrina_Vina_Victoria = {
+						set_nationality = VCA
+					}
+				}
+			}
+		}
+	}
+}

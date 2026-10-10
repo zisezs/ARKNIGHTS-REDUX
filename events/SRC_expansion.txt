@@ -1,0 +1,56 @@
+# ============================================================================
+# 叙拉古 (SRC) · 对外扩张「七丘的狼崽子们」—— 事件
+# ⚠ country_event 一律不写 major = yes（major 会把事件发给所有大国、选项在各自
+#   作用域执行，见 [[hoi4-major-event-scope-leak]]）；只有 news_event 才带 major。
+#
+# 本树只有一处需要事件：莱塔尼亚被打到抵抗不足两成时的收网。
+#   判定在 common/on_actions/SRC_exp_on_actions.txt 的 on_monthly_SRC 里，
+#   附庸与停战由 SRC_exp_ltan_kneel_effect 当场执行，这里只负责报信与给玩家奖励
+#   ——效果和演出分开，事件被玩家关掉/队列满也不会让机制卡住。
+# ============================================================================
+add_namespace = src_exp
+add_namespace = src_exp_news
+
+# ── 选帝侯的臣服：莱塔尼亚的抵抗垮了 ──
+country_event = {
+	id = src_exp.1
+	title = src_exp.1.t
+	desc = src_exp.1.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_exp.1.a
+		add_political_power = 50
+		add_war_support = 0.05
+		custom_effect_tooltip = SRC_exp_tt_ltan_vassal_done
+		hidden_effect = {
+			news_event = { id = src_exp_news.1 hours = 6 }
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# ── 新闻：金律的换主人 ──
+news_event = {
+	id = src_exp_news.1
+	title = src_exp_news.1.t
+	desc = src_exp_news.1.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = src_exp_news.1.a
+		trigger = {
+			original_tag = SRC
+		}
+	}
+	option = {
+		name = src_exp_news.1.b
+	}
+}

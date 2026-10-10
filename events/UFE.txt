@@ -1,0 +1,3385 @@
+add_namespace = UFE_special_events
+add_namespace = UFE_news_events
+
+################
+################
+###			 ###
+###	实效事件 ###
+###			 ###
+################
+################
+
+#格伦沃夫准备金盆洗手
+country_event = {
+	id = UFE_special_events.1
+	title = UFE_special_events.1.t
+	desc = UFE_special_events.1.desc
+
+	picture = GFX_report_event_UFE_Glenwolf
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			swap_ideas = {
+				remove_idea = UFE_stupid_leader_idea
+				add_idea = UFE_kill_leader_idea_1
+			}
+			set_country_flag = UFE_leader_try_to_run_flag
+		}
+	}
+
+	option = {
+		name = UFE_special_events.1.a
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = UFE_stupid_leader_idea
+				add_idea = UFE_kill_leader_idea_1
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = UFE_special_events.6
+				days = 215
+			}
+		}
+		custom_effect_tooltip = UFE_will_run_215_days_tt
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#格伦沃夫总督逃跑
+country_event = {
+	id = UFE_special_events.2
+	title = UFE_special_events.2.t
+	desc = UFE_special_events.2.desc
+
+	picture = GFX_report_event_UFE_Glenwolf
+	
+	is_triggered_only = yes
+
+	option = {
+		name = UFE_special_events.2.a
+		if = { 
+			limit = { has_idea = UFE_kill_leader_idea_1 }
+			remove_ideas = UFE_kill_leader_idea_1
+		}
+		if = { 
+			limit = { has_idea = UFE_kill_leader_idea_2 }
+			remove_ideas = UFE_kill_leader_idea_2
+		}
+		if = { 
+			limit = { has_idea = UFE_kill_leader_idea_3 }
+			remove_ideas = UFE_kill_leader_idea_3
+		}
+		hidden_effect = {
+			UFE_despotism_leader = {
+				retire = yes
+			}
+		}
+		effect_tooltip = {
+			add_country_leader_role = {
+				character = UFE_authoritarianism_leader
+				promote_leader = yes
+				country_leader = {
+					ideology = authoritarian_democracy_subtype
+					traits={ UFE_authoritarianism_leader_trait }
+					expire = "2950.1.1.1"
+					desc = UFE_authoritarianism_leader_desc
+					id = -1
+				}
+			}
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = UFE_despotism_party_new_long
+			name = UFE_despotism_party_new
+		}
+		set_politics = { 
+			ruling_party = authoritarianism
+			election_frequency = 48
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = authoritarianism
+			popularity = 0.4
+		}
+		hidden_effect = {
+			activate_advisor = UFE_field_marshal_second_in_command
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_field_marshal_second_in_command
+		hidden_effect = {
+			country_event = {
+				id = UFE_special_events.5
+				days = 7
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#格伦沃夫遇刺身亡
+country_event = {
+	id = UFE_special_events.3
+	title = UFE_special_events.3.t
+	desc = UFE_special_events.3.desc
+
+	picture = GFX_report_event_UFE_Glenwolf
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = UFE_leader_dead_flag
+	}
+
+	option = {
+		name = UFE_special_events.3.a
+		if = { 
+			limit = { has_idea = UFE_kill_leader_idea_1 }
+			remove_ideas = UFE_kill_leader_idea_1
+		}
+		if = { 
+			limit = { has_idea = UFE_kill_leader_idea_2 }
+			remove_ideas = UFE_kill_leader_idea_2
+		}
+		if = { 
+			limit = { has_idea = UFE_kill_leader_idea_3 }
+			remove_ideas = UFE_kill_leader_idea_3
+		}
+		UFE_despotism_leader = {
+			retire = yes
+		}
+		effect_tooltip = {
+			add_country_leader_role = {
+				character = UFE_authoritarianism_leader
+				promote_leader = yes
+				country_leader = {
+					ideology = authoritarian_democracy_subtype
+					traits={ UFE_authoritarianism_leader_trait }
+					expire = "2950.1.1.1"
+					desc = UFE_authoritarianism_leader_desc
+					id = -1
+				}
+			}
+		}
+		set_party_name = {
+			ideology = despotism
+			long_name = UFE_despotism_party_new_long
+			name = UFE_despotism_party_new
+		}
+		set_politics = { 
+			ruling_party = authoritarianism
+			election_frequency = 48
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = authoritarianism
+			popularity = 0.7
+		}
+		hidden_effect = {
+			activate_advisor = UFE_field_marshal_second_in_command
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_field_marshal_second_in_command
+		if = { #财政危机
+			limit = {
+				has_country_flag = {
+					flag = UFE_leader_try_to_run_flag
+					days > 215
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = UFE_special_events.5
+					days = 7
+				}
+			}
+		}
+		else_if = { #没有遗产
+			limit = {
+				has_country_flag = {
+					flag = UFE_leader_try_to_run_flag
+					days > 165
+				}
+			}
+		}
+		else_if = { #少量遗产
+			limit = {
+				has_country_flag = {
+					flag = UFE_leader_try_to_run_flag
+					days > 115
+				}
+			}
+			set_country_flag = small_amount_flag
+			hidden_effect = {
+				country_event = {
+					id = UFE_special_events.4
+					days = 7
+				}
+			}
+		}
+		else_if = { #中等遗产
+			limit = {
+				has_country_flag = {
+					flag = UFE_leader_try_to_run_flag
+					days > 56
+				}
+			}
+			set_country_flag = medium_amount_flag
+			hidden_effect = {
+				country_event = {
+					id = UFE_special_events.4
+					days = 7
+				}
+			}
+		}
+		else = { #大量遗产
+			set_country_flag = huge_amount_flag
+			hidden_effect = {
+				country_event = {
+					id = UFE_special_events.4
+					days = 7
+				}
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#格伦沃夫的遗留财产
+country_event = {
+	id = UFE_special_events.4
+	title = UFE_special_events.4.t
+	desc = UFE_special_events.4.desc
+
+	picture = GFX_report_event_UFE_Glenwolf
+	
+	is_triggered_only = yes
+
+	option = {
+		name = UFE_special_events.4.a
+		if = { #少量遗产
+			limit = {
+				has_country_flag = small_amount_flag
+			}
+			add_timed_idea = {
+				idea = UFE_consumer_goods_factor_idea
+				days = 180
+			}
+		}
+		else_if = { #中等遗产
+			limit = {
+				has_country_flag = medium_amount_flag
+			}
+			add_timed_idea = {
+				idea = UFE_consumer_goods_factor_idea
+				days = 272
+			}
+		}
+		else_if = { #大量遗产
+			limit = {
+				has_country_flag = huge_amount_flag
+			}
+			add_timed_idea = {
+				idea = UFE_consumer_goods_factor_idea
+				days = 365
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#格伦沃夫造成的财政危机
+country_event = {
+	id = UFE_special_events.5
+	title = UFE_special_events.5.t
+	desc = UFE_special_events.5.desc
+
+	picture = GFX_report_event_Generic_Letter
+	
+	is_triggered_only = yes
+
+	option = {
+		name = UFE_special_events.5.a
+		add_ideas = UFE_consumer_goods_debuff_idea
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#格伦沃夫逃跑触发器
+country_event = {
+	id = UFE_special_events.6
+
+	picture = GFX_report_event_UFE_Glenwolf
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { NOT = { has_country_flag = UFE_leader_dead_flag } }
+			country_event = {
+				id = UFE_special_events.2
+			}
+		}
+	}
+}
+#额外添加
+####补充事件：政治合作选择领导人
+#革命民主派执政
+country_event = {
+	id = UFE_special_events.add
+	title = UFE_special_events.add.t
+	desc = UFE_special_events.add.desc
+
+	picture = GFX_report_event_UFE_Establish_democratic_government
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#必须由切尔尼雪夫斯基来领导！
+	option = {
+		name = UFE_special_events.add.a
+		effect_tooltip = {
+			add_country_leader_role = {
+				character = UFE_liberalism_leader
+				promote_leader = yes
+				country_leader = {
+					ideology = progressive_liberalism_subtype
+					traits={ UFE_liberalism_leader_traits }
+					expire = "2950.1.1.1"
+					id = -1
+				}
+			}
+		}
+		set_politics = { 
+			ruling_party = liberalism
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		hidden_effect = {
+			activate_advisor = UFE_liberalism_second_later
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_liberalism_second_later
+		ai_chance = {
+			base = 0
+		}
+	}
+	#我们要给年轻革命者历练的机会！
+	option = {
+		name = UFE_special_events.add.b
+		add_country_leader_role = {
+			character = UFE_liberalism_third_in_command
+			promote_leader = yes
+			country_leader = {
+				ideology = progressive_liberalism_subtype
+				traits={ UFE_liberalism_third_in_command_trait }
+				desc = "UFE_liberalism_third_in_command_desc"
+				expire = "2950.1.1.1"
+				id = -1
+			}
+		}
+		set_politics = { 
+			ruling_party = liberalism
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		set_country_flag = new_revolution_leader_flag
+		hidden_effect = {
+			activate_advisor = UFE_liberalism_second_later
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_liberalism_second_later
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+#远东和统（询问）
+country_event = {
+	id = UFE_special_events.7
+	title = UFE_special_events.7.t
+	desc = UFE_special_events.7.desc
+
+	picture = GFX_report_event_Generic_Letter
+	
+	is_triggered_only = yes
+	
+	#同意
+	option = {
+		name = UFE_special_events.7.a
+		custom_effect_tooltip = It_means_game_over_tt
+		FROM = {
+			country_event = {
+				id = UFE_special_events.9
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0
+				FROM = {
+					is_ai = yes
+				}
+				has_game_rule = {
+					rule = REU_and_UFE_ai_behavior
+					option = They_WAR
+				}
+			}
+		}
+	}
+	#拒绝
+	option = {
+		name = UFE_special_events.7.b
+		custom_effect_tooltip = It_must_cause_war_tt
+		FROM = {
+			country_event = {
+				id = UFE_special_events.8
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 10
+				FROM = {
+					is_ai = yes
+				}
+				OR = {
+					has_game_rule = {
+						rule = REU_and_UFE_ai_behavior
+						option = They_WAR
+					}
+					has_game_rule = {
+						rule = REU_and_UFE_ai_behavior
+						option = RANDOM
+					}
+				}
+			}
+		}
+	}
+}
+#远东和统（拒绝的答复）
+country_event = {
+	id = UFE_special_events.8
+	title = UFE_special_events.8.t
+	desc = UFE_special_events.8.desc
+
+	picture = GFX_report_event_Generic_Letter
+	
+	is_triggered_only = yes
+
+	option = {
+		name = UFE_special_events.8.a
+		declare_war_on = { target = FROM type = annex_everything }
+		hidden_effect = {
+			news_event = {
+				id = UFE_news_events.4
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#远东和统（同意的答复）
+country_event = {
+	id = UFE_special_events.9
+	title = UFE_special_events.9.t
+	desc = UFE_special_events.9.desc
+
+	picture = GFX_report_event_Generic_Letter
+	
+	is_triggered_only = yes
+
+	option = {
+		name = UFE_special_events.9.a
+		FROM = {
+			#卡兹戴尔红军离开
+			if = {
+				limit = { original_tag = REU }
+				custom_effect_tooltip = reu_ufe_annex_event_1_tt
+				REU_Conrad_Knecht = {
+					set_nationality = KAC
+				}
+				REU_Gergo_Franz = {
+					set_nationality = KAC
+				}
+				REU_Millanden_Engler = {
+					set_nationality = KAC
+				}
+				REU_Rod_Bertharin = {
+					set_nationality = KAC
+				}
+				REU_Ezemara_Umak = {
+					set_nationality = KAC
+				}
+				REU_Bal_Kailin = {
+					set_nationality = KAC
+				}
+			}
+			#右派分子离开
+			if = {
+				limit = { original_tag = UFE }
+				custom_effect_tooltip = reu_ufe_annex_event_2_tt
+				UFE_despotism_leader_tool = {
+					retire = yes
+				}
+				UFE_liberalism_advisor_2 = {
+					retire = yes
+				}
+				UFE_liberalism_advisor_3 = {
+					retire = yes
+				}
+				UFE_liberalism_advisor_6 = {
+					retire = yes
+				}
+				UFE_liberalism_advisor_7 = {
+					retire = yes
+				}
+				UFE_liberalism_advisor_8 = {
+					retire = yes
+				}
+				UFE_liberalism_theorist_1 = {
+					retire = yes
+				}
+				UFE_field_marshal_1 = {
+					retire = yes
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = reu_ufe_annex_event_3_tt
+			hidden_effect = {
+				every_character = {
+					set_nationality = ROOT
+					if = {
+						limit = { ROOT = { tag = UFE } }
+						set_character_flag = UFE_communism_character_flag
+					}
+				}
+			}
+		}
+		ROOT = {
+			#远东政治变化
+			if = {
+				limit = {
+					FROM = { tag = REU }
+					ROOT = { tag = UFE } 
+				}
+				set_country_flag = UFE_annex_REU_flag
+				REU_Alina = {
+					remove_advisor_role = {
+						slot = second_in_command
+					}
+				}
+				promote_character = {
+					character = REU_Talulah
+					ideology = bolshevism_subtype
+				}
+				#整合运动将领不会获得科雷马专属地形特质
+				every_character = {
+					limit = {
+						has_character_flag = UFE_communism_character_flag
+						has_trait = URS_terrain_penalty_reduction_trait
+					}
+					remove_unit_leader_trait = URS_terrain_penalty_reduction_trait
+				}
+			}
+			#整合政治变化
+			if = {
+				limit = {
+					FROM = { tag = UFE }
+					ROOT = { tag = REU } 
+				}
+				set_country_flag = UFE_annex_REU_flag
+				#切尔尼雪夫斯基领导自由主义
+				promote_character = {
+					character = UFE_liberalism_leader
+					ideology = progressive_liberalism_subtype
+				}
+				hidden_effect = {
+					FROM = {
+						set_division_template_lock = {
+							division_template = "自卫猎兵"
+							is_locked = no
+						}
+					}
+				}
+			}
+			annex_country = { target = FROM transfer_troops = yes }
+			hidden_effect = {
+				news_event = {
+					id = UFE_news_events.3
+					days = 1
+				}
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#争夺领导权
+country_event = {
+	id = UFE_special_events.10
+	title = UFE_special_events.10.t
+	desc = UFE_special_events.10.desc
+
+	picture = GFX_report_event_Generic_Socialist_Poster_2
+	
+	immediate = {
+		hidden_effect = {
+			unlock_decision_category_tooltip = UFE_vs_REU_leadership_decisions_category
+			activate_mission = UFE_vs_REU_leadership_decisions_0
+			unlock_decision_tooltip = UFE_vs_REU_leadership_decisions_1
+			unlock_decision_tooltip = UFE_vs_REU_leadership_decisions_2
+			unlock_decision_tooltip = UFE_vs_REU_leadership_decisions_3
+			unlock_decision_tooltip = UFE_vs_REU_leadership_decisions_4
+			set_country_flag = start_UFE_vs_REU_leadership_flag
+		}
+	}
+	
+	is_triggered_only = yes
+	#看看谁才能主导乌萨斯的革命力量
+	option = {
+		name = UFE_special_events.10.a
+		effect_tooltip = {
+			unlock_decision_category_tooltip = UFE_vs_REU_leadership_decisions_category
+			activate_mission = UFE_vs_REU_leadership_decisions_0
+			unlock_decision_tooltip = UFE_vs_REU_leadership_decisions_1
+			unlock_decision_tooltip = UFE_vs_REU_leadership_decisions_2
+			unlock_decision_tooltip = UFE_vs_REU_leadership_decisions_3
+			unlock_decision_tooltip = UFE_vs_REU_leadership_decisions_4
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#威权保守派发动起义
+country_event = {
+	id = UFE_special_events.11
+	title = UFE_special_events.11.t
+	desc = UFE_special_events.11.desc
+
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+	
+	immediate = {
+		hidden_effect = {
+			set_country_flag = UFE_civilwar_happened_flag
+		}
+	}
+	
+	is_triggered_only = yes
+	
+	#誓死保卫革命
+	option = {
+		name = UFE_special_events.11.a
+		UFE_start_civilwar_effect = yes
+		hidden_effect = {
+			news_event = {
+				id = UFE_news_events.8
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+		trigger = {
+			NOT = { has_completed_focus = UFE_ZhenYaPinMin }
+		}
+	}
+	#为自由而战
+	option = {
+		name = UFE_special_events.11.b
+		UFE_start_civilwar_effect = yes
+		hidden_effect = {
+			news_event = {
+				id = UFE_news_events.8
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+		trigger = {
+			has_completed_focus = UFE_ZhenYaPinMin
+		}
+	}
+	#保卫我们的传统
+	option = {
+		name = UFE_special_events.11.c
+		UFE_start_civilwar_effect = yes
+		custom_effect_tooltip = UFE_special_events_11_c_tt
+		hidden_effect = {
+			random_country = {
+				limit = {
+					original_tag = UFE
+					has_war_with = ROOT
+					has_government = authoritarianism
+				}
+				THIS = { change_tag_from = ROOT }
+			}
+			news_event = {
+				id = UFE_news_events.8
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+#特鲁别茨克伊抵触军队政治化
+country_event = {
+	id = UFE_special_events.12
+	title = UFE_special_events.12.t
+	desc = UFE_special_events.12.desc
+
+	picture = GFX_report_event_UFE_Trubetskoy
+	
+	immediate = {
+		
+	}
+	
+	trigger = {
+		tag = UFE
+		has_war_with = URS
+		has_completed_focus = UFE_Dui_DiGuo_ZuoZhan
+	}
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	#他果然是个摇摆派！
+	option = {
+		name = UFE_special_events.12.a
+		add_political_power = -15
+		hidden_effect = {
+			country_event = {
+				id = UFE_special_events.13
+				days = 10
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#尼基塔·穆拉维约夫散布邦联主义言论
+country_event = {
+	id = UFE_special_events.13
+	title = UFE_special_events.13.t
+	desc = UFE_special_events.13.desc
+
+	picture = GFX_report_event_UFE_Muravyov
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#这是投机行为和分裂行为！
+	option = {
+		name = UFE_special_events.13.a
+		add_political_power = -15
+		add_war_support = -0.05
+		hidden_effect = {
+			country_event = {
+				id = UFE_special_events.14
+				days = 10
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#社会动荡加剧
+country_event = {
+	id = UFE_special_events.14
+	title = UFE_special_events.14.t
+	desc = UFE_special_events.14.desc
+	
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#共和事业面临前所未有的挑战！
+	option = {
+		name = UFE_special_events.14.a
+		set_country_flag = UFE_social_stability_flag
+		unlock_decision_category_tooltip = UFE_social_stability_decisions_category
+		activate_mission = UFE_social_stability_decisions_1
+		unlock_decision_tooltip = UFE_social_stability_decisions_2
+		unlock_decision_tooltip = UFE_social_stability_decisions_3
+		unlock_decision_tooltip = UFE_social_stability_decisions_4
+		unlock_decision_tooltip = UFE_social_stability_decisions_5
+		unlock_decision_tooltip = UFE_social_stability_decisions_6
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = UFE_army_control_modifier }
+			add_dynamic_modifier = { modifier = UFE_social_stability_modifier }
+			set_country_flag = UFE_third_stage_focus_allow_flag
+			
+			mark_focus_tree_layout_dirty = yes
+		}
+		custom_effect_tooltip = UFE_special_events_14_tt
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#救国委员会A
+country_event = {
+	id = UFE_special_events.15
+	title = UFE_special_events.15.t
+	desc = UFE_special_events.15.desc
+
+	picture = GFX_report_event_Generic_Courthouse
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#必须让卡列维奇领导我们 #自选二把手
+	option = {
+		name = UFE_special_events.15.a 
+		add_country_leader_role = {
+			character = UFE_authoritarianism_leader
+			promote_leader = yes
+			country_leader = {
+				ideology = revolutionary_democracy_subtype
+				traits={ UFE_authoritarianism_leader_trait_swap }
+				expire = "2950.1.1.1"
+				desc = UFE_kalieweiqi_liberalism_leader_desc
+				id = -1
+			}
+		}
+		country_event = {
+			id = UFE_special_events.79
+		}
+		
+		ai_chance = {
+			base = 0
+		}
+	}
+	#卡列维奇应就任二把手，领导人另选！
+	option = {
+		name = UFE_special_events.15.b
+		hidden_effect = {
+			activate_advisor = UFE_authoritarianism_second_two
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_authoritarianism_second_two
+		custom_effect_tooltip = generic_skip_one_line_tt
+		country_event = {
+			id = UFE_special_events.78
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#救国委员会B 另选领导人
+country_event = {
+	id = UFE_special_events.78
+	title = UFE_special_events.78.t
+	desc = UFE_special_events.15.desc
+
+	picture = GFX_report_event_Generic_Courthouse
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#保持现有领导人
+	option = {
+		name = UFE_special_events.78.a
+		add_political_power = 25
+		add_stability = 0.05
+		add_war_support = 0.05
+		ai_chance = {
+			base = 10
+		}
+	}
+	#切尔尼雪夫斯基更适合领导革命！
+	option = {
+		name = UFE_special_events.78.b
+		promote_character = {
+			character = UFE_liberalism_leader
+			ideology = revolutionary_democracy_subtype
+		}
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			UFE_liberalism_leader = {
+				is_country_leader = no
+			}
+		}
+	}
+	#赫尔岑一直是我们的导师！
+	option = {
+		name = UFE_special_events.78.c
+		add_country_leader_role = {
+			character = UFE_liberalism_second_in_command
+			promote_leader = yes
+			country_leader = {
+				ideology = revolutionary_democracy_subtype
+				traits={ UFE_liberalism_second_in_command_trait }
+				desc = UFE_heercen_liberalism_leader_desc
+				expire = "2950.1.1.1"
+				id = -1
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			UFE_liberalism_second_in_command = {
+				is_country_leader = no
+			}
+		}
+	}
+	#应该支持新一代革命领导人！
+	option = {
+		name = UFE_special_events.78.d
+		add_country_leader_role = {
+			character = UFE_liberalism_third_in_command
+			promote_leader = yes
+			country_leader = {
+				ideology = revolutionary_democracy_subtype
+				traits={ UFE_liberalism_third_in_command_trait }
+				desc = UFE_liberalism_third_in_command_desc
+				expire = "2950.1.1.1"
+				id = -1
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			UFE_liberalism_third_in_command = {
+				is_country_leader = no
+			}
+		}
+	}
+}
+#救国委员会c 另选二把手
+country_event = {
+	id = UFE_special_events.79
+	title = UFE_special_events.79.t
+	desc = UFE_special_events.15.desc
+
+	picture = GFX_report_event_Generic_Courthouse
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#保持现有二把手
+	option = {
+		name = UFE_special_events.79.a
+		add_political_power = 25
+		add_stability = 0.05
+		add_war_support = 0.05
+		ai_chance = {
+			base = 10
+		}
+	}
+	#切尔尼雪夫斯基的政治才能非常突出！
+	option = {
+		name = UFE_special_events.79.b
+		hidden_effect = {
+			activate_advisor = UFE_liberalism_second_early
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_liberalism_second_early
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			NOT = { has_idea = UFE_liberalism_second_early }
+		}
+	}
+	#赫尔岑可以作为精神领袖！
+	option = {
+		name = UFE_special_events.79.c
+		hidden_effect = {
+			activate_advisor = UFE_liberalism_second_later
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_liberalism_second_later
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			NOT = { has_idea = UFE_liberalism_second_later }
+		}
+	}
+	#应该支持新一代革命领导人！
+	option = {
+		name = UFE_special_events.79.d
+		hidden_effect = {
+			activate_advisor = UFE_liberalism_third_in_command_idea
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_liberalism_third_in_command_idea
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			NOT = { has_idea = UFE_liberalism_third_in_command_idea }
+		}
+	}
+}
+#恐怖政策已持续太久
+country_event = {
+	id = UFE_special_events.16
+	title = UFE_special_events.16.t
+	desc = UFE_special_events.16.desc
+
+	picture = GFX_report_event_Generic_Roit_News
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#这不是好消息。
+	option = {
+		name = UFE_special_events.16.a
+		set_variable = { add_stability_var_effect_true_or_false = 1 }
+		custom_effect_tooltip = UFE_special_events_16_tt
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#军队独立倾向扩大
+country_event = {
+	id = UFE_special_events.17
+	title = UFE_special_events.17.t
+	desc = UFE_special_events.17.desc
+
+	picture = GFX_report_event_Generic_Barracks
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#他们有些妄尊自大了。
+	option = {
+		name = UFE_special_events.17.a
+		custom_effect_tooltip = UFE_special_events_17_tt
+		add_to_variable = { UFE_army_control_decision_var = -10 }
+		UFE_clampcheck_stability_add_army_control = yes
+		#提前展示
+		effect_tooltip = {
+			if = {
+				limit = {
+					check_variable = { UFE.UFE_stability_decision_var = 40 } 
+				}
+				country_event = {
+					id = UFE_special_events.11
+				}
+			}
+		}
+		#实际触发
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { UFE.UFE_stability_decision_var < 35 } 
+				}
+				country_event = {
+					id = UFE_special_events.11
+				}
+				#set_country_flag = UFE_civilwar_happened_flag 事件添加
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#恐怖政策过久触发器
+country_event = {
+	id = UFE_special_events.18
+
+	picture = GFX_report_event_Generic_Roit_News
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { has_country_flag = UFE_social_stability_flag } 
+			country_event = {
+				id = UFE_special_events.16
+			}
+		}
+	}
+}
+#军队独立倾向扩大触发器
+country_event = {
+	id = UFE_special_events.19
+
+	picture = GFX_report_event_Generic_Barracks
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { has_country_flag = UFE_social_stability_flag }
+			country_event = {
+				id = UFE_special_events.17
+			}
+		}
+	}
+}
+#经济困境
+country_event = {
+	id = UFE_special_events.20
+	title = UFE_special_events.20.t
+	desc = UFE_special_events.20.desc
+
+	picture = GFX_report_event_Generic_Ursus_Streets
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#我们要稳住物价、打击投机倒把。
+	option = {
+		name = UFE_special_events.20.a
+		add_ideas = UFE_economic_problem_idea_1
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#革命宪法
+country_event = {
+	id = UFE_special_events.21
+	title = UFE_special_events.21.t
+	desc = UFE_special_events.21.desc
+
+	picture = GFX_report_event_Generic_Courthouse
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#革命万岁！共和国万岁！
+	option = {
+		name = UFE_special_events.21.a
+		add_stability = 0.05
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#耶里钦娜反对派
+country_event = {
+	id = UFE_special_events.22
+	title = UFE_special_events.22.t
+	desc = UFE_special_events.22.desc
+
+	picture = GFX_report_event_UFE_Yerichina
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#这是投降主义和机会主义！
+	option = {
+		name = UFE_special_events.22.a
+		add_stability = -0.05
+		add_political_power = -25
+		add_ideas = UFE_yeliqinna_idea
+		country_event = {
+			id = UFE_special_events.23
+			days = 3
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#平民派运动
+country_event = {
+	id = UFE_special_events.23
+	title = UFE_special_events.23.t
+	desc = UFE_special_events.23.desc
+	
+	picture = GFX_report_event_Generic_Socialist_Poster_2
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#我们必须处理动乱！
+	option = {
+		name = UFE_special_events.23.a
+		add_stability = -0.05
+		set_variable = { add_stability_var_effect_true_or_false = 1 }
+		custom_effect_tooltip = UFE_special_events_16_tt
+		set_country_flag = UFE_pingminpai_yundong_flag
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#共和国大选
+country_event = {
+	id = UFE_special_events.24
+	title = UFE_special_events.24.t
+	desc = UFE_special_events.24.desc
+
+	picture = GFX_report_event_Generic_Vote
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#革命领袖切尔尼雪夫斯基！
+	option = {
+		name = UFE_special_events.24.a
+		promote_character = {
+			character = UFE_liberalism_leader
+			ideology = revolutionary_democracy_subtype
+		}
+		country_event = {
+			id = UFE_special_events.25
+			days = 1
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	#德高望重的卡列维奇先生！
+	option = {
+		name = UFE_special_events.24.b
+		if = {
+			limit = {
+				UFE_authoritarianism_leader = {
+					is_country_leader = no
+				}
+			}
+			add_country_leader_role = {
+				character = UFE_authoritarianism_leader
+				promote_leader = yes
+				country_leader = {
+					ideology = revolutionary_democracy_subtype
+					traits={ UFE_authoritarianism_leader_trait_swap }
+					expire = "2950.1.1.1"
+					desc = UFE_kalieweiqi_liberalism_leader_desc
+					id = -1
+				}
+			}
+		}
+		else = {
+			promote_character = {
+				character = UFE_authoritarianism_leader
+				ideology = revolutionary_democracy_subtype
+			}
+		}
+		country_event = {
+			id = UFE_special_events.25
+			days = 1
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	#革命民主派的先驱赫尔岑！
+	option = {
+		name = UFE_special_events.24.c
+		if = {
+			limit = {
+				UFE_liberalism_second_in_command = {
+					is_country_leader = no
+				}
+			}
+			add_country_leader_role = {
+				character = UFE_liberalism_second_in_command
+				promote_leader = yes
+				country_leader = {
+					ideology = revolutionary_democracy_subtype
+					traits={ UFE_liberalism_second_in_command_trait }
+					desc = UFE_heercen_liberalism_leader_desc
+					expire = "2950.1.1.1"
+					id = -1
+				}
+			}
+		}
+		else = {
+			promote_character = {
+				character = UFE_liberalism_second_in_command
+				ideology = revolutionary_democracy_subtype
+			}
+		}
+		country_event = {
+			id = UFE_special_events.25
+			days = 1
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	#代表新一代的圣朱萨斯卡娅！
+	option = {
+		name = UFE_special_events.24.d
+		if = {
+			limit = {
+				has_country_flag = new_revolution_leader_flag
+			}
+			promote_character = {
+				character = UFE_liberalism_third_in_command
+				ideology = revolutionary_democracy_subtype
+			}
+		}
+		else = {
+			add_country_leader_role = {
+				character = UFE_liberalism_third_in_command
+				promote_leader = yes
+				country_leader = {
+					ideology = revolutionary_democracy_subtype
+					traits={ UFE_liberalism_third_in_command_trait }
+					desc = UFE_liberalism_third_in_command_desc
+					expire = "2950.1.1.1"
+					id = -1
+				}
+			}
+		}
+		country_event = {
+			id = UFE_special_events.25
+			days = 1
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#共和国大选——二把手
+country_event = {
+	id = UFE_special_events.25
+	title = UFE_special_events.25.t
+	desc = UFE_special_events.25.desc
+
+	picture = GFX_report_event_Generic_Vote
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#优秀的理论家切尔尼雪夫斯基！
+	option = {
+		name = UFE_special_events.25.a
+		hidden_effect = {
+			activate_advisor = UFE_liberalism_second_early
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_liberalism_second_early
+		trigger = {
+			UFE_liberalism_leader = {
+				is_country_leader = no
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	#在军队中威望极高的卡列维奇！
+	option = {
+		name = UFE_special_events.25.b
+		hidden_effect = {
+			activate_advisor = UFE_authoritarianism_second_two
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_authoritarianism_second_two
+		trigger = {
+			UFE_authoritarianism_leader = {
+				is_country_leader = no
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	#来自共产党的塔露拉女士！
+	option = {
+		name = UFE_special_events.25.c
+		hidden_effect = {
+			activate_advisor = REU_Talulah_second_in_command
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = REU_Talulah_second_in_command
+		trigger = {
+			has_character = REU_Talulah
+			has_completed_focus = UFE_GongChanDang
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	#革命理论家赫尔岑先生！
+	option = {
+		name = UFE_special_events.25.d
+		hidden_effect = {
+			activate_advisor = UFE_liberalism_second_later
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_liberalism_second_later
+		trigger = {
+			UFE_liberalism_second_in_command = {
+				is_country_leader = no
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	#才华横溢的圣朱萨斯卡娅女士！
+	option = {
+		name = UFE_special_events.25.e
+		hidden_effect = {
+			activate_advisor = UFE_liberalism_third_in_command_idea
+		}
+		custom_effect_tooltip = activate_second_in_command_tt
+		show_ideas_tooltip = UFE_liberalism_third_in_command_idea
+		trigger = {
+			UFE_liberalism_third_in_command = {
+				is_country_leader = no
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#奇廷卡斯克骚乱（粮食紧张和谣言四起）
+country_event = {
+	id = UFE_special_events.26
+	title = UFE_special_events.26.t
+	desc = UFE_special_events.26.desc
+
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+	
+	immediate = {
+		
+	}
+	
+	trigger = {
+		tag = UFE
+		has_country_flag = East_Ursus_Upheaval_Enabled
+	}
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	#我们必须尽快解决问题！
+	option = {
+		name = UFE_special_events.26.a
+		add_stability = -0.1
+		38 = {
+			force_enable_resistance = UFE
+			start_resistance = UFE
+			set_resistance = 55
+			set_compliance = 0
+			add_dynamic_modifier = {
+				modifier = UFE_war_state_modifier
+				scope = UFE
+			}
+		}
+		custom_effect_tooltip = UFE_special_events_26_tt
+		hidden_effect = {
+			set_country_flag = UFE_Focus_2_Enabled
+			
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+}
+#向安北提议开发荒地
+country_event = {
+	id = UFE_special_events.27
+	title = UFE_special_events.27.t
+	desc = UFE_special_events.27.desc
+
+	picture = GFX_report_event_Generic_Letter
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#真是个好主意！
+	option = {
+		name = UFE_special_events.27.a
+		UFE = {
+			country_event = {
+				id = UFE_special_events.28
+				hours = 1
+			}
+		}
+		YAB = {
+			transfer_state = 108
+			add_state_core = 108
+		}
+		UFE = {
+			transfer_state = 11
+			add_state_core = 11
+		}
+		108 = {
+			set_state_category = rural
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			hidden_effect = {
+				remove_core_of = ZZZ
+			}
+		}
+		11 = {
+			set_state_category = rural
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_resource = {
+				type = oil
+				amount = 35
+			}
+			hidden_effect = {
+				remove_core_of = ZZZ
+			}
+		}
+		effect_tooltip = {
+			UFE = {
+				give_resource_rights = { receiver = YAB state = 11 }
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	#这恐怕不合适。
+	option = {
+		name = UFE_special_events.27.b
+		UFE = {
+			country_event = {
+				id = UFE_special_events.29
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+#安北同意
+country_event = {
+	id = UFE_special_events.28
+	title = UFE_special_events.28.t
+	desc = UFE_special_events.28.desc
+
+	picture = GFX_report_event_Generic_Snowfield_Twilight
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#我们互惠共赢。
+	option = {
+		name = UFE_special_events.28.a
+		if = {
+			limit = {
+				38 = {
+					has_dynamic_modifier = {
+						modifier = UFE_war_state_modifier
+						scope = UFE
+					}
+				}
+			}
+			38 = {
+				remove_dynamic_modifier = {
+					modifier = UFE_war_state_modifier
+					scope = UFE
+				}
+			}
+		}
+		effect_tooltip = {
+			YAB = {
+				transfer_state = 108
+				add_state_core = 108
+			}
+			UFE = {
+				transfer_state = 11
+				add_state_core = 11
+			}
+			108 = {
+				set_state_category = rural
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			11 = {
+				set_state_category = rural
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_resource = {
+					type = oil
+					amount = 35
+				}
+			}
+		}
+		UFE = {
+			give_resource_rights = { receiver = YAB state = 11 }
+			hidden_effect = {
+				add_ideas = UFE_oil_for_YAB_idea
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#安北拒绝
+country_event = {
+	id = UFE_special_events.29
+	title = UFE_special_events.29.t
+	desc = UFE_special_events.29.desc
+
+	picture = GFX_report_event_Generic_Letter
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#真是可惜。
+	option = {
+		name = UFE_special_events.29.a
+		add_political_power = 35
+		add_stability = 0.05
+		add_war_support = 0.05
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#特鲁别茨克伊越狱潜逃
+country_event = {
+	id = UFE_special_events.30
+	title = UFE_special_events.30.t
+	desc = UFE_special_events.30.desc
+
+	picture = GFX_report_event_UFE_Trubetskoy
+	
+	immediate = {
+		
+	}
+	
+	is_triggered_only = yes
+	
+	#他果然是叛徒！
+	option = {
+		name = UFE_special_events.30.a
+		remove_country_leader_role = {
+			character = UFE_authoritarianism_leader
+			ideology = authoritarian_democracy_subtype
+		}
+		set_party_name = {
+			ideology = authoritarianism
+			long_name = UAE_authoritarianism_after_party_long
+			name = UAE_authoritarianism_after_party
+		}
+		add_country_leader_role = {
+			character = UFE_field_marshal_1
+			promote_leader = yes
+			country_leader = {
+				ideology = authoritarian_democracy_subtype
+				expire = "1190.1.1.1"
+				traits = { UFE_field_marshal_leader_trait }
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#切尔尼雪夫斯基指责政府
+country_event = {
+	id = UFE_special_events.31
+	title = UFE_special_events.31.t
+	desc = UFE_special_events.31.desc
+
+	picture = GFX_report_event_UFE_Chernyshevsky
+	
+	immediate = {
+		set_country_flag = UFE_special_events_31_flag
+	}
+	
+	is_triggered_only = yes
+	
+	#送他们上天堂吧……
+	option = {
+		name = UFE_special_events.31.a
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#民众闯入监狱并杀死在押政治犯
+country_event = {
+	id = UFE_special_events.32
+	title = UFE_special_events.32.t
+	desc = UFE_special_events.32.desc
+
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+	
+	is_triggered_only = yes
+	
+	#立刻调集军队镇压他们！
+	option = {
+		name = UFE_special_events.32.a
+		UFE_stability_decision_var_add_effect = yes
+		UFE_army_control_decision_var_add_effect = yes
+		ai_chance = {
+			base = 0
+		}
+	}
+	#我们睁一只眼闭一只眼。
+	option = {
+		name = UFE_special_events.32.b
+		add_political_power = -50
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#极端派地方官员制造大屠杀
+country_event = {
+	id = UFE_special_events.33
+	title = UFE_special_events.33.t
+	desc = UFE_special_events.33.desc
+
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+	
+	is_triggered_only = yes
+	
+	#多好的行动！我们正缺乏这种杀伐果决的精神！
+	option = {
+		name = UFE_special_events.33.a
+		UFE_stability_decision_var_add_effect = yes
+		UFE_army_control_decision_var_add_effect = yes
+		ai_chance = {
+			base = 0
+		}
+	}
+	#无理取闹，把他革职审查了，看看有多少冤案。
+	option = {
+		name = UFE_special_events.33.b
+		add_political_power = -50
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#民众捣毁拉特兰教堂
+country_event = {
+	id = UFE_special_events.34
+	title = UFE_special_events.34.t
+	desc = UFE_special_events.34.desc
+
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+	
+	is_triggered_only = yes
+	
+	#镇压暴民！他们违反了宗教自由原则。
+	option = {
+		name = UFE_special_events.34.a
+		UFE_stability_decision_var_add_effect = yes
+		ai_chance = {
+			base = 0
+		}
+	}
+	#有证据表明拉特兰教堂在充当外国间谍据点，砸的好！
+	option = {
+		name = UFE_special_events.34.b
+		add_political_power = -50
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#富商被民众杀害
+country_event = {
+	id = UFE_special_events.35
+	title = UFE_special_events.35.t
+	desc = UFE_special_events.35.desc
+
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+	
+	is_triggered_only = yes
+	
+	#我们不能谴责民众，给受害者发放抚恤金就行了。
+	option = {
+		name = UFE_special_events.35.a
+		add_political_power = -50
+		ai_chance = {
+			base = 0
+		}
+	}
+	#依法惩治犯罪者。
+	option = {
+		name = UFE_special_events.35.b
+		UFE_stability_decision_var_add_effect = yes
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#马尔斯校场的血案
+country_event = {
+	id = UFE_special_events.36
+	title = UFE_special_events.36.t
+	desc = UFE_special_events.36.desc
+
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+	
+	is_triggered_only = yes
+	
+	#这是我们的失误，但除了道歉我们什么也不会做。
+	option = {
+		name = UFE_special_events.36.a
+		UFE_stability_decision_var_add_effect = yes
+		UFE_army_control_decision_var_add_effect = yes
+		ai_chance = {
+			base = 0
+		}
+	}
+	#马尔斯校场的屠夫！他必须被革职判刑！
+	option = {
+		name = UFE_special_events.36.b
+		add_political_power = -50
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+#新的投诚者
+country_event = {
+	id = UFE_special_events.80
+	title = UFE_special_events.80.t
+	desc = UFE_special_events.80.desc
+
+	picture = GFX_report_event_Generic_Roit_News
+	
+	is_triggered_only = yes
+	
+	#欢迎他们的加入！
+	option = {
+		name = UFE_special_events.80.a
+		UFE_liberalism_advisor_2 = {
+			custom_effect_tooltip = it_join_us_tt
+		}
+		UFE_liberalism_advisor_6 = {
+			custom_effect_tooltip = it_join_us_tt
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+	#他们仍然是激进分子，必须消灭！
+	option = {
+		name = UFE_special_events.80.b
+		UFE_liberalism_advisor_2 = {
+			retire = yes
+		}
+		UFE_liberalism_advisor_6 = {
+			retire = yes
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+#ufe号召我国民众进行反战暴乱
+country_event = {
+	id = UFE_special_events.81
+	title = UFE_special_events.81.t
+	desc = UFE_special_events.81.desc
+
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+	
+	is_triggered_only = yes
+	
+	#这群卖国的暴民！
+	option = {
+		name = UFE_special_events.81.a
+		custom_effect_tooltip = UFE_special_events_81_tt
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+#ufe的共和主义宣传动摇人心
+country_event = {
+	id = UFE_special_events.82
+	title = UFE_special_events.82.t
+	desc = UFE_special_events.82.desc
+
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+	
+	is_triggered_only = yes
+	
+	#惑乱人心！
+	option = {
+		name = UFE_special_events.82.a
+		custom_effect_tooltip = UFE_special_events_82_tt
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+#统一的代价
+country_event = {
+	id = UFE_special_events.83
+	title = UFE_special_events.83.t
+	desc = UFE_special_events.83.desc
+
+	picture = GFX_report_event_Generic_Ursus_Duma
+	
+	immediate = {
+		
+	}
+	
+	trigger = {
+		tag = UFE
+		URS = { exists = no }
+		OR = {
+			has_completed_focus = UFE_JieShu_KongBu
+			has_completed_focus = UFE_TeWu_JiGuan
+		}
+	}
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	#我们必须重建家园！
+	option = {
+		name = UFE_special_events.83.a
+		#削弱共和国猛虎
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = UFE_tiger_country_idea_0
+				add_idea = UFE_tiger_country_idea_15
+			}
+		}
+		add_to_variable = { industrial_capacity_factory_var = -0.1 }
+		add_to_variable = { army_org_factor_var = -0.1 }
+		add_to_variable = { army_morale_factor_var = -0.1 }
+		add_to_variable = { army_attack_and_defence_factor_var = -0.1 }
+		add_to_variable = { supply_consumption_factor_var = 0.15 }
+		add_to_variable = { experience_loss_factor_var = 0.1 }
+		add_to_variable = { breakthrough_factor_var = -0.15 }
+		add_to_variable = { acclimatization_cold_climate_gain_factor_var = -0.2 }
+		add_to_variable = { army_strength_factor_var = -0.15 }
+		add_to_variable = { attrition_var = 0.15 }
+		#削弱民兵团（如果存在）
+		if = {
+			limit = {
+				has_dynamic_modifier = { modifier = UFE_minbingtuan_idea }
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = UFE_minbingtuan_idea_0
+					add_idea = UFE_minbingtuan_idea_6
+				}
+			}
+			add_to_variable = { conscription_factor_var = -0.1 }
+			add_to_variable = { out_of_supply_factor_var = 0.1 }
+			add_to_variable = { supply_node_range_var = -0.1 }
+		}
+		country_event = {
+			id = UFE_special_events.84
+			days = 1
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+#政治真空与社会割裂
+country_event = {
+	id = UFE_special_events.84
+	title = UFE_special_events.84.t
+	desc = UFE_special_events.84.desc
+
+	picture = GFX_report_event_Generic_Ursus_Duma
+	
+	is_triggered_only = yes
+	
+	#真是个大难题！
+	option = {
+		name = UFE_special_events.84.a
+		if = {
+			limit = { has_idea = UFE_democracy_idea_6 }
+			swap_ideas = {
+				remove_idea = UFE_democracy_idea_6
+				add_idea = UFE_modern_political_idea_1
+			}
+		}
+		if = {
+			limit = { has_idea = UFE_democracy_idea_7 }
+			swap_ideas = {
+				remove_idea = UFE_democracy_idea_7
+				add_idea = UFE_modern_political_idea_1
+			}
+		}
+		#政治整合
+		country_event = {
+			id = UFE_special_events.85
+			days = 1
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+#经济萧条
+country_event = {
+	id = UFE_special_events.85
+	title = UFE_special_events.85.t
+	desc = UFE_special_events.85.desc
+
+	picture = GFX_report_event_Generic_Ursus_Duma
+	
+	is_triggered_only = yes
+	
+	#民不聊生。
+	option = {
+		name = UFE_special_events.85.a
+		swap_ideas = {
+			remove_idea = UFE_modern_economy_idea_2
+			add_idea = UFE_modern_industry_idea_1
+		}
+		#信用掉两级
+		if = {
+			limit = { has_idea = UFE_new_currency_idea_7 }
+			swap_ideas = {
+				remove_idea = UFE_new_currency_idea_7
+				add_idea = UFE_new_currency_idea_5
+			}
+		}
+		else_if = {
+			limit = { has_idea = UFE_new_currency_idea_2 }
+			swap_ideas = {
+				remove_idea = UFE_new_currency_idea_2
+				add_idea = UFE_new_currency_idea_1
+			}
+		}
+		else_if = {
+			limit = { has_idea = UFE_new_currency_idea_3 }
+			swap_ideas = {
+				remove_idea = UFE_new_currency_idea_3
+				add_idea = UFE_new_currency_idea_1
+			}
+		}
+		else_if = {
+			limit = { has_idea = UFE_new_currency_idea_4 }
+			swap_ideas = {
+				remove_idea = UFE_new_currency_idea_4
+				add_idea = UFE_new_currency_idea_2
+			}
+		}
+		else_if = {
+			limit = { has_idea = UFE_new_currency_idea_5 }
+			swap_ideas = {
+				remove_idea = UFE_new_currency_idea_5
+				add_idea = UFE_new_currency_idea_3
+			}
+		}
+		else_if = {
+			limit = { has_idea = UFE_new_currency_idea_6 }
+			swap_ideas = {
+				remove_idea = UFE_new_currency_idea_6
+				add_idea = UFE_new_currency_idea_4
+			}
+		}
+		custom_effect_tooltip = UFE_UFE_new_currency_idea_sub_sub_tt
+		#经济重整
+		country_event = {
+			id = UFE_special_events.86
+			days = 1
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+#过于紧张的军备
+country_event = {
+	id = UFE_special_events.86
+	title = UFE_special_events.86.t
+	desc = UFE_special_events.86.desc
+
+	picture = GFX_report_event_Generic_Barracks
+	
+	is_triggered_only = yes
+	
+	#我们要减少投入军队的资源。
+	option = {
+		name = UFE_special_events.86.a
+		#随机解散一个集团军（24个师）
+		custom_effect_tooltip = destroy_48_unit_tt
+		custom_effect_tooltip = generic_skip_one_line_tt
+		hidden_effect = {
+			set_temp_variable = { temp_targets_index = 0 }
+			while_loop_effect = {
+				limit = {
+					check_variable = { temp_targets_index = 48 compare = less_than }
+				}
+				hidden_effect = {
+					random_country_division = {
+						destroy_unit = yes
+						add_to_temp_variable = { UFE.temp_targets_index = 1 }
+					}
+				}
+			}
+		}
+		#军事重整
+		swap_ideas = {
+			remove_idea = UFE_anti_armor_idea
+			add_idea = UFE_modern_army_idea_1
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+#红军流亡
+country_event = {
+	id = UFE_special_events.87
+	title = UFE_special_events.87.t
+	desc = UFE_special_events.87.desc
+
+	picture = GFX_report_event_Generic_Barracks
+	
+	is_triggered_only = yes
+	
+	#欢迎回家！
+	option = {
+		name = UFE_special_events.87.a
+		UFE = {
+			every_character = {
+				limit = { has_character_flag = UFE_communism_character_flag }
+				set_nationality = KAC						
+			}
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+################
+################
+###			 ###
+###	剧情事件 ###
+###			 ###
+################
+################
+
+#最后一桶金
+country_event = {
+	id = UFE_special_events.37
+	title = UFE_special_events.37.t
+	desc = UFE_special_events.37.desc
+
+	picture = GFX_report_event_UFE_Glenwolf
+	
+	is_triggered_only = yes
+	
+	#唉，我们何日才能摆脱这个瘟神？
+	option = {
+		name = UFE_special_events.37.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#引导原住民刺杀
+country_event = {
+	id = UFE_special_events.38
+	title = UFE_special_events.38.t
+	desc = UFE_special_events.38.desc
+
+	picture = GFX_report_event_Generic_Snow_Village_1
+	
+	is_triggered_only = yes
+	
+	#他早已在心里扣下了扳机。
+	option = {
+		name = UFE_special_events.38.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#格伦沃夫的头颅
+country_event = {
+	id = UFE_special_events.39
+	title = UFE_special_events.39.t
+	desc = UFE_special_events.39.desc
+
+	picture = GFX_report_event_UFE_Glenwolf
+	
+	is_triggered_only = yes
+	
+	#格伦沃夫的惨死让民众欢呼雀跃……
+	option = {
+		name = UFE_special_events.39.a
+		ai_chance = {
+			base = 1
+		}
+	}
+	#……他的头颅也令土匪和奸商心惊胆战。
+	option = {
+		name = UFE_special_events.39.b
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#财政问题
+country_event = {
+	id = UFE_special_events.40
+	title = UFE_special_events.40.t
+	desc = UFE_special_events.40.desc
+
+	picture = GFX_report_event_Generic_Courthouse
+	
+	is_triggered_only = yes
+	
+	#得注意平衡，要加快政治改革了……
+	option = {
+		name = UFE_special_events.40.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#解开革命的枷锁
+country_event = {
+	id = UFE_special_events.41
+	title = UFE_special_events.41.t
+	desc = UFE_special_events.41.desc
+
+	picture = GFX_report_event_UFE_Chernyshevsky
+	
+	is_triggered_only = yes
+	
+	#奔赴命中注定的使命吧！
+	option = {
+		name = UFE_special_events.41.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#与原住民和解
+country_event = {
+	id = UFE_special_events.42
+	title = UFE_special_events.42.t
+	desc = UFE_special_events.42.desc
+
+	picture = GFX_report_event_Generic_Cold_Forest
+	
+	is_triggered_only = yes
+	
+	#当政府改邪归正，他愿意再次为其效劳。
+	option = {
+		name = UFE_special_events.42.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#扩建奇廷卡斯克大学
+country_event = {
+	id = UFE_special_events.43
+	title = UFE_special_events.43.t
+	desc = UFE_special_events.43.desc
+
+	picture = GFX_report_event_Generic_Books
+	
+	is_triggered_only = yes
+	
+	#是的，这完全必要。
+	option = {
+		name = UFE_special_events.43.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#军事政治顾问
+country_event = {
+	id = UFE_special_events.44
+	title = UFE_special_events.44.t
+	desc = UFE_special_events.44.desc
+
+	picture = GFX_report_event_Generic_Barracks
+	
+	is_triggered_only = yes
+	
+	#远东民风如此。
+	option = {
+		name = UFE_special_events.44.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#越来越安稳
+country_event = {
+	id = UFE_special_events.45
+	title = UFE_special_events.45.t
+	desc = UFE_special_events.45.desc
+	
+	picture = GFX_report_event_Generic_Tundra_1
+	
+	is_triggered_only = yes
+	
+	#“哎哟！哎哟！吓死我了！”
+	option = {
+		name = UFE_special_events.45.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#信贷储蓄社
+country_event = {
+	id = UFE_special_events.46
+	title = UFE_special_events.46.t
+	desc = UFE_special_events.46.desc
+
+	picture = GFX_report_event_Generic_Tundra_1
+	
+	is_triggered_only = yes
+	
+	#真解气哈。
+	option = {
+		name = UFE_special_events.46.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#土地改革
+country_event = {
+	id = UFE_special_events.47
+	title = UFE_special_events.47.t
+	desc = UFE_special_events.47.desc
+
+	picture = GFX_report_event_Generic_Snow_Village_1
+	
+	is_triggered_only = yes
+	
+	#而前方就是天空。
+	option = {
+		name = UFE_special_events.47.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#本地的优秀军官
+country_event = {
+	id = UFE_special_events.48
+	title = UFE_special_events.48.t
+	desc = UFE_special_events.48.desc
+
+	picture = GFX_report_event_Generic_Barracks
+	
+	is_triggered_only = yes
+	
+	#让他们站上更高的平台吧！
+	option = {
+		name = UFE_special_events.48.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#亡命者的末日
+country_event = {
+	id = UFE_special_events.49
+	title = UFE_special_events.49.t
+	desc = UFE_special_events.49.desc
+
+	picture = GFX_report_event_Generic_Tundra_2
+	
+	is_triggered_only = yes
+	
+	#结束了。
+	option = {
+		name = UFE_special_events.49.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#不远万里
+country_event = {
+	id = UFE_special_events.50
+	title = UFE_special_events.50.t
+	desc = UFE_special_events.50.desc
+
+	picture = GFX_report_event_Generic_Books
+	
+	is_triggered_only = yes
+	
+	#“同学们，我先做个自我介绍。”
+	option = {
+		name = UFE_special_events.50.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+
+#紧急征召
+country_event = {
+	id = UFE_special_events.51
+	title = UFE_special_events.51.t
+	desc = UFE_special_events.51.desc
+
+	picture = GFX_report_event_Generic_Roit_News
+	
+	is_triggered_only = yes
+	
+	#“我要把军队调入奇廷卡斯克！”
+	option = {
+		name = UFE_special_events.51.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#镇压骚乱
+country_event = {
+	id = UFE_special_events.52
+	title = UFE_special_events.52.t
+	desc = UFE_special_events.52.desc
+
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+	
+	is_triggered_only = yes
+	
+	#我们不得不这么做！
+	option = {
+		name = UFE_special_events.52.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#斩首
+country_event = {
+	id = UFE_special_events.53
+	title = UFE_special_events.53.t
+	desc = UFE_special_events.53.desc
+
+	picture = GFX_report_event_Generic_Roit_News
+	
+	is_triggered_only = yes
+	
+	#奇廷卡斯克的清晨恢复了宁静。
+	option = {
+		name = UFE_special_events.53.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#新的家园
+country_event = {
+	id = UFE_special_events.54
+	title = UFE_special_events.54.t
+	desc = UFE_special_events.54.desc
+
+	picture = GFX_report_event_Generic_Barn_And_Field
+	
+	is_triggered_only = yes
+	
+	#那是对明年的期待。
+	option = {
+		name = UFE_special_events.54.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#征兵动员
+country_event = {
+	id = UFE_special_events.55
+	title = UFE_special_events.55.t
+	desc = UFE_special_events.55.desc
+
+	picture = GFX_report_event_Generic_Socialist_Poster_2
+	
+	is_triggered_only = yes
+	
+	#人群用欢呼声回应了他的演讲。
+	option = {
+		name = UFE_special_events.55.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#革命军事学院
+country_event = {
+	id = UFE_special_events.56
+	title = UFE_special_events.56.t
+	desc = UFE_special_events.56.desc
+
+	picture = GFX_report_event_Generic_Barracks
+	
+	is_triggered_only = yes
+	
+	#我们要建立一支崭新的军队。
+	option = {
+		name = UFE_special_events.56.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#武器测试
+country_event = {
+	id = UFE_special_events.57
+	title = UFE_special_events.57.t
+	desc = UFE_special_events.57.desc
+
+	picture = GFX_report_event_Generic_Letter
+	
+	is_triggered_only = yes
+	
+	#乌萨斯帝国的走狗们会尝到它的厉害。
+	option = {
+		name = UFE_special_events.57.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#旧日遗产
+country_event = {
+	id = UFE_special_events.58
+	title = UFE_special_events.58.t
+	desc = UFE_special_events.58.desc
+
+	picture = GFX_report_event_UFE_Putina
+	
+	is_triggered_only = yes
+	
+	#希望监狱能把她盯牢了。
+	option = {
+		name = UFE_special_events.58.a
+		hidden_effect = {
+			country_event = {
+				id = UFE_special_events.60
+				days = 90
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#穆拉维约夫被捕
+country_event = {
+	id = UFE_special_events.59
+	title = UFE_special_events.59.t
+	desc = UFE_special_events.59.desc
+
+	picture = GFX_report_event_UFE_Muravyov
+	
+	is_triggered_only = yes
+	
+	#他怀念起自己南方故乡的阳光。
+	option = {
+		name = UFE_special_events.59.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#潜逃
+country_event = {
+	id = UFE_special_events.60
+	title = UFE_special_events.60.t
+	desc = UFE_special_events.60.desc
+
+	picture = GFX_report_event_UFE_Putina
+	
+	is_triggered_only = yes
+	
+	#清洗必须进一步加强了。
+	option = {
+		name = UFE_special_events.60.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#得救
+country_event = {
+	id = UFE_special_events.61
+	title = UFE_special_events.61.t
+	desc = UFE_special_events.61.desc
+
+	picture = GFX_report_event_Generic_Prison
+	
+	is_triggered_only = yes
+	
+	#救赎
+	option = {
+		name = UFE_special_events.61.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#共和国不需要学者
+country_event = {
+	id = UFE_special_events.62
+	title = UFE_special_events.62.t
+	desc = UFE_special_events.62.desc
+
+	picture = GFX_report_event_Generic_Prison
+	
+	is_triggered_only = yes
+	
+	#在篮子里滚作一处了。
+	option = {
+		name = UFE_special_events.62.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#审判
+country_event = {
+	id = UFE_special_events.63
+	title = UFE_special_events.63.t
+	desc = UFE_special_events.63.desc
+
+	picture = GFX_report_event_Generic_Prison
+	
+	is_triggered_only = yes
+	
+	#他想要站起，却发现自己腿都吓软了。
+	option = {
+		name = UFE_special_events.63.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#秋后算账
+country_event = {
+	id = UFE_special_events.64
+	title = UFE_special_events.64.t
+	desc = UFE_special_events.64.desc
+
+	picture = GFX_report_event_Generic_Prison
+	
+	is_triggered_only = yes
+	
+	#此言一出，那些讪笑者的脸都白了。
+	option = {
+		name = UFE_special_events.64.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#灭亡
+country_event = {
+	id = UFE_special_events.65
+	title = UFE_special_events.65.t
+	desc = UFE_special_events.65.desc
+
+	picture = GFX_report_event_Generic_Cold_Forest
+	
+	is_triggered_only = yes
+	
+	#这是叛徒应得的下场！
+	option = {
+		name = UFE_special_events.65.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#调遣特派员
+country_event = {
+	id = UFE_special_events.66
+	title = UFE_special_events.66.t
+	desc = UFE_special_events.66.desc
+
+	picture = GFX_report_event_Generic_Barracks
+	
+	is_triggered_only = yes
+	
+	#把革命的触角伸向各个角落！
+	option = {
+		name = UFE_special_events.66.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#限价令
+country_event = {
+	id = UFE_special_events.67
+	title = UFE_special_events.67.t
+	desc = UFE_special_events.67.desc
+
+	picture = GFX_report_event_Generic_Village_House
+	
+	is_triggered_only = yes
+	
+	#不算是坏事。
+	option = {
+		name = UFE_special_events.67.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#人民俱乐部
+country_event = {
+	id = UFE_special_events.68
+	title = UFE_special_events.68.t
+	desc = UFE_special_events.68.desc
+
+	picture = GFX_report_event_Generic_Snowfield_Twilight
+	
+	is_triggered_only = yes
+	
+	#这是以前想都不敢想的事。
+	option = {
+		name = UFE_special_events.68.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#集体创新
+country_event = {
+	id = UFE_special_events.69
+	title = UFE_special_events.69.t
+	desc = UFE_special_events.69.desc
+
+	picture = GFX_report_event_Generic_Military_Factory
+	
+	is_triggered_only = yes
+	
+	#生产任务如期完成。
+	option = {
+		name = UFE_special_events.69.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#自由放任
+country_event = {
+	id = UFE_special_events.70
+	title = UFE_special_events.70.t
+	desc = UFE_special_events.70.desc
+
+	picture = GFX_report_event_Generic_Courthouse
+	
+	is_triggered_only = yes
+	
+	#恰达耶夫是正确的。
+	option = {
+		name = UFE_special_events.70.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#军队经营产业
+country_event = {
+	id = UFE_special_events.71
+	title = UFE_special_events.71.t
+	desc = UFE_special_events.71.desc
+
+	picture = GFX_report_event_Generic_Military_Factory
+	
+	is_triggered_only = yes
+	
+	#算了，别管了。
+	option = {
+		name = UFE_special_events.71.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#白色恐怖
+country_event = {
+	id = UFE_special_events.72
+	title = UFE_special_events.72.t
+	desc = UFE_special_events.72.desc
+
+	picture = GFX_report_event_Generic_Ursus_Streets
+	
+	is_triggered_only = yes
+	
+	#“也许……新政府真能做得更好？”
+	option = {
+		name = UFE_special_events.72.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#切尔尼雪夫斯基遇刺
+country_event = {
+	id = UFE_special_events.73
+	title = UFE_special_events.73.t
+	desc = UFE_special_events.73.desc
+
+	picture = GFX_report_event_UFE_Chernyshevsky
+	
+	is_triggered_only = yes
+	
+	#说再见吧。
+	option = {
+		name = UFE_special_events.73.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#取消政委
+country_event = {
+	id = UFE_special_events.74
+	title = UFE_special_events.74.t
+	desc = UFE_special_events.74.desc
+
+	picture = GFX_report_event_Generic_Barracks
+	
+	is_triggered_only = yes
+	
+	#“我仍然是一个将军，我还有自己的职责。”
+	option = {
+		name = UFE_special_events.74.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#有限福利政策
+country_event = {
+	id = UFE_special_events.75
+	title = UFE_special_events.75.t
+	desc = UFE_special_events.75.desc
+
+	picture = GFX_report_event_Generic_House
+	
+	is_triggered_only = yes
+	
+	#不想被当作垃圾一样扔掉。
+	option = {
+		name = UFE_special_events.75.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#新货币
+country_event = {
+	id = UFE_special_events.76
+	title = UFE_special_events.76.t
+	desc = UFE_special_events.76.desc
+
+	picture = GFX_report_event_Generic_Courthouse
+	
+	is_triggered_only = yes
+	
+	#千万不要心慈手软。
+	option = {
+		name = UFE_special_events.76.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+#恐怖政策
+country_event = {
+	id = UFE_special_events.77
+	title = UFE_special_events.77.t
+	desc = UFE_special_events.77.desc
+
+	picture = GFX_report_event_REU_Gallows
+	
+	is_triggered_only = yes
+	
+	#有所思。
+	option = {
+		name = UFE_special_events.77.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+################
+################
+###			 ###
+###	国家新闻 ###
+###			 ###
+################
+################
+
+#乌萨斯远东政治犯重获自由
+news_event = {
+	id = UFE_news_events.1
+	title = UFE_news_events.1.t
+	desc = UFE_news_events.1.desc
+	picture = GFX_news_UFE_news_1
+	
+	major = yes
+	
+	is_triggered_only = yes
+	#这还不够
+	option = {
+		name = UFE_news_events.1.a
+		trigger = {
+			tag = UFE
+		}
+	}
+	#就凭他们能翻起什么浪花？
+	option = {
+		name = UFE_news_events.1.b
+		trigger = {
+			tag = URS
+		}
+	}
+	#他们能改变乌萨斯吗？
+	option = {
+		name = UFE_news_events.1.c
+		trigger = {
+			NOT = {
+				tag = UFE
+				tag = URS
+			}
+		}
+	}
+}
+#革命民主派在乌萨斯远东执政
+news_event = {
+	id = UFE_news_events.2
+	title = UFE_news_events.2.t
+	desc = UFE_news_events.2.desc
+	picture = GFX_news_UFE_news_2
+	
+	major = yes
+	
+	is_triggered_only = yes
+	#我们离目标越来越近了
+	option = {
+		name = UFE_news_events.2.a
+		trigger = {
+			tag = UFE
+		}
+	}
+	#提高警惕
+	option = {
+		name = UFE_news_events.2.b
+		trigger = {
+			tag = URS
+		}
+	}
+	#他们真敢挑战帝国吗？
+	option = {
+		name = UFE_news_events.2.c
+		trigger = {
+			NOT = {
+				tag = UFE
+				tag = URS
+			}
+		}
+	}
+}
+#REU与UFE决定合作
+news_event = {
+	id = UFE_news_events.3
+	title = UFE_news_events.3.t
+	desc = UFE_news_events.3.desc
+	picture = GFX_news_UFE_news_3
+	
+	major = yes
+	
+	is_triggered_only = yes
+	#为了新乌萨斯！
+	option = {
+		name = UFE_news_events.3.a
+		trigger = {
+			OR = {
+				tag = UFE
+				tag = REU
+			}
+		}
+	}
+	#该死的叛乱者。
+	option = {
+		name = UFE_news_events.3.b
+		trigger = {
+			tag = URS
+		}
+	}
+	#帝国即将面临风暴。
+	option = {
+		name = UFE_news_events.3.c
+		trigger = {
+			NOT = {
+				tag = UFE
+				tag = URS
+				tag = REU
+			}
+		}
+	}
+}
+#革命者的内战
+news_event = {
+	id = UFE_news_events.4
+	title = UFE_news_events.4.t
+	desc = UFE_news_events.4.desc
+	picture = GFX_news_UFE_news_4
+	
+	major = yes
+	
+	immediate = {
+		hidden_effect = {
+			REU = {
+				if = {
+					limit = { has_country_flag = we_win_leadership_flag }
+					save_event_target_as = win_leadership_target
+					UFE = { save_event_target_as = lose_leadership_target }
+					else = {
+						save_event_target_as = lose_leadership_target
+						UFE = { save_event_target_as = win_leadership_target }
+					}
+				}
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	#令人遗憾的结局。
+	option = {
+		name = UFE_news_events.4.a
+		trigger = {
+			OR = {
+				tag = UFE
+				tag = REU
+			}
+		}
+	}
+	#这帮革命者自己放着就垮了。
+	option = {
+		name = UFE_news_events.4.b
+		trigger = {
+			NOT = {
+				tag = UFE
+				tag = REU
+			}
+		}
+	}
+}
+#乌萨斯大革命战争
+news_event = {
+	id = UFE_news_events.5
+	title = UFE_news_events.5.t
+	desc = UFE_news_events.5.desc
+	picture = GFX_news_UFE_news_5
+	
+	major = yes
+	
+	is_triggered_only = yes
+	#解放全国！
+	option = {
+		name = UFE_news_events.5.a
+		trigger = {
+			tag = UFE
+		}
+	}
+	#保卫皇帝！
+	option = {
+		name = UFE_news_events.5.b
+		trigger = {
+			tag = URS
+		}
+	}
+	#乌萨斯要变天了？
+	option = {
+		name = UFE_news_events.5.c
+		trigger = {
+			NOT = {
+				tag = UFE
+				tag = URS
+			}
+		}
+	}
+}
+#UFE平民派运动遭到血腥镇压
+news_event = {
+	id = UFE_news_events.6
+	title = UFE_news_events.6.t
+	desc = UFE_news_events.6.desc
+	picture = GFX_news_UFE_news_6
+	
+	major = yes
+	
+	is_triggered_only = yes
+	#我们改变航向。
+	option = {
+		name = UFE_news_events.6.a
+		trigger = {
+			tag = UFE
+		}
+	}
+	#这帮叛军挺会内斗。
+	option = {
+		name = UFE_news_events.6.b
+		trigger = {
+			tag = URS
+		}
+	}
+	#革命者内部也在内战？
+	option = {
+		name = UFE_news_events.6.c
+		trigger = {
+			NOT = {
+				tag = UFE
+				tag = URS
+			}
+		}
+	}
+}
+#UFE成立救国委员会
+news_event = {
+	id = UFE_news_events.7
+	title = UFE_news_events.7.t
+	desc = UFE_news_events.7.desc
+	picture = GFX_news_UFE_news_7
+	
+	major = yes
+	
+	is_triggered_only = yes
+	#必要之举！
+	option = {
+		name = UFE_news_events.7.a
+		trigger = {
+			tag = UFE
+		}
+	}
+	#他们真是疯狂！
+	option = {
+		name = UFE_news_events.7.b
+		trigger = {
+			tag = URS
+		}
+	}
+	#前所未有的局面。
+	option = {
+		name = UFE_news_events.7.c
+		trigger = {
+			NOT = {
+				tag = UFE
+				tag = URS
+			}
+		}
+	}
+}
+#乌萨斯督政府叛乱
+news_event = {
+	id = UFE_news_events.8
+	title = UFE_news_events.8.t
+	desc = UFE_news_events.8.desc
+	picture = GFX_news_UFE_news_8
+	
+	major = yes
+	
+	is_triggered_only = yes
+	#镇压叛徒！
+	option = {
+		name = UFE_news_events.8.a
+		trigger = {
+			tag = UFE
+		}
+	}
+	#民主派自己放着就垮了！可笑！
+	option = {
+		name = UFE_news_events.8.b
+		trigger = {
+			tag = URS
+		}
+	}
+	#真糟糕。
+	option = {
+		name = UFE_news_events.8.c
+		trigger = {
+			NOT = {
+				tag = UFE
+				tag = URS
+				tag = UFC
+			}
+		}
+	}
+	#保卫祖国的稳定。
+	option = {
+		name = UFE_news_events.8.d
+		trigger = {
+			tag = UFC
+		}
+	}
+}
+#乌萨斯共和国稳定了下来
+news_event = {
+	id = UFE_news_events.9
+	title = UFE_news_events.9.t
+	desc = UFE_news_events.9.desc
+	picture = GFX_news_UFE_news_9
+	
+	major = yes
+	
+	is_triggered_only = yes
+	#古老帝国终归覆灭。
+	option = {
+		name = UFE_news_events.9.a
+	}
+}

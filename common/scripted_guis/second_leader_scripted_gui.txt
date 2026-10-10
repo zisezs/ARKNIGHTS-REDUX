@@ -1,0 +1,184 @@
+scripted_gui = {
+
+	second_leader = {
+		context_type = player_context
+		parent_window_token = politics_tab
+		window_name = "second_leader_gui"
+
+		ai_check = {
+			always = no
+		}
+
+		triggers = {
+			second_leader_frame_visible = {
+				has_country_flag = HOG_veiw
+			}
+			
+			second_leader_name_visible = {
+				has_country_flag = HOG_veiw
+			}
+
+			Anfilis_Windermere_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = VWI_Anfilis_Windermere_second_in_command
+				}
+			}
+
+			Delphine_Windermere_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = VWI_Delphine_Windermere_second_in_command
+				}
+			}
+
+			Victoria_Army_Headquarters_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = VWI_Victoria_Army_Headquarters_second_in_command
+				}
+			}
+
+			Mary_Caster_Victoria_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = VCA_Mary_Caster_Victoria_second_in_command
+				}
+			}
+
+			Paul_Hawker_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = VCA_Paul_Hawker_second_in_command
+				}
+			}
+			
+			Islam_Vitte_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = URS_Islam_Vitte_second_in_command
+				}
+			}
+			
+			Alina_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = REU_Alina_second_in_command
+				}
+			}
+
+			Alexander_Katopov_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = KMG_Alexander_Katopov_second_in_command
+				}
+			}
+
+			Aleksandr_Kolchak_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = NAX_Aleksandr_Kolchak_second_in_command
+				}
+			}
+			
+			#科雷马边疆区
+			#卡列维奇
+			UFE_authoritarianism_leader_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					OR = {
+						has_idea = UFE_authoritarianism_second
+						has_idea = UFE_authoritarianism_second_two
+					}
+				}
+			}
+			#切尔尼雪夫斯基
+			UFE_liberalism_second_early_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = UFE_liberalism_second_early
+				}
+			}
+			#赫尔岑
+			UFE_liberalism_second_later_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = UFE_liberalism_second_later
+				}
+			}
+			#圣朱萨斯卡娅
+			UFE_liberalism_second_third_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = UFE_liberalism_third_in_command_idea
+				}
+			}
+			#特鲁别茨克伊
+			UFE_field_marshal_1_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = UFE_field_marshal_second_in_command
+				}
+			}
+			#恰达耶夫
+			UFE_liberalism_advisor_2_second_in_command_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = UFE_liberalism_advisor_2_second_in_command
+				}
+			}
+			#普汀娜
+			UFE_liberalism_advisor_7_second_in_command_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = UFE_liberalism_advisor_7_second_in_command
+				}
+			}
+			#塔露拉
+			UFE_REU_Talulah_second_in_command_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = REU_Talulah_second_in_command
+				}
+			}
+		}
+	
+		visible = {
+			has_country_flag = second_leader_flag
+		}
+		
+		effects = {
+
+			second_leader_button_click = {
+				if = {
+					limit = {
+						has_country_flag = HOG_veiw
+					}
+					clr_country_flag = HOG_veiw
+				}
+				else = {
+					set_country_flag = HOG_veiw
+				}
+			}
+		}
+	}
+}
+
+scripted_gui = {
+	
+	diplomacy_second_leader = {
+		context_type = selected_country_context
+		parent_window_token = selected_country_view_diplomacy
+		window_name = "diplomacy_second_leader_gui"
+
+		ai_check = {
+			always = no
+		}
+
+		triggers = {
+			second_leader_button_visible = {
+				has_country_flag = second_leader_flag
+			}			
+		}
+	}
+}

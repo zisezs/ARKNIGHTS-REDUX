@@ -1,0 +1,135 @@
+# ============================================================================
+# 本文件由 docs/gen_arf_trade.py 生成，手改会被覆盖。
+# ============================================================================
+# 国际贸易 · scripted_gui
+# ⚠️ 控件名必须与 interface/_ARF_Gui/ARF_Trade.gui 完全一致。
+# 入口面板 context_type = decision_category；看板 context_type = player_context。
+# 权重 ± 按钮的 disabled 由 triggers 里同名 _enabled 决定（到 0 / 9 边界就变灰）。
+
+scripted_gui = {
+
+	# ---------------- 决议分类页入口 ----------------
+	# ⚠️ 入口按钮**不做**「已打开就变灰」：那个写法（高速战舰设计台上在用）
+	#    依赖「关窗时一定会跑关闭效果」这一假设。若 Esc 把窗口关掉而旗标没清，
+	#    按钮就永久变灰、再也点不开，且**看不到任何报错**。
+	#    入口效果本身是幂等的（重复打开只是再算一次），所以放开更安全。
+	ARF_Trade_Entry = {
+		context_type = decision_category
+		window_name = "ARF_Trade_Entry_GUI"
+
+		visible = {
+			always = yes
+		}
+
+		effects = {
+			ARF_TRD_Entry_Btn_click = {
+				ARF_Trade_Open = yes
+			}
+		}
+	}
+
+	# ---------------- 市场看板 ----------------
+	ARF_Trade_GUI = {
+		context_type = player_context
+		window_name = "ARF_Trade_Window"
+
+		visible = {
+			is_ai = no
+			has_country_flag = arf_trade_open
+		}
+
+		effects = {
+			ARF_TRD_Close_click = {
+				ARF_Trade_Close = yes
+			}
+			ARF_TRD_M_yan_click = {
+				ARF_Trade_W_Down_yan = yes
+			}
+			ARF_TRD_P_yan_click = {
+				ARF_Trade_W_Up_yan = yes
+			}
+			ARF_TRD_M_urs_click = {
+				ARF_Trade_W_Down_urs = yes
+			}
+			ARF_TRD_P_urs_click = {
+				ARF_Trade_W_Up_urs = yes
+			}
+			ARF_TRD_M_lei_click = {
+				ARF_Trade_W_Down_lei = yes
+			}
+			ARF_TRD_P_lei_click = {
+				ARF_Trade_W_Up_lei = yes
+			}
+			ARF_TRD_M_ibe_click = {
+				ARF_Trade_W_Down_ibe = yes
+			}
+			ARF_TRD_P_ibe_click = {
+				ARF_Trade_W_Up_ibe = yes
+			}
+			ARF_TRD_M_col_click = {
+				ARF_Trade_W_Down_col = yes
+			}
+			ARF_TRD_P_col_click = {
+				ARF_Trade_W_Up_col = yes
+			}
+			ARF_TRD_M_sar_click = {
+				ARF_Trade_W_Down_sar = yes
+			}
+			ARF_TRD_P_sar_click = {
+				ARF_Trade_W_Up_sar = yes
+			}
+			ARF_TRD_M_vic_click = {
+				ARF_Trade_W_Down_vic = yes
+			}
+			ARF_TRD_P_vic_click = {
+				ARF_Trade_W_Up_vic = yes
+			}
+		}
+
+		triggers = {
+			ARF_TRD_M_yan_click_enabled = {
+				check_variable = { arf_tm_w_yan > 0 }
+			}
+			ARF_TRD_P_yan_click_enabled = {
+				check_variable = { arf_tm_w_yan < 9 }
+			}
+			ARF_TRD_M_urs_click_enabled = {
+				check_variable = { arf_tm_w_urs > 0 }
+			}
+			ARF_TRD_P_urs_click_enabled = {
+				check_variable = { arf_tm_w_urs < 9 }
+			}
+			ARF_TRD_M_lei_click_enabled = {
+				check_variable = { arf_tm_w_lei > 0 }
+			}
+			ARF_TRD_P_lei_click_enabled = {
+				check_variable = { arf_tm_w_lei < 9 }
+			}
+			ARF_TRD_M_ibe_click_enabled = {
+				check_variable = { arf_tm_w_ibe > 0 }
+			}
+			ARF_TRD_P_ibe_click_enabled = {
+				check_variable = { arf_tm_w_ibe < 9 }
+			}
+			ARF_TRD_M_col_click_enabled = {
+				check_variable = { arf_tm_w_col > 0 }
+			}
+			ARF_TRD_P_col_click_enabled = {
+				check_variable = { arf_tm_w_col < 9 }
+			}
+			ARF_TRD_M_sar_click_enabled = {
+				check_variable = { arf_tm_w_sar > 0 }
+			}
+			ARF_TRD_P_sar_click_enabled = {
+				check_variable = { arf_tm_w_sar < 9 }
+			}
+			ARF_TRD_M_vic_click_enabled = {
+				check_variable = { arf_tm_w_vic > 0 }
+			}
+			ARF_TRD_P_vic_click_enabled = {
+				check_variable = { arf_tm_w_vic < 9 }
+			}
+		}
+	}
+
+}

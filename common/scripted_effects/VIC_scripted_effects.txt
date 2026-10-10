@@ -1,0 +1,413 @@
+VIC_Victoria_parliament_Enable = {
+
+	set_country_flag = VIC_Victoria_parliament_flag
+
+	set_variable = { VIC_Gododdin_influence_num = 14 }
+	set_variable = { VIC_Wellington_influence_num = 20 }
+	set_variable = { VIC_Windermere_influence_num = 25 }
+	set_variable = { VIC_Caster_influence_num = 26 }
+	set_variable = { VIC_Ashworth_influence_num = 5 }
+	set_variable = { VIC_Abercorn_influence_num = 5 }
+	set_variable = { VIC_Fife_influence_num = 5 }
+
+	set_variable = { VIC_Gododdin_influence = 0 }
+	set_variable = { VIC_Wellington_influence = 0 }
+	set_variable = { VIC_Windermere_influence = 0 }
+	set_variable = { VIC_Caster_influence = 0 }
+	set_variable = { VIC_Ashworth_influence = 0 }
+	set_variable = { VIC_Abercorn_influence = 0 }
+	set_variable = { VIC_Fife_influence = 0 }
+
+	set_variable = { VIC_Gododdin_support = 0.316 }
+	set_variable = { VIC_Wellington_support = 0.257 }
+	set_variable = { VIC_Windermere_support = 0.612 }
+	set_variable = { VIC_Caster_support = 0.442 }
+
+	VIC_Victoria_parliament_calculation = yes
+}
+
+VIC_Victoria_parliament_calculation = {
+	set_temp_variable = { VIC_influence_num_total = VIC_Gododdin_influence_num }
+	add_to_temp_variable = { VIC_influence_num_total = VIC_Wellington_influence_num }
+	add_to_temp_variable = { VIC_influence_num_total = VIC_Windermere_influence_num }
+	add_to_temp_variable = { VIC_influence_num_total = VIC_Caster_influence_num }
+	add_to_temp_variable = { VIC_influence_num_total = VIC_Ashworth_influence_num }
+	add_to_temp_variable = { VIC_influence_num_total = VIC_Abercorn_influence_num }
+	add_to_temp_variable = { VIC_influence_num_total = VIC_Fife_influence_num }
+	set_variable = { VIC_Gododdin_influence = VIC_Gododdin_influence_num }
+	divide_variable = { VIC_Gododdin_influence = VIC_influence_num_total }
+	set_variable = { VIC_Wellington_influence = VIC_Wellington_influence_num }
+	divide_variable = { VIC_Wellington_influence = VIC_influence_num_total }
+	set_variable = { VIC_Windermere_influence = VIC_Windermere_influence_num }
+	divide_variable = { VIC_Windermere_influence = VIC_influence_num_total }
+	set_variable = { VIC_Caster_influence = VIC_Caster_influence_num }
+	divide_variable = { VIC_Caster_influence = VIC_influence_num_total }
+	set_variable = { VIC_Ashworth_influence = VIC_Ashworth_influence_num }
+	divide_variable = { VIC_Ashworth_influence = VIC_influence_num_total }
+	set_variable = { VIC_Abercorn_influence = VIC_Abercorn_influence_num }
+	divide_variable = { VIC_Abercorn_influence = VIC_influence_num_total }
+	set_variable = { VIC_Fife_influence = VIC_Fife_influence_num }
+	divide_variable = { VIC_Fife_influence = VIC_influence_num_total }
+
+	set_variable = { VIC_Gododdin_union = VIC_Gododdin_influence }
+	add_to_variable = { VIC_Gododdin_union = VIC_Ashworth_influence }
+	add_to_variable = { VIC_Gododdin_union = VIC_Abercorn_influence }
+	multiply_variable = { VIC_Gododdin_union = VIC_Gododdin_support }
+	set_variable = { VIC_Wellington_union = VIC_Wellington_influence }
+	multiply_variable = { VIC_Wellington_union = VIC_Wellington_support }
+	set_variable = { VIC_Windermere_union = VIC_Windermere_influence }
+	multiply_variable = { VIC_Windermere_union = VIC_Windermere_support }
+	set_variable = { VIC_Caster_union = VIC_Caster_influence }
+	add_to_variable = { VIC_Caster_union = VIC_Fife_influence }
+	multiply_variable = { VIC_Caster_union = VIC_Caster_support }
+
+	set_variable = { VIC_duke_union = VIC_Gododdin_union }
+	add_to_variable = { VIC_duke_union = VIC_Wellington_union }
+	add_to_variable = { VIC_duke_union = VIC_Windermere_union }
+	add_to_variable = { VIC_duke_union = VIC_Caster_union }
+}
+
+VIC_proposal_calculation = {
+	set_variable = { VIC_proposal_yes = 0 }
+
+	if = {
+		limit = {
+			has_country_flag = VIC_Gododdin_yes_flag
+		}
+		add_to_variable = { VIC_proposal_yes = VIC_Gododdin_influence }
+		add_to_variable = { VIC_proposal_yes = VIC_Ashworth_influence }
+		add_to_variable = { VIC_proposal_yes = VIC_Abercorn_influence }
+	}
+	if = {
+		limit = {
+			has_country_flag = VIC_Wellington_yes_flag
+		}
+		add_to_variable = { VIC_proposal_yes = VIC_Wellington_influence }
+	}
+	if = {
+		limit = {
+			has_country_flag = VIC_Windermere_yes_flag
+		}
+		add_to_variable = { VIC_proposal_yes = VIC_Windermere_influence }
+	}
+	if = {
+		limit = {
+			has_country_flag = VIC_Caster_yes_flag
+		}
+		add_to_variable = { VIC_proposal_yes = VIC_Caster_influence }
+		add_to_variable = { VIC_proposal_yes = VIC_Fife_influence }
+	}
+}
+
+VIC_proposal_end = {
+	clr_country_flag = VIC_Gododdin_yes_flag
+	clr_country_flag = VIC_Wellington_yes_flag
+	clr_country_flag = VIC_Windermere_yes_flag
+	clr_country_flag = VIC_Caster_yes_flag
+
+	clr_country_flag = VIC_Gododdin_no_flag
+	clr_country_flag = VIC_Wellington_no_flag
+	clr_country_flag = VIC_Windermere_no_flag
+	clr_country_flag = VIC_Caster_no_flag
+}
+
+VIC_Gododdin_support_add = {
+	custom_effect_tooltip = VIC_Gododdin_support_add_tt
+	add_to_variable = { VIC_Gododdin_support = VIC_Gododdin_support_add_var }
+	clamp_variable = {
+		var = VIC_Gododdin_support
+		min = 0
+		max = 1
+	}
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_Wellington_support_add = {
+	custom_effect_tooltip = VIC_Wellington_support_add_tt
+	add_to_variable = { VIC_Wellington_support = VIC_Wellington_support_add_var }
+	clamp_variable = {
+		var = VIC_Wellington_support
+		min = 0
+		max = 1
+	}
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_Windermere_support_add = {
+	custom_effect_tooltip = VIC_Windermere_support_add_tt
+	add_to_variable = { VIC_Windermere_support = VIC_Windermere_support_add_var }
+	clamp_variable = {
+		var = VIC_Windermere_support
+		min = 0
+		max = 1
+	}
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_Caster_support_add = {
+	custom_effect_tooltip = VIC_Caster_support_add_tt
+	add_to_variable = { VIC_Caster_support = VIC_Caster_support_add_var }
+	clamp_variable = {
+		var = VIC_Caster_support
+		min = 0
+		max = 1
+	}
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_Gododdin_influence_add = {
+	custom_effect_tooltip = VIC_Gododdin_influence_add_tt
+	add_to_variable = { VIC_Gododdin_influence_num = 1 }
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_Wellington_influence_add = {
+	custom_effect_tooltip = VIC_Wellington_influence_add_tt
+	add_to_variable = { VIC_Wellington_influence_num = 1 }
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_Windermere_influence_add = {
+	custom_effect_tooltip = VIC_Windermere_influence_add_tt
+	add_to_variable = { VIC_Windermere_influence_num = 1 }
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_Caster_influence_add = {
+	custom_effect_tooltip = VIC_Caster_influence_add_tt
+	add_to_variable = { VIC_Caster_influence_num = 1 }
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_Ashworth_influence_add = {
+	custom_effect_tooltip = VIC_Ashworth_influence_add_tt
+	add_to_variable = { VIC_Ashworth_influence_num = 1 }
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_Abercorn_influence_add = {
+	custom_effect_tooltip = VIC_Abercorn_influence_add_tt
+	add_to_variable = { VIC_Abercorn_influence_num = 1 }
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_Fife_influence_add = {
+	custom_effect_tooltip = VIC_Fife_influence_add_tt
+	add_to_variable = { VIC_Fife_influence_num = 1 }
+	VIC_Victoria_parliament_calculation = yes
+	VIC_proposal_calculation = yes
+}
+
+VIC_war_preparations_add = {
+	add_to_variable = { VIC_war_preparations = VIC_war_preparations_add_var }
+	custom_effect_tooltip = VIC_preparing_for_war_tt
+}
+
+VIC_war_preparations_modifier = {
+	add_dynamic_modifier = {
+		modifier = VIC_war_preparations_dynamic_modifier
+	}
+	set_temp_variable = { VIC_war_preparations_dynamic_var = VIC_war_preparations }
+	divide_temp_variable = { VIC_war_preparations_dynamic_var = 1000 }
+	set_variable = { VIC_war_preparations_war_support_factor_dynamic_var = VIC_war_preparations_dynamic_var }
+	set_variable = { VIC_war_preparations_army_attack_factor_dynamic_var = VIC_war_preparations_dynamic_var }
+	set_variable = { VIC_war_preparations_army_defence_factor_dynamic_var = VIC_war_preparations_dynamic_var }
+}
+
+VIC_Vina_support_add_VCA = {
+	add_to_variable = { VCA.VIC_Vina_support = VIC_Vina_support_add_var }
+	clamp_variable = {
+		var = VCA.VIC_Vina_support
+		min = 0
+		max = 1
+	}
+	custom_effect_tooltip = VIC_Vina_support_add_VCA_tt
+}
+
+VIC_Vina_support_add_VWI = {
+	add_to_variable = { VWI.VIC_Vina_support = VIC_Vina_support_add_var }
+	clamp_variable = {
+		var = VWI.VIC_Vina_support
+		min = 0
+		max = 1
+	}
+	custom_effect_tooltip = VIC_Vina_support_add_VWI_tt
+}
+
+VIC_Eartha_support_add_VCA = {
+	add_to_variable = { VCA.VIC_Eartha_support = VIC_Eartha_support_add_var }
+	clamp_variable = {
+		var = VCA.VIC_Eartha_support
+		min = 0
+		max = 1
+	}
+	custom_effect_tooltip = VIC_Eartha_support_add_VCA_tt
+}
+
+VIC_Eartha_support_add_VWI = {
+	add_to_variable = { VWI.VIC_Eartha_support = VIC_Eartha_support_add_var }
+	clamp_variable = {
+		var = VWI.VIC_Eartha_support
+		min = 0
+		max = 1
+	}
+	custom_effect_tooltip = VIC_Eartha_support_add_VWI_tt
+}
+
+VIC_Navy_support_add_VGO = {
+	add_to_variable = { VGO.VIC_Navy_support = VIC_Navy_support_add_var }
+	clamp_variable = {
+		var = VGO.VIC_Navy_support
+		min = 0
+		max = 1
+	}
+	custom_effect_tooltip = VIC_Navy_support_add_VGO_tt
+}
+
+VIC_Navy_support_add_TAR = {
+	add_to_variable = { TAR.VIC_Navy_support = VIC_Navy_support_add_var }
+	clamp_variable = {
+		var = TAR.VIC_Navy_support
+		min = 0
+		max = 1
+	}
+	custom_effect_tooltip = VIC_Navy_support_add_TAR_tt
+}
+
+VIC_Abercorn_support_add_VGO = {
+	add_to_variable = { VGO.VIC_Abercorn_support = VIC_Abercorn_support_add_var }
+	clamp_variable = {
+		var = VGO.VIC_Abercorn_support
+		min = 0
+		max = 1
+	}
+	custom_effect_tooltip = VIC_Abercorn_support_add_VGO_tt
+}
+
+VIC_Abercorn_support_add_TAR = {
+	add_to_variable = { TAR.VIC_Abercorn_support = VIC_Abercorn_support_add_var }
+	clamp_variable = {
+		var = TAR.VIC_Abercorn_support
+		min = 0
+		max = 1
+	}
+	custom_effect_tooltip = VIC_Abercorn_support_add_TAR_tt
+}
+
+VIC_civil_war_recruit_divisions = {
+	set_state_flag = VIC_civil_war_recruited_state
+
+	set_temp_variable = { spawn_units_num = state_population_k }
+	divide_temp_variable = { spawn_units_num = 1000 }
+	clamp_temp_variable = {
+		var = spawn_units_num
+		min = 1
+		max = 50
+	}
+	if = {
+		limit = { is_core_of = ROOT }
+		multiply_temp_variable = { spawn_units_num = 2 }
+	}
+	set_temp_variable = { war_preparations_bonus = 100 }
+	add_to_temp_variable = { war_preparations_bonus = VIC_war_preparations }
+	divide_temp_variable = { war_preparations_bonus = 100 }
+	multiply_temp_variable = { spawn_units_num = war_preparations_bonus }
+	round_temp_variable = spawn_units_num
+
+	if = {
+		limit = {
+			check_variable = {
+				var = spawn_units_num
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		ROOT = {
+			if = {
+				limit = {
+					NOT = { has_template = "民兵师" }
+				}
+				division_template = {
+					name = "民兵师"
+					is_locked = yes
+					division_names_group = VIC_INF_02
+					regiments = {
+						militia = { x = 0 y = 0 }
+						militia = { x = 0 y = 1 }
+						militia = { x = 1 y = 0 }
+						militia = { x = 1 y = 1 }
+					}
+				}
+			}
+		}
+		for_loop_effect = {
+			start = 1
+			end = spawn_units_num
+			compare = less_than_or_equals
+
+			create_unit = {
+				division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0 start_equipment_factor = 0.7"
+				owner = ROOT
+			}
+		}
+	}
+}
+
+TAR_independence_war_win = {
+	white_peace = TAR
+	set_country_flag = VIC_peace_with_tara
+	every_owned_state = {
+		limit = {
+			has_state_flag = Tara_state_flag
+		}
+		transfer_state_to = TAR
+		add_core_of = TAR
+		remove_core_of = PREV
+	}
+	every_subject_country = {
+		white_peace = TAR
+		set_country_flag = VIC_peace_with_tara
+		every_owned_state = {
+			limit = {
+				has_state_flag = Tara_state_flag
+			}
+			transfer_state_to = TAR
+			add_core_of = TAR
+			remove_core_of = PREV
+		}
+	}
+
+	hidden_effect = {
+		set_global_flag = show_peace_popup_alert
+
+		TAR = {
+			save_global_event_target_as = winning_country
+		}
+		ROOT = {
+			save_global_event_target_as = losing_country
+		}
+
+		if = {
+			limit = {
+				event_target:losing_country = {
+					any_allied_country = {
+						has_war_together_with = event_target:losing_country
+					}
+				}
+			}
+			set_global_flag = losing_country_multiple
+		}
+
+		set_global_flag = war_won
+	}
+}

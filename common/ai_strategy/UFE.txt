@@ -1,0 +1,565 @@
+
+UFE_unit_production = {
+	enable = {
+		tag = UFE
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = role_ratio
+		id = paratroopers
+		value = 0
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = mountaineers
+		value = 4
+	}
+	
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = -30
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = marines
+		value = 0
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = air_assault
+		value = 10
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 20
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = landship
+		value = -10
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 40
+	}
+	
+	#Air unit factors
+	ai_strategy = {
+		type = unit_ratio
+		id = light_fighter
+		value = 50
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = light_cas
+		value = 50
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = medium_tac_bomber
+		value = 10
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = strat_bomber
+		value = 5
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = medium_naval_bomber
+		value = 10
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = fighter
+		value = -40 #Just build a few slowly
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = medium_fighter
+		value = 20
+	}
+
+	# Naval unit factors
+	ai_strategy = {
+		type = unit_ratio
+		id = capital_ship
+		value = 10
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = submarine
+		value = 10
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = 40
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = convoy
+		value = 15
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = convoy
+		value = 1
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = fighter
+		value = 35
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 20
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 30
+	}
+	#民兵部队
+	ai_strategy = {
+		type = role_ratio
+		id = militia
+		value = 20
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = garrison
+		value = -5
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = suppression
+		value = -5
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = paratrooper
+		value = -50
+	}
+}
+#轻视摩托化
+UFE_unit_production = {
+	enable = {
+		tag = UFE
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = -100
+	}
+	
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = -100
+	}
+}
+#研究坦克前没有装备机械化的兴趣
+UFE_unit_production = {
+	enable = {
+		tag = UFE
+		NOT = { has_tech = medium_tank_0 }
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = template_prio
+		id = mechanized
+		value = -100
+	}
+}
+#适度增加步兵师
+UFE_donot_make_mountaineers_too_much = {
+	allowed = { tag = UFE }
+	enable = {
+		has_army_size = { type = militia size > 360 }
+	}
+
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = role_ratio
+		id = militia
+		value = -10
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 20
+	}
+}
+#保存实力
+UFE_focus_defense_when_attack_REU = {
+	allowed = {
+		original_tag = UFE
+	}
+	enable = {
+		has_war_with = REU
+	}
+	abort = {
+		OR = {
+			has_country_flag = {
+				flag = UFE_vs_REU_war_flag
+				days > 140
+			}
+			REU = { exists = no }
+		}
+	}
+	ai_strategy = {
+		type = front_control
+
+		tag = REU
+		ratio = 0.1
+
+		priority = 200
+		ordertype = front
+		execution_type = careful
+		execute_order = no
+	}
+}
+#保存实力（对帝国）
+UFE_focus_defense_when_attack_URS = {
+	allowed = {
+		original_tag = UFE
+	}
+	enable = {
+		has_war_with = URS
+	}
+	abort = {
+		has_country_flag = {
+			flag = UFE_vs_URS_war_flag
+			days > 210
+		}
+	}
+	ai_strategy = {
+		type = front_control
+
+		tag = URS
+		ratio = 0.1
+
+		priority = 200
+		ordertype = front
+		execution_type = careful
+		execute_order = no
+	}
+}
+#提前调集军队
+UFE_prepare_attack_URS = {
+	allowed = {
+		original_tag = UFE
+	}
+	enable = {
+		URS = { exists = yes }
+		REU = {
+			exists = no 
+		}
+		SKH = {
+			exists = no 
+		}
+		KMG = {
+			exists = no 
+		}
+		BAK = {
+			exists = no 
+		}
+		KRS = {
+			exists = no 
+		}
+		OMN = {
+			exists = no 
+		}
+		CYB = {
+			exists = no 
+		}
+		IST = {
+			exists = no 
+		}
+		NAX = {
+			exists = no 
+		}
+		has_completed_focus = UFE_JunShi_XueYuan
+	}
+	abort = {
+		URS = { exists = no }
+	}
+	ai_strategy = {
+		type = prepare_for_war
+		id = URS
+		value = 5
+	}
+}
+
+UFE_building_behavior_energy_early = {
+	allowed = { tag = UFE }
+	#奇廷卡斯克
+	ai_strategy = {
+		type = build_building
+		id = originium_powerplant
+		target = 38
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = new_energy_powerplant
+		target = 38
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 38
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = arms_factory
+		target = 38
+		value = 50
+	}
+	#切尔诺伯格
+	ai_strategy = {
+		type = build_building
+		id = originium_powerplant
+		target = 202
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = new_energy_powerplant
+		target = 202
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 202
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = arms_factory
+		target = 202
+		value = 50
+	}
+	#克缅哥罗德
+	ai_strategy = {
+		type = build_building
+		id = originium_powerplant
+		target = 48
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = new_energy_powerplant
+		target = 48
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 48
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = arms_factory
+		target = 48
+		value = 50
+	}
+	#萨坎哈
+	ai_strategy = {
+		type = build_building
+		id = originium_powerplant
+		target = 85
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = new_energy_powerplant
+		target = 85
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 85
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = industrial_complex
+		target = 85
+		value = 50
+	}
+}
+
+UFE_building_behavior_energy_later = {
+	allowed = { tag = UFE }
+	enable = {
+		OR = {
+			URS = { exists = no }
+			URS = { surrender_progress > 0.1 }
+		}
+	}
+	#克拉斯尼亚尔
+	ai_strategy = {
+		type = build_building
+		id = originium_powerplant
+		target = 1077
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = new_energy_powerplant
+		target = 1077
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 1077
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = industrial_complex
+		target = 1077
+		value = 50
+	}
+	#新阿列克谢耶夫斯克
+	ai_strategy = {
+		type = build_building
+		id = originium_powerplant
+		target = 139
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = new_energy_powerplant
+		target = 139
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 139
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = industrial_complex
+		target = 139
+		value = 100
+	}
+	#卡恩斯克
+	ai_strategy = {
+		type = build_building
+		id = originium_powerplant
+		target = 152
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = new_energy_powerplant
+		target = 152
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 152
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = industrial_complex
+		target = 152
+		value = 50
+	}
+	#贝加尔
+	ai_strategy = {
+		type = build_building
+		id = originium_powerplant
+		target = 790
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = new_energy_powerplant
+		target = 790
+		value = 100
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 790
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = industrial_complex
+		target = 790
+		value = 50
+	}
+	矿产资源
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 1039
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 251
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 95
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 155
+		value = 50
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 1039
+		value = 50
+	}
+}

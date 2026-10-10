@@ -1,0 +1,4323 @@
+focus_tree = {
+	id = VWI_start
+	country = {
+		factor = 0
+		modifier = {
+			add = 20
+			tag = VWI
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = VWI_the_bell_rings
+	}
+
+	#钟声响起
+	focus = {
+		id = VWI_the_bell_rings
+		icon = GFX_focus_VWI_The_bell_rings
+		cost = 1
+		x = 0
+		y = 0
+
+		completion_reward = {
+			set_power_balance = {
+				id = VWI_power_balance
+				left_side = VWI_bop_democracy_side
+				right_side = VWI_bop_royal_side
+				set_value = 0.1
+			}
+		}
+	}
+
+	#巩固前线形势
+	focus = {
+		id = VWI_consolidate_situation_front
+		icon = GFX_focus_VWI_consolidate_situation_front
+		cost = 2
+		prerequisite = {
+			focus = VWI_the_bell_rings
+		} 
+		x = -5
+		y = 1
+		relative_position_id = VWI_the_bell_rings
+
+		completion_reward = {
+			unlock_decision_category_tooltip = VIC_military_construction_decisions
+			set_country_flag = VIC_military_construction_flag
+			every_subject_country = {
+				unlock_decision_category_tooltip = VIC_military_construction_decisions
+				set_country_flag = VIC_military_construction_flag
+			}
+			unlock_decision_tooltip = VIC_attack_VRA
+			unlock_decision_tooltip = VIC_attack_VRB
+			unlock_decision_tooltip = VIC_attack_VRC
+			unlock_decision_tooltip = VIC_attack_VRD
+			set_country_flag = VIC_suppress_rebellion
+			set_variable = { VIC_war_preparations = 10 }
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_debuff_idea
+					add_idea = VWI_military_buff_idea
+				}
+			}
+			hidden_effect = {
+				remove_ideas = VWI_military_debuff_idea
+				add_to_variable = {
+					var = VWI_military_war_support_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_military_max_command_power_dynamic_var
+					value = 20
+				}
+				add_dynamic_modifier = {
+					modifier = VWI_military_buff_dynamic_modifier
+				}
+			}
+		}
+	}
+
+	#阿斯兰重现世间
+	focus = {
+		id = VWI_Aslan_reappears_world
+		icon = GFX_focus_VWI_Aslan_reappears_world
+		cost = 2
+		prerequisite = {
+			focus = VWI_the_bell_rings
+		} 
+		x = 0
+		y = 1
+		relative_position_id = VWI_the_bell_rings
+
+		completion_reward = {
+			unlock_decision_category_tooltip = VIC_divided_empire_decisions
+			set_country_flag = VIC_divided_empire_flag
+			every_subject_country = {
+				unlock_decision_category_tooltip = VIC_divided_empire_decisions
+				set_country_flag = VIC_divided_empire_flag
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_debuff_idea
+					add_idea = VWI_politics_buff_idea
+				}
+			}
+			hidden_effect = {
+				remove_ideas = VWI_politics_debuff_idea
+				add_to_variable = {
+					var = VWI_politics_political_power_gain_dynamic_var
+					value = 0.2
+				}
+				add_to_variable = {
+					var = VWI_politics_stability_factor_dynamic_var
+					value = 0.1
+				}
+				add_dynamic_modifier = {
+					modifier = VWI_politics_buff_dynamic_modifier
+				}
+			}
+		}
+	}
+
+	#稳定后方局面
+	focus = {
+		id = VWI_stabilize_situation_rear
+		icon = GFX_focus_VWI_stabilize_situation_rear
+		cost = 2
+		prerequisite = {
+			focus = VWI_the_bell_rings
+		} 
+		x = 5
+		y = 1
+		relative_position_id = VWI_the_bell_rings
+
+		completion_reward = {
+			unlock_decision_category_tooltip = VIC_economic_development_decisions
+			set_country_flag = VIC_economic_development_flag
+			every_subject_country = {
+				unlock_decision_category_tooltip = VIC_economic_development_decisions
+				set_country_flag = VIC_economic_development_flag
+			}
+			add_stability = 0.1
+			add_political_power = 100
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_debuff_idea
+					add_idea = VWI_economy_buff_idea
+				}
+			}
+			hidden_effect = {
+				remove_ideas = VWI_economy_debuff_idea
+				add_to_variable = {
+					var = VWI_economy_production_factory_start_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+				add_dynamic_modifier = {
+					modifier = VWI_economy_buff_dynamic_modifier
+				}
+			}
+
+			country_event = {
+				id = event_vwi.4
+			}
+		}
+	}
+
+	#棋盘上的小角色
+	focus = {
+		id = VWI_small_characters_chessboard
+		icon = GFX_focus_VWI_small_characters_chessboard
+		cost = 4
+		prerequisite = {
+			focus = VWI_consolidate_situation_front
+		} 
+		x = -4
+		y = 1
+		relative_position_id = VWI_consolidate_situation_front
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+
+			set_country_flag = VIC_add_group_support
+			unlock_decision_tooltip = VIC_add_Vina_support_VWI
+			unlock_decision_tooltip = VIC_minus_Vina_support_VCA
+			unlock_decision_tooltip = VIC_add_Eartha_support_VWI
+			unlock_decision_tooltip = VIC_add_Eartha_support_guns_VWI
+			unlock_decision_tooltip = VIC_minus_Eartha_support_VCA
+		}
+	}
+
+	#步兵师扩编
+	focus = {
+		id = VWI_infantry_division_expansion
+		icon = GFX_focus_VWI_infantry_division_expansion
+		cost = 5
+		prerequisite = {
+			focus = VWI_consolidate_situation_front
+		} 
+		x = -2
+		y = 1
+		relative_position_id = VWI_consolidate_situation_front
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_infantry_division_expansion_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_training_time_army_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_military_army_strength_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_military_conscription_dynamic_var
+					value = 0.005
+				}
+				add_to_variable = {
+					var = VWI_military_army_defence_factor_dynamic_var
+					value = 0.03
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			add_manpower = 20000
+			division_template = {
+				name = "地方民兵"
+				regiments = {
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+					militia = { x = 0 y = 2 }
+					
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+					militia = { x = 1 y = 2 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"地方民兵\" division_template = \"地方民兵\" start_experience_factor = 0.1 start_equipment_factor = 0.8"  
+					owner = VWI
+					count = 3
+				}
+			}
+
+			country_event = {
+				id = event_vwi.14
+			}
+		}
+	}
+
+	#炮兵集中运用
+	focus = {
+		id = VWI_concentrated_use_of_artillery
+		icon = GFX_focus_VWI_concentrated_use_of_artillery
+		cost = 6
+		prerequisite = {
+			focus = VWI_consolidate_situation_front
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_consolidate_situation_front
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_concentrated_use_of_artillery_idea
+				}
+			}
+			set_country_flag = VWI_concentrated_use_of_artillery_flag
+			army_experience = 20
+			custom_effect_tooltip = unlock_army_chief_tooltip
+			show_ideas_tooltip = VWI_Josh_Chandler_army_chief
+			show_ideas_tooltip = VWI_Harper_Caledon_army_chief
+			custom_effect_tooltip = unlock_high_command_tooltip
+			show_ideas_tooltip = VWI_Josh_Chandler_high_command
+			show_ideas_tooltip = VWI_Harper_Caledon_high_command
+			effect_tooltip = {
+				add_corps_commander_role = {
+					character = VWI_Josh_Chandler
+				}
+			}
+			effect_tooltip = {
+				add_corps_commander_role = {
+					character = VWI_Harper_Caledon
+				}
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_army_artillery_attack_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_army_army_artillery_defence_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_land_reinforce_rate_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VWI_military_coordination_bonus_dynamic_var
+					value = 0.02
+				}
+			}
+
+			country_event = {
+				id = event_vwi.12
+			}
+		}
+	}
+
+	#恢复军工企业运转
+	focus = {
+		id = VWI_restore_operation_military_industrial_complex
+		icon = GFX_focus_VWI_restore_operation_military_industrial_complex
+		cost = 5
+		prerequisite = {
+			focus = VWI_consolidate_situation_front
+		}
+		x = 2
+		y = 1
+		relative_position_id = VWI_consolidate_situation_front
+
+		completion_reward = {
+			unlock_decision_tooltip = VIC_MBT_research
+			unlock_decision_tooltip = VIC_armed_helicopter_research
+			unlock_decision_tooltip = VIC_infantry_weapons_research
+			unlock_decision_tooltip = VIC_arts_weapons_research
+			set_country_flag = VIC_weapons_research_flag
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				}
+			}
+		}
+	}
+
+	#与罗德岛保持距离
+	focus = {
+		id = VWI_keep_distance_Rhode_Island
+		icon = GFX_focus_VWI_Keep_distance_Rhode_Island
+		cost = 5
+		prerequisite = {
+			focus = VWI_Aslan_reappears_world
+		}
+		mutually_exclusive = { focus = VWI_enable_Delphine }
+		x = -1
+		y = 1
+		relative_position_id = VWI_Aslan_reappears_world
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.1
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Vina_support_add_var = -0.1 }
+				VIC_Vina_support_add_VWI = yes
+			}
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_keep_distance_Rhode_Island_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_authoritarianism_drift_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+	
+	#启用戴菲恩
+	focus = {
+		id = VWI_enable_Delphine
+		icon = GFX_focus_VWI_enable_Delphine
+		cost = 5
+		prerequisite = {
+			focus = VWI_Aslan_reappears_world
+		}
+		mutually_exclusive = { focus = VWI_keep_distance_Rhode_Island }
+		x = 1
+		y = 1
+		relative_position_id = VWI_Aslan_reappears_world
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = 0.1
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Vina_support_add_var = 0.1 }
+				VIC_Vina_support_add_VWI = yes
+			}
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_enable_Delphine_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_despotism_drift_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+	#临时军管委员会
+	focus = {
+		id = VWI_provisional_Military_Control_Council
+		icon = GFX_focus_VWI_provisional_Military_Control_Council
+		cost = 5
+		prerequisite = {
+			focus = VWI_stabilize_situation_rear
+		}
+		x = -2
+		y = 1
+		relative_position_id = VWI_stabilize_situation_rear
+
+		completion_reward = {
+			add_war_support = -0.05
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_provisional_Military_Control_Council_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_political_power_gain_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_political_advisor_cost_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_trade_laws_cost_factor_dynamic_var
+					value = -0.2
+				}
+				add_to_variable = {
+					var = VWI_economy_mobilization_laws_cost_factor_dynamic_var
+					value = -0.2
+				}
+				add_to_variable = {
+					var = VWI_economy_economy_cost_factor_dynamic_var
+					value = -0.2
+				}
+				add_to_variable = {
+					var = VWI_economy_administrative_development_monthly_modifier_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+	#维持必需品生产
+	focus = {
+		id = VWI_maintain_production_of_essential_goods
+		icon = GFX_focus_VWI_maintain_production_of_essential_goods
+		cost = 5
+		prerequisite = {
+			focus = VWI_stabilize_situation_rear
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_stabilize_situation_rear
+
+		completion_reward = {
+			add_stability = -0.1
+			add_war_support = 0.05
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+			# effect_tooltip = {
+			# 	swap_ideas = {
+			# 		remove_idea = VWI_economy_buff_dummy_idea
+			# 		add_idea = VWI_maintain_production_of_essential_goods_idea
+			# 	}
+			# }
+			# hidden_effect = {
+			# 	add_to_variable = {
+			# 		var = VWI_economy_stability_factor_dynamic_var
+			# 		value = 0.1
+			# 	}
+			# 	add_to_variable = {
+			# 		var = VWI_economy_war_support_factor_dynamic_var
+			# 		value = 0.05
+			# 	}
+			# 	add_to_variable = {
+			# 		var = VWI_economy_industrial_capacity_factory_dynamic_var
+			# 		value = 0.025
+			# 	}
+			# }
+		}
+	}
+	#工业全面动员
+	focus = {
+		id = VWI_full_mobilization_of_industry
+		icon = GFX_focus_VWI_full_mobilization_of_industry
+		cost = 6
+		prerequisite = {
+			focus = VWI_stabilize_situation_rear
+		}
+		x = 4
+		y = 1
+		relative_position_id = VWI_stabilize_situation_rear
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
+			random_owned_state = {
+				limit = {
+					infrastructure < 5
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+
+			country_event = {
+				id = event_vwi.11
+			}
+
+			# effect_tooltip = {
+			# 	swap_ideas = {
+			# 		remove_idea = VWI_economy_buff_dummy_idea
+			# 		add_idea = VWI_full_mobilization_of_industry_idea
+			# 	}
+			# }
+			# hidden_effect = {
+			# 	add_to_variable = {
+			# 		var = VWI_economy_industrial_capacity_factory_dynamic_var
+			# 		value = 0.025
+			# 	}
+			# 	add_to_variable = {
+			# 		var = VWI_economy_production_factory_efficiency_gain_factor_dynamic_var
+			# 		value = 0.05
+			# 	}
+			# }
+		}
+	}
+	#炮兵支援理论
+	focus = {
+		id = VWI_artillery_support_theory
+		icon = GFX_focus_VWI_artillery_support_theory
+		cost = 5
+		prerequisite = {
+			focus = VWI_concentrated_use_of_artillery
+		}
+		mutually_exclusive = { focus = VWI_maintain_authority_academy }
+		x = -1
+		y = 1
+		relative_position_id = VWI_concentrated_use_of_artillery
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_artillery_support_theory_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_planning_speed_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_military_army_infantry_attack_factor_dynamic_var
+					value = 0.05
+				}
+			}
+			
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.1
+			}
+
+			army_experience = 30
+			add_command_power = 50
+			
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Vina_support_add_var = -0.1 }
+				VIC_Vina_support_add_VWI = yes
+			}
+			
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = cat_superior_firepower
+			}
+		}
+	}
+	#大炮兵主义
+	focus = {
+		id = VWI_maintain_authority_academy
+		icon = GFX_focus_VWI_maintain_authority_academy
+		cost = 5
+		prerequisite = {
+			focus = VWI_concentrated_use_of_artillery
+		}
+		mutually_exclusive = { focus = VWI_artillery_support_theory }
+		x = 1
+		y = 1
+		relative_position_id = VWI_concentrated_use_of_artillery
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_maintain_authority_academy_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_army_artillery_attack_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_military_army_army_artillery_defence_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_military_max_planning_dynamic_var
+					value = 0.05
+				}
+			}
+			
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = 0.1
+			}
+			
+			add_political_power = 50
+			add_war_support = 0.05
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Vina_support_add_var = 0.1 }
+				VIC_Vina_support_add_VWI = yes
+			}
+
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = cat_superior_firepower
+			}
+		}
+	}
+	#转移伦蒂尼姆政客
+	focus = {
+		id = VWI_transfer_Lentinium_politicians
+		icon = GFX_focus_VWI_transfer_Lentinium_politicians
+		cost = 6
+        prerequisite = {
+			focus = VWI_keep_distance_Rhode_Island
+            focus = VWI_enable_Delphine
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_keep_distance_Rhode_Island
+
+		completion_reward = {
+
+			VIC = {
+				VWI_Clark_Atney = {
+					set_nationality = VWI
+					hidden_effect = {
+						promote_character = yes
+					}
+				}
+				VWI_Ashley_Brownwood = {
+					set_nationality = VWI
+				}
+				VWI_William_Beneridge = {
+					set_nationality = VWI
+				}
+				VWI_Datzdali = {
+					set_nationality = VWI
+					hidden_effect = {
+						promote_character = yes
+					}
+				}
+				VWI_Ashley_Cecil = {
+					set_nationality = VWI
+				}
+				VWI_Nellie_Birmingham = {
+					set_nationality = VWI
+					hidden_effect = {
+						promote_character = yes
+					}
+				}
+			}
+
+			add_political_power = 50
+
+			country_event = {
+				id = event_vwi.3
+			}
+
+			# effect_tooltip = {
+			# 	swap_ideas = {
+			# 		remove_idea = VWI_politics_buff_dummy_idea
+			# 		add_idea = VWI_transfer_Lentinium_politicians_idea
+			# 	}
+			# }
+			# hidden_effect = {
+			# 	add_to_variable = {
+			# 		var = VWI_politics_political_power_gain_dynamic_var
+			# 		value = 0.1
+			# 	}
+			# 	add_to_variable = {
+			# 		var = VWI_politics_administrative_development_monthly_modifier_dynamic_var
+			# 		value = 0.02
+			# 	}
+			# }
+		}
+	}
+	#研究机构扩张
+	focus = {
+		id = VWI_expansion_research_institutes
+		icon = GFX_focus_VWI_expansion_research_institutes
+		cost = 6
+		prerequisite = {
+			focus = VWI_provisional_Military_Control_Council
+		}
+		x = -1
+		y = 1
+		relative_position_id = VWI_provisional_Military_Control_Council
+
+		completion_reward = {
+			add_research_slot = 1
+			add_tech_bonus = {
+				name = VWI_expansion_research_institutes
+				category = electronics
+				uses = 1
+				bonus = 0.5
+			}
+			add_tech_bonus = {
+				name = VWI_expansion_research_institutes
+				category = industry
+				uses = 1
+				bonus = 0.5
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_expansion_research_institutes_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_research_speed_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_economy_educational_development_monthly_modifier_dynamic_var
+					value = 0.03
+				}
+				add_to_variable = {
+					var = VWI_economy_consumer_goods_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#发行临时货币
+	focus = {
+		id = VWI_issuance_temporary_currency
+		icon = GFX_focus_VWI_issuance_temporary_currency
+		cost = 5
+		prerequisite = {
+			focus = VWI_maintain_production_of_essential_goods
+		}
+		mutually_exclusive = { focus = VWI_distribution_ration_vouchers }
+		x = -1
+		y = 1
+		relative_position_id = VWI_maintain_production_of_essential_goods
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = 0.1
+			}
+			add_popularity = {
+				ideology = conservatism
+				popularity = 0.1
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_issuance_temporary_currency_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Vina_support_add_var = 0.1 }
+				VIC_Vina_support_add_VWI = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_political_power_gain_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_industrial_capacity_factory_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_consumer_goods_factor_dynamic_var
+					value = 0.1
+				}
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				country_event = {
+					id = event_vwi.8
+				}
+			}
+		}
+	}
+
+	#发放配给券
+	focus = {
+		id = VWI_distribution_ration_vouchers
+		icon = GFX_focus_VWI_distribution_ration_vouchers
+		cost = 5
+		prerequisite = {
+			focus = VWI_maintain_production_of_essential_goods
+		}
+		mutually_exclusive = { focus = VWI_issuance_temporary_currency }
+		x = 1
+		y = 1
+		relative_position_id = VWI_maintain_production_of_essential_goods
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.1
+			}
+			add_popularity = {
+				ideology = authoritarianism
+				popularity = 0.1
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Vina_support_add_var = -0.1 }
+				VIC_Vina_support_add_VWI = yes
+			}
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_distribution_ration_vouchers_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_consumer_goods_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_speed_arms_factory_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_speed_industrial_complex_factor_dynamic_var
+					value = 0.1
+				}
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				country_event = {
+					id = event_vwi.7
+				}
+			}
+		}
+	}
+	#欠发达地区投资
+	focus = {
+		id = VWI_investment_less_developed_regions
+		icon = GFX_focus_VWI_investment_less_developed_regions
+		cost = 5
+		prerequisite = {
+			focus = VWI_full_mobilization_of_industry
+		}
+		x = -1
+		y = 1
+		relative_position_id = VWI_full_mobilization_of_industry
+
+		completion_reward = {
+			unlock_decision_tooltip = VIC_construction_investment
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Eartha_support_add_var = 0.1 }
+				VIC_Eartha_support_add_VWI = yes
+			}
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_investment_less_developed_regions_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_poverty_development_monthly_modifier_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#军用设施建设
+	focus = {
+		id = VWI_construction_military_facilities
+		icon = GFX_focus_VWI_construction_military_facilities
+		cost = 5
+		prerequisite = {
+			focus = VWI_full_mobilization_of_industry
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_full_mobilization_of_industry
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					infrastructure < 5
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				}
+			}
+
+			random_owned_state = {
+				limit = {
+					air_base < 5
+				}
+				add_building_construction = {
+					type = air_base
+					level = 4
+				}
+			}
+			#effect_tooltip = {
+			#	swap_ideas = {
+			#		remove_idea = VWI_economy_buff_dummy_idea
+			#		add_idea = VWI_construction_military_facilities_idea
+			#	}
+			#}
+			#hidden_effect = {
+			#	add_to_variable = {
+			#		var = VWI_economy_max_fuel_factor_dynamic_var
+			#		value = 0.2
+			#	}
+			#	add_to_variable = {
+			#		var = VWI_economy_production_speed_infrastructure_factor_dynamic_var
+			#		value = 0.15
+			#	}
+			#	add_to_variable = {
+			#		var = VWI_economy_conversion_cost_civ_to_mil_factor_dynamic_var
+			#		value = -0.2
+			#	}
+			#}
+		}
+	}
+
+	#整编萨卡兹士兵
+	focus = {
+		id = VWI_regrouping_Sarkaz_soldiers
+		icon = GFX_focus_VWI_regrouping_Sarkaz_soldiers
+		cost = 5
+		prerequisite = {
+			focus = VWI_infantry_division_expansion
+		}
+
+		available = {
+			has_global_flag = VIC_joint_march_II_end
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = VWI_infantry_division_expansion
+
+		completion_reward = {
+			add_ideas = VWI_Sarkaz_soldiers_idea
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+		}
+	}
+
+	#制订射表
+	focus = {
+		id = VWI_make_shooting_table
+		icon = GFX_focus_VWI_make_shooting_table
+		cost = 6
+        prerequisite = {
+			focus = VWI_artillery_support_theory
+            focus = VWI_maintain_authority_academy
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_artillery_support_theory
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_make_shooting_table_idea
+				}
+			}
+			army_experience = 10
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_army_artillery_attack_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_army_army_artillery_defence_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_army_attack_factor_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VWI_military_coordination_bonus_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VWI_military_experience_loss_factor_dynamic_var
+					value = -0.1
+				}
+			}
+
+			country_event = {
+				id = event_vwi.13
+			}
+		}
+	}
+
+	#约瑟夫-米切尔集团
+	focus = {
+		id = VWI_Armstrong_Whitworth_Group
+		icon = GFX_focus_VWI_Armstrong_Whitworth_Group
+		cost = 5
+		prerequisite = {
+			focus = VWI_restore_operation_military_industrial_complex
+		}
+		x = 0
+		y = 2
+		relative_position_id = VWI_restore_operation_military_industrial_complex
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			add_ideas = VWI_supper_artillery_idea
+		}
+	}
+
+	#难民救济法案
+	focus = {
+		id = VWI_refugee_relief_act
+		icon = GFX_focus_VWI_refugee_relief_act
+		cost = 5
+		prerequisite = {
+			focus = VWI_transfer_Lentinium_politicians
+		}
+		mutually_exclusive = { focus = VWI_asset_protection_act }
+		x = -1
+		y = 1
+		relative_position_id = VWI_transfer_Lentinium_politicians
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.1
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Eartha_support_add_var = 0.1 }
+				VIC_Eartha_support_add_VWI = yes
+			}
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_refugee_relief_act_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_political_power_gain_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_consumer_goods_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_authoritarianism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_progressivism_drift_dynamic_var
+					value = 0.01
+				}
+			}
+		}
+	}
+
+	#资产保护法案
+	focus = {
+		id = VWI_asset_protection_act
+		icon = GFX_focus_VWI_asset_protection_act
+		cost = 5
+		prerequisite = {
+			focus = VWI_transfer_Lentinium_politicians
+		}
+		mutually_exclusive = { focus = VWI_refugee_relief_act }
+		x = 1
+		y = 1
+		relative_position_id = VWI_transfer_Lentinium_politicians
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = 0.1
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Eartha_support_add_var = -0.1 }
+				VIC_Eartha_support_add_VWI = yes
+			}
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_asset_protection_act_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Vina_support_add_var = 0.1 }
+				VIC_Vina_support_add_VWI = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_conservatism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_despotism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_consumer_goods_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_stability_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_war_support_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#打击黑市
+	focus = {
+		id = VWI_fight_black_market
+		icon = GFX_focus_VWI_fight_black_market
+		cost = 6
+        prerequisite = {
+			focus = VWI_issuance_temporary_currency
+            focus = VWI_distribution_ration_vouchers
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_issuance_temporary_currency
+
+		completion_reward = {
+			add_stability = -0.05
+			add_political_power = 100
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.03 }
+			administrative_development_monthly_add = yes
+			#effect_tooltip = {
+			#	swap_ideas = {
+			#		remove_idea = VWI_economy_buff_dummy_idea
+			#		add_idea = VWI_fight_black_market_idea
+			#	}
+			#}
+			#hidden_effect = {
+			#	add_to_variable = {
+			#		var = VWI_economy_political_power_gain_dynamic_var
+			#		value = 0.2
+			#	}
+			#	add_to_variable = {
+			#		var = VWI_economy_war_support_factor_dynamic_var
+			#		value = 0.05
+			#	}
+			#	add_to_variable = {
+			#		var = VWI_economy_administrative_development_monthly_modifier_dynamic_var
+			#		value = 0.02
+			#	}
+			#}
+		}
+	}
+
+	#完善运输网络
+	focus = {
+		id = VWI_improve_transportation_network
+		icon = GFX_focus_VWI_improve_transportation_network
+		cost = 5
+		prerequisite = {
+			focus = VWI_investment_less_developed_regions
+		}
+		prerequisite = {
+			focus = VWI_construction_military_facilities
+		}
+		mutually_exclusive = { focus = VWI_securing_industrial_electricity }
+		x = 0
+		y = 1
+		relative_position_id = VWI_investment_less_developed_regions
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					infrastructure < 5
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			random_owned_state = {
+				limit = {
+					infrastructure < 5
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_improve_transportation_network_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_production_speed_infrastructure_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_speed_rail_way_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_speed_supply_node_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#确保工业用电
+	focus = {
+		id = VWI_securing_industrial_electricity
+		icon = GFX_focus_VWI_securing_industrial_electricity
+		cost = 5
+		prerequisite = {
+			focus = VWI_investment_less_developed_regions
+		}
+		prerequisite = {
+			focus = VWI_construction_military_facilities
+		}
+		mutually_exclusive = { focus = VWI_improve_transportation_network }
+		x = 0
+		y = 1
+		relative_position_id = VWI_construction_military_facilities
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = originium_powerplant
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = originium_powerplant
+					level = 1
+					instant_build = yes
+				}
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Eartha_support_add_var = 0.1 }
+				VIC_Eartha_support_add_VWI = yes
+			}
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_securing_industrial_electricity_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_production_speed_originium_powerplant_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_speed_new_energy_powerplant_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#阵地渗透小组
+	focus = {
+		id = VWI_position_infiltration_team
+		icon = GFX_focus_VWI_position_infiltration_team
+		cost = 5
+		prerequisite = {
+			focus = VWI_infantry_division_expansion
+		}
+		x = -1
+		y = 3
+		relative_position_id = VWI_infantry_division_expansion
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_position_infiltration_team_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			army_experience = 30
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_army_attack_factor_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VWI_military_breakthrough_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_army_defence_factor_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VWI_military_pocket_penalty_dynamic_var
+					value = -0.15
+				}
+				add_to_variable = {
+					var = VWI_military_land_reinforce_rate_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_army_org_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#突破能力训练
+	focus = {
+		id = VWI_breakthrough_ability_training
+		icon = GFX_focus_VWI_breakthrough_ability_training
+		cost = 6
+		prerequisite = {
+			focus = VWI_make_shooting_table
+		}
+		mutually_exclusive = { focus = VWI_hidden_position }
+		x = -1
+		y = 1
+		relative_position_id = VWI_make_shooting_table
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_breakthrough_ability_training_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_breakthrough_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_land_reinforce_rate_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VWI_military_coordination_bonus_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VWI_military_recon_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_recon_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_army_attack_factor_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+	#阵地隐匿
+	focus = {
+		id = VWI_hidden_position
+		icon = GFX_focus_VWI_hidden_position
+		cost = 6
+		prerequisite = {
+			focus = VWI_make_shooting_table
+		}
+		mutually_exclusive = { focus = VWI_breakthrough_ability_training }
+		x = 1
+		y = 1
+		relative_position_id = VWI_make_shooting_table
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_hidden_position_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_army_defence_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_dig_in_speed_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_military_max_dig_in_dynamic_var
+					value = 5
+				}
+				add_to_variable = {
+					var = VWI_military_enemy_army_bonus_air_superiority_factor_dynamic_var
+					value = -0.05
+				}
+				add_to_variable = {
+					var = VWI_military_cas_damage_reduction_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_army_morale_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+	
+	#非对称制空
+	focus = {
+		id = VWI_asymmetric_air_control
+		icon = GFX_focus_VWI_asymmetric_air_control
+		cost = 5
+		prerequisite = {
+			focus = VWI_restore_operation_military_industrial_complex
+		}
+		x = 1
+		y = 3
+		relative_position_id = VWI_restore_operation_military_industrial_complex
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_asymmetric_air_control_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_enemy_army_bonus_air_superiority_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_military_cas_damage_reduction_dynamic_var
+					value = 0.1
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			set_country_flag = VWI_asymmetric_air_control_flag
+
+			custom_effect_tooltip = unlock_air_chief_tooltip
+			show_ideas_tooltip = VWI_Charles_Gateway_air_chief
+			custom_effect_tooltip = unlock_high_command_tooltip
+			show_ideas_tooltip = VWI_Charles_Gateway_high_command
+
+			air_experience = 30
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+	}
+
+	#尊重工人诉求
+	focus = {
+		id = VWI_respect_workers_demands
+		icon = GFX_focus_VWI_respect_workers_demands
+		cost = 5
+		prerequisite = {
+			focus = VWI_expansion_research_institutes
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_expansion_research_institutes
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.1
+			}
+			swap_ideas = {
+				remove_idea = working_law_18h
+				add_idea = working_law_14h
+			}
+
+			country_event = {
+				id = event_vwi.5
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Eartha_support_add_var = 0.1 }
+				VIC_Eartha_support_add_VWI = yes
+			}
+
+			set_temp_variable = { industrial_development_monthly_effect_add_var = 0.02 }
+			industrial_development_monthly_add = yes
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_respect_workers_demands_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_line_change_production_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_economy_production_factory_efficiency_gain_factor_dynamic_var
+					value = -0.05
+				}
+			}
+		}
+	}
+
+	#囚犯劳动团
+	focus = {
+		id = VWI_prisoner_Labor_Corps
+		icon = GFX_focus_VWI_prisoner_Labor_Corps
+		cost = 5
+		prerequisite = {
+			focus = VWI_fight_black_market
+		}
+		x = -1
+		y = 1
+		relative_position_id = VWI_fight_black_market
+
+		completion_reward = {
+			add_manpower = -5000
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_prisoner_Labor_Corps_idea
+				}
+			}
+			
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_stability_factor_dynamic_var
+					value = -0.05
+				}
+				add_to_variable = {
+					var = VWI_economy_production_speed_buildings_factor_dynamic_var
+					value = 0.05
+				}
+			}
+
+			country_event = {
+				id = event_vwi.6
+			}
+		}
+	}
+
+	#农业小额贷
+	focus = {
+		id = VWI_agricultural_microcredit
+		icon = GFX_focus_VWI_agricultural_microcredit
+		cost = 5
+		prerequisite = {
+			focus = VWI_fight_black_market
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_fight_black_market
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = 0.05
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_agricultural_microcredit_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Vina_support_add_var = 0.1 }
+				VIC_Vina_support_add_VWI = yes
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_production_speed_industrial_complex_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_economy_agricultural_development_monthly_modifier_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+	#扩大轻武器产能
+	focus = {
+		id = VWI_expanding_light_weapons_production_capacity
+		icon = GFX_focus_VWI_expanding_light_weapons_production_capacity
+		cost = 5
+		prerequisite = {
+			focus = VWI_improve_transportation_network
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_improve_transportation_network
+
+		completion_reward = {
+			add_ideas = VWI_light_weapons_factory_idea
+		}
+	}
+
+	#专注火炮产能
+	focus = {
+		id = VWI_focus_on_artillery_production
+		icon = GFX_focus_VWI_focus_on_artillery_production
+		cost = 5
+		prerequisite = {
+			focus = VWI_securing_industrial_electricity
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_securing_industrial_electricity
+
+		completion_reward = {
+			add_ideas = VWI_focus_on_artillery_production_idea
+		}
+	}
+
+	#加强宪兵部队
+	focus = {
+		id = VWI_draw_military_cantonment_system
+		icon = GFX_focus_VWI_draw_military_cantonment_system
+		cost = 5
+		prerequisite = {
+			focus = VWI_position_infiltration_team
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_position_infiltration_team
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_draw_military_cantonment_system_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_resistance_growth_dynamic_var
+					value = -0.15
+				}
+				add_to_variable = {
+					var = VWI_military_resistance_decay_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_compliance_growth_dynamic_var
+					value = 0.15
+				}
+				add_to_variable = {
+					var = VWI_military_army_morale_factor_dynamic_var
+					value = 0.1
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+
+			country_event = {
+				id = event_vwi.10
+			}
+		}
+	}
+
+	#风暴突击队
+	focus = {
+		id = VWI_storm_troopers
+		icon = GFX_focus_VWI_storm_troopers
+		cost = 5
+		prerequisite = {
+			focus = VWI_position_infiltration_team
+		}
+        prerequisite = {
+            focus = VWI_breakthrough_ability_training
+        }
+		x = 0
+		y = 1
+		relative_position_id = VWI_breakthrough_ability_training
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_storm_troopers_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_breakthrough_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_land_reinforce_rate_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VWI_military_coordination_bonus_dynamic_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VWI_military_recon_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_recon_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_army_infantry_attack_factor_dynamic_var
+					value = 0.05
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+		}
+	}
+
+	#适应性陆军
+	focus = {
+		id = VWI_storm_Commando_Expansion
+		icon = GFX_focus_VWI_storm_Commando_Expansion
+		cost = 5
+		prerequisite = {
+			focus = VWI_asymmetric_air_control
+		}
+        prerequisite = {
+            focus = VWI_hidden_position
+        }
+		x = 0
+		y = 1
+		relative_position_id = VWI_hidden_position
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_storm_Commando_Expansion_idea
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_special_forces_cap_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_acclimatization_hot_climate_gain_factor_dynamic_var
+					value = 0.15
+				}
+				add_to_variable = {
+					var = VWI_military_army_org_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_army_strength_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_enemy_army_bonus_air_superiority_factor_dynamic_var
+					value = -0.05
+				}
+				add_to_variable = {
+					var = VWI_military_cas_damage_reduction_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#重建蒸汽骑士
+	focus = {
+		id = VWI_rebuild_Steam_Knight
+		icon = GFX_focus_VWI_rebuild_Steam_Knight
+		cost = 5
+		prerequisite = {
+			focus = VWI_asymmetric_air_control
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_asymmetric_air_control
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			custom_effect_tooltip = VWI_steam_knight_tech_tt
+			hidden_effect = {
+				set_technology = { steam_knight_tech = 1 popup = no }
+
+				division_template = {
+					name = "蒸汽骑士"
+					is_locked = yes
+					force_allow_recruiting = yes
+					division_cap = 10
+					division_names_group = VIC_STM_01
+					regiments = {
+						steam_knight = { x = 0 y = 0 }
+					}
+				}
+	
+				capital_scope = {
+					create_unit = {
+						division = "division_template = \"蒸汽骑士\" start_experience_factor = 0.1 start_equipment_factor = 0.9"
+						owner = VWI
+						count = 1
+					}
+				}
+			}
+		}
+	}
+
+	#温德米尔宣言
+	focus = {
+		id = VWI_Windermere_Declaration
+		icon = GFX_focus_VWI_Windermere_Declaration
+		cost = 5
+        prerequisite = {
+			focus = VWI_refugee_relief_act
+            focus = VWI_asset_protection_act
+		}
+		x = 1
+		y = 3
+		relative_position_id = VWI_refugee_relief_act
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_Windermere_Declaration_idea
+				}
+			}
+			hidden_effect = {
+				#add_to_variable = {
+				#	var = VWI_politics_stability_factor_dynamic_var
+				#	value = 0.05
+				#}
+				add_to_variable = {
+					var = VWI_politics_political_power_gain_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_politics_compliance_growth_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#放松感染者工作限制
+	focus = {
+		id = VWI_relaxation_work_restrictions_infected_people
+		icon = GFX_focus_VWI_relaxation_work_restrictions_infected_people
+		cost = 5
+		prerequisite = {
+			focus = VWI_respect_workers_demands
+		}
+		prerequisite = {
+			focus = VWI_prisoner_Labor_Corps
+		}
+		x = -1
+		y = 1
+		relative_position_id = VWI_prisoner_Labor_Corps
+
+		completion_reward = {
+			add_political_power = -50
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.1
+			}
+			swap_ideas = {
+				remove_idea = isolation_management
+				add_idea = behavior_control
+			}
+
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_Eartha_support_add_var = 0.1 }
+				VIC_Eartha_support_add_VWI = yes
+			}
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_relaxation_work_restrictions_infected_people_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_production_speed_buildings_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_economy_industrial_development_monthly_modifier_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+	#组建志愿工程队
+	focus = {
+		id = VWI_volunteer_engineering_teams_formed
+		icon = GFX_focus_VWI_volunteer_engineering_teams_formed
+		cost = 5
+		prerequisite = {
+			focus = VWI_agricultural_microcredit
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_agricultural_microcredit
+
+		completion_reward = {
+			add_political_power = -50
+			add_stability = 0.05
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_volunteer_engineering_teams_formed_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_stability_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_economy_repair_speed_arms_factory_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_repair_speed_infrastructure_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_administrative_development_monthly_modifier_dynamic_var
+					value = 0.01
+				}
+			}
+
+			country_event = {
+				id = event_vwi.9
+			}
+		}
+	}
+
+	#加大对军工企业支持
+	focus = {
+		id = VWI_increase_support_military_enterprises
+		icon = GFX_focus_VWI_increase_support_military_enterprises
+		cost = 6
+        prerequisite = {
+			focus = VWI_expanding_light_weapons_production_capacity
+            focus = VWI_focus_on_artillery_production
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_expanding_light_weapons_production_capacity
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_increase_support_military_enterprises_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_industrial_capacity_factory_dynamic_var
+					value = 0.07
+				}
+				add_to_variable = {
+					var = VWI_economy_industrial_development_monthly_modifier_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+	#行动:阿瓦隆复归
+	focus = {
+		id = VWI_Operation_Return_of_Avalon
+		icon = GFX_focus_VWI_Operation_Return_of_Avalon
+		cost = 3
+		prerequisite = {
+			focus = VWI_storm_troopers
+			focus = VWI_storm_Commando_Expansion
+		}
+
+		available = {
+			has_global_flag = VIC_joint_march_II_end
+			OR = {
+				VCA = {
+					exists = yes
+				}
+				VGO = {
+					exists = yes
+				}
+			}
+		}
+		
+		x = 1
+		y = 1
+		relative_position_id = VWI_storm_troopers
+
+		completion_reward = {
+			unlock_decision_tooltip = VIC_military_operation_against_VGO
+			unlock_decision_tooltip = VIC_military_operation_against_VCA
+			set_country_flag = VIC_military_operation_flag
+		}
+	}
+
+	#为了人民与维多利亚工作！
+	focus = {
+		id = VWI_work_for_people_with_Victoria
+		icon = GFX_focus_VWI_work_for_people_with_Victoria
+		cost = 5
+		prerequisite = {
+			focus = VWI_relaxation_work_restrictions_infected_people
+		}
+        prerequisite = {
+            focus = VWI_volunteer_engineering_teams_formed
+        }
+		x = 2
+		y = 1
+		relative_position_id = VWI_relaxation_work_restrictions_infected_people
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_work_for_people_with_Victoria_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_global_building_slots_dynamic_var
+					value = 1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_factory_max_efficiency_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#改进资源生产流程
+	focus = {
+		id = VWI_improve_resource_production_processes
+		icon = GFX_focus_VWI_improve_resource_production_processes
+		cost = 5
+		prerequisite = {
+			focus = VWI_increase_support_military_enterprises
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_increase_support_military_enterprises
+
+		completion_reward = {
+			unlock_decision_tooltip = VIC_improving_aluminum_production_processes
+			unlock_decision_tooltip = VIC_develop_synthetic_rubber
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_improve_resource_production_processes_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_local_resources_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#向伦蒂尼姆的二次进军
+	focus = {
+		id = VWI_the_second_march_Lentinium
+		icon = GFX_focus_VWI_the_second_march_Lentinium
+		cost = 1
+		x = 25
+		y = 0
+
+		allow_branch = {
+			has_global_flag = VIC_civil_war_start
+		}
+
+		completion_reward = {
+			
+		}
+	}
+
+	#我们将会重逢
+	focus = {
+		id = VWI_we_will_meet_again
+		icon = GFX_focus_VWI_we_will_meet_again
+		cost = 1
+		prerequisite = {
+			focus = VWI_the_second_march_Lentinium
+		}
+		mutually_exclusive = { focus = VWI_keep_calm_and_carry_on }
+		mutually_exclusive = { focus = VWI_Terra_bless_the_Queen }
+
+		available = {
+			has_country_leader = {
+				character = VWI_Delphine_Windermere
+			}
+			NOT = {
+				has_character = VIC_Alexandrina_Vina_Victoria
+			}
+		}
+
+		x = -8
+		y = 1
+		relative_position_id = VWI_the_second_march_Lentinium
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_we_will_meet_again_military_idea
+				}
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_we_will_meet_again_politics_idea
+				}
+			}
+			set_power_balance = {
+				id = VWI_power_balance
+				left_side = VWI_bop_democracy_side
+				right_side = VWI_bop_army_side
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_surrender_limit_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_war_support_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_political_power_gain_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#组建新典范军
+	focus = {
+		id = VWI_forming_new_model_army
+		icon = GFX_focus_VWI_forming_new_model_army
+		cost = 3
+		prerequisite = {
+			focus = VWI_we_will_meet_again
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_we_will_meet_again
+
+		completion_reward = {
+			add_ideas = VWI_new_model_army_idea
+		}
+	}
+
+	#创建军情五处
+	focus = {
+		id = VWI_creation_of_MI5
+		icon = GFX_focus_VWI_creation_of_MI5
+		cost = 3
+		prerequisite = {
+			focus = VWI_forming_new_model_army
+		}
+		x = -2
+		y = 1
+		relative_position_id = VWI_forming_new_model_army
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_creation_of_MI5_idea
+				}
+			}
+			if = {
+				limit = { has_intelligence_agency = no }
+				create_intelligence_agency = yes
+			}
+			gain_random_agency_upgrade = yes
+			gain_random_agency_upgrade = yes
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_operative_slot_dynamic_var
+					value = 1
+				}
+			}
+		}
+	}
+
+	#与保皇派切割
+	focus = {
+		id = VWI_cut_with_royalists
+		icon = GFX_focus_VWI_cut_with_royalists
+		cost = 3
+		prerequisite = {
+			focus = VWI_forming_new_model_army
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_forming_new_model_army
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.1
+			}
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_cut_with_royalists_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_liberalism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_war_support_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#激发革命热情
+	focus = {
+		id = VWI_arouse_revolutionary_enthusiasm
+		icon = GFX_focus_VWI_arouse_revolutionary_enthusiasm
+		cost = 3
+		prerequisite = {
+			focus = VWI_forming_new_model_army
+		}
+		x = 2
+		y = 1
+		relative_position_id = VWI_forming_new_model_army
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_arouse_revolutionary_enthusiasm_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_conscription_dynamic_var
+					value = 0.005
+				}
+				add_to_variable = {
+					var = VWI_military_army_attack_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#获取少壮派军官支持
+	focus = {
+		id = VWI_get_the_support_of_the_Young_Officers
+		icon = GFX_focus_VWI_get_the_support_of_the_Young_Officers
+		cost = 3
+		prerequisite = {
+			focus = VWI_cut_with_royalists
+		}
+		prerequisite = {
+			focus = VWI_creation_of_MI5
+		}
+		prerequisite = {
+			focus = VWI_arouse_revolutionary_enthusiasm
+		}
+		x = -1
+		y = 1
+		relative_position_id = VWI_cut_with_royalists
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_get_the_support_of_the_Young_Officers_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_max_command_power_mult_dynamic_var
+					value = 0.25
+				}
+				add_to_variable = {
+					var = VWI_military_experience_gain_army_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#革命恐怖
+	focus = {
+		id = VWI_revolutionary_terror
+		icon = GFX_focus_VWI_revolutionary_terror
+		cost = 3
+		prerequisite = {
+			focus = VWI_cut_with_royalists
+		}
+		prerequisite = {
+			focus = VWI_creation_of_MI5
+		}
+		prerequisite = {
+			focus = VWI_arouse_revolutionary_enthusiasm
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_cut_with_royalists
+
+		completion_reward = {
+			add_manpower = -1000
+			add_stability = -0.05
+
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_revolutionary_terror_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_resistance_growth_dynamic_var
+					value = -0.15
+				}
+				add_to_variable = {
+					var = VWI_military_resistance_decay_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_compliance_growth_dynamic_var
+					value = 0.15
+				}
+			}
+		}
+	}
+
+	#邀请共和派人士
+	focus = {
+		id = VWI_republicans_invited
+		icon = GFX_focus_VWI_republicans_invited
+		cost = 3
+		prerequisite = {
+			focus = VWI_get_the_support_of_the_Young_Officers
+		}
+		prerequisite = {
+			focus = VWI_revolutionary_terror
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_get_the_support_of_the_Young_Officers
+
+		completion_reward = {
+			add_political_power = 150
+			
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_republicans_invited_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_administrative_development_monthly_modifier_dynamic_var
+					value = 0.04
+				}
+			}
+		}
+	}
+
+	#《贝弗里奇报告》
+	focus = {
+		id = VWI_Beveridge_Report
+		icon = GFX_focus_VWI_Beveridge_Report
+		cost = 3
+		prerequisite = {
+			focus = VWI_get_the_support_of_the_Young_Officers
+		}
+		prerequisite = {
+			focus = VWI_revolutionary_terror
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_revolutionary_terror
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_Beveridge_Report_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_monthly_population_dynamic_var
+					value = 0.07
+				}
+				add_to_variable = {
+					var = VWI_politics_political_power_gain_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_poverty_development_monthly_modifier_dynamic_var
+					value = 0.02
+				}
+			}
+		}
+	}
+
+	#议会主导
+	focus = {
+		id = VWI_parliamentary_dominant
+		icon = GFX_focus_VWI_parliamentary_dominant
+		cost = 3
+		prerequisite = {
+			focus = VWI_republicans_invited
+		}
+		prerequisite = {
+			focus = VWI_Beveridge_Report
+		}
+		mutually_exclusive = { focus = VWI_presidential_system }
+		x = 0
+		y = 1
+		relative_position_id = VWI_republicans_invited
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.1
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_parliamentary_dominant_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_liberalism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_progressivism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_production_speed_buildings_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#总统制
+	focus = {
+		id = VWI_presidential_system
+		icon = GFX_focus_VWI_presidential_system
+		cost = 3
+		prerequisite = {
+			focus = VWI_republicans_invited
+		}
+		prerequisite = {
+			focus = VWI_Beveridge_Report
+		}
+		mutually_exclusive = { focus = VWI_parliamentary_dominant }
+		x = 0
+		y = 1
+		relative_position_id = VWI_Beveridge_Report
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = 0.1
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_presidential_system_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_authoritarianism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_despotism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_industrial_capacity_factory_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#阿瓦隆立于大地之上
+	focus = {
+		id = VWI_Avalon_stands_above_the_earth
+		icon = GFX_focus_VWI_Avalon_stands_above_the_earth
+		cost = 1
+		prerequisite = {
+			focus = VWI_parliamentary_dominant
+			focus = VWI_presidential_system
+		}
+
+		available = {
+			VCA = {
+				exists = no
+			}
+			has_war = no
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = VWI_parliamentary_dominant
+
+		completion_reward = {
+			add_stability = 0.15
+			add_political_power = 200
+			set_cosmetic_tag = VWI_Commonwealth_of_Avalon
+
+			set_capital = {
+				state = 434
+				remember_old_capital = no
+			}
+
+			hidden_effect = {
+				every_subject_country = {
+					hidden_effect = {
+						transfer_navy = {
+							target = VWI
+						}
+					}
+					every_owned_state = {
+						limit = { is_core_of = PREV }
+						add_core_of = VWI
+						remove_core_of = PREV
+					}
+					every_character = {
+						set_nationality = VWI
+					}
+					VWI = {
+						annex_country = {
+							target = PREV
+							transfer_troops = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#护国公戴菲恩
+	focus = {
+		id = VWI_Lord_Protector_Delphine
+		icon = GFX_focus_VWI_Lord_Protector_Delphine
+		cost = 2
+		prerequisite = {
+			focus = VWI_we_will_meet_again
+		}
+
+		x = 4
+		y = 1
+		relative_position_id = VWI_we_will_meet_again
+
+		completion_reward = {
+			add_trait = {
+				character = VWI_Delphine_Windermere
+				ideology = stratocracy_subtype
+				trait = VWI_the_lord_protector
+			}
+		}
+	}
+
+	#扩大警察职权
+	focus = {
+		id = VWI_expand_the_powers_of_police
+		icon = GFX_focus_VWI_expand_the_powers_of_police
+		cost = 3
+		prerequisite = {
+			focus = VWI_Lord_Protector_Delphine
+		}
+
+		bypass = {
+			has_global_flag = VIC_civil_war_end
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = VWI_Lord_Protector_Delphine
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_expand_the_powers_of_police_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_compliance_growth_dynamic_var
+					value = 0.15
+				}
+				add_to_variable = {
+					var = VWI_military_required_garrison_factor_dynamic_var
+					value = -0.1
+				}
+			}
+		}
+	}
+
+	#专注战争部署
+	focus = {
+		id = VWI_focus_on_war_deployment
+		icon = GFX_focus_VWI_focus_on_war_deployment
+		cost = 3
+		prerequisite = {
+			focus = VWI_expand_the_powers_of_police
+		}
+
+		bypass = {
+			has_global_flag = VIC_civil_war_end
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = VWI_expand_the_powers_of_police
+
+		completion_reward = {
+			add_stability = -0.05
+
+			set_country_flag = VWI_focus_on_war_deployment_flag
+			unlock_decision_tooltip = VWI_war_buff_decision_1
+
+			add_days_mission_timeout  = {
+				mission = VIC_war_exhaustion_increase
+				days = -20
+			}
+		}
+	}
+
+	#回应民众关切
+	focus = {
+		id = VWI_respond_to_public_concerns
+		icon = GFX_focus_VWI_respond_to_public_concerns
+		cost = 3
+		prerequisite = {
+			focus = VWI_focus_on_war_deployment
+		}
+
+		bypass = {
+			has_global_flag = VIC_civil_war_end
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = VWI_focus_on_war_deployment
+
+		completion_reward = {
+			add_political_power = -50
+
+			add_days_mission_timeout  = {
+				mission = VIC_war_exhaustion_increase
+				days = 60
+			}
+		}
+	}
+
+	#宣传民主精神
+	focus = {
+		id = VWI_promote_the_spirit_of_democracy
+		icon = GFX_focus_VWI_promote_the_spirit_of_democracy
+		cost = 3
+		prerequisite = {
+			focus = VWI_respond_to_public_concerns
+		}
+		mutually_exclusive = { focus = VWI_promote_leader_worship }
+
+		bypass = {
+			has_global_flag = VIC_civil_war_end
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = VWI_respond_to_public_concerns
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.1
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_promote_the_spirit_of_democracy_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_liberalism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_progressivism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_authoritarianism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_stability_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#鼓吹领袖崇拜
+	focus = {
+		id = VWI_promote_leader_worship
+		icon = GFX_focus_VWI_promote_leader_worship
+		cost = 3
+		prerequisite = {
+			focus = VWI_respond_to_public_concerns
+		}
+		mutually_exclusive = { focus = VWI_promote_the_spirit_of_democracy }
+
+		bypass = {
+			has_global_flag = VIC_civil_war_end
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = VWI_respond_to_public_concerns
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = 0.1
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_promote_leader_worship_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_authoritarianism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_despotism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_fascism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_war_support_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#保持冷静，继续前进
+	focus = {
+		id = VWI_keep_calm_and_carry_on
+		icon = GFX_focus_VWI_keep_calm_and_carry_on
+		cost = 2
+		prerequisite = {
+			focus = VWI_the_second_march_Lentinium
+		}
+		mutually_exclusive = { focus = VWI_we_will_meet_again }
+		mutually_exclusive = { focus = VWI_Terra_bless_the_Queen }
+
+		available = {
+			has_country_leader = {
+				character = VWI_Anfilis_Windermere
+			}
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = VWI_the_second_march_Lentinium
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_keep_calm_and_carry_on_military_idea
+				}
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_keep_calm_and_carry_on_politics_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_political_power_gain_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_military_war_support_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_military_max_planning_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_max_command_power_mult_dynamic_var
+					value = 0.25
+				}
+			}
+		}
+	}
+
+	#继续配给制度
+	focus = {
+		id = VWI_continue_the_rationing_system
+		icon = GFX_focus_VWI_continue_the_rationing_system
+		cost = 3
+		prerequisite = {
+			focus = VWI_keep_calm_and_carry_on
+		}
+		x = -1
+		y = 1
+		relative_position_id = VWI_keep_calm_and_carry_on
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_continue_the_rationing_system_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_stability_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_war_support_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_speed_buildings_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#加强后方管制
+	focus = {
+		id = VWI_strengthen_rear_control
+		icon = GFX_focus_VWI_strengthen_rear_control
+		cost = 3
+		prerequisite = {
+			focus = VWI_keep_calm_and_carry_on
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_keep_calm_and_carry_on
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_strengthen_rear_control_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_intelligence_agency_defense_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_military_root_out_resistance_effectiveness_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#组建文官政府
+	focus = {
+		id = VWI_form_civilian_government
+		icon = GFX_focus_VWI_form_civilian_government
+		cost = 3
+		prerequisite = {
+			focus = VWI_continue_the_rationing_system
+		}
+		prerequisite = {
+			focus = VWI_strengthen_rear_control
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_continue_the_rationing_system
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_form_civilian_government_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_administrative_development_monthly_modifier_dynamic_var
+					value = 0.03
+				}
+			}
+		}
+	}
+
+	#筹备新地方议会
+	focus = {
+		id = VWI_preparation_of_new_local_council
+		icon = GFX_focus_VWI_preparation_of_new_local_council
+		cost = 3
+		prerequisite = {
+			focus = VWI_form_civilian_government
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_form_civilian_government
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_preparation_of_new_local_council_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_stability_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_political_power_gain_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#军工厂统一管理
+	focus = {
+		id = VWI_unified_management_of_military_factories
+		icon = GFX_focus_VWI_unified_management_of_military_factories
+		cost = 3
+		prerequisite = {
+			focus = VWI_form_civilian_government
+		}
+		x = 2
+		y = 1
+		relative_position_id = VWI_form_civilian_government
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_unified_management_of_military_factories_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_production_lack_of_resource_penalty_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_industrial_capacity_factory_dynamic_var
+					value = 0.025
+				}
+				add_to_variable = {
+					var = VWI_economy_equipment_conversion_speed_dynamic_var
+					value = 0.025
+				}
+			}
+		}
+	}
+
+	#军队代表比例
+	focus = {
+		id = VWI_proportion_of_military_representatives
+		icon = GFX_focus_VWI_proportion_of_military_representatives
+		cost = 3
+		prerequisite = {
+			focus = VWI_preparation_of_new_local_council
+		}
+		mutually_exclusive = { focus = VWI_all_seats_are_open }
+		x = -1
+		y = 1
+		relative_position_id = VWI_preparation_of_new_local_council
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.05
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_proportion_of_military_representatives_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_war_support_factor_dynamic_varr
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_command_power_gain_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_military_high_command_cost_factor_dynamic_var
+					value = -0.10
+				}
+				add_to_variable = {
+					var = VWI_politics_authoritarianism_drift_dynamic_var
+					value = 0.01
+				}
+			}
+		}
+	}
+
+	#开放所有席位
+	focus = {
+		id = VWI_all_seats_are_open
+		icon = GFX_focus_VWI_all_seats_are_open
+		cost = 3
+		prerequisite = {
+			focus = VWI_preparation_of_new_local_council
+		}
+		mutually_exclusive = { focus = VWI_proportion_of_military_representatives }
+		x = 1
+		y = 1
+		relative_position_id = VWI_preparation_of_new_local_council
+
+		completion_reward = {
+			add_power_balance_value = {
+				id = VWI_power_balance
+				value = -0.2
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_all_seats_are_open_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_stability_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_political_power_gain_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_military_political_advisor_cost_factor_dynamic_var
+					value = -0.25
+				}
+				add_to_variable = {
+					var = VWI_politics_liberalism_drift_dynamic_var
+					value = 0.01
+				}
+			}
+		}
+	}
+
+	#补偿民间企业
+	focus = {
+		id = VWI_compensation_for_private_enterprises
+		icon = GFX_focus_VWI_compensation_for_private_enterprises
+		cost = 3
+		prerequisite = {
+			focus = VWI_unified_management_of_military_factories
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_unified_management_of_military_factories
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_compensation_for_private_enterprises_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_consumer_goods_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_speed_industrial_complex_factor_dynamic_var
+					value = 0.15
+				}
+			}
+		}
+	}
+
+	#宣称临时政府
+	focus = {
+		id = VWI_proclaim_the_Provisional_Government
+		icon = GFX_focus_VWI_proclaim_the_Provisional_Government
+		cost = 3
+		prerequisite = {
+			focus = VWI_proportion_of_military_representatives
+			focus = VWI_all_seats_are_open
+		}
+		prerequisite = {
+			focus = VWI_compensation_for_private_enterprises
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_proportion_of_military_representatives
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_proclaim_the_Provisional_Government_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_party_popularity_stability_factor_dynamic_var
+					value = 0.3
+				}
+				add_to_variable = {
+					var = VWI_politics_war_support_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_surrender_limit_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#恢复国内市场
+	focus = {
+		id = VWI_restoration_of_the_domestic_market
+		icon = GFX_focus_VWI_restoration_of_the_domestic_market
+		cost = 3
+		prerequisite = {
+			focus = VWI_proportion_of_military_representatives
+			focus = VWI_all_seats_are_open
+		}
+		prerequisite = {
+			focus = VWI_compensation_for_private_enterprises
+		}
+		x = -1
+		y = 1
+		relative_position_id = VWI_compensation_for_private_enterprises
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_restoration_of_the_domestic_market_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_consumer_goods_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_factory_start_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_economy_production_speed_buildings_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#银剑屹立不倒
+	focus = {
+		id = VWI_the_silver_sword_stands
+		icon = GFX_focus_VWI_the_silver_sword_stands
+		cost = 2
+		prerequisite = {
+			focus = VWI_keep_calm_and_carry_on
+		}
+
+		mutually_exclusive = { focus = VWI_Siege_returns }
+		x = -6
+		y = 1
+		relative_position_id = VWI_Terra_bless_the_Queen
+
+		completion_reward = {
+			add_trait = {
+				character = VWI_Anfilis_Windermere
+				ideology = stratocracy_subtype
+				trait = VWI_Victoria_Silver_Sword
+			}
+		}
+	}
+
+	#推进之王归来
+	focus = {
+		id = VWI_Siege_returns
+		#icon = GFX_focus_VWI_Siege_returns
+		icon = GFX_focus_generic_monarchy_2
+		cost = 2
+		prerequisite = {
+			focus = VWI_Terra_bless_the_Queen
+		}
+
+		mutually_exclusive = { focus = VWI_the_silver_sword_stands }
+		x = -4
+		y = 1
+		relative_position_id = VWI_Terra_bless_the_Queen
+
+		completion_reward = {
+			add_ideas = VWI_model_army_idea
+			add_trait = {
+				character = VIC_Alexandrina_Vina_Victoria
+				ideology = stratocracy_subtype
+				trait = VWI_Siege
+			}
+		}
+	}
+
+	#清剿敌对游击队
+	focus = {
+		id = VWI_eliminate_hostile_guerrillas
+		#icon = GFX_focus_VWI_eliminate_hostile_guerrillas
+		icon = GFX_focus_hol_war_on_pacifism
+		cost = 3
+		prerequisite = {
+			focus = VWI_the_silver_sword_stands
+			focus = VWI_Siege_returns
+		}
+
+		bypass = {
+			has_global_flag = VIC_civil_war_end
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = VWI_the_silver_sword_stands
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_eliminate_hostile_guerrillas_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_military_resistance_growth_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_military_resistance_damage_to_garrison_on_our_occupied_states_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#总参谋部计划
+	focus = {
+		id = VWI_general_Staff_program
+		#icon = GFX_focus_VWI_general_Staff_program
+		icon = GFX_focus_generic_military_mission
+		cost = 3
+		prerequisite = {
+			focus = VWI_eliminate_hostile_guerrillas
+		}
+
+		bypass = {
+			has_global_flag = VIC_civil_war_end
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = VWI_eliminate_hostile_guerrillas
+
+		completion_reward = {
+			add_stability = -0.05
+
+			set_country_flag = VWI_general_Staff_program_flag
+			unlock_decision_tooltip = VWI_war_buff_decision_2
+
+			add_days_mission_timeout  = {
+				mission = VIC_war_exhaustion_increase
+				days = -20
+			}
+
+			#unlock_decision_tooltip = 
+		}
+	}
+
+	#承认工会地位
+	focus = {
+		id = VWI_recognition_of_trade_union_status
+		#icon = GFX_focus_VWI_recognition_of_trade_union_status
+		icon = GFX_focus_ITA_corpo_volontari_della_liberta
+		cost = 3
+		prerequisite = {
+			focus = VWI_general_Staff_program
+		}
+		mutually_exclusive = { focus = VWI_control_of_trade_unions }
+
+		bypass = {
+			has_global_flag = VIC_civil_war_end
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = VWI_general_Staff_program
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_recognition_of_trade_union_status_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_stability_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_factory_max_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#控制工会
+	focus = {
+		id = VWI_control_of_trade_unions
+		#icon = GFX_focus_VWI_control_of_trade_unions
+		icon = GFX_focus_spr_masters_of_our_own_fate
+		cost = 3
+		prerequisite = {
+			focus = VWI_general_Staff_program
+		}
+		mutually_exclusive = { focus = VWI_recognition_of_trade_union_status }
+
+		bypass = {
+			has_global_flag = VIC_civil_war_end
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = VWI_general_Staff_program
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_control_of_trade_unions_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_political_power_gain_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_production_factory_efficiency_gain_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#缓解厌战情绪
+	focus = {
+		id = VWI_alleviate_war_weariness
+		#icon = GFX_focus_VWI_alleviate_war_weariness
+		icon = GFX_focus_SWI_establish_pro_helvetia
+		cost = 3
+		prerequisite = {
+			focus = VWI_recognition_of_trade_union_status
+			focus = VWI_control_of_trade_unions
+		}
+
+		bypass = {
+			has_global_flag = VIC_civil_war_end
+		}
+		
+		x = 1
+		y = 1
+		relative_position_id = VWI_recognition_of_trade_union_status
+
+		completion_reward = {
+			add_political_power = -50
+
+			add_days_mission_timeout  = {
+				mission = VIC_war_exhaustion_increase
+				days = 60
+			}
+		}
+	}
+
+	#泰拉保佑女王
+	focus = {
+		id = VWI_Terra_bless_the_Queen
+		icon = GFX_focus_VWI_Terra_bless_the_Queen
+		cost = 3
+		prerequisite = {
+			focus = VWI_the_second_march_Lentinium
+		}
+		mutually_exclusive = { focus = VWI_we_will_meet_again }
+		mutually_exclusive = { focus = VWI_keep_calm_and_carry_on }
+
+		available = {
+			has_country_leader = {
+				character = VIC_Alexandrina_Vina_Victoria
+			}
+		}
+
+		x = 11
+		y = 1
+		relative_position_id = VWI_the_second_march_Lentinium
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_Terra_bless_the_Queen_politics_idea
+				}
+				swap_ideas = {
+					remove_idea = VWI_military_buff_dummy_idea
+					add_idea = VWI_Terra_bless_the_Queen_military_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_political_power_gain_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_military_army_strength_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_military_army_morale_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#延续战争税
+	focus = {
+		id = VWI_continuation_of_the_war_tax
+		icon = GFX_focus_VWI_continuation_of_the_war_tax
+		cost = 3
+		prerequisite = {
+			focus = VWI_Terra_bless_the_Queen
+		}
+		x = -2
+		y = 1
+		relative_position_id = VWI_Terra_bless_the_Queen
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_continuation_of_the_war_tax_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_industrial_capacity_factory_dynamic_var
+					value = 0.025
+				}
+				add_to_variable = {
+					var = VWI_economy_production_factory_start_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#放宽配给制
+	focus = {
+		id = VWI_liberalization_of_rationing
+		#icon = GFX_focus_VWI_liberalization_of_rationing
+		icon = GFX_focus_generic_currency_reforms
+		cost = 3
+		prerequisite = {
+			focus = VWI_Terra_bless_the_Queen
+		}
+		x = 0
+		y = 1
+		relative_position_id = VWI_Terra_bless_the_Queen
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_liberalization_of_rationing_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_stability_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_consumer_goods_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_political_power_gain_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#审判叛国者
+	focus = {
+		id = VWI_trying_traitors
+		#icon = GFX_focus_VWI_trying_traitors
+		icon = GFX_focus_AUS_lawmaking_leniency
+		cost = 3
+		prerequisite = {
+			focus = VWI_Terra_bless_the_Queen
+		}
+		x = 2
+		y = 1
+		relative_position_id = VWI_Terra_bless_the_Queen
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_trying_traitors_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_administrative_development_monthly_modifier_dynamic_var
+					value = 0.03
+				}
+			}
+		}
+	}
+
+	#确保生活物资
+	focus = {
+		id = VWI_securing_living_supplies
+		#icon = GFX_focus_VWI_securing_living_supplies
+		icon = GFX_focus_generic_agricultural_subsidies
+		cost = 3
+		prerequisite = {
+			focus = VWI_continuation_of_the_war_tax
+		}
+		prerequisite = {
+			focus = VWI_liberalization_of_rationing
+		}
+		prerequisite = {
+			focus = VWI_trying_traitors
+		}
+		x = -1
+		y = 1
+		relative_position_id = VWI_liberalization_of_rationing
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_securing_living_supplies_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_production_factory_efficiency_gain_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_economy_consumer_goods_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_economy_monthly_population_dynamic_var
+					value = 0.07
+				}
+			}
+		}
+	}
+
+	#弥合战争创伤
+	focus = {
+		id = VWI_healing_the_wounds_of_war
+		#icon = GFX_focus_VWI_healing_the_wounds_of_war
+		icon = GFX_focus_generic_industral_devlopment_bucket
+		cost = 3
+		prerequisite = {
+			focus = VWI_continuation_of_the_war_tax
+		}
+		prerequisite = {
+			focus = VWI_liberalization_of_rationing
+		}
+		prerequisite = {
+			focus = VWI_trying_traitors
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_liberalization_of_rationing
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_economy_buff_dummy_idea
+					add_idea = VWI_healing_the_wounds_of_war_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_economy_production_speed_infrastructure_factor_dynamic_var
+					value = 0.15
+				}
+				add_to_variable = {
+					var = VWI_economy_industry_repair_factor_dynamic_var
+					value = 0.2
+				}
+			}
+		}
+	}
+
+	#组建战时议会
+	focus = {
+		id = VWI_formation_of_wartime_parliament
+		icon = GFX_focus_VWI_formation_of_wartime_parliament
+		cost = 3
+		prerequisite = {
+			focus = VWI_securing_living_supplies
+		}
+		prerequisite = {
+			focus = VWI_healing_the_wounds_of_war
+		}
+		x = 2
+		y = 1
+		relative_position_id = VWI_securing_living_supplies
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_formation_of_wartime_parliament_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_war_support_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_political_power_gain_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#君主主义爱国宣传
+	focus = {
+		id = VWI_monarchist_patriotic_propaganda
+		#icon = GFX_focus_VWI_monarchist_patriotic_propaganda
+		icon = GFX_focus_generic_home_defense
+		cost = 3
+		prerequisite = {
+			focus = VWI_formation_of_wartime_parliament
+		}
+		x = -3
+		y = 1
+		relative_position_id = VWI_formation_of_wartime_parliament
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_formation_of_wartime_parliament_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_stability_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_conservatism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_despotism_drift_dynamic_var
+					value = 0.01
+				}
+			}
+		}
+	}
+
+	#承认革命历史
+	focus = {
+		id = VWI_acknowledging_the_history_of_the_revolution
+		#icon = GFX_focus_VWI_acknowledging_the_history_of_the_revolution
+		icon = GFX_focus_generic_concessions
+		cost = 3
+		prerequisite = {
+			focus = VWI_formation_of_wartime_parliament
+		}
+		mutually_exclusive = { focus = VWI_restore_the_honor_of_the_former_king }
+		x = -1
+		y = 1
+		relative_position_id = VWI_formation_of_wartime_parliament
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_acknowledging_the_history_of_the_revolution_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_war_support_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VWI_politics_authoritarianism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_compliance_growth_dynamic_var
+					value = 0.15
+				}
+			}
+		}
+	}
+
+	#恢复先王名誉
+	focus = {
+		id = VWI_restore_the_honor_of_the_former_king
+		#icon = GFX_focus_VWI_restore_the_honor_of_the_former_king
+		icon = GFX_focus_rom_royal_dictatorship
+		cost = 3
+		prerequisite = {
+			focus = VWI_formation_of_wartime_parliament
+		}
+		mutually_exclusive = { focus = VWI_acknowledging_the_history_of_the_revolution }
+		x = 1
+		y = 1
+		relative_position_id = VWI_formation_of_wartime_parliament
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_restore_the_honor_of_the_former_king_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_party_popularity_stability_factor_dynamic_var
+					value = 0.3
+				}
+				add_to_variable = {
+					var = VWI_politics_conservatism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_liberalism_drift_dynamic_var
+					value = 0.01
+				}
+			}
+		}
+	}
+
+	#承诺战后选举
+	focus = {
+		id = VWI_promised_post_war_elections
+		#icon = GFX_focus_VWI_promised_post_war_elections
+		icon = GFX_focus_ARG_defense_and_democracy
+		cost = 3
+		prerequisite = {
+			focus = VWI_acknowledging_the_history_of_the_revolution
+			focus = VWI_restore_the_honor_of_the_former_king
+		}
+		prerequisite = {
+			focus = VWI_monarchist_patriotic_propaganda
+		}
+		x = 1
+		y = 1
+		relative_position_id = VWI_monarchist_patriotic_propaganda
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VWI_politics_buff_dummy_idea
+					add_idea = VWI_promised_post_war_elections_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VWI_politics_stability_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VWI_politics_conservatism_drift_dynamic_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VWI_politics_despotism_drift_dynamic_var
+					value = 0.01
+				}
+			}
+		}
+	}
+
+	#漫漫长路到伦蒂尼姆
+	focus = {
+		id = VWI_long_way_to_Lentinium
+		#icon = GFX_focus_VWI_long_way_to_Lentinium
+		icon = GFX_focus_generic_workers
+		cost = 1
+		prerequisite = {
+			focus = VWI_promised_post_war_elections
+			focus = VWI_proclaim_the_Provisional_Government
+		}
+
+		available = {
+			VCA = {
+				exists = no
+			}
+			has_war = no
+		}
+
+		x = -5
+		y = 1
+		relative_position_id = VWI_promised_post_war_elections
+
+		completion_reward = {
+			add_stability = 0.15
+			add_political_power = 200
+			set_cosmetic_tag = Victoria_Empire
+
+			set_capital = {
+				state = 434
+				remember_old_capital = no
+			}
+
+			hidden_effect = {
+				every_subject_country = {
+					hidden_effect = {
+						transfer_navy = {
+							target = VWI
+						}
+					}
+					every_owned_state = {
+						limit = { is_core_of = PREV }
+						add_core_of = VWI
+						remove_core_of = PREV
+					}
+					every_character = {
+						set_nationality = VWI
+					}
+					VWI = {
+						annex_country = {
+							target = PREV
+							transfer_troops = yes
+						}
+					}
+				}
+			}
+		}
+	}
+}

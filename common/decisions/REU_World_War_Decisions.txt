@@ -1,0 +1,51 @@
+# ==============================================================================
+#  世界革命的终章 —— REU 全球战争目标决议
+#  · 分类见 common/decisions/categories/REU_decision_categroies.txt（REU_World_War_Category，显示名「世界革命」）
+#  · 前置：工厂总数大于 300（num_of_factories = 民用+军用+船坞 总数；该族触发器只认 > / <）
+#  · 效果：遍历所有国家，对「本国 / 附庸 / 阵营成员 / 已交战」之外的国家，
+#    逐个获得全面征服（annex_everything）的战争目标（create_wargoal，同 DUB / RHL 先例写法）。
+#  · 可重复：已交战国家被 has_war_with 过滤；战争目标由玩家自行决定何时开战，可再点补全。
+# ==============================================================================
+
+REU_World_War_Category = {
+
+	REU_declare_war_on_all = {
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			num_of_factories > 300
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = REU_declare_war_on_all_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						NOT = { original_tag = REU }
+						NOT = { is_subject_of = ROOT }
+						NOT = { is_in_faction_with = ROOT }
+						NOT = { has_war_with = ROOT }
+					}
+					ROOT = {
+						create_wargoal = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+}

@@ -1,0 +1,25 @@
+# 通用决议：所有国家各可执行一次，解锁“特殊兵种招募令”装备并直接发放 5 个。
+# 招募令本身没有任何战斗属性，只是各国特殊兵种的“入场券”。
+ARF_special_units_category = {
+
+	ARF_recruit_special_unit_decision = {
+
+		icon = GFX_decision_generic_army_support
+
+		fire_only_once = yes
+
+		available = {
+			always = yes
+		}
+
+		complete_effect = {
+			set_technology = {
+				arf_special_unit_token_tech = 1
+			}
+			add_equipment_to_stockpile = {
+				type = special_unit_token
+				amount = 5
+			}
+		}
+	}
+}

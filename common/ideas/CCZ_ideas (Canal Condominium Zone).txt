@@ -1,0 +1,39 @@
+ideas = {
+	#我决定在写初始化时偷个懒，所以用序号代替民族精神名，重置时应当按tag+民族精神的格式命名，如CCZ_民族精神名
+	country = {
+		CCZ_ideas_1 = {
+			picture = CCZ_ideas_1
+
+			modifier = {
+				consumer_goods_factor = -0.15
+				conscription_factor = -0.25
+				min_export = 0.1
+			}
+		}
+
+		CCZ_ideas_2 = {
+			picture = CCZ_ideas_2
+
+			modifier = {
+				training_time_factor = -0.2
+				resistance_damage_to_garrison = -0.15
+				max_planning_factor = -0.25
+				planning_speed = -0.25
+			}
+		}
+
+		CCZ_ideas_3 = {
+			picture = CCZ_ideas_3
+
+			modifier = {
+				political_power_factor = 0.05
+				production_speed_buildings_factor = 0.1
+			}
+			targeted_modifier = {
+				tag = CLB
+				cic_to_target_factor = 0.10
+				mic_to_target_factor = 0.10
+			}
+		}
+	}
+}
