@@ -1,0 +1,498 @@
+KZM_Ursus_war_Decisions = {
+	
+	#对乌开战
+	// ===== 停用：第十一次乌卡战争已改为乌萨斯侧专属决议链 =====
+	// 新链入口：common/decisions/URS_Kazimierz_War_Decisions.txt → URS_kzmwar_declare_war
+	// 恢复本决议前，请先撤掉新链的 on_monthly_URS 兜底（URS_kzmwar_backstop），否则同一场战争会被发起两次。
+// 	KZM_Ursus_war = {
+// 		icon = GFX_decision_generic_prepare_civil_war
+// 
+// 		#以防意外状况
+// 		fire_only_once = yes
+// 
+// 		#错开时间以避免乌萨斯统一战争与乌卡战争的新闻在短时间内接连触发
+// 		days_remove = 5
+// 
+// 		available = {
+// 			#任一乌萨斯统一者1与帝国交战
+// 			any_country = {
+// 				ursus_unifier = yes
+// 				has_war_with = URS
+// 			}
+// 			#待割地区还在乌萨斯手上
+// 			any_state = {
+// 				OR = {
+// 					is_Ursus_Kozacy_area = yes
+// 					is_Ursus_Belaursnia_area = yes
+// 					is_Ursus_Balti_area = yes
+// 				}
+// 				
+// 				is_owned_by = URS
+// 			}
+// 			#没有被傀儡或已经开战
+// 			NOT = {
+// 				OR = {
+// 					has_war_with = URS
+// 					is_puppet = yes
+// 				}
+// 			}
+// 		}
+// 
+// 		remove_effect = {
+// 			#对乌萨斯帝国与各路叛军宣战
+// 			declare_war_on = { target = URS type = annex_everything }
+// 			declare_war_on = { target = KZC type = annex_everything }
+// 			declare_war_on = { target = BUS type = annex_everything }
+// 			declare_war_on = { target = BLT type = annex_everything }
+// 			#即刻触发新闻“第十一次乌卡战争”
+// 			country_event = {
+// 				id = worldnews_kzm.9
+// 			}
+// 			#获得隐藏debuff
+//             # add_timed_idea = {
+//             #     idea = KZM_War_With_Ursus
+//             #     days = 500
+//             # }
+// 		}
+// 
+// 		ai_will_do = {
+// 			base = 1000
+// 		}
+// 	}
+	// ===== 停用结束 =====
+
+	#启用战败后内容
+	KZM_Shameful_Display = {
+		icon = GFX_decision_generic_political_discourse
+
+		#以防意外状况
+		fire_only_once = yes
+
+		available = {
+			#被乌萨斯统一者傀儡
+			is_puppet = yes
+		}
+
+		complete_effect = {
+			#即刻触发新闻“骑士蒙羞”
+			country_event = {
+				id = worldnews_kzm.10
+			}
+			#获得国家标志以解锁额外决议
+			set_country_flag = KZM_Shameful_Display_flag
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+
+	#加载达谢克卡西米尔
+	KZM_Daszek_Setup = {
+		icon = GFX_decision_generic_political_rally
+
+		#以防意外状况
+		fire_only_once = yes
+
+		available = {
+			#被革命民主主义乌萨斯傀儡
+			is_subject_of = UFE
+			#已完成决议“丢人现眼”
+			has_country_flag = KZM_Shameful_Display_flag		
+		}
+		
+		complete_effect = {
+			#更改执政党（在调试时大有用处）
+			set_politics = {
+				ruling_party = liberalism
+		 	    elections_allowed = yes
+			}
+			#修改达谢克人物描述
+			set_country_leader_description = {
+				desc = KZM_Ignacy_Daszek_UFE_subject_desc
+			}
+			#修改政党名称
+       		set_party_name = {
+				ideology = progressivism
+				name = "KZM_Daszek_progressivism_party"
+				long_name = KZM_Daszek_progressivism_party_long
+			}
+       		set_party_name = {
+				ideology = liberalism
+				name = "KZM_Daszek_liberalism_party"
+				long_name = KZM_Daszek_liberalism_party_long
+			}
+       		set_party_name = {
+				ideology = conservatism
+				name = "KZM_Daszek_conservatism_party"
+				long_name = KZM_Daszek_conservatism_party_long
+			}
+			#修改党派支持率
+			set_popularities = {
+				communism = 2.5
+				socialism = 2.5
+				progressivism = 10
+				liberalism = 40
+				conservatism = 20
+				authoritarianism = 20
+				despotism = 0
+				fascism = 5
+				mysticism = 0
+				special = 0
+			}
+			#重新洗牌
+			remove_ideas = {
+				#移除一些政治路线相关民族精神
+				KZM_Omniscient_Eye
+				KZM_Kleptocracy
+				KZM_National_martial_law
+				KZM_Permanent_state_of_combat_readiness
+				KZM_Sanacja_idea
+				KZM_Army_first_Economy
+				KZM_Corporate_Harmonism
+				KZM_Market_Dominance
+				KZM_Extreme_economic_liberalism
+				KZM_Prepare_for_Next_War
+				KZM_Kazimierz_Democratic_Revolution
+				KZM_Turbo_Lovers
+				KZM_Greater_Hammer
+				KZM_Kazimierz_People_Army
+				KZM_Ursus_Military_Occupation
+			}
+			#法案调整
+			add_ideas = {
+				limited_conscription #军事复员
+				low_economic_mobilisation #减轻动员
+
+				equal_treatment #给予感染者平等权力	
+				working_law_14h #维持原制
+				universal_voting #民主化改革
+			}
+			#获得卡西米尔民主革命
+			add_ideas = KZM_Kazimierz_Democratic_Revolution
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+
+	#加载特奥茨基卡西米尔
+	KZM_Teutski_Setup = {
+		icon = GFX_decision_generic_civil_support
+
+		#以防意外状况
+		fire_only_once = yes
+
+		available = {
+			#被苏维埃乌萨斯傀儡
+			is_subject_of = REU
+			#已完成决议“丢人现眼”
+			has_country_flag = KZM_Shameful_Display_flag	
+		}
+		
+		complete_effect = {
+			#更改执政党（在调试时大有用处）
+			set_politics = {
+				ruling_party = communism
+		 	  	elections_allowed = no
+			}
+			#修改特奥茨基人物描述
+			set_country_leader_description = {
+				desc = KZM_Felix_Teutski_REU_subject_desc
+			}
+			#修改政党名称
+       		set_party_name = {
+				ideology = progressivism
+				name = "KZM_Teutski_progressivism_party"
+				long_name = KZM_Teutski_progressivism_party_long
+			}
+       		set_party_name = {
+				ideology = liberalism
+				name = "KZM_Teutski_liberalism_party"
+				long_name = KZM_Teutski_liberalism_party_long
+			}
+       		set_party_name = {
+				ideology = conservatism
+				name = "KZM_Teutski_conservatism_party"
+				long_name = KZM_Teutski_conservatism_party_long
+			}
+			#修改党派支持率
+			set_popularities = {
+				communism = 30
+				socialism = 20
+				progressivism = 15
+				liberalism = 8
+				conservatism = 7
+				authoritarianism = 15
+				despotism = 0
+				fascism = 5
+				mysticism = 0
+				special = 0
+			}	
+			#重新洗牌
+			remove_ideas = {
+				#移除一些政治路线相关民族精神
+				KZM_Omniscient_Eye
+				KZM_Kleptocracy
+				KZM_National_martial_law
+				KZM_Permanent_state_of_combat_readiness
+				KZM_Sanacja_idea
+				KZM_Army_first_Economy
+				KZM_Corporate_Harmonism
+				KZM_Market_Dominance
+				KZM_Extreme_economic_liberalism
+				KZM_Prepare_for_Next_War
+				KZM_Kazimierz_Democratic_Revolution
+				KZM_Turbo_Lovers
+				KZM_Greater_Hammer
+				KZM_Kazimierz_People_Army
+				KZM_Ursus_Military_Occupation
+
+				#移除民权与景观社会相关民族精神	
+				KZM_Civil_Rights_Dissent
+				KZM_Civil_Rights_Riot
+				KZM_Civil_Rights_Dissent_Was_Suppressed
+				KZM_Civil_Rights_legislation_Low
+				KZM_Civil_Rights_legislation_High
+
+				KZM_Society_of_the_Spectacle_1
+				KZM_Society_of_the_Spectacle_2
+				KZM_Society_of_the_Spectacle_3
+
+				#移除军事相关民族精神
+				KZM_The_Legacy_of_Chivalry
+				KZM_Kazimierz_Armed_forces
+			}
+			#法案调整
+			add_ideas = {
+				limited_conscription #军事复员
+				low_economic_mobilisation #减轻动员
+
+				equal_treatment #给予感染者平等权力	
+				working_law_8h #劳动法改革
+				register_voting #无产阶级专政
+			}
+			#获得涡轮之爱、巨锤圣教、卡西米尔人民军
+			add_ideas = KZM_Turbo_Lovers
+			add_ideas = KZM_Greater_Hammer
+			add_ideas = KZM_Kazimierz_People_Army
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	#加载威权主义军管卡西米尔
+	KZM_authoritarianism_Military_Control_Commission_Setup = {
+		icon = GFX_decision_generic_army_support
+
+		#以防意外状况
+		fire_only_once = yes
+
+		available = {
+			or = {
+				#克缅哥罗德或乌萨斯帝国傀儡
+				is_subject_of = KMG
+				is_subject_of = URS	
+			}
+			or = {
+				#确保意识形态相符
+				KMG = {
+					or = {
+						has_government = conservatism
+						has_government = authoritarianism
+						has_government = despotism
+					}
+				}
+				URS = {
+					or = {
+						has_government = progressivism
+						has_government = liberalism
+						has_government = conservatism
+						has_government = authoritarianism
+						has_government = despotism
+					}
+					
+				}
+			}
+			#已完成决议“丢人现眼”
+			has_country_flag = KZM_Shameful_Display_flag	
+		}
+		
+		complete_effect = {
+			#更改执政党（这下不调试也一样有用了）
+			set_politics = {
+				ruling_party = authoritarianism
+		 	  	elections_allowed = no
+			}
+			#保险措施
+			retire_character = KZM_Czarny
+			retire_character = KZM_Malkiewicz
+			retire_character = KZM_Mob
+			#更替领导人为军管委员会
+			add_country_leader_role = {
+	      	  	character = KZM_Military_Control_Commission
+	     	  	promote_leader = yes
+	    		country_leader = {
+					ideology = stratocracy_subtype
+					expire = "2000.1.1"
+					id = -1
+					desc = KZM_Military_Control_Commission_desc
+	     	   }
+		    }
+			#修改政党名称
+       		set_party_name = {
+				ideology = authoritarianism
+				name = "KZM_Military_Control_Commission_party"
+				long_name = KZM_Military_Control_Commission_party_long
+			}
+       		set_party_name = {
+				ideology = despotism
+				name = "KZM_Military_Control_Commission_party"
+				long_name = KZM_Military_Control_Commission_party_long
+			}
+			#修改党派支持率
+			set_popularities = {
+				communism = 1.5
+				socialism = 1.5
+				progressivism = 5
+				liberalism = 5
+				conservatism = 12
+				authoritarianism = 40
+				despotism = 25
+				fascism = 10
+				mysticism = 0
+				special = 0
+			}	
+			#重新洗牌
+			remove_ideas = {
+				#移除一些政治路线相关民族精神
+				KZM_Omniscient_Eye
+				KZM_Kleptocracy
+				KZM_National_martial_law
+				KZM_Permanent_state_of_combat_readiness
+				KZM_Sanacja_idea
+				KZM_Army_first_Economy
+				KZM_Corporate_Harmonism
+				KZM_Market_Dominance
+				KZM_Extreme_economic_liberalism
+				KZM_Prepare_for_Next_War
+				KZM_Kazimierz_Democratic_Revolution
+				KZM_Turbo_Lovers
+				KZM_Greater_Hammer
+				KZM_Kazimierz_People_Army
+				KZM_Ursus_Military_Occupation
+			}
+			#法案调整
+			add_ideas = {
+				limited_conscription #军事复员
+				low_economic_mobilisation #减轻动员
+
+				behavior_control #管控感染者
+				working_law_12h #维持旧制
+				no_voting #军管
+			}
+			#获得乌萨斯的军事占领
+			add_ideas = KZM_Ursus_Military_Occupation
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	#加载法西斯主义军管卡西米尔
+	KZM_fascism_Military_Control_Commission_Setup = {
+		icon = GFX_decision_generic_tank
+
+		#以防意外状况
+		fire_only_once = yes
+
+		available = {
+			#被法西斯克缅哥罗德傀儡
+			is_subject_of = KMG
+			KMG = {
+				has_government = fascism	
+			}
+			#已完成决议“丢人现眼”
+			has_country_flag = KZM_Shameful_Display_flag	
+		}
+		
+		complete_effect = {
+			#更改执政党（在调试时大有用处）
+			set_politics = {
+				ruling_party = fascism
+		 	  	elections_allowed = no
+			}
+			#更替领导人为军管委员会
+			add_country_leader_role = {
+	      	  character = KZM_Military_Control_Commission
+	     	  	promote_leader = yes
+	    		country_leader = {
+					ideology = national_populism_subtype
+					expire = "2000.1.1"
+					id = -1
+					desc = KZM_Military_Control_Commission_desc
+	     	   }
+		    }
+			#修改政党名称
+       		set_party_name = {
+				ideology = fascism
+				name = "KZM_Military_Control_Commission_party"
+				long_name = KZM_Military_Control_Commission_party_long
+			}
+       		set_party_name = {
+				ideology = despotism
+				name = "KZM_Military_Control_Commission_party"
+				long_name = KZM_Military_Control_Commission_party_long
+			}
+			#修改党派支持率
+			set_popularities = {
+				communism = 1.5
+				socialism = 1.5
+				progressivism = 4
+				liberalism = 6
+				conservatism = 12
+				authoritarianism = 20
+				despotism = 15
+				fascism = 40
+				mysticism = 0
+				special = 0
+			}	
+			#重新洗牌
+			remove_ideas = {
+				#移除一些政治路线相关民族精神
+				KZM_Omniscient_Eye
+				KZM_Kleptocracy
+				KZM_National_martial_law
+				KZM_Permanent_state_of_combat_readiness
+				KZM_Sanacja_idea
+				KZM_Army_first_Economy
+				KZM_Corporate_Harmonism
+				KZM_Market_Dominance
+				KZM_Extreme_economic_liberalism
+				KZM_Prepare_for_Next_War
+				KZM_Kazimierz_Democratic_Revolution
+				KZM_Turbo_Lovers
+				KZM_Greater_Hammer
+				KZM_Kazimierz_People_Army
+				KZM_Ursus_Military_Occupation
+			}
+			#法案调整
+			add_ideas = {
+				limited_conscription #军事复员
+				low_economic_mobilisation #减轻动员
+
+				behavior_control #管控感染者
+				working_law_12h #维持旧制
+				no_voting #军管
+			}
+			#获得乌萨斯的军事占领
+			add_ideas = KZM_Ursus_Military_Occupation
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+}

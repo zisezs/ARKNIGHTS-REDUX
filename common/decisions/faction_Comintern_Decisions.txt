@@ -1,0 +1,29 @@
+Comintern_decisions = {
+
+	Comintern_faction_establish = {
+
+		visible = {
+			NOT = {
+				any_other_country = {
+					has_faction_template = faction_template_communist_international
+				}
+			}
+			has_government = communism
+		}
+
+		available = {
+			is_major = yes
+			has_idea = major_country
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			create_faction_from_template = faction_template_communist_international
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+}

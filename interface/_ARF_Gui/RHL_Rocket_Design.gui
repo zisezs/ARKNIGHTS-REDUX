@@ -1,0 +1,617 @@
+### 《人类与星辰大海》火箭模块 —— 面板 GUI（T04 生成，名字取自契约真源）
+### 版式 = 一张表单：B 零件库 / C 每级一行（装配台）/ D 性能 / E 操作 / F 日志（分区见 star_rocket.ROCKET_LAYOUT）
+### 按钮标签由引擎按 buttonText 本地化键绘制；按钮贴图内不含任何文字；
+### 背景贴图不含任何分区线/角标，避免和控件坐标对不齐。
+guiTypes = {
+	containerWindowType = {
+		name = "rhl_rc_entry_window"
+		position = { x = 0 y = 0 }
+		size = { width = 48 height = 48 }
+		clipping = no
+		buttonType = {
+			name = "rhl_rc_entry_button"
+			quadTextureSprite = "GFX_RHL_rocket_entry_btn"
+			position = { x = 0 y = 0 }
+			clicksound = click_default
+			pdx_tooltip = "RHL_rocket_entry_button_tt"
+		}
+	}
+	containerWindowType = {
+		name = "rhl_rc_window"
+		orientation = center
+		origo = center
+		position = { x = 0 y = 0 }
+		size = { width = 1280 height = 720 }
+		moveable = yes
+		clipping = no
+		background = {
+			name = "bg"
+			quadTextureSprite = "GFX_RHL_rocket_panel_bg"
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_title"
+			position = { x = 24 y = 16 }
+			font = "hoi_18mbs"
+			text = "RHL_rocket_panel_title"
+			format = left
+			maxWidth = 700
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_row1"
+			position = { x = 312 y = 134 }
+			font = "hoi_16mbs"
+			text = "RHL_rocket_row_1"
+			format = left
+			maxWidth = 56
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_row2"
+			position = { x = 312 y = 264 }
+			font = "hoi_16mbs"
+			text = "RHL_rocket_row_2"
+			format = left
+			maxWidth = 56
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_row3"
+			position = { x = 312 y = 394 }
+			font = "hoi_16mbs"
+			text = "RHL_rocket_row_3"
+			format = left
+			maxWidth = 56
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_dv"
+			position = { x = 988 y = 92 }
+			font = "hoi_16mbs"
+			text = "RHL_rocket_stat_dv"
+			format = left
+			maxWidth = 276
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_twr"
+			position = { x = 988 y = 120 }
+			font = "hoi_16mbs"
+			text = "RHL_rocket_stat_twr"
+			format = left
+			maxWidth = 276
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_mass"
+			position = { x = 988 y = 148 }
+			font = "hoi_16mbs"
+			text = "RHL_rocket_stat_mass"
+			format = left
+			maxWidth = 276
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_payload"
+			position = { x = 988 y = 176 }
+			font = "hoi_16mbs"
+			text = "RHL_rocket_stat_payload"
+			format = left
+			maxWidth = 276
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_reliability"
+			position = { x = 988 y = 204 }
+			font = "hoi_16mbs"
+			text = "RHL_rocket_stat_reliability"
+			format = left
+			maxWidth = 276
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_stages"
+			position = { x = 988 y = 232 }
+			font = "hoi_16mbs"
+			text = "RHL_rocket_stat_stages"
+			format = left
+			maxWidth = 276
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_valid"
+			position = { x = 988 y = 260 }
+			font = "hoi_16mbs"
+			text = "[GetRHLRocketStatus]"
+			format = left
+			maxWidth = 276
+			maxHeight = 22
+		}
+		buttonType = {
+			name = "rhl_rc_close"
+			quadTextureSprite = "GFX_RHL_rocket_btn_100"
+			buttonText = "RHL_rocket_btn_close"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 1164 y = 14 }
+		}
+		buttonType = {
+			name = "rhl_rc_help"
+			quadTextureSprite = "GFX_RHL_rocket_btn_100"
+			buttonText = "RHL_rocket_btn_help"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 1056 y = 14 }
+		}
+		buttonType = {
+			name = "rhl_rc_stages_1"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_rocket_stages_1"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 608 }
+		}
+		buttonType = {
+			name = "rhl_rc_stages_2"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_rocket_stages_2"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 160 y = 608 }
+		}
+		buttonType = {
+			name = "rhl_rc_stages_3"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_rocket_stages_3"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 308 y = 608 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_b_s1"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_body_s1"
+			pdx_tooltip = "RHL_rocket_body_s1_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 96 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_b_m1"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_body_m1"
+			pdx_tooltip = "RHL_rocket_body_m1_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 128 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_b_l1"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_body_l1"
+			pdx_tooltip = "RHL_rocket_body_l1_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 160 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_b_m2"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_body_m2"
+			pdx_tooltip = "RHL_rocket_body_m2_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 192 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_e_a1"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_engine_a1"
+			pdx_tooltip = "RHL_rocket_engine_a1_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 230 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_e_a2"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_engine_a2"
+			pdx_tooltip = "RHL_rocket_engine_a2_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 262 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_e_c1"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_engine_c1"
+			pdx_tooltip = "RHL_rocket_engine_c1_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 294 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_e_b1"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_engine_b1"
+			pdx_tooltip = "RHL_rocket_engine_b1_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 326 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_e_d1"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_engine_d1"
+			pdx_tooltip = "RHL_rocket_engine_d1_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 358 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_e_e1"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_engine_e1"
+			pdx_tooltip = "RHL_rocket_engine_e1_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 390 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_p_loxeth"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_prop_loxeth"
+			pdx_tooltip = "RHL_rocket_prop_loxeth_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 428 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_p_loxkero"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_prop_loxkero"
+			pdx_tooltip = "RHL_rocket_prop_loxkero_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 460 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_p_nitric"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_prop_nitric"
+			pdx_tooltip = "RHL_rocket_prop_nitric_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 492 }
+		}
+		buttonType = {
+			name = "rhl_rc_pick_p_h2o2"
+			quadTextureSprite = "GFX_RHL_rocket_btn_288"
+			buttonText = "RHL_rocket_prop_h2o2"
+			pdx_tooltip = "RHL_rocket_prop_h2o2_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 524 }
+		}
+		buttonType = {
+			name = "rhl_rc_s1_body"
+			quadTextureSprite = "GFX_RHL_rocket_btn_120"
+			buttonText = "RHL_rocket_slot_body"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 452 y = 130 }
+		}
+		buttonType = {
+			name = "rhl_rc_s1_engine"
+			quadTextureSprite = "GFX_RHL_rocket_btn_120"
+			buttonText = "RHL_rocket_slot_engine"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 656 y = 130 }
+		}
+		buttonType = {
+			name = "rhl_rc_s1_prop"
+			quadTextureSprite = "GFX_RHL_rocket_btn_100"
+			buttonText = "RHL_rocket_slot_fuel"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 860 y = 130 }
+		}
+		buttonType = {
+			name = "rhl_rc_s2_body"
+			quadTextureSprite = "GFX_RHL_rocket_btn_120"
+			buttonText = "RHL_rocket_slot_body"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 452 y = 260 }
+		}
+		buttonType = {
+			name = "rhl_rc_s2_engine"
+			quadTextureSprite = "GFX_RHL_rocket_btn_120"
+			buttonText = "RHL_rocket_slot_engine"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 656 y = 260 }
+		}
+		buttonType = {
+			name = "rhl_rc_s2_prop"
+			quadTextureSprite = "GFX_RHL_rocket_btn_100"
+			buttonText = "RHL_rocket_slot_fuel"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 860 y = 260 }
+		}
+		buttonType = {
+			name = "rhl_rc_s3_body"
+			quadTextureSprite = "GFX_RHL_rocket_btn_120"
+			buttonText = "RHL_rocket_slot_body"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 452 y = 390 }
+		}
+		buttonType = {
+			name = "rhl_rc_s3_engine"
+			quadTextureSprite = "GFX_RHL_rocket_btn_120"
+			buttonText = "RHL_rocket_slot_engine"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 656 y = 390 }
+		}
+		buttonType = {
+			name = "rhl_rc_s3_prop"
+			quadTextureSprite = "GFX_RHL_rocket_btn_100"
+			buttonText = "RHL_rocket_slot_fuel"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 860 y = 390 }
+		}
+		buttonType = {
+			name = "rhl_rc_payload_0"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_pay_sounding"
+			pdx_tooltip = "RHL_pay_sounding_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 456 y = 608 }
+		}
+		buttonType = {
+			name = "rhl_rc_payload_1"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_pay_bio"
+			pdx_tooltip = "RHL_pay_bio_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 604 y = 608 }
+		}
+		buttonType = {
+			name = "rhl_rc_payload_2"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_pay_lab"
+			pdx_tooltip = "RHL_pay_lab_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 752 y = 608 }
+		}
+		buttonType = {
+			name = "rhl_rc_payload_3"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_pay_heavy"
+			pdx_tooltip = "RHL_pay_heavy_tt"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 900 y = 608 }
+		}
+		buttonType = {
+			name = "rhl_rc_mission_prev"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_rocket_btn_mission_prev"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 556 y = 644 }
+		}
+		buttonType = {
+			name = "rhl_rc_mission_next"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_rocket_btn_mission_next"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 704 y = 644 }
+		}
+		buttonType = {
+			name = "rhl_rc_validate"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_rocket_btn_validate"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 12 y = 644 }
+		}
+		buttonType = {
+			name = "rhl_rc_launch"
+			quadTextureSprite = "GFX_RHL_rocket_btn_launch"
+			buttonText = "RHL_rocket_btn_launch"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 160 y = 644 }
+		}
+		buttonType = {
+			name = "rhl_rc_reset"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_rocket_btn_reset"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			position = { x = 408 y = 644 }
+		}
+		buttonType = {
+			name = "rhl_rc_auto"
+			quadTextureSprite = "GFX_RHL_rocket_btn_140"
+			buttonText = "RHL_rocket_btn_auto"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+			pdx_tooltip = "RHL_rocket_btn_auto_tt"
+			position = { x = 852 y = 644 }
+		}
+		iconType = {
+			name = "rhl_rc_slot1_body_icon"
+			spriteType = "GFX_RHL_rocket_part_body"
+			position = { x = 380 y = 112 }
+		}
+		iconType = {
+			name = "rhl_rc_slot1_engine_icon"
+			spriteType = "GFX_RHL_rocket_part_engine"
+			position = { x = 584 y = 112 }
+		}
+		iconType = {
+			name = "rhl_rc_slot1_prop_icon"
+			spriteType = "GFX_RHL_rocket_part_prop"
+			position = { x = 788 y = 112 }
+		}
+		iconType = {
+			name = "rhl_rc_slot1_body_hl"
+			spriteType = "GFX_RHL_rocket_slot_hl"
+			position = { x = 380 y = 112 }
+		}
+		iconType = {
+			name = "rhl_rc_slot1_engine_hl"
+			spriteType = "GFX_RHL_rocket_slot_hl"
+			position = { x = 584 y = 112 }
+		}
+		iconType = {
+			name = "rhl_rc_slot1_prop_hl"
+			spriteType = "GFX_RHL_rocket_slot_hl"
+			position = { x = 788 y = 112 }
+		}
+		iconType = {
+			name = "rhl_rc_slot2_body_icon"
+			spriteType = "GFX_RHL_rocket_part_body"
+			position = { x = 380 y = 242 }
+		}
+		iconType = {
+			name = "rhl_rc_slot2_engine_icon"
+			spriteType = "GFX_RHL_rocket_part_engine"
+			position = { x = 584 y = 242 }
+		}
+		iconType = {
+			name = "rhl_rc_slot2_prop_icon"
+			spriteType = "GFX_RHL_rocket_part_prop"
+			position = { x = 788 y = 242 }
+		}
+		iconType = {
+			name = "rhl_rc_slot2_body_hl"
+			spriteType = "GFX_RHL_rocket_slot_hl"
+			position = { x = 380 y = 242 }
+		}
+		iconType = {
+			name = "rhl_rc_slot2_engine_hl"
+			spriteType = "GFX_RHL_rocket_slot_hl"
+			position = { x = 584 y = 242 }
+		}
+		iconType = {
+			name = "rhl_rc_slot2_prop_hl"
+			spriteType = "GFX_RHL_rocket_slot_hl"
+			position = { x = 788 y = 242 }
+		}
+		iconType = {
+			name = "rhl_rc_slot3_body_icon"
+			spriteType = "GFX_RHL_rocket_part_body"
+			position = { x = 380 y = 372 }
+		}
+		iconType = {
+			name = "rhl_rc_slot3_engine_icon"
+			spriteType = "GFX_RHL_rocket_part_engine"
+			position = { x = 584 y = 372 }
+		}
+		iconType = {
+			name = "rhl_rc_slot3_prop_icon"
+			spriteType = "GFX_RHL_rocket_part_prop"
+			position = { x = 788 y = 372 }
+		}
+		iconType = {
+			name = "rhl_rc_slot3_body_hl"
+			spriteType = "GFX_RHL_rocket_slot_hl"
+			position = { x = 380 y = 372 }
+		}
+		iconType = {
+			name = "rhl_rc_slot3_engine_hl"
+			spriteType = "GFX_RHL_rocket_slot_hl"
+			position = { x = 584 y = 372 }
+		}
+		iconType = {
+			name = "rhl_rc_slot3_prop_hl"
+			spriteType = "GFX_RHL_rocket_slot_hl"
+			position = { x = 788 y = 372 }
+		}
+		iconType = {
+			name = "rhl_rc_gauge_dv"
+			spriteType = "GFX_RHL_rocket_gauge_dv"
+			position = { x = 988 y = 300 }
+		}
+		iconType = {
+			name = "rhl_rc_gauge_req"
+			spriteType = "GFX_RHL_rocket_gauge_dv"
+			position = { x = 988 y = 348 }
+		}
+		iconType = {
+			name = "rhl_rc_sel_hl_b_s1"
+			spriteType = "GFX_RHL_rocket_pick_sel"
+			position = { x = 12 y = 96 }
+		}
+		iconType = {
+			name = "rhl_rc_sel_hl_b_m1"
+			spriteType = "GFX_RHL_rocket_pick_sel"
+			position = { x = 12 y = 128 }
+		}
+		iconType = {
+			name = "rhl_rc_sel_hl_b_l1"
+			spriteType = "GFX_RHL_rocket_pick_sel"
+			position = { x = 12 y = 160 }
+		}
+		iconType = {
+			name = "rhl_rc_sel_hl_b_m2"
+			spriteType = "GFX_RHL_rocket_pick_sel"
+			position = { x = 12 y = 192 }
+		}
+		iconType = {
+			name = "rhl_rc_payload_sel0"
+			spriteType = "GFX_RHL_rocket_payload_sel"
+			position = { x = 456 y = 608 }
+		}
+		iconType = {
+			name = "rhl_rc_payload_sel1"
+			spriteType = "GFX_RHL_rocket_payload_sel"
+			position = { x = 604 y = 608 }
+		}
+		iconType = {
+			name = "rhl_rc_payload_sel2"
+			spriteType = "GFX_RHL_rocket_payload_sel"
+			position = { x = 752 y = 608 }
+		}
+		iconType = {
+			name = "rhl_rc_payload_sel3"
+			spriteType = "GFX_RHL_rocket_payload_sel"
+			position = { x = 900 y = 608 }
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_mission"
+			position = { x = 988 y = 516 }
+			font = "hoi_16mbs"
+			text = "[GetRHLRocketMission]"
+			format = left
+			maxWidth = 284
+			maxHeight = 22
+		}
+		instantTextBoxType = {
+			name = "rhl_rc_txt_last"
+			position = { x = 988 y = 544 }
+			font = "hoi_16mbs"
+			text = "[GetRHLRocketLast]"
+			format = left
+			maxWidth = 284
+			maxHeight = 22
+		}
+		iconType = {
+			name = "rhl_rc_payload_icon"
+			spriteType = "GFX_RHL_rocket_payload"
+			position = { x = 988 y = 410 }
+		}
+	}
+}

@@ -1,0 +1,178 @@
+capital = 916
+
+oob = "VCA_Start"
+
+recruit_character = VCA_Mary_Caster_Victoria
+recruit_character = VCA_Richard_Worwick
+recruit_character = VCA_Diana_Curcelle
+recruit_character = VCA_Howard_Malpas
+recruit_character = VCA_Felix_Bracken
+recruit_character = VCA_Barry_Domfelsen
+recruit_character = VCA_Anna_Browne_Conny
+recruit_character = VCA_Brian_Montague
+recruit_character = VCA_Louise_Mountgrave_Victoria
+recruit_character = VCA_Albert_Jones
+recruit_character = VCA_Helen_Dawn
+recruit_character = VCA_Marcus_Bond
+recruit_character = VCA_Kimmy_Fairwyn
+recruit_character = VCA_Tolly_Laurelwood
+recruit_character = VCA_Nicholas_Grasby
+recruit_character = VCA_Paul_Hawker
+recruit_character = VCA_Daphne_Gregg_Lloyd
+recruit_character = VCA_Gerard_Lothbury
+recruit_character = VCA_Osborne_Ancoats
+recruit_character = VCA_Scarlett_Goulden
+recruit_character = VCA_Harry_Riddle
+recruit_character = VCA_John_Casey
+recruit_character = VCA_Adams_Swire
+recruit_character = VCA_Ishmael_Elderton
+recruit_character = VCA_Johnny_Falstof
+recruit_character = VCA_Ian_Dickinson
+recruit_character = VCA_Janet_Minwell
+recruit_character = VCA_Trevor_Leigh_Maple
+
+activate_advisor = VCA_Paul_Hawker_second_in_command
+
+set_country_flag = second_leader_flag
+set_country_flag = firstleader_regent
+set_country_flag = secondleader_prime_minister
+
+add_ideas = {
+	no_voting
+	working_law_14h
+	isolation_management
+	local_warlord
+
+	subsistence_agriculture
+	electric_tool_production
+	high_illiteracy_rate
+	inefficient_administration
+	rampant_poverty
+
+	VCA_politics_debuff_idea
+	VCA_economy_debuff_idea
+	VCA_military_debuff_idea
+}
+
+set_variable = { VCA_military_army_org_factor_dynamic_var = -0.1 }
+set_variable = { VCA_military_army_attack_factor_dynamic_var = -0.05 }
+
+set_variable = { VCA_economy_consumer_goods_factor_dynamic_var = 0.2 }
+set_variable = { VCA_economy_production_factory_max_efficiency_factor_dynamic_var = -0.05 }
+
+set_variable = { VCA_politics_stability_factor_dynamic_var = -0.1 }
+
+set_autonomy = {
+	target = VFI
+	autonomy_state = autonomy_victoria_alliance
+}
+set_autonomy = {
+	target = VCR
+	autonomy_state = autonomy_victoria_alliance
+}
+
+set_stability = 0.5
+set_war_support = 0.4
+set_research_slots = 2
+
+set_technology = {
+
+}
+
+create_equipment_variant = {
+	type = landship_chassis_1
+	parent_version = 0
+	modules = {
+		turret_type_slot = tank_super_heavy_four_man_tank_turret
+		main_armament_slot = tank_heavy_cannon_2
+		suspension_type_slot = tank_bogie_suspension
+		armor_type_slot = tank_riveted_armor
+		engine_type_slot = tank_gasoline_engine
+		special_type_slot_1 = tank_heavy_cannon_2
+		special_type_slot_3 = additional_machine_guns
+		special_type_slot_2 = tank_radio_1
+		special_type_slot_4 = sloped_armor
+	}
+	upgrades = {
+		tank_nsb_armor_upgrade = 2
+		tank_nsb_engine_upgrade = 2
+	}
+}
+
+create_equipment_variant = {
+	name = "FV4020“百夫长”"
+	type = medium_tank_chassis_1
+	parent_version = 0
+	modules = {
+		turret_type_slot = tank_medium_two_man_tank_turret
+		main_armament_slot = tank_medium_cannon_2
+		suspension_type_slot = tank_torsion_bar_suspension
+		armor_type_slot = tank_riveted_armor
+		engine_type_slot = tank_gasoline_engine
+	}
+	upgrades = {
+		tank_nsb_armor_upgrade = 2
+		tank_nsb_engine_upgrade = 2
+	}
+}
+
+create_equipment_variant = {
+	name = "吞火者 F MK.21"
+	type = small_plane_airframe_0
+	modules = {
+		fixed_main_weapon_slot = aircraft_cannon_1
+		fixed_aircraft_cannon_slot = aircraft_cannon_1
+		engine_type_slot = engine_1x
+		plane_wingform_slot = straight_wing
+		special_type_slot_1 = empty
+	}
+}
+
+create_equipment_variant = {
+	name = "短矛 F MK.4"
+	type = small_plane_airframe_1
+	modules = {
+		fixed_main_weapon_slot = air_to_air_hardpoint_1
+		fixed_aircraft_cannon_slot = aircraft_cannon_1
+		engine_type_slot = engine_1x
+		plane_wingform_slot = straight_wing
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+	}
+}
+
+create_equipment_variant = {
+	name = "猎人 A MK.1"
+	type = small_plane_cas_airframe_1
+	modules = {
+		fixed_main_weapon_slot = air_to_ground_hardpoint_1
+		fixed_aircraft_cannon_slot = aircraft_cannon_1
+		engine_type_slot = jet_engine_1_1x
+		plane_wingform_slot = straight_wing
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+	}
+}
+
+set_politics = {
+	ruling_party = conservatism
+	elections_allowed = no
+}
+
+set_popularities = {
+	communism = 0
+	socialism = 0
+	progressivism = 0
+	liberalism = 0
+	conservatism = 100
+	authoritarianism = 0
+	despotism = 0
+	fascism = 0
+	mysticism = 0
+	special = 0
+}
+
+# ARF 特殊兵种：开局授予专属兵种科技（ARF 特殊兵种模块维护，请勿手改）
+set_technology = {
+	arf_steam_knight_company_tech = 1
+}

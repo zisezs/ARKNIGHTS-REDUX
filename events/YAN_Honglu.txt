@@ -1,0 +1,453 @@
+# ==============================================================================
+#  大炎 · 洪炉示岁（事件链 · 10 环）
+#  · 原作 act6d5《洪炉示岁》，地点龙门，时间年关（除夕深夜 → 新年 → 三日后）
+#  · 视角：龙门是大炎属国，急报送进百京，玩家以朝廷的身份拍板。
+#  · 出场角色照原作：魏遵武（龙门执政）/ 陈晖洁 / 雪雉 / 鬼姐 / 林警员 / 槐琥 /
+#    炎熔 / 阿米娅 / 博士 / 年 / 夕；朝廷侧用 太傅 / 老天师 / 椿 / 魏彦吾 / 左宣辽。
+#  · 起链 1095.1.1，每 60 天一环，见 YAN_sidestory_scripted_effects.txt。
+#  · 推进写在 immediate 里，不靠玩家点选项，节奏不会被拖住。
+#  · 文风：白描、短句、克制。机制细节一律走 custom_effect_tooltip 的 _tt 键。
+# ==============================================================================
+
+add_namespace = yan_honglu
+
+# ------------------------------------------------------------------
+# 1 年关 —— 除夕深夜，龙门进入最高戒备
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_honglu.1
+	title = yan_honglu.1.t
+	desc = yan_honglu.1.d
+	picture = GFX_report_event_Generic_Lungmen_Office
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_honglu.2 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_honglu.1.a
+		ai_chance = { base = 40 }
+		add_political_power = -25
+		add_stability = 0.03
+	}
+
+	option = {
+		name = yan_honglu.1.b
+		ai_chance = { base = 35 }
+		add_political_power = 35
+		add_stability = -0.03
+	}
+
+	option = {
+		name = yan_honglu.1.c
+		ai_chance = { base = 25 }
+		add_political_power = -50
+		add_to_variable = { yan_sui_awakening = -3 }
+		add_to_variable = { yan_agent_trust = 5 }
+		custom_effect_tooltip = yan_ss_sui_m3_tt
+		custom_effect_tooltip = yan_ss_trust_p5_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 2 巨洞 —— 庙街外的熔痕，消息被鬼姐套走
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_honglu.2
+	title = yan_honglu.2.t
+	desc = yan_honglu.2.d
+	picture = GFX_report_event_Generic_Lungmen_Alley_Rainy
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_honglu.3 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_honglu.2.a
+		ai_chance = { base = 45 }
+		add_political_power = -30
+		add_war_support = 0.03
+		army_experience = 15
+	}
+
+	option = {
+		name = yan_honglu.2.b
+		ai_chance = { base = 30 }
+		add_stability = -0.05
+		add_to_variable = { yan_sui_awakening = 4 }
+		custom_effect_tooltip = yan_ss_sui_p4_tt
+	}
+
+	option = {
+		name = yan_honglu.2.c
+		ai_chance = { base = 25 }
+		add_political_power = -45
+		add_stability = 0.05
+		add_to_variable = { yan_sui_awakening = -4 }
+		custom_effect_tooltip = yan_ss_sui_m4_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 3 升温 —— 入夜反常升温，罗德岛来讲年关传说
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_honglu.3
+	title = yan_honglu.3.t
+	desc = yan_honglu.3.d
+	picture = GFX_report_event_Generic_Coffee
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_honglu.4 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_honglu.3.a
+		ai_chance = { base = 40 }
+		add_political_power = -20
+		add_to_variable = { yan_shudao_integrity = 5 }
+		add_to_variable = { yan_agent_trust = 5 }
+		custom_effect_tooltip = yan_ss_shudao_p5_tt
+		custom_effect_tooltip = yan_ss_trust_p5_tt
+	}
+
+	option = {
+		name = yan_honglu.3.b
+		ai_chance = { base = 35 }
+		add_political_power = 25
+		add_stability = -0.04
+		add_to_variable = { yan_shudao_integrity = -10 }
+		custom_effect_tooltip = yan_ss_shudao_m10_tt
+	}
+
+	option = {
+		name = yan_honglu.3.c
+		ai_chance = { base = 25 }
+		add_stability = 0.04
+		add_to_variable = { yan_agent_trust = 8 }
+		custom_effect_tooltip = yan_ss_trust_p8_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 4 兵俑 —— 无源石反应的整合运动队伍
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_honglu.4
+	title = yan_honglu.4.t
+	desc = yan_honglu.4.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_honglu.5 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_honglu.4.a
+		ai_chance = { base = 45 }
+		add_stability = -0.06
+		add_war_support = 0.05
+		army_experience = 25
+		add_manpower = -8000
+	}
+
+	option = {
+		name = yan_honglu.4.b
+		ai_chance = { base = 30 }
+		add_stability = 0.04
+		add_political_power = -40
+		add_manpower = -3000
+	}
+
+	option = {
+		name = yan_honglu.4.c
+		ai_chance = { base = 25 }
+		add_stability = -0.1
+		add_to_variable = { yan_sui_awakening = 6 }
+		army_experience = 35
+		custom_effect_tooltip = yan_ss_sui_p6_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 5 反向检索 —— 过载全城源石器械，用「无反应区」定位
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_honglu.5
+	title = yan_honglu.5.t
+	desc = yan_honglu.5.d
+	picture = GFX_report_event_Generic_Tactical_Simulation
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_honglu.6 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_honglu.5.a
+		ai_chance = { base = 50 }
+		add_political_power = -75
+		add_stability = -0.05
+		add_to_variable = { yan_sui_awakening = -5 }
+		custom_effect_tooltip = yan_ss_sui_m5_tt
+		custom_effect_tooltip = yan_honglu.5.a.tt
+	}
+
+	option = {
+		name = yan_honglu.5.b
+		ai_chance = { base = 30 }
+		add_political_power = 40
+		add_stability = -0.08
+		add_to_variable = { yan_sui_awakening = 5 }
+		custom_effect_tooltip = yan_ss_sui_p5_tt
+	}
+
+	option = {
+		name = yan_honglu.5.c
+		ai_chance = { base = 20 }
+		add_political_power = -40
+		add_war_support = 0.04
+		add_to_variable = { yan_sui_awakening = -2 }
+		custom_effect_tooltip = yan_ss_sui_m2_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 6 老林 —— 退休警员把突防的兵俑扔进了垃圾箱
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_honglu.6
+	title = yan_honglu.6.t
+	desc = yan_honglu.6.d
+	picture = GFX_report_event_Generic_Barracks
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_honglu.7 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_honglu.6.a
+		ai_chance = { base = 45 }
+		add_stability = 0.06
+		add_war_support = 0.04
+		add_manpower = 12000
+	}
+
+	option = {
+		name = yan_honglu.6.b
+		ai_chance = { base = 30 }
+		add_political_power = 30
+		add_stability = -0.03
+	}
+
+	option = {
+		name = yan_honglu.6.c
+		ai_chance = { base = 25 }
+		add_stability = 0.03
+		add_manpower = 20000
+		add_war_support = -0.02
+	}
+}
+
+# ------------------------------------------------------------------
+# 7 炎熔对年 —— 真言出口，年问「夕到底告诉了人类多少」
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_honglu.7
+	title = yan_honglu.7.t
+	desc = yan_honglu.7.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_honglu.8 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_honglu.7.a
+		ai_chance = { base = 40 }
+		add_political_power = -50
+		add_to_variable = { yan_agent_trust = -10 }
+		add_to_variable = { yan_sui_awakening = -6 }
+		custom_effect_tooltip = yan_ss_trust_m10_tt
+		custom_effect_tooltip = yan_ss_sui_m6_tt
+	}
+
+	option = {
+		name = yan_honglu.7.b
+		ai_chance = { base = 35 }
+		add_to_variable = { yan_agent_trust = 10 }
+		add_stability = 0.03
+		custom_effect_tooltip = yan_ss_trust_p10_tt
+	}
+
+	option = {
+		name = yan_honglu.7.c
+		ai_chance = { base = 25 }
+		add_political_power = 35
+		add_to_variable = { yan_agent_trust = -5 }
+		add_to_variable = { yan_shudao_integrity = -5 }
+		custom_effect_tooltip = yan_ss_trust_m5_tt
+		custom_effect_tooltip = yan_ss_shudao_m5_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 8 洪炉 —— 以城为炉，二十一号城区沦陷
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_honglu.8
+	title = yan_honglu.8.t
+	desc = yan_honglu.8.d
+	picture = GFX_report_event_Generic_explosion
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_honglu.9 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_honglu.8.a
+		ai_chance = { base = 45 }
+		add_war_support = 0.08
+		add_stability = -0.06
+		army_experience = 40
+		add_manpower = -15000
+	}
+
+	option = {
+		name = yan_honglu.8.b
+		ai_chance = { base = 30 }
+		add_political_power = -80
+		add_stability = 0.05
+		add_manpower = 15000
+	}
+
+	option = {
+		name = yan_honglu.8.c
+		ai_chance = { base = 25 }
+		add_stability = -0.12
+		add_war_support = 0.12
+		add_to_variable = { yan_bufan_prep = 10 }
+		custom_effect_tooltip = yan_ss_bufan_p10_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 9 爆竹 —— 弱点：畏响动，畏火光
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_honglu.9
+	title = yan_honglu.9.t
+	desc = yan_honglu.9.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_honglu.10 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_honglu.9.a
+		ai_chance = { base = 45 }
+		add_political_power = -45
+		add_to_variable = { yan_sui_awakening = -8 }
+		army_experience = 30
+		custom_effect_tooltip = yan_ss_sui_m8_tt
+	}
+
+	option = {
+		name = yan_honglu.9.b
+		ai_chance = { base = 30 }
+		add_political_power = -25
+		add_stability = -0.04
+		add_to_variable = { yan_sui_awakening = -3 }
+		add_to_variable = { yan_agent_trust = 6 }
+		custom_effect_tooltip = yan_ss_sui_m3_tt
+		custom_effect_tooltip = yan_ss_trust_p6_tt
+	}
+
+	option = {
+		name = yan_honglu.9.c
+		ai_chance = { base = 25 }
+		add_political_power = 40
+		add_to_variable = { yan_shudao_integrity = -10 }
+		add_to_variable = { yan_agent_trust = -8 }
+		custom_effect_tooltip = yan_ss_shudao_m10_tt
+		custom_effect_tooltip = yan_ss_trust_m8_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 10 玄极 —— 护城炮内核引爆，年假死，全城被炼成玄极巨兵（收尾）
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_honglu.10
+	title = yan_honglu.10.t
+	desc = yan_honglu.10.d
+	picture = GFX_report_event_Generic_Military_Factory
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_honglu.10.a
+		ai_chance = { base = 45 }
+		add_dynamic_modifier = { modifier = yan_honglu_aftermath }
+		add_political_power = -60
+		add_war_support = 0.05
+		add_to_variable = { yan_sui_awakening = -10 }
+		custom_effect_tooltip = yan_ss_sui_m10_tt
+	}
+
+	option = {
+		name = yan_honglu.10.b
+		ai_chance = { base = 35 }
+		add_dynamic_modifier = { modifier = yan_honglu_pact }
+		add_to_variable = { yan_agent_trust = 15 }
+		add_stability = 0.05
+		custom_effect_tooltip = yan_ss_trust_p15_tt
+	}
+
+	option = {
+		name = yan_honglu.10.c
+		ai_chance = { base = 20 }
+		add_dynamic_modifier = { modifier = yan_honglu_aftermath }
+		add_to_variable = { yan_bufan_prep = 15 }
+		add_to_variable = { yan_agent_trust = -10 }
+		add_stability = -0.05
+		custom_effect_tooltip = yan_ss_bufan_p15_tt
+		custom_effect_tooltip = yan_ss_trust_m10_tt
+	}
+}

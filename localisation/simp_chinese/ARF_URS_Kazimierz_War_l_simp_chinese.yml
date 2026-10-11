@@ -1,0 +1,139 @@
+﻿l_simp_chinese:
+
+# ══════════════════ 第十一次乌卡战争 · 乌萨斯侧专属决议链（2026-09-26 重制版）══════════════════
+# 配套：common/decisions/URS_Kazimierz_War_Decisions.txt
+#       common/scripted_effects/URS_Kazimierz_War_scripted_effects.txt
+#       common/dynamic_modifiers/URS_Kazimierz_War_dynamic_modifiers.txt → 战时精神在本文件末尾
+#       events/URS_Kazimierz_War.txt
+# 注意：本链不再有任何替玩家开战的兜底，实时读数只能靠 dynamic variable 写进 _desc
+#       （决议没有 custom_description 这个键，写了会 Unexpected token）。
+
+# ── 决议分类 ──
+ URS_Kazimierz_War_Category: "第十一次乌卡战争"
+ URS_Kazimierz_War_Category_desc: "别列卡人窃据乌卡平原的这笔旧账，如今要在卡瓦莱利亚基的枪口下做个了断。\n\n这条路上没有人替帝国下决心：境内六路叛军是任其自己烂熟，还是由我们亲手引爆；边境四级备战是全部跑完，还是只挑一两样就上；以及对卡西米尔宣战的那一指——都落在御案上这个人的手里。\n\n只有一条规矩还留着：不打一场内战，就换不来一份完整的备战名录。"
+
+# ── 常驻态势面板（只读，实时读数）──
+ URS_kzmwar_situation: "境内叛军叛乱态势"
+ URS_kzmwar_situation_desc: "第三局与各省宪兵队每月呈报一次的清单：谁在募股、谁在藏枪、哪一段铁路的装卸工又开始传阅小册子。\n\n§Y六路叛乱进度§!（满 100 即有资格起事：日子可以在「引蛇出洞」里替它定，放任不管则满格的次月起自炸；一路一辈子只反一次）\n哥萨茨 [KZC.GetName]：[?ROOT.URS_revolt_kzc|0]/100\n别列斯尼亚 [BUS.GetName]：[?ROOT.URS_revolt_bus|0]/100\n波罗的海 [BLT.GetName]：[?ROOT.URS_revolt_blt|0]/100\n苏维埃游击组织 [UCM.GetName]：[?ROOT.URS_revolt_ucm|0]/100\n自由乌萨斯阵线 [ULB.GetName]：[?ROOT.URS_revolt_ulb|0]/100\n民族军团 [UFS.GetName]：[?ROOT.URS_revolt_ufs|0]/100\n\n§G每月增长 [?ROOT.URS_revolt_growth|0]§!：本国开战、卡西米尔插手都会加快，「整肃叛区」期间反而回落。已标为「清剿过」的州份不会被它们夺走。\n\n§Y备战度 [?ROOT.URS_kzmwar_prep_level|0]§!：四级备战各 +1，每平定一路叛军也 +1；≥1 才能对卡西米尔宣战，开战后按此档折算战时精神（6 档封顶）。\n§Y已平定叛军 [?ROOT.URS_kzmwar_pacified_num|0] / 6§!"
+
+# ── 启用条件提示 ──
+ URS_kzmwar_tt_needs_prep: "§R至少要有一级备战跑完才能宣战§!\n当前备战度：[?ROOT.URS_kzmwar_prep_level|0]（四级备战与平定叛军都会累加它）"
+ URS_kzmwar_tt_no_pending: "§R已有一纸起事令在路上，先把那一件办完再点新的§!"
+
+# ── 安内 ──
+ URS_kzmwar_crackdown: "整肃叛区"
+ URS_kzmwar_crackdown_desc: "搜查队、宵禁与一次性的大规模拘留。效果确实，代价也同样确实：工厂停摆、市面怨声载道，而真正的组织者往往已经在头一天夜里撤走了。\n\n选择一路下手：压低其叛乱进度，并把该路起义区内两处州份标为已清剿——日后它们起事时带不走这些地方。若一整路的起义区都被标了清剿，那一引爆也只剩一哄而散的空响。"
+ URS_kzmwar_spark: "引蛇出洞"
+ URS_kzmwar_spark_desc: "与其让它们在敌国的开战之日才钻出来，不如挑一个我们选定的日子，让它们先动。\n\n这一步抢的是日子与地点：某一路进度满格之后，就算我们不动手，它也会在次月起事；由我们来点，则可以挑到搜查队就位、粮弹上车的时辰。\n\n第一步选哪一路（也可一次点燃乌卡争议三地），第二步定起事之日：次日、一月、两月或三月之后。文书当天发出，日子一到，该路起义区便脱离帝国控制并向圣骏堡宣战。\n\n事先清剿过的州份不会被夺走，所以这一步总是接在「整肃叛区」后面最划算。仗打完、那块地重新回到帝国手里时，参谋本部会把缴获折算进对卡西米尔的备战度——叛乱于我们不再是纯粹的损耗。"
+
+# ── 备战四级（平行、可跳级，各 +1 备战度）──
+ URS_kzmwar_prep_mobilization: "边境军团动员"
+ URS_kzmwar_prep_mobilization_desc: "西部军区以「例行检阅」的名义召回了三茬复员兵。铁路调度表上，运粮车的次序被悄悄挪到了运兵车之后。\n\n四级备战之间并无先后，肯花哪几样，战备名录上就多记哪几笔；只是这一样最贵，也最实在。"
+ URS_kzmwar_prep_logistics: "铁道与后勤前推"
+ URS_kzmwar_prep_logistics_desc: "乌卡平原上没有一条能被称作路的东西。要在封冻前把炮弹堆到界河岸边，就得先重铺两百 verst 的枕木，再沿河修起野战仓库网。\n\n参谋本部很清楚：这场仗的胜负在开打之前就已决定。"
+ URS_kzmwar_prep_propaganda: "讨还血债·宣义动员"
+ URS_kzmwar_prep_propaganda_desc: "十次乌卡战争埋下的英灵需要有人点名祭奠。报社开始连续刊载边境城镇的焚毁清单，而每一张插图下面都印着同一句问话：卡西米尔人准备何时再来第十一次？\n\n愤怒是可以被量产的，问题只在于把它导向哪个方向。"
+ URS_kzmwar_ultimatum: "对卡西米尔最后通牒"
+ URS_kzmwar_ultimatum_desc: "照会的措辞由帝国外交部逐字斟酌过：要求卡瓦莱利亚基解散征战骑士团、承认乌卡争议三地的帝国主权，并就在境内部署的武装做出交代。期限十五天，不打算真的谈成。\n\n通牒送到即算完成使命——接下来的事，交由前线司令部办理。它最短也最便宜，但若前面三级一样没做，那就只是一封没有人准备去执行的信。"
+ URS_kzmwar_declare_war: "第十一次乌卡战争：开战"
+ URS_kzmwar_declare_war_desc: "通牒按期被拒绝，边境军团已就位。电报密码本翻到最后一页，圣骏堡的钟声会在明天清晨传遍整个别列卡维亚。\n\n这一次不再有小规模边境推进，也不再有一纸含糊其辞的停战协定——三地必须回来，回来之后就得留在帝国手里。\n\n打这一仗的时机完全由我们决定：备得越足，开战那日挂在国库存照上的精神越强，而平定境内叛军也同样算进这一本账。"
+ URS_kzmwar_declare_war_tt: "§Y效果：§!卡西米尔即刻收到突袭预警，§R2 天后§!帝国对[KZM.GetName]宣战（战争目标：吞并全部）；彼时已在境内的哥萨茨、别列斯尼亚、波罗的海一并卷入。\n同时按备战度 §Y[?ROOT.URS_kzmwar_prep_level|0] 档§! 挂上战时精神「熊旗所向」，两年有效。"
+
+# ── 选择窗：整肃对象 ──
+ ursus_kzmwar.1.t: "整肃何处？"
+ ursus_kzmwar.1.d: "第三局的报告摊在案头，六份卷宗、六处需要动手的地方。搜查队只够出动一次，选一个方向。"
+ ursus_kzmwar.1.oa: "先办[UCM.GetName]的工人夜校"
+ ursus_kzmwar.1.ob: "查抄[ULB.GetName]的沙龙与报馆"
+ ursus_kzmwar.1.oc: "解散[UFS.GetName]的青年团"
+ ursus_kzmwar.1.od: "清剿[KZC.GetName]的哥萨克村庄"
+ ursus_kzmwar.1.oe: "封锁[BUS.GetName]的林地交通"
+ ursus_kzmwar.1.of: "接管[BLT.GetName]的港口仓库"
+ ursus_kzmwar.1.og: "§Y全线同时动手§!"
+
+# ── 选择窗：引爆对象 ──
+ ursus_kzmwar.2.t: "让谁先反？"
+ ursus_kzmwar.2.d: "只要把某一路的联络网故意漏出去，剩下的事会自己发生。帝国需要的只是一个足以宣布进入战争状态的口实。\n\n选定之后还要定日子，日子一到才算数。"
+ ursus_kzmwar.2.oa: "[UCM.GetName]"
+ ursus_kzmwar.2.ob: "[ULB.GetName]"
+ ursus_kzmwar.2.oc: "[UFS.GetName]"
+ ursus_kzmwar.2.od: "[KZC.GetName]"
+ ursus_kzmwar.2.oe: "[BUS.GetName]"
+ ursus_kzmwar.2.of: "[BLT.GetName]"
+ ursus_kzmwar.2.og: "§R同时点燃乌卡争议三地§!"
+ ursus_kzmwar.2.oh: "§H再等等§!"
+
+# ── 选择窗：起事之日 ──
+ ursus_kzmwar.3.t: "哪一天？"
+ ursus_kzmwar.3.d: "联络网已经「漏」出去了，剩下的只是一个日期。\n\n定得太早，西部军区的弹药还在铁路上没卸完；定得太晚，搜查队随时可能把这份名单重新捂回卷宗里。"
+ ursus_kzmwar.3.oa: "§R不必等了——明天就反§!"
+ ursus_kzmwar.3.ob: "一个月后"
+ ursus_kzmwar.3.oc: "两个月后"
+ ursus_kzmwar.3.od: "三个月后"
+ ursus_kzmwar.3.oe: "§H算了，把卷宗压回去§!"
+
+# ── 六路起义告急文书 ──
+ ursus_kzmwar.10.t: "[UCM.GetName]筹备起义"
+ ursus_kzmwar.10.d: "工人夜校的点名册上，最近多出几十张从未登记的面孔。铁路机务段的钳工们开始用一种我们听不懂的黑话交谈，而苏维埃游击组织的传单第一次印上了具体日期。\n\n第三局判断：起事已进日程，就等那个定好的日子。"
+ ursus_kzmwar.10.a: "下令西部军区戒严。"
+
+ ursus_kzmwar.11.t: "[ULB.GetName]筹备起义"
+ ursus_kzmwar.11.d: "流亡自由派忽然结束了持续数年的内部争吵，各沙龙在同一天换上了同一面旗号。境外汇款以「出版定金」的名义成批入账，而城防部队的换防命令至今没有签下来。\n\n第三局判断：起事已进日程，就等那个定好的日子。"
+ ursus_kzmwar.11.a: "下令西部军区戒严。"
+
+ ursus_kzmwar.12.t: "[UFS.GetName]筹备起义"
+ ursus_kzmwar.12.d: "青年团的集会规模一夜之间翻了三倍，操练场地从广场改到了林子深处。他们并不掩饰自己的意图——领头的人公开宣称，民族军团只等一个信号。\n\n第三局判断：起事已进日程，就等那个定好的日子。"
+ ursus_kzmwar.12.a: "下令西部军区戒严。"
+
+ ursus_kzmwar.13.t: "[KZC.GetName]哥萨克蠢动"
+ ursus_kzmwar.13.d: "各村议事会在同一周否决了征粮额度，长老们开始重提那份被搁置了三十年的军籍册。马匹被连夜迁往河对岸，而卡西米尔的武官正以「狩猎队」的名义滞留在边界村庄。\n\n第三局判断：哥萨茨已定于某日起事，公开反旗只在那一天之后。"
+ ursus_kzmwar.13.a: "把骑兵预备队调到第聂伯沿线。"
+
+ ursus_kzmwar.14.t: "[BUS.GetName]局势骤紧"
+ ursus_kzmwar.14.d: "林区的木筏运力被整建制征用，走的却是伐木合同的名义。村镇里新立的检查站不设帝国税吏，只设一种人：会讲卡瓦莱利亚基口音的「文书」。\n\n第三局判断：别列斯尼亚已定于某日起事，公开反旗只在那一天之后。"
+ ursus_kzmwar.14.a: "把骑兵预备队调到第聂伯沿线。"
+
+ ursus_kzmwar.15.t: "[BLT.GetName]港口异动"
+ ursus_kzmwar.15.d: "码头工人联合会取消了全部夜班，理由是「等待仓单」。可港口的吨位记录显示，卸货量在同期翻了一倍——收货方一栏统统写着同一家沿岸商行。\n\n第三局判断：波罗的海已定于某日起事，公开反旗只在那一天之后。"
+ ursus_kzmwar.15.a: "把骑兵预备队调到第聂伯沿线。"
+
+# ── 起义落地 ──
+ ursus_kzmwar.20.t: "§R境内叛乱爆发§!"
+ ursus_kzmwar.20.d: "告急文书上写的日期到了。铁路被撬开，电报线在半小时内全部中断，驻军营地外第一次响起了成建制枪声——那些叛军从帝国手里带走了自己的起义区，并即刻向圣骏堡宣战。\n\n前线司令部请示：先镇压哪一路？"
+ ursus_kzmwar.20.a: "逐一分兵处置。"
+
+# ── 发给卡西米尔的突袭预警 ──
+ ursus_kzmwar.30.t: "§R帝国军集结边界！§!"
+ ursus_kzmwar.30.d: "驻圣骏堡武官的最后一封电报只有半页，末尾写着「列车已在装运，车站全部戒严」。随后通讯中断。\n\n监正会与征战骑士团的参谋们都清楚这份电报的分量：别列卡人的通牒期限已过，而我们的动员还差着整整一旬。"
+ ursus_kzmwar.30.a: "全国进入战备！"
+
+# ── 正式宣战 ──
+ ursus_kzmwar.31.t: "§R第十一次乌卡战争：已宣战§!"
+ ursus_kzmwar.31.d: "宣战照会在天亮前递入卡瓦莱利亚基。西部军区的先头装甲集群已在炮击界河渡口，第十一次乌卡战争正式开始。\n\n参谋本部的作战令只有一句话：这一次，战线要停在对手的首都门前。"
+ ursus_kzmwar.31.a: "愿熊旗所向无敌。"
+
+# ── 自动获胜结算 ──
+ ursus_kzmwar.40.t: "§G卡西米尔投降！§!"
+ ursus_kzmwar.40.d: "征战骑士的最后一处抵抗点在午后放下了武器，卡瓦莱利亚基的市政厅升起白旗。战败条款由帝国方面单方面拟就：乌卡争议三地全数归还，卡西米尔重新组建一个听命于圣骏堡的新政府，其内政、外交与军事皆受管控并允许乌萨斯驻军。\n\n十次战争的血债，这一次算是清完了。"
+ ursus_kzmwar.40.a: "接受投降。"
+
+# ── 平叛报捷 ──
+ ursus_kzmwar.42.t: "§G又一路叛乱平定§!"
+ ursus_kzmwar.42.d: "那个曾被从帝国版图上撕下来的名字，如今重新出现在受降文书的落款处。清点的结果比捷报更有意思：仓库里的步枪有一半还打着帝国军的编号，而军需官说这批枪三个月前就该发到边境军团手里。\n\n参谋本部把它们一并记进了对卡西米尔的那本账上——平定一路，备战便厚一分。"
+ ursus_kzmwar.42.a: "记入战备名录。"
+
+# ── 战争爆发新闻 ──
+ ursus_kzmwar.50.t: "第十一次乌卡战争"
+ ursus_kzmwar.50.d: "乌萨斯帝国在对卡西米尔的最后通牒到期之际，率先越过乌卡平原。数十个师在炮火掩护下渡过界河，航空兵同时炸毁了卡瓦莱利亚基方向的三座铁路桥；边境的征战骑士尚未完成动员，便已被压回第一道预设阵地。\n\n两国之间悬殊的国力差距令人们对卡西米尔的胜算普遍悲观，而第十次乌卡战争的前车之鉴更加深了这份印象。部分报导指出帝国军推进迅速、后勤却拉得过薄；某些看法则确信这场战争会在一个冬天之内结束。无论外界如何看待，北方的战端已开——此战或许就是乌卡之间的最终一战，又或许只会被记作第十一次。"
+ ursus_kzmwar.50.a: "熊与骏鹰，终须一战。"
+
+# ── 战时精神（数值全部由备战度折算，见 URS_kzmwar_update_war_spirit）──
+ URS_kzmwar_war_spirit: "熊旗所向"
+ URS_kzmwar_war_spirit_desc: "整场战争被押在同一句口令上：向卡瓦莱利亚基进军。它在战前攒下多少本账，就在开战这天兑现成多少士气、多少步枪与多少节车厢。\n\n§Y当前折算：备战度 [?ROOT.URS_kzmwar_prep_level|0] 档（封顶 6 档）§!\n - 部队进攻：[?ROOT.URS_kzmwar_sm_attack|+0%]\n - 突破：[?ROOT.URS_kzmwar_sm_break|+0%]\n - 适役人口：[?ROOT.URS_kzmwar_sm_conscription|+0%]\n - 军用工厂建设速度：[?ROOT.URS_kzmwar_sm_arms|+0%]\n - 补给消耗：[?ROOT.URS_kzmwar_sm_supply|+0%]\n\n每完成一级备战、每平定一路叛军，这张表格都会当场重算。"
+
+# ── 乌卡战争任务（正文在 common/decisions/URS_Decisions.txt:1409，此前一直没有中文键）──
+ URS_KZM_war: "第十一次乌卡战争（限期一年）"
+ URS_KZM_war_desc: "总参谋部的作战令只给了十二个月：拿下卡瓦莱利亚基，或至少让它成为一个听命于圣骏堡的政府。一年之期一到仍分不出胜负，前线就带着到手的土地收兵——乌卡争议三地要原样送回去，与哥萨茨、别列斯尼亚、波罗的海的仗也一律作罢。"
+
+# ── 战争名（本链由乌萨斯先手宣战，故攻击方是 URS；WAR_NAME_KZM_URS 已在
+#    ARF_KZM_l_simp_chinese.yml 中定义为同名，不在此重复）──
+ WAR_NAME_URS_KZM: "第十一次乌卡战争"

@@ -1,0 +1,942 @@
+######################
+## 乌萨斯帝国 · 政治国策树（整合改革线）##
+## 皇帝线「皇帝陛下大展身手！」／ 议会线「王朝的终曲」／ 圣愚线「邪魔化运动」##
+######################
+#
+# 25 个国策 = 共同起点 1 + 三线各 8。
+# 旧的 1094 帝国会议 / 迈向未来两棵树（85 策）已下线，
+# 备份在 docs/URS_旧树备份_20260915/。
+#
+# 【版式约定】全部节点使用绝对坐标 x/y（沿用 YAN 树约定，不用 relative_position_id）。
+#
+#   共同起点 病入膏肓 = (0, 0)
+#   两条改革支线自起点左右镜像展开，列心 x = ∓12 → ∓9：
+#     皇帝线（左）  皇帝的远征军 (-12,1) → 得加钱(-15,2) / 安德烈亚·多里安(-9,2)
+#                   → 主线落在 x = -9，y = 3..7
+#     议会线（右）  阿纳斯塔西娅的赠礼 (+12,1) → 初升的曙光(+12,2) → 一五计划(+12,3)
+#                   → 重建圣骏堡(+15,4) / 大政变(+9,4) → 主线落在 x = +9，y = 5..7
+#   圣愚线（中）    时间之前(0,9) … 时间之后(0,16)
+#                   由「狂人的誓言」或「维特的独裁」汇入，构成“两翼失败坠入深渊”的构图。
+#
+# 【互斥】
+#   皇帝线 · 大清洗     ↔  议会线 · 维特的独裁
+#   议会线 · 大政变     ↔  议会线 · 维特的独裁
+#
+# 【圣愚线入口】时间之前（序曲）的 prerequisite 为「狂人的誓言」或「维特的独裁」，
+#   另有 available 门槛：需先在决议面板完成「达莉娅的要求」（置 URS_darya_claim）。
+#
+# 【共享民族精神】URS_ursus_shall_not_die「乌萨斯还不能死！」
+#   三条路线的零散小 BUFF 全部塞进这一个动态修正（common/dynamic_modifiers/
+#   URS_dynamic_modifiers.txt），逐条 add_to_variable 原地成长；
+#   圣愚线「时间之前（序曲）」把它换成 URS_ursus_demonic_campaign「乌萨斯邪魔化运动」
+#   ——同一批变量、同一套数值，只换名字与图标。
+#
+# 【决议钩子】common/decisions/URS_Reform_Conflict_Decisions.txt
+#   （分类 URS_reform_conflict_decisions「乌萨斯的改革矛盾」）
+#   稳定议会／夺取议会 ← 初升的曙光 ｜ 冬季配给 ← 一五计划
+#   新年后演讲 ← 何去何从 ｜ 达莉娅的要求 ← 两条线的终点国策
+#   政变线与邪魔线的整合 ← 内卫被控
+#
+######################
+
+######################
+## 【已停用 2026-09-29】旧政治树（皇帝线／议会线／圣愚线，25 策）##
+######################
+#
+# 本树已不再被任何国家载入（country 块 factor = 0 且不带 tag 修饰），
+# 作用仅为“隐藏旧内容”、保留原文件以便回滚。国策定义原样留在这里，
+# 因此决议/事件里对旧国策 id 的 has_completed_focus 判定会恒为 false（不会崩，但静默失效）。
+#
+#   取而代之：
+#     阶段一「乌萨斯之梦」  common/national_focus/URS_dream.txt   （树 id URS_dream，开局载入）
+#     阶段二「回到起点」    common/national_focus/URS_reform.txt  （树 id URS_return_to_start，决议/效果切换）
+#   军事簇 / 经济簇 / 发展度簇（75 条 shared_focus）已改由上面两棵树各自引用，坐标仍在 y = 20..34。
+#   圣愚线（原“邪魔路线”）按设计改为隐藏娱乐路线，暂随本树一并停用。
+#
+######################
+
+focus_tree = {
+	id = URS_political_reform
+
+	country = {
+		# 【已停用】factor 0 且无 tag 修饰 → 任何国家都不会载入本树
+		factor = 0
+	}
+
+	default = no
+
+	initial_show_position = {
+		focus = URS_grave_illness
+	}
+
+	# ===== 军事国策树（shared_focus 引用） BEGIN =====
+	# ==================== 军事国策树（共享国策簇） ====================
+	# 定义在 common/national_focus/URS_military_shared.txt，25 个共享国策。
+	# 坐标区 y = 20..26，与政治树（y = 0..18）同屏显示。
+	# 生成器：docs/_urs_mil_build.py（改数据表重跑，勿手改产物）
+
+	shared_focus = URS_legion_dishonored
+	shared_focus = URS_mil_aristocrat_audit
+	shared_focus = URS_mil_army_reorganized
+	shared_focus = URS_mil_guards_act
+	shared_focus = URS_mil_capital_garrison
+	shared_focus = URS_mil_freecorps
+	shared_focus = URS_mil_general_staff
+	shared_focus = URS_mil_bolt_industry
+	shared_focus = URS_mil_caster_gear
+	shared_focus = URS_mil_landship
+	shared_focus = URS_mil_secure_net
+	shared_focus = URS_mil_kutsukina
+	shared_focus = URS_mil_sarcophagus
+	shared_focus = URS_mil_griffin_rites
+	shared_focus = URS_mil_blade_creed
+	shared_focus = URS_mil_merit_ranks
+	shared_focus = URS_mil_preachers
+	shared_focus = URS_mil_caster_code
+	shared_focus = URS_mil_warcry
+	shared_focus = URS_mil_katoga_reopened
+	shared_focus = URS_mil_ore_rationing
+	shared_focus = URS_mil_originium_sub
+	shared_focus = URS_mil_bureau_tech
+	shared_focus = URS_mil_project_zero
+	shared_focus = URS_mil_winter_law
+
+	shortcut = {
+		name = URS_shortcut_political
+		target = URS_grave_illness
+		scroll_wheel_factor = 0.08
+	}
+
+	shortcut = {
+		name = URS_shortcut_military
+		target = URS_legion_dishonored
+		scroll_wheel_factor = 0.80
+	}
+	# ===== 军事国策树（shared_focus 引用） END =====
+
+	# ===== 经济国策树（shared_focus 引用） BEGIN =====
+	# ==================== 经济国策树（共享国策簇） ====================
+	# 定义在 common/national_focus/URS_economy_shared.txt，25 个共享国策。
+	# 坐标区 y = 28..34，与政治树（0..18）、军事树（20..26）三棵树同屏。
+	# 生成器：docs/_urs_eco_build.py（改数据表重跑，勿手改产物）
+
+	shared_focus = URS_bread_demand
+	shared_focus = URS_eco_winter_act
+	shared_focus = URS_eco_originium_ration
+	shared_focus = URS_eco_noble_tax_exempt
+	shared_focus = URS_eco_currency_reform
+	shared_focus = URS_eco_assembly_budget
+	shared_focus = URS_eco_treasury_overhaul
+	shared_focus = URS_eco_bureau_tech_transfer
+	shared_focus = URS_eco_university_reform
+	shared_focus = URS_eco_miner_training
+	shared_focus = URS_eco_oka_research
+	shared_focus = URS_eco_sarcophagus_energy
+	shared_focus = URS_eco_caster_academy
+	shared_focus = URS_eco_katoga_unblocked
+	shared_focus = URS_eco_zergrad_autonomy
+	shared_focus = URS_eco_bresk_duchess
+	shared_focus = URS_eco_farnorth_control
+	shared_focus = URS_eco_army_economy_strip
+	shared_focus = URS_eco_noble_negotiation
+	shared_focus = URS_eco_energy_converter
+	shared_focus = URS_eco_katoga_production
+	shared_focus = URS_eco_zergrad_city
+	shared_focus = URS_eco_fuel_plants
+	shared_focus = URS_eco_heating_relief
+	shared_focus = URS_eco_consumer_goods
+
+	shortcut = {
+		name = URS_shortcut_economy
+		target = URS_bread_demand
+		scroll_wheel_factor = 1.60
+	}
+	# ===== 经济国策树（shared_focus 引用） END =====
+
+
+	#1. 病入膏肓
+	focus = {
+		id = URS_grave_illness
+		icon = GFX_focus_URS_grave_illness
+		x = 0
+		y = 0
+		cost = 2
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = URS_ursus_shall_not_die }
+			URS_Imperial_Court_Enable = yes
+			set_country_flag = URS_economic_recovery_decisions_flag
+			set_country_flag = URS_reform_conflict_open
+			set_variable = { URS_shall_not_die_stability_var = -0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_m10
+			set_variable = { URS_shall_not_die_pp_var = -0.5 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_m50
+			set_variable = { URS_fool_support = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_fool_support_p5
+			set_variable = { URS_demonic_corruption = 0 }
+			set_variable = { URS_coup_risk = 0 }
+		}
+	}
+
+	#2. 皇帝的远征军
+	focus = {
+		id = URS_imperial_army_group
+		icon = GFX_focus_URS_imperial_army_group
+		x = -12
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = URS_grave_illness
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 300
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_p10
+			set_country_flag = URS_expeditionary_army
+			custom_effect_tooltip = URS_tt_army_group_dissolved
+		}
+	}
+
+	#3. 得加钱
+	focus = {
+		id = URS_add_money
+		icon = GFX_focus_URS_add_money
+		x = -15
+		y = 2
+		cost = 4
+		prerequisite = {
+			focus = URS_imperial_army_group
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 300
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_cost_var value = -0.25 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_cost_var_m25
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_consumer_var_p20
+		}
+	}
+
+	#4. 安德烈亚·多里安
+	focus = {
+		id = URS_andrea_doreyan
+		icon = GFX_focus_URS_andrea_doreyan
+		x = -9
+		y = 2
+		cost = 4
+		prerequisite = {
+			focus = URS_imperial_army_group
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 300
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_p5
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_p10
+			set_country_flag = URS_andrea_doreyan_appointed
+		}
+	}
+
+	#5. 大区
+	focus = {
+		id = URS_great_region_reform
+		icon = GFX_focus_URS_great_region_reform
+		x = -9
+		y = 3
+		cost = 4
+		prerequisite = {
+			focus = URS_andrea_doreyan
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 300
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_p10
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_industry_var_p5
+			set_country_flag = URS_great_regions
+		}
+	}
+
+	#6. 军事动员
+	focus = {
+		id = URS_military_mobilization
+		icon = GFX_focus_URS_military_mobilization
+		x = -9
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = URS_great_region_reform
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 300
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_conscription_var_p20
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_ws_var_p10
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_industry_var_p10
+			set_country_flag = URS_mobilization_reform
+		}
+	}
+
+	#7. 大清洗
+	focus = {
+		id = URS_great_purge
+		icon = GFX_focus_URS_great_purge
+		x = -9
+		y = 5
+		cost = 5
+		prerequisite = {
+			focus = URS_military_mobilization
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 300
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.5 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_p50
+			add_to_variable = { var = URS_shall_not_die_intel_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_intel_var_p20
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_m10
+			add_stability = -0.05
+			add_to_variable = { var = URS_coup_risk value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_coup_risk_p10
+			custom_effect_tooltip = URS_tt_purged_the_regime
+			set_country_flag = URS_area_management_enabled
+		}
+	}
+
+	#8. 是时候了
+	focus = {
+		id = URS_it_is_time
+		icon = GFX_focus_URS_it_is_time
+		x = -9
+		y = 6
+		cost = 5
+		prerequisite = {
+			focus = URS_great_purge
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 300
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_m15
+			add_stability = -0.05
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_consumer_var_m10
+			set_country_flag = URS_reform_has_come
+		}
+	}
+
+	#9. 狂人的誓言
+	focus = {
+		id = URS_oath_of_a_madman
+		icon = GFX_focus_URS_oath_of_a_madman
+		x = -9
+		y = 7
+		cost = 6
+		prerequisite = {
+			focus = URS_it_is_time
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 300
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_m20
+			add_stability = -0.1
+			add_to_variable = { var = URS_shall_not_die_ws_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_ws_var_m10
+			add_to_variable = { var = URS_fool_support value = 0.3 }
+			custom_effect_tooltip = URS_tt_pol_fool_support_p30
+			set_country_flag = URS_holy_fool_risen
+		}
+	}
+
+	#10. 阿纳斯塔西娅的赠礼
+	focus = {
+		id = URS_anastasia_gift
+		icon = GFX_focus_URS_anastasia_gift
+		x = 12
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = URS_grave_illness
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 200
+		}
+
+		completion_reward = {
+			add_political_power = 30
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_p5
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_p10
+			set_country_flag = URS_anastasia_betrothed
+		}
+	}
+
+	#11. 初升的曙光
+	focus = {
+		id = URS_rising_dawn
+		icon = GFX_focus_URS_rising_dawn
+		x = 12
+		y = 2
+		cost = 4
+		prerequisite = {
+			focus = URS_anastasia_gift
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 200
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_m5
+			add_to_variable = { var = URS_shall_not_die_pp_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_m10
+			add_to_variable = { var = URS_shall_not_die_opinion_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_opinion_var_p15
+			set_country_flag = URS_council_decisions_unlocked
+		}
+	}
+
+	#12. 一五计划
+	focus = {
+		id = URS_first_five_year_plan
+		icon = GFX_focus_URS_first_five_year_plan
+		x = 12
+		y = 3
+		cost = 4
+		prerequisite = {
+			focus = URS_rising_dawn
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 200
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_industry_var_p20
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_consumer_var_m5
+			set_country_flag = URS_winter_rationing_unlocked
+		}
+	}
+
+	#13. 重建圣骏堡
+	focus = {
+		id = URS_rebuild_saint_grypherburg
+		icon = GFX_focus_URS_rebuild_saint_grypherburg
+		x = 15
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = URS_first_five_year_plan
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 200
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_industry_var_p10
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_p10
+			add_to_variable = { var = URS_shall_not_die_research_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_research_var_p5
+			set_country_flag = URS_saint_grypherburg_rebuilt
+		}
+	}
+
+	#14. 大政变
+	focus = {
+		id = URS_great_coup
+		icon = GFX_focus_URS_great_coup
+		x = 9
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = URS_first_five_year_plan
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 200
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_m15
+			add_stability = -0.05
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_p15
+			add_to_variable = { var = URS_coup_risk value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_coup_risk_p10
+			set_country_flag = URS_great_coup_flag
+		}
+	}
+
+	#15. 何去何从
+	focus = {
+		id = URS_where_to_go
+		icon = GFX_focus_URS_where_to_go
+		x = 9
+		y = 5
+		cost = 5
+		prerequisite = {
+			focus = URS_great_coup
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 200
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_m10
+			add_stability = -0.05
+			set_country_flag = URS_new_year_speech_unlocked
+		}
+	}
+
+	#16. 是时候了
+	focus = {
+		id = URS_it_is_time_council
+		icon = GFX_focus_URS_it_is_time_council
+		x = 9
+		y = 6
+		cost = 5
+		prerequisite = {
+			focus = URS_where_to_go
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 200
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_m15
+			add_stability = -0.05
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_consumer_var_m10
+			set_country_flag = URS_reform_has_come_council
+		}
+	}
+
+	#17. 维特的独裁
+	focus = {
+		id = URS_vitte_dictatorship
+		icon = GFX_focus_URS_vitte_dictatorship
+		x = 9
+		y = 7
+		cost = 6
+		prerequisite = {
+			focus = URS_it_is_time_council
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 200
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.5 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_p50
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_p5
+			set_country_flag = URS_vitte_regime
+			set_country_flag = URS_area_management_enabled
+		}
+	}
+
+	#18. 敲钟失败
+	focus = {
+		id = URS_fool_bell_failed
+		icon = GFX_focus_URS_fool_bell_failed
+		x = 0
+		y = 9
+		cost = 4
+		prerequisite = {
+			focus = URS_oath_of_a_madman
+		}
+		prerequisite = {
+			focus = URS_vitte_dictatorship
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = URS_tt_need_darya
+				has_country_flag = URS_darya_claim
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = URS_ursus_shall_not_die }
+			add_dynamic_modifier = { modifier = URS_ursus_demonic_campaign }
+			custom_effect_tooltip = URS_tt_demonic_swap
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_m10
+			add_to_variable = { var = URS_shall_not_die_ws_var value = -0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_ws_var_m5
+			add_to_variable = { var = URS_fool_support value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_fool_support_p10
+			add_to_variable = { var = URS_demonic_corruption value = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_demonic_corruption_p5
+			set_country_flag = URS_demonic_campaign_begins
+		}
+	}
+
+	#19. 圣愚卫队
+	focus = {
+		id = URS_fool_guard
+		icon = GFX_focus_URS_fool_guard
+		x = 0
+		y = 10
+		cost = 4
+		prerequisite = {
+			focus = URS_fool_bell_failed
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_suppress_var_m20
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_p5
+			add_to_variable = { var = URS_demonic_compliance_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_demonic_compliance_var_p15
+			add_to_variable = { var = URS_demonic_org_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_demonic_org_var_p15
+			add_to_variable = { var = URS_fool_support value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_fool_support_p10
+			set_country_flag = URS_fool_guard_formed
+		}
+	}
+
+	#20. 纳斯塔霞加冕
+	focus = {
+		id = URS_fool_coronation
+		icon = GFX_focus_URS_fool_coronation
+		x = 0
+		y = 11
+		cost = 5
+		prerequisite = {
+			focus = URS_fool_guard
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_p10
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_ws_var_p10
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_p20
+			add_to_variable = { var = URS_demonic_coreattack_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_demonic_coreattack_var_p20
+			add_to_variable = { var = URS_demonic_corruption value = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_demonic_corruption_p5
+			set_country_flag = URS_nastasya_crowned
+		}
+	}
+
+	#21. 内卫圣化
+	focus = {
+		id = URS_fool_guards_sainted
+		icon = GFX_focus_URS_fool_guards_sainted
+		x = 0
+		y = 12
+		cost = 5
+		prerequisite = {
+			focus = URS_fool_coronation
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_attack_var_p15
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_suppress_var_m20
+			add_to_variable = { var = URS_demonic_xp_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_demonic_xp_var_p15
+			add_to_variable = { var = URS_demonic_breakthrough_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_demonic_breakthrough_var_p15
+			add_to_variable = { var = URS_coup_risk value = -0.15 }
+			custom_effect_tooltip = URS_tt_pol_coup_risk_m15
+			set_country_flag = URS_guards_sainted
+			set_country_flag = URS_fool_integration_unlocked
+		}
+	}
+
+	#22. 矿区锚定
+	focus = {
+		id = URS_fool_mine_anchored
+		icon = GFX_focus_URS_fool_mine_anchored
+		x = 0
+		y = 13
+		cost = 5
+		prerequisite = {
+			focus = URS_fool_guards_sainted
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_conscription_var_p20
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_industry_var_p10
+			add_to_variable = { var = URS_demonic_compliance_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_demonic_compliance_var_p15
+			add_to_variable = { var = URS_demonic_pop_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_demonic_pop_var_p20
+			add_to_variable = { var = URS_fool_support value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_fool_support_p10
+			set_country_flag = URS_mine_anchored
+		}
+	}
+
+	#23. 国度扩张
+	focus = {
+		id = URS_fool_realm_expansion
+		icon = GFX_focus_URS_fool_realm_expansion
+		x = 0
+		y = 14
+		cost = 6
+		prerequisite = {
+			focus = URS_fool_mine_anchored
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_intel_var value = 0.3 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_intel_var_p30
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.25 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_suppress_var_m25
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_p20
+			add_to_variable = { var = URS_demonic_build_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_demonic_build_var_p15
+			add_to_variable = { var = URS_demonic_coreattack_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_demonic_coreattack_var_p20
+			add_to_variable = { var = URS_demonic_corruption value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_demonic_corruption_p10
+			set_country_flag = URS_the_realm_expands
+		}
+	}
+
+	#24. 普瑞赛斯的认可
+	focus = {
+		id = URS_fool_priestess_approval
+		icon = GFX_focus_URS_fool_priestess_approval
+		x = 0
+		y = 15
+		cost = 6
+		prerequisite = {
+			focus = URS_fool_realm_expansion
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_industry_var_p10
+			add_to_variable = { var = URS_shall_not_die_research_var value = -0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_research_var_m15
+			add_to_variable = { var = URS_shall_not_die_opinion_var value = -0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_opinion_var_m15
+			add_to_variable = { var = URS_shall_not_die_cost_var value = -0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_cost_var_m15
+			add_to_variable = { var = URS_demonic_fuel_var value = 0.3 }
+			custom_effect_tooltip = URS_tt_pol_demonic_fuel_var_p30
+			add_to_variable = { var = URS_demonic_corruption value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_demonic_corruption_p10
+			set_country_flag = URS_priestess_approval
+		}
+	}
+
+	#25. 圣愚帝国
+	focus = {
+		id = URS_fool_empire
+		icon = GFX_focus_URS_fool_empire
+		x = 0
+		y = 16
+		cost = 7
+		prerequisite = {
+			focus = URS_fool_priestess_approval
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_attack_var_p10
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_p15
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_ws_var_p20
+			add_to_variable = { var = URS_shall_not_die_intel_var value = 0.25 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_intel_var_p25
+			add_to_variable = { var = URS_demonic_defense_var value = 0.3 }
+			custom_effect_tooltip = URS_tt_pol_demonic_defense_var_p30
+			add_to_variable = { var = URS_demonic_breakthrough_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_demonic_breakthrough_var_p15
+			URS_become_fool_state = yes
+			set_country_flag = URS_fool_empire_proclaimed
+		}
+	}
+
+	#26. 在暗夜中燃烧
+	focus = {
+		id = URS_fool_burning_in_dark
+		icon = GFX_focus_URS_fool_burning_in_dark
+		x = 0
+		y = 17
+		cost = 7
+		prerequisite = {
+			focus = URS_fool_empire
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_demonic_winter_var value = -0.6 }
+			custom_effect_tooltip = URS_tt_pol_demonic_winter_var_m60
+			add_to_variable = { var = URS_demonic_supply_var value = -0.3 }
+			custom_effect_tooltip = URS_tt_pol_demonic_supply_var_m30
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.45 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_consumer_var_m45
+			add_to_variable = { var = URS_demonic_compliance_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_demonic_compliance_var_p10
+			add_to_variable = { var = URS_demonic_build_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_pol_demonic_build_var_p10
+			add_to_variable = { var = URS_demonic_corruption value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_demonic_corruption_p15
+			set_country_flag = URS_lights_out
+		}
+	}
+
+	#27. 时间之后
+	focus = {
+		id = URS_fool_after_time
+		icon = GFX_focus_URS_fool_after_time
+		x = 0
+		y = 18
+		cost = 8
+		prerequisite = {
+			focus = URS_fool_burning_in_dark
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1000
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.3 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_attack_var_p30
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.25 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_conscription_var_p25
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.5 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_pp_var_p50
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.2 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_suppress_var_m20
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_ws_var_p15
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_industry_var_p15
+			add_to_variable = { var = URS_demonic_xp_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_pol_demonic_xp_var_p20
+			custom_effect_tooltip = URS_tt_demonic_finale
+			custom_effect_tooltip = URS_tt_after_time
+			set_country_flag = URS_after_time_flag
+		}
+	}
+
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}

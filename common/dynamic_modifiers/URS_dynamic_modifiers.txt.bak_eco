@@ -1,0 +1,77 @@
+# ==============================================================
+# 乌萨斯帝国 · 政治国策树共享民族精神（动态修正）
+# --------------------------------------------------------------
+#  「乌萨斯还不能死！」——三条路线的零散小 BUFF 全部塞进这一个容器，
+#  数值由国策逐条 add_to_variable 累加，精神数值原地成长，不换精神。
+#  圣愚线「时间之前（序曲）」用 remove/add 把容器换成下面那份同名数值的
+#  「乌萨斯邪魔化运动」——只换名字与图标，数值完全共享。
+#
+#  enable = { always = yes }：容器随国策挂上，变量默认 0（无定义按 0 处理）。
+#  文案键 = 修正 id 与 <id>_desc，见 ARF_URS_Rework_l_simp_chinese.yml。
+# ==============================================================
+
+# ---------------- 乌萨斯还不能死！ ----------------
+URS_ursus_shall_not_die = {
+	icon = GFX_idea_URS_ursus_shall_not_die
+
+	enable = { always = yes }
+
+	stability_factor = URS_shall_not_die_stability_var
+	political_power_gain = URS_shall_not_die_pp_var
+	industrial_capacity_factory = URS_shall_not_die_industry_var
+	consumer_goods_factor = URS_shall_not_die_consumer_var
+	research_speed_factor = URS_shall_not_die_research_var
+	opinion_gain_monthly_factor = URS_shall_not_die_opinion_var
+	intel_network_gain_factor = URS_shall_not_die_intel_var
+	war_support_factor = URS_shall_not_die_ws_var
+	army_attack_factor = URS_shall_not_die_attack_var
+	resistance_target = URS_shall_not_die_suppress_var
+	political_power_cost = URS_shall_not_die_cost_var
+	conscription_factor = URS_shall_not_die_conscription_var
+}
+
+# ---------------- 乌萨斯邪魔化运动 ----------------
+URS_ursus_demonic_campaign = {
+	icon = GFX_idea_URS_ursus_demonic_campaign
+
+	enable = { always = yes }
+
+	stability_factor = URS_shall_not_die_stability_var
+	political_power_gain = URS_shall_not_die_pp_var
+	industrial_capacity_factory = URS_shall_not_die_industry_var
+	consumer_goods_factor = URS_shall_not_die_consumer_var
+	research_speed_factor = URS_shall_not_die_research_var
+	opinion_gain_monthly_factor = URS_shall_not_die_opinion_var
+	intel_network_gain_factor = URS_shall_not_die_intel_var
+	war_support_factor = URS_shall_not_die_ws_var
+	army_attack_factor = URS_shall_not_die_attack_var
+	resistance_target = URS_shall_not_die_suppress_var
+	political_power_cost = URS_shall_not_die_cost_var
+	conscription_factor = URS_shall_not_die_conscription_var
+}
+
+# ===== 军事国策树（共享民族精神） BEGIN =====
+# ---------------- 乌萨斯军团浴火重生！（军事树共享） ----------------
+URS_legion_reborn = {
+	icon = GFX_idea_URS_legion_reborn
+
+	enable = { always = yes }
+
+	army_attack_factor = URS_legion_attack_var
+	army_org_factor = URS_legion_org_var
+	breakthrough_factor = URS_legion_breakthrough_var
+	supply_consumption_factor = URS_legion_supply_var
+	command_power_gain = URS_legion_command_var
+	conscription_factor = URS_legion_conscription_var
+	war_support_factor = URS_legion_ws_var
+	stability_factor = URS_legion_stability_var
+	political_power_gain = URS_legion_pp_var
+	resistance_target = URS_legion_suppress_var
+	consumer_goods_factor = URS_legion_consumer_var
+	industrial_capacity_factory = URS_legion_industry_var
+	research_speed_factor = URS_legion_research_var
+	experience_gain_army_unit_factor = URS_legion_xp_var
+	winter_attrition_factor = URS_legion_winter_var
+	intel_network_gain_factor = URS_legion_intel_var
+}
+# ===== 军事国策树（共享民族精神） END =====

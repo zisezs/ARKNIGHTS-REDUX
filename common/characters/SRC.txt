@@ -1,0 +1,397 @@
+characters = {
+	#西西里夫人
+	SRC_Madam_Sicily = {
+		name = SRC_Madam_Sicily
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/SRC/Madam_Sicily.dds"
+			}
+		}
+		country_leader = {
+			ideology = oligarchy_subtype
+			traits = { SRC_Lord_of_the_Gray_Hall }
+			expire = "1965.1.1.1"
+			desc = SRC_Madam_Sicily_desc
+		}
+	}
+	#阿格尼尔神父
+	SRC_Agenir = {
+		name = SRC_Agenir
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/SRC/Agenir.dds"
+				small = "gfx/interface/ideas/SRC/Agenir_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/SRC/Agenir.dds"
+				small = "gfx/interface/ideas/SRC/Agenir_small.dds"
+			}
+		}
+		country_leader = {
+			ideology = stratocracy_subtype
+			expire = "1965.1.1.1"
+			desc = SRC_Agenir_desc
+		}
+		advisor = {
+            slot = second_in_command
+            idea_token = SRC_Agenir_second_in_command
+            traits = { SRC_Father }
+			desc = SRC_Agenir_second_in_command_desc
+        }
+		field_marshal = {
+		    skill = 3
+		    attack_skill = 1
+		    defense_skill = 3
+		    planning_skill = 2
+		    logistics_skill = 2
+		}
+	}
+	SRC_Alberto_Saluzzo = {
+		name = SRC_Alberto_Saluzzo
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		# 2026-09-20：专制主义党魁位让给拉维妮娅（党名已改为「至高法院」），
+		# 这里不再挂 country_leader —— 同组两个领袖会抢位，set_politics = despotism 时
+		# 引擎可能升阿尔贝托而不是她。他的 political_advisor 角色保留。
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Alberto_Saluzzo
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Family_Lineage SRC_adv_alberto_saluzzo }
+			desc = SRC_Alberto_Saluzzo_desc
+		}
+	}
+	SRC_Bernardo_Bellone = {
+		name = SRC_Bernardo_Bellone
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		country_leader = {
+			ideology = populist_conservatism_subtype
+			expire = "1965.1.1.1"
+			desc = SRC_Bernardo_Bellone_desc
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Bernardo_Bellone
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Family_Lineage SRC_adv_bernardo_bellone }
+			desc = SRC_Bernardo_Bellone_desc
+		}
+	}
+	SRC_Giovanna_Rossati = {
+		name = SRC_Giovanna_Rossati
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		country_leader = {
+			ideology = national_liberalism_subtype
+			expire = "1965.1.1.1"
+			desc = SRC_Giovanna_Rossati_desc
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Giovanna_Rossati
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Family_Lineage SRC_adv_giovanna_rossati }
+			desc = SRC_Giovanna_Rossati_desc
+		}
+	}
+	SRC_Fabrizio_Venezia = {
+		name = SRC_Fabrizio_Venezia
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		country_leader = {
+			ideology = authoritarian_democracy_subtype
+			expire = "1965.1.1.1"
+			desc = SRC_Fabrizio_Venezia_desc
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Fabrizio_Venezia
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Family_Lineage SRC_adv_fabrizio_venezia }
+			desc = SRC_Fabrizio_Venezia_desc
+		}
+	}
+	SRC_Leontuzzo_Bellone = {
+		name = SRC_Leontuzzo_Bellone
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/SRC/Leontuzzo_Bellone.dds"
+				small = "gfx/leaders/SRC/Leontuzzo_Bellone_small.dds"
+			}
+		}
+		country_leader = {
+			ideology = neoconservatism_subtype
+			expire = "1965.1.1.1"
+			desc = SRC_Leontuzzo_Bellone_desc
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Leontuzzo_Bellone
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Outsider_Lineage SRC_adv_leontuzzo_bellone }
+			desc = SRC_Leontuzzo_Bellone_desc
+		}
+	}
+	SRC_Mario_Segale = {
+		name = SRC_Mario_Segale
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		country_leader = {
+			ideology = conservative_subtype
+			expire = "1965.1.1.1"
+			desc = SRC_Mario_Segale_desc
+		}
+	}
+	SRC_Anton_Garencio = {
+		name = SRC_Anton_Garencio
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		country_leader = {
+			ideology = socialism_subtype
+			expire = "1965.1.1.1"
+			desc = SRC_Anton_Garencio_desc
+		}
+	}
+	SRC_Benedetta_Napolini = {
+		name = SRC_Benedetta_Napolini
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		country_leader = {
+			ideology = national_syndicalism_subtype
+			traits = { SRC_Duce }
+			expire = "1965.1.1.1"
+			desc = SRC_Benedetta_Napolini_desc
+		}
+	}
+	SRC_Lappland_Saluzzo = {
+		name = SRC_Lappland_Saluzzo
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		country_leader = {
+			ideology = extreme_militarism_subtype
+			expire = "1965.1.1.1"
+			desc = SRC_Lappland_Saluzzo_desc
+		}
+		advisor = {
+			slot = army_chief
+			idea_token = SRC_Lappland_Saluzzo_army_chief
+			ledger = army
+			cost = 100
+			traits = { SRC_Outsider_Lineage SRC_adv_lappland_saluzzo }
+			desc = SRC_Lappland_Saluzzo_desc
+		}
+	}
+	#瓦拉赫（陆军部长）
+	SRC_Walach = {
+		name = SRC_Walach
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = army_chief
+			idea_token = SRC_Walach_army_chief
+			ledger = army
+			cost = 100
+			traits = { SRC_Family_Lineage SRC_adv_walach }
+			desc = SRC_Walach_desc
+		}
+	}
+	#德米特里·切塔尔多·贝洛内（顾问）
+	SRC_Dmitri_Bellone = {
+		name = SRC_Dmitri_Bellone
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Dmitri_Bellone
+			ledger = civilian
+			cost = 100
+			# 2026-09-20：贝洛内家把档案主动交给特别法庭、企业改组为联邦物流公司，
+			# 他改挂「联邦任职」——拉维妮娅的家族顾问清洗因此不碰他（设计稿：德米特里任执行总裁）
+			traits = { SRC_Federal_Service SRC_adv_dmitri_bellone }
+			desc = SRC_Dmitri_Bellone_desc
+		}
+	}
+	#拉维妮娅·法尔科内（顾问）
+	SRC_Lavinia_Falcone = {
+		name = SRC_Lavinia_Falcone
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/SRC/Lavinia_Falcone.dds"
+				small = "gfx/leaders/SRC/Lavinia_Falcone_small.dds"
+			}
+		}
+		# 拉维妮娅出任总统时用（common/scripted_effects/SRC_lavinia_effects.txt 的 add_country_leader_role）
+		country_leader = {
+			ideology = civilian_dictatorship_subtype
+			expire = "1965.1.1.1"
+			traits = {
+				SRC_lv_judger
+			}
+			desc = SRC_Lavinia_Falcone_desc
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Lavinia_Falcone
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Outsider_Lineage SRC_adv_lavinia_falcone }
+			desc = SRC_Lavinia_Falcone_desc
+		}
+	}
+	#伊雷妮（顾问）
+	SRC_Irene = {
+		name = SRC_Irene
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/SRC/Irene.dds"
+				small = "gfx/leaders/SRC/Irene_small.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Irene
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Outsider_Lineage SRC_adv_irene }
+			desc = SRC_Irene_desc
+		}
+	}
+	#卢比奥（顾问）
+	SRC_Rubio = {
+		name = SRC_Rubio
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Rubio
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Outsider_Lineage SRC_adv_rubio }
+			desc = SRC_Rubio_desc
+		}
+	}
+	#卡拉奇（顾问）
+	SRC_Caracci = {
+		name = SRC_Caracci
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Caracci
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Outsider_Lineage SRC_adv_caracci }
+			desc = SRC_Caracci_desc
+		}
+	}
+	#安东尼奥·威尼斯（顾问）
+	SRC_Antonio_Venezia = {
+		name = SRC_Antonio_Venezia
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Antonio_Venezia
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Family_Lineage SRC_adv_antonio_venezia }
+			desc = SRC_Antonio_Venezia_desc
+		}
+	}
+	#席尔瓦·莫雷蒂（顾问）
+	SRC_Silva_Moretti = {
+		name = SRC_Silva_Moretti
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Silva_Moretti
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Family_Lineage SRC_adv_silva_moretti }
+			desc = SRC_Silva_Moretti_desc
+		}
+	}
+	#德克萨斯（陆军部长）
+	SRC_Texas = {
+		name = SRC_Texas
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = army_chief
+			idea_token = SRC_Texas_army_chief
+			ledger = army
+			cost = 100
+			traits = { SRC_Outsider_Lineage SRC_adv_texas }
+			desc = SRC_Texas_desc
+		}
+	}
+	#沙雷（顾问）
+	SRC_Shalay = {
+		name = SRC_Shalay
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SRC_Shalay
+			ledger = civilian
+			cost = 100
+			traits = { SRC_Outsider_Lineage SRC_adv_shalay }
+			desc = SRC_Shalay_desc
+		}
+	}
+}

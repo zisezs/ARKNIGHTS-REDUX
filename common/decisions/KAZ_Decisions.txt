@@ -1,0 +1,84 @@
+KAZ_ai_decisions = {
+
+	KAZ_ai_civil_war = {
+
+		available = {
+			has_global_flag = VIC_joint_march_II_end
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+
+			KAC = {
+				transfer_state = 279
+				transfer_state = 307
+				transfer_state = 333
+				transfer_state = 343
+				transfer_state = 344
+				transfer_state = 348
+
+				add_state_core = 279
+				add_state_core = 307
+				add_state_core = 333
+				add_state_core = 343
+				add_state_core = 344
+				add_state_core = 348
+
+				inherit_technology = KAZ
+				set_research_slots = 2
+			}
+
+			KAQ = {
+				transfer_state = 349
+				transfer_state = 386
+				transfer_state = 399
+				transfer_state = 460
+				transfer_state = 464
+				transfer_state = 702
+
+				add_state_core = 349
+				add_state_core = 386
+				add_state_core = 399
+				add_state_core = 460
+				add_state_core = 464
+				add_state_core = 702
+
+				inherit_technology = KAZ
+				set_research_slots = 2
+			}
+
+			transfer_units_fraction= {
+				target = KAQ
+				size = 0.3
+			}
+
+			transfer_units_fraction= {
+				target = KAC
+				size = 0.5
+			}
+
+			KAQ = {
+				declare_war_on = {
+					target = KAZ
+					type = civil_war
+				}
+				declare_war_on = {
+					target = KAC
+					type = civil_war
+				}
+			}
+
+			KAC = {
+				declare_war_on = {
+					target = KAZ
+					type = civil_war
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+}

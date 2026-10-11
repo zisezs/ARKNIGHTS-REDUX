@@ -1,0 +1,54 @@
+add_namespace = news_ursus
+add_namespace = decision_ursus
+
+country_event = {
+	id = decision_ursus.1
+	title = decision_ursus.1.t
+	desc = decision_ursus.1.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = decision_ursus.1.a
+		FROM = {
+			country_event = {
+				id = decision_ursus.2
+			}
+		}
+	}
+
+	option = { 
+		name = decision_ursus.1.b
+		FROM = {
+			country_event = {
+				id = decision_ursus.3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = decision_ursus.2
+	title = decision_ursus.2.t
+	desc = decision_ursus.2.d
+
+	is_triggered_only = yes
+
+	option = { 
+		name = decision_ursus.2.a
+		set_country_flag = REU_annex_UFE
+	}
+}
+
+country_event = {
+	id = decision_ursus.3
+	title = decision_ursus.3.t
+	desc = decision_ursus.3.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = decision_ursus.3.a
+		declare_war_on = { target = UFE type = annex_everything }
+	}
+}

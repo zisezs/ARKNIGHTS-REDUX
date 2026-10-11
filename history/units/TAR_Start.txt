@@ -1,0 +1,159 @@
+######################
+## 塔拉（威灵顿公爵领 → 深池战争期）开局编制
+##
+## 口径来源：docs/剧情拆解_维多利亚与塔拉/31_势力与制度总表.md:25（深池"受过一些训练，
+## 但纪律说不上好"、先杀哨所后夺市政厅、农用地块运军火）、:28（赤铁近卫队＝威灵顿系正规军）、
+## 12_塔拉_照我以火_剧情.md:11/76（加斯特里尔号高速战舰）
+##
+## 与旧版的差别：旧版 19 个师是 5 装甲＋4 机械化＋5 摩托化＋4 步兵＋1 陆行舰的"近代合成军队"，
+## 与流民武装的定性相反；现压到 8 个师，主力改民兵与术队，装甲洪流删除，
+## 番号组改用 common/units/names_divisions/TAR_names_divisions.txt（旧版把 motorized/mechanized
+## 塞进 VIC_INF_01，division_types 不匹配 → 番号静默退化成"第 N 步兵师"）。
+##
+## 支援连不在这里挂：本作支援连靠科技点亮后由玩家在编制界面添加（见
+## common/units/arf_special_support_units.txt 与 common/technologies/arf_special_unit_techs.txt）。
+######################
+
+# ── 深池流民大队：主力，装备靠外部长期资助，故装备系数低 ──
+division_template = {
+	name = "深池流民大队"
+	division_names_group = TAR_MLT_01
+	priority = 3
+	regiments = {
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia = { x = 0 y = 2 }
+		militia = { x = 1 y = 0 }
+		militia = { x = 1 y = 1 }
+		militia = { x = 1 y = 2 }
+		militia = { x = 2 y = 0 }
+	}
+}
+
+# ── 石柱术队：蔓德拉那一系，碎石结盾／凭空造石柱／荆棘之林区拒止 ──
+division_template = {
+	name = "深池石柱术队"
+	division_names_group = TAR_MLT_01
+	priority = 4
+	regiments = {
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia = { x = 1 y = 0 }
+		militia = { x = 1 y = 1 }
+		artillery_brigade = { x = 0 y = 2 }
+		artillery_brigade = { x = 1 y = 2 }
+		anti_air_brigade = { x = 2 y = 2 }
+	}
+}
+
+# ── 威灵顿摩托化步兵师：公爵领的正规军底子，保留两支 ──
+division_template = {
+	name = "威灵顿摩托化步兵师"
+	division_names_group = TAR_MOT_01
+	priority = 6
+	regiments = {
+		motorized = { x = 0 y = 0 }
+		motorized = { x = 0 y = 1 }
+		motorized = { x = 0 y = 2 }
+		motorized = { x = 1 y = 0 }
+		motorized = { x = 1 y = 1 }
+		motorized = { x = 1 y = 2 }
+		mot_artillery_brigade = { x = 2 y = 1 }
+	}
+}
+
+# ── 赤铁近卫队：由【剑】线国策 create_unit 解锁，开局锁定 ──
+#     清洗双重效忠者时用 delete_unit_template_and_units 摘掉（照 events/VIC.txt:578-581 写法）
+division_template = {
+	name = "赤铁近卫队"
+	division_names_group = TAR_INF_01
+	is_locked = yes
+	priority = 8
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		artillery_brigade = { x = 0 y = 2 }
+		artillery_brigade = { x = 1 y = 2 }
+	}
+}
+
+# ── 「加斯特里尔」号：高速战舰的陆战载体，驻港口省而非内陆首都 ──
+division_template = {
+	name = "加斯特里尔号"
+	division_names_group = TAR_LSH_01
+	is_locked = yes
+	priority = 10
+	regiments = {
+		landship = { x = 0 y = 0 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+	}
+}
+
+units = {
+	# 石高原野一带的流民武装（红脊镇、图拉镇方向）
+	division = {
+		name = "深池第一大队"
+		location = 18136
+		division_template = "深池流民大队"
+		start_experience_factor = 0.15
+		start_equipment_factor = 0.45
+	}
+	division = {
+		name = "深池第二大队"
+		location = 18043
+		division_template = "深池流民大队"
+		start_experience_factor = 0.15
+		start_equipment_factor = 0.45
+	}
+	division = {
+		name = "深池第三大队"
+		location = 17955
+		division_template = "深池流民大队"
+		start_experience_factor = 0.20
+		start_equipment_factor = 0.55
+	}
+
+	# 石柱术队：小股、但每队都能改写一段街区的攻守
+	division = {
+		name = "石柱第一术队"
+		location = 18136
+		division_template = "深池石柱术队"
+		start_experience_factor = 0.30
+		start_equipment_factor = 0.60
+	}
+	division = {
+		name = "石柱第二术队"
+		location = 18172
+		division_template = "深池石柱术队"
+		start_experience_factor = 0.30
+		start_equipment_factor = 0.60
+	}
+
+	# 公爵领正规军：只有两支摩托化，没有装甲洪流
+	division = {
+		name = "威灵顿第一摩托化师"
+		location = 17955
+		division_template = "威灵顿摩托化步兵师"
+		start_experience_factor = 0.45
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第二摩托化师"
+		location = 18190
+		division_template = "威灵顿摩托化步兵师"
+		start_experience_factor = 0.45
+		start_equipment_factor = 0.80
+	}
+
+	# 加斯特里尔号停在 593 州的港口省（naval_base 所在地），不再占内陆首都
+	division = {
+		name = "加斯特里尔"
+		location = 3081
+		division_template = "加斯特里尔号"
+		start_experience_factor = 0.50
+		start_equipment_factor = 1.0
+	}
+}

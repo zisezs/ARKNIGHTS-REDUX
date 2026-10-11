@@ -1,0 +1,1892 @@
+focus_tree = {
+	id = VGO_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = VGO
+		}
+	}
+	default = no
+
+	#勘乱之始
+	focus = {
+		id = VGO_The_beginning_of_the_rebellion
+		icon = GFX_focus_VGO_The_beginning_of_the_rebellion
+		x = 13
+		y = 0
+		cost = 5
+		completion_reward = {
+			add_political_power = 200
+		}
+	}
+
+	#重审现状
+	focus = {
+		id = VGO_reexamining_the_status_quo
+		icon = GFX_focus_VGO_reexamining_the_status_quo
+		cost = 2
+		prerequisite = {
+			focus = VGO_The_beginning_of_the_rebellion
+		}
+		x = -5
+		y = 1
+		relative_position_id = VGO_The_beginning_of_the_rebellion
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_military_debuff_idea
+					add_idea = VGO_military_buff_idea
+				}
+			}
+			unlock_decision_category_tooltip = VIC_military_construction_decisions
+			set_country_flag = VIC_military_construction_flag
+			every_subject_country = {
+				unlock_decision_category_tooltip = VIC_military_construction_decisions
+				set_country_flag = VIC_military_construction_flag
+			}
+			unlock_decision_tooltip = VIC_attack_VRA
+			unlock_decision_tooltip = VIC_attack_VRB
+			unlock_decision_tooltip = VIC_attack_VRC
+			unlock_decision_tooltip = VIC_attack_VRD
+			set_country_flag = VIC_suppress_rebellion
+			set_variable = { VIC_war_preparations = 10 }
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				remove_ideas = VGO_military_debuff_idea
+				add_to_variable = {
+					var = VGO_military_training_time_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VGO_military_experience_gain_army_factor_dynamic_var
+					value = 0.1
+				}
+				add_dynamic_modifier = {
+					modifier = VGO_military_buff_dynamic_modifier
+				}
+			}
+		}
+	}
+
+	#接触周边势力
+	focus = {
+		id = VGO_contact_surrounding_forces
+		icon = GFX_focus_VGO_contact_surrounding_forces
+		cost = 2
+		prerequisite = {
+			focus = VGO_reexamining_the_status_quo
+		}
+		x = -3
+		y = 1
+		relative_position_id = VGO_reexamining_the_status_quo
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			set_country_flag = VIC_add_group_support
+			unlock_decision_tooltip = VIC_add_Navy_support_VGO
+			unlock_decision_tooltip = VIC_add_Navy_support_guns_VGO
+			unlock_decision_tooltip = VIC_minus_Navy_support_TAR
+			unlock_decision_tooltip = VIC_add_Abercorn_support_VGO
+			unlock_decision_tooltip = VIC_add_Abercorn_support_guns_VGO
+			unlock_decision_tooltip = VIC_minus_Abercorn_support_TAR
+		}
+	}
+
+	#召回海外军团
+	focus = {
+		id = VGO_recalling_legion_outside
+		icon = GFX_focus_VGO_recalling_legion_outside
+		cost = 5
+		prerequisite = {
+			focus = VGO_contact_surrounding_forces
+		}
+		x = -1
+		y = 1
+		relative_position_id = VGO_contact_surrounding_forces
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			division_template = {
+				name = "殖民地卫戍部队"
+				regiments = {
+					cavalry = { x = 0 y = 0 }
+					cavalry = { x = 0 y = 1 }
+					cavalry = { x = 0 y = 2 }
+					cavalry = { x = 1 y = 0 }
+					cavalry = { x = 1 y = 1 }
+					cavalry = { x = 1 y = 2 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"殖民地卫戍部队\" division_template = \"殖民地卫戍部队\" start_experience_factor = 0.1 start_equipment_factor = 0.8"  
+					owner = VGO
+					count = 5
+				}
+			}
+			#决议刷民兵我看不懂所以不写（
+			#小登是对的，就不该做刷兵决议
+		}
+	}
+
+	#致电哥伦比亚
+	focus = {
+		id = VGO_call_Colombia
+		icon = GFX_focus_VGO_call_Colombia
+		cost = 5
+		prerequisite = {
+			focus = VGO_contact_surrounding_forces
+		}
+		x = 0
+		y = 2
+		relative_position_id = VGO_contact_surrounding_forces
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			unlock_decision_tooltip = VGO_call_Colombia_decision
+		}
+	}
+
+	#尖刀作战
+	focus = {
+		id = VGO_knife_fighting
+		icon = GFX_focus_VGO_knife_fighting
+		cost = 5
+		prerequisite = {
+			focus = VGO_reexamining_the_status_quo
+		}
+		x = -1
+		y = 1
+		relative_position_id = VGO_reexamining_the_status_quo
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_military_buff_dummy_idea
+					add_idea = VGO_knife_fighting_idea 
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_military_special_forces_cap_dynamic_var
+					value = 0.25
+				}
+				add_to_variable = {
+					var = VGO_military_special_forces_attack_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_military_special_forces_defence_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#整军备战
+	focus = {
+		id = VGO_prepare_army_for_war
+		icon = GFX_focus_VGO_prepare_army_for_war
+		cost = 5
+		prerequisite = {
+			focus = VGO_reexamining_the_status_quo
+		}
+		x = 1
+		y = 1
+		relative_position_id = VGO_reexamining_the_status_quo
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			army_experience = 50
+		}
+	}
+
+	#巷战训练
+	focus = {
+		id = VGO_street_fighting_training
+		icon = GFX_focus_VGO_street_fighting_training
+		cost = 5
+		prerequisite = {
+			focus = VGO_knife_fighting
+		}
+		x = -1
+		y = 1
+		relative_position_id = VGO_knife_fighting
+		
+		completion_reward = {
+			custom_effect_tooltip = VGO_street_fighting_training_tt
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				set_technology = { VGO_special_urban_tech = 1 popup = no }
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier }
+					}
+					remove_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier }
+					add_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier1 }
+				}
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier2 }
+					}
+					remove_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier2 }
+					add_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier3 }
+				}
+			}
+		}
+	}
+
+	#加固卡拉顿防线
+	focus = {
+		id = VGO_strengthening_Karaton_line
+		icon = GFX_focus_VGO_strengthening_Karaton_line
+		cost = 5
+		prerequisite = {
+			focus = VGO_prepare_army_for_war
+		}
+		mutually_exclusive = { focus = VGO_arms_buildup_priority }
+		x = -1
+		y = 1
+		relative_position_id = VGO_prepare_army_for_war
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_military_buff_dummy_idea
+					add_idea = VGO_strengthening_Karaton_line_idea 
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			if = {
+				limit = { controls_state = 638 }
+				638 = {
+					set_building_level = {
+						type = bunker
+						level = 3
+						province = {
+							id = 10999
+							id = 5259
+							id = 3310
+							level < 3
+						}
+					}
+				}
+			}
+			every_owned_state = {
+				limit = {
+					OR = {
+						state = 638
+						state = 33
+						state = 572
+					}
+				}
+				add_dynamic_modifier = {
+					modifier = VGO_defend_motherland_plan_modifier
+					scope = ROOT
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_military_production_speed_bunker_factor_dynamic_var
+					value = 0.25
+				}
+				add_to_variable = {
+					var = VGO_military_land_bunker_effectiveness_factor_factor_dynamic_var
+					value = 0.15
+				}
+				add_to_variable = {
+					var = VGO_military_army_defence_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#军备建设优先
+	focus = {
+		id = VGO_arms_buildup_priority
+		icon = GFX_focus_VGO_arms_buildup_priority
+		cost = 5
+		prerequisite = {
+			focus = VGO_prepare_army_for_war
+		}
+		mutually_exclusive = { focus = VGO_strengthening_Karaton_line }
+		x = 1
+		y = 1
+		relative_position_id = VGO_prepare_army_for_war
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_military_buff_dummy_idea
+					add_idea = VGO_arms_buildup_priority_idea 
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_military_production_speed_arms_factory_factor_dynamic_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_military_conversion_cost_civ_to_mil_factor_dynamic_var
+					value = -0.3
+				}
+				add_to_variable = {
+					var = VGO_military_army_defence_factor_dynamic_var
+					value = 0.05
+				}
+			}
+		}
+	}
+
+	#更深的堑壕
+	focus = {
+		id = VGO_deeper_trenches
+		icon = GFX_focus_VGO_deeper_trenches
+		cost = 5
+		prerequisite = {
+			focus = VGO_street_fighting_training
+		}
+		x = 1
+		y = 1
+		relative_position_id = VGO_street_fighting_training
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_military_buff_dummy_idea
+					add_idea = VGO_deeper_trenches_idea 
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_military_max_dig_in_dynamic_var
+					value = 5
+				}
+				add_to_variable = {
+					var = VGO_military_dig_in_speed_factor_dynamic_var
+					value = 0.15
+				}
+			}
+		}
+	}
+
+	#武装民兵
+	focus = {
+		id = VGO_armed_militia
+		icon = GFX_focus_VGO_armed_militia
+		cost = 5
+		prerequisite = {
+			focus = VGO_strengthening_Karaton_line
+			focus = VGO_arms_buildup_priority
+		}
+		x = 0
+		y = 2
+		relative_position_id = VGO_prepare_army_for_war
+
+		completion_reward = {
+			custom_effect_tooltip = VGO_armed_militia_tt
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				set_technology = { VGO_militia_tech = 1 popup = no }
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier }
+					}
+					remove_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier }
+					add_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier2 }
+				}
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier1 }
+					}
+					remove_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier1 }
+					add_dynamic_modifier = { modifier = VGO_military_buff_dynamic_modifier3 }
+				}
+			}
+		}
+	}
+
+	#修建防空阵地
+	focus = {
+		id = VGO_building_air_defense_positions
+		icon = GFX_focus_VGO_building_air_defense_positions
+		cost = 5
+		prerequisite = {
+			focus = VGO_strengthening_Karaton_line
+			focus = VGO_arms_buildup_priority
+		}
+		x = 1
+		y = 1
+		relative_position_id = VGO_arms_buildup_priority
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_military_buff_dummy_idea
+					add_idea = VGO_building_air_defense_positions_idea 
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_military_anti_air1_dynamic_var
+					value = -0.05
+				}
+				add_to_variable = {
+					var = VGO_military_anti_air2_dynamic_var
+					value = 0.05
+				}
+			}
+			every_owned_state = {
+				add_building_construction = {
+				    type = anti_air_building
+				    level = 1
+				    instant_build = yes
+				}
+			}
+		}
+	}
+
+	#后勤生命线
+	focus = {
+		id = VGO_logistical_lifeline
+		icon = GFX_focus_VGO_logistical_lifeline
+		cost = 5
+		prerequisite = {
+			focus = VGO_deeper_trenches
+		}
+		x = -1
+		y = 1
+		relative_position_id = VGO_deeper_trenches
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_military_buff_dummy_idea
+					add_idea = VGO_logistical_lifeline_idea 
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_military_no_supply_grace_dynamic_var
+					value = 48
+				}
+				add_to_variable = {
+					var = VGO_military_supply_node_range_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#增加军事预算
+	focus = {
+		id = VGO_increase_military_budget
+		icon = GFX_focus_VGO_increase_military_budget
+		cost = 5
+		prerequisite = {
+			focus = VGO_deeper_trenches
+		}
+		prerequisite = {
+			focus = VGO_strengthening_Karaton_line
+			focus = VGO_arms_buildup_priority
+		}
+		x = 1
+		y = 1
+		relative_position_id = VGO_deeper_trenches
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			add_research_slot = 1
+		}
+	}
+
+	#迅速武装
+	focus = {
+		id = VGO_rapid_arming
+		icon = GFX_focus_VGO_rapid_arming
+		cost = 5
+		prerequisite = {
+			focus = VGO_armed_militia
+		}
+		x = 1
+		y = 1
+		relative_position_id = VGO_armed_militia
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			add_ideas = VGO_rapid_arming_idea
+		}
+	}
+
+	#坚定守住，就有办法
+	focus = {
+		id = VGO_hold_on_firmly_there_is_a_way
+		icon = GFX_focus_VGO_innovating_military_concepts
+		cost = 5
+		prerequisite = {
+			focus = VGO_increase_military_budget
+		}
+		x = -1
+		y = 1
+		relative_position_id = VGO_increase_military_budget
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_military_buff_dummy_idea
+					add_idea = VGO_hold_on_firmly_there_is_a_way_idea 
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_military_combat_width_factor_dynamic_var
+					value = -0.1
+				}
+				add_to_variable = {
+					var = VGO_military_army_org_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_military_army_defence_factor_dynamic_var
+					value = 0.1
+				}
+			}
+		}
+	}
+
+	#革新军事理念
+	focus = {
+		id = VGO_innovating_military_concepts
+		icon = GFX_focus_VGO_innovating_military_concepts
+		cost = 5
+		prerequisite = {
+			focus = VGO_increase_military_budget
+		}
+		x = 1
+		y = 1
+		relative_position_id = VGO_increase_military_budget
+
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_military_buff_dummy_idea
+					add_idea = VGO_innovating_military_concepts_idea 
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_military_land_doctrine_cost_factor_dynamic_var
+					value = -0.1
+				}
+				set_country_flag = VGO_innovating_military_concepts_flag
+			}
+			custom_effect_tooltip = VGO_innovating_military_concepts_tt
+		}
+	}
+	
+	#启用旧式装备
+	focus = {
+		id = VGO_use_legacy_equipments
+		icon = GFX_focus_VGO_use_legacy_equipments
+		cost = 5
+		prerequisite = {
+			focus = VGO_rapid_arming
+		}
+		x = 1
+		y = 1
+		relative_position_id = VGO_rapid_arming
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 2 }
+				VIC_war_preparations_add = yes
+			}
+			add_equipment_to_stockpile = {
+			    type = infantry_equipment_0
+			    amount = 3000
+			    producer = VGO
+			}
+			add_equipment_to_stockpile = {
+			    type = artillery_equipment_0
+			    amount = 200
+			    producer = VGO
+			}
+		}
+	}
+
+	#执行“日落”计划
+	focus = {
+		id = VGO_executing_Sunset_plan
+		icon = GFX_focus_VGO_executing_Sunset_plan
+		cost = 5
+		prerequisite = {
+			focus = VGO_hold_on_firmly_there_is_a_way
+		}
+		prerequisite = {
+			focus = VGO_innovating_military_concepts
+		}
+
+		available = {
+			has_global_flag = VIC_joint_march_II_end
+			VCA = {
+				exists = yes
+			}
+			VWI = {
+				exists = yes
+			}
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = VGO_hold_on_firmly_there_is_a_way
+
+		completion_reward = {
+			unlock_decision_tooltip = VIC_military_operation_against_VWI
+			unlock_decision_tooltip = VIC_military_operation_against_VCA
+			set_country_flag = VIC_military_operation_flag
+		}
+	}
+
+	#22. 稳定政局
+	focus = {
+		id = VGO_Stabilize_the_political_situation
+		icon = GFX_focus_VGO_Stabilize_the_political_situation
+		relative_position_id = VGO_The_beginning_of_the_rebellion
+		prerequisite = {focus = VGO_The_beginning_of_the_rebellion}
+		x = 0
+		y = 1
+		cost = 2
+		completion_reward = {
+
+		}
+	}
+
+	#23. 临时行政中心
+	focus = {
+		id = VGO_Interim_Administrative_Centre
+		icon = GFX_focus_VGO_Interim_Administrative_Centre
+		relative_position_id = VGO_Stabilize_the_political_situation
+		prerequisite = {focus = VGO_Stabilize_the_political_situation}
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+
+		}
+	}
+
+	#24. 救济居民
+	focus = {
+		id = VGO_Relief_of_residents
+		icon = GFX_focus_VGO_Relief_of_residents
+		relative_position_id = VGO_Interim_Administrative_Centre
+		prerequisite = {focus = VGO_Interim_Administrative_Centre}
+		x = -1
+		y = 1
+		cost = 5
+		completion_reward = {
+
+		}
+	}
+
+	#25. 获得地区议会支持
+	focus = {
+		id = VGO_Gain_support_from_the_regional_councils
+		icon = GFX_focus_VGO_Gain_support_from_the_regional_councils
+		relative_position_id = VGO_Interim_Administrative_Centre
+		prerequisite = {focus = VGO_Interim_Administrative_Centre}
+		x = 1
+		y = 1
+		cost = 5
+		completion_reward = {
+
+		}
+	}
+
+	#26. 非常时期，特殊手段
+	focus = {
+		id = VGO_Extraordinary_times_special_means
+		icon = GFX_focus_VGO_Extraordinary_times_special_means
+		relative_position_id = VGO_Relief_of_residents
+		prerequisite = {focus = VGO_Relief_of_residents}
+		prerequisite = {focus = VGO_Gain_support_from_the_regional_councils}
+		x = 1
+		y = 1
+		cost = 5
+		completion_reward = {
+
+		}
+	}
+
+	#27. “我们能做到！”
+	focus = {
+		id = VGO_We_can_do_it
+		icon = GFX_focus_VGO_We_can_do_it
+		relative_position_id = VGO_Extraordinary_times_special_means
+		prerequisite = {focus = VGO_Extraordinary_times_special_means}
+		x = 0
+		y = 2
+		cost = 5
+		completion_reward = {
+
+		}
+	}
+
+	#28. 重振经济
+	focus = {
+		id = VGO_Revive_the_economy
+		icon = GFX_focus_VGO_Revive_the_economy
+		relative_position_id = VGO_The_beginning_of_the_rebellion
+		prerequisite = {focus = VGO_The_beginning_of_the_rebellion}
+		x = 5
+		y = 1
+		cost = 2
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_debuff_idea
+					add_idea = VGO_economic_buff_idea 
+				}
+			}
+			hidden_effect = {
+				remove_ideas = VGO_economic_debuff_idea
+				add_dynamic_modifier = { modifier = VGO_economy_buff_dynamic_modifier }
+				add_to_variable = {
+					var = VGO_economy_production_factory_start_efficiency_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_line_change_production_efficiency_factor_var
+					value = 0.05
+				}
+			}
+			1064 = { set_state_category = town }
+		}
+	}
+
+	#29. 整顿工业
+	focus = {
+		id = VGO_Rectify_the_industry
+		icon = GFX_focus_VGO_Rectify_the_industry
+		relative_position_id = VGO_Revive_the_economy
+		prerequisite = {focus = VGO_Revive_the_economy}
+		x = -2
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_1_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_production_factory_start_efficiency_factor_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VGO_economy_industrial_capacity_factory_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_production_factory_max_efficiency_factor_var
+					value = 0.01
+				}
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
+	}
+
+	#30. 勘探地区资源
+	focus = {
+		id = VGO_Exploration_of_regional_resources
+		icon = GFX_focus_VGO_Exploration_of_regional_resources
+		relative_position_id = VGO_Revive_the_economy
+		prerequisite = {focus = VGO_Revive_the_economy}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_4_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_local_resources_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_consumer_goods_factor_var
+					value = -0.05
+				}
+			}
+			33 = { 
+				set_state_category = town 
+				add_resource = {
+					type = steel
+					amount = 5
+				}
+				add_resource = {
+					type = oil
+					amount = 10
+				}
+			}
+		}
+	}
+
+	#31. 改善地区经济
+	focus = {
+		id = VGO_Improving_the_regional_economy
+		icon = GFX_focus_VGO_Improving_the_regional_economy
+		relative_position_id = VGO_Revive_the_economy
+		prerequisite = {focus = VGO_Revive_the_economy}
+		x = 4
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_1_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_local_factories_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_STATE_state_production_speed_buildings_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_STATE_recruitable_population_var
+					value = 0.001
+				}
+			}
+			every_military_industrial_organization = {
+				add_mio_funds = 500
+			}
+		}
+	}
+
+	#32. 集中资源发展工业
+	focus = {
+		id = VGO_Start_industrial_mobilization
+		icon = GFX_focus_VGO_Start_industrial_mobilization
+		relative_position_id = VGO_Rectify_the_industry
+		prerequisite = {focus = VGO_Rectify_the_industry}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_1_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_production_factory_start_efficiency_factor_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VGO_economy_industrial_capacity_factory_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_production_factory_max_efficiency_factor_var
+					value = 0.01
+				}
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
+	}
+
+	#33. 扩大开拓团规模
+	focus = {
+		id = VGO_Expand_the_scale_of_the_development_group
+		icon = GFX_focus_VGO_Expand_the_scale_of_the_development_group
+		relative_position_id = VGO_Exploration_of_regional_resources
+		prerequisite = {focus = VGO_Exploration_of_regional_resources}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_4_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_local_resources_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_consumer_goods_factor_var
+					value = -0.05
+				}
+			}
+			619 = { 
+				set_state_category = town 
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+				add_resource = {
+					type = tungsten
+					amount = 12
+				}
+			}
+		}
+	}
+
+	#34. 《西部特别经济法案》
+	focus = {
+		id = VGO_Western_Special_Economic_Act
+		icon = GFX_focus_VGO_Western_Special_Economic_Act
+		relative_position_id = VGO_Improving_the_regional_economy
+		prerequisite = {focus = VGO_Improving_the_regional_economy}
+		x = -2
+		y = 1
+		cost = 8
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_5_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_recruitable_population_var
+					value = 0.005
+				}
+			}
+			add_ideas = VGO_western_economy_idea
+		}
+	}
+
+	#35. 开启经济动员
+	focus = {
+		id = VGO_Start_economic_mobilization
+		icon = GFX_focus_VGO_Start_economic_mobilization
+		relative_position_id = VGO_Improving_the_regional_economy
+		prerequisite = {focus = VGO_Improving_the_regional_economy}
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_3_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_state_production_speed_buildings_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_STATE_recruitable_population_var
+					value = 0.001
+				}
+			}
+			every_military_industrial_organization = {
+				add_mio_funds = 500
+			}
+		}
+	}
+
+	#36. 清点地区银行资产
+	focus = {
+		id = VGO_Inventory_of_regional_bank_assets
+		icon = GFX_focus_VGO_Inventory_of_regional_bank_assets
+		relative_position_id = VGO_Improving_the_regional_economy
+		prerequisite = {focus = VGO_Improving_the_regional_economy}
+		x = 4
+		y = 1
+		cost = 5
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_2_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_local_factories_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_STATE_local_resources_factor_var
+					value = 0.1
+				}
+			}
+			every_military_industrial_organization = {
+				add_mio_funds = 500
+			}
+		}
+	}
+
+	#37. 改善工作环境
+	focus = {
+		id = VGO_Improve_the_working_environment
+		icon = GFX_focus_VGO_Improve_the_working_environment
+		relative_position_id = VGO_Start_industrial_mobilization
+		prerequisite = {focus = VGO_Start_industrial_mobilization}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_2_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_production_factory_start_efficiency_factor_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VGO_economy_line_change_production_efficiency_factor_var
+					value = 0.01
+				}
+				add_to_variable = {
+					var = VGO_economy_industrial_capacity_factory_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_production_factory_max_efficiency_factor_var
+					value = 0.01
+				}
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
+	}
+
+	#38. 进口挖掘机械
+	focus = {
+		id = VGO_Imported_excavation_machinery
+		icon = GFX_focus_VGO_Imported_excavation_machinery
+		relative_position_id = VGO_Expand_the_scale_of_the_development_group
+		prerequisite = {focus = VGO_Expand_the_scale_of_the_development_group}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_4_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_local_resources_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_consumer_goods_factor_var
+					value = -0.05
+				}
+			}
+			609 = { 
+				set_state_category = large_town 
+				add_resource = {
+					type = aluminium
+					amount = 20
+				}
+				add_resource = {
+					type = chromium
+					amount = 25
+				}
+			}
+		}
+	}
+
+	#39. 巩固地区产业
+	focus = {
+		id = VGO_Consolidation_of_local_industries
+		icon = GFX_focus_Consolidation_of_local_industries
+		relative_position_id = VGO_Start_economic_mobilization
+		prerequisite = {focus = VGO_Start_economic_mobilization}
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_3_idea 
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_8_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_state_production_speed_buildings_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_STATE_recruitable_population_var
+					value = 0.001
+				}
+				add_to_variable = {
+					var = VGO_economy_research_speed_factor_var
+					value = 0.02
+				}
+			}
+			every_military_industrial_organization = {
+				add_mio_funds = 500
+			}
+		}
+	}
+
+	#40. 临时配给制
+	focus = {
+		id = VGO_Temporary_rationing
+		icon = GFX_focus_VGO_Temporary_rationing
+		relative_position_id = VGO_Inventory_of_regional_bank_assets
+		prerequisite = {focus = VGO_Inventory_of_regional_bank_assets}
+		x = 0
+		y = 1
+		cost = 5
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_2_idea 
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_7_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_local_factories_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_STATE_local_resources_factor_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_economy_industrial_capacity_factory_var
+					value = 0.05
+				}
+			}
+			every_military_industrial_organization = {
+				add_mio_funds = 500
+			}
+		}
+	}
+
+	#41. 会见企业巨头
+	focus = {
+		id = VGO_Meet_the_corporate_giants
+		icon = GFX_focus_VGO_Meet_the_corporate_giants
+		relative_position_id = VGO_Improve_the_working_environment
+		prerequisite = {focus = VGO_Improve_the_working_environment}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_3_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_line_change_production_efficiency_factor_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VGO_economy_industrial_capacity_factory_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_production_factory_max_efficiency_factor_var
+					value = 0.01
+				}
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
+	}
+
+	#42. 矿区建设
+	focus = {
+		id = VGO_Construction_of_mining_areas
+		icon = GFX_focus_VGO_Construction_of_mining_areas
+		relative_position_id = VGO_Imported_excavation_machinery
+		prerequisite = {focus = VGO_Imported_excavation_machinery}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_4_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_local_resources_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_consumer_goods_factor_var
+					value = -0.05
+				}
+			}
+			572 = { 
+				set_state_category = large_town 
+				add_resource = {
+					type = oil
+					amount = 20
+				}
+				add_resource = {
+					type = tungsten
+					amount = 25
+				}
+			}
+		}
+	}
+
+	#43. 鼓励民营资本
+	focus = {
+		id = VGO_Encourage_private_capital
+		icon = GFX_focus_VGO_Encourage_private_capital
+		relative_position_id = VGO_Consolidation_of_local_industries
+		prerequisite = {focus = VGO_Consolidation_of_local_industries}
+		x = -1
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_3_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_state_production_speed_buildings_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_STATE_recruitable_population_var
+					value = 0.001
+				}
+			}
+			every_military_industrial_organization = {
+				add_mio_funds = 500
+			}
+		}
+	}
+
+	#44. 推动民用实业建设
+	focus = {
+		id = VGO_Promote_the_construction_of_civilian_industry
+		icon = GFX_focus_VGO_Promote_the_construction_of_civilian_industry
+		relative_position_id = VGO_Consolidation_of_local_industries
+		prerequisite = {focus = VGO_Consolidation_of_local_industries}
+		x = 1
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_3_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_state_production_speed_buildings_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_STATE_recruitable_population_var
+					value = 0.001
+				}
+			}
+			every_military_industrial_organization = {
+				add_mio_funds = 500
+			}
+		}
+	}
+
+	#45. 配合地区制造业
+	focus = {
+		id = VGO_Cooperate_with_the_regional_manufacturing_industry
+		icon = GFX_focus_VGO_Cooperate_with_the_regional_manufacturing_industry
+		relative_position_id = VGO_Temporary_rationing
+		prerequisite = {focus = VGO_Temporary_rationing}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_2_idea 
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_9_idea
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_local_factories_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_STATE_local_resources_factor_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_economy_research_speed_factor_var
+					value = 0.01
+				}
+			}
+			every_military_industrial_organization = {
+				add_mio_funds = 1000
+			}
+		}
+	}
+
+	#46. 先进的生产方式
+	focus = {
+		id = VGO_Advanced_production_methods
+		icon = GFX_focus_VGO_Advanced_production_methods
+		relative_position_id = VGO_Meet_the_corporate_giants
+		prerequisite = {focus = VGO_Meet_the_corporate_giants}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_3_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_line_change_production_efficiency_factor_var
+					value = 0.02
+				}
+				add_to_variable = {
+					var = VGO_economy_industrial_capacity_factory_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_production_factory_max_efficiency_factor_var
+					value = 0.01
+				}
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
+	}
+
+	#47. 扩展资源贸易
+	focus = {
+		id = VGO_Expand_resource_trade
+		icon = GFX_focus_VGO_Expand_resource_trade
+		relative_position_id = VGO_Construction_of_mining_areas
+		prerequisite = {focus = VGO_Construction_of_mining_areas}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_4_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_local_resources_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_consumer_goods_factor_var
+					value = -0.05
+				}
+			}
+			22 = { 
+				set_state_category = large_town 
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+				add_resource = {
+					type = aluminium
+					amount = 20
+				}
+			}
+		}
+	}
+
+	#48. 开放西部市场
+	focus = {
+		id = VGO_Opening_of_the_Western_Market
+		icon = GFX_focus_VGO_Opening_of_the_Western_Market
+		relative_position_id = VGO_Encourage_private_capital
+		prerequisite = {focus = VGO_Encourage_private_capital}
+		prerequisite = {focus = VGO_Promote_the_construction_of_civilian_industry}
+		x = 1
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_4_idea 
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_8_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_state_production_speed_buildings_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_STATE_local_building_slots_factor_var
+					value = 1
+				}
+				add_to_variable = {
+					var = VGO_economy_research_speed_factor_var
+					value = 0.02
+				}
+			}
+			every_military_industrial_organization = {
+				add_mio_funds = 1000
+			}
+		}
+	}
+
+	#49. 保障物流通道
+	focus = {
+		id = VGO_Guarantee_logistics_channels
+		icon = GFX_focus_VGO_Guarantee_logistics_channels
+		relative_position_id = VGO_Cooperate_with_the_regional_manufacturing_industry
+		prerequisite = {focus = VGO_Cooperate_with_the_regional_manufacturing_industry}
+		x = 0
+		y = 1
+		cost = 6
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_2_idea 
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_7_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_local_factories_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_STATE_local_resources_factor_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_economy_industrial_capacity_factory_var
+					value = 0.05
+				}
+			}
+			every_military_industrial_organization = {
+				add_mio_funds = 1000
+			}
+		}
+	}
+
+	#50. 西部地区工业化
+	focus = {
+		id = VGO_Industrialization_of_the_western_region
+		icon = GFX_focus_VGO_Industrialization_of_the_western_region
+		relative_position_id = VGO_Advanced_production_methods
+		prerequisite = {focus = VGO_Advanced_production_methods}
+		prerequisite = {focus = VGO_Expand_resource_trade}
+		x = 1
+		y = 1
+		cost = 8
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_5_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_economy_local_resources_factor_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_economy_production_speed_arms_factory_factor_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_economy_production_speed_industrial_complex_factor_var
+					value = 0.1
+				}
+				add_to_variable = {
+					var = VGO_economy_production_factory_max_efficiency_factor_var
+					value = 0.01
+				}
+				set_country_flag = VGO_Industrialization_of_the_western_region_flag
+			}
+			custom_effect_tooltip = VGO_Industrialization_of_the_western_region_tt
+			638 = { 
+				set_state_category = metropolis 
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+				add_resource = {
+					type = aluminium
+					amount = 15
+				}
+				add_resource = {
+					type = chromium
+					amount = 20
+				}
+				add_resource = {
+					type = tungsten
+					amount = 20
+				}
+				add_resource = {
+					type = oil
+					amount = 25
+				}
+			}
+		}
+	}
+
+	#51. 支援复合工业
+	focus = {
+		id = VGO_Support_for_complex_industries
+		icon = GFX_focus_VGO_Support_for_complex_industries
+		relative_position_id = VGO_Opening_of_the_Western_Market
+		prerequisite = {focus = VGO_Opening_of_the_Western_Market}
+		prerequisite = {focus = VGO_Guarantee_logistics_channels}
+		x = 2
+		y = 1
+		cost = 10
+		
+		available = {
+			any_military_industrial_organization = {
+				has_mio_size > 6
+			}
+		}
+		
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_state_buff_dummy_idea
+					add_idea = VGO_state_buff_tool_4_idea 
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VGO_economic_buff_dummy_idea
+					add_idea = VGO_economic_buff_tool_6_idea 
+				}
+			}
+			hidden_effect = {
+				add_to_variable = {
+					var = VGO_STATE_state_production_speed_buildings_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_STATE_local_building_slots_factor_var
+					value = 1
+				}
+				add_to_variable = {
+					var = VGO_economy_research_speed_factor_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VGO_economy_industrial_capacity_factory_var
+					value = 0.1
+				}
+			}
+			custom_effect_tooltip = VGO_Support_for_complex_industries_tt
+			hidden_effect = {
+				every_military_industrial_organization = {
+					limit = { has_mio_size > 6 }
+					VGO = { add_offsite_building = { type = arms_factory level = 2 } }
+				}
+			}
+		}
+	}
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}
+
+

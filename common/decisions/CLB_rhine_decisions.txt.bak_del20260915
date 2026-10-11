@@ -1,0 +1,186 @@
+CLB_rhine_decisions = {
+
+	# 召开十科会议
+	CLB_rhine_decision_council_session = {
+		icon = GFX_decision_generic_intelligence_operation
+		cost = 50
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_council
+		}
+		available = {
+			has_country_flag = CLB_flag_council
+		}
+		days_remove = 180
+		complete_effect = {
+			random_list = {
+				25 = {
+					CLB = { add_to_variable = { CLB_ten_research = 0.05 } }
+					custom_effect_tooltip = CLB_tt_intl_tension_up_10
+				}
+				25 = {
+					CLB = { add_to_variable = { CLB_ten_build = 0.10 } }
+				}
+				25 = {
+					CLB = { add_to_variable = { CLB_pol_stab = 0.10 } }
+				}
+				25 = {
+					CLB = { add_to_variable = { CLB_mil_atk = 0.10 } }
+				}
+			}
+			add_political_power = -50
+		}
+		ai_will_do = { factor = 10 }
+	}
+
+	# 献上奇观
+	CLB_rhine_decision_offer_wonders = {
+		icon = GFX_decision_generic_construction
+		cost = 50
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_offer_wonders
+		}
+		available = {
+			has_country_flag = CLB_flag_offer_wonders
+		}
+		complete_effect = {
+			CLB = {
+				add_to_variable = { CLB_beast_acquiescence = 20 }
+				add_to_variable = { CLB_bea_research = 0.05 }
+			}
+			add_political_power = -50
+		}
+		ai_will_do = { factor = 10 }
+	}
+
+	# 清理梅兰德
+	CLB_rhine_decision_purge_maylander = {
+		icon = GFX_decision_generic_arrest
+		cost = 150
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_rhine_state
+		}
+		available = {
+			has_country_flag = CLB_flag_rhine_state
+		}
+		complete_effect = {
+			CLB = {
+				add_to_variable = { CLB_maylander_influence = -20 }
+				add_to_variable = { CLB_int_stab = -0.05 }
+				set_country_flag = CLB_flag_maylander_purged
+			}
+			add_political_power = -150
+		}
+		ai_will_do = { factor = 10 }
+	}
+
+	# 递质投票
+	CLB_rhine_decision_neuro_vote = {
+		icon = GFX_decision_generic_civil_support
+		cost = 50
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_dept_energy
+		}
+		available = {
+			has_country_flag = CLB_flag_dept_energy
+		}
+		days_remove = 90
+		complete_effect = {
+			CLB = {
+				add_to_variable = { CLB_ten_stab = 0.05 }
+			}
+			add_political_power = -50
+		}
+		ai_will_do = { factor = 10 }
+	}
+
+	# 天空贷
+	CLB_rhine_decision_skyloan = {
+		icon = GFX_decision_generic_fundraising
+		cost = 100
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_justin
+		}
+		available = {
+			has_country_flag = CLB_flag_justin
+		}
+		complete_effect = {
+			CLB = {
+				add_to_variable = { CLB_eco_factory = 0.05 }
+				add_to_variable = { CLB_eco_stab = -0.05 }
+				add_to_variable = { CLB_sky_fever = 5 }
+			}
+			add_political_power = -100
+		}
+		ai_will_do = { factor = 10 }
+	}
+
+	# 兽主的游戏
+	CLB_rhine_decision_beast_game = {
+		icon = GFX_decision_generic_construction
+		cost = 50
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_beast_playground
+		}
+		available = {
+			has_country_flag = CLB_flag_beast_playground
+		}
+		complete_effect = {
+			add_political_power = -50
+			random_list = {
+				50 = {
+					CLB = { add_to_variable = { CLB_bea_research = 0.10 } }
+				}
+				50 = {
+					CLB = {
+						add_to_variable = { CLB_eco_factory = -0.10 }
+						add_to_variable = { CLB_bea_stab = -0.10 }
+					}
+				}
+			}
+		}
+		ai_will_do = { factor = 10 }
+	}
+
+	# 星门开启
+	CLB_rhine_decision_stargate_open = {
+		icon = GFX_decision_generic_electricity
+		cost = 200
+		fire_only_once = yes
+		visible = {
+			has_country_flag = CLB_flag_stargate
+		}
+		available = {
+			has_country_flag = CLB_flag_stargate
+		}
+		complete_effect = {
+			add_political_power = -200
+			country_event = { id = clb_rhine.8 days = 1 }
+		}
+		ai_will_do = { factor = 10 }
+	}
+	# 更名为「莱茵生命企业国」
+	CLB_rhine_decision_rename_corporate_state = {
+		icon = GFX_decision_generic_civil_support
+		cost = 25
+		fire_only_once = yes
+		visible = {
+			has_country_flag = CLB_rhine_coup_started
+			NOT = { has_cosmetic_tag = Rhine_Lab_Corporate_State }
+		}
+		available = {
+			has_country_flag = CLB_rhine_coup_started
+			NOT = { has_cosmetic_tag = Rhine_Lab_Corporate_State }
+		}
+		complete_effect = {
+			set_cosmetic_tag = Rhine_Lab_Corporate_State
+		}
+		ai_will_do = { factor = 10 }
+	}
+
+}

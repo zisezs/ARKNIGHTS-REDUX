@@ -1,0 +1,247 @@
+ideas = {
+	country = {
+		#停滞之地（4级）
+		KJG_Stagnation_State_4 = {
+            picture = KJG_Stagnation_State
+			modifier = {
+			    stability_factor = 0.2
+			    war_support_factor = -0.2
+                consumer_goods_factor = 0.5
+                industrial_capacity_factory = -0.4
+				production_factory_max_efficiency_factor = -0.2
+                production_speed_buildings_factor = -0.2
+                research_speed_factor = -0.3
+				production_factory_efficiency_gain_factor = -0.2
+			}
+		}
+		
+		#缓步前行（3级）
+        KJG_Stagnation_State_3 = {
+			picture = KJG_Stagnation_State
+			modifier = {
+				stability_factor = 0.15
+				war_support_factor = -0.2
+				consumer_goods_factor = 0.3
+				industrial_capacity_factory = -0.3
+				production_factory_max_efficiency_factor = -0.15
+                production_speed_buildings_factor = -0.1
+                research_speed_factor = -0.25
+				production_factory_efficiency_gain_factor = -0.15
+			}
+		}
+
+		#昂扬向前（2级）
+        KJG_Stagnation_State_2 = {
+			picture = KJG_Stagnation_State
+			modifier = {
+				stability_factor = 0.1
+				war_support_factor = -0.15
+				consumer_goods_factor = 0.2
+				industrial_capacity_factory = -0.25
+				production_factory_max_efficiency_factor = -0.1
+                production_speed_buildings_factor = -0.05
+                research_speed_factor = -0.15
+				production_factory_efficiency_gain_factor = -0.1
+			}
+		}
+
+		#敢于梦想（1级）
+        KJG_Stagnation_State_1 = {
+			picture = KJG_Stagnation_State
+			modifier = {
+				war_support_factor = -0.05
+				consumer_goods_factor = 0.1
+				industrial_capacity_factory = -0.15
+				production_factory_max_efficiency_factor = -0.05
+				production_factory_efficiency_gain_factor = -0.05
+				research_speed_factor = -0.1
+			}
+		}
+
+		#与世隔绝
+		KJG_Cut_off_from_the_world = {
+			modifier = {
+				min_export = -0.1
+				trade_opinion_factor = -0.35
+				political_power_gain = -0.2
+                enemy_justify_war_goal_time = 2
+				drift_defence_factor = 0.25
+			}
+		}
+
+		#喀兰贸易的影响
+		KJG_Karlan_Trade = {
+		    modifier = {
+				consumer_goods_factor = -0.15
+				production_speed_buildings_factor = 0.05
+				industrial_capacity_factory = 0.05
+				political_power_gain = 0.1
+		    }
+		}
+
+		#耶拉冈德信仰
+		KJG_Kjeragandr = {
+			modifier = {
+				stability_factor = 0.1
+				army_morale_factor = 0.075
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+				conscription = 0.02
+			}
+		}
+
+		#三族议会
+		KJG_Tri_Clan_Council = {
+			modifier = {
+				political_power_factor = -0.2
+				party_popularity_stability_factor = 0.1
+				mobilization_laws_cost_factor = 0.15
+				trade_laws_cost_factor  = 0.15
+				economy_cost_factor = 0.15
+				political_advisor_cost_factor = 0.15
+			}
+		}
+
+		#过时的部族军队
+		KJG_Military_decentralized = {
+			picture = KJG_Military_decentralized
+			modifier = {
+				command_power_gain_mult = -0.2
+				mobilization_speed = -0.3
+				experience_gain_army_factor = -0.2
+				army_morale_factor = -0.1
+				army_org_factor = -0.15
+				out_of_supply_factor = -0.2
+				planning_speed = -0.25
+				army_attack_factor = -0.15
+				army_defence_factor = -0.15
+				experience_loss_factor = 0.1
+				special_forces_cap = 0.5
+				conscription_factor = 0.2
+				equipment_capture = 0.1
+			}
+		}
+
+		#初阶军事改革（1级）
+		KJG_Military_reform_1 = {
+			picture = KJG_Military_decentralized
+			modifier = {
+				command_power_gain_mult = -0.1
+				mobilization_speed = -0.2
+				experience_gain_army_factor = -0.15
+				army_morale_factor = -0.05
+				army_org_factor = -0.075
+				out_of_supply_factor = -0.1
+				planning_speed = -0.15
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+				experience_loss_factor = 0.05
+				special_forces_cap = 0.5
+				conscription_factor = 0.2
+				equipment_capture = 0.1
+			}
+		}
+
+		#卓有成效的军事改革（2级）
+		KJG_Military_reform_2 = {
+			picture = KJG_Military_decentralized
+			modifier = {
+				mobilization_speed = -0.1
+				experience_gain_army_factor = -0.05
+				out_of_supply_factor = -0.05
+				planning_speed = -0.1
+				army_attack_factor = -0.05
+				army_defence_factor = -0.05
+				special_forces_cap = 0.75
+				special_forces_attack_factor = 0.025
+				special_forces_defence_factor = 0.025
+				conscription_factor = 0.1
+				equipment_capture = 0.05
+			}
+		}
+
+		#雪境锋芒（3级）
+		KJG_Military_reform_3 = {
+			picture = KJG_Military_decentralized
+			modifier = {
+				out_of_supply_factor = 0.1
+				special_forces_cap = 0.75
+				special_forces_attack_factor = 0.05
+				special_forces_defence_factor = 0.05
+				conscription_factor = 0.1
+				max_training = 0.15
+			}
+		}
+
+		#现代化计划（1级）
+		KJG_Modernization_plan_1 = {
+			name = KJG_Modernization_plan
+			desc = KJG_Modernization_plan_desc
+			picture = KJG_Industrialization_dynamic_modifiers
+
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.025
+				production_speed_buildings_factor = 0.05
+				industrial_capacity_factory = 0.05
+				stability_factor = -0.05
+				political_power_factor = -0.1
+				consumer_goods_factor = -0.15
+				industrial_development_monthly_modifier = 0.005
+				educational_development_monthly_modifier = 0.005
+			}
+		}
+
+		#现代化计划（2级）
+		KJG_Modernization_plan_2 = {
+			name = KJG_Modernization_plan
+			desc = KJG_Modernization_plan_desc
+			picture = KJG_Industrialization_dynamic_modifiers
+
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_max_efficiency_factor = 0.05
+				production_speed_buildings_factor = 0.05
+				industrial_capacity_factory = 0.05
+				stability_factor = -0.1
+				political_power_factor = 0.05
+				consumer_goods_factor = -0.25
+				industrial_development_monthly_modifier = 0.02
+				educational_development_monthly_modifier = 0.02
+				poverty_development_monthly_modifier = 0.01
+			}
+		}
+
+		#传统主义至上
+		KJG_Traditionalism_Above_All = {
+			modifier = {
+				war_support_factor = 0.1
+				stability_factor = 0.1
+				army_org_factor = 0.1
+				army_attack_against_major_factor = 0.05
+				army_defence_against_major_factor = 0.05
+				drift_defence_factor = 0.15
+			}
+		}
+	}
+
+	#工业企业
+	industrial_concern = {
+		#喀兰贸易
+		KJG_Karlan_Trade_industrial_concern = {
+            picture = KJG_Karlan_Trade_industrial_concern
+
+			allowed = { 
+				original_tag = KJG 
+			}	
+
+			research_bonus = { 
+				industry = 0.15 
+			}
+
+			cost = 150
+			removal_cost = 10
+			traits = { KJG_Karlan_Trade_traits }
+		}
+	}
+}

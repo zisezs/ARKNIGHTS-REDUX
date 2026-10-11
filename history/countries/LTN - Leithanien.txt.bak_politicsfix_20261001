@@ -1,0 +1,88 @@
+capital = 502
+
+oob = "LTN_Start"
+
+recruit_character = LTN_Lieselotte_EwigeGnade
+recruit_character = LTN_Hildegard_GrimmMacht
+recruit_character = LTN_Unger_Minks
+recruit_character = LTN_Lenny_Movico
+
+add_ideas = {
+	volunteer_only
+	free_trade
+	civilian_economy
+	major_country
+	elite_voting
+	working_law_14h
+	behavior_control
+	mechanized_agriculture
+	scale_factory
+	higher_education
+	perfect_system
+	low_poverty
+
+	KZM_xp #经验加成
+}
+
+set_variable = { LTN_festival_prep = 0 }
+
+# >>> LTN_growth_vars
+# 成长精神初值（由 docs/gen_ltn_rewards.cjs 生成；满档一律 ≤ ±25%）
+add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
+add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
+add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
+add_dynamic_modifier = { modifier = LTN_dyn_electors_fetter }
+add_dynamic_modifier = { modifier = LTN_dyn_treasury }
+add_dynamic_modifier = { modifier = LTN_dyn_atelier }
+add_dynamic_modifier = { modifier = LTN_dyn_ironlaw }
+add_dynamic_modifier = { modifier = LTN_dyn_host }
+
+set_variable = { LTN_tw_ppg = 0.05 }
+set_variable = { LTN_tw_ppf = 0.05 }
+set_variable = { LTN_tw_stab = -0.1 }
+set_variable = { LTN_tw_ws = 0 }
+set_variable = { LTN_tw_drift = 0.05 }
+set_variable = { LTN_tw_week = -0.004 }
+set_variable = { LTN_law_stab = 0.1 }
+set_variable = { LTN_law_res = 0.04 }
+set_variable = { LTN_law_ppg = 0.03 }
+set_variable = { LTN_law_drift = 0.15 }
+set_variable = { LTN_law_exp = 0 }
+set_variable = { LTN_law_week = -0.002 }
+set_variable = { LTN_echo_ppg = -0.06 }
+set_variable = { LTN_echo_stab = -0.05 }
+set_variable = { LTN_echo_res = 0 }
+set_variable = { LTN_echo_drift = 0 }
+set_variable = { LTN_echo_cons = 0 }
+set_variable = { LTN_echo_week = -0.008 }
+set_variable = { LTN_fet_ppg = -0.1 }
+set_variable = { LTN_fet_con = -0.08 }
+set_variable = { LTN_fet_build = -0.1 }
+set_variable = { LTN_fet_fac = -0.1 }
+set_variable = { LTN_fet_train = 0.1 }
+set_variable = { LTN_fet_stab = 0.05 }
+set_variable = { LTN_tre_build = 0 }
+set_variable = { LTN_tre_prod = 0 }
+set_variable = { LTN_tre_fac = 0 }
+set_variable = { LTN_tre_eff = 0 }
+set_variable = { LTN_tre_cons = 0 }
+set_variable = { LTN_tre_stab = -0.04 }
+set_variable = { LTN_atl_res = 0 }
+set_variable = { LTN_atl_maxeff = 0 }
+set_variable = { LTN_atl_effg = 0 }
+set_variable = { LTN_atl_ind = 0 }
+set_variable = { LTN_atl_arms = 0 }
+set_variable = { LTN_atl_cons = 0 }
+set_variable = { LTN_irn_atk = 0 }
+set_variable = { LTN_irn_def = 0 }
+set_variable = { LTN_irn_org = 0 }
+set_variable = { LTN_irn_btk = 0 }
+set_variable = { LTN_irn_plan = 0 }
+set_variable = { LTN_irn_exp = 0 }
+set_variable = { LTN_hos_con = 0 }
+set_variable = { LTN_hos_pop = 0 }
+set_variable = { LTN_hos_train = 0 }
+set_variable = { LTN_hos_reinf = 0 }
+set_variable = { LTN_hos_regain = 0 }
+set_variable = { LTN_hos_morale = 0 }
+# <<< LTN_growth_vars

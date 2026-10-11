@@ -1,0 +1,32 @@
+# 博尔扎诺分离主义者（叙拉古内战）
+# 与既有国家 BZN（countries/Bolzano.txt）无关，这是内战里另开的分离政权
+# 开局零领土；真正的割州、定都、执政党与领袖在 SRC_civil_war_breakout_effect 里当场重跑
+# 执政党与领袖 ideology 必须同组：conservatism ← conservative_subtype
+# （原来写 ruling_party = liberalism 配 conservative_subtype，两边不同组 → 没有执政领袖 → 地图上没有国家颜色）
+capital = 510
+
+set_politics = {
+	ruling_party = conservatism
+	last_election = "1094.6.1.12"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	communism = 0
+	socialism = 0
+	progressivism = 0
+	liberalism = 30
+	conservatism = 45
+	authoritarianism = 15
+	despotism = 0
+	fascism = 10
+	mysticism = 0
+	special = 0
+}
+
+set_research_slots = 1
+set_stability = 0.3
+set_war_support = 0.45
+
+recruit_character = SR2_Rettore_Provinciale

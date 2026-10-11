@@ -1,0 +1,344 @@
+
+####################
+## 伊比利亚 开局部队 ##
+####################
+
+#惩戒军主力连队：6步兵+手炮营，攻守均衡的填线部队
+division_template = {
+	name = "惩戒军连队"
+	division_names_group = IBR_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+
+		artillery = { x = 2 y = 0 }
+	}
+	support = {
+		engineer = { x = 0 y = 0 }
+		recon = { x = 0 y = 1 }
+	}
+}
+
+#海岸大阵：三千人的重装防御编制，专守海岸与海嗣
+division_template = {
+	name = "海岸大阵"
+	division_names_group = IBR_INF_02
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
+
+		artillery_brigade = { x = 3 y = 0 }
+	}
+	support = {
+		engineer = { x = 0 y = 0 }
+		logistics_company = { x = 0 y = 1 }
+	}
+}
+
+#灯塔戍卫队：驻守灯塔与沿海村镇的地方武装
+division_template = {
+	name = "灯塔戍卫队"
+	division_names_group = IBR_MIL_01
+	regiments = {
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia = { x = 1 y = 0 }
+		militia = { x = 1 y = 1 }
+	}
+	support = {
+		military_police = { x = 0 y = 0 }
+	}
+}
+
+#审判官突击团：提灯法杖与手炮的精锐执法部队
+division_template = {
+	name = "审判官突击团"
+	division_names_group = IBR_SWF_01
+	regiments = {
+		special_warfare = { x = 0 y = 0 }
+		special_warfare = { x = 0 y = 1 }
+		special_warfare = { x = 1 y = 0 }
+		special_warfare = { x = 1 y = 1 }
+	}
+	support = {
+		artillery = { x = 0 y = 0 }
+		signal_company = { x = 0 y = 1 }
+	}
+}
+
+#盐船步行机队：盐碱荒漠上的大型风力步行机
+division_template = {
+	name = "盐船步行机队"
+	division_names_group = IBR_MOT_01
+	regiments = {
+		motorized = { x = 0 y = 0 }
+		motorized = { x = 0 y = 1 }
+		motorized = { x = 1 y = 0 }
+		motorized = { x = 1 y = 1 }
+	}
+	support = {
+		recon = { x = 0 y = 0 }
+	}
+}
+
+#国防军残部：大静谧后散落的旧王室佣兵
+division_template = {
+	name = "国防军骑兵团"
+	division_names_group = IBR_CAV_01
+	regiments = {
+		cavalry = { x = 0 y = 0 }
+		cavalry = { x = 0 y = 1 }
+		cavalry = { x = 1 y = 0 }
+		cavalry = { x = 1 y = 1 }
+	}
+}
+
+units = {
+	#首都圈：佩尔多尼
+	division = {
+		name = "第1海岸大阵“颂圣棱堡”"
+		location = 19197
+		division_template = "海岸大阵"
+		start_experience_factor = 0.75
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "第1惩戒军连队“佩尔多尼卫戍”"
+		location = 19197
+		division_template = "惩戒军连队"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "第1审判官突击团“圣提灯”"
+		location = 19197
+		division_template = "审判官突击团"
+		start_experience_factor = 0.9
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "第2海岸大阵“灯塔之门”"
+		location = 19209
+		division_template = "海岸大阵"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.8
+	}
+	#莱利亚特
+	division = {
+		name = "第2惩戒军连队“莱利亚特”"
+		location = 8287
+		division_template = "惩戒军连队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "第1灯塔戍卫队"
+		location = 8287
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	#特纳里夫
+	division = {
+		name = "第3海岸大阵“跨海之锚”"
+		location = 10199
+		division_template = "海岸大阵"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "第2灯塔戍卫队"
+		location = 10199
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	#安达卢斯
+	division = {
+		name = "第3惩戒军连队“安达卢斯”"
+		location = 7004
+		division_template = "惩戒军连队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "第3灯塔戍卫队"
+		location = 7004
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	#瓦尔纳
+	division = {
+		name = "第4惩戒军连队"
+		location = 11080
+		division_template = "惩戒军连队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	#加利西亚
+	division = {
+		name = "第5惩戒军连队"
+		location = 9913
+		division_template = "惩戒军连队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	#圣特伦
+	division = {
+		name = "第4灯塔戍卫队"
+		location = 18758
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	#埃乌拉
+	division = {
+		name = "第5灯塔戍卫队"
+		location = 18869
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	#格莱西亚斯-莱昂
+	division = {
+		name = "第6惩戒军连队"
+		location = 4696
+		division_template = "惩戒军连队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	#穆特利亚
+	division = {
+		name = "第6灯塔戍卫队"
+		location = 3630
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "第1盐船步行机队“苍白海之影”"
+		location = 3630
+		division_template = "盐船步行机队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.6
+	}
+	#奥哈里拉
+	division = {
+		name = "第7灯塔戍卫队"
+		location = 19165
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	#巴伦塞亚
+	division = {
+		name = "第8灯塔戍卫队"
+		location = 12319
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	#梅利利亚（萨尔贡边境）
+	division = {
+		name = "第7惩戒军连队“东方壁垒”"
+		location = 11840
+		division_template = "惩戒军连队"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.7
+	}
+	#格兰法洛：伊比利亚之眼
+	division = {
+		name = "第9灯塔戍卫队“伊比利亚之眼”"
+		location = 10863
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.8
+		start_equipment_factor = 0.6
+	}
+	#阿斯图特（旧船坞）
+	division = {
+		name = "第2盐船步行机队“风盐旅”"
+		location = 2870
+		division_template = "盐船步行机队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.6
+	}
+	#波尔特
+	division = {
+		name = "第1国防军骑兵团"
+		location = 7333
+		division_template = "国防军骑兵团"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.5
+	}
+	#托莱多
+	division = {
+		name = "第2国防军骑兵团"
+		location = 9787
+		division_template = "国防军骑兵团"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.5
+	}
+	#贝雅
+	division = {
+		name = "第10灯塔戍卫队"
+		location = 12895
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	#埃斯特雷拉
+	division = {
+		name = "第11灯塔戍卫队"
+		location = 19385
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	#格莱西亚斯-曼查
+	division = {
+		name = "第8惩戒军连队"
+		location = 4267
+		division_template = "惩戒军连队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	#塔斯克
+	division = {
+		name = "第9惩戒军连队"
+		location = 1601
+		division_template = "惩戒军连队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	#安塔布利亚
+	division = {
+		name = "第12灯塔戍卫队"
+		location = 12806
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	#安塔布利亚
+	division = {
+		name = "第13灯塔戍卫队"
+		location = 12806
+		division_template = "灯塔戍卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+}

@@ -1,0 +1,415 @@
+######################
+## 深池 · 战争带「赤铁之路」逻辑（scripted_effects）
+## 调用方：common/national_focus/DUB_redeem_diplo_shared.txt 的 completion_reward
+## 作用域：全部以 ROOT ＝ DUB（深池）为发起方调用
+##
+## 沿用 DUB_redeem_diplo_effects.txt 里已经实机验证过的四条硬规矩：
+##   1) 宣战写成「发起方作用域 ＋ target = 字面 tag 或循环里的 PREV」，不用 save_event_target_as 的目标；
+##   2) 附庸既不能自主宣战也不能被第三国宣战 —— 双方都要 is_subject = no；
+##   3) annex_country 不给核心：先转地／add_core_of 再吞；
+##   4) 经验效果的名字是 army_experience / navy_experience（不是 add_army_experience，原版无此键）。
+##
+## 可用的自治等级（common/autonomous_states/autonomy_victoria.txt）：
+##   autonomy_victoria_supervised_state / _protectorate / _alliance / _colony
+######################
+
+# ── A 段：最后一份通牒（给场上最大的继承国造一个战争目标，为下一格铺路） ──
+# 注意：威灵顿公爵领 TAR 不在名单里——2026-09-26 用户改判，这一线不开战，直接傀儡化。
+DUB_war_ultimatum_effect = {
+	if = {
+		limit = { VCA = { exists = yes is_subject = no } is_subject = no }
+		create_wargoal = { type = annex_everything target = VCA expire = 180 }
+		set_country_flag = DUB_war_ultimatum_to_vca
+	}
+	else_if = {
+		limit = { VWI = { exists = yes is_subject = no } is_subject = no }
+		create_wargoal = { type = annex_everything target = VWI expire = 180 }
+		set_country_flag = DUB_war_ultimatum_to_wki
+	}
+	else_if = {
+		limit = { VGO = { exists = yes is_subject = no } is_subject = no }
+		create_wargoal = { type = annex_everything target = VGO expire = 180 }
+		set_country_flag = DUB_war_ultimatum_to_vgo
+	}
+	else_if = {
+		limit = { VIC = { exists = yes is_subject = no } is_subject = no }
+		create_wargoal = { type = annex_everything target = VIC expire = 180 }
+		set_country_flag = DUB_war_ultimatum_to_vic
+	}
+	else = {
+		log = "DUB war: 场上没有可下通牒的维多利亚继承国，只落下威慑"
+	}
+}
+
+# ── A 段：第一份宣战书（只打接壤的第一个，避免凭空造出一条没有前线的假战争） ──
+DUB_war_firstshot_effect = {
+	every_country = {
+		limit = {
+			OR = { tag = VCA tag = VWI tag = VGO tag = VFA tag = VSA tag = VIC }
+			exists = yes
+			is_subject = no
+			is_neighbor_of = ROOT
+			NOT = { has_war_with = ROOT }
+			ROOT = {
+				is_subject = no
+				NOT = { has_country_flag = DUB_war_first_blood }
+			}
+		}
+		ROOT = { declare_war_on = { target = PREV type = annex_everything } }
+		ROOT = { set_country_flag = DUB_war_first_blood }
+	}
+	if = {
+		limit = {
+			NOT = { has_country_flag = DUB_war_first_blood }
+			is_subject = no
+			VCA = { exists = yes is_subject = no }
+			NOT = { has_war_with = VCA }
+		}
+		declare_war_on = { target = VCA type = annex_everything }
+		set_country_flag = DUB_war_first_blood
+	}
+	if = {
+		limit = { has_war = yes }
+		add_war_support = 0.05
+	}
+	else = {
+		log = "DUB war: 第一份宣战书没人可递（无接壤的继承国，或我们自己是附庸）"
+	}
+}
+
+# ── 第二线：威灵顿公爵领直接变成傀儡国（不开战） ──
+# 三条从 puppet 事故里学来的规矩（见记忆 hoi4-puppet-faction-collapse）：
+#   · puppet 停的是傀儡名下【每一条战争的整体】，阵营成员会被一起拉下场 ⇒ 先抄名单；
+#   · 领袖被附庸时若阵营带 change_leader_rule_never，会当场解散 ⇒ 先把领袖位让给别的成员；
+#   · 附庸不能宣战也不能被宣战 ⇒ 双方都要 is_subject = no。
+DUB_war_puppet_tar_effect = {
+	if = {
+		limit = {
+			TAR = { exists = yes is_subject = no }
+			is_subject = no
+		}
+		# 收网前抄名单（puppet 之后 has_war_with / is_in_faction 就全查不到了）
+		TAR = {
+			every_faction_member = {
+				limit = { NOT = { original_tag = ROOT } }
+				set_country_flag = DUB_tar_old_member
+			}
+			every_enemy_country = {
+				set_country_flag = DUB_tar_old_enemy
+			}
+		}
+		# 他若是阵营领袖，先把位子让给一个还活着的成员，免得阵营就地解散、全图停战
+		TAR = {
+			if = {
+				limit = { is_faction_leader = yes }
+				every_faction_member = {
+					limit = { NOT = { original_tag = TAR } }
+					random_select_amount = 1
+					set_faction_leader = yes
+				}
+			}
+		}
+		puppet = { target = TAR end_wars = yes end_civil_wars = no }
+		if = {
+			limit = { TAR = { is_subject_of = ROOT } }
+			add_political_power = 40
+			add_war_support = 0.05
+		}
+		else = {
+			log = "DUB war: puppet 没把威灵顿收进来（引擎拒绝），这一线只落下旗标"
+		}
+		# 名单用完就清掉，避免日后凭空开战或凭空拉人
+		every_country = {
+			limit = { OR = { has_country_flag = DUB_tar_old_enemy has_country_flag = DUB_tar_old_member } }
+			clr_country_flag = DUB_tar_old_enemy
+			clr_country_flag = DUB_tar_old_member
+		}
+	}
+	else = {
+		log = "DUB war: 威灵顿不存在、或它/我们已是附庸，傀儡化跳过"
+	}
+	TAR_dip_core_held_effect = yes
+}
+
+# ── 第二线：接收要塞、仓库与花名册 ──
+DUB_war_tar_garrisons_effect = {
+	# 原属威灵顿、如今在我们手里的省：城防归我们重修
+	every_owned_state = {
+		limit = { is_core_of = TAR }
+		add_building_construction = { type = fortress level = 2 instant_build = yes }
+	}
+	TAR_dip_core_held_effect = yes
+	# 仓库清点入库
+	add_equipment_to_stockpile = {
+		type = infantry_equipment_0
+		amount = 8000
+		producer = ROOT
+	}
+	add_manpower = 25000
+}
+
+# ── 第三线：对温德米尔边防集团军宣战 ──
+DUB_war_declare_wki_effect = {
+	if = {
+		limit = {
+			VWI = { exists = yes is_subject = no }
+			is_subject = no
+			NOT = { has_war_with = VWI }
+		}
+		declare_war_on = { target = VWI type = annex_everything }
+		if = {
+			limit = { has_war_with = VWI }
+			add_war_support = 0.05
+		}
+		else = {
+			log = "DUB war: 对温德米尔宣战被引擎拒绝"
+		}
+	}
+	reverse_add_opinion_modifier = { target = VWI modifier = TAR_dip_bad_blood }
+}
+
+# ── 围城通用：把"我们脚下、别人名下"的省转成我们的核心，并在新占的一处加固要塞 ──
+DUB_war_siege_effect = {
+	TAR_dip_core_held_effect = yes
+	random_owned_controlled_state = {
+		limit = { is_core_of = ROOT }
+		add_building_construction = { type = fortress level = 2 instant_build = yes }
+	}
+}
+
+# ── 受降条款通用：正在与我们交战、且已被打服的继承国一律降为保护领 ──
+## 注意：end_wars 一律写 no。puppet/white_peace 停的是该国名下每一条战争整体，
+##   若对方是阵营领袖而阵营带 change_leader_rule_never，会让全地图一起停战（引擎零报错）。
+DUB_war_terms_effect = {
+	every_country = {
+		limit = {
+			OR = {
+				tag = VCA tag = TAR tag = VWI tag = VGO tag = VAB tag = VFI tag = VAS tag = VCR
+				tag = VVI tag = VEA tag = VWA tag = VFA tag = VSA tag = VRN
+				tag = VRA tag = VRB tag = VRC tag = VRD tag = VRE tag = VIC
+			}
+			exists = yes
+			is_subject = no
+			has_war_with = ROOT
+			ROOT = { is_subject = no }
+			OR = {
+				surrender_progress > 0.49
+				has_capitulated = yes
+			}
+		}
+		ROOT = {
+			set_autonomy = { target = PREV autonomy_state = autonomy_victoria_protectorate end_wars = no end_civil_wars = no }
+		}
+	}
+	TAR_dip_core_held_effect = yes
+}
+
+# ── 第二线收束：公爵领作为一个政权结束，人才全部转籍（照 vic_tar.3 的三条规矩写） ──
+DUB_war_annex_tar_effect = {
+	if = {
+		limit = { TAR = { exists = yes } }
+		if = {
+			limit = { has_war_with = TAR }
+			white_peace = TAR
+		}
+		TAR = {
+			every_owned_state = {
+				limit = { has_state_flag = Tara_state_flag }
+				transfer_state_to = ROOT
+				add_core_of = ROOT
+			}
+			every_character = {
+				set_nationality = ROOT
+			}
+		}
+		annex_country = { target = TAR transfer_troops = yes }
+	}
+	else = {
+		# 公爵领还只是个零领土名分：地无从可取，人照单全收
+		TAR = {
+			every_character = {
+				set_nationality = ROOT
+			}
+		}
+	}
+	TAR_dip_core_held_effect = yes
+	add_political_power = 60
+	add_stability = 0.05
+}
+
+# ── 群小与海：给驻军写换防表（停战 → 降为同盟领 → 转核心） ──
+DUB_war_garrison_effect = {
+	every_country = {
+		limit = {
+			OR = { tag = VRA tag = VRD tag = VRE }
+			exists = yes
+			is_subject = no
+			ROOT = { is_subject = no }
+		}
+		if = {
+			limit = { has_war_with = ROOT }
+			ROOT = { white_peace = PREV }
+		}
+		ROOT = {
+			set_autonomy = { target = PREV autonomy_state = autonomy_victoria_alliance end_wars = no end_civil_wars = no }
+		}
+	}
+	TAR_dip_core_held_effect = yes
+}
+
+# ── 群小与海：给皇家海军一个港口（停战 → 同盟领 → 首都省船坞 +1） ──
+DUB_war_navy_effect = {
+	every_country = {
+		limit = {
+			tag = VRN
+			exists = yes
+			is_subject = no
+			ROOT = { is_subject = no }
+		}
+		if = {
+			limit = { has_war_with = ROOT }
+			ROOT = { white_peace = PREV }
+		}
+		ROOT = {
+			set_autonomy = { target = PREV autonomy_state = autonomy_victoria_alliance end_wars = no end_civil_wars = no }
+		}
+	}
+	capital_scope = {
+		add_building_construction = { type = dockyard level = 1 instant_build = yes }
+	}
+	navy_experience = 25
+}
+
+# ── 群小与海收束：公社与盖尔兰并排写进同一份公文（附庸即吞） ──
+DUB_war_red_fold_effect = {
+	every_country = {
+		limit = {
+			OR = { tag = VRB tag = VRC }
+			exists = yes
+			is_subject_of = ROOT
+		}
+		ROOT = { annex_country = { target = PREV transfer_troops = yes } }
+	}
+	TAR_dip_core_held_effect = yes
+	every_owned_state = {
+		limit = { OR = { state = 631 state = 620 state = 623 } }
+		add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+	}
+}
+
+# ── 群小与海收束：吞掉已是附庸的皇家海军，把港池挖深 ──
+DUB_war_navy_fold_effect = {
+	every_country = {
+		limit = {
+			tag = VRN
+			exists = yes
+			is_subject_of = ROOT
+		}
+		ROOT = { annex_country = { target = PREV transfer_troops = yes } }
+	}
+	TAR_dip_core_held_effect = yes
+	capital_scope = {
+		add_building_construction = { type = dockyard level = 2 instant_build = yes }
+	}
+	navy_experience = 30
+}
+
+# ── 伦蒂尼姆：断水断粮（打不动的城就让它自己渴） ──
+DUB_war_cistern_effect = {
+	434 = {
+		limit = { NOT = { is_controlled_by = ROOT } }
+		damage_building = { type = industrial_complex damage = 2 }
+		damage_building = { type = infrastructure damage = 2 }
+	}
+	# 围城方也要喝水：我们的军工同样吃紧，这一笔记在自己账上
+	add_political_power = -20
+}
+
+# ── 伦蒂尼姆：破城（城真在我们手里才转核心、才发奖励；否则只记一笔） ──
+DUB_war_breach_effect = {
+	if = {
+		limit = { 434 = { is_controlled_by = ROOT } }
+		434 = {
+			add_core_of = ROOT
+			add_building_construction = { type = fortress level = 2 instant_build = yes }
+		}
+		TAR_dip_core_held_effect = yes
+		add_political_power = 80
+		add_stability = 0.05
+		add_war_support = 0.10
+		set_country_flag = DUB_war_londinium_taken
+	}
+	else_if = {
+		limit = { 434 = { is_owned_by = ROOT } }
+		434 = { add_core_of = ROOT }
+		TAR_dip_core_held_effect = yes
+		add_political_power = 40
+		set_country_flag = DUB_war_londinium_taken
+	}
+	else = {
+		log = "DUB war: 伦蒂尼姆还不在我们手里，破城格只补了核心与名分"
+		TAR_dip_core_held_effect = yes
+	}
+}
+
+# ── 伦蒂尼姆：加斯特里尔号入港 ──
+DUB_war_harbor_effect = {
+	capital_scope = {
+		add_building_construction = { type = dockyard level = 2 instant_build = yes }
+	}
+	3081 = {
+		limit = { is_owned_and_controlled_by = ROOT }
+		add_core_of = ROOT
+		add_building_construction = { type = naval_base level = 2 instant_build = yes }
+	}
+	navy_experience = 30
+	add_political_power = 30
+}
+
+# ── 决议「加入双塔协定」：拆自己的阵营，转投莱塔尼亚当家的那一个 ──
+# 双塔协定 = faction_template_zwillingstuerme_pakt（莱塔尼亚主导）。
+# 两条路：① 莱塔尼亚还在当家 ⇒ 请它的领袖把我们拉进去（add_to_faction 要写在领袖作用域里）；
+#        ② 当家换了人或阵营已散 ⇒ 我们自己照同一份章程重立门户、坐上主位。
+# 拆阵营用 dismantle_faction = yes（原版 24 处，只能拆自己当家的）；不是领袖时退席用 remove_from_faction，
+#   原版一律带国家目标（THIS/TAG），不写 yes。
+DUB_join_twin_towers_effect = {
+	if = {
+		limit = { is_in_faction = yes }
+		if = {
+			limit = { is_faction_leader = yes }
+			dismantle_faction = yes
+		}
+		else = {
+			remove_from_faction = THIS
+		}
+	}
+	if = {
+		limit = {
+			is_in_faction = no
+			LTN = { exists = yes is_in_faction = yes NOT = { is_subject_of = ROOT } }
+			NOT = { has_war_with = LTN }
+		}
+		LTN = {
+			faction_leader = {
+				add_to_faction = ROOT
+			}
+		}
+	}
+	if = {
+		limit = { is_in_faction = no }
+		set_rule = { can_create_factions = yes }
+		create_faction_from_template = faction_template_zwillingstuerme_pakt
+		add_faction_initiative = 1
+		if = {
+			limit = { NOT = { has_country_flag = TAR_rd_war_done } }
+			log = "DUB: 双塔协定重立门户（莱塔尼亚没能当家）"
+		}
+	}
+	if = {
+		limit = { is_in_faction = yes }
+		set_war_support = 0.05
+	}
+	else = {
+		log = "DUB: 加入双塔协定失败（既进不去也没能重立）"
+	}
+}

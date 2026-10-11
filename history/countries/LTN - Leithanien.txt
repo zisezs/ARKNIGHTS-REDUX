@@ -1,0 +1,267 @@
+capital = 502
+
+oob = "LTN_Start"
+
+recruit_character = LTN_Lieselotte_EwigeGnade
+recruit_character = LTN_Hildegard_GrimmMacht
+recruit_character = LTN_Unger_Minks
+recruit_character = LTN_Lenny_Movico
+recruit_character = LTN_Loris_Bordin
+recruit_character = LTN_Cora_Lowenstein
+recruit_character = LTN_Brandt_Reiner
+
+add_ideas = {
+	volunteer_only
+	free_trade
+	civilian_economy
+	major_country
+	elite_voting
+	working_law_14h
+	behavior_control
+	mechanized_agriculture
+	scale_factory
+	higher_education
+	perfect_system
+	low_poverty
+
+	KZM_xp #经验加成
+}
+
+set_variable = { LTN_festival_prep = 0 }
+set_variable = { LTN_score_insight = 0 }	# 决议 B1「抄本校勘」的读数，供调律台预演页显示（上限 6）
+
+# >>> LTN_growth_vars
+# 成长精神初值（由 docs/gen_ltn_rewards.cjs 生成；初值与满档都在 5% 格子上）
+add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
+add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
+add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
+add_dynamic_modifier = { modifier = LTN_dyn_electors_fetter }
+add_dynamic_modifier = { modifier = LTN_dyn_treasury }
+add_dynamic_modifier = { modifier = LTN_dyn_atelier }
+add_dynamic_modifier = { modifier = LTN_dyn_ironlaw }
+add_dynamic_modifier = { modifier = LTN_dyn_host }
+add_dynamic_modifier = { modifier = LTN_dyn_outreach }
+
+set_variable = { LTN_tw_ppg = 0.05 }
+set_variable = { LTN_tw_ppf = 0.05 }
+set_variable = { LTN_tw_stab = -0.1 }
+set_variable = { LTN_tw_ws = 0 }
+set_variable = { LTN_tw_drift = 0.05 }
+set_variable = { LTN_tw_week = -0.005 }
+set_variable = { LTN_law_stab = 0.1 }
+set_variable = { LTN_law_res = 0.05 }
+set_variable = { LTN_law_ppg = 0.05 }
+set_variable = { LTN_law_drift = 0.15 }
+set_variable = { LTN_law_exp = 0 }
+set_variable = { LTN_law_week = -0.005 }
+set_variable = { LTN_echo_ppg = -0.05 }
+set_variable = { LTN_echo_stab = -0.05 }
+set_variable = { LTN_echo_res = 0 }
+set_variable = { LTN_echo_drift = 0 }
+set_variable = { LTN_echo_cons = 0 }
+set_variable = { LTN_echo_week = -0.01 }
+set_variable = { LTN_fet_ppg = -0.1 }
+set_variable = { LTN_fet_con = -0.1 }
+set_variable = { LTN_fet_build = -0.1 }
+set_variable = { LTN_fet_fac = -0.1 }
+set_variable = { LTN_fet_train = 0.1 }
+set_variable = { LTN_fet_stab = 0.05 }
+set_variable = { LTN_tre_build = 0 }
+set_variable = { LTN_tre_prod = 0 }
+set_variable = { LTN_tre_fac = 0 }
+set_variable = { LTN_tre_eff = 0 }
+set_variable = { LTN_tre_cons = 0 }
+set_variable = { LTN_tre_stab = -0.05 }
+set_variable = { LTN_atl_res = 0 }
+set_variable = { LTN_atl_maxeff = 0 }
+set_variable = { LTN_atl_effg = 0 }
+set_variable = { LTN_atl_ind = 0 }
+set_variable = { LTN_atl_arms = 0 }
+set_variable = { LTN_atl_cons = 0 }
+set_variable = { LTN_irn_atk = 0 }
+set_variable = { LTN_irn_def = 0 }
+set_variable = { LTN_irn_org = 0 }
+set_variable = { LTN_irn_btk = 0 }
+set_variable = { LTN_irn_plan = 0 }
+set_variable = { LTN_irn_exp = 0 }
+set_variable = { LTN_hos_con = 0 }
+set_variable = { LTN_hos_pop = 0 }
+set_variable = { LTN_hos_train = 0 }
+set_variable = { LTN_hos_reinf = 0 }
+set_variable = { LTN_hos_regain = 0 }
+set_variable = { LTN_hos_morale = 0 }
+set_variable = { LTN_out_ppg = 0 }
+set_variable = { LTN_out_stab = 0 }
+set_variable = { LTN_out_drift = 0 }
+set_variable = { LTN_out_ws = 0 }
+set_variable = { LTN_out_cons = 0 }
+# <<< LTN_growth_vars
+
+# 调律台（09 号文档的小游戏）：【金律的和谐】+ 乐章状态初值
+# 判定与结算见 common/scripted_effects/LTN_law_scripted_effects.txt
+add_dynamic_modifier = { modifier = LTN_dyn_law_harmony }
+add_dynamic_modifier = { modifier = LTN_dyn_law_dials }
+set_variable = { LTN_har_stab = 0 }
+set_variable = { LTN_har_pp = 0 }
+set_variable = { LTN_har_res = 0 }
+set_variable = { LTN_har_drift = 0 }
+set_variable = { LTN_dial_pop = 0 }
+set_variable = { LTN_dial_build = 0 }
+set_variable = { LTN_dial_res = 0 }
+set_variable = { LTN_law_version = 1 }
+set_variable = { LTN_law_cooldown = 0 }
+set_variable = { LTN_law_view = 0 }
+# 九声部 × 三音孔（0..4）：中位开局
+set_variable = { LTN_law_voice_1_tax = 2 }
+set_variable = { LTN_law_voice_2_tax = 2 }
+set_variable = { LTN_law_voice_3_tax = 2 }
+set_variable = { LTN_law_voice_4_tax = 2 }
+set_variable = { LTN_law_voice_5_tax = 2 }
+set_variable = { LTN_law_voice_6_tax = 2 }
+set_variable = { LTN_law_voice_7_tax = 2 }
+set_variable = { LTN_law_voice_8_tax = 2 }
+set_variable = { LTN_law_voice_9_tax = 2 }
+set_variable = { LTN_law_voice_1_levy = 2 }
+set_variable = { LTN_law_voice_2_levy = 2 }
+set_variable = { LTN_law_voice_3_levy = 2 }
+set_variable = { LTN_law_voice_4_levy = 2 }
+set_variable = { LTN_law_voice_5_levy = 2 }
+set_variable = { LTN_law_voice_6_levy = 2 }
+set_variable = { LTN_law_voice_7_levy = 2 }
+set_variable = { LTN_law_voice_8_levy = 2 }
+set_variable = { LTN_law_voice_9_levy = 2 }
+set_variable = { LTN_law_voice_1_arts = 2 }
+set_variable = { LTN_law_voice_2_arts = 2 }
+set_variable = { LTN_law_voice_3_arts = 2 }
+set_variable = { LTN_law_voice_4_arts = 2 }
+set_variable = { LTN_law_voice_5_arts = 2 }
+set_variable = { LTN_law_voice_6_arts = 2 }
+set_variable = { LTN_law_voice_7_arts = 2 }
+set_variable = { LTN_law_voice_8_arts = 2 }
+set_variable = { LTN_law_voice_9_arts = 2 }
+set_variable = { LTN_law_voice_1_tone = 0 }
+set_variable = { LTN_law_voice_2_tone = 0 }
+set_variable = { LTN_law_voice_3_tone = 0 }
+set_variable = { LTN_law_voice_4_tone = 0 }
+set_variable = { LTN_law_voice_5_tone = 0 }
+set_variable = { LTN_law_voice_6_tone = 0 }
+set_variable = { LTN_law_voice_7_tone = 0 }
+set_variable = { LTN_law_voice_8_tone = 0 }
+set_variable = { LTN_law_voice_9_tone = 0 }
+
+set_research_slots = 4
+set_stability = 0.8
+set_war_support = 0.4
+
+set_technology = {
+	infantry_weapons_0 = 1
+	infantry_weapons_improvement_1 = 1
+	infantry_weapons_improvement_2 = 1
+	arts_weapons_0 = 1
+	arts_weapons_improvement_1 = 1
+	support_weapons_1 = 1
+	tech_support = 1
+	LRD_tech_shengchan_0 = 1
+	LRD_tech_shengchan_2 = 1
+	LRD_tech_tumu_0 = 1
+	fuel_silos = 1
+	LRD_tech_jisuanji_0 = 1
+	LRD_tech_jisuanji_1 = 1
+	crystal_electronic_unit = 1
+	transistor_computer = 1
+	integrated_circuit_computer_1 = 1
+	MSA_radar = 1
+	PESA_radar = 1
+	tech_support = 1
+	tech_engineers = 1
+	tech_recon = 1
+	tech_military_police = 1	#宪兵队支援连（女皇之声/边区守备队编制引用；IBR/SIE/YAN 同款做法）
+	basic_train = 1
+	motorized_infantry_0 = 1
+	motorized_infantry_1 = 1
+	mechanized_infantry_1 = 1
+	artillery_0 = 1
+	artillery_improvement_1 = 1
+	artillery_1 = 1
+	sp_artillery_1 = 1
+	antitank_0 = 1
+	antitank_improvement_1 = 1
+	antitank_1 = 1
+	rocket_artillery_0 = 1
+	rocket_artillery_improvement_1 = 1
+	antiair_0 = 1
+	antiair_improvement_1 = 1
+	antiair_1 = 1
+	sp_antiair_1 = 1
+	LRD_tech_energy_1 = 1
+	light_tank_0 = 1
+	light_tank_1 = 1
+	medium_tank_0 = 1
+	medium_tank_1 = 1
+	heavy_tank_0 = 1
+	heavy_tank_1 = 1
+	landship_0 = 1
+	landship_1 = 1
+	air_engines = 1
+	jet_engines_1 = 1
+	small_airframe_0 = 1
+	small_airframe_1 = 1
+	medium_airframe_0 = 1
+	medium_airframe_1 = 1
+	large_airframe_0 = 1
+	transport_plane_0 = 1
+	airborne_bombs = 1
+	aa_cannon_1 = 1
+	aircraft_construction = 1
+	helicopter_0 = 1
+	utility_helicopter_1 = 1
+	armed_helicopter_1 = 1
+	air_assault = 1
+}
+
+set_politics = {
+	ruling_party = conservatism
+	elections_allowed = no
+}
+
+set_popularities = {
+	communism = 3
+	socialism = 7
+	progressivism = 21
+	liberalism = 20
+	conservatism = 25
+	authoritarianism = 21
+	despotism = 1
+	fascism = 2
+	mysticism = 0
+	special = 0
+}
+
+create_faction_from_template = faction_template_zwillingstuerme_pakt
+add_to_faction = LRS
+add_to_faction = PAN
+
+#傀儡国
+set_autonomy = {
+	target = NEL
+	autonomous_state = autonomy_colony
+	freedom_level = 0.5
+}
+set_autonomy = {
+	target = VOL
+	autonomous_state = autonomy_colony
+	freedom_level = 0.5
+}
+set_autonomy = {
+	target = WGG
+	autonomous_state = autonomy_colony
+	freedom_level = 0.5
+}
+
+#保独
+give_guarantee = BLV
+
+# ARF 特殊兵种：开局授予专属兵种科技（ARF 特殊兵种模块维护，请勿手改）
+set_technology = {
+	arf_golden_law_guard_tech = 1
+}

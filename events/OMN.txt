@@ -1,0 +1,404 @@
+add_namespace = focus_omn
+add_namespace = news_omn
+add_namespace = decision_omn
+
+country_event = {
+	id = focus_omn.1
+	title = focus_omn.1.t
+	desc = focus_omn.1.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.1.a
+	}
+}
+
+country_event = {
+	id = focus_omn.2
+	title = focus_omn.2.t
+	desc = focus_omn.2.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.2.a
+	}
+}
+
+country_event = {
+	id = focus_omn.3
+	title = focus_omn.3.t
+	desc = focus_omn.3.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.3.a
+	}
+}
+
+country_event = {
+	id = focus_omn.4
+	title = focus_omn.4.t
+	desc = focus_omn.4.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.4.a
+	}
+}
+
+country_event = {
+	id = focus_omn.5
+	title = focus_omn.5.t
+	desc = focus_omn.5.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.5.a
+	}
+}
+
+country_event = {
+	id = focus_omn.6
+	title = focus_omn.6.t
+	desc = focus_omn.6.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.6.a
+	}
+}
+
+country_event = {
+	id = focus_omn.7
+	title = focus_omn.7.t
+	desc = focus_omn.7.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.7.a
+	}
+}
+
+country_event = {
+	id = focus_omn.8
+	title = focus_omn.8.t
+	desc = focus_omn.8.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.8.a
+		unlock_national_focus = OMN_next_july_plan
+	}
+}
+
+country_event = {
+	id = focus_omn.9
+	title = focus_omn.9.t
+	desc = focus_omn.9.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.9.a
+	}
+}
+
+country_event = {
+	id = focus_omn.10
+	title = focus_omn.10.t
+	desc = focus_omn.10.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.10.a
+	}
+}
+
+country_event = {
+	id = focus_omn.11
+	title = focus_omn.11.t
+	desc = focus_omn.11.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.11.a
+	}
+}
+
+country_event = {
+	id = focus_omn.12
+	title = focus_omn.12.t
+	desc = focus_omn.12.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.12.a
+	}
+}
+
+country_event = {
+	id = focus_omn.13
+	title = focus_omn.13.t
+	desc = focus_omn.13.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.13.a
+	}
+}
+
+country_event = {
+	id = focus_omn.14
+	title = focus_omn.14.t
+	desc = focus_omn.14.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.14.a
+		load_focus_tree = OMN_for_whom_the_bell_tolls
+		set_country_flag = OMN_civil_war_chantashaw
+		complete_national_focus = OMN_run_through_the_wilderness
+		complete_national_focus = OMN_the_bell_tolls_for_many
+		remove_idea = OMN_oppressed_peasants
+		swap_ideas = {
+			remove_idea = OMN_peaceful_threshing_ground_2
+			add_idea = OMN_burning_wheat_field
+		}
+		set_temp_variable = { dev_rate_agr = 1 }
+		Agricultural_Level_Rate_Minus = yes
+		set_temp_variable = { dev_rate_adm = 2 }
+		Administrative_Efficiency_Rate_Minus = yes
+	}
+
+	option = {
+		name = focus_omn.14.b
+		load_focus_tree = OMN_for_whom_the_bell_tolls
+		set_country_flag = OMN_civil_war_aryusz
+		complete_national_focus = OMN_run_through_the_wilderness
+		complete_national_focus = OMN_the_bell_tolls_for_few
+		remove_idea = OMN_oppressed_peasants
+		swap_ideas = {
+			remove_idea = OMN_peaceful_threshing_ground_2
+			add_idea = OMN_burning_wheat_field
+		}
+		set_temp_variable = { dev_rate_agr = 1 }
+		Agricultural_Level_Rate_Minus = yes
+		set_temp_variable = { dev_rate_adm = 2 }
+		Administrative_Efficiency_Rate_Minus = yes
+	}
+}
+
+country_event = {
+	id = decision_omn.1
+	title = decision_omn.1.t
+	desc = decision_omn.1.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = decision_omn.1.a
+		add_stability = 0.3
+		add_war_support = 0.3
+		remove_idea = OMN_burning_wheat_field
+		country_lock_all_division_template = no
+		every_core_state = {
+			damage_building = {
+				type = infrastructure
+				damage = 0.5
+			}
+			damage_building = {
+				type = industrial_complex
+				damage = 10
+			}
+		}
+		hidden_effect = {
+			set_popularities = {
+				despotism = 60
+				authoritarianism = 30
+				conservatism = 10
+			}
+		}
+	}
+}
+
+country_event = {
+	id = decision_omn.2
+	title = decision_omn.2.t
+	desc = decision_omn.2.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = decision_omn.2.a
+		add_stability = 0.3
+		add_war_support = 0.3
+		set_politics = { 
+			ruling_party = conservatism
+		}
+		remove_idea = OMN_burning_wheat_field
+		country_lock_all_division_template = no
+		every_core_state = {
+			damage_building = {
+				type = infrastructure
+				damage = 0.5
+			}
+			damage_building = {
+				type = industrial_complex
+				damage = 10
+			}
+		}
+		hidden_effect = {
+			set_popularities = {
+				despotism = 10
+				authoritarianism = 30
+				conservatism = 60
+			}
+		}
+	}
+}
+
+country_event = {
+	id = focus_omn.15
+	title = focus_omn.15.t
+	desc = focus_omn.15.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.15.a
+	}
+}
+
+country_event = {
+	id = focus_omn.16
+	title = focus_omn.16.t
+	desc = focus_omn.16.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.16.a
+	}
+}
+
+country_event = {
+	id = focus_omn.17
+	title = focus_omn.17.t
+	desc = focus_omn.17.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.17.a
+	}
+}
+
+country_event = {
+	id = focus_omn.18
+	title = focus_omn.18.t
+	desc = focus_omn.18.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.18.a
+	}
+}
+
+country_event = {
+	id = focus_omn.19
+	title = focus_omn.19.t
+	desc = focus_omn.19.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_omn.19.a
+	}
+}
+
+news_event = {
+	id = news_omn.1
+	title = news_omn.1.t
+	desc = news_omn.1.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = news_omn.1.a
+	}
+}
+
+news_event = {
+	id = news_omn.2
+	title = news_omn.2.t
+	desc = news_omn.2.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = news_omn.2.a
+	}
+}
+
+news_event = {
+	id = news_omn.3
+	title = news_omn.3.t
+	desc = news_omn.3.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = news_omn.3.a
+	}
+}
+
+news_event = {
+	id = news_omn.4
+	title = news_omn.4.t
+	desc = news_omn.4.d
+	#picture = GFX_report_event_german_speech #需要更换
+
+	is_triggered_only = yes
+
+	option = {
+		name = news_omn.4.a
+	}
+}

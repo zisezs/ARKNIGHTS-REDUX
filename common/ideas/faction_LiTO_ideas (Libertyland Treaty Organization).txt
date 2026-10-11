@@ -1,0 +1,32 @@
+ideas = {
+	country = {
+		LiTO_west_Terra_air_defense_command = {
+			
+			cancel = {
+				NOT = {
+					has_faction_template = faction_template_libertyland_treaty_organization
+				}
+			}
+
+			modifier = {
+				air_home_defence_factor = 0.2
+				air_superiority_detect_factor = 0.1
+				air_interception_detect_factor = 0.1
+			}
+		}
+
+		LiTO_joint_command = {
+
+			cancel = {
+				NOT = {
+					has_faction_template = faction_template_libertyland_treaty_organization
+				}
+			}
+
+			modifier = {
+				max_planning = 0.1
+				supply_consumption_factor = -0.1
+			}
+		}
+	}
+}

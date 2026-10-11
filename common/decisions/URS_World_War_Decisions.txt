@@ -1,0 +1,52 @@
+# ==============================================================================
+#  对所有国家宣战 —— URS 全面战争决议
+#  · 分类见 common/decisions/categories/URS_decision_categroies.txt（URS_World_War_Category）
+#  · 解锁：1103.1.1 起（日期门槛写在分类 visible 上）
+#  · 效果：遍历所有国家，对「本国 / 附庸 / 阵营成员 / 已交战」之外的国家挨个宣战，
+#    战争目标 annex_everything（同 REU_declare_war_on_all、RHL_war_* 先例写法）。
+#  · 包括 TAG ZZZ（废土）：ZZZ 既非附庸也不是阵营成员，同样在遍历之列。
+#  · 可重复：已交战国家被 has_war_with 过滤；停战后可再点补宣。
+# ==============================================================================
+
+URS_World_War_Category = {
+
+	URS_declare_war_on_all = {
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = URS
+		}
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			always = yes
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = URS_declare_war_on_all_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						NOT = { original_tag = URS }
+						NOT = { is_subject_of = ROOT }
+						NOT = { is_in_faction_with = ROOT }
+						NOT = { has_war_with = ROOT }
+					}
+					ROOT = {
+						declare_war_on = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+}

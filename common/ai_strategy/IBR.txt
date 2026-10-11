@@ -1,0 +1,52 @@
+#IBR 增强陆军进攻欲望：高征服倾向 + 战线 rush 执行
+IBR_ai_land_aggression = {
+	allowed = { tag = IBR }
+	enable = {
+		tag = IBR
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = conquer
+		id = PON
+		value = 200
+	}
+	ai_strategy = {
+		type = conquer
+		id = DBM
+		value = 200
+	}
+	ai_strategy = {
+		type = conquer
+		id = ZZZ
+		value = 200
+	}
+
+	ai_strategy = {
+		type = front_control
+		tag = PON
+		ratio = 0.6
+		priority = 200
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+	}
+	ai_strategy = {
+		type = front_control
+		tag = DBM
+		ratio = 0.6
+		priority = 200
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+	}
+	ai_strategy = {
+		type = front_control
+		tag = ZZZ
+		ratio = 0.6
+		priority = 200
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+	}
+}

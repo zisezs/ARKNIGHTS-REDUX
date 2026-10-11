@@ -1,0 +1,92 @@
+capital = 621
+
+
+# ── 原作人物（定义在 common/characters/TAR.txt，深池是他们的国籍） ──
+recruit_character = TAR_Eblana_Dublinn		# 爱布拉娜·都柏林：领袖、红龙
+recruit_character = TAR_Loughshinny_Dublinn	# 拉芙希妮·都柏林：另一条红龙
+recruit_character = TAR_Harmonie			# 阿赫茉妮：谋臣
+recruit_character = TAR_Mandragora			# 蔓德拉：小丘郡一线头目
+recruit_character = TAR_John_OConnor		# 约翰·奥康奈德：赤铁近卫队教官
+
+# ── 深池顾问与将领池（common/characters/DUB_redeem.txt） ──
+# 军政
+recruit_character = DUB_Executive_Officer	# 校官：赤铁近卫队长，同时是领袖近侍
+recruit_character = DUB_Nemesis				# 涅梅丝：守灵人，管城内安置
+recruit_character = DUB_Serious_Watchman	# 严肃的守灵人：话事人
+recruit_character = DUB_Moran				# 莫兰：卡迈河谷的吟游诗人
+recruit_character = DUB_Singer				# 歌唱家：作家
+recruit_character = DUB_Bridget				# 布莉吉：游牧人，报信与认路
+recruit_character = DUB_Emma				# 艾玛：粮店老板，管口粮
+recruit_character = DUB_Vane				# 维恩：流民记账人
+# 六头领（原作只给代号）
+recruit_character = DUB_Robber				# 「强盗」
+recruit_character = DUB_Arsoner				# 「纵火家」
+recruit_character = DUB_Accountant			# 「会计」
+recruit_character = DUB_Poison_Scholar		# 「毒药学者」
+recruit_character = DUB_Prisoner			# 「囚犯」
+recruit_character = DUB_Orator				# 「雄辩家」
+
+add_ideas = {
+	TAR_extinguished_bell
+	TAR_debt_of_blood
+	TAR_two_embers
+	DUB_dead_fire_risen		# 初始人力法案：死火复生（动员法槽，直接顶掉默认的 volunteer_only）
+	subsistence_agriculture
+	electric_tool_production
+	high_illiteracy_rate
+	inefficient_administration
+	rampant_poverty
+}
+
+set_stability = 0.4
+set_war_support = 0.6
+set_research_slots = 4
+
+set_technology = {
+	infantry_weapons_0 = 1
+	artillery_0 = 1
+	tech_support = 1
+	basic_machine_tools = 1
+	punched_card_computer = 1
+	tech_recon = 1
+	motorized_infantry_0 = 1
+	power_plant = 1
+	# 行尸科技正常由法案的 on_add 授予；history 里的 add_ideas 不保证触发 on_add，
+	# 这里显式补一发（set_technology 绕过 allow = { always = no }，重复授予无害）。
+	dub_dead_fire_walker_tech = 1
+}
+
+# 唯一的编制档在模板文件里定义；必须排在 set_technology 之后，
+# 否则「死火行尸师」的 12 个团是在兵种解锁前加载的。
+oob = "DUB_Start"
+
+# ── 编制锁：深池只能造「死火行尸师」这一档 ──
+# 顺序有讲究：先挂科技与 oob（模板要存在、兵种要可用），再全国锁，最后单独把这一档解回来。
+# country_lock_all_division_template = yes 挡住"新建/改模板"，
+# set_division_template_lock 决定某一档模板当下能不能用（RHL 外勤部队就是这么锁的）。
+country_lock_all_division_template = yes
+set_division_template_lock = {
+	division_template = "死火行尸师"
+	is_locked = no
+}
+
+set_politics = {
+	ruling_party = despotism
+	elections_allowed = no
+}
+
+# 深池不是政党联盟，是一堆人各自押注同一场火：
+# 领袖席压住场面，纵火家与校官要烧要打，会计与守钟人只想把日子过回去。
+set_popularities = {
+	communism = 9
+	socialism = 11
+	progressivism = 2
+	liberalism = 0
+	conservatism = 0
+	authoritarianism = 14
+	despotism = 44
+	fascism = 16
+	mysticism = 4
+	special = 0
+	corporate_technocracy = 0
+}

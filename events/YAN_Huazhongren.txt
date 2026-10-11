@@ -1,0 +1,456 @@
+# ==============================================================================
+#  大炎 · 画中人（事件链 · 10 环）
+#  · 原作 act16d5《画中人》，地点勾吴地界灰齐山 / 画中婆山镇，时间景祚七年除夕
+#  · 视角：登记在册的代理人「夕」擅离山头三年，司岁台要追，年却先一步托了罗德岛。
+#    玩家以朝廷身份裁定：追、除、还是不管。
+#  · 出场角色照原作：年 / 夕 / 说书人（煮伞居士，即夕）/ 黎（当铺掌柜）/
+#    嵯峨（东国游方僧）/ 炎熔 / 克洛丝 / 乌有 / 阿然 / 逸川 / 廉子虚（回忆）；
+#    朝廷侧用 椿（司岁台监正）/ 左乐 / 老天师。
+#  · 起链 1096.1.1（除夕），每 60 天一环，见 YAN_sidestory_scripted_effects.txt。
+#  · 设定要点：原作通篇不写「岁兽」「岁相」，只用「我们」「它」「神明」指代；
+#    年给出的关键设定是——当「我们」苏醒、重新成为「我」，现在的年与夕都会消失。
+#    这一条直接接上大炎的「代理人信任」机制，是本链的政治核心。
+# ==============================================================================
+
+add_namespace = yan_hzr
+
+# ------------------------------------------------------------------
+# 1 擅离 —— 夕的名字下面注着三个字：未归山
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_hzr.1
+	title = yan_hzr.1.t
+	desc = yan_hzr.1.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_hzr.2 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_hzr.1.a
+		ai_chance = { base = 40 }
+		add_political_power = -40
+		add_to_variable = { yan_sui_awakening = -5 }
+		add_to_variable = { yan_agent_trust = -8 }
+		custom_effect_tooltip = yan_ss_sui_m5_tt
+		custom_effect_tooltip = yan_ss_trust_m8_tt
+	}
+
+	option = {
+		name = yan_hzr.1.b
+		ai_chance = { base = 35 }
+		add_political_power = 20
+		add_to_variable = { yan_agent_trust = 8 }
+		custom_effect_tooltip = yan_ss_trust_p8_tt
+	}
+
+	option = {
+		name = yan_hzr.1.c
+		ai_chance = { base = 25 }
+		add_political_power = -60
+		add_war_support = 0.05
+		add_to_variable = { yan_sui_awakening = -10 }
+		add_to_variable = { yan_agent_trust = -15 }
+		custom_effect_tooltip = yan_ss_sui_m10_tt
+		custom_effect_tooltip = yan_ss_trust_m15_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 2 灰齐山 —— 一个月没有讯号
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_hzr.2
+	title = yan_hzr.2.t
+	desc = yan_hzr.2.d
+	picture = GFX_report_event_Generic_Cold_Forest
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_hzr.3 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_hzr.2.a
+		ai_chance = { base = 40 }
+		add_political_power = -45
+		army_experience = 15
+		add_stability = -0.03
+		add_manpower = -2000
+	}
+
+	option = {
+		name = yan_hzr.2.b
+		ai_chance = { base = 30 }
+		add_political_power = -30
+		add_stability = -0.05
+		add_to_variable = { yan_sui_awakening = 4 }
+		custom_effect_tooltip = yan_ss_sui_p4_tt
+	}
+
+	option = {
+		name = yan_hzr.2.c
+		ai_chance = { base = 30 }
+		add_political_power = 25
+		add_to_variable = { yan_sui_awakening = 5 }
+		custom_effect_tooltip = yan_ss_sui_p5_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 3 说书 —— 我们在听人说书
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_hzr.3
+	title = yan_hzr.3.t
+	desc = yan_hzr.3.d
+	picture = GFX_report_event_Generic_Manor_Garden
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_hzr.4 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_hzr.3.a
+		ai_chance = { base = 40 }
+		add_political_power = -25
+		add_to_variable = { yan_shudao_integrity = 10 }
+		custom_effect_tooltip = yan_ss_shudao_p10_tt
+	}
+
+	option = {
+		name = yan_hzr.3.b
+		ai_chance = { base = 30 }
+		add_political_power = 30
+		add_to_variable = { yan_shudao_integrity = -10 }
+		custom_effect_tooltip = yan_ss_shudao_m10_tt
+	}
+
+	option = {
+		name = yan_hzr.3.c
+		ai_chance = { base = 30 }
+		add_political_power = -40
+		add_to_variable = { yan_sui_awakening = -3 }
+		custom_effect_tooltip = yan_ss_sui_m3_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 4 日月 —— 日恒在东，月恒在西
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_hzr.4
+	title = yan_hzr.4.t
+	desc = yan_hzr.4.d
+	picture = GFX_report_event_Generic_Snow_Village_1
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_hzr.5 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_hzr.4.a
+		ai_chance = { base = 40 }
+		add_political_power = -35
+		add_stability = -0.04
+		add_war_support = 0.04
+		add_to_variable = { yan_sui_awakening = -4 }
+		custom_effect_tooltip = yan_ss_sui_m4_tt
+	}
+
+	option = {
+		name = yan_hzr.4.b
+		ai_chance = { base = 30 }
+		add_political_power = 30
+		add_to_variable = { yan_sui_awakening = 6 }
+		custom_effect_tooltip = yan_ss_sui_p6_tt
+	}
+
+	option = {
+		name = yan_hzr.4.c
+		ai_chance = { base = 30 }
+		add_political_power = -50
+		add_stability = 0.05
+		add_manpower = 8000
+	}
+}
+
+# ------------------------------------------------------------------
+# 5 婆山镇 —— 查不到的年号
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_hzr.5
+	title = yan_hzr.5.t
+	desc = yan_hzr.5.d
+	picture = GFX_report_event_Generic_Village_House
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_hzr.6 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_hzr.5.a
+		ai_chance = { base = 40 }
+		add_political_power = -30
+		add_to_variable = { yan_shudao_integrity = 15 }
+		custom_effect_tooltip = yan_ss_shudao_p15_tt
+	}
+
+	option = {
+		name = yan_hzr.5.b
+		ai_chance = { base = 30 }
+		add_political_power = -40
+		add_stability = -0.06
+		add_to_variable = { yan_agent_trust = -6 }
+		custom_effect_tooltip = yan_ss_trust_m6_tt
+	}
+
+	option = {
+		name = yan_hzr.5.c
+		ai_chance = { base = 30 }
+		add_political_power = 25
+		add_to_variable = { yan_agent_trust = 5 }
+		custom_effect_tooltip = yan_ss_trust_p5_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 6 点睛 —— 保镇平安，换送众人离开
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_hzr.6
+	title = yan_hzr.6.t
+	desc = yan_hzr.6.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_hzr.7 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_hzr.6.a
+		ai_chance = { base = 40 }
+		add_political_power = -25
+		add_to_variable = { yan_agent_trust = 10 }
+		add_to_variable = { yan_sui_awakening = -3 }
+		custom_effect_tooltip = yan_ss_trust_p10_tt
+		custom_effect_tooltip = yan_ss_sui_m3_tt
+	}
+
+	option = {
+		name = yan_hzr.6.b
+		ai_chance = { base = 30 }
+		add_political_power = 30
+		add_to_variable = { yan_agent_trust = -8 }
+		custom_effect_tooltip = yan_ss_trust_m8_tt
+	}
+
+	option = {
+		name = yan_hzr.6.c
+		ai_chance = { base = 30 }
+		add_political_power = -50
+		army_experience = 20
+		add_manpower = -3000
+	}
+}
+
+# ------------------------------------------------------------------
+# 7 一日之祸 —— 死掉的人「变回来了」
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_hzr.7
+	title = yan_hzr.7.t
+	desc = yan_hzr.7.d
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_hzr.8 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_hzr.7.a
+		ai_chance = { base = 40 }
+		add_political_power = -45
+		add_stability = 0.06
+		add_war_support = 0.03
+	}
+
+	option = {
+		name = yan_hzr.7.b
+		ai_chance = { base = 30 }
+		add_political_power = 35
+		add_stability = -0.08
+		add_to_variable = { yan_sui_awakening = 4 }
+		custom_effect_tooltip = yan_ss_sui_p4_tt
+	}
+
+	option = {
+		name = yan_hzr.7.c
+		ai_chance = { base = 30 }
+		add_political_power = -25
+		add_stability = -0.04
+		add_to_variable = { yan_agent_trust = 5 }
+		custom_effect_tooltip = yan_ss_trust_p5_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 8 爆竹 —— 镇口垒土灶烧竹
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_hzr.8
+	title = yan_hzr.8.t
+	desc = yan_hzr.8.d
+	picture = GFX_report_event_Generic_explosion
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_hzr.9 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_hzr.8.a
+		ai_chance = { base = 40 }
+		add_political_power = -35
+		add_stability = 0.05
+		add_to_variable = { yan_sui_awakening = -5 }
+		custom_effect_tooltip = yan_ss_sui_m5_tt
+	}
+
+	option = {
+		name = yan_hzr.8.b
+		ai_chance = { base = 35 }
+		add_political_power = 20
+	}
+
+	option = {
+		name = yan_hzr.8.c
+		ai_chance = { base = 25 }
+		add_political_power = -30
+		add_to_variable = { yan_agent_trust = -6 }
+		add_to_variable = { yan_shudao_integrity = 5 }
+		custom_effect_tooltip = yan_ss_trust_m6_tt
+		custom_effect_tooltip = yan_ss_shudao_p5_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 9 大梦 —— 错，你我皆是画中人
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_hzr.9
+	title = yan_hzr.9.t
+	desc = yan_hzr.9.d
+	picture = GFX_report_event_Generic_Mansion_Room
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_hzr.10 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_hzr.9.a
+		ai_chance = { base = 40 }
+		add_political_power = -40
+		add_to_variable = { yan_agent_trust = 12 }
+		add_to_variable = { yan_sui_awakening = -6 }
+		custom_effect_tooltip = yan_ss_trust_p12_tt
+		custom_effect_tooltip = yan_ss_sui_m6_tt
+	}
+
+	option = {
+		name = yan_hzr.9.b
+		ai_chance = { base = 30 }
+		add_political_power = -70
+		add_war_support = 0.06
+		add_to_variable = { yan_sui_awakening = -10 }
+		add_to_variable = { yan_agent_trust = -15 }
+		custom_effect_tooltip = yan_ss_sui_m10_tt
+		custom_effect_tooltip = yan_ss_trust_m15_tt
+	}
+
+	option = {
+		name = yan_hzr.9.c
+		ai_chance = { base = 30 }
+		add_political_power = 30
+		add_to_variable = { yan_sui_awakening = 5 }
+		add_to_variable = { yan_agent_trust = 5 }
+		custom_effect_tooltip = yan_ss_sui_p5_tt
+		custom_effect_tooltip = yan_ss_trust_p5_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 10 洪炉 —— 八尺长的大号二踢脚（收尾）
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_hzr.10
+	title = yan_hzr.10.t
+	desc = yan_hzr.10.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_hzr.10.a
+		ai_chance = { base = 40 }
+		add_dynamic_modifier = { modifier = yan_hzr_agents_registered }
+		add_political_power = -50
+		add_to_variable = { yan_agent_trust = 15 }
+		custom_effect_tooltip = yan_ss_trust_p15_tt
+	}
+
+	option = {
+		name = yan_hzr.10.b
+		ai_chance = { base = 35 }
+		add_dynamic_modifier = { modifier = yan_hzr_painting_sealed }
+		add_to_variable = { yan_sui_awakening = -8 }
+		add_stability = 0.05
+		custom_effect_tooltip = yan_ss_sui_m8_tt
+	}
+
+	option = {
+		name = yan_hzr.10.c
+		ai_chance = { base = 25 }
+		add_dynamic_modifier = { modifier = yan_hzr_agents_registered }
+		add_to_variable = { yan_bufan_prep = 15 }
+		add_to_variable = { yan_agent_trust = -10 }
+		add_stability = -0.05
+		custom_effect_tooltip = yan_ss_bufan_p15_tt
+		custom_effect_tooltip = yan_ss_trust_m10_tt
+	}
+}

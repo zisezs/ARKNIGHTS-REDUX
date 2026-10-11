@@ -1,0 +1,1307 @@
+focus_tree = {
+	id = KRS_start
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = KRS
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = KRS_swaying_in_rainstorm
+	}
+	
+	#风雨飘摇
+	focus = {
+		id = KRS_swaying_in_rainstorm
+		icon = GFX_focus_KRS_swaying_in_rainstorm
+		cost = 1
+		x = 6
+		y = 0
+
+		completion_reward = {
+
+		}
+	}
+
+	#西方来电
+	focus = {
+		id = KRS_call_from_west
+		icon = GFX_focus_KRS_call_from_west
+		cost = 1
+		prerequisite = {
+			focus = KRS_swaying_in_rainstorm
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#筹集物资
+	focus = {
+		id = KRS_collect_supplies
+		icon = GFX_focus_KRS_collect_supplies
+		cost = 1
+		prerequisite = {
+			focus = KRS_call_from_west
+		}
+
+		x = -2
+		y = 2
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+	
+	#北地人！停止内斗！
+	focus = {
+		id = KRS_stop_internal_strife
+		icon = GFX_focus_KRS_stop_internal_strife
+		cost = 1
+		prerequisite = {
+			focus = KRS_collect_supplies
+		}
+
+		x = -2
+		y = 3
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#号召我们的和平
+	focus = {
+		id = KRS_call_for_our_peace
+		icon = GFX_focus_KRS_call_for_our_peace
+		cost = 1
+		prerequisite = {
+			focus = KRS_stop_internal_strife
+		}
+
+		x = -2
+		y = 5
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#召集战争指挥部
+	focus = {
+		id = KRS_raly_war_command
+		icon = GFX_focus_KRS_raly_war_command
+		cost = 1
+		prerequisite = {
+			focus = KRS_call_from_west
+		}
+
+		x = 2
+		y = 2
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#深入敌营内部
+	focus = {
+		id = KRS_deep_into_enemy
+		icon = GFX_focus_KRS_deep_into_enemy
+		cost = 1
+		prerequisite = {
+			focus = KRS_raly_war_command
+		}
+
+		x = 2
+		y = 3
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#彻底清算
+	focus = {
+		id = KRS_complete_liquidation
+		icon = GFX_focus_KRS_complete_liquidation
+		cost = 1
+		prerequisite = {
+			focus = KRS_deep_into_enemy
+		}
+		mutually_exclusive = {
+			focus = KRS_punish_enemy_head
+		}
+
+		x = 0
+		y = 4
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#惩办匪首
+	focus = {
+		id = KRS_punish_enemy_head
+		icon = GFX_focus_KRS_punish_enemy_head
+		cost = 1
+		prerequisite = {
+			focus = KRS_deep_into_enemy
+		}
+		mutually_exclusive = {
+			focus = KRS_complete_liquidation
+		}
+
+		x = 4
+		y = 4
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#枪声逐渐平息
+	focus = {
+		id = KRS_gun_failing_silent
+		icon = GFX_focus_KRS_gun_failing_silent
+		cost = 1
+		prerequisite = {
+			focus = KRS_complete_liquidation
+			focus = KRS_punish_enemy_head
+		}
+
+		x = 2
+		y = 5
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#萨尔加特的森林之间……
+	focus = {
+		id = KRS_in_Salgat_woods
+		icon = GFX_focus_KRS_in_Salgat_woods
+		cost = 1
+		prerequisite = {
+			focus = KRS_call_for_our_peace
+		}
+		prerequisite = {
+			focus = KRS_gun_failing_silent
+		}
+
+		x = 0
+		y = 6
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#只为守护我们的家园
+	focus = {
+		id = KRS_only_for_protecting_our_homeland
+		icon = GFX_focus_KRS_only_for_protecting_our_homeland
+		cost = 1
+		prerequisite = {
+			focus = KRS_in_Salgat_woods
+		}
+
+		x = 0
+		y = 7
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#为乌萨斯服役
+	focus = {
+		id = KRS_serve_for_Ursus
+		icon = GFX_focus_KRS_serve_for_Ursus
+		cost = 1
+		prerequisite = {
+			focus = KRS_only_for_protecting_our_homeland
+		}
+
+		x = -6
+		y = 8
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#我们为何而战
+	focus = {
+		id = KRS_why_do_we_fight
+		icon = GFX_focus_KRS_why_do_we_fight
+		cost = 1
+		prerequisite = {
+			focus = KRS_serve_for_Ursus
+		}
+
+		x = -6
+		y = 9
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#光荣而伟大的事业
+	focus = {
+		id = KRS_glorious_great_cause
+		icon = GFX_focus_KRS_glorious_great_cause
+		cost = 1
+		prerequisite = {
+			focus = KRS_why_do_we_fight
+		}
+
+		x = -6
+		y = 10
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#军队是个炼钢厂
+	focus = {
+		id = KRS_army_steel_factory
+		icon = GFX_focus_KRS_army_steel_factory
+		cost = 1
+		prerequisite = {
+			focus = KRS_only_for_protecting_our_homeland
+		}
+		prerequisite = {
+			focus = KRS_glorious_great_cause
+		}
+
+		x = 0
+		y = 11
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#特种作战部队
+	focus = {
+		id = KRS_special_force
+		icon = GFX_focus_KRS_special_force
+		cost = 1
+		prerequisite = {
+			focus = KRS_army_steel_factory
+		}
+
+		x = -2
+		y = 12
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#鼎新革故
+	focus = {
+		id = KRS_reform_army
+		icon = GFX_focus_KRS_reform_army
+		cost = 1
+		prerequisite = {
+			focus = KRS_special_force
+		}
+		mutually_exclusive = {
+			focus = KRS_keep_traditional
+		}
+
+		x = -4
+		y = 13
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#历久弥新
+	focus = {
+		id = KRS_keep_traditional
+		icon = GFX_focus_KRS_keep_traditional
+		cost = 1
+		prerequisite = {
+			focus = KRS_special_force
+		}
+		mutually_exclusive = {
+			focus = KRS_reform_army
+		}
+
+		x = 0
+		y = 13
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#哥伦比亚式战术
+	focus = {
+		id = KRS_Columbian_tactics
+		icon = GFX_focus_KRS_Columbian_tactics
+		cost = 1
+		prerequisite = {
+			focus = KRS_reform_army
+		}
+
+		x = -4
+		y = 14
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#久经考验的乌萨斯战争艺术
+	focus = {
+		id = KRS_Ursus_war_art
+		icon = GFX_focus_KRS_Ursus_war_art
+		cost = 1
+		prerequisite = {
+			focus = KRS_keep_traditional
+		}
+
+		x = 0
+		y = 14
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#克拉斯尼亚尔家乡军
+	focus = {
+		id = KRS_Krasnyar_home_army
+		icon = GFX_focus_KRS_Krasnyar_home_army
+		cost = 1
+		prerequisite = {
+			focus = KRS_army_steel_factory
+		}
+
+		x = 2
+		y = 12
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#我们光荣的军事传统
+	focus = {
+		id = KRS_our_glorious_military_tradition
+		icon = GFX_focus_KRS_our_glorious_military_tradition
+		cost = 1
+		prerequisite = {
+			focus = KRS_Krasnyar_home_army
+		}
+
+		x = 2
+		y = 13
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#我们的军事科技
+	focus = {
+		id = KRS_our_military_technology
+		icon = GFX_focus_KRS_our_military_technology
+		cost = 1
+		prerequisite = {
+			focus = KRS_only_for_protecting_our_homeland
+		}
+
+		x = 6
+		y = 8
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#建立克拉斯尼亚尔军工复合体
+	focus = {
+		id = KRS_Krasnyar_military_industry_complex
+		icon = GFX_focus_KRS_Krasnyar_military_industry_complex
+		cost = 1
+		prerequisite = {
+			focus = KRS_our_military_technology
+		}
+
+		x = 6
+		y = 9
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#进口外国先进武器
+	focus = {
+		id = KRS_import_foreign_advanced_weapon
+		icon = GFX_focus_KRS_import_foreign_advanced_weapon
+		cost = 1
+		prerequisite = {
+			focus = KRS_Krasnyar_military_industry_complex
+		}
+
+		x = 4
+		y = 10
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#雪原利剑计划
+	focus = {
+		id = KRS_snow_field_sword_project
+		icon = GFX_focus_KRS_snow_field_sword_project
+		cost = 1
+		prerequisite = {
+			focus = KRS_Krasnyar_military_industry_complex
+		}
+
+		x = 8
+		y = 10
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#招揽外国科研人才
+	focus = {
+		id = KRS_recruit_foreign_scientist
+		icon = GFX_focus_KRS_recruit_foreign_scientist
+		cost = 1
+		prerequisite = {
+			focus = KRS_import_foreign_advanced_weapon
+		}
+
+		x = 4
+		y = 11
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#军工厂昼夜不停
+	focus = {
+		id = KRS_military_factory_non_stop
+		icon = GFX_focus_KRS_recruit_foreign_scientist
+		cost = 1
+		prerequisite = {
+			focus = KRS_snow_field_sword_project
+		}
+
+		x = 8
+		y = 11
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#守卫家乡的利剑
+	focus = {
+		id = KRS_sword_defending_homeland
+		icon = GFX_focus_KRS_sword_defending_homeland
+		cost = 1
+		prerequisite = {
+			focus = KRS_recruit_foreign_scientist
+		}
+		prerequisite = {
+			focus = KRS_military_factory_non_stop
+		}
+
+		x = 6
+		y = 14
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#席卷而来的风暴
+	focus = {
+		id = KRS_incoming_storm
+		icon = GFX_focus_KRS_incoming_storm
+		cost = 1
+		prerequisite = {
+			focus = KRS_Columbian_tactics
+			focus = KRS_Ursus_war_art
+		}
+		prerequisite = {
+			focus = KRS_our_glorious_military_tradition
+		}
+		prerequisite = {
+			focus = KRS_sword_defending_homeland
+		}
+
+		x = 2
+		y = 15
+		relative_position_id = KRS_swaying_in_rainstorm
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#蹒跚起步
+	focus = {
+		id = KRS_stuttering_start
+		icon = GFX_focus_KRS_stuttering_start
+		cost = 1
+
+		x = 26
+		y = 0
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#筹建工业委员会
+	focus = {
+		id = KRS_planning_industry_committee
+		icon = GFX_focus_KRS_planning_industry_committee
+		cost = 1
+		prerequisite = {
+			focus = KRS_stuttering_start
+		}
+
+		x = -8
+		y = 1
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#粉碎大托拉斯
+	focus = {
+		id = KRS_destroy_large_trust
+		icon = GFX_focus_KRS_destroy_large_trust
+		cost = 1
+		prerequisite = {
+			focus = KRS_planning_industry_committee
+		}
+
+		x = -10
+		y = 2
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#安抚小工厂主
+	focus = {
+		id = KRS_ease_small_factory_owner
+		icon = GFX_focus_KRS_ease_small_factory_owner
+		cost = 1
+		prerequisite = {
+			focus = KRS_destroy_large_trust
+		}
+
+		x = -10
+		y = 3
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#政府来负责
+	focus = {
+		id = KRS_government_take_responsibility
+		icon = GFX_focus_KRS_government_take_responsibility
+		cost = 1
+		prerequisite = {
+			focus = KRS_ease_small_factory_owner
+		}
+
+		x = -10
+		y = 5
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#建立工业检查部门
+	focus = {
+		id = KRS_build_industry_inspection_department
+		icon = GFX_focus_KRS_build_industry_inspection_department
+		cost = 1
+		prerequisite = {
+			focus = KRS_planning_industry_committee
+		}
+
+		x = -6
+		y = 2
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#摸清物流系统
+	focus = {
+		id = KRS_know_about_logistics
+		icon = GFX_focus_KRS_know_about_logistics
+		cost = 1
+		prerequisite = {
+			focus = KRS_build_industry_inspection_department
+		}
+
+		x = -8
+		y = 3
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#排查财务系统
+	focus = {
+		id = KRS_going_through_finance
+		icon = GFX_focus_KRS_going_through_finance
+		cost = 1
+		prerequisite = {
+			focus = KRS_build_industry_inspection_department
+		}
+
+		x = -4
+		y = 3
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#查禁走私倒卖
+	focus = {
+		id = KRS_banning_smuggle_and_reselling
+		icon = GFX_focus_KRS_banning_smuggle_and_reselling
+		cost = 1
+		prerequisite = {
+			focus = KRS_know_about_logistics
+		}
+
+		x = -8
+		y = 4
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#新一份财务报表
+	focus = {
+		id = KRS_new_financial_report
+		icon = GFX_focus_KRS_new_financial_report
+		cost = 1
+		prerequisite = {
+			focus = KRS_going_through_finance
+		}
+
+		x = -4
+		y = 4
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#没收非法所得
+	focus = {
+		id = KRS_take_illegal_profit
+		icon = GFX_focus_KRS_take_illegal_profit
+		cost = 1
+		prerequisite = {
+			focus = KRS_banning_smuggle_and_reselling
+		}
+		prerequisite = {
+			focus = KRS_new_financial_report
+		}
+
+		x = -6
+		y = 5
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#哥伦比亚的先进经验
+	focus = {
+		id = KRS_Columbian_advanced_experience
+		icon = GFX_focus_KRS_Columbian_advanced_experience
+		cost = 1
+		prerequisite = {
+			focus = KRS_government_take_responsibility
+		}
+		prerequisite = {
+			focus = KRS_take_illegal_profit
+		}
+		mutually_exclusive = {
+			focus = KRS_our_own_way
+		}
+
+		x = -8
+		y = 6
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#我们自己的道路
+	focus = {
+		id = KRS_our_own_way
+		icon = GFX_focus_KRS_our_own_way
+		cost = 1
+		prerequisite = {
+			focus = KRS_government_take_responsibility
+		}
+		prerequisite = {
+			focus = KRS_take_illegal_profit
+		}
+		mutually_exclusive = {
+			focus = KRS_Columbian_advanced_experience
+		}
+
+		x = -6
+		y = 6
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#处理鼠患
+	focus = {
+		id = KRS_take_action_on_rats
+		icon = GFX_focus_KRS_take_action_on_rats
+		cost = 1
+		prerequisite = {
+			focus = KRS_stuttering_start
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#精简公务员队伍
+	focus = {
+		id = KRS_cutting_down_civil_servants
+		icon = GFX_focus_KRS_cutting_down_civil_servants
+		cost = 1
+		prerequisite = {
+			focus = KRS_take_action_on_rats
+		}
+
+		x = -2
+		y = 2
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#明确部门职权
+	focus = {
+		id = KRS_clearing_departmental_power
+		icon = GFX_focus_KRS_clearing_departmental_power
+		cost = 1
+		prerequisite = {
+			focus = KRS_cutting_down_civil_servants
+		}
+
+		x = -2
+		y = 3
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#重启情报系统
+	focus = {
+		id = KRS_reopen_intelligence_system
+		icon = GFX_focus_KRS_reopen_intelligence_system
+		cost = 1
+		prerequisite = {
+			focus = KRS_clearing_departmental_power
+		}
+
+		x = -2
+		y = 4
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#反腐巡视组
+	focus = {
+		id = KRS_anti_corruption_inspection_group
+		icon = GFX_focus_KRS_anti_corruption_inspection_group
+		cost = 1
+		prerequisite = {
+			focus = KRS_take_action_on_rats
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#公务员财产申报制度
+	focus = {
+		id = KRS_civil_servant_property_report
+		icon = GFX_focus_KRS_civil_servant_property_report
+		cost = 1
+		prerequisite = {
+			focus = KRS_anti_corruption_inspection_group
+		}
+
+		x = 0
+		y = 3
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#查抄腐败贵族
+	focus = {
+		id = KRS_confisticate_corrupted_nobles
+		icon = GFX_focus_KRS_confisticate_corrupted_nobles
+		cost = 1
+		prerequisite = {
+			focus = KRS_anti_corruption_inspection_group
+		}
+
+		x = 2
+		y = 3
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#鼓励廉政
+	focus = {
+		id = KRS_encourage_honesty
+		icon = GFX_focus_KRS_encourage_honesty
+		cost = 1
+		prerequisite = {
+			focus = KRS_civil_servant_property_report
+		}
+		prerequisite = {
+			focus = KRS_confisticate_corrupted_nobles
+		}
+
+		x = 0
+		y = 4
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#取之于民，用之于民
+	focus = {
+		id = KRS_take_from_and_use_upon_people
+		icon = GFX_focus_KRS_take_from_and_use_upon_people
+		cost = 1
+		prerequisite = {
+			focus = KRS_civil_servant_property_report
+		}
+		prerequisite = {
+			focus = KRS_confisticate_corrupted_nobles
+		}
+
+		x = 2
+		y = 4
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#永远清廉
+	focus = {
+		id = KRS_always_honest
+		icon = GFX_focus_KRS_always_honest
+		cost = 1
+		prerequisite = {
+			focus = KRS_reopen_intelligence_system
+		}
+		prerequisite = {
+			focus = KRS_encourage_honesty
+		}
+		prerequisite = {
+			focus = KRS_take_from_and_use_upon_people
+		}
+
+		x = 0
+		y = 5
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#仓储盘点
+	focus = {
+		id = KRS_take_stock
+		icon = GFX_focus_KRS_take_stock
+		cost = 1
+		prerequisite = {
+			focus = KRS_stuttering_start
+		}
+
+		x = 8
+		y = 1
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#调查火灾
+	focus = {
+		id = KRS_investigate_the_fire
+		icon = GFX_focus_KRS_investigate_the_fire
+		cost = 1
+		prerequisite = {
+			focus = KRS_take_stock
+		}
+
+		x = 6
+		y = 2
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#伐林垦地
+	focus = {
+		id = KRS_chopping_woods_for_land
+		icon = GFX_focus_KRS_chopping_woods_for_land
+		cost = 1
+		prerequisite = {
+			focus = KRS_investigate_the_fire
+		}
+
+		x = 4
+		y = 3
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#雇佣农业工人
+	focus = {
+		id = KRS_hire_agricultural_workers
+		icon = GFX_focus_KRS_hire_agricultural_workers
+		cost = 1
+		prerequisite = {
+			focus = KRS_chopping_woods_for_land
+		}
+
+		x = 4
+		y = 4
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#并购谈判
+	focus = {
+		id = KRS_merger_negotiation
+		icon = GFX_focus_KRS_merger_negotiation
+		cost = 1
+		prerequisite = {
+			focus = KRS_investigate_the_fire
+		}
+
+		x = 8
+		y = 3
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#赎买小农土地
+	focus = {
+		id = KRS_buy_land_from_small_farmers
+		icon = GFX_focus_KRS_buy_land_from_small_farmers
+		cost = 1
+		prerequisite = {
+			focus = KRS_merger_negotiation
+		}
+
+		x = 8
+		y = 4
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#大农场
+	focus = {
+		id = KRS_big_farm
+		icon = GFX_focus_KRS_big_farm
+		cost = 1
+		prerequisite = {
+			focus = KRS_hire_agricultural_workers
+		}
+		prerequisite = {
+			focus = KRS_buy_land_from_small_farmers
+		}
+
+		x = 6
+		y = 5
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#应对新一轮抗议
+	focus = {
+		id = KRS_deal_with_new_protest
+		icon = GFX_focus_KRS_deal_with_new_protest
+		cost = 1
+		prerequisite = {
+			focus = KRS_take_stock
+		}
+
+		x = 10
+		y = 2
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#我们的贵族朋友
+	focus = {
+		id = KRS_our_noble_friends
+		icon = GFX_focus_KRS_our_noble_friends
+		cost = 1
+		prerequisite = {
+			focus = KRS_deal_with_new_protest
+		}
+
+		x = 10
+		y = 3
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#我们的外国朋友
+	focus = {
+		id = KRS_our_foreign_friends
+		icon = GFX_focus_KRS_our_foreign_friends
+		cost = 1
+		prerequisite = {
+			focus = KRS_our_noble_friends
+		}
+
+		x = 10
+		y = 5
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#最黑暗的日子已经过去
+	focus = {
+		id = KRS_darkest_days_have_passed
+		icon = GFX_focus_KRS_darkest_days_have_passed
+		cost = 1
+		prerequisite = {
+			focus = KRS_big_farm
+		}
+		prerequisite = {
+			focus = KRS_our_foreign_friends
+		}
+
+		x = 8
+		y = 6
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#噩耗传来
+	focus = {
+		id = KRS_bad_news_coming
+		icon = GFX_focus_KRS_bad_news_coming
+		cost = 1
+		prerequisite = {
+			focus = KRS_Columbian_advanced_experience
+			focus = KRS_our_own_way
+		}
+		prerequisite = {
+			focus = KRS_always_honest
+		}
+		prerequisite = {
+			focus = KRS_darkest_days_have_passed
+		}
+
+		x = 0
+		y = 7
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#我们的明天
+	focus = {
+		id = KRS_our_tomorrow
+		icon = GFX_focus_KRS_our_tomorrow
+		cost = 1
+		prerequisite = {
+			focus = KRS_bad_news_coming
+		}
+
+		x = 0
+		y = 8
+		relative_position_id = KRS_stuttering_start
+		
+		completion_reward = {
+			
+		}
+	}
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}

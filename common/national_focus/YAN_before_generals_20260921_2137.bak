@@ -1,0 +1,4690 @@
+######################
+## 大炎 国策树 · 【岁相的荒唐梦】（2026-09-21 取代旧主树） ##
+######################
+#
+# 【主题】真龙开阁，问十二位"能人异士"谁能入宰府。这是一场梦：十二个人都坐了进去。
+#         ——"我原本期待，炎国将来的盛世图景中，也有你们十二人的位置。"（辞岁行）
+#
+# 【版式】全部节点使用绝对坐标 x/y。
+#   【与岁同行】y 0..4：真龙与岁立约（根格）→ 盟书为证 → 岁片临朝 → 期限之约 → 送岁归陵；
+#                      左支 借躯入世/镇岁能源/百城千舰/千岁之利，右支 划界之约/不干民命/岁怒之防/缄口之盟
+#   军事簇   y 14..25 ：shared_focus 引用 YAN_military_shared.txt（本文件不占该区）
+#   十二相   y 27..49 ：4 列 × 3 行，每块 3 列 × 7 行，块内 Δx=2、Δy=1，块间 Δx=12、Δy=8
+#   收束带   y 51..55 ：望日之期 → 岁陵惊动 → 岁陵决战 → 八域不散 → 九州同举
+
+# 【解锁】根格「与岁同行」完成 → 置旗 yan_sui_pact → 十二相 12 个出山格的 available 打开
+#         （这就是"岁片国策树"的开关；出山格本身不写 prerequisite，避免跨 27 行的长连线）。
+# 【无互斥】十二相全部可点，任何一格都不锁其它格（"荒唐梦"的玩法口径）。
+# 【保号】YAN_Suiling_Stirring / YAN_Suiling_Decisive / YAN_Wang_replaces_Sui 三个旧 id
+#         原样保留（事件 yan_sui.10 与既有脚本按 id 触发），前置改挂本树收束带。
+# 【大BUFF】每人一枚 dynamic_modifier YAN_chc_<拼音>，数值写在变量里，三带各三档原地成长；
+#           【与岁同行】另挂 YAN_sui_pact_reign（岁片临朝，送岁归陵时撤除）。
+# 【生成器】E:/tmp/sui12/gen_dreamtree.js（改数据表重跑，勿手改产物）
+#
+######################
+
+focus_tree = {
+	id = YAN_national_focus
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = YAN
+		}
+	}
+
+	default = no
+
+	initial_show_position = {
+		x = 0
+		y = 0
+	}
+
+	shortcut = {
+		name = YAN_shortcut_dream_left
+		target = YAN_chc_zhongyue_chu
+		scroll_wheel_factor = 0.05
+	}
+
+	shortcut = {
+		name = YAN_shortcut_dream_mid
+		target = YAN_chc_pact_root
+		scroll_wheel_factor = 0.5
+	}
+
+	shortcut = {
+		name = YAN_shortcut_dream_right
+		target = YAN_chc_wang_chu
+		scroll_wheel_factor = 0.95
+	}
+
+	# YAN_chc_pact_root
+	focus = {
+		id = YAN_chc_pact_root
+		icon = GFX_focus_YAN_chc_pact_root
+		x = 0
+		y = 0
+		cost = 4
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			YAN_chc_init_vars
+			set_country_flag = yan_sui_pact
+			add_to_variable = { yan_agent_trust = 15 }
+			custom_effect_tooltip = YAN_chc_trust_u15_tt
+			add_to_variable = { yan_sui_awakening = 5 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+			add_political_power = 60
+			custom_effect_tooltip = YAN_chc_pact_root_tt
+		}
+	}
+
+	# YAN_chc_pact_letter
+	focus = {
+		id = YAN_chc_pact_letter
+		icon = GFX_focus_YAN_chc_pact_letter
+		x = 0
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_pact_root
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_war_support = 0.08
+			add_stability = -0.03
+			custom_effect_tooltip = YAN_chc_pact_letter_tt
+		}
+	}
+
+	# YAN_chc_pact_throne
+	focus = {
+		id = YAN_chc_pact_throne
+		icon = GFX_focus_YAN_chc_pact_throne
+		x = 0
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_pact_letter
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_sui_pact_reign }
+			set_variable = { YAN_sui_pact_stab_var = -0.06 }
+			set_variable = { YAN_sui_pact_war_var = 0.08 }
+			set_variable = { YAN_sui_pact_res_var = 0.05 }
+			set_variable = { YAN_sui_pact_fac_var = 0.04 }
+			add_to_variable = { yan_sui_awakening = 8 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+			custom_effect_tooltip = YAN_chc_pact_throne_tt
+		}
+	}
+
+	# YAN_chc_pact_term
+	focus = {
+		id = YAN_chc_pact_term
+		icon = GFX_focus_YAN_chc_pact_term
+		x = 0
+		y = 3
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_pact_throne
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_stability = 0.03
+			custom_effect_tooltip = YAN_chc_pact_term_tt
+		}
+	}
+
+	# YAN_chc_pact_return
+	focus = {
+		id = YAN_chc_pact_return
+		icon = GFX_focus_YAN_chc_pact_return
+		x = 0
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = YAN_chc_pact_term
+		}
+		available = {
+			date < 1105.1.1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = YAN_sui_pact_reign }
+			add_to_variable = { yan_sui_awakening = -12 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+			add_stability = 0.05
+			custom_effect_tooltip = YAN_chc_pact_return_tt
+		}
+	}
+
+	# YAN_chc_pact_body
+	focus = {
+		id = YAN_chc_pact_body
+		icon = GFX_focus_YAN_chc_pact_body
+		x = -2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_pact_root
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+		}
+	}
+
+	# YAN_chc_pact_energy
+	focus = {
+		id = YAN_chc_pact_energy
+		icon = GFX_focus_YAN_chc_pact_energy
+		x = -4
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_pact_body
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_to_variable = { YAN_sui_pact_fac_var = 0.06 }
+			custom_effect_tooltip = YAN_chc_pact_energy_tt
+		}
+	}
+
+	# YAN_chc_pact_cities
+	focus = {
+		id = YAN_chc_pact_cities
+		icon = GFX_focus_YAN_chc_pact_cities
+		x = -6
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_pact_energy
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_to_variable = { YAN_sui_pact_fac_var = 0.06 }
+			add_to_variable = { YAN_sui_pact_war_var = 0.05 }
+			custom_effect_tooltip = YAN_chc_pact_cities_tt
+		}
+	}
+
+	# YAN_chc_pact_interest
+	focus = {
+		id = YAN_chc_pact_interest
+		icon = GFX_focus_YAN_chc_pact_interest
+		x = -8
+		y = 4
+		cost = 4
+		prerequisite = {
+			focus = YAN_chc_pact_cities
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_to_variable = { YAN_sui_pact_res_var = 0.06 }
+			add_political_power = 40
+			custom_effect_tooltip = YAN_chc_pact_interest_tt
+		}
+	}
+
+	# YAN_chc_pact_line
+	focus = {
+		id = YAN_chc_pact_line
+		icon = GFX_focus_YAN_chc_pact_line
+		x = 2
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_pact_root
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_stability = 0.04
+			custom_effect_tooltip = YAN_chc_pact_line_tt
+		}
+	}
+
+	# YAN_chc_pact_people
+	focus = {
+		id = YAN_chc_pact_people
+		icon = GFX_focus_YAN_chc_pact_people
+		x = 4
+		y = 2
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_pact_line
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_stability = 0.04
+			custom_effect_tooltip = YAN_chc_pact_people_tt
+		}
+	}
+
+	# YAN_chc_pact_guard
+	focus = {
+		id = YAN_chc_pact_guard
+		icon = GFX_focus_YAN_chc_pact_guard
+		x = 6
+		y = 3
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_pact_people
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_awakening = -5 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+			custom_effect_tooltip = YAN_chc_pact_guard_tt
+		}
+	}
+
+	# YAN_chc_pact_seal
+	focus = {
+		id = YAN_chc_pact_seal
+		icon = GFX_focus_YAN_chc_pact_seal
+		x = 8
+		y = 4
+		cost = 4
+		prerequisite = {
+			focus = YAN_chc_pact_guard
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			custom_effect_tooltip = YAN_chc_pact_seal_tt
+		}
+	}
+
+	# YAN_chc_zhongyue_chu
+	focus = {
+		id = YAN_chc_zhongyue_chu
+		icon = GFX_focus_YAN_chc_zhongyue_chu
+		x = -18
+		y = 27
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_zhongyue }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_zhongyue_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_zhongyue_zb
+	focus = {
+		id = YAN_chc_zhongyue_zb
+		icon = GFX_focus_YAN_chc_zhongyue_zb
+		x = -20
+		y = 28
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_zhongyue_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_zhongyue_sw
+	focus = {
+		id = YAN_chc_zhongyue_sw
+		icon = GFX_focus_YAN_chc_zhongyue_sw
+		x = -16
+		y = 28
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_zhongyue_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_zhongyue_a1
+	focus = {
+		id = YAN_chc_zhongyue_a1
+		icon = GFX_focus_YAN_chc_zhongyue_a1
+		x = -20
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_zhongyue_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_zhongyue_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_zhongyue_a2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_zhongyue_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_zhongyue_a2
+	focus = {
+		id = YAN_chc_zhongyue_a2
+		icon = GFX_focus_YAN_chc_zhongyue_a2
+		x = -20
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_zhongyue_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_zhongyue_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_zhongyue_a2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_zhongyue_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_zhongyue_a3
+	focus = {
+		id = YAN_chc_zhongyue_a3
+		icon = GFX_focus_YAN_chc_zhongyue_a3
+		x = -20
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_zhongyue_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_zhongyue_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_zhongyue_a2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_zhongyue_a_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_zhongyue_b1
+	focus = {
+		id = YAN_chc_zhongyue_b1
+		icon = GFX_focus_YAN_chc_zhongyue_b1
+		x = -18
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_zhongyue_zb
+			focus = YAN_chc_zhongyue_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_zhongyue_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_zhongyue_b2_var value = -0.03 }
+			custom_effect_tooltip = YAN_chc_zhongyue_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_zhongyue_b2
+	focus = {
+		id = YAN_chc_zhongyue_b2
+		icon = GFX_focus_YAN_chc_zhongyue_b2
+		x = -18
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_zhongyue_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_zhongyue_b1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_zhongyue_b2_var value = -0.05 }
+			custom_effect_tooltip = YAN_chc_zhongyue_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_zhongyue_b3
+	focus = {
+		id = YAN_chc_zhongyue_b3
+		icon = GFX_focus_YAN_chc_zhongyue_b3
+		x = -18
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_zhongyue_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_zhongyue_b1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_zhongyue_b2_var value = -0.07 }
+			custom_effect_tooltip = YAN_chc_zhongyue_b_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_zhongyue_c1
+	focus = {
+		id = YAN_chc_zhongyue_c1
+		icon = GFX_focus_YAN_chc_zhongyue_c1
+		x = -16
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_zhongyue_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_zhongyue_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_zhongyue_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_zhongyue_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_zhongyue_c2
+	focus = {
+		id = YAN_chc_zhongyue_c2
+		icon = GFX_focus_YAN_chc_zhongyue_c2
+		x = -16
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_zhongyue_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_zhongyue_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_zhongyue_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_zhongyue_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_zhongyue_c3
+	focus = {
+		id = YAN_chc_zhongyue_c3
+		icon = GFX_focus_YAN_chc_zhongyue_c3
+		x = -16
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_zhongyue_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_zhongyue_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_zhongyue_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_zhongyue_c_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_zhongyue_cri
+	focus = {
+		id = YAN_chc_zhongyue_cri
+		icon = GFX_focus_YAN_chc_zhongyue_cri
+		x = -18
+		y = 32
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_zhongyue_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_zhongyue_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_zhongyue_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_zhongyue_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_zhongyue_a2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_zhongyue_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_zhongyue_b2_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_zhongyue_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_zhongyue_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_zhongyue_cri_tt
+		}
+	}
+
+	# YAN_chc_zhongyue_fin
+	focus = {
+		id = YAN_chc_zhongyue_fin
+		icon = GFX_focus_YAN_chc_zhongyue_fin
+		x = -18
+		y = 33
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_zhongyue_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_zhongyue_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_zhongyue_a2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_zhongyue_b1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_zhongyue_b2_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_zhongyue_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_zhongyue_c2_var value = 0.02 }
+			set_country_flag = yan_chc_zhongyue_done
+			custom_effect_tooltip = YAN_chc_zhongyue_fin_tt
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_wang_chu
+	focus = {
+		id = YAN_chc_wang_chu
+		icon = GFX_focus_YAN_chc_wang_chu
+		x = 18
+		y = 27
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_wang }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_wang_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_wang_zb
+	focus = {
+		id = YAN_chc_wang_zb
+		icon = GFX_focus_YAN_chc_wang_zb
+		x = 16
+		y = 28
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_wang_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_wang_sw
+	focus = {
+		id = YAN_chc_wang_sw
+		icon = GFX_focus_YAN_chc_wang_sw
+		x = 20
+		y = 28
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_wang_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_wang_a1
+	focus = {
+		id = YAN_chc_wang_a1
+		icon = GFX_focus_YAN_chc_wang_a1
+		x = 16
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_wang_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_wang_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_wang_a2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_wang_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_wang_a2
+	focus = {
+		id = YAN_chc_wang_a2
+		icon = GFX_focus_YAN_chc_wang_a2
+		x = 16
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_wang_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_wang_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_wang_a2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_wang_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_wang_a3
+	focus = {
+		id = YAN_chc_wang_a3
+		icon = GFX_focus_YAN_chc_wang_a3
+		x = 16
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_wang_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_wang_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_wang_a2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_wang_a_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_wang_b1
+	focus = {
+		id = YAN_chc_wang_b1
+		icon = GFX_focus_YAN_chc_wang_b1
+		x = 18
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_wang_zb
+			focus = YAN_chc_wang_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_wang_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_wang_b2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_wang_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_wang_b2
+	focus = {
+		id = YAN_chc_wang_b2
+		icon = GFX_focus_YAN_chc_wang_b2
+		x = 18
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_wang_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_wang_b1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_wang_b2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_wang_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_wang_b3
+	focus = {
+		id = YAN_chc_wang_b3
+		icon = GFX_focus_YAN_chc_wang_b3
+		x = 18
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_wang_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_wang_b1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_wang_b2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_wang_b_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_wang_c1
+	focus = {
+		id = YAN_chc_wang_c1
+		icon = GFX_focus_YAN_chc_wang_c1
+		x = 20
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_wang_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_wang_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_wang_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_wang_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_wang_c2
+	focus = {
+		id = YAN_chc_wang_c2
+		icon = GFX_focus_YAN_chc_wang_c2
+		x = 20
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_wang_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_wang_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_wang_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_wang_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_wang_c3
+	focus = {
+		id = YAN_chc_wang_c3
+		icon = GFX_focus_YAN_chc_wang_c3
+		x = 20
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_wang_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_wang_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_wang_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_wang_c_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_wang_cri
+	focus = {
+		id = YAN_chc_wang_cri
+		icon = GFX_focus_YAN_chc_wang_cri
+		x = 18
+		y = 32
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_wang_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_wang_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_wang_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_wang_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_wang_a2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_wang_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_wang_b2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_wang_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_wang_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_wang_cri_tt
+		}
+	}
+
+	# YAN_chc_wang_fin
+	focus = {
+		id = YAN_chc_wang_fin
+		icon = GFX_focus_YAN_chc_wang_fin
+		x = 18
+		y = 33
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_wang_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_wang_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_wang_a2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_wang_b1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_wang_b2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_wang_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_wang_c2_var value = 0.02 }
+			set_country_flag = yan_chc_wang_done
+			custom_effect_tooltip = YAN_chc_wang_fin_tt
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_ling_chu
+	focus = {
+		id = YAN_chc_ling_chu
+		icon = GFX_focus_YAN_chc_ling_chu
+		x = -6
+		y = 27
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_ling }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_ling_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_ling_zb
+	focus = {
+		id = YAN_chc_ling_zb
+		icon = GFX_focus_YAN_chc_ling_zb
+		x = -8
+		y = 28
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_ling_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_ling_sw
+	focus = {
+		id = YAN_chc_ling_sw
+		icon = GFX_focus_YAN_chc_ling_sw
+		x = -4
+		y = 28
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_ling_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_ling_a1
+	focus = {
+		id = YAN_chc_ling_a1
+		icon = GFX_focus_YAN_chc_ling_a1
+		x = -8
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ling_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ling_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ling_a2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_ling_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_ling_a2
+	focus = {
+		id = YAN_chc_ling_a2
+		icon = GFX_focus_YAN_chc_ling_a2
+		x = -8
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ling_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ling_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_ling_a2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_ling_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_ling_a3
+	focus = {
+		id = YAN_chc_ling_a3
+		icon = GFX_focus_YAN_chc_ling_a3
+		x = -8
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_ling_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ling_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_ling_a2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_ling_a_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_ling_b1
+	focus = {
+		id = YAN_chc_ling_b1
+		icon = GFX_focus_YAN_chc_ling_b1
+		x = -6
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ling_zb
+			focus = YAN_chc_ling_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ling_b1_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_ling_b2_var value = -0.03 }
+			custom_effect_tooltip = YAN_chc_ling_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_ling_b2
+	focus = {
+		id = YAN_chc_ling_b2
+		icon = GFX_focus_YAN_chc_ling_b2
+		x = -6
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ling_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ling_b1_var value = -0.05 }
+			add_to_variable = { var = YAN_chc_ling_b2_var value = -0.05 }
+			custom_effect_tooltip = YAN_chc_ling_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_ling_b3
+	focus = {
+		id = YAN_chc_ling_b3
+		icon = GFX_focus_YAN_chc_ling_b3
+		x = -6
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_ling_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ling_b1_var value = -0.07 }
+			add_to_variable = { var = YAN_chc_ling_b2_var value = -0.07 }
+			custom_effect_tooltip = YAN_chc_ling_b_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_ling_c1
+	focus = {
+		id = YAN_chc_ling_c1
+		icon = GFX_focus_YAN_chc_ling_c1
+		x = -4
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ling_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ling_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ling_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_ling_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_ling_c2
+	focus = {
+		id = YAN_chc_ling_c2
+		icon = GFX_focus_YAN_chc_ling_c2
+		x = -4
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ling_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ling_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_ling_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_ling_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_ling_c3
+	focus = {
+		id = YAN_chc_ling_c3
+		icon = GFX_focus_YAN_chc_ling_c3
+		x = -4
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_ling_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ling_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_ling_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_ling_c_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_ling_cri
+	focus = {
+		id = YAN_chc_ling_cri
+		icon = GFX_focus_YAN_chc_ling_cri
+		x = -6
+		y = 32
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_ling_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_ling_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_ling_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_ling_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ling_a2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ling_b1_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_ling_b2_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_ling_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ling_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_ling_cri_tt
+		}
+	}
+
+	# YAN_chc_ling_fin
+	focus = {
+		id = YAN_chc_ling_fin
+		icon = GFX_focus_YAN_chc_ling_fin
+		x = -6
+		y = 33
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_ling_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_ling_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_ling_a2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_ling_b1_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_ling_b2_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_ling_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_ling_c2_var value = 0.02 }
+			set_country_flag = yan_chc_ling_done
+			custom_effect_tooltip = YAN_chc_ling_fin_tt
+		}
+	}
+
+	# YAN_chc_jun_chu
+	focus = {
+		id = YAN_chc_jun_chu
+		icon = GFX_focus_YAN_chc_jun_chu
+		x = 18
+		y = 35
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_jun }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_jun_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_jun_zb
+	focus = {
+		id = YAN_chc_jun_zb
+		icon = GFX_focus_YAN_chc_jun_zb
+		x = 16
+		y = 36
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_jun_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_jun_sw
+	focus = {
+		id = YAN_chc_jun_sw
+		icon = GFX_focus_YAN_chc_jun_sw
+		x = 20
+		y = 36
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_jun_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_jun_a1
+	focus = {
+		id = YAN_chc_jun_a1
+		icon = GFX_focus_YAN_chc_jun_a1
+		x = 16
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jun_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jun_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jun_a2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_jun_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_jun_a2
+	focus = {
+		id = YAN_chc_jun_a2
+		icon = GFX_focus_YAN_chc_jun_a2
+		x = 16
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jun_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jun_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_jun_a2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_jun_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_jun_a3
+	focus = {
+		id = YAN_chc_jun_a3
+		icon = GFX_focus_YAN_chc_jun_a3
+		x = 16
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_jun_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jun_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_jun_a2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_jun_a_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_jun_b1
+	focus = {
+		id = YAN_chc_jun_b1
+		icon = GFX_focus_YAN_chc_jun_b1
+		x = 18
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jun_zb
+			focus = YAN_chc_jun_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jun_b1_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_jun_b2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_jun_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_jun_b2
+	focus = {
+		id = YAN_chc_jun_b2
+		icon = GFX_focus_YAN_chc_jun_b2
+		x = 18
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jun_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jun_b1_var value = -0.05 }
+			add_to_variable = { var = YAN_chc_jun_b2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_jun_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_jun_b3
+	focus = {
+		id = YAN_chc_jun_b3
+		icon = GFX_focus_YAN_chc_jun_b3
+		x = 18
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_jun_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jun_b1_var value = -0.07 }
+			add_to_variable = { var = YAN_chc_jun_b2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_jun_b_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_jun_c1
+	focus = {
+		id = YAN_chc_jun_c1
+		icon = GFX_focus_YAN_chc_jun_c1
+		x = 20
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jun_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jun_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jun_c2_var value = -0.03 }
+			custom_effect_tooltip = YAN_chc_jun_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_jun_c2
+	focus = {
+		id = YAN_chc_jun_c2
+		icon = GFX_focus_YAN_chc_jun_c2
+		x = 20
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jun_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jun_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_jun_c2_var value = -0.05 }
+			custom_effect_tooltip = YAN_chc_jun_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_jun_c3
+	focus = {
+		id = YAN_chc_jun_c3
+		icon = GFX_focus_YAN_chc_jun_c3
+		x = 20
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_jun_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jun_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_jun_c2_var value = -0.07 }
+			custom_effect_tooltip = YAN_chc_jun_c_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_jun_cri
+	focus = {
+		id = YAN_chc_jun_cri
+		icon = GFX_focus_YAN_chc_jun_cri
+		x = 18
+		y = 40
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_jun_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_jun_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_jun_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_jun_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jun_a2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jun_b1_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_jun_b2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jun_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jun_c2_var value = -0.03 }
+			custom_effect_tooltip = YAN_chc_jun_cri_tt
+		}
+	}
+
+	# YAN_chc_jun_fin
+	focus = {
+		id = YAN_chc_jun_fin
+		icon = GFX_focus_YAN_chc_jun_fin
+		x = 18
+		y = 41
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_jun_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_jun_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_jun_a2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_jun_b1_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_jun_b2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_jun_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_jun_c2_var value = -0.02 }
+			set_country_flag = yan_chc_jun_done
+			custom_effect_tooltip = YAN_chc_jun_fin_tt
+		}
+	}
+
+	# YAN_chc_jie_chu
+	focus = {
+		id = YAN_chc_jie_chu
+		icon = GFX_focus_YAN_chc_jie_chu
+		x = 18
+		y = 43
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_jie }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_jie_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_jie_zb
+	focus = {
+		id = YAN_chc_jie_zb
+		icon = GFX_focus_YAN_chc_jie_zb
+		x = 16
+		y = 44
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_jie_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_jie_sw
+	focus = {
+		id = YAN_chc_jie_sw
+		icon = GFX_focus_YAN_chc_jie_sw
+		x = 20
+		y = 44
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_jie_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_jie_a1
+	focus = {
+		id = YAN_chc_jie_a1
+		icon = GFX_focus_YAN_chc_jie_a1
+		x = 16
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jie_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jie_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jie_a2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_jie_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_jie_a2
+	focus = {
+		id = YAN_chc_jie_a2
+		icon = GFX_focus_YAN_chc_jie_a2
+		x = 16
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jie_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jie_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_jie_a2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_jie_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_jie_a3
+	focus = {
+		id = YAN_chc_jie_a3
+		icon = GFX_focus_YAN_chc_jie_a3
+		x = 16
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_jie_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jie_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_jie_a2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_jie_a_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_jie_b1
+	focus = {
+		id = YAN_chc_jie_b1
+		icon = GFX_focus_YAN_chc_jie_b1
+		x = 18
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jie_zb
+			focus = YAN_chc_jie_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jie_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jie_b2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_jie_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_jie_b2
+	focus = {
+		id = YAN_chc_jie_b2
+		icon = GFX_focus_YAN_chc_jie_b2
+		x = 18
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jie_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jie_b1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_jie_b2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_jie_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_jie_b3
+	focus = {
+		id = YAN_chc_jie_b3
+		icon = GFX_focus_YAN_chc_jie_b3
+		x = 18
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_jie_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jie_b1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_jie_b2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_jie_b_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_jie_c1
+	focus = {
+		id = YAN_chc_jie_c1
+		icon = GFX_focus_YAN_chc_jie_c1
+		x = 20
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jie_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jie_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jie_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_jie_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_jie_c2
+	focus = {
+		id = YAN_chc_jie_c2
+		icon = GFX_focus_YAN_chc_jie_c2
+		x = 20
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_jie_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jie_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_jie_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_jie_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_jie_c3
+	focus = {
+		id = YAN_chc_jie_c3
+		icon = GFX_focus_YAN_chc_jie_c3
+		x = 20
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_jie_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_jie_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_jie_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_jie_c_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_jie_cri
+	focus = {
+		id = YAN_chc_jie_cri
+		icon = GFX_focus_YAN_chc_jie_cri
+		x = 18
+		y = 48
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_jie_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_jie_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_jie_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_jie_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jie_a2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jie_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jie_b2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jie_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_jie_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_jie_cri_tt
+		}
+	}
+
+	# YAN_chc_jie_fin
+	focus = {
+		id = YAN_chc_jie_fin
+		icon = GFX_focus_YAN_chc_jie_fin
+		x = 18
+		y = 49
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_jie_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_jie_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_jie_a2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_jie_b1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_jie_b2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_jie_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_jie_c2_var value = 0.02 }
+			set_country_flag = yan_chc_jie_done
+			custom_effect_tooltip = YAN_chc_jie_fin_tt
+		}
+	}
+
+	# YAN_chc_shu_chu
+	focus = {
+		id = YAN_chc_shu_chu
+		icon = GFX_focus_YAN_chc_shu_chu
+		x = 6
+		y = 27
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_shu }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_shu_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_shu_zb
+	focus = {
+		id = YAN_chc_shu_zb
+		icon = GFX_focus_YAN_chc_shu_zb
+		x = 4
+		y = 28
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_shu_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_shu_sw
+	focus = {
+		id = YAN_chc_shu_sw
+		icon = GFX_focus_YAN_chc_shu_sw
+		x = 8
+		y = 28
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_shu_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_shu_a1
+	focus = {
+		id = YAN_chc_shu_a1
+		icon = GFX_focus_YAN_chc_shu_a1
+		x = 4
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_shu_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_shu_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_shu_a2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_shu_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_shu_a2
+	focus = {
+		id = YAN_chc_shu_a2
+		icon = GFX_focus_YAN_chc_shu_a2
+		x = 4
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_shu_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_shu_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_shu_a2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_shu_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_shu_a3
+	focus = {
+		id = YAN_chc_shu_a3
+		icon = GFX_focus_YAN_chc_shu_a3
+		x = 4
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_shu_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_shu_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_shu_a2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_shu_a_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_shu_b1
+	focus = {
+		id = YAN_chc_shu_b1
+		icon = GFX_focus_YAN_chc_shu_b1
+		x = 6
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_shu_zb
+			focus = YAN_chc_shu_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_shu_b1_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_shu_b2_var value = -0.03 }
+			custom_effect_tooltip = YAN_chc_shu_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_shu_b2
+	focus = {
+		id = YAN_chc_shu_b2
+		icon = GFX_focus_YAN_chc_shu_b2
+		x = 6
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_shu_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_shu_b1_var value = -0.05 }
+			add_to_variable = { var = YAN_chc_shu_b2_var value = -0.05 }
+			custom_effect_tooltip = YAN_chc_shu_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_shu_b3
+	focus = {
+		id = YAN_chc_shu_b3
+		icon = GFX_focus_YAN_chc_shu_b3
+		x = 6
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_shu_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_shu_b1_var value = -0.07 }
+			add_to_variable = { var = YAN_chc_shu_b2_var value = -0.07 }
+			custom_effect_tooltip = YAN_chc_shu_b_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_shu_c1
+	focus = {
+		id = YAN_chc_shu_c1
+		icon = GFX_focus_YAN_chc_shu_c1
+		x = 8
+		y = 29
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_shu_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_shu_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_shu_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_shu_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_shu_c2
+	focus = {
+		id = YAN_chc_shu_c2
+		icon = GFX_focus_YAN_chc_shu_c2
+		x = 8
+		y = 30
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_shu_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_shu_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_shu_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_shu_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_shu_c3
+	focus = {
+		id = YAN_chc_shu_c3
+		icon = GFX_focus_YAN_chc_shu_c3
+		x = 8
+		y = 31
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_shu_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_shu_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_shu_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_shu_c_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_shu_cri
+	focus = {
+		id = YAN_chc_shu_cri
+		icon = GFX_focus_YAN_chc_shu_cri
+		x = 6
+		y = 32
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_shu_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_shu_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_shu_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_shu_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_shu_a2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_shu_b1_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_shu_b2_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_shu_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_shu_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_shu_cri_tt
+		}
+	}
+
+	# YAN_chc_shu_fin
+	focus = {
+		id = YAN_chc_shu_fin
+		icon = GFX_focus_YAN_chc_shu_fin
+		x = 6
+		y = 33
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_shu_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_shu_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_shu_a2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_shu_b1_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_shu_b2_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_shu_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_shu_c2_var value = 0.02 }
+			set_country_flag = yan_chc_shu_done
+			custom_effect_tooltip = YAN_chc_shu_fin_tt
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_ji_chu
+	focus = {
+		id = YAN_chc_ji_chu
+		icon = GFX_focus_YAN_chc_ji_chu
+		x = 6
+		y = 35
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_ji }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_ji_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_ji_zb
+	focus = {
+		id = YAN_chc_ji_zb
+		icon = GFX_focus_YAN_chc_ji_zb
+		x = 4
+		y = 36
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_ji_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_ji_sw
+	focus = {
+		id = YAN_chc_ji_sw
+		icon = GFX_focus_YAN_chc_ji_sw
+		x = 8
+		y = 36
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_ji_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_ji_a1
+	focus = {
+		id = YAN_chc_ji_a1
+		icon = GFX_focus_YAN_chc_ji_a1
+		x = 4
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ji_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ji_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ji_a2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_ji_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_ji_a2
+	focus = {
+		id = YAN_chc_ji_a2
+		icon = GFX_focus_YAN_chc_ji_a2
+		x = 4
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ji_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ji_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_ji_a2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_ji_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_ji_a3
+	focus = {
+		id = YAN_chc_ji_a3
+		icon = GFX_focus_YAN_chc_ji_a3
+		x = 4
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_ji_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ji_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_ji_a2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_ji_a_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_ji_b1
+	focus = {
+		id = YAN_chc_ji_b1
+		icon = GFX_focus_YAN_chc_ji_b1
+		x = 6
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ji_zb
+			focus = YAN_chc_ji_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ji_b1_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_ji_b2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_ji_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_ji_b2
+	focus = {
+		id = YAN_chc_ji_b2
+		icon = GFX_focus_YAN_chc_ji_b2
+		x = 6
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ji_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ji_b1_var value = -0.05 }
+			add_to_variable = { var = YAN_chc_ji_b2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_ji_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_ji_b3
+	focus = {
+		id = YAN_chc_ji_b3
+		icon = GFX_focus_YAN_chc_ji_b3
+		x = 6
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_ji_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ji_b1_var value = -0.07 }
+			add_to_variable = { var = YAN_chc_ji_b2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_ji_b_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_ji_c1
+	focus = {
+		id = YAN_chc_ji_c1
+		icon = GFX_focus_YAN_chc_ji_c1
+		x = 8
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ji_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ji_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ji_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_ji_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_ji_c2
+	focus = {
+		id = YAN_chc_ji_c2
+		icon = GFX_focus_YAN_chc_ji_c2
+		x = 8
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_ji_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ji_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_ji_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_ji_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_ji_c3
+	focus = {
+		id = YAN_chc_ji_c3
+		icon = GFX_focus_YAN_chc_ji_c3
+		x = 8
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_ji_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_ji_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_ji_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_ji_c_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_ji_cri
+	focus = {
+		id = YAN_chc_ji_cri
+		icon = GFX_focus_YAN_chc_ji_cri
+		x = 6
+		y = 40
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_ji_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_ji_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_ji_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_ji_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ji_a2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ji_b1_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_ji_b2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ji_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_ji_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_ji_cri_tt
+		}
+	}
+
+	# YAN_chc_ji_fin
+	focus = {
+		id = YAN_chc_ji_fin
+		icon = GFX_focus_YAN_chc_ji_fin
+		x = 6
+		y = 41
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_ji_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_ji_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_ji_a2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_ji_b1_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_ji_b2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_ji_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_ji_c2_var value = 0.02 }
+			set_country_flag = yan_chc_ji_done
+			custom_effect_tooltip = YAN_chc_ji_fin_tt
+		}
+	}
+
+	# YAN_chc_yi_chu
+	focus = {
+		id = YAN_chc_yi_chu
+		icon = GFX_focus_YAN_chc_yi_chu
+		x = -18
+		y = 35
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_yi }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_yi_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_yi_zb
+	focus = {
+		id = YAN_chc_yi_zb
+		icon = GFX_focus_YAN_chc_yi_zb
+		x = -20
+		y = 36
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_yi_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_yi_sw
+	focus = {
+		id = YAN_chc_yi_sw
+		icon = GFX_focus_YAN_chc_yi_sw
+		x = -16
+		y = 36
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_yi_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_yi_a1
+	focus = {
+		id = YAN_chc_yi_a1
+		icon = GFX_focus_YAN_chc_yi_a1
+		x = -20
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yi_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yi_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yi_a2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_yi_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_yi_a2
+	focus = {
+		id = YAN_chc_yi_a2
+		icon = GFX_focus_YAN_chc_yi_a2
+		x = -20
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yi_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yi_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_yi_a2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_yi_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_yi_a3
+	focus = {
+		id = YAN_chc_yi_a3
+		icon = GFX_focus_YAN_chc_yi_a3
+		x = -20
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_yi_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yi_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_yi_a2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_yi_a_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_yi_b1
+	focus = {
+		id = YAN_chc_yi_b1
+		icon = GFX_focus_YAN_chc_yi_b1
+		x = -18
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yi_zb
+			focus = YAN_chc_yi_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yi_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yi_b2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_yi_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_yi_b2
+	focus = {
+		id = YAN_chc_yi_b2
+		icon = GFX_focus_YAN_chc_yi_b2
+		x = -18
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yi_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yi_b1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_yi_b2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_yi_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_yi_b3
+	focus = {
+		id = YAN_chc_yi_b3
+		icon = GFX_focus_YAN_chc_yi_b3
+		x = -18
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_yi_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yi_b1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_yi_b2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_yi_b_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_yi_c1
+	focus = {
+		id = YAN_chc_yi_c1
+		icon = GFX_focus_YAN_chc_yi_c1
+		x = -16
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yi_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yi_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yi_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_yi_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_yi_c2
+	focus = {
+		id = YAN_chc_yi_c2
+		icon = GFX_focus_YAN_chc_yi_c2
+		x = -16
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yi_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yi_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_yi_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_yi_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_yi_c3
+	focus = {
+		id = YAN_chc_yi_c3
+		icon = GFX_focus_YAN_chc_yi_c3
+		x = -16
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_yi_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yi_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_yi_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_yi_c_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_yi_cri
+	focus = {
+		id = YAN_chc_yi_cri
+		icon = GFX_focus_YAN_chc_yi_cri
+		x = -18
+		y = 40
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_yi_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_yi_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_yi_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_yi_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yi_a2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yi_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yi_b2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yi_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yi_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_yi_cri_tt
+		}
+	}
+
+	# YAN_chc_yi_fin
+	focus = {
+		id = YAN_chc_yi_fin
+		icon = GFX_focus_YAN_chc_yi_fin
+		x = -18
+		y = 41
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_yi_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_yi_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_yi_a2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_yi_b1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_yi_b2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_yi_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_yi_c2_var value = 0.02 }
+			set_country_flag = yan_chc_yi_done
+			custom_effect_tooltip = YAN_chc_yi_fin_tt
+		}
+	}
+
+	# YAN_chc_nian_chu
+	focus = {
+		id = YAN_chc_nian_chu
+		icon = GFX_focus_YAN_chc_nian_chu
+		x = 6
+		y = 43
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_nian }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_nian_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_nian_zb
+	focus = {
+		id = YAN_chc_nian_zb
+		icon = GFX_focus_YAN_chc_nian_zb
+		x = 4
+		y = 44
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_nian_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_nian_sw
+	focus = {
+		id = YAN_chc_nian_sw
+		icon = GFX_focus_YAN_chc_nian_sw
+		x = 8
+		y = 44
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_nian_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_nian_a1
+	focus = {
+		id = YAN_chc_nian_a1
+		icon = GFX_focus_YAN_chc_nian_a1
+		x = 4
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_nian_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_nian_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_nian_a2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_nian_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_nian_a2
+	focus = {
+		id = YAN_chc_nian_a2
+		icon = GFX_focus_YAN_chc_nian_a2
+		x = 4
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_nian_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_nian_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_nian_a2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_nian_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_nian_a3
+	focus = {
+		id = YAN_chc_nian_a3
+		icon = GFX_focus_YAN_chc_nian_a3
+		x = 4
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_nian_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_nian_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_nian_a2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_nian_a_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_nian_b1
+	focus = {
+		id = YAN_chc_nian_b1
+		icon = GFX_focus_YAN_chc_nian_b1
+		x = 6
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_nian_zb
+			focus = YAN_chc_nian_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_nian_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_nian_b2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_nian_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_nian_b2
+	focus = {
+		id = YAN_chc_nian_b2
+		icon = GFX_focus_YAN_chc_nian_b2
+		x = 6
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_nian_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_nian_b1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_nian_b2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_nian_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_nian_b3
+	focus = {
+		id = YAN_chc_nian_b3
+		icon = GFX_focus_YAN_chc_nian_b3
+		x = 6
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_nian_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_nian_b1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_nian_b2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_nian_b_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_nian_c1
+	focus = {
+		id = YAN_chc_nian_c1
+		icon = GFX_focus_YAN_chc_nian_c1
+		x = 8
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_nian_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_nian_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_nian_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_nian_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_nian_c2
+	focus = {
+		id = YAN_chc_nian_c2
+		icon = GFX_focus_YAN_chc_nian_c2
+		x = 8
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_nian_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_nian_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_nian_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_nian_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_nian_c3
+	focus = {
+		id = YAN_chc_nian_c3
+		icon = GFX_focus_YAN_chc_nian_c3
+		x = 8
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_nian_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_nian_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_nian_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_nian_c_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_nian_cri
+	focus = {
+		id = YAN_chc_nian_cri
+		icon = GFX_focus_YAN_chc_nian_cri
+		x = 6
+		y = 48
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_nian_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_nian_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_nian_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_nian_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_nian_a2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_nian_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_nian_b2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_nian_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_nian_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_nian_cri_tt
+		}
+	}
+
+	# YAN_chc_nian_fin
+	focus = {
+		id = YAN_chc_nian_fin
+		icon = GFX_focus_YAN_chc_nian_fin
+		x = 6
+		y = 49
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_nian_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_nian_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_nian_a2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_nian_b1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_nian_b2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_nian_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_nian_c2_var value = 0.02 }
+			set_country_flag = yan_chc_nian_done
+			custom_effect_tooltip = YAN_chc_nian_fin_tt
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_fang_chu
+	focus = {
+		id = YAN_chc_fang_chu
+		icon = GFX_focus_YAN_chc_fang_chu
+		x = -18
+		y = 43
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_fang }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_fang_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_fang_zb
+	focus = {
+		id = YAN_chc_fang_zb
+		icon = GFX_focus_YAN_chc_fang_zb
+		x = -20
+		y = 44
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_fang_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_fang_sw
+	focus = {
+		id = YAN_chc_fang_sw
+		icon = GFX_focus_YAN_chc_fang_sw
+		x = -16
+		y = 44
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_fang_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_fang_a1
+	focus = {
+		id = YAN_chc_fang_a1
+		icon = GFX_focus_YAN_chc_fang_a1
+		x = -20
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_fang_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_fang_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_fang_a2_var value = -0.03 }
+			custom_effect_tooltip = YAN_chc_fang_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_fang_a2
+	focus = {
+		id = YAN_chc_fang_a2
+		icon = GFX_focus_YAN_chc_fang_a2
+		x = -20
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_fang_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_fang_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_fang_a2_var value = -0.05 }
+			custom_effect_tooltip = YAN_chc_fang_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_fang_a3
+	focus = {
+		id = YAN_chc_fang_a3
+		icon = GFX_focus_YAN_chc_fang_a3
+		x = -20
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_fang_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_fang_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_fang_a2_var value = -0.07 }
+			custom_effect_tooltip = YAN_chc_fang_a_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_fang_b1
+	focus = {
+		id = YAN_chc_fang_b1
+		icon = GFX_focus_YAN_chc_fang_b1
+		x = -18
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_fang_zb
+			focus = YAN_chc_fang_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_fang_b1_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_fang_b2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_fang_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_fang_b2
+	focus = {
+		id = YAN_chc_fang_b2
+		icon = GFX_focus_YAN_chc_fang_b2
+		x = -18
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_fang_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_fang_b1_var value = -0.05 }
+			add_to_variable = { var = YAN_chc_fang_b2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_fang_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_fang_b3
+	focus = {
+		id = YAN_chc_fang_b3
+		icon = GFX_focus_YAN_chc_fang_b3
+		x = -18
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_fang_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_fang_b1_var value = -0.07 }
+			add_to_variable = { var = YAN_chc_fang_b2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_fang_b_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_fang_c1
+	focus = {
+		id = YAN_chc_fang_c1
+		icon = GFX_focus_YAN_chc_fang_c1
+		x = -16
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_fang_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_fang_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_fang_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_fang_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_fang_c2
+	focus = {
+		id = YAN_chc_fang_c2
+		icon = GFX_focus_YAN_chc_fang_c2
+		x = -16
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_fang_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_fang_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_fang_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_fang_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_fang_c3
+	focus = {
+		id = YAN_chc_fang_c3
+		icon = GFX_focus_YAN_chc_fang_c3
+		x = -16
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_fang_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_fang_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_fang_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_fang_c_p7_tt
+			add_political_power = 50
+		}
+	}
+
+	# YAN_chc_fang_cri
+	focus = {
+		id = YAN_chc_fang_cri
+		icon = GFX_focus_YAN_chc_fang_cri
+		x = -18
+		y = 48
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_fang_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_fang_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_fang_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_fang_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_fang_a2_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_fang_b1_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_fang_b2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_fang_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_fang_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_fang_cri_tt
+		}
+	}
+
+	# YAN_chc_fang_fin
+	focus = {
+		id = YAN_chc_fang_fin
+		icon = GFX_focus_YAN_chc_fang_fin
+		x = -18
+		y = 49
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_fang_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_fang_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_fang_a2_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_fang_b1_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_fang_b2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_fang_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_fang_c2_var value = 0.02 }
+			set_country_flag = yan_chc_fang_done
+			custom_effect_tooltip = YAN_chc_fang_fin_tt
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_xi_chu
+	focus = {
+		id = YAN_chc_xi_chu
+		icon = GFX_focus_YAN_chc_xi_chu
+		x = -6
+		y = 35
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_xi }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_xi_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_xi_zb
+	focus = {
+		id = YAN_chc_xi_zb
+		icon = GFX_focus_YAN_chc_xi_zb
+		x = -8
+		y = 36
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_xi_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_xi_sw
+	focus = {
+		id = YAN_chc_xi_sw
+		icon = GFX_focus_YAN_chc_xi_sw
+		x = -4
+		y = 36
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_xi_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_xi_a1
+	focus = {
+		id = YAN_chc_xi_a1
+		icon = GFX_focus_YAN_chc_xi_a1
+		x = -8
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_xi_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_xi_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_xi_a2_var value = -0.03 }
+			custom_effect_tooltip = YAN_chc_xi_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_xi_a2
+	focus = {
+		id = YAN_chc_xi_a2
+		icon = GFX_focus_YAN_chc_xi_a2
+		x = -8
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_xi_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_xi_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_xi_a2_var value = -0.05 }
+			custom_effect_tooltip = YAN_chc_xi_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_xi_a3
+	focus = {
+		id = YAN_chc_xi_a3
+		icon = GFX_focus_YAN_chc_xi_a3
+		x = -8
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_xi_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_xi_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_xi_a2_var value = -0.07 }
+			custom_effect_tooltip = YAN_chc_xi_a_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_xi_b1
+	focus = {
+		id = YAN_chc_xi_b1
+		icon = GFX_focus_YAN_chc_xi_b1
+		x = -6
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_xi_zb
+			focus = YAN_chc_xi_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_xi_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_xi_b2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_xi_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_xi_b2
+	focus = {
+		id = YAN_chc_xi_b2
+		icon = GFX_focus_YAN_chc_xi_b2
+		x = -6
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_xi_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_xi_b1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_xi_b2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_xi_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_xi_b3
+	focus = {
+		id = YAN_chc_xi_b3
+		icon = GFX_focus_YAN_chc_xi_b3
+		x = -6
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_xi_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_xi_b1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_xi_b2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_xi_b_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_xi_c1
+	focus = {
+		id = YAN_chc_xi_c1
+		icon = GFX_focus_YAN_chc_xi_c1
+		x = -4
+		y = 37
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_xi_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_xi_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_xi_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_xi_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_xi_c2
+	focus = {
+		id = YAN_chc_xi_c2
+		icon = GFX_focus_YAN_chc_xi_c2
+		x = -4
+		y = 38
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_xi_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_xi_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_xi_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_xi_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_xi_c3
+	focus = {
+		id = YAN_chc_xi_c3
+		icon = GFX_focus_YAN_chc_xi_c3
+		x = -4
+		y = 39
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_xi_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_xi_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_xi_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_xi_c_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_xi_cri
+	focus = {
+		id = YAN_chc_xi_cri
+		icon = GFX_focus_YAN_chc_xi_cri
+		x = -6
+		y = 40
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_xi_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_xi_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_xi_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_xi_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_xi_a2_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_xi_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_xi_b2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_xi_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_xi_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_xi_cri_tt
+		}
+	}
+
+	# YAN_chc_xi_fin
+	focus = {
+		id = YAN_chc_xi_fin
+		icon = GFX_focus_YAN_chc_xi_fin
+		x = -6
+		y = 41
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_xi_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_xi_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_xi_a2_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_xi_b1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_xi_b2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_xi_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_xi_c2_var value = 0.02 }
+			set_country_flag = yan_chc_xi_done
+			custom_effect_tooltip = YAN_chc_xi_fin_tt
+			add_to_variable = { yan_sui_awakening = 1 }
+			custom_effect_tooltip = YAN_chc_awake_p1_tt
+		}
+	}
+
+	# YAN_chc_yu_chu
+	focus = {
+		id = YAN_chc_yu_chu
+		icon = GFX_focus_YAN_chc_yu_chu
+		x = -6
+		y = 43
+		cost = 3
+		available = {
+			has_country_flag = yan_sui_pact
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_yu }
+			add_to_variable = { yan_agent_trust = 5 }
+			custom_effect_tooltip = YAN_chc_trust_u5_tt
+			set_country_flag = yan_chc_yu_ok
+			add_political_power = 40
+		}
+	}
+
+	# YAN_chc_yu_zb
+	focus = {
+		id = YAN_chc_yu_zb
+		icon = GFX_focus_YAN_chc_yu_zb
+		x = -8
+		y = 44
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_yu_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_yu_sw
+	focus = {
+		id = YAN_chc_yu_sw
+		icon = GFX_focus_YAN_chc_yu_sw
+		x = -4
+		y = 44
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_yu_chu
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 20
+		}
+	}
+
+	# YAN_chc_yu_a1
+	focus = {
+		id = YAN_chc_yu_a1
+		icon = GFX_focus_YAN_chc_yu_a1
+		x = -8
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yu_zb
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yu_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yu_a2_var value = -0.03 }
+			custom_effect_tooltip = YAN_chc_yu_a_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_yu_a2
+	focus = {
+		id = YAN_chc_yu_a2
+		icon = GFX_focus_YAN_chc_yu_a2
+		x = -8
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yu_a1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yu_a1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_yu_a2_var value = -0.05 }
+			custom_effect_tooltip = YAN_chc_yu_a_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_yu_a3
+	focus = {
+		id = YAN_chc_yu_a3
+		icon = GFX_focus_YAN_chc_yu_a3
+		x = -8
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_yu_a2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yu_a1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_yu_a2_var value = -0.07 }
+			custom_effect_tooltip = YAN_chc_yu_a_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_yu_b1
+	focus = {
+		id = YAN_chc_yu_b1
+		icon = GFX_focus_YAN_chc_yu_b1
+		x = -6
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yu_zb
+			focus = YAN_chc_yu_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yu_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yu_b2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_yu_b_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_yu_b2
+	focus = {
+		id = YAN_chc_yu_b2
+		icon = GFX_focus_YAN_chc_yu_b2
+		x = -6
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yu_b1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yu_b1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_yu_b2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_yu_b_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_yu_b3
+	focus = {
+		id = YAN_chc_yu_b3
+		icon = GFX_focus_YAN_chc_yu_b3
+		x = -6
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_yu_b2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yu_b1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_yu_b2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_yu_b_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_yu_c1
+	focus = {
+		id = YAN_chc_yu_c1
+		icon = GFX_focus_YAN_chc_yu_c1
+		x = -4
+		y = 45
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yu_sw
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yu_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yu_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_yu_c_p3_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_chc_yu_c2
+	focus = {
+		id = YAN_chc_yu_c2
+		icon = GFX_focus_YAN_chc_yu_c2
+		x = -4
+		y = 46
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_yu_c1
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yu_c1_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_yu_c2_var value = 0.05 }
+			custom_effect_tooltip = YAN_chc_yu_c_p5_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_chc_yu_c3
+	focus = {
+		id = YAN_chc_yu_c3
+		icon = GFX_focus_YAN_chc_yu_c3
+		x = -4
+		y = 47
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_yu_c2
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_yu_c1_var value = 0.07 }
+			add_to_variable = { var = YAN_chc_yu_c2_var value = 0.07 }
+			custom_effect_tooltip = YAN_chc_yu_c_p7_tt
+			add_political_power = 50
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_yu_cri
+	focus = {
+		id = YAN_chc_yu_cri
+		icon = GFX_focus_YAN_chc_yu_cri
+		x = -6
+		y = 48
+		cost = 2
+		prerequisite = {
+			focus = YAN_chc_yu_a3
+		}
+		prerequisite = {
+			focus = YAN_chc_yu_b3
+		}
+		prerequisite = {
+			focus = YAN_chc_yu_c3
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 20
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = -0.02
+			add_to_variable = { var = YAN_chc_yu_a1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yu_a2_var value = -0.03 }
+			add_to_variable = { var = YAN_chc_yu_b1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yu_b2_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yu_c1_var value = 0.03 }
+			add_to_variable = { var = YAN_chc_yu_c2_var value = 0.03 }
+			custom_effect_tooltip = YAN_chc_yu_cri_tt
+		}
+	}
+
+	# YAN_chc_yu_fin
+	focus = {
+		id = YAN_chc_yu_fin
+		icon = GFX_focus_YAN_chc_yu_fin
+		x = -6
+		y = 49
+		cost = 3
+		prerequisite = {
+			focus = YAN_chc_yu_cri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 25
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			add_to_variable = { var = YAN_chc_yu_a1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_yu_a2_var value = -0.02 }
+			add_to_variable = { var = YAN_chc_yu_b1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_yu_b2_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_yu_c1_var value = 0.02 }
+			add_to_variable = { var = YAN_chc_yu_c2_var value = 0.02 }
+			set_country_flag = yan_chc_yu_done
+			custom_effect_tooltip = YAN_chc_yu_fin_tt
+			add_to_variable = { yan_sui_awakening = -1 }
+			custom_effect_tooltip = YAN_chc_awake_m1_tt
+		}
+	}
+
+	# YAN_chc_wangri
+	focus = {
+		id = YAN_chc_wangri
+		icon = GFX_focus_YAN_chc_wangri
+		x = 0
+		y = 51
+		cost = 4
+		prerequisite = {
+			focus = YAN_chc_zhongyue_fin
+			focus = YAN_chc_wang_fin
+			focus = YAN_chc_ling_fin
+			focus = YAN_chc_jun_fin
+			focus = YAN_chc_jie_fin
+			focus = YAN_chc_shu_fin
+			focus = YAN_chc_ji_fin
+			focus = YAN_chc_yi_fin
+			focus = YAN_chc_nian_fin
+			focus = YAN_chc_fang_fin
+			focus = YAN_chc_xi_fin
+			focus = YAN_chc_yu_fin
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.05
+			set_country_flag = yan_chc_all_dreams
+			custom_effect_tooltip = YAN_chc_wangri_tt
+		}
+	}
+
+	# YAN_Suiling_Stirring
+	focus = {
+		id = YAN_Suiling_Stirring
+		icon = GFX_focus_YAN_Suiling_Stirring
+		x = 0
+		y = 52
+		cost = 1
+		prerequisite = {
+			focus = YAN_chc_wangri
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_research_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_behemoth_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+			custom_effect_tooltip = YAN_route_sui_research_p5_tt
+			custom_effect_tooltip = YAN_route_sui_behemoth_p5_tt
+			set_variable = { yan_sui_awakening = 45 }
+			custom_effect_tooltip = YAN_Suiling_Stirring_tt
+		}
+	}
+
+	# YAN_Suiling_Decisive
+	focus = {
+		id = YAN_Suiling_Decisive
+		icon = GFX_focus_YAN_Suiling_Decisive
+		x = 0
+		y = 53
+		cost = 4
+		prerequisite = {
+			focus = YAN_Suiling_Stirring
+		}
+		available = {
+			OR = {
+				check_variable = { yan_sui_awakening > 79 }
+				date > 1103.1.1
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_research_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_behemoth_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_intel_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_agent_unlock_var value = 1 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+			custom_effect_tooltip = YAN_route_sui_research_p5_tt
+			custom_effect_tooltip = YAN_route_sui_behemoth_p5_tt
+			custom_effect_tooltip = YAN_route_sui_intel_p5_tt
+			custom_effect_tooltip = YAN_route_sui_agent_unlock_u1_tt
+			if = {
+				limit = { check_variable = { yan_agent_trust > 59 } }
+				add_ideas = YAN_Wang_shackles
+				add_ideas = YAN_New_sui_shadow
+				add_ideas = YAN_Sui_calamity_ended
+				custom_effect_tooltip = YAN_Suiling_Decisive_wang_tt
+			}
+			else_if = {
+				limit = { check_variable = { yan_bufan_prep > 59 } }
+				add_ideas = YAN_True_dragon_fallen
+				add_ideas = YAN_Sui_calamity_ended
+				custom_effect_tooltip = YAN_Suiling_Decisive_bufan_tt
+			}
+			else = {
+				add_ideas = YAN_Sui_disaster
+				add_ideas = YAN_Behemoths_awaken
+				custom_effect_tooltip = YAN_Suiling_Decisive_fail_tt
+			}
+			country_event = { id = yan_sui.10 }
+		}
+	}
+
+	# YAN_Wang_replaces_Sui
+	focus = {
+		id = YAN_Wang_replaces_Sui
+		icon = GFX_focus_YAN_Wang_replaces_Sui
+		x = -8
+		y = 54
+		cost = 4
+		prerequisite = {
+			focus = YAN_Suiling_Decisive
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_ideas = YAN_New_sui_shadow
+		}
+	}
+
+	# YAN_chc_crown_a
+	focus = {
+		id = YAN_chc_crown_a
+		icon = GFX_focus_YAN_chc_crown_a
+		x = 0
+		y = 54
+		cost = 4
+		prerequisite = {
+			focus = YAN_Suiling_Decisive
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_dream_crown }
+			add_to_variable = { var = YAN_chc_crown_stability_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_crown_war_support_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_crown_pp_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_crown_research_var value = 0.05 }
+			add_to_variable = { var = YAN_chc_crown_factory_var value = 0.02 }
+			custom_effect_tooltip = YAN_chc_crown_a_tt
+		}
+	}
+
+	# YAN_chc_crown_b
+	focus = {
+		id = YAN_chc_crown_b
+		icon = GFX_focus_YAN_chc_crown_b
+		x = 0
+		y = 55
+		cost = 5
+		prerequisite = {
+			focus = YAN_chc_crown_a
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 30
+		}
+
+		completion_reward = {
+			add_to_variable = { var = YAN_chc_crown_stability_var value = 0.10 }
+			add_to_variable = { var = YAN_chc_crown_war_support_var value = 0.10 }
+			add_to_variable = { var = YAN_chc_crown_pp_var value = 0.10 }
+			add_to_variable = { var = YAN_chc_crown_research_var value = 0.10 }
+			add_to_variable = { var = YAN_chc_crown_factory_var value = 0.03 }
+			add_stability = 0.10
+			add_war_support = 0.10
+			add_political_power = 150
+			set_country_flag = yan_chc_dream_done
+			custom_effect_tooltip = YAN_chc_crown_b_tt
+		}
+	}
+
+	# ==================== 军事树（共享国策簇） ====================
+	# 定义在 common/national_focus/YAN_military_shared.txt
+	# 坐标区 y = 14..25；本树内容避开该区（【与岁同行】y 0..4、十二相 y 27..49、收束带 y 51..55）。
+	# 共 40 个国策，引用行保持原样。
+	shared_focus = YAN_mil_reform_root
+	shared_focus = YAN_mil_people
+	shared_focus = YAN_mil_drill
+	shared_focus = YAN_mil_council
+	shared_focus = YAN_mil_modernization
+	shared_focus = YAN_mil_air_root
+	shared_focus = YAN_mil_air_warning
+	shared_focus = YAN_mil_air_craft
+	shared_focus = YAN_mil_air_uav
+	shared_focus = YAN_mil_air_ew
+	shared_focus = YAN_mil_air_line
+	shared_focus = YAN_mil_air_rs
+	shared_focus = YAN_mil_air_supremacy
+	shared_focus = YAN_mil_navy_root
+	shared_focus = YAN_mil_navy_capital
+	shared_focus = YAN_mil_navy_shipyard
+	shared_focus = YAN_mil_navy_marines
+	shared_focus = YAN_mil_navy_carrier
+	shared_focus = YAN_mil_navy_amphib
+	shared_focus = YAN_mil_navy_warships
+	shared_focus = YAN_mil_navy_supremacy
+	shared_focus = YAN_mil_army_root
+	shared_focus = YAN_mil_army_livefire
+	shared_focus = YAN_mil_army_armor
+	shared_focus = YAN_mil_army_artillery
+	shared_focus = YAN_mil_army_mobile
+	shared_focus = YAN_mil_army_firepower
+	shared_focus = YAN_mil_army_officers
+	shared_focus = YAN_mil_army_elite
+	shared_focus = YAN_mil_support_root
+	shared_focus = YAN_mil_support_logistics
+	shared_focus = YAN_mil_support_satellite
+	shared_focus = YAN_mil_support_digital
+	shared_focus = YAN_mil_support_units
+	shared_focus = YAN_mil_support_future
+	shared_focus = YAN_mil_support_cyber
+	shared_focus = YAN_mil_support_steadfast
+	shared_focus = YAN_mil_joint
+	shared_focus = YAN_mil_staff
+	shared_focus = YAN_mil_ascend
+
+}

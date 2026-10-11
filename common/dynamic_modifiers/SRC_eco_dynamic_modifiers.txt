@@ -1,0 +1,94 @@
+# ============================================================================
+# 叙拉古 (SRC) · 产业国策树 —— 四个成长型民族精神（动态修正）
+#
+# 机制与 SRC_federal_dynamic_modifiers.txt 同源：修正符的数值直接写成国家变量，
+#   国策用 add_to_variable 原地累加（带 icon 的国家动态修正 = 政治栏里会成长的民族精神）。
+# 挂载：国策 completion_reward 里的 add_dynamic_modifier（幂等，可反复执行）。
+# 变量前缀 SRC_ga_ / SRC_tg_ / SRC_ni_ / SRC_th_ 严格分家，且不与政治树的
+#   SRC_nm_ / SRC_cd_ / SRC_tr_ / SRC_go_ / SRC_cp_ 复用。
+#
+# 【叙拉古黄金时代】= 总起挂上的容器精神，三档成长：
+#   萌芽 = 只走完总起；发展 = 走完 1~3 条分支终点；鼎盛 = 走完终局国策。
+#   （离散换档会丢变量，所以按本项目惯例用同一个精神原地成长，档位只在文案里说。）
+#
+# 满档（经济树 23 格全部走完，不含决议）：
+#   叙拉古黄金时代 稳定度 +15% / 政治点 +15% / 建造速度 +14% / 工业产出 +23% / 船坞产能 +23% / 科研速度 +23% / 战争支持度 +8% / 消费品需求 -5% / 每厂贸易资源 +1 / 文化输出 +15%
+#   传统产业黄金时代 工业产出 +15% / 政治点 +20% / 稳定度 +24% / 消费品需求 -15% / 人口增长 +15% / 科研速度 -10% / 文化输出 +25%
+#   新沃尔西尼产业新时代 政治点 +10% / 稳定度 +15% / 建造速度 +15% / 科研速度 +15% / 船坞产能 +15% / 工业产出 +15% / 补给消耗 -12%
+#   叙拉古商业霸权 政治点 +15% / 稳定度 +15% / 战争支持度 +20% / 工业产出 +15% / 消费品需求 -10% / 每厂贸易资源 +2 / 外国资本影响 -15% / 工厂最高效率 +12%
+#   —— 四者相加：稳定度 +69%、政治点 +60%、建造速度 +29%、工业产出 +68%、消费品需求 -30%、人口增长 +15%、科研速度 +28%、文化输出 +30%、船坞产能 +38%、补给消耗 -12%、战争支持度 +28%、每厂贸易资源 +3、外国资本影响 -15%、工厂最高效率 +12%
+#   （2026-09-19 钳到 ±25%；2026-09-20 再把其中的 25% 档削到 15%，非 25% 档保持原值）
+#   改数值要同步改这段注释、SRC_tt_* 文案与 docs/SRC_经济树效果一览.md
+# ============================================================================
+
+# ---- 总起 · 叙拉古黄金时代（萌芽 → 发展 → 鼎盛）----
+SRC_dyn_golden_age = {
+	icon = GFX_idea_SRC_dyn_golden_age
+
+	enable = {
+		always = yes
+	}
+
+	stability_factor = SRC_ga_stab
+	political_power_gain = SRC_ga_pp
+	industrial_capacity_factory = SRC_ga_fac
+	industrial_capacity_dockyard = SRC_ga_dock
+	research_speed_factor = SRC_ga_res
+	production_speed_buildings_factor = SRC_ga_build
+	war_support_factor = SRC_ga_ws
+	consumer_goods_factor = SRC_ga_cons
+	resource_trade_cost_bonus_per_factory = SRC_ga_trade
+	src_culture_influence_tt = SRC_ga_culture
+}
+
+# ---- 分支一 · 传统产业的黄金时代 ----
+SRC_dyn_traditional_golden = {
+	icon = GFX_idea_SRC_dyn_traditional_golden
+
+	enable = {
+		always = yes
+	}
+
+	stability_factor = SRC_tg_stab
+	political_power_gain = SRC_tg_pp
+	industrial_capacity_factory = SRC_tg_fac
+	consumer_goods_factor = SRC_tg_cons
+	monthly_population = SRC_tg_pop
+	research_speed_factor = SRC_tg_res
+	src_culture_influence_tt = SRC_tg_culture
+}
+
+# ---- 分支二 · 新沃尔西尼产业新时代 ----
+SRC_dyn_new_industry = {
+	icon = GFX_idea_SRC_dyn_new_industry
+
+	enable = {
+		always = yes
+	}
+
+	production_speed_buildings_factor = SRC_ni_build
+	industrial_capacity_factory = SRC_ni_fac
+	industrial_capacity_dockyard = SRC_ni_dock
+	research_speed_factor = SRC_ni_res
+	stability_factor = SRC_ni_stab
+	political_power_gain = SRC_ni_pp
+	supply_consumption_factor = SRC_ni_supply
+}
+
+# ---- 分支三 · 叙拉古商业霸权 ----
+SRC_dyn_trade_hegemony = {
+	icon = GFX_idea_SRC_dyn_trade_hegemony
+
+	enable = {
+		always = yes
+	}
+
+	industrial_capacity_factory = SRC_th_fac
+	stability_factor = SRC_th_stab
+	political_power_gain = SRC_th_pp
+	war_support_factor = SRC_th_ws
+	consumer_goods_factor = SRC_th_cons
+	production_factory_max_efficiency_factor = SRC_th_eff
+	resource_trade_cost_bonus_per_factory = SRC_th_trade
+	src_foreign_capital_influence_tt = SRC_th_capital
+}

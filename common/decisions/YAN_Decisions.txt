@@ -1,0 +1,289 @@
+# ==============================================================================
+#  大炎 · 岁陵司决议
+#  · 四大机制（骨架）：岁兽苏醒度 / 书刀完整度 / 不反准备度 / 代理人信任
+#    变量与月度结算见 common/scripted_effects/YAN_scripted_effects.txt
+#  · 「岁陵司近况」是纯读数决议（cost 0，无实际效果，只显示四条状态）
+#  · 文案见 localisation/simp_chinese/ARF_YAN_l_simp_chinese.yml（键 = 决议 id / id_desc）
+# ==============================================================================
+
+YAN_Suiling_Affairs = {
+
+	# ---------------- 读数 ----------------
+
+	# 岁陵司近况
+	YAN_decision_suiling_report = {
+		icon = GFX_decision_generic_political_address
+
+		available = { always = yes }
+
+		cost = 0
+		cooldown = 1
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_Sui_Pressure_Status
+			custom_effect_tooltip = YAN_Sui_Awakening_Status
+			custom_effect_tooltip = YAN_Shudao_Status
+			custom_effect_tooltip = YAN_Bufan_Status
+			custom_effect_tooltip = YAN_Agent_Trust_Status
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	# ---------------- 岁兽苏醒度 ----------------
+
+	# 司岁台警戒令
+	YAN_decision_sishuitai_alert = {
+		icon = GFX_decision_generic_police_action
+
+		available = {
+			check_variable = { yan_sui_awakening > 9 }
+		}
+
+		cost = 50
+		cooldown = 90
+
+		complete_effect = {
+			add_to_variable = { yan_sui_awakening = -10 }
+			add_stability = 0.02
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# 秉烛人巡陵
+	YAN_decision_zenith_patrol = {
+		icon = GFX_decision_generic_intelligence_operation
+
+		available = { always = yes }
+
+		cost = 25
+		cooldown = 60
+
+		complete_effect = {
+			add_to_variable = { yan_sui_awakening = -3 }
+			add_to_variable = { yan_agent_trust = 5 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# 加固岁陵封印
+	YAN_decision_reinforce_seal = {
+		icon = GFX_decision_generic_mountain_fortification
+
+		available = {
+			check_variable = { yan_sui_awakening > 39 }
+		}
+
+		cost = 100
+		cooldown = 120
+
+		complete_effect = {
+			add_to_variable = { yan_sui_awakening = -15 }
+			add_stability = -0.03
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ---------------- 书刀完整度 ----------------
+
+	# 书刀删改（改历史）
+	YAN_decision_erase_history = {
+		icon = GFX_decision_generic_intelligence_operation
+
+		available = {
+			has_idea = YAN_Shudao_in_Tianjingge
+			check_variable = { yan_shudao_integrity > 14 }
+		}
+
+		cost = 75
+		cooldown = 180
+
+		complete_effect = {
+			add_to_variable = { yan_shudao_integrity = -15 }
+			add_to_variable = { yan_sui_awakening = -8 }
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# 封存书刀（回升完整度，但换稳定）
+	YAN_decision_seal_shudao = {
+		icon = GFX_decision_generic_protection
+
+		available = {
+			has_idea = YAN_Shudao_in_Tianjingge
+		}
+
+		cost = 50
+		cooldown = 150
+
+		complete_effect = {
+			add_to_variable = { yan_shudao_integrity = 15 }
+			add_stability = 0.02
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ---------------- 不反准备度 ----------------
+
+	# 筹备不反（需解锁不反源石）
+	YAN_decision_prepare_bufan = {
+		icon = GFX_decision_generic_research
+
+		available = {
+			has_idea = YAN_Bufan_originium
+		}
+
+		cost = 75
+		cooldown = 120
+
+		complete_effect = {
+			add_to_variable = { yan_bufan_prep = 20 }
+			add_stability = -0.02
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# 启动不反（需国策「启动不反」授权，且准备度满）
+	YAN_decision_launch_bufan = {
+		icon = GFX_decision_generic_ignite_civil_war
+
+		available = {
+			has_country_flag = yan_bufan_authorized
+			has_idea = YAN_Bufan_originium
+			check_variable = { yan_bufan_prep > 99 }
+		}
+
+		cost = 200
+		fire_only_once = yes
+
+		complete_effect = {
+			add_ideas = YAN_True_dragon_fallen
+			add_ideas = YAN_Sui_calamity_ended
+			add_war_support = 0.3
+			add_stability = -0.3
+			set_country_flag = yan_bufan_launched
+			country_event = { id = yan_sui.11 }
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	# ---------------- 代理人信任 ----------------
+
+	# 嘉奖代理人
+	YAN_decision_reward_agents = {
+		icon = GFX_decision_generic_welfare
+
+		available = {
+			has_idea = YAN_Agents_family
+		}
+
+		cost = 25
+		cooldown = 60
+
+		complete_effect = {
+			add_to_variable = { yan_agent_trust = 8 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# 甄别代理人
+	YAN_decision_screen_agents = {
+		icon = GFX_decision_generic_arrest
+
+		available = { always = yes }
+
+		cost = 50
+		cooldown = 90
+
+		complete_effect = {
+			add_to_variable = { yan_agent_trust = -12 }
+			add_to_variable = { yan_sui_awakening = -5 }
+			add_stability = 0.02
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	# 请望入局
+	YAN_decision_invite_wang = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			has_country_flag = yan_wang_chess
+		}
+
+		cost = 100
+		cooldown = 180
+
+		complete_effect = {
+			add_to_variable = { yan_agent_trust = 10 }
+			add_to_variable = { yan_sui_awakening = -5 }
+			add_political_power = 25
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# 【岁醒】树已改为开局即载入（见 common/national_focus/YAN_Suixing.txt 的 country 因子），
+	# 原先手动载入第二棵树的决议「体验未完善内容」已删除；完成终格「岁陵之约」后自动切回主树。
+
+	# ---------------- 北境 ----------------
+
+	# 清除邪魔威胁（1103 年起出现；对乌萨斯宣战，乌萨斯抱定死战）
+	YAN_decision_purge_demon_threat = {
+		icon = GFX_decision_generic_military
+
+		visible = {
+			date > 1103.1.1
+		}
+
+		available = {
+			country_exists = URS
+			NOT = { has_war_with = URS }
+			date > 1103.1.1
+		}
+
+		cost = 75
+		fire_only_once = yes
+
+		complete_effect = {
+			declare_war_on = { target = URS type = annex_everything }
+			URS = { add_ideas = URS_Not_one_step_back }
+			custom_effect_tooltip = YAN_purge_demon_threat_tt
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

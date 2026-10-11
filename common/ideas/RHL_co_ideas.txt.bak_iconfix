@@ -1,0 +1,341 @@
+# 莱茵生命（RHL）· 企业运营决议 · 限时/永久民族精神
+# 仅供 common/decisions/RHL_co_decisions.txt 与 events/RHL_co_events.txt 挂载。
+# 限时精神的持续天数由决议/事件的 add_timed_idea 指定，此处不含 duration。
+# 正负效果合并写在同一条精神里 —— 即每条决议的「代价」。
+
+ideas = {
+	country = {
+
+		# ══════════ 一、企业文化 ══════════
+
+		# ── 召开十科合议：科研+5% 稳定+5%；代价：每日政治点 -0.05 ──
+		RHL_co_idea_council = {
+			icon = GFX_idea_generic_research_bonus
+			modifier = {
+				research_speed_factor = 0.05
+				stability_factor = 0.05
+				political_power_gain = -0.05
+			}
+		}
+
+		# ── 科主任满意 · 随机一科效果 +10%（十选一） ──
+		RHL_co_idea_praise_s1 = {
+			icon = GFX_idea_generic_research_bonus
+			modifier = { research_speed_factor = 0.10 }
+		}
+		RHL_co_idea_praise_s2 = {
+			icon = GFX_idea_generic_improved_industries
+			modifier = { energy_gain_factor = 0.10 }
+		}
+		RHL_co_idea_praise_s3 = {
+			icon = GFX_idea_generic_democratic_drift_bonus
+			modifier = { industrial_capacity_factory = 0.10 }
+		}
+		RHL_co_idea_praise_s4 = {
+			icon = GFX_idea_generic_air_research
+			modifier = { production_speed_buildings_factor = 0.10 }
+		}
+		RHL_co_idea_praise_s5 = {
+			icon = GFX_idea_generic_research_bonus
+			modifier = { opinion_gain_monthly_factor = 0.10 }
+		}
+		RHL_co_idea_praise_s6 = {
+			icon = GFX_idea_generic_improved_industries
+			modifier = { agricultural_development_monthly_modifier = 0.10 }
+		}
+		RHL_co_idea_praise_s7 = {
+			icon = GFX_idea_generic_production_bonus
+			modifier = { army_attack_factor = 0.10 }
+		}
+		RHL_co_idea_praise_s8 = {
+			icon = GFX_idea_generic_economic_increase
+			modifier = { political_power_gain = 0.10 }
+		}
+		RHL_co_idea_praise_s9 = {
+			icon = GFX_idea_generic_spy_intel
+			modifier = { own_operative_intel_extraction_rate = 0.10 }
+		}
+		RHL_co_idea_praise_s10 = {
+			icon = GFX_idea_generic_air_research
+			modifier = { air_attack_factor = 0.10 }
+		}
+
+		# ── 帕尔维斯的超人计划：科研+15%；代价：稳定-10%、异见+10% ──
+		RHL_co_idea_superman = {
+			icon = GFX_idea_generic_deal_with_the_devil
+			modifier = {
+				research_speed_factor = 0.15
+				stability_factor = -0.10
+			}
+		}
+
+		# ── 员工配股计划：稳定+15% 工厂+5%；代价：消费品+10% ──
+		RHL_co_idea_stock = {
+			icon = GFX_idea_generic_economic_increase
+			modifier = {
+				stability_factor = 0.15
+				industrial_capacity_factory = 0.05
+				consumer_goods_factor = 0.10
+			}
+		}
+
+		# ── 赫默伦理审查：稳定+10%；代价：科研-10% ──
+		RHL_co_idea_ethics = {
+			icon = GFX_idea_generic_democratic_drift_bonus
+			modifier = {
+				stability_factor = 0.10
+				research_speed_factor = -0.10
+			}
+		}
+
+		# ── 小贾斯汀的人才收购：科研+10%；代价：外交-10% ──
+		RHL_co_idea_poach = {
+			icon = GFX_idea_generic_economic_increase
+			modifier = {
+				research_speed_factor = 0.10
+				opinion_gain_monthly_factor = -0.10
+			}
+		}
+
+		# ── 雅拉的孤儿院扩编：间谍+15% 稳定+10%；代价：每日政治点 -0.10 ──
+		RHL_co_idea_orphanage = {
+			icon = GFX_idea_generic_spy_intel
+			modifier = {
+				own_operative_intel_extraction_rate = 0.15
+				stability_factor = 0.10
+				political_power_gain = -0.10
+			}
+		}
+
+		# ══════════ 二、展会 ══════════
+
+		# ── 天空生活展会：稳定+10%；代价：消费品+10% ──
+		RHL_co_idea_sky_life = {
+			icon = GFX_idea_generic_political_support
+			modifier = {
+				stability_factor = 0.10
+				consumer_goods_factor = 0.10
+			}
+		}
+
+		# ── 螺旋桨天堂（奇观 · 永久）：稳定+5% 战争支持+5% ──
+		RHL_co_idea_propeller = {
+			icon = GFX_idea_generic_air_research
+			modifier = {
+				stability_factor = 0.05
+				war_support_factor = 0.05
+			}
+		}
+
+		# ── 螺旋桨天堂重建：建筑+15%（365 天） ──
+		RHL_co_idea_propeller_build = {
+			icon = GFX_idea_generic_build_infrastructure
+			modifier = {
+				production_speed_buildings_factor = 0.15
+			}
+		}
+
+		# ── 重建负担（代价）：工业产能-5% 稳定-5%（365 天） ──
+		RHL_co_idea_propeller_cost = {
+			icon = GFX_idea_generic_economic_crisis
+			modifier = {
+				industrial_capacity_factory = -0.05
+				stability_factor = -0.05
+			}
+		}
+
+		# ── 万星园巡礼：科研+10% 稳定+10%；代价：每日政治点 -0.05 ──
+		RHL_co_idea_wanxingyuan = {
+			icon = GFX_idea_generic_air_research
+			modifier = {
+				research_speed_factor = 0.10
+				stability_factor = 0.10
+				political_power_gain = -0.05
+			}
+		}
+
+		# ── 莱茵「树」开放日：稳定+10%；代价：间谍防御-10% ──
+		RHL_co_idea_tree_open = {
+			icon = GFX_idea_generic_political_support
+			modifier = {
+				stability_factor = 0.10
+				enemy_operative_detection_chance_factor = -0.10
+			}
+		}
+
+		# ── 天空贷发行：工厂+10%；代价：稳定-10% ──
+		RHL_co_idea_skyloan = {
+			icon = GFX_idea_generic_improved_industries
+			modifier = {
+				industrial_capacity_factory = 0.10
+				stability_factor = -0.10
+			}
+		}
+
+		# ── 天空贷崩盘：稳定-20% 工厂-10%（偿付期到期） ──
+		RHL_co_idea_skyloan_crash = {
+			icon = GFX_idea_generic_economic_crisis
+			modifier = {
+				stability_factor = -0.20
+				industrial_capacity_factory = -0.10
+			}
+		}
+
+		# ── 天空氧气瓶配给：稳定+5%；代价：消费品+5% ──
+		RHL_co_idea_oxygen = {
+			icon = GFX_idea_generic_political_support
+			modifier = {
+				stability_factor = 0.05
+				consumer_goods_factor = 0.05
+			}
+		}
+
+		# ══════════ 三、外交 ══════════
+
+		# ── 罗德岛合作（永久）：科研+5% 稳定+5% ──
+		RHL_co_idea_rhodes_coop = {
+			icon = GFX_idea_generic_research_bonus
+			modifier = {
+				research_speed_factor = 0.05
+				stability_factor = 0.05
+			}
+		}
+
+		# ── 梅兰德清算成功：间谍+15% 稳定+10% ──
+		RHL_co_idea_maylander_purge = {
+			icon = GFX_idea_generic_secret_police
+			modifier = {
+				own_operative_intel_extraction_rate = 0.15
+				stability_factor = 0.10
+			}
+		}
+
+		# ── 梅兰德反扑（清算失败）：稳定-10%；代价：每日政治点 -0.10 ──
+		RHL_co_idea_maylander_backlash = {
+			icon = GFX_idea_generic_economic_crisis
+			modifier = {
+				stability_factor = -0.10
+				political_power_gain = -0.10
+			}
+		}
+
+		# ── 维多利亚复仇宣传：战争支持+15% 陆军攻击+5% ──
+		RHL_co_idea_victoria = {
+			icon = GFX_idea_generic_war_college
+			modifier = {
+				war_support_factor = 0.15
+				army_attack_factor = 0.05
+			}
+		}
+
+		# ── 莱塔尼亚技术引进：科研+15%；代价：外交-10% ──
+		RHL_co_idea_leithanien = {
+			icon = GFX_idea_generic_research_bonus
+			modifier = {
+				research_speed_factor = 0.15
+				opinion_gain_monthly_factor = -0.10
+			}
+		}
+
+		# ── 天空公约（永久）：外交好感增速+10% 稳定+5% ──
+		RHL_co_idea_sky_convention = {
+			icon = GFX_idea_generic_air_research
+			modifier = {
+				opinion_gain_monthly_factor = 0.10
+				stability_factor = 0.05
+			}
+		}
+
+		# ── 峰会筹备（代价）：每日政治点 -0.15 ──
+		RHL_co_idea_summit_cost = {
+			icon = GFX_idea_generic_economic_crisis
+			modifier = {
+				political_power_gain = -0.15
+			}
+		}
+
+		# ── 阿戈尔接触：海军组织+15% 海军命中+10% 科研+10% ──
+		RHL_co_idea_aegir = {
+			icon = GFX_idea_generic_naval_manufacturer_1
+			modifier = {
+				navy_org_factor = 0.15
+				naval_hit_chance = 0.10
+				research_speed_factor = 0.10
+			}
+		}
+
+		# ── 深海恐惧（代价）：稳定-10% ──
+		RHL_co_idea_deep_sea_fear = {
+			icon = GFX_idea_generic_economic_crisis
+			modifier = {
+				stability_factor = -0.10
+			}
+		}
+
+		# ══════════ 四、安抚民众 ══════════
+
+		# ── 感染者医疗补贴：稳定+15%；代价：工厂产出-5% ──
+		RHL_co_idea_medical = {
+			icon = GFX_idea_generic_morale_bonus
+			modifier = {
+				stability_factor = 0.15
+				industrial_capacity_factory = -0.05
+			}
+		}
+
+		# ── 拓荒者安置（永久）：人力+10% ──
+		RHL_co_idea_pioneers = {
+			icon = GFX_idea_generic_manpower_bonus
+			modifier = {
+				conscription_factor = 0.10
+			}
+		}
+
+		# ── 拓荒者法案：稳定+15%；代价：消费品+10% ──
+		RHL_co_idea_pioneer_act = {
+			icon = GFX_idea_generic_manpower_bonus
+			modifier = {
+				stability_factor = 0.15
+				consumer_goods_factor = 0.10
+			}
+		}
+
+		# ── 媒体管控：稳定+10% 战争支持+5% ──
+		RHL_co_idea_media = {
+			icon = GFX_idea_generic_secret_police
+			modifier = {
+				stability_factor = 0.10
+				war_support_factor = 0.05
+			}
+		}
+
+		# ── 天空热降温：稳定+10% 消费品-10%；代价：工厂产出-5% ──
+		RHL_co_idea_cool_down = {
+			icon = GFX_idea_generic_economic_recovery
+			modifier = {
+				stability_factor = 0.10
+				consumer_goods_factor = -0.10
+				industrial_capacity_factory = -0.05
+			}
+		}
+
+		# ── 兽主的喝彩：科研+10% 稳定+10%；代价：消费品+15% ──
+		RHL_co_idea_applause = {
+			icon = GFX_idea_generic_deal_with_the_devil
+			modifier = {
+				research_speed_factor = 0.10
+				stability_factor = 0.10
+				consumer_goods_factor = 0.15
+			}
+		}
+
+		# ── 大赦天下：稳定+20%；代价：间谍防御-15% ──
+		RHL_co_idea_amnesty = {
+			icon = GFX_idea_generic_morale_bonus
+			modifier = {
+				stability_factor = 0.20
+				enemy_operative_detection_chance_factor = -0.15
+			}
+		}
+	}
+}

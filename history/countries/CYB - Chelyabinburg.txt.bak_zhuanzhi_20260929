@@ -1,0 +1,119 @@
+capital = 197
+oob = "CYB_Start"
+
+set_country_flag = East_Ursus_Development
+
+set_research_slots = 3
+set_stability = 0.45
+set_war_support = 0.40
+
+recruit_character = CYB_Fernando_Saratov
+recruit_character = CYB_Ludgar_Will
+recruit_character = CYB_Jose_Peniarieta
+recruit_character = CYB_Kuru_Nick
+
+add_ideas = {
+	local_warlord
+	
+	civilian_economy
+	limited_conscription
+	export_focus
+	local_warlord
+
+	no_voting
+	working_law_18h
+	isolation_management
+	
+	subsistence_agriculture
+	electric_tool_production
+	illiteracy_widespread
+	inefficient_administration
+	rampant_poverty
+
+	CYB_Bosque_arms_factory
+	CYB_Fernando_arms_factory
+	CYB_Autanburg_arms_storage
+
+	Internal_guard_surveillance
+}
+
+add_dynamic_modifier = {
+	modifier = CYB_worker_unrest_modifier
+}
+
+set_technology = {
+	infantry_weapons_0 = 1
+	arts_weapons_0 = 1
+	tech_support = 1
+	basic_machine_tools = 1
+	punched_card_computer = 1
+	tech_recon = 1
+	tech_support = 1
+	motorized_infantry_0 = 1
+	power_plant = 1
+}
+
+set_politics = {
+	ruling_party = authoritarianism
+	last_election = "1091.6.1"
+	election_frequency = 48
+	elections_allowed = yes
+	long_name = CYB_Bosque_arms_party_long
+	name = CYB_Bosque_arms_party
+}
+
+set_popularities = {
+	communism = 0
+	socialism = 10
+	progressivism = 0
+	liberalism = 10
+	conservatism = 0
+	authoritarianism = 60
+	despotism = 20
+	fascism = 0
+	mysticism = 0
+	special = 0
+}
+
+set_party_name = {
+	ideology = despotism
+	long_name = CYB_Natkus_enterprise_party_long
+	name = CYB_Natkus_enterprise_party
+}
+
+set_party_name = {
+	ideology = socialism
+	long_name = CYB_Worker_collaboration_aliance_party_long
+	name = CYB_Worker_collaboration_aliance_party
+}
+
+set_party_name = {
+	ideology = liberalism
+	long_name = CYB_Cap_arms_party_long
+	name = CYB_Cap_arms_party
+}
+
+set_variable = {
+	var = CYB.CYB_worker_unrest_modifier_research_speed_factor
+	value = 0
+}
+set_variable = {
+	var = CYB.CYB_worker_unrest_modifier_production_speed_buildings_factor
+	value = 0
+}
+set_variable = {
+	var = CYB.CYB_worker_unrest_modifier_recruitable_population_factor
+	value = -0.15
+}
+set_variable = {
+	var = CYB.CYB_worker_unrest_modifier_political_power_factor
+	value = 0
+}
+set_variable = {
+	var = CYB.CYB_worker_unrest_modifier_stability_factor
+	value = -0.3
+}
+set_variable = {
+	var = CYB.CYB_worker_unrest_modifier_war_support_factor
+	value = -0.3
+}

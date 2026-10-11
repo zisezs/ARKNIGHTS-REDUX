@@ -1,0 +1,420 @@
+characters = {
+
+	#费奥多尔·弗拉基米罗维奇
+	URS_Feodor_Vladimirovich_Ryurik = {
+        name = URS_Feodor_Vladimirovich_Ryurik
+        portraits = {
+            civilian = {
+                large = "gfx/leaders/URS/Feodor_Vladimirovich.dds"
+            }
+        }
+        country_leader = {
+            ideology = conservative_subtype
+            desc = URS_Feodor_Vladimirovich_Ryurik_desc
+        }
+    }
+    #伊斯拉姆·维特
+	URS_Islam_Vitte = {
+        name = URS_Islam_Vitte
+        portraits = {
+            civilian = {
+                large = "GFX_Islam_Vitte"
+                small = "gfx/interface/ideas/URS/Islam_Vitte_small.dds"
+            }
+        }
+        country_leader = {
+            ideology = conservative_subtype
+            desc = URS_Islam_Vitte_desc
+        }
+        advisor = {
+			slot = second_in_command
+			idea_token = URS_Islam_Vitte_second_in_command
+			traits = { URS_treasury_minister }
+			desc = URS_Islam_Vitte_desc
+			can_be_fired = no
+		}
+        advisor = {
+            slot = political_advisor
+            idea_token = URS_Islam_Vitte_advisor
+            traits = { URS_treasury_minister }
+            available = {
+                OR = {
+                    has_government = despotism
+                    has_government = progressivism
+                    has_government = conservatism
+                }
+                not = {
+                    has_idea = URS_Islam_Vitte_second_in_command
+                }
+            }
+			
+			ai_will_do = {
+				factor = 200
+			}
+        }
+    }
+    #尤里·马尔托夫
+	URS_Yuri_Martov = {
+        name = URS_Yuri_Martov
+        portraits = {
+            civilian = {
+                #large = "GFX_portrait_URS_Yuri_Martov"
+            }
+        }
+        country_leader = {
+            ideology = social_democracy_subtype
+            desc = URS_Yuri_Martov_desc
+        }
+        advisor = {
+            slot = political_advisor
+            idea_token = URS_Yuri_Martov
+            traits = { URS_mild_reformist }
+            available = {
+                OR = {
+                    has_government = despotism
+                    has_government = progressivism
+                    has_government = conservatism
+                }
+            }
+        }
+    }
+    #狄安娜·克林斯基
+	URS_Deanna_Klinsky = {
+        name = URS_Deanna_Klinsky
+        portraits = {
+            civilian = {
+                #large = "GFX_portrait_URS_Deanna_Klinsky"
+            }
+        }
+        country_leader = {
+            ideology = liberalism_subtype
+            desc = URS_Deanna_Klinsky_desc
+        }
+        advisor = {
+            slot = political_advisor
+            idea_token = URS_Deanna_Klinsky
+            traits = { URS_tolerant_republican }
+            available = {
+                OR = {
+                    has_government = progressivism
+                    has_government = conservatism
+                }
+            }
+        }
+    }
+    #安东·卡德洛夫
+	URS_Anton_Kadlov = {
+        name = URS_Anton_Kadlov
+        portraits = {
+            civilian = {
+                #large = "GFX_portrait_URS_Anton_Kadlov"
+            }
+        }
+        country_leader = {
+            ideology = dual_monarchy_subtype
+            desc = URS_Anton_Kadlov_desc
+        }
+        advisor = {
+            slot = political_advisor
+            idea_token = URS_Anton_Kadlov
+            traits = { URS_prominent_conservatist }
+            available = {
+                OR = {
+                    has_government = conservatism
+                    has_government = authoritarianism
+                    has_government = despotism
+                }
+            }
+			
+			ai_will_do = {
+				factor = 200
+			}
+        }
+    }
+    #米哈伊·斯托雷平
+	URS_Mihai_Stolypin = {
+        name = URS_Mihai_Stolypin
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Mihai_Stolypin"
+            }
+        }
+        country_leader = {
+            ideology = absolute_monarchy_subtype
+            desc = URS_Mihai_Stolypin_desc
+        }
+        advisor = {
+            slot = political_advisor
+            idea_token = URS_Mihai_Stolypin
+            traits = { URS_empire_protector }
+            available = {
+                OR = {
+                    has_government = authoritarianism
+                    has_government = despotism
+                }
+            }
+        }
+    }
+    #安娜西斯塔娅·阿列克谢耶夫
+	URS_Anastasia_Alexeyev = {
+        name = URS_Anastasia_Alexeyev
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Anastasia_Alexeyev"
+            }
+        }
+        country_leader = {
+            ideology = neo_orderism_subtype
+            desc = URS_Anastasia_Alexeyev_desc
+        }
+    }
+    #拉夫连季·贝洛夫
+    URS_Lavrenti_Belov = {
+        name = URS_Lavrenti_Belov
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Lavrenti_Belov"
+            }
+        }
+        advisor = {
+            slot = political_advisor
+            idea_token = URS_Lavrenti_Belov
+            traits = { URS_head_of_guard }
+            available = {
+                #没有完成国策“内卫的末路”
+            }
+        }
+    }
+    #列夫·托尔茨克
+    URS_Lev_Trotsk = {
+        name = URS_Lev_Trotsk
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Lev_Trotsk"
+            }
+        }
+        advisor = {
+            slot = political_advisor
+            idea_token = URS_Lev_Trotsk
+            traits = { URS_legendary_writer }
+            available = {
+                OR = {
+                    has_government = progressivism
+                    has_government = conservatism
+                    has_government = despotism
+                }
+            }
+			
+			ai_will_do = {
+				factor = 120
+			}
+        }
+    }
+    #伊什克·拉普茨斯
+    URS_Ishk_Laputz = {
+        name = URS_Ishk_Laputz
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Ishk_Laputz"
+            }
+        }
+        advisor = {
+            slot = political_advisor
+            idea_token = URS_Ishk_Laputz
+            traits = { URS_mysterious_priest }
+            available = {
+                has_government = despotism
+            }
+        }
+    }
+    #德米特里·捷列夫斯基
+    URS_Dmitry_Terevsky = {
+        name = URS_Dmitry_Terevsky
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Dmitry_Terevsky"
+            }
+        }
+        advisor = {
+            slot = political_advisor
+            idea_token = URS_Dmitry_Terevsky
+            traits = { URS_chemical_genius }
+			
+			ai_will_do = {
+				factor = 150
+			}
+        }
+    }
+    #尼古拉·弗拉基米罗维奇
+    URS_Nikolai_Vladimirovich = {
+        name = URS_Nikolai_Vladimirovich
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Nikolai_Vladimirovich"
+            }
+        }
+        advisor = {
+            slot = army_chief
+            idea_token = URS_Nikolai_Vladimirovich
+            traits = { URS_ultimate_leader }
+        }
+    }
+    #安德烈·绍伊特拉茨
+    URS_Andrei_Shoitracz = {
+        name = URS_Andrei_Shoitracz
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Andrei_Shoitracz"
+            }
+        }
+        advisor = {
+            slot = army_chief
+            idea_token = URS_Andrei_Shoitracz
+            traits = { URS_empire_new_general }
+			
+			ai_will_do = {
+				factor = 100
+			}
+        }
+    }
+    #弗拉迪米尔·苏霍姆
+    URS_Vladimir_Sukhom = {
+        name = URS_Vladimir_Sukhom
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Vladimir_Sukhom"
+            }
+        }
+        advisor = {
+            slot = high_command
+            idea_token = URS_Vladimir_Sukhom
+            ledger = army
+            traits = { URS_controversial_reformist }
+			
+			ai_will_do = {
+				factor = 100
+			}
+        }
+    }
+    #伊利亚·列奥尼达斯
+    URS_Ilya_Leonidas = {
+        name = URS_Ilya_Leonidas
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Ilya_Leonidas"
+            }
+        }
+        advisor = {
+            slot = high_command
+            idea_token = URS_Ilya_Leonidas
+            ledger = army
+            traits = { URS_land_cruiser_commander }
+        }
+    }
+    #伊戈尔·普斯托夫
+    URS_Igor_Pustov = {
+        name = URS_Igor_Pustov
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Igor_Pustov"
+            }
+        }
+        advisor = {
+            slot = high_command
+            idea_token = URS_Igor_Pustov
+            ledger = army
+            traits = { URS_automation_pioneer }
+            available = {
+                #已完成国策“自动化作战”
+            }
+			
+			ai_will_do = {
+				factor = 100
+			}
+        }
+    }
+    #谢尔盖·奥达诺夫斯基
+    URS_Sergei_Odanovsky = {
+        name = URS_Sergei_Odanovsky
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Sergei_Odanovsky"
+            }
+        }
+        advisor = {
+            slot = high_command
+            idea_token = URS_Sergei_Odanovsky
+            ledger = air
+            traits = { URS_air_striker }
+			ai_will_do = {
+				factor = 75.000
+			}
+        }
+    }
+    #斯特莱奇·库帕拉
+    URS_Strachey_Kupala = {
+        name = URS_Strachey_Kupala
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Strachey_Kupala"
+            }
+        }
+        advisor = {
+            slot = high_command
+            idea_token = URS_Strachey_Kupala
+            ledger = air
+            traits = { URS_drone_pioneer }
+        }
+    }
+    #斯韦特兰娜·米尔诺维奇
+    URS_Svetlana_Milnovich = {
+        name = URS_Svetlana_Milnovich
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Svetlana_Milnovich"
+            }
+        }
+        advisor = {
+            slot = air_chief
+            idea_token = URS_Svetlana_Milnovich
+            traits = { URS_impact_group_tactician }
+			ai_will_do = {
+				factor = 75.000
+			}
+        }
+    }
+    #安德烈亚·斯密尔诺
+    URS_Andrea_Smeerno = {
+        name = URS_Andrea_Smeerno
+        portraits = {
+            civilian = {
+                large = "GFX_portrait_URS_Andrea_Smeerno"
+            }
+        }
+        advisor = {
+            slot = high_command
+            idea_token = URS_Andrea_Smeerno
+            ledger = navy
+            traits = { URS_battleship_worshipper }
+        }
+    }
+
+	# ===== 圣愚（URS_The_Fool） BEGIN =====
+	# 圣愚 —— 圣愚线的最终国家元首（邪魔化运动成功后的领袖）
+	# ideology = mysticism_subtype 与执政党一致，promote_character 才能让他上台；
+	# 肖像由 docs/_urs_fool_state_build.py 从原图裁成 156:210 的胸像。
+	URS_The_Fool = {
+		name = URS_The_Fool
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/URS/URS_The_Fool.png"
+			}
+		}
+		country_leader = {
+			ideology = mysticism_subtype
+			desc = URS_The_Fool_desc
+			traits = { URS_demonic_essence }
+		}
+	}
+	# ===== 圣愚（URS_The_Fool） END =====
+}

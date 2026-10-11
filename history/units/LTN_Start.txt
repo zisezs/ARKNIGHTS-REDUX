@@ -1,0 +1,324 @@
+
+####################
+## 莱塔尼亚联合帝国 LTN 开局部队 ##
+####################
+# 按 docs/莱塔尼亚设定集 重制（2026-10-01）：
+#   · 01 号文档 §六【设】：贵族私兵制——每个级别贵族可养的私兵规模由法律严格规定，战时每个贵族
+#     都是自己军队的领袖；军中经常出现全部由源石技艺使用者组成的部队；所有军人建军时须过一遍
+#     军事法术适应性测试，优胜者被抽入单独训练场所 → 金律法卫。
+#   · 01 号文档 §4.2／§6.2【设】【剧】：双塔手上只有两道名册——女皇之声（御前乐师／谕使／禁卫，
+#     不受各大区法律制约）与金律法卫（剑与法术只属于金律乐章与莱塔尼亚）；女皇的术师是双塔
+#     另一支直属法术部队（封锁街道、张设屏障、扣押人犯）。
+#   · 01 号文档 §5.2【剧】：宪兵队是地方治安武装，民兵接受过正规军事训练；
+#     09 号文档 §四第 5 条：无海空军，天灾云与大裂谷就是天然防线 → 本 OOB 不含任何舰船与航空队。
+#   · 九大区名沿用「金律乐章 · 调律台」面板（LTN_law_region_1..9）的既定顺序：海登施威尔／恩瓦德／
+#     厄登赫尔／鲁珀坎／施彤领／瓦瑟领／福特冈／奥施登海姆／凯普拉尼。九大区在工程里没有州级载体，
+#     各私兵的驻地按地理就近安放在实际拥有的州（见每师注释），番号仍用大区名。
+#   · 番号组见 common/units/names_divisions/LTN_names_divisions.txt（旧版借用的 SRC_INF_01 未定义，
+#     error.log 长期报 unknown tag，本次一并修正）。
+#   · ARF 专属支援营「金律法卫」不在这里预挂：按本工程口径，专属支援连由玩家点了【征调特殊兵种
+#     招募令】之后在编制界面添加（arf_golden_law_guard_tech 开局已授予，见 09 号文档 §四）；
+#     编制里的「金律法卫军团」是成建制的面具军团，不是那支支援连。
+#   · 无海军、无空军——设定如此，不要补。
+
+# ── 女皇之声：双塔禁卫 · 御前乐师与谕使 ──
+#    「目前的皇帝禁卫军被称作'女皇之声'……每一位首先是双子女皇的御前乐师，然后是谕使和禁卫。」【设】
+division_template = {
+	name = "女皇之声"
+	division_names_group = LTN_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+	}
+	support = {
+		recon = { x = 0 y = 0 }
+		military_police = { x = 0 y = 1 }
+	}
+}
+
+# ── 金律法卫军团：金律殿堂直属 · 面具军团 ──
+#    「单兵中近距离作战能力惊人；以军团规模出动时可通过源石技艺共联发动毁灭性法术」【设】
+#    「黄金旋律」守乐章的辉光，「帷幕」需十人以上共张——编制按 3×3 步列，工/侦/炮随行
+division_template = {
+	name = "金律法卫军团"
+	division_names_group = LTN_INF_02
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
+	}
+	support = {
+		engineer = { x = 0 y = 0 }
+		recon = { x = 0 y = 1 }
+		artillery = { x = 0 y = 2 }
+	}
+}
+
+# ── 术师团：全部由源石技艺使用者组成的部队 ──
+#    「贵族建军时着重培养源石技艺出众的术师；军中经常出现全部由源石技艺使用者组成的部队」【设】
+#    两个炮兵营按「法术装置／军械」折算（09 号文档 §四：军械线的产出不走新科技）
+division_template = {
+	name = "术师团"
+	division_names_group = LTN_INF_03
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+
+		artillery_brigade = { x = 2 y = 0 }
+		artillery_brigade = { x = 2 y = 1 }
+	}
+	support = {
+		engineer = { x = 0 y = 0 }
+		recon = { x = 0 y = 1 }
+	}
+}
+
+# ── 选帝侯私兵师：九大区贵族按法律限额养的私兵，战时由自家贵族统领 ──
+#    一营火炮是各高塔自己的家底；没有统一后勤，故支援连只给侦察
+division_template = {
+	name = "选帝侯私兵师"
+	division_names_group = LTN_INF_04
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+
+		artillery_brigade = { x = 2 y = 0 }
+	}
+	support = {
+		recon = { x = 0 y = 0 }
+	}
+}
+
+# ── 边区守备队：宪兵驻地与民兵 ──
+#    「民兵：居民都接受过正规军事训练」；「宪兵队：地方治安武装，由最近的移动城邦调派」【剧】
+division_template = {
+	name = "边区守备队"
+	division_names_group = LTN_INF_05
+	regiments = {
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia = { x = 0 y = 2 }
+
+		militia = { x = 1 y = 0 }
+		militia = { x = 1 y = 1 }
+		militia = { x = 1 y = 2 }
+	}
+	support = {
+		military_police = { x = 0 y = 0 }
+	}
+}
+
+units = {
+	# ---------------- 女皇之声（2） ----------------
+	# 崔林特尔梅：一白一黑两座女皇塔由廊桥相连，名册只在双塔名下
+	division = {
+		name = "女皇之声·白塔卫队"
+		location = 2520
+		division_template = "女皇之声"
+		start_experience_factor = 0.75
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "女皇之声·黑塔卫队"
+		location = 3145
+		division_template = "女皇之声"
+		start_experience_factor = 0.75
+		start_equipment_factor = 1.0
+	}
+
+	# ---------------- 金律法卫军团（2） ----------------
+	# 金律殿堂在首都；面具与誓言只属于金律乐章与莱塔尼亚
+	division = {
+		name = "金律法卫军团"
+		location = 1576
+		division_template = "金律法卫军团"
+		start_experience_factor = 0.8
+		start_equipment_factor = 1.0
+	}
+	# 北境巡察团：施彤领方向的天灾云与废猎村需要有人盯着（TW 线伏笔）
+	division = {
+		name = "金律法卫·北境巡察团"
+		location = 11220
+		division_template = "金律法卫军团"
+		start_experience_factor = 0.8
+		start_equipment_factor = 1.0
+	}
+
+	# ---------------- 术师团（3） ----------------
+	# 女皇的术师：双塔直属，负责封锁、讯问、押解，行刑手在其中
+	division = {
+		name = "女皇的术师"
+		location = 8435
+		division_template = "术师团"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.95
+	}
+	# 厄登赫尔：百年难遇的大术师比勒菲尔德出自此区
+	division = {
+		name = "厄登赫尔术师团"
+		location = 9764
+		division_template = "术师团"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	# 圣维罗纳：帝国第二大城的术师队
+	division = {
+		name = "圣维罗纳术师团"
+		location = 13111
+		division_template = "术师团"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+
+	# ---------------- 选帝侯私兵（11） ----------------
+	# 海登施威尔（中央外莱塔尼亚 376 州方向）
+	division = {
+		name = "海登施威尔选帝侯卫队"
+		location = 4913
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.45
+		start_equipment_factor = 0.8
+	}
+	# 恩瓦德：首都所在大区，出过路德维格与赫尔昏佐伦，装备最好的一支私兵
+	division = {
+		name = "恩瓦德选帝侯卫队"
+		location = 16570
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.85
+	}
+	# 厄登赫尔（西外莱塔尼亚 436 州方向）
+	division = {
+		name = "厄登赫尔选帝侯卫队"
+		location = 8615
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.45
+		start_equipment_factor = 0.8
+	}
+	# 鲁珀坎：最东南、近叙拉古，被视作帝国的隐疾
+	division = {
+		name = "鲁珀坎选帝侯卫队"
+		location = 4956
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.75
+	}
+	# 施彤领：北部边境，首府费尔斯；四皇会战的天灾云还在头顶
+	division = {
+		name = "施彤领选帝侯卫队"
+		location = 16067
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.45
+		start_equipment_factor = 0.8
+	}
+	# 瓦瑟领：女皇之声常从这里的民间采谱
+	division = {
+		name = "瓦瑟领选帝侯卫队"
+		location = 17191
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.75
+	}
+	# 福特冈：「福特冈的湖泊与港口」「福特冈的施尼茨勒」都在此区
+	division = {
+		name = "福特冈选帝侯卫队"
+		location = 15737
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.75
+	}
+	# 奥施登海姆：官方设定留白之区，按外疆州（378 瓦尔特高）安放
+	division = {
+		name = "奥施登海姆选帝侯卫队"
+		location = 15728
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.7
+	}
+	# 凯普拉尼：官方设定留白之区，按托米拉斯拉夫州（597）安放
+	division = {
+		name = "凯普拉尼选帝侯卫队"
+		location = 7491
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.7
+	}
+	# 乌提卡领：巫王故乡、黑键的封地，巫王倒台后逐步衰落，什么都缺
+	division = {
+		name = "乌提卡领卫队"
+		location = 16796
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.65
+	}
+	# 维谢海姆：斯特罗洛家的移动城市，夕照区事件链所在
+	division = {
+		name = "维谢海姆领主卫队"
+		location = 448
+		division_template = "选帝侯私兵师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.7
+	}
+
+	# ---------------- 边区守备队（5） ----------------
+	# 沃伦姆德：原文「沃伦姆德现在只有你一个正规军人」，驻防的只有宪兵与民兵
+	division = {
+		name = "沃伦姆德守备队"
+		location = 15433
+		division_template = "边区守备队"
+		start_experience_factor = 0.25
+		start_equipment_factor = 0.55
+	}
+	division = {
+		name = "卡利斯塔边队"
+		location = 10643
+		division_template = "边区守备队"
+		start_experience_factor = 0.25
+		start_equipment_factor = 0.55
+	}
+	division = {
+		name = "赫尔维蒂亚守备队"
+		location = 12143
+		division_template = "边区守备队"
+		start_experience_factor = 0.25
+		start_equipment_factor = 0.55
+	}
+	# 兰赛拉尔方向：LRS 手里还攥着五个 LTN 法理州，前哨先钉住
+	division = {
+		name = "艾萨凯特前哨"
+		location = 17530
+		division_template = "边区守备队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "比拉费德守备队"
+		location = 8880
+		division_template = "边区守备队"
+		start_experience_factor = 0.25
+		start_equipment_factor = 0.55
+	}
+}

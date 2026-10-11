@@ -1,0 +1,722 @@
+######################
+## 大炎 开局国策树 · 【岁醒】（2026-09-21 重制：开局即载入，终格切回主树） ##
+#
+# 【玩法】开局岁压 100 —— 工厂与船坞产能 −100%、基建 −60%、科研 −40%、组织度 −30%、
+#         补给消耗 +50%、稳定度 −20%。岁压 = yan_sui_pressure(0..100)，各键由它派生
+#         （见 common/scripted_effects/YAN_sui_pressure_scripted_effects.txt）。
+# 【曲线】幕一动员 100→80，幕二镇压 80→17，幕三祂站起来 17→49，幕四谈判 49→25，终格清零。
+# 【交还】「岁陵之约」完成后 load_focus_tree 切回 YAN_national_focus，并置旗 yan_sui_agreement_done
+#         ——本树 country 因子带 NOT 旗标，之后不会再被引擎选中。
+# 【保号】旧树 16 格 id 原样保留（事件与 loc 按 id 引用），只重排坐标、补上岁压与苏醒度结算。
+# 【读数】岁陵司分类的「岁陵司近况」决议显示 岁压严重程度 + 岁兽苏醒度。
+# 【生成器】E:/tmp/sui12/gen_suixing.js（改数据表重跑，勿手改产物）
+######################
+
+focus_tree = {
+	id = YAN_suixing
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 20
+			tag = YAN
+			NOT = { has_country_flag = yan_sui_agreement_done }
+		}
+	}
+
+	default = no
+
+	initial_show_position = {
+		x = 0
+		y = 0
+	}
+
+	# YAN_suixing
+	focus = {
+		id = YAN_suixing
+		icon = GFX_focus_YAN_suixing
+		x = 0
+		y = 0
+		cost = 1
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			YAN_sui_pressure_init = yes
+			add_to_variable = { yan_sui_pressure = -3 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_suixing_press_tt
+			add_to_variable = { yan_sui_awakening = 5 }
+			custom_effect_tooltip = YAN_SX_awake_p_tt
+			add_political_power = 30
+			set_country_flag = yan_sui_awake_begin
+		}
+	}
+
+	# YAN_SX_Wake_Thunder
+	focus = {
+		id = YAN_SX_Wake_Thunder
+		icon = GFX_focus_YAN_SX_Wake_Thunder
+		x = -2
+		y = 1
+		cost = 2
+		prerequisite = {
+			focus = YAN_suixing
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = 0 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Wake_Thunder_press_tt
+			add_to_variable = { yan_sui_awakening = 10 }
+			custom_effect_tooltip = YAN_SX_awake_p_tt
+			add_war_support = 0.05
+			add_stability = -0.05
+			army_experience = 30
+		}
+	}
+
+	# YAN_SX_Loyal_Edict
+	focus = {
+		id = YAN_SX_Loyal_Edict
+		icon = GFX_focus_YAN_SX_Loyal_Edict
+		x = 0
+		y = 1
+		cost = 2
+		prerequisite = {
+			focus = YAN_suixing
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -4 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Loyal_Edict_press_tt
+			add_political_power = 40
+			add_stability = 0.03
+			add_manpower = 60000
+		}
+	}
+
+	# YAN_SX_Seal_Suiling
+	focus = {
+		id = YAN_SX_Seal_Suiling
+		icon = GFX_focus_YAN_SX_Seal_Suiling
+		x = 2
+		y = 1
+		cost = 2
+		prerequisite = {
+			focus = YAN_suixing
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -6 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Seal_Suiling_press_tt
+			add_to_variable = { yan_sui_awakening = -5 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_stability = -0.02
+			add_political_power = 20
+		}
+	}
+
+	# YAN_SX_Cut_Leyline
+	focus = {
+		id = YAN_SX_Cut_Leyline
+		icon = GFX_focus_YAN_SX_Cut_Leyline
+		x = -2
+		y = 2
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Wake_Thunder
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -4 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Cut_Leyline_press_tt
+			add_to_variable = { yan_sui_awakening = -5 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			army_experience = 25
+			add_war_support = 0.03
+		}
+	}
+
+	# YAN_SX_Granary_Levy
+	focus = {
+		id = YAN_SX_Granary_Levy
+		icon = GFX_focus_YAN_SX_Granary_Levy
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Loyal_Edict
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -2 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Granary_Levy_press_tt
+			add_manpower = 60000
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_SX_Purge_Zhang
+	focus = {
+		id = YAN_SX_Purge_Zhang
+		icon = GFX_focus_YAN_SX_Purge_Zhang
+		x = 2
+		y = 2
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Seal_Suiling
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -1 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Purge_Zhang_press_tt
+			add_to_variable = { yan_sui_awakening = -4 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_to_variable = { yan_shudao_integrity = -10 }
+			custom_effect_tooltip = YAN_SX_shudao_m10_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_SX_Storm_Suiling
+	focus = {
+		id = YAN_SX_Storm_Suiling
+		icon = GFX_focus_YAN_SX_Storm_Suiling
+		x = -3
+		y = 3
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Cut_Leyline
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -6 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Storm_Suiling_press_tt
+			add_to_variable = { yan_sui_awakening = -3 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			army_experience = 40
+		}
+	}
+
+	# YAN_SX_Dream_Counter
+	focus = {
+		id = YAN_SX_Dream_Counter
+		icon = GFX_focus_YAN_SX_Dream_Counter
+		x = -1
+		y = 3
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Cut_Leyline
+		}
+		prerequisite = {
+			focus = YAN_SX_Granary_Levy
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -5 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Dream_Counter_press_tt
+			add_to_variable = { yan_sui_awakening = -4 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_political_power = 30
+		}
+	}
+
+	# YAN_SX_Melt_Qiyou
+	focus = {
+		id = YAN_SX_Melt_Qiyou
+		icon = GFX_focus_YAN_SX_Melt_Qiyou
+		x = 1
+		y = 3
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Granary_Levy
+		}
+		prerequisite = {
+			focus = YAN_SX_Purge_Zhang
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -5 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Melt_Qiyou_press_tt
+			add_political_power = 30
+		}
+	}
+
+	# YAN_SX_Seal_Ziyou
+	focus = {
+		id = YAN_SX_Seal_Ziyou
+		icon = GFX_focus_YAN_SX_Seal_Ziyou
+		x = 3
+		y = 3
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Purge_Zhang
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -5 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Seal_Ziyou_press_tt
+			add_to_variable = { yan_shudao_integrity = -15 }
+			custom_effect_tooltip = YAN_SX_shudao_m15_tt
+		}
+	}
+
+	# YAN_SX_Slay_Sword
+	focus = {
+		id = YAN_SX_Slay_Sword
+		icon = GFX_focus_YAN_SX_Slay_Sword
+		x = -3
+		y = 4
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Storm_Suiling
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -7 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Slay_Sword_press_tt
+			add_to_variable = { yan_sui_awakening = -5 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			army_experience = 50
+			add_war_support = 0.05
+		}
+	}
+
+	# YAN_SX_Burn_Mowang
+	focus = {
+		id = YAN_SX_Burn_Mowang
+		icon = GFX_focus_YAN_SX_Burn_Mowang
+		x = -1
+		y = 4
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Dream_Counter
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -5 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Burn_Mowang_press_tt
+			add_to_variable = { yan_sui_awakening = -3 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_political_power = 25
+		}
+	}
+
+	# YAN_SX_Jieyuan_Rite
+	focus = {
+		id = YAN_SX_Jieyuan_Rite
+		icon = GFX_focus_YAN_SX_Jieyuan_Rite
+		x = 1
+		y = 4
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Melt_Qiyou
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -5 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Jieyuan_Rite_press_tt
+			add_to_variable = { yan_sui_awakening = -3 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_stability = 0.02
+		}
+	}
+
+	# YAN_SX_Shanhaizhong_Trial
+	focus = {
+		id = YAN_SX_Shanhaizhong_Trial
+		icon = GFX_focus_YAN_SX_Shanhaizhong_Trial
+		x = 3
+		y = 4
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Seal_Ziyou
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -4 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Shanhaizhong_Trial_press_tt
+			add_to_variable = { yan_sui_awakening = -2 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_to_variable = { yan_agent_trust = 10 }
+			custom_effect_tooltip = YAN_SX_agent_u10_tt
+		}
+	}
+
+	# YAN_SX_Dragon_Led_Hunt
+	focus = {
+		id = YAN_SX_Dragon_Led_Hunt
+		icon = GFX_focus_YAN_SX_Dragon_Led_Hunt
+		x = -2
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = YAN_SX_Slay_Sword
+		}
+		prerequisite = {
+			focus = YAN_SX_Burn_Mowang
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -6 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Dragon_Led_Hunt_press_tt
+			add_to_variable = { yan_sui_awakening = 5 }
+			custom_effect_tooltip = YAN_SX_awake_p_tt
+			add_war_support = 0.08
+			add_stability = 0.03
+			set_country_flag = yan_dragon_personal_hunt
+		}
+	}
+
+	# YAN_SX_Agent_Screen
+	focus = {
+		id = YAN_SX_Agent_Screen
+		icon = GFX_focus_YAN_SX_Agent_Screen
+		x = 2
+		y = 5
+		cost = 3
+		prerequisite = {
+			focus = YAN_SX_Jieyuan_Rite
+		}
+		prerequisite = {
+			focus = YAN_SX_Shanhaizhong_Trial
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -5 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Agent_Screen_press_tt
+			add_to_variable = { yan_sui_awakening = -5 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_to_variable = { yan_agent_trust = -10 }
+			custom_effect_tooltip = YAN_SX_agent_m10_tt
+			add_stability = 0.03
+			set_country_flag = yan_agents_screened
+		}
+	}
+
+	# YAN_SX_Great_Hunt
+	focus = {
+		id = YAN_SX_Great_Hunt
+		icon = GFX_focus_YAN_SX_Great_Hunt
+		x = 0
+		y = 6
+		cost = 3
+		prerequisite = {
+			focus = YAN_SX_Dragon_Led_Hunt
+		}
+		prerequisite = {
+			focus = YAN_SX_Agent_Screen
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -10 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Great_Hunt_press_tt
+			add_to_variable = { yan_sui_awakening = -10 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_to_variable = { yan_bufan_prep = -50 }
+			custom_effect_tooltip = YAN_SX_bufan_m50_tt
+			add_to_variable = { yan_agent_trust = 20 }
+			custom_effect_tooltip = YAN_SX_agent_u20_tt
+			add_political_power = 150
+		}
+	}
+
+	# YAN_SX_Behemoth_Sight
+	focus = {
+		id = YAN_SX_Behemoth_Sight
+		icon = GFX_focus_YAN_SX_Behemoth_Sight
+		x = -2
+		y = 7
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Great_Hunt
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = 14 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Behemoth_Sight_press_tt
+			add_to_variable = { yan_sui_awakening = 15 }
+			custom_effect_tooltip = YAN_SX_awake_p_tt
+			add_stability = -0.05
+			add_war_support = 0.05
+			set_country_flag = yan_behemoth_sighted
+		}
+	}
+
+	# YAN_SX_Bufan_Reforge
+	focus = {
+		id = YAN_SX_Bufan_Reforge
+		icon = GFX_focus_YAN_SX_Bufan_Reforge
+		x = 2
+		y = 7
+		cost = 2
+		prerequisite = {
+			focus = YAN_SX_Great_Hunt
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = 10 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Bufan_Reforge_press_tt
+			add_to_variable = { yan_sui_awakening = 10 }
+			custom_effect_tooltip = YAN_SX_awake_p_tt
+			add_to_variable = { yan_bufan_prep = 25 }
+			custom_effect_tooltip = YAN_SX_bufan_u25_tt
+			add_war_support = 0.05
+		}
+	}
+
+	# YAN_SX_Sui_Wrath
+	focus = {
+		id = YAN_SX_Sui_Wrath
+		icon = GFX_focus_YAN_SX_Sui_Wrath
+		x = 0
+		y = 8
+		cost = 3
+		prerequisite = {
+			focus = YAN_SX_Behemoth_Sight
+		}
+		prerequisite = {
+			focus = YAN_SX_Bufan_Reforge
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = 8 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Sui_Wrath_press_tt
+			add_to_variable = { yan_sui_awakening = 10 }
+			custom_effect_tooltip = YAN_SX_awake_p_tt
+			add_stability = -0.05
+			army_experience = 30
+		}
+	}
+
+	# YAN_SX_Court_Trial
+	focus = {
+		id = YAN_SX_Court_Trial
+		icon = GFX_focus_YAN_SX_Court_Trial
+		x = -1
+		y = 9
+		cost = 3
+		prerequisite = {
+			focus = YAN_SX_Sui_Wrath
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -10 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Court_Trial_press_tt
+			add_to_variable = { yan_sui_awakening = -5 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_political_power = 60
+			add_stability = 0.03
+		}
+	}
+
+	# YAN_SX_Dragon_Descends
+	focus = {
+		id = YAN_SX_Dragon_Descends
+		icon = GFX_focus_YAN_SX_Dragon_Descends
+		x = 1
+		y = 9
+		cost = 3
+		prerequisite = {
+			focus = YAN_SX_Sui_Wrath
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -8 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Dragon_Descends_press_tt
+			add_to_variable = { yan_sui_awakening = -5 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_war_support = 0.05
+		}
+	}
+
+	# YAN_SX_Whole_Board_Bet
+	focus = {
+		id = YAN_SX_Whole_Board_Bet
+		icon = GFX_focus_YAN_SX_Whole_Board_Bet
+		x = 0
+		y = 10
+		cost = 3
+		prerequisite = {
+			focus = YAN_SX_Court_Trial
+		}
+		prerequisite = {
+			focus = YAN_SX_Dragon_Descends
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_to_variable = { yan_sui_pressure = -6 }
+			YAN_sui_pressure_recalc = yes
+			custom_effect_tooltip = YAN_SX_Whole_Board_Bet_press_tt
+			add_to_variable = { yan_sui_awakening = -5 }
+			custom_effect_tooltip = YAN_SX_awake_m_tt
+			add_political_power = 40
+			set_country_flag = yan_sui_gambit
+		}
+	}
+
+	# YAN_SX_Sui_Agreement
+	focus = {
+		id = YAN_SX_Sui_Agreement
+		icon = GFX_focus_YAN_SX_Sui_Agreement
+		x = 0
+		y = 11
+		cost = 4
+		prerequisite = {
+			focus = YAN_SX_Whole_Board_Bet
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			YAN_sui_pressure_agree = yes
+			custom_effect_tooltip = YAN_SX_Sui_Agreement_tt
+		}
+	}
+
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}

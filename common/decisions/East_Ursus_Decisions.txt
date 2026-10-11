@@ -1,0 +1,3442 @@
+East_Ursus_test_Decisions = {
+    East_Ursus_test_Upheaval_Begin = {
+        allowed = {
+            ursus_unifier = yes
+}
+
+        complete_effect = {
+			East_Ursus_Upheaval_Enable = yes
+		}
+    }
+
+    East_Ursus_test_Upheaval_End = {
+        allowed = {
+            ursus_unifier = yes
+}
+
+        complete_effect = {
+			East_Ursus_Upheaval_Disable = yes
+		}
+    }
+
+	East_Ursus_test_Upheaval_Region_Enable = {
+		icon = GFX_decision_generic_welfare
+		complete_effect = {
+			if = {
+				limit = { east_tundria_ursus = yes }
+				REU = {
+					if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+					East_Ursus_Upheaval_Enable = yes
+				}
+				SKH = {
+					if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+					East_Ursus_Upheaval_Enable = yes
+				}
+				UFE = {
+					if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+					East_Ursus_Upheaval_Enable = yes
+				}
+			}
+			else_if = {
+				limit = { central_tundria_ursus = yes }
+				KMG = {
+					if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+					East_Ursus_Upheaval_Enable = yes
+				}
+				BAK = {
+					if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+					East_Ursus_Upheaval_Enable = yes
+				}
+				SGT = {
+					if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+					East_Ursus_Upheaval_Enable = yes
+				}
+				OMN = {
+					if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+					East_Ursus_Upheaval_Enable = yes
+				}
+				NAX = {
+					if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+					East_Ursus_Upheaval_Enable = yes
+				}
+			}
+		}
+	}
+
+	East_Ursus_test_Upheaval_Everyone_Enable = {
+		icon = GFX_decision_generic_welfare
+		complete_effect = {
+			REU = {
+				if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+				East_Ursus_Upheaval_Enable = yes
+			}
+			SKH = {
+				if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+				East_Ursus_Upheaval_Enable = yes
+			}
+			UFE = {
+				if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+				East_Ursus_Upheaval_Enable = yes
+			}
+			KMG = {
+				if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+				East_Ursus_Upheaval_Enable = yes
+			}
+			BAK = {
+				if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+				East_Ursus_Upheaval_Enable = yes
+			}
+			SGT = {
+				if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+				East_Ursus_Upheaval_Enable = yes
+			}
+			OMN = {
+				if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+				East_Ursus_Upheaval_Enable = yes
+			}
+			NAX = {
+				if = { limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } } }
+				East_Ursus_Upheaval_Enable = yes
+			}
+		}
+	}
+
+	East_Ursus_annex_east = {
+        allowed = {
+            ursus_unifier = yes
+}
+
+        complete_effect = {
+			annex_country = {
+				target = REU
+			}
+			annex_country = {
+				target = UTA
+			}
+			annex_country = {
+				target = BWS
+			}
+			annex_country = {
+				target = BRS
+			}
+			annex_country = {
+				target = BRN
+			}
+			annex_country = {
+				target = UFE
+			}
+			annex_country = {
+				target = SKH
+			}
+			annex_country = {
+				target = KMG
+			}
+			annex_country = {
+				target = BAK
+			}
+			annex_country = {
+				target = KMG
+			}
+			annex_country = {
+				target = DUD
+			}
+			annex_country = {
+				target = SGT
+			}
+			annex_country = {
+				target = KRS
+			}
+			annex_country = {
+				target = NAX
+			}
+			annex_country = {
+				target = IST
+			}
+			annex_country = {
+				target = CYB
+			}
+			annex_country = {
+				target = OMN
+			}
+			annex_country = {
+				target = UEA
+			}
+			every_owned_state = {
+				add_core_of = PREV
+			}
+		}
+    }
+	# East_Ursus_test_Upheaval_Everyone_Add_Army = {
+	# 	complete_effect = {
+	# 		division_template = {
+	# 			name = "常规步兵师"
+	# 			priority = 1
+	# 			regiments = {
+	# 				infantry = { x = 0 y = 0 }
+	# 				infantry = { x = 0 y = 1 }
+	# 				infantry = { x = 0 y = 2 }
+				
+	# 				infantry = { x = 1 y = 0 }
+	# 				infantry = { x = 1 y = 1 }
+	# 				infantry = { x = 1 y = 2 }
+		
+	# 				infantry = { x = 2 y = 0 }
+	# 				infantry = { x = 2 y = 1 }
+	# 				infantry = { x = 2 y = 2 }
+	# 			}
+	# 		}
+	# 		capital_scope = {
+	# 			create_unit = { 
+	# 				division = "name = \"常规步兵师\" division_template = \"常规步兵师\" start_experience_factor = 0.5" 
+	# 				owner = ROOT
+	# 			}
+	# 		}
+	# 	}
+	# }
+}
+
+East_Ursus_Upheaval_Decisions_GUI = {
+
+	Upheaval_Occupation_UTA = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			OR = {
+				original_tag = REU
+				original_tag = SKH
+			}
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_UTA_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = UTA.command_power
+			hidden_effect = {
+				if = {
+					limit = {
+						original_tag = REU
+					}
+					transfer_state = 168
+					transfer_state = 165
+					transfer_state = 156
+					country_event = {
+						id = event_reu.93
+					}
+					hidden_effect = {
+						news_event = {
+							id = worldnews_reu.3
+						}
+					}
+				}
+				if = {
+					limit = {
+						original_tag = SKH
+					}
+					transfer_state = 131
+					transfer_state = 98
+					transfer_state = 63
+				}
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = UTA }
+						add_core_of = PREV
+						remove_core_of = UTA
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	#加核心决议
+	Upheaval_Occupation_UFE = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			UFE = { exists = no }
+			any_owned_state = { is_core_of = UFE }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = UFE }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = UFE.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = UFE }
+						add_core_of = PREV
+						remove_core_of = UFE
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Upheaval_Occupation_REU = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			REU = { exists = no }
+			any_owned_state = { is_core_of = REU }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = REU }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = REU.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = REU }
+						add_core_of = PREV
+						remove_core_of = REU
+					}
+				}
+				KMG = {
+					set_country_flag = KMG_Alexia_Kosichina_join
+					add_to_variable = { KMG_moderates_num = 1 }
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+
+	}
+
+	Upheaval_Occupation_SKH = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			SKH = { exists = no }
+			any_owned_state = { is_core_of = SKH }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = SKH }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = SKH.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = SKH }
+						add_core_of = PREV
+						remove_core_of = SKH
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+
+	}
+
+	Upheaval_Occupation_KMG = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			KMG = { exists = no }
+			any_owned_state = { is_core_of = KMG }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = KMG }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = KMG.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = KMG }
+						add_core_of = PREV
+						remove_core_of = KMG
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+
+	}
+
+	Upheaval_Occupation_BAK = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			BAK = { exists = no }
+			any_owned_state = { is_core_of = BAK }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = BAK }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = BAK.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = BAK }
+						add_core_of = PREV
+						remove_core_of = BAK
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+
+	}
+
+	Upheaval_Occupation_SGT = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			SGT = { exists = no }
+			any_owned_state = { is_core_of = SGT }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = SGT }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = SGT.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = SGT }
+						add_core_of = PREV
+						remove_core_of = SGT
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+
+	}
+
+	Upheaval_Occupation_KRS = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			KRS = { exists = no }
+			any_owned_state = { is_core_of = KRS }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = KRS }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = KRS.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = KRS }
+						add_core_of = PREV
+						remove_core_of = KRS
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+
+	}
+
+	Upheaval_Occupation_OMN = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			OMN = { exists = no }
+			any_owned_state = { is_core_of = OMN }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = OMN }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = OMN.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = OMN }
+						add_core_of = PREV
+						remove_core_of = OMN
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+
+	}
+
+	Upheaval_Occupation_CYB = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			CYB = { exists = no }
+			any_owned_state = { is_core_of = CYB }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = CYB }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = CYB.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = CYB }
+						add_core_of = PREV
+						remove_core_of = CYB
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+
+	}
+
+	Upheaval_Occupation_IST = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			IST = { exists = no }
+			any_owned_state = { is_core_of = IST }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = IST }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = IST.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = IST }
+						add_core_of = PREV
+						remove_core_of = IST
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+
+	}
+
+	Upheaval_Occupation_NAX = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			NAX = { exists = no }
+			any_owned_state = { is_core_of = NAX }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = NAX }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = NAX.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = NAX }
+						add_core_of = PREV
+						remove_core_of = NAX
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Upheaval_Occupation_UEA = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			UEA = { exists = no }
+			any_owned_state = { is_core_of = UEA }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = UEA }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_command_power = UEA.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = UEA }
+						add_core_of = PREV
+						remove_core_of = UEA
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	#宣战决议
+	# 2026-09-21 重制（本组 9 条由 docs/_ursus_war_decisions_rework.js 生成，勿手改单条）：
+	#   · 修掉致命 bug：cancel_trigger 原为 NOT = { country_exists = X  has_war_with = X }，块内两条件是「与」，
+	#     备战 15 天内既未亡国也未交战 → 条件恒真，决议点下去次日即被静默取消，玩家与 AI 都宣不出战。
+	#   · 玩家不再受 has_war = no 与本区（东/中冻原）节奏限制，可同时对多个角逐者开战；AI 原样保留，免得多线崩盘。
+	#   · 去掉 fire_only_once，改为 days_re_enable = 120：和议后对方仍在，冷却期过后可再宣。
+	#   · 图标 generic_assault 在原版与本体 gfx 里都不存在（面板上是一片空白），改用 generic_military。
+
+	East_Ursus_Upheaval_War_With_REU = {
+
+		icon = GFX_decision_generic_military
+
+		visible = {
+			check_variable = { Upheaval_ContendersReal_Num > 1 }		# 只剩一个角逐者 -> 本决议失效
+			REU = { exists = yes }
+			NOT = { tag = REU }
+			is_neighbor_of = REU
+			NOT = { has_war_with = REU }
+			NOT = { REU = { is_subject_of = ROOT } }		#附庸走整合，不签宣战
+			NOT = { original_tag = UFE }		#科雷马要先解决萨坎哈
+			#玩家可多线开战、可跨区开战；AI 仍是一场仗一场仗地打，并保留本区节奏
+			OR = {
+				is_ai = no
+				AND = {
+					has_war = no
+					OR = {
+						east_tundria_ursus = yes
+						check_variable = { Upheaval_Contenders_Num_2 = 1 }
+					}
+				}
+			}
+		}
+
+		cost = 25
+
+		modifier = {
+			command_power_gain = -0.5
+			political_power_gain = -1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+
+		days_remove = 15
+		days_re_enable = 120		#和议后目标仍在，四个月内不能再宣
+
+		remove_effect = {
+			declare_war_on = { target = REU type = annex_everything }
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+			if = {
+				limit = {
+					original_tag = REU
+				}
+				SKH = {
+					set_country_flag = REU_SKH_War
+				}
+			}
+		}
+
+		cancel_trigger = {		#目标已亡 / 已在交战才取消（原先写反，15 天备战期内恒真）
+			hidden_trigger = {
+				OR = {
+					REU = { exists = no }
+					has_war_with = REU
+				}
+			}
+		}
+		cancel_effect = {
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		ai_will_do = { #AI不会向多个军阀宣战
+			factor = 1000
+			modifier = {
+				factor = 0
+				has_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+	}
+
+	East_Ursus_Upheaval_War_With_UFE = {
+
+		icon = GFX_decision_generic_military
+
+		visible = {
+			check_variable = { Upheaval_ContendersReal_Num > 1 }		# 只剩一个角逐者 -> 本决议失效
+			UFE = { exists = yes }
+			NOT = { tag = UFE }
+			is_neighbor_of = UFE
+			NOT = { has_war_with = UFE }
+			NOT = { UFE = { is_subject_of = ROOT } }		#附庸走整合，不签宣战
+			#玩家可多线开战、可跨区开战；AI 仍是一场仗一场仗地打，并保留本区节奏
+			OR = {
+				is_ai = no
+				AND = {
+					has_war = no
+					OR = {
+						east_tundria_ursus = yes		#与 REU/SKH 两条一致：东冻原内部互宣（原先漏掉，东乌打不到科雷马）
+						check_variable = { Upheaval_Contenders_Num_2 = 1 }
+					}
+				}
+			}
+		}
+
+		cost = 25
+
+		modifier = {
+			command_power_gain = -0.5
+			political_power_gain = -1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+
+		days_remove = 15
+		days_re_enable = 120		#和议后目标仍在，四个月内不能再宣
+
+		remove_effect = {
+			declare_war_on = { target = UFE type = annex_everything }
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		cancel_trigger = {		#目标已亡 / 已在交战才取消（原先写反，15 天备战期内恒真）
+			hidden_trigger = {
+				OR = {
+					UFE = { exists = no }
+					has_war_with = UFE
+				}
+			}
+		}
+		cancel_effect = {
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		ai_will_do = { #AI不会向多个军阀宣战
+			factor = 1000
+			modifier = {
+				factor = 0
+				has_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+	}
+
+	East_Ursus_Upheaval_War_With_SKH = {
+
+		icon = GFX_decision_generic_military
+
+		visible = {
+			check_variable = { Upheaval_ContendersReal_Num > 1 }		# 只剩一个角逐者 -> 本决议失效
+			SKH = { exists = yes }
+			NOT = { tag = SKH }
+			is_neighbor_of = SKH
+			NOT = { has_war_with = SKH }
+			NOT = { SKH = { is_subject_of = ROOT } }		#附庸走整合，不签宣战
+			#玩家可多线开战、可跨区开战；AI 仍是一场仗一场仗地打，并保留本区节奏
+			OR = {
+				is_ai = no
+				AND = {
+					has_war = no
+					OR = {
+						east_tundria_ursus = yes
+						check_variable = { Upheaval_Contenders_Num_2 = 1 }
+					}
+				}
+			}
+		}
+
+		available = {
+			if = {
+				limit = {
+					original_tag = UFE
+				}
+				SKH = {
+					OR = {
+						controls_state = 202
+						has_country_flag = {
+							flag = REU_SKH_War
+							days > 150
+						}
+						custom_trigger_tooltip = {
+							tooltip = REU_SKH_War_tt
+							has_country_flag = {
+								flag = REU_SKH_War
+								days > 150
+							}
+						}
+					}
+				}
+			}
+			else = {
+				always = yes
+			}
+		}
+
+		cost = 25
+
+		modifier = {
+			command_power_gain = -0.5
+			political_power_gain = -1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+
+		days_remove = 15
+		days_re_enable = 120		#和议后目标仍在，四个月内不能再宣
+
+		remove_effect = {
+			declare_war_on = { target = SKH type = annex_everything }
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+			if = {
+				limit = {
+					original_tag = REU
+				}
+				SKH = {
+					set_country_flag = REU_SKH_War
+				}
+			}
+		}
+
+		cancel_trigger = {		#目标已亡 / 已在交战才取消（原先写反，15 天备战期内恒真）
+			hidden_trigger = {
+				OR = {
+					SKH = { exists = no }
+					has_war_with = SKH
+				}
+			}
+		}
+		cancel_effect = {
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		ai_will_do = { #AI不会向多个军阀宣战
+			factor = 1000
+			modifier = {
+				factor = 0
+				has_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+	}
+
+	East_Ursus_Upheaval_War_With_KMG = {
+
+		icon = GFX_decision_generic_military
+
+		visible = {
+			check_variable = { Upheaval_ContendersReal_Num > 1 }		# 只剩一个角逐者 -> 本决议失效
+			KMG = { exists = yes }
+			NOT = { tag = KMG }
+			is_neighbor_of = KMG
+			NOT = { has_war_with = KMG }
+			NOT = { KMG = { is_subject_of = ROOT } }		#附庸走整合，不签宣战
+			#玩家可多线开战、可跨区开战；AI 仍是一场仗一场仗地打，并保留本区节奏
+			OR = {
+				is_ai = no
+				AND = {
+					has_war = no
+					OR = {
+						central_tundria_ursus = yes
+						check_variable = { Upheaval_Contenders_Num_2 = 1 }
+					}
+				}
+			}
+		}
+
+		cost = 25
+
+		modifier = {
+			command_power_gain = -0.5
+			political_power_gain = -1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+
+		days_remove = 15
+		days_re_enable = 120		#和议后目标仍在，四个月内不能再宣
+
+		remove_effect = {
+			declare_war_on = { target = KMG type = annex_everything }
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		cancel_trigger = {		#目标已亡 / 已在交战才取消（原先写反，15 天备战期内恒真）
+			hidden_trigger = {
+				OR = {
+					KMG = { exists = no }
+					has_war_with = KMG
+				}
+			}
+		}
+		cancel_effect = {
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		ai_will_do = { #AI不会向多个军阀宣战
+			factor = 1000
+			modifier = {
+				factor = 0
+				has_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+	}
+
+	East_Ursus_Upheaval_War_With_BAK = {
+
+		icon = GFX_decision_generic_military
+
+		visible = {
+			check_variable = { Upheaval_ContendersReal_Num > 1 }		# 只剩一个角逐者 -> 本决议失效
+			BAK = { exists = yes }
+			NOT = { tag = BAK }
+			is_neighbor_of = BAK
+			NOT = { has_war_with = BAK }
+			NOT = { BAK = { is_subject_of = ROOT } }		#附庸走整合，不签宣战
+			#玩家可多线开战、可跨区开战；AI 仍是一场仗一场仗地打，并保留本区节奏
+			OR = {
+				is_ai = no
+				AND = {
+					has_war = no
+					OR = {
+						central_tundria_ursus = yes
+						check_variable = { Upheaval_Contenders_Num_2 = 1 }
+					}
+				}
+			}
+		}
+
+		cost = 25
+
+		modifier = {
+			command_power_gain = -0.5
+			political_power_gain = -1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+
+		days_remove = 15
+		days_re_enable = 120		#和议后目标仍在，四个月内不能再宣
+
+		remove_effect = {
+			declare_war_on = { target = BAK type = annex_everything }
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		cancel_trigger = {		#目标已亡 / 已在交战才取消（原先写反，15 天备战期内恒真）
+			hidden_trigger = {
+				OR = {
+					BAK = { exists = no }
+					has_war_with = BAK
+				}
+			}
+		}
+		cancel_effect = {
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		ai_will_do = { #AI不会向多个军阀宣战
+			factor = 1000
+			modifier = {
+				factor = 0
+				has_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+	}
+
+	East_Ursus_Upheaval_War_With_SGT = {
+
+		icon = GFX_decision_generic_military
+
+		visible = {
+			check_variable = { Upheaval_ContendersReal_Num > 1 }		# 只剩一个角逐者 -> 本决议失效
+			SGT = { exists = yes }
+			NOT = { tag = SGT }
+			is_neighbor_of = SGT
+			NOT = { has_war_with = SGT }
+			NOT = { SGT = { is_subject_of = ROOT } }		#附庸走整合，不签宣战
+			#玩家可多线开战、可跨区开战；AI 仍是一场仗一场仗地打，并保留本区节奏
+			OR = {
+				is_ai = no
+				AND = {
+					has_war = no
+					OR = {
+						central_tundria_ursus = yes
+						check_variable = { Upheaval_Contenders_Num_2 = 1 }
+					}
+				}
+			}
+		}
+
+		cost = 25
+
+		modifier = {
+			command_power_gain = -0.5
+			political_power_gain = -1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+
+		days_remove = 15
+		days_re_enable = 120		#和议后目标仍在，四个月内不能再宣
+
+		remove_effect = {
+			declare_war_on = { target = SGT type = annex_everything }
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		cancel_trigger = {		#目标已亡 / 已在交战才取消（原先写反，15 天备战期内恒真）
+			hidden_trigger = {
+				OR = {
+					SGT = { exists = no }
+					has_war_with = SGT
+				}
+			}
+		}
+		cancel_effect = {
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		ai_will_do = { #AI不会向多个军阀宣战
+			factor = 1000
+			modifier = {
+				factor = 0
+				has_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+	}
+
+	# East_Ursus_Upheaval_War_With_KRS = {
+
+	# 	icon = GFX_decision_generic_military
+
+	# 	visible = {
+	# 		is_neighbor_of = KRS
+	# 		has_war = no
+	# 		OR = {
+	# 			central_tundria_ursus = yes
+	# 			check_variable = { Upheaval_Contenders_Num_2 = 1 }
+	# 		}
+	# 	}
+
+	# 	fire_only_once = yes
+	# 	cost = 25
+
+	# 	modifier = {
+	# 		command_power_gain = -0.5
+	# 		political_power_gain = -1
+	# 	}
+
+	# 	complete_effect = {
+	# 		hidden_effect = {
+	# 			set_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 		}
+	# 	}
+
+	# 	days_remove = 15
+	# 	remove_effect = {
+	# 		declare_war_on = { target = KRS type = annex_everything }
+	# 		clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 	}
+
+	# 	cancel_trigger = {
+	# 		hidden_trigger = {
+	# 			NOT = {
+	# 				country_exists = KRS
+	# 				has_war_with = KRS
+	# 			}
+	# 		}
+	# 	}
+	# 	cancel_effect = {
+	# 		clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 	}
+
+	# 	ai_will_do = { #AI不会向多个军阀宣战
+	# 		factor = 1000
+	# 		modifier = {
+	# 			factor = 0
+	# 			has_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 		}
+	# 	}
+	# }
+
+	East_Ursus_Upheaval_War_With_OMN = {
+
+		icon = GFX_decision_generic_military
+
+		visible = {
+			check_variable = { Upheaval_ContendersReal_Num > 1 }		# 只剩一个角逐者 -> 本决议失效
+			OMN = { exists = yes }
+			NOT = { tag = OMN }
+			is_neighbor_of = OMN
+			NOT = { has_war_with = OMN }
+			NOT = { OMN = { is_subject_of = ROOT } }		#附庸走整合，不签宣战
+			#玩家可多线开战、可跨区开战；AI 仍是一场仗一场仗地打，并保留本区节奏
+			OR = {
+				is_ai = no
+				AND = {
+					has_war = no
+					OR = {
+						central_tundria_ursus = yes
+						check_variable = { Upheaval_Contenders_Num_2 = 1 }
+					}
+				}
+			}
+		}
+
+		cost = 25
+
+		modifier = {
+			command_power_gain = -0.5
+			political_power_gain = -1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+
+		days_remove = 15
+		days_re_enable = 120		#和议后目标仍在，四个月内不能再宣
+
+		remove_effect = {
+			declare_war_on = { target = OMN type = annex_everything }
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		cancel_trigger = {		#目标已亡 / 已在交战才取消（原先写反，15 天备战期内恒真）
+			hidden_trigger = {
+				OR = {
+					OMN = { exists = no }
+					has_war_with = OMN
+				}
+			}
+		}
+		cancel_effect = {
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		ai_will_do = { #AI不会向多个军阀宣战
+			factor = 1000
+			modifier = {
+				factor = 0
+				has_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+	}
+
+	# East_Ursus_Upheaval_War_With_CYB = {
+
+	# 	icon = GFX_decision_generic_military
+
+	# 	visible = {
+	# 		is_neighbor_of = CYB
+	# 		has_war = no
+	# 		OR = {
+	# 			west_tundria_ursus = yes
+	# 			check_variable = { Upheaval_Contenders_Num_2 = 1 }
+	# 		}
+	# 	}
+
+	# 	fire_only_once = yes
+	# 	cost = 25
+
+	# 	modifier = {
+	# 		command_power_gain = -0.5
+	# 		political_power_gain = -1
+	# 	}
+
+	# 	complete_effect = {
+	# 		hidden_effect = {
+	# 			set_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 		}
+	# 	}
+
+	# 	days_remove = 15
+	# 	remove_effect = {
+	# 		declare_war_on = { target = CYB type = annex_everything }
+	# 		clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 	}
+
+	# 	cancel_trigger = {
+	# 		hidden_trigger = {
+	# 			NOT = {
+	# 				country_exists = CYB
+	# 				has_war_with = CYB
+	# 			}
+	# 		}
+	# 	}
+	# 	cancel_effect = {
+	# 		clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 	}
+
+	# 	ai_will_do = { #AI不会向多个军阀宣战
+	# 		factor = 1000
+	# 		modifier = {
+	# 			factor = 0
+	# 			has_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 		}
+	# 	}
+	# }
+
+	# East_Ursus_Upheaval_War_With_IST = {
+
+	# 	icon = GFX_decision_generic_military
+
+	# 	visible = {
+	# 		is_neighbor_of = IST
+	# 		has_war = no
+	# 		OR = {
+	# 			west_tundria_ursus = yes
+	# 			check_variable = { Upheaval_Contenders_Num_2 = 1 }
+	# 		}
+	# 	}
+
+	# 	fire_only_once = yes
+	# 	cost = 25
+
+	# 	modifier = {
+	# 		command_power_gain = -0.5
+	# 		political_power_gain = -1
+	# 	}
+
+	# 	complete_effect = {
+	# 		hidden_effect = {
+	# 			set_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 		}
+	# 	}
+
+	# 	days_remove = 15
+	# 	remove_effect = {
+	# 		declare_war_on = { target = IST type = annex_everything }
+	# 		clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 	}
+
+	# 	cancel_trigger = {
+	# 		hidden_trigger = {
+	# 			NOT = {
+	# 				country_exists = IST
+	# 				has_war_with = IST
+	# 			}
+	# 		}
+	# 	}
+	# 	cancel_effect = {
+	# 		clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 	}
+
+	# 	ai_will_do = { #AI不会向多个军阀宣战
+	# 		factor = 1000
+	# 		modifier = {
+	# 			factor = 0
+	# 			has_country_flag = East_Ursus_Upheaval_preparing_expansion
+	# 		}
+	# 	}
+	# }
+
+	East_Ursus_Upheaval_War_With_NAX = {
+
+		icon = GFX_decision_generic_military
+
+		visible = {
+			check_variable = { Upheaval_ContendersReal_Num > 1 }		# 只剩一个角逐者 -> 本决议失效
+			NAX = { exists = yes }
+			NOT = { tag = NAX }
+			is_neighbor_of = NAX
+			NOT = { has_war_with = NAX }
+			NOT = { NAX = { is_subject_of = ROOT } }		#附庸走整合，不签宣战
+			#玩家可多线开战、可跨区开战；AI 仍是一场仗一场仗地打，并保留本区节奏
+			OR = {
+				is_ai = no
+				AND = {
+					has_war = no
+					OR = {
+						central_tundria_ursus = yes
+						check_variable = { Upheaval_Contenders_Num_2 = 1 }
+					}
+				}
+			}
+		}
+
+		cost = 25
+
+		modifier = {
+			command_power_gain = -0.5
+			political_power_gain = -1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+
+		days_remove = 15
+		days_re_enable = 120		#和议后目标仍在，四个月内不能再宣
+
+		remove_effect = {
+			declare_war_on = { target = NAX type = annex_everything }
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		cancel_trigger = {		#目标已亡 / 已在交战才取消（原先写反，15 天备战期内恒真）
+			hidden_trigger = {
+				OR = {
+					NAX = { exists = no }
+					has_war_with = NAX
+				}
+			}
+		}
+		cancel_effect = {
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		ai_will_do = { #AI不会向多个军阀宣战
+			factor = 1000
+			modifier = {
+				factor = 0
+				has_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+	}
+
+	East_Ursus_Upheaval_War_With_UEA = {
+
+		icon = GFX_decision_generic_military
+
+		visible = {
+			UEA = { exists = yes }
+			NOT = { tag = UEA }
+			NOT = { has_war_with = UEA }
+			NOT = { UEA = { is_subject_of = ROOT } }		#附庸走整合，不签宣战
+			check_variable = { Upheaval_Contenders_Num_1 = 1 }		#先把冻原上的角逐者打完
+			OR = {
+				is_ai = no
+				has_war = no
+			}
+		}
+
+		cost = 25
+
+		modifier = {
+			command_power_gain = -0.5
+			political_power_gain = -1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+
+		days_remove = 15
+		days_re_enable = 120		#和议后目标仍在，四个月内不能再宣
+
+		remove_effect = {
+			declare_war_on = { target = UEA type = annex_everything }
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		cancel_trigger = {		#目标已亡 / 已在交战才取消（原先写反，15 天备战期内恒真）
+			hidden_trigger = {
+				OR = {
+					UEA = { exists = no }
+					has_war_with = UEA
+				}
+			}
+		}
+		cancel_effect = {
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		ai_will_do = { #AI不会向多个军阀宣战
+			factor = 1000
+			modifier = {
+				factor = 0
+				has_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+	}
+
+	Upheaval_Chaos_Gain = {
+
+		icon = GFX_decision_generic_political_rally
+
+		available = { hidden_trigger = { always = no } }
+
+		activation = {
+			OR = {
+				has_country_flag = East_Ursus_Upheaval_Enabled
+				has_country_flag = East_Ursus_Upheaval_2_Enabled
+			}
+		}
+
+		priority = 100
+
+		is_good = no
+
+		days_mission_timeout = 7
+
+		timeout_effect = {
+			set_temp_variable = { Y = 0.02 }
+			if = {
+				limit = { has_war = yes }
+				multiply_temp_variable = { Y = 1.5 }
+			}
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			if = {
+				limit = {
+					AND = {
+						NOT = {
+							controls_state = var:ursus_warlord_original_capital
+						}
+						NOT = {
+							has_idea = upheaval_capital_lost
+						}
+					}
+				}
+				add_ideas = upheaval_capital_lost
+			}
+		}
+
+		cancel_trigger = { 
+			East_Ursus_Upheaval_ScriptedTrigger_OnlyOneContenderLeft = yes
+		}
+	}
+
+	Upheaval_Chaos_Appease = {
+		icon = GFX_decision_generic_welfare
+		cost = 30
+
+		modifier = {
+			consumer_goods_factor = 0.05
+		}
+		
+		available = {
+			set_temp_variable = { Y = 0 }
+			East_Ursus_Upheaval_ScriptedTrigger_Chaos_MoreThanY = yes
+		}
+		
+		complete_effect = {
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+		}
+
+		days_remove = 30
+		days_re_enable = 30
+
+		remove_effect = {
+			set_temp_variable = { Y = -0.1 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+		}
+
+		cancel_trigger = {
+			East_Ursus_Upheaval_ScriptedTrigger_OnlyOneContenderLeft = yes
+		}
+
+		ai_will_do = { factor = 50 }
+	}
+
+	Upheaval_Factories_for_War = {
+		icon = GFX_decision_generic_factory
+		cost = 40
+
+		visible = {
+			NOT = {
+				has_idea = Upheaval_increased_factory_output
+			}
+		}
+
+		available = {
+			set_temp_variable = { Y = 0.8 }
+			East_Ursus_Upheaval_ScriptedTrigger_Chaos_LessThanY = yes
+		}
+
+		complete_effect = {
+			set_temp_variable = { Y = 0.04 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_timed_idea = {
+				idea = Upheaval_increased_factory_output
+				days = 100
+			}
+			add_stability = -0.02
+		}
+		days_remove = 20
+		ai_will_do = { factor = 50 }
+		cancel_trigger = { 
+			East_Ursus_Upheaval_ScriptedTrigger_OnlyOneContenderLeft = yes
+		}
+	}
+
+	Upheaval_War_Propaganda = {
+		icon = GFX_decision_generic_political_address
+		cost = 50
+
+		visible = {
+			NOT = {
+				has_idea = Upheaval_boosting_morale
+			}
+		}
+
+		available = {
+			set_temp_variable = { Y = 0 }
+			East_Ursus_Upheaval_ScriptedTrigger_Chaos_MoreThanY = yes
+		}
+
+		complete_effect = {
+			set_temp_variable = { Y = -0.02 }
+			East_Ursus_Upheaval_Chaos_Add_Y = yes
+			add_timed_idea = {
+				idea = Upheaval_boosting_morale
+				days = 30
+			}
+			add_stability = -0.02
+		}
+		days_remove = 20
+		ai_will_do = { factor = 50 }
+		cancel_trigger = { 
+			East_Ursus_Upheaval_ScriptedTrigger_OnlyOneContenderLeft = yes
+		}
+	}
+
+#
+	# War_With_East_Tundria_Ursus = {
+	# 	icon = GFX_decision_generic_military
+
+	# 	visible = {
+	# 		has_war = no
+	# 		check_variable = { Upheaval_Contenders_Num_2 = 1 }
+	# 		NOT = {
+	# 			east_tundria_ursus = yes
+	# 		}
+	# 	}
+
+	# 	available = {
+	# 		custom_trigger_tooltip = {
+	# 			tooltip = East_Tundria_Ursus_Unification_tt
+	# 			any_neighbor_country = {
+	# 				east_tundria_ursus = yes
+	# 				check_variable = { Upheaval_Contenders_Num_2 = 1 }
+	# 			}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				west_tundria_ursus = yes
+	# 			}
+	# 			UEA = {
+	# 				exists = no
+	# 			}
+	# 			custom_trigger_tooltip = {
+	# 				tooltip = East_Ursus_East_Central_War_tt
+	# 				has_country_flag = {
+	# 					flag = East_Ursus_East_Central_War
+	# 					days > 150
+	# 				}
+	# 			}
+	# 			has_country_flag = {
+	# 				flag = East_Ursus_East_Central_War
+	# 				days > 150
+	# 			}
+	# 		}
+	# 	}
+
+	# 	fire_only_once = yes
+	# 	cost = 25
+
+	# 	days_remove = 15
+
+	# 	remove_effect = {
+	# 		every_neighbor_country = {
+	# 			limit = {
+	# 				east_tundria_ursus = yes
+	# 			}
+	# 			FROM = {
+	# 				declare_war_on = {
+	# 					target = PREV
+	# 					type = annex_everything
+	# 				}
+	# 			}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				central_tundria_ursus = yes
+	# 			}
+	# 			OMN = {
+	# 				set_country_flag = East_Ursus_East_Central_War
+	# 			}
+	# 			CYB = {
+	# 				set_country_flag = East_Ursus_East_Central_War
+	# 			}
+	# 			IST = {
+	# 				set_country_flag = East_Ursus_East_Central_War
+	# 			}
+	# 			NAX = {
+	# 				set_country_flag = East_Ursus_East_Central_War
+	# 			}
+	# 		}
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1000
+	# 	}
+	# }
+
+	# War_With_Central_Tundria_Ursus = {
+	# 	icon = GFX_decision_generic_military
+
+	# 	visible = {
+	# 		has_war = no
+	# 		check_variable = { Upheaval_Contenders_Num_2 = 1 }
+	# 		NOT = {
+	# 			central_tundria_ursus = yes
+	# 		}
+	# 	}
+
+	# 	available = {
+	# 		custom_trigger_tooltip = {
+	# 			tooltip = Central_Tundria_Ursus_Unification_tt
+	# 			any_neighbor_country = {
+	# 				central_tundria_ursus = yes
+	# 				check_variable = { Upheaval_Contenders_Num_2 = 1 }
+	# 			}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				west_tundria_ursus = yes
+	# 			}
+	# 			UEA = {
+	# 				exists = no
+	# 			}
+	# 			custom_trigger_tooltip = {
+	# 				tooltip = East_Ursus_East_Central_War_tt
+	# 				has_country_flag = {
+	# 					flag = East_Ursus_East_Central_War
+	# 					days > 150
+	# 				}
+	# 			}
+	# 			has_country_flag = {
+	# 				flag = East_Ursus_East_Central_War
+	# 				days > 150
+	# 			}
+	# 		}
+	# 	}
+
+	# 	fire_only_once = yes
+	# 	cost = 25
+
+	# 	days_remove = 15
+
+	# 	remove_effect = {
+	# 		every_neighbor_country = {
+	# 			limit = {
+	# 				central_tundria_ursus = yes
+	# 			}
+	# 			FROM = {
+	# 				declare_war_on = {
+	# 					target = PREV
+	# 					type = annex_everything
+	# 				}
+	# 			}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				east_tundria_ursus = yes
+	# 			}
+	# 			OMN = {
+	# 				set_country_flag = East_Ursus_East_Central_War
+	# 			}
+	# 			CYB = {
+	# 				set_country_flag = East_Ursus_East_Central_War
+	# 			}
+	# 			IST = {
+	# 				set_country_flag = East_Ursus_East_Central_War
+	# 			}
+	# 			NAX = {
+	# 				set_country_flag = East_Ursus_East_Central_War
+	# 			}
+	# 		}
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1000
+	# 	}
+	# }
+
+	# War_With_West_Tundria_Ursus = {
+	# 	icon = GFX_decision_generic_military
+
+	# 	visible = {
+	# 		has_war = no
+	# 		check_variable = { Upheaval_Contenders_Num_2 = 1 }
+	# 		NOT = {
+	# 			west_tundria_ursus = yes
+	# 		}
+	# 	}
+
+	# 	available = {
+	# 		custom_trigger_tooltip = {
+	# 			tooltip = West_Tundria_Ursus_Unification_tt
+	# 			any_neighbor_country = {
+	# 				west_tundria_ursus = yes
+	# 				check_variable = { Upheaval_Contenders_Num_2 = 1 }
+	# 			}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				east_tundria_ursus = yes
+	# 			}
+	# 			KMG = {
+	# 				exists = no
+	# 			}
+	# 			SGT = {
+	# 				exists = no
+	# 			}
+	# 			KRS = {
+	# 				exists = no
+	# 			}
+	# 			BAK = {
+	# 				exists = no
+	# 			}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				central_tundria_ursus = yes
+	# 			}
+	# 			REU = {
+	# 				exists = no
+	# 			}
+	# 			SKH = {
+	# 				exists = no
+	# 			}
+	# 			UFE = {
+	# 				exists = no
+	# 			}
+	# 		}
+	# 		OR = {
+	# 			AND = {
+	# 				custom_trigger_tooltip = {
+	# 					tooltip = East_Ursus_UEA_War_tt
+	# 					has_country_flag = {
+	# 						flag = East_Ursus_UEA_War
+	# 						days > 200
+	# 					}
+	# 				}
+	# 				has_country_flag = {
+	# 					flag = East_Ursus_UEA_War
+	# 					days > 200
+	# 				}
+	# 			}
+				
+	# 			UEA = {
+	# 				exists = no
+	# 			}
+	# 		}
+	# 	}
+
+	# 	fire_only_once = yes
+	# 	cost = 25
+
+	# 	days_remove = 15
+
+	# 	remove_effect = {
+	# 		every_neighbor_country = {
+	# 			limit = {
+	# 				west_tundria_ursus = yes
+	# 			}
+	# 			FROM = {
+	# 				declare_war_on = {
+	# 					target = PREV
+	# 					type = annex_everything
+	# 				}
+	# 			}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				UEA = {
+	# 					exists = yes
+	# 				}
+	# 			}
+	# 			declare_war_on = {
+	# 				target = UEA
+	# 				type = annex_everything
+	# 			}
+	# 		}
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1000
+	# 	}
+	# }
+
+	East_Ursus_Unification = {
+		visible = {
+			OR = {
+				AND = {
+					NOT = {
+						any_neighbor_country = {
+							ursus_unifier = yes
+						}
+					}
+					all_owned_state = {
+						is_core_of = ROOT
+					}
+					UEA = {
+						exists = no
+					}
+					CYB = {
+						exists = no
+					}
+					IST = {
+						exists = no
+					}
+				}
+				# 2026-09-13：已是东乌萨斯仅存的角逐者 = 大叛乱已分出胜负，允许直接结算
+				East_Ursus_Upheaval_ScriptedTrigger_OnlyOneContenderLeft = yes
+			}
+		}
+
+		complete_effect = {
+			East_Ursus_Upheaval_Disable = yes
+			if = {
+				limit = {
+					original_tag = REU
+				}
+				set_province_name = {
+					id = 1908
+					name = vp_NovoTundriskaya
+				}
+				set_cosmetic_tag = Soviet_Republic_of_Tundria
+			}
+			if = {
+				limit = {
+					original_tag = KMG
+				}
+				set_province_name = {
+					id = 1908
+					name = vp_NovoTundriskaya
+				}
+				set_cosmetic_tag = National_Republic_of_Tundria
+			}
+			if = {
+				limit = {
+					original_tag = UFE
+				}
+				set_province_name = {
+					id = 1908
+					name = vp_NovoTundriskaya
+				}
+			}
+			swap_ideas = {
+				remove_idea = local_warlord
+				add_idea = medium_country
+			}
+			add_research_slot = 1
+
+			set_capital = {
+				state = 139
+				remember_old_capital = no
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}	
+}
+
+Ursus_Unification_War_Decisions_GUI = {
+
+	# East_Ursus_contact_resistance_in_empire = {
+	# 	visible = {
+	# 		OR = {
+	# 			has_government = communism
+	# 			has_government = liberalism
+	# 			has_government = fascism
+	# 			original_tag = KMG
+	# 			original_tag = UFE
+	# 		}
+	# 	}
+
+	# 	fire_only_once = yes
+	# 	cost = 25
+
+	# 	days_remove = 30
+
+	# 	remove_effect = {
+	# 		if = {
+	# 			limit = {
+	# 				has_government = communism
+	# 			}
+	# 			set_country_flag = URS_communism_uprising
+	# 			URS = {
+	# 				set_variable = { East_Ursus_Berekar_infiltration = 5 }
+	# 				custom_effect_tooltip = East_Ursus_Berekar_infiltration_5_tt
+	# 			}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				OR = {
+	# 					has_government = liberalism
+	# 					original_tag = UFE
+	# 				}
+	# 			}
+	# 			set_country_flag = URS_liberalism_uprising
+	# 			URS = {
+	# 				set_variable = { East_Ursus_North_west_infiltration = 5 }
+	# 				custom_effect_tooltip = East_Ursus_North_west_infiltration_5_tt
+	# 			}
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				OR = {
+	# 					has_government = fascism
+	# 					original_tag = KMG
+	# 				}
+	# 			}
+	# 			set_country_flag = URS_fascism_uprising
+	# 			URS = {
+	# 				set_variable = { East_Ursus_Volga_infiltration = 5 }
+	# 				custom_effect_tooltip = East_Ursus_Volga_infiltration_5_tt
+	# 			}
+	# 		}
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1000
+	# 	}
+	# }
+
+	# East_Ursus_infiltrate_Balti_area = {
+	# 	available = {
+	# 		has_equipment = { infantry_equipment > 199 }
+	# 	}
+
+	# 	days_remove = 30
+
+	# 	cost = 10
+
+	# 	complete_effect = {
+	# 		add_equipment_to_stockpile = {
+	# 			type = infantry_equipment
+	# 			amount = -200
+	# 		}
+	# 	}
+
+	# 	remove_effect = {
+	# 	}
+	# }
+
+	# East_Ursus_infiltrate_Belaursnia_area = {
+	# 	available = {
+	# 		has_equipment = { infantry_equipment > 199 }
+	# 	}
+
+	# 	days_remove = 30
+
+	# 	cost = 10
+
+	# 	complete_effect = {
+	# 		add_equipment_to_stockpile = {
+	# 			type = infantry_equipment
+	# 			amount = -200
+	# 		}
+	# 	}
+
+	# 	remove_effect = {
+	# 	}
+	# }
+
+	# East_Ursus_infiltrate_Kozacy_area = {
+	# 	available = {
+	# 		has_equipment = { infantry_equipment > 199 }
+	# 	}
+
+	# 	days_remove = 30
+
+	# 	cost = 10
+
+	# 	complete_effect = {
+	# 		add_equipment_to_stockpile = {
+	# 			type = infantry_equipment
+	# 			amount = -200
+	# 		}
+	# 	}
+
+	# 	remove_effect = {
+	# 	}
+	# }
+
+	# East_Ursus_infiltrate_North_west_area = {
+	# 	available = {
+	# 		has_equipment = { infantry_equipment > 199 }
+	# 		URS = {
+	# 			custom_trigger_tooltip = {
+	# 				tooltip = East_Ursus_local_infiltration_less_3_tt
+	# 				check_variable = { East_Ursus_North_west_infiltration < 3}
+	# 			}
+	# 		}
+	# 		custom_trigger_tooltip = {
+	# 			tooltip = East_Ursus_infiltration_point_more_0_tt
+	# 			check_variable = { East_Ursus_infiltration_point > 0 }
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				OR = {
+	# 					has_government = liberalism
+	# 					original_tag = UFE
+	# 				}
+	# 			}
+	# 			custom_trigger_tooltip = {
+	# 				tooltip = East_Ursus_local_infiltration_uprise_tt
+	# 				always = no
+	# 			}
+	# 		}
+	# 	}
+
+	# 	days_remove = 30
+
+	# 	cost = 10
+
+	# 	complete_effect = {
+	# 		add_equipment_to_stockpile = {
+	# 			type = infantry_equipment
+	# 			amount = -200
+	# 		}
+	# 		add_to_variable = { East_Ursus_infiltration_point = -1 }
+	# 		custom_effect_tooltip = East_Ursus_infiltration_point_minus_1_tt
+	# 	}
+
+	# 	remove_effect = {
+	# 		URS = {
+	# 			add_to_variable = { East_Ursus_North_west_infiltration = 1 }
+	# 			custom_effect_tooltip = East_Ursus_North_west_infiltration_1_tt
+	# 		}
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1000
+	# 	}
+	# }
+
+	# East_Ursus_infiltrate_South_area = {
+	# 	available = {
+	# 		has_equipment = { infantry_equipment > 199 }
+	# 		URS = {
+	# 			custom_trigger_tooltip = {
+	# 				tooltip = East_Ursus_local_infiltration_less_3_tt
+	# 				check_variable = { East_Ursus_South_infiltration < 3}
+	# 			}
+	# 		}
+	# 		custom_trigger_tooltip = {
+	# 			tooltip = East_Ursus_infiltration_point_more_0_tt
+	# 			check_variable = { East_Ursus_infiltration_point > 0 }
+	# 		}
+	# 	}
+
+	# 	days_remove = 30
+
+	# 	cost = 10
+
+	# 	complete_effect = {
+	# 		add_equipment_to_stockpile = {
+	# 			type = infantry_equipment
+	# 			amount = -200
+	# 		}
+	# 		add_to_variable = { East_Ursus_infiltration_point = -1 }
+	# 	}
+
+	# 	remove_effect = {
+	# 		URS = {
+	# 			add_to_variable = { East_Ursus_South_infiltration = 1 }
+	# 			custom_effect_tooltip = East_Ursus_South_infiltration_1_tt
+	# 		}
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1000
+	# 	}
+	# }
+
+	# East_Ursus_infiltrate_Volga_area = {
+	# 	available = {
+	# 		has_equipment = { infantry_equipment > 199 }
+	# 		URS = {
+	# 			custom_trigger_tooltip = {
+	# 				tooltip = East_Ursus_local_infiltration_less_3_tt
+	# 				check_variable = { East_Ursus_Volga_infiltration < 3}
+	# 			}
+	# 		}
+	# 		custom_trigger_tooltip = {
+	# 			tooltip = East_Ursus_infiltration_point_more_0_tt
+	# 			check_variable = { East_Ursus_infiltration_point > 0 }
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				OR = {
+	# 					has_government = fascism
+	# 					original_tag = KMG
+	# 				}
+	# 			}
+	# 			custom_trigger_tooltip = {
+	# 				tooltip = East_Ursus_local_infiltration_uprise_tt
+	# 				always = no
+	# 			}
+	# 		}
+	# 	}
+
+	# 	days_remove = 30
+
+	# 	cost = 10
+
+	# 	complete_effect = {
+	# 		add_equipment_to_stockpile = {
+	# 			type = infantry_equipment
+	# 			amount = -200
+	# 		}
+	# 		add_to_variable = { East_Ursus_infiltration_point = -1 }
+	# 	}
+
+	# 	remove_effect = {
+	# 		URS = {
+	# 			add_to_variable = { East_Ursus_Volga_infiltration = 1 }
+	# 			custom_effect_tooltip = East_Ursus_Volga_infiltration_1_tt
+	# 		}
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1000
+	# 	}
+	# }
+
+	# East_Ursus_infiltrate_Berekar_area = {
+	# 	available = {
+	# 		has_equipment = { infantry_equipment > 199 }
+	# 		URS = {
+	# 			custom_trigger_tooltip = {
+	# 				tooltip = East_Ursus_local_infiltration_less_3_tt
+	# 				check_variable = { East_Ursus_Berekar_infiltration < 3}
+	# 			}
+	# 		}
+	# 		custom_trigger_tooltip = {
+	# 			tooltip = East_Ursus_infiltration_point_more_0_tt
+	# 			check_variable = { East_Ursus_infiltration_point > 0 }
+	# 		}
+	# 		if = {
+	# 			limit = {
+	# 				has_government = communism
+	# 			}
+	# 			custom_trigger_tooltip = {
+	# 				tooltip = East_Ursus_local_infiltration_uprise_tt
+	# 				always = no
+	# 			}
+	# 		}
+	# 	}
+
+	# 	days_remove = 30
+
+	# 	cost = 20
+
+	# 	complete_effect = {
+	# 		add_equipment_to_stockpile = {
+	# 			type = infantry_equipment
+	# 			amount = -200
+	# 		}
+	# 		add_to_variable = { East_Ursus_infiltration_point = -1 }
+	# 	}
+
+	# 	remove_effect = {
+	# 		URS = {
+	# 			add_to_variable = { East_Ursus_Berekar_infiltration = 1 }
+	# 			custom_effect_tooltip = East_Ursus_Berekar_infiltration_1_tt
+	# 		}
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1000
+	# 	}
+	# }
+
+	# East_Ursus_infiltrate_Saint_Grypherburg_area = {
+	# 	available = {
+	# 		has_equipment = { infantry_equipment > 199 }
+	# 		URS = {
+	# 			custom_trigger_tooltip = {
+	# 				tooltip = East_Ursus_local_infiltration_less_3_tt
+	# 				check_variable = { East_Ursus_Saint_Grypherburg_infiltration < 3}
+	# 			}
+	# 		}
+	# 		custom_trigger_tooltip = {
+	# 			tooltip = East_Ursus_infiltration_point_more_0_tt
+	# 			check_variable = { East_Ursus_infiltration_point > 0 }
+	# 		}
+	# 	}
+
+	# 	days_remove = 60
+
+	# 	cost = 30
+
+	# 	complete_effect = {
+	# 		add_equipment_to_stockpile = {
+	# 			type = infantry_equipment
+	# 			amount = -200
+	# 		}
+	# 		add_to_variable = { East_Ursus_infiltration_point = -1 }
+	# 	}
+
+	# 	remove_effect = {
+	# 		URS = {
+	# 			add_to_variable = { East_Ursus_Saint_Grypherburg_infiltration = 1 }
+	# 			custom_effect_tooltip = East_Ursus_Saint_Grypherburg_infiltration_1_tt
+	# 		}
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1000
+	# 	}
+	# }
+
+	War_With_Ursus = {
+		visible = {
+			NOT = {
+				has_war_with = URS
+			}
+			URS = { exists = yes }
+		}
+		available = {
+			has_country_flag = {
+				flag = East_Ursus_Unification_After
+				days > 150
+			}
+			custom_trigger_tooltip = {
+				tooltip = East_Ursus_Unification_After_tt
+				has_country_flag = {
+					flag = East_Ursus_Unification_After
+					days > 150
+				}
+			}
+			# if = {
+			# 	limit = {
+			# 		has_government = communism
+			# 	}
+			# 	has_country_flag = URS_communism_uprising
+			# }
+			# if = {
+			# 	limit = {
+			# 		OR = {
+			# 			has_government = liberalism
+			# 			original_tag = UFE
+			# 		}
+			# 	}
+			# 	has_country_flag = URS_liberalism_uprising
+			# }
+			# if = {
+			# 	limit = {
+			# 		OR = {
+			# 			has_government = fascism
+			# 			original_tag = KMG
+			# 		}
+			# 	}
+			# 	has_country_flag = URS_fascism_uprising
+			# }
+			if = {
+				limit = {
+					original_tag = UFE
+				}
+				has_country_flag = UFE_allow_declear_war_to_URS_flag
+			}
+			# OR = {
+			# 	URS = {
+			# 		custom_trigger_tooltip = {
+			# 			tooltip = East_Ursus_infiltration_least_1_tt
+			# 			OR = {
+			# 				check_variable = { East_Ursus_North_west_infiltration > 0 }
+			# 				check_variable = { East_Ursus_South_infiltration > 0 }
+			# 				check_variable = { East_Ursus_Volga_infiltration > 0 }
+			# 				check_variable = { East_Ursus_Berekar_infiltration > 0 }
+			# 				check_variable = { East_Ursus_Saint_Grypherburg_infiltration > 0 }
+			# 			}
+			# 		}
+			# 	}
+			# 	custom_trigger_tooltip = {
+			# 		tooltip = East_Ursus_infiltration_point_0_tt
+			# 		check_variable = { East_Ursus_infiltration_point = 0 }
+			# 	}
+			# }
+		}
+
+		fire_only_once = yes
+		cost = 25
+
+		days_remove = 15
+
+		cancel_trigger = {
+			has_war_with = URS
+		}
+
+		remove_effect = {
+			declare_war_on = { target = URS type = annex_everything }
+			# division_template = {
+			# 	name = "民兵师"
+			# 	regiments = {
+			# 		infantry = { x = 0 y = 0 }
+			# 		infantry = { x = 0 y = 1 }
+			# 		infantry =  { x = 1 y = 0 }
+			# 		infantry =  { x = 1 y = 1 }
+			# 	}
+			# }
+			#East_Ursus_infiltrate_uprising = yes
+			
+			hidden_effect = {
+				Ursus_area_uprising = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	# ===== 停用：第十一次乌卡战争已改为乌萨斯侧专属决议链 =====
+	# 新链入口：common/decisions/URS_Kazimierz_War_Decisions.txt → URS_kzmwar_declare_war
+	# 恢复本决议前，请先停用新链的 URS_kzmwar_declare_war，否则同一场战争会被发起两次。
+# 	War_With_KZM_and_west_three = {
+# 		available = {
+# 			URS = { exists = no }
+# 			has_country_flag = Ursus_Unification
+# 		}
+#
+# 		fire_only_once = yes
+# 		cost = 25
+#
+# 		days_remove = 15
+#
+# 		remove_effect = {
+# 			declare_war_on = { target = KZM type = annex_everything }
+# 			declare_war_on = { target = KZC type = annex_everything }
+# 			declare_war_on = { target = BUS type = annex_everything }
+# 			declare_war_on = { target = BLT type = annex_everything }
+# 		}
+#
+# 		ai_will_do = {
+# 			factor = 1000
+# 		}
+# 	}
+	# ===== 停用结束 =====
+
+	East_Ursus_KZM_war = {
+		icon = GFX_decision_generic_political_discourse
+
+		fire_only_once = yes
+
+		available = {
+			KZM = {
+				OR = {
+					is_puppet_of = ROOT
+					exists = no
+				}
+			}
+		}
+
+		activation = {
+			URS = { exists = no }
+			has_war_with = KZM
+		}
+
+		is_good = no
+
+		days_mission_timeout = 365
+
+		priority = 500
+
+		cancel_trigger = {
+			surrender_progress > 0.25
+			# 新链保险：仗一停就撤任务，免得到期 timeout 把割回的三地又送回去
+			NOT = { has_war_with = KZM }
+		}
+		
+		cancel_effect = {
+			white_peace = KZM
+			white_peace = KZC
+			white_peace = BUS
+			white_peace = BLT
+			every_owned_state = {
+				limit = {
+					is_Ursus_Kozacy_area = yes
+				}
+				if = {
+					limit = {
+						KZC = { exists = yes }
+					}
+					transfer_state_to = KZC
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_Ursus_Belaursnia_area = yes
+				}
+				if = {
+					limit = {
+						BUS = { exists = yes }
+					}
+					transfer_state_to = BUS
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_Ursus_Balti_area = yes
+				}
+				if = {
+					limit = {
+						BLT = { exists = yes }
+					}
+					transfer_state_to = BLT
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+		}
+
+		timeout_effect = {
+			white_peace = KZM
+			white_peace = KZC
+			white_peace = BUS
+			white_peace = BLT
+			every_owned_state = {
+				limit = {
+					is_Ursus_Kozacy_area = yes
+				}
+				if = {
+					limit = {
+						KZC = { exists = yes }
+					}
+					transfer_state_to = KZC
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_Ursus_Belaursnia_area = yes
+				}
+				if = {
+					limit = {
+						BUS = { exists = yes }
+					}
+					transfer_state_to = BUS
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_Ursus_Balti_area = yes
+				}
+				if = {
+					limit = {
+						BLT = { exists = yes }
+					}
+					transfer_state_to = BLT
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+		}
+	}
+
+	Occupation_URS = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			URS = { exists = no }
+			UCM = {
+				OR = {
+					is_puppet_of = ROOT
+					exists = no
+				}
+			}
+			ULB = {
+				OR = {
+					is_puppet_of = ROOT
+					exists = no
+				}
+			}
+			UFS = {
+				OR = {
+					is_puppet_of = ROOT
+					exists = no
+				}
+			}
+			any_owned_state = { is_core_of = URS }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = URS }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			add_command_power = URS.command_power
+
+			if = {
+				limit = {
+					original_tag = REU
+				}
+				annex_country = {
+					target = UCM
+					transfer_troops = yes
+				}
+			}
+			
+			if = {
+				limit = {
+					original_tag = KMG
+				}
+				annex_country = {
+					target = UFS
+					transfer_troops = yes
+				}
+			}
+
+			if = {
+				limit = {
+					original_tag = UFE
+				}
+				annex_country = {
+					target = ULB
+					transfer_troops = yes
+				}
+			}
+
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = URS }
+						add_core_of = PREV
+						remove_core_of = URS
+					}
+
+					every_owned_state = {
+						limit = { is_core_of = UCM }
+						add_core_of = PREV
+						remove_core_of = UCM
+					}
+
+					every_owned_state = {
+						limit = { is_core_of = ULB }
+						add_core_of = PREV
+						remove_core_of = ULB
+					}
+
+					every_owned_state = {
+						limit = { is_core_of = UFS }
+						add_core_of = PREV
+						remove_core_of = UFS
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Occupation_KZC = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			KZC = { exists = no }
+			any_owned_state = { is_core_of = KZC }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = KZC }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			add_command_power = KZC.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = KZC }
+						add_core_of = PREV
+						remove_core_of = KZC
+						remove_core_of = URS
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Occupation_BUS = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			BUS = { exists = no }
+			any_owned_state = { is_core_of = BUS }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = BUS }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			add_command_power = BUS.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = BUS }
+						add_core_of = PREV
+						remove_core_of = BUS
+						remove_core_of = URS
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Occupation_BLT = {
+
+		icon = GFX_decision_generic_colonial_administration
+		visible = {
+			BLT = { exists = no }
+			any_owned_state = { is_core_of = BLT }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			set_temp_variable = { TargetTag = BLT }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			add_command_power = BLT.command_power
+			hidden_effect = {
+				FROM = {
+					every_owned_state = {
+						limit = { is_core_of = BLT }
+						add_core_of = PREV
+						remove_core_of = BLT
+						remove_core_of = URS
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	# ── 2026-09-21 新增：武力解决第四集团军（与谈判并立的第二条路线，玩家专属） ──
+	War_With_UFA = {
+
+		icon = GFX_decision_generic_military
+
+		visible = {
+			UFA = { exists = yes }
+			NOT = { tag = UFA }
+			is_neighbor_of = UFA
+			NOT = { has_war_with = UFA }
+			NOT = { has_subject = UFA }		#已经是附庸就只能吞并，不能宣战
+		}
+
+		available = {
+			has_country_flag = {
+				flag = East_Ursus_Unification_After
+				days > 150
+			}
+			custom_trigger_tooltip = {
+				tooltip = East_Ursus_Unification_After_tt
+				has_country_flag = {
+					flag = East_Ursus_Unification_After
+					days > 150
+				}
+			}
+		}
+
+		cost = 25
+
+		modifier = {
+			command_power_gain = -0.5
+			political_power_gain = -1
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = East_Ursus_Upheaval_preparing_expansion
+			}
+		}
+
+		days_remove = 15
+		days_re_enable = 120
+
+		remove_effect = {
+			declare_war_on = { target = UFA type = annex_everything }
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				OR = {
+					UFA = { exists = no }
+					has_war_with = UFA
+				}
+			}
+		}
+		cancel_effect = {
+			clr_country_flag = East_Ursus_Upheaval_preparing_expansion
+		}
+
+		ai_will_do = {		#AI 一律走谈判路线，不给它添一条战线
+			base = 0
+		}
+	}
+
+	Occupation_UFA = {
+
+		icon = GFX_decision_generic_colonial_administration
+
+		visible = {
+			UFA = { exists = no }
+			any_owned_state = { is_core_of = UFA }
+		}
+
+		cost = 25
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { TargetTag = UFA }
+			custom_effect_tooltip = East_Ursus_Upheaval_Occupation_TargetTag_Tt
+			hidden_effect = {
+				every_owned_state = {
+					limit = {
+						is_core_of = UFA
+					}
+					add_core_of = ROOT
+					remove_core_of = UFA
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Negotiate_With_Fourth_Army = {
+
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {		#第四集团军已被打亡或被自己吞并时不再挂这条
+			UFA = { exists = yes }
+			NOT = { has_subject = UFA }
+		}
+
+		available = {
+			URS = {
+				exists = no
+			}
+		}
+
+		fire_only_once = yes
+		complete_effect = {
+			set_autonomy = {
+				target = UFA
+				autonomy_state = autonomy_ursus_combat_troops
+			}
+			if = {
+				limit = {
+					original_tag = REU
+				}
+				hidden_effect = {
+					UFA = {
+						set_cosmetic_tag = Soviet_North_Combat_Troops
+						set_politics = {
+							ruling_party = communism
+							elections_allowed = no
+						}
+						set_popularities = {
+							communism = 100
+						}
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					original_tag = UFE
+				}
+				hidden_effect = {
+					UFA = {
+						set_cosmetic_tag = Ursus_Northern_Frontier
+						set_politics = {
+							ruling_party = liberalism
+							elections_allowed = no
+						}
+						set_popularities = {
+							liberalism = 100
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Declare_Ursus_Unification = {
+
+		icon = GFX_decision_generic_form_nation
+		available = {
+			all_owned_state = {
+				is_core_of = ROOT
+			}
+			OR = {		#谈判收编或直接打亡第四集团军，都算统一
+				has_subject = UFA
+				UFA = { exists = no }
+			}
+		}
+
+		fire_only_once = yes
+		complete_effect = {
+			set_country_flag = Ursus_Unification
+			if = {
+				limit = {
+					original_tag = REU
+				}
+				set_cosmetic_tag = Soviet_Union
+				
+				hidden_effect = {
+					news_event = {
+						id = worldnews_reu.1
+					}
+				}
+			}
+			if = {
+				limit = {
+					original_tag = KMG
+				}
+				set_cosmetic_tag = National_Republic_of_Ursus
+			}
+
+			swap_ideas = {
+				remove_idea = medium_country
+				add_idea = major_country
+			}
+			add_research_slot = 1
+
+			set_capital = {
+				state = 58
+				remember_old_capital = no
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+}
+
+##########################
+###东达利亚开拓计划决议组###
+##########################
+
+East_Ursus_Development_Decisions = {
+
+	#着重农业发展
+	East_Ursus_Focus_On_Agricultural = {
+
+		icon = generic_forestry
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			NOT = {
+				OR = {
+					has_idea = mechanized_agriculture
+					has_idea = modern_agriculture
+				}
+			}
+		}
+
+		cost = 50
+
+		days_remove = 60
+		days_re_enable = 120
+
+		modifier = {
+			agricultural_development_monthly_modifier = 0.02
+			consumer_goods_factor = 0.1
+			monthly_population = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	#着重工业发展
+	East_Ursus_Focus_On_Industrial = {
+
+		icon = generic_factory
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			NOT = {
+				OR = {
+					has_idea = scale_factory
+					has_idea = automated_factory
+				}
+			}
+		}
+
+		cost = 50
+
+		days_remove = 60
+		days_re_enable = 120
+
+		modifier = {
+			industrial_development_monthly_modifier = 0.02
+			consumer_goods_factor = -0.1
+			civilian_factories_consumption = 0.2
+			production_speed_buildings_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	#着重军事生产
+	East_Ursus_Focus_On_Military = {
+
+		icon = generic_merge_plant_materiel
+
+		visible = {
+			always = yes
+		}
+
+		cost = 50
+
+		days_remove = 60
+		days_re_enable = 120
+
+		modifier = {
+			consumer_goods_factor = -0.1
+			military_factories_consumption = 0.2
+			industrial_capacity_factory = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	#重视教育
+	East_Ursus_Focus_On_Educational = {
+
+		icon = generic_political_address
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			NOT = {
+				OR = {
+					has_idea = primary_education
+					has_idea = higher_education
+				}
+			}
+		}
+
+		cost = 50
+
+		days_remove = 60
+		days_re_enable = 120
+
+		modifier = {
+			educational_development_monthly_modifier = 0.02
+			research_speed_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	#重视行政
+	East_Ursus_Focus_On_Administration = {
+
+		icon = SWI_no_elected_president
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			NOT = {
+				OR = {
+					has_idea = efficient_administration
+					has_idea = perfect_system
+				}
+			}
+		}
+
+		cost = 50
+
+		days_remove = 60
+		days_re_enable = 120
+
+		modifier = {
+			administrative_development_monthly_modifier = 0.02
+			political_power_gain = 0.5
+		}
+
+		remove_effect = {
+			add_political_power = 50
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	#发放福利
+	East_Ursus_Focus_On_Poverty = {
+
+		icon = generic_welfare
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			NOT = {
+				OR = {
+					has_idea = very_low_poverty
+					has_idea = no_poverty
+				}
+			}
+		}
+
+		cost = 50
+
+		days_remove = 60
+		days_re_enable = 120
+
+		modifier = {
+			poverty_development_monthly_modifier = 0.02
+			political_power_gain = -0.5
+			consumer_goods_factor = 0.1
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	#军事训练
+	East_Ursus_Focus_On_Training = {
+
+		icon = generic_military
+
+		visible = {
+			always = yes
+		}
+
+		cost = 75
+
+		days_remove = 60
+		days_re_enable = 120
+
+		modifier = {
+			training_time_factor = -0.2
+			experience_gain_army_factor = 0.05
+		}
+
+		remove_effect = {
+			army_experience = 50
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	#确保控制
+	East_Ursus_Focus_On_Stability = {
+
+		icon = generic_civil_support
+
+		visible = {
+			always = yes
+		}
+
+		cost = 25
+
+		days_remove = 60
+		days_re_enable = 120
+
+		modifier = {
+			political_power_gain = -0.5
+			stability_weekly = 0.002
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
+
+central_tundria_trade_dispute_decisions = {
+
+	central_tundria_trade_dispute_running = {
+
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			always = no
+		}
+		
+		activation = {
+			has_country_flag = central_tundria_trade_dispute_flag
+		}
+
+		priority = 1000
+		days_mission_timeout = 200
+		is_good = no
+
+		timeout_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						KMG.trade_influence > BAK.trade_influence
+					}
+				}
+				KMG = {
+					country_event = {
+						id = event_kmg.7
+					}
+					annex_country = {
+						target = KRS
+						transfer_troops = yes
+					}
+					every_owned_state = {
+						limit = { is_core_of = KRS }
+						add_core_of = PREV
+						remove_core_of = KRS
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						KMG.trade_influence < BAK.trade_influence
+					}
+				}
+				KMG = {
+					country_event = {
+						id = event_kmg.8
+					}
+				}
+				BAK = {
+					annex_country = {
+						target = KRS
+						transfer_troops = yes
+					}
+					every_owned_state = {
+						limit = { is_core_of = KRS }
+						add_core_of = PREV
+						remove_core_of = KRS
+					}
+				}
+			}
+			else = {
+				limit = {
+					check_variable = {
+						KMG.trade_influence = BAK.trade_influence
+					}
+				}
+				random_list = {
+					50 = {
+						KMG = {
+							country_event = {
+								id = event_kmg.7
+							}
+							annex_country = {
+								target = KRS
+								transfer_troops = yes
+							}
+							every_owned_state = {
+								limit = { is_core_of = KRS }
+								add_core_of = PREV
+								remove_core_of = KRS
+							}
+						}
+					}
+					50 = {
+						KMG = {
+							country_event = {
+								id = event_kmg.8
+							}
+						}
+						BAK = {
+							annex_country = {
+								target = KRS
+								transfer_troops = yes
+							}
+							every_owned_state = {
+								limit = { is_core_of = KRS }
+								add_core_of = PREV
+								remove_core_of = KRS
+							}
+						}
+					}
+				}
+			}
+			clr_country_flag = central_tundria_trade_dispute_flag
+		}
+	}
+
+	KMG_expand_port = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			original_tag = KMG
+		}
+
+		cost = 25
+
+		days_remove = 15
+		days_re_enable = 15
+
+		complete_effect = {
+			set_temp_variable = { tit = 3 }
+			central_tundria_trade_influence_change = yes
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	BAK_upgrade_generators = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			original_tag = BAK
+		}
+
+		cost = 25
+
+		days_remove = 15
+		days_re_enable = 15
+
+		complete_effect = {
+			set_temp_variable = { tit = 3 }
+			central_tundria_trade_influence_change = yes
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	KMG_northern_route = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			original_tag = KMG
+		}
+
+		cost = 50
+
+		days_remove = 15
+		days_re_enable = 30
+
+		complete_effect = {
+			set_temp_variable = { tit = 8 }
+			central_tundria_trade_influence_change = yes
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	BAK_introducing_advanced_technology = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			original_tag = BAK
+		}
+
+		cost = 50
+
+		days_remove = 15
+		days_re_enable = 30
+
+		complete_effect = {
+			set_temp_variable = { tit = 8 }
+			central_tundria_trade_influence_change = yes
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	KMG_damage_transmission_lines = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			original_tag = KMG
+		}
+
+		cost = 50
+
+		days_remove = 15
+		days_re_enable = 30
+
+		complete_effect = {
+			BAK = {
+				set_temp_variable = { tit = -5 }
+				central_tundria_trade_influence_change = yes
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	BAK_attack_transport_convoy = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			original_tag = BAK
+		}
+
+		cost = 50
+
+		days_remove = 15
+		days_re_enable = 30
+
+		complete_effect = {
+			KMG = {
+				set_temp_variable = { tit = -5 }
+				central_tundria_trade_influence_change = yes
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	KMG_industrial_park_construction = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			original_tag = KMG
+		}
+
+		cost = 100
+
+		days_remove = 60
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { tit = 15 }
+			central_tundria_trade_influence_change = yes
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	BAK_industrial_park_construction = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			original_tag = BAK
+		}
+
+		cost = 100
+
+		days_remove = 60
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { tit = 15 }
+			central_tundria_trade_influence_change = yes
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+}

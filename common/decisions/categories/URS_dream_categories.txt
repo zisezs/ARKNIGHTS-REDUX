@@ -1,0 +1,28 @@
+# ============================================================================
+# 乌萨斯帝国 ·「费奥多尔初步改革」决议分类
+# ============================================================================
+#
+# 决议正文见 common/decisions/URS_Feodor_Reform_Decisions.txt
+# 分类页顶部那块面板由 scripted_gui 提供（与「帝国宫廷」「大炎珍玩集册」同款挂法）。
+# 面板文案：loc 键 URS_dr_reform_decisions_desc（分类 id + _desc，引擎自动取）。
+#
+# 面板可见 = 国策「问题之源」完成（URS_dr_reform_open）。
+# 保留 visible_when_empty = yes：后期决议可能被清空，页签仍要在。
+# ============================================================================
+
+URS_dr_reform_decisions = {
+	icon = GFX_decision_category_power_struggle
+
+	allowed = {
+		original_tag = URS
+	}
+
+	visible = {
+		has_country_flag = URS_dr_reform_open
+	}
+
+	visible_when_empty = yes
+	priority = 11
+
+	scripted_gui = URS_dr_reform_gui
+}

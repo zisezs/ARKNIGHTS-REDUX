@@ -1,0 +1,463 @@
+# ==============================================================================
+#  大炎 ·【岁醒】叛军循环 —— 山海众事件
+#  · yan_shz.1..19  地方急报（对应 19 宣政司，每波按被占州的旗标选对应那封）
+#  · yan_shz.20     通用：没有宣政司旗标的州，以及「占州已达上限、本波只增兵」
+#  · yan_shz.21     首次起事的全国新闻（旗标去重，只发一次）
+#  · yan_shz.22     【动员乡勇】每爆出一个**新**势力发一次：首都编 5 支四步乡勇
+#  效果本体在 common/scripted_effects/YAN_shanhai_scripted_effects.txt；
+#  事件只负责「叙事 + 玩家表态」，两个选项都是额外代价，不抵消脚本损失。
+#  生成器 E:/tmp/sui12/gen_shanhai.js
+# ==============================================================================
+
+add_namespace = yan_shz
+
+country_event = {
+	id = yan_shz.1
+	title = yan_shz.1.t
+	desc = yan_shz.1.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.1.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.1.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.2
+	title = yan_shz.2.t
+	desc = yan_shz.2.d
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.2.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.2.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.3
+	title = yan_shz.3.t
+	desc = yan_shz.3.d
+	picture = GFX_report_event_Generic_Roit_News
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.3.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.3.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.4
+	title = yan_shz.4.t
+	desc = yan_shz.4.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.4.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.4.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.5
+	title = yan_shz.5.t
+	desc = yan_shz.5.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.5.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.5.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.6
+	title = yan_shz.6.t
+	desc = yan_shz.6.d
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.6.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.6.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.7
+	title = yan_shz.7.t
+	desc = yan_shz.7.d
+	picture = GFX_report_event_Generic_Roit_News
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.7.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.7.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.8
+	title = yan_shz.8.t
+	desc = yan_shz.8.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.8.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.8.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.9
+	title = yan_shz.9.t
+	desc = yan_shz.9.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.9.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.9.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.10
+	title = yan_shz.10.t
+	desc = yan_shz.10.d
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.10.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.10.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.11
+	title = yan_shz.11.t
+	desc = yan_shz.11.d
+	picture = GFX_report_event_Generic_Roit_News
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.11.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.11.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.12
+	title = yan_shz.12.t
+	desc = yan_shz.12.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.12.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.12.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.13
+	title = yan_shz.13.t
+	desc = yan_shz.13.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.13.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.13.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.14
+	title = yan_shz.14.t
+	desc = yan_shz.14.d
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.14.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.14.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.15
+	title = yan_shz.15.t
+	desc = yan_shz.15.d
+	picture = GFX_report_event_Generic_Roit_News
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.15.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.15.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.16
+	title = yan_shz.16.t
+	desc = yan_shz.16.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.16.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.16.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.17
+	title = yan_shz.17.t
+	desc = yan_shz.17.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.17.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.17.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.18
+	title = yan_shz.18.t
+	desc = yan_shz.18.d
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.18.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.18.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.19
+	title = yan_shz.19.t
+	desc = yan_shz.19.d
+	picture = GFX_report_event_Generic_Roit_News
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.19.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.19.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	id = yan_shz.20
+	title = yan_shz.20.t
+	desc = yan_shz.20.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.20.a
+		add_political_power = -25
+	}
+	option = {
+		name = yan_shz.20.b
+		add_war_support = 0.03
+		army_experience = 20
+		add_political_power = -10
+	}
+}
+
+# 【动员乡勇】每有新势力竖旗就发一次：首都编 5 支四步乡勇
+country_event = {
+	id = yan_shz.22
+	title = yan_shz.22.t
+	desc = yan_shz.22.d
+	picture = GFX_report_event_Generic_Barracks
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_shz.22.a
+		# 模板只建一次；create_unit 落首都（capital_scope），owner = ROOT = 大炎
+		if = {
+			limit = { NOT = { has_country_flag = YAN_shz_militia_template_flag } }
+			set_country_flag = YAN_shz_militia_template_flag
+			division_template = {
+				name = "乡勇"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+				}
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"乡勇\" division_template = \"乡勇\" start_experience_factor = 0 start_equipment_factor = 0.5"
+				owner = ROOT
+				count = 5
+			}
+		}
+		custom_effect_tooltip = YAN_shz_militia_tt
+	}
+}
+
+news_event = {
+	id = yan_shz.21
+	title = yan_shz.21.t
+	desc = yan_shz.21.d
+	picture = GFX_report_event_Generic_Roit_News
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = yan_shz.21.a
+	}
+}

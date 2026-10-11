@@ -1,0 +1,723 @@
+﻿l_simp_chinese:
+
+# ==============================================================================
+#  大炎（YAN）重制 —— 民族精神 / 路线大BUFF / 顾问 / 国策 / 决议 / 机制 文案
+#  文风参照《登临意》（玉门篇）：白描为主，短句，克制，不堆数字；
+#  效果数值由修正符 tooltip 自动生成，本文件只写设定与叙述；
+#  无引擎对应的说明行（对巨兽攻击等）在 yan_*_tt 键里。
+# ==============================================================================
+
+# ---------------------------- 修正符说明行 ----------------------------
+
+yan_attack_vs_behemoth_tt:0 "对巨兽、邪魔的攻击"
+yan_diplomatic_relation_tt:0 "外交关系"
+yan_corruption_tt:0 "腐败"
+yan_originium_research_tt:0 "源石技艺研究"
+yan_focus_time_tt:0 "国策时间"
+yan_medical_research_tt:0 "医疗研究"
+yan_law_research_tt:0 "律法研究"
+yan_culture_influence_tt:0 "文化影响力"
+yan_agent_surveillance_tt:0 "对代理人的监控"
+yan_yumen_defence_tt:0 "玉门防御"
+yan_disaster_mitigation_tt:0 "天灾减益"
+yan_tianshi_support_tt:0 "天师术师支援连效果"
+yan_agriculture_research_tt:0 "农业研究"
+yan_navy_research_tt:0 "海军研究"
+yan_agent_advisor_unlock_tt:0 "可招募代理人顾问"
+yan_bufan_unlock_tt:0 "解锁「启动不反」决议"
+yan_sui_awakening_monthly_tt:0 "每月岁兽苏醒度"
+yan_shudao_monthly_tt:0 "每月书刀完整度"
+yan_agent_trust_monthly_tt:0 "每月代理人信任"
+
+# ---------------------------- 民族精神（开局） ----------------------------
+
+YAN_True_dragon_reign:0 "真龙治下，国祚永昌"
+YAN_True_dragon_reign_desc:0 "真龙临朝，百官俯首。数百年不曾对外兴兵，天下承平日久——大到边关的烽燧，小到巷口的茶摊，都默认明天与今天一样。只是这份安稳是拿「不必再争」换来的：朝野上下，渐渐忘了怎么打一场真正的仗。"
+
+YAN_Divine_subjects:0 "敕封神明，大炎子民"
+YAN_Divine_subjects_desc:0 "诛神之后，大炎把「人定胜天」写进了国本：山川河岳由朝廷敕封，邪魔巨兽被记作待斩的祸患。这套神话是子民的骄傲，也是一道门槛——四邻畏其强，亦惧其傲。"
+
+YAN_Three_dukes:0 "三公六部，承平暗弱"
+YAN_Three_dukes_desc:0 "太师掌教化，太傅辅政，太尉主兵，六部各守一摊。这样的制衡让朝政极少出大错，也极少出大功：文书要走完的衙门太多，军队的锐气，就在一次次「再从长计议」里磨钝了。"
+
+YAN_Mobile_cities:0 "移动城邦与源石矿脉"
+YAN_Mobile_cities_desc:0 "百灶建在源石矿脉之上，整座城会走。天灾来时，任它碾过大地的旧城，人早已随城躲开——这是大炎对天灾最骄傲的答案。代价写在账本上：能源的胃口极大，脚下的土地也一年薄过一年。"
+
+YAN_Sishuitai_candle:0 "司岁台秉烛"
+YAN_Sishuitai_candle_desc:0 "秉烛人夜夜提灯，记下十二个人的一举一动。名义上他们是同僚，实际上是被监视的碎片；而秉烛人自己也说不清，守的是岁陵，还是一场随时会醒的旧梦。"
+
+YAN_Martial_tradition:0 "尚武传统"
+YAN_Martial_tradition_desc:0 "玉门擂台的鼓声未歇，廉家武馆、铁意六合拳、红梅咏春的招牌就挂满了半条街。大炎人把「能打」当作体面的一部分，即便朝堂早已忘了远方还有战事。"
+
+YAN_Taishi_injustice:0 "太师冤案"
+YAN_Taishi_injustice_desc:0 "四十年前，皇太子提刀上殿兵谏，老真龙驾崩，太师担下谋逆之名被处死。百官嘴上不提，心里都清楚：连太师都能这样收场，那还有谁是不能牺牲的。"
+
+YAN_Shanhaizhong:0 "山海众渗透"
+YAN_Shanhaizhong_desc:0 "山海众从未真正被剿灭。他们渗进驿道、盐场与边军的伙房，把仇怨磨成可以经营的东西。朝廷的告示贴得再多，也堵不住那些在风雪里递出的暗号。"
+
+YAN_Shudao_in_Tianjingge:0 "书刀在天镜阁"
+YAN_Shudao_in_Tianjingge_desc:0 "书刀悬在天镜阁顶楼，能删改的远不止史书上的一个名字。只要它还锁在那里，真龙就还是真龙——所以盯着它的，从来不止谏官。"
+
+YAN_Bufan_originium:0 "不反源石"
+YAN_Bufan_originium_desc:0 "不反是留给真龙血脉的最后一条路：以身为引，与岁同归。它被锁在最深的库房里，钥匙只系在一个人腰上——用它的代价，从来都由那一个人独自付清。"
+
+# ---------------------------- 民族精神（国策解锁） ----------------------------
+
+YAN_Taishi_rehabilitated:0 "太师昭雪"
+YAN_Taishi_rehabilitated_desc:0 "旧案重翻，冤名尽洗。压了四十年的一口气终于吐出来，朝野上下的脊背也随之直了起来：原来这朝廷，还是讲道理的。"
+
+YAN_Brothers_one_heart:0 "兄弟同心"
+YAN_Brothers_one_heart_desc:0 "真龙与魏彦吾隔着龙门多年的心结，终于有一句话把它解开。一个坐镇百灶，一个看着龙门，兄弟二人不再互相防着，大炎便少了半座内耗的墙。"
+
+YAN_Bingzhu_new_system:0 "秉烛新制"
+YAN_Bingzhu_new_system_desc:0 "司岁台换了当家的，也换了做法：不再只是盯着代理人，而是试着与他们共事。秉烛人依旧夜行，只是烛光照到的地方，比从前宽了。"
+
+YAN_Tiankui_sword:0 "天喟之剑"
+YAN_Tiankui_sword_desc:0 "书刀交到陈晖洁手上，它便不再只是删改名字的器物——刀刃指向的，是那些想用假史盖住一切的东西。"
+
+YAN_Agents_family:0 "代理人一家"
+YAN_Agents_family_desc:0 "十二片碎片，终究是同一个人裂开的。重岳守门、令与均织梦、年与夕镇伥、黍与余安民——他们当中有人入朝，有人隐居，有人只想把日子过好。大炎愿意把他们当人看，他们便也愿意为大炎出一次手。"
+
+YAN_Wang_shackles:0 "望之枷锁"
+YAN_Wang_shackles_desc:0 "岁陵深处换了主人。望接过旧的枷锁，替大炎按住那条盘了千年的根。需要有人永远守在地下，这件事没有变，变的只是守的人。"
+
+YAN_New_sui_shadow:0 "新岁之影"
+YAN_New_sui_shadow_desc:0 "岁陵之下不再是兽，而是一个「人」。他以源石为身、以山川为忆，替大炎看着这方土地：既像旧日的祸患，又像新的神明。"
+
+YAN_Sui_calamity_ended:0 "岁兽之祸终结"
+YAN_Sui_calamity_ended_desc:0 "纠缠大炎千年的那一根刺，终于被拔掉了。岁陵不再渗血，伥物不再作乱，边关的夜风里也不再有那种让人牙根发紧的动静——一个朝代，终于可以只操心人的事。"
+
+YAN_Rhodes_cooperation:0 "罗德岛合作"
+YAN_Rhodes_cooperation_desc:0 "与罗德岛的一纸协议，让大炎第一次愿意正视矿石病：不再是「免得漏了」，而是「该治了」。"
+
+YAN_Shudao_case:0 "书刀案"
+YAN_Shudao_case_desc:0 "书刀被夺的消息压不住，天镜阁连夜封门。史书被改过，名字被抹掉，朝堂上人人自危——从这天起，谁也不敢保证自己明天还叫这个名字。"
+
+YAN_Behemoths_awaken:0 "巨兽苏醒"
+YAN_Behemoths_awaken_desc:0 "岁陵那边的动静，惊醒了沉睡在八荒边界的其他东西。它们还没有动，可边关的巡骑已经不敢在天黑之后出城。"
+
+YAN_Sui_disaster:0 "岁兽之乱"
+YAN_Sui_disaster_desc:0 "岁陵裂了。百灶与邙山一带字侑、伥物横行，夜里整条街都在响，稳定已成空话。大炎为拖延付出的代价，正在一笔一笔地收。"
+
+YAN_Xiemo_influence:0 "邪魔影响"
+YAN_Xiemo_influence_desc:0 "与乌萨斯的战火烧到了极北的边际，那些被冰原裂隙吞没的「邪魔」循着战争的气息渗了过来。边关驿卒说，深夜的营火会突然熄灭，雪地上会多出一串不属于任何人的脚印，而辎重队穿过荒原时，马匹总在同一个位置莫名惊跳。士兵们不只是在与乌萨斯人作战——还在与自己投在雪地里的影子作战。\n\n§R陆军补给消耗 +20%§!／§R陆军防御 -30%§!／§R陆军组织度 -30%§!"
+
+YAN_Lao_Tianshi_guashuai:0 "老天师挂帅"
+YAN_Lao_Tianshi_guashuai_desc:0 "极北的败报一天短过一天，短到只剩一句「又是那样死的」。朝廷没了办法，只好去请那位早不管事的老人。他下山没带仪仗，只提一根木棍；教士卒的不是阵法，是怎么在夜里认出同伴的呼吸。三军知道他站在最前面，于是敢站在最后面，辎重车队也不再在半途空转，等一道永远不会来的号令。\n\n§G陆军攻击 +30%§!／§G液化源石消耗 -50%§!"
+
+YAN_True_dragon_fallen:0 "真龙陨落"
+YAN_True_dragon_fallen_desc:0 "真龙以身为引，与岁同归。岁兽死了，真龙也死了——大炎失去了它最神圣的那一个人，也失去了让天下安心的那个由头。"
+
+# ---------------------------- 三条路线 ----------------------------
+
+YAN_Route_Jingtian_Baomin:0 "敬天保民"
+YAN_Route_Jingtian_Baomin_desc:0 "炎据泰拉东，真龙统之。六部三公理政，大理寺、肃政院司法，天师府、钦天监、司岁台分职。国祚在真龙，亦在子民；安民固圉，平反冤狱，是其本。"
+
+YAN_Route_Dashou_Weitian:0 "大狩维天"
+YAN_Route_Dashou_Weitian_desc:0 "太古巨兽号神，岁为最古。真龙大狩，诛神逐兽，岁裂为十二代理人。司岁台监之，岁陵镇之，玉门备之，“不反”为同尽之器。望终入岁陵，杀岁识而代之，纳“不反”，受睚仇，以永劫易大炎安。"
+
+YAN_Route_Baiye_Zhengxing:0 "百业争兴"
+YAN_Route_Baiye_Zhengxing_desc:0 "百灶为都，玉门为塞，龙门通商，大荒劝农。饮食、武术、书画、诗词、影视、物流、侦探诸业并盛，烟火不绝。"
+
+# ---------------------------- 路线大BUFF（每条线一个，三档递进） ----------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ---------------------------- 人物 ----------------------------
+
+YAN_Taifu:0 "太傅"
+YAN_Taifu_desc:0 "三公之首，主谋国是。他相信大炎的敌人不在边关，而在自己心里那条不肯认输的执念；所以能谈的，他都想先谈一次。"
+
+YAN_Taiwei:0 "太尉"
+YAN_Taiwei_desc:0 "三公之中掌兵的那一位。他从不掩饰主张：岁兽是祸，就该除；代理人既是碎片，就不该留。朝堂上他把话说得最直，也最让人不安。"
+
+YAN_Ning_Chunqiu:0 "宁辞秋"
+YAN_Ning_Chunqiu_desc:0 "礼部左侍郎，宁述的孙女。比起陈兵边境，她更信一纸文书能办成的事——而她确实办成过几件。"
+
+YAN_Liang_Xun:0 "梁洵"
+YAN_Liang_Xun_desc:0 "尚蜀知府出身，后升玉门参知，又调百灶天镜阁誊录郎。管钱粮、修城渠的老手，也正因如此，他最清楚这座帝国的家底经不起几场大战。"
+
+YAN_Chun:0 "椿"
+YAN_Chun_desc:0 "司岁台监正，秉烛人里资历最深的一个。她守了那个秘密大半辈子，也为颉的死背过一段说不清的旧账。"
+
+YAN_Zuo_Le:0 "左乐"
+YAN_Zuo_Le_desc:0 "左宣辽之子，景教授之子，年轻的秉烛人。他比前任更愿意把代理人当人看，也更愿意把「监视」这一职，改叫共事。"
+
+YAN_Wei_Yanwu:0 "魏彦吾"
+YAN_Wei_Yanwu_desc:0 "本名炎武，原皇太子，如今龙门总督，也是真龙的兄长。四十年前他提刀上殿，此后离京；如今他握着一座城的钱与人，对百灶的态度始终是四个字：先看再说。"
+
+YAN_Yu_Cheng:0 "虞澄"
+YAN_Yu_Cheng_desc:0 "刑名出身的清官，为太师案查了半辈子，曾一把火烧掉大理寺卷牍库。他信冤案不平则国无宁日，因此得罪过的人比他的部下还多。"
+
+YAN_Lao_Tianshi:0 "老天师"
+YAN_Lao_Tianshi_desc:0 "提着木棍的老者，扫邪魔、破巨兽所向披靡，闲下来却在厨房拨火添柴。他不太谈天师府的事，也不谈自己怎么活这么久。"
+
+YAN_Zuo_Xuanliao:0 "左宣辽"
+YAN_Zuo_Xuanliao_desc:0 "玉门的老将，一辈子守在西北的风沙里。他不在乎朝堂的算计，只在乎城墙还立不立得住。"
+
+YAN_Chen_Huijie:0 "陈晖洁"
+YAN_Chen_Huijie_desc:0 "龙门近卫局高级警司，魏彦吾的外甥女，炎景公主之女。持赤霄剑，办案不讲情面，偏偏对「历史可以被人随意涂改」这件事，比谁都耿耿于怀。"
+
+YAN_Chong_Yue:0 "重岳"
+YAN_Chong_Yue_desc:0 "十二分之一，排行第一，执掌「武」。曾任玉门武术教官，把「朔」之名与残魂封进剑里，换来一具人的身体。他自认是人，不认那段岁的来历。"
+
+YAN_Jun:0 "均"
+YAN_Jun_desc:0 "排行第四，口含天宪，曾治狱、研究《炎律》。他相信规矩能管住人心，也相信只要写得够细，连岁也会被规矩困住。"
+
+YAN_Ling:0 "令"
+YAN_Ling_desc:0 "排行第三，诗人，好饮酒。曾戍北百年，尚蜀一役独退天灾。她看得太透，所以懒得争，只偶尔在梦里替大炎拆掉一两个不该发生的凶祸。"
+
+YAN_Nian:0 "年"
+YAN_Nian_desc:0 "排行第九，管铸造。她造的物件比大炎任何工坊都精巧，能造玄极巨兵，也能造十二楼五城；代价是她走到哪里，哪里就莫名其妙地烧起来。"
+
+YAN_Xi:0 "夕"
+YAN_Xi_desc:0 "排行第十一，画家，隐居灰齐山。她画下的东西会成真，代表作《拙山尽起图》。所以她极少落笔——除非有人值得她记下来。"
+
+YAN_Shu:0 "黍"
+YAN_Shu_desc:0 "排行第六，农业天师，曾在大荒城做农业研究。他把荒年的活命本事看得比什么都重，于是走到哪里，哪里的仓廪就先满起来。"
+
+YAN_Yu:0 "余"
+YAN_Yu_desc:0 "排行第十二，幺弟，余味居的老板。他话少，熬得一手好汤——对于一支大军能不能吃上饭这件事，他比谁都清楚。"
+
+# ---------------------------- 顾问特质 ----------------------------
+
+YAN_Taifu_advisor:0 "政治改革者"
+YAN_Taiwei_advisor:0 "主战派"
+YAN_Ning_Chunqiu_advisor:0 "外交家"
+YAN_Liang_Xun_advisor:0 "建设专家"
+YAN_Chun_advisor:0 "司岁台监正"
+YAN_Zuo_Le_advisor:0 "秉烛人监正"
+YAN_Wei_Yanwu_advisor:0 "政治强人"
+YAN_Yu_Cheng_advisor:0 "司法改革者"
+YAN_Lao_Tianshi_advisor:0 "科研顾问"
+YAN_Zuo_Xuanliao_advisor:0 "玉门守将"
+YAN_Chen_Huijie_advisor:0 "机动警司"
+YAN_Chong_Yue_advisor:0 "练兵官"
+YAN_Lao_Tianshi_high_command:0 "天师支援"
+YAN_Liang_Xun_high_command:0 "后勤规划"
+YAN_Taiwei_army_chief:0 "雷霆军令"
+YAN_Zuo_Xuanliao_army_chief:0 "玉门壁垒"
+YAN_Wei_Yanwu_army_chief:0 "总督军令"
+YAN_Taifu_theorist:0 "国策统筹"
+YAN_Jun_theorist:0 "律法理论家"
+YAN_Ling_theorist:0 "安定理论家"
+YAN_Ling_advisor:0 "织梦者"
+YAN_Nian_advisor:0 "铸造大师"
+YAN_Xi_advisor:0 "画境执笔"
+YAN_Shu_advisor:0 "农事顾问"
+YAN_Yu_advisor:0 "后勤顾问"
+YAN_Chen_Huijie_special:0 "天喟之剑"
+
+# ---------------------------- 顾问特质说明（数值由引擎自动列出，此处只写人话） ----------------------------
+
+YAN_Taifu_advisor_desc:0 "三公之首坐在政事堂里，把能谈的先在纸上谈一遍，再决定要不要动人。他署名的条陈下来，六部办事的次序肉眼可见地变了。"
+YAN_Taiwei_advisor_desc:0 "主兵的这一位在朝堂上从不给自己留余地。他一句话，校场的号子就密了三分——也难怪有人因此睡不安稳。"
+YAN_Ning_Chunqiu_advisor_desc:0 "她带回来的不是一纸盟约，而是让对面愿意坐下来听一句话的交情。四方使节开始把百灶算作必经的一站。"
+YAN_Liang_Xun_advisor_desc:0 "管过钱粮的人最清楚工程卡在哪一环。他重排了工期与料单，尚蜀的城渠因此提早合龙，谁也没多等一天。"
+YAN_Chun_advisor_desc:0 "司岁台的值夜册上，名字被圈了又圈。她盯着的从来不是岁，而是每一个可能把岁放出来的人。"
+YAN_Zuo_Le_advisor_desc:0 "年轻的监正把「监视名册」改成了「共事名册」，眼睛反倒比从前更多——愿意主动来报消息的人，也多起来了。"
+YAN_Wei_Yanwu_advisor_desc:0 "龙门总督的印信在百灶不好使，他的人脉却是。他一句话能省下的公文，比御案上摞起来的还厚。"
+YAN_Yu_Cheng_advisor_desc:0 "他重开旧卷宗不为翻案本身，只为让还活着的人敢把话说完。大理寺的门槛，从那天起没那么高了。"
+YAN_Lao_Tianshi_advisor_desc:0 "他在学宫里只待了三天，留下的三页笔记替源石技艺的后进省了十年弯路。旁人问他师承，他说自己只是在厨下看火看得久。"
+YAN_Zuo_Xuanliao_advisor_desc:0 "老将在玉门的城墙上站了四十年，不用看地图也知道风从哪一面来。士们把他的名字刻进了工事的砖缝。"
+YAN_Chen_Huijie_advisor_desc:0 "办案讲究快、准、不留尾巴。她把同一套东西搬到参谋席上：先插进去，再让合不上。"
+YAN_Chong_Yue_advisor_desc:0 "教头下操不问出身，只问还能不能再走一遍。他练过兵的地方，伤兵最少，肯往前冲的人最多。"
+YAN_Lao_Tianshi_high_command_desc:0 "术师成建制地上阵，是他点的头。头一回演练收兵，观摩的老将们在原地站了很久，谁也没先开口。"
+YAN_Liang_Xun_high_command_desc:0 "他算过一支大军一天要吃掉几座城的粮，所以他的命令单上永远先写辎重，再写进攻。"
+YAN_Taiwei_army_chief_desc:0 "他把进攻写成条令：不必等对面布完阵，先把自家拳头砸进去。军中自此只认一件事——谁先动手，谁定节奏。"
+YAN_Zuo_Xuanliao_army_chief_desc:0 "他任内的陆军条例反反复复只有一句话：先把阵脚站稳，再谈别的。"
+YAN_Wei_Yanwu_army_chief_desc:0 "总督调兵不看面子看时机。将领们很快就发现，他批下来的机动余地比兵部给的还宽。"
+YAN_Taifu_theorist_desc:0 "他把历次国策的成例编成了一部章程。后来的人照着办，就少绕三年路——这是他能给慢节奏的朝堂最实在的东西。"
+YAN_Jun_theorist_desc:0 "口含天宪的那一位相信，写得够细的规矩能替人管住人心，连也一样。他的稿子送进修律馆，就没有再被改回来过。"
+YAN_Ling_theorist_desc:0 "她讲安定，不讲进取。朝堂上肯听她的人不多，可凡是听了的地方，当年的凶案就少了几桩。"
+YAN_Ling_advisor_desc:0 "织梦的人不常上朝，她只在梦里把该拦的事先拦一遍。醒来递进宫的那道条陈，往往比边关的奏报还早三天。"
+YAN_Nian_advisor_desc:0 "她嫌工部的炉子太钝，索性自己开了一间。玄极巨兵的关节件从这里出去，连带着几条流水线的良率一起被抬了起来。"
+YAN_Xi_advisor_desc:0 "《拙山尽起图》挂出去的那一年，四方使节都想方设法要一幅真迹。她从不替谁说话，名气替她说了。"
+YAN_Shu_advisor_desc:0 "他看荒年的本事比看军报还细。仓廪先满起来，队伍才走得出玉门的风沙。"
+YAN_Yu_advisor_desc:0 "余味居的灶子搬进军中那天起，前线的伙房就换了章程。兵士们说不出什么道理，只是更肯守自己那段墙。"
+YAN_Chen_Huijie_special_desc:0 "书刀在她手里只干一件事：把被抹掉的名字一页页翻回来。将士们因此信了一件事——名字不会被随便涂改，战功也不会。"
+
+# ---------------------------- 路线动态精神：每个国策的具体 BUFF 提示 ----------------------------
+
+YAN_route_politics:0 "承平之治"
+YAN_route_politics_desc:0 "太师掌教化，太傅辅政，太尉主兵，六部各安其位。朝堂上没人再急着出奇策——把旧规走稳，本身就是本事。此后每走稳一步，这份治世便厚一分。"
+
+YAN_route_sui:0 "岁陵司秉烛"
+YAN_route_sui_desc:0 "秉烛人夜夜巡陵，记档、勘验、轮值。地脉的读数一日日压下去，百灶的夜也一日日安下去。"
+
+YAN_route_military:0 "禁军整训"
+YAN_route_military_desc:0 "校场上的号声密了，革甲换成了新的。承平之兵重新学会一件事：把队列走整齐，也是要练的。"
+
+YAN_route_industry:0 "百灶工造"
+YAN_route_industry_desc:0 "能源桩往地下再扎一截，工坊三班连轴。百灶的灯，从此夜里也不熄。"
+
+YAN_route_research:0 "百灶学宫"
+YAN_route_research_desc:0 "学宫重开，四院并立。肯较真的读书人聚到一处，大炎便有了自己的脑子。"
+
+YAN_route_local:0 "十九宣政司"
+YAN_route_local_desc:0 "宣政司各领其地，府、州、县层层向六部负责。中央的手不必伸得太远，可账目得清楚。"
+
+YAN_route_diplomacy:0 "四方馆"
+YAN_route_diplomacy_desc:0 "礼部重开四方馆，迎来送往。大炎太久不曾主动与人打交道，这一步，是姿态也是国策。"
+
+
+YAN_route_diplomacy_improve_m25_tt:0 "「四方馆」：改善关系维护费 −25%"
+YAN_route_diplomacy_opinion_u5_tt:0 "「四方馆」：关系改善 +5"
+YAN_route_diplomacy_relation_u20_tt:0 "「四方馆」：外交关系 +20"
+YAN_route_diplomacy_relation_u5_tt:0 "「四方馆」：外交关系 +5"
+YAN_route_diplomacy_research_p5_tt:0 "「四方馆」：研究速度 +5%"
+YAN_route_industry_build_speed_p10_tt:0 "「百灶工造」：建造速度 +10%"
+YAN_route_industry_build_speed_p5_tt:0 "「百灶工造」：建造速度 +5%"
+YAN_route_industry_civ_factory_p10_tt:0 "「百灶工造」：民用工厂产出 +10%"
+YAN_route_industry_civ_factory_p5_tt:0 "「百灶工造」：民用工厂产出 +5%"
+YAN_route_industry_dockyard_p15_tt:0 "「百灶工造」：船坞产出 +15%"
+YAN_route_industry_max_efficiency_p5_tt:0 "「百灶工造」：工厂最大效率 +5%"
+YAN_route_local_agriculture_p10_tt:0 "「十九宣政司」：农业研究 +10%"
+YAN_route_local_agriculture_p5_tt:0 "「十九宣政司」：农业研究 +5%"
+YAN_route_local_monthly_pop_u0_5_tt:0 "「十九宣政司」：每月人口 +0.5"
+YAN_route_local_population_p5_tt:0 "「十九宣政司」：可征兵人口 +5%"
+YAN_route_local_stability_p5_tt:0 "「十九宣政司」：稳定度 +5%"
+YAN_route_local_supply_m5_tt:0 "「十九宣政司」：补给消耗 −5%"
+YAN_route_military_army_xp_p2_tt:0 "「禁军整训」：陆军经验 +0.02/日"
+YAN_route_military_army_xp_p5_tt:0 "「禁军整训」：陆军经验 +0.05/日"
+YAN_route_military_attack_p5_tt:0 "「禁军整训」：陆军攻击 +5%"
+YAN_route_military_breakthrough_p10_tt:0 "「禁军整训」：突破 +10%"
+YAN_route_military_breakthrough_p5_tt:0 "「禁军整训」：突破 +5%"
+YAN_route_military_defence_p10_tt:0 "「禁军整训」：陆军防御 +10%"
+YAN_route_military_defence_p5_tt:0 "「禁军整训」：陆军防御 +5%"
+YAN_route_military_org_p5_tt:0 "「禁军整训」：陆军组织度 +5%"
+YAN_route_military_training_m10_tt:0 "「禁军整训」：训练时间 −10%"
+YAN_route_military_training_m5_tt:0 "「禁军整训」：训练时间 −5%"
+YAN_route_politics_advisor_cost_m25_tt:0 "「承平之治」：顾问花费 −25%"
+YAN_route_politics_advisor_cost_m5_tt:0 "「承平之治」：顾问花费 −5%"
+YAN_route_politics_pp_p15_tt:0 "「承平之治」：每日政治力量 +0.15/日"
+YAN_route_politics_pp_p5_tt:0 "「承平之治」：每日政治力量 +0.05/日"
+YAN_route_politics_resistance_m20_tt:0 "「承平之治」：抵抗目标 −20%"
+YAN_route_politics_resistance_m5_tt:0 "「承平之治」：抵抗目标 −5%"
+YAN_route_politics_stability_p15_tt:0 "「承平之治」：稳定度 +15%"
+YAN_route_politics_stability_p5_tt:0 "「承平之治」：稳定度 +5%"
+YAN_route_research_medical_p15_tt:0 "「百灶学宫」：医疗研究 +15%"
+YAN_route_research_medical_p5_tt:0 "「百灶学宫」：医疗研究 +5%"
+YAN_route_research_originium_p15_tt:0 "「百灶学宫」：源石技艺研究 +15%"
+YAN_route_research_originium_p5_tt:0 "「百灶学宫」：源石技艺研究 +5%"
+YAN_route_research_speed_p10_tt:0 "「百灶学宫」：研究速度 +10%"
+YAN_route_research_speed_p5_tt:0 "「百灶学宫」：研究速度 +5%"
+YAN_route_sui_agent_unlock_u1_tt:0 "「岁陵司秉烛」：可招募代理人顾问 达成"
+YAN_route_sui_behemoth_p10_tt:0 "「岁陵司秉烛」：对巨兽、邪魔的攻击 +10%"
+YAN_route_sui_behemoth_p5_tt:0 "「岁陵司秉烛」：对巨兽、邪魔的攻击 +5%"
+YAN_route_sui_intel_p15_tt:0 "「岁陵司秉烛」：情报网获取 +15%"
+YAN_route_sui_intel_p5_tt:0 "「岁陵司秉烛」：情报网获取 +5%"
+YAN_route_sui_research_p5_tt:0 "「岁陵司秉烛」：研究速度 +5%"
+YAN_route_sui_stability_p5_tt:0 "「岁陵司秉烛」：稳定度 +5%"
+# ---------------------------- 决议分类与机制读数 ----------------------------
+
+YAN_Suiling_Affairs:0 "岁陵司"
+
+YAN_sui_status_calm:0 "\n§G岁兽苏醒度：平稳§!——岁陵安静，司岁台的记档里只有几行闲笔。"
+YAN_sui_status_stirring:0 "\n§Y岁兽苏醒度：渐醒§!——地脉的读数在动，秉烛人开始加派人手。"
+YAN_sui_status_warning:0 "\n§O岁兽苏醒度：警戒§!——岁陵的封印已不堪重负，再拖下去就要出事。"
+YAN_sui_status_critical:0 "\n§R岁兽苏醒度：危急§!——岁陵随时会裂，必须立刻决断。"
+
+YAN_shudao_status_intact:0 "\n§G书刀完整度：完好§!——刀锋无损，仍可删改历史。"
+YAN_shudao_status_worn:0 "\n§Y书刀完整度：磨损§!——刀口已经卷了，再用下去撑不了几回。"
+YAN_shudao_status_broken:0 "\n§R书刀完整度：崩裂§!——书刀已卷刃，太尉一系正盯着天镜阁。"
+
+YAN_bufan_status_none:0 "\n§T不反准备度：未备§!——血脉未淬，源石未引。"
+YAN_bufan_status_preparing:0 "\n§Y不反准备度：筹备中§!——不反的引子已经备下了一些。"
+YAN_bufan_status_close:0 "\n§O不反准备度：将成§!——再走一步，就能送真龙上路。"
+YAN_bufan_status_ready:0 "\n§R不反准备度：就绪§!——只要真龙一句话，随时可以同归。"
+
+YAN_agent_status_hostile:0 "\n§R代理人信任：敌对§!——代理人已开始避开司岁台的眼线。"
+YAN_agent_status_wary:0 "\n§T代理人信任：戒备§!——他们愿意谈，但都留着后手。"
+YAN_agent_status_cooperative:0 "\n§G代理人信任：合作§!——几位代理人愿意为大炎办些不方便的事。"
+YAN_agent_status_family:0 "\n§B代理人信任：一家§!——十二片碎片终于坐到了一张桌上。"
+
+# ---------------------------- 决议 ----------------------------
+
+YAN_decision_suiling_report:0 "岁陵司近况"
+YAN_decision_suiling_report_desc:0 "禀真龙：岁陵、天镜阁、不反库房与十二代理人的近况，都记在这张折子上。看与不看，折子都要送到。"
+
+YAN_decision_sishuitai_alert:0 "颁司岁台警戒令"
+YAN_decision_sishuitai_alert_desc:0 "调秉烛人巡陵，加派术师复检地脉，把警戒令逐级传下去。声势闹得大些，岁陵那边便会安分几日——至少看起来如此。"
+
+YAN_decision_zenith_patrol:0 "秉烛人巡陵"
+YAN_decision_zenith_patrol_desc:0 "让秉烛人下到年久失修的岁陵夹层去，实地看一看封印，也顺便与守在外围的代理人打个照面、说几句好话。"
+
+YAN_decision_reinforce_seal:0 "加固岁陵封印"
+YAN_decision_reinforce_seal_desc:0 "倾国库之力再封一次岁陵：重铸镇石、改派术师、迁走附近的村屯。压得住一时，也压得万人怨声。"
+
+YAN_decision_erase_history:0 "书刀删改"
+YAN_decision_erase_history_desc:0 "以书刀删去史册上的一段记载，连带抹掉那个名字在大炎人记忆里的分量。岁陵那边会因此安静一些——刀锋也会更薄一些。"
+
+YAN_decision_seal_shudao:0 "封存书刀"
+YAN_decision_seal_shudao_desc:0 "将书刀重新封入天镜阁的旧匣，附殿大学士轮流看守。不用它，它就还是那柄能保大炎体面的刀。"
+
+YAN_decision_prepare_bufan:0 "筹备不反"
+YAN_decision_prepare_bufan_desc:0 "以真龙血脉为引，取源石为薪，把一切备到「只差一个人点头」的地步。这件事一旦开始，便不能回头。"
+
+YAN_decision_launch_bufan:0 "启动不反"
+YAN_decision_launch_bufan_desc:0 "真龙亲赴岁陵，以自身为引点燃不反。此举可一朝解大炎千年之患，代价是当朝真龙与岁同归于尽——此后史书如何叙他，全看留在世上的人。"
+
+YAN_decision_reward_agents:0 "嘉奖代理人"
+YAN_decision_reward_agents_desc:0 "给愿意共事的几位代理人一些实在的体面：敕封、宅邸、祭田，或者只是让司岁台别再无休止地跟着。"
+
+YAN_decision_screen_agents:0 "甄别代理人"
+YAN_decision_screen_agents_desc:0 "彻查十二片碎片的行止，把可疑的逐一登记造册、调离要地。朝堂会因此安心，代理人也会因此更远。"
+
+YAN_decision_invite_wang:0 "请望入局"
+YAN_decision_invite_wang_desc:0 "正式请望入岁陵这盘棋。他来不来另说，但这一步落定之后，岁陵的终局就只剩黑白两种走法。"
+
+YAN_decision_purge_demon_threat:0 "清除邪魔威胁"
+YAN_decision_purge_demon_threat_desc:0 "北境的邪魔本不该认什么国界，可它们如今却和乌萨斯纠缠得难分彼此。秉烛人把一张图铺在殿上：从冰原一路南下，越过山口与冻河，直指大炎的边城。真龙看罢只问了一句——是等着它们找上门，还是我们把战场推回去？\n\n檄文随后送往圣骏堡。大炎的刀锋，第一次朝北。"
+YAN_purge_demon_threat_tt:0 "§Y乌萨斯帝国§!将获得民族精神§R寸步不让§!：陆军攻击 §G+10%§!、陆军防御 §G+10%§!、工厂产出 §G+50%§!"
+
+# ---------------------------- 事件 ----------------------------
+
+yan_sui.1.t:0 "岁陵传警"
+yan_sui.1.d:0 "司岁台的急报是子夜送进禁城的：岁陵夹层的镇石同时发热，三处封记自己裂了。秉烛人不敢擅动，只把折子递了上去。\n\n「按旧例，该加派人手了。」监正的声音很轻，「可旧例里没写，封记会自己裂。」"
+yan_sui.1.a:0 "加派秉烛人，此事不可外传。"
+
+yan_sui.2.t:0 "岁兽之乱"
+yan_sui.2.d:0 "百灶先乱，接着是邙山。夜里的街巷满是伥物的动静，巡防营的号令一夜间变了三次。天亮时，城里的人发现很多铺子不再开门——而城外的官道上，多了些举着旗子赶路的人。\n\n大炎为拖延付出的代价，终于开始收了。"
+yan_sui.2.a:0 "传令各处弹压。"
+
+yan_sui.3.t:0 "书刀案"
+yan_sui.3.d:0 "书刀不见了。天镜阁连夜封门，殿前司的人进进出出，谁也不敢看谁的眼睛。\n\n有传言说刀在太尉手里，也有说在陈晖洁手里。无论哪一种，都意味着天镜阁以后再不能替谁改史了。"
+yan_sui.3.a:0 "封锁消息，彻查到底。"
+
+yan_sui.4.t:0 "代理人离心"
+yan_sui.4.d:0 "司岁台的回报一封比一封含糊：几位代理人已经很久没有应召了，守在外围的秉烛人说，有人搬走了，连门都没关。\n\n碎片们开始把大炎当成需要防备的一方。"
+yan_sui.4.a:0 "备些薄礼，再去请一次。"
+
+yan_sui.10.t:0 "岁陵决战"
+yan_sui.10.d:0 "岁陵这一夜不再平静。棋盘、封印、源石与血脉，所有这些拖了很多年的东西，都在同一处收了账。\n\n天亮之前，会有人从陵里走出来，告诉等待的人：谁活下来了，大炎欠了谁。"
+yan_sui.10.a:0 "静候结果。"
+yan_sui.10.b:0 "昭告天下，大炎自此无岁。"
+
+yan_sui.11.t:0 "不反"
+yan_sui.11.d:0 "真龙在岁陵深处点燃了不反。那一夜，整个百灶都看见东边的天在发白，却听不见一点声音。\n\n岁兽死了，岁陵静了。留下的只是一句话：那一位再没有回来。"
+yan_sui.11.a:0 "举国缟素。"
+
+# ---------------------------- 国策 · 起点 ----------------------------
+
+YAN_True_Dragon_Court:0 "真龙临朝"
+YAN_True_Dragon_Court_desc:0 "封禅已毕，真龙坐回那张空了很久的椅子。丹墀之下，太傅与太尉各自垂着眼，没人知道他先要动的是岁陵、旧案，还是那位远在龙门的兄长。"
+YAN_Xuanji_giant_armor_tt:0 "重装甲研究加速（装甲类 +50%，共 2 次），玄极巨兵实验装甲师可扩编成军"
+YAN_Start_Bufan_tt:0 "解锁「启动不反」决议，需在不反准备度满后执行"
+YAN_Suiling_Stirring_tt:0 "岁兽苏醒度设为 45，此后持「岁兽之患」时每月上涨"
+
+# ---------------------------- 国策 · 政治线 ----------------------------
+
+YAN_Three_Dukes:0 "三公议政"
+YAN_Three_Dukes_desc:0 "太师掌教化，太傅辅政，太尉主兵。三公各守一摊，六部各领一事——朝堂从此慢下来，但也少有人能一手遮天。"
+
+YAN_Taifu_Strategy:0 "太傅：上兵伐谋"
+YAN_Taifu_Strategy_desc:0 "太傅把一卷棋谱推到御案上：岁未必要斩，代理人未必要杀，旧案未必要瞒。能靠谈、靠换、靠时间了结的，就不该拿人命去填。"
+
+YAN_Grand_Examination:0 "设置大考"
+YAN_Grand_Examination_desc:0 "重开大考，以策问取士。太傅要的不只是新官，是一批肯把「岁」当成政务、而不是忌讳来谈的年轻人。"
+
+YAN_Bingzhu_New_System:0 "秉烛新制"
+YAN_Bingzhu_New_System_desc:0 "司岁台添了「共事」一职。秉烛人仍旧夜行，只是手里的烛，从今往后也替代理人照路。"
+
+YAN_Taiwei_Rearmament:0 "太尉：整军经武"
+YAN_Taiwei_Rearmament_desc:0 "太尉的话向来只有一句：祸在，就除；有刀，就用。校场上的号声比往年密了许多，朝堂上的争论也尖了许多。"
+
+YAN_Yumen_Fire:0 "玉门开火"
+YAN_Yumen_Fire_desc:0 "玉门全线备战，炮口不再只对着大漠。军报上，太尉只批了四个字——不必留情。"
+
+YAN_Seize_Shudao:0 "夺取书刀"
+YAN_Seize_Shudao_desc:0 "书刀锁在天镜阁顶楼，需监正与第四代理人的钥匙。太尉的人推开那扇门时，学士们没有拦。"
+
+YAN_Start_Bufan:0 "启动不反"
+YAN_Start_Bufan_desc:0 "不反的引子已经备齐，只等真龙点头。这一点头之后，大炎会失去它的天子，也会永远失去岁。"
+
+YAN_Yumen_Mutual_Ruin:0 "玉门同归"
+YAN_Yumen_Mutual_Ruin_desc:0 "另一条更硬的路：不启不反，把玉门整条防线压上岁陵，用炮火与人命把岁填死。这条路不体面，却不必真龙去死。"
+
+YAN_Taishi_Rehab:0 "太师平反"
+YAN_Taishi_Rehab_desc:0 "旧案像一根刺，扎在大炎皮肉里四十年。既然要谈岁、谈代理人，就先从自己家这笔账谈起。"
+
+YAN_Probe_Old_Case:0 "彻查旧案"
+YAN_Probe_Old_Case_desc:0 "卷宗重开，谁主谋、谁沉默、谁改过笔录，一条条摆到光下——包括当年提刀上殿的那位皇太子。"
+
+YAN_Pardon_Gu_Quan:0 "赦免顾筌、宁述"
+YAN_Pardon_Gu_Quan_desc:0 "顾筌已死，宁述老了。赦书一下，大炎等于当众认下：当年那句「天下一白」，是对的。"
+
+YAN_Huang_Meets_Ning_Yin:0 "煌与宁茵相认"
+YAN_Huang_Meets_Ning_Yin_desc:0 "一桩被旧案拆散的家事，终于有了一天能坐下来相认。朝堂翻案，落到人身上，不过是让两个人叫出彼此的名字。"
+
+YAN_Tianxia_Yibai:0 "天下一白"
+YAN_Tianxia_Yibai_desc:0 "最后一页卷宗合上，压在百官心头的那口冤气散了。从此大炎不必再替一个错误的名字守密——天下一白，人心自安。"
+
+YAN_Sishuitai_Reform:0 "司岁台改革"
+YAN_Sishuitai_Reform_desc:0 "把司岁台从「看坟的衙门」里拽出来：该查的照查，该记的照记，只是不再事事只做一件事——瞒。"
+
+YAN_Chun_Resigns:0 "椿辞职"
+YAN_Chun_Resigns_desc:0 "椿递辞表时只说了半句：「那个秘密，我守得比岁陵还久了。」剩下半句，她咽了回去。"
+
+YAN_Zuo_Le_takes_office:0 "左乐接任监正"
+YAN_Zuo_Le_takes_office_desc:0 "年轻的秉烛人接过司岁台。第一道命令不是加派人手，而是把「监视名册」改成「共事名册」。"
+
+YAN_Bingzhu_people_new:0 "秉烛人新制"
+YAN_Bingzhu_people_new_desc:0 "新章程颁下：巡陵、存档、勘验之外，秉烛人有权代朝廷与代理人交涉。烛照到的地方，不再只有嫌疑。"
+
+YAN_Shudao_back_to_Tianjingge:0 "书刀归天镜阁"
+YAN_Shudao_back_to_Tianjingge_desc:0 "书刀请回天镜阁，交回学士之手。刀还在，只是不再是谁想拿就能拿的东西。"
+
+YAN_Shudao_Sealed:0 "书刀封存"
+YAN_Shudao_Sealed_desc:0 "封匣、加锁、附殿大学士轮值看管。不让任何人用它——因为任何人都可能想用它。"
+
+YAN_Chen_Huijie_holds_shudao:0 "陈晖洁持书刀"
+YAN_Chen_Huijie_holds_shudao_desc:0 "书刀交到陈晖洁手上。她不打算删改任何东西，只想把那些被删改过的，一页页翻回来。"
+
+YAN_Tiankui_Sword:0 "天喟之剑"
+YAN_Tiankui_Sword_desc:0 "刀锋出鞘那夜，龙门近卫局的人只看见她一个人走进雨里。回来时鞋上全是泥，赤霄剑却收得很稳。"
+
+YAN_True_Dragon_and_Wei:0 "真龙与魏彦吾"
+YAN_True_Dragon_and_Wei_desc:0 "龙门与百灶之间那条线，说到底是两兄弟的事。真龙决定先动这一步——不论对面接不接。"
+
+YAN_Brothers_standoff:0 "兄弟对峙"
+YAN_Brothers_standoff_desc:0 "会面没有称兄道弟，也没有掀桌。两个人都清楚对方的筹码，也清楚再耗下去会便宜谁。"
+
+YAN_Brothers_one_heart:0 "兄弟同心"
+YAN_Brothers_one_heart_desc:0 "龙门的人马开始向百灶靠拢。大炎头一回不必把一半心思花在提防自己人身上——这比多出十个师管用。"
+
+# ---------------------------- 国策 · 岁兽线 ----------------------------
+
+YAN_Suiling_Stirring:0 "岁陵惊动"
+YAN_Suiling_Stirring_desc:0 "司岁台的观测回报：陵下巨物呼吸转沉，隐有翻身之象——比预想中来得早。"
+
+YAN_Sishuitai_Alert:0 "司岁台警戒"
+YAN_Sishuitai_Alert_desc:0 "加派人手、复勘封印、重排轮值。压不下根子上的东西，至少把发作的时辰往后推。"
+
+YAN_Watch_Agents:0 "监视代理人"
+YAN_Watch_Agents_desc:0 "十二片碎片的行止逐日记档。记得越细，越有人觉得他们不过是想过日子的普通人——这才是最让人不安的地方。"
+
+YAN_Purge_Agents:0 "诛杀代理人"
+YAN_Purge_Agents_desc:0 "既然是岁的碎片，就不该留。诛杀令一下，朝堂上空出的位子，很快被别的东西填上。"
+
+YAN_Agents_Cooperation:0 "代理人合作"
+YAN_Agents_Cooperation_desc:0 "大炎终于愿意承认：这十二个「碎片」首先是十二个人。请他们入朝、议事、出工，而不是只在名册上被标注为「待观」。"
+
+YAN_Chong_Yue_enters:0 "重岳入岁陵"
+YAN_Chong_Yue_enters_desc:0 "执掌「武」的那一片自己走进岁陵。他说得干脆：「这债不是我的，可守门的事，我熟。」"
+
+YAN_Ling_and_Jun_dream:0 "令、均织梦"
+YAN_Ling_and_Jun_dream_desc:0 "一个织梦，一个写律。两人在岁陵外围织了一层看不见的封条——梦里定下的规矩，也会落在实处。"
+
+YAN_Nian_and_Xi_ward:0 "年、夕镇伥"
+YAN_Nian_and_Xi_ward_desc:0 "年带着铸造的镇压器，夕以画境圈住游荡的伥物。百灶郊外的夜，头一回静得让人不习惯。"
+
+YAN_Shu_and_Yu_settle:0 "黍、余安民"
+YAN_Shu_and_Yu_settle_desc:0 "黍去修仓廪，余去管流民。岁陵的事还没了结，可先得让活着的人有饭可吃、有处可去。"
+
+YAN_Shudao_research:0 "书刀研究"
+YAN_Shudao_research_desc:0 "学士们获准研究书刀本身：它删掉的究竟是字，还是字背后的记忆？这件事想清楚之前，谁也不敢再用它。"
+
+YAN_Erase_history:0 "删改历史"
+YAN_Erase_history_desc:0 "一笔落下，某段记载消失了。岁陵那边随之安静，可史官在灯下发现，自己已经想不起刚刚删掉的是什么。"
+
+YAN_Erase_Sui_word:0 "抹去「岁」字"
+YAN_Erase_Sui_word_desc:0 "把「岁」从史册与告示里一点点抹掉。名字没了，祸患似乎也少了一分力气——代价是提笔的人自己也开始忘事。"
+
+YAN_Weaken_Sui:0 "岁兽意识削弱"
+YAN_Weaken_Sui_desc:0 "岁陵深处的意识因此迟缓。它还在，只是不再那么容易醒。"
+
+YAN_Bufan_prepare:0 "不反准备"
+YAN_Bufan_prepare_desc:0 "不反的库房重新启用：点炭、验石、试引。所有人都在做准备，所有人都不往御案那边看。"
+
+YAN_True_Dragon_blood:0 "真龙血脉"
+YAN_True_Dragon_blood_desc:0 "取真龙之血为引，淬进不反的核心。医官的手很稳，殿里没人说话。"
+
+YAN_Bufan_Originium_Rite:0 "不反源石"
+YAN_Bufan_Originium_Rite_desc:0 "整块不反源石嵌进岁陵的引座。此后只等一个人，站到它前面。"
+
+YAN_Wang_chess:0 "望的棋局"
+YAN_Wang_chess_desc:0 "望入岁陵，不为斩岁，只为与它下一盘棋。棋盘铺开之后，大炎头一回有了不必流血的可能。"
+
+YAN_181_black_stones:0 "一百八十一黑子"
+YAN_181_black_stones_desc:0 "一百八十一枚黑子落定，每一枚都对岁陵的一条脉络。望要把这盘棋下成和局——和局里，人可以替兽。"
+
+YAN_Suiling_Decisive:0 "岁陵决战"
+YAN_Suiling_Decisive_desc:0 "倾国之战落向岁陵：凭十二人的信任，凭不反的准备。两样都不足，便是最坏的那一种收场。"
+YAN_Suiling_Decisive_wang_tt:0 "岁陵一战由望收官：移除「岁兽之患」，获得「望之枷锁」「新岁之影」与「岁兽之祸终结」"
+YAN_Suiling_Decisive_bufan_tt:0 "真龙亲启不反：移除「岁兽之患」，获得「岁兽之祸终结」与「真龙陨落」"
+YAN_Suiling_Decisive_fail_tt:0 "准备不足，岁陵失守：获得「岁兽之乱」与「巨兽苏醒」"
+
+YAN_Wang_replaces_Sui:0 "望取代岁"
+YAN_Wang_replaces_Sui_desc:0 "他把自己换成岁，锁进永眠，以未来近乎永恒的折磨为代价——与永世不得超生，没有分别。"
+
+# ---------------------------- 国策 · 军事线 ----------------------------
+
+YAN_Military_Reform:0 "军事改革"
+YAN_Military_Reform_desc:0 "承平太久，军里早习惯了按例操演。太尉要改的不是编制，是那股「反正打不起来」的气。"
+
+YAN_Yumen_Fortress:0 "玉门要塞"
+YAN_Yumen_Fortress_desc:0 "玉门是西北的锁，也是岁陵的门。工事修到城墙之外，烽燧接成一线。"
+
+YAN_Pingfeng_Guard:0 "屏风卫"
+YAN_Pingfeng_Guard_desc:0 "城墙外再挂一道会走的墙。不求进取，只求墙后的人能睡个整觉。"
+
+YAN_Shajq:0 "沙渠"
+YAN_Shajq_desc:0 "沿旧河道掘渠排沙，让兵马在天灾与风沙里也能走得动、扎得下。"
+
+YAN_Tianzai_fort:0 "天灾工事"
+YAN_Tianzai_fort_desc:0 "照天灾的脾气修掩体与储水：风来的日子不进不退，只在墙后等它过去。"
+
+YAN_Wangfeng_Festival:0 "望烽节"
+YAN_Wangfeng_Festival_desc:0 "开春点烽火、擂征鼓，三日不息。告诉城里的人：城池无恙，山河无恙，大炎无恙。"
+
+YAN_Imperial_Guard_Expansion:0 "禁军扩编"
+YAN_Imperial_Guard_Expansion_desc:0 "禁军由六镇再添，京畿与外省要地都驻上精锐。人多则粮饷重，可国都的安全值这个价。"
+
+YAN_Imperial_Guard:0 "御林卫"
+YAN_Imperial_Guard_desc:0 "御林卫专守宫城与京师，遇乱先保中枢。他们站在那里，就是给百官吃的一颗定心丸。"
+
+YAN_Patrol_Battalions:0 "巡防营"
+YAN_Patrol_Battalions_desc:0 "巡防营铺到州县去：缉盗、查盐、弹压械斗。这些琐碎事，才是稳定最实在的底子。"
+
+YAN_Border_Army_Training:0 "边军整训"
+YAN_Border_Army_Training_desc:0 "边军常年守备，疏于操演。整训的重点不在进攻，而在风沙与严寒里还能不能站住岗。"
+
+YAN_Tianshi_office:0 "天师府"
+YAN_Tianshi_office_desc:0 "重整天师府，把散在江湖里的术师收归编制。土木、农业、天灾信使各成一门——他们要对付的不是人。"
+
+YAN_Tianshi_support_company:0 "天师术师支援连"
+YAN_Tianshi_support_company_desc:0 "每镇配属一队天师术师：勘地脉、破邪术、镇伥物。有他们在，部队在异常地带才不至于手足无措。"
+
+YAN_Qintianjian:0 "钦天监"
+YAN_Qintianjian_desc:0 "钦天监不只观星，也要算出天灾来的时辰。算准一次，省下的就是几座城。"
+
+YAN_Originium_arts:0 "源石技艺"
+YAN_Originium_arts_desc:0 "把源石技艺从术师秘传改成军学：可控、可教、可量产，才谈得上在战场上用。"
+
+YAN_Xuanji_giant_armor:0 "玄极巨兵"
+YAN_Xuanji_giant_armor_desc:0 "玄极巨兵是炎国最大胆的造物，也是年最得意的作品。能不能用、会不会烧起来，都得等它先动了才知。"
+
+YAN_Crush_Shanhaizhong:0 "剿灭山海众"
+YAN_Crush_Shanhaizhong_desc:0 "山海众的根扎得太深，谈是谈不掉的。既如此，只好一段段地拔。"
+
+YAN_Amnesty_Shanhaizhong:0 "招安山海众"
+YAN_Amnesty_Shanhaizhong_desc:0 "与其把山海众逼成永远的清剿对象，不如给他们一个将功补过的名分——比如，去对付更凶的东西。"
+
+# ---------------------------- 国策 · 工业线 ----------------------------
+
+YAN_Baizao_Energy:0 "百灶能源桩"
+YAN_Baizao_Energy_desc:0 "百灶的能源桩再往深处扎一截。城会走得更远，付出的油与料也更多。"
+
+YAN_Originium_vein_cost:0 "源石矿脉消耗"
+YAN_Originium_vein_cost_desc:0 "采掘再狠一些，同一处矿脉能榨出更多东西。至于这片地被榨空之后怎么办，那是下一代的事。"
+
+YAN_Dahuang_Agriculture:0 "大荒城农业"
+YAN_Dahuang_Agriculture_desc:0 "渠、仓、屯田一并收拾出来。大军能不能打，先看这里的粮能不能撑。"
+
+YAN_Twelve_towers:0 "十二楼五城"
+YAN_Twelve_towers_desc:0 "十二楼五城全面开工。大炎的城市不只是住人的地方——它们会走、会躲，会把天灾甩在身后。"
+
+YAN_Longmen_trade:0 "龙门贸易"
+YAN_Longmen_trade_desc:0 "龙门是东陆的钱袋子。把口岸、关税与商路理顺，百灶的账面自然好看。"
+
+YAN_Tianjingge_expansion:0 "天镜阁扩建"
+YAN_Tianjingge_expansion_desc:0 "天镜阁增置书库与学士。一个能改史的机构，最该先做的是把史收全。"
+
+# ---------------------------- 国策 · 科研线 ----------------------------
+
+YAN_Baizao_Academy:0 "百灶学宫"
+YAN_Baizao_Academy_desc:0 "百灶学宫重开大门：算学、工造、医理、律令各设一院。大炎要的是一批肯较真的读书人。"
+
+YAN_Six_ministries_college:0 "六部学院"
+YAN_Six_ministries_college_desc:0 "六部各办学院，把衙门里的门道编成教材。官吏不再只靠师徒相授，政务才有统一的尺子。"
+
+YAN_Tianshi_originium_study:0 "天师府源石技艺"
+YAN_Tianshi_originium_study_desc:0 "天师府与学宫合开讲席：把玄的东西写成能验的条目，术法才不至于只靠天赋。"
+YAN_Tianshi_originium_study_tt:0 "解锁源石技艺研究讲席与术师支援"
+
+YAN_Qintianjian_forecast:0 "钦天监天灾预测"
+YAN_Qintianjian_forecast_desc:0 "以地动、风向与水质为凭，推算天灾来的时辰。预测比抵御便宜得多。"
+
+YAN_Behemoth_research:0 "巨兽研究"
+YAN_Behemoth_research_desc:0 "整理历代诛神与镇岁的文书，研究巨兽的脾性、弱点与来历。要跟天敌打交道，先把它当对手来认识。"
+
+YAN_Shudao_history_research:0 "书刀历史研究"
+YAN_Shudao_history_research_desc:0 "以书刀为对象，研究「历史被改过多少次」。想明白这件事，比多修十座城更能让朝廷稳下来。"
+
+# ---------------------------- 国策 · 地方线 ----------------------------
+
+YAN_Local_Governance:0 "地方治理"
+YAN_Local_Governance_desc:0 "宣政司与州府重新划界、定权、核账。中央的手不必伸得太远，但得知道各地到底有多少东西。"
+
+YAN_Longmen_governance:0 "龙门"
+YAN_Longmen_governance_desc:0 "龙门不归宣政司，由总督任行政长官。真龙要先理顺这层关系——那座城攥着东陆的钱与人。"
+YAN_Longmen_governance_tt:0 "解锁魏彦吾与陈晖洁顾问，龙门方向的贸易与警务加成"
+
+YAN_Shangshu_governance:0 "尚蜀"
+YAN_Shangshu_governance_desc:0 "尚蜀风高，山道难行，兵匪都不易根除。理清这里的仓与驿，等于给大炎多留一条退路。"
+
+YAN_Yumen_governance:0 "玉门"
+YAN_Yumen_governance_desc:0 "玉门既是边关也是擂台，军民杂处、武馆林立。把这里收进秩序，西北才算真的稳住。"
+YAN_Yumen_governance_tt:0 "解锁玉门戍卫师的强化与玉门方向的防御加成"
+
+YAN_Dahuang_governance:0 "大荒城"
+YAN_Dahuang_governance_desc:0 "大荒城地广人稀，屯田与水利是命脉。多开一道渠，边军就少饿一天。"
+
+YAN_Mangshan_governance:0 "邙山"
+YAN_Mangshan_governance_desc:0 "邙山靠着岁陵，器物多化为伥，人与伥同住一镇。镇压、安民、改设巡检司，一件都不能少。"
+
+YAN_Baizao_governance:0 "百灶"
+YAN_Baizao_governance_desc:0 "百灶是天子脚下，也是大炎的门面。把这里的学宫、工坊与市面经营好，天下就有了样板。"
+
+# ---------------------------- 国策 · 外交线 ----------------------------
+
+YAN_Yan_Diplomacy:0 "大炎外交"
+YAN_Yan_Diplomacy_desc:0 "大炎太久不曾主动与人打交道。重新打开礼部与四方馆的门，是国策，也是姿态。"
+
+YAN_Rhodes_island:0 "罗德岛合作"
+YAN_Rhodes_island_desc:0 "与罗德岛签下合作：矿石病的防治、感染者的安置，以及一些不便由朝廷出面的事，都可交给他们。"
+
+YAN_Ussuri_border:0 "乌萨斯边境"
+YAN_Ussuri_border_desc:0 "北边的邻居从不安静。加固关隘、整备边军，同时留出谈判的余地。"
+
+YAN_Aegir_immigration:0 "阿戈尔移民"
+YAN_Aegir_immigration_desc:0 "接纳从东部海域上岸的阿戈尔人。他们带来的不只是人手，还有大炎尚未学会的海洋。"
+
+YAN_Shanhaizhong_issue:0 "山海众问题"
+YAN_Shanhaizhong_issue_desc:0 "把山海众当成一件外交与内政交织的旧案来办：该清的清，该议的议，不再一味硬打。"
+YAN_Shanhaizhong_issue_tt:0 "移除「山海众渗透」"
+
+YAN_Behemoth_diplomacy:0 "巨兽外交"
+YAN_Behemoth_diplomacy_desc:0 "与后、矩、睚这些仍在沉睡的存在接触。跟天的旧敌谈条件，本是荒唐事——可总比再打一场诛神大战便宜。"
+
+# ---------------------------- 其他 ----------------------------
+
+YAN_xuanji_armor:0 "玄极巨兵装甲"
+YAN_Sun_Zaizhi_desc:0 "大炎旧臣，主张以乡约与宗族自治替朝廷分忧。他那一套「先安人心、再谈国是」的说法，在承平年代颇有人缘。"
+YAN_Li_Shouting_desc:0 "出身下层的工会组织者，主张把源石工业的利润还给做工的人。他的话在百灶的工人区很有分量，在朝堂上则不受欢迎。"
+
+#国策效果数值行（引擎渲染，句式照原版 GER_modify_*_tt）
+ YAN_route_sui_modify_tt: "§Y$YAN_route_sui$§!追加效果："
+#精神面板/国策数值行取「MODIFIER_<大写键名>」作显示名（这两条是 YAN_route_sui 的自造键，原版没有名字）
+ MODIFIER_YAN_ATTACK_VS_BEHEMOTH_TT: "对巨兽、邪魔的攻击"
+ MODIFIER_YAN_AGENT_ADVISOR_UNLOCK_TT: "可招募代理人顾问"
+
+ YAN_route_sui_behemoth_var_value_tt: " $MODIFIER_YAN_ATTACK_VS_BEHEMOTH_TT$: $RIGHT|+=%1$"
+ YAN_route_sui_agent_unlock_var_value_tt: " $MODIFIER_YAN_AGENT_ADVISOR_UNLOCK_TT$: $RIGHT|+=%1$"

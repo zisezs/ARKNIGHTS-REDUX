@@ -1,0 +1,31 @@
+# System from EaW
+
+defined_text = {
+	name = Get_newspaper_header
+
+	text = {
+		trigger = {
+			original_tag = YAN
+		}
+		localization_key = YAN_newspaper_header
+	}
+
+	text = {
+		trigger = {
+			OR = {
+				original_tag = VIC
+				original_tag = GUL
+				original_tag = TAR
+				original_tag = VCA
+				original_tag = VWI
+				original_tag = VGO
+				original_tag = VWA
+			}
+		}
+		localization_key = VIC_newspaper_header
+	}
+
+	text = {
+		localization_key = generic_newspaper_header
+	}
+}

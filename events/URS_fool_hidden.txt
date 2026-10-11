@@ -1,0 +1,221 @@
+# ==============================================================================
+# 乌萨斯 · 圣愚帝国隐藏事件（由在职顾问解锁）
+# 由 docs/_urs_advisors_build.py 生成，勿手改。
+#
+# 触发：on_daily_URS 检测到对应顾问在职 → 置 <idea>_event_fired 旗标 → 发事件。
+# 全部 is_triggered_only = yes，不主动弹窗。
+# ==============================================================================
+
+add_namespace = fool_urs
+
+# 阿洛伊泽的选择
+country_event = {
+	id = fool_urs.1
+	title = fool_urs.1.t
+	desc = fool_urs.1.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = fool_urs.1.a
+		ai_chance = {
+			base = 50
+		}
+		add_stability = 0.03
+	}
+
+	option = {
+		name = fool_urs.1.b
+		ai_chance = {
+			base = 50
+		}
+		add_to_variable = { URS_coup_risk = 0.1 }
+		add_stability = -0.05
+	}
+
+}
+
+# 第三局地下室
+country_event = {
+	id = fool_urs.2
+	title = fool_urs.2.t
+	desc = fool_urs.2.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = fool_urs.2.a
+		ai_chance = {
+			base = 50
+		}
+		add_to_variable = { URS_demonic_corruption = -0.015 }
+		add_stability = 0.03
+	}
+
+	option = {
+		name = fool_urs.2.b
+		ai_chance = {
+			base = 50
+		}
+		add_political_power = 25
+		add_to_variable = { URS_demonic_corruption = 0.01 }
+	}
+
+}
+
+# 邻国的恐惧
+country_event = {
+	id = fool_urs.3
+	title = fool_urs.3.t
+	desc = fool_urs.3.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = fool_urs.3.a
+		ai_chance = {
+			base = 50
+		}
+		add_to_variable = { URS_shall_not_die_opinion_var = 0.1 }
+		add_stability = 0.02
+	}
+
+	option = {
+		name = fool_urs.3.b
+		ai_chance = {
+			base = 50
+		}
+		add_political_power = 30
+		add_to_variable = { URS_shall_not_die_opinion_var = -0.1 }
+	}
+
+}
+
+# 敲钟者
+country_event = {
+	id = fool_urs.4
+	title = fool_urs.4.t
+	desc = fool_urs.4.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = fool_urs.4.a
+		ai_chance = {
+			base = 50
+		}
+		add_to_variable = { URS_fool_support = -0.05 }
+		add_to_variable = { URS_demonic_corruption = -0.01 }
+	}
+
+	option = {
+		name = fool_urs.4.b
+		ai_chance = {
+			base = 50
+		}
+		add_stability = 0.03
+		add_to_variable = { URS_fool_support = 0.03 }
+	}
+
+}
+
+# 源石计划
+country_event = {
+	id = fool_urs.5
+	title = fool_urs.5.t
+	desc = fool_urs.5.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = fool_urs.5.a
+		ai_chance = {
+			base = 50
+		}
+		army_experience = 30
+		add_stability = -0.03
+	}
+
+	option = {
+		name = fool_urs.5.b
+		ai_chance = {
+			base = 50
+		}
+		add_to_variable = { URS_demonic_corruption = -0.02 }
+		add_political_power = 20
+	}
+
+}
+
+# 萨米雪原的战鼓雷鸣
+country_event = {
+	id = fool_urs.6
+	title = fool_urs.6.t
+	desc = fool_urs.6.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = fool_urs.6.a
+		ai_chance = {
+			base = 50
+		}
+		hidden_effect = {
+			SAM = {
+				SAM_eternal_hunt_uprising = yes
+			}
+			YAN = {
+				country_event = { id = fool_urs.7 days = 14 }
+			}
+		}
+	}
+
+	option = {
+		name = fool_urs.6.b
+		ai_chance = {
+			base = 50
+		}
+		hidden_effect = {
+			SAM = {
+				SAM_eternal_hunt_uprising = yes
+			}
+			YAN = {
+				country_event = { id = fool_urs.7 days = 14 }
+			}
+		}
+	}
+
+}
+
+# 老天师的疑虑
+country_event = {
+	id = fool_urs.7
+	title = fool_urs.7.t
+	desc = fool_urs.7.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = fool_urs.7.a
+		ai_chance = {
+			base = 50
+		}
+		set_country_flag = YAN_fool_threat_unlocked
+	}
+
+	option = {
+		name = fool_urs.7.b
+		ai_chance = {
+			base = 50
+		}
+		set_country_flag = YAN_fool_threat_unlocked
+	}
+
+}

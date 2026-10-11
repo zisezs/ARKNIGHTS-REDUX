@@ -1,0 +1,87 @@
+division_template = {
+	name = "合成步兵师"				# 由志愿者，感染者与难民组成的步兵部队
+	division_names_group = KRT_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 0 y = 3 }
+		infantry = { x = 0 y = 4 }
+		infantry = { x = 1 y = 0 }
+	}
+}
+
+division_template = {
+	name = "合成机动步兵师"				#由志愿者，感染者与难民组成的机动步兵部队
+	division_names_group = KRT_INF_01
+	regiments = {
+		cavalry  = { x = 0 y = 0 }
+		cavalry  = { x = 0 y = 1 }
+		cavalry  = { x = 0 y = 2 }
+
+		cavalry  = { x = 1 y = 0 }
+		cavalry  = { x = 1 y = 1 }
+		cavalry  = { x = 1 y = 2 }
+	}
+}
+
+units = {
+	 #特别第九集团军 将领：冯·康特 紧急会议组建的志愿兵师与难民师，装备紧缺且战斗力低下的灰色牲口
+	division = { 
+		name = "特编第二合成步兵师"
+		location = 4092
+		division_template = "合成步兵师"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.2
+	}
+	division = { 
+		name = "特编第三合成步兵师"
+		location = 9806
+		division_template = "合成步兵师"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.2
+	}
+	division = { 
+		name = "志愿第三合成步兵师"
+		location = 17289
+		division_template = "合成步兵师"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.2
+	}
+	division = { 
+		name = "志愿第四合成步兵师"
+		location = 17226
+		division_template = "合成步兵师"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.2
+	}
+	division = { 
+		name = "灰色合成步兵师"
+		location = 8624
+		division_template = "合成步兵师"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.2
+	}
+	division = { 
+		name = "合成机动步兵师"
+		location = 1980
+		division_template = "合成机动步兵师"
+		start_experience_factor = 0.2
+		start_equipment_factor = 0.2
+	}
+	division = { 
+		name = "独立第三机动步兵师"
+		location = 17225
+		division_template = "合成机动步兵师"
+		start_experience_factor = 0.2
+		start_equipment_factor = 0.2
+	}
+	division = { 
+		name = "合成第二机动步兵师"
+		location = 17225
+		division_template = "合成机动步兵师"
+		start_experience_factor = 0.2
+		start_equipment_factor = 0.2
+	}
+}

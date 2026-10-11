@@ -1,0 +1,119 @@
+######################
+## 塔拉·《挽歌燃烧殆尽》事件组配套精神（全部为可摘除的定时精神）
+## 消费方：events/TAR_elegy.txt（namespace: TAR_ea）
+## picture 一律复用工程内已有的 GFX_idea_TAR_*，不新增贴图
+######################
+ideas = {
+	country = {
+		# 紫火缠身：染火者不肯退场，人力好征、人心难稳
+		TAR_ea_deadfire = {
+			picture = GFX_idea_TAR_extinguished_bell
+			allowed = { always = yes }
+			removal_cost = yes
+			default = no
+			modifier = {
+				stability_factor = -0.10
+				conscription_factor = 0.12
+				war_support_factor = 0.05
+				resistance_target = 0.10
+			}
+		}
+		# 空仓之冬：账好报，胃不好受
+		TAR_ea_granary_short = {
+			picture = GFX_idea_TAR_redeem_economy
+			allowed = { always = yes }
+			removal_cost = yes
+			default = no
+			modifier = {
+				consumer_goods_factor = 0.10
+				industrial_capacity_factory = -0.06
+				stability_factor = -0.03
+			}
+		}
+		# 还火规程：六步走完，悲伤就有了去处
+		TAR_ea_wake_rite = {
+			picture = GFX_idea_TAR_two_embers
+			allowed = { always = yes }
+			removal_cost = yes
+			default = no
+			modifier = {
+				stability_factor = 0.08
+				political_power_gain = 0.12
+				war_support_factor = -0.05
+			}
+		}
+		# 清洗之账：被放过的人与被送走的人，都记着同一个名字
+		TAR_ea_purge_debt = {
+			picture = GFX_idea_TAR_ghost_legions
+			allowed = { always = yes }
+			removal_cost = yes
+			default = no
+			modifier = {
+				stability_factor = 0.06
+				resistance_target = 0.12
+				army_org_factor = -0.05
+			}
+		}
+		# 一盏灯：首先温暖自己，然后照亮前路
+		TAR_ea_lantern_lit = {
+			picture = GFX_idea_TAR_lantern_spirit
+			allowed = { always = yes }
+			removal_cost = yes
+			default = no
+			modifier = {
+				stability_factor = 0.14
+				resistance_target = -0.18
+				industrial_capacity_factory = 0.06
+				war_support_factor = -0.08
+			}
+		}
+		# 一夜不熄：有人在城门口举着火，其他人因此睡了
+		TAR_ea_sleepless = {
+			picture = GFX_idea_TAR_redeem_military
+			allowed = { always = yes }
+			removal_cost = yes
+			default = no
+			modifier = {
+				stability_factor = 0.10
+				army_morale_factor = -0.05
+				training_time_army_factor = 0.10
+			}
+		}
+		# 指派的官职：圣物不会自己走，因为它被人按在桌上
+		TAR_ea_relic_appointed = {
+			picture = GFX_idea_TAR_redeem_politics
+			allowed = { always = yes }
+			removal_cost = yes
+			default = no
+			modifier = {
+				industrial_capacity_factory = 0.08
+				consumer_goods_factor = -0.05
+				stability_factor = -0.04
+			}
+		}
+		# 守灵人入城：不与生者团结的那一家，破了例
+		TAR_ea_wake_in_city = {
+			picture = GFX_idea_TAR_crowned_ember_spirit
+			allowed = { always = yes }
+			removal_cost = yes
+			default = no
+			modifier = {
+				stability_factor = 0.10
+				resistance_target = -0.12
+				political_power_gain = 0.06
+				war_support_factor = -0.05
+			}
+		}
+		# 借走的祭器：他们没来要回，也没再来
+		TAR_ea_wake_offended = {
+			picture = GFX_idea_TAR_extinguished_bell
+			allowed = { always = yes }
+			removal_cost = yes
+			default = no
+			modifier = {
+				stability_factor = -0.06
+				resistance_target = 0.10
+			}
+		}
+	}
+}

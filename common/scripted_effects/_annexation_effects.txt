@@ -1,0 +1,123 @@
+# state scope
+transfer_state_without_overriding_occupation = {
+	if = {
+		limit = {
+			is_fully_controlled_by = owner
+		}
+		transfer_state_to = var:tag_to_release
+	}
+	else = {
+		set_state_owner_to = var:tag_to_release
+		set_state_province_controller = {
+			controller = var:tag_to_release
+			limit = {
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+	}
+}
+
+Victoria_release = {
+	if = {
+		limit = {
+			434 = {
+				is_owned_by = ROOT
+			}
+		}
+		set_temp_variable = { tag_to_release = VIC }
+		every_owned_state = {
+			limit = {
+				is_Victoria = yes
+			}
+			transfer_state_without_overriding_occupation = yes
+		}
+		puppet = var:tag_to_release
+	}
+	else_if = {
+		limit = {
+			916 = {
+				is_owned_by = ROOT
+			}
+		}
+		set_temp_variable = { tag_to_release = VCA }
+		every_owned_state = {
+			limit = {
+				is_West_Angland = yes
+			}
+			transfer_state_without_overriding_occupation = yes
+		}
+		puppet = var:tag_to_release
+	}
+	else_if = {
+		limit = {
+			581 = {
+				is_owned_by = ROOT
+			}
+		}
+		set_temp_variable = { tag_to_release = VWI }
+		every_owned_state = {
+			limit = {
+				is_West_Angland = yes
+			}
+			transfer_state_without_overriding_occupation = yes
+		}
+		puppet = var:tag_to_release
+	}
+	else_if = {
+		limit = {
+			482 = {
+				is_owned_by = ROOT
+			}
+		}
+		set_temp_variable = { tag_to_release = VGO }
+		every_owned_state = {
+			limit = {
+				is_Gaelland = yes
+			}
+			transfer_state_without_overriding_occupation = yes
+		}
+		puppet = var:tag_to_release
+	}
+}
+
+Angland_release = {
+	if = {
+		limit = {
+			434 = {
+				is_owned_by = ROOT
+			}
+		}
+		set_temp_variable = { tag_to_release = VIC }
+		every_owned_state = {
+			limit = {
+				is_Victoria = yes
+			}
+			transfer_state_without_overriding_occupation = yes
+		}
+		puppet = var:tag_to_release
+	}
+}
+
+Gaelland_release = {
+	set_temp_variable = { tag_to_release = VGO }
+	every_owned_state = {
+		limit = {
+			is_Tara = yes
+		}
+		transfer_state_without_overriding_occupation = yes
+	}
+	puppet = var:tag_to_release
+}
+
+Tara_release = {
+	set_temp_variable = { tag_to_release = TAR }
+	every_owned_state = {
+		limit = {
+			is_Tara = yes
+		}
+		transfer_state_without_overriding_occupation = yes
+	}
+	puppet = var:tag_to_release
+}

@@ -1,0 +1,134 @@
+# ==============================================================================
+# 深池 (DUB) 专属 AI 战略（2026-09-26）
+#
+# 用户口径：AI 深池【就要】大量训练"12 营纯死火行尸"的死火军当主力，不要它改回步兵骨干。
+#   所以这份文件是顺着这个方向推，而不是纠偏：行尸权重抬到最高，真步兵/民团/炮团压成负值。
+#   具体"一师几个营"由 common/ai_templates/DUB_templates.txt 的 target_template 规定（12 营）。
+#
+# 与全局层的关系：common/ai_strategy 下各块是【叠加】的，同 type+id 的 value 相加，这里只写增量。
+#   基线：default.txt（role_ratio infantry 40 / militia 5 / armor 20 / motorized 10 / landship 2 / garrison 5）
+#         REC_global_ai.txt（template_prio infantry 25、equipment infantry 25 / artillery 20 / support 30）
+#
+# 注意：不要用 max_amount 之类 token 硬卡营数——原版 sub_units 里零命中，写了不生效。
+# ==============================================================================
+DUB_redeem_army = {
+
+	allowed = {
+		original_tag = DUB
+	}
+	enable = {
+		original_tag = DUB
+	}
+	abort_when_not_enabled = yes
+
+	# —— 换代优先级：行尸是唯一想要的线 ——
+	# 抬到 +250，压过 generic 给步兵/炮团的所有权重；AI 自动设计凑性价比时只会选行尸
+	# （一营吃 1 件枪、面板等于整营步兵还多 10 突破，本来就没有对手，这里只是不再拦它）。
+	ai_strategy = {
+		type = template_prio
+		id = dub_dead_fire_walker
+		value = 250
+	}
+	# 真步兵、民团、炮团全部压成负值：不是禁用，是让 AI 别把宽度分给它们
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = -120
+	}
+	ai_strategy = {
+		type = template_prio
+		id = militia
+		value = -150
+	}
+	ai_strategy = {
+		type = template_prio
+		id = artillery_brigade
+		value = -80
+	}
+	ai_strategy = {
+		type = template_prio
+		id = light_armor
+		value = -100
+	}
+
+	# —— 编制配额：行尸是唯一的一档，其余 role 全部削成非正 ——
+	# 基线是叠加的：default.txt 给 infantry 40 / armor 27 / mountaineers 7 / motorized 10 /
+	#   paratroopers 4 / air_assault 6 / militia 5 / landship 2 / garrison 5；
+	#   doctrines.txt 还会按所选学说再加（各家学说块只命中一条，armor 那一族最多再加 ~20）。
+	# 所以这里的负值把 default 原样抵掉、再留出学说的余量，保证无论 AI 深池选哪套学说都是 ≤0。
+	# 削成 0 只是让 AI【不想】造它们；真正"造不出来"由模板锁保证（见 history 与法案）。
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 30
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = militia
+		value = -5
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = -59
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = -12
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = landship
+		value = -2
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = mountaineers
+		value = -7
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = paratroopers
+		value = -4
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = air_assault
+		value = -6
+	}
+	# 占领区的治安：不另开"驻军/镇压"专属档（那会是第二份能练的编制），
+	# 所以连 default 的 garrison 5 也一起抵成 0 —— AI 只会拿现成的行尸师去驻防。
+	ai_strategy = {
+		type = role_ratio
+		id = garrison
+		value = -5
+	}
+
+	# —— 产能：行尸几乎不吃装备，所以枪线压到最低，省下来的军工去出炮与支援装备 ——
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = -20
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 10
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = support
+		value = 10
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = -30
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = motorized
+		value = -30
+	}
+}

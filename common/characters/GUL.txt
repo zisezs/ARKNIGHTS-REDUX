@@ -1,0 +1,1095 @@
+characters = {
+	#无政府
+	GUL_LIG_404 = {
+		name = GUL_LIG_404
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/ZZZ/wasteland.dds"
+			}
+		}
+		country_leader = {
+			desc = GUL_LIG_404_desc
+			ideology = disorder_subtype
+			traits = {
+				GUL_LIG_404_trait
+			}
+		}
+	}
+	#诺曼底公爵
+	GUL_Normandy = {
+		name = GUL_Normandy
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_Normandy.dds"
+			}
+		}
+		gender = male
+		country_leader = {
+			desc = GUL_Normandy_desc
+			ideology = feudal_aristocracy_subtype
+			traits = {
+				GUL_Normandy_trait
+			}
+		}
+	}
+	#殖民委员会
+	GUL_zhi_min_wei_yuan_hui = {
+		name = GUL_zhi_min_wei_yuan_hui
+		portraits = {
+			civilian = {
+				#large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		gender = male
+		advisor={
+			slot = second_in_command
+			idea_token = GUL_zhi_min_wei_yuan_hui_idea
+			allowed = {
+				original_tag = GUL
+			}
+			traits = {
+				GUL_zhi_min_wei_yuan_hui_trait
+			}
+			desc = GUL_zhi_min_wei_yuan_hui_desc
+			available = {
+				#is_country_leader = no
+			}
+			visible = {
+			
+			}
+			can_be_fired = no
+			cost = 150
+			ai_will_do = {
+				factor = 0.000
+			}
+		}
+	}
+	#雅各宾派
+	#保尔·莫拉
+	GUL_bao_er_mo_la = {
+		name = GUL_bao_er_mo_la
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_bao_er_mo_la.dds" 
+				small = "gfx/leaders/GUL/GUL_bao_er_mo_la_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_bao_er_mo_la.dds"
+				small = "gfx/leaders/GUL/GUL_bao_er_mo_la_small.dds"
+			}
+		}
+		country_leader = {
+			ideology = revolutionary_democracy_subtype
+			traits={ GUL_bao_er_mo_la_traits }
+			desc = GUL_bao_er_mo_la_desc
+			expire = "2950.1.1.1"
+			id = -1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_bao_er_mo_la_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_bao_er_mo_la_traits
+			}
+			available = {
+				is_country_leader = no
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_bao_er_mo_la_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#马克西米连·罗贝斯比尔
+	GUL_luo_bei_si_bi_er = {
+		name = GUL_luo_bei_si_bi_er
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_luo_bei_si_bi_er.dds"
+				small = "gfx/leaders/GUL/GUL_luo_bei_si_bi_er_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_luo_bei_si_bi_er.dds"
+				small = "gfx/leaders/GUL/GUL_luo_bei_si_bi_er_small.dds"
+			}
+		}
+		country_leader = {
+			ideology = revolutionary_democracy_subtype
+			traits={ GUL_luo_bei_si_bi_er_traits }
+			desc = GUL_luo_bei_si_bi_er_desc
+			expire = "2950.1.1.1"
+			id = -1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_luo_bei_si_bi_er_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_luo_bei_si_bi_er_traits
+			}
+			available = {
+				is_country_leader = no
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_luo_bei_si_bi_er_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#乔治·寇东
+	GUL_kou_dong = {
+		name = GUL_kou_dong
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_kou_dong.dds"
+				small = "gfx/leaders/GUL/GUL_kou_dong_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_kou_dong.dds"
+				small = "gfx/leaders/GUL/GUL_kou_dong_small.dds"
+			}
+		}
+		country_leader = {
+			ideology = revolutionary_democracy_subtype
+			traits={ GUL_kou_dong_traits }
+			desc = GUL_kou_dong_desc
+			expire = "2950.1.1.1"
+			id = -1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_kou_dong_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_kou_dong_traits
+			}
+			available = {
+				is_country_leader = no
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_kou_dong_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#安东尼娜·圣朱斯特
+	GUL_sheng_zhu_si_te = {
+		name = GUL_sheng_zhu_si_te
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_srst_leader.dds"
+				small = "gfx/leaders/GUL/GUL_srst_leader_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_srst_leader.dds"
+				small = "gfx/leaders/GUL/GUL_srst_leader_small.dds"
+			}
+		}
+		country_leader = {
+			ideology = revolutionary_democracy_subtype
+			traits={ GUL_sheng_zhu_si_te_traits }
+			desc = GUL_sheng_zhu_si_te_desc
+			expire = "2950.1.1.1"
+			id = -1
+		}
+		gender = female
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_sheng_zhu_si_te_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_sheng_zhu_si_te_traits
+			}
+			available = {
+				is_country_leader = no
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_sheng_zhu_si_te_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#乔安娜·丹顿
+	GUL_dan_dong = {
+		name = GUL_dan_dong
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_dan_dong.dds"
+				small = "gfx/leaders/GUL/GUL_dan_dong_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_dan_dong.dds"
+				small = "gfx/leaders/GUL/GUL_dan_dong_small.dds"
+			}
+		}
+		country_leader = {
+			ideology = revolutionary_democracy_subtype
+			traits={ GUL_dan_dong_traits }
+			desc = GUL_dan_dong_desc
+			expire = "2950.1.1.1"
+			id = -1
+		}
+		gender = female
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_dan_dong_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_dan_dong_traits
+			}
+			available = {
+				is_country_leader = no
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_dan_dong_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#吉伦特派
+	#玛丽·罗兰
+	GUL_ma_li_luo_lan = {
+		name = GUL_ma_li_luo_lan
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_luo_lan.dds"
+				small = "gfx/leaders/GUL/GUL_luo_lan_small_lock.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_luo_lan.dds"
+				small = "gfx/leaders/GUL/GUL_luo_lan_small.dds"
+			}
+		}
+		country_leader = {
+			ideology = progressive_liberalism_subtype
+			traits={ GUL_ma_li_luo_lan_traits }
+			desc = GUL_ma_li_luo_lan_desc
+			expire = "2950.1.1.1"
+			id = -1
+		}
+		gender = female
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_ma_li_luo_lan_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_ma_li_luo_lan_traits
+			}
+			available = {
+				is_country_leader = no
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_ma_li_luo_lan_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#皮埃尔·鲍里索
+	GUL_bao_li_suo = {
+		name = GUL_bao_li_suo
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_bao_li_suo.dds"
+				small = "gfx/leaders/GUL/GUL_bao_li_suo_small_lock.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_bao_li_suo.dds"
+				small = "gfx/leaders/GUL/GUL_bao_li_suo_small.dds"
+			}
+		}
+		country_leader = {
+			ideology = progressive_liberalism_subtype
+			traits={ GUL_bao_li_suo_traits }
+			desc = GUL_bao_li_suo_desc
+			expire = "2950.1.1.1"
+			id = -1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_bao_li_suo_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_bao_li_suo_traits
+			}
+			available = {
+				is_country_leader = no
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_bao_li_suo_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#马奎斯·孔多赛
+	GUL_kong_duo_sai = {
+		name = GUL_kong_duo_sai
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_kong_duo_sai.dds"
+				small = "gfx/leaders/GUL/GUL_kong_duo_sai_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_kong_duo_sai.dds"
+				small = "gfx/leaders/GUL/GUL_kong_duo_sai_small.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_kong_duo_sai_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_kong_duo_sai_traits
+			}
+			available = {
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = scientist_political_debuff_trait_tt
+			}
+			on_remove = {
+				custom_effect_tooltip = scientist_political_debuff_trait_1_tt
+			}
+			desc = GUL_kong_duo_sai_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+		scientist = {
+			traits = {  }
+			skills = {
+				specialization_nuclear = 2
+			}
+			visible = {
+				owner = {
+					NOT = { has_idea = GUL_kong_duo_sai_idea }
+				}
+			}
+		}
+	}
+	#拉瓦锡
+	#洛朗·拉沃锡尔
+	GUL_la_wo_xi_er = {
+		name = GUL_la_wo_xi_er
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_la_wo_xi_er.dds"
+				small = "gfx/leaders/GUL/GUL_la_wo_xi_er_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_la_wo_xi_er.dds"
+				small = "gfx/leaders/GUL/GUL_la_wo_xi_er_small.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_la_wo_xi_er_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_la_wo_xi_er_traits
+			}
+			available = {
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = scientist_political_debuff_trait_tt
+			}
+			on_remove = {
+				custom_effect_tooltip = scientist_political_debuff_trait_1_tt
+			}
+			desc = GUL_la_wo_xi_er_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+		scientist = {
+			traits = {  }
+			skills = {
+				specialization_nuclear = 2
+			}
+			visible = {
+				owner = {
+					NOT = { has_idea = GUL_la_wo_xi_er_idea }
+				}
+			}
+		}
+	}
+	#斐扬派
+	#西尔万·巴伊
+	GUL_ba_yi = {
+		name = GUL_ba_yi
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_ba_yi.dds"
+				small = "gfx/leaders/GUL/GUL_ba_yi_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_ba_yi.dds"
+				small = "gfx/leaders/GUL/GUL_ba_yi_small.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_ba_yi_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_ba_yi_traits
+			}
+			available = {
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			on_add = {
+				custom_effect_tooltip = scientist_political_debuff_trait_tt
+			}
+			on_remove = {
+				custom_effect_tooltip = scientist_political_debuff_trait_1_tt
+			}
+			desc = GUL_ba_yi_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+		scientist = {
+			traits = {  }
+			skills = {
+				specialization_air = 2
+			}
+			visible = {
+				owner = {
+					NOT = { has_idea = GUL_ba_yi_idea }
+				}
+			}
+		}
+	}
+	#吉尔贝·拉斐特
+	GUL_la_fei_te = {
+		name = GUL_la_fei_te
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_la_fei_te.dds"
+				small = "gfx/leaders/GUL/GUL_la_fei_te_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_la_fei_te.dds"
+				small = "gfx/leaders/GUL/GUL_la_fei_te_small.dds"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = GUL_la_fei_te_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				army_chief_offensive_2
+			}
+			available = {
+				has_completed_focus = GUL_Guo_Min_Zi_Wei_Jun
+				is_country_leader = no
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_la_fei_te_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+		country_leader = {
+			ideology = stratocracy_subtype
+			traits={ GUL_la_fei_te_traits }
+			desc = GUL_la_fei_te_desc
+			expire = "2950.1.1.1"
+			id = -1
+		}
+		field_marshal={
+			visible = {
+				has_completed_focus = GUL_Guo_Min_Zi_Wei_Jun
+				NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+			}
+			traits={ old_guard politically_connected war_hero }
+			skill = 3
+            attack_skill = 2
+            defense_skill = 4
+            planning_skill = 3
+            logistics_skill = 3
+			legacy_id=-1
+		}
+	}
+	#阿德里安·杜波尔
+	GUL_du_bo_er = {
+		name = GUL_du_bo_er
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_du_bo_er.dds"
+				small = "gfx/leaders/GUL/GUL_du_bo_er_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_du_bo_er.dds"
+				small = "gfx/leaders/GUL/GUL_du_bo_er_small.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_du_bo_er_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_du_bo_er_traits
+			}
+			available = {
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_du_bo_er_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#平原派
+	#约瑟夫·歇士
+	GUL_xie_shi = {
+		name = GUL_xie_shi
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_xie_shi.dds"
+				small = "gfx/leaders/GUL/GUL_xie_shi_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_xie_shi.dds"
+				small = "gfx/leaders/GUL/GUL_xie_shi_small.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_xie_shi_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_xie_shi_traits
+			}
+			available = {
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}		
+			}
+			desc = GUL_xie_shi_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#雷克斯·康巴塞雷斯
+	GUL_kang_ba_sai_lei_si = {
+		name = GUL_kang_ba_sai_lei_si
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_kang_ba_sai_lei_si.dds"
+				small = "gfx/leaders/GUL/GUL_kang_ba_sai_lei_si_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_kang_ba_sai_lei_si.dds"
+				small = "gfx/leaders/GUL/GUL_kang_ba_sai_lei_si_small.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_kang_ba_sai_lei_si_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_kang_ba_sai_lei_si_traits
+			}
+			available = {
+					
+			}
+			desc = GUL_kang_ba_sai_lei_si_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#热月分子
+	#夏尔·塔列朗
+	GUL_ta_lie_lang = {
+		name = GUL_ta_lie_lang
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_ta_lie_lang.dds"
+				small = "gfx/leaders/GUL/GUL_ta_lie_lang_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_ta_lie_lang.dds"
+				small = "gfx/leaders/GUL/GUL_ta_lie_lang_small.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_ta_lie_lang_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_ta_lie_lang_traits
+			}
+			available = {
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}		
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_ta_lie_lang_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#约瑟夫·富歇
+	GUL_fu_xie = {
+		name = GUL_fu_xie
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_fu_xie.dds"
+				small = "gfx/leaders/GUL/GUL_fu_xie_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_fu_xie.dds"
+				small = "gfx/leaders/GUL/GUL_fu_xie_small.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_fu_xie_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_fu_xie_traits
+			}
+			available = {
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}		
+			}
+			desc = GUL_fu_xie_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#朗贝蒂娜·塔里安 ##“如果你真的爱我，就设法拯救法国和我”（史实恋爱脑）
+	GUL_ta_li_an = {
+		name = GUL_ta_li_an
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_ta_li_an.dds"
+				small = "gfx/leaders/GUL/GUL_ta_li_an_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_ta_li_an.dds"
+				small = "gfx/leaders/GUL/GUL_ta_li_an_small.dds"
+			}
+		}
+		gender = female
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_ta_li_an_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_ta_li_an_traits
+			}
+			available = {
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}	
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}				
+			}
+			desc = GUL_ta_li_an_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#公社/埃贝尔/忿激派
+	#欧仁·鲍狄埃
+	GUL_bao_di_ai = {
+		name = GUL_bao_di_ai
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_bao_di_ai.dds"
+				small = "gfx/leaders/GUL/GUL_bao_di_ai_small_lock.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_bao_di_ai.dds"
+				small = "gfx/leaders/GUL/GUL_bao_di_ai_small_lock.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_bao_di_ai_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_bao_di_ai_trait
+			}
+			available = {
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}	
+				if = {
+					limit = { has_character_flag = THIS_CHARACTER_LOCKED }
+					NOT = { has_character_flag = THIS_CHARACTER_LOCKED }
+				}
+			}
+			desc = GUL_bao_di_ai_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	#其他
+	#拉扎尔·卡尔诺 
+	GUL_ka_er_nuo = {
+		name = GUL_ka_er_nuo
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_ka_er_no.dds"
+				small = "gfx/leaders/GUL/GUL_ka_er_no_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_ka_er_no.dds"
+				small = "gfx/leaders/GUL/GUL_ka_er_no_small.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = GUL_ka_er_no_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_ka_er_nuo_trait
+			}
+			available = {
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}		
+			}
+			on_add = {
+				custom_effect_tooltip = scientist_political_debuff_trait_tt
+			}
+			on_remove = {
+				custom_effect_tooltip = scientist_political_debuff_trait_1_tt
+			}
+			desc = GUL_ka_er_no_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+		scientist = {
+			traits = {  }
+			skills = {
+				specialization_land = 2
+			}
+			visible = {
+				owner = {
+					NOT = { has_idea = GUL_ka_er_no_idea }
+				}
+			}
+		}
+	}
+	#维克多·莫罗
+	GUL_mo_luo = {
+		name = GUL_mo_luo
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_mo_luo.dds"
+				small = "gfx/leaders/GUL/GUL_mo_luo_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_mo_luo.dds"
+				small = "gfx/leaders/GUL/GUL_mo_luo_small.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = GUL_mo_luo_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				army_infantry_3
+			}
+			available = {
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+			}
+			desc = GUL_mo_luo_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+		field_marshal={
+			visible = {
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+			}
+			traits={ inflexible_strategist }
+			skill = 2
+            attack_skill = 1
+            defense_skill = 3
+            planning_skill = 3
+            logistics_skill = 3
+			legacy_id=-1
+		}
+	}
+	#拉扎琳·奥什
+	GUL_ao_shi = {
+		name = GUL_ao_shi
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_ao_shi.dds"
+				small = "gfx/leaders/GUL/GUL_ao_shi_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_ao_shi.dds"
+				small = "gfx/leaders/GUL/GUL_ao_shi_small.dds"
+			}
+		}
+		gender = female
+		advisor={
+			slot = army_chief
+			idea_token = GUL_ao_shi_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				GUL_ao_shi_trait
+			}
+			available = {
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+			}
+			desc = GUL_ao_shi_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+		corps_commander={
+			visible = {
+				if = {
+					limit = { NOT = { has_global_flag = gul_independ_flag } }
+					has_global_flag = gul_independ_flag
+				}
+			}
+			traits={ inflexible_strategist }
+			skill = 1
+            attack_skill = 2
+            defense_skill = 1
+            planning_skill = 2
+            logistics_skill = 1
+			legacy_id=-1
+		}
+	}
+	#娜波莉娜·波纳巴特
+	GUL_bo_na_ba_te = {
+		name = GUL_bo_na_ba_te
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/GUL/GUL_bo_na_ba_te.dds"
+				small = "gfx/leaders/GUL/GUL_bo_na_ba_te_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/GUL/GUL_bo_na_ba_te.dds"
+				small = "gfx/leaders/GUL/GUL_bo_na_ba_te_small.dds"
+			}
+		}
+		gender = female
+		advisor={
+			slot = high_command
+			idea_token = GUL_bo_na_ba_te_idea
+			allowed = {
+				tag = GUL
+			}
+			traits = {
+				army_artillery_3
+			}
+			visible = {
+				has_country_flag = GUL_young_commander1_flag
+			}
+			desc = GUL_bo_na_ba_te_adv_desc
+			
+			cost = 150
+			ai_will_do = {
+				factor = 0
+			}
+		}
+		corps_commander={
+			visible = {
+				has_country_flag = GUL_young_commander1_flag
+			}
+			traits={ brilliant_strategist war_hero career_officer media_personality war_hero }
+			skill = 1
+            attack_skill = 3
+            defense_skill = 1
+            planning_skill = 1
+            logistics_skill = 1
+			legacy_id=-1
+		}
+	}
+}

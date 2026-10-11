@@ -1,0 +1,2124 @@
+ideas = {
+	mobilization_laws = {
+		law = yes
+		use_list_view = yes
+		
+		UFE_disarmed_laws = {
+
+			cost = 150
+			picture = UFE_disarmed_laws
+			removal_cost = -1
+			level = 8
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				consumer_goods_expected_value = 0.1
+				training_time_factor = -0.1
+				conscription = 0.02
+				weekly_manpower = 1000
+			}
+			
+			allowed_to_remove = {
+				always = no
+			}
+
+			cancel_if_invalid = no
+		}
+		UFE_war_mobilization_laws_1 = {
+		
+			name = UFE_war_mobilization_laws
+			picture = UFE_war_mobilization_laws
+
+			cost = 150
+			removal_cost = -1
+			level = 8
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				consumer_goods_expected_value = 0.1
+				training_time_factor = -0.2
+				conscription = 0.03
+				weekly_manpower = 2000
+			}
+			
+			allowed_to_remove = {
+				always = no
+			}
+
+			cancel_if_invalid = no
+		}
+		UFE_war_mobilization_laws_2 = {
+			
+			name = UFE_war_mobilization_laws
+			picture = UFE_war_mobilization_laws
+			
+			cost = 150
+			removal_cost = -1
+			level = 8
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				consumer_goods_expected_value = 0.1
+				training_time_factor = -0.2
+				conscription = 0.04
+				weekly_manpower = 3000
+			}
+			
+			allowed_to_remove = {
+				always = no
+			}
+
+			cancel_if_invalid = no
+		}
+		#特工
+		UFE_war_mobilization_laws_3 = {
+			
+			name = UFE_war_mobilization_laws
+			picture = UFE_war_mobilization_laws
+			
+			cost = 150
+			removal_cost = -1
+			level = 8
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				consumer_goods_expected_value = 0.1
+				training_time_factor = -0.2
+				conscription = 0.04
+				weekly_manpower = 3000
+				agency_upgrade_time = -0.15
+				operation_cost = -0.1
+				operation_infiltrate_outcome = 0.1
+				operation_outcome = 0.2
+			}
+			
+			allowed_to_remove = {
+				always = no
+			}
+
+			cancel_if_invalid = no
+		}
+		#无特工
+		UFE_war_mobilization_laws_4 = {
+			
+			name = UFE_war_mobilization_laws
+			picture = UFE_war_mobilization_laws
+			
+			cost = 150
+			removal_cost = -1
+			level = 8
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				consumer_goods_expected_value = 0.05
+				training_time_factor = -0.4
+				conscription = 0.05
+				weekly_manpower = 4000
+			}
+			
+			allowed_to_remove = {
+				always = no
+			}
+
+			cancel_if_invalid = no
+		}
+		#全民动员最终体
+		UFE_war_mobilization_laws_5 = {
+			
+			name = UFE_war_mobilization_laws
+			picture = UFE_war_mobilization_laws
+			
+			cost = 150
+			removal_cost = -1
+			level = 8
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				consumer_goods_expected_value = 0.05
+				training_time_factor = -0.4
+				conscription = 0.05
+				agency_upgrade_time = -0.15
+				operation_cost = -0.1
+				operation_infiltrate_outcome = 0.1
+				operation_outcome = 0.2
+				weekly_manpower = 4000
+			}
+			
+			allowed_to_remove = {
+				always = no
+			}
+
+			cancel_if_invalid = no
+		}
+		#对帝国作战
+		UFE_war_mobilization_laws_6 = {
+			
+			name = UFE_war_mobilization_laws
+			picture = UFE_war_mobilization_laws
+			
+			cost = 150
+			removal_cost = -1
+			level = 8
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				consumer_goods_expected_value = 0.05
+				training_time_factor = -0.4
+				conscription = 0.05
+				agency_upgrade_time = -0.15
+				operation_cost = -0.1
+				operation_infiltrate_outcome = 0.1
+				operation_outcome = 0.2
+				weekly_manpower = 4000
+			}
+			
+			targeted_modifier = {
+				tag = URS
+				attack_bonus_against = 0.1
+				breakthrough_bonus_against = 0.1
+				defense_bonus_against = 0.1
+			}
+			
+			allowed_to_remove = {
+				always = no
+			}
+
+			cancel_if_invalid = no
+		}
+	}
+	industrial_concern = {	
+		
+		UFE_local_industry = {
+			
+			picture = UFE_local_industrial_concern
+			
+			allowed = {
+				original_tag = UFE
+			}
+			
+			available = {
+			
+			}
+			
+			traits = { industrial_concern }
+			
+			modifier = {
+				production_speed_buildings_factor = 0.1
+				industrial_capacity_factory = 0.1
+			}
+			
+			research_bonus = {
+				industry = 0.05
+			}
+			
+			ai_will_do = {
+				factor = 50
+			}
+		}
+	}
+	hidden_ideas = { 
+		UFE_oil_for_YAB_idea = {
+			
+			available = { 
+				YAB = { 
+					NOT = { has_war_with = YAN } 
+				} 
+			}
+			
+			on_remove = {
+				YAB = { remove_resource_rights = 11 }
+			}
+			
+		}
+		#UFE共和宣传
+		URS_republic_effect_short = {
+				
+			allowed = {
+				always = yes
+			}
+
+			allowed_civil_war = {
+				always = no
+			}
+				
+			removal_cost = -1
+				
+			targeted_modifier = {
+				tag = UFE
+				attack_bonus_against = -0.1
+				defense_bonus_against = -0.1
+			}
+		}
+		#反装甲训练
+		UFE_special_units_decisions_6_idea = {
+			name = UFE_special_units_decisions_6
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			equipment_bonus = {
+				infantry_equipment = {
+					hard_attack = 1
+					ap_attack = 1
+					instant = yes
+				}
+				arts_equipment = {
+					hard_attack = 0.15
+					ap_attack = 0.1
+					instant = yes
+				}
+			}
+		}
+		#恐慌与骚乱
+		UFE_war_state_idea_1 = {
+		
+			name = UFE_war_state_idea
+		
+			modifier = {
+				local_factories = -0.4
+				recruitable_population_factor = -0.6
+				resistance_damage_to_garrison = 0.1
+				resistance_target = 0.3
+			}
+		}
+		UFE_war_state_idea_2 = {
+		
+			name = UFE_war_state_idea
+		
+			modifier = {
+				local_factories = -0.4
+				recruitable_population_factor = -0.4
+				resistance_damage_to_garrison = 0.05
+				resistance_target = 0.15
+			}
+		}
+		UFE_war_state_idea_3 = {
+		
+			name = UFE_war_state_idea
+		
+			modifier = {
+				local_factories = -0.4
+				recruitable_population_factor = -0.2
+			}
+		}
+		UFE_war_state_idea_4 = {
+		
+			name = UFE_war_state_idea
+		
+			modifier = {
+				local_factories = -0.2
+				recruitable_population_factor = -0.2
+			}
+		}
+		#作战国策
+		#东部计划
+		UFE_focus_war_idea_1 = {
+			
+			name = UFE_focus_war_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			targeted_modifier = {
+				tag = SKH
+				attack_bonus_against = 0.15
+				breakthrough_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+			targeted_modifier = {
+				tag = REU
+				attack_bonus_against = 0.15
+				breakthrough_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+		}
+		#中部计划
+		UFE_focus_war_idea_2 = {
+			
+			name = UFE_focus_war_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			targeted_modifier = {
+				tag = KMG
+				attack_bonus_against = 0.15
+				breakthrough_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+			targeted_modifier = {
+				tag = BAK
+				attack_bonus_against = 0.15
+				breakthrough_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+			targeted_modifier = {
+				tag = SGT
+				attack_bonus_against = 0.15
+				breakthrough_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+			targeted_modifier = {
+				tag = KRS
+				attack_bonus_against = 0.15
+				breakthrough_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+		}
+		#西部计划
+		UFE_focus_war_idea_3 = {
+			
+			name = UFE_focus_war_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			targeted_modifier = {
+				tag = OMN
+				attack_bonus_against = 0.15
+				breakthrough_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+			targeted_modifier = {
+				tag = CYB
+				attack_bonus_against = 0.15
+				breakthrough_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+			targeted_modifier = {
+				tag = IST
+				attack_bonus_against = 0.15
+				breakthrough_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+			targeted_modifier = {
+				tag = NAX
+				attack_bonus_against = 0.15
+				breakthrough_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+		}
+		#军事现状
+		UFE_special_army_idea_0 = {
+			name = UFE_special_army_idea
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			modifier = {
+				land_doctrine_cost_factor = 1
+				army_org_factor = -0.1
+			}
+		}
+		UFE_special_army_idea_1 = {
+			name = UFE_special_army_idea
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			modifier = {
+				experience_gain_army_factor = 0.15
+				army_org_factor = -0.1
+			}
+		}
+		UFE_special_army_idea_2 = {
+			name = UFE_special_army_idea
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			modifier = {
+				experience_gain_army_factor = 0.15
+			}
+		}
+		UFE_special_army_idea_3 = {
+			name = UFE_special_army_idea
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			modifier = {
+				org_loss_when_moving = -0.2
+			}
+		}
+		UFE_special_army_idea_4 = {
+			name = UFE_special_army_idea
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			modifier = {
+				militia_max_strength = 5
+				militia_max_organisation = 5
+				max_dig_in = 10
+				dig_in_speed_factor = 0.25
+			}
+		}
+		UFE_special_army_idea_5 = {
+			name = UFE_special_army_idea
+			modifier = {
+				
+			}
+		}
+		UFE_special_army_idea_6 = {
+			name = UFE_special_army_medals
+			modifier = {
+				army_attack_factor = 0.05
+				army_morale_factor = 0.1
+				army_org_factor = 0.1
+				army_strength_factor = 0.1
+			}
+		}
+		###特质工具
+		UFE_authoritarianism_leader_trait_tool_1 = {
+			name = UFE_authoritarianism_leader_trait_tool
+			modifier = {
+			
+			}
+		}
+		UFE_authoritarianism_leader_trait_tool_2 = {
+			name = UFE_authoritarianism_leader_trait_tool
+			modifier = {
+				army_attack_factor = 0.03
+				army_defence_factor = 0.03
+				political_power_factor = 0.05
+			}
+		}
+		#极低信用
+		UFE_new_currency_idea_1 = {
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.4
+				industrial_capacity_factory = -0.05
+				industrial_capacity_dockyard = -0.05
+				production_speed_industrial_complex_factor = -0.1
+				production_speed_arms_factory_factor = -0.1
+			}
+		}
+		#较低信用
+		UFE_new_currency_idea_2 = {
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.3
+			}
+		}
+		#略低信用
+		UFE_new_currency_idea_3 = {
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.2
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+			}
+		}
+		#中等信用
+		UFE_new_currency_idea_4 = {
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.1
+				industrial_capacity_factory = 0.1
+				industrial_capacity_dockyard = 0.1
+				line_change_production_efficiency_factor = 0.05
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+		#略高信用
+		UFE_new_currency_idea_5 = {
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			modifier = {
+				industrial_capacity_factory = 0.15
+				industrial_capacity_dockyard = 0.15
+				line_change_production_efficiency_factor = 0.1
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_max_efficiency_factor = 0.1
+			}
+		}
+		#高信用
+		UFE_new_currency_idea_6 = {
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			modifier = {
+				industrial_capacity_factory = 0.2
+				industrial_capacity_dockyard = 0.2
+				line_change_production_efficiency_factor = 0.1
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_max_efficiency_factor = 0.1
+				production_speed_industrial_complex_factor = 0.1
+				production_speed_arms_factory_factor = 0.1
+			}
+		}
+		#极高信用
+		UFE_new_currency_idea_7 = {
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			modifier = {
+				industrial_capacity_factory = 0.2
+				industrial_capacity_dockyard = 0.2
+				line_change_production_efficiency_factor = 0.15
+				production_factory_efficiency_gain_factor = 0.15
+				production_factory_max_efficiency_factor = 0.15
+				production_speed_industrial_complex_factor = 0.15
+				production_speed_arms_factory_factor = 0.15
+			}
+		}
+	}
+	country = {
+		#军事现代化
+		UFE_modern_army_idea_1 = {
+			removal_cost = -1
+			picture = UFE_anti_armor_idea
+			name = UFE_modern_army_idea
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			modifier = {
+				motorized_attack_factor = -0.15
+				motorized_defence_factor = -0.15
+				mechanized_attack_factor = -0.15
+				mechanized_defence_factor = -0.15
+				army_armor_attack_factor = -0.15
+				army_armor_defence_factor = -0.15
+				enemy_army_bonus_air_superiority_factor = 0.1
+				air_superiority_bonus_in_combat = -0.15
+				air_manpower_requirement_factor = 0.2
+				air_ace_generation_chance_factor = -0.1
+				air_accidents_factor = 0.2
+				ace_effectiveness_factor = -0.05
+			}
+			
+			equipment_bonus = {
+				anti_air_equipment = {
+					hard_attack = 0.15
+					ap_attack = 0.1
+					instant = yes
+				}
+				anti_tank_equipment = {
+					hard_attack = 0.15
+					ap_attack = 0.1
+					instant = yes
+				}
+				armor = {
+					build_cost_ic = 0.25 instant = yes
+				}
+				motorized_equipment = {
+					build_cost_ic = 0.25 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = 0.25 instant = yes
+				}
+				mio_cat_eq_all_small_plane = {
+					build_cost_ic = 0.2 instant = yes
+				}
+				mio_cat_eq_all_medium_plane = {
+					build_cost_ic = 0.2 instant = yes
+				}
+				mio_cat_eq_all_large_plane = {
+					build_cost_ic = 0.2 instant = yes
+				}
+			}
+		}
+		#经济现代化
+		UFE_modern_industry_idea_1 = {
+			removal_cost = -1
+			picture = UFE_modern_economy_idea
+			name = UFE_modern_industry_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.05
+				consumer_goods_expected_value = 0.1
+				production_speed_buildings_factor = -0.1
+			}
+		}
+		#政治现代化
+		UFE_modern_political_idea_1 = {
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+			name = UFE_modern_political_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				political_power_factor = -0.2
+				stability_weekly = 0.001
+				war_support_weekly = 0.001
+			}
+		}
+		#非对称反装甲作战
+		UFE_anti_armor_idea = {
+			removal_cost = -1
+			name = UFE_anti_armor_idea
+			picture = UFE_anti_armor_idea
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			equipment_bonus = {
+				infantry_equipment = {
+					hard_attack = 1
+					ap_attack = 1
+					instant = yes
+				}
+				arts_equipment = {
+					hard_attack = 0.3
+					ap_attack = 0.25
+					instant = yes
+				}
+				artillery_equipment = {
+					hard_attack = 1
+					ap_attack = 1
+					instant = yes
+				}
+				anti_air_equipment = {
+					hard_attack = 0.3
+					ap_attack = 0.2
+					instant = yes
+				}
+				anti_tank_equipment = {
+					hard_attack = 0.25
+					ap_attack = 0.2
+					instant = yes
+				}
+			}
+		}
+		#经济动荡
+		UFE_economic_problem_idea_1 = {
+			removal_cost = -1
+			name = UFE_economic_problem_idea
+			picture = UFE_economic_problem_idea
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				min_export = 0.3
+				industrial_capacity_dockyard = -0.16
+				industrial_capacity_factory = -0.16
+				production_factory_efficiency_gain_factor = -0.1
+				production_factory_max_efficiency_factor = -0.05
+				consumer_goods_factor = 0.16
+				stability_factor = -0.25
+			}
+		}
+		UFE_economic_problem_idea_2 = {
+			removal_cost = -1
+			name = UFE_economic_problem_idea
+			picture = UFE_economic_problem_idea
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				min_export = 0.15
+				industrial_capacity_dockyard = -0.08
+				industrial_capacity_factory = -0.08
+				production_factory_max_efficiency_factor = -0.05
+				consumer_goods_factor = 0.08
+			}
+		}
+		#耶里钦娜反对派
+		UFE_yeliqinna_idea = {
+			removal_cost = -1
+			name = UFE_yeliqinna_idea
+			picture = UFE_yeliqinna_idea
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			available = {
+				has_character = UFE_liberalism_advisor_2
+				has_character = UFE_liberalism_advisor_6
+			}
+
+			modifier = {
+				stability_weekly = -0.005
+				political_power_cost = 0.75
+				war_support_weekly = -0.003
+				political_advisor_cost_factor = 0.35
+				mobilization_laws_cost_factor = 0.25
+				economy_cost_factor = 0.25
+			}
+		}
+		#孤悬的革命火种
+		UFE_lonely_democratic_power_idea = {
+			removal_cost = -1
+			picture = UFE_lonely_democratic_power_idea
+			
+			cancel = {
+				REU = {
+					has_government = communism
+				}
+			}
+			
+			on_remove = {
+				country_event = {
+					id = UFE_special_events.10
+				}
+				REU = {
+					country_event = {
+						id = UFE_special_events.10
+					}
+				}
+			}
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				custom_modifier_tooltip = UFE_lonely_democratic_power_idea_tt
+			}
+		}
+		#军工复合体
+		UFE_military_production_idea_1 = {
+			removal_cost = -1
+			picture = UFE_military_production_idea
+			name = UFE_military_production_idea
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				artillery_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				anti_tank_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				anti_air_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				support_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+			}
+		}
+		UFE_military_production_idea_2 = {
+			removal_cost = -1
+			picture = UFE_military_production_idea
+			name = UFE_military_production_idea
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				artillery_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				anti_tank_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				anti_air_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				support_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				armor = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				motorized_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+			}
+		}
+		UFE_military_production_idea_3 = {
+			removal_cost = -1
+			picture = UFE_military_production_idea
+			name = UFE_military_production_idea
+			
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+			
+			modifier = {
+				industrial_capacity_factory = 0.08
+			}
+			
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				artillery_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				anti_tank_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				anti_air_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				support_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				armor = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				motorized_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				fighter = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				cas = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				tactical_bomber = {
+					build_cost_ic = -0.05 instant = yes
+				}
+			}
+		}
+		#不可靠的总督
+		UFE_stupid_leader_idea = {
+			removal_cost = -1
+			picture = UFE_stupid_leader_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				authoritarianism_drift = 0.05
+				despotism_drift = -0.05
+			}
+		}
+		UFE_kill_leader_idea_1 = {
+			removal_cost = -1
+			picture = UFE_stupid_leader_idea
+			name = UFE_kill_leader_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				authoritarianism_drift = 0.05
+				despotism_drift = -0.05
+				leader_be_killed_every_week = 0.05
+			}
+		}
+		UFE_kill_leader_idea_2 = {
+			removal_cost = -1
+			picture = UFE_stupid_leader_idea
+			name = UFE_kill_leader_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				authoritarianism_drift = 0.05
+				despotism_drift = -0.05
+				leader_be_killed_every_week = 0.1
+			}
+		}
+		UFE_kill_leader_idea_3 = {
+			removal_cost = -1
+			picture = UFE_stupid_leader_idea
+			name = UFE_kill_leader_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				authoritarianism_drift = 0.05
+				despotism_drift = -0.05
+				leader_be_killed_every_week = 0.2
+			}
+		}
+		#原住民问题
+		UFE_yuan_zhu_min = {
+			name = UFE_yuan_zhu_min
+			removal_cost = -1
+			picture = UFE_yuan_zhu_min
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				modifier_army_sub_unit_militia_attack_factor = 0.05
+				modifier_army_sub_unit_militia_defence_factor = 0.05
+				modifier_army_sub_unit_militia_max_org_factor = 0.02
+				conscription_factor = 0.05
+				conscription = 0.01
+				stability_factor = -0.25
+				consumer_goods_factor = 0.24
+				production_speed_buildings_factor = -0.3
+				global_building_slots_factor = -0.25
+			}
+		}
+		UFE_yuan_zhu_min_0 = {
+			name = UFE_yuan_zhu_min
+			removal_cost = -1
+			#picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				
+			}
+		}
+		UFE_yuan_zhu_min_1 = {
+			name = UFE_yuan_zhu_min
+			removal_cost = -1
+			#picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				stability_factor = 0.1
+				consumer_goods_factor = -0.12
+			}
+		}
+		UFE_yuan_zhu_min_2 = {
+			name = UFE_yuan_zhu_min
+			removal_cost = -1
+			#picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				stability_factor = 0.1
+				consumer_goods_factor = -0.12
+			}
+		}
+		UFE_yuan_zhu_min_3 = {
+			name = UFE_yuan_zhu_min
+			removal_cost = -1
+			#picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				production_speed_buildings_factor = 0.1
+				global_building_slots_factor = 0.05
+			}
+		}
+		UFE_yuan_zhu_min_4 = {
+			name = UFE_yuan_zhu_min
+			removal_cost = -1
+			#picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				stability_factor = 0.1
+			}
+		}
+		UFE_yuan_zhu_min_4a = {
+			name = UFE_yuan_zhu_min
+			removal_cost = -1
+			#picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				conscription_factor = 0.1
+			}
+		}
+		UFE_yuan_zhu_min_5 = {
+			name = UFE_yuan_zhu_min
+			removal_cost = -1
+			#picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				conscription = 0.005
+				army_core_attack_factor = 0.1
+				army_core_defence_factor = 0.1
+			}
+		}
+		UFE_yuan_zhu_min_6 = {
+			name = UFE_yuan_zhu_min
+			removal_cost = -1
+			#picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				modifier_army_sub_unit_militia_attack_factor = 0.05
+				modifier_army_sub_unit_militia_defence_factor = 0.05
+				modifier_army_sub_unit_militia_max_org_factor = 0.03
+			}
+		}
+		UFE_yuan_zhu_min_7 = {
+			name = UFE_minbingtuan_idea
+			removal_cost = -1
+			#picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				conscription_factor = 0.05
+			}
+		}
+		UFE_minbingtuan_idea_0 = {
+			name = UFE_minbingtuan_idea
+			removal_cost = -1
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				
+			}
+		}
+		UFE_minbingtuan_idea_1 = {
+			name = UFE_minbingtuan_idea
+			removal_cost = -1
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				conscription = 0.005
+				out_of_supply_factor = -0.1
+				supply_node_range = 0.1
+			}
+		}
+		UFE_minbingtuan_idea_2 = {
+			name = UFE_minbingtuan_idea
+			removal_cost = -1
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				production_speed_buildings_factor = 0.1
+			}
+		}
+		UFE_minbingtuan_idea_3 = {
+			name = UFE_minbingtuan_idea
+			removal_cost = -1
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				global_building_slots_factor = 0.1
+			}
+		}
+		UFE_minbingtuan_idea_4 = {
+			name = UFE_minbingtuan_idea
+			removal_cost = -1
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				production_speed_buildings_factor = 0.05
+				global_building_slots_factor = 0.1
+			}
+		}
+		UFE_minbingtuan_idea_5 = {
+			name = UFE_minbingtuan_idea
+			removal_cost = -1
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				production_speed_buildings_factor = 0.05
+				global_building_slots_factor = 0.15
+			}
+		}
+		UFE_minbingtuan_idea_6 = { #统一
+			name = UFE_minbingtuan_idea
+			removal_cost = -1
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				out_of_supply_factor = 0.1
+				supply_node_range = -0.1
+				conscription_factor = -0.1
+			}
+		}
+		#蓝色极光
+		UFE_democracy_idea_1 = {
+			name = UFE_democracy_idea
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				liberalism_drift = 0.05
+				drift_defence_factor = -0.15
+			}
+		}
+		UFE_democracy_idea_2 = {
+			name = UFE_democracy_idea
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				liberalism_drift = 0.1
+				drift_defence_factor = -0.2
+			}
+		}
+		UFE_democracy_idea_3 = {
+			name = UFE_democracy_idea
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				liberalism_drift = 0.1
+				drift_defence_factor = -0.2
+				political_power_factor = 0.15
+				political_advisor_cost_factor = -0.17
+				authoritarianism_drift = -0.02
+			}
+		}
+		UFE_democracy_idea_4 = {
+			name = UFE_rev_democracy_idea
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				liberalism_drift = 0.1
+				progressivism_drift = 0.05
+				political_power_factor = 0.15
+				political_advisor_cost_factor = -0.17
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+			}
+		}
+		UFE_democracy_idea_4a = {
+			name = UFE_rev_democracy_idea
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				liberalism_drift = 0.1
+				political_power_factor = 0.15
+				political_advisor_cost_factor = -0.17
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+			}
+		}
+		UFE_democracy_idea_5 = {
+			name = UFE_rev_democracy_idea
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				liberalism_drift = 0.05
+				progressivism_drift = 0.1
+				political_power_factor = 0.15
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+				stability_weekly = 0.001
+				war_support_weekly = 0.001
+				political_advisor_cost_factor = -0.32
+				mobilization_laws_cost_factor = -0.15
+			}
+		}
+		UFE_democracy_idea_5a = {
+			name = UFE_rev_democracy_idea
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				liberalism_drift = 0.1
+				political_power_factor = 0.15
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+				stability_weekly = 0.001
+				war_support_weekly = 0.001
+				political_advisor_cost_factor = -0.32
+				mobilization_laws_cost_factor = -0.15
+			}
+		}
+		UFE_democracy_idea_6 = {
+			name = UFE_rev_democracy_idea
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				liberalism_drift = 0.05
+				progressivism_drift = 0.1
+				political_power_factor = 0.2
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+				stability_weekly = 0.002
+				war_support_weekly = 0.002
+				political_advisor_cost_factor = -0.32
+				mobilization_laws_cost_factor = -0.15
+			}
+		}
+		UFE_democracy_idea_6a = {
+			name = UFE_rev_democracy_idea
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				liberalism_drift = 0.1
+				political_power_factor = 0.2
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+				stability_weekly = 0.002
+				war_support_weekly = 0.002
+				political_advisor_cost_factor = -0.32
+				mobilization_laws_cost_factor = -0.15
+			}
+		}
+		UFE_democracy_idea_7 = {
+			name = UFE_rev_democracy_idea
+			removal_cost = -1
+			picture = generice_revolution_republicanism_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				liberalism_drift = 0.05
+				progressivism_drift = 0.1
+				communism_drift = 0.02
+				party_popularity_stability_factor = 0.05
+				political_power_factor = 0.2
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+				stability_weekly = 0.002
+				war_support_weekly = 0.002
+				political_advisor_cost_factor = -0.32
+				mobilization_laws_cost_factor = -0.15
+			}
+		}
+		#荒芜之地
+		UFE_wasteland_idea = {
+			name = UFE_wasteland_idea
+			removal_cost = -1
+			picture = UFE_wasteland_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				custom_modifier_tooltip = infantry_ter_buff_tt
+				research_speed_factor = -0.65
+				industrial_capacity_factory = -0.55
+				production_factory_efficiency_gain_factor = -0.6
+				production_factory_max_efficiency_factor = -0.1
+				army_org_factor = 0.05
+				army_morale_factor = 0.1
+				army_strength_factor = 0.05
+				experience_loss_factor = -0.15
+				breakthrough_factor = 0.05
+				supply_consumption_factor = -0.2
+				attrition = -0.15
+				acclimatization_cold_climate_gain_factor = 0.25
+				custom_modifier_tooltip = urs_sprite_of_nation_tt
+				infantry_casualty_trickleback = 0.008
+				infantry_experience_loss_factor = -0.01
+			}
+		}
+		UFE_wasteland_idea_0 = {
+			name = UFE_wasteland_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				
+			}
+		}
+		UFE_wasteland_idea_1 = {
+			name = UFE_wasteland_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				research_speed_factor = 0.05
+				industrial_capacity_factory = 0.1
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_max_efficiency_factor = 0.02
+			}
+		}
+		UFE_wasteland_idea_2 = {
+			name = UFE_wasteland_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				production_factory_max_efficiency_factor = 0.02
+			}
+		}
+		UFE_wasteland_idea_3 = {
+			name = UFE_wasteland_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				research_speed_factor = 0.1
+				production_factory_max_efficiency_factor = 0.02
+			}
+		}
+		UFE_wasteland_idea_4 = {
+			name = UFE_wasteland_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				research_speed_factor = 0.05
+			}
+		}
+		UFE_wasteland_idea_5 = {
+			name = UFE_wasteland_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				experience_loss_factor = -0.1
+				army_strength_factor = 0.1
+				breakthrough_factor = 0.1
+			}
+		}
+		UFE_wasteland_idea_6 = {
+			name = UFE_wasteland_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				infantry_casualty_trickleback = 0.008
+				army_strength_factor = 0.05
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				breakthrough_factor = 0.05
+			}
+		}
+		UFE_wasteland_idea_7 = {
+			name = UFE_wasteland_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				supply_consumption_factor = -0.1
+				attrition = -0.1
+				acclimatization_cold_climate_gain_factor = 0.1
+				breakthrough_factor = 0.1
+			}
+		}
+		UFE_far_east_tiger_idea_0 = {
+			name = UFE_far_east_tiger_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				
+			}
+		}
+		UFE_far_east_tiger_idea_1 = {
+			name = UFE_far_east_tiger_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				infantry_experience_loss_factor = -0.008
+				army_strength_factor = 0.05
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				army_morale_factor = 0.1
+			}
+		}
+		UFE_far_east_tiger_idea_2 = {
+			name = UFE_far_east_tiger_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				army_org_factor = 0.05
+			}
+		}
+		UFE_far_east_tiger_idea_3 = {
+			name = UFE_far_east_tiger_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				land_reinforce_rate = 0.02
+				coordination_bonus = 0.02
+				land_night_attack = 0.1
+				army_speed_factor = 0.05
+				org_loss_when_moving = -0.05
+			}
+		}
+		UFE_far_east_tiger_idea_4 = {
+			name = UFE_far_east_tiger_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				industrial_capacity_factory = 0.1
+			}
+		}
+		UFE_tiger_country_idea_0 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				
+			}
+		}
+		UFE_tiger_country_idea_1 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+				production_factory_efficiency_gain_factor = 0.05
+			}
+		}
+		UFE_tiger_country_idea_2 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				research_speed_factor = 0.05
+			}
+		}
+		UFE_tiger_country_idea_3 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				research_speed_factor = 0.05
+				industrial_capacity_factory = 0.05
+				production_factory_efficiency_gain_factor = 0.05
+			}
+		}
+		UFE_tiger_country_idea_4 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				research_speed_factor = 0.05
+				production_factory_efficiency_gain_factor = 0.1
+			}
+		}
+		UFE_tiger_country_idea_5 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				research_speed_factor = 0.1
+			}
+		}
+		UFE_tiger_country_idea_6 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				research_speed_factor = -0.05
+			}
+		}
+		UFE_tiger_country_idea_7 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				industrial_capacity_factory = 0.1
+				production_factory_efficiency_gain_factor = 0.05
+			}
+		}
+		UFE_tiger_country_idea_8 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+		UFE_tiger_country_idea_9 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
+				intel_from_combat_factor = 0.1 
+				recon_factor = 0.05
+			}
+		}
+		UFE_tiger_country_idea_10 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				operative_slot = 1
+			}
+		}
+		UFE_tiger_country_idea_11 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				army_org_factor = 0.05
+				intel_from_combat_factor = 0.05
+				recon_factor = 0.1
+			}
+		}
+		UFE_tiger_country_idea_12 = {
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				army_morale_factor = 0.05
+				army_speed_factor = 0.05
+				org_loss_when_moving = -0.05
+			}
+		}
+		UFE_tiger_country_idea_13 = { #废除政委
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				army_morale_factor = -0.05
+				army_org_factor = -0.05
+				army_strength_factor = -0.1
+			}
+		}
+		UFE_tiger_country_idea_14 = { #军队经商
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				army_attack_factor = -0.05
+				army_defence_factor = -0.05
+				breakthrough_factor = -0.05
+				army_strength_factor = -0.1
+			}
+		}
+		UFE_tiger_country_idea_15 = { #统一
+			name = UFE_tiger_country_idea
+			removal_cost = -1
+			picture = KOM_loose_surveillance
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+				breakthrough_factor = -0.15
+				army_strength_factor = -0.15
+				army_org_factor = -0.1
+				army_morale_factor = -0.1
+				supply_consumption_factor = 0.15
+				attrition = 0.15
+				experience_loss_factor = 0.1
+				industrial_capacity_factory = -0.1
+			}
+		}
+		
+		#皮草贸易
+		UFE_picao_trade_idea_1 = {
+			name = UFE_picao_trade_idea
+			removal_cost = -1
+			picture = UFE_picao_trade_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				picao_gain_every_month = 500
+				industrial_capacity_factory = -0.1
+				industrial_capacity_dockyard = -0.1
+				consumer_goods_factor = -0.05
+				custom_modifier_tooltip = UFE_picao_trade_idea_tt
+			}
+		}
+		UFE_picao_trade_idea_2 = {
+			name = UFE_picao_trade_idea
+			removal_cost = -1
+			picture = UFE_picao_trade_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				picao_gain_every_month = 1000
+				industrial_capacity_factory = -0.1
+				industrial_capacity_dockyard = -0.1
+				consumer_goods_factor = -0.1
+				custom_modifier_tooltip = UFE_picao_trade_idea_tt
+			}
+		}
+		UFE_picao_trade_idea_3 = {
+			name = UFE_picao_trade_idea
+			removal_cost = -1
+			picture = UFE_picao_trade_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				picao_gain_every_month = 1500
+				industrial_capacity_factory = -0.1
+				industrial_capacity_dockyard = -0.1
+				consumer_goods_factor = -0.15
+				custom_modifier_tooltip = UFE_picao_trade_idea_tt
+			}
+		}
+		#现代化经济
+		UFE_modern_economy_idea_1 = {
+			removal_cost = -1
+			picture = UFE_modern_economy_idea
+			name = UFE_modern_economy_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				industrial_capacity_factory = -0.1
+				industrial_capacity_dockyard = -0.1
+				consumer_goods_factor = 0.1
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.1
+			}
+		}
+		UFE_modern_economy_idea_2 = {
+			removal_cost = -1
+			picture = UFE_modern_economy_idea
+			name = UFE_modern_economy_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.1
+			}
+		}
+		#查获前总督赃款
+		UFE_consumer_goods_factor_idea = {
+			removal_cost = -1
+			picture = UFE_consumer_goods_factor_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				consumer_goods_factor = -0.2
+				production_speed_buildings_factor = 0.05
+			}
+		}
+		#政府财政危机
+		UFE_consumer_goods_debuff_idea = {
+			removal_cost = -1
+			picture = UFE_consumer_goods_debuff_idea
+
+			allowed_civil_war = {
+				has_government = liberalism
+			}
+
+			modifier = {
+				consumer_goods_factor = 0.3
+			}
+		}
+		#个人自由文化
+		UFE_selfish_idea_1 = {
+			name = UFE_selfish_idea
+			removal_cost = -1
+			picture = UFE_selfish_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				conscription_factor = -0.1
+				stability_factor = 0.05
+				industrial_capacity_dockyard = 0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+		UFE_selfish_idea_2 = {
+			name = UFE_selfish_idea
+			removal_cost = -1
+			picture = UFE_selfish_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				conscription_factor = -0.15
+				stability_factor = 0.05
+				industrial_capacity_dockyard = 0.1
+				industrial_capacity_factory = 0.1
+			}
+		}
+		UFE_selfish_idea_3 = {
+			name = UFE_selfish_idea
+			removal_cost = -1
+			picture = UFE_selfish_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				conscription_factor = -0.2
+				stability_factor = 0.1
+				industrial_capacity_dockyard = 0.1
+				industrial_capacity_factory = 0.1
+				production_factory_max_efficiency_factor = 0.05
+				army_core_attack_factor = -0.05
+				army_core_defence_factor = -0.05
+			}
+		}
+		UFE_selfish_idea_4 = { #先点经典自由
+			name = UFE_selfish_idea
+			removal_cost = -1
+			picture = UFE_selfish_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				conscription_factor = -0.25
+				stability_factor = 0.1
+				industrial_capacity_dockyard = 0.1
+				industrial_capacity_factory = 0.1
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_max_efficiency_factor = 0.1
+				army_core_attack_factor = -0.05
+				army_core_defence_factor = -0.05
+				min_export = 0.1
+			}
+		}
+		UFE_selfish_idea_5 = { #先点有限福利
+			name = UFE_selfish_idea
+			removal_cost = -1
+			picture = UFE_selfish_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				conscription_factor = -0.25
+				monthly_population = -0.25
+				consumer_goods_factor = -0.15
+				production_speed_buildings_factor = 0.05
+				stability_factor = 0.15
+				industrial_capacity_dockyard = 0.1
+				industrial_capacity_factory = 0.1
+				production_factory_max_efficiency_factor = 0.05
+				army_core_attack_factor = -0.05
+				army_core_defence_factor = -0.05
+				min_export = 0.1
+			}
+		}
+		UFE_selfish_idea_6 = { #完全体
+			name = UFE_selfish_idea
+			removal_cost = -1
+			picture = UFE_selfish_idea
+
+			allowed_civil_war = {
+				NOT = { has_government = authoritarianism }
+			}
+
+			modifier = {
+				conscription_factor = -0.3
+				monthly_population = -0.25
+				consumer_goods_factor = -0.15
+				production_speed_buildings_factor = 0.05
+				stability_factor = 0.15
+				industrial_capacity_dockyard = 0.1
+				industrial_capacity_factory = 0.1
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_max_efficiency_factor = 0.1
+				army_core_attack_factor = -0.05
+				army_core_defence_factor = -0.05
+				min_export = 0.2
+			}
+		}
+		#地区修正效果变化显示工具
+		UFE_right_state_modifier_idea_0 = {
+			name = UFE_right_state_modifier_tool
+		}
+		UFE_right_state_modifier_idea_1 = {
+			name = UFE_right_state_modifier_tool
+			modifier = {
+				state_production_speed_buildings_factor = 0.05
+				state_resources_factor = 0.05
+				local_building_slots_factor = 0.05
+			}
+		}
+	}
+}

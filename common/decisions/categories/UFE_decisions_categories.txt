@@ -1,0 +1,80 @@
+#皮草贸易
+UFE_picao_trade_decisions_category = {
+	priority = 200
+	allowed = {
+		tag = UFE
+	}
+	visible = {
+		OR = {
+			has_idea = UFE_picao_trade_idea_1
+			has_idea = UFE_picao_trade_idea_2
+			has_idea = UFE_picao_trade_idea_3
+		}
+	}
+	
+	icon = GFX_decision_category_gre_investment_decisions
+}
+#革命领导权博弈
+UFE_vs_REU_leadership_decisions_category = {
+	priority = 175
+	allowed = {
+		OR = {
+			tag = UFE
+			tag = REU
+		}
+	}
+	
+	icon = GFX_decision_category_infiltration
+}
+#土著猎兵升级
+UFE_special_units_decisions_category = {
+	priority = 150
+	allowed = {
+		tag = UFE
+	}
+	
+	scripted_gui = UFE_special_units_decisions_gui
+	
+	icon = decision_category_spr_the_seeds_of_revolution
+	
+	visible_when_empty = yes
+}
+#货币信用
+UFE_new_currency_decisions_category = {
+	priority = 140
+	allowed = {
+		tag = UFE
+	}
+	
+	icon = decision_category_generic_economy
+}
+#社会矛盾
+UFE_social_stability_decisions_category = {
+	priority = 250
+	allowed = {
+		tag = UFE
+	}
+	
+	visible = { has_country_flag = UFE_social_stability_flag }
+	
+	scripted_gui = UFE_stability_and_army_control_decisions_gui
+	
+	icon = decision_category_generic_crisis
+}
+#革命宣传
+UFE_revolutionary_propaganda_decision_decision_category = {
+	priority = 180
+
+	icon = GFX_decision_category_SWI_federal_council
+	
+	scripted_gui = UFE_revolutionary_propaganda_decision_ui
+
+	visible = {
+		tag = UFE
+		has_completed_focus = UFE_BenDiBaoKan
+	}
+	
+	allowed = {
+		tag = UFE
+	}
+}

@@ -1,0 +1,91 @@
+add_namespace = event_tar
+
+#塔拉独立（旧版「统一维多利亚」选项已移除）
+country_event = {
+	id = event_tar.1
+	title = event_tar.1.t
+	desc = event_tar.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_tar.1.a
+
+		set_country_flag = TAR_independence_flag
+
+		ai_chance = {
+			factor = 5
+		}
+	}
+
+}
+
+#先发制人
+country_event = {
+	id = event_tar.2
+	title = event_tar.2.t
+	desc = event_tar.2.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_tar.2.a
+
+		hidden_effect = {
+			news_event = {
+				id = worldnews_reu.3
+			}
+		}
+	}
+}
+
+#开斯特请求互不侵犯条约
+country_event = {
+	id = event_tar.10001
+	title = event_tar.10001.t
+	desc = event_tar.10001.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_tar.10001.a
+		VCA = {
+			country_event = {
+				id = event_vca.10006
+			}
+		}
+
+		ai_chance = {
+			factor = 8
+		}
+	}
+
+	option = {
+		name = event_tar.10001.b
+		VCA = {
+			set_country_flag = VCA_TAR_non_aggression_pact_failure
+			country_event = {
+				id = event_vca.10007
+			}
+		}
+
+		ai_chance = {
+			factor = 2
+		}
+	}
+}
+
+#塔拉改旗易帜
+country_event = {
+	id = event_tar.10002
+	title = event_tar.10002.t
+	desc = event_tar.10002.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_tar.10002.a
+
+		drop_cosmetic_tag = yes
+	}
+}

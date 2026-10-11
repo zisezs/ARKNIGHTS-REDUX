@@ -1,0 +1,33 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) · 金律乐章「金律的和谐」动态精神
+#
+# 独立于 gen_ltn_rewards.cjs 生成的 LTN_political_dynamic_modifiers.txt；
+# 数值由 common/scripted_effects/LTN_law_scripted_effects.txt 的
+# LTN_law_apply_spirit 按和谐档位写入 LTN_har_stab / LTN_har_pp / LTN_har_res / LTN_har_drift。
+# 初值 0 在 history/countries/LTN - Leithanien.txt。
+# 满档 ±25%（稳定度）/ ±10%（政治点、研究）/ ±15%（思潮抵御），符合设计文档 ±25% 上限。
+# ============================================================================
+
+LTN_dyn_law_harmony = {
+	icon = GFX_idea_LTN_dyn_law_harmony
+	enable = {
+		always = yes
+	}
+
+	stability_factor = LTN_har_stab        # 档位 ±0.25 / ±0.12 / 0
+	political_power_gain = LTN_har_pp      # 档位 ±0.10 / ±0.05 / 0
+	research_speed_factor = LTN_har_res    # 档位 ±0.10 / ±0.05 / 0
+	drift_defence_factor = LTN_har_drift   # 档位 ±0.15 / ±0.08 / 0
+}
+
+# ---- 「金律 · 征收音孔」：三类音孔的直接征收效果（由 recalc 聚合九声部重算） ----
+LTN_dyn_law_dials = {
+	icon = GFX_idea_LTN_dyn_law_dials
+	enable = {
+		always = yes
+	}
+
+	recruitable_population_factor = LTN_dial_pop    # 兵役：每区拉满 +0.9% / ≤1 档 -1.1%（全满 +8.1%、全低 -9.9%）
+	production_speed_buildings_factor = LTN_dial_build   # 赋税（建设速度）：同上
+	research_speed_factor = LTN_dial_res            # 法术：同上
+}

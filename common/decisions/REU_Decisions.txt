@@ -1,0 +1,1646 @@
+REU_base_construction_decisions = {
+
+	#第三集团军的搜寻
+	REU_third_army_searching = {
+		icon = GFX_decision_generic_political_discourse
+
+		fire_only_once = yes
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			has_country_flag = REU_base_construction
+		}
+
+		is_good = no
+
+		days_mission_timeout = 380
+
+		priority = 1000
+
+		timeout_effect = {
+			country_event = {
+				id = event_reu.49
+			}
+			# start_border_war = {
+			# 	change_state_after_war = no
+			# 	minimum_duration_in_days = 20
+			# 	attacker = {
+			# 		state = 98
+			# 		num_provinces = 1
+			# 	}	
+			# 	defender = {
+			# 		state = 131
+			# 		num_provinces = 1
+			# 		modifier = 0.3
+			# 		dig_in_factor = 0.3
+			# 		# on_win = event_reu.14
+			# 		# on_lose = event_reu.15
+			# 		# on_cancel = event_reu.16
+			# 	}
+			# }
+		}
+	}
+
+	#物资获取
+	REU_get_supplies = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		activation = {
+			NOT = {
+				has_country_flag = REU_rapid_marching
+			}
+			has_country_flag = REU_base_construction
+		}
+
+		is_good = yes
+
+		priority = 999
+		days_mission_timeout = 30
+
+		cancel_trigger = {
+			has_country_flag = REU_rapid_marching
+		}
+
+		timeout_effect = {
+			set_temp_variable = { spl = REU_get_supplies_num }
+			if = {
+				limit = {
+					REU_Demidov_Kirilyevich_Yastlin = {
+						is_hired_as_advisor = yes
+					}
+				}
+				add_to_temp_variable = { spl = 1 }
+			}
+			if = {
+				limit = {
+					REU_Alexander_Levich_Beselowski = {
+						is_hired_as_advisor = yes
+					}
+				}
+				add_to_temp_variable = { spl = 1 }
+			}
+			if = {
+				limit = {
+					has_completed_focus = REU_Unremitting
+				}
+				add_to_temp_variable = { spl = num_of_civilian_factories }
+			}
+			if = {
+				limit = {
+					has_completed_focus = REU_Rely_on_transactions
+				}
+				custom_effect_tooltip = REU_get_supplies_deal_tt
+				add_to_temp_variable = { spl = REU_deal_num }
+				add_to_variable = { REU_deal_num = 1 }
+			}
+			REU_supplies_add = yes
+			
+			custom_effect_tooltip = redo_this_mission_decision_tt
+			hidden_effect = {
+				activate_mission = REU_get_supplies
+			}
+		}
+	}
+
+	#急行军
+	REU_rapid_march = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			always = no
+		}
+
+		visible = {
+			has_country_flag = REU_rapid_marching
+		}
+
+		activation = {
+			has_country_flag = REU_rapid_marching
+		}
+
+		is_good = yes
+
+		days_mission_timeout = 60
+
+		priority = 500
+
+		timeout_effect = {
+			hidden_effect = {
+				annex_country = {
+					target = BWS
+				}
+				set_capital = {
+					state = 251
+					remember_old_capital = no
+				}
+
+				131 = {
+					teleport_armies = {
+						limit = {
+							original_tag = REU
+						}
+						to_state = 232
+					}
+				}
+
+				clr_country_flag = REU_rapid_marching
+		
+				if = {
+					limit = {
+						NOT = {
+							OR = {
+								has_completed_focus = REU_Light_Pack
+								has_completed_focus = REU_Take_Everything
+							}
+						}
+					}
+					unlock_national_focus = REU_Light_Pack
+				}
+				if = {
+					limit = {
+						NOT = {
+							OR = {
+								has_completed_focus = REU_whole_to_parts
+								has_completed_focus = REU_Avoid_involvement
+							}
+						}
+					}
+					unlock_national_focus = REU_whole_to_parts
+				}
+				complete_national_focus = REU_enter_Blagoveshchensk
+				news_event = {
+					id = worldnews_reu.2
+				}
+			}
+		}
+	}
+
+	#武器生产线
+	REU_add_offsite_arms_factory = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			OR = {
+				has_completed_focus = REU_Unremitting
+				has_completed_focus = REU_Rely_on_transactions
+			}
+			NOT = {
+				has_country_flag = REU_rapid_marching
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { az = 3 }
+			check_variable = { REU_Supplies > 2 }
+		}
+		custom_cost_text = decision_REU_Supplies
+
+		priority = 500
+		days_remove = 14
+		days_re_enable = 60
+
+		cancel_trigger = {
+			has_country_flag = REU_rapid_marching
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { REU_Supplies = -3 }
+				add_to_variable = {
+					REU_supplies_x01 = -0.3
+				}
+			}
+		}
+
+		remove_effect = {
+			add_offsite_building = {
+				type = arms_factory
+				level = 1
+			}
+			add_to_variable = { REU_offsite_arms_factory = 1 }
+		}
+
+		ai_will_do = { base = 6 }
+	}
+
+	#物资生产线
+	REU_add_offsite_industrial_complex = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			OR = {
+				has_completed_focus = REU_Unremitting
+				has_completed_focus = REU_Rely_on_transactions
+			}
+			NOT = {
+				has_country_flag = REU_rapid_marching
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { az = 3 }
+			check_variable = { REU_Supplies > 2 }
+		}
+		custom_cost_text = decision_REU_Supplies
+
+		priority = 500
+		days_remove = 14
+		days_re_enable = 60
+
+		cancel_trigger = {
+			has_country_flag = REU_rapid_marching
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { REU_Supplies = -3 }
+				add_to_variable = {
+					REU_supplies_x01 = -0.3
+				}
+			}
+		}
+
+		remove_effect = {
+			add_offsite_building = {
+				type = industrial_complex
+				level = 1
+			}
+			add_to_variable = { REU_offsite_industrial_complex = 1 }
+		}
+
+		ai_will_do = { base = 6 }
+	}
+
+	#走私武器
+	REU_smuggle_weapons = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_smuggle_in_white_area
+			NOT = {
+				has_country_flag = REU_rapid_marching
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { az = 2 }
+			check_variable = { REU_Supplies > 1 }
+		}
+		custom_cost_text = decision_REU_Supplies
+
+		priority = 500
+		days_remove = 14
+		days_re_enable = 30
+
+		cancel_trigger = {
+			has_country_flag = REU_rapid_marching
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { REU_Supplies = -2 }
+				add_to_variable = {
+					REU_supplies_x01 = -0.2
+				}
+			}
+		}
+
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 150
+			}
+			add_equipment_to_stockpile = {
+				type = arts_equipment
+				amount = 20
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 15
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 15
+			}
+		}
+
+		ai_will_do = { base = 1.5 }
+	}
+
+	#走私工业科技蓝图
+	REU_smuggle_industry_blueprint = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_smuggle_in_white_area
+			NOT = {
+				has_country_flag = REU_rapid_marching
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { az = 1 }
+			check_variable = { REU_Supplies > 0 }
+		}
+		custom_cost_text = decision_REU_Supplies
+
+		priority = 500
+		days_remove = 14
+		days_re_enable = 50
+
+		cancel_trigger = {
+			has_country_flag = REU_rapid_marching
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { REU_Supplies = -1 }
+				add_to_variable = {
+					REU_supplies_x01 = -0.1
+				}
+			}
+		}
+
+		remove_effect = {
+			add_tech_bonus = {
+				bonus = 0.3
+				uses = 1
+				category = industry
+			}
+		}
+
+		ai_will_do = { base = 1.5 }
+	}
+
+	#走私电子科技蓝图
+	REU_smuggle_electronics_blueprint = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_smuggle_in_white_area
+			NOT = {
+				has_country_flag = REU_rapid_marching
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { az = 1 }
+			check_variable = { REU_Supplies > 0 }
+		}
+		custom_cost_text = decision_REU_Supplies
+
+		priority = 500
+		days_remove = 14
+		days_re_enable = 50
+
+		cancel_trigger = {
+			has_country_flag = REU_rapid_marching
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { REU_Supplies = -1 }
+			}
+		}
+
+		remove_effect = {
+			add_tech_bonus = {
+				bonus = 0.3
+				uses = 1
+				category = electronics
+			}
+		}
+
+		ai_will_do = { base = 1.5 }
+	}
+
+	#走私军事书籍
+	REU_smuggle_military_learning_materials = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_smuggle_in_white_area
+			NOT = {
+				has_country_flag = REU_rapid_marching
+			}
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { az = 1 }
+			check_variable = { REU_Supplies > 0 }
+		}
+		custom_cost_text = decision_REU_Supplies
+
+		priority = 500
+		days_remove = 14
+		days_re_enable = 50
+
+		cancel_trigger = {
+			has_country_flag = REU_rapid_marching
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { REU_Supplies = -1 }
+			}
+		}
+
+		remove_effect = {
+			army_experience = 25
+			air_experience = 25
+		}
+
+		ai_will_do = { base = 1.5 }
+	}
+
+	#传播共产主义
+	REU_spread_communism_in_base = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_completed_focus = REU_The_new_communists
+			communism < 0.5
+			NOT = {
+				has_country_flag = REU_rapid_marching
+			}
+		}
+
+		priority = 500
+		cost = 25
+		days_remove = 70
+
+		cancel_trigger = {
+			has_country_flag = REU_rapid_marching
+		}
+		
+		modifier = {
+			communism_drift = 0.05
+			stability_weekly = 0.01
+		}
+
+		remove_effect = {
+			set_temp_variable = { dev_rate_adm = 0.1 }
+			Administrative_Efficiency_Rate_Add = yes
+		}
+		
+		ai_will_do = { base = 1.5 }
+	}
+}
+
+#渗透行动
+REU_infiltration_decisions = {
+	REU_infiltrated_state = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			OR = {
+				AND = {
+					FROM = {
+						has_dynamic_modifier = {
+							modifier = REU_infiltrated_state_2_modifier
+							scope = REU
+						}
+					}
+					REU = {
+						has_completed_focus = REU_land_redistribution
+					}
+				}
+				AND = {
+					FROM = {
+						has_dynamic_modifier = {
+							modifier = REU_infiltrated_state_1_modifier
+							scope = REU
+						}
+					}
+					REU = {
+						has_completed_focus = REU_Hug_each_other
+					}
+				}
+				FROM = {
+					NOT = {
+						OR = {
+							has_dynamic_modifier = {
+								modifier = REU_infiltrated_state_3_modifier
+								scope = REU
+							}
+							has_dynamic_modifier = {
+								modifier = REU_infiltrated_state_2_modifier
+								scope = REU
+							}
+							has_dynamic_modifier = {
+								modifier = REU_infiltrated_state_1_modifier
+								scope = REU
+							}
+						}
+					}
+				}
+			}
+			NOT = {
+				FROM = {
+					is_controlled_by = ROOT
+				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_infiltrated_state_num_available_tt
+				check_variable = {
+					var = REU_infiltrated_state_num
+					value = REU_infiltrated_state_max_num
+					compare = less_than
+				}
+			}
+			FROM = {
+				controller = {
+					NOT = {
+						has_war_with = REU
+					}
+				}
+			}
+			if = {
+				limit = {
+					BWS = {
+						exists = yes
+					}
+				}
+				REU = {
+					NOT = {
+						has_country_flag = REU_exterminate_start
+					}
+				}
+			}
+		}
+
+		state_target = yes
+		target_trigger = {
+			FROM = {
+				controller = {
+					ursus_area_country = yes
+				}
+				any_neighbor_state = {
+					OR = {
+						is_controlled_by_ROOT_or_subject = yes
+						has_dynamic_modifier = {
+							modifier = REU_infiltrated_state_1_modifier
+							scope = REU
+						}
+						has_dynamic_modifier = {
+							modifier = REU_infiltrated_state_2_modifier
+							scope = REU
+						}
+						has_dynamic_modifier = {
+							modifier = REU_infiltrated_state_3_modifier
+							scope = REU
+						}
+					}
+				}
+			}
+		}
+		on_map_mode = map_and_decisions_view
+		fire_only_once = no
+
+		cost = REU_infiltration_cost
+		days_remove = 30
+
+		complete_effect = {
+			REU = {
+				add_to_variable = { REU_infiltrated_state_num = 1 }
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				controller = {
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = NOT_REU_counter_infiltration
+							}
+						}
+						set_country_flag = NOT_REU_counter_infiltration
+					}
+				}
+				if = {
+					limit = {
+						has_dynamic_modifier = {
+							modifier = REU_infiltrated_state_2_modifier
+							scope = REU
+						}
+					}
+					remove_dynamic_modifier = {
+						modifier = REU_infiltrated_state_2_modifier
+					}
+					add_dynamic_modifier = {
+						modifier = REU_infiltrated_state_3_modifier
+						scope = REU
+					}
+					add_core_of = REU
+				}
+				else_if = {
+					limit = {
+						has_dynamic_modifier = {
+							modifier = REU_infiltrated_state_1_modifier
+							scope = REU
+						}
+					}
+					remove_dynamic_modifier = {
+						modifier = REU_infiltrated_state_1_modifier
+					}
+					add_dynamic_modifier = {
+						modifier = REU_infiltrated_state_2_modifier
+						scope = REU
+					}
+				}
+				else = {
+					add_dynamic_modifier = {
+						modifier = REU_infiltrated_state_1_modifier
+						scope = REU
+					}
+				}
+				REU = {
+					# set_variable = {
+					# 	var:REU_add_state_manpower = {
+					# 		value = PREV.state_population
+					# 		multiply = 0.005
+					# 	}
+					# }
+					#钢丝新版的计算方式无法将计算后变量即时显示在效果上
+					set_temp_variable = { REU_add_state_manpower = PREV.state_population }
+					multiply_temp_variable = { REU_add_state_manpower = 0.005 }
+					add_manpower = REU_add_state_manpower
+				}
+			}
+
+			REU = {
+				add_to_variable = { REU_infiltrated_state_num = -1 }
+			}
+		}
+
+		cancel_trigger = {
+			if = {
+				limit = {
+					BWS = {
+						exists = yes
+					}
+				}
+				OR = {
+					REU = {
+						has_country_flag = REU_exterminate_start
+					}
+					FROM = {
+						is_controlled_by = ROOT
+					}
+				}
+			}
+			else = {
+				FROM = {
+					is_controlled_by = ROOT
+				}
+			}
+		}
+		
+		cancel_effect = {
+			REU = {
+				add_to_variable = { REU_infiltrated_state_num = -1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 3
+			modifier = {
+				factor = 1.5
+				has_completed_focus = REU_Hug_each_other
+			}
+			modifier = {
+				factor = 2
+				has_country_flag = REU_land_redistribution
+			}
+		}
+	}
+}
+
+#反渗透
+NOT_REU_counter_infiltration = {
+	NOT_REU_counter_infiltrated_state = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			FROM = {
+				NOT = {
+					has_dynamic_modifier = REU_infiltrated_state_3_modifier
+				}
+			}
+			ROOT = {
+				NOT = {
+					has_war_with = REU
+				}
+			}
+		}
+
+		state_target = yes
+		target_trigger = {
+			FROM = {
+				controller = {
+					original_tag = ROOT
+				}
+				OR = {
+					has_dynamic_modifier = {
+						modifier = REU_infiltrated_state_1_modifier
+						scope = REU
+					}
+					has_dynamic_modifier = {
+						modifier = REU_infiltrated_state_2_modifier
+						scope = REU
+					}
+				}
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+		fire_only_once = no
+
+		cost = 100
+		days_remove = 60
+
+		remove_effect = {
+			FROM = {
+				if = {
+					limit = {
+						has_dynamic_modifier = REU_infiltrated_state_1_modifier
+					}
+					remove_dynamic_modifier = {
+						modifier = REU_infiltrated_state_1_modifier
+					}
+				}
+				else_if = {
+					limit = {
+						has_dynamic_modifier = REU_infiltrated_state_2_modifier
+					}
+					remove_dynamic_modifier = {
+						modifier = REU_infiltrated_state_2_modifier
+					}
+					add_dynamic_modifier = {
+						modifier = REU_infiltrated_state_1_modifier
+						scope = REU
+					}
+				}
+			}
+		}
+
+		ai_will_do = { base = 3 }
+	}
+}
+
+#苏维埃宣传部
+REU_propaganda_decisions = {
+	#我们将实现高产量 #大生产
+	REU_propaganda_decision_1 = {
+		icon = generic_factory
+
+		visible = {
+			has_country_flag = REU_production_campaign_flag
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_propaganda_var_tt
+				check_variable = { REU_propaganda < REU_propaganda_limit }
+			}
+		}
+
+		cost = 75
+		days_remove = 180
+		
+		modifier = {
+			industrial_capacity_factory = 0.05
+			production_speed_buildings_factor = 0.05
+			production_factory_efficiency_gain_factor = 0.02
+			production_factory_max_efficiency_factor = 0.02
+		}
+		
+		complete_effect = {
+			add_to_variable = { REU_propaganda = 1 }
+		}
+
+		remove_effect = {
+			add_to_variable = { REU_propaganda = -1 }
+		}
+		
+		ai_will_do = { base = 4 }
+	}
+	#义务劳动人人有责 #义务劳动
+	REU_propaganda_decision_2 = {
+		icon = generic_construction
+		
+		visible = {
+			has_country_flag = REU_Encourage_voluntary_labor_flag
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_propaganda_var_tt
+				check_variable = { REU_propaganda < REU_propaganda_limit }
+			}
+		}
+		
+		cost = 75
+		days_remove = 180
+		
+		modifier = {
+			consumer_goods_expected_value = -0.05
+			production_speed_arms_factory_factor = 0.1
+			production_speed_industrial_complex_factor = 0.1
+		}
+		
+		complete_effect = {
+			add_to_variable = { REU_propaganda = 1 }
+		}
+
+		remove_effect = {
+			add_to_variable = { REU_propaganda = -1 }
+		}
+		
+		ai_will_do = { base = 1.5 }
+	}
+	#地主贵族无处可逃 #无
+	REU_propaganda_decision_3 = {
+		
+		icon = generic_confiscation
+		
+		cost = 75
+		days_remove = 180
+		
+		visible = {
+			check_variable = { REU_propaganda_decision_3_var < 10 }
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_propaganda_var_tt
+				check_variable = { REU_propaganda < REU_propaganda_limit }
+			}
+		}
+		
+		modifier = {
+			war_support_weekly = 0.002
+		}
+		
+		complete_effect = {
+			add_to_variable = { REU_propaganda = 1 }
+		}
+
+		remove_effect = {
+			add_to_variable = { REU_propaganda = -1 }
+			custom_effect_tooltip = REU_propaganda_decision_3_tt
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 1
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = { base = 4 }
+	}
+	#反动势力必死无疑 #镇压反动势力
+	REU_propaganda_decision_4 = {
+		
+		icon = generic_prepare_civil_war
+		
+		visible = {
+			has_country_flag = REU_Suppression_of_counter_revolutionaries_flag
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_propaganda_var_tt
+				check_variable = { REU_propaganda < REU_propaganda_limit }
+			}
+			custom_trigger_tooltip = {
+				tooltip = any_enemy_country_is_feudal_country_tt
+				any_enemy_country = {
+					OR = {	
+						has_government = authoritarianism #威权主义
+						has_government = conservatism #保守主义
+						has_government = despotism #专制主义
+						has_government = fascism #法西斯主义
+						has_government = mysticism #神秘主义
+						has_government = liberalism #自由主义
+					}
+				}
+			}
+		}
+		
+		cost = 75
+		days_remove = 180
+		
+		modifier = {
+			custom_modifier_tooltip = REU_propaganda_decision_4_modifier_tt
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				every_enemy_country = {
+					limit = {
+						OR = {	
+							has_government = authoritarianism #威权主义
+							has_government = conservatism #保守主义
+							has_government = despotism #专制主义
+							has_government = fascism #法西斯主义
+							has_government = mysticism #神秘主义
+							has_government = liberalism #自由主义
+						}
+					}
+					add_ideas = REU_propaganda_idea #施加隐藏debuff
+					#隐藏事件移除隐藏debuff
+					country_event = {
+						id = event_reu.100
+						days = 180
+					}
+				}
+			}
+			add_to_variable = { REU_propaganda = 1 }
+		}
+
+		remove_effect = {
+			add_to_variable = { REU_propaganda = -1 }
+		}
+		
+		ai_will_do = { base = 4 }
+	}
+	#伟大红军战无不胜 #无
+	REU_propaganda_decision_5 = {
+		
+		icon = generic_military
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_propaganda_var_tt
+				check_variable = { REU_propaganda < REU_propaganda_limit }
+			}
+			has_war = yes
+		}
+		
+		cost = 75
+		days_remove = 180
+		
+		modifier = {
+			army_attack_factor = 0.05
+			breakthrough_factor = 0.05
+		}
+		
+		complete_effect = {
+			add_to_variable = { REU_propaganda = 1 }
+		}
+
+		remove_effect = {
+			add_to_variable = { REU_propaganda = -1 }
+		}
+		
+		ai_will_do = { base = 4 }
+	}
+	#游击队员无上荣光 #任意联络国策
+	REU_propaganda_decision_6 = {
+		
+		icon = generic_civil_support
+		
+		visible = {
+			OR = {
+				has_country_flag = REU_Contact_Metropolitan_Workers_flag
+				has_country_flag = REU_Reaching_out_to_ethnic_minorities_flag
+			}
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_propaganda_var_tt
+				check_variable = { REU_propaganda < REU_propaganda_limit }
+			}
+			any_owned_state = {
+				any_neighbor_state = {
+					controller = { has_war_with = ROOT }
+				}
+			}
+		}
+		
+		cost = 75
+		days_remove = 180
+		
+		complete_effect = {
+			add_to_variable = { REU_propaganda = 1 }
+			custom_effect_tooltip = REU_propaganda_decision_6_tt
+			hidden_effect = {
+				every_enemy_country = {
+					for_loop_effect = {
+						end = 3
+						every_controlled_state = {
+							limit = {
+								any_neighbor_state = {
+									OR = {
+										has_dynamic_modifier = {
+											modifier = REU_infiltrated_state_1_modifier
+											scope = REU
+										}
+										has_dynamic_modifier = {
+											modifier = REU_infiltrated_state_2_modifier
+											scope = REU
+										}
+										has_dynamic_modifier = {
+											modifier = REU_infiltrated_state_3_modifier
+											scope = REU
+										}
+										controller = {
+											tag = REU
+										}
+									}
+								}
+							}
+							if = {
+								limit = {
+									OR = {
+										has_dynamic_modifier = {
+											modifier = REU_infiltrated_state_1_modifier
+											scope = REU
+										}
+										has_dynamic_modifier = {
+											modifier = REU_infiltrated_state_2_modifier
+											scope = REU
+										}
+									}
+								}
+								remove_dynamic_modifier = {
+									modifier = REU_infiltrated_state_1_modifier
+									scope = REU
+								}
+								remove_dynamic_modifier = {
+									modifier = REU_infiltrated_state_2_modifier
+									scope = REU
+								}
+								add_dynamic_modifier = {
+									modifier = REU_infiltrated_state_3_modifier
+									scope = REU
+								}
+								add_core_of = REU
+								force_enable_resistance = PREV
+								start_resistance = PREV
+								set_resistance = 65
+								set_compliance = 0
+							}
+							eles_if = {
+								limit = {
+									has_dynamic_modifier = {
+										modifier = REU_infiltrated_state_3_modifier
+										scope = REU
+									}
+								}
+							}
+							else = {
+								add_dynamic_modifier = {
+									modifier = REU_infiltrated_state_3_modifier
+									scope = REU
+									days = 180
+								}
+								force_enable_resistance = PREV
+								start_resistance = PREV
+								set_resistance = 65
+								set_compliance = 0
+							}
+						}
+					}					
+				}
+			}
+		}
+
+		remove_effect = {
+			add_to_variable = { REU_propaganda = -1 }
+		}
+		
+		ai_will_do = { base = 15 }
+	}
+	#知识打破奴隶枷锁 #教育秩序
+	REU_propaganda_decision_7 = {
+		
+		icon = generic_brainwash
+		
+		visible = {
+			has_country_flag = REU_restore_educational_order_flag
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_propaganda_var_tt
+				check_variable = { REU_propaganda < REU_propaganda_limit }
+			}
+		}
+		
+		cost = 75
+		days_remove = 180
+		
+		modifier = {
+			research_speed_factor = 0.08
+		}
+		
+		complete_effect = {
+			add_to_variable = { REU_propaganda = 1 }
+		}
+
+		remove_effect = {
+			add_to_variable = { REU_propaganda = -1 }
+		}
+	}	
+	#帝国主义终将灭亡 #终局
+	REU_propaganda_decision_8 = {
+		
+		icon = generic_reorganize_irregulars
+		
+		visible = {
+			has_country_flag = REU_Berserk_into_Saint_Grypherburg_flag
+		}
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_propaganda_var_tt
+				check_variable = { REU_propaganda < REU_propaganda_limit }
+			}
+			any_enemy_country = {
+				is_major = yes
+			}
+		}
+		
+		cost = 75
+		days_remove = 180
+		
+		modifier = {
+			army_defence_against_major_factor = 0.08
+			army_attack_against_major_factor = 0.05
+		}
+		
+		complete_effect = {
+			add_to_variable = { REU_propaganda = 1 }
+		}
+
+		remove_effect = {
+			add_to_variable = { REU_propaganda = -1 }
+		}
+	}
+}
+
+#整合运动杂项决议
+REU_misc_decisions = {
+	REU_change_flag_original = {
+		icon = GFX_decision_generic_form_nation
+
+		visible = {
+			has_government = despotism
+			NOT = {
+				has_cosmetic_tag = REU_original
+			}
+		}
+		complete_effect = {
+			set_cosmetic_tag = REU_original
+		}
+	}
+
+	REU_change_flag_mod = {
+		icon = GFX_decision_generic_form_nation
+		visible = {
+			has_government = despotism
+			has_cosmetic_tag = REU_original
+		}
+		complete_effect = {
+			drop_cosmetic_tag = yes
+		}
+	}
+
+	REU_new_uniform_reform = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = East_Ursus_Unification_After
+			NOT = { has_country_flag = REU_new_uniform_reform_done }
+		}
+
+		complete_effect = {
+			set_country_flag = REU_new_uniform_reform_done
+			country_event = {
+				id = event_reu.117
+			}
+		}
+	}
+
+	REU_hidden_misc_decisions = {
+		icon = GFX_decision_generic_break_treaty
+
+		complete_effect = {
+			set_country_flag = REU_misc_decisions_hidden_flag
+		}
+	}
+}
+
+#调试决议
+REU_test_Decisions_GUI = {
+
+	REU_test_Base_Construction_Begin = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = {
+            is_ai = no
+        }
+		complete_effect = {
+			set_country_flag = REU_base_construction
+			set_variable = { REU_Supplies = 5 }
+			add_to_variable = { REU_get_supplies_num = 1}
+		}
+	}
+
+	REU_test_light_from = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = {
+			is_ai = no
+		}
+		complete_effect = {
+			country_event = {
+				id = event_reu.23
+			}
+		}
+	}
+
+	REU_test_march_begin = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = {
+			is_ai = no
+		}
+		complete_effect = {
+			country_event = {
+				id = event_reu.49
+			}
+		}
+	}
+
+	REU_test_march_end = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = {
+			is_ai = no
+		}
+		complete_effect = {
+			remove_mission = REU_rapid_march
+		}
+	}
+
+	REU_test_unlock_focus_all = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = {
+			is_ai = no
+		}
+		complete_effect = {
+			set_country_flag = REU_Sarkaz_red_army
+			set_country_flag = REU_Exterminate_start
+			set_country_flag = East_Ursus_Unification_After
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+}
+
+REU_Base_Construction_Decisions_GUI = {
+
+
+
+	REU_Search_Supplies = {
+		icon = GFX_decision_generic_political_discourse
+
+		cancel_trigger = {
+			has_country_flag = REU_March_Begin
+		}
+
+		activation = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		is_good = yes
+
+		priority = 500
+		days_mission_timeout = 30
+
+		cancel_trigger = {
+			has_country_flag = REU_March_Begin
+		}
+
+		timeout_effect = {
+			set_temp_variable = { spl = REU_search_supplies_num }
+			REU_Base_Construction_Supplies_Add = yes
+			custom_effect_tooltip = redo_this_mission_decision_tt
+			hidden_effect = {
+				activate_mission = REU_Search_Supplies
+			}
+		}
+	}
+
+
+
+	REU_Rescue_Infected = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_Rescue_Infected
+			NOT = { has_country_flag = REU_March_Begin }
+		}
+
+		priority = 500
+		cost = 75
+		days_remove = 60
+		days_re_enable = 60
+
+		remove_effect = {
+			set_temp_variable = { pts = 200 }
+			REU_Base_Construction_Partisans_Add = yes
+		}
+
+		ai_will_do = { base = 100 }
+	}
+
+	REU_Rob_Supplies = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_Rob_Supplies
+			NOT = { has_country_flag = REU_March_Begin }
+		}
+
+		priority = 500
+		cost = 50
+		days_remove = 14
+		days_re_enable = 70
+
+		remove_effect = {
+			fixed_random_seed = no
+			random_list = {
+				20 = {
+					country_event = {
+						id = event_reu.14
+					}
+				}
+				60 = {
+					country_event = {
+						id = event_reu.15
+					}
+				}
+				20 = {
+					country_event = {
+						id = event_reu.16
+					}
+				}
+			}
+		}
+
+		ai_will_do = { base = 100 }
+	}
+
+	REU_Steal_Supplies = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_Steal_Supplies
+			NOT = { has_country_flag = REU_March_Begin }
+		}
+
+		priority = 500
+		cost = 50
+		days_remove = 14
+		days_re_enable = 70
+
+		remove_effect = {
+			fixed_random_seed = no
+			random_list = {
+				50 = {
+					country_event = {
+						id = event_reu.17
+					}
+				}
+				30 = {
+					country_event = {
+						id = event_reu.18
+					}
+				}
+				20 = {
+					country_event = {
+						id = event_reu.19
+					}
+				}
+			}
+		}
+
+		ai_will_do = { base = 100 }
+	}
+
+	REU_Deal_With_Villages = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_Deal_With_Villages
+			NOT = { has_country_flag = REU_March_Begin }
+		}
+
+		priority = 500
+		cost = 50
+		days_remove = 14
+		days_re_enable = 70
+
+		remove_effect = {
+			set_temp_variable = { spl = 1 }
+			REU_Base_Construction_Supplies_Add = yes
+		}
+
+		ai_will_do = { base = 100 }
+	}
+
+	REU_logging_hunting = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_logging_hunting
+			NOT = { has_country_flag = REU_March_Begin }
+		}
+
+		priority = 500
+		cost = 50
+		days_remove = 14
+		days_re_enable = 30
+
+		remove_effect = {
+			set_temp_variable = { spl = 1 }
+			REU_Base_Construction_Supplies_Add = yes
+		}
+
+		ai_will_do = { base = 100 }
+	}
+
+	REU_industrial_production = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_industrial_production
+			NOT = { has_country_flag = REU_March_Begin }
+		}
+
+		priority = 500
+		cost = 75
+		days_remove = 14
+		days_re_enable = 30
+
+		remove_effect = {
+			set_temp_variable = { spl = 2 }
+			REU_Base_Construction_Supplies_Add = yes
+		}
+
+		ai_will_do = { base = 100 }
+	}
+
+	REU_product_trading = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			OR = {
+				has_country_flag = REU_logging_hunting
+				has_country_flag = REU_industrial_production
+			}
+			NOT = { has_country_flag = REU_March_Begin }
+		}
+
+		custom_cost_trigger = {
+			set_temp_variable = { az = 1 }
+			check_variable = { REU_Supplies > 0 }
+		}
+		custom_cost_text = decision_REU_Supplies
+
+		priority = 500
+		days_remove = 14
+		days_re_enable = 70
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = { REU_Supplies = -1 }
+			}
+		}
+
+		remove_effect = {
+			add_cic = 300
+			add_political_power = 60
+		}
+
+		ai_will_do = { base = 100 }
+	}
+
+
+
+
+
+
+
+
+}
+REU_Communism_Spreading_Decisions_GUI = {
+	REU_Spread_Communism_To_People = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = REU_Communism_Spreading_Begin
+			NOT = { has_country_flag = REU_March_Begin }
+		}
+
+		priority = 500
+		cost = 50
+		days_remove = 70
+		
+		modifier = {
+			communism_drift = 0.05
+			despotism_drift = -0.02
+			stability_weekly = 0.01
+		}
+
+		remove_effect = {
+			set_temp_variable = { dev_rate_adm = 0.1 }
+			Administrative_Efficiency_Rate_Add = yes
+		}
+		
+		ai_will_do = { base = 100 }
+	}
+
+	REU_Spread_Communism_To_Reunion = {
+		icon = GFX_decision_generic_political_discourse
+		
+		visible = {
+			has_country_flag = REU_Communism_Spreading_Begin
+			NOT = { has_country_flag = REU_March_Begin }
+		}
+		
+		priority = 500
+		cost = 50
+		days_remove = 70
+
+		modifier = {
+			communism_drift = 0.1
+			despotism_drift = -0.02
+			stability_weekly = 0.01
+		}
+
+		ai_will_do = { base = 100 }
+	}
+}
+
+# 保留 Redux 原有块：REU_flag_decisions
+REU_flag_decisions = {
+	REU_change_flag_original = {
+		visible = {
+			has_government = despotism
+		}
+		complete_effect = {
+			set_cosmetic_tag = REU_original
+		}
+	}
+
+	REU_change_flag_mod = {
+		visible = {
+			has_government = despotism
+			has_cosmetic_tag = REU_original
+		}
+		complete_effect = {
+			drop_cosmetic_tag = yes
+		}
+	}
+}

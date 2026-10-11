@@ -1,0 +1,161 @@
+capital = 131
+
+oob = "REU_Start"
+
+recruit_character = REU_Talulah
+recruit_character = REU_Buldrokkastee
+recruit_character = REU_Alina
+recruit_character = REU_Yelena
+recruit_character = REU_Lyudmila
+recruit_character = REU_Misha
+recruit_character = REU_Faust
+recruit_character = REU_Mudrock
+recruit_character = REU_big_bob
+recruit_character = REU_Skullshatterer
+recruit_character = REU_Kolev_Bodrovich_Ishavalle
+recruit_character = REU_Conrad_Knecht
+recruit_character = REU_Gergo_Franz
+recruit_character = REU_Millanden_Engler
+recruit_character = REU_Rod_Bertharin
+recruit_character = REU_Ezemara_Umak
+recruit_character = REU_Bal_Kailin
+recruit_character = REU_Demidov_Kirilyevich_Yastlin
+recruit_character = REU_Tintine_Ivanovitch_Smirnov
+recruit_character = REU_Alexander_Levich_Beselowski
+recruit_character = REU_Stepan_Andreevich_Kashov
+
+recruit_character = REU_Yevgenia_Sergeyevna_Michurina
+recruit_character = REU_Lukiy_Mikhailovich_Fyodorov
+recruit_character = REU_Natalya_Ivanovna_Bogushevskaya
+recruit_character = REU_Anastasiya_Ivannovna_Surenyan
+recruit_character = REU_Anna_Ivanovna_Surenyan
+recruit_character = REU_Lazar_Moiseyevich_Kahanovski
+recruit_character = REU_Vira_Vladimirovna_Shcherbakova
+recruit_character = REU_Inessa_dHerbenville
+recruit_character = REU_Olga_Vasilyevna_Glinskaya
+recruit_character = REU_Ishmael_Alekseyevna_Yusupova
+recruit_character = REU_Mikhail_Aleksandrovich_Koloshnikov
+recruit_character = REU_Nicholas_Alekseyevich_Korchagin
+recruit_character = REU_Mikhail_Vasilyevich_Peskov
+recruit_character = REU_Galina_Maksimovna_Zhuykova
+recruit_character = REU_Mita_Nikolayevna_Tukhachevskaya
+recruit_character = REU_Fyodor_Pavlovich_Batrov
+recruit_character = REU_Nasta_Fyodorovna_Vatutina
+recruit_character = REU_Maksim_Ksaveryevich_Rokoszewski
+recruit_character = REU_Angelina_Timofeyevna_Yazova
+recruit_character = REU_Svetlana_Fyodorovna_Akhromeyeva
+recruit_character = REU_Viacheslav_Valeryevich_Maksimov
+recruit_character = REU_Mariya_Mikhaylovna_Malinina
+recruit_character = REU_Alexander_Alexandrovich_Kryukovsky
+
+#索科洛夫 —— 「弑君者」柳德米拉的心腹
+recruit_character = REU_Sokolov
+
+activate_advisor = REU_Alina_second_in_command
+
+add_ideas = {
+	local_warlord
+	extensive_conscription
+	no_voting
+	working_law_14h
+	equal_treatment
+	barren_land
+	handcraft_workshop
+	illiteracy_widespread
+	anarchy
+	severe_poverty
+	
+	REU_Wanderers_on_tundra
+}
+
+add_dynamic_modifier = {
+	modifier = REU_youji_economic_modifier
+}
+set_variable = { research_speed_factor_var = -0.15 }
+set_variable = { industrial_capacity_factory_var = -0.2 }
+set_variable = { production_factory_efficiency_gain_factor_var = -0.1 }
+set_variable = { production_factory_max_efficiency_factor_var = -0.1 }
+set_variable = { production_speed_buildings_factor_var = -0.05 }
+
+add_dynamic_modifier = {
+	modifier = REU_reunion_political_modifier
+}
+set_variable = { political_power_factor_var = -0.15 }
+set_variable = { stability_factor_var = -0.05 }
+set_variable = { war_support_factor_var = 0.15 }
+
+add_dynamic_modifier = {
+	modifier = REU_ganranzhe_youjidui_modifier
+}
+set_variable = { army_org_regain_var = -0.05 }
+set_variable = { conscription_factor_var = 0.1 }
+set_variable = { equipment_capture_factor_var = 0.1 }
+set_variable = { army_morale_factor_var = -0.05 }
+set_variable = { army_org_factor_var = -0.1 }
+set_variable = { army_defence_factor_var = -0.05 }
+set_variable = { army_attack_factor_var = -0.05 }
+
+set_variable = { air_mission_xp_gain_factor_var = 0.1 }
+set_variable = { air_training_xp_gain_factor_var = 0.15 }
+set_variable = { air_accidents_factor_var = -0.05 }
+set_variable = { air_mission_efficiency_var = 0.05 }
+
+country_event = {
+	id = event_reu.20
+	days = 187
+}
+country_event = {
+	id = event_reu.78
+	months = 30
+	days = 7
+}
+
+set_country_flag = second_leader_flag
+
+set_research_slots = 1
+set_stability = 0.15
+set_war_support = 0.5
+
+set_technology = {
+	infantry_weapons_0 = 1
+	infantry_weapons_improvement_1 = 1
+	arts_weapons_0 = 1
+	arts_weapons_improvement_1 = 1
+	support_weapons_1 = 1
+	motorized_infantry_0 = 1
+	tech_support = 1
+	tech_recon = 1
+	basic_train = 1
+	artillery_0 = 1
+	artillery_improvement_1 = 1
+	basic_machine_tools = 1
+	punched_card_computer = 1
+	vacuum_tube_computer = 1
+	assembly_line_production = 1
+	decentralized_industrial_chain_1 = 1
+	construction_1 = 1
+	fuel_silos = 1
+	power_plant = 1
+}
+
+set_politics = {
+	ruling_party = despotism
+	elections_allowed = no
+}
+set_popularities = {
+	communism = 0
+	socialism = 0
+	progressivism = 0
+	liberalism = 0
+	conservatism = 0
+	authoritarianism = 0
+	despotism = 100
+	fascism = 0
+	mysticism = 0
+	special = 0
+}
+
+# ARF 特殊兵种：开局授予专属兵种科技（ARF 特殊兵种模块维护，请勿手改）
+set_technology = {
+	arf_patriot_phalanx_tech = 1
+}

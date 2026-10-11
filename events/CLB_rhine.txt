@@ -1,0 +1,249 @@
+add_namespace = clb_rhine
+
+# 注意：事件 id 的命名空间必须先在此声明，否则引擎逐个报
+# "Malformed token: clb_rhine.N"，本文件 11 个事件全部不会注册。
+# 哥伦比亚 · 莱茵生命 事件链
+# 命名空间 clb_rhine
+# 1-4 由 history/countries/CLB - Columbia.txt 定时触发；5 由决议触发；6-7 由月度结算触发；8-11 由国策/结算触发
+
+# 海德兄弟求助
+country_event = {
+	id = clb_rhine.1
+	title = clb_rhine.1.t
+	desc = clb_rhine.1.d
+	is_triggered_only = yes
+
+	option = {
+		name = clb_rhine.1.a
+		CLB = { add_to_variable = { CLB_ten_research = 0.10 } }
+		add_stability = -0.05
+	}
+	option = {
+		name = clb_rhine.1.b
+		CLB = { add_to_variable = { CLB_int_detect = 0.10 } }
+		add_stability = 0.05
+	}
+}
+
+# 曼斯菲尔德监狱暴动
+country_event = {
+	id = clb_rhine.2
+	title = clb_rhine.2.t
+	desc = clb_rhine.2.d
+	is_triggered_only = yes
+
+	option = {
+		name = clb_rhine.2.a
+		CLB = { add_to_variable = { CLB_eco_factory = 0.10 } }
+		add_stability = -0.05
+	}
+	option = {
+		name = clb_rhine.2.b
+		add_stability = 0.05
+		CLB = {
+			add_to_variable = { CLB_eco_factory = 0.05 }
+			add_to_variable = { CLB_pol_stab = -0.05 }
+		}
+	}
+}
+
+# 359 基地事故
+country_event = {
+	id = clb_rhine.3
+	title = clb_rhine.3.t
+	desc = clb_rhine.3.d
+	is_triggered_only = yes
+
+	option = {
+		name = clb_rhine.3.a
+		add_stability = 0.05
+	}
+	option = {
+		name = clb_rhine.3.b
+		add_stability = -0.10
+		add_political_power = 50
+	}
+	option = {
+		name = clb_rhine.3.c
+		CLB = { add_to_variable = { CLB_mil_atk = 0.10 } }
+	}
+}
+
+# 螺旋桨天堂预展
+country_event = {
+	id = clb_rhine.4
+	title = clb_rhine.4.t
+	desc = clb_rhine.4.d
+	is_triggered_only = yes
+
+	option = {
+		name = clb_rhine.4.a
+		CLB = {
+			add_to_variable = { CLB_sky_fever = 20 }
+			add_to_variable = { CLB_beast_acquiescence = 10 }
+		}
+	}
+	option = {
+		name = clb_rhine.4.b
+		add_stability = 0.05
+		CLB = { add_to_variable = { CLB_sky_fever = -10 } }
+	}
+}
+
+# 兽主的游戏（由决议触发）
+country_event = {
+	id = clb_rhine.5
+	title = clb_rhine.5.t
+	desc = clb_rhine.5.d
+	is_triggered_only = yes
+
+	option = {
+		name = clb_rhine.5.a
+		CLB = {
+			add_to_variable = { CLB_beast_acquiescence = 20 }
+			add_to_variable = { CLB_bea_research = 0.05 }
+		}
+	}
+	option = {
+		name = clb_rhine.5.b
+		add_stability = -0.10
+		CLB = { add_to_variable = { CLB_bea_cg = 0.10 } }
+	}
+}
+
+# 孤星
+country_event = {
+	id = clb_rhine.6
+	title = clb_rhine.6.t
+	desc = clb_rhine.6.d
+	is_triggered_only = yes
+
+	option = {
+		name = clb_rhine.6.a
+		CLB = {
+			add_to_variable = { CLB_sky_fever = 30 }
+			add_to_variable = { CLB_beast_acquiescence = 20 }
+			add_to_variable = { CLB_end_research = 0.20 }
+		}
+	}
+	option = {
+		name = clb_rhine.6.b
+		add_stability = 0.10
+		CLB = { add_to_variable = { CLB_end_research = -0.10 } }
+	}
+	option = {
+		name = clb_rhine.6.c
+		CLB = { add_to_variable = { CLB_sky_fever = 20 } }
+		add_stability = -0.10
+	}
+}
+
+# 未许之地
+country_event = {
+	id = clb_rhine.7
+	title = clb_rhine.7.t
+	desc = clb_rhine.7.d
+	is_triggered_only = yes
+
+	option = {
+		name = clb_rhine.7.a
+		add_stability = -0.10
+		CLB = { add_to_variable = { CLB_eco_ws = 0.15 } }
+	}
+	option = {
+		name = clb_rhine.7.b
+		CLB = {
+			add_to_variable = { CLB_beast_acquiescence = 20 }
+			add_to_variable = { CLB_end_research = 0.10 }
+		}
+	}
+	option = {
+		name = clb_rhine.7.c
+		add_stability = 0.10
+		CLB = { add_to_variable = { CLB_pol_pp = 0.10 } }
+	}
+}
+
+# 星门开启
+country_event = {
+	id = clb_rhine.8
+	title = clb_rhine.8.t
+	desc = clb_rhine.8.d
+	is_triggered_only = yes
+
+	option = {
+		name = clb_rhine.8.a
+		CLB = {
+			add_to_variable = { CLB_end_research = 0.30 }
+			add_to_variable = { CLB_beast_acquiescence = 20 }
+		}
+		add_stability = -0.10
+	}
+	option = {
+		name = clb_rhine.8.b
+		add_stability = 0.10
+		CLB = { add_to_variable = { CLB_end_research = -0.10 } }
+	}
+	option = {
+		name = clb_rhine.8.c
+		CLB = { add_to_variable = { CLB_mil_atk = 0.20 } }
+	}
+}
+
+# 结局 · 企业乌托邦
+country_event = {
+	id = clb_rhine.9
+	title = clb_rhine.9.t
+	desc = clb_rhine.9.d
+	is_triggered_only = yes
+	option = { name = clb_rhine.9.a }
+}
+
+# 结局 · 兽主游乐场
+country_event = {
+	id = clb_rhine.10
+	title = clb_rhine.10.t
+	desc = clb_rhine.10.d
+	is_triggered_only = yes
+	option = { name = clb_rhine.10.a }
+}
+
+# 结局 · 天空坠落
+country_event = {
+	id = clb_rhine.11
+	title = clb_rhine.11.t
+	desc = clb_rhine.11.d
+	is_triggered_only = yes
+	option = { name = clb_rhine.11.a }
+}
+
+# 就职 · 莱茵生命第一次内部推选（塞雷娅就任总统）
+# 由 election_clb.1 在 CLB_rhine_coup_started 旗标存在时预定触发
+country_event = {
+	id = inauguration_clb.29
+	title = inauguration_clb.29.t
+	desc = inauguration_clb.29.d
+	is_triggered_only = yes
+
+	option = {
+		name = inauguration_clb.29.a
+
+		set_politics = {
+			ruling_party = progressivism
+			elections_allowed = yes
+		}
+
+		# 莱茵生命人物已移交 RHL；CLB 剧情推进至此先自行招募塞雷娅
+		recruit_character = CLB_Saria
+
+		add_country_leader_role = {
+			character = CLB_Saria
+			promote_leader = yes
+			country_leader = {
+				ideology = progressivism_subtype
+			}
+		}
+
+		set_country_flag = CLB_flag_internal_selection_done
+	}
+}

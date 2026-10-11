@@ -1,0 +1,187 @@
+on_actions = {
+	# ==========================================================================
+	# 乌萨斯 · 顾问的持续/一次性/事件效果（on_daily_URS）
+	# 由 docs/_urs_advisors_build.py 生成，勿手改。
+	#
+	# 顾问没有「上任瞬间」的钩子，所以各类效果都在每日结算里做：
+	#   ① 在职累加：邪魔污染 / 纳斯塔霞恐惧（按 /日 数值）
+	#   ② 上任一次性：政变风险、圣愚支持等（<idea>_applied 旗标去重，卸任不回退）
+	#   ③ 隐藏事件派发：<idea>_event 旗标去重，只发一次
+	#
+	# 变量口径：URS_demonic_corruption / URS_fool_support 是**分数**（0.05 = 5%），
+	# 所以「+1/日」写作 +0.01/日；URS_nastasya_fear 是 0–100 计数器，原样累加。
+	# ==========================================================================
+	on_daily_URS = {
+		effect = {
+			# ---- ⓪ 萨米雪原的战鼓雷鸣：1099.1.1 后、圣愚在位，只触发一次 ----
+			if = {
+				limit = {
+					date > 1099.1.1
+					has_country_leader = {
+						character = URS_The_Fool
+						ruling_only = yes
+					}
+					NOT = { has_country_flag = fool_urs_sami_war_fired }
+				}
+				set_country_flag = fool_urs_sami_war_fired
+				country_event = { id = fool_urs.6 days = 3 }
+			}
+
+			if = {
+				limit = {
+					has_idea = URS_Aloyze_Gorchikova
+					NOT = { has_country_flag = URS_Aloyze_Gorchikova_event_fired }
+				}
+				set_country_flag = URS_Aloyze_Gorchikova_event_fired
+				country_event = { id = fool_urs.1 days = 3 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Aloyze_Gorchikova_chief_of_staff }
+				add_to_variable = { URS_demonic_corruption = 0.005 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Director_Third_Bureau }
+				add_to_variable = { URS_demonic_corruption = 0.005 }
+			}
+
+			if = {
+				limit = {
+					has_idea = URS_Director_Third_Bureau
+					NOT = { has_country_flag = URS_Director_Third_Bureau_event_fired }
+				}
+				set_country_flag = URS_Director_Third_Bureau_event_fired
+				country_event = { id = fool_urs.2 days = 3 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Katoga_Factory_Manager }
+				add_to_variable = { URS_demonic_corruption = 0.005 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Foreign_Minister_Vorontsova }
+				add_to_variable = { URS_demonic_corruption = 0.005 }
+			}
+
+			if = {
+				limit = {
+					has_idea = URS_Foreign_Minister_Vorontsova
+					NOT = { has_country_flag = URS_Foreign_Minister_Vorontsova_event_fired }
+				}
+				set_country_flag = URS_Foreign_Minister_Vorontsova_event_fired
+				country_event = { id = fool_urs.3 days = 3 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Research_Minister_Elita }
+				add_to_variable = { URS_demonic_corruption = 0.02 }
+			}
+
+			if = {
+				limit = { has_idea = URS_War_Minister_Svetlana }
+				add_to_variable = { URS_demonic_corruption = 0.01 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Army_Commander_Evgeny }
+				add_to_variable = { URS_demonic_corruption = 0.005 }
+			}
+
+			if = {
+				limit = {
+					has_idea = URS_Army_Commander_Evgeny
+					NOT = { has_country_flag = URS_Army_Commander_Evgeny_applied }
+				}
+				set_country_flag = URS_Army_Commander_Evgeny_applied
+				add_to_variable = { URS_coup_risk = 0.2 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Air_Commander_Razin }
+				add_to_variable = { URS_demonic_corruption = 0.01 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Fool_Guard_Commander }
+				add_to_variable = { URS_demonic_corruption = 0.01 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Interior_Minister_Guards }
+				add_to_variable = { URS_demonic_corruption = 0.015 }
+			}
+
+			if = {
+				limit = {
+					has_idea = URS_Interior_Minister_Guards
+					NOT = { has_country_flag = URS_Interior_Minister_Guards_applied }
+				}
+				set_country_flag = URS_Interior_Minister_Guards_applied
+				add_to_variable = { URS_coup_risk = -0.5 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Naga_Anchored }
+				add_to_variable = { URS_demonic_corruption = 0.02 }
+				add_to_variable = { URS_nastasya_fear = 10 }
+			}
+
+			if = {
+				limit = {
+					has_idea = URS_Naga_Anchored
+					NOT = { has_country_flag = URS_Naga_Anchored_applied }
+				}
+				set_country_flag = URS_Naga_Anchored_applied
+				add_to_variable = { URS_fool_support = 0.2 }
+			}
+
+			if = {
+				limit = {
+					has_idea = URS_Bielchok
+					NOT = { has_country_flag = URS_Bielchok_applied }
+				}
+				set_country_flag = URS_Bielchok_applied
+				add_to_variable = { URS_fool_support = -0.1 }
+				add_to_variable = { URS_demonic_corruption = -0.005 }
+			}
+
+			if = {
+				limit = {
+					has_idea = URS_Bielchok
+					NOT = { has_country_flag = URS_Bielchok_event_fired }
+				}
+				set_country_flag = URS_Bielchok_event_fired
+				country_event = { id = fool_urs.4 days = 3 }
+			}
+
+			if = {
+				limit = {
+					has_idea = URS_Rerkin
+					NOT = { has_country_flag = URS_Rerkin_applied }
+				}
+				set_country_flag = URS_Rerkin_applied
+				add_to_variable = { URS_fool_support = -0.05 }
+				add_to_variable = { URS_demonic_corruption = 0.005 }
+			}
+
+			if = {
+				limit = { has_idea = URS_Priestess_Voice }
+				add_to_variable = { URS_demonic_corruption = 0.03 }
+			}
+
+			if = {
+				limit = {
+					has_idea = URS_Priestess_Voice
+					NOT = { has_country_flag = URS_Priestess_Voice_event_fired }
+				}
+				set_country_flag = URS_Priestess_Voice_event_fired
+				country_event = { id = fool_urs.5 days = 3 }
+			}
+
+			# 纳斯塔霞恐惧是 0–100 计数器，钳在区间内
+			clamp_variable = { var = URS_nastasya_fear min = 0 max = 100 }
+		}
+	}
+}

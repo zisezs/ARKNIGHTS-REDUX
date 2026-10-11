@@ -1,0 +1,1161 @@
+focus_tree = {
+	id = NAX_start
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = NAX
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = NAX_reorganize_white_army
+	}
+	
+	#重组白军
+	focus = {
+		id = NAX_reorganize_white_army
+		icon = GFX_focus_NAX_reorganize_white_army
+		cost = 1
+		x = 6
+		y = 0
+
+		completion_reward = {
+
+		}
+	}
+
+	#高尔察克的装甲部队
+	focus = {
+		id = NAX_Kolchak_armour
+		icon = GFX_focus_NAX_Kolchak_armour
+		cost = 1
+		prerequisite = {
+			focus = NAX_reorganize_white_army
+		}
+		mutually_exclusive = {
+			focus = NAX_Wiazemsky_cavalry
+		}
+
+		x = -4
+		y = 1
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#学习机械化作战学说
+	focus = {
+		id = NAX_learn_machanized_doctrine
+		icon = GFX_focus_NAX_learn_machanized_doctrine
+		cost = 1
+		prerequisite = {
+			focus = NAX_Kolchak_armour
+		}
+
+		x = -6
+		y = 3
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#恢复陆行舰传统
+	focus = {
+		id = NAX_restore_land_cruiser_tradition
+		icon = GFX_focus_NAX_restore_land_cruiser_tradition
+		cost = 1
+		prerequisite = {
+			focus = NAX_Kolchak_armour
+		}
+
+		x = -4
+		y = 3
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#增强机械运输
+	focus = {
+		id = NAX_advance_machine_transportation
+		icon = GFX_focus_NAX_advance_machine_transportation
+		cost = 1
+		prerequisite = {
+			focus = NAX_learn_machanized_doctrine
+		}
+
+		x = -6
+		y = 4
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#系统化装甲部队
+	focus = {
+		id = NAX_systemize_armour_troop
+		icon = GFX_focus_NAX_systemize_armour_troop
+		cost = 1
+		prerequisite = {
+			focus = NAX_restore_land_cruiser_tradition
+		}
+
+		x = -4
+		y = 4
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#增加燃料供应设施
+	focus = {
+		id = NAX_add_fuel_supply
+		icon = GFX_focus_NAX_add_fuel_supply
+		cost = 1
+		prerequisite = {
+			focus = NAX_advance_machine_transportation
+		}
+		prerequisite = {
+			focus = NAX_systemize_armour_troop
+		}
+
+		x = -6
+		y = 5
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#雪原上的钢铁洪流
+	focus = {
+		id = NAX_iron_stream_on_snow_field
+		icon = GFX_focus_NAX_iron_stream_on_snow_field
+		cost = 1
+		prerequisite = {
+			focus = NAX_advance_machine_transportation
+		}
+		prerequisite = {
+			focus = NAX_systemize_armour_troop
+		}
+
+		x = -4
+		y = 5
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#维亚泽姆斯基的骑兵部队
+	focus = {
+		id = NAX_Wiazemsky_cavalry
+		icon = GFX_focus_NAX_Wiazemsky_cavalry
+		cost = 1
+		prerequisite = {
+			focus = NAX_reorganize_white_army
+		}
+		mutually_exclusive = {
+			focus = NAX_Kolchak_armour
+		}
+
+		x = 4
+		y = 1
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#学习骑兵作战学说
+	focus = {
+		id = NAX_learn_cavalry_doctrine
+		icon = GFX_focus_NAX_learn_cavalry_doctrine
+		cost = 1
+		prerequisite = {
+			focus = NAX_Wiazemsky_cavalry
+		}
+
+		x = 4
+		y = 3
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#扩编骑兵部队
+	focus = {
+		id = NAX_augment_cavalry_troop
+		icon = GFX_focus_NAX_augment_cavalry_troop
+		cost = 1
+		prerequisite = {
+			focus = NAX_Wiazemsky_cavalry
+		}
+
+		x = 6
+		y = 3
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#扩大骑兵武器生产
+	focus = {
+		id = NAX_produce_more_cavalry_weapon
+		icon = GFX_focus_NAX_produce_more_cavalry_weapon
+		cost = 1
+		prerequisite = {
+			focus = NAX_learn_cavalry_doctrine
+		}
+
+		x = 4
+		y = 4
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#加强驮兽训练
+	focus = {
+		id = NAX_enhance_burdenbeast_training
+		icon = GFX_focus_NAX_enhance_burdenbeast_training
+		cost = 1
+		prerequisite = {
+			focus = NAX_augment_cavalry_troop
+		}
+
+		x = 6
+		y = 4
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#“为了我们的沙皇”
+	focus = {
+		id = NAX_for_our_Tsar
+		icon = GFX_focus_NAX_for_our_Tsar
+		cost = 1
+		prerequisite = {
+			focus = NAX_produce_more_cavalry_weapon
+		}
+		prerequisite = {
+			focus = NAX_enhance_burdenbeast_training
+		}
+
+		x = 4
+		y = 5
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#新概念骑士
+	focus = {
+		id = NAX_new_concept_knight
+		icon = GFX_focus_NAX_new_concept_knight
+		cost = 1
+		prerequisite = {
+			focus = NAX_produce_more_cavalry_weapon
+		}
+		prerequisite = {
+			focus = NAX_enhance_burdenbeast_training
+		}
+
+		x = 6
+		y = 5
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#与外国的合作
+	focus = {
+		id = NAX_cooperation_with_other_countries
+		icon = GFX_focus_NAX_cooperation_with_other_countries
+		cost = 1
+		prerequisite = {
+			focus = NAX_reorganize_white_army
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#扩充工业建设
+	focus = {
+		id = NAX_expand_industry_construction
+		icon = GFX_focus_NAX_expand_industry_construction
+		cost = 1
+		prerequisite = {
+			focus = NAX_cooperation_with_other_countries
+		}
+
+		x = -2
+		y = 3
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#采购武器原料
+	focus = {
+		id = NAX_procure_weapon_material
+		icon = GFX_focus_NAX_procure_weapon_material
+		cost = 1
+		prerequisite = {
+			focus = NAX_cooperation_with_other_countries
+		}
+
+		x = 2
+		y = 3
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#扩建军用工厂
+	focus = {
+		id = NAX_expand_military_industry
+		icon = GFX_focus_NAX_expand_military_industry
+		cost = 1
+		prerequisite = {
+			focus = NAX_expand_industry_construction
+		}
+		prerequisite = {
+			focus = NAX_procure_weapon_material
+		}
+
+		x = 0
+		y = 4
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#新阿列克谢的军事院校
+	focus = {
+		id = NAX_NovoAlekseyevsk_military_academy
+		icon = GFX_focus_NAX_NovoAlekseyevsk_military_academy
+		cost = 1
+		prerequisite = {
+			focus = NAX_expand_military_industry
+		}
+
+		x = 0
+		y = 5
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#冻原的核心军事力量
+	focus = {
+		id = NAX_core_military_power_of_forzen_field
+		icon = GFX_focus_NAX_core_military_power_of_forzen_field
+		cost = 1
+		prerequisite = {
+			focus = NAX_iron_stream_on_snow_field
+			focus = NAX_for_our_Tsar
+		}
+		prerequisite = {
+			focus = NAX_NovoAlekseyevsk_military_academy
+		}
+
+		x = 0
+		y = 6
+		relative_position_id = NAX_reorganize_white_army
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#第五集团军的影响力
+	focus = {
+		id = NAX_influence_of_fifth_army_group
+		icon = GFX_focus_NAX_influence_of_fifth_army_group
+		cost = 1
+		x = 20
+		y = 0
+
+		completion_reward = {
+
+		}
+	}
+
+	#上将高尔察克
+	focus = {
+		id = NAX_general_Kolchak
+		icon = GFX_focus_NAX_general_Kolchak
+		cost = 1
+		prerequisite = {
+			focus = NAX_influence_of_fifth_army_group
+		}
+
+		x = -4
+		y = 1
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#军队中的不满
+	focus = {
+		id = NAX_unrest_in_army
+		icon = GFX_focus_NAX_unrest_in_army
+		cost = 1
+		prerequisite = {
+			focus = NAX_influence_of_fifth_army_group
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#维亚泽姆斯基的准备
+	focus = {
+		id = NAX_Wiazemsky_preparation
+		icon = GFX_focus_NAX_Wiazemsky_preparation
+		cost = 1
+		prerequisite = {
+			focus = NAX_influence_of_fifth_army_group
+		}
+
+		x = 4
+		y = 1
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#代理人
+	focus = {
+		id = NAX_the_representative
+		icon = GFX_focus_NAX_the_representative
+		cost = 1
+		prerequisite = {
+			focus = NAX_general_Kolchak
+		}
+		prerequisite = {
+			focus = NAX_unrest_in_army
+		}
+		prerequisite = {
+			focus = NAX_Wiazemsky_preparation
+		}
+		mutually_exclusive = {
+			focus = NAX_old_hawk
+		}
+
+		x = -2
+		y = 2
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#衰老的鹰
+	focus = {
+		id = NAX_old_hawk
+		icon = GFX_focus_NAX_old_hawk
+		cost = 1
+		prerequisite = {
+			focus = NAX_general_Kolchak
+		}
+		prerequisite = {
+			focus = NAX_unrest_in_army
+		}
+		prerequisite = {
+			focus = NAX_Wiazemsky_preparation
+		}
+		mutually_exclusive = {
+			focus = NAX_the_representative
+		}
+
+		x = 2
+		y = 2
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#集团军内部的问题
+	focus = {
+		id = NAX_question_within_army_group
+		icon = GFX_focus_NAX_question_within_army_group
+		cost = 1
+		prerequisite = {
+			focus = NAX_the_representative
+		}
+
+		x = -4
+		y = 3
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#进一步的冲突
+	focus = {
+		id = NAX_further_conflict
+		icon = GFX_focus_NAX_further_conflict
+		cost = 1
+		prerequisite = {
+			focus = NAX_the_representative
+			focus = NAX_old_hawk
+		}
+
+		x = 0
+		y = 3
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#曾经辉煌的家族
+	focus = {
+		id = NAX_once_glorious_family
+		icon = GFX_focus_NAX_once_glorious_family
+		cost = 1
+		prerequisite = {
+			focus = NAX_old_hawk
+		}
+
+		x = 4
+		y = 3
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#整顿内部势力
+	focus = {
+		id = NAX_rectify_internal_forces
+		icon = GFX_focus_NAX_rectify_internal_forces
+		cost = 1
+		prerequisite = {
+			focus = NAX_question_within_army_group
+		}
+
+		x = -6
+		y = 4
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#新闻造势
+	focus = {
+		id = NAX_news_for_empowerment
+		icon = GFX_focus_NAX_news_for_empowerment
+		cost = 1
+		prerequisite = {
+			focus = NAX_the_representative
+		}
+
+		x = -2
+		y = 4
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#召集贵族
+	focus = {
+		id = NAX_call_for_nobles
+		icon = GFX_focus_NAX_call_for_nobles
+		cost = 1
+		prerequisite = {
+			focus = NAX_old_hawk
+		}
+
+		x = 2
+		y = 4
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#宣扬伊凡大帝崇拜
+	focus = {
+		id = NAX_advocate_Emperor_Ivan_worship
+		icon = GFX_focus_NAX_advocate_Emperor_Ivan_worship
+		cost = 1
+		prerequisite = {
+			focus = NAX_once_glorious_family
+		}
+
+		x = 6
+		y = 4
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#不需要异议者
+	focus = {
+		id = NAX_no_more_dissenter
+		icon = GFX_focus_NAX_no_more_dissenter
+		cost = 1
+		prerequisite = {
+			focus = NAX_rectify_internal_forces
+		}
+		prerequisite = {
+			focus = NAX_news_for_empowerment
+		}
+
+		x = -4
+		y = 5
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#法理优势
+	focus = {
+		id = NAX_jurisprudence_advantage
+		icon = GFX_focus_NAX_jurisprudence_advantage
+		cost = 1
+		prerequisite = {
+			focus = NAX_call_for_nobles
+		}
+		prerequisite = {
+			focus = NAX_advocate_Emperor_Ivan_worship
+		}
+
+		x = 4
+		y = 5
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#治安危机
+	focus = {
+		id = NAX_security_crisis
+		icon = GFX_focus_NAX_security_crisis
+		cost = 1
+		prerequisite = {
+			focus = NAX_no_more_dissenter
+			focus = NAX_jurisprudence_advantage
+		}
+		prerequisite = {
+			focus = NAX_further_conflict
+		}
+
+		x = 0
+		y = 6
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#最后一搏
+	focus = {
+		id = NAX_last_fight
+		icon = GFX_focus_NAX_last_fight
+		cost = 1
+		prerequisite = {
+			focus = NAX_no_more_dissenter
+		}
+		prerequisite = {
+			focus = NAX_security_crisis
+		}
+
+		x = -2
+		y = 7
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#重振旧皇室
+	focus = {
+		id = NAX_revitalize_old_royalty
+		icon = GFX_focus_NAX_revitalize_old_royalty
+		cost = 1
+		prerequisite = {
+			focus = NAX_jurisprudence_advantage
+		}
+		prerequisite = {
+			focus = NAX_security_crisis
+		}
+
+		x = 2
+		y = 7
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#建立议会
+	focus = {
+		id = NAX_establish_parliament
+		icon = GFX_focus_NAX_establish_parliament
+		cost = 1
+		prerequisite = {
+			focus = NAX_last_fight
+			focus = NAX_revitalize_old_royalty
+		}
+
+		x = 0
+		y = 8
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#1号法案
+	focus = {
+		id = NAX_act_number_one
+		icon = GFX_focus_NAX_act_number_one
+		cost = 1
+		prerequisite = {
+			focus = NAX_establish_parliament
+		}
+
+		x = 0
+		y = 9
+		relative_position_id = NAX_influence_of_fifth_army_group
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#新阿列克谢的现状
+	focus = {
+		id = NAX_NovoAlekseyevsk_current_status
+		icon = GFX_focus_NAX_NovoAlekseyevsk_current_status
+		cost = 1
+		x = 32
+		y = 0
+
+		completion_reward = {
+
+		}
+	}
+
+	#新阿列克谢工业化
+	focus = {
+		id = NAX_NovoAlekseyevsk_industrialization
+		icon = GFX_focus_NAX_NovoAlekseyevsk_industrialization
+		cost = 1
+		prerequisite = {
+			focus = NAX_NovoAlekseyevsk_current_status
+		}
+
+		x = 0
+		y = 1
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#促进平衡发展
+	focus = {
+		id = NAX_promote_balanced_development
+		icon = GFX_focus_NAX_promote_balanced_development
+		cost = 1
+		prerequisite = {
+			focus = NAX_NovoAlekseyevsk_industrialization
+		}
+
+		x = 0
+		y = 2
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#地区初步工业化
+	focus = {
+		id = NAX_regional_initial_industrialization
+		icon = GFX_focus_NAX_regional_initial_industrialization
+		cost = 1
+		prerequisite = {
+			focus = NAX_promote_balanced_development
+		}
+
+		x = -2
+		y = 3
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#会见银行家
+	focus = {
+		id = NAX_meet_with_bankers
+		icon = GFX_focus_NAX_meet_with_bankers
+		cost = 1
+		prerequisite = {
+			focus = NAX_regional_initial_industrialization
+		}
+
+		x = -4
+		y = 4
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#增强基础设施建设
+	focus = {
+		id = NAX_promote_infrastructure_construction
+		icon = GFX_focus_NAX_promote_infrastructure_construction
+		cost = 1
+		prerequisite = {
+			focus = NAX_regional_initial_industrialization
+		}
+
+		x = -2
+		y = 4
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#进出口问题
+	focus = {
+		id = NAX_import_and_export_problem
+		icon = GFX_focus_NAX_import_and_export_problem
+		cost = 1
+		prerequisite = {
+			focus = NAX_regional_initial_industrialization
+		}
+
+		x = 0
+		y = 4
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#启用工业专家
+	focus = {
+		id = NAX_hire_industry_experts
+		icon = GFX_focus_NAX_hire_industry_experts
+		cost = 1
+		prerequisite = {
+			focus = NAX_meet_with_bankers
+		}
+
+		x = -4
+		y = 5
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#翻新民用工厂
+	focus = {
+		id = NAX_renovate_civil_industry
+		icon = GFX_focus_NAX_renovate_civil_industry
+		cost = 1
+		prerequisite = {
+			focus = NAX_promote_infrastructure_construction
+		}
+
+		x = -2
+		y = 5
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#激励工业生产
+	focus = {
+		id = NAX_stimulate_industrial_production
+		icon = GFX_focus_NAX_stimulate_industrial_production
+		cost = 1
+		prerequisite = {
+			focus = NAX_hire_industry_experts
+		}
+		prerequisite = {
+			focus = NAX_renovate_civil_industry
+		}
+
+		x = -2
+		y = 6
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#招募科学家团队
+	focus = {
+		id = NAX_hire_scientist_group
+		icon = GFX_focus_NAX_hire_scientist_group
+		cost = 1
+		prerequisite = {
+			focus = NAX_stimulate_industrial_production
+		}
+
+		x = -2
+		y = 7
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#启用军事工业建设方案
+	focus = {
+		id = NAX_initiate_military_industry_construction
+		icon = GFX_focus_NAX_initiate_military_industry_construction
+		cost = 1
+		prerequisite = {
+			focus = NAX_promote_balanced_development
+		}
+
+		x = 2
+		y = 3
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#促进本地军事工业
+	focus = {
+		id = NAX_promote_local_military_industry
+		icon = GFX_focus_NAX_promote_local_military_industry
+		cost = 1
+		prerequisite = {
+			focus = NAX_initiate_military_industry_construction
+		}
+
+		x = 4
+		y = 4
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#承包商
+	focus = {
+		id = NAX_the_contractor
+		icon = GFX_focus_NAX_the_contractor
+		cost = 1
+		prerequisite = {
+			focus = NAX_initiate_military_industry_construction
+		}
+		prerequisite = {
+			focus = NAX_import_and_export_problem
+		}
+
+		x = 2
+		y = 5
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#改进武器生产方案
+	focus = {
+		id = NAX_improve_weapon_production
+		icon = GFX_focus_NAX_improve_weapon_production
+		cost = 1
+		prerequisite = {
+			focus = NAX_promote_local_military_industry
+		}
+
+		x = 4
+		y = 5
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#从国际市场购入武器
+	focus = {
+		id = NAX_buy_weapon_from_international_market
+		icon = GFX_focus_NAX_buy_weapon_from_international_market
+		cost = 1
+		prerequisite = {
+			focus = NAX_the_contractor
+		}
+
+		x = 2
+		y = 6
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#促进战争经济
+	focus = {
+		id = NAX_promote_wartime_economy
+		icon = GFX_focus_NAX_promote_wartime_economy
+		cost = 1
+		prerequisite = {
+			focus = NAX_improve_weapon_production
+		}
+		prerequisite = {
+			focus = NAX_buy_weapon_from_international_market
+		}
+
+		x = 4
+		y = 7
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+
+	#为战争作充足准备
+	focus = {
+		id = NAX_fully_prepared_for_war
+		icon = GFX_focus_NAX_fully_prepared_for_war
+		cost = 1
+		prerequisite = {
+			focus = NAX_hire_scientist_group
+		}
+		prerequisite = {
+			focus = NAX_promote_wartime_economy
+		}
+
+		x = 0
+		y = 8
+		relative_position_id = NAX_NovoAlekseyevsk_current_status
+		
+		completion_reward = {
+			
+		}
+	}
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}

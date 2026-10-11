@@ -1,0 +1,592 @@
+armor_URS = {
+
+  	roles = {
+  		armor
+  	}
+	
+  	available_for = {
+  		URS
+  	}
+	
+  	upgrade_prio = {
+  		base = 3
+
+  		modifier = {
+  			factor = 5
+  			has_tech = medium_tank_0
+  		}
+  	}
+
+  	URS_light_armor_default = {
+  		upgrade_prio = {
+  			base = 1
+			
+			modifier = {
+				factor = 0
+				has_tech = medium_tank_0
+			}
+  		}
+		
+  		production_prio = {
+  			factor = 1
+
+  			modifier = {
+  				factor = 3
+  				num_of_military_factories > 89
+  			}
+  		}
+		
+  		can_upgrade_in_field = {
+  			has_equipment = { light_tank_chassis < 500 } 
+  		}
+
+  		target_template = {
+			
+  			support = {
+  				engineer = 1
+  				mot_recon = 1
+  				artillery = 1
+  				anti_tank = 1
+  			}
+			
+  			regiments = {
+  				light_armor = 6
+  				motorized = 6
+  			}
+  		}
+  	}
+
+  	URS_heavy_armor_default = {
+  		upgrade_prio = {
+  			base = 1
+			
+			modifier = {
+				factor = 0
+				has_tech = medium_tank_0
+			}
+  		}
+
+  		target_template = {
+			
+  			support = {
+  				engineer = 1
+  				recon = 1
+  				logistics_company = 1
+  				maintenance_company = 1
+  			}
+			
+  			regiments = {
+  				heavy_armor = 6
+  				motorized = 4
+  			}
+  		}
+  	}
+
+  	URS_medium_armor_default = {
+	
+  		upgrade_prio = {
+  			base = 1
+			
+			modifier = {
+				factor = 5
+				has_tech = medium_tank_0
+			}
+  		}
+		
+  		target_template = {
+			
+  			support = {
+  				engineer = 1
+  				mot_recon = 1
+  				maintenance_company = 1
+  				logistics_company = 1
+  			}
+			
+			regimental_support = {
+				anti_air_support = 1
+				anti_tank_support = 1
+				artillery_support = 1
+			}
+			
+  			regiments = {
+  				medium_armor = 6
+  				motorized = 6
+  			}
+  		}
+  	}
+
+  	URS_medium_armor_2_default = {
+
+		upgrade_prio = {
+  			base = 1
+			
+			modifier = {
+				factor = 2
+				has_tech = medium_tank_0
+			}
+			modifier = {
+  				factor = 2
+  				num_of_military_factories > 99
+  			}
+			modifier = {
+  				factor = 2
+				has_tech = mechanized_infantry_1
+  			}
+  		}
+
+  		target_template = {
+			
+  			support = {
+  				engineer = 1
+  				mot_recon = 1
+  				maintenance_company = 1
+  				logistics_company = 1
+				field_hospital = 1
+  			}
+			
+			regimental_support = {
+				anti_air_support = 1
+				anti_tank_support = 1
+				artillery_support = 1
+			}
+			
+  			regiments = {
+  				medium_armor = 6
+  				mechanized = 6
+  			}
+  		}
+  	}
+
+  	landship_default = {
+  		upgrade_prio = {
+  			base = 1
+
+  			modifier = {
+  				factor = 2
+  				num_of_military_factories > 119
+  			}
+  		}
+
+  		target_template = {
+		
+  			support = {
+  				engineer = 1
+  				recon = 1
+  				logistics_company = 1
+  				maintenance_company = 1
+				field_hospital = 1
+  			}
+			
+			regimental_support = {
+				anti_air_support = 1
+				anti_tank_support = 1
+				artillery_support = 1
+			}
+			
+  			regiments = {
+  				landship = 5
+  				mechanized = 5
+  			}
+  		}
+  	}
+}
+
+garrison_URS = {
+	
+  	roles = {
+  		garrison
+  	}
+
+  	available_for = {
+  		URS
+  	}
+	
+  	upgrade_prio = {
+  		base = 30
+
+  		modifier = {
+  			factor = 0
+  			ai_has_role_template = garrison
+  		}
+  	}
+
+  	garrison_URS = {
+	
+  		reinforce_prio = 0
+  		custom_icon = 7
+	
+  		upgrade_prio = {
+  			base = 2
+
+  			modifier = {
+  				factor = 1
+  			}
+  		}
+		
+  		target_template = {
+  			
+  			support = { 
+  				engineer = 1
+  			}
+			
+  			regiments = {
+  				infantry = 5
+  			}
+  		}
+		
+  	}
+}
+
+suppression_URS = {
+	
+  	roles = {
+  		suppression
+  	}
+	
+  	upgrade_prio = {
+  		base = 1
+
+  		modifier = {
+  			factor = 20
+  			has_war = yes
+  		}
+  	}
+	
+  	suppression_URS = {
+	
+  		reinforce_prio = 0
+  		custom_icon = 13
+	
+  		upgrade_prio = {
+  			base = 1
+  		}
+		
+  		target_template = {
+			
+  			support = { 
+  				military_police = 1
+  			}
+			
+  			regiments = {
+  				cavalry  = 4
+  			}
+  		}
+		
+  	}
+}
+
+infantry_URS = {
+
+  	roles = {
+  		infantry
+  	}
+
+  	available_for = {
+  		URS
+  	}
+	
+  	upgrade_prio = {
+  		base = 25
+  	}
+
+  	URS_infantry_default = {
+	
+  		upgrade_prio = {
+  			base = 1
+
+  			modifier = {
+  				factor = 3
+  			}
+  		}
+		
+  		target_template = {
+  			
+  			support = {
+  				engineer = 1
+  				recon = 1
+  				logistics_company = 1
+  				artillery = 1
+				firepower = 1
+  			}
+			
+			regimental_support = {
+				anti_air_support = 1
+				anti_tank_support = 1
+				artillery_support = 1
+				firepower_support = 1
+			}
+			
+  			regiments = {
+  				infantry = 9
+  				artillery_brigade = 2
+  			}
+  		}
+		
+		replace_with = URS_infantry_improved
+  	}
+
+  	URS_infantry_improved = {
+	
+  		upgrade_prio = {
+  			base = 1
+			
+			modifier = {
+  				factor = 0
+  				NOT = { has_tech = antitank_0 }
+  			}
+
+  			modifier = {
+  				factor = 4
+  				has_tech = antitank_0
+  			}
+  		}
+		
+  		target_template = {
+  			
+  			support = {
+  				engineer = 1
+  				recon = 1
+  				logistics_company = 1
+  				artillery = 1
+				firepower = 1
+  			}
+			
+			regimental_support = {
+				anti_air_support = 1
+				anti_tank_support = 1
+				artillery_support = 1
+				firepower_support = 1
+			}
+			
+  			regiments = {
+  				infantry = 9
+  				artillery_brigade = 2
+				anti_tank_brigade = 1
+  			}
+  		}
+		
+  		replace_with = infantry_advanced
+  	}
+	
+	infantry_advanced = {
+	
+  		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 5
+				num_of_military_factories > 30
+			}
+
+			modifier = {
+				factor = 5
+				date > 1101.1.1
+			}
+		}
+
+		target_template = {
+			
+			support = {
+  				engineer = 1
+  				recon = 1
+  				logistics_company = 1
+  				artillery = 1
+				firepower = 1
+  			}
+			
+			regimental_support = {
+				anti_air_support = 1
+				anti_tank_support = 1
+				artillery_support = 1
+				firepower_support = 1
+			}
+			
+			regiments = {
+				infantry = 10
+  				artillery_brigade = 3
+				anti_tank_brigade = 1
+			}
+		}
+  	}
+}
+
+mountaineers_URS = {
+
+  	roles = {
+  		mountaineers
+  	}
+
+  	available_for = {
+  		URS
+  	}
+	
+  	upgrade_prio = {
+  		base = 0
+  	}
+
+  	URS_mountaineers_default = {
+	
+  		upgrade_prio = {
+  			base = 0
+
+  			modifier = {
+  				factor = 0
+  			}
+  		}
+
+  		target_template = {
+			
+  			support = {
+  				engineer = 1
+  				artillery = 1
+  				anti_tank = 1
+  				logistics_company = 1
+  			}
+			
+			regimental_support = {
+				anti_air_support = 1
+				anti_tank_support = 1
+				artillery_support = 1
+			}
+			
+  			regiments = {
+  				mountaineers = 9
+  				artillery_brigade = 2
+				anti_tank_brigade = 1
+  			}
+  		}
+  	}
+}
+
+paratrooper_URS = {
+
+  	roles = {
+  		paratrooper
+  	}
+
+  	available_for = {
+  		URS
+  	}
+	
+  	upgrade_prio = {
+  		base = 1
+
+  		modifier = {
+  			factor = 0
+  			NOT = {
+  				has_tech = paratroopers_1
+  			}
+  		}
+  	}
+
+  	URS_paratrooper_default = {
+	
+  		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 1
+			}
+		}
+
+		target_template = {
+			
+			support = {
+				engineer = 1
+				artillery = 1
+				anti_tank = 1
+			}
+			
+			regimental_support = {
+				anti_air_support = 1
+				anti_tank_support = 1
+				artillery_support = 1
+			}
+			
+			regiments = {
+				paratrooper = 9
+			}
+		}
+  	}
+}
+
+air_assault_URS = {
+
+  	roles = {
+  		air_assault
+  	}
+
+  	available_for = {
+  		URS
+  	}
+	
+  	upgrade_prio = {
+  		base = 5
+
+  		modifier = {
+  			factor = 0
+  			NOT = {
+  				has_tech = air_assault_1
+  			}
+  		}
+  	}
+	
+  	URS_air_assault_default = {
+	
+  		upgrade_prio = {
+  			base = 1
+
+  			modifier = {
+  				factor = 10
+  				num_of_military_factories > 89
+  			}
+  		}
+		
+  		target_template = {
+  					
+  			support = {
+  				engineer = 1
+  				maintenance_company = 1
+  				logistics_company = 1
+				field_hospital = 1
+				anti_tank = 1
+  			}
+			
+  			regiments = {
+  				armed_helicopter = 4
+  				air_assault = 4
+  			}
+  		}
+  	}
+}
+
+hq_URS = {
+	role = hq_role
+	
+	upgrade_prio = {
+		base = 0
+	}
+	
+	available_for = {
+	 	URS
+	}
+
+	hq_default = {
+		upgrade_prio = {
+			base = 0
+		}
+
+		target_template = {
+			support = {
+				hq_support_company = 1
+				hq_recon = 1
+				hq_military_police = 1
+				hq_signal = 1
+			}
+			
+			regiments = {
+				hq_motorized = 4
+			}
+		}
+	}
+}

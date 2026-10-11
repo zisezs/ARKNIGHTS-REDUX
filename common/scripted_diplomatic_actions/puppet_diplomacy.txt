@@ -1,0 +1,130 @@
+## ROOT is the diplomatic action initiator
+## FROM is the target
+## Default scope is FROM
+
+scripted_diplomatic_actions = {
+	demilitarization = {
+		allowed = {
+			always = yes
+		}
+		visible = {
+			is_subject_of = ROOT
+			#has_country_flag = defeated_puppet_flag #战败国被傀儡的情况下才有
+			NOT = {
+				has_country_flag = puppet_demilitarization_flag
+			}
+		}
+
+		cost = 0
+		requires_acceptance = no
+		show_acceptance_on_action_button = no
+		send_description = DEMILITARIZATION_DESC
+
+		complete_effect = {
+			set_country_flag = puppet_demilitarization_flag
+			country_lock_all_division_template = yes
+			add_ideas = puppet_demilitarization_idea
+			delete_unit = {
+				disband = yes
+			}
+		}
+
+		ai_desire = {
+			base = 0
+		}
+	}
+
+	remilitarization = {
+		allowed = {
+			always = yes
+		}
+		visible = {
+			is_subject_of = ROOT
+			#has_country_flag = defeated_puppet_flag #战败国被傀儡的情况下才有
+			has_country_flag = puppet_demilitarization_flag
+		}
+
+		cost = 0
+		requires_acceptance = no
+		show_acceptance_on_action_button = no
+		send_description = REMILITARIZATION_DESC
+
+		complete_effect = {
+			clr_country_flag = puppet_demilitarization_flag
+			country_lock_all_division_template = no
+			remove_ideas = puppet_demilitarization_idea
+			add_timed_idea = {
+				idea = puppet_remilitarization_idea
+    			days = 365
+			}
+		}
+
+		ai_desire = {
+			base = 0
+		}
+	}
+
+	# sovereignty_restoration = {
+	# 	allowed = {
+	# 		always = yes
+	# 	}
+	# 	visible = {
+	# 		is_subject_of = ROOT
+	# 		#has_country_flag = defeated_puppet_flag #战败国被傀儡的情况下才有
+	# 	}
+
+	# 	cost = 0
+	# 	requires_acceptance = no
+	# 	show_acceptance_on_action_button = no
+	# 	send_description = SOVEREIGNTY_RESTORATION_DESC
+
+	# 	complete_effect = {
+	# 		clr_country_flag = puppet_demilitarization_flag
+	# 		country_lock_all_division_template = no
+	# 		remove_ideas = puppet_demilitarization_idea
+	# 		add_timed_idea = {
+	# 			idea = puppet_remilitarization_idea
+    # 			days = 365
+	# 		}
+	# 		end_puppet = FROM
+	# 	}
+
+	# 	ai_desire = {
+	# 		base = 0
+	# 	}
+	# }
+
+	# Redetermine_country_destiny = {
+	# 	allowed = {
+	# 		always = yes
+	# 	}
+	# 	visible = {
+	# 		is_subject_of = ROOT
+	# 		#has_country_flag = defeated_puppet_flag #战败国被傀儡的情况下才有
+	# 	}
+
+	# 	cost = 0
+	# 	requires_acceptance = no
+	# 	show_acceptance_on_action_button = no
+	# 	send_description = REDETERMINE_COUNTRY_DESTINY_DESC
+
+	# 	complete_effect = {
+	# 		clr_country_flag = puppet_demilitarization_flag
+	# 		country_lock_all_division_template = no
+	# 		remove_ideas = puppet_demilitarization_idea
+	# 		delete_unit = {
+	# 			disband = yes
+	# 		}
+	# 		ROOT = {
+	# 			annex_country = {
+	# 				target = FROM
+	# 				transfer_troops = no
+	# 			}
+	# 		}
+	# 	}
+
+	# 	ai_desire = {
+	# 		base = 0
+	# 	}
+	# }
+}

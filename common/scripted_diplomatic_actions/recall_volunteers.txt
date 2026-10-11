@@ -1,0 +1,67 @@
+## ROOT is the diplomatic action initiator
+## FROM is the target
+## Default scope is FROM
+
+scripted_diplomatic_actions = {
+	recall_volunteers = {
+		allowed = { always = yes }
+		visible = {
+			has_volunteers_amount_from = {
+				tag = ROOT
+				count > 0
+			}
+			NOT = {
+				ROOT = {
+					has_country_flag = recalling_volunteers_from_@PREV
+				}
+			}
+		}
+
+		cost = 0
+		requires_acceptance = no
+		show_acceptance_on_action_button = no
+		send_description = RECALL_VOLUNTEERS_DESC
+
+		complete_effect = {
+			if = {
+				limit = {
+					ROOT = { is_ai = no }
+				}
+				log = "[ROOT.GetName] is recalling volunteers from [FROM.GetName] due to player choice"
+			}
+			else_if = {
+				limit = {
+					ROOT = {
+						NOT = {
+							has_country_flag = AI_sent_volunteers_@PREV
+						}
+					}
+				}
+				log = "[ROOT.GetName] is recalling volunteers from [FROM.GetName] due to a scripted AI change"
+			}
+			else = {
+				log = "[ROOT.GetName] is recalling volunteers from [FROM.GetName] due to an ongoing justification or wargoal"
+			}
+			ROOT = {
+				set_country_flag = {
+					flag = recalling_volunteers_from_@PREV
+					days = 30
+					value = 1
+				}
+				recall_volunteers_from = PREV
+			}
+		}
+
+		ai_desire = {
+			base = 0
+			modifier = {
+				add = 1000
+				ROOT = {
+					NOT = {
+						has_country_flag = AI_sent_volunteers_@PREV
+					}#强制AI撤回志愿军
+				}
+			}
+		}
+	}
+}

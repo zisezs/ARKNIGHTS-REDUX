@@ -1,0 +1,1537 @@
+URS_economic_recovery_decisions = {
+	URS_inviting_foreign_investment = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = URS_inviting_foreign_investment_flag
+		} 
+
+		cost = 150
+		days_remove = 60
+		days_re_enable = 60
+
+		modifier = {
+			production_speed_buildings_factor = 0.2
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_tax_police_dispatched = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = URS_tax_police_flag
+		} 
+
+		cost = 150
+		days_remove = 120
+		days_re_enable = 60
+
+		modifier = {
+			consumer_goods_factor = -0.4
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_construction_North_west = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			any_core_state = {
+				is_Ursus_North_west_area = yes
+				free_building_slots = {
+					building = industrial_complex
+					size > 2
+					include_locked = yes
+				}
+			}
+		}
+
+		cost = 75
+		days_remove = 60
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			random_core_state = {
+				limit = {
+					is_Ursus_North_west_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_construction_Saint_Grypherburg = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			any_core_state = {
+				is_Ursus_Saint_Grypherburg_area = yes
+				free_building_slots = {
+					building = industrial_complex
+					size > 2
+					include_locked = yes
+				}
+			}
+		}
+
+		cost = 75
+		days_remove = 60
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			random_core_state = {
+				limit = {
+					is_Ursus_Saint_Grypherburg_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_construction_South = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			any_core_state = {
+				is_Ursus_South_area = yes
+				free_building_slots = {
+					building = industrial_complex
+					size > 2
+					include_locked = yes
+				}
+			}
+		}
+
+		cost = 75
+		days_remove = 60
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			random_core_state = {
+				limit = {
+					is_Ursus_South_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_construction_Volga = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			any_core_state = {
+				is_Ursus_Volga_area = yes
+				free_building_slots = {
+					building = industrial_complex
+					size > 2
+					include_locked = yes
+				}
+			}
+		}
+
+		cost = 75
+		days_remove = 60
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			random_core_state = {
+				limit = {
+					is_Ursus_Volga_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_construction_Berekar = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			any_core_state = {
+				is_Ursus_Berekar_area = yes
+				free_building_slots = {
+					building = industrial_complex
+					size > 2
+					include_locked = yes
+				}
+			}
+		}
+
+		cost = 75
+		days_remove = 60
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			random_core_state = {
+				limit = {
+					is_Ursus_Berekar_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_construction_Kozacy = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			any_core_state = {
+				is_Ursus_Kozacy_area = yes
+				free_building_slots = {
+					building = industrial_complex
+					size > 2
+					include_locked = yes
+				}
+			}
+		}
+
+		cost = 75
+		days_remove = 60
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			random_core_state = {
+				limit = {
+					is_Ursus_Kozacy_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_construction_Belaursnia = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			any_core_state = {
+				is_Ursus_Belaursnia_area = yes
+				free_building_slots = {
+					building = industrial_complex
+					size > 2
+					include_locked = yes
+				}
+			}
+		}
+
+		cost = 75
+		days_remove = 60
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			random_core_state = {
+				limit = {
+					is_Ursus_Belaursnia_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_construction_Balti = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			any_core_state = {
+				is_Ursus_Balti_area = yes
+				free_building_slots = {
+					building = industrial_complex
+					size > 2
+					include_locked = yes
+				}
+			}
+		}
+
+		cost = 75
+		days_remove = 60
+		days_re_enable = 60
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			random_core_state = {
+				limit = {
+					is_Ursus_Balti_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_Kozacy_hydropower_station = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = URS_expanding_power_plant_flag
+		} 
+
+		cost = 120
+		days_remove = 150
+
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			170 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = new_energy_powerplant
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		cancel_effect = {
+			170 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = new_energy_powerplant
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_Belaursnia_engine_factory = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = URS_emphasis_on_industrial_flag
+		}
+
+		cost = 120
+		days_remove = 120
+
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			167 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		cancel_effect = {
+			167 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_Balti_transportation = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = URS_restructuring_transportation_flag
+		}
+
+		cost = 120
+		days_remove = 120
+
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			build_railway = {
+				level = 3
+				fallback = yes
+				start_state = 1085
+				target_state = 163
+			}
+			build_railway = {
+				level = 3
+				fallback = yes
+				start_state = 163
+				target_state = 120
+			}
+			1085 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			240 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			163 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			211 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		cancel_effect = {
+			1085 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_Saint_Grypherburg_circular_rail_line = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = URS_circular_rail_line_flag
+		}
+
+		cost = 120
+		days_remove = 120
+
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			build_railway = {
+				level = 3
+				fallback = yes
+				start_state = 110
+				target_state = 32
+			}
+			build_railway = {
+				level = 3
+				fallback = yes
+				start_state = 32
+				target_state = 106
+			}
+			build_railway = {
+				level = 3
+				fallback = yes
+				start_state = 106
+				target_state = 84
+			}
+			build_railway = {
+				level = 3
+				fallback = yes
+				start_state = 84
+				target_state = 110
+			}
+		}
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		cancel_effect = {
+			build_railway = {
+				level = 1
+				fallback = yes
+				start_state = 110
+				target_state = 32
+			}
+			build_railway = {
+				level = 1
+				fallback = yes
+				start_state = 32
+				target_state = 106
+			}
+			build_railway = {
+				level = 1
+				fallback = yes
+				start_state = 106
+				target_state = 84
+			}
+			build_railway = {
+				level = 1
+				fallback = yes
+				start_state = 84
+				target_state = 110
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	URS_ural_railway_project = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = URS_ural_railway_flag
+		}
+
+		cost = 120
+		days_remove = 120
+
+		fire_only_once = yes
+
+		modifier = {
+			political_power_gain = -0.2
+		}
+
+		remove_effect = {
+			build_railway = {
+				level = 2
+				fallback = yes
+				start_state = 58
+				target_state = 161
+			}
+			build_railway = {
+				level = 2
+				fallback = yes
+				start_state = 58
+				target_state = 259
+			}
+		}
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		cancel_effect = {
+			build_railway = {
+				level = 1
+				fallback = yes
+				start_state = 58
+				target_state = 161
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+}
+
+URS_area_management_decisions = {
+
+	URS_suppress_ULB = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			any_owned_state = {
+				limit = {
+					ULB_uprising_area = yes
+					NOT = {
+						state = 126
+					}
+				}
+				is_demilitarized_zone = yes
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URS_suppressing
+			}
+		}
+
+		cost = 50
+		days_remove = 30
+		days_re_enable = 180
+
+		modifier = {
+			production_speed_buildings_factor = -0.05
+		}
+		
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					ULB_uprising_area = yes
+					NOT = {
+						state = 126
+					}
+				}
+				set_demilitarized_zone = no
+				set_state_flag = URS_suppressed
+			}
+
+			set_country_flag = URS_suppressing
+
+			add_to_variable = { URS_suppress_num = 1 }
+		}
+
+		remove_effect = {
+			clr_country_flag = URS_suppressing
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	
+	URS_suppress_UCM = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			any_owned_state = {
+				limit = {
+					UCM_uprising_area = yes
+					NOT = {
+						state = 176
+					}
+				}
+				is_demilitarized_zone = yes
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URS_suppressing
+			}
+		}
+
+		cost = 50
+		days_remove = 30
+		days_re_enable = 180
+
+		modifier = {
+			production_speed_buildings_factor = -0.05
+		}
+		
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					UCM_uprising_area = yes
+					NOT = {
+						state = 176
+					}
+				}
+				set_demilitarized_zone = no
+				set_state_flag = URS_suppressed
+			}
+
+			set_country_flag = URS_suppressing
+
+			add_to_variable = { URS_suppress_num = 1 }
+		}
+
+		remove_effect = {
+			clr_country_flag = URS_suppressing
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+
+	URS_suppress_UFS = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			any_owned_state = {
+				limit = {
+					UFS_uprising_area = yes
+					NOT = {
+						state = 259
+					}
+				}
+				is_demilitarized_zone = yes
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URS_suppressing
+			}
+		}
+
+		cost = 50
+		days_remove = 30
+		days_re_enable = 180
+
+		modifier = {
+			production_speed_buildings_factor = -0.05
+		}
+		
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					UFS_uprising_area = yes
+					NOT = {
+						state = 259
+					}
+				}
+				set_demilitarized_zone = no
+				set_state_flag = URS_suppressed
+			}
+
+			set_country_flag = URS_suppressing
+
+			add_to_variable = { URS_suppress_num = 1 }
+		}
+
+		remove_effect = {
+			clr_country_flag = URS_suppressing
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+
+	URS_suppress_KZC = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			any_owned_state = {
+				limit = {
+					KZC_uprising_area = yes
+					NOT = {
+						state = 488
+					}
+				}
+				is_demilitarized_zone = yes
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URS_suppressing
+			}
+		}
+
+		cost = 50
+		days_remove = 30
+		days_re_enable = 180
+
+		modifier = {
+			production_speed_buildings_factor = -0.05
+		}
+		
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					KZC_uprising_area = yes
+					NOT = {
+						state = 488
+					}
+				}
+				set_demilitarized_zone = no
+				set_state_flag = URS_suppressed
+			}
+
+			set_country_flag = URS_suppressing
+
+			add_to_variable = { URS_suppress_num = 1 }
+		}
+
+		remove_effect = {
+			clr_country_flag = URS_suppressing
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+
+	URS_suppress_BUS = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			any_owned_state = {
+				limit = {
+					BUS_uprising_area = yes
+					NOT = {
+						state = 81
+					}
+				}
+				is_demilitarized_zone = yes
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URS_suppressing
+			}
+		}
+
+		cost = 50
+		days_remove = 30
+		days_re_enable = 180
+
+		modifier = {
+			production_speed_buildings_factor = -0.05
+		}
+		
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					BUS_uprising_area = yes
+					NOT = {
+						state = 81
+					}
+				}
+				set_demilitarized_zone = no
+				set_state_flag = URS_suppressed
+			}
+
+			set_country_flag = URS_suppressing
+
+			add_to_variable = { URS_suppress_num = 1 }
+		}
+
+		remove_effect = {
+			clr_country_flag = URS_suppressing
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+
+	URS_suppress_BLT = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			any_owned_state = {
+				limit = {
+					BLT_uprising_area = yes
+					NOT = {
+						state = 111
+					}
+				}
+				is_demilitarized_zone = yes
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URS_suppressing
+			}
+		}
+
+		cost = 50
+		days_remove = 30
+		days_re_enable = 180
+
+		modifier = {
+			production_speed_buildings_factor = -0.05
+		}
+		
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					BLT_uprising_area = yes
+					NOT = {
+						state = 111
+					}
+				}
+				set_demilitarized_zone = no
+				set_state_flag = URS_suppressed
+			}
+
+			set_country_flag = URS_suppressing
+
+			add_to_variable = { URS_suppress_num = 1 }
+		}
+
+		remove_effect = {
+			clr_country_flag = URS_suppressing
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+
+	URS_war_with_east = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			check_variable = {
+				URS_suppress_num > 12
+			}
+
+			OR = {
+				REU = { exists = yes }
+				SKH = { exists = yes }
+				UFE = { exists = yes }
+				KMG = { exists = yes }
+				BAK = { exists = yes }
+				SGT = { exists = yes }
+				OMN = { exists = yes }
+				NAX = { exists = yes }
+			}
+
+			NOT = {
+				has_war = yes
+			}
+		}
+
+		#fire_only_once = yes #不知道这个加不加会不会有什么影响
+		cost = 25
+		days_remove = 30
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		remove_effect = {
+			puppet = IST
+			puppet = UEA
+			puppet = CYB
+			every_country = {
+				limit = {
+					ursus_unifier = yes
+				}
+				URS = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+			hidden_effect = {
+				Ursus_area_uprising = yes
+			}
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+
+	Occupation_East_Ursus = {
+
+		icon = GFX_decision_document_building
+		visible = {
+			any_owned_state = {
+				NOT = {
+					is_core_of = URS
+				}
+			}
+		}
+		available = {
+			REU = { exists = no }
+			SKH = { exists = no }
+			UFE = { exists = no }
+			KMG = { exists = no }
+			BAK = { exists = no }
+			SGT = { exists = no }
+			OMN = { exists = no }
+			NAX = { exists = no }
+			# all_other_country = {
+			# 	ursus_unifier = yes
+			# 	exists = no
+			# }
+		}
+		cost = 25
+
+		fire_only_once = yes
+		complete_effect = {
+			annex_country = {
+				target = IST
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = UEA
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = CYB
+				transfer_troops = yes
+			}
+			hidden_effect = {
+				every_owned_state = {
+					limit = {
+						OR = {
+							is_core_of = REU
+							is_core_of = SKH
+							is_core_of = UFE
+							is_core_of = KMG
+							is_core_of = BAK
+							is_core_of = SGT
+							is_core_of = OMN
+							is_core_of = NAX
+							is_core_of = IST
+							is_core_of = UEA
+							is_core_of = CYB
+						}
+					}
+					add_core_of = URS
+					remove_core_of = REU
+					remove_core_of = SKH
+					remove_core_of = UFE
+					remove_core_of = KMG
+					remove_core_of = BAK
+					remove_core_of = SGT
+					remove_core_of = OMN
+					remove_core_of = NAX
+					remove_core_of = IST
+					remove_core_of = UEA
+					remove_core_of = CYB
+				}
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Occupation_UCM_uprising_area = {
+
+		icon = GFX_decision_document_building
+		visible = {
+			any_controlled_state = {
+				is_core_of = UCM
+			}
+		}
+		available = {
+			UCM = { exists = no }
+			every_state = {
+				limit = {
+					is_core_of = UCM
+				}
+				is_controlled_by = URS
+			}
+		}
+
+		cost = 10
+
+		fire_only_once = yes
+		complete_effect = {
+			every_controlled_state = {
+				limit = {
+					is_core_of = UCM
+				}
+				add_core_of = URS
+				remove_core_of = UCM
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Occupation_ULB_uprising_area = {
+
+		icon = GFX_decision_document_building
+		visible = {
+			any_controlled_state = {
+				is_core_of = ULB
+			}
+		}
+		available = {
+			ULB = { exists = no }
+			every_state = {
+				limit = {
+					is_core_of = ULB
+				}
+				is_controlled_by = URS
+			}
+		}
+
+		cost = 10
+
+		fire_only_once = yes
+		complete_effect = {
+			every_controlled_state = {
+				limit = {
+					is_core_of = ULB
+				}
+				add_core_of = URS
+				remove_core_of = ULB
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Occupation_UFS_uprising_area = {
+
+		icon = GFX_decision_document_building
+		visible = {
+			any_controlled_state = {
+				is_core_of = UFS
+			}
+		}
+		available = {
+			UFS = { exists = no }
+			every_state = {
+				limit = {
+					is_core_of = UFS
+				}
+				is_controlled_by = URS
+			}
+		}
+
+		cost = 10
+
+		fire_only_once = yes
+		complete_effect = {
+			every_controlled_state = {
+				limit = {
+					is_core_of = UFS
+				}
+				add_core_of = URS
+				remove_core_of = UFS
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Occupation_KZC_uprising_area = {
+
+		icon = GFX_decision_document_building
+		visible = {
+			any_controlled_state = {
+				is_core_of = KZC
+			}
+		}
+		available = {
+			KZC = { exists = no }
+			every_state = {
+				limit = {
+					is_core_of = KZC
+				}
+				is_controlled_by = URS
+			}
+		}
+
+		cost = 10
+
+		fire_only_once = yes
+		complete_effect = {
+			every_controlled_state = {
+				limit = {
+					is_core_of = KZC
+				}
+				add_core_of = URS
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Occupation_BUS_uprising_area = {
+
+		icon = GFX_decision_document_building
+		visible = {
+			any_controlled_state = {
+				is_core_of = BUS
+			}
+		}
+		available = {
+			BUS = { exists = no }
+			every_state = {
+				limit = {
+					is_core_of = BUS
+				}
+				is_controlled_by = URS
+			}
+		}
+
+		cost = 10
+
+		fire_only_once = yes
+		complete_effect = {
+			every_controlled_state = {
+				limit = {
+					is_core_of = BUS
+				}
+				add_core_of = URS
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	Occupation_BLT_uprising_area = {
+
+		icon = GFX_decision_document_building
+		visible = {
+			any_controlled_state = {
+				is_core_of = BLT
+			}
+		}
+		available = {
+			BLT = { exists = no }
+			every_state = {
+				limit = {
+					is_core_of = BLT
+				}
+				is_controlled_by = URS
+			}
+		}
+
+		cost = 10
+
+		fire_only_once = yes
+		complete_effect = {
+			every_controlled_state = {
+				limit = {
+					is_core_of = BLT
+				}
+				add_core_of = URS
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	// ===== 停用：第十一次乌卡战争已改为乌萨斯侧专属决议链 =====
+	// 新链入口：common/decisions/URS_Kazimierz_War_Decisions.txt → URS_kzmwar_declare_war
+	// 恢复本决议前，请先撤掉新链的 on_monthly_URS 兜底（URS_kzmwar_backstop），否则同一场战争会被发起两次。
+// 	URS_War_With_KZM_and_west_three = {
+// 		available = {
+// 			all_other_country = {
+// 				ursus_unifier = yes
+// 				exists = no
+// 			}
+// 			any_state = {
+// 				OR = {
+// 					is_Ursus_Kozacy_area = yes
+// 					is_Ursus_Belaursnia_area = yes
+// 					is_Ursus_Balti_area = yes
+// 				}
+// 				
+// 				NOT = {
+// 					is_owned_by = URS
+// 				}
+// 			}
+// 		}
+// 
+// 		fire_only_once = yes
+// 		cost = 25
+// 
+// 		days_remove = 15
+// 
+// 		remove_effect = {
+// 			declare_war_on = { target = KZM type = annex_everything }
+// 			declare_war_on = { target = KZC type = annex_everything }
+// 			declare_war_on = { target = BUS type = annex_everything }
+// 			declare_war_on = { target = BLT type = annex_everything }
+// 		}
+// 
+// 		ai_will_do = {
+// 			factor = 1000
+// 		}
+// 	}
+	// ===== 停用结束 =====
+
+	URS_KZM_war = {
+		icon = GFX_decision_generic_political_discourse
+
+		#fire_only_once = yes
+
+		available = {
+			KZM = {
+				OR = {
+					is_puppet_of = ROOT
+					exists = no
+				}
+			}
+		}
+
+		activation = {
+			has_war_with = KZM
+		}
+
+		is_good = no
+
+		days_mission_timeout = 365
+
+		priority = 500
+
+		cancel_trigger = {
+			surrender_progress > 0.5
+			// 新链保险：仗一停就撤任务，免得到期 timeout 把割回的三地又送回去
+			NOT = { has_war_with = KZM }
+		}
+		
+		cancel_effect = {
+			white_peace = KZM
+			white_peace = KZC
+			white_peace = BUS
+			white_peace = BLT
+			every_controlled_state = {
+				limit = {
+					is_Ursus_Kozacy_area = yes
+				}
+				if = {
+					limit = {
+						KZC = { exists = yes }
+					}
+					transfer_state_to = KZC
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+			every_controlled_state = {
+				limit = {
+					is_Ursus_Belaursnia_area = yes
+				}
+				if = {
+					limit = {
+						BUS = { exists = yes }
+					}
+					transfer_state_to = BUS
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+			every_controlled_state = {
+				limit = {
+					is_Ursus_Balti_area = yes
+				}
+				if = {
+					limit = {
+						BLT = { exists = yes }
+					}
+					transfer_state_to = BLT
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+		}
+
+		timeout_effect = {
+			white_peace = KZM
+			white_peace = KZC
+			white_peace = BUS
+			white_peace = BLT
+			every_controlled_state = {
+				limit = {
+					is_Ursus_Kozacy_area = yes
+				}
+				if = {
+					limit = {
+						KZC = { exists = yes }
+					}
+					transfer_state_to = KZC
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+			every_controlled_state = {
+				limit = {
+					is_Ursus_Belaursnia_area = yes
+				}
+				if = {
+					limit = {
+						BUS = { exists = yes }
+					}
+					transfer_state_to = BUS
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+			every_controlled_state = {
+				limit = {
+					is_Ursus_Balti_area = yes
+				}
+				if = {
+					limit = {
+						BLT = { exists = yes }
+					}
+					transfer_state_to = BLT
+				}
+				else = {
+					transfer_state_to = KZM
+				}
+			}
+		}
+	}
+}

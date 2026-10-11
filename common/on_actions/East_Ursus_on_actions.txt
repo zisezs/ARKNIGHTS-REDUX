@@ -1,0 +1,60 @@
+on_actions = {
+    on_annex = {
+		effect = {
+			if = {
+				limit = { FROM = { ursus_unifier = yes } }
+				every_country = {
+					limit = {
+						ursus_unifier = yes
+					}
+					add_to_variable = { Upheaval_Contenders_Num_1 = -1 }
+				}
+				if = {
+					limit = { FROM = { east_tundria_ursus = yes } }
+					every_country = {
+						limit = {
+							has_country_flag = East_Ursus_Upheaval_Enabled
+							east_tundria_ursus = yes
+						}
+						add_to_variable = { Upheaval_Contenders_Num_2 = -1 }
+					}
+				}
+				else_if = {
+					limit = { FROM = { central_tundria_ursus = yes } }
+					every_country = {
+						limit = {
+							has_country_flag = East_Ursus_Upheaval_Enabled
+							central_tundria_ursus = yes
+						}
+						add_to_variable = { Upheaval_Contenders_Num_2 = -1 }
+					}
+				}
+			}
+			if = {
+				limit = { FROM = { ursus_unifier = yes } }
+				every_country = {
+					limit = { has_country_flag = East_Ursus_Upheaval_Enabled }
+					East_Ursus_Upheaval_Refresh_Contenders = yes
+				}
+			}
+
+			FROM = {
+				if = { limit = { has_country_flag = East_Ursus_Upheaval_Enabled } 
+					East_Ursus_Upheaval_Disable = yes
+					clr_country_flag = East_Ursus_Upheaval_Ended
+				}
+			}
+		}
+	}
+
+    on_monthly = {
+		effect = {
+			if = {
+				limit = { has_country_flag = East_Ursus_Upheaval_Enabled }
+				East_Ursus_Upheaval_Refresh_Contenders = yes
+				# 角逐者定期互宣（先重算人数再走循环；只剩一个角逐者时循环自动失效）
+				East_Ursus_Upheaval_Auto_War_Loop = yes
+			}
+		}
+	}
+}

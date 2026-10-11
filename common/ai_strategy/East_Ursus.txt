@@ -1,0 +1,135 @@
+East_Tundria_Ursus_rush_war_strat = {
+	allowed = {
+		OR = {
+			east_tundria_ursus = yes
+		}
+	}
+	enable = {
+		has_country_flag = East_Ursus_Upheaval_Enabled
+	}
+
+	ai_strategy = {
+		type = front_control
+		country_trigger = {
+			east_tundria_ursus = yes
+		}
+		ratio = 0.2
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+Central_Tundria_Ursus_rush_war_strat = {
+	allowed = {
+		OR = {
+			central_tundria_ursus = yes
+		}
+	}
+	enable = {
+		has_country_flag = East_Ursus_Upheaval_Enabled
+	}
+
+	ai_strategy = {
+		type = front_control
+		country_trigger = {
+			central_tundria_ursus = yes
+		}
+		ratio = 0.2
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+West_Tundria_Ursus_rush_war_strat = {
+	allowed = {
+		OR = {
+			west_tundria_ursus = yes
+		}
+	}
+	enable = {
+		has_country_flag = East_Ursus_Upheaval_Enabled
+	}
+
+	ai_strategy = {
+		type = front_control
+		country_trigger = {
+			west_tundria_ursus = yes
+		}
+		ratio = 0.2
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+East_Ursus_Upheaval_Final_rush_war_strat = {
+	allowed = {
+		OR = {
+			east_tundria_ursus = yes
+			central_tundria_ursus = yes
+			west_tundria_ursus = yes
+		}
+	}
+	enable = {
+		has_country_flag = East_Ursus_Upheaval_2_Enabled
+	}
+
+	ai_strategy = {
+		type = front_control
+		country_trigger = {
+			east_tundria_ursus = yes
+			central_tundria_ursus = yes
+			west_tundria_ursus = yes
+			far_east_ursus = yes
+		}
+		ratio = 0.2
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+rush_war_strat = {
+	allowed = {
+		OR = {
+			original_tag = KRS
+			original_tag = SGT
+		}
+	}
+	enable = {
+		OR = {
+			has_war_with = KRS
+			has_war_with = SGT
+		}
+	}
+
+	ai_strategy = {
+		type = front_control
+		country_trigger = {
+			OR = {
+				original_tag = KRS
+				original_tag = SGT
+			}
+		}
+		ratio = 0.2
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+REU_rush = {
+	allowed = {
+		original_tag = REU
+	}
+	enable = {
+		has_war_with = BRN
+	}
+
+	ai_strategy = {
+		type = front_control
+		country_trigger = {
+			original_tag = REU
+		}
+		ratio = 0.4
+		execution_type = rush
+		execute_order = yes
+	}
+}

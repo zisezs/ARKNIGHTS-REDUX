@@ -1,0 +1,225 @@
+capital = 38
+
+oob = "UFE_Start"
+
+add_ideas = {
+	UFE_disarmed_laws
+	limited_exports
+	civilian_economy
+	local_warlord
+
+	no_voting
+	working_law_18h
+	isolation_management
+	
+	subsistence_agriculture
+	electric_tool_production
+	illiteracy_widespread
+	inefficient_administration
+	rampant_poverty
+	
+	UFE_wasteland_idea
+	UFE_yuan_zhu_min
+	UFE_stupid_leader_idea
+	UFE_democracy_idea_1
+	UFE_picao_trade_idea_1
+	UFE_lonely_democratic_power_idea
+	
+	UFE_special_army_idea_0
+}
+
+set_country_flag = second_leader_flag
+set_country_flag = East_Ursus_Development
+
+recruit_character = UFE_despotism_leader
+recruit_character = UFE_despotism_leader_tool
+recruit_character = UFE_authoritarianism_leader
+recruit_character = UFE_liberalism_leader
+recruit_character = UFE_liberalism_second_in_command
+recruit_character = UFE_liberalism_third_in_command
+recruit_character = UFE_liberalism_advisor_1
+recruit_character = UFE_liberalism_advisor_2
+recruit_character = UFE_liberalism_advisor_3
+recruit_character = UFE_liberalism_advisor_4
+recruit_character = UFE_liberalism_advisor_5
+recruit_character = UFE_liberalism_advisor_6
+recruit_character = UFE_liberalism_advisor_7
+recruit_character = UFE_liberalism_advisor_8
+recruit_character = UFE_liberalism_advisor_9
+recruit_character = UFE_liberalism_advisor_10
+recruit_character = UFE_liberalism_theorist_1
+recruit_character = UFE_liberalism_theorist_2
+recruit_character = UFE_field_marshal_1
+recruit_character = UFE_field_marshal_2
+recruit_character = UFE_field_marshal_3
+recruit_character = UFE_corps_commander_1
+recruit_character = UFE_corps_commander_2
+recruit_character = UFE_corps_commander_3
+recruit_character = UFE_corps_commander_4
+recruit_character = UFE_corps_commander_5
+recruit_character = UFE_corps_commander_6
+recruit_character = UFE_corps_commander_7
+recruit_character = UFE_air_chief_1
+recruit_character = UFE_navy_chief_1
+
+#忠诚的将领
+UFE_field_marshal_2 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_field_marshal_2 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_field_marshal_3 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_corps_commander_1 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_corps_commander_2 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_corps_commander_3 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_corps_commander_4 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_corps_commander_5 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_corps_commander_6 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_corps_commander_7 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_liberalism_advisor_9 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_air_chief_1 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+UFE_navy_chief_1 = {
+	set_character_flag = UFE_democratic_character_flag
+}
+
+#有威胁的叛徒（开局）
+UFE_liberalism_advisor_3 = {
+	set_character_flag = UFE_targeted_for_purge_flag
+	set_character_flag = UFE_traitors_flag
+}
+UFE_liberalism_advisor_7 = {
+	set_character_flag = UFE_targeted_for_purge_flag
+	set_character_flag = UFE_traitors_flag
+}
+UFE_liberalism_theorist_1 = {
+	set_character_flag = UFE_targeted_for_purge_flag
+	set_character_flag = UFE_traitors_flag
+}
+UFE_field_marshal_1 = {
+	set_character_flag = UFE_targeted_for_purge_flag
+	set_character_flag = UFE_traitors_flag
+}
+UFE_liberalism_advisor_8 = {
+	set_character_flag = UFE_targeted_for_purge_flag
+	set_character_flag = UFE_traitors_flag
+}
+set_variable = { add_stability_var_effect_true_or_false = 1 }
+set_variable = { add_army_control_var_effect_true_or_false = -1 }
+set_variable = { UFE_targeted_for_purge_var = 5 }
+
+activate_advisor = UFE_authoritarianism_second
+
+set_research_slots = 2
+set_stability = 0.55
+set_war_support = 0.45
+
+set_technology = {
+	infantry_weapons_0 = 1
+	arts_weapons_0 = 1
+	tech_support = 1
+	basic_machine_tools = 1
+	punched_card_computer = 1
+	tech_recon = 1
+	tech_maintenance_company = 1
+	tech_support = 1
+	motorized_infantry_0 = 1
+	power_plant = 1
+	artillery_0 = 1
+	UFE_special_units_decisions_6_tech = 1
+	antiair_0 = 1
+}
+
+set_politics = {
+	ruling_party = despotism
+	elections_allowed = no
+}
+set_popularities = {
+	communism = 0
+	socialism = 0
+	progressivism = 0
+	liberalism = 5
+	conservatism = 0
+	authoritarianism = 10
+	despotism = 85
+	fascism = 0
+	mysticism = 0
+	special = 0
+}
+
+#初始皮草
+set_variable = { picao_var = 500 }
+
+#原住民问题
+set_variable = { conscription_factor_var = 0.05 }
+set_variable = { conscription_var = 0.01 }
+set_variable = { stability_factor_var = -0.25 }
+set_variable = { conscription_var = 0.01 }
+set_variable = { consumer_goods_factor_var = 0.24 }
+set_variable = { production_speed_buildings_factor_var = -0.3 }
+set_variable = { global_building_slots_factor_var = -0.25 }
+set_variable = { out_of_supply_factor_var = -0.1 }
+set_variable = { supply_node_range_var = 0.1 }
+set_variable = { modifier_army_sub_unit_militia_speed_factor_var = 0.02 }
+set_variable = { modifier_army_sub_unit_militia_defence_factor_var = 0.05 }
+set_variable = { modifier_army_sub_unit_militia_attack_factor_var = 0.05 }
+
+#荒芜之地
+set_variable = { research_speed_factor_var = -0.65 }
+set_variable = { industrial_capacity_factory_var = -0.5 }
+set_variable = { production_factory_efficiency_gain_factor_var = -0.6 }
+set_variable = { production_factory_max_efficiency_factor_var = -0.1 }
+set_variable = { army_org_factor_var = 0.05 }
+set_variable = { army_morale_factor_var = 0.05 }
+set_variable = { army_attack_and_defense_factor_var = 0 }
+set_variable = { terrain_penalty_reduction_var = 0.2 }
+set_variable = { supply_consumption_factor_var = -0.2 }
+set_variable = { attrition_var = -0.15 }
+set_variable = { acclimatization_cold_climate_gain_factor_var = 0.25 }
+set_variable = { experience_loss_factor_var = -0.15 }
+set_variable = { breakthrough_factor_var = 0.05 }
+set_variable = { army_strength_factor_var = 0.05 }
+set_variable = { infantry_casualty_trickleback_var = 0.008 }
+set_variable = { infantry_experience_loss_factor_var = -0.01 }
+
+#革命形势
+set_variable = { UFE_social_stability_decisions_1_days_var = 30 }
+set_variable = { UFE_stability_decision_var = 65 }
+set_variable = { UFE_army_control_decision_var = 50 }
+UFE_clampcheck_stability_add_army_control = yes
+
+#土地私有化
+set_variable = { UFE.state_production_speed_buildings_factor_var = 0 }
+set_variable = { UFE.local_building_slots_var = 0.1 }
+
+#恐慌与骚乱
+set_variable = { UFE.UFE_WS_local_factories = -0.4 }
+set_variable = { UFE.UFE_WS_recruitable_population_factor = -0.6 }
+set_variable = { UFE.UFE_WS_resistance_damage_to_garrison = 0.1 }
+set_variable = { UFE.UFE_WS_resistance_target = 0.3 }
+
+#动态修正
+add_dynamic_modifier = { modifier = UFE_yuan_zhu_min }
+add_dynamic_modifier = { modifier = UFE_wasteland_idea }
+#add_dynamic_modifier = { modifier = UFE_army_control_modifier }
+#add_dynamic_modifier = { modifier = UFE_social_stability_modifier }

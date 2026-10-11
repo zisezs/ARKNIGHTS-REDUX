@@ -1,0 +1,110 @@
+# ============================================================================
+# 本文件由 docs/gen_arf_warship_design.py 生成，手改会被覆盖。
+# ============================================================================
+# 高速战舰设计台 · scripted_gui
+# ⚠️ 控件名必须与 interface/_ARF_Gui/ARF_Warship_Design.gui 完全一致。
+scripted_gui = {
+
+	# ---------------- 决议分类页入口 ----------------
+	ARF_WS_Design_Entry = {
+		context_type = decision_category
+		window_name = "ARF_WS_Design_Entry_GUI"
+
+		visible = {
+			always = yes
+		}
+
+		effects = {
+			ARF_WSd_Entry_Btn_click = {
+				ARF_WS_Design_Open = yes
+			}
+		}
+
+		triggers = {
+			ARF_WSd_Entry_Btn_click_enabled = {
+				NOT = { has_country_flag = arf_ws_design_open }
+			}
+		}
+	}
+
+	# ---------------- 设计台窗口 ----------------
+	ARF_WS_Design_GUI = {
+		context_type = player_context
+		window_name = "ARF_Warship_Design_Window"
+
+		visible = {
+			is_ai = no
+			has_country_flag = arf_ws_design_open
+		}
+
+		effects = {
+			ARF_WSd_Close_click = {
+				ARF_WS_Design_Close = yes
+			}
+			ARF_WSd_Reset_click = {
+				ARF_WS_Reset_Current = yes
+			}
+			ARF_WSd_Tab_1_click = {
+				ARF_WS_Tab_1 = yes
+			}
+			ARF_WSd_Tab_2_click = {
+				ARF_WS_Tab_2 = yes
+			}
+			ARF_WSd_Tab_3_click = {
+				ARF_WS_Tab_3 = yes
+			}
+			ARF_WSd_Tab_4_click = {
+				ARF_WS_Tab_4 = yes
+			}
+			ARF_WSd_Prev_gun_click = {
+				ARF_WS_Slot_gun_prev = yes
+			}
+			ARF_WSd_Next_gun_click = {
+				ARF_WS_Slot_gun_next = yes
+			}
+			ARF_WSd_Prev_sec_click = {
+				ARF_WS_Slot_sec_prev = yes
+			}
+			ARF_WSd_Next_sec_click = {
+				ARF_WS_Slot_sec_next = yes
+			}
+			ARF_WSd_Prev_arm_click = {
+				ARF_WS_Slot_arm_prev = yes
+			}
+			ARF_WSd_Next_arm_click = {
+				ARF_WS_Slot_arm_next = yes
+			}
+			ARF_WSd_Prev_eng_click = {
+				ARF_WS_Slot_eng_prev = yes
+			}
+			ARF_WSd_Next_eng_click = {
+				ARF_WS_Slot_eng_next = yes
+			}
+			ARF_WSd_Prev_fc_click = {
+				ARF_WS_Slot_fc_prev = yes
+			}
+			ARF_WSd_Next_fc_click = {
+				ARF_WS_Slot_fc_next = yes
+			}
+			ARF_WSd_Prev_ammo_click = {
+				ARF_WS_Slot_ammo_prev = yes
+			}
+			ARF_WSd_Next_ammo_click = {
+				ARF_WS_Slot_ammo_next = yes
+			}
+			ARF_WSd_Prev_sp_click = {
+				ARF_WS_Slot_sp_prev = yes
+			}
+			ARF_WSd_Next_sp_click = {
+				ARF_WS_Slot_sp_next = yes
+			}
+		}
+
+		triggers = {
+			ARF_WSd_Tab_1_Sel_visible = { check_variable = { arf_ws_cur = 1 compare = equals } }
+			ARF_WSd_Tab_2_Sel_visible = { check_variable = { arf_ws_cur = 2 compare = equals } }
+			ARF_WSd_Tab_3_Sel_visible = { check_variable = { arf_ws_cur = 3 compare = equals } }
+			ARF_WSd_Tab_4_Sel_visible = { check_variable = { arf_ws_cur = 4 compare = equals } }
+		}
+	}
+}

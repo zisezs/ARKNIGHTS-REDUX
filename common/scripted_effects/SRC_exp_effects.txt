@@ -1,0 +1,425 @@
+# ============================================================================
+# 叙拉古 (SRC) · 对外扩张树「七丘的狼崽子们」—— 脚本效果
+#
+# 设计稿里那些「引擎没有的东西」在这里换成了真写法，逐条对应：
+#   「莱塔尼亚在首都获得 50 支 16 步 5 支援连步兵师」→ division_template（16 团 + 5 支援连）
+#       先建模板再 create_unit，装在 LTN 的 capital_scope 里（顺序反了生不出兵，见 SRC_civilwar_effects）
+#   「投降进度低于 20% 立刻停战并附庸」→ on_monthly_SRC 轮询 LTN 的 surrender_progress > 0.8，
+#       满足即 SRC_exp_ltan_kneel_effect：puppet（引擎语义自带停战，比 white_peace 干净，
+#       不会弹出和平会议）。⚠ 2026-09-26 补：光一句 puppet 会把双塔协定整个拆散、
+#       全地图一起停战，收网前后各有一段善后，见该效果的注释
+#   「对 BZN、MRA 宣战后在其首都生成 30 师」→ on_war 钩子 + 各自的 capital_scope create_unit，
+#       每个目标只发一次（旗标 SRC_exp_flag_levee_bzn / _mra 守卫）
+#   「整肃边疆家族」→ 随机一个边疆州挂州级精神 SRC_dyn_state_wolf_law + 直接入册（add_core_of）
+#   「把没有核心的地区核心化」→ 完全控制且无抵抗的州 add_core_of
+#   「加入双塔协定」→ SRC_exp_twin_towers_take_seat_effect：阵营还在就请领袖拉人，
+#       散了就由叙拉古用同一个阵营模板重立门户（原版 LTN history 就是 create_faction_from_template），
+#       最后叙拉古坐主位、把掉出去的老成员请回席位
+#
+# 自检 E:/tmp/src_exp_check.js
+# ============================================================================
+
+# ---- 莱塔尼亚 · 帝都动员：50 支「16 步 + 5 支援连」的动员师 ----
+SRC_exp_ltn_reserve_levee_effect = {
+	if = {
+		limit = {
+			country_exists = LTN
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = SRC_exp_flag_levee_ltn }
+			}
+			set_country_flag = SRC_exp_flag_levee_ltn
+			LTN = {
+				if = {
+					limit = {
+						NOT = { has_template = "莱塔尼亚帝国动员师" }
+					}
+					division_template = {
+						name = "莱塔尼亚帝国动员师"
+						is_locked = yes
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+							infantry = { x = 1 y = 3 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 2 y = 2 }
+							infantry = { x = 2 y = 3 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 3 y = 1 }
+							infantry = { x = 3 y = 2 }
+							infantry = { x = 3 y = 3 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							recon = { x = 0 y = 1 }
+							artillery = { x = 0 y = 2 }
+							signal_company = { x = 0 y = 3 }
+							logistics_company = { x = 0 y = 4 }
+						}
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"莱塔尼亚帝国动员师\" division_template = \"莱塔尼亚帝国动员师\" start_experience_factor = 0.2 start_equipment_factor = 1 start_manpower_factor = 1"
+						owner = LTN
+						count = 50
+					}
+				}
+			}
+		}
+	}
+}
+
+# ---- 莱塔尼亚臣服：只有莱塔尼亚停战，双塔协定由叙拉古接手 ----
+# puppet 自带停战，但它停的是"莱塔尼亚名下每一条战争"：附庸一签，整条战争链上
+# 所有国家一起握手。再加上双塔协定的换主规则是 change_leader_rule_never（原版
+# common/factions/rules/change_leader_rules.txt 里 trigger = always = no），领袖一
+# 被附庸就没人接得上班 → 阵营当场解散 → 成员被逐出所有阵营战争。
+# 所以收网前先把两样东西抄成旗标（签完就查不到了），并把领袖位让给一个还活着的
+# 成员把阵营保住；收网后叙拉古坐上主位，照着敌国名单把莱塔尼亚的仗接着打完。
+SRC_exp_ltan_kneel_effect = {
+	if = {
+		limit = {
+			country_exists = LTN
+			NOT = {
+				LTN = { is_subject_of = SRC }
+			}
+		}
+		LTN = {
+			# ① 抄名单：协定席位的成员 + 莱塔尼亚的敌国（叙拉古自己不算，它就是要停的这一个）
+			set_country_flag = SRC_exp_flag_twin_tower_member
+			if = {
+				limit = {
+					is_in_faction = yes
+				}
+				every_faction_member = {
+					limit = {
+						NOT = { original_tag = SRC }
+					}
+					set_country_flag = SRC_exp_flag_twin_tower_member
+				}
+			}
+			every_enemy_country = {
+				limit = {
+					NOT = { original_tag = SRC }
+				}
+				set_country_flag = SRC_exp_flag_twin_tower_enemy
+			}
+			# ② 换主规则是 never，先自己把领袖位交出去，阵营才不会被附庸顺手拆掉
+			if = {
+				limit = {
+					is_faction_leader = yes
+				}
+				every_faction_member = {
+					limit = {
+						NOT = { original_tag = LTN }
+					}
+					random_select_amount = 1
+					set_faction_leader = yes
+				}
+			}
+		}
+		# ③ 收网：停战的只有莱塔尼亚
+		puppet = {
+			target = LTN
+			end_wars = yes
+		}
+		# 留痕：puppet 偶尔会不认账（引擎零报错），game.log 里 grep SRC_exp 即可判定
+		if = {
+			limit = {
+				LTN = { is_subject_of = SRC }
+			}
+			log = "SRC_exp: 莱塔尼亚已成叙拉古傀儡"
+		}
+		else = {
+			log = "SRC_exp: puppet 未生效，莱塔尼亚不是叙拉古的附庸"
+		}
+		# ④ 傀儡国形态的国名：莱塔尼亚联邦
+		LTN = {
+			set_cosmetic_tag = Leithanien_federal
+		}
+		# ⑤ 叙拉古入主双塔协定，莱塔尼亚的敌国由叙拉古接着打
+		SRC_exp_twin_towers_take_seat_effect = yes
+		SRC_exp_continue_ltan_wars_effect = yes
+	}
+	if = {
+		limit = {
+			country_exists = LTN
+			# 写死 SRC 而不是 ROOT：本效果也会被 on_capitulation 兜底调用，
+			# 那条钩子的 ROOT 是投降的莱塔尼亚，用 ROOT 会判成"自己附庸自己"
+			LTN = { is_subject_of = SRC }
+		}
+		set_country_flag = SRC_exp_flag_ltan_vassal
+	}
+}
+
+# ---- 双塔协定：把叙拉古送上主位 ----
+# 阵营还在（只是换了当家的）就请那位领袖拉叙拉古入伙；已经散了就照原章程重立门户。
+# 两条路走完后都由叙拉古接管领袖位，再把附庸化时掉出席位的老成员请回来。
+SRC_exp_twin_towers_take_seat_effect = {
+	if = {
+		limit = {
+			is_in_faction = no
+		}
+		random_country = {
+			limit = {
+				has_country_flag = SRC_exp_flag_twin_tower_member
+				is_in_faction = yes
+				NOT = { has_war_with = SRC }
+			}
+			faction_leader = {
+				add_to_faction = SRC
+			}
+		}
+		if = {
+			limit = {
+				is_in_faction = no
+			}
+			set_rule = { can_create_factions = yes }
+			create_faction_from_template = faction_template_zwillingstuerme_pakt
+			add_faction_initiative = 1
+		}
+	}
+	if = {
+		limit = {
+			is_in_faction = yes
+			is_faction_leader = no
+		}
+		set_faction_leader = yes
+	}
+	every_country = {
+		limit = {
+			has_country_flag = SRC_exp_flag_twin_tower_member
+			NOT = { is_in_faction = yes }
+			NOT = { has_war_with = SRC }
+		}
+		SRC = {
+			add_to_faction = PREV
+		}
+	}
+}
+
+# ---- 莱塔尼亚的仗接着打：敌国名单是收网前抄下的 ----
+# 叙拉古此时已是协定领袖，重新宣战等于把这些战争原样接回来（兰赛拉尔、潘诺尼亚
+# 这些成员会被自动拉进阵营战争）。名单用完就清，免得日后又对老对手凭空开战。
+SRC_exp_continue_ltan_wars_effect = {
+	every_country = {
+		limit = {
+			has_country_flag = SRC_exp_flag_twin_tower_enemy
+		}
+		if = {
+			limit = {
+				NOT = { has_war_with = SRC }
+				NOT = { is_subject_of = SRC }
+				NOT = { is_in_faction_with = SRC }
+			}
+			SRC = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+		clr_country_flag = SRC_exp_flag_twin_tower_enemy
+	}
+}
+
+# ---- 博尔扎诺 · 边境民团：30 支 16 步师（宣战时由 on_war 调起） ----
+SRC_exp_bzn_levee_effect = {
+	if = {
+		limit = {
+			NOT = { has_template = "博尔扎诺边境民团" }
+		}
+		division_template = {
+			name = "博尔扎诺边境民团"
+			is_locked = yes
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 0 y = 2 }
+				infantry = { x = 0 y = 3 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+				infantry = { x = 1 y = 2 }
+				infantry = { x = 1 y = 3 }
+				infantry = { x = 2 y = 0 }
+				infantry = { x = 2 y = 1 }
+				infantry = { x = 2 y = 2 }
+				infantry = { x = 2 y = 3 }
+				infantry = { x = 3 y = 0 }
+				infantry = { x = 3 y = 1 }
+				infantry = { x = 3 y = 2 }
+				infantry = { x = 3 y = 3 }
+			}
+		}
+	}
+	capital_scope = {
+		create_unit = {
+			division = "name = \"博尔扎诺边境民团\" division_template = \"博尔扎诺边境民团\" start_experience_factor = 0.15 start_equipment_factor = 1 start_manpower_factor = 1"
+			owner = BZN
+			count = 30
+		}
+	}
+	set_country_flag = SRC_exp_flag_levee_bzn
+}
+
+# ---- 克罗地亚迪纳摩 · 边境民团：30 支 16 步师 ----
+SRC_exp_mra_levee_effect = {
+	if = {
+		limit = {
+			NOT = { has_template = "迪纳摩边境民团" }
+		}
+		division_template = {
+			name = "迪纳摩边境民团"
+			is_locked = yes
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 0 y = 2 }
+				infantry = { x = 0 y = 3 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+				infantry = { x = 1 y = 2 }
+				infantry = { x = 1 y = 3 }
+				infantry = { x = 2 y = 0 }
+				infantry = { x = 2 y = 1 }
+				infantry = { x = 2 y = 2 }
+				infantry = { x = 2 y = 3 }
+				infantry = { x = 3 y = 0 }
+				infantry = { x = 3 y = 1 }
+				infantry = { x = 3 y = 2 }
+				infantry = { x = 3 y = 3 }
+			}
+		}
+	}
+	capital_scope = {
+		create_unit = {
+			division = "name = \"迪纳摩边境民团\" division_template = \"迪纳摩边境民团\" start_experience_factor = 0.15 start_equipment_factor = 1 start_manpower_factor = 1"
+			owner = MRA
+			count = 30
+		}
+	}
+	set_country_flag = SRC_exp_flag_levee_mra
+}
+
+# ---- 【准备伟大进军】的宣战目标：对博尔扎诺、克罗地亚迪纳摩各来一份 ----
+SRC_exp_advance_wargoal_effect = {
+	if = {
+		limit = {
+			country_exists = BZN
+			NOT = { has_war_with = BZN }
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = BZN
+			expire = 0
+		}
+	}
+	if = {
+		limit = {
+			country_exists = MRA
+			NOT = { has_war_with = MRA }
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = MRA
+			expire = 0
+		}
+	}
+}
+
+# ---- 【打击边疆分裂主义】的决议：整肃一个边疆州 ----
+# 边疆 = 挨着别人家地盘的州；整肃过的不再重复（州旗标）
+SRC_exp_purge_frontier_effect = {
+	random_owned_state = {
+		limit = {
+			NOT = { has_state_flag = SRC_exp_flag_purged }
+			any_neighbor_state = {
+				NOT = { is_owned_by = ROOT }
+			}
+		}
+		add_dynamic_modifier = { modifier = SRC_dyn_state_wolf_law }
+		set_state_flag = SRC_exp_flag_purged
+		add_core_of = ROOT
+	}
+}
+
+# ---- 【光荣的叙拉古公民！】的决议：把一个完全控制、无抵抗的非核心州入册 ----
+SRC_exp_core_one_state_effect = {
+	random_owned_state = {
+		limit = {
+			NOT = { is_core_of = ROOT }
+			is_fully_controlled_by = ROOT
+			has_resistance = no
+		}
+		add_core_of = ROOT
+	}
+}
+
+# ---- 【军团凯旋！】的决议：加入双塔协定（不在就自己重立） ----
+# 收网那次已经把叙拉古送上过主位，这里整段用 is_in_faction 挡掉，只留遏制哥伦比亚的部分
+SRC_exp_join_twin_towers_effect = {
+	if = {
+		limit = {
+			is_in_faction = no
+		}
+		if = {
+			limit = {
+				LTN = {
+					is_in_faction = yes
+					NOT = { is_subject_of = ROOT }
+				}
+				NOT = { has_war_with = LTN }
+			}
+			LTN = {
+				faction_leader = {
+					add_to_faction = ROOT
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				CLB = {
+					is_in_faction = yes
+				}
+				NOT = { has_war_with = CLB }
+			}
+			CLB = {
+				faction_leader = {
+					add_to_faction = ROOT
+				}
+			}
+		}
+		else = {
+			SRC_exp_twin_towers_take_seat_effect = yes
+		}
+	}
+	# 遏制哥伦比亚：关系 -50 + 对莱茵生命拿到宣战目标
+	if = {
+		limit = {
+			country_exists = CLB
+		}
+		reverse_add_opinion_modifier = {
+			target = CLB
+			modifier = SRC_exp_op_contain_columbia
+		}
+	}
+	if = {
+		limit = {
+			country_exists = RHL
+			NOT = { has_war_with = RHL }
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = RHL
+			expire = 0
+		}
+	}
+}

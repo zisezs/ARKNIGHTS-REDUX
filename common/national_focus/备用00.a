@@ -1,0 +1,2392 @@
+######################
+## 莱茵生命十科国策树（企业国备选路线）
+## 树 id RHL_td ｜ RHL（莱茵生命）开局默认树；
+##   CLB 玩家可在「十科合议厅」完成后经决议 RHL_td_decision_enable 启用
+## 排版：根居中 (0,0)；十科镜像对称 —— 右侧 结构/能量/源石应用/工程/科考，左侧 生态/防卫/商务/人力/总辖；
+##       内侧列（±2/±8/±14/±20/±26）为技术支线，外侧列（±6/±12/±18/±24/±30）为政治支线，
+##       科终局居中（±4/±10/±16/±22/±28, y=6），全科终局汇于正中 (0,9)。
+######################
+focus_tree = {
+	id = RHL_td
+	country = {
+		factor = 0
+		modifier = {
+			add = 100
+			tag = RHL
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = RHL_td_council
+	}
+
+	# ══════════════════════ 根：十科合议厅 ══════════════════════
+	focus = {
+		id = RHL_td_council
+		icon = GFX_goal_generic_national_unity
+		x = 0
+		y = 0
+		cost = 35
+		available = {
+			OR = {
+				tag = RHL
+				has_country_flag = CLB_flag_council
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_tt_root_open
+			hidden_effect = {
+				set_country_flag = CLB_flag_td_active
+				RHL_td_init = yes
+			}
+		}
+	}
+
+	# ══════════════════════ 一、结构科：嵌合与灵魂（右 1 ｜ 锚点 +4） ══════════════════════
+	focus = {
+		id = RHL_td_s1_l1
+		icon = GFX_goal_generic_scientific_exchange
+		relative_position_id = RHL_td_council
+		x = 2
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Parvis
+			add_political_power = 25
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s1 }
+			custom_effect_tooltip = RHL_td_vtt_s1_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s1_stab_n0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s1_res = 0.05 }
+				add_to_variable = { RHL_td_s1_stab = -0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s1_l2
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_s1_l1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s1_l1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s1_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_meter_neuro_p5
+			hidden_effect = {
+				add_to_variable = { RHL_td_s1_res = 0.05 }
+				add_to_variable = { CLB_neurotransmitter = 5 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s1_l3
+		icon = GFX_goal_generic_dangerous_deal
+		relative_position_id = RHL_td_s1_l2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s1_l2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s1_det_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s1_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s1_stab_n0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s1_det = 0.05 }
+				add_to_variable = { RHL_td_s1_res = 0.05 }
+				add_to_variable = { RHL_td_s1_stab = -0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s1_l4
+		icon = GFX_goal_generic_secret_weapon
+		relative_position_id = RHL_td_s1_l3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s1_l3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = electronics }
+			custom_effect_tooltip = RHL_td_vtt_s1_res_p0_10
+			custom_effect_tooltip = CLB_tt_dissent_up_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s1_res = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s1_r1
+		icon = GFX_goal_generic_political_pressure
+		relative_position_id = RHL_td_council
+		x = 6
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s1 }
+			custom_effect_tooltip = RHL_td_vtt_s1_pp_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s1_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s1_stab_n0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s1_pp = 0.05 }
+				add_to_variable = { RHL_td_s1_res = 0.05 }
+				add_to_variable = { RHL_td_s1_stab = -0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s1_r2
+		icon = GFX_goal_generic_propaganda
+		relative_position_id = RHL_td_s1_r1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s1_r1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s1_res_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s1_stab_n0_10
+			custom_effect_tooltip = CLB_tt_dissent_up_5
+			hidden_effect = {
+				add_to_variable = { RHL_td_s1_res = 0.10 }
+				add_to_variable = { RHL_td_s1_stab = -0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s1_r3
+		icon = GFX_goal_generic_national_unity
+		relative_position_id = RHL_td_s1_r2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s1_r2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s1_res_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s1_ws_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s1_res = 0.10 }
+				add_to_variable = { RHL_td_s1_ws = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s1_r4
+		icon = GFX_goal_generic_forceful_treaty
+		relative_position_id = RHL_td_s1_r3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s1_r3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s1_res_p0_15
+			custom_effect_tooltip = RHL_td_vtt_s1_stab_n0_15
+			custom_effect_tooltip = CLB_tt_dissent_up_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s1_res = 0.15 }
+				add_to_variable = { RHL_td_s1_stab = -0.15 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_f1
+		icon = GFX_goal_generic_scientific_exchange
+		relative_position_id = RHL_td_s1_l4
+		x = 2
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s1_l4
+		}
+		prerequisite = {
+			focus = RHL_td_s1_r4
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = RHL_td_dyn_s1 }
+			add_ideas = RHL_td_spirit_s1
+			set_country_flag = CLB_flag_td_s1_final
+			custom_effect_tooltip = RHL_td_vtt_spirit_s1
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p10
+			custom_effect_tooltip = RHL_td_tt_unlock_chimera_mass
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+			}
+		}
+	}
+
+	# ══════════════════════ 二、能量科：递质与石棺（右 2 ｜ 锚点 +10） ══════════════════════
+	focus = {
+		id = RHL_td_s2_l1
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_council
+		x = 8
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Ferdinand
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s2 }
+			set_country_flag = CLB_flag_td_neuro
+			custom_effect_tooltip = RHL_td_vtt_s2_res_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s2_res = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s2_l2
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = RHL_td_s2_l1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s2_l1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s2_extract_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s2_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s2_extract = 0.10 }
+				add_to_variable = { RHL_td_s2_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s2_l3
+		icon = GFX_goal_generic_air_production
+		relative_position_id = RHL_td_s2_l2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s2_l2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s2_air_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s2_res_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s2_air = 0.10 }
+				add_to_variable = { RHL_td_s2_res = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s2_l4
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_s2_l3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s2_l3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s2_extract_p0_15
+			custom_effect_tooltip = RHL_td_vtt_s2_stab_p0_10
+			custom_effect_tooltip = CLB_tt_dissent_up_5
+			hidden_effect = {
+				add_to_variable = { RHL_td_s2_extract = 0.15 }
+				add_to_variable = { RHL_td_s2_stab = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s2_r1
+		icon = GFX_goal_generic_oil_refinery
+		relative_position_id = RHL_td_council
+		x = 12
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s2 }
+			custom_effect_tooltip = RHL_td_vtt_s2_energy_p0_15
+			custom_effect_tooltip = RHL_td_vtt_s2_fuel_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s2_energy = 0.15 }
+				add_to_variable = { RHL_td_s2_fuel = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s2_r2
+		icon = GFX_goal_generic_secret_weapon
+		relative_position_id = RHL_td_s2_r1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s2_r1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s2_energy_p0_20
+			custom_effect_tooltip = RHL_td_tt_diplo_down_15
+			custom_effect_tooltip = CLB_tt_intl_tension_up_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s2_energy = 0.20 }
+				add_to_variable = { RHL_td_s2_opinion = -0.05 }
+				add_threat = 10
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s2_r3
+		icon = GFX_goal_generic_dangerous_deal
+		relative_position_id = RHL_td_s2_r2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s2_r2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_fuel = 500
+			custom_effect_tooltip = CLB_tt_intl_tension_up_10
+			custom_effect_tooltip = CLB_tt_stability_down_5
+			hidden_effect = {
+				add_threat = 10
+				add_to_variable = { RHL_td_s2_stab = -0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s2_r4
+		icon = GFX_goal_generic_scientific_exchange
+		relative_position_id = RHL_td_s2_r3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s2_r3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = nuclear }
+			custom_effect_tooltip = RHL_td_vtt_s2_res_p0_20
+			custom_effect_tooltip = RHL_td_vtt_s2_energy_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s2_res = 0.20 }
+				add_to_variable = { RHL_td_s2_energy = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_f2
+		icon = GFX_goal_generic_oil_refinery
+		relative_position_id = RHL_td_s2_l4
+		x = 2
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s2_l4
+		}
+		prerequisite = {
+			focus = RHL_td_s2_r4
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = RHL_td_dyn_s2 }
+			add_ideas = RHL_td_spirit_s2
+			set_country_flag = CLB_flag_td_s2_final
+			custom_effect_tooltip = RHL_td_vtt_spirit_s2
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p10
+			custom_effect_tooltip = CLB_tt_intl_tension_up_15
+			custom_effect_tooltip = RHL_td_tt_unlock_well_overload
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+				add_threat = 15
+			}
+		}
+	}
+
+	# ══════════════════════ 三、源石技艺应用科：递质与平等（右 3 ｜ 锚点 +16） ══════════════════════
+	focus = {
+		id = RHL_td_s3_l1
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_council
+		x = 14
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Dorothy
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s3 }
+			custom_effect_tooltip = RHL_td_vtt_s3_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s3_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s3_res = 0.05 }
+				add_to_variable = { RHL_td_s3_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s3_l2
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = RHL_td_s3_l1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s3_l1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s3_det_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s3_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s3_det = 0.10 }
+				add_to_variable = { RHL_td_s3_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s3_l3
+		icon = GFX_goal_generic_improve_relations
+		relative_position_id = RHL_td_s3_l2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s3_l2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s3_stab_p0_10
+			custom_effect_tooltip = RHL_td_tt_dissent_n0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s3_stab = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s3_l4
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_s3_l3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s3_l3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s3_det_p0_15
+			custom_effect_tooltip = RHL_td_vtt_s3_stab_p0_10
+			custom_effect_tooltip = CLB_tt_dissent_up_5
+			hidden_effect = {
+				add_to_variable = { RHL_td_s3_det = 0.15 }
+				add_to_variable = { RHL_td_s3_stab = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s3_r1
+		icon = GFX_goal_generic_consumer_goods
+		relative_position_id = RHL_td_council
+		x = 18
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s3 }
+			custom_effect_tooltip = RHL_td_vtt_s3_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s3_factory_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s3_res = 0.05 }
+				add_to_variable = { RHL_td_s3_factory = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s3_r2
+		icon = GFX_goal_generic_production2
+		relative_position_id = RHL_td_s3_r1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s3_r1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s3_atk_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s3_res_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s3_atk = 0.10 }
+				add_to_variable = { RHL_td_s3_res = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s3_r3
+		icon = GFX_goal_generic_construct_mil_factory
+		relative_position_id = RHL_td_s3_r2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s3_r2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 10 }
+			custom_effect_tooltip = RHL_td_vtt_s3_atk_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s3_atk = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s3_r4
+		icon = GFX_goal_generic_national_unity
+		relative_position_id = RHL_td_s3_r3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s3_r3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s3_res_p0_15
+			custom_effect_tooltip = RHL_td_vtt_s3_stab_p0_10
+			custom_effect_tooltip = RHL_td_tt_dissent_n0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s3_res = 0.15 }
+				add_to_variable = { RHL_td_s3_stab = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_f3
+		icon = GFX_goal_generic_consumer_goods
+		relative_position_id = RHL_td_s3_l4
+		x = 2
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s3_l4
+		}
+		prerequisite = {
+			focus = RHL_td_s3_r4
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = RHL_td_dyn_s3 }
+			add_ideas = RHL_td_spirit_s3
+			set_country_flag = CLB_flag_td_s3_final
+			custom_effect_tooltip = RHL_td_vtt_spirit_s3
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p10
+			custom_effect_tooltip = RHL_td_tt_unlock_neuro_network
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+			}
+		}
+	}
+
+	# ══════════════════════ 四、工程科：浮空与咒言（右 4 ｜ 锚点 +22） ══════════════════════
+	focus = {
+		id = RHL_td_s4_l1
+		icon = GFX_goal_generic_scientific_exchange
+		relative_position_id = RHL_td_council
+		x = 20
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Nasti
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s4 }
+			custom_effect_tooltip = RHL_td_vtt_s4_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s4_build_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s4_res = 0.05 }
+				add_to_variable = { RHL_td_s4_build = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s4_l2
+		icon = GFX_goal_generic_construction
+		relative_position_id = RHL_td_s4_l1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s4_l1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s4_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s4_det_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s4_res = 0.05 }
+				add_to_variable = { RHL_td_s4_det = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s4_l3
+		icon = GFX_goal_generic_construction2
+		relative_position_id = RHL_td_s4_l2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s4_l2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s4_build_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s4_air_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s4_build = 0.10 }
+				add_to_variable = { RHL_td_s4_air = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s4_l4
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_s4_l3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s4_l3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s4_res_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s4_build_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s4_res = 0.10 }
+				add_to_variable = { RHL_td_s4_build = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s4_r1
+		icon = GFX_goal_generic_construct_infrastructure
+		relative_position_id = RHL_td_council
+		x = 24
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s4 }
+			custom_effect_tooltip = RHL_td_vtt_s4_build_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s4_air_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s4_build = 0.10 }
+				add_to_variable = { RHL_td_s4_air = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s4_r2
+		icon = GFX_goal_generic_construction
+		relative_position_id = RHL_td_s4_r1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s4_r1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s4_air_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s4_build_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s4_air = 0.10 }
+				add_to_variable = { RHL_td_s4_build = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s4_r3
+		icon = GFX_goal_generic_air_production
+		relative_position_id = RHL_td_s4_r2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s4_r2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s4_air_p0_15
+			hidden_effect = {
+				add_to_variable = { RHL_td_s4_air = 0.15 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s4_r4
+		icon = GFX_goal_generic_air_doctrine
+		relative_position_id = RHL_td_s4_r3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s4_r3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s4_build_p0_15
+			custom_effect_tooltip = RHL_td_vtt_s4_air_p0_10
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s4_build = 0.15 }
+				add_to_variable = { RHL_td_s4_air = 0.10 }
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_f4
+		icon = GFX_goal_generic_construction2
+		relative_position_id = RHL_td_s4_l4
+		x = 2
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s4_l4
+		}
+		prerequisite = {
+			focus = RHL_td_s4_r4
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = RHL_td_dyn_s4 }
+			add_ideas = RHL_td_spirit_s4
+			set_country_flag = CLB_flag_td_s4_final
+			custom_effect_tooltip = RHL_td_vtt_spirit_s4
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p15
+			effect_tooltip = {
+				unlock_national_focus = RHL_td_sky_city
+			}
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 15 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_sky_city
+		icon = GFX_goal_generic_air_production
+		relative_position_id = RHL_td_grand
+		x = 0
+		y = -2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_f4
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_ideas = RHL_td_idea_sky_city
+			add_offsite_building = { type = industrial_complex level = 5 }
+			custom_effect_tooltip = RHL_td_tt_sky_city
+		}
+	}
+
+	# ══════════════════════ 五、科考科：冰原与星门（右 5 ｜ 锚点 +28） ══════════════════════
+	focus = {
+		id = RHL_td_s5_l1
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_council
+		x = 26
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Mariam
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s5 }
+			custom_effect_tooltip = RHL_td_tt_prospecting_up_10
+			custom_effect_tooltip = RHL_td_vtt_s5_res_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s5_res = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s5_l2
+		icon = GFX_goal_generic_scientific_exchange
+		relative_position_id = RHL_td_s5_l1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s5_l1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s5_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s5_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s5_res = 0.05 }
+				add_to_variable = { RHL_td_s5_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s5_l3
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = RHL_td_s5_l2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s5_l2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s5_res_p0_10
+			custom_effect_tooltip = CLB_tt_intl_tension_up_5
+			hidden_effect = {
+				add_to_variable = { RHL_td_s5_res = 0.10 }
+				add_threat = 5
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s5_l4
+		icon = GFX_goal_generic_secret_weapon
+		relative_position_id = RHL_td_s5_l3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s5_l3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s5_res_p0_15
+			custom_effect_tooltip = CLB_tt_intl_tension_up_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s5_res = 0.15 }
+				add_threat = 10
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s5_r1
+		icon = GFX_goal_generic_more_territorial_claims
+		relative_position_id = RHL_td_council
+		x = 30
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s5 }
+			custom_effect_tooltip = RHL_td_tt_prospecting_up_10
+			custom_effect_tooltip = RHL_td_vtt_s5_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s5_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s5_r2
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = RHL_td_s5_r1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s5_r1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s5_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s5_det_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s5_res = 0.05 }
+				add_to_variable = { RHL_td_s5_det = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s5_r3
+		icon = GFX_goal_generic_dangerous_deal
+		relative_position_id = RHL_td_s5_r2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s5_r2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_tt_resources_up_10
+			custom_effect_tooltip = CLB_tt_diplo_down_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s5_opinion = -0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s5_r4
+		icon = GFX_goal_generic_fortify_city
+		relative_position_id = RHL_td_s5_r3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s5_r3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s5_air_p0_20
+			custom_effect_tooltip = RHL_td_vtt_s5_air_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s5_air = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_f5
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_s5_l4
+		x = 2
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s5_l4
+		}
+		prerequisite = {
+			focus = RHL_td_s5_r4
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = RHL_td_dyn_s5 }
+			add_ideas = RHL_td_spirit_s5
+			set_country_flag = CLB_flag_td_s5_final
+			custom_effect_tooltip = RHL_td_vtt_spirit_s5
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p15
+			custom_effect_tooltip = CLB_tt_intl_tension_up_15
+			effect_tooltip = {
+				unlock_national_focus = RHL_td_stargate_program
+			}
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 15 }
+				add_threat = 15
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_stargate_program
+		icon = GFX_goal_generic_secret_weapon
+		relative_position_id = RHL_td_f5
+		x = 0
+		y = 1
+		cost = 50
+		prerequisite = {
+			focus = RHL_td_f5
+		}
+		ai_will_do = {
+			factor = 15
+		}
+		completion_reward = {
+			add_ideas = RHL_td_idea_stargate_program
+			set_country_flag = CLB_flag_td_stargate_program
+			custom_effect_tooltip = CLB_tt_intl_tension_up_20
+			hidden_effect = {
+				add_threat = 20
+			}
+		}
+	}
+
+	# ══════════════════════ 六、生态科：精灵与生命（左 1 ｜ 锚点 -4） ══════════════════════
+	focus = {
+		id = RHL_td_s6_l1
+		icon = GFX_goal_generic_construction
+		relative_position_id = RHL_td_council
+		x = -2
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Muelsyse
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s6 }
+			custom_effect_tooltip = RHL_td_vtt_s6_agri_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s6_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s6_agri = 0.10 }
+				add_to_variable = { RHL_td_s6_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s6_l2
+		icon = GFX_goal_generic_improve_relations
+		relative_position_id = RHL_td_s6_l1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s6_l1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s6_stab_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s6_res_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s6_stab = 0.05 }
+				add_to_variable = { RHL_td_s6_res = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s6_l3
+		icon = GFX_goal_generic_national_unity
+		relative_position_id = RHL_td_s6_l2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s6_l2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s6_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s6_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s6_res = 0.05 }
+				add_to_variable = { RHL_td_s6_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s6_l4
+		icon = GFX_goal_generic_construction2
+		relative_position_id = RHL_td_s6_l3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s6_l3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s6_agri_p0_15
+			custom_effect_tooltip = RHL_td_vtt_s6_stab_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s6_agri = 0.15 }
+				add_to_variable = { RHL_td_s6_stab = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s6_r1
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = RHL_td_council
+		x = -6
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s6 }
+			custom_effect_tooltip = RHL_td_vtt_s6_res_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s6_det_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s6_res = 0.05 }
+				add_to_variable = { RHL_td_s6_det = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s6_r2
+		icon = GFX_goal_generic_political_pressure
+		relative_position_id = RHL_td_s6_r1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s6_r1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s6_stab_p0_05
+			custom_effect_tooltip = RHL_td_tt_dissent_n0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s6_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s6_r3
+		icon = GFX_goal_generic_air_production
+		relative_position_id = RHL_td_s6_r2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s6_r2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s6_res_p0_10
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s6_res = 0.10 }
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s6_r4
+		icon = GFX_goal_generic_air_doctrine
+		relative_position_id = RHL_td_s6_r3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s6_r3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s6_stab_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s6_res_p0_10
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s6_stab = 0.10 }
+				add_to_variable = { RHL_td_s6_res = 0.10 }
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_f6
+		icon = GFX_goal_generic_national_unity
+		relative_position_id = RHL_td_s6_l4
+		x = -2
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s6_l4
+		}
+		prerequisite = {
+			focus = RHL_td_s6_r4
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = RHL_td_dyn_s6 }
+			add_ideas = RHL_td_spirit_s6
+			set_country_flag = CLB_flag_td_s6_final
+			custom_effect_tooltip = RHL_td_vtt_spirit_s6
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p15
+			custom_effect_tooltip = RHL_td_tt_unlock_eco_nation
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 15 }
+			}
+		}
+	}
+
+	# ══════════════════════ 七、防卫科：钙质与秩序（左 2 ｜ 锚点 -10） ══════════════════════
+	focus = {
+		id = RHL_td_s7_l1
+		icon = GFX_goal_generic_defence
+		relative_position_id = RHL_td_council
+		x = -8
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Saria
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s7 }
+			custom_effect_tooltip = RHL_td_vtt_s7_atk_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s7_def_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s7_atk = 0.10 }
+				add_to_variable = { RHL_td_s7_def = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s7_l2
+		icon = GFX_goal_generic_scientific_exchange
+		relative_position_id = RHL_td_s7_l1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s7_l1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s7_atk_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s7_res_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s7_atk = 0.10 }
+				add_to_variable = { RHL_td_s7_res = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s7_l3
+		icon = GFX_goal_generic_army_motorized
+		relative_position_id = RHL_td_s7_l2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s7_l2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s7_atk_p0_10
+			custom_effect_tooltip = RHL_td_tt_equip_speed_up_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s7_atk = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s7_l4
+		icon = GFX_goal_generic_construct_mil_factory
+		relative_position_id = RHL_td_s7_l3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s7_l3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 10 }
+			custom_effect_tooltip = RHL_td_vtt_s7_atk_p0_15
+			hidden_effect = {
+				add_to_variable = { RHL_td_s7_atk = 0.15 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s7_r1
+		icon = GFX_goal_generic_army_doctrines
+		relative_position_id = RHL_td_council
+		x = -12
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s7 }
+			custom_effect_tooltip = RHL_td_vtt_s7_xp_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s7_def_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s7_xp = 0.05 }
+				add_to_variable = { RHL_td_s7_def = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s7_r2
+		icon = GFX_goal_generic_political_pressure
+		relative_position_id = RHL_td_s7_r1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s7_r1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 5 }
+			custom_effect_tooltip = RHL_td_vtt_s7_atk_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s7_atk = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s7_r3
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = RHL_td_s7_r2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s7_r2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Black
+			custom_effect_tooltip = RHL_td_vtt_s7_ws_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s7_atk_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s7_ws = 0.10 }
+				add_to_variable = { RHL_td_s7_atk = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s7_r4
+		icon = GFX_goal_generic_construct_military
+		relative_position_id = RHL_td_s7_r3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s7_r3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_offsite_building = { type = arms_factory level = 10 }
+			custom_effect_tooltip = RHL_td_vtt_s7_atk_p0_15
+			hidden_effect = {
+				add_to_variable = { RHL_td_s7_atk = 0.15 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_f7
+		icon = GFX_goal_generic_army_tanks
+		relative_position_id = RHL_td_s7_l4
+		x = -2
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s7_l4
+		}
+		prerequisite = {
+			focus = RHL_td_s7_r4
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = RHL_td_dyn_s7 }
+			add_ideas = RHL_td_spirit_s7
+			set_country_flag = CLB_flag_td_s7_final
+			add_offsite_building = { type = arms_factory level = 15 }
+			custom_effect_tooltip = RHL_td_vtt_spirit_s7
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p10
+			custom_effect_tooltip = RHL_td_tt_unlock_rdf_template
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+			}
+		}
+	}
+
+	# ══════════════════════ 八、商务科：权与利（左 3 ｜ 锚点 -16） ══════════════════════
+	focus = {
+		id = RHL_td_s8_l1
+		icon = GFX_goal_generic_trade
+		relative_position_id = RHL_td_council
+		x = -14
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Justin_Fitzroy
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s8 }
+			custom_effect_tooltip = RHL_td_vtt_s8_trade_p0_25
+			custom_effect_tooltip = RHL_td_vtt_s8_pp_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s8_opinion = 0.25 }
+				add_to_variable = { RHL_td_s8_pp = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s8_l2
+		icon = GFX_goal_generic_positive_trade_relations
+		relative_position_id = RHL_td_s8_l1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s8_l1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s8_factory_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s8_stab_n0_05
+			custom_effect_tooltip = RHL_td_vtt_meter_sky_p5
+			hidden_effect = {
+				add_to_variable = { RHL_td_s8_factory = 0.05 }
+				add_to_variable = { RHL_td_s8_stab = -0.05 }
+				add_to_variable = { CLB_sky_fever = 5 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s8_l3
+		icon = GFX_goal_generic_consumer_goods
+		relative_position_id = RHL_td_s8_l2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s8_l2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s8_factory_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s8_stab_n0_05
+			custom_effect_tooltip = RHL_td_vtt_meter_sky_p5
+			hidden_effect = {
+				add_to_variable = { RHL_td_s8_factory = 0.10 }
+				add_to_variable = { RHL_td_s8_stab = -0.05 }
+				add_to_variable = { CLB_sky_fever = 5 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s8_l4
+		icon = GFX_goal_generic_propaganda
+		relative_position_id = RHL_td_s8_l3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s8_l3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s8_ws_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s8_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s8_ws = 0.10 }
+				add_to_variable = { RHL_td_s8_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s8_r1
+		icon = GFX_goal_generic_improve_relations
+		relative_position_id = RHL_td_council
+		x = -18
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s8 }
+			custom_effect_tooltip = RHL_td_vtt_s8_pp_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s8_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s8_pp = 0.10 }
+				add_to_variable = { RHL_td_s8_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s8_r2
+		icon = GFX_goal_generic_political_pressure
+		relative_position_id = RHL_td_s8_r1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s8_r1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s8_pp_p0_15
+			custom_effect_tooltip = RHL_td_tt_parliament_up_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s8_pp = 0.15 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s8_r3
+		icon = GFX_goal_generic_forceful_treaty
+		relative_position_id = RHL_td_s8_r2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s8_r2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s8_stab_p0_10
+			custom_effect_tooltip = RHL_td_tt_dissent_n0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s8_stab = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s8_r4
+		icon = GFX_goal_generic_dangerous_deal
+		relative_position_id = RHL_td_s8_r3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s8_r3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s8_pp_p0_20
+			custom_effect_tooltip = RHL_td_vtt_s8_stab_n0_10
+			custom_effect_tooltip = RHL_td_vtt_s8_ws_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s8_pp = 0.20 }
+				add_to_variable = { RHL_td_s8_stab = -0.10 }
+				add_to_variable = { RHL_td_s8_ws = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_f8
+		icon = GFX_goal_generic_trade
+		relative_position_id = RHL_td_s8_l4
+		x = -2
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s8_l4
+		}
+		prerequisite = {
+			focus = RHL_td_s8_r4
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = RHL_td_dyn_s8 }
+			add_ideas = RHL_td_spirit_s8
+			set_country_flag = CLB_flag_td_s8_final
+			custom_effect_tooltip = RHL_td_vtt_spirit_s8
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p10
+			custom_effect_tooltip = RHL_td_tt_unlock_power_profit
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+			}
+		}
+	}
+
+	# ══════════════════════ 九、人力资源科：晨星与孤儿（左 4 ｜ 锚点 -22） ══════════════════════
+	focus = {
+		id = RHL_td_s9_l1
+		icon = GFX_goal_generic_improve_relations
+		relative_position_id = RHL_td_council
+		x = -20
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Yara
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s9 }
+			custom_effect_tooltip = RHL_td_vtt_s9_stab_p0_05
+			custom_effect_tooltip = RHL_td_vtt_s9_pp_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s9_stab = 0.05 }
+				add_to_variable = { RHL_td_s9_pp = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s9_l2
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = RHL_td_s9_l1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s9_l1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			recruit_character = CLB_Mejia
+			custom_effect_tooltip = RHL_td_vtt_s9_extract_p0_15
+			hidden_effect = {
+				add_to_variable = { RHL_td_s9_extract = 0.15 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s9_l3
+		icon = GFX_goal_generic_political_pressure
+		relative_position_id = RHL_td_s9_l2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s9_l2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_vtt_meter_CLB_maylander_influence_n20
+			custom_effect_tooltip = RHL_td_vtt_s9_stab_n0_05
+			hidden_effect = {
+				add_to_variable = { CLB_maylander_influence = -20 }
+				add_to_variable = { RHL_td_s9_stab = -0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s9_l4
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_s9_l3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s9_l3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s9_extract_p0_15
+			custom_effect_tooltip = RHL_td_tt_operative_up_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s9_extract = 0.15 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s9_r1
+		icon = GFX_goal_generic_production2
+		relative_position_id = RHL_td_council
+		x = -24
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s9 }
+			custom_effect_tooltip = RHL_td_vtt_s9_factory_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s9_stab_n0_10
+			custom_effect_tooltip = CLB_tt_dissent_up_5
+			hidden_effect = {
+				add_to_variable = { RHL_td_s9_factory = 0.10 }
+				add_to_variable = { RHL_td_s9_stab = -0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s9_r2
+		icon = GFX_goal_generic_consumer_goods
+		relative_position_id = RHL_td_s9_r1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s9_r1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s9_factory_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s9_stab_n0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s9_factory = 0.10 }
+				add_to_variable = { RHL_td_s9_stab = -0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s9_r3
+		icon = GFX_goal_generic_construction
+		relative_position_id = RHL_td_s9_r2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s9_r2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s9_stab_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s9_factory_n0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s9_stab = 0.10 }
+				add_to_variable = { RHL_td_s9_factory = -0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s9_r4
+		icon = GFX_goal_generic_national_unity
+		relative_position_id = RHL_td_s9_r3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s9_r3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s9_stab_p0_15
+			custom_effect_tooltip = RHL_td_tt_dissent_n0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s9_stab = 0.15 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_f9
+		icon = GFX_goal_generic_improve_relations
+		relative_position_id = RHL_td_s9_l4
+		x = -2
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s9_l4
+		}
+		prerequisite = {
+			focus = RHL_td_s9_r4
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = RHL_td_dyn_s9 }
+			add_ideas = RHL_td_spirit_s9
+			set_country_flag = CLB_flag_td_s9_final
+			custom_effect_tooltip = RHL_td_vtt_spirit_s9
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p10
+			custom_effect_tooltip = RHL_td_tt_unlock_intel_bureau
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+			}
+		}
+	}
+
+	# ══════════════════════ 十、总辖构件科：万星园与星荚（左 5 ｜ 锚点 -28） ══════════════════════
+	focus = {
+		id = RHL_td_s10_l1
+		icon = GFX_goal_generic_construction2
+		relative_position_id = RHL_td_council
+		x = -26
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s10 }
+			custom_effect_tooltip = RHL_td_tt_wonder_up_10
+			custom_effect_tooltip = RHL_td_vtt_s10_res_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s10_res = 0.10 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s10_l2
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_s10_l1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s10_l1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s10_res_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s10_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s10_res = 0.10 }
+				add_to_variable = { RHL_td_s10_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s10_l3
+		icon = GFX_goal_generic_construction
+		relative_position_id = RHL_td_s10_l2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s10_l2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s10_agri_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s10_res_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s10_agri = 0.10 }
+				add_to_variable = { RHL_td_s10_res = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s10_l4
+		icon = GFX_goal_generic_scientific_exchange
+		relative_position_id = RHL_td_s10_l3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s10_l3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s10_res_p0_15
+			custom_effect_tooltip = RHL_td_vtt_s10_stab_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s10_res = 0.15 }
+				add_to_variable = { RHL_td_s10_stab = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s10_r1
+		icon = GFX_goal_generic_air_doctrine
+		relative_position_id = RHL_td_council
+		x = -30
+		y = 2
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_council
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_dynamic_modifier = { modifier = RHL_td_dyn_s10 }
+			custom_effect_tooltip = RHL_td_vtt_s10_res_p0_10
+			custom_effect_tooltip = CLB_tt_intl_tension_up_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s10_res = 0.10 }
+				add_threat = 10
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s10_r2
+		icon = GFX_goal_generic_air_production
+		relative_position_id = RHL_td_s10_r1
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s10_r1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s10_air_p0_10
+			custom_effect_tooltip = RHL_td_vtt_s10_res_p0_05
+			hidden_effect = {
+				add_to_variable = { RHL_td_s10_air = 0.10 }
+				add_to_variable = { RHL_td_s10_res = 0.05 }
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s10_r3
+		icon = GFX_goal_generic_dangerous_deal
+		relative_position_id = RHL_td_s10_r2
+		x = 0
+		y = 1
+		cost = 28
+		prerequisite = {
+			focus = RHL_td_s10_r2
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_tt_strat_bomb_up_20
+			custom_effect_tooltip = RHL_td_vtt_s10_air_p0_10
+			custom_effect_tooltip = CLB_tt_intl_tension_up_15
+			hidden_effect = {
+				add_to_variable = { RHL_td_s10_air = 0.10 }
+				add_threat = 15
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_s10_r4
+		icon = GFX_goal_generic_secret_weapon
+		relative_position_id = RHL_td_s10_r3
+		x = 0
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s10_r3
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = RHL_td_vtt_s10_res_p0_20
+			custom_effect_tooltip = CLB_tt_intl_tension_up_20
+			hidden_effect = {
+				add_to_variable = { RHL_td_s10_res = 0.20 }
+				add_threat = 20
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_f10
+		icon = GFX_goal_generic_radar
+		relative_position_id = RHL_td_s10_l4
+		x = -2
+		y = 1
+		cost = 35
+		prerequisite = {
+			focus = RHL_td_s10_l4
+		}
+		prerequisite = {
+			focus = RHL_td_s10_r4
+		}
+		ai_will_do = {
+			factor = 20
+		}
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = RHL_td_dyn_s10 }
+			add_ideas = RHL_td_spirit_s10
+			set_country_flag = CLB_flag_td_s10_final
+			custom_effect_tooltip = RHL_td_vtt_spirit_s10
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p20
+			custom_effect_tooltip = CLB_tt_intl_tension_up_20
+			effect_tooltip = {
+				unlock_national_focus = RHL_td_stargate_apotheosis
+			}
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 20 }
+				add_threat = 20
+			}
+		}
+	}
+	focus = {
+		id = RHL_td_stargate_apotheosis
+		icon = GFX_goal_generic_secret_weapon
+		relative_position_id = RHL_td_f10
+		x = 0
+		y = 1
+		cost = 70
+		prerequisite = {
+			focus = RHL_td_f10
+		}
+		ai_will_do = {
+			factor = 15
+		}
+		completion_reward = {
+			add_ideas = RHL_td_idea_stargate_apotheosis
+			set_country_flag = CLB_flag_stargate
+			custom_effect_tooltip = RHL_td_tt_stargate_apotheosis
+			custom_effect_tooltip = CLB_tt_intl_tension_up_20
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p20
+			hidden_effect = {
+				add_threat = 20
+				add_to_variable = { CLB_beast_acquiescence = 20 }
+			}
+		}
+	}
+
+	# ══════════════════════ 十一、十科合议厅：莱茵生命合众国 ══════════════════════
+	focus = {
+		id = RHL_td_grand
+		icon = GFX_goal_generic_national_unity
+		relative_position_id = RHL_td_council
+		x = 0
+		y = 9
+		cost = 70
+		prerequisite = {
+			focus = RHL_td_f1
+		}
+		prerequisite = {
+			focus = RHL_td_f2
+		}
+		prerequisite = {
+			focus = RHL_td_f3
+		}
+		prerequisite = {
+			focus = RHL_td_f4
+		}
+		prerequisite = {
+			focus = RHL_td_f5
+		}
+		prerequisite = {
+			focus = RHL_td_f6
+		}
+		prerequisite = {
+			focus = RHL_td_f7
+		}
+		prerequisite = {
+			focus = RHL_td_f8
+		}
+		prerequisite = {
+			focus = RHL_td_f9
+		}
+		prerequisite = {
+			focus = RHL_td_f10
+		}
+		ai_will_do = {
+			factor = 50
+		}
+		completion_reward = {
+			set_cosmetic_tag = Rhine_Lab_Corporate_State
+			add_ideas = RHL_td_spirit_grand
+			set_country_flag = CLB_flag_td_ending_unlocked
+			custom_effect_tooltip = RHL_td_vtt_spirit_grand
+			custom_effect_tooltip = RHL_td_vtt_meter_beast_p30
+			custom_effect_tooltip = CLB_tt_intl_tension_up_20
+			custom_effect_tooltip = RHL_td_tt_endings_unlocked
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 30 }
+				add_threat = 20
+			}
+		}
+	}
+
+	# ══════════════════════ 四结局（互斥） ══════════════════════
+	focus = {
+		id = RHL_td_end_utopia
+		icon = GFX_goal_generic_positive_trade_relations
+		relative_position_id = RHL_td_grand
+		x = -3
+		y = 1
+		cost = 21
+		prerequisite = {
+			focus = RHL_td_grand
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_technocracy
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_beast
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_maylander
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_ideas = RHL_td_ending_utopia
+			set_country_flag = CLB_flag_ending_enterprise_utopia
+			custom_effect_tooltip = RHL_td_tt_end_utopia
+		}
+	}
+	focus = {
+		id = RHL_td_end_technocracy
+		icon = GFX_goal_generic_scientific_exchange
+		relative_position_id = RHL_td_grand
+		x = -1
+		y = 1
+		cost = 21
+		prerequisite = {
+			focus = RHL_td_grand
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_utopia
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_beast
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_maylander
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_ideas = RHL_td_ending_technocracy
+			set_country_flag = CLB_flag_td_ending_technocracy
+			custom_effect_tooltip = RHL_td_tt_end_technocracy
+		}
+	}
+	focus = {
+		id = RHL_td_end_beast
+		icon = GFX_goal_generic_dangerous_deal
+		relative_position_id = RHL_td_grand
+		x = 1
+		y = 1
+		cost = 21
+		prerequisite = {
+			focus = RHL_td_grand
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_utopia
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_technocracy
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_maylander
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_ideas = RHL_td_ending_beast
+			set_country_flag = CLB_flag_ending_beast_playground
+			custom_effect_tooltip = RHL_td_tt_end_beast
+		}
+	}
+	focus = {
+		id = RHL_td_end_maylander
+		icon = GFX_goal_generic_intelligence_exchange
+		relative_position_id = RHL_td_grand
+		x = 3
+		y = 1
+		cost = 21
+		prerequisite = {
+			focus = RHL_td_grand
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_utopia
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_technocracy
+		}
+		mutually_exclusive = {
+			focus = RHL_td_end_beast
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_ideas = RHL_td_ending_maylander
+			set_country_flag = CLB_flag_td_ending_maylander
+			custom_effect_tooltip = RHL_td_tt_end_maylander
+		}
+	}
+}

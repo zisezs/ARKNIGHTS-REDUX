@@ -1,0 +1,130 @@
+# 大炎 · 脚本效果
+# 四大专属机制（骨架）：
+#   yan_sui_awakening   岁兽苏醒度  0~100，初始 40，持「岁兽之患」时每月 +0.5
+#   yan_shudao_integrity 书刀完整度 0~100，初始 100，删改消耗，<50 触发「书刀案」
+#   yan_bufan_prep      不反准备度  0~100，初始 0，国策/决议提升，≥100 才可启动不反
+#   yan_agent_trust     代理人信任  0~100，初始 30，≥70 获「代理人一家」，<20 离心
+# 阈值事件链入口见 events/YAN_Suiling.txt
+
+# 开局初始化（on_startup 调用，只在未赋值时写初值）
+YAN_init_mechanics = {
+	if = {
+		limit = { NOT = { has_variable = yan_sui_awakening } }
+		set_variable = { yan_sui_awakening = 40 }
+	}
+	if = {
+		limit = { NOT = { has_variable = yan_shudao_integrity } }
+		set_variable = { yan_shudao_integrity = 100 }
+	}
+	if = {
+		limit = { NOT = { has_variable = yan_bufan_prep } }
+		set_variable = { yan_bufan_prep = 0 }
+	}
+	if = {
+		limit = { NOT = { has_variable = yan_agent_trust } }
+		set_variable = { yan_agent_trust = 30 }
+	}
+	# 岁压（【岁醒】开局树的国家级 DEBUFF）初值与精神挂载
+	# 见 common/scripted_effects/YAN_sui_pressure_scripted_effects.txt
+	YAN_sui_pressure_init = yes
+}
+
+# 月度结算（on_monthly 调用）
+YAN_monthly_tick = {
+	# 岁兽苏醒度自然上涨
+	if = {
+		limit = { has_idea = YAN_Sui_signs }
+		add_to_variable = { yan_sui_awakening = 0.5 }
+	}
+
+	# 钳制到合法区间
+	clamp_variable = { var = yan_sui_awakening min = 0 max = 100 }
+	clamp_variable = { var = yan_shudao_integrity min = 0 max = 100 }
+	clamp_variable = { var = yan_bufan_prep min = 0 max = 100 }
+	clamp_variable = { var = yan_agent_trust min = 0 max = 100 }
+
+	# 岁压月度反扑：未与岁立约前，岁压按苏醒度自行涨回来
+	YAN_sui_pressure_monthly = yes
+
+	# 宰府朝议：已开府且有人署理的席位「自行推进本席国策」，不占玩家国策时间
+	# 见 common/scripted_effects/YAN_court_scripted_effects.txt（生成器 E:/tmp/sui12/gen_court.js）
+	YAN_court_advance = yes
+
+	# 叛军循环：每 30 天一个州被「某某地区山海众」占据（爆 4 步填线师 + 掉稳定度/战争支持度 + 破坏工厂）
+	# 见 common/scripted_effects/YAN_shanhai_scripted_effects.txt（生成器 E:/tmp/sui12/gen_shanhai.js）
+	YAN_shanhai_check = yes
+
+	# 书刀完整度过低 → 太尉夺取「书刀案」
+	if = {
+		limit = {
+			check_variable = { yan_shudao_integrity < 50 }
+			NOT = { has_country_flag = yan_shudao_case_flag }
+		}
+		set_country_flag = yan_shudao_case_flag
+		add_ideas = YAN_Shudao_case
+		country_event = { id = yan_sui.3 days = 1 }
+	}
+
+	# 苏醒度警戒（80）→ 提示事件
+	if = {
+		limit = {
+			check_variable = { yan_sui_awakening > 79 }
+			NOT = { has_country_flag = yan_sui_warning_flag }
+		}
+		set_country_flag = yan_sui_warning_flag
+		country_event = { id = yan_sui.1 days = 1 }
+	}
+
+	# 苏醒度触顶（100）→ 岁兽之乱
+	if = {
+		limit = {
+			check_variable = { yan_sui_awakening > 99 }
+			NOT = { has_country_flag = yan_sui_disaster_flag }
+		}
+		set_country_flag = yan_sui_disaster_flag
+		add_ideas = YAN_Sui_disaster
+		add_ideas = YAN_Behemoths_awaken
+		country_event = { id = yan_sui.2 days = 1 }
+	}
+
+	# 代理人信任高 → 代理人一家
+	if = {
+		limit = {
+			check_variable = { yan_agent_trust > 69 }
+			NOT = { has_idea = YAN_Agents_family }
+		}
+		add_ideas = YAN_Agents_family
+	}
+
+	# 代理人信任低 → 离心
+	if = {
+		limit = {
+			check_variable = { yan_agent_trust < 20 }
+			NOT = { has_country_flag = yan_agents_estranged_flag }
+		}
+		set_country_flag = yan_agents_estranged_flag
+		add_stability = -0.05
+		country_event = { id = yan_sui.4 days = 1 }
+	}
+
+	# 「岁醒」已重制为开局树（country 因子 20 > 主树 10），开局即载入，不再需要决议或这里手动 load。
+	# 终格「岁陵之约」调用 YAN_sui_pressure_agree 切回 YAN_national_focus。
+
+	# SideStory 五条剧情链的起链日期门（洪炉示岁/将进酒/画中人/登临意/相见欢）
+	# 链内推进写在每个事件的 immediate 里，这里只管点火。
+	# 见 common/scripted_effects/YAN_sidestory_scripted_effects.txt
+	YAN_sidestory_start_check = yes
+
+	# 1098.1.1 硬日期门 → 起「西北都护府异变」事件链（不能更早）
+	YNW_upheaval_start_check = yes
+
+	# 「西北都护府异变」已完结 → 补发「岁怒」超事件（终幕当场已发过一次，旗标去重）
+	if = {
+		limit = {
+			has_global_flag = YNW_upheaval_complete
+			NOT = { has_country_flag = yan_sui_wrath_news_flag }
+		}
+		set_country_flag = yan_sui_wrath_news_flag
+		news_event = { id = yanse.1 }
+	}
+}

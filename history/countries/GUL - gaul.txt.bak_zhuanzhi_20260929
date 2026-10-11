@@ -1,0 +1,118 @@
+capital = 381
+
+oob = "GUL_Start"
+
+recruit_character = GUL_Normandy
+recruit_character = GUL_Jeanne_Normandy
+recruit_character = GUL_Resistance_Organization
+recruit_character = GUL_zhi_min_wei_yuan_hui
+
+recruit_character = GUL_bao_er_mo_la
+recruit_character = GUL_luo_bei_si_bi_er
+recruit_character = GUL_kou_dong
+recruit_character = GUL_sheng_zhu_si_te
+recruit_character = GUL_dan_dong
+
+recruit_character = GUL_ma_li_luo_lan
+recruit_character = GUL_bao_li_suo
+recruit_character = GUL_kong_duo_sai
+
+recruit_character = GUL_la_wo_xi_er
+recruit_character = GUL_ba_yi
+recruit_character = GUL_la_fei_te
+recruit_character = GUL_du_bo_er
+
+recruit_character = GUL_xie_shi
+recruit_character = GUL_kang_ba_sai_lei_si
+
+recruit_character = GUL_ta_lie_lang
+recruit_character = GUL_fu_xie
+recruit_character = GUL_ta_li_an
+
+recruit_character = GUL_bao_di_ai
+
+recruit_character = GUL_ka_er_nuo
+recruit_character = GUL_mo_luo
+recruit_character = GUL_ao_shi
+recruit_character = GUL_bo_na_ba_te
+
+add_ideas = {
+	limited_conscription
+	limited_exports
+	civilian_economy
+	small_country
+
+	no_voting
+	working_law_14h
+	behavior_control
+
+	subsistence_agriculture
+	small_production_line
+	basic_literacy
+	inefficient_administration
+	widespread_poverty
+	
+	GUL_bloody_memory_ideas_1
+	GUL_bloody_memory_ideas_1_hidden
+	#殖民委员会
+	GUL_zhi_min_wei_yuan_hui_idea
+}
+
+add_dynamic_modifier = {
+	modifier = GUL_political_idea_1
+}
+set_variable = { stability_factor_var = -0.3 }
+set_variable = { political_power_factor_var = -0.5 }
+
+add_dynamic_modifier = {
+	modifier = GUL_broken_economy_idea
+}
+set_variable = { vic_ocup_fac_num_var = 12 }
+set_variable = { consumer_goods_factor_var = 0.2 }
+set_variable = { production_speed_buildings_factor_var = -0.1 }
+set_variable = { production_factory_efficiency_gain_factor_var = -0.25 }
+set_variable = { production_factory_max_efficiency_factor_var = -0.1 }
+set_variable = { industrial_capacity_factory_var = -0.2 }
+
+set_research_slots = 2
+set_stability = 0.6
+set_war_support = 0.5
+
+#高卢抵抗运动决议
+set_variable = { GUL_rebel_decisions_1_days = 30 }
+set_variable = { GUL_rebel_decisions_5_cost = 100 }
+set_variable = { GUL_rebel_decisions_2_days_var = 35 }
+set_variable = { GUL_rebel_decisions_2_cost_var = 25 }
+set_variable = { GUL_rebel_decisions_3_cost_var = 50 }
+activate_mission = GUL_rebel_decisions_1
+
+set_cosmetic_tag = Duchy_of_Normandy
+
+set_technology = {
+	infantry_weapons_0 = 1
+	artillery_0 = 1
+	tech_support = 1
+	basic_machine_tools = 1
+	punched_card_computer = 1
+	tech_recon = 1
+	motorized_infantry_0 = 1
+	power_plant = 1
+}
+
+set_politics = {
+	ruling_party = despotism
+	elections_allowed = no
+}
+
+set_popularities = {
+	communism = 5
+	socialism = 15
+	progressivism = 0
+	liberalism = 30
+	conservatism = 0
+	authoritarianism = 10
+	despotism = 40
+	fascism = 0
+	mysticism = 0
+	special = 0
+}

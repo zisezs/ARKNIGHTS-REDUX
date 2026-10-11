@@ -1,0 +1,2613 @@
+# ==============================================================================
+#  莱茵生命 · 十科军工企业（MIO）　【由 docs/gen_rhl_mio.cjs 生成，勿手改】
+#  ---------------------------------------------------------------------------
+#  十科清单取自 common/national_focus/RHL_td.txt 的分节标题。
+#  每家：自建树（不 include preset）+ 12 条专属特质 + 1 条起始特质，十种不同拓扑。
+#  门控挂在本科室自己的国策上：技术线 RHL_td_sN_l*、政治线 RHL_td_sN_r*。
+#  allowed = OR(original_tag = RHL, has_focus_tree = RHL_td)：
+#    莱茵生命默认全有；哥伦比亚经决议启用十科树后同样解锁。
+#  坐标全部落在 x>=0、y<=5（原版 MIO 树行距 102px、可视区 640px，y=6 起要滚动）。
+# ==============================================================================
+
+# ==============================================================================
+# 一 · 结构科 —— 嵌合与灵魂（菱形晶格树，12 条专属特质）
+# ==============================================================================
+RHL_Dept_Structure_organization = {
+	name = RHL_Dept_Structure_organization
+	icon = GFX_rhl_mio_structure
+
+	allowed = {
+		OR = {
+			original_tag = RHL
+			has_focus_tree = RHL_td
+		}
+	}
+
+	equipment_type = {
+		arts_equipment
+		special_unit_token
+		infantry_equipment
+	}
+	research_categories = {
+		arts_weapons
+		cat_special_forces_generic
+		infantry_weapons
+		support_tech
+	}
+
+	initial_trait = {
+		token = RHL_mio_initial_dept_structure
+		name = RHL_mio_initial_dept_structure
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.25
+		}
+		production_bonus = {
+			production_capacity_factor = 0.15
+		}
+		equipment_bonus = {
+			armor_value = 0.15
+		}
+	}
+
+	# 1 嵌合骨架
+	trait = {
+		token = RHL_mio_trait_rhl_skeleton
+		name = RHL_mio_trait_rhl_skeleton
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = 3 y = 0 }
+
+		equipment_bonus = {
+			armor_value = 0.3
+			hardness = 0.2
+		}
+	}
+
+	# 2 灵魂锚定
+	trait = {
+		token = RHL_mio_trait_rhl_soul_anchor
+		name = RHL_mio_trait_rhl_soul_anchor
+		icon = GFX_generic_mio_trait_icon_max_strength
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_skeleton
+		any_parent = { RHL_mio_trait_rhl_skeleton }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s1_l2 }
+		}
+
+		equipment_bonus = {
+			max_strength = 0.4
+			reliability = -0.1
+		}
+	}
+
+	# 3 人工肌束
+	trait = {
+		token = RHL_mio_trait_rhl_artificial_muscle
+		name = RHL_mio_trait_rhl_artificial_muscle
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_skeleton
+		any_parent = { RHL_mio_trait_rhl_skeleton }
+
+		equipment_bonus = {
+			soft_attack = 0.35
+			breakthrough = 0.2
+			build_cost_ic = 0.05
+		}
+	}
+
+	# 4 培养槽阵列
+	trait = {
+		token = RHL_mio_trait_rhl_culture_tank
+		name = RHL_mio_trait_rhl_culture_tank
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_soul_anchor
+		any_parent = { RHL_mio_trait_rhl_soul_anchor }
+
+		production_bonus = {
+			production_capacity_factor = 0.25
+			production_resource_need_factor = 0.1
+		}
+	}
+
+	# 5 素体标准化
+	trait = {
+		token = RHL_mio_trait_rhl_body_std
+		name = RHL_mio_trait_rhl_body_std
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_soul_anchor
+		all_parents = { RHL_mio_trait_rhl_artificial_muscle }
+
+		equipment_bonus = {
+			build_cost_ic = -0.2
+			reliability = 0.1
+		}
+	}
+
+	# 6 神经中继
+	trait = {
+		token = RHL_mio_trait_rhl_nerve_relay
+		name = RHL_mio_trait_rhl_nerve_relay
+		icon = GFX_generic_mio_trait_icon_ap_attack
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_artificial_muscle
+		any_parent = { RHL_mio_trait_rhl_artificial_muscle }
+
+		equipment_bonus = {
+			ap_attack = 0.3
+			hard_attack = 0.2
+		}
+	}
+
+	# 7 几丁质装甲
+	trait = {
+		token = RHL_mio_trait_rhl_chitin_plate
+		name = RHL_mio_trait_rhl_chitin_plate
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_culture_tank
+		any_parent = { RHL_mio_trait_rhl_culture_tank }
+
+		equipment_bonus = {
+			armor_value = 0.35
+			defense = 0.25
+		}
+	}
+
+	# 8 再生皮层
+	trait = {
+		token = RHL_mio_trait_rhl_regenerate
+		name = RHL_mio_trait_rhl_regenerate
+		icon = GFX_generic_mio_trait_icon_max_strength
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_body_std
+		any_parent = { RHL_mio_trait_rhl_body_std }
+
+		equipment_bonus = {
+			max_strength = 0.35
+			reliability = 0.15
+		}
+	}
+
+	# 9 禁忌融合
+	trait = {
+		token = RHL_mio_trait_rhl_forbidden_fusion
+		name = RHL_mio_trait_rhl_forbidden_fusion
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_chitin_plate
+		all_parents = { RHL_mio_trait_rhl_regenerate }
+
+		equipment_bonus = {
+			soft_attack = 0.45
+			hard_attack = 0.35
+			reliability = -0.1
+		}
+	}
+
+	# 10 战场回收
+	trait = {
+		token = RHL_mio_trait_rhl_field_reclaim
+		name = RHL_mio_trait_rhl_field_reclaim
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_chitin_plate
+		any_parent = { RHL_mio_trait_rhl_chitin_plate }
+
+		equipment_bonus = {
+			build_cost_ic = -0.15
+		}
+		production_bonus = {
+			production_conversion_speed_factor = 0.3
+		}
+	}
+
+	# 11 嵌合军团化
+	trait = {
+		token = RHL_mio_trait_rhl_legion
+		name = RHL_mio_trait_rhl_legion
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_regenerate
+		any_parent = { RHL_mio_trait_rhl_regenerate }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s1_r4 }
+		}
+
+		equipment_bonus = {
+			breakthrough = 0.25
+		}
+		production_bonus = {
+			production_capacity_factor = 0.3
+		}
+	}
+
+	# 12 完美素体
+	trait = {
+		token = RHL_mio_trait_rhl_perfect_body
+		name = RHL_mio_trait_rhl_perfect_body
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_forbidden_fusion
+		any_parent = { RHL_mio_trait_rhl_forbidden_fusion }
+
+		equipment_bonus = {
+			armor_value = 0.4
+			soft_attack = 0.4
+			max_strength = 0.3
+			reliability = -0.05
+		}
+	}
+
+}
+
+# ==============================================================================
+# 二 · 能量科 —— 递质与石棺（竖脊侧枝树，12 条专属特质）
+# ==============================================================================
+RHL_Dept_Energy_organization = {
+	name = RHL_Dept_Energy_organization
+	icon = GFX_rhl_mio_energy
+
+	allowed = {
+		OR = {
+			original_tag = RHL
+			has_focus_tree = RHL_td
+		}
+	}
+
+	equipment_type = {
+		support_equipment
+		nuclear_missile_equipment
+		artillery_equipment
+	}
+	research_categories = {
+		support_tech
+		nuclear
+		rocketry
+		cat_power
+	}
+
+	initial_trait = {
+		token = RHL_mio_initial_dept_energy
+		name = RHL_mio_initial_dept_energy
+
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.3
+		}
+		production_bonus = {
+			production_capacity_factor = 0.12
+		}
+	}
+
+	# 1 递质反应堆
+	trait = {
+		token = RHL_mio_trait_rhl_transmitter_reactor
+		name = RHL_mio_trait_rhl_transmitter_reactor
+		icon = GFX_generic_mio_trait_icon_fuel_consumption
+		special_trait_background = yes
+
+		position = { x = 3 y = 0 }
+
+		equipment_bonus = {
+			fuel_consumption = -0.15
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.35
+		}
+	}
+
+	# 2 并网调度
+	trait = {
+		token = RHL_mio_trait_rhl_grid_dispatch
+		name = RHL_mio_trait_rhl_grid_dispatch
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_transmitter_reactor
+		any_parent = { RHL_mio_trait_rhl_transmitter_reactor }
+
+		production_bonus = {
+			production_capacity_factor = 0.25
+			production_conversion_speed_factor = 0.2
+		}
+	}
+
+	# 3 石棺取能
+	trait = {
+		token = RHL_mio_trait_rhl_sarcophagus_tap
+		name = RHL_mio_trait_rhl_sarcophagus_tap
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_grid_dispatch
+		any_parent = { RHL_mio_trait_rhl_grid_dispatch }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s2_l2 }
+		}
+
+		equipment_bonus = {
+			reliability = -0.1
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.25
+		}
+	}
+
+	# 4 稳态输出
+	trait = {
+		token = RHL_mio_trait_rhl_steady_output
+		name = RHL_mio_trait_rhl_steady_output
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_grid_dispatch
+		any_parent = { RHL_mio_trait_rhl_grid_dispatch }
+
+		equipment_bonus = {
+			build_cost_ic = -0.12
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.25
+		}
+	}
+
+	# 5 超导输电
+	trait = {
+		token = RHL_mio_trait_rhl_superconductor
+		name = RHL_mio_trait_rhl_superconductor
+		icon = GFX_generic_mio_trait_icon_fuel_consumption
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_sarcophagus_tap
+		all_parents = { RHL_mio_trait_rhl_steady_output }
+
+		equipment_bonus = {
+			fuel_consumption = -0.2
+		}
+		production_bonus = {
+			production_capacity_factor = 0.2
+		}
+	}
+
+	# 6 备用蓄能
+	trait = {
+		token = RHL_mio_trait_rhl_buffer_storage
+		name = RHL_mio_trait_rhl_buffer_storage
+		icon = GFX_generic_mio_trait_icon_max_strength
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_superconductor
+		any_parent = { RHL_mio_trait_rhl_superconductor }
+
+		equipment_bonus = {
+			max_strength = 0.3
+			defense = 0.2
+		}
+	}
+
+	# 7 能量税
+	trait = {
+		token = RHL_mio_trait_rhl_energy_tax
+		name = RHL_mio_trait_rhl_energy_tax
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_superconductor
+		any_parent = { RHL_mio_trait_rhl_superconductor }
+
+		production_bonus = {
+			production_cost_factor = 0.1
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.4
+		}
+	}
+
+	# 8 过载并网
+	trait = {
+		token = RHL_mio_trait_rhl_overload
+		name = RHL_mio_trait_rhl_overload
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_buffer_storage
+		all_parents = { RHL_mio_trait_rhl_energy_tax }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s2_r4 }
+		}
+
+		equipment_bonus = {
+			reliability = -0.12
+		}
+		production_bonus = {
+			production_capacity_factor = 0.4
+		}
+	}
+
+	# 9 谐振增压
+	trait = {
+		token = RHL_mio_trait_rhl_resonant_boost
+		name = RHL_mio_trait_rhl_resonant_boost
+		icon = GFX_generic_mio_trait_icon_hard_attack
+		special_trait_background = yes
+
+		position = { x = -1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_sarcophagus_tap
+		any_parent = { RHL_mio_trait_rhl_sarcophagus_tap }
+
+		equipment_bonus = {
+			hard_attack = 0.3
+			ap_attack = 0.25
+		}
+	}
+
+	# 10 无人值守电站
+	trait = {
+		token = RHL_mio_trait_rhl_unmanned_station
+		name = RHL_mio_trait_rhl_unmanned_station
+		icon = GFX_generic_mio_trait_icon_supply_consumption
+		special_trait_background = yes
+
+		position = { x = 1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_steady_output
+		any_parent = { RHL_mio_trait_rhl_steady_output }
+
+		equipment_bonus = {
+			supply_consumption = -0.25
+		}
+		production_bonus = {
+			production_capacity_factor = 0.2
+		}
+	}
+
+	# 11 全国电网
+	trait = {
+		token = RHL_mio_trait_rhl_national_grid
+		name = RHL_mio_trait_rhl_national_grid
+		icon = GFX_generic_mio_department_icon_tank_general_production
+		special_trait_background = yes
+
+		position = { x = -1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_buffer_storage
+		any_parent = { RHL_mio_trait_rhl_buffer_storage }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s2_l4 }
+		}
+
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.5
+			military_industrial_organization_research_bonus = 0.2
+		}
+	}
+
+	# 12 永动机方案
+	trait = {
+		token = RHL_mio_trait_rhl_perpetual_engine
+		name = RHL_mio_trait_rhl_perpetual_engine
+		icon = GFX_generic_mio_trait_icon_fuel_consumption
+		special_trait_background = yes
+
+		position = { x = 1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_energy_tax
+		any_parent = { RHL_mio_trait_rhl_energy_tax }
+
+		equipment_bonus = {
+			fuel_consumption = -0.25
+			reliability = -0.08
+		}
+		production_bonus = {
+			production_capacity_factor = 0.3
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.6
+		}
+	}
+
+}
+
+# ==============================================================================
+# 三 · 源石技艺应用科 —— 递质与平等（扇形树，12 条专属特质）
+# ==============================================================================
+RHL_Dept_Originium_organization = {
+	name = RHL_Dept_Originium_organization
+	icon = GFX_rhl_mio_originium
+
+	allowed = {
+		OR = {
+			original_tag = RHL
+			has_focus_tree = RHL_td
+		}
+	}
+
+	equipment_type = {
+		arts_equipment
+		support_equipment
+		infantry_equipment
+	}
+	research_categories = {
+		arts_weapons
+		cat_arts
+		support_tech
+		hospital_tech
+	}
+
+	initial_trait = {
+		token = RHL_mio_initial_dept_originium
+		name = RHL_mio_initial_dept_originium
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.25
+		}
+		equipment_bonus = {
+			soft_attack = 0.12
+		}
+	}
+
+	# 1 术式标准化
+	trait = {
+		token = RHL_mio_trait_rhl_formula_std
+		name = RHL_mio_trait_rhl_formula_std
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		special_trait_background = yes
+
+		position = { x = 3 y = 0 }
+
+		equipment_bonus = {
+			soft_attack = 0.25
+			reliability = 0.1
+		}
+	}
+
+	# 2 全民化模组
+	trait = {
+		token = RHL_mio_trait_rhl_mass_kit
+		name = RHL_mio_trait_rhl_mass_kit
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = -3 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_formula_std
+		any_parent = { RHL_mio_trait_rhl_formula_std }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s3_r4 }
+		}
+
+		equipment_bonus = {
+			reliability = -0.08
+		}
+		production_bonus = {
+			production_capacity_factor = 0.3
+			production_cost_factor = -0.2
+		}
+	}
+
+	# 3 感染防护配给
+	trait = {
+		token = RHL_mio_trait_rhl_infection_kit
+		name = RHL_mio_trait_rhl_infection_kit
+		icon = GFX_generic_mio_trait_icon_defense
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_formula_std
+		any_parent = { RHL_mio_trait_rhl_formula_std }
+
+		equipment_bonus = {
+			defense = 0.15
+		}
+		production_bonus = {
+			production_resource_penalty_factor = -0.3
+		}
+	}
+
+	# 4 平等分发
+	trait = {
+		token = RHL_mio_trait_rhl_equal_issue
+		name = RHL_mio_trait_rhl_equal_issue
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_formula_std
+		any_parent = { RHL_mio_trait_rhl_formula_std }
+
+		production_bonus = {
+			production_cost_factor = -0.25
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = -0.05
+		}
+	}
+
+	# 5 术式回收
+	trait = {
+		token = RHL_mio_trait_rhl_formula_reclaim
+		name = RHL_mio_trait_rhl_formula_reclaim
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 3 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_formula_std
+		any_parent = { RHL_mio_trait_rhl_formula_std }
+
+		equipment_bonus = {
+			build_cost_ic = -0.1
+		}
+		production_bonus = {
+			production_conversion_speed_factor = 0.25
+		}
+	}
+
+	# 6 民用转军用
+	trait = {
+		token = RHL_mio_trait_rhl_civilian_convert
+		name = RHL_mio_trait_rhl_civilian_convert
+		icon = GFX_generic_mio_trait_icon_conversion_speed
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_mass_kit
+		any_parent = { RHL_mio_trait_rhl_mass_kit }
+
+		production_bonus = {
+			production_conversion_speed_factor = 0.3
+			production_capacity_factor = 0.2
+		}
+	}
+
+	# 7 源石电池
+	trait = {
+		token = RHL_mio_trait_rhl_originium_cell
+		name = RHL_mio_trait_rhl_originium_cell
+		icon = GFX_generic_mio_trait_icon_fuel_consumption
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_infection_kit
+		any_parent = { RHL_mio_trait_rhl_infection_kit }
+
+		equipment_bonus = {
+			fuel_consumption = -0.2
+			soft_attack = 0.15
+		}
+	}
+
+	# 8 递质共鸣
+	trait = {
+		token = RHL_mio_trait_rhl_resonance
+		name = RHL_mio_trait_rhl_resonance
+		icon = GFX_generic_mio_trait_icon_hard_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_equal_issue
+		any_parent = { RHL_mio_trait_rhl_equal_issue }
+
+		equipment_bonus = {
+			hard_attack = 0.3
+			ap_attack = 0.25
+		}
+	}
+
+	# 9 术式冗余
+	trait = {
+		token = RHL_mio_trait_rhl_redundant_formula
+		name = RHL_mio_trait_rhl_redundant_formula
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_formula_reclaim
+		any_parent = { RHL_mio_trait_rhl_formula_reclaim }
+
+		equipment_bonus = {
+			reliability = 0.25
+			weight = 0.05
+		}
+	}
+
+	# 10 广播式施术
+	trait = {
+		token = RHL_mio_trait_rhl_broadcast_cast
+		name = RHL_mio_trait_rhl_broadcast_cast
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_civilian_convert
+		all_parents = { RHL_mio_trait_rhl_originium_cell }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s3_l4 }
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.35
+			ap_attack = 0.2
+		}
+	}
+
+	# 11 感染抑制涂层
+	trait = {
+		token = RHL_mio_trait_rhl_infection_coat
+		name = RHL_mio_trait_rhl_infection_coat
+		icon = GFX_generic_mio_trait_icon_max_strength
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_resonance
+		all_parents = { RHL_mio_trait_rhl_redundant_formula }
+
+		equipment_bonus = {
+			max_strength = 0.3
+			defense = 0.2
+		}
+	}
+
+	# 12 全民皆兵
+	trait = {
+		token = RHL_mio_trait_rhl_nation_in_arms
+		name = RHL_mio_trait_rhl_nation_in_arms
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		special_trait_background = yes
+
+		position = { x = 2 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_broadcast_cast
+		all_parents = { RHL_mio_trait_rhl_infection_coat }
+
+		equipment_bonus = {
+			soft_attack = 0.3
+			reliability = 0.15
+		}
+		production_bonus = {
+			production_capacity_factor = 0.35
+			production_cost_factor = -0.15
+		}
+	}
+
+}
+
+# ==============================================================================
+# 四 · 工程科 —— 浮空与咒言（拱形树，12 条专属特质）
+# ==============================================================================
+RHL_Dept_Engineering_organization = {
+	name = RHL_Dept_Engineering_organization
+	icon = GFX_rhl_mio_engineering
+
+	allowed = {
+		OR = {
+			original_tag = RHL
+			has_focus_tree = RHL_td
+		}
+	}
+
+	equipment_type = {
+		large_plane_airframe
+		transport_plane_equipment
+		support_equipment
+	}
+	research_categories = {
+		mio_cat_all_heavy_aircraft_and_modules
+		transport_plane
+		cat_air_engine
+		support_tech
+	}
+
+	initial_trait = {
+		token = RHL_mio_initial_dept_engineering
+		name = RHL_mio_initial_dept_engineering
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.25
+		}
+		equipment_bonus = {
+			air_range = 0.15
+		}
+	}
+
+	# 1 浮空结构
+	trait = {
+		token = RHL_mio_trait_rhl_float_frame
+		name = RHL_mio_trait_rhl_float_frame
+		icon = GFX_generic_mio_trait_icon_air_range
+		special_trait_background = yes
+
+		position = { x = 3 y = 0 }
+
+		equipment_bonus = {
+			air_range = 0.3
+			air_defence = 0.2
+		}
+	}
+
+	# 2 升力冗余
+	trait = {
+		token = RHL_mio_trait_rhl_lift_redundancy
+		name = RHL_mio_trait_rhl_lift_redundancy
+		icon = GFX_generic_mio_trait_icon_air_agility
+		special_trait_background = yes
+
+		position = { x = -2 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_float_frame
+		any_parent = { RHL_mio_trait_rhl_float_frame }
+
+		equipment_bonus = {
+			air_agility = 0.25
+			weight = 0.1
+		}
+	}
+
+	# 3 咒言刻印
+	trait = {
+		token = RHL_mio_trait_rhl_inscription
+		name = RHL_mio_trait_rhl_inscription
+		icon = GFX_generic_mio_trait_icon_air_attack
+		special_trait_background = yes
+
+		position = { x = 2 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_float_frame
+		any_parent = { RHL_mio_trait_rhl_float_frame }
+
+		equipment_bonus = {
+			air_attack = 0.3
+			reliability = -0.05
+		}
+	}
+
+	# 4 悬停平台
+	trait = {
+		token = RHL_mio_trait_rhl_hover_platform
+		name = RHL_mio_trait_rhl_hover_platform
+		icon = GFX_generic_mio_trait_icon_air_range
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_lift_redundancy
+		any_parent = { RHL_mio_trait_rhl_lift_redundancy }
+
+		equipment_bonus = {
+			air_range = 0.25
+			defense = 0.2
+		}
+	}
+
+	# 5 轻质蒙皮
+	trait = {
+		token = RHL_mio_trait_rhl_light_skin
+		name = RHL_mio_trait_rhl_light_skin
+		icon = GFX_generic_mio_trait_icon_weight
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_lift_redundancy
+		any_parent = { RHL_mio_trait_rhl_lift_redundancy }
+
+		equipment_bonus = {
+			weight = -0.2
+			maximum_speed = 0.15
+		}
+	}
+
+	# 6 抗风锚固
+	trait = {
+		token = RHL_mio_trait_rhl_wind_anchor
+		name = RHL_mio_trait_rhl_wind_anchor
+		icon = GFX_generic_mio_trait_icon_entrenchment
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_inscription
+		any_parent = { RHL_mio_trait_rhl_inscription }
+
+		equipment_bonus = {
+			entrenchment = 0.3
+			defense = 0.25
+		}
+	}
+
+	# 7 浮空炮位
+	trait = {
+		token = RHL_mio_trait_rhl_sky_gun
+		name = RHL_mio_trait_rhl_sky_gun
+		icon = GFX_generic_mio_trait_icon_hard_attack
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_inscription
+		any_parent = { RHL_mio_trait_rhl_inscription }
+
+		equipment_bonus = {
+			hard_attack = 0.3
+			ap_attack = 0.2
+		}
+	}
+
+	# 8 空中城市地基
+	trait = {
+		token = RHL_mio_trait_rhl_sky_city_base
+		name = RHL_mio_trait_rhl_sky_city_base
+		icon = GFX_generic_mio_trait_icon_facilities
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_hover_platform
+		any_parent = { RHL_mio_trait_rhl_hover_platform }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s4_r4 }
+		}
+
+		equipment_bonus = {
+			facilities = 0.35
+		}
+		production_bonus = {
+			production_capacity_factor = 0.15
+		}
+	}
+
+	# 9 模块化吊舱
+	trait = {
+		token = RHL_mio_trait_rhl_module_pod
+		name = RHL_mio_trait_rhl_module_pod
+		icon = GFX_generic_mio_trait_icon_conversion_speed
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_sky_gun
+		any_parent = { RHL_mio_trait_rhl_sky_gun }
+
+		production_bonus = {
+			production_conversion_speed_factor = 0.3
+			production_capacity_factor = 0.2
+		}
+	}
+
+	# 10 自循环修复
+	trait = {
+		token = RHL_mio_trait_rhl_self_repair
+		name = RHL_mio_trait_rhl_self_repair
+		icon = GFX_generic_mio_trait_icon_max_strength
+		special_trait_background = yes
+
+		position = { x = 2 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_sky_city_base
+		all_parents = { RHL_mio_trait_rhl_module_pod }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s4_l4 }
+		}
+
+		equipment_bonus = {
+			max_strength = 0.2
+		}
+		production_bonus = {
+			production_conversion_speed_factor = 0.35
+		}
+	}
+
+	# 11 骨笔模块化
+	trait = {
+		token = RHL_mio_trait_rhl_bone_pen
+		name = RHL_mio_trait_rhl_bone_pen
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_sky_city_base
+		any_parent = { RHL_mio_trait_rhl_sky_city_base }
+
+		equipment_bonus = {
+			build_cost_ic = -0.15
+		}
+		production_bonus = {
+			production_cost_factor = -0.2
+		}
+	}
+
+	# 12 天空堡垒
+	trait = {
+		token = RHL_mio_trait_rhl_sky_fortress
+		name = RHL_mio_trait_rhl_sky_fortress
+		icon = GFX_generic_mio_trait_icon_air_attack
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_module_pod
+		any_parent = { RHL_mio_trait_rhl_module_pod }
+
+		equipment_bonus = {
+			air_attack = 0.35
+			air_range = 0.35
+			max_strength = 0.35
+			weight = 0.1
+		}
+	}
+
+}
+
+# ==============================================================================
+# 五 · 科考科 —— 冰原与星门（斜向深链树，12 条专属特质）
+# ==============================================================================
+RHL_Dept_Expedition_organization = {
+	name = RHL_Dept_Expedition_organization
+	icon = GFX_rhl_mio_expedition
+
+	allowed = {
+		OR = {
+			original_tag = RHL
+			has_focus_tree = RHL_td
+		}
+	}
+
+	equipment_type = {
+		motorized_equipment
+		armored_car_equipment
+		support_equipment
+	}
+	research_categories = {
+		motorized_equipment
+		cat_armored_cars
+		recon_tech
+		logistics_tech
+	}
+
+	initial_trait = {
+		token = RHL_mio_initial_dept_expedition
+		name = RHL_mio_initial_dept_expedition
+
+		production_bonus = {
+			production_capacity_factor = 0.15
+		}
+		equipment_bonus = {
+			max_strength = 0.15
+		}
+	}
+
+	# 1 极寒工况包
+	trait = {
+		token = RHL_mio_trait_rhl_cold_package
+		name = RHL_mio_trait_rhl_cold_package
+		icon = GFX_generic_mio_trait_icon_defense
+		special_trait_background = yes
+
+		position = { x = 0 y = 0 }
+
+		equipment_bonus = {
+			defense = 0.25
+			reliability = 0.15
+		}
+	}
+
+	# 2 远征补给线
+	trait = {
+		token = RHL_mio_trait_rhl_supply_line
+		name = RHL_mio_trait_rhl_supply_line
+		icon = GFX_generic_mio_trait_icon_supply_consumption
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_cold_package
+		any_parent = { RHL_mio_trait_rhl_cold_package }
+
+		equipment_bonus = {
+			supply_consumption = -0.25
+			maximum_speed = 0.15
+		}
+	}
+
+	# 3 冰原前哨
+	trait = {
+		token = RHL_mio_trait_rhl_outpost
+		name = RHL_mio_trait_rhl_outpost
+		icon = GFX_generic_mio_trait_icon_entrenchment
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_supply_line
+		any_parent = { RHL_mio_trait_rhl_supply_line }
+
+		equipment_bonus = {
+			entrenchment = 0.25
+			defense = 0.2
+		}
+	}
+
+	# 4 夜行光学
+	trait = {
+		token = RHL_mio_trait_rhl_night_optics
+		name = RHL_mio_trait_rhl_night_optics
+		icon = GFX_generic_mio_trait_icon_night_penalty
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_outpost
+		any_parent = { RHL_mio_trait_rhl_outpost }
+
+		equipment_bonus = {
+			night_penalty = -0.3
+			soft_attack = 0.1
+		}
+	}
+
+	# 5 星荚警戒网
+	trait = {
+		token = RHL_mio_trait_rhl_aegis_net
+		name = RHL_mio_trait_rhl_aegis_net
+		icon = GFX_generic_mio_trait_icon_surface_detection
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_night_optics
+		any_parent = { RHL_mio_trait_rhl_night_optics }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s5_r4 }
+		}
+
+		equipment_bonus = {
+			surface_detection = 0.35
+			breakthrough = 0.12
+		}
+	}
+
+	# 6 深层钻探
+	trait = {
+		token = RHL_mio_trait_rhl_deep_drill
+		name = RHL_mio_trait_rhl_deep_drill
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_aegis_net
+		any_parent = { RHL_mio_trait_rhl_aegis_net }
+
+		equipment_bonus = {
+			build_cost_ic = 0.05
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.2
+		}
+	}
+
+	# 7 雪橇车队
+	trait = {
+		token = RHL_mio_trait_rhl_sledge_convoy
+		name = RHL_mio_trait_rhl_sledge_convoy
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_supply_line
+		any_parent = { RHL_mio_trait_rhl_supply_line }
+
+		equipment_bonus = {
+			maximum_speed = 0.25
+			supply_consumption = -0.15
+		}
+	}
+
+	# 8 冰下测绘
+	trait = {
+		token = RHL_mio_trait_rhl_polar_survey
+		name = RHL_mio_trait_rhl_polar_survey
+		icon = GFX_generic_mio_trait_icon_detection
+		special_trait_background = yes
+
+		position = { x = 0 y = 2 }
+		relative_position_id = RHL_mio_trait_rhl_sledge_convoy
+		any_parent = { RHL_mio_trait_rhl_sledge_convoy }
+
+		equipment_bonus = {
+			detection = 0.3
+			defense = 0.15
+		}
+	}
+
+	# 9 标本运输
+	trait = {
+		token = RHL_mio_trait_rhl_specimen_logistics
+		name = RHL_mio_trait_rhl_specimen_logistics
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 2 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_polar_survey
+		any_parent = { RHL_mio_trait_rhl_polar_survey }
+
+		production_bonus = {
+			production_capacity_factor = 0.25
+			production_conversion_speed_factor = 0.15
+		}
+	}
+
+	# 10 极昼作业
+	trait = {
+		token = RHL_mio_trait_rhl_endless_day
+		name = RHL_mio_trait_rhl_endless_day
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		special_trait_background = yes
+
+		position = { x = 2 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_outpost
+		any_parent = { RHL_mio_trait_rhl_outpost }
+
+		equipment_bonus = {
+			breakthrough = 0.2
+			defense = 0.15
+		}
+	}
+
+	# 11 星门观测阵列
+	trait = {
+		token = RHL_mio_trait_rhl_stargate_array
+		name = RHL_mio_trait_rhl_stargate_array
+		icon = GFX_generic_mio_trait_icon_surface_detection
+		special_trait_background = yes
+
+		position = { x = 2 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_cold_package
+		any_parent = { RHL_mio_trait_rhl_cold_package }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s5_l4 }
+		}
+
+		equipment_bonus = {
+			surface_detection = 0.25
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.35
+		}
+	}
+
+	# 12 极地远征军
+	trait = {
+		token = RHL_mio_trait_rhl_polar_expedition
+		name = RHL_mio_trait_rhl_polar_expedition
+		icon = GFX_generic_mio_trait_icon_supply_consumption
+		special_trait_background = yes
+
+		position = { x = 2 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_stargate_array
+		any_parent = { RHL_mio_trait_rhl_stargate_array }
+
+		equipment_bonus = {
+			supply_consumption = -0.3
+			maximum_speed = 0.25
+			entrenchment = 0.3
+			defense = 0.25
+		}
+	}
+
+}
+
+# ==============================================================================
+# 六 · 生态科 —— 精灵与生命（环簇树，12 条专属特质）
+# ==============================================================================
+RHL_Dept_Ecology_organization = {
+	name = RHL_Dept_Ecology_organization
+	icon = GFX_rhl_mio_ecology
+
+	allowed = {
+		OR = {
+			original_tag = RHL
+			has_focus_tree = RHL_td
+		}
+	}
+
+	equipment_type = {
+		support_equipment
+		infantry_equipment
+	}
+	research_categories = {
+		support_tech
+		infantry_weapons
+		hospital_tech
+		engineers_tech
+	}
+
+	initial_trait = {
+		token = RHL_mio_initial_dept_ecology
+		name = RHL_mio_initial_dept_ecology
+
+		equipment_bonus = {
+			max_strength = 0.2
+			reliability = 0.15
+		}
+	}
+
+	# 1 生物防治
+	trait = {
+		token = RHL_mio_trait_rhl_biocontrol
+		name = RHL_mio_trait_rhl_biocontrol
+		icon = GFX_generic_mio_trait_icon_entrenchment
+		special_trait_background = yes
+
+		position = { x = 2 y = 0 }
+
+		equipment_bonus = {
+			entrenchment = 0.25
+			max_strength = 0.2
+		}
+	}
+
+	# 2 孢子屏障
+	trait = {
+		token = RHL_mio_trait_rhl_spore_barrier
+		name = RHL_mio_trait_rhl_spore_barrier
+		icon = GFX_generic_mio_trait_icon_defense
+		special_trait_background = yes
+
+		position = { x = 1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_biocontrol
+		any_parent = { RHL_mio_trait_rhl_biocontrol }
+
+		equipment_bonus = {
+			defense = 0.3
+			hardness = 0.2
+		}
+	}
+
+	# 3 共生装甲
+	trait = {
+		token = RHL_mio_trait_rhl_symbiotic_armor
+		name = RHL_mio_trait_rhl_symbiotic_armor
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = 1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_spore_barrier
+		any_parent = { RHL_mio_trait_rhl_spore_barrier }
+
+		equipment_bonus = {
+			armor_value = 0.3
+			max_strength = 0.25
+		}
+	}
+
+	# 4 生态园区
+	trait = {
+		token = RHL_mio_trait_rhl_eco_park
+		name = RHL_mio_trait_rhl_eco_park
+		icon = GFX_generic_mio_trait_icon_facilities
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_biocontrol
+		any_parent = { RHL_mio_trait_rhl_biocontrol }
+
+		equipment_bonus = {
+			facilities = 0.3
+			defense = 0.15
+		}
+	}
+
+	# 5 精灵共生
+	trait = {
+		token = RHL_mio_trait_rhl_symbiosis
+		name = RHL_mio_trait_rhl_symbiosis
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_spore_barrier
+		all_parents = { RHL_mio_trait_rhl_symbiotic_armor }
+
+		equipment_bonus = {
+			soft_attack = 0.2
+			reliability = 0.2
+		}
+	}
+
+	# 6 生物发光
+	trait = {
+		token = RHL_mio_trait_rhl_bioluminescence
+		name = RHL_mio_trait_rhl_bioluminescence
+		icon = GFX_generic_mio_trait_icon_night_penalty
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_symbiotic_armor
+		any_parent = { RHL_mio_trait_rhl_symbiotic_armor }
+
+		equipment_bonus = {
+			night_penalty = -0.2
+			surface_detection = 0.2
+		}
+	}
+
+	# 7 无伤采集
+	trait = {
+		token = RHL_mio_trait_rhl_gentle_harvest
+		name = RHL_mio_trait_rhl_gentle_harvest
+		icon = GFX_generic_mio_trait_icon_resources
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_eco_park
+		any_parent = { RHL_mio_trait_rhl_eco_park }
+
+		production_bonus = {
+			production_resource_need_factor = -0.25
+			production_cost_factor = 0.05
+		}
+	}
+
+	# 8 自愈涂层
+	trait = {
+		token = RHL_mio_trait_rhl_self_healing
+		name = RHL_mio_trait_rhl_self_healing
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_symbiosis
+		any_parent = { RHL_mio_trait_rhl_symbiosis }
+
+		equipment_bonus = {
+			reliability = 0.25
+			max_strength = 0.2
+		}
+	}
+
+	# 9 生态武器化
+	trait = {
+		token = RHL_mio_trait_rhl_eco_weapon
+		name = RHL_mio_trait_rhl_eco_weapon
+		icon = GFX_generic_mio_trait_icon_hard_attack
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_bioluminescence
+		any_parent = { RHL_mio_trait_rhl_bioluminescence }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s6_r4 }
+		}
+
+		equipment_bonus = {
+			hard_attack = 0.3
+			ap_attack = 0.25
+		}
+	}
+
+	# 10 生命维持
+	trait = {
+		token = RHL_mio_trait_rhl_life_support
+		name = RHL_mio_trait_rhl_life_support
+		icon = GFX_generic_mio_trait_icon_max_strength
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_gentle_harvest
+		any_parent = { RHL_mio_trait_rhl_gentle_harvest }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s6_l4 }
+		}
+
+		equipment_bonus = {
+			max_strength = 0.4
+			supply_consumption = -0.2
+		}
+	}
+
+	# 11 盖亚防线
+	trait = {
+		token = RHL_mio_trait_rhl_gaia_line
+		name = RHL_mio_trait_rhl_gaia_line
+		icon = GFX_generic_mio_trait_icon_entrenchment
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_self_healing
+		all_parents = { RHL_mio_trait_rhl_symbiosis }
+
+		equipment_bonus = {
+			entrenchment = 0.4
+			defense = 0.35
+			max_strength = 0.35
+			facilities = 0.25
+		}
+	}
+
+	# 12 净化作业
+	trait = {
+		token = RHL_mio_trait_rhl_purification
+		name = RHL_mio_trait_rhl_purification
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_eco_weapon
+		any_parent = { RHL_mio_trait_rhl_eco_weapon }
+
+		equipment_bonus = {
+			build_cost_ic = -0.1
+		}
+		production_bonus = {
+			production_conversion_speed_factor = 0.2
+		}
+	}
+
+}
+
+# ==============================================================================
+# 七 · 防卫科 —— 钙质与秩序（宽叉二选一树，12 条专属特质）
+# ==============================================================================
+RHL_Dept_Defense_organization = {
+	name = RHL_Dept_Defense_organization
+	icon = GFX_rhl_mio_defense
+
+	allowed = {
+		OR = {
+			original_tag = RHL
+			has_focus_tree = RHL_td
+		}
+	}
+
+	equipment_type = {
+		infantry_equipment
+		armored_car_equipment
+		support_equipment
+	}
+	research_categories = {
+		infantry_weapons
+		cat_armored_cars
+		military_police_tech
+		support_tech
+	}
+
+	initial_trait = {
+		token = RHL_mio_initial_dept_defense
+		name = RHL_mio_initial_dept_defense
+
+		production_bonus = {
+			production_capacity_factor = 0.15
+		}
+		equipment_bonus = {
+			defense = 0.15
+		}
+	}
+
+	# 1 钙质涂层
+	trait = {
+		token = RHL_mio_trait_rhl_calcium_coat
+		name = RHL_mio_trait_rhl_calcium_coat
+		icon = GFX_generic_mio_trait_icon_defense
+		special_trait_background = yes
+
+		position = { x = 3 y = 0 }
+
+		equipment_bonus = {
+			defense = 0.3
+			armor_value = 0.2
+		}
+	}
+
+	# 2 动力甲原型
+	trait = {
+		token = RHL_mio_trait_rhl_power_armor
+		name = RHL_mio_trait_rhl_power_armor
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = -3 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_calcium_coat
+		any_parent = { RHL_mio_trait_rhl_calcium_coat }
+
+		mutually_exclusive = {
+			RHL_mio_trait_rhl_power_armor
+		}
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s7_l4 }
+		}
+
+		equipment_bonus = {
+			armor_value = 0.4
+			breakthrough = 0.25
+			maximum_speed = -0.05
+		}
+	}
+
+	# 3 外骨骼承重
+	trait = {
+		token = RHL_mio_trait_rhl_exoskeleton
+		name = RHL_mio_trait_rhl_exoskeleton
+		icon = GFX_generic_mio_trait_icon_breakthrough
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_power_armor
+		any_parent = { RHL_mio_trait_rhl_power_armor }
+
+		equipment_bonus = {
+			breakthrough = 0.3
+			weight = -0.1
+		}
+	}
+
+	# 4 镇暴装备
+	trait = {
+		token = RHL_mio_trait_rhl_riot_gear
+		name = RHL_mio_trait_rhl_riot_gear
+		icon = GFX_generic_mio_trait_icon_defense
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_exoskeleton
+		any_parent = { RHL_mio_trait_rhl_exoskeleton }
+
+		equipment_bonus = {
+			defense = 0.25
+			max_strength = 0.2
+		}
+	}
+
+	# 5 动员体制
+	trait = {
+		token = RHL_mio_trait_rhl_mobilization
+		name = RHL_mio_trait_rhl_mobilization
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_riot_gear
+		any_parent = { RHL_mio_trait_rhl_riot_gear }
+
+		production_bonus = {
+			production_capacity_factor = 0.35
+			production_resource_need_factor = -0.15
+		}
+	}
+
+	# 6 宪兵条例
+	trait = {
+		token = RHL_mio_trait_rhl_gendarmerie_code
+		name = RHL_mio_trait_rhl_gendarmerie_code
+		icon = GFX_generic_mio_trait_icon_entrenchment
+		special_trait_background = yes
+
+		position = { x = 3 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_calcium_coat
+		any_parent = { RHL_mio_trait_rhl_calcium_coat }
+
+		mutually_exclusive = {
+			RHL_mio_trait_rhl_calcium_coat
+		}
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s7_r4 }
+		}
+
+		equipment_bonus = {
+			entrenchment = 0.35
+			max_strength = 0.25
+		}
+	}
+
+	# 7 装甲巡警
+	trait = {
+		token = RHL_mio_trait_rhl_armored_patrol
+		name = RHL_mio_trait_rhl_armored_patrol
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_gendarmerie_code
+		any_parent = { RHL_mio_trait_rhl_gendarmerie_code }
+
+		equipment_bonus = {
+			armor_value = 0.25
+			surface_detection = 0.2
+		}
+	}
+
+	# 8 快速反应
+	trait = {
+		token = RHL_mio_trait_rhl_quick_response
+		name = RHL_mio_trait_rhl_quick_response
+		icon = GFX_generic_mio_trait_icon_maximum_speed
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_armored_patrol
+		any_parent = { RHL_mio_trait_rhl_armored_patrol }
+
+		equipment_bonus = {
+			maximum_speed = 0.25
+			breakthrough = 0.2
+		}
+	}
+
+	# 9 城防工程
+	trait = {
+		token = RHL_mio_trait_rhl_city_fort
+		name = RHL_mio_trait_rhl_city_fort
+		icon = GFX_generic_mio_trait_icon_facilities
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_quick_response
+		any_parent = { RHL_mio_trait_rhl_quick_response }
+
+		equipment_bonus = {
+			facilities = 0.25
+			entrenchment = 0.25
+		}
+	}
+
+	# 10 制式列装
+	trait = {
+		token = RHL_mio_trait_rhl_standard_issue
+		name = RHL_mio_trait_rhl_standard_issue
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_calcium_coat
+		any_parent = { RHL_mio_trait_rhl_calcium_coat }
+
+		production_bonus = {
+			production_capacity_factor = 0.3
+			production_cost_factor = -0.15
+		}
+	}
+
+	# 11 战场宪管
+	trait = {
+		token = RHL_mio_trait_rhl_field_marshal
+		name = RHL_mio_trait_rhl_field_marshal
+		icon = GFX_generic_mio_department_icon_tank_general_production
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_standard_issue
+		any_parent = { RHL_mio_trait_rhl_standard_issue }
+
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.25
+			military_industrial_organization_task_capacity = 1
+		}
+	}
+
+	# 12 铁壁师团
+	trait = {
+		token = RHL_mio_trait_rhl_iron_wall
+		name = RHL_mio_trait_rhl_iron_wall
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_field_marshal
+		any_parent = { RHL_mio_trait_rhl_field_marshal }
+
+		equipment_bonus = {
+			armor_value = 0.45
+			defense = 0.4
+			entrenchment = 0.35
+			breakthrough = 0.2
+		}
+	}
+
+}
+
+# ==============================================================================
+# 八 · 商务科 —— 权与利（轮辐树，12 条专属特质）
+# ==============================================================================
+RHL_Dept_Commerce_organization = {
+	name = RHL_Dept_Commerce_organization
+	icon = GFX_rhl_mio_commerce
+
+	allowed = {
+		OR = {
+			original_tag = RHL
+			has_focus_tree = RHL_td
+		}
+	}
+
+	equipment_type = {
+		mio_cat_eq_all_infantry_and_support_equipment
+		train_equipment
+		motorized_equipment
+	}
+	research_categories = {
+		cat_production
+		industry
+		construction_tech
+	}
+
+	initial_trait = {
+		token = RHL_mio_initial_dept_commerce
+		name = RHL_mio_initial_dept_commerce
+
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.4
+			military_industrial_organization_design_team_assign_cost = -0.3
+		}
+	}
+
+	# 1 媒体收购
+	trait = {
+		token = RHL_mio_trait_rhl_media_buyout
+		name = RHL_mio_trait_rhl_media_buyout
+		icon = GFX_generic_mio_department_icon_tank_general_production
+		special_trait_background = yes
+
+		position = { x = 3 y = 0 }
+
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.35
+		}
+	}
+
+	# 2 期货锁价
+	trait = {
+		token = RHL_mio_trait_rhl_futures_lock
+		name = RHL_mio_trait_rhl_futures_lock
+		icon = GFX_generic_mio_trait_icon_resources
+		special_trait_background = yes
+
+		position = { x = -3 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_media_buyout
+		any_parent = { RHL_mio_trait_rhl_media_buyout }
+
+		production_bonus = {
+			production_resource_need_factor = -0.25
+			production_cost_factor = -0.1
+		}
+	}
+
+	# 3 猎头网络
+	trait = {
+		token = RHL_mio_trait_rhl_headhunting
+		name = RHL_mio_trait_rhl_headhunting
+		icon = GFX_generic_mio_department_icon_artillery_technology
+		special_trait_background = yes
+
+		position = { x = -2 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_media_buyout
+		any_parent = { RHL_mio_trait_rhl_media_buyout }
+
+		organization_modifier = {
+			military_industrial_organization_design_team_change_cost = -0.45
+			military_industrial_organization_research_bonus = 0.15
+		}
+	}
+
+	# 4 专利买断
+	trait = {
+		token = RHL_mio_trait_rhl_patent_buyout
+		name = RHL_mio_trait_rhl_patent_buyout
+		icon = GFX_generic_mio_department_icon_infantry_technology
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_media_buyout
+		any_parent = { RHL_mio_trait_rhl_media_buyout }
+
+		organization_modifier = {
+			military_industrial_organization_design_team_assign_cost = -0.4
+			military_industrial_organization_research_bonus = 0.2
+		}
+	}
+
+	# 5 政商通道
+	trait = {
+		token = RHL_mio_trait_rhl_political_channel
+		name = RHL_mio_trait_rhl_political_channel
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_media_buyout
+		any_parent = { RHL_mio_trait_rhl_media_buyout }
+
+		production_bonus = {
+			production_cost_factor = -0.12
+		}
+		organization_modifier = {
+			military_industrial_organization_industrial_manufacturer_assign_cost = -0.4
+		}
+	}
+
+	# 6 舆论管制
+	trait = {
+		token = RHL_mio_trait_rhl_public_opinion
+		name = RHL_mio_trait_rhl_public_opinion
+		icon = GFX_generic_mio_trait_icon_defense
+		special_trait_background = yes
+
+		position = { x = 2 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_media_buyout
+		any_parent = { RHL_mio_trait_rhl_media_buyout }
+
+		equipment_bonus = {
+			defense = 0.2
+			entrenchment = 0.2
+		}
+	}
+
+	# 7 供应链霸权
+	trait = {
+		token = RHL_mio_trait_rhl_supply_hegemony
+		name = RHL_mio_trait_rhl_supply_hegemony
+		icon = GFX_generic_mio_trait_icon_resources
+		special_trait_background = yes
+
+		position = { x = 3 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_media_buyout
+		any_parent = { RHL_mio_trait_rhl_media_buyout }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s8_r4 }
+		}
+
+		production_bonus = {
+			production_resource_penalty_factor = -0.35
+			production_capacity_factor = 0.25
+		}
+	}
+
+	# 8 十科合议分红
+	trait = {
+		token = RHL_mio_trait_rhl_dividend
+		name = RHL_mio_trait_rhl_dividend
+		icon = GFX_generic_mio_trait_icon_resources
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_futures_lock
+		any_parent = { RHL_mio_trait_rhl_futures_lock }
+
+		production_bonus = {
+			production_resource_penalty_factor = 0.1
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.45
+		}
+	}
+
+	# 9 并购重组
+	trait = {
+		token = RHL_mio_trait_rhl_merger
+		name = RHL_mio_trait_rhl_merger
+		icon = GFX_generic_mio_trait_icon_conversion_speed
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_patent_buyout
+		all_parents = { RHL_mio_trait_rhl_political_channel }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s8_l4 }
+		}
+
+		production_bonus = {
+			production_conversion_speed_factor = 0.2
+		}
+		organization_modifier = {
+			military_industrial_organization_size_up_requirement = -0.35
+		}
+	}
+
+	# 10 空壳产线
+	trait = {
+		token = RHL_mio_trait_rhl_paper_lines
+		name = RHL_mio_trait_rhl_paper_lines
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_public_opinion
+		any_parent = { RHL_mio_trait_rhl_public_opinion }
+
+		equipment_bonus = {
+			reliability = -0.1
+			build_cost_ic = 0.05
+		}
+		production_bonus = {
+			production_capacity_factor = 0.3
+		}
+	}
+
+	# 11 财团金库
+	trait = {
+		token = RHL_mio_trait_rhl_treasury
+		name = RHL_mio_trait_rhl_treasury
+		icon = GFX_generic_mio_department_icon_tank_general_production
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_merger
+		any_parent = { RHL_mio_trait_rhl_merger }
+
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.6
+			military_industrial_organization_task_capacity = 1
+		}
+	}
+
+	# 12 商业帝国
+	trait = {
+		token = RHL_mio_trait_rhl_business_empire
+		name = RHL_mio_trait_rhl_business_empire
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_treasury
+		all_parents = { RHL_mio_trait_rhl_dividend RHL_mio_trait_rhl_paper_lines }
+
+		production_bonus = {
+			production_capacity_factor = 0.35
+			production_cost_factor = -0.25
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.7
+			military_industrial_organization_size_up_requirement = -0.35
+			military_industrial_organization_research_bonus = 0.25
+		}
+	}
+
+}
+
+# ==============================================================================
+# 九 · 人力资源科 —— 晨星与孤儿（金字塔树，12 条专属特质）
+# ==============================================================================
+RHL_Dept_HumanResources_organization = {
+	name = RHL_Dept_HumanResources_organization
+	icon = GFX_rhl_mio_hr
+
+	allowed = {
+		OR = {
+			original_tag = RHL
+			has_focus_tree = RHL_td
+		}
+	}
+
+	equipment_type = {
+		infantry_equipment
+		support_equipment
+		motorized_equipment
+	}
+	research_categories = {
+		infantry_weapons
+		support_tech
+		engineers_tech
+		logistics_tech
+		computing_tech
+	}
+
+	initial_trait = {
+		token = RHL_mio_initial_dept_hr
+		name = RHL_mio_initial_dept_hr
+
+		production_bonus = {
+			production_capacity_factor = 0.2
+			production_cost_factor = -0.1
+		}
+	}
+
+	# 1 感染者劳工
+	trait = {
+		token = RHL_mio_trait_rhl_infected_labour
+		name = RHL_mio_trait_rhl_infected_labour
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 3 y = 0 }
+
+		equipment_bonus = {
+			reliability = -0.05
+		}
+		production_bonus = {
+			production_capacity_factor = 0.35
+			production_resource_need_factor = -0.15
+		}
+	}
+
+	# 2 晨星奖学金
+	trait = {
+		token = RHL_mio_trait_rhl_morning_star
+		name = RHL_mio_trait_rhl_morning_star
+		icon = GFX_generic_mio_department_icon_support_technology
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_infected_labour
+		any_parent = { RHL_mio_trait_rhl_infected_labour }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.25
+			military_industrial_organization_design_team_change_cost = -0.35
+		}
+	}
+
+	# 3 公民权换产能
+	trait = {
+		token = RHL_mio_trait_rhl_citizenship_quota
+		name = RHL_mio_trait_rhl_citizenship_quota
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_infected_labour
+		any_parent = { RHL_mio_trait_rhl_infected_labour }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s9_r4 }
+		}
+
+		production_bonus = {
+			production_capacity_factor = 0.3
+			production_cost_factor = 0.05
+		}
+	}
+
+	# 4 孤儿兵源
+	trait = {
+		token = RHL_mio_trait_rhl_orphan_recruit
+		name = RHL_mio_trait_rhl_orphan_recruit
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_morning_star
+		any_parent = { RHL_mio_trait_rhl_morning_star }
+
+		production_bonus = {
+			production_capacity_factor = 0.3
+			production_resource_need_factor = -0.2
+		}
+	}
+
+	# 5 编外用工
+	trait = {
+		token = RHL_mio_trait_rhl_temp_staff
+		name = RHL_mio_trait_rhl_temp_staff
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_morning_star
+		all_parents = { RHL_mio_trait_rhl_citizenship_quota }
+
+		production_bonus = {
+			production_capacity_factor = 0.25
+			production_efficiency_cap_factor = 0.15
+		}
+	}
+
+	# 6 职工宿舍
+	trait = {
+		token = RHL_mio_trait_rhl_dormitory
+		name = RHL_mio_trait_rhl_dormitory
+		icon = GFX_generic_mio_trait_icon_facilities
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_citizenship_quota
+		any_parent = { RHL_mio_trait_rhl_citizenship_quota }
+
+		equipment_bonus = {
+			facilities = 0.25
+			max_strength = 0.2
+		}
+	}
+
+	# 7 培训流水线
+	trait = {
+		token = RHL_mio_trait_rhl_training_line
+		name = RHL_mio_trait_rhl_training_line
+		icon = GFX_generic_mio_trait_icon_conversion_speed
+		special_trait_background = yes
+
+		position = { x = -1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_orphan_recruit
+		any_parent = { RHL_mio_trait_rhl_orphan_recruit }
+
+		production_bonus = {
+			production_conversion_speed_factor = 0.3
+			production_efficiency_gain_factor = 0.2
+		}
+	}
+
+	# 8 轮岗制度
+	trait = {
+		token = RHL_mio_trait_rhl_rotation
+		name = RHL_mio_trait_rhl_rotation
+		icon = GFX_generic_mio_trait_icon_efficiency_gain
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_orphan_recruit
+		any_parent = { RHL_mio_trait_rhl_orphan_recruit }
+
+		production_bonus = {
+			production_efficiency_gain_factor = 0.25
+			production_conversion_speed_factor = 0.2
+		}
+	}
+
+	# 9 绩效激励
+	trait = {
+		token = RHL_mio_trait_rhl_performance
+		name = RHL_mio_trait_rhl_performance
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_temp_staff
+		any_parent = { RHL_mio_trait_rhl_temp_staff }
+
+		production_bonus = {
+			production_capacity_factor = 0.2
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.25
+		}
+	}
+
+	# 10 劳务派遣
+	trait = {
+		token = RHL_mio_trait_rhl_dispatched_labour
+		name = RHL_mio_trait_rhl_dispatched_labour
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 1 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_dormitory
+		any_parent = { RHL_mio_trait_rhl_dormitory }
+
+		equipment_bonus = {
+			reliability = -0.05
+		}
+		production_bonus = {
+			production_cost_factor = -0.2
+		}
+	}
+
+	# 11 人才池
+	trait = {
+		token = RHL_mio_trait_rhl_talent_pool
+		name = RHL_mio_trait_rhl_talent_pool
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_rotation
+		any_parent = { RHL_mio_trait_rhl_rotation }
+
+		production_bonus = {
+			production_capacity_factor = 0.25
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.15
+		}
+	}
+
+	# 12 人力洪流
+	trait = {
+		token = RHL_mio_trait_rhl_manpower_flood
+		name = RHL_mio_trait_rhl_manpower_flood
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_performance
+		any_parent = { RHL_mio_trait_rhl_performance }
+
+		production_bonus = {
+			production_capacity_factor = 0.45
+			production_resource_need_factor = -0.3
+			production_conversion_speed_factor = 0.3
+			production_efficiency_gain_factor = 0.25
+		}
+	}
+
+}
+
+# ==============================================================================
+# 十 · 总辖构件科 —— 万星园与星荚（十字树，12 条专属特质）
+# ==============================================================================
+RHL_Dept_Directorate_organization = {
+	name = RHL_Dept_Directorate_organization
+	icon = GFX_rhl_mio_directorate
+
+	allowed = {
+		OR = {
+			original_tag = RHL
+			has_focus_tree = RHL_td
+		}
+	}
+
+	equipment_type = {
+		armor
+		mio_cat_eq_all_tanks
+		railway_gun_equipment
+		train_equipment
+	}
+	research_categories = {
+		mio_cat_tech_all_armor_and_modules
+		cat_fortification
+		train_tech
+		cat_artillery
+	}
+
+	initial_trait = {
+		token = RHL_mio_initial_dept_directorate
+		name = RHL_mio_initial_dept_directorate
+
+		organization_modifier = {
+			military_industrial_organization_task_capacity = 1
+			military_industrial_organization_research_bonus = 0.2
+		}
+	}
+
+	# 1 标准构件接口
+	trait = {
+		token = RHL_mio_trait_rhl_std_interface
+		name = RHL_mio_trait_rhl_std_interface
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 3 y = 0 }
+
+		equipment_bonus = {
+			build_cost_ic = -0.2
+		}
+		production_bonus = {
+			production_conversion_speed_factor = 0.25
+		}
+	}
+
+	# 2 模数化军械
+	trait = {
+		token = RHL_mio_trait_rhl_modular_arms
+		name = RHL_mio_trait_rhl_modular_arms
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_std_interface
+		any_parent = { RHL_mio_trait_rhl_std_interface }
+
+		equipment_bonus = {
+			build_cost_ic = -0.25
+			reliability = 0.15
+		}
+	}
+
+	# 3 中央调度室
+	trait = {
+		token = RHL_mio_trait_rhl_central_control
+		name = RHL_mio_trait_rhl_central_control
+		icon = GFX_generic_mio_trait_icon_conversion_speed
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_modular_arms
+		any_parent = { RHL_mio_trait_rhl_modular_arms }
+
+		production_bonus = {
+			production_conversion_speed_factor = 0.3
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.15
+		}
+	}
+
+	# 4 要塞网络
+	trait = {
+		token = RHL_mio_trait_rhl_fort_network
+		name = RHL_mio_trait_rhl_fort_network
+		icon = GFX_generic_mio_trait_icon_entrenchment
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_central_control
+		any_parent = { RHL_mio_trait_rhl_central_control }
+
+		equipment_bonus = {
+			entrenchment = 0.3
+			facilities = 0.25
+		}
+	}
+
+	# 5 战略储备
+	trait = {
+		token = RHL_mio_trait_rhl_strategic_reserve
+		name = RHL_mio_trait_rhl_strategic_reserve
+		icon = GFX_generic_mio_trait_icon_max_strength
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_fort_network
+		any_parent = { RHL_mio_trait_rhl_fort_network }
+
+		equipment_bonus = {
+			max_strength = 0.2
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.25
+		}
+	}
+
+	# 6 统一配给
+	trait = {
+		token = RHL_mio_trait_rhl_rationing
+		name = RHL_mio_trait_rhl_rationing
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = RHL_mio_trait_rhl_strategic_reserve
+		any_parent = { RHL_mio_trait_rhl_strategic_reserve }
+
+		production_bonus = {
+			production_cost_factor = -0.2
+			production_capacity_factor = 0.25
+		}
+	}
+
+	# 7 万星园
+	trait = {
+		token = RHL_mio_trait_rhl_ten_thousand_garden
+		name = RHL_mio_trait_rhl_ten_thousand_garden
+		icon = GFX_generic_mio_trait_icon_facilities
+		special_trait_background = yes
+
+		position = { x = -3 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_central_control
+		any_parent = { RHL_mio_trait_rhl_central_control }
+
+		equipment_bonus = {
+			facilities = 0.35
+		}
+		production_bonus = {
+			production_capacity_factor = 0.2
+		}
+	}
+
+	# 8 构件外销
+	trait = {
+		token = RHL_mio_trait_rhl_component_export
+		name = RHL_mio_trait_rhl_component_export
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_ten_thousand_garden
+		any_parent = { RHL_mio_trait_rhl_ten_thousand_garden }
+
+		production_bonus = {
+			production_capacity_factor = 0.15
+		}
+		organization_modifier = {
+			military_industrial_organization_funds_gain = 0.35
+		}
+	}
+
+	# 9 星门预留
+	trait = {
+		token = RHL_mio_trait_rhl_stargate_slot
+		name = RHL_mio_trait_rhl_stargate_slot
+		icon = GFX_generic_mio_department_icon_support_technology
+		special_trait_background = yes
+
+		position = { x = 1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_component_export
+		any_parent = { RHL_mio_trait_rhl_component_export }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s10_l4 }
+		}
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.35
+			military_industrial_organization_funds_gain = 0.15
+		}
+	}
+
+	# 10 星荚穹顶
+	trait = {
+		token = RHL_mio_trait_rhl_aegis_dome
+		name = RHL_mio_trait_rhl_aegis_dome
+		icon = GFX_generic_mio_trait_icon_entrenchment
+		special_trait_background = yes
+
+		position = { x = 1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_central_control
+		any_parent = { RHL_mio_trait_rhl_central_control }
+
+		equipment_bonus = {
+			entrenchment = 0.35
+			defense = 0.3
+		}
+	}
+
+	# 11 穹顶联营
+	trait = {
+		token = RHL_mio_trait_rhl_dome_grid
+		name = RHL_mio_trait_rhl_dome_grid
+		icon = GFX_generic_mio_trait_icon_defense
+		special_trait_background = yes
+
+		position = { x = 1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_aegis_dome
+		any_parent = { RHL_mio_trait_rhl_aegis_dome }
+
+		equipment_bonus = {
+			defense = 0.25
+			facilities = 0.2
+		}
+	}
+
+	# 12 总辖统筹
+	trait = {
+		token = RHL_mio_trait_rhl_directorate_sync
+		name = RHL_mio_trait_rhl_directorate_sync
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 1 y = 0 }
+		relative_position_id = RHL_mio_trait_rhl_dome_grid
+		any_parent = { RHL_mio_trait_rhl_dome_grid }
+
+		available = {
+			FROM = { has_completed_focus = RHL_td_s10_r4 }
+		}
+
+		production_bonus = {
+			production_cost_factor = 0.05
+		}
+		organization_modifier = {
+			military_industrial_organization_task_capacity = 3
+			military_industrial_organization_size_up_requirement = -0.3
+		}
+	}
+
+}
+

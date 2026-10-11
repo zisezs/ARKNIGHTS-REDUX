@@ -1,0 +1,2298 @@
+# ==============================================================================
+#  大炎（YAN）国策树
+#  · 起点「真龙临朝」下分 7 条线：政治 / 岁兽 / 军事 / 工业 / 科研 / 地方 / 外交
+#  · 图标：关键节点用 GFX_focus_YAN_*（自绘徽章，见 interface/_ARF_goals/YAN_goals.gfx），
+#          其余复用原版 GFX_focus_generic_*
+#  · cost 为「周」（HOI4 国策 cost 单位），3 周 = 21 天
+#  · 长期加成不散挂：每条线在里程碑发放/升级一个「路线大BUFF」
+#    （YAN_Route_politics/sui/military/industry/research/local/diplomacy _1/_2/_3），
+#    其余国策给一次性收益（PP / 陆军经验 / 建筑位 / 科研槽 / 变量）。
+#  · 四大机制（岁兽苏醒度/书刀完整度/不反准备度/代理人信任）见
+#    common/scripted_effects/YAN_scripted_effects.txt、common/decisions/YAN_Decisions.txt
+# ==============================================================================
+
+focus_tree = {
+	id = YAN_national_focus
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = YAN
+		}
+	}
+
+	default = no
+
+	initial_show_position = {
+		focus = YAN_True_Dragon_Court
+	}
+
+	# ============================ 起点 ============================
+
+	# 真龙临朝
+	focus = {
+		id = YAN_True_Dragon_Court
+		icon = GFX_focus_YAN_True_Dragon_Court
+		cost = 1
+		x = 0
+		y = 0
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_stability_p5_tt
+
+			add_political_power = 50
+			add_stability = 0.03
+			add_ideas = YAN_True_dragon_reign
+			set_country_flag = yan_true_dragon_court
+		}
+	}
+
+	# ============================ 一、政治线 ============================
+
+	# 三公议政
+	focus = {
+		id = YAN_Three_Dukes
+		icon = GFX_focus_generic_advisors
+		cost = 3
+		prerequisite = { focus = YAN_True_Dragon_Court }
+		x = -40
+		y = 1
+		relative_position_id = YAN_True_Dragon_Court
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_stability_var value = 0.15 }
+			add_to_variable = { var = YAN_route_politics_pp_var value = 0.15 }
+			custom_effect_tooltip = YAN_route_politics_stability_p15_tt
+			custom_effect_tooltip = YAN_route_politics_pp_p15_tt
+
+			add_political_power = 30
+			add_stability = 0.03
+		}
+	}
+
+	# 太傅：上兵伐谋
+	focus = {
+		id = YAN_Taifu_Strategy
+		icon = GFX_focus_generic_monarchy_2
+		cost = 5
+		prerequisite = { focus = YAN_Three_Dukes }
+		mutually_exclusive = { focus = YAN_Taiwei_Rearmament }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Three_Dukes
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_stability_p5_tt
+
+			add_political_power = 50
+			add_command_power = 30
+			set_country_flag = yan_taifu_line
+		}
+	}
+
+	# 设置大考
+	focus = {
+		id = YAN_Grand_Examination
+		icon = GFX_focus_generic_university_1
+		cost = 5
+		prerequisite = { focus = YAN_Taifu_Strategy }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Taifu_Strategy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_pp_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_pp_p5_tt
+
+			add_political_power = 50
+			add_political_power = 50
+		}
+	}
+
+	# 秉烛新制
+	focus = {
+		id = YAN_Bingzhu_New_System
+		icon = GFX_focus_YAN_Bingzhu
+		cost = 5
+		prerequisite = { focus = YAN_Grand_Examination }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Grand_Examination
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_stability_var value = 0.15 }
+			add_to_variable = { var = YAN_route_politics_pp_var value = 0.15 }
+			add_to_variable = { var = YAN_route_politics_advisor_cost_var value = -0.25 }
+			custom_effect_tooltip = YAN_route_politics_stability_p15_tt
+			custom_effect_tooltip = YAN_route_politics_pp_p15_tt
+			custom_effect_tooltip = YAN_route_politics_advisor_cost_m25_tt
+
+			add_ideas = YAN_Bingzhu_new_system
+		}
+	}
+
+	# 代理人合作
+	focus = {
+		id = YAN_Agents_Cooperation
+		icon = GFX_focus_generic_support_the_left_right
+		cost = 8
+		prerequisite = {
+			focus = YAN_Bingzhu_New_System
+			focus = YAN_Sishuitai_Alert
+		}
+		mutually_exclusive = { focus = YAN_Purge_Agents }
+		x = 14
+		y = -1
+		relative_position_id = YAN_Bingzhu_New_System
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_research_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_behemoth_var value = 0.1 }
+			add_to_variable = { var = YAN_route_sui_intel_var value = 0.15 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+			custom_effect_tooltip = YAN_route_sui_research_p5_tt
+			custom_effect_tooltip = YAN_route_sui_behemoth_p10_tt
+			custom_effect_tooltip = YAN_route_sui_intel_p15_tt
+
+			add_ideas = YAN_Agents_family
+			add_to_variable = { yan_agent_trust = 20 }
+		}
+	}
+
+	# 太尉：整军经武
+	focus = {
+		id = YAN_Taiwei_Rearmament
+		icon = GFX_focus_generic_military_dictatorship
+		cost = 5
+		prerequisite = { focus = YAN_Three_Dukes }
+		mutually_exclusive = { focus = YAN_Taifu_Strategy }
+		x = 2
+		y = 1
+		relative_position_id = YAN_Three_Dukes
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_advisor_cost_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_politics_advisor_cost_m5_tt
+
+			add_war_support = 0.05
+			army_experience = 25
+			set_country_flag = yan_taiwei_line
+		}
+	}
+
+	# 玉门开火
+	focus = {
+		id = YAN_Yumen_Fire
+		icon = GFX_focus_YAN_Yumen_Fire
+		cost = 8
+		prerequisite = { focus = YAN_Taiwei_Rearmament }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Taiwei_Rearmament
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_resistance_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_politics_resistance_m5_tt
+
+			add_war_support = 0.1
+			army_experience = 25
+			set_country_flag = yan_yumen_fire
+		}
+	}
+
+	# 夺取书刀
+	focus = {
+		id = YAN_Seize_Shudao
+		icon = GFX_focus_generic_secret_service_agency
+		cost = 8
+		prerequisite = { focus = YAN_Yumen_Fire }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Yumen_Fire
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_stability_p5_tt
+
+			add_political_power = 50
+			add_to_variable = { yan_shudao_integrity = -20 }
+			set_country_flag = yan_seize_shudao
+		}
+	}
+
+	# 启动不反
+	focus = {
+		id = YAN_Start_Bufan
+		icon = GFX_focus_YAN_Start_Bufan
+		cost = 10
+		prerequisite = { focus = YAN_Seize_Shudao }
+		mutually_exclusive = { focus = YAN_Yumen_Mutual_Ruin }
+		x = -2
+		y = 1
+		relative_position_id = YAN_Seize_Shudao
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_pp_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_pp_p5_tt
+
+			add_to_variable = { yan_bufan_prep = 30 }
+			set_country_flag = yan_bufan_authorized
+			custom_effect_tooltip = YAN_Start_Bufan_tt
+		}
+	}
+
+	# 玉门同归
+	focus = {
+		id = YAN_Yumen_Mutual_Ruin
+		icon = GFX_focus_generic_home_defense
+		cost = 10
+		prerequisite = { focus = YAN_Seize_Shudao }
+		mutually_exclusive = { focus = YAN_Start_Bufan }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Seize_Shudao
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_advisor_cost_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_politics_advisor_cost_m5_tt
+
+			add_war_support = 0.15
+			add_to_variable = { yan_bufan_prep = -20 }
+			add_to_variable = { yan_sui_awakening = -10 }
+			set_country_flag = yan_yumen_mutual_ruin
+		}
+	}
+
+	# 太师平反
+	focus = {
+		id = YAN_Taishi_Rehab
+		icon = GFX_focus_generic_blue_flags
+		cost = 5
+		prerequisite = { focus = YAN_Three_Dukes }
+		x = 4
+		y = 1
+		relative_position_id = YAN_Three_Dukes
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_resistance_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_politics_resistance_m5_tt
+
+			add_political_power = 50
+			add_stability = 0.05
+		}
+	}
+
+	# 彻查旧案
+	focus = {
+		id = YAN_Probe_Old_Case
+		icon = GFX_focus_generic_secret_agent_operative
+		cost = 5
+		prerequisite = { focus = YAN_Taishi_Rehab }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Taishi_Rehab
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_stability_p5_tt
+
+			add_political_power = 25
+			add_stability = 0.03
+		}
+	}
+
+	# 赦免顾筌、宁述
+	focus = {
+		id = YAN_Pardon_Gu_Quan
+		icon = GFX_focus_generic_monarchist_sentiment
+		cost = 5
+		prerequisite = { focus = YAN_Probe_Old_Case }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Probe_Old_Case
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_pp_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_pp_p5_tt
+
+			add_stability = 0.05
+			set_country_flag = yan_pardon_old_case
+		}
+	}
+
+	# 煌与宁茵相认
+	focus = {
+		id = YAN_Huang_Meets_Ning_Yin
+		icon = GFX_focus_generic_support_the_left_right
+		cost = 5
+		prerequisite = { focus = YAN_Pardon_Gu_Quan }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Pardon_Gu_Quan
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_advisor_cost_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_politics_advisor_cost_m5_tt
+
+			add_stability = 0.05
+			add_political_power = 25
+		}
+	}
+
+	# 天下一白
+	focus = {
+		id = YAN_Tianxia_Yibai
+		icon = GFX_focus_generic_asia_liberation
+		cost = 8
+		prerequisite = { focus = YAN_Huang_Meets_Ning_Yin }
+		x = -4
+		y = 1
+		relative_position_id = YAN_Huang_Meets_Ning_Yin
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_stability_var value = 0.15 }
+			add_to_variable = { var = YAN_route_politics_pp_var value = 0.15 }
+			add_to_variable = { var = YAN_route_politics_advisor_cost_var value = -0.25 }
+			add_to_variable = { var = YAN_route_politics_resistance_var value = -0.2 }
+			custom_effect_tooltip = YAN_route_politics_stability_p15_tt
+			custom_effect_tooltip = YAN_route_politics_pp_p15_tt
+			custom_effect_tooltip = YAN_route_politics_advisor_cost_m25_tt
+			custom_effect_tooltip = YAN_route_politics_resistance_m20_tt
+
+			add_ideas = YAN_Taishi_rehabilitated
+			add_war_support = 0.05
+		}
+	}
+
+	# 司岁台改革
+	focus = {
+		id = YAN_Sishuitai_Reform
+		icon = GFX_focus_generic_secret_service_agency
+		cost = 3
+		prerequisite = { focus = YAN_True_Dragon_Court }
+		x = -38
+		y = 1
+		relative_position_id = YAN_True_Dragon_Court
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_resistance_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_politics_resistance_m5_tt
+
+			add_political_power = 25
+			add_stability = 0.03
+		}
+	}
+
+	# 椿辞职
+	focus = {
+		id = YAN_Chun_Resigns
+		icon = GFX_focus_generic_advisors
+		cost = 5
+		prerequisite = { focus = YAN_Sishuitai_Reform }
+		x = 4
+		y = 1
+		relative_position_id = YAN_Sishuitai_Reform
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_stability_p5_tt
+
+			add_political_power = 25
+		}
+	}
+
+	# 左乐接任监正
+	focus = {
+		id = YAN_Zuo_Le_takes_office
+		icon = GFX_focus_generic_secret_agent_operative
+		cost = 5
+		prerequisite = { focus = YAN_Chun_Resigns }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Chun_Resigns
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_pp_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_pp_p5_tt
+
+			add_political_power = 25
+			set_country_flag = yan_zuole_office
+		}
+	}
+
+	# 秉烛人新制
+	focus = {
+		id = YAN_Bingzhu_people_new
+		icon = GFX_focus_generic_secret_service_agency
+		cost = 5
+		prerequisite = { focus = YAN_Zuo_Le_takes_office }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Zuo_Le_takes_office
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_advisor_cost_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_politics_advisor_cost_m5_tt
+
+			add_political_power = 50
+			add_political_power = 25
+		}
+	}
+
+	# 书刀归天镜阁
+	focus = {
+		id = YAN_Shudao_back_to_Tianjingge
+		icon = GFX_focus_YAN_Shudao
+		cost = 3
+		prerequisite = { focus = YAN_True_Dragon_Court }
+		x = -36
+		y = 1
+		relative_position_id = YAN_True_Dragon_Court
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_resistance_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_politics_resistance_m5_tt
+
+			add_to_variable = { yan_shudao_integrity = 10 }
+		}
+	}
+
+	# 书刀封存
+	focus = {
+		id = YAN_Shudao_Sealed
+		icon = GFX_focus_generic_secret_service_agency
+		cost = 8
+		prerequisite = { focus = YAN_Shudao_back_to_Tianjingge }
+		mutually_exclusive = { focus = YAN_Chen_Huijie_holds_shudao }
+		x = 4
+		y = 1
+		relative_position_id = YAN_Shudao_back_to_Tianjingge
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_stability_p5_tt
+
+			add_to_variable = { yan_shudao_integrity = 30 }
+			add_stability = 0.05
+		}
+	}
+
+	# 陈晖洁持书刀
+	focus = {
+		id = YAN_Chen_Huijie_holds_shudao
+		icon = GFX_focus_YAN_Shudao
+		cost = 8
+		prerequisite = { focus = YAN_Shudao_back_to_Tianjingge }
+		mutually_exclusive = { focus = YAN_Shudao_Sealed }
+		x = 6
+		y = 1
+		relative_position_id = YAN_Shudao_back_to_Tianjingge
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_pp_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_pp_p5_tt
+
+			add_to_variable = { yan_shudao_integrity = -10 }
+			set_country_flag = yan_chen_shudao
+		}
+	}
+
+	# 天喟之剑
+	focus = {
+		id = YAN_Tiankui_Sword
+		icon = GFX_focus_YAN_Tiankui_Sword
+		cost = 8
+		prerequisite = { focus = YAN_Chen_Huijie_holds_shudao }
+		x = -2
+		y = 1
+		relative_position_id = YAN_Chen_Huijie_holds_shudao
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_advisor_cost_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_politics_advisor_cost_m5_tt
+
+			add_ideas = YAN_Tiankui_sword
+		}
+	}
+
+	# 真龙与魏彦吾
+	focus = {
+		id = YAN_True_Dragon_and_Wei
+		icon = GFX_focus_generic_monarchy_1
+		cost = 3
+		prerequisite = { focus = YAN_True_Dragon_Court }
+		x = -34
+		y = 1
+		relative_position_id = YAN_True_Dragon_Court
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_resistance_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_politics_resistance_m5_tt
+
+			add_political_power = 25
+		}
+	}
+
+	# 兄弟对峙
+	focus = {
+		id = YAN_Brothers_standoff
+		icon = GFX_focus_generic_military_mission
+		cost = 5
+		prerequisite = { focus = YAN_True_Dragon_and_Wei }
+		x = 6
+		y = 1
+		relative_position_id = YAN_True_Dragon_and_Wei
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_stability_p5_tt
+
+			add_political_power = 25
+			add_war_support = 0.05
+		}
+	}
+
+	# 兄弟同心
+	focus = {
+		id = YAN_Brothers_one_heart
+		icon = GFX_focus_generic_befriend_monarchist_georgia
+		cost = 8
+		prerequisite = { focus = YAN_Brothers_standoff }
+		x = -2
+		y = 1
+		relative_position_id = YAN_Brothers_standoff
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_politics }
+			add_to_variable = { var = YAN_route_politics_pp_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_politics_pp_p5_tt
+
+			add_ideas = YAN_Brothers_one_heart
+		}
+	}
+
+	# ============================ 二、岁兽线 ============================
+
+	# 岁陵异动
+	focus = {
+		id = YAN_Suiling_Stirring
+		icon = GFX_focus_YAN_Suiling
+		cost = 1
+		prerequisite = { focus = YAN_True_Dragon_Court }
+		x = -25
+		y = 1
+		relative_position_id = YAN_True_Dragon_Court
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_research_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_behemoth_var value = 0.1 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+			custom_effect_tooltip = YAN_route_sui_research_p5_tt
+			custom_effect_tooltip = YAN_route_sui_behemoth_p10_tt
+
+			set_variable = { yan_sui_awakening = 45 }
+			custom_effect_tooltip = YAN_Suiling_Stirring_tt
+		}
+	}
+
+	# 司岁台警戒
+	focus = {
+		id = YAN_Sishuitai_Alert
+		icon = GFX_focus_generic_secret_agent_operative
+		cost = 3
+		prerequisite = { focus = YAN_Suiling_Stirring }
+		x = 1
+		y = 1
+		relative_position_id = YAN_Suiling_Stirring
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+
+			add_to_variable = { yan_sui_awakening = -10 }
+			add_stability = 0.05
+		}
+	}
+
+	# 监视代理人
+	focus = {
+		id = YAN_Watch_Agents
+		icon = GFX_focus_generic_secret_service_agency
+		cost = 5
+		prerequisite = { focus = YAN_Sishuitai_Alert }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Sishuitai_Alert
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_research_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_research_p5_tt
+
+			add_to_variable = { yan_agent_trust = 10 }
+			add_political_power = 25
+		}
+	}
+
+	# 诛杀代理人
+	focus = {
+		id = YAN_Purge_Agents
+		icon = GFX_focus_generic_crush_the_military
+		cost = 5
+		prerequisite = { focus = YAN_Sishuitai_Alert }
+		mutually_exclusive = { focus = YAN_Agents_Cooperation }
+		x = 2
+		y = 1
+		relative_position_id = YAN_Sishuitai_Alert
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_intel_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_intel_p5_tt
+
+			add_to_variable = { yan_agent_trust = -40 }
+			add_to_variable = { yan_sui_awakening = -15 }
+			add_war_support = 0.1
+			add_stability = -0.05
+		}
+	}
+
+	# 重岳入岁陵
+	focus = {
+		id = YAN_Chong_Yue_enters
+		icon = GFX_focus_generic_mountain_training
+		cost = 5
+		prerequisite = { focus = YAN_Agents_Cooperation }
+		x = -2
+		y = 1
+		relative_position_id = YAN_Agents_Cooperation
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_behemoth_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_behemoth_p5_tt
+
+			add_to_variable = { yan_agent_trust = 10 }
+			army_experience = 25
+		}
+	}
+
+	# 令、均织梦
+	focus = {
+		id = YAN_Ling_and_Jun_dream
+		icon = GFX_focus_generic_support_the_left_right
+		cost = 5
+		prerequisite = { focus = YAN_Agents_Cooperation }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Agents_Cooperation
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+
+			add_to_variable = { yan_agent_trust = 10 }
+			add_stability = 0.03
+		}
+	}
+
+	# 年、夕镇伥
+	focus = {
+		id = YAN_Nian_and_Xi_ward
+		icon = GFX_focus_generic_army_doctrines_2
+		cost = 5
+		prerequisite = { focus = YAN_Agents_Cooperation }
+		x = 2
+		y = 1
+		relative_position_id = YAN_Agents_Cooperation
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_research_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_research_p5_tt
+
+			add_to_variable = { yan_agent_trust = 10 }
+			add_political_power = 25
+		}
+	}
+
+	# 黍、余安民
+	focus = {
+		id = YAN_Shu_and_Yu_settle
+		icon = GFX_focus_generic_agricultural_subsidies
+		cost = 5
+		prerequisite = { focus = YAN_Agents_Cooperation }
+		x = 4
+		y = 1
+		relative_position_id = YAN_Agents_Cooperation
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_intel_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_intel_p5_tt
+
+			add_to_variable = { yan_agent_trust = 10 }
+			add_stability = 0.05
+		}
+	}
+
+	# 书刀研究
+	focus = {
+		id = YAN_Shudao_research
+		icon = GFX_focus_YAN_Shudao
+		cost = 3
+		prerequisite = { focus = YAN_Suiling_Stirring }
+		x = 3
+		y = 1
+		relative_position_id = YAN_Suiling_Stirring
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_behemoth_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_behemoth_p5_tt
+
+			add_to_variable = { yan_shudao_integrity = 20 }
+		}
+	}
+
+	# 删改历史
+	focus = {
+		id = YAN_Erase_history
+		icon = GFX_focus_generic_secret_service_agency
+		cost = 5
+		prerequisite = { focus = YAN_Shudao_research }
+		x = 2
+		y = 1
+		relative_position_id = YAN_Shudao_research
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+
+			add_to_variable = { yan_shudao_integrity = -15 }
+			add_to_variable = { yan_sui_awakening = -5 }
+		}
+	}
+
+	# 抹去「岁」字
+	focus = {
+		id = YAN_Erase_Sui_word
+		icon = GFX_focus_generic_secret_agent_operative
+		cost = 8
+		prerequisite = { focus = YAN_Erase_history }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Erase_history
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_research_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_research_p5_tt
+
+			add_to_variable = { yan_shudao_integrity = -20 }
+			add_to_variable = { yan_sui_awakening = -10 }
+		}
+	}
+
+	# 岁兽意识削弱
+	focus = {
+		id = YAN_Weaken_Sui
+		icon = GFX_focus_generic_blue_flags
+		cost = 8
+		prerequisite = { focus = YAN_Erase_Sui_word }
+		x = -5
+		y = 1
+		relative_position_id = YAN_Erase_Sui_word
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_intel_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_intel_p5_tt
+
+			add_to_variable = { yan_sui_awakening = -15 }
+			add_stability = 0.05
+		}
+	}
+
+	# 不反准备
+	focus = {
+		id = YAN_Bufan_prepare
+		icon = GFX_focus_YAN_Start_Bufan
+		cost = 5
+		prerequisite = { focus = YAN_Suiling_Stirring }
+		x = 5
+		y = 1
+		relative_position_id = YAN_Suiling_Stirring
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_behemoth_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_behemoth_p5_tt
+
+			add_to_variable = { yan_bufan_prep = 20 }
+			add_war_support = 0.10
+		}
+	}
+
+	# 真龙血脉
+	focus = {
+		id = YAN_True_Dragon_blood
+		icon = GFX_focus_generic_monarchy_1
+		cost = 5
+		prerequisite = { focus = YAN_Bufan_prepare }
+		x = 2
+		y = 1
+		relative_position_id = YAN_Bufan_prepare
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+
+			add_to_variable = { yan_bufan_prep = 20 }
+			add_stability = -0.03
+		}
+	}
+
+	# 不反源石
+	focus = {
+		id = YAN_Bufan_Originium_Rite
+		icon = GFX_focus_YAN_Start_Bufan
+		cost = 8
+		prerequisite = { focus = YAN_True_Dragon_blood }
+		x = 0
+		y = 1
+		relative_position_id = YAN_True_Dragon_blood
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_research_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_research_p5_tt
+
+			add_ideas = YAN_Bufan_originium
+			add_to_variable = { yan_bufan_prep = 30 }
+		}
+	}
+
+	# 望的棋局
+	focus = {
+		id = YAN_Wang_chess
+		icon = GFX_focus_generic_asia_liberation
+		cost = 5
+		prerequisite = { focus = YAN_Suiling_Stirring }
+		x = 7
+		y = 1
+		relative_position_id = YAN_Suiling_Stirring
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_intel_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_intel_p5_tt
+
+			add_political_power = 50
+			set_country_flag = yan_wang_chess
+		}
+	}
+
+	# 一百八十一黑子
+	focus = {
+		id = YAN_181_black_stones
+		icon = GFX_focus_generic_secret_agent_operative
+		cost = 8
+		prerequisite = { focus = YAN_Wang_chess }
+		x = 2
+		y = 1
+		relative_position_id = YAN_Wang_chess
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_behemoth_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_behemoth_p5_tt
+
+			add_to_variable = { yan_agent_trust = 15 }
+			add_to_variable = { yan_sui_awakening = -5 }
+		}
+	}
+
+	# 岁陵决战
+	focus = {
+		id = YAN_Suiling_Decisive
+		icon = GFX_focus_YAN_Suiling_Decisive
+		cost = 10
+		prerequisite = {
+			focus = YAN_181_black_stones
+			focus = YAN_Bufan_Originium_Rite
+		}
+		x = 0
+		y = 1
+		relative_position_id = YAN_181_black_stones
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		available = {
+			OR = {
+				# 岁兽苏醒度顶到岁陵撑不住
+				check_variable = { yan_sui_awakening > 79 }
+				# 或者拖到 1103 年，司岁台再压不住，决战自动开启
+				date > 1103.1.1
+			}
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_research_var value = 0.05 }
+			add_to_variable = { var = YAN_route_sui_behemoth_var value = 0.1 }
+			add_to_variable = { var = YAN_route_sui_intel_var value = 0.15 }
+			add_to_variable = { var = YAN_route_sui_agent_unlock_var value = 1 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+			custom_effect_tooltip = YAN_route_sui_research_p5_tt
+			custom_effect_tooltip = YAN_route_sui_behemoth_p10_tt
+			custom_effect_tooltip = YAN_route_sui_intel_p15_tt
+			custom_effect_tooltip = YAN_route_sui_agent_unlock_u1_tt
+
+			if = {
+				limit = { check_variable = { yan_agent_trust > 59 } }
+				add_ideas = YAN_Wang_shackles
+				add_ideas = YAN_New_sui_shadow
+				add_ideas = YAN_Sui_calamity_ended
+				custom_effect_tooltip = YAN_Suiling_Decisive_wang_tt
+			}
+			else_if = {
+				limit = { check_variable = { yan_bufan_prep > 59 } }
+				add_ideas = YAN_True_dragon_fallen
+				add_ideas = YAN_Sui_calamity_ended
+				custom_effect_tooltip = YAN_Suiling_Decisive_bufan_tt
+			}
+			else = {
+				add_ideas = YAN_Sui_disaster
+				add_ideas = YAN_Behemoths_awaken
+				custom_effect_tooltip = YAN_Suiling_Decisive_fail_tt
+			}
+			country_event = { id = yan_sui.10 }
+		}
+	}
+
+	# 望取代岁
+	focus = {
+		id = YAN_Wang_replaces_Sui
+		icon = GFX_focus_YAN_Suiling_Decisive
+		cost = 8
+		prerequisite = { focus = YAN_Suiling_Decisive }
+		x = -5
+		y = 1
+		relative_position_id = YAN_Suiling_Decisive
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_sui }
+			add_to_variable = { var = YAN_route_sui_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_sui_stability_p5_tt
+
+			add_stability = 0.1
+			add_war_support = 0.05
+			add_ideas = YAN_New_sui_shadow
+		}
+	}
+
+	# ============================ 三、军事线 ============================
+
+	# 军事改革
+	focus = {
+		id = YAN_Military_Reform
+		icon = GFX_focus_generic_military_academy
+		cost = 3
+		prerequisite = { focus = YAN_True_Dragon_Court }
+		x = -12
+		y = 1
+		relative_position_id = YAN_True_Dragon_Court
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_attack_var value = 0.05 }
+			add_to_variable = { var = YAN_route_military_defence_var value = 0.1 }
+			add_to_variable = { var = YAN_route_military_army_xp_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_attack_p5_tt
+			custom_effect_tooltip = YAN_route_military_defence_p10_tt
+			custom_effect_tooltip = YAN_route_military_army_xp_p5_tt
+
+			army_experience = 25
+			add_political_power = 25
+		}
+	}
+
+	# 玉门要塞
+	focus = {
+		id = YAN_Yumen_Fortress
+		icon = GFX_focus_generic_mountain_fortification
+		cost = 5
+		prerequisite = { focus = YAN_Military_Reform }
+		x = -2
+		y = 1
+		relative_position_id = YAN_Military_Reform
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_attack_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_attack_p5_tt
+
+			army_experience = 25
+		}
+	}
+
+	# 屏风卫
+	focus = {
+		id = YAN_Pingfeng_Guard
+		icon = GFX_focus_generic_home_defense
+		cost = 5
+		prerequisite = { focus = YAN_Yumen_Fortress }
+		x = 2
+		y = 1
+		relative_position_id = YAN_Yumen_Fortress
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_defence_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_defence_p5_tt
+
+			army_experience = 25
+		}
+	}
+
+	# 沙渠
+	focus = {
+		id = YAN_Shajq
+		icon = GFX_focus_generic_desert_training
+		cost = 5
+		prerequisite = { focus = YAN_Yumen_Fortress }
+		x = 4
+		y = 1
+		relative_position_id = YAN_Yumen_Fortress
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_army_xp_var value = 0.02 }
+			custom_effect_tooltip = YAN_route_military_army_xp_p2_tt
+
+			army_experience = 25
+		}
+	}
+
+	# 天灾工事
+	focus = {
+		id = YAN_Tianzai_fort
+		icon = GFX_focus_generic_mountain_fortification
+		cost = 5
+		prerequisite = { focus = YAN_Shajq }
+		x = -2
+		y = 1
+		relative_position_id = YAN_Shajq
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_training_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_military_training_m5_tt
+
+			army_experience = 25
+		}
+	}
+
+	# 望烽节
+	focus = {
+		id = YAN_Wangfeng_Festival
+		icon = GFX_focus_generic_army_attack
+		cost = 8
+		prerequisite = { focus = YAN_Tianzai_fort }
+		x = -3
+		y = 1
+		relative_position_id = YAN_Tianzai_fort
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_attack_var value = 0.05 }
+			add_to_variable = { var = YAN_route_military_defence_var value = 0.1 }
+			add_to_variable = { var = YAN_route_military_army_xp_var value = 0.05 }
+			add_to_variable = { var = YAN_route_military_training_var value = -0.1 }
+			add_to_variable = { var = YAN_route_military_org_var value = 0.05 }
+			add_to_variable = { var = YAN_route_military_breakthrough_var value = 0.1 }
+			custom_effect_tooltip = YAN_route_military_attack_p5_tt
+			custom_effect_tooltip = YAN_route_military_defence_p10_tt
+			custom_effect_tooltip = YAN_route_military_army_xp_p5_tt
+			custom_effect_tooltip = YAN_route_military_training_m10_tt
+			custom_effect_tooltip = YAN_route_military_org_p5_tt
+			custom_effect_tooltip = YAN_route_military_breakthrough_p10_tt
+
+			add_war_support = 0.05
+		}
+	}
+
+	# 禁军扩编
+	focus = {
+		id = YAN_Imperial_Guard_Expansion
+		icon = GFX_focus_generic_diverse_army
+		cost = 5
+		prerequisite = { focus = YAN_Military_Reform }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Military_Reform
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_org_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_org_p5_tt
+
+			army_experience = 25
+			add_manpower = 50000
+		}
+	}
+
+	# 御林卫
+	focus = {
+		id = YAN_Imperial_Guard
+		icon = GFX_focus_generic_home_defense
+		cost = 5
+		prerequisite = { focus = YAN_Imperial_Guard_Expansion }
+		x = 4
+		y = 1
+		relative_position_id = YAN_Imperial_Guard_Expansion
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_breakthrough_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_breakthrough_p5_tt
+
+			army_experience = 25
+		}
+	}
+
+	# 巡防营
+	focus = {
+		id = YAN_Patrol_Battalions
+		icon = GFX_focus_generic_defensive_reorganization
+		cost = 5
+		prerequisite = { focus = YAN_Imperial_Guard_Expansion }
+		x = 6
+		y = 1
+		relative_position_id = YAN_Imperial_Guard_Expansion
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_attack_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_attack_p5_tt
+
+			add_political_power = 25
+		}
+	}
+
+	# 边军整训
+	focus = {
+		id = YAN_Border_Army_Training
+		icon = GFX_focus_generic_military_mission
+		cost = 5
+		prerequisite = { focus = YAN_Patrol_Battalions }
+		x = -4
+		y = 1
+		relative_position_id = YAN_Patrol_Battalions
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_defence_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_defence_p5_tt
+
+			army_experience = 25
+		}
+	}
+
+	# 天师府
+	focus = {
+		id = YAN_Tianshi_office
+		icon = GFX_focus_YAN_Tianshi
+		cost = 5
+		prerequisite = { focus = YAN_Military_Reform }
+		x = 2
+		y = 1
+		relative_position_id = YAN_Military_Reform
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_attack_var value = 0.05 }
+			add_to_variable = { var = YAN_route_military_defence_var value = 0.1 }
+			add_to_variable = { var = YAN_route_military_army_xp_var value = 0.05 }
+			add_to_variable = { var = YAN_route_military_training_var value = -0.1 }
+			add_to_variable = { var = YAN_route_military_org_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_attack_p5_tt
+			custom_effect_tooltip = YAN_route_military_defence_p10_tt
+			custom_effect_tooltip = YAN_route_military_army_xp_p5_tt
+			custom_effect_tooltip = YAN_route_military_training_m10_tt
+			custom_effect_tooltip = YAN_route_military_org_p5_tt
+
+			add_political_power = 25
+			set_country_flag = yan_tianshi_office
+		}
+	}
+
+	# 天师术师支援连
+	focus = {
+		id = YAN_Tianshi_support_company
+		icon = GFX_focus_generic_army_doctrines_2
+		cost = 8
+		prerequisite = { focus = YAN_Tianshi_office }
+		x = 6
+		y = 1
+		relative_position_id = YAN_Tianshi_office
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_army_xp_var value = 0.02 }
+			custom_effect_tooltip = YAN_route_military_army_xp_p2_tt
+
+			army_experience = 25
+		}
+	}
+
+	# 钦天监
+	focus = {
+		id = YAN_Qintianjian
+		icon = GFX_focus_generic_air_defense
+		cost = 5
+		prerequisite = { focus = YAN_Tianshi_office }
+		x = 8
+		y = 1
+		relative_position_id = YAN_Tianshi_office
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_training_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_military_training_m5_tt
+
+			army_experience = 25
+		}
+	}
+
+	# 源石技艺
+	focus = {
+		id = YAN_Originium_arts
+		icon = GFX_focus_generic_socialist_science
+		cost = 5
+		prerequisite = { focus = YAN_Qintianjian }
+		x = -6
+		y = 1
+		relative_position_id = YAN_Qintianjian
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_org_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_org_p5_tt
+
+			add_research_slot = 1
+		}
+	}
+
+	# 玄极巨兵
+	focus = {
+		id = YAN_Xuanji_giant_armor
+		icon = GFX_focus_generic_heavy_tank
+		cost = 8
+		prerequisite = { focus = YAN_Tianshi_office }
+		x = 10
+		y = 1
+		relative_position_id = YAN_Tianshi_office
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_breakthrough_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_breakthrough_p5_tt
+
+			army_experience = 50
+			add_tech_bonus = {
+				name = YAN_xuanji_armor
+				bonus = 0.5
+				uses = 2
+				category = armor
+			}
+			custom_effect_tooltip = YAN_Xuanji_giant_armor_tt
+		}
+	}
+
+	# 剿灭山海众
+	focus = {
+		id = YAN_Crush_Shanhaizhong
+		icon = GFX_focus_generic_crush_the_military
+		cost = 5
+		prerequisite = { focus = YAN_Military_Reform }
+		mutually_exclusive = {
+			focus = YAN_Amnesty_Shanhaizhong
+			focus = YAN_Shanhaizhong_issue
+		}
+		x = 4
+		y = 1
+		relative_position_id = YAN_Military_Reform
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_attack_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_attack_p5_tt
+
+			remove_ideas = YAN_Shanhaizhong
+			add_political_power = 25
+		}
+	}
+
+	# 招安山海众
+	focus = {
+		id = YAN_Amnesty_Shanhaizhong
+		icon = GFX_focus_generic_support_the_left_right
+		cost = 5
+		prerequisite = { focus = YAN_Military_Reform }
+		mutually_exclusive = {
+			focus = YAN_Crush_Shanhaizhong
+			focus = YAN_Shanhaizhong_issue
+		}
+		x = 6
+		y = 1
+		relative_position_id = YAN_Military_Reform
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_military }
+			add_to_variable = { var = YAN_route_military_defence_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_military_defence_p5_tt
+
+			remove_ideas = YAN_Shanhaizhong
+			add_political_power = 25
+			set_country_flag = yan_shanhaizhong_amnesty
+		}
+	}
+
+	# ============================ 四、工业线 ============================
+
+	# 百灶能源桩
+	focus = {
+		id = YAN_Baizao_Energy
+		icon = GFX_focus_YAN_Baizao
+		cost = 3
+		prerequisite = { focus = YAN_True_Dragon_Court }
+		x = 0
+		y = 1
+		relative_position_id = YAN_True_Dragon_Court
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_industry }
+			add_to_variable = { var = YAN_route_industry_civ_factory_var value = 0.1 }
+			add_to_variable = { var = YAN_route_industry_build_speed_var value = 0.1 }
+			custom_effect_tooltip = YAN_route_industry_civ_factory_p10_tt
+			custom_effect_tooltip = YAN_route_industry_build_speed_p10_tt
+
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_stability = -0.05
+		}
+	}
+
+	# 源石矿脉消耗
+	focus = {
+		id = YAN_Originium_vein_cost
+		icon = GFX_focus_generic_mining_industry
+		cost = 5
+		prerequisite = { focus = YAN_Baizao_Energy }
+		x = -1
+		y = 1
+		relative_position_id = YAN_Baizao_Energy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_industry }
+			add_to_variable = { var = YAN_route_industry_civ_factory_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_industry_civ_factory_p5_tt
+
+			add_political_power = 25
+		}
+	}
+
+	# 大荒城农业
+	focus = {
+		id = YAN_Dahuang_Agriculture
+		icon = GFX_focus_generic_modernizing_agriculture
+		cost = 5
+		prerequisite = { focus = YAN_Baizao_Energy }
+		x = 1
+		y = 1
+		relative_position_id = YAN_Baizao_Energy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_industry }
+			add_to_variable = { var = YAN_route_industry_build_speed_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_industry_build_speed_p5_tt
+
+			add_political_power = 25
+		}
+	}
+
+	# 十二楼五城
+	focus = {
+		id = YAN_Twelve_towers
+		icon = GFX_focus_generic_industry_1
+		cost = 5
+		prerequisite = { focus = YAN_Dahuang_Agriculture }
+		x = 3
+		y = 1
+		relative_position_id = YAN_Dahuang_Agriculture
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_industry }
+			add_to_variable = { var = YAN_route_industry_civ_factory_var value = 0.1 }
+			add_to_variable = { var = YAN_route_industry_build_speed_var value = 0.1 }
+			add_to_variable = { var = YAN_route_industry_max_efficiency_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_industry_civ_factory_p10_tt
+			custom_effect_tooltip = YAN_route_industry_build_speed_p10_tt
+			custom_effect_tooltip = YAN_route_industry_max_efficiency_p5_tt
+
+		}
+	}
+
+	# 龙门贸易
+	focus = {
+		id = YAN_Longmen_trade
+		icon = GFX_focus_generic_british_trade
+		cost = 5
+		prerequisite = { focus = YAN_Baizao_Energy }
+		x = 3
+		y = 1
+		relative_position_id = YAN_Baizao_Energy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_industry }
+			add_to_variable = { var = YAN_route_industry_max_efficiency_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_industry_max_efficiency_p5_tt
+
+			add_political_power = 50
+		}
+	}
+
+	# 天镜阁扩建
+	focus = {
+		id = YAN_Tianjingge_expansion
+		icon = GFX_focus_generic_industry_3
+		cost = 8
+		prerequisite = { focus = YAN_Twelve_towers }
+		x = -3
+		y = 1
+		relative_position_id = YAN_Twelve_towers
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_industry }
+			add_to_variable = { var = YAN_route_industry_civ_factory_var value = 0.1 }
+			add_to_variable = { var = YAN_route_industry_build_speed_var value = 0.1 }
+			add_to_variable = { var = YAN_route_industry_max_efficiency_var value = 0.05 }
+			add_to_variable = { var = YAN_route_industry_dockyard_var value = 0.15 }
+			custom_effect_tooltip = YAN_route_industry_civ_factory_p10_tt
+			custom_effect_tooltip = YAN_route_industry_build_speed_p10_tt
+			custom_effect_tooltip = YAN_route_industry_max_efficiency_p5_tt
+			custom_effect_tooltip = YAN_route_industry_dockyard_p15_tt
+
+			add_research_slot = 1
+			add_political_power = 25
+		}
+	}
+
+	# ============================ 五、科研线 ============================
+
+	# 百灶学宫
+	focus = {
+		id = YAN_Baizao_Academy
+		icon = GFX_focus_generic_university_1
+		cost = 3
+		prerequisite = { focus = YAN_True_Dragon_Court }
+		x = 12
+		y = 1
+		relative_position_id = YAN_True_Dragon_Court
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_research }
+			add_to_variable = { var = YAN_route_research_speed_var value = 0.1 }
+			custom_effect_tooltip = YAN_route_research_speed_p10_tt
+
+			add_research_slot = 1
+		}
+	}
+
+	# 六部学院
+	focus = {
+		id = YAN_Six_ministries_college
+		icon = GFX_focus_generic_university_2
+		cost = 5
+		prerequisite = { focus = YAN_Baizao_Academy }
+		x = -1
+		y = 1
+		relative_position_id = YAN_Baizao_Academy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_research }
+			add_to_variable = { var = YAN_route_research_speed_var value = 0.1 }
+			add_to_variable = { var = YAN_route_research_originium_var value = 0.15 }
+			custom_effect_tooltip = YAN_route_research_speed_p10_tt
+			custom_effect_tooltip = YAN_route_research_originium_p15_tt
+
+			add_research_slot = 1
+			add_political_power = 25
+		}
+	}
+
+	# 天师府源石技艺
+	focus = {
+		id = YAN_Tianshi_originium_study
+		icon = GFX_focus_generic_socialist_science
+		cost = 5
+		prerequisite = { focus = YAN_Baizao_Academy }
+		x = 1
+		y = 1
+		relative_position_id = YAN_Baizao_Academy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_research }
+			add_to_variable = { var = YAN_route_research_speed_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_research_speed_p5_tt
+
+			add_research_slot = 1
+			custom_effect_tooltip = YAN_Tianshi_originium_study_tt
+		}
+	}
+
+	# 钦天监天灾预测
+	focus = {
+		id = YAN_Qintianjian_forecast
+		icon = GFX_focus_generic_air_defense
+		cost = 5
+		prerequisite = { focus = YAN_Tianshi_originium_study }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Tianshi_originium_study
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_research }
+			add_to_variable = { var = YAN_route_research_originium_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_research_originium_p5_tt
+
+			army_experience = 25
+		}
+	}
+
+	# 巨兽研究
+	focus = {
+		id = YAN_Behemoth_research
+		icon = GFX_focus_generic_advanced_military_studies
+		cost = 8
+		prerequisite = { focus = YAN_Baizao_Academy }
+		x = 3
+		y = 1
+		relative_position_id = YAN_Baizao_Academy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_research }
+			add_to_variable = { var = YAN_route_research_medical_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_research_medical_p5_tt
+
+			add_research_slot = 1
+		}
+	}
+
+	# 书刀历史研究
+	focus = {
+		id = YAN_Shudao_history_research
+		icon = GFX_focus_YAN_Shudao
+		cost = 8
+		prerequisite = { focus = YAN_Behemoth_research }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Behemoth_research
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_research }
+			add_to_variable = { var = YAN_route_research_speed_var value = 0.1 }
+			add_to_variable = { var = YAN_route_research_originium_var value = 0.15 }
+			add_to_variable = { var = YAN_route_research_medical_var value = 0.15 }
+			custom_effect_tooltip = YAN_route_research_speed_p10_tt
+			custom_effect_tooltip = YAN_route_research_originium_p15_tt
+			custom_effect_tooltip = YAN_route_research_medical_p15_tt
+
+		}
+	}
+
+	# ============================ 六、地方线 ============================
+
+	# 地方治理
+	focus = {
+		id = YAN_Local_Governance
+		icon = GFX_focus_generic_asia_liberation
+		cost = 3
+		prerequisite = { focus = YAN_True_Dragon_Court }
+		x = 25
+		y = 1
+		relative_position_id = YAN_True_Dragon_Court
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_local }
+			add_to_variable = { var = YAN_route_local_stability_var value = 0.05 }
+			add_to_variable = { var = YAN_route_local_population_var value = 0.05 }
+			add_to_variable = { var = YAN_route_local_supply_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_local_stability_p5_tt
+			custom_effect_tooltip = YAN_route_local_population_p5_tt
+			custom_effect_tooltip = YAN_route_local_supply_m5_tt
+
+			add_stability = 0.03
+			add_political_power = 25
+		}
+	}
+
+	# 龙门
+	focus = {
+		id = YAN_Longmen_governance
+		icon = GFX_focus_YAN_Longmen
+		cost = 5
+		prerequisite = { focus = YAN_Local_Governance }
+		x = -2
+		y = 1
+		relative_position_id = YAN_Local_Governance
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_local }
+			add_to_variable = { var = YAN_route_local_stability_var value = 0.05 }
+			add_to_variable = { var = YAN_route_local_population_var value = 0.05 }
+			add_to_variable = { var = YAN_route_local_supply_var value = -0.05 }
+			add_to_variable = { var = YAN_route_local_agriculture_var value = 0.1 }
+			custom_effect_tooltip = YAN_route_local_stability_p5_tt
+			custom_effect_tooltip = YAN_route_local_population_p5_tt
+			custom_effect_tooltip = YAN_route_local_supply_m5_tt
+			custom_effect_tooltip = YAN_route_local_agriculture_p10_tt
+
+			add_command_power = 30
+			custom_effect_tooltip = YAN_Longmen_governance_tt
+		}
+	}
+
+	# 尚蜀
+	focus = {
+		id = YAN_Shangshu_governance
+		icon = GFX_focus_generic_mountain_training
+		cost = 5
+		prerequisite = { focus = YAN_Local_Governance }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Local_Governance
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_local }
+			add_to_variable = { var = YAN_route_local_stability_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_local_stability_p5_tt
+
+			add_political_power = 25
+		}
+	}
+
+	# 玉门
+	focus = {
+		id = YAN_Yumen_governance
+		icon = GFX_focus_YAN_Yumen_Fire
+		cost = 5
+		prerequisite = { focus = YAN_Local_Governance }
+		x = 2
+		y = 1
+		relative_position_id = YAN_Local_Governance
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_local }
+			add_to_variable = { var = YAN_route_local_population_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_local_population_p5_tt
+
+			army_experience = 25
+			custom_effect_tooltip = YAN_Yumen_governance_tt
+		}
+	}
+
+	# 大荒城
+	focus = {
+		id = YAN_Dahuang_governance
+		icon = GFX_focus_generic_agricultural_subsidies
+		cost = 5
+		prerequisite = { focus = YAN_Local_Governance }
+		x = 4
+		y = 1
+		relative_position_id = YAN_Local_Governance
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_local }
+			add_to_variable = { var = YAN_route_local_supply_var value = -0.05 }
+			custom_effect_tooltip = YAN_route_local_supply_m5_tt
+
+			add_political_power = 25
+		}
+	}
+
+	# 邙山
+	focus = {
+		id = YAN_Mangshan_governance
+		icon = GFX_focus_generic_hill_training
+		cost = 5
+		prerequisite = { focus = YAN_Shangshu_governance }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Shangshu_governance
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_local }
+			add_to_variable = { var = YAN_route_local_agriculture_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_local_agriculture_p5_tt
+
+			add_political_power = 25
+		}
+	}
+
+	# 百灶
+	focus = {
+		id = YAN_Baizao_governance
+		icon = GFX_focus_YAN_Baizao
+		cost = 8
+		prerequisite = { focus = YAN_Longmen_governance }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Longmen_governance
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_local }
+			add_to_variable = { var = YAN_route_local_stability_var value = 0.05 }
+			add_to_variable = { var = YAN_route_local_population_var value = 0.05 }
+			add_to_variable = { var = YAN_route_local_supply_var value = -0.05 }
+			add_to_variable = { var = YAN_route_local_agriculture_var value = 0.1 }
+			add_to_variable = { var = YAN_route_local_monthly_pop_var value = 0.5 }
+			custom_effect_tooltip = YAN_route_local_stability_p5_tt
+			custom_effect_tooltip = YAN_route_local_population_p5_tt
+			custom_effect_tooltip = YAN_route_local_supply_m5_tt
+			custom_effect_tooltip = YAN_route_local_agriculture_p10_tt
+			custom_effect_tooltip = YAN_route_local_monthly_pop_u0_5_tt
+
+			add_research_slot = 1
+		}
+	}
+
+	# ============================ 七、外交线 ============================
+
+	# 大炎外交
+	focus = {
+		id = YAN_Yan_Diplomacy
+		icon = GFX_focus_generic_anti_fascist_diplomacy
+		cost = 3
+		prerequisite = { focus = YAN_True_Dragon_Court }
+		x = 37
+		y = 1
+		relative_position_id = YAN_True_Dragon_Court
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_diplomacy }
+			add_to_variable = { var = YAN_route_diplomacy_opinion_var value = 5 }
+			add_to_variable = { var = YAN_route_diplomacy_research_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_diplomacy_opinion_u5_tt
+			custom_effect_tooltip = YAN_route_diplomacy_research_p5_tt
+
+			add_political_power = 25
+			add_stability = 0.03
+		}
+	}
+
+	# 罗德岛合作
+	focus = {
+		id = YAN_Rhodes_island
+		icon = GFX_focus_generic_air_partners
+		cost = 5
+		prerequisite = { focus = YAN_Yan_Diplomacy }
+		x = -2
+		y = 1
+		relative_position_id = YAN_Yan_Diplomacy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_diplomacy }
+			add_to_variable = { var = YAN_route_diplomacy_opinion_var value = 5 }
+			add_to_variable = { var = YAN_route_diplomacy_research_var value = 0.05 }
+			add_to_variable = { var = YAN_route_diplomacy_relation_var value = 20 }
+			custom_effect_tooltip = YAN_route_diplomacy_opinion_u5_tt
+			custom_effect_tooltip = YAN_route_diplomacy_research_p5_tt
+			custom_effect_tooltip = YAN_route_diplomacy_relation_u20_tt
+
+			add_ideas = YAN_Rhodes_cooperation
+		}
+	}
+
+	# 乌萨斯边境
+	focus = {
+		id = YAN_Ussuri_border
+		icon = GFX_focus_generic_home_defense
+		cost = 5
+		prerequisite = { focus = YAN_Yan_Diplomacy }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Yan_Diplomacy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_diplomacy }
+			add_to_variable = { var = YAN_route_diplomacy_opinion_var value = 5 }
+			custom_effect_tooltip = YAN_route_diplomacy_opinion_u5_tt
+
+			army_experience = 25
+		}
+	}
+
+	# 阿戈尔移民
+	focus = {
+		id = YAN_Aegir_immigration
+		icon = GFX_focus_generic_navy_research_bonus
+		cost = 5
+		prerequisite = { focus = YAN_Yan_Diplomacy }
+		x = 2
+		y = 1
+		relative_position_id = YAN_Yan_Diplomacy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_diplomacy }
+			add_to_variable = { var = YAN_route_diplomacy_research_var value = 0.05 }
+			custom_effect_tooltip = YAN_route_diplomacy_research_p5_tt
+
+			navy_experience = 25
+		}
+	}
+
+	# 山海众问题
+	focus = {
+		id = YAN_Shanhaizhong_issue
+		icon = GFX_focus_generic_crush_the_military
+		cost = 5
+		prerequisite = { focus = YAN_Yan_Diplomacy }
+		mutually_exclusive = {
+			focus = YAN_Crush_Shanhaizhong
+			focus = YAN_Amnesty_Shanhaizhong
+		}
+		x = 4
+		y = 1
+		relative_position_id = YAN_Yan_Diplomacy
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_diplomacy }
+			add_to_variable = { var = YAN_route_diplomacy_relation_var value = 5 }
+			custom_effect_tooltip = YAN_route_diplomacy_relation_u5_tt
+
+			remove_ideas = YAN_Shanhaizhong
+			custom_effect_tooltip = YAN_Shanhaizhong_issue_tt
+		}
+	}
+
+	# 巨兽外交
+	focus = {
+		id = YAN_Behemoth_diplomacy
+		icon = GFX_focus_generic_monarchist_sentiment
+		cost = 8
+		prerequisite = { focus = YAN_Aegir_immigration }
+		x = 0
+		y = 1
+		relative_position_id = YAN_Aegir_immigration
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_route_diplomacy }
+			add_to_variable = { var = YAN_route_diplomacy_opinion_var value = 5 }
+			add_to_variable = { var = YAN_route_diplomacy_research_var value = 0.05 }
+			add_to_variable = { var = YAN_route_diplomacy_relation_var value = 20 }
+			add_to_variable = { var = YAN_route_diplomacy_improve_var value = -0.25 }
+			custom_effect_tooltip = YAN_route_diplomacy_opinion_u5_tt
+			custom_effect_tooltip = YAN_route_diplomacy_research_p5_tt
+			custom_effect_tooltip = YAN_route_diplomacy_relation_u20_tt
+			custom_effect_tooltip = YAN_route_diplomacy_improve_m25_tt
+
+			set_country_flag = yan_behemoth_diplomacy
+		}
+	}
+}

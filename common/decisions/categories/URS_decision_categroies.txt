@@ -1,0 +1,82 @@
+URS_imperial_court_decisions = {
+	icon = GFX_decision_category_generic_political_actions
+	allowed = {
+		original_tag = URS
+	}
+	visible = {
+		has_country_flag = URS_imperial_court_decisions_flag
+	}
+	visible_when_empty = yes
+	priority = 10
+}
+
+URS_economic_recovery_decisions = {
+	icon = GFX_decision_category_generic_economy
+	allowed = {
+		original_tag = URS
+	}
+	visible = {
+		has_country_flag = URS_economic_recovery_decisions_flag
+	}
+	visible_when_empty = yes
+	priority = 3
+}
+
+URS_area_management_decisions = {
+	icon = GFX_decision_category_generic_economy
+	allowed = {
+		original_tag = URS
+	}
+	visible = {
+		# 2026-09-15：原门槛为 has_completed_focus = URS_victory_of_Octobrist_party，
+		# 该旧国策随政治树重制被删除 → 改为旗标，由新树「大清洗」/「维特的独裁」置位。
+		has_country_flag = URS_area_management_enabled
+	}
+	visible_when_empty = yes
+	priority = 3
+}
+
+URS_reform_conflict_decisions = {
+	icon = GFX_decision_category_power_struggle
+	allowed = {
+		original_tag = URS
+	}
+	visible = {
+		has_country_flag = URS_reform_conflict_open
+	}
+	visible_when_empty = yes
+	priority = 8
+}
+
+# ===== 全面战争（决议分类） BEGIN =====
+# 决议正文见 common/decisions/URS_World_War_Decisions.txt
+# 1103.1.1 解锁：对整个世界宣战，挨个点名（含废土 ZZZ）。
+URS_World_War_Category = {
+	icon = GFX_decision_category_generic_political_actions
+	allowed = {
+		original_tag = URS
+	}
+	visible = {
+		date > 1103.1.1
+	}
+	visible_when_empty = yes
+	priority = 10
+}
+# ===== 全面战争（决议分类） END =====
+
+# ===== 军事国策树（决议分类） BEGIN =====
+URS_military_decisions = {
+	icon = GFX_decision_category_army_reform
+	allowed = {
+		original_tag = URS
+	}
+	visible = {
+		has_country_flag = URS_mil_reform_started
+	}
+	# 面板文案（ARS_URS_l_simp_chinese.yml 的 URS_military_decisions_desc）
+	# 内嵌 [URS_empire_army_loyalty_loc]，实时显示帝国军忠诚度档位，
+	# 故保留空分类时的页签。
+	visible_when_empty = yes
+	priority = 9
+}
+# ===== 军事国策树（决议分类） END =====

@@ -1,0 +1,400 @@
+leader_traits = {
+	Yan_the_emperor = {
+		random = no
+		stability_factor = 0.05
+		consumer_goods_factor = 0.05
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	# ================================================================
+	#  大炎 · 顾问特质
+	#  · 政治顾问 / 特殊顾问 → political_advisor 槽
+	#  · 理论家（太傅·国策统筹 / 均·律法 / 令·安定）→ theorist 槽，ledger = army
+	#  · 军事参谋 → high_command 槽；陆军部长 → army_chief 槽
+	#  · 同一人物的两个 advisor 块不可共用槽位类型，否则后一条会覆盖前一条
+	#  · sprite = 顾问列表用的头像框编号（沿用原版编号段）
+	#    2026-09-22：本文件不再使用 yan_*_tt 纯说明行（引擎不参与运算、只有 tooltip），
+	#    原先挂说明行的十条效果全部换成原版 country_leader 有先例的真实修正符：
+	#    国策时间 → political_power_gain；外交关系 → trade_opinion_factor +
+	#    opinion_gain_monthly_factor；监控代理人 → enemy_operative_detection_chance /
+	#    _capture_chance_factor + intelligence_agency_defense；代理人信任 → operative_slot；
+	#    反腐 → consumer_goods_factor + industrial_capacity_factory；源石技艺 →
+	#    production_speed_energy_infrastructure_factor；玉门防御 → army_core_defence_factor +
+	#    dig_in_speed_factor；天师支援 → attrition + army_org_factor；律法 →
+	#    drift_defence_factor + 两类法律成本；文化影响 → compliance_growth + resistance_target；
+	#    农政 → local_resources_factor + production_speed_infrastructure_factor。
+	#    另把两处 breakthrough_factor（部队级键，挂这里静默失效）换成 army_core_attack_factor。
+	# ================================================================
+
+	# ---------------- 政治顾问 ----------------
+
+	# 太傅 · 政治改革者
+	YAN_Taifu_advisor = {
+		sprite = 12
+		random = no
+		political_power_factor = 0.15
+		stability_factor = 0.1
+		political_advisor_cost_factor = -0.1
+		political_power_gain = 0.2
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 太尉 · 主战派
+	YAN_Taiwei_advisor = {
+		sprite = 12
+		random = no
+		war_support_factor = 0.15
+		experience_gain_army = 0.1
+		army_org_factor = 0.05
+		stability_factor = -0.03
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 宁辞秋 · 外交家
+	YAN_Ning_Chunqiu_advisor = {
+		sprite = 13
+		random = no
+		stability_factor = 0.1
+		opinion_gain_monthly = 5
+		improve_relations_maintain_cost_factor = -0.25
+		trade_opinion_factor = 0.2
+		opinion_gain_monthly_factor = 0.5
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 梁洵 · 建设专家
+	YAN_Liang_Xun_advisor = {
+		sprite = 13
+		random = no
+		production_speed_buildings_factor = 0.15
+		industrial_capacity_factory = 0.1
+		production_factory_max_efficiency_factor = 0.05
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 椿 · 司岁台监正
+	YAN_Chun_advisor = {
+		sprite = 13
+		random = no
+		stability_factor = 0.1
+		political_power_factor = 0.1
+		intel_network_gain_factor = 0.15
+		enemy_operative_detection_chance = 0.3
+		intelligence_agency_defense = 0.2
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 左乐 · 秉烛人监正（秉烛新制后）
+	YAN_Zuo_Le_advisor = {
+		sprite = 13
+		random = no
+		political_power_factor = 0.15
+		intel_network_gain_factor = 0.25
+		enemy_operative_capture_chance_factor = 0.25
+		intelligence_agency_defense = 0.25
+		operative_slot = 1
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 魏彦吾 · 政治强人
+	YAN_Wei_Yanwu_advisor = {
+		sprite = 12
+		random = no
+		political_power_factor = 0.15
+		command_power_gain = 0.8
+		consumer_goods_factor = -0.03
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 虞澄 · 司法改革者
+	YAN_Yu_Cheng_advisor = {
+		sprite = 13
+		random = no
+		stability_factor = 0.1
+		political_power_factor = 0.05
+		consumer_goods_factor = -0.05
+		industrial_capacity_factory = 0.05
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 老天师 · 科研顾问
+	YAN_Lao_Tianshi_advisor = {
+		sprite = 13
+		random = no
+		research_speed_factor = 0.1
+		army_morale_factor = 0.1
+		production_speed_energy_infrastructure_factor = 0.25
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# ---------------- 军事参谋（high_command） ----------------
+
+	# 左宣辽 · 防御
+	YAN_Zuo_Xuanliao_advisor = {
+		sprite = 9
+		random = no
+		army_defence_factor = 0.15
+		combat_entrenchment = 1
+		army_core_defence_factor = 0.15
+		dig_in_speed_factor = 0.25
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 陈晖洁 · 机动
+	YAN_Chen_Huijie_advisor = {
+		sprite = 9
+		random = no
+		army_attack_factor = 0.08
+		army_speed_factor = 0.1
+		recon_factor = 0.15
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 重岳 · 练兵
+	YAN_Chong_Yue_advisor = {
+		sprite = 9
+		random = no
+		experience_gain_army = 0.15
+		army_infantry_attack_factor = 0.1
+		training_time_factor = -0.1
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 老天师 · 天师支援
+	YAN_Lao_Tianshi_high_command = {
+		sprite = 9
+		random = no
+		army_morale_factor = 0.05
+		attrition = -0.15
+		army_org_factor = 0.05
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 梁洵 · 后勤
+	YAN_Liang_Xun_high_command = {
+		sprite = 9
+		random = no
+		supply_consumption_factor = -0.15
+		attrition = -0.1
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# ---------------- 陆军部长（army_chief） ----------------
+	#  重制：三位部长分别走「攻势 / 守势 / 指挥机动」三条互不重叠的学说，
+	#  数值全部落在真实修正符上，不写 engine 里没有对应运算的说明行。
+	#  · 太尉（主战派）  → 雷霆军令 · 攻势学说（sprite 7 = 原版进攻系图标）
+	#  · 左宣辽（玉门）  → 玉门壁垒 · 守势学说（sprite 9 = 原版防御系图标）
+	#  · 魏彦吾（总督）  → 总督军令 · 指挥与机动（sprite 5 = 通用系图标）
+	#  三者不给同一把「万金油」加成（如统一的陆军经验），保证换人 = 换打法。
+
+	# 太尉 · 雷霆军令（攻势）
+	YAN_Taiwei_army_chief = {
+		sprite = 7
+		random = no
+		army_attack_factor = 0.1
+		army_core_attack_factor = 0.1
+		max_planning = 0.1
+		war_support_factor = 0.1
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 左宣辽 · 玉门壁垒（守势）
+	YAN_Zuo_Xuanliao_army_chief = {
+		sprite = 9
+		random = no
+		army_defence_factor = 0.15
+		combat_entrenchment = 2
+		max_dig_in = 5
+		army_org_factor = 0.05
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 魏彦吾 · 总督军令（指挥与机动）
+	YAN_Wei_Yanwu_army_chief = {
+		sprite = 5
+		random = no
+		command_power_gain = 0.2
+		command_cap_increase = 20
+		army_speed_factor = 0.1
+		recon_factor = 0.1
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# ---------------- 理论家 ----------------
+
+	# 太傅 · 国策统筹
+	YAN_Taifu_theorist = {
+		sprite = 14
+		random = no
+		political_power_factor = 0.05
+		political_power_gain = 0.15
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 均 · 律法
+	YAN_Jun_theorist = {
+		sprite = 14
+		random = no
+		stability_factor = 0.1
+		political_advisor_cost_factor = -0.1
+		drift_defence_factor = 0.2
+		mobilization_laws_cost_factor = -0.15
+		trade_laws_cost_factor = -0.15
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 令 · 安定
+	YAN_Ling_theorist = {
+		sprite = 14
+		random = no
+		stability_factor = 0.15
+		political_power_factor = 0.05
+		war_support_factor = -0.03
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# ---------------- 特殊顾问（需国策解锁） ----------------
+
+	# 令 · 代理人
+	YAN_Ling_advisor = {
+		sprite = 13
+		random = no
+		stability_factor = 0.15
+		political_power_factor = 0.15
+		intel_network_gain_factor = 0.2
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 年 · 代理人
+	YAN_Nian_advisor = {
+		sprite = 13
+		random = no
+		research_speed_factor = 0.1
+		production_factory_max_efficiency_factor = 0.1
+		industrial_capacity_factory = 0.05
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 夕 · 代理人
+	YAN_Xi_advisor = {
+		sprite = 13
+		random = no
+		stability_factor = 0.1
+		opinion_gain_monthly = 5
+		compliance_growth = 0.2
+		resistance_target = -0.1
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 黍 · 代理人
+	YAN_Shu_advisor = {
+		sprite = 13
+		random = no
+		supply_consumption_factor = -0.15
+		recruitable_population_factor = 0.05
+		local_resources_factor = 0.2
+		production_speed_infrastructure_factor = 0.2
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 余 · 代理人
+	YAN_Yu_advisor = {
+		sprite = 13
+		random = no
+		stability_factor = 0.1
+		supply_consumption_factor = -0.1
+		army_morale_factor = 0.1
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 陈晖洁 · 天喟之剑
+	YAN_Chen_Huijie_special = {
+		sprite = 9
+		random = no
+		army_attack_factor = 0.15
+		army_core_attack_factor = 0.15
+		army_org_factor = 0.05
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+}

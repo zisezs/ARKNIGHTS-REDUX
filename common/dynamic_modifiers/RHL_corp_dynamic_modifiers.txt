@@ -1,0 +1,35 @@
+# ══════════════════════════════════════════════════════════════════════
+#  【企业国家！】的三条效果载体（民族精神 = 国家级 dynamic_modifier）
+#  【由 docs/gen_rhl_corp.cjs 生成，勿手改；数值真源 docs/rhl_corp_data.cjs】
+#  ------------------------------------------------------------------
+#  ⚠ 块内**不写 name =**：dynamic_modifier 没有这个字段，引擎只记一条
+#    invalid modifier: name 并忽略它。显示名取的是 loc 键 = 本块 id，
+#    即 localisation 里的 RHL_cp_dyn_admin / RHL_cp_dyn_admin_desc。
+#  数值写成变量，由各格的 hidden_effect add_to_variable 原地累加；
+#    初值由 common/scripted_effects/RHL_corp_scripted_effects.txt 建表。
+#  满档 = 一条支线 6 格里同一条轴被推 3 次 × 10% = +30%。
+# ══════════════════════════════════════════════════════════════════════
+
+RHL_cp_dyn_admin = {
+	icon = GFX_idea_RHL_cp_admin
+	enable = { always = yes }
+
+	political_power_gain = RHL_cp_admin_pp
+	stability_factor = RHL_cp_admin_stab
+}
+
+RHL_cp_dyn_econ = {
+	icon = GFX_idea_RHL_cp_econ
+	enable = { always = yes }
+
+	industrial_capacity_factory = RHL_cp_econ_ind
+	production_speed_buildings_factor = RHL_cp_econ_build
+}
+
+RHL_cp_dyn_sci = {
+	icon = GFX_idea_RHL_cp_sci
+	enable = { always = yes }
+
+	research_speed_factor = RHL_cp_sci_res
+	war_support_factor = RHL_cp_sci_ws
+}

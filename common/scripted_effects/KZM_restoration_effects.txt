@@ -1,0 +1,368 @@
+# ============================================================================
+# 卡西米尔 (KZM) · 复国骑士团 —— 脚本效果
+#
+# 作用域约定：以下效果一律在【国家作用域】调用（国策 completion_reward /
+#             决议 complete·remove_effect / 事件 immediate）。
+#
+# 三条硬护栏（本 mod 踩过，别再踩）：
+#   · 州数一律整盘重数（KZM_resto_count_bastions），不做 ±1 记账 —— 亡国/割地不经过这里
+#   · every_* 循环里要写回国家变量必须显式 ROOT = { add_to_variable = ... }，
+#     否则读到的是州变量
+#   · 调用脚本效果必须写 "= yes"，裸写标识符是语法错、会崩掉整份文件
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# 整盘重数：把 KZM_bastion_num 重算成当前挂着【复国骑士团根据地】的州数
+# ----------------------------------------------------------------------------
+KZM_resto_count_bastions = {
+	set_variable = { KZM_bastion_num = 0 }
+	every_owned_state = {
+		limit = {
+			has_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+		}
+		ROOT = { add_to_variable = { var = KZM_bastion_num value = 1 } }
+	}
+}
+
+# ----------------------------------------------------------------------------
+# 在指定片区里点 2 个州种下根据地
+# 每个片区最多 2 次；片区内已无空位时 random_owned_state 的 limit 恒假，什么都不做
+# ----------------------------------------------------------------------------
+KZM_resto_plant_heartland = {
+	random_owned_state = {
+		limit = {
+			KZM_resto_heartland_area = yes
+			KZM_resto_bastion_eligible = yes
+		}
+		add_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+		set_state_flag = KZM_bastion_state
+	}
+	random_owned_state = {
+		limit = {
+			KZM_resto_heartland_area = yes
+			KZM_resto_bastion_eligible = yes
+		}
+		add_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+		set_state_flag = KZM_bastion_state
+	}
+	KZM_resto_count_bastions = yes
+}
+
+KZM_resto_plant_arena = {
+	random_owned_state = {
+		limit = {
+			KZM_resto_arena_cities_area = yes
+			KZM_resto_bastion_eligible = yes
+		}
+		add_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+		set_state_flag = KZM_bastion_state
+	}
+	random_owned_state = {
+		limit = {
+			KZM_resto_arena_cities_area = yes
+			KZM_resto_bastion_eligible = yes
+		}
+		add_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+		set_state_flag = KZM_bastion_state
+	}
+	KZM_resto_count_bastions = yes
+}
+
+KZM_resto_plant_highlands = {
+	random_owned_state = {
+		limit = {
+			KZM_resto_highlands_area = yes
+			KZM_resto_bastion_eligible = yes
+		}
+		add_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+		set_state_flag = KZM_bastion_state
+	}
+	random_owned_state = {
+		limit = {
+			KZM_resto_highlands_area = yes
+			KZM_resto_bastion_eligible = yes
+		}
+		add_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+		set_state_flag = KZM_bastion_state
+	}
+	KZM_resto_count_bastions = yes
+}
+
+KZM_resto_plant_lakes = {
+	random_owned_state = {
+		limit = {
+			KZM_resto_lakes_area = yes
+			KZM_resto_bastion_eligible = yes
+		}
+		add_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+		set_state_flag = KZM_bastion_state
+	}
+	random_owned_state = {
+		limit = {
+			KZM_resto_lakes_area = yes
+			KZM_resto_bastion_eligible = yes
+		}
+		add_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+		set_state_flag = KZM_bastion_state
+	}
+	KZM_resto_count_bastions = yes
+}
+
+# ---- 可重复决议【四处串联】用：四片里任选一片补一个空位 ----
+KZM_resto_plant_one = {
+	random_owned_state = {
+		limit = { KZM_resto_bastion_eligible = yes }
+		add_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+		set_state_flag = KZM_bastion_state
+	}
+	KZM_resto_count_bastions = yes
+}
+
+# ----------------------------------------------------------------------------
+# 起义军的编制
+# 模板必须在 create_unit 之前定义；has_template 守卫保证重复执行不产生重名模板
+# ----------------------------------------------------------------------------
+KZM_resto_raise_templates = {
+	if = {
+		limit = { NOT = { has_template = "起义骑士团" } }
+		division_template = {
+			name = "起义骑士团"
+			is_locked = yes
+			division_names_group = KZM_INF_01
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 0 y = 2 }
+				infantry = { x = 0 y = 3 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+				infantry = { x = 1 y = 2 }
+				artillery_brigade = { x = 2 y = 0 }
+			}
+			support = {
+				artillery = { x = 0 y = 0 }
+				engineer = { x = 0 y = 1 }
+			}
+		}
+	}
+	if = {
+		limit = { NOT = { has_template = "银枪天马" } }
+		division_template = {
+			name = "银枪天马"
+			is_locked = yes
+			division_names_group = KZM_ARM_01
+			regiments = {
+				motorized = { x = 0 y = 0 }
+				motorized = { x = 0 y = 1 }
+				motorized = { x = 0 y = 2 }
+				motorized = { x = 1 y = 0 }
+				motorized = { x = 1 y = 1 }
+				motorized = { x = 1 y = 2 }
+				medium_armor = { x = 2 y = 0 }
+				medium_armor = { x = 2 y = 1 }
+			}
+			support = {
+				recon = { x = 0 y = 0 }
+				artillery = { x = 0 y = 1 }
+			}
+		}
+	}
+}
+
+# ---- 起兵：在首都与几片根据地上拉出部队 ----
+KZM_resto_muster = {
+	KZM_resto_raise_templates = yes
+	capital_scope = {
+		create_unit = {
+			division = "division_template = \"起义骑士团\" start_experience_factor = 0.35 start_equipment_factor = 1"
+			owner = KZM
+			count = 6
+		}
+		create_unit = {
+			division = "division_template = \"银枪天马\" start_experience_factor = 0.4 start_equipment_factor = 1"
+			owner = KZM
+			count = 2
+		}
+	}
+	random_owned_state = {
+		limit = { has_dynamic_modifier = { modifier = KZM_dyn_reso_bastion } }
+		create_unit = {
+			division = "division_template = \"起义骑士团\" start_experience_factor = 0.25 start_equipment_factor = 0.7"
+			owner = KZM
+			count = 2
+		}
+	}
+	random_owned_state = {
+		limit = { has_dynamic_modifier = { modifier = KZM_dyn_reso_bastion } }
+		create_unit = {
+			division = "division_template = \"起义骑士团\" start_experience_factor = 0.25 start_equipment_factor = 0.7"
+			owner = KZM
+			count = 2
+		}
+	}
+	random_owned_state = {
+		limit = { has_dynamic_modifier = { modifier = KZM_dyn_reso_bastion } }
+		create_unit = {
+			division = "division_template = \"起义骑士团\" start_experience_factor = 0.25 start_equipment_factor = 0.7"
+			owner = KZM
+			count = 2
+		}
+	}
+}
+
+# ----------------------------------------------------------------------------
+# 【极夜天曦】—— 大起义全套结算
+# 只在事件里调用（kzm_resto.20 的 immediate），不要直接写进国策的 completion_reward：
+# HOI4 会为 tooltip 反复求值 completion_reward，换领袖那几步会每帧刷错（叙拉古踩过 418 条）
+#
+# 顺序是刻意的：脱离附庸 → 把玛恩纳拉进国家 → 换执政党 → 兜底推他上台 → 改名 →
+#           夺回控制权 → 白和退出全部战争 → 对乌萨斯宣战 → 起兵
+#   · 附庸没有宣战权，declare_war_on 在 is_subject = yes 时整句空转，所以放最后
+#   · 角色必须先入池再换党：set_politics 只会把「该党在本国的党魁」升成国家领袖，
+#     那一刻找不到可用党魁，引擎就直接按 common/names/00_names.txt 随机捏一个人当领袖
+#   · 入池之后还要 retire_country_leader + promote_character 兜一次——
+#     对已经有静态 country_leader 块的角色调 add_country_leader_role 会被引擎拒绝，
+#     连带把 promote_leader = yes 一起废掉（上一版的「本杰明」就是这么来的）
+# ----------------------------------------------------------------------------
+KZM_resto_great_uprising = {
+	# ---- 一、脱离附庸（has_overlord 这个触发符不存在，判附庸只能 is_subject）----
+	if = {
+		limit = {
+			is_subject = yes
+			OVERLORD = { exists = yes NOT = { tag = ROOT } }
+		}
+		OVERLORD = {
+			set_autonomy = {
+				target = KZM
+				autonomy_state = autonomy_free
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+	}
+
+	# ---- 二、先把玛恩纳拉进国家 ----
+	# 必须排在 set_politics 之前。special 组里本国只有他一个 country_leader 角色，
+	# 执政党一换，引擎自己就把该党党魁升成国家领袖 —— 这是最稳的一条路。
+	# 反过来（先换党、再补角色）会让引擎在换党那一刻找不到可用党魁，
+	# 于是直接从 common/names/00_names.txt 随机捏一个人当领袖（上一版就是这么冒出个「本杰明」的）。
+	if = {
+		limit = { NOT = { has_country_leader = { character = KZM_Mlynar_Nearl ruling_only = yes } } }
+		recruit_character = KZM_Mlynar_Nearl
+	}
+
+	# ---- 三、复国骑士团执政 ----
+	set_popularities = {
+		communism = 5
+		socialism = 5
+		progressivism = 8
+		liberalism = 8
+		conservatism = 14
+		authoritarianism = 10
+		despotism = 0
+		fascism = 5
+		mysticism = 0
+		special = 45
+	}
+	set_politics = {
+		ruling_party = special
+		elections_allowed = no
+	}
+
+	# ---- 四、兜底：上台的不是他就亲手推一次 ----
+	# 这里绝对不要再写 add_country_leader_role：角色文件里已经静态挂了同意识形态的
+	# country_leader 块，那句会被引擎拒绝（error.log: Character already has a country
+	# leader role for ideology: 复国骑士团），而一被拒绝，连 promote_leader = yes 一起不执行。
+	# 正解是「退掉在任者 + promote_character」两步。
+	if = {
+		limit = { NOT = { has_country_leader = { character = KZM_Mlynar_Nearl ruling_only = yes } } }
+		retire_country_leader = yes
+		promote_character = {
+			character = KZM_Mlynar_Nearl
+			ideology = knight_restoration_subtype
+		}
+	}
+
+	# ---- 五、改国名 ----
+	set_cosmetic_tag = Kazimierz_Restoration_Knights
+
+	# ---- 六、占领军被就地解除武装：所有本国核心的州，控制权直接回到卡西米尔 ----
+	every_state = {
+		limit = {
+			is_core_of = KZM
+			CONTROLLER = { NOT = { tag = KZM } }
+		}
+		set_state_controller_to = KZM
+	}
+
+	# ---- 七、先退出全部战争（白和），把战线清空 ----
+	# 排在宣战之前是必须的：第十一次乌卡战争可能名义上还没结束，
+	# 而下一条的闸门写着 NOT has_war_with = URS —— 不清空就永远宣不出去。
+	# 白和 = 不割地不解约，只是把这一仗抹掉；起义要的是干净的开局，不是继承旧账。
+	# PREV 在 ROOT = { } 块里指被迭代国（本 mod 00_scripted_effects / COG 同型先例）
+	every_country = {
+		limit = {
+			has_war_with = KZM
+		}
+		ROOT = {
+			white_peace = PREV
+		}
+	}
+
+	# ---- 八、第十二次乌卡战争 ----
+	if = {
+		limit = {
+			is_subject = no
+			URS = { exists = yes }
+			NOT = { has_war_with = URS }
+		}
+		KZM = { declare_war_on = { target = URS type = annex_everything } }
+	}
+
+	# ---- 九、起兵 ----
+	KZM_resto_muster = yes
+
+	# ---- 十、把占领期的东西清掉，换上复国的 ----
+	if = {
+		limit = { has_idea = KZM_Ursus_Military_Occupation }
+		remove_ideas = KZM_Ursus_Military_Occupation
+	}
+	if = {
+		limit = { has_idea = KZM_Deep_State }
+		remove_ideas = KZM_Deep_State
+	}
+	add_stability = 0.15
+	add_war_support = 0.2
+}
+# ----------------------------------------------------------------------------
+# 领袖位纠偏（月度兜底）
+#
+# 上一版【极夜天曦】的换领袖只写了 add_country_leader_role，而那句被引擎拒了
+# （角色文件里已经静态挂了同意识形态的 country_leader 块 —— error.log:
+#   "Character already has a country leader role for ideology: 复国骑士团"）。
+# 于是 set_politics 换执政党那一刻 special 党没有可用党魁，
+# 引擎就按 common/names/00_names.txt 随机捏了一个人当国家领袖（表现为台上是个「本杰明」）。
+#
+# 新开局已经不会再犯，但**老存档里那位随机人不会自己走**——国家领袖不是 idea，
+# 没有任何「按名字删除」的效果，只能 retire_country_leader 把在任者退掉再推玛恩纳。
+# 所以这条挂在 on_monthly_KZM 上，一次性（KZM_leader_fixed 去重）。
+# ----------------------------------------------------------------------------
+KZM_resto_fix_leader = {
+	if = {
+		limit = {
+			has_country_flag = KZM_polar_dawn_fired
+			NOT = { has_country_flag = KZM_leader_fixed }
+			NOT = { has_country_leader = { character = KZM_Mlynar_Nearl ruling_only = yes } }
+		}
+		set_country_flag = KZM_leader_fixed
+		if = {
+			limit = { NOT = { has_country_leader = { character = KZM_Mlynar_Nearl } } }
+			recruit_character = KZM_Mlynar_Nearl
+		}
+		retire_country_leader = yes
+		promote_character = {
+			character = KZM_Mlynar_Nearl
+			ideology = knight_restoration_subtype
+		}
+	}
+}

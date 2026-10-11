@@ -1,0 +1,90 @@
+CLB_war_decisions = {
+	CLB_CFC = {
+
+		available = {
+			date > 1097.12.1
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			puppet = CFC
+
+			CFC = {
+				transfer_state = 205
+				transfer_state = 326
+				transfer_state = 454
+				transfer_state = 466
+				transfer_state = 493
+				transfer_state = 598
+				transfer_state = 963
+				transfer_state = 1006
+				
+				every_owned_state = {
+					add_core_of = CFC
+				}
+
+				set_politics = {
+					ruling_party = despotism
+					elections_allowed = no
+				}
+
+				set_popularities = {
+					communism = 0
+					socialism = 0
+					progressivism = 0
+					liberalism = 0
+					conservatism = 0
+					authoritarianism = 25
+					despotism = 75
+					fascism = 0
+					mysticism = 0
+					special = 0
+				}				
+			}	
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	CLB_KJG = {
+
+		available = {
+			date > 1097.12.1
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			CLB = {
+				add_to_faction = KJG
+			}
+		}
+
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+
+	CLB_focus_debug = {
+
+    	visible = {
+        	is_debug = yes
+			is_ai = no
+   	 	}
+
+		complete_effect = {
+			load_focus_tree = CLB_shared
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}
+
+CLB_Congress_of_Columbia = {
+	
+}

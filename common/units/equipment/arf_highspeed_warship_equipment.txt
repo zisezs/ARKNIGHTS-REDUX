@@ -1,0 +1,191 @@
+# 高速战舰：四类“陆上战舰”支援连的专用装备。
+# 刻意设成不可生产（is_buildable = no 写在变体和原型上，原版 explosive_ammo_equipment_1 同款写法），
+# 只能通过【高速战舰工程】决议发放。
+#
+# 这里写的属性就是设定表里的原值（对人员杀伤 600 就写 600）。
+equipments = {
+
+	# ---------------- 无畏舰 ----------------
+	arf_dreadnought_equipment = {
+		year = 1076
+
+		is_archetype = yes
+		is_buildable = no
+		type = {
+			infantry
+			support
+		}
+		group_by = archetype
+
+		interface_category = interface_category_land
+
+		active = yes
+
+		reliability = 0.9
+
+		#Defensive Abilities
+		defense = 150
+		breakthrough = 100
+		hardness = 0.9
+		armor_value = 120
+
+		#Offensive Abilities
+		soft_attack = 600
+		hard_attack = 400
+		ap_attack = 80
+		air_attack = 2
+
+		#Space taken in convoy
+		lend_lease_cost = 10
+
+		build_cost_ic = 0
+	}
+
+	arf_dreadnought_equipment_1 = {
+		year = 1076
+
+		archetype = arf_dreadnought_equipment
+		is_buildable = no
+		active = yes
+		priority = 5
+		visual_level = 0
+	}
+
+	# ---------------- 突击舰 ----------------
+	arf_assault_ship_equipment = {
+		year = 1076
+
+		is_archetype = yes
+		is_buildable = no
+		type = {
+			infantry
+			support
+		}
+		group_by = archetype
+
+		interface_category = interface_category_land
+
+		active = yes
+
+		reliability = 0.9
+
+		#Defensive Abilities
+		defense = 100
+		breakthrough = 60
+		hardness = 0.7
+		armor_value = 60
+
+		#Offensive Abilities
+		soft_attack = 420
+		hard_attack = 320
+		ap_attack = 60
+		air_attack = 1.5
+
+		#Space taken in convoy
+		lend_lease_cost = 8
+
+		build_cost_ic = 0
+	}
+
+	arf_assault_ship_equipment_1 = {
+		year = 1076
+
+		archetype = arf_assault_ship_equipment
+		is_buildable = no
+		active = yes
+		priority = 5
+		visual_level = 0
+	}
+
+	# ---------------- 炮舰 ----------------
+	arf_gunboat_equipment = {
+		year = 1076
+
+		is_archetype = yes
+		is_buildable = no
+		type = {
+			infantry
+			support
+		}
+		group_by = archetype
+
+		interface_category = interface_category_land
+
+		active = yes
+
+		reliability = 0.9
+
+		#Defensive Abilities
+		defense = 60
+		breakthrough = 10
+		hardness = 0.5
+		armor_value = 30
+
+		#Offensive Abilities
+		soft_attack = 250
+		hard_attack = 180
+		ap_attack = 40
+		air_attack = 1
+
+		#Space taken in convoy
+		lend_lease_cost = 4
+
+		build_cost_ic = 0
+	}
+
+	arf_gunboat_equipment_1 = {
+		year = 1076
+
+		archetype = arf_gunboat_equipment
+		is_buildable = no
+		active = yes
+		priority = 5
+		visual_level = 0
+	}
+
+	# ---------------- 辅助舰 ----------------
+	arf_auxiliary_ship_equipment = {
+		year = 1076
+
+		is_archetype = yes
+		is_buildable = no
+		type = {
+			infantry
+			support
+		}
+		group_by = archetype
+
+		interface_category = interface_category_land
+
+		active = yes
+
+		reliability = 0.95
+
+		#Defensive Abilities
+		defense = 20
+		breakthrough = 10
+		hardness = 0.05
+		armor_value = 5
+
+		#Offensive Abilities
+		soft_attack = 30
+		hard_attack = 10
+		ap_attack = 5
+		air_attack = 0.5
+
+		#Space taken in convoy
+		lend_lease_cost = 2
+
+		build_cost_ic = 0
+	}
+
+	arf_auxiliary_ship_equipment_1 = {
+		year = 1076
+
+		archetype = arf_auxiliary_ship_equipment
+		is_buildable = no
+		active = yes
+		priority = 5
+		visual_level = 0
+	}
+}

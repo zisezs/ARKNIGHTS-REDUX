@@ -1,0 +1,155 @@
+# ==============================================================================
+#  【反邪魔统一阵线】—— REU 针对乌萨斯圣愚国的决策组
+# ------------------------------------------------------------------------------
+#  分类见 common/decisions/categories/REU_decision_categroies.txt
+#  （REU_United_Front_Category）；解锁条件 = 乌萨斯圣愚国已出现，
+#  即 URS 现任由角色 URS_The_Fool 担任国家领袖（同 YAN_fool_threat_decisions.txt）。
+#  分类出现即解锁，故本条内不再另设旗标门槛。
+#
+#  AI 权重：本组 4 条全部 ai_will_do = base 0 —— 玩家专属，AI 永不点击。
+# ==============================================================================
+
+REU_United_Front_Category = {
+
+	# ── 1) 团结乌萨斯割据势力 ──────────────────────────────────────────────
+	# 吞并乌萨斯帝国之外的全部割据势力（ursus_unifier 8 TAG），并把到手地盘
+	# 转为核心、接收其部队。TAG 池与 common/scripted_triggers/East_Ursus_scripted_triggers.txt
+	# 的 ursus_unifier 触发器保持一致（REU/SKH/UFE/KMG/BAK/SGT/OMN/NAX）。
+	REU_uf_unite_ursus_warlords = {
+		icon = GFX_decision_generic_national_unity
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			any_country = {
+				ursus_unifier = yes
+				NOT = { original_tag = REU }
+				exists = yes
+			}
+		}
+
+		cost = 150
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = REU_uf_unite_ursus_warlords_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						ursus_unifier = yes
+						NOT = { original_tag = REU }
+						exists = yes
+					}
+					ROOT = {
+						annex_country = {
+							target = PREV
+							transfer_troops = yes
+						}
+					}
+				}
+				# 到手地盘转核心（同 URS Occupation_East_Ursus 先例）
+				every_owned_state = {
+					limit = {
+						NOT = { is_core_of = ROOT }
+					}
+					add_core_of = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 2) 接收被圣愚迫害的流民 ────────────────────────────────────────────
+	REU_uf_refugees = {
+		icon = GFX_decision_generic_civil_support
+
+		visible = {
+			always = yes
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = REU_uf_refugees_tt
+			hidden_effect = {
+				# 地图外军工厂 +30
+				add_offsite_building = {
+					type = arms_factory
+					level = 30
+				}
+			}
+			add_manpower = 1000000
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 3) 请求萨米秘术援助 ────────────────────────────────────────────────
+	REU_uf_sami_aid = {
+		icon = GFX_decision_generic_operation
+
+		visible = {
+			always = yes
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = REU_uf_sami_aid_tt
+			add_timed_idea = {
+				idea = REU_United_Front_Zeal
+				days = 365
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 4) 发动“塔露拉突击” ──────────────────────────────────────────────
+	# 可重复 10 次（计数变量 REU_uf_talua_assault_count）。
+	REU_uf_talua_assault = {
+		icon = GFX_decision_generic_assault
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			has_war = yes
+			check_variable = {
+				var = REU_uf_talua_assault_count
+				value = 10
+				compare = less_than
+			}
+		}
+
+		cost = 50
+
+		complete_effect = {
+			custom_effect_tooltip = REU_uf_talua_assault_tt
+			add_to_variable = {
+				var = REU_uf_talua_assault_count
+				value = 1
+			}
+			add_timed_idea = {
+				idea = REU_Talua_Assault
+				days = 90
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+}

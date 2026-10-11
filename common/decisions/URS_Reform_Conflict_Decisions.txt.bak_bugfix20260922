@@ -1,0 +1,232 @@
+# ==============================================================
+# 乌萨斯帝国 · 政治国策树「改革矛盾」决议组
+# --------------------------------------------------------------
+#  分类 URS_reform_conflict_decisions 声明在
+#  common/decisions/categories/URS_decision_categroies.txt；
+#  本文件的顶层块名就是该分类键。
+#
+#  解锁路径（全部由国策置旗标）：
+#    稳定议会 / 夺取议会 ← 初升的曙光（URS_council_decisions_unlocked）
+#    冬季配给           ← 一五计划（URS_winter_rationing_unlocked）
+#    新年后演讲         ← 何去何从（URS_new_year_speech_unlocked）
+#    达莉娅的要求       ← 狂人的誓言 / 维特的独裁 完成后出现
+#    政变线与邪魔线整合 ← 内卫被控（URS_fool_integration_unlocked）
+#
+#  矛盾机制：稳定议会与夺取议会互斥（夺取后前者消失），
+#  夺取议会为 fire_only_once，代价是稳定度归零 + 政变风险。
+#
+#  【AI 权重】2026-09-15：为配合 common/ai_strategy_plans/URS_ai_strategy_plans.txt
+#  「AI 优先走圣愚政治线」，本文件 6 条决议的 ai_will_do 统一改为
+#  `base = 0 + modifier { is_ai = yes factor = N }`：玩家点得到但 AI 不替玩家点，
+#  AI 操控时按 N 加权自动完成，其中「达莉娅的要求」权重最高（圣愚线入场券）。
+#  由 docs/_urs_ai_build.py 生成，勿手改。
+# ==============================================================
+
+URS_reform_conflict_decisions = {
+
+	URS_conflict_stabilize_council = {
+		icon = GFX_decision_generic_political_address
+
+		visible = {
+			has_country_flag = URS_council_decisions_unlocked
+			NOT = { has_country_flag = URS_council_seized }
+		}
+
+		cost = 75
+		days_remove = 120
+		days_re_enable = 30
+
+		modifier = {
+			stability_factor = 0.5
+		}
+
+		custom_effect_tooltip = URS_conflict_stabilize_council_tt
+
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 50
+			}
+		}
+	}
+
+	URS_conflict_seize_council = {
+		icon = GFX_decision_generic_police_action
+
+		visible = {
+			has_country_flag = URS_council_decisions_unlocked
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = URS_conflict_seize_council_tt
+			hidden_effect = {
+				set_stability = 0
+				add_to_variable = { var = URS_coup_risk value = 0.2 }
+				custom_effect_tooltip = URS_tt_pol_coup_risk_p20
+				set_country_flag = URS_council_seized
+				set_country_flag = URS_winter_rationing_unlocked
+				set_country_flag = URS_new_year_speech_unlocked
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	URS_conflict_winter_rationing = {
+		icon = GFX_decision_generic_consumer_goods
+
+		visible = {
+			has_country_flag = URS_winter_rationing_unlocked
+		}
+
+		cost = 50
+		days_remove = 180
+		days_re_enable = 60
+
+		modifier = {
+			consumer_goods_factor = -0.05
+		}
+
+		custom_effect_tooltip = URS_conflict_winter_rationing_tt
+
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 400
+			}
+		}
+	}
+
+	URS_conflict_new_year_speech = {
+		icon = GFX_decision_generic_speech
+
+		visible = {
+			has_country_flag = URS_new_year_speech_unlocked
+		}
+
+		cost = 25
+		days_remove = 14
+		days_re_enable = 30
+
+		modifier = {
+			political_power_gain = 2.0
+		}
+
+		custom_effect_tooltip = URS_conflict_new_year_speech_tt
+
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 300
+			}
+		}
+	}
+
+	URS_conflict_darya_demand = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			OR = {
+				has_completed_focus = URS_oath_of_a_madman
+				has_completed_focus = URS_vitte_dictatorship
+			}
+			NOT = { has_country_flag = URS_darya_claim }
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = URS_conflict_darya_demand_tt
+			hidden_effect = {
+				add_to_variable = { var = URS_fool_support value = 0.1 }
+				custom_effect_tooltip = URS_tt_pol_fool_support_p10
+				set_country_flag = URS_darya_claim
+			}
+		}
+
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 800
+			}
+		}
+	}
+
+	URS_conflict_fool_integration = {
+		icon = GFX_decision_generic_brainwash
+
+		visible = {
+			has_country_flag = URS_fool_integration_unlocked
+		}
+
+		cost = 50
+		days_remove = 180
+		days_re_enable = 60
+
+		modifier = {
+			resistance_target = -0.1
+			war_support_factor = 0.05
+		}
+
+		custom_effect_tooltip = URS_conflict_fool_integration_tt
+
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		# AI 专用权重：玩家操控时不生效（base = 0），AI 操控时按此加权。
+		# 圣愚政治线要求先完成本决议（置 URS_darya_claim）才能点「敲钟失败」。
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_ai = yes
+				factor = 600
+			}
+		}
+	}
+
+}

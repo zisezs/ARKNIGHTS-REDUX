@@ -1,0 +1,697 @@
+####################
+## 大炎 开局部队 ##
+####################
+# 按设计文档重制：6 类师模板 + 玄极巨兵实验旅 + 百灶空卫
+# 番号组见 common/units/names_divisions/YAN_names_divisions.txt
+# 位置沿用原 OOB 的有效省份 id
+
+#禁军镇：9 步兵 + 3 炮兵，工兵/侦察/宪兵/天师术师/后勤，精锐填线
+division_template = {
+	name = "禁军镇"
+	division_names_group = YAN_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
+		artillery = { x = 3 y = 0 }
+		artillery = { x = 3 y = 1 }
+		artillery = { x = 3 y = 2 }
+	}
+	support = {
+		engineer = { x = 0 y = 0 }
+		recon = { x = 0 y = 1 }
+		military_police = { x = 0 y = 2 }
+		firepower_support = { x = 0 y = 3 }
+		logistics_company = { x = 0 y = 4 }
+	}
+}
+
+#御林卫：9 步兵 + 2 炮兵，工兵/宪兵/后勤，首都卫戍
+division_template = {
+	name = "御林卫"
+	division_names_group = YAN_INF_02
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
+		artillery = { x = 3 y = 0 }
+		artillery = { x = 3 y = 1 }
+	}
+	support = {
+		engineer = { x = 0 y = 0 }
+		military_police = { x = 0 y = 1 }
+		logistics_company = { x = 0 y = 2 }
+	}
+}
+
+#玉门戍卫师：9 步兵 + 1 炮兵，工兵/天师术师/后勤，要塞防御
+division_template = {
+	name = "玉门戍卫师"
+	division_names_group = YAN_INF_03
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
+		artillery = { x = 3 y = 0 }
+	}
+	support = {
+		engineer = { x = 0 y = 0 }
+		firepower_support = { x = 0 y = 1 }
+		logistics_company = { x = 0 y = 2 }
+	}
+}
+
+#边军守备师：6 步兵 + 2 炮兵，工兵/后勤，低配守备
+division_template = {
+	name = "边军守备师"
+	division_names_group = YAN_INF_04
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+		artillery = { x = 2 y = 0 }
+		artillery = { x = 2 y = 1 }
+	}
+	support = {
+		engineer = { x = 0 y = 0 }
+		logistics_company = { x = 0 y = 1 }
+	}
+}
+
+#天师术师团：6 步兵 + 天师术师/工兵/侦察，对巨兽与天灾特化
+division_template = {
+	name = "天师术师团"
+	division_names_group = YAN_INF_05
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+	}
+	support = {
+		firepower_support = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+		recon = { x = 0 y = 2 }
+	}
+}
+
+#龙门近卫师：6 步兵 + 宪兵/侦察，城市战
+division_template = {
+	name = "龙门近卫师"
+	division_names_group = YAN_INF_06
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+	}
+	support = {
+		military_police = { x = 0 y = 0 }
+		recon = { x = 0 y = 1 }
+	}
+}
+
+#玄极巨兵实验旅：4 重装 + 4 机械化 + 支援，实验装甲
+division_template = {
+	name = "玄极巨兵实验旅"
+	division_names_group = YAN_ARM_01
+	regiments = {
+		heavy_armor = { x = 0 y = 0 }
+		heavy_armor = { x = 0 y = 1 }
+		heavy_armor = { x = 0 y = 2 }
+		heavy_armor = { x = 0 y = 3 }
+		mechanized = { x = 1 y = 0 }
+		mechanized = { x = 1 y = 1 }
+		mechanized = { x = 1 y = 2 }
+		mechanized = { x = 1 y = 3 }
+	}
+	support = {
+		maintenance_company = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+		logistics_company = { x = 0 y = 2 }
+		recon = { x = 0 y = 3 }
+	}
+}
+
+units = {
+	# ---------------- 禁军镇（6） ----------------
+	division = {
+		name = "禁军第一镇“真龙”"
+		location = 1410
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "禁军第二镇“天镜”"
+		location = 7520
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "禁军第三镇“百灶”"
+		location = 1470
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "禁军第四镇“赤霄”"
+		location = 16182
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "禁军第五镇“神武”"
+		location = 11619
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "禁军第六镇“镇岁”"
+		location = 15495
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1.0
+	}
+
+	# ---------------- 御林卫（4） ----------------
+	division = {
+		name = "御林卫第一卫“禁城”"
+		location = 15337
+		division_template = "御林卫"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.95
+	}
+	division = {
+		name = "御林卫第二卫“百珍”"
+		location = 9484
+		division_template = "御林卫"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.95
+	}
+	division = {
+		name = "御林卫第三卫“天镜”"
+		location = 5425
+		division_template = "御林卫"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.95
+	}
+	division = {
+		name = "御林卫第四卫“岁陵”"
+		location = 12715
+		division_template = "御林卫"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.95
+	}
+
+	# ---------------- 玉门戍卫师（8） ----------------
+	division = {
+		name = "玉门第一戍卫师“望烽”"
+		location = 15311
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第二戍卫师“屏风”"
+		location = 15191
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第三戍卫师“沙渠”"
+		location = 15091
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第四戍卫师“天灾”"
+		location = 14643
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第五戍卫师“左宣辽”"
+		location = 675
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第六戍卫师“重岳”"
+		location = 6410
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第七戍卫师“武魁”"
+		location = 6958
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第八戍卫师“玉门”"
+		location = 15527
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+
+	# ---------------- 北疆边军（12） ----------------
+	division = {
+		name = "北疆第一边军"
+		location = 16033
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第二边军"
+		location = 16395
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第三边军"
+		location = 17017
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第四边军"
+		location = 12296
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第五边军"
+		location = 14592
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第六边军"
+		location = 2371
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第七边军"
+		location = 2859
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第八边军"
+		location = 8796
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第九边军"
+		location = 14396
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第十边军"
+		location = 16279
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第十一边军"
+		location = 10635
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第十二边军"
+		location = 3207
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+
+	# ---------------- 天师术师团（2） ----------------
+	division = {
+		name = "天师府第一术师团“钦天”"
+		location = 6196
+		division_template = "天师术师团"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.95
+	}
+	division = {
+		name = "天师府第二术师团“雷法”"
+		location = 8491
+		division_template = "天师术师团"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.95
+	}
+
+	# ---------------- 龙门近卫师（2） ----------------
+	division = {
+		name = "龙门近卫局第一特别行动师"
+		location = 8742
+		division_template = "龙门近卫师"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.95
+	}
+	division = {
+		name = "龙门近卫局第二特别行动师"
+		location = 5391
+		division_template = "龙门近卫师"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.95
+	}
+
+	# ---------------- 玄极巨兵实验旅（1） ----------------
+	division = {
+		name = "玄极巨兵实验队“年”"
+		location = 3507
+		division_template = "玄极巨兵实验旅"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+
+	# ---------------- 禁军镇（增编 6～12，重制扩编） ----------------
+	division = {
+		name = "禁军第七镇“承天”"
+		location = 1410
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1
+	}
+	division = {
+		name = "禁军第八镇“云台”"
+		location = 7520
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1
+	}
+	division = {
+		name = "禁军第九镇“天策”"
+		location = 1470
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1
+	}
+	division = {
+		name = "禁军第十镇“神策”"
+		location = 16182
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1
+	}
+	division = {
+		name = "禁军第十一镇“武成”"
+		location = 11619
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1
+	}
+	division = {
+		name = "禁军第十二镇“定远”"
+		location = 15495
+		division_template = "禁军镇"
+		start_experience_factor = 0.7
+		start_equipment_factor = 1
+	}
+
+	# ---------------- 御林卫（增编 5～8） ----------------
+	division = {
+		name = "御林卫第五卫“上林”"
+		location = 15337
+		division_template = "御林卫"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.95
+	}
+	division = {
+		name = "御林卫第六卫“长乐”"
+		location = 9484
+		division_template = "御林卫"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.95
+	}
+	division = {
+		name = "御林卫第七卫“未央”"
+		location = 5425
+		division_template = "御林卫"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.95
+	}
+	division = {
+		name = "御林卫第八卫“建章”"
+		location = 12715
+		division_template = "御林卫"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.95
+	}
+
+	# ---------------- 玉门戍卫师（增编 9～16） ----------------
+	division = {
+		name = "玉门第九戍卫师“阳关”"
+		location = 15311
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第十戍卫师“疏勒”"
+		location = 15191
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第十一戍卫师“敦煌”"
+		location = 15091
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第十二戍卫师“玉塞”"
+		location = 14643
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第十三戍卫师“雪岭”"
+		location = 675
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第十四戍卫师“赤水”"
+		location = 6410
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第十五戍卫师“流沙”"
+		location = 6958
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = {
+		name = "玉门第十六戍卫师“白龙”"
+		location = 15527
+		division_template = "玉门戍卫师"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+
+	# ---------------- 北疆边军（增编 13～24） ----------------
+	division = {
+		name = "北疆第十三边军"
+		location = 16033
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第十四边军"
+		location = 16395
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第十五边军"
+		location = 17017
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第十六边军"
+		location = 12296
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第十七边军"
+		location = 14592
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第十八边军"
+		location = 2371
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第十九边军"
+		location = 2859
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第二十边军"
+		location = 8796
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第二十一边军"
+		location = 14396
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第二十二边军"
+		location = 16279
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第二十三边军"
+		location = 10635
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "北疆第二十四边军"
+		location = 3207
+		division_template = "边军守备师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.8
+	}
+
+	# ---------------- 天师术师团（增编 3～4） ----------------
+	division = {
+		name = "天师府第三术师团“步斗”"
+		location = 6196
+		division_template = "天师术师团"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.95
+	}
+	division = {
+		name = "天师府第四术师团“六甲”"
+		location = 8491
+		division_template = "天师术师团"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.95
+	}
+
+	# ---------------- 龙门近卫师（增编 3～4） ----------------
+	division = {
+		name = "龙门近卫局第三特别行动师"
+		location = 8742
+		division_template = "龙门近卫师"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.95
+	}
+	division = {
+		name = "龙门近卫局第四特别行动师"
+		location = 5391
+		division_template = "龙门近卫师"
+		start_experience_factor = 0.7
+		start_equipment_factor = 0.95
+	}
+
+	# ---------------- 玄极巨兵实验旅（增编 2） ----------------
+	division = {
+		name = "玄极巨兵实验队“夕”"
+		location = 3507
+		division_template = "玄极巨兵实验旅"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1
+	}
+}
+
+# 百灶空卫：战斗机与战术轰炸各一支（首都 1034，需自行补建机场）
+air_wings = {
+	1034 = {
+		small_plane_airframe_1 = {
+			owner = YAN
+			amount = 12
+			version_name = "炎式战机"
+		}
+		name = "百灶空卫第一战斗机联队"
+		medium_plane_airframe_1 = {
+			owner = YAN
+			amount = 12
+			version_name = "炎式轰战机"
+		}
+		name = "百灶空卫第一战术轰炸联队"
+	}
+}

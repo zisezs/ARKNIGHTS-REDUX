@@ -1,0 +1,578 @@
+# 莱茵生命（RHL）· 企业运营决议（24 条 + 1 条解锁决议）· 无限制版
+# ──────────────────────────────────────────────────────────────
+# 应用户要求取消所有限制：
+#   - 无政体 / 国家的存在性等前置条件，开局即可使用；
+#   - 无冷却（不再设置 RHL_co_cd_* 时限旗标）；
+#   - 无一次性限制（fire_only_once 默认 no）；
+#   - 唯一消耗是决议的 cost = X（政治点）。
+# 保留项：
+#   - allowed = original_tag RHL（决议归属莱茵生命本身，非使用限制）；
+#   - 天空贷的 days_remove = 180（这是「180 天后偿付期到期 → 天空贷崩盘」的核心机制，非冷却）。
+# 效果内部对已灭亡国家做了存在性判断（if limit country_exists），避免报错，不影响使用。
+#
+# 「异见」沿用 CLB 侧惯例：以 custom_effect_tooltip 表现，配稳定/政治点数值。
+# 「外交 ±X」沿用 RHL_td 惯例：opinion_gain_monthly_factor；针对特定国家用好感动文件。
+
+# ══════════════════════════════ 一、企业文化 ══════════════════════════════
+
+RHL_co_culture = {
+
+	# ── 召开十科合议（50 点） ──
+	RHL_co_cul_council = {
+		icon = GFX_decision_generic_political_discourse
+
+		cost = 50
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_council days = 180 }
+			# 随机一科获得「科主任满意」：该科效果 +10%，持续 180 天
+			random_list = {
+				10 = { add_timed_idea = { idea = RHL_co_idea_praise_s1 days = 180 } }
+				10 = { add_timed_idea = { idea = RHL_co_idea_praise_s2 days = 180 } }
+				10 = { add_timed_idea = { idea = RHL_co_idea_praise_s3 days = 180 } }
+				10 = { add_timed_idea = { idea = RHL_co_idea_praise_s4 days = 180 } }
+				10 = { add_timed_idea = { idea = RHL_co_idea_praise_s5 days = 180 } }
+				10 = { add_timed_idea = { idea = RHL_co_idea_praise_s6 days = 180 } }
+				10 = { add_timed_idea = { idea = RHL_co_idea_praise_s7 days = 180 } }
+				10 = { add_timed_idea = { idea = RHL_co_idea_praise_s8 days = 180 } }
+				10 = { add_timed_idea = { idea = RHL_co_idea_praise_s9 days = 180 } }
+				10 = { add_timed_idea = { idea = RHL_co_idea_praise_s10 days = 180 } }
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 帕尔维斯的超人计划（100 点） ──
+	RHL_co_cul_superman = {
+		icon = GFX_decision_generic_dangerous_deal
+
+		cost = 100
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_superman days = 365 }
+			custom_effect_tooltip = CLB_tt_dissent_up_10
+			# 解锁「嵌合生命体」科研选项
+			add_tech_bonus = { bonus = 0.5 uses = 2 category = infantry_tech }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 员工配股计划（75 点） ──
+	RHL_co_cul_stock = {
+		icon = GFX_decision_generic_fundraising
+
+		cost = 75
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_stock days = 180 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 赫默伦理审查（50 点） ──
+	RHL_co_cul_ethics = {
+		icon = GFX_decision_generic_civil_support
+
+		cost = 50
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_ethics days = 180 }
+			# 国际声望 +10
+			custom_effect_tooltip = RHL_co_tt_prestige_up_10
+			hidden_effect = {
+				every_country = {
+					limit = { NOT = { tag = ROOT } }
+					reverse_add_opinion_modifier = { target = ROOT modifier = RHL_co_op_prestige_10 }
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 小贾斯汀的人才收购（100 点） ──
+	RHL_co_cul_poach = {
+		icon = GFX_decision_generic_operation
+
+		cost = 100
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_poach days = 180 }
+			# 获得 1 个随机科技加成卡
+			random_list = {
+				33 = { add_tech_bonus = { bonus = 0.5 uses = 1 category = electronics } }
+				33 = { add_tech_bonus = { bonus = 0.5 uses = 1 category = industry } }
+				34 = { add_tech_bonus = { bonus = 0.5 uses = 1 category = arts_weapons } }
+			}
+			# 外交 -10：同行们记住了被挖走的名字
+			custom_effect_tooltip = CLB_tt_diplo_down_10
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 雅拉的孤儿院扩编（75 点） ──
+	RHL_co_cul_orphanage = {
+		icon = GFX_decision_generic_spy_agency
+
+		cost = 75
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_orphanage days = 365 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}
+
+# ══════════════════════════════ 二、展会 ══════════════════════════════
+
+RHL_co_expo = {
+
+	# ── 举办天空生活展会（100 点） ──
+	RHL_co_expo_sky_life = {
+		icon = GFX_decision_generic_political_rally
+
+		cost = 100
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_sky_life days = 180 }
+			custom_effect_tooltip = RHL_co_tt_meter_sky_fever_p20
+			hidden_effect = { add_to_variable = { CLB_sky_fever = 20 } }
+			custom_effect_tooltip = RHL_co_tt_meter_beast_p10
+			hidden_effect = { add_to_variable = { CLB_beast_acquiescence = 10 } }
+			custom_effect_tooltip = RHL_co_tt_prestige_up_15
+			hidden_effect = {
+				every_country = {
+					limit = { NOT = { tag = ROOT } }
+					reverse_add_opinion_modifier = { target = ROOT modifier = RHL_co_op_prestige_15 }
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 螺旋桨天堂重建（150 点） ──
+	RHL_co_expo_propeller = {
+		icon = GFX_decision_generic_construction
+
+		cost = 150
+
+		complete_effect = {
+			# 奇观：永久精神「螺旋桨天堂」
+			add_ideas = RHL_co_idea_propeller
+			# 建筑 +15%，持续 365 天
+			add_timed_idea = { idea = RHL_co_idea_propeller_build days = 365 }
+			# 代价：工业产能 -5%、稳定 -5%，持续 365 天（重建负担）
+			add_timed_idea = { idea = RHL_co_idea_propeller_cost days = 365 }
+			custom_effect_tooltip = RHL_co_tt_meter_sky_fever_p20
+			hidden_effect = { add_to_variable = { CLB_sky_fever = 20 } }
+			custom_effect_tooltip = RHL_co_tt_meter_beast_p15
+			hidden_effect = { add_to_variable = { CLB_beast_acquiescence = 15 } }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 万星园巡礼（75 点） ──
+	RHL_co_expo_wanxingyuan = {
+		icon = GFX_decision_generic_speech
+
+		cost = 75
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_wanxingyuan days = 180 }
+			custom_effect_tooltip = RHL_co_tt_meter_beast_p10
+			hidden_effect = { add_to_variable = { CLB_beast_acquiescence = 10 } }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 莱茵「树」开放日（50 点） ──
+	RHL_co_expo_tree_open = {
+		icon = GFX_decision_generic_civil_support
+
+		cost = 50
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_tree_open days = 180 }
+			custom_effect_tooltip = RHL_co_tt_meter_sky_fever_p10
+			hidden_effect = { add_to_variable = { CLB_sky_fever = 10 } }
+			custom_effect_tooltip = RHL_co_tt_meter_beast_p5
+			hidden_effect = { add_to_variable = { CLB_beast_acquiescence = 5 } }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 天空贷发行（75 点 / 180 天后偿付期到期） ──
+	RHL_co_expo_skyloan = {
+		icon = GFX_decision_generic_fundraising
+
+		cost = 75
+		days_remove = 180
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_skyloan days = 180 }
+			custom_effect_tooltip = RHL_co_tt_meter_sky_fever_p15
+			hidden_effect = { add_to_variable = { CLB_sky_fever = 15 } }
+			custom_effect_tooltip = RHL_co_tt_skyloan_due
+		}
+
+		remove_effect = {
+			# 偿付期到：天空贷崩盘
+			add_timed_idea = { idea = RHL_co_idea_skyloan_crash days = 180 }
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ── 天空氧气瓶配给（25 点） ──
+	RHL_co_expo_oxygen = {
+		icon = GFX_decision_generic_consumer_goods
+
+		cost = 25
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_oxygen days = 90 }
+			custom_effect_tooltip = RHL_co_tt_meter_sky_fever_p5
+			hidden_effect = { add_to_variable = { CLB_sky_fever = 5 } }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}
+
+# ══════════════════════════════ 三、外交 ══════════════════════════════
+
+RHL_co_diplomacy = {
+
+	# ── 与罗德岛谈判（50 点 · 三选一走事件 rhlco.1） ──
+	RHL_co_dip_rhodes = {
+		icon = GFX_decision_generic_political_address
+
+		cost = 50
+
+		complete_effect = {
+			set_country_flag = RHL_flag_rhodes_talk
+			custom_effect_tooltip = RHL_co_tt_rhodes_open
+			country_event = { id = rhlco.1 days = 1 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 追捕罗德岛（100 点） ──
+	RHL_co_dip_hunt_rhodes = {
+		icon = GFX_decision_generic_arrest
+
+		cost = 100
+
+		complete_effect = {
+			if = {
+				limit = {
+					country_exists = RIL
+					NOT = { has_war_with = RIL }
+				}
+				create_wargoal = { type = annex_everything target = RIL }
+			}
+			army_experience = 25
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ── 梅兰德清算（150 点 · 有失败风险） ──
+	RHL_co_dip_purge_maylander = {
+		icon = GFX_decision_generic_wreckers
+
+		cost = 150
+
+		complete_effect = {
+			random_list = {
+				75 = {
+					custom_effect_tooltip = RHL_co_tt_maylander_success
+					custom_effect_tooltip = RHL_co_tt_meter_maylander_n30
+					hidden_effect = {
+						add_to_variable = { CLB_maylander_influence = -30 }
+						set_country_flag = RHL_flag_maylander_purged
+					}
+					add_timed_idea = { idea = RHL_co_idea_maylander_purge days = 365 }
+				}
+				25 = {
+					custom_effect_tooltip = RHL_co_tt_maylander_backlash
+					custom_effect_tooltip = RHL_co_tt_meter_maylander_p10
+					hidden_effect = {
+						add_to_variable = { CLB_maylander_influence = 10 }
+						set_country_flag = RHL_flag_maylander_purged
+					}
+					add_timed_idea = { idea = RHL_co_idea_maylander_backlash days = 365 }
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ── 维多利亚复仇宣传（75 点） ──
+	RHL_co_dip_victoria = {
+		icon = GFX_decision_generic_speech
+
+		cost = 75
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_victoria days = 180 }
+			# 外交 -20，与维多利亚关系恶化
+			custom_effect_tooltip = CLB_tt_diplo_down_20
+			hidden_effect = {
+				if = {
+					limit = { country_exists = VIC }
+					reverse_add_opinion_modifier = { target = VIC modifier = RHL_co_op_soured }
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ── 莱塔尼亚技术引进（100 点） ──
+	RHL_co_dip_leithanien = {
+		icon = GFX_decision_generic_military
+
+		cost = 100
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_leithanien days = 180 }
+			# 解锁「巫术模块」科研选项
+			add_tech_bonus = { bonus = 0.5 uses = 2 category = arts_weapons }
+			# 外交 -10，与拉特兰关系恶化
+			custom_effect_tooltip = CLB_tt_diplo_down_10
+			hidden_effect = {
+				if = {
+					limit = { country_exists = LTR }
+					reverse_add_opinion_modifier = { target = LTR modifier = RHL_co_op_soured }
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 拉特兰天空峰会（150 点） ──
+	RHL_co_dip_laterano = {
+		icon = GFX_decision_generic_form_nation
+
+		cost = 150
+
+		complete_effect = {
+			# 国际声望 +30
+			custom_effect_tooltip = RHL_co_tt_prestige_up_30
+			hidden_effect = {
+				every_country = {
+					limit = { NOT = { tag = ROOT } }
+					reverse_add_opinion_modifier = { target = ROOT modifier = RHL_co_op_prestige_30 }
+				}
+			}
+			# 外交 +20：东道主拉特兰尤为满意
+			hidden_effect = {
+				if = {
+					limit = { country_exists = LTR }
+					reverse_add_opinion_modifier = { target = LTR modifier = RHL_co_op_prestige_30 }
+				}
+			}
+			# 签署「天空公约」：永久精神
+			add_ideas = RHL_co_idea_sky_convention
+			set_country_flag = RHL_flag_sky_convention
+			custom_effect_tooltip = RHL_co_tt_convention_unlocked
+			add_timed_idea = { idea = RHL_co_idea_summit_cost days = 365 }
+			custom_effect_tooltip = RHL_co_tt_meter_beast_p10
+			hidden_effect = { add_to_variable = { CLB_beast_acquiescence = 10 } }
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ── 阿戈尔接触（100 点） ──
+	RHL_co_dip_aegir = {
+		icon = GFX_decision_generic_naval
+
+		cost = 100
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_aegir days = 365 }
+			# 解锁「阿戈尔科技」科研选项
+			add_tech_bonus = { bonus = 0.5 uses = 2 category = naval_equipment }
+			# 触发「深海恐惧」事件（稳定 -10% 由事件落地）
+			country_event = { id = rhlco.2 days = 3 }
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+}
+
+# ══════════════════════════════ 四、安抚民众 ══════════════════════════════
+
+RHL_co_pacify = {
+
+	# ── 感染者医疗补贴（75 点） ──
+	RHL_co_pac_medical = {
+		icon = GFX_decision_generic_welfare
+
+		cost = 75
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_medical days = 180 }
+			custom_effect_tooltip = RHL_co_tt_dissent_down_10
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 拓荒者安置法案（100 点） ──
+	RHL_co_pac_pioneers = {
+		icon = GFX_decision_generic_construct_infrastructure
+
+		cost = 100
+
+		complete_effect = {
+			# 人力 +10%（永久精神）
+			add_ideas = RHL_co_idea_pioneers
+			add_timed_idea = { idea = RHL_co_idea_pioneer_act days = 365 }
+			custom_effect_tooltip = RHL_co_tt_dissent_down_10
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 媒体管控（50 点） ──
+	RHL_co_pac_media = {
+		icon = GFX_decision_generic_police_action
+
+		cost = 50
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_media days = 180 }
+			custom_effect_tooltip = CLB_tt_dissent_up_10
+			# 国际声望 -10
+			custom_effect_tooltip = RHL_co_tt_prestige_down_10
+			hidden_effect = {
+				every_country = {
+					limit = { NOT = { tag = ROOT } }
+					reverse_add_opinion_modifier = { target = ROOT modifier = RHL_co_op_notorious }
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 天空热降温（75 点） ──
+	RHL_co_pac_cool_down = {
+		icon = GFX_decision_generic_industry
+
+		cost = 75
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_cool_down days = 180 }
+			custom_effect_tooltip = RHL_co_tt_meter_sky_fever_n20
+			hidden_effect = { add_to_variable = { CLB_sky_fever = -20 } }
+		}
+
+		ai_will_do = {
+			factor = 5
+			modifier = {
+				factor = 5
+				check_variable = { var = CLB_sky_fever value = 60 compare = greater_than_or_equals }
+			}
+		}
+	}
+
+	# ── 兽主的喝彩（150 点） ──
+	RHL_co_pac_beast_applause = {
+		icon = GFX_decision_generic_dangerous_deal
+
+		cost = 150
+
+		complete_effect = {
+			custom_effect_tooltip = RHL_co_tt_meter_beast_p30
+			hidden_effect = { add_to_variable = { CLB_beast_acquiescence = 30 } }
+			add_timed_idea = { idea = RHL_co_idea_applause days = 365 }
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ── 大赦天下（100 点） ──
+	RHL_co_pac_amnesty = {
+		icon = GFX_decision_generic_national_unity
+
+		cost = 100
+
+		complete_effect = {
+			add_timed_idea = { idea = RHL_co_idea_amnesty days = 365 }
+			custom_effect_tooltip = RHL_co_tt_dissent_down_15
+			custom_effect_tooltip = RHL_co_tt_prestige_up_15
+			hidden_effect = {
+				every_country = {
+					limit = { NOT = { tag = ROOT } }
+					reverse_add_opinion_modifier = { target = ROOT modifier = RHL_co_op_prestige_15 }
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}

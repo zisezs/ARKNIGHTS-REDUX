@@ -1,0 +1,431 @@
+division_template = {
+	name = "空中骑兵师"				# 哥伦比亚最精锐的空突部队
+	division_names_group = CLB_INF_01
+	regiments = {
+		air_assault = { x = 0 y = 0 }
+		air_assault = { x = 0 y = 1 }
+
+		air_assault = { x = 1 y = 0 }
+		air_assault = { x = 1 y = 1 }
+	}
+	support = {
+		artillery = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+	}
+}
+
+division_template = {
+	name = "联邦军步兵师"				# 哥伦比亚常备军
+	division_names_group = CLB_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
+	}
+		support = {
+			artillery = { x = 0 y = 0 }
+			engineer = { x = 0 y = 1 }
+			mot_recon = { x = 0 y = 2 }
+	}
+}
+
+division_template = {
+	name = "国民警卫军"				# 哥伦比亚国民警卫军
+	division_names_gro2p = CLB_INF_01
+	regiments = {
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+
+	}
+		support = {
+			engineer = { x = 0 y = 0 }
+	}
+}
+
+division_template = {
+	name = "装甲骑兵师"			# 哥伦比亚的装甲部队
+	division_names_group = CLB_INF_01
+	regiments = {
+		light_armor = { x = 0 y = 0 }
+		light_armor = { x = 0 y = 1 }
+		light_armor = { x = 0 y = 2 }
+		light_armor = { x = 0 y = 2 }
+
+		motorized = { x = 1 y = 0 }
+		motorized = { x = 1 y = 1 }
+		motorized = { x = 1 y = 2 }
+
+		motorized = { x = 2 y = 0 }
+		motorized = { x = 2 y = 1 }
+		motorized = { x = 2 y = 2 }
+	}
+		support = {
+			artillery = { x = 0 y = 0 }
+			mot_recon = { x = 0 y = 1 }
+	}
+}
+
+division_template = {
+	name = "联邦舰队"			# 哥伦比亚的陆行舰队
+	division_names_group = CLB_INF_01
+	regiments = {
+		landship = { x = 0 y = 0 }
+		landship = { x = 0 y = 1 }
+		landship = { x = 0 y = 2 }
+		landship = { x = 0 y = 3 }
+
+		motorized = { x = 1 y = 0 }
+		motorized = { x = 1 y = 1 }
+		motorized = { x = 1 y = 2 }
+
+		motorized = { x = 2 y = 0 }
+		motorized = { x = 2 y = 1 }
+		motorized = { x = 2 y = 2 }
+	}
+	support = {
+		artillery = { x = 0 y = 0 }
+		mot_recon = { x = 0 y = 1 }
+	}
+}
+
+units = {
+
+	#空突部队
+	division = { 
+		name = "第1骑兵师"
+		location = 7110
+		division_template = "空中骑兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = { 
+		name = "第2骑兵师"
+		location = 15561
+		division_template = "空中骑兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+
+	division = {
+		name = "第1步兵师"
+		location = 7139
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "第2步兵师"
+		location = 2881
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "第3步兵师"
+		location = 16816
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "第4步兵师"
+		location = 11399
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "第5步兵师"
+		location = 12020
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "第6步兵师"
+		location = 17308
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "第7步兵师"
+		location = 7029
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "第8步兵师"
+		location = 16547
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "第9步兵师"
+		location = 16255
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "第10步兵师"
+		location = 10128
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "第11步兵师"
+		location = 16285
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+	}
+
+	#州警卫队
+	division = {
+		name = "密歇根国民警卫军"
+		location = 16329
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "查卡顿国民警卫军"
+		location = 16197
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "佐治亚莱纳国民警卫军"
+		location = 6561
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "麦威道尔国民警卫军"
+		location = 12436
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "蒙达加国民警卫军"
+		location = 3492
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "怀勒冈国民警卫军"
+		location = 14851
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "科塔那国民警卫军"
+		location = 12774
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "亚利特明国民警卫军"
+		location = 11284
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "拉弗拉里基国民警卫军"
+		location = 15277
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "纽波特兰国民警卫军"
+		location = 10388
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "第1圣保罗国民警卫军"
+		location = 15114
+		division_template = "国民警卫军"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "第2圣保罗国民警卫军"
+		location = 15491
+		division_template = "国民警卫军"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "第3圣保罗国民警卫军"
+		location = 15561
+		division_template = "国民警卫军"
+		start_experience_factor = 0.3
+		start_equipment_factor = 1.0
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "宾洛法尼亚国民警卫军"
+		location = 7521
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "缅尔国民警卫军"
+		location = 5807
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "色肯国民警卫军"
+		location = 11477
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "科塔那国民警卫军"
+		location = 12774
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "新泽西国民警卫军"
+		location = 7839
+		division_template = "国民警卫军"
+		start_experience_factor = 0.1
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	#驻外军团
+	division = {
+		name = "玻利瓦尔第1驻军师"
+		location = 15196
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "玻利瓦尔第2驻军师"
+		location = 304
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+	division = {
+		name = "玻利瓦尔第3驻军师"
+		location = 8696
+		division_template = "联邦军步兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+		force_equipment_variants = { infantry_equipment_0 = { owner = "CLB" } }
+	}
+
+	#装甲部队
+	division = {
+		name = "第3骑兵师"
+		location = 4227
+		division_template = "装甲骑兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "第4骑兵师"
+		location = 16816
+		division_template = "装甲骑兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "第5骑兵师"
+		location = 15491
+		division_template = "装甲骑兵师"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+
+	#陆行舰队
+	division = {
+		name = "第1舰队"
+		location = 12020
+		division_template = "联邦舰队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "第2舰队"
+		location = 16255
+		division_template = "联邦舰队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "第3舰队"
+		location = 17308
+		division_template = "联邦舰队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "第4舰队"
+		location = 15491
+		division_template = "联邦舰队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "第5舰队"
+		location = 14851
+		division_template = "联邦舰队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+}

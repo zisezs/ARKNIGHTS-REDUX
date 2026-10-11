@@ -1,0 +1,300 @@
+division_template = {
+	name = "国防军师"				# 哥伦比亚援助并培训的比勒陀利亚部队
+	division_names_group = BIL_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
+	}
+		support = {
+		engineer = { x = 0 y = 0 }
+		artillery = { x = 0 y = 1 }
+	}
+}
+
+division_template = {
+	name = "王酋军"				# 比勒陀利亚的精锐部队
+	division_names_group = BIL_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry =  { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry =  { x = 1 y = 2 }
+	}
+		support = {
+		artillery = { x = 0 y = 0 }
+	}
+}
+
+division_template = {
+	name = "国家卫队"				# 比勒陀利亚的主要作战部队
+	division_names_group = BIL_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+	}
+		support = {
+		engineer = { x = 0 y = 0 }
+	}
+}
+
+division_template = {
+	name = "部落协从军"				# 比勒陀利亚的后备部队
+	division_names_group = BIL_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+	}
+}
+
+division_template = {
+	name = "王酋斥候团"				# 比勒陀利亚的预备机动部队
+	division_names_group = BIL_INF_01
+	regiments = {
+		cavalry  = { x = 0 y = 0 }
+		cavalry  = { x = 0 y = 1 }
+		cavalry  = { x = 0 y = 2 }
+	}
+}
+
+division_template = {
+	name = "陆行舰团"			# 哥伦比亚援助的老式陆行舰
+	division_names_group = BIL_INF_01
+	regiments = {
+		landship = { x = 0 y = 0 }
+
+		light_armor = { x = 1 y = 0 }
+	}
+		support = {
+		artillery = { x = 0 y = 0 }
+	}
+}
+
+units = {
+
+	division = { 
+		name = "首都卫队"
+		location = 4753
+		division_template = "国防军师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 1.0
+		force_equipment_variants = { infantry_equipment_1 = { owner = "CLB" } }
+		force_equipment_variants = { gun_equipment_1 = { owner = "CLB" } }
+	}
+	division = { 
+		name = "培训师"
+		location = 4420
+		division_template = "国防军师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 1.0
+		force_equipment_variants = { infantry_equipment_1 = { owner = "CLB" } }
+		force_equipment_variants = { gun_equipment_1 = { owner = "CLB" } }
+	}
+	division = {
+		name = "国防军教导总队"
+		location = 3390
+		division_template = "国防军师"
+		start_experience_factor = 0.4
+		start_equipment_factor = 1.0
+		force_equipment_variants = { infantry_equipment_1 = { owner = "CLB" } }
+		force_equipment_variants = { gun_equipment_1 = { owner = "CLB" } }
+	}
+	division = {
+		name = "普利亚施特王酋军"
+		location = 11851
+		division_template = "王酋军"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "哈里特密斯王酋军"
+		location = 17925
+		division_template = "王酋军"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "恩格斯通王酋军"
+		location = 3390
+		division_template = "王酋军"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "布兰布尔王酋军"
+		location = 77
+		division_template = "王酋军"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "斯尔威兰士王酋军"
+		location = 11760
+		division_template = "王酋军"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.8
+	}
+	division = {
+		name = "第12国家卫队旅"
+		location = 10249
+		division_template = "国家卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "第16国家卫队旅"
+		location = 17539
+		division_template = "国家卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "第17国家卫队旅"
+		location = 17835
+		division_template = "国家卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "第24国家卫队旅"
+		location = 1583
+		division_template = "国家卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "第35国家卫队旅"
+		location = 11760
+		division_template = "国家卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "第39国家卫队旅"
+		location = 4676
+		division_template = "国家卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "第55国家卫队旅"
+		location = 11851
+		division_template = "国家卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "第57国家卫队旅"
+		location = 17543
+		division_template = "国家卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "第58国家卫队旅"
+		location = 9496
+		division_template = "国家卫队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+
+	division = {
+		name = "第6协从军"
+		location = 18281
+		division_template = "部落协从军"
+		start_experience_factor = 0.2
+		start_equipment_factor = 0.4
+	}
+	division = {
+		name = "第7协从军"
+		location = 18701
+		division_template = "部落协从军"
+		start_experience_factor = 0.2
+		start_equipment_factor = 0.4
+	}
+	division = {
+		name = "第9协从军"
+		location = 18701
+		division_template = "部落协从军"
+		start_experience_factor = 0.2
+		start_equipment_factor = 0.4
+	}
+	division = {
+		name = "第14协从军"
+		location = 7726
+		division_template = "部落协从军"
+		start_experience_factor = 0.2
+		start_equipment_factor = 0.4
+	}
+	division = {
+		name = "第19协从军"
+		location = 18484
+		division_template = "部落协从军"
+		start_experience_factor = 0.2
+		start_equipment_factor = 0.4
+	}
+
+	division = {
+		name = "波尔克团"
+		location = 18281
+		division_template = "王酋斥候团"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "博瓦茨纳团"
+		location = 1428
+		division_template = "王酋斥候团"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "纳比布团"
+		location = 12187
+		division_template = "王酋斥候团"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "巴米亚团"
+		location = 3429
+		division_template = "王酋斥候团"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = {
+		name = "国家陆行舰团"
+		location = 4753
+		division_template = "陆行舰团"
+		start_experience_factor = 0.4
+		start_equipment_factor = 1.0
+		force_equipment_variants = { light_tank_chassis_1 = { owner = "CLB" version_name = "M2A4" } }
+		force_equipment_variants = { landship_chassis_0 = { owner = "CLB" version_name = "LS 1084 M1A4" } }
+	}
+	division = {
+		name = "萨尔贡陆行舰团"
+		location = 4753
+		division_template = "陆行舰团"
+		start_experience_factor = 0.4
+		start_equipment_factor = 1.0
+		force_equipment_variants = { light_tank_chassis_1 = { owner = "CLB" version_name = "M2A4" } }
+		force_equipment_variants = { landship_chassis_0 = { owner = "CLB" version_name = "LS 1084 M1A4" } }
+	}
+}

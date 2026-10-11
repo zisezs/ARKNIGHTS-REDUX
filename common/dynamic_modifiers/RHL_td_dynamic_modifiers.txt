@@ -1,0 +1,147 @@
+# 哥伦比亚 / 莱茵生命 —— 十科国策树（备选路线）· 科室动态修正
+# 每科一条独立动态修正，读取本科专属变量（RHL_td_sN_*，由国策 hidden_effect 累加）。
+# 科室最终国策完成时移除本修正，替换为对应的科室民族精神（见 RHL_td_ideas.txt）。
+# 变量初值由十科国策树根国策 RHL_td_council 的 completion_reward 统一置零。
+
+# ── 1/10 结构科·嵌合与灵魂（挂载：RHL_td_s1_l1 / RHL_td_s1_r1） ──
+RHL_td_dyn_s1 = {
+	name = RHL_td_dyn_s1
+	icon = GFX_idea_RHL_td_dyn_s1
+	enable = { always = yes }
+
+	research_speed_factor = RHL_td_s1_res
+	stability_factor = RHL_td_s1_stab
+	political_power_gain = RHL_td_s1_pp
+	war_support_factor = RHL_td_s1_ws
+	enemy_operative_detection_chance_factor = RHL_td_s1_det
+}
+
+# ── 2/10 能量科·递质与石棺（挂载：RHL_td_s2_l1 / RHL_td_s2_r1） ──
+RHL_td_dyn_s2 = {
+	name = RHL_td_dyn_s2
+	icon = GFX_idea_RHL_td_dyn_s2
+	enable = { always = yes }
+
+	research_speed_factor = RHL_td_s2_res
+	stability_factor = RHL_td_s2_stab
+	energy_gain_factor = RHL_td_s2_energy
+	fuel_gain_factor = RHL_td_s2_fuel
+	air_attack_factor = RHL_td_s2_air
+	air_defence_factor = RHL_td_s2_air
+	own_operative_intel_extraction_rate = RHL_td_s2_extract
+	opinion_gain_monthly_factor = RHL_td_s2_opinion
+}
+
+# ── 3/10 源石技艺应用科·递质与平等（挂载：RHL_td_s3_l1 / RHL_td_s3_r1） ──
+RHL_td_dyn_s3 = {
+	name = RHL_td_dyn_s3
+	icon = GFX_idea_RHL_td_dyn_s3
+	enable = { always = yes }
+
+	research_speed_factor = RHL_td_s3_res
+	stability_factor = RHL_td_s3_stab
+	enemy_operative_detection_chance_factor = RHL_td_s3_det
+	industrial_capacity_factory = RHL_td_s3_factory
+	army_attack_factor = RHL_td_s3_atk
+}
+
+# ── 4/10 工程科·浮空与咒言（挂载：RHL_td_s4_l1 / RHL_td_s4_r1） ──
+RHL_td_dyn_s4 = {
+	name = RHL_td_dyn_s4
+	icon = GFX_idea_RHL_td_dyn_s4
+	enable = { always = yes }
+
+	research_speed_factor = RHL_td_s4_res
+	production_speed_buildings_factor = RHL_td_s4_build
+	air_attack_factor = RHL_td_s4_air
+	air_defence_factor = RHL_td_s4_air
+	enemy_operative_detection_chance_factor = RHL_td_s4_det
+}
+
+# ── 5/10 科考科·冰原与星门（挂载：RHL_td_s5_l1 / RHL_td_s5_r1） ──
+RHL_td_dyn_s5 = {
+	name = RHL_td_dyn_s5
+	icon = GFX_idea_RHL_td_dyn_s5
+	enable = { always = yes }
+
+	research_speed_factor = RHL_td_s5_res
+	stability_factor = RHL_td_s5_stab
+	enemy_operative_detection_chance_factor = RHL_td_s5_det
+	air_attack_factor = RHL_td_s5_air
+	air_defence_factor = RHL_td_s5_air
+	opinion_gain_monthly_factor = RHL_td_s5_opinion
+}
+
+# ── 6/10 生态科·精灵与生命（挂载：RHL_td_s6_l1 / RHL_td_s6_r1） ──
+RHL_td_dyn_s6 = {
+	name = RHL_td_dyn_s6
+	icon = GFX_idea_RHL_td_dyn_s6
+	enable = { always = yes }
+
+	research_speed_factor = RHL_td_s6_res
+	stability_factor = RHL_td_s6_stab
+	enemy_operative_detection_chance_factor = RHL_td_s6_det
+	agricultural_development_monthly_modifier = RHL_td_s6_agri
+}
+
+# ── 7/10 防卫科·钙质与秩序（挂载：RHL_td_s7_l1 / RHL_td_s7_r1） ──
+RHL_td_dyn_s7 = {
+	name = RHL_td_dyn_s7
+	icon = GFX_idea_RHL_td_dyn_s7
+	enable = { always = yes }
+
+	army_attack_factor = RHL_td_s7_atk
+	army_defence_factor = RHL_td_s7_def
+	research_speed_factor = RHL_td_s7_res
+	experience_gain_army = RHL_td_s7_xp
+	stability_factor = RHL_td_s7_stab
+	war_support_factor = RHL_td_s7_ws
+}
+
+# ── 8/10 商务科·权与利（挂载：RHL_td_s8_l1 / RHL_td_s8_r1） ──
+RHL_td_dyn_s8 = {
+	name = RHL_td_dyn_s8
+	icon = GFX_idea_RHL_td_dyn_s8
+	enable = { always = yes }
+
+	political_power_gain = RHL_td_s8_pp
+	stability_factor = RHL_td_s8_stab
+	industrial_capacity_factory = RHL_td_s8_factory
+	opinion_gain_monthly_factor = RHL_td_s8_opinion
+	war_support_factor = RHL_td_s8_ws
+}
+
+# ── 9/10 人力资源科·晨星与孤儿（挂载：RHL_td_s9_l1 / RHL_td_s9_r1） ──
+RHL_td_dyn_s9 = {
+	name = RHL_td_dyn_s9
+	icon = GFX_idea_RHL_td_dyn_s9
+	enable = { always = yes }
+
+	own_operative_intel_extraction_rate = RHL_td_s9_extract
+	stability_factor = RHL_td_s9_stab
+	industrial_capacity_factory = RHL_td_s9_factory
+	political_power_gain = RHL_td_s9_pp
+}
+
+# ── 10/10 总辖构件科·万星园与星荚（挂载：RHL_td_s10_l1 / RHL_td_s10_r1） ──
+RHL_td_dyn_s10 = {
+	name = RHL_td_dyn_s10
+	icon = GFX_idea_RHL_td_dyn_s10
+	enable = { always = yes }
+
+	research_speed_factor = RHL_td_s10_res
+	stability_factor = RHL_td_s10_stab
+	air_attack_factor = RHL_td_s10_air
+	air_defence_factor = RHL_td_s10_air
+	agricultural_development_monthly_modifier = RHL_td_s10_agri
+}
+
+# ── 附：企业渗透·哥伦比亚（内科手术决议；工厂份额随控制度增长） ──
+RHL_dyn_crb = {
+	name = RHL_dyn_crb
+	icon = GFX_idea_RHL_dyn_crb
+	enable = { always = yes }
+
+	industrial_capacity_factory = RHL_crb_factory
+	political_power_gain = RHL_crb_pp
+}

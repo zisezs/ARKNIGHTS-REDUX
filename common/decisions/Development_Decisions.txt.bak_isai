@@ -1,0 +1,80 @@
+Development_test_Decisions = {
+	Agricultural_Level_Add_decision = {
+		allowed = {
+			is_ai = no
+		}
+
+		#days_remove = 70
+
+		modifier = {
+			agricultural_development_monthly_modifier = 0.2
+		}
+
+		complete_effect = {
+			set_temp_variable = { agricultural_development_monthly_effect_add_var = 0.1 }
+			agricultural_development_monthly_add = yes
+
+			division_template = {
+				name = "民兵师"
+				is_locked = yes
+				regiments = {
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+				}
+			}
+
+			capital_scope = {
+				for_loop_effect = {
+					start = 1
+					end = 5
+					compare = less_than_or_equals
+
+					create_unit = {
+						division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0 start_equipment_factor = 0.8"
+						owner = ROOT
+					}
+				}
+			}
+		}		
+	}
+
+	ifv_tech_unlock = {
+		allowed = {
+			is_ai = no
+		}
+
+		complete_effect = {
+			
+		}		
+	}
+
+	ifv_tech_lock = {
+		allowed = {
+			is_ai = no
+		}
+
+		complete_effect = {
+			set_technology = {
+				ifv_tech = 0
+				remove_ifv_tech = 1
+			}
+		}		
+	}
+
+	motorized_infantry_1_lock = {
+		allowed = {
+			is_ai = no
+		}
+
+		complete_effect = {
+			set_technology = {
+				motorized_infantry_1 = 0
+				arts_weapons_0 = 0
+				support_weapons_1 = -1
+				support_weapons_2 = -1
+			}
+		}		
+	}
+}

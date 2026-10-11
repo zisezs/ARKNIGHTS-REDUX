@@ -1,0 +1,114 @@
+# ============================================================================
+# 叙拉古 (SRC) · 民主的胜利 —— 四条路线的成长型大 BUFF + 市民积分体系
+#
+# 机制：修正符的数值直接写成国家变量，国策用 add_to_variable 原地累加
+#       （带 icon 的国家动态修正 = 政治栏里一个会成长的民族精神）。
+# 变量前缀按路线分开（SRC_nm_ / SRC_cd_ / SRC_tr_ / SRC_go_ / SRC_cp_），
+#   绝不复用共享变量池，否则一次累加会被多个精神同时计数。
+# 挂载：国策 completion_reward 里的 add_dynamic_modifier（幂等，可反复执行）。
+#
+# 2026-09-19 整合：原先每格国策发一个一次性精神（秩序恢复、物流控制、技术引进、
+#   叙拉古新文化、贸易枢纽、平等之城、联邦宪法草案、罗德岛合作协议、流亡者庇护、
+#   企鹅物流协助、猎狼人联络处、国民卫队、家族法人化）——全部并进下面四条路线精神，
+#   国策改为直接给对应变量升档。政治栏里只剩「会成长的四条路线 + 市民积分」，
+#   外加独立的负面精神「老一辈怒火中烧！」与决议发的限期精神。
+#
+# 满档（2026-09-20 按用户要求把原来的 25% 档削到 15%；原本不到 25% 的档保持原值）：
+#   新沃尔西尼模式   稳定 +15% / 政治点 +15% / 战争支持 +15% / 工业 +15% / 基建速度 +15%
+#                    / 补给消耗 -15% / 训练时间 -20% / 民主思潮 +5%
+#   世界渴望之城     科研 +15% / 建造 +17%（含 3 期伟大建设工程） / 工业 +21%（同上） / 船坞 +15%
+#                    / 稳定 +7% / 政治点 +15% / 消费品 -21%
+#   荆棘之路的尽头   稳定 +15% / 政治点 +15% / 征兵 +15% / 科研 +18% / 组织度恢复 +20%
+#                    / 消费品 -10% / 民主思潮 +15% / 每周稳定 +0.4%
+#   铳与秩序的新解   攻 +15% / 防 +15% / 组织度 +15% / 训练时间 -15% / 征兵 +15%
+#                    / 情报网络 +15% / 特工位 +2 / 补给消耗 -15% / 损耗 -15% / 战争支持 +8%
+#   市民积分体系     稳定 +14% / 政治点 +15% / 消费品 -5%
+#   （改数值要同步改这段注释、SRC_tt_* 文案与 docs/SRC_国策效果一览.md）
+# ============================================================================
+
+# ---- 分支一 · 家族的去势 ----
+SRC_dyn_new_model = {
+	icon = GFX_idea_SRC_dyn_new_model
+
+	enable = {
+		always = yes
+	}
+
+	stability_factor = SRC_nm_stab
+	political_power_gain = SRC_nm_pp
+	war_support_factor = SRC_nm_ws
+	democratic_drift = SRC_nm_drift
+	industrial_capacity_factory = SRC_nm_fac
+	training_time_factor = SRC_nm_train
+	supply_consumption_factor = SRC_nm_supply
+	production_speed_infrastructure_factor = SRC_nm_infra
+}
+
+# ---- 分支二 · 世界渴望之城 ----
+SRC_dyn_city_of_desires = {
+	icon = GFX_idea_SRC_dyn_city_of_desires
+
+	enable = {
+		always = yes
+	}
+
+	research_speed_factor = SRC_cd_res
+	production_speed_buildings_factor = SRC_cd_build
+	industrial_capacity_factory = SRC_cd_fac
+	industrial_capacity_dockyard = SRC_cd_dock
+	consumer_goods_factor = SRC_cd_cons
+	stability_factor = SRC_cd_stab
+	political_power_gain = SRC_cd_pp
+}
+
+# ---- 分支三 · 荆棘之路 ----
+SRC_dyn_thorn_road_end = {
+	icon = GFX_idea_SRC_dyn_thorn_road_end
+
+	enable = {
+		always = yes
+	}
+
+	stability_factor = SRC_tr_stab
+	stability_weekly = SRC_tr_weekly
+	political_power_gain = SRC_tr_pp
+	conscription_factor = SRC_tr_cons
+	democratic_drift = SRC_tr_drift
+	research_speed_factor = SRC_tr_res
+	army_org_regain = SRC_tr_orgregain
+	consumer_goods_factor = SRC_tr_consumer
+}
+
+# ---- 分支四 · 铳与秩序的新解 ----
+SRC_dyn_guns_and_order = {
+	icon = GFX_idea_SRC_dyn_guns_and_order
+
+	enable = {
+		always = yes
+	}
+
+	army_attack_factor = SRC_go_att
+	army_defence_factor = SRC_go_def
+	army_org_factor = SRC_go_org
+	training_time_factor = SRC_go_train
+	conscription_factor = SRC_go_cons
+	war_support_factor = SRC_go_ws
+	intel_network_gain_factor = SRC_go_intel
+	operative_slot = SRC_go_operative
+	supply_consumption_factor = SRC_go_supply
+	attrition = SRC_go_attrition
+}
+
+# ---- 市民积分体系：认证金、社区服务与守法记录折算成的城市信心 ----
+# SRC_civic_points 是积分本身（决议门槛与文案用它），下面三个才是生效数值。
+SRC_civic_points_system = {
+	icon = GFX_idea_SRC_civic_points_system
+
+	enable = {
+		always = yes
+	}
+
+	stability_factor = SRC_cp_stab
+	political_power_gain = SRC_cp_pp
+	consumer_goods_factor = SRC_cp_cons
+}

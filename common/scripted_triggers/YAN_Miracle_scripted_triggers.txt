@@ -1,0 +1,444 @@
+# ==============================================================================
+#  大炎·奇迹工程 —— scripted_triggers
+#  生成物，真源 docs/yan_miracle_data.cjs
+#
+#  约定：ROOT 恒为大炎本体。州 scope 里引用国家变量一律写 ROOT.YAN_mir_*
+# ==============================================================================
+
+# ---- 州 scope：当前工程（YAN_mir_proj）的选址要求，逐条「与」 ----
+YAN_Mir_Proj_Req = {
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 1 compare = equals }
+		}
+		AND = {
+			is_core_of = ROOT
+			is_capital = no
+			infrastructure < 5
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 2 compare = equals }
+		}
+		AND = {
+			is_core_of = ROOT
+			OR = {
+				industrial_complex > 2
+				arms_factory > 2
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 3 compare = equals }
+		}
+		AND = {
+			is_core_of = ROOT
+			is_coastal = no
+			infrastructure > 1
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 4 compare = equals }
+		}
+		AND = {
+			is_core_of = ROOT
+			OR = {
+				is_coastal = yes
+				naval_base > 0
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 5 compare = equals }
+		}
+		AND = {
+			is_core_of = ROOT
+			arms_factory > 1
+			infrastructure > 2
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 6 compare = equals }
+		}
+		AND = {
+			is_core_of = ROOT
+			is_coastal = yes
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 7 compare = equals }
+		}
+		AND = {
+			OR = {
+				is_capital = yes
+				AND = {
+					is_core_of = ROOT
+					industrial_complex > 3
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 8 compare = equals }
+		}
+		AND = {
+			is_core_of = ROOT
+			is_in_home_area = no
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 9 compare = equals }
+		}
+		AND = {
+			is_core_of = ROOT
+			infrastructure > 4
+			OR = {
+				industrial_complex > 3
+				arms_factory > 3
+			}
+		}
+	}
+}
+
+# ---- 州 scope：该州已被本工程占用（台账里的任何一处，或正在营的那一处）----
+YAN_Mir_Proj_Sited = {
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 1 compare = equals }
+		}
+		OR = {
+			check_variable = { id = ROOT.YAN_mir_s1_guangsha }
+			check_variable = { id = ROOT.YAN_mir_s2_guangsha }
+			check_variable = { id = ROOT.YAN_mir_s3_guangsha }
+			check_variable = { id = ROOT.YAN_mir_site_guangsha }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 2 compare = equals }
+		}
+		OR = {
+			check_variable = { id = ROOT.YAN_mir_s1_rongjin }
+			check_variable = { id = ROOT.YAN_mir_s2_rongjin }
+			check_variable = { id = ROOT.YAN_mir_site_rongjin }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 3 compare = equals }
+		}
+		OR = {
+			check_variable = { id = ROOT.YAN_mir_s1_dujiang }
+			check_variable = { id = ROOT.YAN_mir_s2_dujiang }
+			check_variable = { id = ROOT.YAN_mir_s3_dujiang }
+			check_variable = { id = ROOT.YAN_mir_site_dujiang }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 4 compare = equals }
+		}
+		OR = {
+			check_variable = { id = ROOT.YAN_mir_s1_zhuancao }
+			check_variable = { id = ROOT.YAN_mir_s2_zhuancao }
+			check_variable = { id = ROOT.YAN_mir_site_zhuancao }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 5 compare = equals }
+		}
+		OR = {
+			check_variable = { id = ROOT.YAN_mir_s1_zhenyue }
+			check_variable = { id = ROOT.YAN_mir_s2_zhenyue }
+			check_variable = { id = ROOT.YAN_mir_site_zhenyue }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 6 compare = equals }
+		}
+		OR = {
+			check_variable = { id = ROOT.YAN_mir_s1_feiyun }
+			check_variable = { id = ROOT.YAN_mir_s2_feiyun }
+			check_variable = { id = ROOT.YAN_mir_site_feiyun }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 7 compare = equals }
+		}
+		OR = {
+			check_variable = { id = ROOT.YAN_mir_s1_sitian }
+			check_variable = { id = ROOT.YAN_mir_site_sitian }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 8 compare = equals }
+		}
+		OR = {
+			check_variable = { id = ROOT.YAN_mir_s1_yumen }
+			check_variable = { id = ROOT.YAN_mir_s2_yumen }
+			check_variable = { id = ROOT.YAN_mir_s3_yumen }
+			check_variable = { id = ROOT.YAN_mir_site_yumen }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 9 compare = equals }
+		}
+		OR = {
+			check_variable = { id = ROOT.YAN_mir_s1_longmen }
+			check_variable = { id = ROOT.YAN_mir_site_longmen }
+		}
+	}
+}
+
+# ---- 州 scope：本工程此刻能不能在这儿动土 ----
+YAN_Mir_State_Eligible = {
+	is_owned_and_controlled_by = ROOT
+	YAN_Mir_Proj_Req = yes
+	NOT = { YAN_Mir_Proj_Sited = yes }
+}
+
+# ---- 国家 scope：当前工程已封顶（台账槽位全满）----
+YAN_Mir_Proj_Capped = {
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 1 compare = equals }
+		}
+		AND = {
+				check_variable = { YAN_mir_s1_guangsha > 0 }
+				check_variable = { YAN_mir_s2_guangsha > 0 }
+				check_variable = { YAN_mir_s3_guangsha > 0 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 2 compare = equals }
+		}
+		AND = {
+				check_variable = { YAN_mir_s1_rongjin > 0 }
+				check_variable = { YAN_mir_s2_rongjin > 0 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 3 compare = equals }
+		}
+		AND = {
+				check_variable = { YAN_mir_s1_dujiang > 0 }
+				check_variable = { YAN_mir_s2_dujiang > 0 }
+				check_variable = { YAN_mir_s3_dujiang > 0 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 4 compare = equals }
+		}
+		AND = {
+				check_variable = { YAN_mir_s1_zhuancao > 0 }
+				check_variable = { YAN_mir_s2_zhuancao > 0 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 5 compare = equals }
+		}
+		AND = {
+				check_variable = { YAN_mir_s1_zhenyue > 0 }
+				check_variable = { YAN_mir_s2_zhenyue > 0 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 6 compare = equals }
+		}
+		AND = {
+				check_variable = { YAN_mir_s1_feiyun > 0 }
+				check_variable = { YAN_mir_s2_feiyun > 0 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 7 compare = equals }
+		}
+		AND = {
+				check_variable = { YAN_mir_s1_sitian > 0 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 8 compare = equals }
+		}
+		AND = {
+				check_variable = { YAN_mir_s1_yumen > 0 }
+				check_variable = { YAN_mir_s2_yumen > 0 }
+				check_variable = { YAN_mir_s3_yumen > 0 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { ROOT.YAN_mir_proj = 9 compare = equals }
+		}
+		AND = {
+				check_variable = { YAN_mir_s1_longmen > 0 }
+		}
+	}
+}
+
+# ---- 国家 scope：当前工程正有一项在营（同一工程只养一支工程队）----
+YAN_Mir_Proj_Active = {
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 1 compare = equals }
+		}
+			has_country_flag = yan_mir_act_guangsha
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 2 compare = equals }
+		}
+			has_country_flag = yan_mir_act_rongjin
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 3 compare = equals }
+		}
+			has_country_flag = yan_mir_act_dujiang
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 4 compare = equals }
+		}
+			has_country_flag = yan_mir_act_zhuancao
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 5 compare = equals }
+		}
+			has_country_flag = yan_mir_act_zhenyue
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 6 compare = equals }
+		}
+			has_country_flag = yan_mir_act_feiyun
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 7 compare = equals }
+		}
+			has_country_flag = yan_mir_act_sitian
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 8 compare = equals }
+		}
+			has_country_flag = yan_mir_act_yumen
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 9 compare = equals }
+		}
+			has_country_flag = yan_mir_act_longmen
+	}
+}
+
+# ---- 国家 scope：当前工程在全国还有没有可选之州 ----
+# ⚠️ any_*_state 触发符**不吃 limit** —— 条件直接写进块里（原版 any_controlled_state = { is_coastal = yes }）
+YAN_Mir_Has_Site = {
+	any_controlled_state = {
+		YAN_Mir_State_Eligible = yes
+	}
+}
+
+# ---- 国家 scope：当前工程的政治力量付得起（额度逐条写死，不拿变量去比）----
+YAN_Mir_Paid_Up = {
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 1 compare = equals }
+		}
+			has_political_power > 59
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 2 compare = equals }
+		}
+			has_political_power > 79
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 3 compare = equals }
+		}
+			has_political_power > 69
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 4 compare = equals }
+		}
+			has_political_power > 74
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 5 compare = equals }
+		}
+			has_political_power > 99
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 6 compare = equals }
+		}
+			has_political_power > 89
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 7 compare = equals }
+		}
+			has_political_power > 69
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 8 compare = equals }
+		}
+			has_political_power > 99
+	}
+	if = {
+		limit = {
+			check_variable = { YAN_mir_proj = 9 compare = equals }
+		}
+			has_political_power > 139
+	}
+}
+
+# ---- 国家 scope：开工按钮的总闸 ----
+YAN_Mir_Can_Start = {
+	NOT = { YAN_Mir_Proj_Capped = yes }
+	NOT = { YAN_Mir_Proj_Active = yes }
+	YAN_Mir_Has_Site = yes
+	YAN_Mir_Paid_Up = yes
+}
+
+# ---- 国家 scope：全国精神该挂了（有任意一处落成）----
+YAN_Mir_Any_Done = {
+	or = {
+		check_variable = { YAN_mir_done_guangsha > 0 }
+		check_variable = { YAN_mir_done_rongjin > 0 }
+		check_variable = { YAN_mir_done_dujiang > 0 }
+		check_variable = { YAN_mir_done_zhuancao > 0 }
+		check_variable = { YAN_mir_done_zhenyue > 0 }
+		check_variable = { YAN_mir_done_feiyun > 0 }
+		check_variable = { YAN_mir_done_sitian > 0 }
+		check_variable = { YAN_mir_done_yumen > 0 }
+		check_variable = { YAN_mir_done_longmen > 0 }
+	}
+}

@@ -1,0 +1,943 @@
+focus_tree = {
+	id = VIC_provisional_parliament
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = VIC
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = VIC_provisional_parliament_formation
+	}
+
+	#组建临时议会
+	focus = {
+		id = VIC_provisional_parliament_formation
+		icon = GFX_focus_VIC_provisional_parliament_formation
+		cost = 1
+		x = 0
+		y = 0
+		
+		completion_reward = {
+			add_political_power = 100
+			VIC_Victoria_parliament_Enable = yes
+			unlock_decision_category_tooltip = VIC_Victoria_parliament_decisions
+
+			hidden_effect = {
+				country_event = {
+					id = event_vic.22
+				}
+				
+				country_event = {
+					id = event_vic.9
+					days = 10
+				}
+			}
+		}
+	}
+
+	#提案：优先疏散群众
+	focus = {
+		id = VIC_public_evacuation
+		icon = GFX_focus_VIC_public_evacuation
+		cost = 7
+		prerequisite = {
+			focus = VIC_provisional_parliament_formation
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_asset_evacuation_yes_flag
+			}
+		}
+
+		x = -3
+		y = 1
+		relative_position_id = VIC_provisional_parliament_formation
+
+		select_effect = {
+			set_country_flag = VIC_public_evacuation_flag
+
+			set_country_flag = VIC_Gododdin_yes_flag
+			set_country_flag = VIC_Wellington_no_flag
+			set_country_flag = VIC_Windermere_yes_flag
+			set_country_flag = VIC_Normandy_yes_flag
+			set_country_flag = VIC_Caster_no_flag
+
+			VIC_proposal_calculation = yes
+		}
+		
+		completion_reward = {
+			
+			if = {
+				limit = {
+					check_variable = {
+						var = VIC_proposal_yes
+						value = 0.6
+						compare = greater_than
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = event_vic.27
+					}
+					
+					set_country_flag = VIC_public_evacuation_yes_flag
+					
+					add_to_variable = {
+						var = VIC_Sarkaz_invation_stability_factor_dynamic_var
+						value = 0.1
+					}
+					add_to_variable = {
+						var = VIC_Sarkaz_invation_industrial_capacity_factory_dynamic_var
+						value = 0.05
+					}
+					add_to_variable = {
+						var = VIC_Sarkaz_invation_production_factory_max_efficiency_factor_dynamic_var
+						value = 0.05
+					}
+				}
+			}
+			else = {
+				hidden_effect = {
+					country_event = {
+						id = event_vic.28
+					}
+				}
+			}
+
+			custom_effect_tooltip = VIC_if_proposal_yes_tt
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VIC_Sarkaz_invation_dummy_idea
+					add_idea = VIC_public_evacuation_idea
+				}
+			}
+
+			clr_country_flag = VIC_public_evacuation_flag
+			VIC_proposal_end = yes
+		}
+	}
+
+	#提案：优先撤离重要资产
+	focus = {
+		id = VIC_asset_evacuation
+		icon = GFX_focus_VIC_asset_evacuation
+		cost = 7
+		prerequisite = {
+			focus = VIC_provisional_parliament_formation
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_public_evacuation_yes_flag
+			}
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = VIC_provisional_parliament_formation
+
+		select_effect = {
+			set_country_flag = VIC_asset_evacuation_flag
+
+			set_country_flag = VIC_Gododdin_yes_flag
+			set_country_flag = VIC_Wellington_yes_flag
+			set_country_flag = VIC_Windermere_no_flag
+			set_country_flag = VIC_Normandy_yes_flag
+			set_country_flag = VIC_Caster_yes_flag
+
+			VIC_proposal_calculation = yes
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					check_variable = {
+						var = VIC_proposal_yes
+						value = 0.6
+						compare = greater_than
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = event_vic.27
+					}
+
+					set_country_flag = VIC_asset_evacuation_yes_flag
+
+					add_to_variable = {
+						var = VIC_Sarkaz_invation_consumer_goods_factor_dynamic_var
+						value = -0.2
+					}
+
+					country_event = {
+						id = event_vic.8
+					}
+				}
+			}
+			else = {
+				hidden_effect = {
+					country_event = {
+						id = event_vic.28
+					}
+				}
+			}
+
+			custom_effect_tooltip = VIC_if_proposal_yes_tt
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VIC_Sarkaz_invation_dummy_idea
+					add_idea = VIC_asset_evacuation_idea
+				}
+			}
+
+			clr_country_flag = VIC_asset_evacuation_flag
+			VIC_proposal_end = yes
+		}
+	}
+
+	#提案：接管破产工厂
+	focus = {
+		id = VIC_take_over_bankrupt_factories
+		icon = GFX_focus_VIC_take_over_bankrupt_factories
+		cost = 7
+		prerequisite = {
+			focus = VIC_provisional_parliament_formation
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_relief_for_difficult_enterprises_yes_flag
+			}
+		}
+
+		x = 1
+		y = 1
+		relative_position_id = VIC_provisional_parliament_formation
+
+		select_effect = {
+			set_country_flag = VIC_take_over_bankrupt_factories_flag
+
+			set_country_flag = VIC_Gododdin_yes_flag
+			set_country_flag = VIC_Wellington_no_flag
+			set_country_flag = VIC_Windermere_yes_flag
+			set_country_flag = VIC_Normandy_no_flag
+			set_country_flag = VIC_Caster_yes_flag
+
+			VIC_proposal_calculation = yes
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					check_variable = {
+						var = VIC_proposal_yes
+						value = 0.6
+						compare = greater_than
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = event_vic.27
+					}
+
+					set_country_flag = VIC_take_over_bankrupt_factories_yes_flag
+
+					add_to_variable = {
+						var = VIC_Sarkaz_invation_industrial_capacity_factory_dynamic_var
+						value = 0.05
+					}
+					add_to_variable = {
+						var = VIC_Sarkaz_invation_production_speed_buildings_factor_dynamic_var
+						value = 0.05
+					}
+
+					country_event = {
+						id = event_vic.10
+					}
+				}
+			}
+			else = {
+				hidden_effect = {
+					country_event = {
+						id = event_vic.28
+					}
+				}
+			}
+
+			custom_effect_tooltip = VIC_if_proposal_yes_tt
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VIC_Sarkaz_invation_dummy_idea
+					add_idea = VIC_take_over_bankrupt_factories_idea
+				}
+			}
+
+			clr_country_flag = VIC_take_over_bankrupt_factories_flag
+			VIC_proposal_end = yes
+		}
+	}
+
+	#提案：救济困难企业
+	focus = {
+		id = VIC_relief_for_difficult_enterprises
+		icon = GFX_focus_VIC_relief_for_difficult_enterprises
+		cost = 7
+		prerequisite = {
+			focus = VIC_provisional_parliament_formation
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_take_over_bankrupt_factories_yes_flag
+			}
+		}
+
+		x = 3
+		y = 1
+		relative_position_id = VIC_provisional_parliament_formation
+
+		select_effect = {
+			set_country_flag = VIC_relief_for_difficult_enterprises_flag
+
+			set_country_flag = VIC_Gododdin_no_flag
+			set_country_flag = VIC_Wellington_no_flag
+			set_country_flag = VIC_Windermere_yes_flag
+			set_country_flag = VIC_Normandy_no_flag
+			set_country_flag = VIC_Caster_yes_flag
+
+			VIC_proposal_calculation = yes
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					check_variable = {
+						var = VIC_proposal_yes
+						value = 0.6
+						compare = greater_than
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = event_vic.27
+					}
+
+					set_country_flag = VIC_relief_for_difficult_enterprises_yes_flag
+
+					add_to_variable = {
+						var = VIC_Sarkaz_invation_consumer_goods_factor_dynamic_var
+						value = -0.2
+					}
+
+					country_event = {
+						id = event_vic.13
+					}
+				}
+			}
+			else = {
+				hidden_effect = {
+					country_event = {
+						id = event_vic.28
+					}
+				}
+			}
+
+			custom_effect_tooltip = VIC_if_proposal_yes_tt
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VIC_Sarkaz_invation_dummy_idea
+					add_idea = VIC_relief_for_difficult_enterprises_idea
+				}
+			}
+
+			clr_country_flag = VIC_relief_for_difficult_enterprises_flag
+			VIC_proposal_end = yes
+		}
+	}
+
+	#提案：扩大地方部队
+	focus = {
+		id = VIC_expand_local_forces
+		icon = GFX_focus_VIC_expand_local_forces
+		cost = 7
+		prerequisite = {
+			focus = VIC_public_evacuation
+			focus = VIC_asset_evacuation
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = VIC_public_evacuation
+
+		select_effect = {
+			set_country_flag = VIC_expand_local_forces_flag
+
+			country_event = {
+				id = event_vic.23
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					check_variable = {
+						var = VIC_proposal_yes
+						value = 0.6
+						compare = greater_than
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = event_vic.27
+					}
+
+					activate_decision = VIC_expand_local_forces_in
+				}
+			}
+			else = {
+				hidden_effect = {
+					country_event = {
+						id = event_vic.28
+					}
+
+					uncomplete_national_focus = {
+						focus = VIC_expand_local_forces
+						refund_political_power = no
+					}
+
+					VGO = {
+						clr_country_flag = VIC_expand_local_forces_in_flag
+					}
+					TAR = {
+						clr_country_flag = VIC_expand_local_forces_in_flag
+					}
+					VWI = {
+						clr_country_flag = VIC_expand_local_forces_in_flag
+					}
+					GUL = {
+						clr_country_flag = VIC_expand_local_forces_in_flag
+					}
+					VCA = {
+						clr_country_flag = VIC_expand_local_forces_in_flag
+					}
+				}
+			}
+
+			custom_effect_tooltip = VIC_if_proposal_yes_tt
+			effect_tooltip = {
+				activate_decision = VIC_expand_local_forces_in
+			}
+
+			clr_country_flag = VIC_expand_local_forces_flag
+			VIC_proposal_end = yes
+		}
+	}
+
+	#发放救济物资
+	focus = {
+		id = VIC_distributing_relief_supplies
+		icon = GFX_focus_VIC_distributing_relief_supplies
+		cost = 7
+		prerequisite = {
+			focus = VIC_public_evacuation
+			focus = VIC_asset_evacuation
+		}
+
+		x = -1
+		y = 1
+		relative_position_id = VIC_asset_evacuation
+		
+		completion_reward = {
+			unlock_decision_tooltip = VIC_relief_supplies_distribution
+			add_days_mission_timeout  = {
+				mission = VIC_Sarkaz_expansion
+				days = 30
+			}
+
+			country_event = {
+				id = event_vic.12
+			}
+		}
+	}
+
+	#公爵会议
+	focus = {
+		id = VIC_duke_conference
+		icon = GFX_focus_VIC_duke_conference
+		cost = 2
+		prerequisite = {
+			focus = VIC_provisional_parliament_formation
+		}
+		
+		x = 0
+		y = 2
+		relative_position_id = VIC_provisional_parliament_formation
+		
+		completion_reward = {
+			country_event = {
+				id = event_vic.4
+			}
+
+			set_temp_variable = { VIC_Gododdin_support_add_var = 0.1}
+			VIC_Gododdin_support_add = yes
+			set_temp_variable = { VIC_Wellington_support_add_var = 0.1}
+			VIC_Wellington_support_add = yes
+			set_temp_variable = { VIC_Windermere_support_add_var = 0.1}
+			VIC_Windermere_support_add = yes
+			set_temp_variable = { VIC_Caster_support_add_var = 0.1}
+			VIC_Caster_support_add = yes
+		}
+	}
+
+	#监控市场行为
+	focus = {
+		id = VIC_monitoring_market_behavior
+		icon = GFX_focus_VIC_monitoring_market_behavior
+		cost = 7
+		prerequisite = {
+			focus = VIC_take_over_bankrupt_factories
+			focus = VIC_relief_for_difficult_enterprises
+		}
+		
+		x = 1
+		y = 1
+		relative_position_id = VIC_take_over_bankrupt_factories
+		
+		completion_reward = {
+			unlock_decision_tooltip = VIC_market_regulation
+			add_days_mission_timeout  = {
+				mission = VIC_Sarkaz_expansion
+				days = 30
+			}
+		}
+	}
+
+	#提案：修建战时民用工厂
+	focus = {
+		id = VIC_wartime_civilian_factories
+		icon = GFX_focus_VIC_wartime_civilian_factories
+		cost = 7
+		prerequisite = {
+			focus = VIC_take_over_bankrupt_factories
+			focus = VIC_relief_for_difficult_enterprises
+		}
+		
+		x = 1
+		y = 1
+		relative_position_id = VIC_relief_for_difficult_enterprises
+
+		select_effect = {
+			set_country_flag = VIC_wartime_civilian_factories_flag
+
+			country_event = {
+				id = event_vic.25
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					check_variable = {
+						var = VIC_proposal_yes
+						value = 0.6
+						compare = greater_than
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = event_vic.27
+					}
+
+					activate_decision = VIC_wartime_civilian_factories_in
+				}
+			}
+			else = {
+				hidden_effect = {
+					country_event = {
+						id = event_vic.28
+					}
+
+					uncomplete_national_focus = {
+						focus = VIC_wartime_civilian_factories
+						refund_political_power = no
+					}
+
+					VGO = {
+						clr_country_flag = VIC_wartime_civilian_factories_in_flag
+					}
+					TAR = {
+						clr_country_flag = VIC_wartime_civilian_factories_in_flag
+					}
+					VWI = {
+						clr_country_flag = VIC_wartime_civilian_factories_in_flag
+					}
+					GUL = {
+						clr_country_flag = VIC_wartime_civilian_factories_in_flag
+					}
+					VCA = {
+						clr_country_flag = VIC_wartime_civilian_factories_in_flag
+					}
+				}
+			}
+
+			custom_effect_tooltip = VIC_if_proposal_yes_tt
+			effect_tooltip = {
+				activate_decision = VIC_wartime_civilian_factories_in
+			}
+
+			clr_country_flag = VIC_wartime_civilian_factories_flag
+			VIC_proposal_end = yes
+		}
+	}
+
+	#提案：军用物资调配
+	focus = {
+		id = VIC_military_material_allocation
+		icon = GFX_focus_VIC_military_material_allocation
+		cost = 7
+		prerequisite = {
+			focus = VIC_public_evacuation
+			focus = VIC_asset_evacuation
+		}
+		
+		x = 0
+		y = 2
+		relative_position_id = VIC_public_evacuation
+
+		select_effect = {
+			set_country_flag = VIC_military_material_allocation_flag
+
+			country_event = {
+				id = event_vic.24
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					check_variable = {
+						var = VIC_proposal_yes
+						value = 0.6
+						compare = greater_than
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = event_vic.27
+					}
+
+					every_possible_country = {
+						limit = {
+							has_country_flag = VIC_military_material_allocation_in_flag
+						}
+						VIC = {
+							send_equipment = {
+								equipment = infantry_equipment
+								amount = 1000
+								target = PREV
+							}
+						}
+					}
+				}
+			}
+			else = {
+				hidden_effect = {
+					country_event = {
+						id = event_vic.28
+					}
+
+					VGO = {
+						clr_country_flag = VIC_military_material_allocation_in_flag
+					}
+					TAR = {
+						clr_country_flag = VIC_military_material_allocation_in_flag
+					}
+					VWI = {
+						clr_country_flag = VIC_military_material_allocation_in_flag
+					}
+					GUL = {
+						clr_country_flag = VIC_military_material_allocation_in_flag
+					}
+					VCA = {
+						clr_country_flag = VIC_military_material_allocation_in_flag
+					}
+				}
+			}
+
+			custom_effect_tooltip = VIC_if_proposal_yes_tt
+			custom_effect_tooltip = VIC_military_material_allocation_tt
+
+			clr_country_flag = VIC_military_material_allocation_flag
+			VIC_proposal_end = yes
+
+			hidden_effect = {
+				uncomplete_national_focus = {
+					focus = VIC_military_material_allocation
+					refund_political_power = no
+				}
+			}
+			
+		}
+	}
+
+	#提案：刺探萨卡兹情报
+	focus = {
+		id = VIC_spying_on_the_Sarkaz
+		icon = GFX_focus_VIC_spying_on_the_Sarkaz
+		cost = 7
+		prerequisite = {
+			focus = VIC_duke_conference
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_searching_for_royalty_yes_flag
+			}
+		}
+		
+		x = -1
+		y = 1
+		relative_position_id = VIC_duke_conference
+
+		select_effect = {
+			set_country_flag = VIC_spying_on_the_Sarkaz_flag
+
+			set_country_flag = VIC_Gododdin_yes_flag
+			set_country_flag = VIC_Wellington_yes_flag
+			set_country_flag = VIC_Windermere_no_flag
+			set_country_flag = VIC_Normandy_yes_flag
+			set_country_flag = VIC_Caster_yes_flag
+
+			VIC_proposal_calculation = yes
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					check_variable = {
+						var = VIC_proposal_yes
+						value = 0.6
+						compare = greater_than
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = event_vic.27
+					}
+
+					set_country_flag = VIC_spying_on_the_Sarkaz_yes_flag
+
+					set_temp_variable = { VIC_Windermere_influence_add_var = 0.015 }
+					VIC_Windermere_influence_add = yes
+					set_temp_variable = { VIC_Caster_influence_add_var = -0.015 }
+					VIC_Caster_influence_add = yes
+				}
+			}
+			else = {
+				hidden_effect = {
+					country_event = {
+						id = event_vic.28
+					}
+				}
+			}
+
+			custom_effect_tooltip = VIC_if_proposal_yes_tt
+			effect_tooltip = {
+				unlock_decision_tooltip = VIC_Londinium_spying
+
+				set_temp_variable = { VIC_Windermere_influence_add_var = -0.015 }
+				VIC_Windermere_influence_add = yes
+				set_temp_variable = { VIC_Caster_influence_add_var = 0.015 }
+				VIC_Caster_influence_add = yes
+			}
+
+			clr_country_flag = VIC_spying_on_the_Sarkaz_flag
+			VIC_proposal_end = yes
+		}
+	}
+
+	#提案：寻找王室下落
+	focus = {
+		id = VIC_searching_for_royalty
+		icon = GFX_focus_VIC_searching_for_royalty
+		cost = 7
+		prerequisite = {
+			focus = VIC_duke_conference
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_spying_on_the_Sarkaz_yes_flag
+			}
+		}
+		
+		x = 1
+		y = 1
+		relative_position_id = VIC_duke_conference
+
+		select_effect = {
+			set_country_flag = VIC_searching_for_royalty_flag
+
+			set_country_flag = VIC_Gododdin_yes_flag
+			set_country_flag = VIC_Wellington_yes_flag
+			set_country_flag = VIC_Windermere_yes_flag
+			set_country_flag = VIC_Normandy_yes_flag
+			set_country_flag = VIC_Caster_yes_flag
+
+			VIC_proposal_calculation = yes
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					check_variable = {
+						var = VIC_proposal_yes
+						value = 0.6
+						compare = greater_than
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = event_vic.27
+					}
+
+					set_country_flag = VIC_searching_for_royalty_yes_flag
+
+					set_temp_variable = { VIC_Windermere_influence_add_var = 0.015 }
+					VIC_Windermere_influence_add = yes
+					set_temp_variable = { VIC_Caster_influence_add_var = -0.015 }
+					VIC_Caster_influence_add = yes
+				}
+			}
+			else = {
+				hidden_effect = {
+					country_event = {
+						id = event_vic.28
+					}
+				}
+			}
+
+			custom_effect_tooltip = VIC_if_proposal_yes_tt
+			effect_tooltip = {
+				unlock_decision_tooltip = VIC_royalty_searching
+
+				set_temp_variable = { VIC_Windermere_influence_add_var = 0.015 }
+				VIC_Windermere_influence_add = yes
+				set_temp_variable = { VIC_Caster_influence_add_var = -0.015 }
+				VIC_Caster_influence_add = yes
+			}
+
+			clr_country_flag = VIC_searching_for_royalty_flag
+			VIC_proposal_end = yes
+		}
+	}
+
+	#提案：修建战时军用工厂
+	focus = {
+		id = VIC_wartime_military_factories
+		icon = GFX_focus_VIC_wartime_military_factories
+		cost = 7
+		prerequisite = {
+			focus = VIC_take_over_bankrupt_factories
+			focus = VIC_relief_for_difficult_enterprises
+		}
+		
+		x = 0
+		y = 2
+		relative_position_id = VIC_relief_for_difficult_enterprises
+
+		select_effect = {
+			set_country_flag = VIC_wartime_military_factories_flag
+
+			country_event = {
+				id = event_vic.26
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					check_variable = {
+						var = VIC_proposal_yes
+						value = 0.6
+						compare = greater_than
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = event_vic.27
+					}
+
+					activate_decision = VIC_wartime_military_factories_in
+				}
+			}
+			else = {
+				hidden_effect = {
+					country_event = {
+						id = event_vic.28
+					}
+
+					uncomplete_national_focus = {
+						focus = VIC_wartime_military_factories
+						refund_political_power = no
+					}
+
+					VGO = {
+						clr_country_flag = VIC_wartime_military_factories_in_flag
+					}
+					TAR = {
+						clr_country_flag = VIC_wartime_military_factories_in_flag
+					}
+					VWI = {
+						clr_country_flag = VIC_wartime_military_factories_in_flag
+					}
+					GUL = {
+						clr_country_flag = VIC_wartime_military_factories_in_flag
+					}
+					VCA = {
+						clr_country_flag = VIC_wartime_military_factories_in_flag
+					}
+				}
+			}
+
+			custom_effect_tooltip = VIC_if_proposal_yes_tt
+			effect_tooltip = {
+				activate_decision = VIC_wartime_military_factories_in
+			}
+
+			clr_country_flag = VIC_wartime_military_factories_flag
+			VIC_proposal_end = yes
+		}
+	}
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}

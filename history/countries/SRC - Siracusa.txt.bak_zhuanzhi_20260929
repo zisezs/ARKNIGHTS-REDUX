@@ -1,0 +1,103 @@
+capital = 534
+
+oob = "SRC_Start"
+
+add_ideas = {
+	volunteer_only
+	limited_exports
+	civilian_economy
+	medium_country
+	elite_voting
+	working_law_14h
+	isolation_management
+	subsistence_agriculture
+	small_production_line
+	high_illiteracy_rate
+	useless_government
+	rampant_poverty
+}
+
+add_ideas = {
+	SRC_Wild_Hunt
+	SRC_Grey_Hall
+	SRC_Twelve_Families
+	SRC_Joint_Council
+	SRC_United_Court
+	SRC_Mafia_State
+}
+
+# ---- 地块 BUFF：家族盘踞（全部本土）+ 新沃尔西尼模式示范区（首都）----
+# 州级 modifier 定义见 common/dynamic_modifiers/SRC_state_buff_dynamic_modifiers.txt
+# 示范区加成读国家变量，之后由「新沃尔西尼模式」决议组逐期抬高
+set_variable = { SRC_vm_fac = 0.2 }
+every_owned_state = {
+	limit = {
+		is_core_of = SRC
+	}
+	add_dynamic_modifier = { modifier = SRC_dyn_family_entrenchment }
+}
+capital_scope = {
+	add_dynamic_modifier = { modifier = SRC_dyn_volsinii_model_zone }
+}
+
+set_research_slots = 2
+set_stability = 0.4
+set_war_support = 0.15
+country_lock_all_division_template = yes
+
+every_core_state = {
+	add_claim_by = BZN
+}
+
+set_technology = {
+	infantry_weapons_0 = 1
+	artillery_0 = 1
+	tech_support = 1
+	basic_machine_tools = 1
+	punched_card_computer = 1
+	tech_recon = 1
+	motorized_infantry_0 = 1
+	power_plant = 1
+}
+
+set_politics = {
+	ruling_party = authoritarianism
+	last_election = "1936.1.1"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	communism = 0
+	socialism =0
+	progressivism = 0
+	liberalism = 12
+	conservatism = 39
+	authoritarianism = 25
+	despotism = 24
+	fascism = 0
+	mysticism = 0
+	special = 0
+}
+
+recruit_character = SRC_Madam_Sicily
+recruit_character = SRC_Agenir
+recruit_character = SRC_Alberto_Saluzzo
+recruit_character = SRC_Bernardo_Bellone
+recruit_character = SRC_Giovanna_Rossati
+recruit_character = SRC_Fabrizio_Venezia
+recruit_character = SRC_Leontuzzo_Bellone
+recruit_character = SRC_Mario_Segale
+recruit_character = SRC_Anton_Garencio
+recruit_character = SRC_Benedetta_Napolini
+recruit_character = SRC_Lappland_Saluzzo
+recruit_character = SRC_Walach
+recruit_character = SRC_Dmitri_Bellone
+recruit_character = SRC_Lavinia_Falcone
+recruit_character = SRC_Irene
+recruit_character = SRC_Rubio
+recruit_character = SRC_Caracci
+recruit_character = SRC_Antonio_Venezia
+recruit_character = SRC_Silva_Moretti
+recruit_character = SRC_Texas
+recruit_character = SRC_Shalay

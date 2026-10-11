@@ -1,0 +1,99 @@
+#URS大量训练装甲师
+URS_must_make_more_tank = {
+	allowed = { tag = URS }
+	enable = {
+		tag = URS
+	}
+
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -15
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 35
+	}
+}
+
+# ===== 圣愚政治线（邪魔化运动）AI 战略 BEGIN =====
+# 由 docs/_urs_ai_build.py 生成，勿手改。
+#
+# 国策侧的优先级在 common/ai_strategy_plans/URS_ai_strategy_plans.txt；
+# 这里补的是「国策之外」的战略姿态 —— 邪魔化运动成功后，乌萨斯变成一个
+# 不计代价、压倒性进攻的国家（领袖特质【邪魔本质】：+50% 攻击 / +50% 组织度 /
+# -50% 稳定度 / 与所有国家 -200 关系）。AI 相应地把「防御、外交、克制」全部关掉：
+#   · 主动开战意愿拉满（declare_war / conquer / prepare_for_war / consider_weak）；
+#   · 前线倾向全力进攻、兵力向进攻方向集中（front_control / force_concentration_factor）；
+#   · 装备：步兵装备优先、装甲降档（用人力换产能）。
+URS_fool_ascension_strategy = {
+	allowed = { tag = URS }
+	enable = {
+		tag = URS
+		has_country_flag = URS_fool_empire_proclaimed
+	}
+	abort_when_not_enabled = yes
+
+	# 前线控制：倾向「全力进攻」（值越高越不守成）
+	ai_strategy = {
+		type = front_control
+		id = front_control
+		value = 0.6
+	}
+	# 兵力集中系数：把部队堆到进攻方向而不是均摊守边
+	ai_strategy = {
+		type = force_concentration_factor
+		id = force_concentration_factor
+		value = 1.5
+	}
+	# 主动宣战意愿
+	ai_strategy = {
+		type = declare_war
+		id = declare_war
+		value = 1.0
+	}
+	# 开战准备：不等外交窗口，直接备战
+	ai_strategy = {
+		type = prepare_for_war
+		id = prepare_for_war
+		value = 1.0
+	}
+	# 征服倾向
+	ai_strategy = {
+		type = conquer
+		id = conquer
+		value = 1.0
+	}
+	# 敌军兵力评估：低估对手，敢打硬仗（配合 +50% 攻击）
+	ai_strategy = {
+		type = consider_weak
+		id = consider_weak
+		value = 1.0
+	}
+	# 装备生产：步兵装备优先，火炮次之
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry_equipment
+		value = 2.0
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 1.5
+	}
+	# 陆军编制偏好：步兵师优先于装甲师
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 30
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = -10
+	}
+}
+# ===== 圣愚政治线（邪魔化运动）AI 战略 END =====

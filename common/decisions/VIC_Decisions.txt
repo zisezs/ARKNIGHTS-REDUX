@@ -1,0 +1,3066 @@
+VIC_Sarkaz_invation_decisions = {
+	VIC_test_war = {
+		visible = {
+			is_debug = yes
+			is_ai = no
+		}
+
+		complete_effect = {
+			every_country = {
+				limit = {
+					OR = {
+						original_tag = VWI
+						original_tag = VCA
+						original_tag = VGO
+						original_tag = TAR
+					}
+				}
+				# country_event = {
+				# 	id = event_vic.10001
+				# }
+				# country_event = {
+				# 	id = event_vic.10005
+				# 	days = 60
+				# }
+				# country_event = {
+				# 	id = event_vic.10006
+				# 	days = 95
+				# }
+				country_event = {
+					id = event_vic.10007
+					days = 100
+				}
+			}
+
+			country_event = {
+				id = event_vic.3
+			}
+
+			# VWI = {
+			# 	country_event = {
+			# 		id = event_vwi.1
+			# 		days = 11
+			# 	}
+			# }
+
+			# VCA = {
+			# 	country_event = {
+			# 		id = event_vca.2
+			# 		days = 4
+			# 	}
+			# 	country_event = {
+			# 		id = event_vca.1
+			# 		days = 10
+			# 	}
+			# }
+
+			# TAR = {
+			# 	country_event = {
+			# 		id = event_tar.1
+			# 		days = 10
+			# 	}
+			# }
+		}
+	}
+
+	VIC_test_send_equip = {
+		visible = {
+			is_debug = yes
+			is_ai = no
+		}
+
+		complete_effect = {
+			send_equipment = {
+				equipment = infantry_equipment
+				amount = 100
+				target = VWI
+			}
+		}
+	}
+	
+	VIC_Sarkaz_expansion = {
+		icon = GFX_decision_generic_political_discourse
+
+		fire_only_once = yes
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			original_tag = VIC
+			NOT = {
+				has_country_flag = VIC_joint_march_failed_flag
+			}
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				has_country_flag = VIC_joint_march_failed_flag
+			}
+		}
+
+		is_good = no
+
+		#days_mission_timeout = 450
+		days_mission_timeout = 350
+
+		priority = 500
+
+		timeout_effect = {
+			country_event = {
+				id = event_vic.1
+			}
+		}
+	}
+
+	VIC_Sarkaz_expansion_again = {
+		icon = GFX_decision_generic_political_discourse
+
+		fire_only_once = yes
+
+		visible = {
+			original_tag = VIC
+		}
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			has_country_flag = VIC_joint_march_failed_flag
+		}
+
+		is_good = no
+
+		#days_mission_timeout = 900
+		days_mission_timeout = 600
+
+		priority = 500
+
+		timeout_effect = {
+			VIC = {
+				country_event = {
+					id = event_vic.10001
+				}
+				# country_event = {
+				# 	id = event_vic.10005
+				# 	days = 60
+				# }
+				# country_event = {
+				# 	id = event_vic.10006
+				# 	days = 95
+				# }
+				# country_event = {
+				# 	id = event_vic.10007
+				# 	days = 100
+				# }
+			}
+
+			# ZZZ = {
+			# 	country_event = {
+			# 		id = hidden_vic.1
+			# 		days = 95
+			# 	}
+			# 	country_event = {
+			# 		id = hidden_vic.2
+			# 		days = 100
+			# 	}
+			# }
+
+			# VCA = {
+			# 	country_event = {
+			# 		id = event_vca.2
+			# 		days = 40
+			# 	}
+			# 	country_event = {
+			# 		id = event_vca.1
+			# 		days = 100
+			# 	}
+			# }
+
+			TAR = {
+				country_event = {
+					id = event_tar.10002
+					days = 60
+				}
+				country_event = {
+					id = event_tar.1
+					days = 101
+				}
+			}
+		}
+	}
+
+	VIC_Sarkaz_expansion_again_fake = {
+		name = VIC_Sarkaz_expansion_again
+		icon = GFX_decision_generic_political_discourse
+
+		fire_only_once = yes
+
+		visible = {
+			OR = {
+				original_tag = VGO
+				original_tag = TAR
+				original_tag = VWI
+				original_tag = VCA
+			}
+		}
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			OR = {
+				original_tag = VGO
+				original_tag = TAR
+				original_tag = VWI
+				original_tag = VCA
+			}
+			VIC = {
+				has_country_flag = VIC_joint_march_failed_flag
+			}
+		}
+
+		is_good = no
+
+		#days_mission_timeout = 900
+		days_mission_timeout = 600
+
+		timeout_effect = {
+		}
+	}
+}
+
+VIC_Victoria_parliament_decisions = {
+	VIC_start_joint_march = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VIC_duke_union_morethan_tt
+				check_variable = { VIC_duke_union > 0.75 }
+			}
+		}
+
+		days_remove = 14
+
+		remove_effect = {
+			country_event = {
+				id = event_vic.1
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_call_on_duke_unite = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = VIC_duke_union_lessthan_tt
+				check_variable = { VIC_duke_union < 0.25 }
+			}
+		}
+
+		cost = 50
+		days_remove = 14
+		days_re_enable = 70
+
+		complete_effect = {
+			set_temp_variable = { VIC_Gododdin_support_add_var = 0.1}
+			VIC_Gododdin_support_add = yes
+			set_temp_variable = { VIC_Wellington_support_add_var = 0.1}
+			VIC_Wellington_support_add = yes
+			set_temp_variable = { VIC_Windermere_support_add_var = 0.1}
+			VIC_Windermere_support_add = yes
+			set_temp_variable = { VIC_Caster_support_add_var = 0.1}
+			VIC_Caster_support_add = yes
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_win_over_Gododdin = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			OR = {
+				has_political_power > 100
+				AND = {
+					has_manpower > 2000
+					has_equipment = {
+						infantry_equipment > 199
+					}
+				}
+			}
+		}
+
+		cost = 25
+		days_remove = 14
+		days_re_enable = 35
+
+		complete_effect = {
+			if = {
+				limit = {
+					has_manpower > 2000
+					has_equipment = {
+						infantry_equipment > 199
+					}
+				}
+				add_manpower = -2000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -200
+				}
+			}
+			else = {
+				add_political_power = -75
+			}
+
+			if = {
+				limit = {
+					has_country_flag = VIC_Gododdin_no_flag
+				}
+				clr_country_flag = VIC_Gododdin_no_flag
+				set_country_flag = VIC_Gododdin_yes_flag
+
+				VIC_proposal_calculation = yes
+
+				custom_effect_tooltip = VIC_Gododdin_no_to_yes_tt
+			}
+
+			set_temp_variable = { VIC_Gododdin_support_add_var = 0.025 }
+			VIC_Gododdin_support_add = yes
+			VIC_Gododdin_influence_add = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0.2
+				check_variable = { VIC_Gododdin_influence > 0.2 }
+			}
+			modifier = {
+				factor = 2
+				check_variable = { VIC_Gododdin_influence < 0.16 }
+			}
+		}
+	}
+
+	VIC_win_over_Wellington = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			OR = {
+				has_political_power > 100
+				AND = {
+					has_manpower > 2000
+					has_equipment = {
+						infantry_equipment > 199
+					}
+				}
+			}
+		}
+
+		cost = 25
+		days_remove = 14
+		days_re_enable = 35
+
+		complete_effect = {
+			if = {
+				limit = {
+					has_manpower > 2000
+					has_equipment = {
+						infantry_equipment > 199
+					}
+				}
+				add_manpower = -2000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -200
+				}
+			}
+			else = {
+				add_political_power = -75
+			}
+
+			if = {
+				limit = {
+					has_country_flag = VIC_Wellington_no_flag
+				}
+				clr_country_flag = VIC_Wellington_no_flag
+				set_country_flag = VIC_Wellington_yes_flag
+
+				VIC_proposal_calculation = yes
+
+				custom_effect_tooltip = VIC_Wellington_no_to_yes_tt
+			}
+
+			set_temp_variable = { VIC_Wellington_support_add_var = 0.025 }
+			VIC_Wellington_support_add = yes
+			VIC_Wellington_influence_add = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0.2
+				check_variable = { VIC_Wellington_influence > 0.2 }
+			}
+			modifier = {
+				factor = 2
+				check_variable = { VIC_Wellington_influence < 0.16 }
+			}
+		}
+	}
+
+	VIC_win_over_Windermere = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			OR = {
+				has_political_power > 100
+				AND = {
+					has_manpower > 2000
+					has_equipment = {
+						infantry_equipment > 199
+					}
+				}
+			}
+		}
+
+		cost = 25
+		days_remove = 14
+		days_re_enable = 35
+
+		complete_effect = {
+			if = {
+				limit = {
+					has_manpower > 2000
+					has_equipment = {
+						infantry_equipment > 199
+					}
+				}
+				add_manpower = -2000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -200
+				}
+			}
+			else = {
+				add_political_power = -75
+			}
+
+			if = {
+				limit = {
+					has_country_flag = VIC_Windermere_no_flag
+				}
+				clr_country_flag = VIC_Windermere_no_flag
+				set_country_flag = VIC_Windermere_yes_flag
+
+				VIC_proposal_calculation = yes
+
+				custom_effect_tooltip = VIC_Windermere_no_to_yes_tt
+			}
+
+			set_temp_variable = { VIC_Windermere_support_add_var = 0.025 }
+			VIC_Windermere_support_add = yes
+			VIC_Windermere_influence_add = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0.2
+				check_variable = { VIC_Windermere_influence > 0.2 }
+			}
+			modifier = {
+				factor = 2
+				check_variable = { VIC_Windermere_influence < 0.16 }
+			}
+		}
+	}
+
+	VIC_win_over_Caster = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			OR = {
+				has_political_power > 100
+				AND = {
+					has_manpower > 2000
+					has_equipment = {
+						infantry_equipment > 199
+					}
+				}
+			}
+		}
+
+		cost = 25
+		days_remove = 14
+		days_re_enable = 35
+
+		complete_effect = {
+			if = {
+				limit = {
+					has_manpower > 2000
+					has_equipment = {
+						infantry_equipment > 199
+					}
+				}
+				add_manpower = -2000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -200
+				}
+			}
+			else = {
+				add_political_power = -75
+			}
+
+			if = {
+				limit = {
+					has_country_flag = VIC_Caster_no_flag
+				}
+				clr_country_flag = VIC_Caster_no_flag
+				set_country_flag = VIC_Caster_yes_flag
+
+				VIC_proposal_calculation = yes
+				
+				custom_effect_tooltip = VIC_Caster_no_to_yes_tt
+			}
+
+			set_temp_variable = { VIC_Caster_support_add_var = 0.025 }
+			VIC_Caster_support_add = yes
+			VIC_Caster_influence_add = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0.2
+				check_variable = { VIC_Caster_influence > 0.2 }
+			}
+			modifier = {
+				factor = 2
+				check_variable = { VIC_Caster_influence < 0.18 }
+			}
+		}
+	}
+
+	VIC_relief_supplies_distribution = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_completed_focus = VIC_distributing_relief_supplies
+		}
+
+		cost = 50
+		days_remove = 35
+		days_re_enable = 70
+
+		modifier = {
+			stability_weekly = 0.02
+			political_power_factor = 0.3
+			consumer_goods_factor = 0.1
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				add_to_variable = {
+					var = VIC_Sarkaz_invation_stability_factor_dynamic_var
+					value = 0.05
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VIC_Sarkaz_invation_dummy_idea
+					add_idea = VIC_relief_supplies_distribution_idea
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_market_regulation = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_completed_focus = VIC_monitoring_market_behavior
+		}
+
+		cost = 50
+		days_remove = 35
+		days_re_enable = 70
+
+		modifier = {
+			stability_weekly = 0.02
+			political_power_factor = 0.3
+			consumer_goods_factor = 0.1
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				add_to_variable = {
+					var = VIC_Sarkaz_invation_production_factory_max_efficiency_factor_dynamic_var
+					value = 0.05
+				}
+				add_to_variable = {
+					var = VIC_Sarkaz_invation_production_factory_efficiency_gain_factor_dynamic_var
+					value = 0.05
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VIC_Sarkaz_invation_dummy_idea
+					add_idea = VIC_market_regulation_idea
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_Londinium_spying = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_completed_focus = VIC_spying_on_the_Sarkaz
+		}
+
+		fire_only_once = yes
+
+		days_remove = 35
+
+		modifier = {
+			civilian_factory_use = 2
+		}
+
+		complete_effect = {
+			add_days_mission_timeout  = {
+				mission = VIC_Sarkaz_expansion
+				days = 20
+			}
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				add_to_variable = {
+					var = VIC_Sarkaz_invation_war_support_factor_dynamic_var
+					value = 0.1
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VIC_Sarkaz_invation_dummy_idea
+					add_idea = VIC_Londinium_spying_idea
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_royalty_searching = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_completed_focus = VIC_searching_for_royalty
+		}
+
+		fire_only_once = yes
+
+		days_remove = 35
+
+		modifier = {
+			civilian_factory_use = 2
+		}
+
+		complete_effect = {
+			add_days_mission_timeout  = {
+				mission = VIC_Sarkaz_expansion
+				days = 20
+			}
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				add_to_variable = {
+					var = VIC_Sarkaz_invation_stability_factor_dynamic_var
+					value = 0.1
+				}
+			}
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = VIC_Sarkaz_invation_dummy_idea
+					add_idea = VIC_royalty_searching_idea
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_expand_local_forces_in = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			original_tag = VIC
+			has_completed_focus = VIC_expand_local_forces
+		}
+
+		available = {
+			always = no
+		}
+
+		days_remove = 180
+
+		priority = 500
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		remove_effect = {
+			uncomplete_national_focus = {
+				focus = VIC_expand_local_forces
+				refund_political_power = no
+			}
+
+			every_possible_country = {
+				limit = {
+					has_country_flag = VIC_expand_local_forces_in_flag
+				}
+				add_to_variable = { VIC_expand_local_forces = 3 }
+				random_core_state = {
+					create_unit = {
+						division = "division_template = \"近卫军\" start_experience_factor = 0.1 start_equipment_factor = 0.9"
+						owner = VIC
+						count = 3
+					}
+				}
+				custom_effect_tooltip = VIC_expand_local_forces_in_tt
+			}
+		}
+	}
+
+	VIC_wartime_civilian_factories_in = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			always = no
+		}
+
+		visible = {
+			original_tag = VIC
+			has_completed_focus = VIC_wartime_civilian_factories
+		}
+
+		days_remove = 60
+
+		priority = 500
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		remove_effect = {
+			uncomplete_national_focus = {
+				focus = VIC_wartime_civilian_factories
+				refund_political_power = no
+			}
+
+			every_possible_country = {
+				limit = {
+					has_country_flag = VIC_wartime_civilian_factories_in_flag
+				}
+				random_core_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	VIC_wartime_military_factories_in = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			original_tag = VIC
+			has_completed_focus = VIC_wartime_military_factories
+		}
+		
+		days_remove = 60
+
+		priority = 500
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		remove_effect = {
+			uncomplete_national_focus = {
+				focus = VIC_wartime_military_factories
+				refund_political_power = no
+			}
+
+			every_possible_country = {
+				limit = {
+					has_country_flag = VIC_wartime_military_factories_in_flag
+				}
+				random_core_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+}
+
+VIC_divided_empire_decisions = {
+	
+	VIC_war_exhaustion_increase = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			has_war = yes
+			has_global_flag = VIC_civil_war_start
+			NOT = {
+				has_global_flag = VIC_civil_war_end
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = TAR_independence_flag
+				}
+			}
+		}
+
+		is_good = no
+
+		days_mission_timeout = 90
+
+		priority = 500
+
+		cancel_trigger = {
+			OR = {
+				has_war = no
+				has_country_flag = TAR_independence_flag
+			}
+		}
+
+		timeout_effect = {
+			if = {
+				limit = {
+					has_idea = VIC_war_exhaustion_4
+				}
+				swap_ideas = {
+					remove_idea = VIC_war_exhaustion_4
+					add_idea = VIC_war_exhaustion_5
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = VIC_war_exhaustion_3
+				}
+				swap_ideas = {
+					remove_idea = VIC_war_exhaustion_3
+					add_idea = VIC_war_exhaustion_4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = VIC_war_exhaustion_2
+				}
+				swap_ideas = {
+					remove_idea = VIC_war_exhaustion_2
+					add_idea = VIC_war_exhaustion_3
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = VIC_war_exhaustion_1
+				}
+				swap_ideas = {
+					remove_idea = VIC_war_exhaustion_1
+					add_idea = VIC_war_exhaustion_2
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_idea = VIC_war_exhaustion_5
+					}
+				}
+				add_ideas = VIC_war_exhaustion_1
+			}
+		}
+	}
+
+	VIC_reintegrate_targeted_decision = {
+		allowed = {
+			OR = {
+				original_tag = VGO
+				original_tag = TAR
+				original_tag = VWI
+				original_tag = VCA
+
+				original_tag = VFI
+				original_tag = VAB
+				original_tag = VAS
+				original_tag = VCR
+				original_tag = VEA
+				original_tag = VSA
+				original_tag = VRN
+				original_tag = DUB
+			}
+		}
+
+		visible = {
+			NOT = {
+				has_country_flag = TAR_independence_flag
+			}
+		}
+
+		available = {
+			FROM = {
+				OR = {
+					AND = {
+						compliance > 15
+						resistance < 35
+					}
+					has_resistance = no
+				}
+			}
+		}
+
+		state_target = yes
+		target_array = VIC.core_states
+		target_trigger = {
+			FROM = {
+				is_controlled_by = ROOT
+				NOT = {
+					is_core_of = ROOT
+				}
+			}
+		}
+		on_map_mode = map_only
+		fire_only_once = no
+
+		days_remove = 30
+
+		remove_effect = {
+			FROM = {
+				hidden_effect = {
+					remove_core_of = VCA
+					remove_core_of = VWI
+					remove_core_of = TAR
+					remove_core_of = VGO
+
+					remove_core_of = VFI
+					remove_core_of = VAB
+					remove_core_of = VAS
+					remove_core_of = VCR
+					remove_core_of = VEA
+					remove_core_of = VSA
+					remove_core_of = VRN
+					remove_core_of = DUB
+				}
+				add_core_of = ROOT
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	VIC_suppress_resistance = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			any_controlled_state = {
+				NOT = {
+					is_core_of = ROOT
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = 50
+		days_re_enable = 70
+
+		modifier = {
+			resistance_growth = -0.3
+			resistance_decay = 0.1
+			compliance_growth = 0.3
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	VIC_war_propaganda = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_war = yes
+		}
+
+		available = {
+			has_war_support < 20%
+		}
+
+		cost = 25
+		days_remove = 28
+		days_re_enable = 35
+
+		modifier = {
+			war_support_weekly = 0.03
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_comfort_people = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_war = yes
+		}
+
+		cost = 50
+		days_remove = 30
+		days_re_enable = 60
+
+		modifier = {
+			stability_weekly = 0.05
+		}
+
+		complete_effect = {
+			add_days_mission_timeout = {
+				mission = VIC_war_exhaustion_increase
+				days = 40
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_break_non_aggression_pact = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_global_flag = VIC_civil_war_start
+			has_global_flag = VIC_one_duke_left
+			OR = {
+				has_non_aggression_pact_with = VWI
+				has_non_aggression_pact_with = VCA
+				has_non_aggression_pact_with = VGO
+				has_non_aggression_pact_with = TAR
+			}
+		}
+
+		days_remove = 15
+
+		complete_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_war_with = VWI
+					}
+					has_non_aggression_pact_with = VWI
+				}
+				diplomatic_relation = {
+					country = VWI
+					relation = non_aggression_pact
+					active = no
+				}
+				declare_war_on = {
+					target = VWI
+					type = civil_war
+				}
+				every_subject_country = {
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VWI
+						hostility_reason = asked_to_join
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_war_with = VCA
+					}
+					has_non_aggression_pact_with = VCA
+				}
+				diplomatic_relation = {
+					country = VCA
+					relation = non_aggression_pact
+					active = no
+				}
+				declare_war_on = {
+					target = VCA
+					type = civil_war
+				}
+				every_subject_country = {
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VCA
+						hostility_reason = asked_to_join
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_war_with = VGO
+					}
+					has_non_aggression_pact_with = VGO
+				}
+				diplomatic_relation = {
+					country = VGO
+					relation = non_aggression_pact
+					active = no
+				}
+				declare_war_on = {
+					target = VGO
+					type = civil_war
+				}
+				every_subject_country = {
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VGO
+						hostility_reason = asked_to_join
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_war_with = TAR
+					}
+					has_non_aggression_pact_with = TAR
+				}
+				diplomatic_relation = {
+					country = TAR
+					relation = non_aggression_pact
+					active = no
+				}
+				declare_war_on = {
+					target = TAR
+					type = civil_war
+				}
+				every_subject_country = {
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = TAR
+						hostility_reason = asked_to_join
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	# VWI_ = {
+	# 	visible = {
+	# 		AND = {
+	# 			has_war = yes
+
+	# 		}
+	# 	}
+
+	# 	available = {
+	# 		has_propaganda_slot = yes
+	# 	}
+
+	# 	cost = 25
+	# 	days_remove = 140
+	# 	days_re_enable = 140
+
+	# 	modifier = {
+	# 		political_power_factor = 0.3
+	# 		stability_weekly = 0.05
+	# 		surrender_limit = 0.1
+	# 	}
+
+	# 	complete_effect = {
+	# 		remove_propaganda_slot = yes
+	# 	}
+
+	# 	remove_effect = {
+	# 		add_propaganda_slot = yes
+	# 	}
+	# }
+
+	# VWI_ = {
+	# 	visible = {
+	# 		AND = {
+	# 			has_war = yes
+
+	# 		}
+	# 	}
+
+	# 	available = {
+	# 		has_propaganda_slot = yes
+	# 	}
+
+	# 	cost = 25
+	# 	days_remove = 140
+	# 	days_re_enable = 140
+
+	# 	modifier = {
+	# 		political_power_factor = 0.3
+	# 		stability_weekly = 0.05
+	# 		surrender_limit = 0.1
+	# 	}
+
+	# 	complete_effect = {
+	# 		remove_propaganda_slot = yes
+	# 	}
+
+	# 	remove_effect = {
+	# 		add_propaganda_slot = yes
+	# 	}
+	# }
+}
+
+VIC_military_construction_decisions = {
+
+	VIC_recruit_targeted_decision = {
+		allowed = {
+			OR = {
+				original_tag = VGO
+				original_tag = TAR
+				original_tag = VWI
+				original_tag = VCA
+
+				original_tag = VFI
+				original_tag = WAB
+				original_tag = VAS
+				original_tag = VCR
+				original_tag = VEA
+				original_tag = VSA
+				original_tag = VRN
+				original_tag = DUB
+			}
+		}
+
+		visible = {
+			has_global_flag = VIC_civil_war_start
+			NOT = {
+				has_global_flag = VIC_civil_war_end
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_civil_war_recruiting
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					controls_state = FROM
+				}
+				has_global_flag = VIC_civil_war_end
+			}
+		}
+
+		state_target = yes
+		target_array = VIC.core_states
+		target_trigger = {
+			FROM = {
+				is_controlled_by = ROOT
+				NOT = {
+					has_state_flag = VIC_civil_war_recruited_state
+				}
+			}
+		}
+		on_map_mode = map_only
+		fire_only_once = no
+
+		days_remove = 15
+
+		cancel_effect = {
+			clr_country_flag = VIC_civil_war_recruiting
+		}
+
+		complete_effect = {
+			set_country_flag = VIC_civil_war_recruiting
+		}
+		
+		remove_effect = {
+			FROM = {
+				VIC_civil_war_recruit_divisions = yes
+			}
+			clr_country_flag = VIC_civil_war_recruiting
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	VIC_preparing_for_war = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			has_country_flag = VIC_military_construction_flag
+			NOT = {
+				has_global_flag = VIC_civil_war_start
+			}
+		}
+
+		is_good = yes
+
+		days_mission_timeout = 30
+
+		priority = 500
+
+		cancel_trigger = {
+			has_war = yes
+		}
+
+		timeout_effect = {
+			set_temp_variable = { VIC_war_preparations_add_var = 5 }
+			VIC_war_preparations_add = yes
+		}
+	}
+
+	
+
+	VIC_attack_VRA = {
+		visible = {
+			VRA = {
+				exists = yes
+			}
+			is_neighbor_of = VRA
+			has_country_flag = VIC_suppress_rebellion
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 10
+
+		remove_effect = {
+			declare_war_on = {
+				target = VRA
+				type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			base = 50
+		}
+	}
+
+	VIC_attack_VRB = {
+		visible = {
+			VRB = {
+				exists = yes
+			}
+			is_neighbor_of = VRB
+			NOT = {
+				original_tag = TAR
+			}
+			has_country_flag = VIC_suppress_rebellion
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 10
+
+		remove_effect = {
+			declare_war_on = {
+				target = VRB
+				type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			base = 50
+		}
+	}
+
+	VIC_attack_VRC = {
+		visible = {
+			VRC = {
+				exists = yes
+			}
+			is_neighbor_of = VRC
+			has_country_flag = VIC_suppress_rebellion
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 10
+
+		remove_effect = {
+			declare_war_on = {
+				target = VRC
+				type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			base = 50
+		}
+	}
+
+	VIC_attack_VRD = {
+		visible = {
+			VRD = {
+				exists = yes
+			}
+			is_neighbor_of = VRD
+			has_country_flag = VIC_suppress_rebellion
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 10
+
+		remove_effect = {
+			declare_war_on = {
+				target = VRD
+				type = annex_everything
+			}
+		}
+
+		ai_will_do = {
+			base = 50
+		}
+	}
+
+	VIC_push_the_frontline = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_war = yes
+			has_global_flag = VIC_civil_war_start
+			NOT = {
+				has_global_flag = VIC_civil_war_end
+			}
+		}
+
+		cost = 100
+		days_remove = 30
+		days_re_enable = 60
+
+		modifier = {
+			army_attack_factor = 0.15
+			breakthrough_factor = 0.15
+		}
+
+		complete_effect = {
+			add_days_mission_timeout = {
+				mission = VIC_war_exhaustion_increase
+				days = -20
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_seize_some_trains = {
+
+		visible = { 
+			num_of_factories < 60
+		}
+		
+		available = {
+			has_equipment = { train_equipment < 101 }
+			has_tech = basic_train
+		}
+		
+		days_remove = 180
+
+		complete_effect = {
+			add_equipment_to_stockpile = {
+				type = train_equipment
+				amount = 15
+			}
+			add_stability = -0.05
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1.5
+				has_stability > 0.74
+			}
+		}
+	}		
+
+	VIC_MBT_research = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = VIC_weapons_research_flag
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_researching_other_weapon_flag
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 180
+
+		complete_effect = {
+			set_country_flag = VIC_researching_other_weapon_flag
+		}
+
+		remove_effect = {
+			add_tech_bonus = {
+				bonus = 0.8
+				uses = 1
+				category = cat_medium_armor
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 20 }
+				VIC_war_preparations_add = yes
+			}
+
+			clr_country_flag = VIC_researching_other_weapon_flag
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_armed_helicopter_research = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = VIC_weapons_research_flag
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_researching_other_weapon_flag
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 180
+
+		complete_effect = {
+			set_country_flag = VIC_researching_other_weapon_flag
+		}
+
+		remove_effect = {
+			add_tech_bonus = {
+				bonus = 0.8
+				uses = 1
+				category = armed_helicopter
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 20 }
+				VIC_war_preparations_add = yes
+			}
+
+			clr_country_flag = VIC_researching_other_weapon_flag
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_infantry_weapons_research = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = VIC_weapons_research_flag
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_researching_other_weapon_flag
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 180
+
+		complete_effect = {
+			set_country_flag = VIC_researching_other_weapon_flag
+		}
+
+		remove_effect = {
+			add_tech_bonus = {
+				bonus = 0.8
+				uses = 2
+				category = infantry_weapons
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 20 }
+				VIC_war_preparations_add = yes
+			}
+
+			clr_country_flag = VIC_researching_other_weapon_flag
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_arts_weapons_research = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = VIC_weapons_research_flag
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_researching_other_weapon_flag
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 180
+
+		complete_effect = {
+			set_country_flag = VIC_researching_other_weapon_flag
+		}
+
+		remove_effect = {
+			add_tech_bonus = {
+				bonus = 0.8
+				uses = 2
+				category = arts_weapons
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = VIC_civil_war_start
+					}
+				}
+				set_temp_variable = { VIC_war_preparations_add_var = 20 }
+				VIC_war_preparations_add = yes
+			}
+
+			clr_country_flag = VIC_researching_other_weapon_flag
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	VIC_military_operation_against_VGO = {
+		visible = {
+			NOT = {
+				original_tag = VGO
+			}
+			has_country_flag = VIC_military_operation_flag
+			VGO = { exists = yes }
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_military_operation_acting_flag
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 90
+
+		complete_effect = {
+			set_country_flag = VIC_military_operation_acting_flag
+		}
+
+		targeted_modifier = {
+			tag = VGO
+			attack_bonus_against = 0.15
+			breakthrough_bonus_against = 0.15
+			defense_bonus_against = 0.15
+		}
+
+		modifier = {
+			air_cas_efficiency = 0.1
+			planning_speed = 0.1
+		}
+
+		remove_effect = {
+			clr_country_flag = VIC_military_operation_acting_flag
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	VIC_military_operation_against_VWI = {
+		visible = {
+			NOT = {
+				original_tag = VWI
+			}
+			has_country_flag = VIC_military_operation_flag
+			VWI = { exists = yes }
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_military_operation_acting_flag
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 90
+
+		complete_effect = {
+			set_country_flag = VIC_military_operation_acting_flag
+		}
+
+		targeted_modifier = {
+			tag = VWI
+			attack_bonus_against = 0.15
+			breakthrough_bonus_against = 0.15
+			defense_bonus_against = 0.15
+		}
+
+		modifier = {
+			air_cas_efficiency = 0.1
+			planning_speed = 0.1
+		}
+
+		remove_effect = {
+			clr_country_flag = VIC_military_operation_acting_flag
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	VIC_military_operation_against_VCA = {
+		visible = {
+			NOT = {
+				original_tag = VCA
+			}
+			has_country_flag = VIC_military_operation_flag
+			VCA = { exists = yes }
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = VIC_military_operation_acting_flag
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 90
+
+		complete_effect = {
+			set_country_flag = VIC_military_operation_acting_flag
+		}
+
+		targeted_modifier = {
+			tag = VCA
+			attack_bonus_against = 0.15
+			breakthrough_bonus_against = 0.15
+			defense_bonus_against = 0.15
+		}
+
+		modifier = {
+			air_cas_efficiency = 0.1
+			planning_speed = 0.1
+		}
+
+		remove_effect = {
+			clr_country_flag = VIC_military_operation_acting_flag
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	VGO_call_Colombia_decision = {
+
+		visible = {
+			has_completed_focus = VGO_call_Colombia
+		}
+
+		cost = 50
+		days_remove = 60
+		days_re_enable = 120
+
+		modifier = {
+			political_power_gain = -0.1
+			consumer_goods_factor = 0.12
+		}
+
+		remove_effect = {
+			add_equipment_to_stockpile = {
+			    type = infantry_equipment
+			    amount = 500
+			    producer = CLB
+			}
+			add_tech_bonus = {
+				bonus = 0.25
+				uses = 1
+				type = infantry_weapons
+			}
+		}
+	}
+
+	VWI_war_buff_decision_1 = {
+		visible = {
+			original_tag = VWI
+			has_country_flag = VWI_focus_on_war_deployment_flag
+			has_war = yes
+		}
+
+		cost = 25
+		days_remove = 45
+		days_re_enable = 90
+
+		modifier = {
+			land_reinforce_rate = 0.05
+			army_morale_factor = 0.05
+			experience_gain_army_unit_factor = 0.1
+		}
+	}
+
+	VWI_war_buff_decision_2 = {
+		visible = {
+			original_tag = VWI
+			has_country_flag = VWI_general_Staff_program_flag
+			has_war = yes
+		}
+
+		cost = 25
+		days_remove = 45
+		days_re_enable = 90
+
+		modifier = {
+			army_attack_factor = 0.05
+			breakthrough_factor = 0.05
+		}
+	}
+
+	VCA_war_buff_decision = {
+		visible = {
+			original_tag = VCA
+			has_country_flag = VCA_rebuilding_the_Royal_Army_flag
+			has_war = yes
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+		days_remove = 45
+		days_re_enable = 90
+
+		modifier = {
+			air_superiority_bonus_in_combat = 0.1
+			army_speed_factor = 0.1
+			air_close_air_support_org_damage_factor = 0.1
+			army_org_regain = 0.1
+		}
+	}
+}
+
+VIC_economic_development_decisions = {
+	VIC_inherit_bonds_targeted_decision = {
+		allowed = {
+			OR = {
+				original_tag = VGO
+				original_tag = TAR
+				original_tag = VWI
+				original_tag = VCA
+			}
+		}
+
+		visible = {
+		}
+
+		available = {
+			FROM = {
+				has_resistance = yes
+			}
+		}
+
+		state_target = yes
+		target_array = VIC.core_states
+		target_trigger = {
+			FROM = {
+				is_controlled_by = ROOT
+				NOT = {
+					is_core_of = ROOT
+				}
+			}
+		}
+		on_map_mode = map_only
+		fire_only_once = yes
+
+		days_remove = 30
+
+		remove_effect = {
+			FROM = {
+				set_state_flag = VIC_inherit_bonds_@ROOT
+				add_resistance_target = {
+					amount = -20
+					occupier = ROOT
+					tooltip = VIC_inherit_bonds_tt
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	VIC_issue_war_bonds = {
+		visible = {
+			NOT = {
+				has_global_flag = VIC_civil_war_end
+			}
+		}
+
+		cost = 50
+		days_remove = 90
+		days_re_enable = 45
+
+		complete_effect = {
+			add_dynamic_modifier = {
+				modifier = VIC_war_bonds_dynamic_modifier
+				days = 90
+			}
+			set_variable = { VIC_country_war_bonds_once = 0 }
+			every_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				set_temp_variable = { VIC_state_war_bonds_temp = state_population_k }
+				divide_temp_variable = { VIC_state_war_bonds_temp = 1000 }
+				add_to_variable = { VIC_state_war_bonds = VIC_state_war_bonds_temp }
+				add_to_variable = { ROOT.VIC_country_war_bonds = VIC_state_war_bonds_temp }
+				add_to_variable = { ROOT.VIC_country_war_bonds_once = VIC_state_war_bonds_temp }
+				set_state_flag = VIC_inherit_bonds_@ROOT
+			}
+			set_variable = { VIC_war_bonds_consumer_goods_factor_dynamic_var = VIC_country_war_bonds_once }
+			multiply_variable = { VIC_war_bonds_consumer_goods_factor_dynamic_var = -0.01 }
+			set_variable = { VIC_war_bonds_production_speed_buildings_factor_dynamic_var = VIC_country_war_bonds_once }
+			multiply_variable = { VIC_war_bonds_production_speed_buildings_factor_dynamic_var = 0.01 }
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+	
+	VIC_improving_aluminum_production_processes = {
+		visible = {
+			has_completed_focus = VWI_improve_resource_production_processes
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+		days_remove = 90
+
+		remove_effect = {
+			add_resource = {
+				type = aluminium
+				amount = 30
+				state = 557
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_develop_synthetic_rubber = {
+		visible = {
+			has_completed_focus = VWI_improve_resource_production_processes
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+		days_remove = 90
+
+		remove_effect = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = cat_synth_rubber
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_construction_investment = {
+		visible = {
+			has_completed_focus = VWI_investment_less_developed_regions
+		}
+
+		cost = 150
+		days_remove = 180
+		days_re_enable = 180
+
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+}
+
+VIC_pioneer_decisions = {
+
+	VIC_pioneer_stage_1 = {
+
+		visible = {
+			FROM = {
+				any_neighbor_state = {
+					is_owned_by = ROOT
+				}
+				hidden_trigger = {
+					NOT = { has_state_flag = pioneer_stage_1_completed }
+				}
+			}
+		}
+
+		available = {
+			any_owned_state = {
+				state_population > 500000
+			}
+			FROM = {
+				any_neighbor_state = {
+					is_owned_by = ROOT
+				}
+				hidden_trigger = {
+					NOT = { has_state_flag = pioneer_stage_1_completed }
+				}
+			}
+			NOT = {
+				has_country_flag = VIC_pioneer_cooldown
+			}
+		}
+		
+		state_target = yes
+		targets = { 535 548 553 605 945 }
+
+		fire_only_once = no
+		
+		cost = 25
+		days_remove = 45
+
+		modifier = {
+			political_power_factor = -0.05
+			monthly_population = -0.05
+		}
+
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					state_population > 500000
+				}
+				add_manpower = -8000
+			}
+			FROM = {
+				add_manpower = 8000
+				hidden_effect = {
+					remove_core_of = ZZZ
+					add_core_of = VIC
+				}
+				transfer_state_to = ROOT
+				add_core_of = ROOT
+				set_state_flag = pioneer_stage_1_completed
+			}
+			set_country_flag = {
+			    flag = VIC_pioneer_cooldown
+			    days = 45
+			    value = 1
+			}
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	VIC_pioneer_stage_2 = {
+
+		visible = {
+			FROM = {
+				is_owned_by = ROOT
+				hidden_trigger = {
+					has_state_flag = pioneer_stage_1_completed
+					NOT = { has_state_flag = pioneer_stage_2_completed }
+				}
+			}
+		}
+		available = {
+			any_owned_state = {
+				state_population > 500000
+			}
+			FROM = {
+				is_owned_by = ROOT
+				is_core_of = ROOT
+				hidden_trigger = {
+					has_state_flag = pioneer_stage_1_completed
+					NOT = { has_state_flag = pioneer_stage_2_completed }
+				}
+			}
+			NOT = {
+				has_country_flag = VIC_pioneer_cooldown
+			}
+		}
+
+		state_target = yes
+		targets = { 535 548 553 605 945 }
+
+		fire_only_once = no
+
+		cost = 25
+		days_remove = 45
+
+		modifier = {
+			political_power_factor = -0.05
+			monthly_population = -0.05
+			consumer_goods_factor = 0.1
+		}
+
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					state_population > 500000
+				}
+				add_manpower = -16000
+			}
+			FROM = {
+				add_manpower = 16000
+				add_building_construction = {
+				    type = infrastructure
+				    level = 1
+				    instant_build = yes
+				}
+				increase_state_category = yes
+				set_state_flag = pioneer_stage_2_completed
+				if = {
+					limit = { state = 535 }
+					add_victory_points = {
+						province = 3658
+						value = 2
+					}
+				}
+				else_if = {
+					limit = { state = 553 }
+					add_victory_points = {
+						province = 17467
+						value = 2
+					}
+				}
+				else_if = {
+					limit = { state = 605 }
+					add_victory_points = {
+						province = 4593
+						value = 2
+					}
+				}
+				else_if = {
+					limit = { state = 945 }
+					add_victory_points = {
+						province = 17739
+						value = 2
+					}
+				}
+			}
+			set_country_flag = {
+			    flag = VIC_pioneer_cooldown
+			    days = 45
+			    value = 1
+			}
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	VIC_pioneer_stage_3 = {
+
+		visible = {
+			FROM = {
+				is_owned_by = ROOT
+				hidden_trigger = {
+					has_state_flag = pioneer_stage_2_completed
+					NOT = { has_state_flag = pioneer_stage_3_completed }
+				}
+			}
+		}
+
+		available = {
+			any_owned_state = {
+				state_population > 500000
+			}
+			FROM = {
+				is_owned_by = ROOT
+				is_core_of = ROOT
+				hidden_trigger = {
+					has_state_flag = pioneer_stage_2_completed
+					NOT = { has_state_flag = pioneer_stage_3_completed }
+				}
+			}
+			NOT = {
+				has_country_flag = VIC_pioneer_cooldown
+			}
+		}
+
+		state_target = yes
+		targets = { 535 548 553 605 945 }
+
+		fire_only_once = no
+
+		cost = 25
+		days_remove = 45
+
+		modifier = {
+			political_power_factor = -0.05
+			monthly_population = -0.05
+			consumer_goods_factor = 0.1
+		}
+
+		complete_effect = {
+			random_owned_state = {
+				limit = {
+					state_population > 500000
+				}
+				add_manpower = -16000
+			}
+			FROM = {
+				add_manpower = 16000
+				add_building_construction = {
+				    type = industrial_complex
+				    level = 1
+				    instant_build = yes
+				}
+				add_building_construction = {
+				    type = infrastructure
+				    level = 1
+				    instant_build = yes
+				}
+				increase_state_category = yes
+				set_state_flag = pioneer_stage_3_completed
+				if = {
+					limit = { state = 535 }
+					add_victory_points = {
+						province = 3658
+						value = 3
+					}
+				}
+				else_if = {
+					limit = { state = 553 }
+					add_victory_points = {
+						province = 17467
+						value = 3
+					}
+				}
+				else_if = {
+					limit = { state = 605 }
+					add_victory_points = {
+						province = 4593
+						value = 3
+					}
+				}
+				else_if = {
+					limit = { state = 945 }
+					add_victory_points = {
+						province = 17739
+						value = 3
+					}
+				}
+			}
+			set_country_flag = {
+			    flag = VIC_pioneer_cooldown
+			    days = 45
+			    value = 1
+			}
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+	}
+}
+
+VIC_reforge_the_crown_decisions = {
+	
+	VIC_add_Vina_support_VWI = {
+		visible = {
+			original_tag = VWI
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Vina_support_add_var = 0.03 }
+			VIC_Vina_support_add_VWI = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Vina_support_VCA = {
+		visible = {
+			original_tag = VCA
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Vina_support_add_var = 0.03 }
+			VIC_Vina_support_add_VCA = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_minus_Vina_support_VCA = {
+		visible = {
+			original_tag = VWI
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Vina_support_add_var = -0.03 }
+			VIC_Vina_support_add_VCA = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_minus_Vina_support_VWI = {
+		visible = {
+			original_tag = VCA
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Vina_support_add_var = -0.03 }
+			VIC_Vina_support_add_VWI = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Eartha_support_VWI = {
+		visible = {
+			original_tag = VWI
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Eartha_support_add_var = 0.03 }
+			VIC_Eartha_support_add_VWI = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Eartha_support_guns_VWI = {
+		visible = {
+			original_tag = VWI
+			has_country_flag = VIC_add_group_support
+		}
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 100
+			}
+		}
+
+		days_remove = 30
+		days_re_enable = 90
+
+		complete_effect = {
+			set_temp_variable = { VIC_Eartha_support_add_var = 0.1 }
+			VIC_Eartha_support_add_VWI = yes
+
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+				producer = VWI
+			}
+		}
+
+		remove_effect = {
+			VEA = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 100
+					producer = VWI
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Eartha_support_VCA = {
+		visible = {
+			original_tag = VCA
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Eartha_support_add_var = 0.03 }
+			VIC_Eartha_support_add_VCA = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Eartha_support_guns_VCA = {
+		visible = {
+			original_tag = VCA
+			has_country_flag = VIC_add_group_support
+		}
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 100
+			}
+		}
+
+		days_remove = 30
+		days_re_enable = 90
+
+		complete_effect = {
+			set_temp_variable = { VIC_Eartha_support_add_var = 0.1 }
+			VIC_Eartha_support_add_VCA = yes
+
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+				producer = VCA
+			}
+		}
+
+		remove_effect = {
+			VEA = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 100
+					producer = VCA
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_minus_Eartha_support_VCA = {
+		visible = {
+			original_tag = VWI
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Eartha_support_add_var = -0.03 }
+			VIC_Eartha_support_add_VCA = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_minus_Eartha_support_VWI = {
+		visible = {
+			original_tag = VCA
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Eartha_support_add_var = -0.03 }
+			VIC_Eartha_support_add_VWI = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Navy_support_VGO = {
+		visible = {
+			original_tag = VGO
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Navy_support_add_var = 0.03 }
+			VIC_Navy_support_add_VGO = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Navy_support_guns_VGO = {
+		visible = {
+			original_tag = VGO
+			has_country_flag = VIC_add_group_support
+		}
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 100
+			}
+		}
+
+		days_remove = 30
+		days_re_enable = 90
+
+		complete_effect = {
+			set_temp_variable = { VIC_Navy_support_add_var = 0.1 }
+			VIC_Navy_support_add_VGO = yes
+
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+				producer = VGO
+			}
+		}
+
+		remove_effect = {
+			VRN = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 100
+					producer = VGO
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Navy_support_TAR = {
+		visible = {
+			original_tag = TAR
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Navy_support_add_var = 0.03 }
+			VIC_Navy_support_add_TAR = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Navy_support_guns_TAR = {
+		visible = {
+			original_tag = TAR
+			has_country_flag = VIC_add_group_support
+		}
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 100
+			}
+		}
+
+		days_remove = 30
+		days_re_enable = 90
+
+		complete_effect = {
+			set_temp_variable = { VIC_Navy_support_add_var = 0.1 }
+			VIC_Navy_support_add_TAR = yes
+
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+				producer = TAR
+			}
+		}
+
+		remove_effect = {
+			VRN = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 100
+					producer = TAR
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_minus_Navy_support_TAR = {
+		visible = {
+			original_tag = VGO
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Navy_support_add_var = -0.03 }
+			VIC_Navy_support_add_TAR = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_minus_Navy_support_VGO = {
+		visible = {
+			original_tag = TAR
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Navy_support_add_var = -0.03 }
+			VIC_Navy_support_add_VGO = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Abercorn_support_VGO = {
+		visible = {
+			original_tag = VGO
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Abercorn_support_add_var = 0.03 }
+			VIC_Abercorn_support_add_VGO = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Abercorn_support_guns_VGO = {
+		visible = {
+			original_tag = VGO
+			has_country_flag = VIC_add_group_support
+		}
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 100
+			}
+		}
+
+		days_remove = 30
+		days_re_enable = 90
+
+		complete_effect = {
+			set_temp_variable = { VIC_Abercorn_support_add_var = 0.1 }
+			VIC_Abercorn_support_add_VGO = yes
+
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+				producer = VGO
+			}
+		}
+
+		remove_effect = {
+			VAB = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 100
+					producer = VGO
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Abercorn_support_TAR = {
+		visible = {
+			original_tag = TAR
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Abercorn_support_add_var = 0.03 }
+			VIC_Abercorn_support_add_TAR = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_add_Abercorn_support_guns_TAR = {
+		visible = {
+			original_tag = TAR
+			has_country_flag = VIC_add_group_support
+		}
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 100
+			}
+		}
+
+		days_remove = 30
+		days_re_enable = 90
+
+		complete_effect = {
+			set_temp_variable = { VIC_Abercorn_support_add_var = 0.1 }
+			VIC_Abercorn_support_add_TAR = yes
+
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -100
+				producer = TAR
+			}
+		}
+
+		remove_effect = {
+			VAB = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 100
+					producer = TAR
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_minus_Abercorn_support_TAR = {
+		visible = {
+			original_tag = VGO
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Abercorn_support_add_var = -0.03 }
+			VIC_Abercorn_support_add_TAR = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+
+	VIC_minus_Abercorn_support_VGO = {
+		visible = {
+			original_tag = TAR
+			has_country_flag = VIC_add_group_support
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 60
+
+		complete_effect = {
+			set_temp_variable = { VIC_Abercorn_support_add_var = -0.03 }
+			VIC_Abercorn_support_add_VGO = yes
+		}
+
+		ai_will_do = {
+			base = 1.5
+		}
+	}
+}
+
+VIC_unification_decisions = {
+
+	declare_VIC_unification = {
+
+		fire_only_once = yes
+
+		complete_effect = {
+			set_global_flag = VIC_civil_war_end
+
+			swap_ideas = {
+				remove_idea = local_warlord
+				add_idea = major_country
+			}
+
+			set_variable = { VIC_country_war_bonds = 0 }
+
+			every_controlled_state = {
+				limit = {
+					has_state_flag = VIC_inherit_bonds_@ROOT
+				}
+				add_to_variable = { ROOT.VIC_country_war_bonds = VIC_state_war_bonds }
+			}
+
+			add_timed_idea = {
+				idea = VIC_repayment_of_war_bonds
+				days = VIC_country_war_bonds
+			}
+
+			remove_dynamic_modifier = {
+				modifier = VIC_war_preparations_dynamic_modifier
+			}
+
+			transfer_state = 501
+			transfer_state = 859
+			501 = {
+				add_core_of = ROOT
+				remove_core_of = VFA
+			}
+			859 = {
+				add_core_of = ROOT
+				remove_core_of = VFA
+			}
+
+			set_division_template_lock = {
+				division_template = "掷弹兵师"
+				is_locked = no
+			}
+
+			delete_unit_template_and_units = {
+				division_template = "民兵师"
+				disband = yes
+			}
+
+			every_subject_country = {
+				set_division_template_lock = {
+					division_template = "掷弹兵师"
+					is_locked = no
+				}
+
+				delete_unit_template_and_units = {
+					division_template = "民兵师"
+					disband = yes
+				}
+			}
+
+			if = {
+				limit = {
+					has_completed_focus = VWI_we_will_meet_again
+				}
+				CLB = {
+					add_to_faction = ROOT
+				}
+			}
+			else = {
+				LTN = {
+					add_to_faction = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+	}
+}

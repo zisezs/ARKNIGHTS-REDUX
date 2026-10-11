@@ -1,0 +1,64 @@
+scripted_gui = {
+	#军事现状
+	UFE_special_units_decisions_gui = {
+		context_type = decision_category
+		window_name = "UFE_special_units_decisions_ui_window"
+	}
+	#社会激荡与军队控制
+	UFE_stability_and_army_control_decisions_gui = {
+		context_type = decision_category
+		window_name = "UFE_stability_and_army_control_decisions_window"
+
+		visible = {
+			always = yes
+		}
+
+		properties = {
+			UFE_stability_bar_progress = {
+				frame = UFE_stability_bar_progress_frame
+				image = "[GetUfeBarSta]"
+			}
+			UFE_army_control_bar_progress = {
+				frame = UFE_army_control_bar_progress_frame
+				image = "[GetUfeBarArm]"
+			}
+		}
+	}
+	#宣传决议
+	UFE_revolutionary_propaganda_decision_ui = {
+		context_type = decision_category
+		window_name = "UFE_revolutionary_propaganda_decision_ui_window"
+		
+		properties = {
+			constitution_spirit_1 = {
+				image = "[GetUrsConSpr1]"
+				frame = constitution_spirit_1_frame
+			}
+			constitution_spirit_2 = {
+				image = "[GetUrsConSpr2]"
+				frame = constitution_spirit_2_frame
+			}
+			constitution_spirit_3 = {
+				image = "[GetUrsConSpr3]"
+				frame = constitution_spirit_3_frame
+			}
+			constitution_spirit_4 = {
+				image = "[GetUrsConSpr4]"
+				frame = constitution_spirit_4_frame
+			}
+			constitution_spirit_5 = {
+				image = "[GetUrsConSpr5]"
+				frame = constitution_spirit_5_frame
+			}
+			constitution_spirit_6 = {
+				image = "[GetUrsConSpr6]"
+				frame = constitution_spirit_6_frame
+			}
+			constitution_spirit_7 = {
+				image = "[GetUrsConSpr7]"
+				frame = constitution_spirit_7_frame
+			}
+		}
+	}
+}
+

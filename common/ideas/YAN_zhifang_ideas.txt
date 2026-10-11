@@ -1,0 +1,96 @@
+# ==============================================================================
+#  大炎 · 兵部·职方司 —— 义从籍三档（外交/志愿军机制精神）
+#  · 由 common/decisions/YAN_Zhifang_Decisions.txt 的三条募勇决议逐档挂上
+#  · 每一档的 on_add 摘掉上一档：义从籍始终只有一条在榜
+#  · 这组修正符吃的是【引擎原版志愿军】那一套：
+#      send_volunteer_size            ＝ 每场战争可多派几个师（原版基础值 +N）
+#      send_volunteer_divisions_required ＝ 负值＝ fewer 师就能开口派志愿军（门槛下移）
+#      send_volunteers_tension        ＝ 负值＝派志愿军攒的世界紧张度更少
+#      air_volunteer_cap              ＝ 可派航空志愿队额度
+#      experience_gain_army_factor    ＝ 义从在外国战场上替我们练兵
+#  · 文案见 localisation/simp_chinese/ARF_YAN_Zhifang_l_simp_chinese.yml
+# ==============================================================================
+
+ideas = {
+	country = {
+
+		# 一档：登记在籍，愿越境者听入册
+		YAN_Yicong_Levy_1 = {
+			picture = YAN_Martial_tradition
+
+			removal_cost = -1
+
+			allowed = {
+				original_tag = YAN
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				send_volunteer_size = 4
+				send_volunteer_divisions_required = -0.2
+				send_volunteers_tension = -0.25
+				experience_gain_army_factor = 0.1
+				consumer_goods_factor = 0.02
+			}
+		}
+
+		# 二档：锐士 —— 成套编队，还添了航空志愿队
+		YAN_Yicong_Levy_2 = {
+			picture = YAN_Route_military
+
+			removal_cost = -1
+
+			allowed = {
+				original_tag = YAN
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			on_add = {
+				remove_ideas = YAN_Yicong_Levy_1
+			}
+
+			modifier = {
+				send_volunteer_size = 8
+				send_volunteer_divisions_required = -0.4
+				send_volunteers_tension = -0.4
+				experience_gain_army_factor = 0.15
+				air_volunteer_cap = 1
+				consumer_goods_factor = 0.03
+			}
+		}
+
+		# 三档：炎字义从成军 —— 旗号立起，愿意从的人就不止一个两个
+		YAN_Yicong_Levy_3 = {
+			picture = YAN_Brothers_one_heart
+
+			removal_cost = -1
+
+			allowed = {
+				original_tag = YAN
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			on_add = {
+				remove_ideas = YAN_Yicong_Levy_2
+			}
+
+			modifier = {
+				send_volunteer_size = 14
+				send_volunteer_divisions_required = -0.6
+				send_volunteers_tension = -0.6
+				experience_gain_army_factor = 0.2
+				air_volunteer_cap = 3
+				consumer_goods_factor = 0.04
+			}
+		}
+	}
+}

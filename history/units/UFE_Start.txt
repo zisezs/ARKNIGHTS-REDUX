@@ -1,0 +1,112 @@
+focus = {
+	current = UFE_GeLunWoFu_de_MingYun
+	progress = 1
+}
+
+division_template = {
+	name = "正规部队"
+	division_names_group = UFE_INF_01
+
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 0 y = 3 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+		infantry = { x = 1 y = 3 }
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+	}
+}
+division_template = {
+	name = "自卫猎兵"
+	division_names_group = UFE_INF_02
+	is_locked = yes
+	force_allow_recruiting = yes
+
+	regiments = {
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia =  { x = 0 y = 2 }
+		militia = { x = 1 y = 0 }
+		militia = { x = 1 y = 1 }
+		militia = { x = 1 y = 2 }
+	}
+}
+division_template = {
+	name = "猎人雇佣军"
+	division_names_group = UFE_INF_03
+
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry =  { x = 0 y = 2 }
+		infantry =  { x = 0 y = 3 }
+	}
+}
+
+units = {
+	division = { 
+		division_name = {
+			is_name_ordered = yes
+			name_order = 1
+		}
+		location = 2379
+		division_template = "正规部队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1
+	}
+	division = { 
+		division_name = {
+			is_name_ordered = yes
+			name_order = 1
+		}
+		location = 5003
+		division_template = "猎人雇佣军"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.7
+	}
+	division = { 
+		division_name = {
+			is_name_ordered = yes
+			name_order = 1
+		}
+		location = 5003
+		division_template = "自卫猎兵"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.6
+	}
+	division = { 
+		division_name = {
+			is_name_ordered = yes
+			name_order = 2
+		}
+		location = 7315
+		division_template = "自卫猎兵"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.5
+	}
+	division = { 
+		division_name = {
+			is_name_ordered = yes
+			name_order = 2
+		}
+		location = 7315
+		division_template = "正规部队"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1
+	}
+	division = { 
+		division_name = {
+			is_name_ordered = yes
+			name_order = 3
+		}
+		location = 5003
+		division_template = "自卫猎兵"
+		start_experience_factor = 0.4
+		start_equipment_factor = 1
+	}
+}
+

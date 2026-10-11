@@ -1,0 +1,714 @@
+######################
+## 乌萨斯帝国 · 政治国策树（整合改革线）##
+## 皇帝线「皇帝陛下大展身手！」／ 议会线「王朝的终曲」／ 圣愚线「邪魔化运动」##
+######################
+#
+# 25 个国策 = 共同起点 1 + 三线各 8。
+# 旧的 1094 帝国会议 / 迈向未来两棵树（85 策）已下线，
+# 备份在 docs/URS_旧树备份_20260915/。
+#
+# 【版式约定】全部节点使用绝对坐标 x/y（沿用 YAN 树约定，不用 relative_position_id）。
+#
+#   共同起点 病入膏肓 = (0, 0)
+#   两条改革支线自起点左右镜像展开，列心 x = ∓12 → ∓9：
+#     皇帝线（左）  皇帝的远征军 (-12,1) → 得加钱(-15,2) / 安德烈亚·多里安(-9,2)
+#                   → 主线落在 x = -9，y = 3..7
+#     议会线（右）  阿纳斯塔西娅的赠礼 (+12,1) → 初升的曙光(+12,2) → 一五计划(+12,3)
+#                   → 重建圣骏堡(+15,4) / 大政变(+9,4) → 主线落在 x = +9，y = 5..7
+#   圣愚线（中）    时间之前(0,9) … 时间之后(0,16)
+#                   由「狂人的誓言」或「维特的独裁」汇入，构成“两翼失败坠入深渊”的构图。
+#
+# 【互斥】
+#   皇帝线 · 大清洗     ↔  议会线 · 维特的独裁
+#   议会线 · 大政变     ↔  议会线 · 维特的独裁
+#
+# 【圣愚线入口】时间之前（序曲）的 prerequisite 为「狂人的誓言」或「维特的独裁」，
+#   另有 available 门槛：需先在决议面板完成「达莉娅的要求」（置 URS_darya_claim）。
+#
+# 【共享民族精神】URS_ursus_shall_not_die「乌萨斯还不能死！」
+#   三条路线的零散小 BUFF 全部塞进这一个动态修正（common/dynamic_modifiers/
+#   URS_dynamic_modifiers.txt），逐条 add_to_variable 原地成长；
+#   圣愚线「时间之前（序曲）」把它换成 URS_ursus_demonic_campaign「乌萨斯邪魔化运动」
+#   ——同一批变量、同一套数值，只换名字与图标。
+#
+# 【决议钩子】common/decisions/URS_Reform_Conflict_Decisions.txt
+#   （分类 URS_reform_conflict_decisions「乌萨斯的改革矛盾」）
+#   稳定议会／夺取议会 ← 初升的曙光 ｜ 冬季配给 ← 一五计划
+#   新年后演讲 ← 何去何从 ｜ 达莉娅的要求 ← 两条线的终点国策
+#   政变线与邪魔线的整合 ← 内卫被控
+#
+######################
+
+focus_tree = {
+	id = URS_political_reform
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = URS
+		}
+	}
+
+	default = no
+
+	initial_show_position = {
+		focus = URS_grave_illness
+	}
+
+
+	#1. 病入膏肓
+	focus = {
+		id = URS_grave_illness
+		icon = GFX_goal_generic_political_pressure
+		x = 0
+		y = 0
+		cost = 2
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = URS_ursus_shall_not_die }
+			URS_Imperial_Court_Enable = yes
+			set_country_flag = URS_economic_recovery_decisions_flag
+			set_country_flag = URS_reform_conflict_open
+			set_variable = { URS_shall_not_die_stability_var = -0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_m10
+			set_variable = { URS_shall_not_die_pp_var = -0.5 }
+			custom_effect_tooltip = URS_tt_shall_not_die_pp_var_m50
+			set_variable = { URS_fool_support = 0.05 }
+			custom_effect_tooltip = URS_tt_fool_support_p5
+			set_variable = { URS_demonic_corruption = 0 }
+			set_variable = { URS_coup_risk = 0 }
+		}
+	}
+
+	#2. 皇帝的远征军
+	focus = {
+		id = URS_imperial_army_group
+		icon = GFX_focus_URS_rule_the_earth
+		x = -12
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = URS_grave_illness
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_pp_var_p10
+			set_country_flag = URS_expeditionary_army
+			custom_effect_tooltip = URS_tt_army_group_dissolved
+		}
+	}
+
+	#3. 得加钱
+	focus = {
+		id = URS_add_money
+		icon = GFX_focus_URS_strive_for_excellence
+		x = -15
+		y = 2
+		cost = 4
+		prerequisite = {
+			focus = URS_imperial_army_group
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_cost_var value = -0.25 }
+			custom_effect_tooltip = URS_tt_shall_not_die_cost_var_m25
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_shall_not_die_consumer_var_p20
+		}
+	}
+
+	#4. 安德烈亚·多里安
+	focus = {
+		id = URS_andrea_doreyan
+		icon = GFX_focus_URS_trust_civil_service
+		x = -9
+		y = 2
+		cost = 4
+		prerequisite = {
+			focus = URS_imperial_army_group
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_p5
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_pp_var_p10
+			set_country_flag = URS_andrea_doreyan_appointed
+		}
+	}
+
+	#5. 大区
+	focus = {
+		id = URS_great_region_reform
+		icon = GFX_focus_URS_reorganize_state_offices
+		x = -9
+		y = 3
+		cost = 4
+		prerequisite = {
+			focus = URS_andrea_doreyan
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_p10
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_shall_not_die_industry_var_p5
+			set_country_flag = URS_great_regions
+		}
+	}
+
+	#6. 军事动员
+	focus = {
+		id = URS_military_mobilization
+		icon = GFX_focus_URS_tide_of_iron
+		x = -9
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = URS_great_region_reform
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_shall_not_die_conscription_var_p20
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_ws_var_p10
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_industry_var_p10
+			set_country_flag = URS_mobilization_reform
+		}
+	}
+
+	#7. 大清洗
+	focus = {
+		id = URS_great_purge
+		icon = GFX_focus_URS_supervision_method
+		x = -9
+		y = 5
+		cost = 5
+		prerequisite = {
+			focus = URS_military_mobilization
+		}
+		mutually_exclusive = {
+			focus = URS_vitte_dictatorship
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.5 }
+			custom_effect_tooltip = URS_tt_shall_not_die_pp_var_p50
+			add_to_variable = { var = URS_shall_not_die_intel_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_shall_not_die_intel_var_p20
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_m10
+			add_stability = -0.05
+			add_to_variable = { var = URS_coup_risk value = 0.1 }
+			custom_effect_tooltip = URS_tt_coup_risk_p10
+			custom_effect_tooltip = URS_tt_purged_the_regime
+			set_country_flag = URS_area_management_enabled
+		}
+	}
+
+	#8. 是时候了
+	focus = {
+		id = URS_it_is_time
+		icon = GFX_goal_generic_soviet_construction
+		x = -9
+		y = 6
+		cost = 5
+		prerequisite = {
+			focus = URS_great_purge
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.15 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_m15
+			add_stability = -0.05
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_consumer_var_m10
+			set_country_flag = URS_reform_has_come
+		}
+	}
+
+	#9. 狂人的誓言
+	focus = {
+		id = URS_oath_of_a_madman
+		icon = GFX_goal_generic_dangerous_deal
+		x = -9
+		y = 7
+		cost = 6
+		prerequisite = {
+			focus = URS_it_is_time
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.2 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_m20
+			add_stability = -0.1
+			add_to_variable = { var = URS_shall_not_die_ws_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_ws_var_m10
+			add_to_variable = { var = URS_fool_support value = 0.3 }
+			custom_effect_tooltip = URS_tt_fool_support_p30
+			set_country_flag = URS_holy_fool_risen
+		}
+	}
+
+	#10. 阿纳斯塔西娅的赠礼
+	focus = {
+		id = URS_anastasia_gift
+		icon = GFX_focus_URS_relying_on_aristocracy
+		x = 12
+		y = 1
+		cost = 3
+		prerequisite = {
+			focus = URS_grave_illness
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_political_power = 30
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_p5
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_pp_var_p10
+			set_country_flag = URS_anastasia_betrothed
+		}
+	}
+
+	#11. 初升的曙光
+	focus = {
+		id = URS_rising_dawn
+		icon = GFX_focus_URS_reopen_supreme_court
+		x = 12
+		y = 2
+		cost = 4
+		prerequisite = {
+			focus = URS_anastasia_gift
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.05 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_m5
+			add_to_variable = { var = URS_shall_not_die_pp_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_pp_var_m10
+			add_to_variable = { var = URS_shall_not_die_opinion_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_shall_not_die_opinion_var_p15
+			set_country_flag = URS_council_decisions_unlocked
+		}
+	}
+
+	#12. 一五计划
+	focus = {
+		id = URS_first_five_year_plan
+		icon = GFX_focus_URS_enlarge_production_capacity
+		x = 12
+		y = 3
+		cost = 4
+		prerequisite = {
+			focus = URS_rising_dawn
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.2 }
+			custom_effect_tooltip = URS_tt_shall_not_die_industry_var_p20
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.05 }
+			custom_effect_tooltip = URS_tt_shall_not_die_consumer_var_m5
+			set_country_flag = URS_winter_rationing_unlocked
+		}
+	}
+
+	#13. 重建圣骏堡
+	focus = {
+		id = URS_rebuild_saint_grypherburg
+		icon = GFX_focus_URS_reestablish_government
+		x = 15
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = URS_first_five_year_plan
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_industry_var_p10
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_p10
+			add_to_variable = { var = URS_shall_not_die_research_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_shall_not_die_research_var_p5
+			set_country_flag = URS_saint_grypherburg_rebuilt
+		}
+	}
+
+	#14. 大政变
+	focus = {
+		id = URS_great_coup
+		icon = GFX_goal_generic_dangerous_deal
+		x = 9
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = URS_first_five_year_plan
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.15 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_m15
+			add_stability = -0.05
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_shall_not_die_pp_var_p15
+			add_to_variable = { var = URS_coup_risk value = 0.1 }
+			custom_effect_tooltip = URS_tt_coup_risk_p10
+			set_country_flag = URS_great_coup_flag
+		}
+	}
+
+	#15. 何去何从
+	focus = {
+		id = URS_where_to_go
+		icon = GFX_goal_generic_neutrality_focus
+		x = 9
+		y = 5
+		cost = 5
+		prerequisite = {
+			focus = URS_great_coup
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_m10
+			add_stability = -0.05
+			set_country_flag = URS_new_year_speech_unlocked
+		}
+	}
+
+	#16. 是时候了
+	focus = {
+		id = URS_it_is_time_council
+		icon = GFX_goal_generic_soviet_construction
+		x = 9
+		y = 6
+		cost = 5
+		prerequisite = {
+			focus = URS_where_to_go
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.15 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_m15
+			add_stability = -0.05
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_consumer_var_m10
+			set_country_flag = URS_reform_has_come_council
+		}
+	}
+
+	#17. 维特的独裁
+	focus = {
+		id = URS_vitte_dictatorship
+		icon = GFX_goal_generic_political_pressure
+		x = 9
+		y = 7
+		cost = 6
+		prerequisite = {
+			focus = URS_it_is_time_council
+		}
+		mutually_exclusive = {
+			focus = URS_great_purge
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.5 }
+			custom_effect_tooltip = URS_tt_shall_not_die_pp_var_p50
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_p5
+			set_country_flag = URS_vitte_regime
+			set_country_flag = URS_area_management_enabled
+		}
+	}
+
+	#18. 时间之前（序曲）
+	focus = {
+		id = URS_before_time
+		icon = GFX_goal_generic_dangerous_deal
+		x = 0
+		y = 9
+		cost = 3
+		prerequisite = {
+			focus = URS_oath_of_a_madman
+		}
+		prerequisite = {
+			focus = URS_vitte_dictatorship
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = URS_tt_need_darya
+				has_country_flag = URS_darya_claim
+			}
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = URS_ursus_shall_not_die }
+			add_dynamic_modifier = { modifier = URS_ursus_demonic_campaign }
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.15 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_m15
+			add_stability = -0.05
+			add_to_variable = { var = URS_shall_not_die_ws_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_ws_var_m10
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.05 }
+			custom_effect_tooltip = URS_tt_shall_not_die_consumer_var_m5
+			set_country_flag = URS_demonic_campaign_begins
+		}
+	}
+
+	#19. 哭声渐息
+	focus = {
+		id = URS_crying_fades
+		icon = GFX_goal_generic_propaganda
+		x = 0
+		y = 10
+		cost = 4
+		prerequisite = {
+			focus = URS_before_time
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_p5
+			add_to_variable = { var = URS_fool_support value = 0.15 }
+			custom_effect_tooltip = URS_tt_fool_support_p15
+			add_to_variable = { var = URS_demonic_corruption value = 0.1 }
+			custom_effect_tooltip = URS_tt_demonic_corruption_p10
+		}
+	}
+
+	#20. 锚定
+	focus = {
+		id = URS_anchoring
+		icon = GFX_goal_generic_secret_weapon
+		x = 0
+		y = 11
+		cost = 4
+		prerequisite = {
+			focus = URS_crying_fades
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_p10
+			add_stability = 0.03
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_ws_var_p10
+			add_to_variable = { var = URS_demonic_corruption value = 0.2 }
+			custom_effect_tooltip = URS_tt_demonic_corruption_p20
+		}
+	}
+
+	#21. 纳斯塔霞
+	focus = {
+		id = URS_nastasya
+		icon = GFX_goal_generic_propaganda
+		x = 0
+		y = 12
+		cost = 5
+		prerequisite = {
+			focus = URS_anchoring
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.15 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_p15
+			add_stability = 0.05
+			add_to_variable = { var = URS_fool_support value = 0.2 }
+			custom_effect_tooltip = URS_tt_fool_support_p20
+			set_country_flag = URS_nastasya_returns
+		}
+	}
+
+	#22. 内卫被控
+	focus = {
+		id = URS_guards_seized
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 0
+		y = 13
+		cost = 5
+		prerequisite = {
+			focus = URS_nastasya
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_p10
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.2 }
+			custom_effect_tooltip = URS_tt_shall_not_die_suppress_var_m20
+			add_to_variable = { var = URS_coup_risk value = -0.1 }
+			custom_effect_tooltip = URS_tt_coup_risk_m10
+			set_country_flag = URS_guards_seized
+			set_country_flag = URS_fool_integration_unlocked
+		}
+	}
+
+	#23. 国度
+	focus = {
+		id = URS_the_realm
+		icon = GFX_goal_generic_secret_weapon
+		x = 0
+		y = 14
+		cost = 6
+		prerequisite = {
+			focus = URS_guards_seized
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_attack_var_p10
+			add_to_variable = { var = URS_shall_not_die_stability_var value = -0.05 }
+			custom_effect_tooltip = URS_tt_shall_not_die_stability_var_m5
+			add_to_variable = { var = URS_shall_not_die_opinion_var value = -0.2 }
+			custom_effect_tooltip = URS_tt_shall_not_die_opinion_var_m20
+			add_to_variable = { var = URS_demonic_corruption value = 0.2 }
+			custom_effect_tooltip = URS_tt_demonic_corruption_p20
+			set_country_flag = URS_the_realm_rises
+		}
+	}
+
+	#24. 力竭声嘶
+	focus = {
+		id = URS_hoarse_and_exhausted
+		icon = GFX_goal_generic_political_pressure
+		x = 0
+		y = 15
+		cost = 6
+		prerequisite = {
+			focus = URS_the_realm
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_ws_var value = -0.1 }
+			custom_effect_tooltip = URS_tt_shall_not_die_ws_var_m10
+			add_to_variable = { var = URS_fool_support value = -0.3 }
+			custom_effect_tooltip = URS_tt_fool_support_m30
+			add_to_variable = { var = URS_demonic_corruption value = -0.15 }
+			custom_effect_tooltip = URS_tt_demonic_corruption_m15
+			set_country_flag = URS_bells_ring
+		}
+	}
+
+	#25. 时间之后
+	focus = {
+		id = URS_after_time
+		icon = GFX_goal_generic_secret_weapon
+		x = 0
+		y = 16
+		cost = 6
+		prerequisite = {
+			focus = URS_hoarse_and_exhausted
+		}
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = URS_tt_after_time
+			set_country_flag = URS_after_time_flag
+		}
+	}
+
+}

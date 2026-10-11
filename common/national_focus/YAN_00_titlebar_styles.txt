@@ -1,0 +1,22 @@
+# 大炎 · 国策标题栏样式（本项目 common/national_focus 被 replace_path，原版 00_titlebar_styles.txt 不在了）
+#  · default_style 补回原版默认四态；YAN_court_focus_style 复用原版核心圈那套金色关节框。
+#  · 贴图定义在 D:/s/steamapps/common/Hearts of Iron IV/interface/nationalfocusview.gfx（未被 replace）
+#  · 生成器：E:/tmp/sui12/gen_court.js
+style = {
+	name = default_style
+	default = yes
+
+	unavailable = GFX_focus_unavailable
+	completed = GFX_focus_completed
+	available = GFX_focus_can_start
+	current = GFX_focus_current
+}
+
+style = {
+	name = YAN_court_focus_style
+
+	unavailable = GFX_focus_unavailable_joint_GER_inner_circle
+	completed = GFX_focus_completed_joint_GER_inner_circle
+	available = GFX_focus_can_start_joint_GER_inner_circle
+	current = GFX_focus_current_joint_GER_inner_circle
+}

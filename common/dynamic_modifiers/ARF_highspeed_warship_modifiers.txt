@@ -1,0 +1,45 @@
+# 【高速战舰工程】建造中的民族精神。
+# 效果：建造期间占用该国 N 座军工厂的产能。
+#   引擎里没有任何"按座数扣工厂"的修正符（modifiers 文档里连 offsite 都没有，
+#   也确认过 military_factories_consumption 在 1.19.2 不存在），
+#   所以这里用 industrial_capacity_factory 承载，数值由决议在点击时算好：
+#       arf_pen_xxx = -N ÷ num_of_military_factories
+#   这样"占用 20 座"在任何规模的国家都是精确等价的产能占用。
+#   注意：本目录的文件是扁平结构，不要再套一层 dynamic_modifiers = { }。
+#   enable = { always = yes } 让它不进任何解锁条件，只靠 add_dynamic_modifier 挂载。
+
+arf_dreadnought_under_construction = {
+	enable = {
+		always = yes
+	}
+	icon = "GFX_idea_generic_degauss_ship_hulls"
+
+	industrial_capacity_factory = arf_pen_dread
+}
+
+arf_assault_ship_under_construction = {
+	enable = {
+		always = yes
+	}
+	icon = "GFX_idea_generic_sea_focused_navy"
+
+	industrial_capacity_factory = arf_pen_assault
+}
+
+arf_gunboat_under_construction = {
+	enable = {
+		always = yes
+	}
+	icon = "GFX_idea_generic_coastal_navy"
+
+	industrial_capacity_factory = arf_pen_gunboat
+}
+
+arf_auxiliary_ship_under_construction = {
+	enable = {
+		always = yes
+	}
+	icon = "GFX_idea_generic_coastal_defense_ships"
+
+	industrial_capacity_factory = arf_pen_auxiliary
+}

@@ -1,0 +1,243 @@
+######################
+## 伊比利亚 军事线 · 升级型民族精神（分级 ideas） ##
+## 由 common/national_focus/IBR_military_shared.txt 的国策逐级 swap_ideas 推进；
+## 升级效果见 common/scripted_effects/IBR_military_scripted_effects.txt；
+## 生成器 docs/gen_ibr_military.cjs（改 CHAINS 表重跑，勿手改）。
+######################
+
+ideas = {
+	country = {
+
+		# 收回的海洋遗产（5 级，满级数值见下；第 n 级 = 满级 × n / 5）
+		IBR_reclaimed_sea_heritage_1 = {
+			picture = IBR_reclaimed_sea_heritage
+			modifier = {
+				naval_damage_factor = 0.04
+				naval_defense_factor = 0.04
+				army_org_factor = 0.04
+				army_attack_factor = 0.04
+				army_defence_factor = 0.04
+				navy_org_factor = 0.04
+				experience_gain_army_factor = 0.04
+				experience_gain_navy_factor = 0.04
+				breakthrough_factor = 0.04
+			}
+		}
+		IBR_reclaimed_sea_heritage_2 = {
+			picture = IBR_reclaimed_sea_heritage
+			modifier = {
+				naval_damage_factor = 0.08
+				naval_defense_factor = 0.08
+				army_org_factor = 0.08
+				army_attack_factor = 0.08
+				army_defence_factor = 0.08
+				navy_org_factor = 0.08
+				experience_gain_army_factor = 0.08
+				experience_gain_navy_factor = 0.08
+				breakthrough_factor = 0.08
+			}
+		}
+		IBR_reclaimed_sea_heritage_3 = {
+			picture = IBR_reclaimed_sea_heritage
+			modifier = {
+				naval_damage_factor = 0.12
+				naval_defense_factor = 0.12
+				army_org_factor = 0.12
+				army_attack_factor = 0.12
+				army_defence_factor = 0.12
+				navy_org_factor = 0.12
+				experience_gain_army_factor = 0.12
+				experience_gain_navy_factor = 0.12
+				breakthrough_factor = 0.12
+			}
+		}
+		IBR_reclaimed_sea_heritage_4 = {
+			picture = IBR_reclaimed_sea_heritage
+			modifier = {
+				naval_damage_factor = 0.16
+				naval_defense_factor = 0.16
+				army_org_factor = 0.16
+				army_attack_factor = 0.16
+				army_defence_factor = 0.16
+				navy_org_factor = 0.16
+				experience_gain_army_factor = 0.16
+				experience_gain_navy_factor = 0.16
+				breakthrough_factor = 0.16
+			}
+		}
+		IBR_reclaimed_sea_heritage_5 = {
+			picture = IBR_reclaimed_sea_heritage
+			modifier = {
+				naval_damage_factor = 0.2
+				naval_defense_factor = 0.2
+				army_org_factor = 0.2
+				army_attack_factor = 0.2
+				army_defence_factor = 0.2
+				navy_org_factor = 0.2
+				experience_gain_army_factor = 0.2
+				experience_gain_navy_factor = 0.2
+				breakthrough_factor = 0.2
+			}
+		}
+
+		# 惩戒军团重生（5 级，满级数值见下；第 n 级 = 满级 × n / 5）
+		IBR_shield_of_the_south_1 = {
+			picture = IBR_shield_of_the_south
+			modifier = {
+				army_defence_factor = 0.054
+				army_attack_factor = 0.054
+				army_org_factor = 0.054
+				breakthrough_factor = 0.036
+				training_time_army_factor = -0.036
+				conscription_factor = 0.054
+			}
+		}
+		IBR_shield_of_the_south_2 = {
+			picture = IBR_shield_of_the_south
+			modifier = {
+				army_defence_factor = 0.108
+				army_attack_factor = 0.108
+				army_org_factor = 0.108
+				breakthrough_factor = 0.072
+				training_time_army_factor = -0.072
+				conscription_factor = 0.108
+			}
+		}
+		IBR_shield_of_the_south_3 = {
+			picture = IBR_shield_of_the_south
+			modifier = {
+				army_defence_factor = 0.162
+				army_attack_factor = 0.162
+				army_org_factor = 0.162
+				breakthrough_factor = 0.108
+				training_time_army_factor = -0.108
+				conscription_factor = 0.162
+			}
+		}
+		IBR_shield_of_the_south_4 = {
+			picture = IBR_shield_of_the_south
+			modifier = {
+				army_defence_factor = 0.216
+				army_attack_factor = 0.216
+				army_org_factor = 0.216
+				breakthrough_factor = 0.144
+				training_time_army_factor = -0.144
+				conscription_factor = 0.216
+			}
+		}
+		IBR_shield_of_the_south_5 = {
+			picture = IBR_shield_of_the_south
+			modifier = {
+				army_defence_factor = 0.27
+				army_attack_factor = 0.27
+				army_org_factor = 0.27
+				breakthrough_factor = 0.18
+				training_time_army_factor = -0.18
+				conscription_factor = 0.27
+			}
+		}
+
+		# 重铸的无敌舰队（5 级，满级数值见下；第 n 级 = 满级 × n / 5）
+		IBR_armada_reforged_1 = {
+			picture = IBR_armada_reforged
+			modifier = {
+				industrial_capacity_dockyard = 0.072
+				navy_org_factor = 0.054
+				naval_damage_factor = 0.054
+				naval_defense_factor = 0.054
+				naval_doctrine_cost_factor = -0.036
+				naval_invasion_capacity = 2
+			}
+		}
+		IBR_armada_reforged_2 = {
+			picture = IBR_armada_reforged
+			modifier = {
+				industrial_capacity_dockyard = 0.144
+				navy_org_factor = 0.108
+				naval_damage_factor = 0.108
+				naval_defense_factor = 0.108
+				naval_doctrine_cost_factor = -0.072
+				naval_invasion_capacity = 4
+			}
+		}
+		IBR_armada_reforged_3 = {
+			picture = IBR_armada_reforged
+			modifier = {
+				industrial_capacity_dockyard = 0.216
+				navy_org_factor = 0.162
+				naval_damage_factor = 0.162
+				naval_defense_factor = 0.162
+				naval_doctrine_cost_factor = -0.108
+				naval_invasion_capacity = 5
+			}
+		}
+		IBR_armada_reforged_4 = {
+			picture = IBR_armada_reforged
+			modifier = {
+				industrial_capacity_dockyard = 0.288
+				navy_org_factor = 0.216
+				naval_damage_factor = 0.216
+				naval_defense_factor = 0.216
+				naval_doctrine_cost_factor = -0.144
+				naval_invasion_capacity = 7
+			}
+		}
+		IBR_armada_reforged_5 = {
+			picture = IBR_armada_reforged
+			modifier = {
+				industrial_capacity_dockyard = 0.36
+				navy_org_factor = 0.27
+				naval_damage_factor = 0.27
+				naval_defense_factor = 0.27
+				naval_doctrine_cost_factor = -0.18
+				naval_invasion_capacity = 9
+			}
+		}
+
+		# 永恒征服（4 级，满级数值见下；第 n 级 = 满级 × n / 4）
+		IBR_sun_over_the_south_1 = {
+			picture = IBR_sun_over_the_south
+			modifier = {
+				army_attack_factor = 0.05
+				army_org_factor = 0.05
+				breakthrough_factor = 0.05
+				war_support_factor = 0.06
+				political_power_factor = 0.05
+				naval_damage_factor = 0.05
+			}
+		}
+		IBR_sun_over_the_south_2 = {
+			picture = IBR_sun_over_the_south
+			modifier = {
+				army_attack_factor = 0.1
+				army_org_factor = 0.1
+				breakthrough_factor = 0.1
+				war_support_factor = 0.12
+				political_power_factor = 0.1
+				naval_damage_factor = 0.1
+			}
+		}
+		IBR_sun_over_the_south_3 = {
+			picture = IBR_sun_over_the_south
+			modifier = {
+				army_attack_factor = 0.15
+				army_org_factor = 0.15
+				breakthrough_factor = 0.15
+				war_support_factor = 0.18
+				political_power_factor = 0.15
+				naval_damage_factor = 0.15
+			}
+		}
+		IBR_sun_over_the_south_4 = {
+			picture = IBR_sun_over_the_south
+			modifier = {
+				army_attack_factor = 0.2
+				army_org_factor = 0.2
+				breakthrough_factor = 0.2
+				war_support_factor = 0.24
+				political_power_factor = 0.2
+				naval_damage_factor = 0.2
+			}
+		}
+	}
+}

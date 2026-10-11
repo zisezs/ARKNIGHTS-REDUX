@@ -1,0 +1,31 @@
+#权力平衡决议组
+VCA_balance_of_power_category = {
+	#鼓励政治自由
+	VCA_Encourage_political_freedom = {
+		icon = GFX_decision_hol_war_on_pacifism
+
+		cost = 100
+		days_remove = 150
+		days_re_enable = 50
+		
+		modifier = {
+			research_speed_factor = 0.05
+			political_power_factor = 0.05
+			power_balance_weekly = -0.005
+		}
+	}
+
+	#呼吁举国团结
+	VCA_Calling_for_the_country_unite = {
+		icon = GFX_decision_generic_speech
+
+		cost = 100
+		days_remove = 150
+		days_re_enable = 50
+		
+		modifier = {
+			war_stability_factor = 0.1
+			power_balance_weekly = 0.005
+		}
+	}
+}

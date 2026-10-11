@@ -1,0 +1,195 @@
+ideas = {
+	country = {
+
+		VIC_aftermath_of_financial_boom_idea = {
+
+			modifier = {
+				political_power_cost = 0.5
+				consumer_goods_factor = 0.4
+				conscription_factor = -0.3
+				local_resources_factor = -0.2
+			}
+		}
+		
+		VIC_post_revolutionary_chaos_idea = {
+
+			modifier = {
+				stability_factor = -0.2
+				war_support_factor = -0.1
+				disabled_ideas = 1
+			}
+		}
+		
+		VIC_victors_of_the_Great_War_idea = {
+
+			modifier = {
+				conscription = -0.003
+				war_support_factor = -0.05
+				land_doctrine_cost_factor = 0.5
+			}
+		}
+
+		VIC_Sarkaz_invation_dummy_idea = {
+			name = VIC_Sarkaz_invation_idea
+
+			modifier = {
+			}
+		}
+
+		VIC_public_evacuation_idea = {
+			name = VIC_Sarkaz_invation_idea
+
+			modifier = {
+				stability_factor = 0.1
+				industrial_capacity_factory = 0.05
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+
+		VIC_asset_evacuation_idea = {
+			name = VIC_Sarkaz_invation_idea
+
+			modifier = {
+				consumer_goods_factor = -0.2
+			}
+		}
+		
+		VIC_take_over_bankrupt_factories_idea = {
+			name = VIC_Sarkaz_invation_idea
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		VIC_relief_for_difficult_enterprises_idea = {
+			name = VIC_Sarkaz_invation_idea
+
+			modifier = {
+				consumer_goods_factor = -0.2
+			}
+		}
+
+		VIC_relief_supplies_distribution_idea = {
+			name = VIC_Sarkaz_invation_idea
+
+			modifier = {
+				stability_factor = 0.05
+			}
+		}
+
+		VIC_market_regulation_idea = {
+			name = VIC_Sarkaz_invation_idea
+
+			modifier = {
+				production_factory_max_efficiency_factor = 0.05
+				production_factory_efficiency_gain_factor = 0.05
+			}
+		}
+
+		VIC_Londinium_spying_idea = {
+			name = VIC_Sarkaz_invation_idea
+
+			modifier = {
+				war_support_factor = 0.1
+			}
+		}
+
+		VIC_royalty_searching_idea = {
+			name = VIC_Sarkaz_invation_idea
+
+			modifier = {
+				stability_factor = 0.1
+			}
+		}
+
+		VIC_war_exhaustion_1 = {
+
+			modifier = {
+				stability_factor = -0.1
+				war_support_factor = -0.1
+				surrender_limit = -0.1
+			}
+
+			cancel = {
+				OR = {
+					has_country_flag = TAR_independence_flag
+					has_global_flag = VIC_civil_war_end
+				}
+			}
+		}
+
+		VIC_war_exhaustion_2 = {
+
+			modifier = {
+				stability_factor = -0.25
+				war_support_factor = -0.25
+				surrender_limit = -0.25
+			}
+
+			cancel = {
+				OR = {
+					has_country_flag = TAR_independence_flag
+					has_global_flag = VIC_civil_war_end
+				}
+			}
+		}
+
+		VIC_war_exhaustion_3 = {
+
+			modifier = {
+				stability_factor = -0.5
+				war_support_factor = -0.5
+				surrender_limit = -0.5
+			}
+
+			cancel = {
+				OR = {
+					has_country_flag = TAR_independence_flag
+					has_global_flag = VIC_civil_war_end
+				}
+			}
+		}
+
+		VIC_war_exhaustion_4 = {
+
+			modifier = {
+				stability_factor = -0.75
+				war_support_factor = -0.75
+				surrender_limit = -0.75
+			}
+
+			cancel = {
+				OR = {
+					has_country_flag = TAR_independence_flag
+					has_global_flag = VIC_civil_war_end
+				}
+			}
+		}
+
+		VIC_war_exhaustion_5 = {
+
+			modifier = {
+				stability_factor = -0.99
+				war_support_factor = -0.99
+				surrender_limit = -0.99
+			}
+
+			cancel = {
+				OR = {
+					has_country_flag = TAR_independence_flag
+					has_global_flag = VIC_civil_war_end
+				}
+			}
+		}
+
+		VIC_repayment_of_war_bonds = {
+
+			modifier = {
+				consumer_goods_expected_value = 0.2
+				political_power_gain = -0.1
+			}
+		}
+	}
+}

@@ -1,0 +1,79 @@
+division_template = {
+	name = "巨狼之口"				# 西西里夫人直属武装，特务与处决力量
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+	}
+	support = {
+		recon = { x = 0 y = 0 }
+	}
+}
+
+division_template = {
+	name = "十二家族联合精锐"			# 灰厅临时联合远征/清算编组，非常设番号
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+	}
+}
+
+division_template = {
+	name = "城邦执法队"				# 法官执法系统与地方警察的执法编制
+	regiments = {
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+
+		militia = { x = 1 y = 0 }
+		militia = { x = 1 y = 1 }
+	}
+}
+
+units = {
+	division = { 
+		name = "巨狼之口"
+		location = 7976
+		division_template = "巨狼之口"
+		start_experience_factor = 0.8
+		start_equipment_factor = 1.0
+	}
+	division = { 
+		name = "十二家族联合精锐"
+		location = 17279
+		division_template = "十二家族联合精锐"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+	division = { 
+		name = "城邦联合法院执法队"
+		location = 9536
+		division_template = "城邦执法队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = { 
+		name = "新沃尔西尼法院法警队"
+		location = 13057
+		division_template = "城邦执法队"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.6
+	}
+	division = { 
+		name = "新沃尔西尼警察局警队"
+		location = 13057
+		division_template = "城邦执法队"
+		start_experience_factor = 0.25
+		start_equipment_factor = 0.5
+	}
+}

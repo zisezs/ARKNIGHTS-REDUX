@@ -1,0 +1,372 @@
+# 莱茵生命（RHL）· 安保部门外勤部队
+# 五阶段决议链：组建（10×6步）→ 火力强化（15×9步+炮）→ 摩托化（20×10摩+3支）→
+# 机械化（25×12机+4支）→ 完全机械化（30×12机+5支）；招募决议每 60 天成军一队，全程约 5 年。
+# 机制：每阶段定义本级模板（division_template 效果）并将全军换装（every_country_division +
+# change_division_template）；月度点验（RHL_td_monthly_tick）使战损自动释放名额；模板锁定防手改。
+
+RHL_field_decisions = {
+
+	# ══════════ 组建安保部门外勤部队 ══════════
+	RHL_field_decision_establish = {
+		icon = GFX_decision_generic_construction
+		cost = 50
+		fire_only_once = yes
+		visible = {
+			NOT = {
+				has_country_flag = RHL_flag_field_active
+			}
+		}
+		available = {
+			always = yes
+		}
+		days_remove = 60
+		remove_effect = {
+			add_political_power = -50
+			set_country_flag = RHL_flag_field_active
+			set_variable = { RHL_field_cap = 10 }
+			set_variable = { RHL_field_count = 4 }
+			set_variable = { RHL_field_tier = 1 }
+			division_template = {
+				name = "莱茵外勤部队 I"
+				priority = 1
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+				}
+			}
+			set_division_template_lock = { division_template = "莱茵外勤部队 I" is_locked = yes }
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ══════════ 第二阶段 · 扩编与火力强化 ══════════
+	RHL_field_decision_firepower = {
+		icon = GFX_decision_generic_dangerous_deal
+		cost = 100
+		fire_only_once = yes
+		visible = {
+			has_country_flag = RHL_flag_field_active
+			NOT = {
+				has_country_flag = RHL_flag_field_ii
+			}
+		}
+		available = {
+			has_country_flag = RHL_flag_field_active
+		}
+		days_remove = 180
+		remove_effect = {
+			add_political_power = -100
+			set_country_flag = RHL_flag_field_ii
+			set_variable = { RHL_field_cap = 15 }
+			set_variable = { RHL_field_tier = 2 }
+			set_technology = { artillery_0 = 1 }
+			division_template = {
+				name = "莱茵外勤部队 II"
+				priority = 1
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 2 y = 1 }
+					infantry = { x = 2 y = 2 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+					artillery = { x = 0 y = 1 }
+				}
+			}
+			set_division_template_lock = { division_template = "莱茵外勤部队 II" is_locked = yes }
+			every_country_division = {
+				change_division_template = { division_template = "莱茵外勤部队 II" }
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ══════════ 第三阶段 · 摩托化改装 ══════════
+	RHL_field_decision_motorize = {
+		icon = GFX_decision_generic_fundraising
+		cost = 150
+		fire_only_once = yes
+		visible = {
+			has_country_flag = RHL_flag_field_ii
+			NOT = {
+				has_country_flag = RHL_flag_field_iii
+			}
+		}
+		available = {
+			has_country_flag = RHL_flag_field_ii
+		}
+		days_remove = 270
+		remove_effect = {
+			add_political_power = -150
+			set_country_flag = RHL_flag_field_iii
+			set_variable = { RHL_field_cap = 20 }
+			set_variable = { RHL_field_tier = 3 }
+			division_template = {
+				name = "莱茵外勤部队 III"
+				priority = 1
+				regiments = {
+					motorized = { x = 0 y = 0 }
+					motorized = { x = 0 y = 1 }
+					motorized = { x = 0 y = 2 }
+					motorized = { x = 0 y = 3 }
+					motorized = { x = 0 y = 4 }
+					motorized = { x = 1 y = 0 }
+					motorized = { x = 1 y = 1 }
+					motorized = { x = 1 y = 2 }
+					motorized = { x = 1 y = 3 }
+					motorized = { x = 1 y = 4 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+					recon = { x = 0 y = 1 }
+					artillery = { x = 0 y = 2 }
+				}
+			}
+			set_division_template_lock = { division_template = "莱茵外勤部队 III" is_locked = yes }
+			every_country_division = {
+				change_division_template = { division_template = "莱茵外勤部队 III" }
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ══════════ 第四阶段 · 机械化整编 ══════════
+	RHL_field_decision_mechanize = {
+		icon = GFX_decision_generic_intelligence_operation
+		cost = 200
+		fire_only_once = yes
+		visible = {
+			has_country_flag = RHL_flag_field_iii
+			NOT = {
+				has_country_flag = RHL_flag_field_iv
+			}
+		}
+		available = {
+			has_country_flag = RHL_flag_field_iii
+		}
+		days_remove = 365
+		remove_effect = {
+			add_political_power = -200
+			set_country_flag = RHL_flag_field_iv
+			set_variable = { RHL_field_cap = 25 }
+			set_variable = { RHL_field_tier = 4 }
+			set_technology = { tech_logistics_company = 1 }
+			division_template = {
+				name = "莱茵外勤部队 IV"
+				priority = 1
+				regiments = {
+					mechanized = { x = 0 y = 0 }
+					mechanized = { x = 0 y = 1 }
+					mechanized = { x = 0 y = 2 }
+					mechanized = { x = 1 y = 0 }
+					mechanized = { x = 1 y = 1 }
+					mechanized = { x = 1 y = 2 }
+					mechanized = { x = 2 y = 0 }
+					mechanized = { x = 2 y = 1 }
+					mechanized = { x = 2 y = 2 }
+					mechanized = { x = 3 y = 0 }
+					mechanized = { x = 3 y = 1 }
+					mechanized = { x = 3 y = 2 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+					recon = { x = 0 y = 1 }
+					artillery = { x = 0 y = 2 }
+					logistics_company = { x = 0 y = 3 }
+				}
+			}
+			set_division_template_lock = { division_template = "莱茵外勤部队 IV" is_locked = yes }
+			every_country_division = {
+				change_division_template = { division_template = "莱茵外勤部队 IV" }
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ══════════ 第五阶段 · 完全机械化 ══════════
+	RHL_field_decision_final = {
+		icon = GFX_decision_generic_national_unity
+		cost = 250
+		fire_only_once = yes
+		visible = {
+			has_country_flag = RHL_flag_field_iv
+			NOT = {
+				has_country_flag = RHL_flag_field_v
+			}
+		}
+		available = {
+			has_country_flag = RHL_flag_field_iv
+		}
+		days_remove = 365
+		remove_effect = {
+			add_political_power = -250
+			set_country_flag = RHL_flag_field_v
+			set_variable = { RHL_field_cap = 30 }
+			set_variable = { RHL_field_tier = 5 }
+			set_technology = { tech_maintenance_company = 1 }
+			division_template = {
+				name = "莱茵外勤部队 V"
+				priority = 1
+				regiments = {
+					mechanized = { x = 0 y = 0 }
+					mechanized = { x = 0 y = 1 }
+					mechanized = { x = 0 y = 2 }
+					mechanized = { x = 1 y = 0 }
+					mechanized = { x = 1 y = 1 }
+					mechanized = { x = 1 y = 2 }
+					mechanized = { x = 2 y = 0 }
+					mechanized = { x = 2 y = 1 }
+					mechanized = { x = 2 y = 2 }
+					mechanized = { x = 3 y = 0 }
+					mechanized = { x = 3 y = 1 }
+					mechanized = { x = 3 y = 2 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+					recon = { x = 0 y = 1 }
+					artillery = { x = 0 y = 2 }
+					logistics_company = { x = 0 y = 3 }
+					maintenance_company = { x = 0 y = 4 }
+				}
+			}
+			set_division_template_lock = { division_template = "莱茵外勤部队 V" is_locked = yes }
+			every_country_division = {
+				change_division_template = { division_template = "莱茵外勤部队 V" }
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ══════════ 招募外勤分队（消耗政治点，60 天成军） ══════════
+	RHL_field_decision_recruit = {
+		icon = GFX_decision_generic_spy_agency
+		cost = 50
+		fire_only_once = no
+		visible = {
+			has_country_flag = RHL_flag_field_active
+		}
+		available = {
+			has_country_flag = RHL_flag_field_active
+			custom_trigger_tooltip = {
+				tooltip = RHL_field_tt_slots
+				OR = {
+					AND = {
+						check_variable = { var = RHL_field_tier value = 1 }
+						check_variable = { var = RHL_field_count value = 10 compare = less_than }
+					}
+					AND = {
+						check_variable = { var = RHL_field_tier value = 2 }
+						check_variable = { var = RHL_field_count value = 15 compare = less_than }
+					}
+					AND = {
+						check_variable = { var = RHL_field_tier value = 3 }
+						check_variable = { var = RHL_field_count value = 20 compare = less_than }
+					}
+					AND = {
+						check_variable = { var = RHL_field_tier value = 4 }
+						check_variable = { var = RHL_field_count value = 25 compare = less_than }
+					}
+					AND = {
+						check_variable = { var = RHL_field_tier value = 5 }
+						check_variable = { var = RHL_field_count value = 30 compare = less_than }
+					}
+				}
+			}
+		}
+		days_remove = 60
+		remove_effect = {
+			add_political_power = -50
+			add_to_variable = { RHL_field_count = 1 }
+			if = {
+				limit = {
+					check_variable = { var = RHL_field_tier value = 1 }
+				}
+				capital_scope = {
+					create_unit = {
+						division = "division_template = \"莱茵外勤部队 I\" start_experience_factor = 0.1"
+						owner = ROOT
+						count = 1
+					}
+				}
+				add_equipment_to_stockpile = { type = infantry_equipment amount = 2500 }
+			}
+			else_if = {
+				limit = {
+					check_variable = { var = RHL_field_tier value = 2 }
+				}
+				capital_scope = {
+					create_unit = {
+						division = "division_template = \"莱茵外勤部队 II\" start_experience_factor = 0.1"
+						owner = ROOT
+						count = 1
+					}
+				}
+				add_equipment_to_stockpile = { type = infantry_equipment amount = 3500 }
+				add_equipment_to_stockpile = { type = support_equipment amount = 200 }
+			}
+			else_if = {
+				limit = {
+					check_variable = { var = RHL_field_tier value = 3 }
+				}
+				capital_scope = {
+					create_unit = {
+						division = "division_template = \"莱茵外勤部队 III\" start_experience_factor = 0.1"
+						owner = ROOT
+						count = 1
+					}
+				}
+				add_equipment_to_stockpile = { type = motorized_equipment amount = 4000 }
+				add_equipment_to_stockpile = { type = support_equipment amount = 250 }
+			}
+			else_if = {
+				limit = {
+					check_variable = { var = RHL_field_tier value = 4 }
+				}
+				capital_scope = {
+					create_unit = {
+						division = "division_template = \"莱茵外勤部队 IV\" start_experience_factor = 0.1"
+						owner = ROOT
+						count = 1
+					}
+				}
+				add_equipment_to_stockpile = { type = mechanized_equipment amount = 5000 }
+				add_equipment_to_stockpile = { type = support_equipment amount = 300 }
+			}
+			else = {
+				capital_scope = {
+					create_unit = {
+						division = "division_template = \"莱茵外勤部队 V\" start_experience_factor = 0.1"
+						owner = ROOT
+						count = 1
+					}
+				}
+				add_equipment_to_stockpile = { type = mechanized_equipment amount = 6000 }
+				add_equipment_to_stockpile = { type = support_equipment amount = 350 }
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+}

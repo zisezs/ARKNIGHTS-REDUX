@@ -1,0 +1,123 @@
+#URS大量训练装甲师
+URS_must_make_more_tank = {
+	allowed = { tag = URS }
+	enable = {
+		tag = URS
+	}
+
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -15
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 35
+	}
+}
+
+# ===== 圣愚政治线（邪魔化运动）AI 战略 BEGIN =====
+# 由 docs/_urs_ai_build.py 生成，勿手改。
+#
+# 国策侧的优先级在 common/ai_strategy_plans/URS_ai_strategy_plans.txt；
+# 这里补的是「国策之外」的战略姿态 —— 邪魔化运动成功后，乌萨斯变成一个
+# 不计代价、压倒性进攻的国家（领袖特质【邪魔本质】：+50% 攻击 / +50% 组织度 /
+# -50% 稳定度 / 与所有国家 -200 关系）。AI 相应地把「防御、外交、克制」全部关掉：
+#   · 对所有敌国战线全力压上（front_control 只认 ratio/execution_type/execute_order，
+#     不认 id + value —— 旧写法整条被引擎忽略）；
+#   · 兵力向主攻方向集中、主攻战线多要兵（force_concentration_* / front_unit_request）；
+#   · 全局开战意愿拉满（avoid_starting_wars 是无目标项）+ 对叙拉古的定点宣战/征服；
+#   · 装备生产：id 必须是装备类别（infantry），不是型号名（infantry_equipment）。
+URS_fool_ascension_strategy = {
+	allowed = { tag = URS }
+	enable = {
+		tag = URS
+		has_country_flag = URS_fool_empire_proclaimed
+	}
+	abort_when_not_enabled = yes
+
+	# 前线控制：一律全力进攻并执行命令（priority 高于全局战略的 60）
+	ai_strategy = {
+		type = front_control
+		country_trigger = {
+			always = yes
+		}
+		ratio = 0.05
+		priority = 120
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+		manual_attack = yes
+	}
+	# 兵力集中系数：把部队堆到进攻方向而不是均摊守边（value 为百分点）
+	ai_strategy = {
+		type = force_concentration_factor
+		value = 40
+	}
+	ai_strategy = {
+		type = force_concentration_target_weight
+		country_trigger = {
+			always = yes
+		}
+		value = 50
+	}
+	ai_strategy = {
+		type = front_unit_request
+		country_trigger = {
+			always = yes
+		}
+		value = 40
+	}
+	# 主动开战意愿：无目标项，对所有潜在对手生效
+	ai_strategy = {
+		type = avoid_starting_wars
+		value = -600
+	}
+	# 对叙拉古的定点意愿（declare_war / conquer / prepare_for_war 的 id 必须是敌国 tag）
+	ai_strategy = {
+		type = declare_war
+		id = REU
+		value = 400
+	}
+	ai_strategy = {
+		type = conquer
+		id = REU
+		value = 400
+	}
+	ai_strategy = {
+		type = prepare_for_war
+		id = REU
+		value = 300
+	}
+	# 装备生产：步兵装备优先，火炮次之
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 30
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 20
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = support
+		value = 20
+	}
+	# 陆军编制偏好：步兵师优先于装甲师
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 30
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = -10
+	}
+}
+# ===== 圣愚政治线（邪魔化运动）AI 战略 END =====

@@ -1,0 +1,86 @@
+East_Ursus_test_Decisions = {
+
+	icon = GFX_EUU_decision_category
+
+	allowed = {
+		ursus_unifier = yes
+	}
+	visible = {
+		is_debug = yes
+		is_ai = no
+	}
+	visible_when_empty = yes
+
+	priority = {
+		base = 114514
+	}
+
+}
+
+East_Ursus_Upheaval_Decisions_GUI = {
+
+	icon = GFX_EUU_decision_category
+	scripted_gui = East_Ursus_Upheaval
+
+	allowed = {
+		ursus_unifier = yes
+	}
+	visible = {
+		has_country_flag = East_Ursus_Upheaval_Enabled
+	}
+	visible_when_empty = yes
+
+	priority = {
+		base = 200
+	}
+}
+
+Ursus_Unification_War_Decisions_GUI = {
+
+	icon = GFX_EUU_decision_category
+
+	allowed = {
+		ursus_unifier = yes
+	}
+	visible = {
+		has_country_flag = East_Ursus_Unification_After
+	}
+	visible_when_empty = yes
+
+	priority = {
+		base = 150
+	}
+}
+
+East_Ursus_Development_Decisions = {
+
+	icon = GFX_EUU_decision_category
+
+	allowed = {
+		ursus_unifier = yes
+	}
+	visible = {
+		has_country_flag = East_Ursus_Development
+	}
+	visible_when_empty = yes
+
+	priority = {
+		base = 100
+	}
+}
+
+central_tundria_trade_dispute_decisions = {
+	icon = GFX_EUU_decision_category
+
+	allowed = {
+		OR = {
+			original_tag = KMG
+			original_tag = BAK
+		}
+	}
+	visible = {
+		has_country_flag = central_tundria_trade_dispute_flag
+	}
+	visible_when_empty = yes
+	priority = 3
+}

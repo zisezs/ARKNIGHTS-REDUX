@@ -1,0 +1,288 @@
+characters = {
+    ################
+    ##国家领导人
+    ################
+    #地区防御委员会（无政府主义联盟）
+    IBR_regional_defence_committee = {
+        name = IBR_regional_defence_committee
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/regional_defence_committee.dds
+            }
+        }
+        country_leader = {
+			ideology = anarchism_subtype
+			traits = {  }
+			expire = "2000.1.1"
+			id = -1
+			desc = IBR_regional_defence_committee_desc
+		}
+    }
+	#戴维·埃西亚拉（民主革命委员会）
+    IBR_David_Esciara = {
+        name = IBR_David_Esciara
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/David_Esciara.dds
+            }
+        }
+        country_leader = {
+			ideology = liberalism_subtype
+			traits = { IBR_constitutional_reformer }
+			expire = "2000.1.1"
+			id = -1
+			desc = IBR_David_Esciara_desc
+		}
+    }
+	#圣徒卡门（伊比利亚审判庭）
+    IBR_Carmen_Iberia = {
+        name = IBR_Carmen_Iberia
+        portraits = {
+            civilian = {
+                large = "gfx/leaders/IBR/Carmen_Iberia.dds"
+            }
+        }
+        country_leader = {
+			ideology = authoritarian_democracy_subtype
+			traits = { IBR_eternal_saint }
+			expire = "2000.1.1"
+			id = -1
+			desc = IBR_Carmen_Iberia_desc
+		}
+    }
+	#卡洛斯九世（卡洛斯派）
+    IBR_Carlos_IX = {
+        name = IBR_Carlos_IX
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/Carlos_IX.dds
+            }
+        }
+        country_leader = {
+			ideology = absolute_monarchy_subtype
+			traits = { IBR_exiled_king }
+			expire = "2000.1.1"
+			id = -1
+			desc = IBR_Carlos_IX_desc
+		}
+    }
+	#胡安·里维拉（长剑党）
+    IBR_Juan_Rivera = {
+        name = IBR_Juan_Rivera
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/Juan_Rivera.dds
+            }
+        }
+        country_leader = {
+			ideology = national_syndicalism_subtype
+			traits = { IBR_sword_party_banner }
+			expire = "2000.1.1"
+			id = -1
+			desc = IBR_Juan_Rivera_desc
+		}
+    }
+	#深海主教团（深海教会）
+    IBR_deep_sea_episcopate = {
+        name = IBR_deep_sea_episcopate
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/deep_sea_episcopate.dds
+            }
+        }
+        country_leader = {
+			ideology = mysticism_subtype
+			traits = {  }
+			expire = "2000.1.1"
+			id = -1
+			desc = IBR_deep_sea_episcopate_desc
+		}
+    }
+
+    ################
+    ##内阁顾问
+    ################
+    #流明（灯塔的守夜人）
+    IBR_Lumen = {
+        name = IBR_Lumen
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/Lumen.dds
+            }
+        }
+        gender = male
+        advisor = {
+            slot = second_in_command
+            idea_token = IBR_Lumen
+            traits = { IBR_lantern_keeper }
+            desc = IBR_Lumen_second_in_command_desc
+        }
+    }
+    #艾丽妮（执裁官）
+    IBR_Irene = {
+        name = IBR_Irene
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/Irene.dds
+            }
+            army = {
+                large = "" #gfx/leaders/IBR/Irene.dds
+            }
+        }
+        gender = female
+        advisor = {
+            slot = political_advisor
+            idea_token = IBR_Irene
+            traits = { IBR_voice_of_mercy }
+            desc = IBR_Irene_political_advisor_desc
+        }
+        corps_commander = {
+            skill = 3
+            attack_skill = 3
+            defense_skill = 4
+            planning_skill = 2
+            logistics_skill = 2
+            traits = { IBR_inquisitor_training }
+        }
+    }
+    #大审判官马提亚斯
+    IBR_Matthias = {
+        name = IBR_Matthias
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/Matthias.dds
+            }
+            army = {
+                large = "" #gfx/leaders/IBR/Matthias.dds
+            }
+        }
+        gender = male
+        advisor = {
+            slot = army_chief
+            idea_token = IBR_Matthias
+            traits = { IBR_iron_inquisitor_chief }
+            desc = IBR_Matthias_army_chief_desc
+        }
+    }
+    #胡安娜（私掠船团首领）
+    IBR_Juana = {
+        name = IBR_Juana
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/Juana.dds
+            }
+            army = {
+                large = "" #gfx/leaders/IBR/Juana.dds
+            }
+        }
+        gender = female
+        advisor = {
+            slot = navy_chief
+            idea_token = IBR_Juana
+            traits = { IBR_corsair_queen }
+            desc = IBR_Juana_navy_chief_desc
+        }
+    }
+    #维加（灯塔信号观测长）
+    IBR_Vega = {
+        name = IBR_Vega
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/Vega.dds
+            }
+            army = {
+                large = "" #gfx/leaders/IBR/Vega.dds
+            }
+        }
+        gender = male
+        advisor = {
+            slot = air_chief
+            idea_token = IBR_Vega
+            traits = { IBR_beacon_observer }
+            desc = IBR_Vega_air_chief_desc
+        }
+    }
+    #罗德里戈·门多萨（国防军宿将）
+    IBR_Mendoza = {
+        name = IBR_Mendoza
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/Mendoza.dds
+            }
+            army = {
+                large = "" #gfx/leaders/IBR/Mendoza.dds
+            }
+        }
+        gender = male
+        advisor = {
+            slot = high_command
+            idea_token = IBR_Mendoza
+            traits = { IBR_old_crown_veteran }
+            desc = IBR_Mendoza_high_command_desc
+        }
+        field_marshal = {
+            skill = 3
+            attack_skill = 3
+            defense_skill = 4
+            planning_skill = 2
+            logistics_skill = 3
+            traits = { old_guard }
+        }
+    }
+
+    ################
+    ##将领
+    ################
+    #棘刺（至高之术的剑客）
+    IBR_Thorns = {
+        name = IBR_Thorns
+        portraits = {
+            army = {
+                large = "" #gfx/leaders/IBR/Thorns.dds
+            }
+        }
+        gender = male
+        corps_commander = {
+            skill = 4
+            attack_skill = 4
+            defense_skill = 3
+            planning_skill = 3
+            logistics_skill = 2
+            traits = { trickster urban_assault_specialist IBR_supreme_sword }
+        }
+    }
+    #奥夫雷贡（大阵统帅）
+    IBR_Obregon = {
+        name = IBR_Obregon
+        portraits = {
+            army = {
+                large = "" #gfx/leaders/IBR/Obregon.dds
+            }
+        }
+        gender = male
+        corps_commander = {
+            skill = 3
+            attack_skill = 2
+            defense_skill = 5
+            planning_skill = 2
+            logistics_skill = 3
+            traits = { cautious_defender old_guard }
+        }
+    }
+    #弗朗西斯卡·卢娜（盐风城救济修女）
+    IBR_Francisca_Luna = {
+        name = IBR_Francisca_Luna
+        portraits = {
+            civilian = {
+                large = "" #gfx/leaders/IBR/Francisca_Luna.dds
+            }
+        }
+        gender = female
+        advisor = {
+            slot = political_advisor
+            idea_token = IBR_Francisca_Luna
+            traits = { IBR_lantern_keeper }
+            desc = IBR_Francisca_Luna_political_advisor_desc
+        }
+    }
+}

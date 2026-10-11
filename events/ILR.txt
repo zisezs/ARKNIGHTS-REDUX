@@ -1,0 +1,37 @@
+add_namespace = test_ilr
+
+country_event = {
+	id = test_ilr.1 #奥布雷诺威切吞并维尔吉纳
+	title = test_ilr.1.t
+	desc = test_ilr.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_ilr.1.a
+		annex_country = {
+			target = ILR
+			transfer_troops = yes
+		}
+	}
+}
+
+country_event = {
+	id = test_ilr.2 #奥布雷诺威切吞并维尔吉纳
+	title = test_ilr.2.t
+	desc = test_ilr.2.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_ilr.2.a
+		declare_war_on = {
+			target = MRA
+			type = annex_everything
+		}
+		declare_war_on = {
+			target = DRK
+			type = annex_everything
+		}
+	}
+}

@@ -1,0 +1,283 @@
+leader_traits = {
+
+	SRC_Lord_of_the_Gray_Hall = {
+		random = no
+		stability_factor = 0.2
+		political_power_gain = 0.25
+		socialism_drift = -0.5
+		fascism_drift = -0.5
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	SRC_Father = {
+		random = no
+		administrative_development_monthly_modifier = 0.02
+		political_power_factor = 0.2
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	SRC_Duce = {
+		random = no
+		war_support_factor = 0.25
+		army_attack_factor = 0.05
+		army_org_regain = 0.05
+		pocket_penalty = -0.1
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	########################################
+	# 莱昂图索·贝洛内出任国家领袖的两个特质
+	# （由 common/scripted_effects/SRC_federal_effects.txt 挂上）
+	########################################
+
+	# 【灰厅话事人】圆桌边上终于坐进了一座无家族城市的代表
+	SRC_grey_hall_spokesman = {
+		random = no
+		sprite = 13
+		stability_factor = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	# 【领袖的尊严】市长不是家族的门面，法律才是这座城市的门面
+	SRC_dignity_of_leadership = {
+		random = no
+		sprite = 5
+		political_power_factor = 0.2
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+
+	########################################
+	# 叙拉古 · 顾问 / 陆军部长特质（16 人；标签 = 【家族】/【外来者】）
+	# 由 docs/_src_advisors_build.py 生成 —— 改表重跑，勿手改。
+	########################################
+
+	SRC_Family_Lineage = {
+		random = no
+		political_power_gain = 0.05
+		stability_factor = 0.05
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_Outsider_Lineage = {
+		random = no
+		research_speed_factor = 0.05
+		production_speed_buildings_factor = 0.05
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_alberto_saluzzo = {
+		random = no
+		consumer_goods_factor = -0.1
+		stability_factor = 0.1
+		trade_laws_cost_factor = -0.25
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_giovanna_rossati = {
+		random = no
+		production_speed_buildings_factor = 0.15
+		industrial_capacity_factory = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_walach = {
+		random = no
+		army_attack_factor = 0.1
+		army_org_factor = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_dmitri_bellone = {
+		random = no
+		political_power_gain = 0.15
+		industrial_capacity_factory = 0.1
+		economy_cost_factor = -0.25
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_fabrizio_venezia = {
+		random = no
+		political_power_gain = 0.1
+		stability_factor = 0.15
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_leontuzzo_bellone = {
+		random = no
+		production_speed_buildings_factor = 0.15
+		research_speed_factor = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_lavinia_falcone = {
+		random = no
+		stability_factor = 0.2
+		political_power_gain = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_irene = {
+		random = no
+		supply_consumption_factor = -0.15
+		production_speed_buildings_factor = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_bernardo_bellone = {
+		random = no
+		political_power_gain = 0.15
+		intel_network_gain_factor = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_rubio = {
+		random = no
+		production_speed_buildings_factor = 0.15
+		consumer_goods_factor = -0.05
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_caracci = {
+		random = no
+		stability_factor = 0.15
+		consumer_goods_factor = -0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_antonio_venezia = {
+		random = no
+		intel_network_gain_factor = 0.15
+		political_power_gain = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_silva_moretti = {
+		random = no
+		stability_factor = 0.1
+		war_support_factor = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_lappland_saluzzo = {
+		random = no
+		army_attack_factor = 0.15
+		army_speed_factor = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_texas = {
+		random = no
+		army_attack_factor = 0.1
+		army_defence_factor = 0.1
+		army_org_regain = 0.05
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	SRC_adv_shalay = {
+		random = no
+		industrial_capacity_factory = 0.1
+		research_speed_factor = 0.1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	########################################
+	# 拉维妮娅·法尔科内出任总统的两个特质
+	# （由 common/scripted_effects/SRC_lavinia_effects.txt 挂上）
+	########################################
+
+	########################################
+	# 拉维妮娅·法尔科内出任总统的领袖特质
+	# （由 common/scripted_effects/SRC_lavinia_effects.txt 挂上）
+	#
+	# 设计稿口径：政治点数获取 +100%，再减去「当前稳定度」。
+	# 领袖特质读不到变量，所以扣减那半边挂在国家动态修正 SRC_lv_dyn_judger_scale 上
+	# （political_power_gain = SRC_lv_judge_tax，每月按 has_stability 分档刷新）。
+	# 两条相加 = +100% - 稳定度；反扑期稳定度锁 0%，所以整条树上都是净 +100%。
+	########################################
+	SRC_lv_judger = {
+		random = no
+		political_power_gain = 1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+C_thorn_throne_leader = {
+		random = no
+		political_power_gain = 0.25
+		stability_factor = 0.15
+		war_support_factor = 0.15
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	########################################
+	# 联邦任职：家族企业收归联邦之后、以公职身份留任的人
+	# （叙拉古拉维妮娅线的顾问清洗按 SRC_Family_Lineage 标签批量执行，
+	#   挂这个标签的人不在清洗范围内 —— 德米特里即由此豁免）
+	########################################
+	SRC_Federal_Service = {
+		random = no
+		political_power_gain = 0.10
+		industrial_capacity_factory = 0.05
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+}

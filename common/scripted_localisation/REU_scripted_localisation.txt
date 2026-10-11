@@ -1,0 +1,105 @@
+defined_text = {
+	name = REU_infiltrated_state_decisions_name
+
+	text = {
+		trigger = {
+			FROM = {
+				has_dynamic_modifier = {
+					modifier = REU_infiltrated_state_2_modifier
+					scope = REU
+				}
+			}
+		}
+		localization_key = REU_base_strengthen_in_state
+	}
+	text = {
+		trigger = {
+			FROM = {
+				has_dynamic_modifier = {
+					modifier = REU_infiltrated_state_1_modifier
+					scope = REU
+				}
+			}
+		}
+		localization_key = REU_base_in_state
+	}
+	text = {
+		localization_key = REU_propaganda_in_state
+	}
+}
+
+# 保留 Redux 原有块：GetBaseLoc
+defined_text = {
+	name = GetBaseLoc
+
+	text = {
+		trigger = { 251 = { controls_or_subject_of = yes } }
+		localization_key = STATE_251
+	}
+	text = {
+		trigger = { 131 = { controls_or_subject_of = yes } }
+		localization_key = STATE_131
+	}
+}
+
+# 保留 Redux 原有块：GetREURegionScriptedLoc
+defined_text = {
+	name = GetREURegionScriptedLoc
+	text = {
+		trigger = {
+			has_country_flag = REU_Viewing_1
+		}
+		localization_key = REU_Region_Loc_1
+	}
+	text = {
+		trigger = {
+			has_country_flag = REU_Viewing_2
+		}
+		localization_key = REU_Region_Loc_2
+	}
+	text = {
+		trigger = {
+			has_country_flag = REU_Viewing_3
+		}
+		localization_key = REU_Region_Loc_3
+	}
+	text = {
+		trigger = {
+			has_country_flag = REU_Viewing_4
+		}
+		localization_key = REU_Region_Loc_4
+	}
+	text = {
+		trigger = {
+			has_country_flag = REU_Viewing_5
+		}
+		localization_key = REU_Region_Loc_5
+	}
+	text = {
+		trigger = {
+			has_country_flag = REU_Viewing_6
+		}
+		localization_key = REU_Region_Loc_6
+	}
+	text = {
+		trigger = {
+			has_country_flag = REU_Viewing_7
+		}
+		localization_key = REU_Region_Loc_7
+	}
+
+	text = {
+		trigger = {
+			NOT = {
+				has_country_flag = REU_Viewing_1
+				has_country_flag = REU_Viewing_2
+				has_country_flag = REU_Viewing_3
+				has_country_flag = REU_Viewing_4
+				has_country_flag = REU_Viewing_5
+				has_country_flag = REU_Viewing_6
+				has_country_flag = REU_Viewing_7
+			}
+		}
+		localization_key = REU_Region_Loc_No_Region
+	}
+}

@@ -1,0 +1,76 @@
+capital = 96
+
+#set_convoys = 100
+set_stability = 0.4
+set_war_support = 0.6
+set_research_slots = 2
+#starting_train_buffer = 2
+#set_fuel_ratio = 0.8
+#add_command_power = 20
+
+oob = "YAB_Start"
+
+recruit_character = YAB_An_Sishun
+recruit_character = YAB_Chokos_Orzen
+recruit_character = YAB_Liu_Song
+#activate_advisor = 
+
+add_ideas = {
+	limited_conscription
+	free_trade
+	low_economic_mobilisation
+	special_region
+
+	no_voting
+	working_law_18h
+	equal_treatment
+	subsistence_agriculture
+	electric_tool_production
+	illiteracy_widespread
+	inefficient_administration
+	rampant_poverty
+
+	YAB_northern_front
+}
+
+country_event = {
+	id = test_yab.1
+	months = 50
+}
+
+# 岁相显化-都护府叛乱：开局 1094.6.1 + 66 个月 = 1099.12.1 硬日期
+# （事件与效果见 events/YAB_SuiArmy.txt 与
+#   common/scripted_effects/YAB_sui_army_scripted_effects.txt）
+country_event = {
+	id = sui_yab.1
+	months = 66
+}
+
+set_technology = {
+	infantry_weapons_0 = 1
+	artillery_0 = 1
+	tech_support = 1
+	LRD_tech_shengchan_0 = 1
+	LRD_tech_jisuanji_0 = 1
+	tech_recon = 1
+	motorized_infantry_0 = 1
+	LRD_tech_energy_1 = 1
+}
+
+set_politics = {
+	ruling_party = despotism
+	elections_allowed = no
+}
+
+set_popularities = {
+	communism = 0
+	socialism = 0
+	progressivism = 0
+	liberalism = 0
+	conservatism = 0
+	authoritarianism = 0
+	despotism = 80
+	fascism = 15
+	mysticism = 5
+	special = 0
+}

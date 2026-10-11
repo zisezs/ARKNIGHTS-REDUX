@@ -1,0 +1,1254 @@
+######################
+## 哥伦比亚联邦 · 莱茵生命建设国策树
+## 树 id CLB_construction ｜ 坐标由 docs/_clb_tree_build.js 依前置自动排版（行内 Δx≥2，无图标重叠）
+######################
+focus_tree = {
+	id = CLB_construction
+	country = {
+		factor = 0
+		modifier = {
+			add = 5
+			tag = CLB
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = CLB_construction_charter
+	}
+	focus = {
+		id = CLB_construction_charter
+		icon = GFX_goal_generic_national_unity
+		x = -20
+		y = 0
+		cost = 5
+		available = {
+			has_country_flag = CLB_flag_council_perfect
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 80
+			add_stability = 0.08
+			custom_effect_tooltip = CLB_vtt_politics_pp_p0_075
+
+			custom_effect_tooltip = CLB_vtt_politics_opinion_p0_0375
+			custom_effect_tooltip = CLB_dyn_r_politics_modify_tt
+			add_to_variable = {
+				CLB_pol_pp = 0.075
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				CLB_pol_stab = 0.05
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_pol_opinion = 0.0375
+				tooltip = CLB_pol_opinion_value_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_shareholder_democracy
+		icon = GFX_goal_generic_political_pressure
+		x = -21
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_construction_charter
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 60
+			add_stability = 0.05
+
+			custom_effect_tooltip = CLB_vtt_politics_build_p0_025
+			custom_effect_tooltip = CLB_dyn_r_politics_modify_tt
+			add_to_variable = {
+				CLB_pol_stab = 0.0375
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_pol_build = 0.025
+				tooltip = production_speed_buildings_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_technocratic_system
+		icon = GFX_goal_generic_scientific_exchange
+		x = -19
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_construction_charter
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_tt_dissent_down
+			add_political_power = 40
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = electronics }
+
+			custom_effect_tooltip = CLB_dyn_r_science_modify_tt
+			add_to_variable = {
+				CLB_ten_research = 0.0375
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				CLB_ten_build = 0.025
+				tooltip = production_speed_buildings_factor_tt
+			}
+			add_to_variable = {
+				CLB_ten_stab = 0.0125
+				tooltip = stability_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_infected_citizenship
+		icon = GFX_goal_generic_consumer_goods
+		x = -18
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_treatment_reform
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_tt_dissent_down
+			add_political_power = 60
+			add_stability = 0.05
+
+			custom_effect_tooltip = CLB_vtt_politics_build_p0_0125
+			custom_effect_tooltip = CLB_dyn_r_politics_modify_tt
+			add_to_variable = {
+				CLB_pol_stab = 0.0375
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_pol_build = 0.0125
+				tooltip = production_speed_buildings_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_pioneer_act
+		icon = GFX_goal_generic_construct_infrastructure
+		x = -16
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_pioneer
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			agricultural_development_monthly_modifier = 0.10
+			add_offsite_building = { type = industrial_complex level = 2 }
+			add_stability = 0.03
+
+			custom_effect_tooltip = CLB_dyn_r_economy_modify_tt
+			add_to_variable = {
+				CLB_eco_stab = 0.025
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_eco_build = 0.025
+				tooltip = production_speed_buildings_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_media_empire
+		icon = GFX_goal_generic_propaganda
+		x = -14
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_media
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 60
+			add_stability = 0.05
+			custom_effect_tooltip = CLB_vtt_politics_ws_p0_0375
+
+			custom_effect_tooltip = CLB_vtt_politics_opinion_p0_0375
+			custom_effect_tooltip = CLB_dyn_r_politics_modify_tt
+			add_to_variable = {
+				CLB_pol_ws = 0.0375
+				tooltip = war_support_factor_tt
+			}
+			add_to_variable = {
+				CLB_pol_stab = 0.025
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_pol_opinion = 0.0375
+				tooltip = CLB_pol_opinion_value_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_skyloan_expansion
+		icon = GFX_goal_generic_positive_trade_relations
+		x = -12
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_skyloan
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+			add_stability = 0.03
+
+			custom_effect_tooltip = CLB_vtt_meter_CLB_sky_fever_p10
+			hidden_effect = {
+				add_to_variable = { CLB_sky_fever = 10 }
+			}
+			custom_effect_tooltip = CLB_dyn_r_economy_modify_tt
+			add_to_variable = {
+				CLB_eco_factory = 0.0375
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_to_variable = {
+				CLB_eco_stab = -0.025
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_eco_ws = 0.0125
+				tooltip = war_support_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_sky_concept_stock
+		icon = GFX_goal_generic_trade
+		x = -17
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_skyloan_expansion
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+			add_stability = 0.03
+
+			custom_effect_tooltip = CLB_dyn_r_economy_modify_tt
+			add_to_variable = {
+				CLB_eco_factory = 0.0375
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_to_variable = {
+				CLB_eco_stab = -0.0125
+				tooltip = stability_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_floating_industrial_belt
+		icon = GFX_goal_generic_construct_civ_factory
+		x = -10
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_airship_fleet
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+			add_stability = 0.03
+
+			custom_effect_tooltip = CLB_dyn_r_economy_modify_tt
+			add_to_variable = {
+				CLB_eco_build = 0.0375
+				tooltip = production_speed_buildings_factor_tt
+			}
+			add_to_variable = {
+				CLB_eco_factory = 0.025
+				tooltip = industrial_capacity_factory_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_neurotransmitter_nationwide
+		icon = GFX_goal_generic_radar
+		x = -8
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_dept_energy
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+
+			add_political_power = 40
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = electronics }
+
+			custom_effect_tooltip = CLB_vtt_meter_CLB_neurotransmitter_p40
+			hidden_effect = {
+				add_to_variable = { CLB_neurotransmitter = 40 }
+				set_country_flag = CLB_flag_neuro_nation
+			}
+			custom_effect_tooltip = CLB_dyn_r_science_modify_tt
+			add_to_variable = {
+				CLB_ten_detect = 0.05
+				tooltip = enemy_operative_detection_chance_factor_tt
+			}
+			add_to_variable = {
+				CLB_ten_stab = 0.025
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_ten_research = 0.0125
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_sarcophagus_energy_grid
+		icon = GFX_goal_generic_oil_refinery
+		x = -6
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_sarcophagus_well
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+			add_stability = 0.03
+			add_offsite_building = { type = industrial_complex level = 2 }
+
+			custom_effect_tooltip = CLB_dyn_r_economy_modify_tt
+			add_to_variable = {
+				CLB_eco_energy = 0.075
+				tooltip = CLB_eco_energy_value_tt
+			}
+			add_to_variable = {
+				CLB_eco_fuel = 0.05
+				tooltip = fuel_gain_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_wanxingyuan_phase2
+		icon = GFX_goal_generic_construction2
+		x = -4
+		y = 0
+		cost = 5
+		available = {
+			has_country_flag = CLB_flag_wanxingyuan
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.05
+			add_offsite_building = { type = industrial_complex level = 2 }
+			air_experience = 25
+			custom_effect_tooltip = CLB_vtt_spirit_endgame
+
+			custom_effect_tooltip = CLB_vtt_meter_CLB_beast_acquiescence_p10
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+				set_country_flag = CLB_flag_wanxingyuan2
+				add_dynamic_modifier = { modifier = CLB_dyn_r_endgame }
+			}
+			custom_effect_tooltip = CLB_dyn_r_endgame_modify_tt
+			add_to_variable = {
+				CLB_end_research = 0.05
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				CLB_end_air = 0.025
+				tooltip = air_attack_factor_tt
+			}
+			add_to_variable = {
+				CLB_end_stab = 0.0125
+				tooltip = stability_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_propeller_paradise_rebuild
+		icon = GFX_goal_generic_air_production
+		x = -2
+		y = 0
+		cost = 5
+		available = {
+			has_country_flag = CLB_flag_skyloan
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.05
+			add_offsite_building = { type = industrial_complex level = 2 }
+			add_offsite_building = { type = industrial_complex level = 2 }
+
+			custom_effect_tooltip = CLB_vtt_endgame_cg_p0_0125
+			custom_effect_tooltip = CLB_vtt_meter_CLB_sky_fever_p20
+			custom_effect_tooltip = CLB_vtt_meter_CLB_beast_acquiescence_p10
+			hidden_effect = {
+				add_to_variable = { CLB_sky_fever = 20 }
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+				set_country_flag = CLB_flag_propeller
+			}
+			custom_effect_tooltip = CLB_dyn_r_endgame_modify_tt
+			add_to_variable = {
+				CLB_end_research = 0.025
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				CLB_end_air = 0.0375
+				tooltip = air_attack_factor_tt
+			}
+			add_to_variable = {
+				CLB_end_stab = 0.025
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_end_cg = 0.0125
+				tooltip = consumer_goods_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_rhine_tree_complete
+		icon = GFX_goal_generic_radar
+		x = 0
+		y = 0
+		cost = 5
+		available = {
+			has_country_flag = CLB_flag_dept_engineering
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.05
+			add_offsite_building = { type = industrial_complex level = 2 }
+			add_research_slot = 1
+
+			custom_effect_tooltip = CLB_vtt_meter_CLB_beast_acquiescence_p10
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+				set_country_flag = CLB_flag_rhine_tree
+			}
+			custom_effect_tooltip = CLB_dyn_r_endgame_modify_tt
+			add_to_variable = {
+				CLB_end_research = 0.05
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				CLB_end_stab = 0.025
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_end_air = 0.0125
+				tooltip = air_attack_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_stargate_project
+		icon = GFX_goal_generic_secret_weapon
+		x = -9
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus = CLB_wanxingyuan_phase2
+		}
+		prerequisite = {
+			focus = CLB_propeller_paradise_rebuild
+		}
+		prerequisite = {
+			focus = CLB_rhine_tree_complete
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_tt_intl_tension_up_15
+			add_political_power = 100
+			add_stability = 0.05
+			add_offsite_building = { type = industrial_complex level = 2 }
+			air_experience = 50
+			add_research_slot = 1
+
+			custom_effect_tooltip = CLB_vtt_endgame_pp_p0_025
+
+			custom_effect_tooltip = CLB_vtt_meter_CLB_beast_acquiescence_p20
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 20 }
+				set_country_flag = CLB_flag_stargate
+			}
+			custom_effect_tooltip = CLB_dyn_r_endgame_modify_tt
+			add_to_variable = {
+				CLB_end_research = 0.075
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				CLB_end_pp = 0.025
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				CLB_end_air = 0.025
+				tooltip = air_attack_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_rhine_army_expansion
+		icon = GFX_goal_generic_construct_military
+		x = 2
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_rhine_defense_force
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			army_experience = 25
+			add_war_support = 0.04
+
+			custom_effect_tooltip = CLB_dyn_r_military_modify_tt
+			add_to_variable = {
+				CLB_mil_atk = 0.05
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				CLB_mil_def = 0.025
+				tooltip = army_defence_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_power_armor_legion
+		icon = GFX_goal_generic_army_tanks
+		x = 6
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_power_armor_std
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			army_experience = 25
+			add_war_support = 0.04
+
+			custom_effect_tooltip = CLB_dyn_r_military_modify_tt
+			add_to_variable = {
+				CLB_mil_atk = 0.05
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				CLB_mil_org = 0.025
+				tooltip = army_org_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_airship_fleet_expansion
+		icon = GFX_goal_generic_air_production
+		x = 8
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_airship_fleet
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			army_experience = 25
+			add_war_support = 0.04
+			custom_effect_tooltip = CLB_vtt_military_air_p0_05
+			custom_effect_tooltip = CLB_dyn_r_military_modify_tt
+			add_to_variable = {
+				CLB_mil_air = 0.05
+				tooltip = CLB_mil_air_value_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_focusing_generator_mass
+		icon = GFX_goal_generic_secret_weapon
+		x = 10
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_focusing_generator
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_tt_intl_tension_up_15
+			army_experience = 25
+			add_war_support = 0.04
+			custom_effect_tooltip = CLB_vtt_military_air_p0_075
+
+			custom_effect_tooltip = CLB_dyn_r_military_modify_tt
+			add_to_variable = {
+				CLB_mil_air = 0.075
+				tooltip = CLB_mil_air_value_tt
+			}
+			add_to_variable = {
+				CLB_mil_atk = 0.025
+				tooltip = army_attack_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_mobile_cavalry_elite
+		icon = GFX_goal_generic_army_motorized
+		x = 12
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_mobile_cavalry
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			army_experience = 25
+			add_war_support = 0.04
+			custom_effect_tooltip = CLB_vtt_military_sf_p0_075
+			custom_effect_tooltip = CLB_vtt_military_xp_p0_0125
+			custom_effect_tooltip = CLB_dyn_r_military_modify_tt
+			add_to_variable = {
+				CLB_mil_sf = 0.075
+				tooltip = special_forces_attack_factor_tt
+			}
+			add_to_variable = {
+				CLB_mil_xp = 0.0125
+				tooltip = experience_gain_army_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_border_great_wall
+		icon = GFX_goal_generic_fortify_city
+		x = 14
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_rhine_defense_force
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			army_experience = 25
+			add_war_support = 0.04
+
+			custom_effect_tooltip = CLB_dyn_r_military_modify_tt
+			add_to_variable = {
+				CLB_mil_def = 0.05
+				tooltip = army_defence_factor_tt
+			}
+			add_to_variable = {
+				CLB_mil_stab = 0.0125
+				tooltip = stability_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_intervene_bolivar
+		icon = GFX_goal_generic_more_territorial_claims
+		x = -7
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_rhine_army_expansion
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_tt_diplo_down_10
+			army_experience = 25
+			add_war_support = 0.04
+
+			custom_effect_tooltip = CLB_dyn_r_military_modify_tt
+			add_to_variable = {
+				CLB_mil_ws = 0.0375
+				tooltip = war_support_factor_tt
+			}
+			add_to_variable = {
+				CLB_mil_atk = 0.025
+				tooltip = army_attack_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_intervene_sargon
+		icon = GFX_goal_generic_demand_territory
+		x = -5
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_rhine_army_expansion
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_tt_diplo_down_10
+			army_experience = 25
+			add_war_support = 0.04
+
+			custom_effect_tooltip = CLB_dyn_r_military_modify_tt
+			add_to_variable = {
+				CLB_mil_atk = 0.025
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				CLB_mil_def = 0.0125
+				tooltip = army_defence_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_arts_breakthrough
+		icon = GFX_goal_generic_scientific_exchange
+		x = 16
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_dept_energy
+			has_country_flag = CLB_flag_dept_structure
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 40
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = artillery }
+
+			custom_effect_tooltip = CLB_dyn_r_science_modify_tt
+			add_to_variable = {
+				CLB_ten_research = 0.0625
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_neurotransmitter_military
+		icon = GFX_goal_generic_radar
+		x = -13
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_neurotransmitter_nationwide
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 40
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = radar_tech }
+
+			custom_effect_tooltip = CLB_dyn_r_science_modify_tt
+			add_to_variable = {
+				CLB_ten_detect = 0.0375
+				tooltip = enemy_operative_detection_chance_factor_tt
+			}
+			add_to_variable = {
+				CLB_ten_research = 0.0125
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_sarcophagus_analysis
+		icon = GFX_goal_generic_secret_weapon
+		x = -11
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_sarcophagus_energy_grid
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 40
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = nuclear }
+
+			custom_effect_tooltip = CLB_dyn_r_science_modify_tt
+			add_to_variable = {
+				CLB_ten_research = 0.0625
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_stargate_research
+		icon = GFX_goal_generic_secret_weapon
+		x = -9
+		y = 2
+		cost = 4
+		prerequisite = {
+			focus = CLB_stargate_project
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_tt_intl_tension_up_10
+			add_political_power = 40
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = rocketry }
+			add_research_slot = 1
+
+			custom_effect_tooltip = CLB_dyn_r_science_modify_tt
+			add_to_variable = {
+				CLB_ten_research = 0.075
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_floating_tech_breakthrough
+		icon = GFX_goal_generic_air_doctrine
+		x = -15
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_floating_industrial_belt
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 40
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = air_equipment }
+
+			custom_effect_tooltip = CLB_dyn_r_science_modify_tt
+			add_to_variable = {
+				CLB_ten_build = 0.0375
+				tooltip = production_speed_buildings_factor_tt
+			}
+			add_to_variable = {
+				CLB_ten_research = 0.025
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_power_armor_iteration
+		icon = GFX_goal_generic_army_tanks
+		x = -1
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_power_armor_legion
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			army_experience = 25
+			add_war_support = 0.04
+
+			custom_effect_tooltip = CLB_dyn_r_military_modify_tt
+			add_to_variable = {
+				CLB_mil_atk = 0.05
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				CLB_mil_org = 0.025
+				tooltip = army_org_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_maylander_agreement
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 18
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_may_reform
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 50
+			add_command_power = 20
+
+			custom_effect_tooltip = CLB_vtt_intel_pp_p0_025
+			custom_effect_tooltip = CLB_dyn_r_intel_modify_tt
+			add_to_variable = {
+				CLB_int_detect = 0.0375
+				tooltip = enemy_operative_detection_chance_factor_tt
+			}
+			add_to_variable = {
+				CLB_int_pp = 0.025
+				tooltip = political_power_gain_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_rhodes_island_cooperation
+		icon = GFX_goal_generic_improve_relations
+		x = 1
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_maylander_agreement
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 60
+			add_stability = 0.05
+			custom_effect_tooltip = CLB_vtt_politics_opinion_p0_05
+
+			custom_effect_tooltip = CLB_dyn_r_politics_modify_tt
+			add_to_variable = {
+				CLB_pol_opinion = 0.05
+				tooltip = CLB_pol_opinion_value_tt
+			}
+			add_to_variable = {
+				CLB_pol_stab = 0.025
+				tooltip = stability_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_victoria_revenge
+		icon = GFX_goal_generic_territory_or_war
+		x = -3
+		y = 1
+		cost = 4
+		prerequisite = {
+			focus = CLB_rhine_army_expansion
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_tt_diplo_down_20
+			add_political_power = 60
+			add_stability = 0.05
+			custom_effect_tooltip = CLB_vtt_politics_ws_p0_0375
+			custom_effect_tooltip = CLB_vtt_politics_opinion_n0_0625
+			custom_effect_tooltip = CLB_dyn_r_politics_modify_tt
+			add_to_variable = {
+				CLB_pol_ws = 0.0375
+				tooltip = war_support_factor_tt
+			}
+			add_to_variable = {
+				CLB_pol_opinion = -0.0625
+				tooltip = CLB_pol_opinion_value_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_leithanien_tech_exchange
+		icon = GFX_goal_generic_scientific_exchange
+		x = -10
+		y = 3
+		cost = 4
+		prerequisite = {
+			focus = CLB_stargate_research
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 40
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = electronics }
+
+			custom_effect_tooltip = CLB_dyn_r_science_modify_tt
+			add_to_variable = {
+				CLB_ten_research = 0.0375
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_laterano_sky_summit
+		icon = GFX_goal_generic_alliance
+		x = -8
+		y = 3
+		cost = 4
+		prerequisite = {
+			focus = CLB_stargate_research
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 60
+			add_stability = 0.05
+			custom_effect_tooltip = CLB_vtt_politics_ws_p0_0375
+			custom_effect_tooltip = CLB_vtt_politics_opinion_p0_0625
+			custom_effect_tooltip = CLB_dyn_r_politics_modify_tt
+			add_to_variable = {
+				CLB_pol_ws = 0.0375
+				tooltip = war_support_factor_tt
+			}
+			add_to_variable = {
+				CLB_pol_opinion = 0.0625
+				tooltip = CLB_pol_opinion_value_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_aegir_contact
+		icon = GFX_goal_generic_build_navy
+		x = -11
+		y = 2
+		cost = 4
+		prerequisite = {
+			focus = CLB_sarcophagus_analysis
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			navy_capital_ship_attack_factor = 0.10
+			add_political_power = 40
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = radar_tech }
+
+			custom_effect_tooltip = CLB_dyn_r_science_modify_tt
+			add_to_variable = {
+				CLB_ten_research = 0.0375
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				CLB_ten_detect = 0.0125
+				tooltip = enemy_operative_detection_chance_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_beast_lord_diplomacy
+		icon = GFX_goal_generic_dangerous_deal
+		x = 20
+		y = 0
+		cost = 4
+		available = {
+			has_country_flag = CLB_flag_beast_playground
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 55
+			add_stability = -0.04
+
+			custom_effect_tooltip = CLB_vtt_meter_CLB_beast_acquiescence_p10
+			hidden_effect = {
+				add_to_variable = { CLB_beast_acquiescence = 10 }
+			}
+			custom_effect_tooltip = CLB_dyn_r_beast_modify_tt
+			add_to_variable = {
+				CLB_bea_cg = 0.025
+				tooltip = consumer_goods_factor_tt
+			}
+			add_to_variable = {
+				CLB_bea_stab = -0.025
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_bea_research = 0.0125
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_sky_convention
+		icon = GFX_goal_generic_major_alliance
+		x = -6
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = CLB_stargate_project
+		}
+		prerequisite = {
+			focus = CLB_laterano_sky_summit
+		}
+		prerequisite = {
+			focus = CLB_leithanien_tech_exchange
+		}
+		prerequisite = {
+			focus = CLB_rhodes_island_cooperation
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_tt_reputation_up_30
+			add_political_power = 80
+			add_stability = 0.08
+			add_popularity = { ideology = progressivism popularity = 0.05 }
+			custom_effect_tooltip = CLB_vtt_politics_opinion_p0_0875
+
+			custom_effect_tooltip = CLB_vtt_politics_ws_p0_025
+			hidden_effect = {
+				set_country_flag = CLB_flag_sky_convention
+			}
+			custom_effect_tooltip = CLB_dyn_r_politics_modify_tt
+			add_to_variable = {
+				CLB_pol_opinion = 0.0875
+				tooltip = CLB_pol_opinion_value_tt
+			}
+			add_to_variable = {
+				CLB_pol_stab = 0.025
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_pol_ws = 0.025
+				tooltip = war_support_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = CLB_stargate_open
+		icon = GFX_goal_generic_secret_weapon
+		x = -12
+		y = 5
+		cost = 5
+		prerequisite = {
+			focus = CLB_stargate_project
+		}
+		prerequisite = {
+			focus = CLB_sky_convention
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			custom_effect_tooltip = CLB_tt_intl_tension_up_20
+			country_event = { id = clb_rhine.8 days = 3 }
+			add_political_power = 100
+			add_stability = 0.05
+			add_offsite_building = { type = industrial_complex level = 2 }
+			air_experience = 75
+			add_research_slot = 1
+
+			custom_effect_tooltip = CLB_vtt_endgame_pp_p0_0375
+
+			hidden_effect = {
+				set_country_flag = CLB_flag_stargate_open
+			}
+			custom_effect_tooltip = CLB_dyn_r_endgame_modify_tt
+			add_to_variable = {
+				CLB_end_research = 0.0875
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				CLB_end_pp = 0.0375
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				CLB_end_stab = -0.025
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				CLB_end_ws = 0.0375
+				tooltip = war_support_factor_tt
+			}
+		}
+	}
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}

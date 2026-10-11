@@ -1,0 +1,2590 @@
+add_namespace = test_vic
+add_namespace = event_vic
+add_namespace = hidden_vic
+
+#开始联合进军
+country_event = {
+	id = event_vic.1
+	title = event_vic.1.t
+	desc = event_vic.1.d
+
+	picture = GFX_report_event_VIC_joint_march
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.1.a
+
+		country_event = {
+			id = event_vic.2
+		}
+	}
+}
+
+#众叛亲离
+country_event = {
+	id = event_vic.2
+	title = event_vic.2.t
+	desc = event_vic.2.d
+
+	picture = GFX_report_event_VIC_landship_3
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.2.a
+
+		country_event = {
+			id = event_vic.3
+		}
+	}
+}
+
+#联合进军失败
+country_event = {
+	id = event_vic.3
+	title = event_vic.3.t
+	desc = event_vic.3.d
+
+	picture = GFX_report_event_VIC_Anfilis_Windermere_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.3.a
+
+		set_country_flag = VIC_joint_march_failed_flag
+		clr_country_flag = VIC_Victoria_parliament_flag
+
+		end_puppet = DOA
+		end_puppet = DOM
+		end_puppet = VDA
+		end_puppet = GUL
+		end_puppet = DCN
+
+		#布列塔尼军区
+
+		BRT = {
+			transfer_state = 469
+			transfer_state = 485
+			transfer_state = 515
+			transfer_state = 1007
+			transfer_state = 1027
+
+			inherit_technology = VIC
+			set_research_slots = 2
+		}
+
+		#文森特
+		VVI = {
+			transfer_state = 449
+			transfer_state = 676
+			transfer_state = 944
+			transfer_state = 1010
+			transfer_state = 1024
+
+			inherit_technology = VIC
+			set_research_slots = 2
+		}
+		
+		#威灵顿
+        TAR = {
+			division_template = {
+				name = "掷弹兵师"
+				division_names_group = VIC_INF_01
+				is_locked = yes
+				force_allow_recruiting = yes
+				regiments = {
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+				
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+				}
+			}
+
+			set_variable = { VIC_Navy_support = 0.2 }
+			set_variable = { VIC_Abercorn_support = 0 }
+
+			set_country_flag = VIC_add_group_support
+
+			transfer_state = 27
+			transfer_state = 175
+			transfer_state = 180
+			transfer_state = 231
+			transfer_state = 573
+			transfer_state = 588
+			transfer_state = 593
+			transfer_state = 616
+			transfer_state = 620
+			transfer_state = 659
+			transfer_state = 672
+			transfer_state = 711
+			transfer_state = 734
+			transfer_state = 764
+
+			inherit_technology = VIC
+			set_research_slots = 2
+
+			load_oob = "TAR_Start"
+
+			if = {
+				limit = {
+					has_country_flag = VIC_player_choose
+				}
+				change_tag_from = VIC
+			}
+		}
+
+		616 = {
+			create_unit = {
+				division = "division_template = \"掷弹兵师\" start_experience_factor = 0.1 start_equipment_factor = 0.9"
+				owner = TAR
+				count = VIC.VIC_Wellington_influence_num
+			}
+		}
+
+		#开斯特
+		VCA = {
+			division_template = {
+				name = "掷弹兵师"
+				division_names_group = VIC_INF_01
+				is_locked = yes
+				force_allow_recruiting = yes
+				regiments = {
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+				
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+				}
+			}
+
+			transfer_state = 132
+			transfer_state = 508
+			transfer_state = 511
+			transfer_state = 517
+			transfer_state = 519
+			transfer_state = 525
+			transfer_state = 528
+			transfer_state = 538
+			transfer_state = 540
+			transfer_state = 550
+			transfer_state = 554
+			transfer_state = 631
+			transfer_state = 916
+			transfer_state = 960
+
+			set_variable = { VIC_Vina_support = 0.1 }
+			set_variable = { VIC_Eartha_support = 0 }
+
+			inherit_technology = VIC
+			set_research_slots = 2
+
+			load_oob = "VCA_Start"
+
+			if = {
+				limit = {
+					has_country_flag = VIC_player_choose
+				}
+				change_tag_from = VIC
+			}
+		}
+
+		550 = {
+			create_unit = {
+				division = "division_template = \"掷弹兵师\" start_experience_factor = 0.1 start_equipment_factor = 0.9"
+				owner = VCA
+				count = VIC.VIC_Caster_influence_num
+			}
+		}
+
+		#温德米尔
+		VWI = {
+			division_template = {
+				name = "掷弹兵师"
+				division_names_group = VIC_INF_01
+				is_locked = yes
+				force_allow_recruiting = yes
+				regiments = {
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+				
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+				}
+			}
+
+			transfer_state = 21
+			transfer_state = 35
+			transfer_state = 547
+			transfer_state = 556
+			transfer_state = 557
+			transfer_state = 566
+			transfer_state = 581
+			transfer_state = 582
+			transfer_state = 1083
+
+			set_variable = { VIC_Vina_support = 0 }
+			set_variable = { VIC_Eartha_support = 0.1 }
+
+			inherit_technology = VIC
+			set_research_slots = 2
+
+			load_oob = "VWI_Start"
+
+			if = {
+				limit = {
+					has_country_flag = VIC_player_choose
+				}
+				change_tag_from = VIC
+			}
+		}
+
+		21 = {
+			create_unit = {
+				division = "division_template = \"掷弹兵师\" start_experience_factor = 0.1 start_equipment_factor = 0.9"
+				owner = VWI
+				count = VIC.VIC_Windermere_influence_num
+			}
+		}
+
+		#高多汀
+		VGO = {
+			division_template = {
+				name = "掷弹兵师"
+				division_names_group = VIC_INF_01
+				is_locked = yes
+				force_allow_recruiting = yes
+				regiments = {
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+				
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+				}
+			}
+
+			set_variable = { VIC_Navy_support = 0 }
+			set_variable = { VIC_Abercorn_support = 0.2 }
+
+			set_country_flag = VIC_add_group_support
+			
+			transfer_state = 22
+			transfer_state = 33
+			transfer_state = 572
+			transfer_state = 609
+			transfer_state = 619
+			transfer_state = 638
+			transfer_state = 1064
+			572 = { add_dynamic_modifier = { modifier = VGO_state_economy_modifier } }
+			609 = { add_dynamic_modifier = { modifier = VGO_state_economy_modifier } }
+			33 = { add_dynamic_modifier = { modifier = VGO_state_economy_modifier } }
+			619 = { add_dynamic_modifier = { modifier = VGO_state_economy_modifier } }
+			1064 = { add_dynamic_modifier = { modifier = VGO_state_economy_modifier } }
+			22 = { add_dynamic_modifier = { modifier = VGO_state_economy_modifier } }
+			638 = { add_dynamic_modifier = { modifier = VGO_state_economy_modifier } }
+
+			inherit_technology = VIC
+			set_research_slots = 2
+
+			load_oob = "VGO_Start"
+
+			if = {
+				limit = {
+					has_country_flag = VIC_player_choose
+				}
+				change_tag_from = VIC
+			}
+		}
+
+		572 = {
+			create_unit = {
+				division = "division_template = \"掷弹兵师\" start_experience_factor = 0.1 start_equipment_factor = 0.9"
+				owner = VGO
+				count = VIC.VIC_Gododdin_influence_num
+			}
+		}
+
+		#亚伯科恩
+		VAB = {
+			division_template = {
+				name = "掷弹兵师"
+				division_names_group = VIC_INF_01
+				is_locked = yes
+				force_allow_recruiting = yes
+				regiments = {
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+				
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+				}
+			}
+
+			transfer_state = 575
+			transfer_state = 600
+
+			inherit_technology = VIC
+			set_research_slots = 2
+
+			load_oob = "VAB_Start"
+		}
+
+		575 = {
+			create_unit = {
+				division = "division_template = \"掷弹兵师\" start_experience_factor = 0.1 start_equipment_factor = 0.9"
+				owner = VAB
+				count = VIC.VIC_Abercorn_influence_num
+			}
+		}
+
+		#法夫
+		VFI = {
+			division_template = {
+				name = "掷弹兵师"
+				division_names_group = VIC_INF_01
+				is_locked = yes
+				force_allow_recruiting = yes
+				regiments = {
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+				
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+				}
+			}
+
+			transfer_state = 477
+			transfer_state = 482
+			transfer_state = 929
+
+			inherit_technology = VIC
+			set_research_slots = 2
+
+			load_oob = "VFI_Start"
+		}
+
+		477 = {
+			create_unit = {
+				division = "division_template = \"掷弹兵师\" start_experience_factor = 0.1 start_equipment_factor = 0.9"
+				owner = VFI
+				count = VIC.VIC_Fife_influence_num
+			}
+		}
+
+		#阿什沃思公爵领
+		VAS = {
+			division_template = {
+				name = "掷弹兵师"
+				division_names_group = VIC_INF_01
+				is_locked = yes
+				force_allow_recruiting = yes
+				regiments = {
+					militia = { x = 0 y = 0 }
+					militia = { x = 0 y = 1 }
+				
+					militia = { x = 1 y = 0 }
+					militia = { x = 1 y = 1 }
+				}
+			}
+
+			transfer_state = 954
+			transfer_state = 1062
+			transfer_state = 1065
+
+			inherit_technology = VIC
+			set_research_slots = 2
+
+			load_oob = "VAS_Start"
+		}
+
+		954 = {
+			create_unit = {
+				division = "division_template = \"掷弹兵师\" start_experience_factor = 0.1 start_equipment_factor = 0.9"
+				owner = VAS
+				count = VIC.VIC_Ashworth_influence_num
+			}
+		}
+
+		#克雷加文子爵领
+		VCR = {
+			transfer_state = 518
+			transfer_state = 928
+
+			inherit_technology = VIC
+			set_research_slots = 2
+
+			load_oob = "VCR_Start"
+		}
+
+		#自救军
+		VEA = {
+			transfer_state = 1081
+
+			inherit_technology = VIC
+			set_research_slots = 2
+		}
+
+		#拉瓦几亚半岛边防军
+		VWA = {
+			transfer_state = 5
+			transfer_state = 291
+			transfer_state = 394
+			transfer_state = 653
+			transfer_state = 671
+			transfer_state = 700
+			transfer_state = 709
+			transfer_state = 737
+			transfer_state = 1079
+			transfer_state = 1085
+
+			inherit_technology = VIC
+			set_research_slots = 2
+		}
+
+		#维多利亚第一集团军
+		VFA = {
+			transfer_state = 109
+			transfer_state = 163
+			transfer_state = 497
+			transfer_state = 501
+			transfer_state = 859
+			if = {
+				limit = {
+					867 = { is_owned_by = VIC }
+				}
+				transfer_state = 867
+			}
+			transfer_state = 1009
+			transfer_state = 1013
+			transfer_state = 1022
+			transfer_state = 1023
+			transfer_state = 1025
+			transfer_state = 1028
+
+			inherit_technology = VIC
+			set_research_slots = 2
+		}
+
+		#维多利亚第二集团军
+		VSA = {
+			transfer_state = 75
+			transfer_state = 606
+			transfer_state = 611
+			transfer_state = 623
+			transfer_state = 624
+			transfer_state = 665
+			transfer_state = 971
+
+			inherit_technology = VIC
+			set_research_slots = 2
+		}
+		
+		#皇家海军
+		VRN = {
+			transfer_state = 660
+			transfer_state = 663
+
+			inherit_technology = VIC
+			set_research_slots = 2
+		}
+
+		#深池
+		DUB = {
+			transfer_state = 621
+
+			inherit_technology = VIC
+			set_research_slots = 2
+		}
+
+		VRA = {
+			transfer_state = 175
+			transfer_state = 180
+			transfer_state = 231
+			transfer_state = 588
+			transfer_state = 659
+			transfer_state = 672
+
+			every_owned_state = {
+				add_core_of = VRA
+			}
+
+			inherit_technology = VIC
+			set_research_slots = 1
+
+			load_oob = "VRA_Start"
+		}
+
+		VRB = {
+			
+			transfer_state = 550
+			transfer_state = 631
+			transfer_state = 132
+
+			every_owned_state = {
+				add_core_of = VRB
+			}
+
+			inherit_technology = VIC
+			set_research_slots = 1
+
+			load_oob = "VRB_Start"
+		}
+
+		VRC = {
+			transfer_state = 477
+			transfer_state = 538
+			transfer_state = 575
+			transfer_state = 1062
+
+			every_owned_state = {
+				add_core_of = VRC
+			}
+
+			inherit_technology = VIC
+			set_research_slots = 1
+
+			load_oob = "VRC_Start"
+		}
+
+		VRD = {
+			transfer_state = 35
+			transfer_state = 582
+
+			every_owned_state = {
+				add_core_of = VRD
+			}
+
+			inherit_technology = VIC
+			set_research_slots = 1
+
+			load_oob = "VRD_Start"
+		}
+
+		# VRE = {
+
+		# 	every_owned_state = {
+		# 		add_core_of = VRE
+		# 	}
+
+		# 	inherit_technology = VIC
+		# 	set_research_slots = 1
+
+		# 	load_oob = "VRE_Start"
+		# }
+
+		hidden_effect = {
+			delete_unit_template_and_units = {
+				division_template = "近卫军"
+				disband = no
+			}
+
+			country_event = {
+				id = event_vic.21
+				days = 3
+			}
+		}
+
+		every_country = {
+			limit = {
+				victoria_unifier = yes
+				has_variable = VIC_expand_local_forces
+			}
+			random_core_state = {
+				create_unit = {
+					division = "division_template = \"掷弹兵师\" start_experience_factor = 0.1 start_equipment_factor = 0.9"
+					owner = THIS
+					count = THIS.VIC_expand_local_forces
+				}
+			}
+		}
+
+		every_country = {
+			limit = {
+				victoria_unifier = yes
+			}
+			set_cosmetic_tag = VIC_color
+		}
+	}
+}
+
+#公爵会议
+country_event = {
+	id = event_vic.4
+	title = event_vic.4.t
+	desc = event_vic.4.d
+
+	picture = GFX_report_event_VIC_council
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.4.a
+	}
+}
+
+#劳动限制法案
+country_event = {
+	id = event_vic.5
+	title = event_vic.5.t
+	desc = event_vic.5.d
+
+	picture = GFX_report_event_VIC_Industrial_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.5.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_vic.29
+				days = 10
+			}
+		}
+	}
+}
+
+#暴风雨中的航船（选择公爵）
+country_event = {
+	id = event_vic.6
+	title = event_vic.6.t
+	desc = event_vic.6.d
+
+	picture = GFX_report_event_VIC_council
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.6.a
+
+		VWI = {
+			set_country_flag = VIC_player_choose
+			custom_effect_tooltip = VIC_player_choose_tt
+		}
+	}
+
+	option = {
+		name = event_vic.6.b
+
+		VCA = {
+			set_country_flag = VIC_player_choose
+			custom_effect_tooltip = VIC_player_choose_tt
+		}
+	}
+
+	option = {
+		name = event_vic.6.c
+
+		VGO = {
+			set_country_flag = VIC_player_choose
+			custom_effect_tooltip = VIC_player_choose_tt
+		}
+	}
+
+	option = {
+		name = event_vic.6.e
+
+		TAR = {
+			set_country_flag = VIC_player_choose
+			custom_effect_tooltip = VIC_player_choose_tt
+		}
+	}
+}
+
+#风暴撤离
+country_event = {
+	id = event_vic.8
+	title = event_vic.8.t
+	desc = event_vic.8.d
+
+	picture = GFX_report_event_VIC_city_square
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.8.a
+	}
+}
+
+#古兹曼的沉思
+country_event = {
+	id = event_vic.9
+	title = event_vic.9.t
+	desc = event_vic.9.d
+
+	picture = GFX_report_event_Generic_School_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.9.a
+	}
+}
+
+#秃鹫
+country_event = {
+	id = event_vic.10
+	title = event_vic.10.t
+	desc = event_vic.10.d
+
+	picture = GFX_report_event_VIC_Industrial_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.10.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_vic.11
+				days = 20
+			}
+		}
+	}
+}
+
+#贵族府的会晤
+country_event = {
+	id = event_vic.11
+	title = event_vic.11.t
+	desc = event_vic.11.d
+
+	picture = GFX_report_event_Generic_Manor_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.11.a
+	}
+}
+
+#从天而降的救兵
+country_event = {
+	id = event_vic.12
+	title = event_vic.12.t
+	desc = event_vic.12.d
+
+	picture = GFX_report_event_VIC_city_square
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.12.a
+	}
+}
+
+#杯水车薪
+country_event = {
+	id = event_vic.13
+	title = event_vic.13.t
+	desc = event_vic.13.d
+
+	picture = GFX_report_event_Generic_poker
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.13.a
+	}
+}
+
+#河口郡的诡异事件
+country_event = {
+	id = event_vic.14
+	title = event_vic.14.t
+	desc = event_vic.14.d
+
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.14.a
+	}
+}
+
+#浮生一日
+country_event = {
+	id = event_vic.15
+	title = event_vic.15.t
+	desc = event_vic.15.d
+
+	picture = GFX_report_event_Generic_House
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.15.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_vic.16
+				days = 25
+			}
+		}
+	}
+}
+
+#蓝天先生
+country_event = {
+	id = event_vic.16
+	title = event_vic.16.t
+	desc = event_vic.16.d
+
+	picture = GFX_report_event_VIC_street_another
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.16.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_vic.17
+				days = 25
+			}
+		}
+	}
+}
+
+#丽茵卡登在呼唤
+country_event = {
+	id = event_vic.17
+	title = event_vic.17.t
+	desc = event_vic.17.d
+
+	picture = GFX_report_event_VIC_country
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.17.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_vic.18
+				days = 20
+			}
+		}
+	}
+}
+
+#顺其自然
+country_event = {
+	id = event_vic.18
+	title = event_vic.18.t
+	desc = event_vic.18.d
+
+	picture = GFX_report_event_VIC_country
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.18.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_vic.19
+				days = 80
+			}
+		}
+	}
+}
+
+#永远的草莓地
+country_event = {
+	id = event_vic.19
+	title = event_vic.19.t
+	desc = event_vic.19.d
+
+	picture = GFX_report_event_VIC_street_daytime
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.19.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_vic.20
+				days = 50
+			}
+		}
+	}
+}
+
+#于风中飘摇
+country_event = {
+	id = event_vic.20
+	title = event_vic.20.t
+	desc = event_vic.20.d
+
+	picture = GFX_report_event_Generic_Village_House
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.20.a
+	}
+}
+
+#漫长而曲折之路
+country_event = {
+	id = event_vic.21
+	title = event_vic.21.t
+	desc = event_vic.21.d
+
+	picture = GFX_report_event_VIC_country
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.21.a
+	}
+}
+
+#垂垂老矣之雄狮
+country_event = {
+	id = event_vic.22
+	title = event_vic.22.t
+	desc = event_vic.22.d
+
+	picture = GFX_report_event_VIC_dusk_lenti_avenue
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.22.a
+	}
+}
+
+#新地方军
+country_event = {
+	id = event_vic.23
+	title = event_vic.23.t
+	desc = event_vic.23.d
+
+	picture = GFX_report_event_VIC_council
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.23.a
+		VGO = {
+			set_country_flag = VIC_expand_local_forces_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_yes_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.23.b
+		TAR = {
+			set_country_flag = VIC_expand_local_forces_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_yes_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.23.c
+		VWI = {
+			set_country_flag = VIC_expand_local_forces_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_yes_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.23.e
+		VCA = {
+			set_country_flag = VIC_expand_local_forces_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_yes_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+#军火速递
+country_event = {
+	id = event_vic.24
+	title = event_vic.24.t
+	desc = event_vic.24.d
+
+	picture = GFX_report_event_Generic_Military_Factory
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.24.a
+		VGO = {
+			set_country_flag = VIC_military_material_allocation_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_yes_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.24.b
+		TAR = {
+			set_country_flag = VIC_military_material_allocation_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_yes_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.24.c
+		VWI = {
+			set_country_flag = VIC_military_material_allocation_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_yes_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.24.e
+		VCA = {
+			set_country_flag = VIC_military_material_allocation_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_yes_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+#战时民用工厂建设选址
+country_event = {
+	id = event_vic.25
+	title = event_vic.25.t
+	desc = event_vic.25.d
+
+	picture = GFX_report_event_VIC_Industrial_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.25.a
+		VGO = {
+			set_country_flag = VIC_wartime_civilian_factories_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_yes_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.25.b
+		TAR = {
+			set_country_flag = VIC_wartime_civilian_factories_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_yes_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.25.c
+		VWI = {
+			set_country_flag = VIC_wartime_civilian_factories_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_yes_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.25.e
+		VCA = {
+			set_country_flag = VIC_wartime_civilian_factories_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_yes_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+#战时军用工厂建设选址
+country_event = {
+	id = event_vic.26
+	title = event_vic.26.t
+	desc = event_vic.26.d
+
+	picture = GFX_report_event_VIC_Industrial_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.26.a
+		VGO = {
+			set_country_flag = VIC_wartime_military_factories_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_yes_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.26.b
+		TAR = {
+			set_country_flag = VIC_wartime_military_factories_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_yes_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.26.c
+		VWI = {
+			set_country_flag = VIC_wartime_military_factories_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_yes_flag
+		set_country_flag = VIC_Caster_no_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = event_vic.26.f
+		VCA = {
+			set_country_flag = VIC_wartime_military_factories_in_flag
+		}
+
+		set_country_flag = VIC_Gododdin_no_flag
+		set_country_flag = VIC_Wellington_no_flag
+		set_country_flag = VIC_Windermere_no_flag
+		set_country_flag = VIC_Caster_yes_flag
+
+		VIC_proposal_calculation = yes
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+#提案通过
+country_event = {
+	id = event_vic.27
+	title = event_vic.27.t
+	desc = event_vic.27.d
+
+	picture = GFX_report_event_VIC_council
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.27.a
+	}
+}
+
+#提案不通过
+country_event = {
+	id = event_vic.28
+	title = event_vic.28.t
+	desc = event_vic.28.d
+
+	picture = GFX_report_event_VIC_council
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.28.a
+	}
+}
+
+#六百磅
+country_event = {
+	id = event_vic.29
+	title = event_vic.29.t
+	desc = event_vic.29.d
+
+	picture = GFX_report_event_VIC_street_night
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.29.a
+
+		hidden_effect = {
+			country_event = {
+				id = event_vic.30
+				days = 3
+			}
+		}
+	}
+}
+
+#伟大的父亲
+country_event = {
+	id = event_vic.30
+	title = event_vic.30.t
+	desc = event_vic.30.d
+
+	picture = GFX_report_event_Generic_Village_House
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.30.a
+	}
+}
+
+#褪色花瓣
+country_event = {
+	id = event_vic.31
+	title = event_vic.31.t
+	desc = event_vic.31.d
+
+	picture = GFX_report_event_VIC_street_daytime
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.31.a
+
+		custom_effect_tooltip = event_by_shamao_tt
+	}
+}
+
+#1000编号开头代表第二次联合进军事件链，以后会按事件发生顺序改编号
+#飞空艇升空，各方公爵警觉
+#火光热浪
+country_event = {
+	id = event_vic.10001
+	title = event_vic.10001.t
+	desc = event_vic.10001.d
+	picture = GFX_report_event_VIC_airship
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.10001.a
+		if = {
+			limit = {
+				original_tag = VIC
+			}
+			country_event = {
+				id = event_vic.10004
+				days = 2
+			}
+		}
+		else_if = {
+			limit = {
+				original_tag = VWI
+			}
+			country_event = {
+				id = event_vic.10002
+			}
+		}
+		else = {
+			country_event = {
+				id = event_vic.10003
+			}
+		}
+	}
+}
+
+#前线报告（温德米尔）
+country_event = {
+	id = event_vic.10002
+	title = event_vic.10002.t
+	desc = event_vic.10002.d
+	picture = GFX_report_event_VIC_landship_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.10002.a
+	}
+}
+
+#前线报告（其他公爵）
+country_event = {
+	id = event_vic.10003
+	title = event_vic.10003.t
+	desc = event_vic.10003.d
+	picture = GFX_report_event_VIC_landship_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.10003.a
+	}
+}
+
+#技术原因
+country_event = {
+	id = event_vic.10004
+	title = event_vic.10004.t
+	desc = event_vic.10004.d
+	picture = GFX_report_event_VIC_Norbert_area
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.10004.a
+		if = {
+			limit = {
+				original_tag = VIC
+			}
+			country_event = {
+				id = event_vic.10005
+				days = 2
+			}
+		}
+	}
+}
+
+#善意背叛
+country_event = {
+	id = event_vic.10005
+	title = event_vic.10005.t
+	desc = event_vic.10005.d
+	picture = GFX_report_event_VIC_Vina_Amiya
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.10005.a
+		if = {
+			limit = {
+				original_tag = VIC
+			}
+			country_event = {
+				id = event_vic.10006
+				days = 2
+			}
+		}
+	}
+}
+
+#广播热线正繁忙
+country_event = {
+	id = event_vic.10006
+	title = event_vic.10006.t
+	desc = event_vic.10006.d
+	picture = GFX_report_event_VIC_street_night
+
+	is_triggered_only = yes
+	
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.10006.a
+		if = {
+			limit = {
+				original_tag = VIC
+			}
+			country_event = {
+				id = event_vic.10007
+				days = 2
+			}
+		}
+	}
+}
+
+#捂住耳朵
+country_event = {
+	id = event_vic.10007
+	title = event_vic.10007.t
+	desc = event_vic.10007.d
+	picture = GFX_report_event_VIC_street_night
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.10007.a
+		if = {
+			limit = {
+				original_tag = VIC
+			}
+			country_event = {
+				id = event_vic.10008
+				days = 2
+			}
+		}
+	}
+}
+
+#沉没成本
+country_event = {
+	id = event_vic.10008
+	title = event_vic.10008.t
+	desc = event_vic.10008.d
+	picture = GFX_report_event_VIC_Boxing_gym_1
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.10008.a
+		if = {
+			limit = {
+				original_tag = VIC
+			}
+			country_event = {
+				id = event_vic.10009
+				days = 2
+			}
+		}
+	}
+}
+
+#被弃之人
+country_event = {
+	id = event_vic.10009
+	title = event_vic.10009.t
+	desc = event_vic.10009.d
+	picture = GFX_report_event_VIC_Baird
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.10009.a
+		if = {
+			limit = {
+				original_tag = VWI
+			}
+			country_event = {
+				id = event_vwi.10001
+				days = 4
+			}
+		}
+
+		if = {
+			limit = {
+				original_tag = VIC
+			}
+			country_event = {
+				id = event_vic.100010
+				days = 14
+			}
+		}
+	}
+}
+
+#两难境地
+country_event = {
+	id = event_vic.100010
+	title = event_vic.100010.t
+	desc = event_vic.100010.d
+	picture = GFX_report_event_VIC_Excalibur
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.100010.a
+
+		trigger = {
+			check_variable = {
+				var = VCA.VIC_Vina_support
+				value = VWI.VIC_Vina_support
+				compare = greater_than
+			}
+		}
+
+		effect_tooltip = {
+			VIC = {
+				VIC_Alexandrina_Vina_Victoria = {
+					set_nationality = VCA
+				}
+				VIC_Hannah_Jackson = {
+					set_nationality = VCA
+				}
+				VIC_Kate_Morrigan = {
+					set_nationality = VCA
+				}
+				VIC_Isabel_Montagu = {
+					set_nationality = VCA
+				}
+			}
+		}
+
+		hidden_effect = {
+			if = {
+				limit = {
+					original_tag = VCA
+				}
+				VIC = {
+					VIC_Alexandrina_Vina_Victoria = {
+						set_nationality = VCA
+					}
+					VIC_Hannah_Jackson = {
+						set_nationality = VCA
+					}
+					VIC_Kate_Morrigan = {
+						set_nationality = VCA
+					}
+					VIC_Isabel_Montagu = {
+						set_nationality = VCA
+					}
+				}
+				country_event = {
+					id = event_vca.10001
+				}
+			}
+
+			if = {
+				limit = {
+					original_tag = VWI
+				}
+				if = {
+					limit = {
+						has_character = VWI_Anfilis_Windermere
+					}
+					country_event = {
+						id = event_vwi.10007
+					}
+				}
+				else = {
+					country_event = {
+						id = event_vwi.10004
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = event_vic.100010.b
+
+		trigger = {
+			check_variable = {
+				var = VCA.VIC_Vina_support
+				value = VWI.VIC_Vina_support
+				compare = less_than_or_equals
+			}
+		}
+
+		effect_tooltip = {
+			VIC = {
+				VIC_Alexandrina_Vina_Victoria = {
+					set_nationality = VWI
+				}
+				VIC_Hannah_Jackson = {
+					set_nationality = VWI
+				}
+				VIC_Kate_Morrigan = {
+					set_nationality = VWI
+				}
+				VIC_Isabel_Montagu = {
+					set_nationality = VWI
+				}
+			}
+		}
+		
+		hidden_effect = {
+			if = {
+				limit = {
+					original_tag = VCA
+				}
+				country_event = {
+					id = event_vca.10002
+				}
+			}
+
+			if = {
+				limit = {
+					original_tag = VWI
+				}
+				VIC = {
+					VIC_Alexandrina_Vina_Victoria = {
+						set_nationality = VWI
+					}
+					VIC_Hannah_Jackson = {
+						set_nationality = VWI
+					}
+					VIC_Kate_Morrigan = {
+						set_nationality = VWI
+					}
+					VIC_Isabel_Montagu = {
+						set_nationality = VWI
+					}
+				}
+				VWI = {
+					retire_character = VWI_Aslan_Royal_Family
+				}
+				if = {
+					limit = {
+						has_character = VWI_Anfilis_Windermere
+					}
+					country_event = {
+						id = event_vwi.10006
+					}
+				}
+				else = {
+					country_event = {
+						id = event_vwi.10005
+					}
+				}
+			}
+		}
+	}
+}
+
+#紧急通讯
+country_event = {
+	id = event_vic.100011
+	title = event_vic.100011.t
+	desc = event_vic.100011.d
+	picture = GFX_report_event_VIC_landship_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.100011.a
+	}
+}
+
+#紧急通讯
+country_event = {
+	id = event_vic.100012
+	title = event_vic.100012.t
+	desc = event_vic.100012.d
+	picture = GFX_report_event_VIC_landship_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_vic.100012.a
+	}
+}
+
+#四方决定联合进军
+country_event = {
+	id = event_vic.100013
+	title = event_vic.100013.t
+	desc = event_vic.100013.d
+	picture = GFX_report_event_VIC_joint_march
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.100013.a
+		if = {
+			limit = {
+				original_tag = VCA
+			}
+			country_event = {
+				id = event_vca.10005
+			}
+		}
+
+		if = {
+			limit = {
+				original_tag = VIC
+			}
+			country_event = {
+				id = event_vic.100017 #event_vic.100015
+				days = 15
+			}
+		}
+	}
+}
+
+#三方决定联合进军
+country_event = {
+	id = event_vic.100014
+	title = event_vic.100014.t
+	desc = event_vic.100014.d
+	picture = GFX_report_event_VIC_joint_march
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+		}
+	}
+
+	option = {
+		name = event_vic.100014.a
+		if = {
+			limit = {
+				original_tag = VCA
+			}
+			country_event = {
+				id = event_vca.10005
+			}
+		}
+
+		if = {
+			limit = {
+				original_tag = VIC
+			}
+			country_event = {
+				id = event_vic.100017 #event_vic.100015
+				days = 15
+			}
+		}
+	}
+}
+
+# #联合进军开始
+# country_event = {
+# 	id = event_vic.100015
+# 	title = event_vic.100015.t
+# 	desc = event_vic.100015.d
+
+# 	is_triggered_only = yes
+
+# 	option = {
+# 		name = event_vic.100015.a
+# 	}
+# }
+
+# #联合进军开始
+# country_event = {
+# 	id = event_vic.100016
+# 	title = event_vic.100016.t
+# 	desc = event_vic.100016.d
+
+# 	is_triggered_only = yes
+
+# 	option = {
+# 		name = event_vic.100016.a
+# 	}
+# }
+
+#自光辉中奔涌
+country_event = {
+	id = event_vic.100017
+	title = event_vic.100017.t
+	desc = event_vic.100017.d
+	picture = GFX_report_event_VIC_battle_with_Sarkaz
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+			original_tag = ZZZ
+		}
+	}
+
+	option = {
+		name = event_vic.100017.a
+
+		effect_tooltip = {
+			39 = {
+				set_demilitarized_zone = no
+			}
+			414 = {
+				set_demilitarized_zone = no
+			}
+			434 = {
+				set_demilitarized_zone = no
+			}
+			595 = {
+				set_demilitarized_zone = no
+			}
+			1081 = {
+				set_demilitarized_zone = no
+			}
+		}
+
+		if = {
+			limit = {
+				original_tag = ZZZ
+			}
+			country_event = {
+				id = event_vic.100018
+				days = 15
+			}
+		}
+
+		hidden_effect = {
+			if = {
+				limit = {
+					original_tag = VIC
+				}
+				VEA = {
+					39 = {
+						set_demilitarized_zone = no
+					}
+					414 = {
+						set_demilitarized_zone = no
+					}
+					434 = {
+						set_demilitarized_zone = no
+					}
+					595 = {
+						set_demilitarized_zone = no
+					}
+					1081 = {
+						set_demilitarized_zone = no
+					}
+				}
+
+			}
+		}
+	}
+}
+
+#工人暴动
+country_event = {
+	id = event_vic.100018
+	title = event_vic.100018.t
+	desc = event_vic.100018.d
+	picture = GFX_report_event_Generic_Socialist_Poster_2
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+			original_tag = ZZZ
+		}
+	}
+
+	option = {
+		name = event_vic.100018.a
+
+		if = {
+			limit = {
+				original_tag = ZZZ
+			}
+			VEA = {
+				transfer_state = 39
+				transfer_state = 414
+				transfer_state = 434
+				transfer_state = 595
+	
+				load_oob = "VEA_Start"
+			}
+			39 = {
+				add_core_of = VEA
+			}
+			414 = {
+				add_core_of = VEA
+			}
+			434 = {
+				add_core_of = VEA
+			}
+			595 = {
+				add_core_of = VEA
+			}
+			country_event = {
+				id = event_vic.100019
+				days = 10
+			}
+			country_event = {
+				id = hidden_vic.1
+				days = 10
+			}
+		}
+	}
+}
+
+#萨卡兹被驱逐，开始议会谈判
+country_event = {
+	id = event_vic.100019
+	title = event_vic.100019.t
+	desc = event_vic.100019.d
+	picture = GFX_report_event_VIC_council
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+			original_tag = ZZZ
+		}
+	}
+
+	option = {
+		name = event_vic.100019.a
+
+		if = {
+			limit = {
+				original_tag = ZZZ
+			}
+			country_event = {
+				id = event_vic.1000100
+				days = 5
+			}
+			country_event = {
+				id = hidden_vic.2
+				days = 5
+			}
+		}
+	}
+}
+
+#谈判破裂，开始内战
+country_event = {
+	id = event_vic.1000100
+	title = event_vic.1000100.t
+	desc = event_vic.1000100.d
+
+	is_triggered_only = yes
+
+	major = yes
+	show_major = {
+		OR = {
+			original_tag = VIC
+			victoria_unifier = yes
+			original_tag = ZZZ
+		}
+	}
+
+	option = {
+		name = event_vic.1000100.a
+
+		if = {
+			limit = {
+				original_tag = VWI
+				has_country_flag = VWI_Terra_bless_the_Queen
+			}
+			complete_national_focus = VWI_the_second_march_Lentinium
+			complete_national_focus = VWI_Terra_bless_the_Queen
+		}
+
+		if = {
+			limit = {
+				original_tag = VWI
+				has_country_flag = VWI_keep_calm_and_carry_on
+			}
+			complete_national_focus = VWI_the_second_march_Lentinium
+			complete_national_focus = VWI_keep_calm_and_carry_on
+		}
+		if = {
+			limit = {
+				original_tag = VWI
+				has_country_flag = VWI_we_will_meet_again
+			}
+			complete_national_focus = VWI_the_second_march_Lentinium
+			complete_national_focus = VWI_we_will_meet_again
+		}
+
+		if = {
+			limit = {
+				original_tag = VCA
+				power_balance_value = {
+					id = VCA_power_balance
+					value < 0
+				}
+			}
+			complete_national_focus = VCA_the_last_stand_of_fallen_empire
+			complete_national_focus = VCA_Rule_Viktoria
+		}
+		if = {
+			original_tag = VCA
+			NOT = {
+				power_balance_value = {
+					id = VCA_power_balance
+					value > 0
+				}
+			}
+			complete_national_focus = VCA_the_last_stand_of_fallen_empire
+			complete_national_focus = VCA_to_the_Victorian_Moon
+		}
+	}
+}
+
+#隐藏事件 谈判事件同时触发
+country_event = {
+	id = hidden_vic.1
+	title = hidden_vic.1.t
+	desc = hidden_vic.1.d
+
+	immediate = {
+		hidden_effect = {
+			set_global_flag = VIC_joint_march_II_end
+
+			VEA = {
+				store_puppet_goverment = yes
+			}
+			if = {
+				limit = {
+					check_variable = { VCA.VIC_Eartha_support > VWI.VIC_Eartha_support }
+				}
+				VCA = {
+					set_autonomy = {
+						target = VEA
+						autonomous_state = autonomy_victoria_alliance
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { VCA.VIC_Eartha_support < VWI.VIC_Eartha_support }
+				}
+				VWI = {
+					set_autonomy = {
+						target = VEA
+						autonomous_state = autonomy_victoria_alliance
+					}
+				}
+			}
+			else = {
+				random_list = {
+					50 = {
+						VWI = {
+							set_autonomy = {
+								target = VEA
+								autonomous_state = autonomy_victoria_alliance
+							}
+						}
+					}
+					50 = {
+						VCA = {
+							set_autonomy = {
+								target = VEA
+								autonomous_state = autonomy_victoria_alliance
+							}
+						}
+					}
+				}
+			}
+
+			VEA = {
+				puppet_not_change_goverment = yes
+			}
+
+			VRN = {
+				store_puppet_goverment = yes
+			}
+			if = {
+				limit = {
+					check_variable = { VGO.VIC_Navy_support > TAR.VIC_Navy_support }
+				}
+				VGO = {
+					set_autonomy = {
+						target = VRN
+						autonomous_state = autonomy_victoria_alliance
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { VGO.VIC_Navy_support < TAR.VIC_Navy_support }
+				}
+				TAR = {
+					set_autonomy = {
+						target = VRN
+						autonomous_state = autonomy_victoria_alliance
+					}
+				}
+			}
+			else = {
+				random_list = {
+					50 = {
+						TAR = {
+							set_autonomy = {
+								target = VRN
+								autonomous_state = autonomy_victoria_alliance
+							}
+						}
+					}
+					50 = {
+						VGO = {
+							set_autonomy = {
+								target = VRN
+								autonomous_state = autonomy_victoria_alliance
+							}
+						}
+					}
+				}
+			}
+			VRN = {
+				puppet_not_change_goverment = yes
+			}
+
+			VAB = {
+				store_puppet_goverment = yes
+			}
+			if = {
+				limit = {
+					check_variable = { VGO.VIC_Abercorn_support > TAR.VIC_Abercorn_support }
+				}
+				VGO = {
+					set_autonomy = {
+						target = VAB
+						autonomous_state = autonomy_victoria_alliance
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { VGO.VIC_Abercorn_support < TAR.VIC_Abercorn_support }
+				}
+				TAR = {
+					set_autonomy = {
+						target = VAB
+						autonomous_state = autonomy_victoria_alliance
+					}
+				}
+				VGO = {
+					transfer_state = 575
+					add_state_core = 575
+				}
+				VAB = {
+					remove_state_core = 575
+				}
+			}
+			else = {
+				random_list = {
+					50 = {
+						TAR = {
+							set_autonomy = {
+								target = VAB
+								autonomous_state = autonomy_victoria_alliance
+							}
+						}
+						VGO = {
+							transfer_state = 575
+							add_state_core = 575
+						}
+						VAB = {
+							remove_state_core = 575
+						}
+					}
+					50 = {
+						VGO = {
+							set_autonomy = {
+								target = VAB
+								autonomous_state = autonomy_victoria_alliance
+							}
+						}
+					}
+				}
+			}
+			VAB = {
+				puppet_not_change_goverment = yes
+			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	hidden = yes
+
+	option = {
+		name = hidden_vic.1.a
+	}
+}
+
+#谈判破裂，触发开始内战
+country_event = {
+	id = hidden_vic.2
+	title = hidden_vic.2.t
+	desc = hidden_vic.2.d
+
+	immediate = {
+		hidden_effect = {
+			news_event = {
+				id = worldnews_vic.1
+			}
+	
+			set_global_flag = VIC_civil_war_start
+	
+			VGO = {
+				drop_cosmetic_tag = yes
+			}
+	
+			VCA = {
+				if = {
+					limit = {
+						NOT = {
+							has_non_aggression_pact_with = TAR
+						}
+					}
+					declare_war_on = {
+						target = TAR
+						type = civil_war
+					}
+					declare_war_on = {
+						target = DUB
+						type = civil_war
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_non_aggression_pact_with = VGO
+						}
+					}
+					declare_war_on = {
+						target = VGO
+						type = civil_war
+					}
+				}
+				
+				declare_war_on = {
+					target = VWI
+					type = civil_war
+				}
+	
+				every_subject_country = {
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = TAR
+						hostility_reason = asked_to_join
+					}
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VWI
+						hostility_reason = asked_to_join
+					}
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VGO
+						hostility_reason = asked_to_join
+					}
+				}
+	
+				VIC_war_preparations_modifier = yes
+	
+				mark_focus_tree_layout_dirty = yes
+	
+				clr_country_flag = VIC_add_group_support
+			}
+			VWI = {
+				declare_war_on = {
+					target = TAR
+					type = civil_war
+				}
+				declare_war_on = {
+					target = VCA
+					type = civil_war
+				}
+				declare_war_on = {
+					target = VGO
+					type = civil_war
+				}
+	
+				every_subject_country = {
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = TAR
+						hostility_reason = asked_to_join
+					}
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VCA
+						hostility_reason = asked_to_join
+					}
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VGO
+						hostility_reason = asked_to_join
+					}
+				}
+	
+				VIC_war_preparations_modifier = yes
+	
+				mark_focus_tree_layout_dirty = yes
+	
+				clr_country_flag = VIC_add_group_support
+	
+				complete_national_focus = VWI_the_second_march_Lentinium
+			}
+			TAR = {
+				declare_war_on = {
+					target = VWI
+					type = civil_war
+				}
+				declare_war_on = {
+					target = VGO
+					type = civil_war
+				}
+	
+				every_subject_country = {
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VCA
+						hostility_reason = asked_to_join
+					}
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VWI
+						hostility_reason = asked_to_join
+					}
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VGO
+						hostility_reason = asked_to_join
+					}
+				}
+	
+				VIC_war_preparations_modifier = yes
+	
+				mark_focus_tree_layout_dirty = yes
+	
+				clr_country_flag = VIC_add_group_support
+			}
+			VGO = {
+				declare_war_on = {
+					target = VWI
+					type = civil_war
+				}
+				declare_war_on = {
+					target = TAR
+					type = civil_war
+				}
+	
+				every_subject_country = {
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VCA
+						hostility_reason = asked_to_join
+					}
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = VWI
+						hostility_reason = asked_to_join
+					}
+					add_to_war = {
+						targeted_alliance = PREV
+						enemy = TAR
+						hostility_reason = asked_to_join
+					}
+				}
+	
+				VIC_war_preparations_modifier = yes
+				
+				mark_focus_tree_layout_dirty = yes
+	
+				clr_country_flag = VIC_add_group_support
+			}
+			DCN = {
+				declare_war_on = {
+					target = VWA
+					type = annex_everything
+				}
+			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	hidden = yes
+
+	option = {
+		name = hidden_vic.2.a
+	}
+}

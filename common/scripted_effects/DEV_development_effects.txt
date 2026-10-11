@@ -1,0 +1,337 @@
+######################
+## 发展度共享国策树（DEV）脚本 —— 建档 / 维持托管 / 达标自动完成（抬档在国策的 completion_reward 里）
+## 生成器 docs/gen_dev_development.cjs（勿手改本文件）
+##
+## 抬档：由国策自己的 completion_reward 负责（每格 = 该维 +1 档，走现成的 <dim>_improve，
+##   满档时空过）。本脚本**不再重复抬档**，只负责两件事：
+## 档位口径：tier = 该国工厂数已跨过的门槛数（20/45/85/140/220），tier 到第几行就点亮第几行。
+## 维持托管：档位自带负向月度回落，且越高越快，所以直接抬上去的档过几个月就会掉回来。
+##   本脚本每月按"自有推进量 = max(0, 回落净值 + max(0, -别家推进))"给该维补一笔差额：
+##     · 回落到 0 就停手 —— 升上去的档不会掉（这是本树"自动维持"的全部含义）；
+##     · 别家（UFE/REU/KMG 国策）已写的正向推进照旧生效，按它们自己的速率继续长；
+##     · modifier@ 读到的是含民族精神的净值，所以大炎【天命】这类已持平的精神不会被叠加推飞。
+## 自动完成：tier 达标即 complete_national_focus（每格一行，AI 与玩家一视同仁）。
+######################
+
+# 建档：自有维持量变量清零（on_startup 与月度开头各调一次，幂等）
+DEV_dev_tree_init = {
+	if = {
+		limit = { NOT = { has_variable = DEV_own_agri } }
+		set_variable = { DEV_own_agri = 0 }
+	}
+	if = {
+		limit = { NOT = { has_variable = DEV_own_ind } }
+		set_variable = { DEV_own_ind = 0 }
+	}
+	if = {
+		limit = { NOT = { has_variable = DEV_own_edu } }
+		set_variable = { DEV_own_edu = 0 }
+	}
+	if = {
+		limit = { NOT = { has_variable = DEV_own_adm } }
+		set_variable = { DEV_own_adm = 0 }
+	}
+	if = {
+		limit = { NOT = { has_variable = DEV_own_pov } }
+		set_variable = { DEV_own_pov = 0 }
+	}
+}
+
+# 月度结算入口
+DEV_dev_tree_monthly = {
+	DEV_dev_tree_init = yes
+	set_variable = { DEV_c_tier = 0 }
+	if = {
+		limit = { num_of_factories > 19 }
+		set_variable = { DEV_c_tier = 1 }
+	}
+	if = {
+		limit = { num_of_factories > 44 }
+		set_variable = { DEV_c_tier = 2 }
+	}
+	if = {
+		limit = { num_of_factories > 84 }
+		set_variable = { DEV_c_tier = 3 }
+	}
+	if = {
+		limit = { num_of_factories > 139 }
+		set_variable = { DEV_c_tier = 4 }
+	}
+	if = {
+		limit = { num_of_factories > 219 }
+		set_variable = { DEV_c_tier = 5 }
+	}
+	DEV_dev_tree_sustain = yes
+	DEV_dev_tree_complete = yes
+}
+
+# 维持托管：补上"档位自带的月度回落"，同时保留别家（UFE/REU/KMG 国策）写的月度推进不吞掉
+#   自有推进量 own = max(0, -modifier@回落 + max(0, -别家推进))；
+#   于是：大炎【天命】等已持平的精神不再叠加（modifier@ 读到的是含精神的净值）；
+#   别家的正向推进照旧生效（速率是它们自己的设计值），只是不会再被自身的回落吃掉。
+DEV_dev_tree_sustain = {
+	# agri
+	set_variable = { DEV_c_mod = 0 }
+	add_to_variable = { var = DEV_c_mod value = modifier@agricultural_development_monthly_modifier }
+	multiply_variable = { DEV_c_mod = -1 }
+	set_variable = { DEV_c_others = 0 }
+	add_to_variable = { var = DEV_c_others value = agricultural_development_monthly_effect }
+	subtract_from_variable = { DEV_c_others = DEV_own_agri }
+	multiply_variable = { DEV_c_others = -1 }
+	clamp_variable = { var = DEV_c_others min = 0 }
+	add_to_variable = { var = DEV_c_mod value = DEV_c_others }
+	clamp_variable = { var = DEV_c_mod min = 0 }
+	set_variable = { DEV_c_delta = 0 }
+	add_to_variable = { var = DEV_c_delta value = DEV_c_mod }
+	subtract_from_variable = { DEV_c_delta = DEV_own_agri }
+	add_to_variable = { agricultural_development_monthly_effect = DEV_c_delta }
+	set_variable = { DEV_own_agri = { value = DEV_c_mod } }
+	# ind
+	set_variable = { DEV_c_mod = 0 }
+	add_to_variable = { var = DEV_c_mod value = modifier@industrial_development_monthly_modifier }
+	multiply_variable = { DEV_c_mod = -1 }
+	set_variable = { DEV_c_others = 0 }
+	add_to_variable = { var = DEV_c_others value = industrial_development_monthly_effect }
+	subtract_from_variable = { DEV_c_others = DEV_own_ind }
+	multiply_variable = { DEV_c_others = -1 }
+	clamp_variable = { var = DEV_c_others min = 0 }
+	add_to_variable = { var = DEV_c_mod value = DEV_c_others }
+	clamp_variable = { var = DEV_c_mod min = 0 }
+	set_variable = { DEV_c_delta = 0 }
+	add_to_variable = { var = DEV_c_delta value = DEV_c_mod }
+	subtract_from_variable = { DEV_c_delta = DEV_own_ind }
+	add_to_variable = { industrial_development_monthly_effect = DEV_c_delta }
+	set_variable = { DEV_own_ind = { value = DEV_c_mod } }
+	# edu
+	set_variable = { DEV_c_mod = 0 }
+	add_to_variable = { var = DEV_c_mod value = modifier@educational_development_monthly_modifier }
+	multiply_variable = { DEV_c_mod = -1 }
+	set_variable = { DEV_c_others = 0 }
+	add_to_variable = { var = DEV_c_others value = educational_development_monthly_effect }
+	subtract_from_variable = { DEV_c_others = DEV_own_edu }
+	multiply_variable = { DEV_c_others = -1 }
+	clamp_variable = { var = DEV_c_others min = 0 }
+	add_to_variable = { var = DEV_c_mod value = DEV_c_others }
+	clamp_variable = { var = DEV_c_mod min = 0 }
+	set_variable = { DEV_c_delta = 0 }
+	add_to_variable = { var = DEV_c_delta value = DEV_c_mod }
+	subtract_from_variable = { DEV_c_delta = DEV_own_edu }
+	add_to_variable = { educational_development_monthly_effect = DEV_c_delta }
+	set_variable = { DEV_own_edu = { value = DEV_c_mod } }
+	# adm
+	set_variable = { DEV_c_mod = 0 }
+	add_to_variable = { var = DEV_c_mod value = modifier@administrative_development_monthly_modifier }
+	multiply_variable = { DEV_c_mod = -1 }
+	set_variable = { DEV_c_others = 0 }
+	add_to_variable = { var = DEV_c_others value = administrative_development_monthly_effect }
+	subtract_from_variable = { DEV_c_others = DEV_own_adm }
+	multiply_variable = { DEV_c_others = -1 }
+	clamp_variable = { var = DEV_c_others min = 0 }
+	add_to_variable = { var = DEV_c_mod value = DEV_c_others }
+	clamp_variable = { var = DEV_c_mod min = 0 }
+	set_variable = { DEV_c_delta = 0 }
+	add_to_variable = { var = DEV_c_delta value = DEV_c_mod }
+	subtract_from_variable = { DEV_c_delta = DEV_own_adm }
+	add_to_variable = { administrative_development_monthly_effect = DEV_c_delta }
+	set_variable = { DEV_own_adm = { value = DEV_c_mod } }
+	# pov
+	set_variable = { DEV_c_mod = 0 }
+	add_to_variable = { var = DEV_c_mod value = modifier@poverty_development_monthly_modifier }
+	multiply_variable = { DEV_c_mod = -1 }
+	set_variable = { DEV_c_others = 0 }
+	add_to_variable = { var = DEV_c_others value = poverty_development_monthly_effect }
+	subtract_from_variable = { DEV_c_others = DEV_own_pov }
+	multiply_variable = { DEV_c_others = -1 }
+	clamp_variable = { var = DEV_c_others min = 0 }
+	add_to_variable = { var = DEV_c_mod value = DEV_c_others }
+	clamp_variable = { var = DEV_c_mod min = 0 }
+	set_variable = { DEV_c_delta = 0 }
+	add_to_variable = { var = DEV_c_delta value = DEV_c_mod }
+	subtract_from_variable = { DEV_c_delta = DEV_own_pov }
+	add_to_variable = { poverty_development_monthly_effect = DEV_c_delta }
+	set_variable = { DEV_own_pov = { value = DEV_c_mod } }
+}
+
+# 达标点亮：门槛跨过即自动完成（按行顺序，前置格先亮）
+DEV_dev_tree_complete = {
+	# 第 1 行（20 座）
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 1 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_agri_1 }
+		}
+		complete_national_focus = DEV_agri_1
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 1 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_ind_1 }
+		}
+		complete_national_focus = DEV_ind_1
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 1 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_edu_1 }
+		}
+		complete_national_focus = DEV_edu_1
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 1 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_adm_1 }
+		}
+		complete_national_focus = DEV_adm_1
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 1 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_pov_1 }
+		}
+		complete_national_focus = DEV_pov_1
+	}
+	# 第 2 行（45 座）
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 2 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_agri_2 }
+		}
+		complete_national_focus = DEV_agri_2
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 2 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_ind_2 }
+		}
+		complete_national_focus = DEV_ind_2
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 2 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_edu_2 }
+		}
+		complete_national_focus = DEV_edu_2
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 2 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_adm_2 }
+		}
+		complete_national_focus = DEV_adm_2
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 2 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_pov_2 }
+		}
+		complete_national_focus = DEV_pov_2
+	}
+	# 第 3 行（85 座）
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 3 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_agri_3 }
+		}
+		complete_national_focus = DEV_agri_3
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 3 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_ind_3 }
+		}
+		complete_national_focus = DEV_ind_3
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 3 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_edu_3 }
+		}
+		complete_national_focus = DEV_edu_3
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 3 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_adm_3 }
+		}
+		complete_national_focus = DEV_adm_3
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 3 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_pov_3 }
+		}
+		complete_national_focus = DEV_pov_3
+	}
+	# 第 4 行（140 座）
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 4 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_agri_4 }
+		}
+		complete_national_focus = DEV_agri_4
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 4 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_ind_4 }
+		}
+		complete_national_focus = DEV_ind_4
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 4 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_edu_4 }
+		}
+		complete_national_focus = DEV_edu_4
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 4 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_adm_4 }
+		}
+		complete_national_focus = DEV_adm_4
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 4 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_pov_4 }
+		}
+		complete_national_focus = DEV_pov_4
+	}
+	# 第 5 行（220 座）
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 5 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_agri_5 }
+		}
+		complete_national_focus = DEV_agri_5
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 5 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_ind_5 }
+		}
+		complete_national_focus = DEV_ind_5
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 5 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_edu_5 }
+		}
+		complete_national_focus = DEV_edu_5
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 5 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_adm_5 }
+		}
+		complete_national_focus = DEV_adm_5
+	}
+	if = {
+		limit = {
+			check_variable = { var = DEV_c_tier value = 5 compare = greater_than_or_equals }
+			NOT = { has_completed_focus = DEV_pov_5 }
+		}
+		complete_national_focus = DEV_pov_5
+	}
+}

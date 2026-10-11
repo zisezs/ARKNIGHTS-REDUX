@@ -1,0 +1,389 @@
+# ══════════════════════════════════════════════════════════════════════
+#  合成化步兵营 · 编队重组 —— 效果层
+#  ------------------------------------------------------------------
+#  小队类型编号（槽位变量 synth_slot_1..9 的取值，0..5）：
+#    0 先锋  突破 +10%
+#    1 近卫  防御 +10%、对步兵杀伤 +10%
+#    2 重装  HP +10%、防御 +10%
+#    3 术师  对装甲杀伤 +30%、HP -10%
+#    4 狙击  对步兵杀伤 +20%
+#    5 医疗  HP +20%、对步兵杀伤 -10%
+#  九格互相叠加；开局 9 格全【先锋】。
+#
+#  实现：add_unit_bonus 是「永久累加」的国家级兵种加成（键名 = sub_unit id
+#  synth_infantry，只作用于合成化步兵营）。面板改配置时按「先撤旧型、再上新型」
+#  成对调用 SYNTH_sq_unapply / SYNTH_sq_apply，所以块里的数值全是静态常量，
+#  减法就用负数块（SYNTH_sq_sub_*）。
+#
+#  数值口径：软攻/硬攻/防御/突破在加成块里是「装备派生值的百分比」小数
+#  （0.10 = +10%，与原版 subdoctrine 的 category_all_armor = { defense = 0.1 } 一致）；
+#  max_strength 是基础值口径（HP = 25 → +10% 写 2.5、+20% 写 5.0、-10% 写 -2.5）。
+#  ⚠ 若游戏内验证发现 max_strength 也按百分比解释，把下文 2.5 / -2.5 / 5.0
+#    整体换成 0.1 / -0.1 / 0.2（只有 SYNTH_sq_add/sub_2/3/5 六块用到）。
+# ══════════════════════════════════════════════════════════════════════
+
+# ── 小队加成块（静态增量；sub = 负值块 = 撤销该型小队）─────────────────
+SYNTH_sq_add_0 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			breakthrough = 0.10
+		}
+	}
+}
+SYNTH_sq_sub_0 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			breakthrough = -0.10
+		}
+	}
+}
+SYNTH_sq_add_1 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			defense = 0.10
+			soft_attack = 0.10
+		}
+	}
+}
+SYNTH_sq_sub_1 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			defense = -0.10
+			soft_attack = -0.10
+		}
+	}
+}
+SYNTH_sq_add_2 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			max_strength = 2.5
+			defense = 0.10
+		}
+	}
+}
+SYNTH_sq_sub_2 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			max_strength = -2.5
+			defense = -0.10
+		}
+	}
+}
+SYNTH_sq_add_3 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			hard_attack = 0.30
+			max_strength = -2.5
+		}
+	}
+}
+SYNTH_sq_sub_3 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			hard_attack = -0.30
+			max_strength = 2.5
+		}
+	}
+}
+SYNTH_sq_add_4 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			soft_attack = 0.20
+		}
+	}
+}
+SYNTH_sq_sub_4 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			soft_attack = -0.20
+		}
+	}
+}
+SYNTH_sq_add_5 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			max_strength = 5.0
+			soft_attack = -0.10
+		}
+	}
+}
+SYNTH_sq_sub_5 = {
+	add_unit_bonus = {
+		synth_infantry = {
+			max_strength = -5.0
+			soft_attack = 0.10
+		}
+	}
+}
+
+# ── 按 synth_idx（0..5）分发：上装 / 撤装 ─────────────────────────────
+SYNTH_sq_apply = {
+	if = { limit = { check_variable = { synth_idx = 0 } } SYNTH_sq_add_0 = yes }
+	else_if = { limit = { check_variable = { synth_idx = 1 } } SYNTH_sq_add_1 = yes }
+	else_if = { limit = { check_variable = { synth_idx = 2 } } SYNTH_sq_add_2 = yes }
+	else_if = { limit = { check_variable = { synth_idx = 3 } } SYNTH_sq_add_3 = yes }
+	else_if = { limit = { check_variable = { synth_idx = 4 } } SYNTH_sq_add_4 = yes }
+	else_if = { limit = { check_variable = { synth_idx = 5 } } SYNTH_sq_add_5 = yes }
+}
+SYNTH_sq_unapply = {
+	if = { limit = { check_variable = { synth_idx = 0 } } SYNTH_sq_sub_0 = yes }
+	else_if = { limit = { check_variable = { synth_idx = 1 } } SYNTH_sq_sub_1 = yes }
+	else_if = { limit = { check_variable = { synth_idx = 2 } } SYNTH_sq_sub_2 = yes }
+	else_if = { limit = { check_variable = { synth_idx = 3 } } SYNTH_sq_sub_3 = yes }
+	else_if = { limit = { check_variable = { synth_idx = 4 } } SYNTH_sq_sub_4 = yes }
+	else_if = { limit = { check_variable = { synth_idx = 5 } } SYNTH_sq_sub_5 = yes }
+}
+
+# ── 合计变量（面板显示用，单位 = 百分点；HP 也按百分比口径显示）────────
+SYNTH_tot_add = {
+	if = { limit = { check_variable = { synth_idx = 0 } }
+		add_to_variable = { synth_tot_brk = 10 }
+	}
+	else_if = { limit = { check_variable = { synth_idx = 1 } }
+		add_to_variable = { synth_tot_def = 10 }
+		add_to_variable = { synth_tot_soft = 10 }
+	}
+	else_if = { limit = { check_variable = { synth_idx = 2 } }
+		add_to_variable = { synth_tot_hp = 10 }
+		add_to_variable = { synth_tot_def = 10 }
+	}
+	else_if = { limit = { check_variable = { synth_idx = 3 } }
+		add_to_variable = { synth_tot_hard = 30 }
+		add_to_variable = { synth_tot_hp = -10 }
+	}
+	else_if = { limit = { check_variable = { synth_idx = 4 } }
+		add_to_variable = { synth_tot_soft = 20 }
+	}
+	else_if = { limit = { check_variable = { synth_idx = 5 } }
+		add_to_variable = { synth_tot_hp = 20 }
+		add_to_variable = { synth_tot_soft = -10 }
+	}
+}
+SYNTH_tot_sub = {
+	if = { limit = { check_variable = { synth_idx = 0 } }
+		add_to_variable = { synth_tot_brk = -10 }
+	}
+	else_if = { limit = { check_variable = { synth_idx = 1 } }
+		add_to_variable = { synth_tot_def = -10 }
+		add_to_variable = { synth_tot_soft = -10 }
+	}
+	else_if = { limit = { check_variable = { synth_idx = 2 } }
+		add_to_variable = { synth_tot_hp = -10 }
+		add_to_variable = { synth_tot_def = -10 }
+	}
+	else_if = { limit = { check_variable = { synth_idx = 3 } }
+		add_to_variable = { synth_tot_hard = -30 }
+		add_to_variable = { synth_tot_hp = 10 }
+	}
+	else_if = { limit = { check_variable = { synth_idx = 4 } }
+		add_to_variable = { synth_tot_soft = -20 }
+	}
+	else_if = { limit = { check_variable = { synth_idx = 5 } }
+		add_to_variable = { synth_tot_hp = -20 }
+		add_to_variable = { synth_tot_soft = 10 }
+	}
+}
+
+# ── 槽位循环：0→1→2→3→4→5→0（九格各一份，按钮名 synth_slot_N_click 对应）──
+SYNTH_slot_cycle_1 = {
+	set_variable = { synth_idx = synth_slot_1 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	add_to_variable = { synth_slot_1 = 1 }
+	if = { limit = { check_variable = { synth_slot_1 > 5 } } set_variable = { synth_slot_1 = 0 } }
+	set_variable = { synth_idx = synth_slot_1 }
+	SYNTH_sq_apply = yes
+	SYNTH_tot_add = yes
+	add_to_variable = { synth_dirty = 1 }
+}
+SYNTH_slot_cycle_2 = {
+	set_variable = { synth_idx = synth_slot_2 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	add_to_variable = { synth_slot_2 = 1 }
+	if = { limit = { check_variable = { synth_slot_2 > 5 } } set_variable = { synth_slot_2 = 0 } }
+	set_variable = { synth_idx = synth_slot_2 }
+	SYNTH_sq_apply = yes
+	SYNTH_tot_add = yes
+	add_to_variable = { synth_dirty = 1 }
+}
+SYNTH_slot_cycle_3 = {
+	set_variable = { synth_idx = synth_slot_3 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	add_to_variable = { synth_slot_3 = 1 }
+	if = { limit = { check_variable = { synth_slot_3 > 5 } } set_variable = { synth_slot_3 = 0 } }
+	set_variable = { synth_idx = synth_slot_3 }
+	SYNTH_sq_apply = yes
+	SYNTH_tot_add = yes
+	add_to_variable = { synth_dirty = 1 }
+}
+SYNTH_slot_cycle_4 = {
+	set_variable = { synth_idx = synth_slot_4 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	add_to_variable = { synth_slot_4 = 1 }
+	if = { limit = { check_variable = { synth_slot_4 > 5 } } set_variable = { synth_slot_4 = 0 } }
+	set_variable = { synth_idx = synth_slot_4 }
+	SYNTH_sq_apply = yes
+	SYNTH_tot_add = yes
+	add_to_variable = { synth_dirty = 1 }
+}
+SYNTH_slot_cycle_5 = {
+	set_variable = { synth_idx = synth_slot_5 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	add_to_variable = { synth_slot_5 = 1 }
+	if = { limit = { check_variable = { synth_slot_5 > 5 } } set_variable = { synth_slot_5 = 0 } }
+	set_variable = { synth_idx = synth_slot_5 }
+	SYNTH_sq_apply = yes
+	SYNTH_tot_add = yes
+	add_to_variable = { synth_dirty = 1 }
+}
+SYNTH_slot_cycle_6 = {
+	set_variable = { synth_idx = synth_slot_6 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	add_to_variable = { synth_slot_6 = 1 }
+	if = { limit = { check_variable = { synth_slot_6 > 5 } } set_variable = { synth_slot_6 = 0 } }
+	set_variable = { synth_idx = synth_slot_6 }
+	SYNTH_sq_apply = yes
+	SYNTH_tot_add = yes
+	add_to_variable = { synth_dirty = 1 }
+}
+SYNTH_slot_cycle_7 = {
+	set_variable = { synth_idx = synth_slot_7 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	add_to_variable = { synth_slot_7 = 1 }
+	if = { limit = { check_variable = { synth_slot_7 > 5 } } set_variable = { synth_slot_7 = 0 } }
+	set_variable = { synth_idx = synth_slot_7 }
+	SYNTH_sq_apply = yes
+	SYNTH_tot_add = yes
+	add_to_variable = { synth_dirty = 1 }
+}
+SYNTH_slot_cycle_8 = {
+	set_variable = { synth_idx = synth_slot_8 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	add_to_variable = { synth_slot_8 = 1 }
+	if = { limit = { check_variable = { synth_slot_8 > 5 } } set_variable = { synth_slot_8 = 0 } }
+	set_variable = { synth_idx = synth_slot_8 }
+	SYNTH_sq_apply = yes
+	SYNTH_tot_add = yes
+	add_to_variable = { synth_dirty = 1 }
+}
+SYNTH_slot_cycle_9 = {
+	set_variable = { synth_idx = synth_slot_9 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	add_to_variable = { synth_slot_9 = 1 }
+	if = { limit = { check_variable = { synth_slot_9 > 5 } } set_variable = { synth_slot_9 = 0 } }
+	set_variable = { synth_idx = synth_slot_9 }
+	SYNTH_sq_apply = yes
+	SYNTH_tot_add = yes
+	add_to_variable = { synth_dirty = 1 }
+}
+
+# ── 恢复默认编制（九格全【先锋】）────────────────────────────────────
+SYNTH_reset_slots = {
+	set_variable = { synth_idx = synth_slot_1 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	set_variable = { synth_slot_1 = 0 }
+	SYNTH_sq_add_0 = yes
+	add_to_variable = { synth_tot_brk = 10 }
+
+	set_variable = { synth_idx = synth_slot_2 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	set_variable = { synth_slot_2 = 0 }
+	SYNTH_sq_add_0 = yes
+	add_to_variable = { synth_tot_brk = 10 }
+
+	set_variable = { synth_idx = synth_slot_3 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	set_variable = { synth_slot_3 = 0 }
+	SYNTH_sq_add_0 = yes
+	add_to_variable = { synth_tot_brk = 10 }
+
+	set_variable = { synth_idx = synth_slot_4 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	set_variable = { synth_slot_4 = 0 }
+	SYNTH_sq_add_0 = yes
+	add_to_variable = { synth_tot_brk = 10 }
+
+	set_variable = { synth_idx = synth_slot_5 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	set_variable = { synth_slot_5 = 0 }
+	SYNTH_sq_add_0 = yes
+	add_to_variable = { synth_tot_brk = 10 }
+
+	set_variable = { synth_idx = synth_slot_6 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	set_variable = { synth_slot_6 = 0 }
+	SYNTH_sq_add_0 = yes
+	add_to_variable = { synth_tot_brk = 10 }
+
+	set_variable = { synth_idx = synth_slot_7 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	set_variable = { synth_slot_7 = 0 }
+	SYNTH_sq_add_0 = yes
+	add_to_variable = { synth_tot_brk = 10 }
+
+	set_variable = { synth_idx = synth_slot_8 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	set_variable = { synth_slot_8 = 0 }
+	SYNTH_sq_add_0 = yes
+	add_to_variable = { synth_tot_brk = 10 }
+
+	set_variable = { synth_idx = synth_slot_9 }
+	SYNTH_sq_unapply = yes
+	SYNTH_tot_sub = yes
+	set_variable = { synth_slot_9 = 0 }
+	SYNTH_sq_add_0 = yes
+	add_to_variable = { synth_tot_brk = 10 }
+
+	add_to_variable = { synth_dirty = 1 }
+}
+
+# ── 开局初始化（on_startup + on_monthly 兜底，见 SYNTH_infantry_on_actions.txt）──
+#     九格全【先锋】= 突破 +90%，一次性累加进 add_unit_bonus。
+SYNTH_init_country = {
+	if = { limit = { NOT = { has_variable = synth_slot_1 } }
+		set_variable = { synth_slot_1 = 0 }
+		set_variable = { synth_slot_2 = 0 }
+		set_variable = { synth_slot_3 = 0 }
+		set_variable = { synth_slot_4 = 0 }
+		set_variable = { synth_slot_5 = 0 }
+		set_variable = { synth_slot_6 = 0 }
+		set_variable = { synth_slot_7 = 0 }
+		set_variable = { synth_slot_8 = 0 }
+		set_variable = { synth_slot_9 = 0 }
+		set_variable = { synth_tot_brk = 90 }
+		set_variable = { synth_tot_def = 0 }
+		set_variable = { synth_tot_soft = 0 }
+		set_variable = { synth_tot_hard = 0 }
+		set_variable = { synth_tot_hp = 0 }
+		add_unit_bonus = {
+			synth_infantry = {
+				breakthrough = 0.90
+			}
+		}
+	}
+}
+
+# ── 面板开关 ─────────────────────────────────────────────────────────
+SYNTH_open_panel = {
+	set_variable = { synth_panel_open = 1 }
+	add_to_variable = { synth_dirty = 1 }
+}
+SYNTH_close_panel = {
+	clear_variable = synth_panel_open
+}

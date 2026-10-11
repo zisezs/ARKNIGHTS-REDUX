@@ -1,0 +1,23 @@
+# ============================================================================
+# 本文件由 docs/gen_arf_trade.py 生成，手改会被覆盖。
+# ============================================================================
+# 国际贸易 · 动态修正
+# 值与变量（未定义按 0 处理）——国策/效果只改变量，这里自动跟随。
+# 写法先例：common/dynamic_modifiers/YAN_route_dynamic_modifiers.txt
+# ⚠️ political_power_gain 是小数（0.01 = +1%）；production_speed_buildings_factor 同理。
+#
+# 显示：加了 icon 之后会出现在国家的「修正/民族精神」栏里，
+#       tooltip 由引擎按下面的修正行自动生成。
+# ⚠️ research_speed_factor 会反过来喂给 effects 里的竞争力公式（见文件头 §闭环提醒）。
+
+arf_international_trade = {
+	icon = GFX_idea_generic_economic_increase
+	enable = { always = yes }
+
+	# 建造速度（系数 0.0050，封顶 +40% = 填补 80 点；封顶在 effects 里做，这里直接取变量）
+	production_speed_buildings_factor = arf_tm_build_bonus
+	# 政治点获取（系数 0.0100，封顶 +60% = 填补 60 点；封顶在 effects 里做，这里直接取变量）
+	political_power_gain = arf_tm_pp_bonus
+	# 科研速度（系数 0.0025，封顶 +30% = 填补 120 点；封顶在 effects 里做，这里直接取变量）
+	research_speed_factor = arf_tm_res_bonus
+}

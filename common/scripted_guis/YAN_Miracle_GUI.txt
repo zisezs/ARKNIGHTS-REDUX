@@ -1,0 +1,200 @@
+# ==============================================================================
+#  大炎·奇迹工程 —— scripted_gui
+#  · YAN_Miracle_Entry ：决议分类页里的入口小面板（宿主窗只有 ~502px 宽，控件右边缘留在 488 以内）
+#  · YAN_Miracle_GUI   ：全屏终端面板
+#
+#  ⚠️ 控件名必须与 interface/_ARF_Gui/YAN_Miracle.gui 完全一致：
+#     拼错不报错，只会得到一批死按钮。docs/validate_yan_miracle.cjs 两边对账。
+#  生成物，真源 docs/gen_yan_miracle.cjs
+# ==============================================================================
+
+scripted_gui = {
+
+	# ---------------- 决议页入口 ----------------
+	YAN_Miracle_Entry = {
+		context_type = decision_category
+		window_name = "YAN_Miracle_Entry_GUI"
+
+		visible = { always = yes }
+
+		effects = {
+			YAN_Mir_Entry_Open_click = { YAN_Mir_Open = yes }
+			YAN_Mir_Entry_Roster_click = {
+				YAN_Mir_Open = yes
+				YAN_Mir_ShowRoster = yes
+			}
+		}
+
+		triggers = {
+			YAN_Mir_Entry_Pip_1_visible = { check_variable = { YAN_mir_total > 1 } }
+			YAN_Mir_Entry_Pip_2_visible = { check_variable = { YAN_mir_total > 3 } }
+			YAN_Mir_Entry_Pip_3_visible = { check_variable = { YAN_mir_total > 5 } }
+			YAN_Mir_Entry_Pip_4_visible = { check_variable = { YAN_mir_total > 7 } }
+			YAN_Mir_Entry_Pip_5_visible = { check_variable = { YAN_mir_total > 9 } }
+			YAN_Mir_Entry_Pip_6_visible = { check_variable = { YAN_mir_total > 10 } }
+			YAN_Mir_Entry_Pip_7_visible = { check_variable = { YAN_mir_total > 12 } }
+			YAN_Mir_Entry_Pip_8_visible = { check_variable = { YAN_mir_total > 14 } }
+			YAN_Mir_Entry_Pip_9_visible = { check_variable = { YAN_mir_total > 16 } }
+			YAN_Mir_Entry_Pip_10_visible = { check_variable = { YAN_mir_total > 18 } }
+		}
+	}
+
+
+	# ---------------- 全屏终端 ----------------
+	YAN_Miracle_GUI = {
+		context_type = player_context
+		window_name = "YAN_Miracle_Window"
+
+		visible = {
+			is_ai = no
+			has_country_flag = yan_mir_open
+		}
+
+		effects = {
+			YAN_Mir_Close_click = { YAN_Mir_Close = yes }
+			YAN_Mir_Prev_click = { YAN_Mir_Prev = yes }
+			YAN_Mir_Next_click = { YAN_Mir_Next = yes }
+			YAN_Mir_Go_click = { YAN_Mir_BreakGround = yes }
+			YAN_Mir_RosterBtn_click = { YAN_Mir_ShowRoster = yes }
+			YAN_Mir_RosterClose_click = { YAN_Mir_ShowDossier = yes }
+			YAN_Mir_Card_1_click = {
+				set_variable = { YAN_mir_proj = 1 }
+				YAN_Mir_SelectProj = yes
+			}
+			YAN_Mir_Card_2_click = {
+				set_variable = { YAN_mir_proj = 2 }
+				YAN_Mir_SelectProj = yes
+			}
+			YAN_Mir_Card_3_click = {
+				set_variable = { YAN_mir_proj = 3 }
+				YAN_Mir_SelectProj = yes
+			}
+			YAN_Mir_Card_4_click = {
+				set_variable = { YAN_mir_proj = 4 }
+				YAN_Mir_SelectProj = yes
+			}
+			YAN_Mir_Card_5_click = {
+				set_variable = { YAN_mir_proj = 5 }
+				YAN_Mir_SelectProj = yes
+			}
+			YAN_Mir_Card_6_click = {
+				set_variable = { YAN_mir_proj = 6 }
+				YAN_Mir_SelectProj = yes
+			}
+			YAN_Mir_Card_7_click = {
+				set_variable = { YAN_mir_proj = 7 }
+				YAN_Mir_SelectProj = yes
+			}
+			YAN_Mir_Card_8_click = {
+				set_variable = { YAN_mir_proj = 8 }
+				YAN_Mir_SelectProj = yes
+			}
+			YAN_Mir_Card_9_click = {
+				set_variable = { YAN_mir_proj = 9 }
+				YAN_Mir_SelectProj = yes
+			}
+		}
+
+		triggers = {
+			# ---- 台账浮层：整块压住中栏，与卷宗互斥 ----
+			YAN_Mir_Roster_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+
+			# ---- 左栏九张卡片：选中高亮 / 在营角标 / 封顶挂锁 ----
+			YAN_Mir_CardSel_1_visible = { check_variable = { YAN_mir_proj = 1 compare = equals } }
+			YAN_Mir_Badge_1_visible = { has_country_flag = yan_mir_act_guangsha }
+			YAN_Mir_Lock_1_visible = {
+				check_variable = { YAN_mir_proj = 1 compare = equals }
+				YAN_Mir_Proj_Capped = yes
+			}
+			YAN_Mir_CardSel_2_visible = { check_variable = { YAN_mir_proj = 2 compare = equals } }
+			YAN_Mir_Badge_2_visible = { has_country_flag = yan_mir_act_rongjin }
+			YAN_Mir_Lock_2_visible = {
+				check_variable = { YAN_mir_proj = 2 compare = equals }
+				YAN_Mir_Proj_Capped = yes
+			}
+			YAN_Mir_CardSel_3_visible = { check_variable = { YAN_mir_proj = 3 compare = equals } }
+			YAN_Mir_Badge_3_visible = { has_country_flag = yan_mir_act_dujiang }
+			YAN_Mir_Lock_3_visible = {
+				check_variable = { YAN_mir_proj = 3 compare = equals }
+				YAN_Mir_Proj_Capped = yes
+			}
+			YAN_Mir_CardSel_4_visible = { check_variable = { YAN_mir_proj = 4 compare = equals } }
+			YAN_Mir_Badge_4_visible = { has_country_flag = yan_mir_act_zhuancao }
+			YAN_Mir_Lock_4_visible = {
+				check_variable = { YAN_mir_proj = 4 compare = equals }
+				YAN_Mir_Proj_Capped = yes
+			}
+			YAN_Mir_CardSel_5_visible = { check_variable = { YAN_mir_proj = 5 compare = equals } }
+			YAN_Mir_Badge_5_visible = { has_country_flag = yan_mir_act_zhenyue }
+			YAN_Mir_Lock_5_visible = {
+				check_variable = { YAN_mir_proj = 5 compare = equals }
+				YAN_Mir_Proj_Capped = yes
+			}
+			YAN_Mir_CardSel_6_visible = { check_variable = { YAN_mir_proj = 6 compare = equals } }
+			YAN_Mir_Badge_6_visible = { has_country_flag = yan_mir_act_feiyun }
+			YAN_Mir_Lock_6_visible = {
+				check_variable = { YAN_mir_proj = 6 compare = equals }
+				YAN_Mir_Proj_Capped = yes
+			}
+			YAN_Mir_CardSel_7_visible = { check_variable = { YAN_mir_proj = 7 compare = equals } }
+			YAN_Mir_Badge_7_visible = { has_country_flag = yan_mir_act_sitian }
+			YAN_Mir_Lock_7_visible = {
+				check_variable = { YAN_mir_proj = 7 compare = equals }
+				YAN_Mir_Proj_Capped = yes
+			}
+			YAN_Mir_CardSel_8_visible = { check_variable = { YAN_mir_proj = 8 compare = equals } }
+			YAN_Mir_Badge_8_visible = { has_country_flag = yan_mir_act_yumen }
+			YAN_Mir_Lock_8_visible = {
+				check_variable = { YAN_mir_proj = 8 compare = equals }
+				YAN_Mir_Proj_Capped = yes
+			}
+			YAN_Mir_CardSel_9_visible = { check_variable = { YAN_mir_proj = 9 compare = equals } }
+			YAN_Mir_Badge_9_visible = { has_country_flag = yan_mir_act_longmen }
+			YAN_Mir_Lock_9_visible = {
+				check_variable = { YAN_mir_proj = 9 compare = equals }
+				YAN_Mir_Proj_Capped = yes
+			}
+
+			# ---- 选址要求逐项 ----
+			YAN_Mir_ChkTxt_1_visible = { check_variable = { YAN_mir_chk_1 > 0 } }
+			YAN_Mir_ChkOk_1_visible = { check_variable = { YAN_mir_chk_1 = 1 compare = equals } }
+			YAN_Mir_ChkNo_1_visible = { check_variable = { YAN_mir_chk_1 = 2 compare = equals } }
+			YAN_Mir_ChkTxt_2_visible = { check_variable = { YAN_mir_chk_2 > 0 } }
+			YAN_Mir_ChkOk_2_visible = { check_variable = { YAN_mir_chk_2 = 1 compare = equals } }
+			YAN_Mir_ChkNo_2_visible = { check_variable = { YAN_mir_chk_2 = 2 compare = equals } }
+			YAN_Mir_ChkTxt_3_visible = { check_variable = { YAN_mir_chk_3 > 0 } }
+			YAN_Mir_ChkOk_3_visible = { check_variable = { YAN_mir_chk_3 = 1 compare = equals } }
+			YAN_Mir_ChkNo_3_visible = { check_variable = { YAN_mir_chk_3 = 2 compare = equals } }
+
+			# ---- 翻页 / 开工 ----
+			YAN_Mir_Prev_visible = { check_variable = { YAN_mir_site_count > 1 } }
+			YAN_Mir_Next_visible = { check_variable = { YAN_mir_site_count > 1 } }
+			YAN_Mir_Rank_visible = { check_variable = { YAN_mir_site_count > 0 } }
+			YAN_Mir_Go_visible = { YAN_Mir_Has_Site = yes }
+			YAN_Mir_Go_click_enabled = { YAN_Mir_Can_Start = yes }
+			YAN_Mir_GoTip_visible = { NOT = { YAN_Mir_Can_Start = yes } }
+			YAN_Mir_NoSite_visible = { NOT = { YAN_Mir_Has_Site = yes } }
+			YAN_Mir_StateName_visible = { check_variable = { YAN_mir_site_count > 0 } }
+
+			# ---- 合格判定两态互斥 ----
+			YAN_Mir_VerdictOk_visible = { check_variable = { YAN_mir_site_ok = 1 compare = equals } }
+			YAN_Mir_VerdictNo_visible = { NOT = { check_variable = { YAN_mir_site_ok = 1 compare = equals } } }
+
+			# ---- 竣工进度刻度 ----
+			YAN_Mir_Pip_1_visible = { check_variable = { YAN_mir_total > 1 } }
+			YAN_Mir_Pip_2_visible = { check_variable = { YAN_mir_total > 3 } }
+			YAN_Mir_Pip_3_visible = { check_variable = { YAN_mir_total > 5 } }
+			YAN_Mir_Pip_4_visible = { check_variable = { YAN_mir_total > 7 } }
+			YAN_Mir_Pip_5_visible = { check_variable = { YAN_mir_total > 9 } }
+			YAN_Mir_Pip_6_visible = { check_variable = { YAN_mir_total > 10 } }
+			YAN_Mir_Pip_7_visible = { check_variable = { YAN_mir_total > 12 } }
+			YAN_Mir_Pip_8_visible = { check_variable = { YAN_mir_total > 14 } }
+			YAN_Mir_Pip_9_visible = { check_variable = { YAN_mir_total > 16 } }
+			YAN_Mir_Pip_10_visible = { check_variable = { YAN_mir_total > 18 } }
+		}
+
+		properties = {
+			YAN_Mir_Plate = { image = "[YAN_GetMirPlate]" }
+		}
+	}
+}

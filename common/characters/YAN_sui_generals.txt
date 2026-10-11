@@ -1,0 +1,261 @@
+# ==============================================================================
+#  大炎 · 岁家十二将领（【岁相的荒唐梦】出山格招募）
+#  · 不写进 history：完成各线首格「出山」时由国策 recruit_character 入池。
+#  · 与同名顾问（YAN_Chong_Yue 等）是两套角色，各自有头像与定位。
+#  · 生成器：E:/tmp/sui12/gen_sui_generals.js（勿手改产物）
+# ==============================================================================
+characters = {
+
+	# 重岳 —— 守土相 · 专属特质「玉门为屏」
+	YAN_gen_zhongyue = {
+		name = YAN_gen_zhongyue
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_zhongyue.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_zhongyue_small.png"
+			}
+		}
+		gender = male
+		field_marshal = {
+			desc = YAN_gen_zhongyue_desc
+			traits = { YAN_sui_zhongyue defensive_doctrine }
+			skill = 8
+			attack_skill = 8
+			defense_skill = 9
+			logistics_skill = 6
+			planning_skill = 7
+		}
+	}
+
+	# 望 —— 暗相 · 专属特质「落子无悔」
+	YAN_gen_wang = {
+		name = YAN_gen_wang
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_wang.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_wang_small.png"
+			}
+		}
+		gender = male
+		field_marshal = {
+			desc = YAN_gen_wang_desc
+			traits = { YAN_sui_wang skilled_staffer }
+			skill = 9
+			attack_skill = 6
+			defense_skill = 7
+			logistics_skill = 7
+			planning_skill = 10
+		}
+	}
+
+	# 令 —— 礼相 · 专属特质「尚蜀有主」
+	YAN_gen_ling = {
+		name = YAN_gen_ling
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_ling.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_ling_small.png"
+			}
+		}
+		gender = female
+		field_marshal = {
+			desc = YAN_gen_ling_desc
+			traits = { YAN_sui_ling offensive_doctrine }
+			skill = 8
+			attack_skill = 8
+			defense_skill = 7
+			logistics_skill = 7
+			planning_skill = 6
+		}
+	}
+
+	# 均 —— 律相 · 专属特质「律不循私」
+	YAN_gen_jun = {
+		name = YAN_gen_jun
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_jun.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_jun_small.png"
+			}
+		}
+		gender = female
+		corps_commander = {
+			desc = YAN_gen_jun_desc
+			traits = { YAN_sui_jun }
+			skill = 7
+			attack_skill = 6
+			defense_skill = 8
+			logistics_skill = 6
+			planning_skill = 8
+		}
+	}
+
+	# 颉 —— 史相 · 专属特质「笔削不欺」
+	YAN_gen_jie = {
+		name = YAN_gen_jie
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_jie.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_jie_small.png"
+			}
+		}
+		gender = female
+		corps_commander = {
+			desc = YAN_gen_jie_desc
+			traits = { YAN_sui_jie }
+			skill = 7
+			attack_skill = 5
+			defense_skill = 6
+			logistics_skill = 8
+			planning_skill = 8
+		}
+	}
+
+	# 黍 —— 农相 · 专属特质「农不失时」
+	YAN_gen_shu = {
+		name = YAN_gen_shu
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_shu.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_shu_small.png"
+			}
+		}
+		gender = female
+		corps_commander = {
+			desc = YAN_gen_shu_desc
+			traits = { YAN_sui_shu }
+			skill = 7
+			attack_skill = 5
+			defense_skill = 7
+			logistics_skill = 9
+			planning_skill = 6
+		}
+	}
+
+	# 绩 —— 贾相 · 专属特质「账无不平」
+	YAN_gen_ji = {
+		name = YAN_gen_ji
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_ji.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_ji_small.png"
+			}
+		}
+		gender = male
+		corps_commander = {
+			desc = YAN_gen_ji_desc
+			traits = { YAN_sui_ji }
+			skill = 7
+			attack_skill = 6
+			defense_skill = 5
+			logistics_skill = 9
+			planning_skill = 7
+		}
+	}
+
+	# 易 —— 博相 · 专属特质「博物多识」
+	YAN_gen_yi = {
+		name = YAN_gen_yi
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_yi.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_yi_small.png"
+			}
+		}
+		gender = male
+		corps_commander = {
+			desc = YAN_gen_yi_desc
+			traits = { YAN_sui_yi }
+			skill = 7
+			attack_skill = 6
+			defense_skill = 8
+			logistics_skill = 6
+			planning_skill = 8
+		}
+	}
+
+	# 年 —— 工相 · 专属特质「洪炉百炼」
+	YAN_gen_nian = {
+		name = YAN_gen_nian
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_nian.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_nian_small.png"
+			}
+		}
+		gender = female
+		field_marshal = {
+			desc = YAN_gen_nian_desc
+			traits = { YAN_sui_nian }
+			skill = 8
+			attack_skill = 9
+			defense_skill = 6
+			logistics_skill = 7
+			planning_skill = 6
+		}
+	}
+
+	# 方 —— 医相 · 专属特质「分毫必称」
+	YAN_gen_fang = {
+		name = YAN_gen_fang
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_fang.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_fang_small.png"
+			}
+		}
+		gender = male
+		corps_commander = {
+			desc = YAN_gen_fang_desc
+			traits = { YAN_sui_fang }
+			skill = 7
+			attack_skill = 5
+			defense_skill = 7
+			logistics_skill = 8
+			planning_skill = 7
+		}
+	}
+
+	# 夕 —— 艺相 · 专属特质「画里江山」
+	YAN_gen_xi = {
+		name = YAN_gen_xi
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_xi.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_xi_small.png"
+			}
+		}
+		gender = female
+		corps_commander = {
+			desc = YAN_gen_xi_desc
+			traits = { YAN_sui_xi trickster }
+			skill = 7
+			attack_skill = 8
+			defense_skill = 4
+			logistics_skill = 5
+			planning_skill = 8
+		}
+	}
+
+	# 余 —— 膳相 · 专属特质「桌无虚席」
+	YAN_gen_yu = {
+		name = YAN_gen_yu
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_yu.png"
+				small = "gfx/leaders/YAN/gen/YAN_gen_yu_small.png"
+			}
+		}
+		gender = male
+		corps_commander = {
+			desc = YAN_gen_yu_desc
+			traits = { YAN_sui_yu }
+			skill = 7
+			attack_skill = 6
+			defense_skill = 6
+			logistics_skill = 8
+			planning_skill = 6
+		}
+	}
+
+}

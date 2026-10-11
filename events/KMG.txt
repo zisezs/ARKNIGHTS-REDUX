@@ -1,0 +1,538 @@
+add_namespace = test_kmg
+add_namespace = focus_kmg
+add_namespace = event_kmg
+
+#测试克拉斯尼亚尔
+country_event = {
+	id = test_kmg.1
+	title = test_kmg.1.t
+	desc = test_kmg.1.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	option = {
+		name = test_kmg.1.a
+		KMG = {
+			annex_country = {
+				target = KRS
+				transfer_troops = yes
+			}
+			every_owned_state = {
+				limit = { is_core_of = KRS }
+				add_core_of = KMG
+				remove_core_of = KRS
+			}
+		}
+	}
+
+	option = {
+		name = test_kmg.1.b
+		BAK = {
+			annex_country = {
+				target = KRS
+				transfer_troops = yes
+			}
+			every_owned_state = {
+				limit = { is_core_of = KRS }
+				add_core_of = KMG
+				remove_core_of = KRS
+			}
+		}
+	}
+}
+
+#触不可及
+country_event = {
+	id = event_kmg.1
+	title = event_kmg.1.t
+	desc = event_kmg.1.d
+	picture = GFX_report_event_KMG_Katopov
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_kmg.1.a
+	}
+}
+
+#那位女士
+country_event = {
+	id = event_kmg.2
+	title = event_kmg.2.t
+	desc = event_kmg.2.d
+	picture = GFX_report_event_KMG_Levitova
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_kmg.2.a
+	}
+}
+
+#被赐予晨星的女孩
+country_event = {
+	id = focus_kmg.1
+	title = focus_kmg.1.t
+	desc = focus_kmg.1.d
+	picture = GFX_report_event_VIC_manor_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.1.a
+	}
+}
+
+#融化的海
+country_event = {
+	id = focus_kmg.2
+	title = focus_kmg.2.t
+	desc = focus_kmg.2.d
+	picture = GFX_report_event_Generic_Tundra_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.2.a
+		DUD = {
+			KMG_Viktor_Bydrakov = {
+				set_nationality = KMG
+			}
+		}
+		annex_country = {
+			target = DUD
+			transfer_troops = yes
+		}
+		every_owned_state = {
+			limit = { is_core_of = DUD }
+			add_core_of = KMG
+			remove_core_of = DUD
+		}
+		set_country_flag = KMG_Viktor_Bydrakov_join
+		add_to_variable = { KMG_centrists_num = 1 }
+	}
+}
+
+#长线投资
+country_event = {
+	id = focus_kmg.3
+	title = focus_kmg.3.t
+	desc = focus_kmg.3.d
+	picture = GFX_report_event_Generic_Barracks
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.3.a
+		set_country_flag = KMG_Sergey_Efron_join
+		add_to_variable = { KMG_moderates_num = 1 }
+	}
+}
+
+#忠诚不需要很多
+country_event = {
+	id = focus_kmg.4
+	title = focus_kmg.4.t
+	desc = focus_kmg.4.d
+	picture = GFX_report_event_Generic_Steak
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.4.a
+		country_event = {
+			id = event_kmg.3
+			days = 15
+		}
+		set_country_flag = KMG_Anastasy_Vonsiatsky_join
+		add_to_variable = { KMG_radicals_num = 1 }
+	}
+}
+
+#祂会宽恕我吗？
+country_event = {
+	id = event_kmg.3
+	title = event_kmg.3.t
+	desc = event_kmg.3.d
+	picture = GFX_report_event_KMG_Vonsiatsky
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_kmg.3.a
+	}
+}
+
+#归途
+country_event = {
+	id = focus_kmg.5
+	title = focus_kmg.5.t
+	desc = focus_kmg.5.d
+	picture = GFX_report_event_KMG_Gumilev
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.5.a
+		clr_country_flag = KMG_savinkova_tour_begin
+		set_country_flag = KMG_Nikolay_Gumilev_join
+		add_to_variable = { KMG_moderates_num = 1 }
+	}
+}
+
+#是恐惧让他们看到他
+country_event = {
+	id = focus_kmg.6
+	title = focus_kmg.6.t
+	desc = focus_kmg.6.d
+	picture = GFX_report_event_Generic_Manor_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.6.a
+		set_country_flag = KMG_Peter_Sorokin_join
+		add_to_variable = { KMG_radicals_num = 1 }
+	}
+}
+
+#推销思想
+country_event = {
+	id = event_kmg.4
+	title = event_kmg.4.t
+	desc = event_kmg.4.d
+	picture = GFX_report_event_Generic_Roit_News
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_kmg.4.a
+		set_country_flag = KMG_Anastasia_Rozaevskaya_join
+		add_to_variable = { KMG_radicals_num = 1 }
+		country_event = {
+			id = event_kmg.6
+			days = 15
+		}
+	}
+}
+
+#既然我不信神……
+country_event = {
+	id = event_kmg.5
+	title = event_kmg.5.t
+	desc = event_kmg.5.d
+	picture = report_event_Generic_Books
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_kmg.5.a
+		set_country_flag = KMG_Pavel_Suvchinskyv_join
+		add_to_variable = { KMG_moderates_num = 1 }
+	}
+}
+
+#交个朋友
+country_event = {
+	id = event_kmg.6
+	title = event_kmg.6.t
+	desc = event_kmg.6.d
+	picture = GFX_report_event_KMG_Vonsiatsky
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_kmg.6.a
+	}
+}
+
+#大地的本质
+country_event = {
+	id = focus_kmg.7
+	title = focus_kmg.7.t
+	desc = focus_kmg.7.d
+	picture = GFX_report_event_Generic_Bar
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.7.a
+	}
+}
+
+#圣骏堡之行
+country_event = {
+	id = focus_kmg.8
+	title = focus_kmg.8.t
+	desc = focus_kmg.8.d
+	picture = GFX_report_event_Generic_Palace_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.8.a
+	}
+}
+
+#都烂透了
+country_event = {
+	id = focus_kmg.9
+	title = focus_kmg.9.t
+	desc = focus_kmg.9.d
+	picture = GFX_report_event_Generic_Manor_Garden
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.9.a
+	}
+}
+
+#闲谈
+country_event = {
+	id = focus_kmg.10
+	title = focus_kmg.10.t
+	desc = focus_kmg.10.d
+	picture = GFX_report_event_Generic_Village_House
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.10.a
+	}
+}
+
+#BUG
+country_event = {
+	id = focus_kmg.11
+	title = focus_kmg.11.t
+	desc = focus_kmg.11.d
+	picture = GFX_report_event_Generic_Coffee
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.11.a
+	}
+}
+
+#各人做各人应做的事
+country_event = {
+	id = focus_kmg.12
+	title = focus_kmg.12.t
+	desc = focus_kmg.12.d
+	picture = GFX_report_event_KMG_Macaron
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.12.a
+	}
+}
+
+#律法与罪恶
+country_event = {
+	id = focus_kmg.13
+	title = focus_kmg.13.t
+	desc = focus_kmg.13.d
+	picture = GFX_report_event_Generic_Ursus_Duma
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.13.a
+	}
+	option = {
+		name = focus_kmg.13.b
+	}
+}
+
+#憎恶
+country_event = {
+	id = focus_kmg.14
+	title = focus_kmg.14.t
+	desc = focus_kmg.14.d
+	picture = GFX_report_event_Generic_Mansion_Room
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.14.a
+	}
+}
+
+#平常的一天
+country_event = {
+	id = event_kmg.7
+	title = event_kmg.7.t
+	desc = event_kmg.7.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_kmg.7.a
+	}
+}
+
+#陌生的人
+country_event = {
+	id = event_kmg.8
+	title = event_kmg.8.t
+	desc = event_kmg.8.d
+	picture = GFX_report_event_Generic_Manor_Garden
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_kmg.8.a
+	}
+}
+
+#死亡是不讲什么法律的
+country_event = {
+	id = focus_kmg.15
+	title = focus_kmg.15.t
+	desc = focus_kmg.15.d
+	picture = GFX_report_event_Generic_Tundra_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.15.a
+	}
+}
+
+#人生是没有正义的
+country_event = {
+	id = focus_kmg.16
+	title = focus_kmg.16.t
+	desc = focus_kmg.16.d
+	picture = GFX_report_event_Generic_Chernobog_Skyline
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.16.a
+	}
+}
+
+#我的血使我痛苦
+country_event = {
+	id = focus_kmg.17
+	title = focus_kmg.17.t
+	desc = focus_kmg.17.d
+	picture = GFX_report_event_Generic_explosion
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.17.a
+
+		KMG_Polka_Savinkova = {
+			set_portraits = {
+				civilian = { large = "GFX_Polka_Savinkova_2" }
+				army = { large = "GFX_Polka_Savinkova_2" }
+			}
+		}
+	}
+}
+
+#源石出口问题
+country_event = {
+	id = focus_kmg.18
+	title = focus_kmg.18.t
+	desc = focus_kmg.18.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.18.a
+		set_country_flag = KMG_choose_above_board_trade
+	}
+
+	option = {
+		name = focus_kmg.18.b
+		set_country_flag = KMG_choose_underground_trade
+	}
+}
+
+#一把尖锐的刀
+country_event = {
+	id = focus_kmg.19
+	title = focus_kmg.19.t
+	desc = focus_kmg.19.d
+	picture = GFX_report_event_Generic_Manor_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.19.a
+	}
+}
+
+#专心忙他自己的事
+country_event = {
+	id = focus_kmg.20
+	title = focus_kmg.20.t
+	desc = focus_kmg.20.d
+	picture = GFX_report_event_Generic_Mansion_Room
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.20.a
+	}
+}
+
+#劳动，祖国
+country_event = {
+	id = focus_kmg.21
+	title = focus_kmg.21.t
+	desc = focus_kmg.21.d
+	picture = GFX_report_event_Generic_Workers_Union
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.21.a
+	}
+
+	option = {
+		name = focus_kmg.21.b
+	}
+}
+
+#我们是……
+country_event = {
+	id = focus_kmg.22
+	title = focus_kmg.22.t
+	desc = focus_kmg.22.d
+	picture = GFX_report_event_Generic_Barracks
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.22.a
+	}
+
+	option = {
+		name = focus_kmg.22.b
+	}
+}
+
+#瓦尼亚和他的水管
+country_event = {
+	id = focus_kmg.23
+	title = focus_kmg.23.t
+	desc = focus_kmg.23.d
+	picture = GFX_report_event_Generic_Military_Factory
+
+	is_triggered_only = yes
+
+	option = {
+		name = focus_kmg.23.a
+	}
+}

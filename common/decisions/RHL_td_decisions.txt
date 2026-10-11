@@ -1,0 +1,230 @@
+# 注意：本文件顶层块名 = 决议分类名，块内只能放「决议」。
+# 分类自身的外观/可见性/优先级一律写在
+# common/decisions/categories/RHL_td_decisions_categories.txt，
+# 不要在这里重复声明 icon / allowed / visible_when_empty / priority
+# —— 引擎会把它们当作未知 token 报错（visible_when_empty 处解析中断）。
+RHL_td_decisions = {
+
+	# ══════════ 启用十科国策树（备选路线） ══════════
+	RHL_td_decision_enable = {
+		icon = GFX_decision_generic_national_unity
+		cost = 25
+		fire_only_once = yes
+		visible = {
+			has_country_flag = CLB_flag_council
+			NOT = {
+				has_country_flag = CLB_flag_td_chosen
+			}
+		}
+		available = {
+			has_country_flag = CLB_flag_council
+			NOT = {
+				has_country_flag = CLB_flag_td_chosen
+			}
+		}
+		complete_effect = {
+			set_country_flag = CLB_flag_td_chosen
+			load_focus_tree = { tree = RHL_td keep_completed = yes }
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ══════════ 结构科：嵌合实验·量产 ══════════
+	RHL_td_decision_chimera_mass = {
+		icon = GFX_decision_generic_dangerous_deal
+		cost = 100
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_td_s1_final
+		}
+		available = {
+			has_country_flag = CLB_flag_td_s1_final
+		}
+		complete_effect = {
+			add_political_power = -100
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = CLB_flag_td_chimera_template
+						}
+					}
+					set_country_flag = CLB_flag_td_chimera_template
+					division_template = {
+						name = "嵌合生命体军团"
+						priority = 1
+						regiments = {
+							infantry = {
+								x = 0
+								y = 0
+							}
+							infantry = {
+								x = 0
+								y = 1
+							}
+							infantry = {
+								x = 0
+								y = 2
+							}
+							infantry = {
+								x = 1
+								y = 0
+							}
+							infantry = {
+								x = 1
+								y = 1
+							}
+							infantry = {
+								x = 1
+								y = 2
+							}
+						}
+						support = {
+							recon = {
+								x = 0
+								y = 0
+							}
+							engineer = {
+								x = 0
+								y = 1
+							}
+						}
+					}
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "division_template = \"嵌合生命体军团\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = ROOT
+					count = 1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ══════════ 能量科：能量井过载 ══════════
+	RHL_td_decision_well_overload = {
+		icon = GFX_decision_generic_electricity
+		cost = 150
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_td_s2_final
+		}
+		available = {
+			has_country_flag = CLB_flag_td_s2_final
+		}
+		complete_effect = {
+			add_political_power = -150
+			add_fuel = 1000
+			custom_effect_tooltip = CLB_tt_stability_down_5
+			hidden_effect = {
+				add_to_variable = { RHL_td_s2_stab = -0.05 }
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ══════════ 源石技艺应用科：中枢·意识网络 ══════════
+	RHL_td_decision_neuro_network = {
+		icon = GFX_decision_generic_civil_support
+		cost = 100
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_td_s3_final
+		}
+		available = {
+			has_country_flag = CLB_flag_td_s3_final
+		}
+		days_remove = 180
+		complete_effect = {
+			add_political_power = -100
+			custom_effect_tooltip = RHL_td_vtt_s3_stab_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s3_stab = 0.10 }
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ══════════ 生态科：生态园·全国 ══════════
+	RHL_td_decision_eco_nation = {
+		icon = GFX_decision_generic_construct_infrastructure
+		cost = 150
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_td_s6_final
+		}
+		available = {
+			has_country_flag = CLB_flag_td_s6_final
+		}
+		days_remove = 180
+		complete_effect = {
+			add_political_power = -150
+			custom_effect_tooltip = RHL_td_vtt_s6_stab_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s6_stab = 0.10 }
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ══════════ 商务科：权与利 ══════════
+	RHL_td_decision_power_profit = {
+		icon = GFX_decision_generic_fundraising
+		cost = 100
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_td_s8_final
+		}
+		available = {
+			has_country_flag = CLB_flag_td_s8_final
+		}
+		days_remove = 180
+		complete_effect = {
+			add_political_power = -100
+			custom_effect_tooltip = RHL_td_vtt_s8_factory_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s8_factory = 0.10 }
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	# ══════════ 人力资源科：情报总局 ══════════
+	RHL_td_decision_intel_bureau = {
+		icon = GFX_decision_generic_spy_agency
+		cost = 100
+		fire_only_once = no
+		visible = {
+			has_country_flag = CLB_flag_td_s9_final
+		}
+		available = {
+			has_country_flag = CLB_flag_td_s9_final
+		}
+		days_remove = 180
+		complete_effect = {
+			add_political_power = -100
+			custom_effect_tooltip = RHL_td_vtt_s9_extract_p0_10
+			hidden_effect = {
+				add_to_variable = { RHL_td_s9_extract = 0.10 }
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+}

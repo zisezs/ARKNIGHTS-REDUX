@@ -1,0 +1,819 @@
+# ============================================================================
+# 叙拉古 (SRC) · 民主的胜利 —— 国策树配套事件
+# ⚠ 全部为 country_event / news_event；country_event 一律不写 major = yes
+#   （major 会让事件发给所有大国、选项在各自作用域执行，见 [[hoi4-major-event-scope-leak]]）
+# ============================================================================
+add_namespace = src_federal
+add_namespace = src_federal_news
+
+# ── 起始：西西里夫人隐藏在幕后 ──
+country_event = {
+	id = src_federal.1
+	title = src_federal.1.t
+	desc = src_federal.1.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_federal.1.a
+		add_political_power = 50
+		add_stability = 0.03
+		set_country_flag = SRC_flag_madam_quiescent
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		name = src_federal.1.b
+		add_war_support = 0.04
+		SRC_civic_points_up_10_effect = yes
+		custom_effect_tooltip = SRC_tt_points10
+		set_country_flag = SRC_flag_madam_watchful
+		ai_chance = {
+			base = 5
+		}
+	}
+	option = {
+		name = src_federal.1.c
+		add_political_power = 20
+		add_stability = 0.01
+		ai_chance = {
+			base = 2
+		}
+	}
+}
+
+# ── 分支一 · 清剿残余：威尼斯与萨卢佐的局部冲突 ──
+country_event = {
+	id = src_federal.2
+	title = src_federal.2.t
+	desc = src_federal.2.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_federal.2.a
+		add_war_support = 0.05
+		add_stability = -0.03
+		add_manpower = -8000
+		ai_chance = {
+			base = 8
+		}
+	}
+	option = {
+		name = src_federal.2.b
+		add_political_power = 70
+		add_stability = 0.02
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+# ── 分支一 · 瓦解地下经济：黑市的反扑 ──
+country_event = {
+	id = src_federal.3
+	title = src_federal.3.t
+	desc = src_federal.3.d
+	picture = GFX_report_event_Generic_explosion
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_federal.3.a
+		add_stability = 0.04
+		add_war_support = 0.03
+		add_manpower = -5000
+		SRC_civic_points_up_5_effect = yes
+		custom_effect_tooltip = SRC_tt_points5
+		ai_chance = {
+			base = 8
+		}
+	}
+	option = {
+		name = src_federal.3.b
+		add_political_power = 80
+		add_stability = -0.02
+		SRC_civic_points_down_10_effect = yes
+		custom_effect_tooltip = SRC_tt_points_down10
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+# ── 分支二 · 世界渴望之城：列国的注视 ──
+country_event = {
+	id = src_federal.4
+	title = src_federal.4.t
+	desc = src_federal.4.d
+	picture = GFX_report_event_german_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_federal.4.a
+		add_stability = 0.05
+		add_political_power = 50
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		name = src_federal.4.b
+		add_war_support = 0.05
+		add_political_power = 30
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+# ── 老一辈怒火中烧：又一座州的核心被抹去（月度结算）──
+country_event = {
+	id = src_federal.6
+	title = src_federal.6.t
+	desc = src_federal.6.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_federal.6.a
+		add_stability = -0.02
+		add_political_power = 30
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		name = src_federal.6.b
+		add_war_support = 0.04
+		add_stability = -0.01
+		ai_chance = {
+			base = 6
+		}
+	}
+}
+
+# ── 制宪会议开幕（决议 complete_effect）──
+country_event = {
+	id = src_federal.7
+	title = src_federal.7.t
+	desc = src_federal.7.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_federal.7.a
+		add_political_power = 40
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+# ── 终局：叙拉古的未来 ──
+country_event = {
+	id = src_federal.9
+	title = src_federal.9.t
+	desc = src_federal.9.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_federal.9.a
+		add_stability = 0.05
+		add_political_power = 80
+		SRC_civic_points_up_20_effect = yes
+		custom_effect_tooltip = SRC_tt_points20
+		custom_effect_tooltip = SRC_tt_finale_unlock_next
+		hidden_effect = {
+			set_country_flag = SRC_flag_new_day
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+######################
+## 新闻事件 ##
+######################
+
+# 新沃尔西尼模式的胜利
+news_event = {
+	id = src_federal_news.1
+	title = src_federal_news.1.t
+	desc = src_federal_news.1.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = src_federal_news.1.a
+		trigger = {
+			original_tag = SRC
+		}
+	}
+	option = {
+		name = src_federal_news.1.b
+	}
+}
+
+# 联邦宪法生效（制宪会议决议）
+news_event = {
+	id = src_federal_news.2
+	title = src_federal_news.2.t
+	desc = src_federal_news.2.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = src_federal_news.2.a
+		trigger = {
+			original_tag = SRC
+		}
+	}
+	option = {
+		name = src_federal_news.2.b
+	}
+}
+
+# 伟大建设工程竣工
+news_event = {
+	id = src_federal_news.3
+	title = src_federal_news.3.t
+	desc = src_federal_news.3.d
+	picture = GFX_report_event_Generic_Military_Factory
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = src_federal_news.3.a
+		trigger = {
+			original_tag = SRC
+		}
+	}
+	option = {
+		name = src_federal_news.3.b
+	}
+}
+
+# 产业国策树终局：叙拉古黄金时代（新闻）
+news_event = {
+	id = src_federal_news.4
+	title = src_federal_news.4.t
+	desc = src_federal_news.4.d
+	picture = GFX_report_event_Generic_Steak
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = src_federal_news.4.a
+		trigger = {
+			original_tag = SRC
+		}
+	}
+	option = {
+		name = src_federal_news.4.b
+	}
+}
+
+# 产业国策树终局：黄金时代的开幕（本国选择）
+country_event = {
+	id = src_federal.10
+	title = src_federal.10.t
+	desc = src_federal.10.d
+	picture = GFX_report_event_Generic_Workers_Union
+
+	is_triggered_only = yes
+
+	option = {
+		name = src_federal.10.a
+		add_political_power = 60
+		add_stability = 0.03
+		custom_effect_tooltip = SRC_eco_tt_10a
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		name = src_federal.10.b
+		add_stability = 0.07
+		add_manpower = 40000
+		custom_effect_tooltip = SRC_eco_tt_10b
+		ai_chance = {
+			base = 6
+		}
+	}
+	option = {
+		name = src_federal.10.c
+		add_war_support = 0.06
+		add_political_power = 25
+		custom_effect_tooltip = SRC_eco_tt_10c
+		ai_chance = {
+			base = 4
+		}
+	}
+}
+
+
+# ── 国策配套 1/35 · year_one_new_volsinii ──
+country_event = {
+	id = src_federal.101
+	title = SRC_year_one_new_volsinii
+	desc = src_federal.101.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 2/35 · new_urban_law_enforced ──
+country_event = {
+	id = src_federal.102
+	title = SRC_new_urban_law_enforced
+	desc = src_federal.102.d
+	picture = GFX_report_event_german_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 3/35 · purge_family_remnants ──
+country_event = {
+	id = src_federal.103
+	title = SRC_purge_family_remnants
+	desc = src_federal.103.d
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 4/35 · absorb_truck_union ──
+country_event = {
+	id = src_federal.104
+	title = SRC_absorb_truck_union
+	desc = src_federal.104.d
+	picture = GFX_report_event_Generic_Workers_Union
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 5/35 · dismantle_underground_economy ──
+country_event = {
+	id = src_federal.105
+	title = SRC_dismantle_underground_economy
+	desc = src_federal.105.d
+	picture = GFX_report_event_Generic_poker
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 6/35 · madam_silence ──
+country_event = {
+	id = src_federal.106
+	title = SRC_madam_silence
+	desc = src_federal.106.d
+	picture = GFX_report_event_Generic_Coffee
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 7/35 · grey_hall_reform ──
+country_event = {
+	id = src_federal.107
+	title = SRC_grey_hall_reform
+	desc = src_federal.107.d
+	picture = GFX_report_event_VIC_council
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 8/35 · families_corporatized ──
+country_event = {
+	id = src_federal.108
+	title = SRC_families_corporatized
+	desc = src_federal.108.d
+	picture = GFX_report_event_REU_Meeting_Room
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 9/35 · port_expansion ──
+country_event = {
+	id = src_federal.109
+	title = SRC_port_expansion
+	desc = src_federal.109.d
+	picture = GFX_report_event_Cruise
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 10/35 · mobile_city_network ──
+country_event = {
+	id = src_federal.110
+	title = SRC_mobile_city_network
+	desc = src_federal.110.d
+	picture = GFX_report_event_Generic_Chernobog_Skyline
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 11/35 · columbia_tech_investment ──
+country_event = {
+	id = src_federal.111
+	title = SRC_columbia_tech_investment
+	desc = src_federal.111.d
+	picture = GFX_report_event_Generic_Lungmen_Office
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 12/35 · civic_points_autonomy ──
+country_event = {
+	id = src_federal.112
+	title = SRC_civic_points_autonomy
+	desc = src_federal.112.d
+	picture = GFX_report_event_Generic_Roit_News
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 13/35 · new_art_district ──
+country_event = {
+	id = src_federal.113
+	title = SRC_new_art_district
+	desc = src_federal.113.d
+	picture = GFX_report_event_REU_Blaze
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 14/35 · central_terra_trade_hub ──
+country_event = {
+	id = src_federal.114
+	title = SRC_central_terra_trade_hub
+	desc = src_federal.114.d
+	picture = GFX_report_event_VIC_city_square
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 15/35 · city_of_desires_blueprint ──
+country_event = {
+	id = src_federal.115
+	title = SRC_city_of_desires_blueprint
+	desc = src_federal.115.d
+	picture = GFX_report_event_Generic_Chernobog_Control_Tower
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 16/35 · united_court_independent ──
+country_event = {
+	id = src_federal.116
+	title = SRC_united_court_independent
+	desc = src_federal.116.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 17/35 · lavinia_judicial_reform ──
+country_event = {
+	id = src_federal.117
+	title = SRC_lavinia_judicial_reform
+	desc = src_federal.117.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 18/35 · judge_academy ──
+country_event = {
+	id = src_federal.118
+	title = SRC_judge_academy
+	desc = src_federal.118.d
+	picture = GFX_report_event_Generic_School_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 19/35 · infected_rights_law ──
+country_event = {
+	id = src_federal.119
+	title = SRC_infected_rights_law
+	desc = src_federal.119.d
+	picture = GFX_report_event_Generic_Hospital_Suite
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 20/35 · civic_equality_act ──
+country_event = {
+	id = src_federal.120
+	title = SRC_civic_equality_act
+	desc = src_federal.120.d
+	picture = GFX_report_event_Generic_Vote
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 21/35 · local_elections_pilot ──
+country_event = {
+	id = src_federal.121
+	title = SRC_local_elections_pilot
+	desc = src_federal.121.d
+	picture = GFX_report_event_UFE_Establish_democratic_government
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 22/35 · federal_constitution_draft ──
+country_event = {
+	id = src_federal.122
+	title = SRC_federal_constitution_draft
+	desc = src_federal.122.d
+	picture = GFX_report_event_Generic_Palace_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 23/35 · police_department_rebuild ──
+country_event = {
+	id = src_federal.123
+	title = SRC_police_department_rebuild
+	desc = src_federal.123.d
+	picture = GFX_report_event_Generic_Barracks
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 24/35 · armed_political_education ──
+country_event = {
+	id = src_federal.124
+	title = SRC_armed_political_education
+	desc = src_federal.124.d
+	picture = GFX_report_event_Generic_Socialist_Poster_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 25/35 · penguin_logistics_assist ──
+country_event = {
+	id = src_federal.125
+	title = SRC_penguin_logistics_assist
+	desc = src_federal.125.d
+	picture = GFX_report_event_Generic_Lungmen_Station
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 26/35 · counter_wolf_lords ──
+country_event = {
+	id = src_federal.126
+	title = SRC_counter_wolf_lords
+	desc = src_federal.126.d
+	picture = GFX_report_event_UFE_Glenwolf
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 27/35 · national_guard ──
+country_event = {
+	id = src_federal.127
+	title = SRC_national_guard
+	desc = src_federal.127.d
+	picture = GFX_report_event_Generic_Parade
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 28/35 · guns_and_order_redefined ──
+country_event = {
+	id = src_federal.128
+	title = SRC_guns_and_order_redefined
+	desc = src_federal.128.d
+	picture = GFX_report_event_REU_The_New_Rifle
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 29/35 · militarization_of_state_forces ──
+country_event = {
+	id = src_federal.129
+	title = SRC_militarization_of_state_forces
+	desc = src_federal.129.d
+	picture = GFX_report_event_Generic_Prison
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 30/35 · texas_returns ──
+country_event = {
+	id = src_federal.130
+	title = SRC_texas_returns
+	desc = src_federal.130.d
+	picture = GFX_report_event_Generic_Steak
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 31/35 · rhodes_island_agreement ──
+country_event = {
+	id = src_federal.131
+	title = SRC_rhodes_island_agreement
+	desc = src_federal.131.d
+	picture = GFX_report_event_Generic_RI_Doctors_Office
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 32/35 · casimir_capital_response ──
+country_event = {
+	id = src_federal.132
+	title = SRC_casimir_capital_response
+	desc = src_federal.132.d
+	picture = GFX_report_event_Generic_Manor_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 33/35 · leytonia_shadow_response ──
+country_event = {
+	id = src_federal.133
+	title = SRC_leytonia_shadow_response
+	desc = src_federal.133.d
+	picture = GFX_report_event_Generic_Mansion_Room
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 34/35 · mobile_cities_league ──
+country_event = {
+	id = src_federal.134
+	title = SRC_mobile_cities_league
+	desc = src_federal.134.d
+	picture = GFX_report_event_VIC_joint_march
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}
+
+# ── 国策配套 35/35 · new_volsinii_model_victory ──
+country_event = {
+	id = src_federal.135
+	title = SRC_new_volsinii_model_victory
+	desc = src_federal.135.d
+	picture = GFX_report_event_ideal
+
+	is_triggered_only = yes
+
+	option = {
+		name = SRC_evt_flavor_ok
+	}
+}

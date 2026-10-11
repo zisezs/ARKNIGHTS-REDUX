@@ -1,0 +1,26 @@
+unit_medals = {
+	#列装新式武器
+	KMG_focus_medal = {
+		
+		available = { 
+			tag = KMG
+			has_completed_focus = KMG_Experimental_weapon_application
+			should_have_any_unique_medals_trigger = no
+		}
+		frame = 2
+		icon = "GFX_medal_icon_default"
+	
+		cost = 20
+		
+		unit_modifiers = {
+			army_attack_factor = 0.1
+			army_defence_factor = 0.1
+			army_strength_factor = -0.05
+		}
+		
+		one_time_effect = {
+			add_divisional_commander_xp = 100
+		}
+		
+	}
+}

@@ -1,0 +1,1162 @@
+East_Ursus_Upheaval_Enable = {
+	log = "[GetDateText]: [Root.GetName]: East_Ursus_Upheaval_Enable; Executing"
+
+	# 2026-09-23：整段包一层「还没开过才开」，测试决议重复点时不再把混乱度/数组重置一遍
+	if = {
+		limit = { NOT = { has_country_flag = East_Ursus_Upheaval_Enabled } }
+
+		custom_effect_tooltip = East_Ursus_Upheaval_Enable_Tt
+		set_country_flag = East_Ursus_Upheaval_Enabled
+		set_country_flag = East_Ursus_Upheaval_Focus_Enabled
+
+		East_Ursus_Upheaval_Contenders_Setup = yes
+
+		set_variable = { Upheaval_Chaos = 0.2 }
+		set_variable = { Upheaval_Chaos_Progress = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Progress = 100 }
+
+		East_Ursus_Upheaval_Chaos_Modifier_Setup = yes
+
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = East_Ursus_Upheaval_DynamicModifier_Chaos }
+		}
+
+		East_Ursus_Upheaval_Change_Color = yes
+
+		set_variable = { ursus_warlord_original_capital = capital }
+
+		# 自动混战的节奏变量（见文件末尾 East_Ursus_Upheaval_Auto_War_Loop）
+		set_variable = { Upheaval_Auto_War_Timer = 0 }
+		set_variable = { Upheaval_Auto_War_Picked = 0 }
+
+		mark_focus_tree_layout_dirty = yes
+
+		# 2026-09-23：ai_focus_aggressive_factor 不是效果（error.log 一直报 Unknown effect-type），删掉
+	}
+
+	log = "[GetDateText]: [Root.GetName]: East_Ursus_Upheaval_Enable; Finished execution"
+}
+
+East_Ursus_Upheaval_Disable = {
+
+	custom_effect_tooltip = East_Ursus_Upheaval_Disable_Tt
+	clr_country_flag = East_Ursus_Upheaval_Enabled
+	clear_array = Upheaval_Contenders
+	clear_variable = Upheaval_ContendersReal_Num
+	clear_array = Upheaval_PrepareWarOn
+	clear_variable = Upheaval_Auto_War_Timer
+	clear_variable = Upheaval_Auto_War_Picked
+
+	clear_variable = Upheaval_Chaos
+	clear_variable = Upheaval_Chaos_temp
+	clear_variable = Upheaval_Chaos_Modifier_conscription_factor
+	clear_variable = Upheaval_Chaos_Modifier_org_loss_when_moving
+	clear_variable = Upheaval_Chaos_Modifier_out_of_supply_factor
+	clear_variable = Upheaval_Chaos_Modifier_surrender_limit
+	clear_variable = Upheaval_Chaos_Modifier_stability_factor
+	clear_variable = Upheaval_Chaos_Modifier_war_support_factor
+	hidden_effect = {
+		remove_dynamic_modifier = { modifier = East_Ursus_Upheaval_DynamicModifier_Chaos }
+	}
+
+	set_country_flag = East_Ursus_Upheaval_Ended
+	set_country_flag = East_Ursus_Unification_After
+	mark_focus_tree_layout_dirty = yes
+	set_variable = { East_Ursus_infiltration_point = 5 }
+
+	URS = {
+		set_variable = { East_Ursus_North_west_infiltration = 0 }
+		set_variable = { East_Ursus_South_infiltration = 0 }
+		set_variable = { East_Ursus_Volga_infiltration = 0 }
+		set_variable = { East_Ursus_Berekar_infiltration = 0 }
+		set_variable = { East_Ursus_Saint_Grypherburg_infiltration = 0 }
+	}
+}
+
+# 2026-09-23（第二处）：角逐者名册与三个计数改成每月整份重算。
+# 旧写法只在 on_annex 里对 Num_1/Num_2 做 -1，而和会割地、内战建国、改 tag、
+# 机制开启之后才冒出来的角逐者都不走 on_annex —— 计数一旦漂住，
+# War_With_UEA 的「冻原上的角逐者打完了」和 AI 那条「本区只剩一个对手」就永久判错。
+East_Ursus_Upheaval_Contenders_Setup = {
+	East_Ursus_Upheaval_Refresh_Contenders = yes
+}
+
+East_Ursus_Upheaval_Refresh_Contenders = {
+	# 「仍在机制内的角逐者」= 该国存在且带 East_Ursus_Upheaval_Enabled 旗标。
+	# Num_1 = 全东乌萨斯；Num_2 = 与本方同区（东冻原 / 中冻原）；Real_Num = 带旗标者。
+	# OnlyOneContenderLeft 触发器、宣战决议的 visible、结算决议都读这三个。
+	hidden_effect = {
+		if = {
+			limit = { has_variable = Upheaval_Contenders }
+			clear_array = Upheaval_Contenders
+		}
+		set_variable = { Upheaval_Contenders_Num_1 = 0 }
+		set_variable = { Upheaval_Contenders_Num_2 = 0 }
+		set_variable = { Upheaval_ContendersReal_Num = 0 }
+		if = {
+			limit = { REU = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = REU }
+			if = {
+				limit = { east_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { SKH = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = SKH }
+			if = {
+				limit = { east_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { UFE = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = UFE }
+			if = {
+				limit = { east_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { KMG = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = KMG }
+			if = {
+				limit = { central_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { BAK = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = BAK }
+			if = {
+				limit = { central_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { SGT = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = SGT }
+			if = {
+				limit = { central_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { OMN = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = OMN }
+			if = {
+				limit = { central_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+		if = {
+			limit = { NAX = { exists = yes } }
+			add_to_variable = { Upheaval_Contenders_Num_1 = 1 }
+			add_to_array = { Upheaval_Contenders = NAX }
+			if = {
+				limit = { central_tundria_ursus = yes }
+				add_to_variable = { Upheaval_Contenders_Num_2 = 1 }
+			}
+		}
+	}
+	East_Ursus_Upheaval_Count_Flagged_Contenders = yes
+}
+
+
+# Real_Num：只统计还带着机制旗标的那批（被吞并后旗标会由 Disable 清掉）
+East_Ursus_Upheaval_Count_Flagged_Contenders = {
+	hidden_effect = {
+		if = {
+			limit = {
+				REU = { exists = yes }
+				REU = { has_country_flag = East_Ursus_Upheaval_Enabled }
+			}
+			add_to_variable = { Upheaval_ContendersReal_Num = 1 }
+		}
+		if = {
+			limit = {
+				SKH = { exists = yes }
+				SKH = { has_country_flag = East_Ursus_Upheaval_Enabled }
+			}
+			add_to_variable = { Upheaval_ContendersReal_Num = 1 }
+		}
+		if = {
+			limit = {
+				UFE = { exists = yes }
+				UFE = { has_country_flag = East_Ursus_Upheaval_Enabled }
+			}
+			add_to_variable = { Upheaval_ContendersReal_Num = 1 }
+		}
+		if = {
+			limit = {
+				KMG = { exists = yes }
+				KMG = { has_country_flag = East_Ursus_Upheaval_Enabled }
+			}
+			add_to_variable = { Upheaval_ContendersReal_Num = 1 }
+		}
+		if = {
+			limit = {
+				BAK = { exists = yes }
+				BAK = { has_country_flag = East_Ursus_Upheaval_Enabled }
+			}
+			add_to_variable = { Upheaval_ContendersReal_Num = 1 }
+		}
+		if = {
+			limit = {
+				SGT = { exists = yes }
+				SGT = { has_country_flag = East_Ursus_Upheaval_Enabled }
+			}
+			add_to_variable = { Upheaval_ContendersReal_Num = 1 }
+		}
+		if = {
+			limit = {
+				OMN = { exists = yes }
+				OMN = { has_country_flag = East_Ursus_Upheaval_Enabled }
+			}
+			add_to_variable = { Upheaval_ContendersReal_Num = 1 }
+		}
+		if = {
+			limit = {
+				NAX = { exists = yes }
+				NAX = { has_country_flag = East_Ursus_Upheaval_Enabled }
+			}
+			add_to_variable = { Upheaval_ContendersReal_Num = 1 }
+		}
+	}
+}
+
+East_Ursus_Upheaval_Chaos_Modifier_Setup = {
+	if = {
+		limit = { check_variable = { Upheaval_Chaos > 0.9 } }
+		set_variable = { Upheaval_Chaos_temp = Upheaval_Chaos }
+		add_to_variable = { Upheaval_Chaos_temp = -0.3 }
+		set_variable = { Upheaval_Chaos_Modifier_conscription_factor = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_conscription_factor = -0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_org_loss_when_moving = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_org_loss_when_moving = 0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_out_of_supply_factor = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_out_of_supply_factor = 0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_surrender_limit = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Modifier_surrender_limit = -0.7 }
+
+		set_variable = { Upheaval_Chaos_Modifier_stability_factor = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Modifier_stability_factor = -0.7 }
+
+		set_variable = { Upheaval_Chaos_Modifier_war_support_factor = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Modifier_war_support_factor = -0.7 }
+	}
+	else_if = {
+		limit = { check_variable = { Upheaval_Chaos > 0.3 } }
+		set_variable = { Upheaval_Chaos_temp = Upheaval_Chaos }
+		add_to_variable = { Upheaval_Chaos_temp = -0.3 }
+		set_variable = { Upheaval_Chaos_Modifier_conscription_factor = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_conscription_factor = -0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_org_loss_when_moving = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_org_loss_when_moving = 0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_out_of_supply_factor = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_out_of_supply_factor = 0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_surrender_limit = Upheaval_Chaos_temp }
+		multiply_variable = { Upheaval_Chaos_Modifier_surrender_limit = -0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_stability_factor = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Modifier_stability_factor = -0.5 }
+
+		set_variable = { Upheaval_Chaos_Modifier_war_support_factor = Upheaval_Chaos }
+		multiply_variable = { Upheaval_Chaos_Modifier_war_support_factor = -0.5 }
+	}
+	else = {
+		set_variable = { Upheaval_Chaos_temp = 0.3 }
+		subtract_from_variable = { Upheaval_Chaos_temp = Upheaval_Chaos }
+		set_variable = { Upheaval_Chaos_Modifier_conscription_factor = Upheaval_Chaos_temp }
+
+		set_variable = { Upheaval_Chaos_Modifier_stability_factor = Upheaval_Chaos_temp }
+
+		set_variable = { Upheaval_Chaos_Modifier_war_support_factor = Upheaval_Chaos_temp }
+	}
+	force_update_dynamic_modifier = yes
+}
+
+East_Ursus_Upheaval_Change_Color = {
+	else_if = {
+		limit = {
+			original_tag = NAX
+		}
+		set_cosmetic_tag = NAX_upheaval
+	}
+	else_if = {
+		limit = {
+			original_tag = BAK
+		}
+		set_cosmetic_tag = BAK_upheaval
+	}
+	else_if = {
+		limit = {
+			original_tag = SKH
+		}
+		set_cosmetic_tag = SKH_upheaval
+	}
+}
+
+East_Ursus_Upheaval_Chaos_Add_Y = {
+	custom_effect_tooltip = East_Ursus_Upheaval_Chaos_Add_Y_Tt
+	add_to_variable = { Upheaval_Chaos = Y }
+	set_variable = { Upheaval_Chaos_Progress = Upheaval_Chaos }
+	multiply_variable = { Upheaval_Chaos_Progress = 100 }
+	clamp_variable = { var = Upheaval_Chaos min = 0 max = 1 }
+	East_Ursus_Upheaval_Chaos_Modifier_Setup = yes
+	East_Ursus_Upheaval_Refresh_Contenders = yes
+}
+
+East_Ursus_infiltrate_uprising = {
+
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_North_west_area = yes
+			URS = {
+				check_variable = { East_Ursus_North_west_infiltration = 1 }
+			}
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 2
+		}
+		damage_building = {
+			type = arms_factory
+			damage = 2
+		}
+	}
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_North_west_area = yes
+			URS = {
+				check_variable = { East_Ursus_North_west_infiltration > 1 }
+			}
+		}
+		ROOT = {
+			#set_state_controller = PREV
+			add_state_core = PREV
+			#set_variable = { troops_num = East_Ursus_North_west_infiltration }
+		}
+		# create_unit = {
+		# 	division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 	owner = ROOT
+		# }
+		# if = {
+		# 	limit = {
+		# 		URS = {
+		# 			check_variable = { East_Ursus_North_west_infiltration > 2 }
+		# 		}
+		# 	}
+		# 	create_unit = {
+		# 		division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 		owner = ROOT
+		# 	}
+		# }
+	}
+
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_South_area = yes
+			URS = {
+				check_variable = { East_Ursus_South_infiltration = 1 }
+			}
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 2
+		}
+		damage_building = {
+			type = arms_factory
+			damage = 2
+		}
+	}
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_South_area = yes
+			URS = {
+				check_variable = { East_Ursus_South_infiltration > 1 }
+			}
+		}
+		ROOT = {
+			#set_state_controller = PREV
+			add_state_core = PREV
+			#set_variable = { troops_num = East_Ursus_South_infiltration }
+		}
+		# create_unit = {
+		# 	division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 	owner = ROOT
+		# }
+		# if = {
+		# 	limit = {
+		# 		URS = {
+		# 			check_variable = { East_Ursus_South_infiltration > 2 }
+		# 		}
+		# 	}
+		# 	create_unit = {
+		# 		division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 		owner = ROOT
+		# 	}
+		# }
+	}
+
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Volga_area = yes
+			URS = {
+				check_variable = { East_Ursus_Volga_infiltration = 1 }
+			}
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 2
+		}
+		damage_building = {
+			type = arms_factory
+			damage = 2
+		}
+	}
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Volga_area = yes
+			URS = {
+				check_variable = { East_Ursus_Volga_infiltration > 1 }
+			}
+		}
+		ROOT = {
+			#set_state_controller = PREV
+			add_state_core = PREV
+			#set_variable = { troops_num = East_Ursus_Volga_infiltration }
+		}
+		# create_unit = {
+		# 	division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 	owner = ROOT
+		# }
+		# if = {
+		# 	limit = {
+		# 		URS = {
+		# 			check_variable = { East_Ursus_Volga_infiltration > 2 }
+		# 		}
+		# 	}
+		# 	create_unit = {
+		# 		division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 		owner = ROOT
+		# 	}
+		# }
+	}
+
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Berekar_area = yes
+			URS = {
+				check_variable = { East_Ursus_Berekar_infiltration = 1 }
+			}
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 2
+		}
+		damage_building = {
+			type = arms_factory
+			damage = 2
+		}
+	}
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Berekar_area = yes
+			URS = {
+				check_variable = { East_Ursus_Berekar_infiltration > 1 }
+			}
+		}		
+		ROOT = {
+			#set_state_controller = PREV
+			add_state_core = PREV
+			#set_variable = { troops_num = East_Ursus_Berekar_infiltration }
+		}
+		# create_unit = {
+		# 	division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 	owner = ROOT
+		# }
+		# if = {
+		# 	limit = {
+		# 		URS = {
+		# 			check_variable = { East_Ursus_Berekar_infiltration > 2 }
+		# 		}
+		# 	}
+		# 	create_unit = {
+		# 		division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 		owner = ROOT
+		# 	}
+		# }
+	}
+
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Saint_Grypherburg_area = yes
+			URS = {
+				check_variable = { East_Ursus_Saint_Grypherburg_infiltration = 1 }
+			}
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 2
+		}
+		damage_building = {
+			type = arms_factory
+			damage = 2
+		}
+	}
+	every_state = {
+		limit = {
+			is_East_Ursus_infiltrated_Saint_Grypherburg_area = yes
+			URS = {
+				check_variable = { East_Ursus_Saint_Grypherburg_infiltration > 1 }
+			}
+		}
+		ROOT = {
+			#set_state_controller = PREV
+			add_state_core = PREV
+			#set_variable = { troops_num = East_Ursus_Saint_Grypherburg_infiltration }
+		}
+		# create_unit = {
+		# 	division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 	owner = ROOT
+		# }
+		# if = {
+		# 	limit = {
+		# 		URS = {
+		# 			check_variable = { East_Ursus_Saint_Grypherburg_infiltration > 2 }
+		# 		}
+		# 	}
+		# 	create_unit = {
+		# 		division = "name = \"民兵师\" division_template = \"民兵师\" start_experience_factor = 0.2" 
+		# 		owner = ROOT
+		# 	}
+		# }
+	}
+}
+
+Ursus_area_uprising = {
+	every_state = {
+		limit = {
+			UCM_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		add_core_of = UCM
+		transfer_state_to = UCM
+	}
+	every_state = {
+		limit = {
+			ULB_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		add_core_of = ULB
+		transfer_state_to = ULB
+	}
+	every_state = {
+		limit = {
+			UFS_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		add_core_of = UFS
+		transfer_state_to = UFS
+	}
+	every_state = {
+		limit = {
+			KZC_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		transfer_state_to = KZC
+	}
+	every_state = {
+		limit = {
+			BUS_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		transfer_state_to = BUS
+	}
+	every_state = {
+		limit = {
+			BLT_uprising_area = yes
+			NOT = {
+				has_state_flag = URS_suppressed
+			}
+		}
+		transfer_state_to = BLT
+	}
+	UCM = {
+		declare_war_on = { target = URS type = annex_everything }
+		declare_war_on = { target = ULB type = annex_everything }
+		declare_war_on = { target = UFS type = annex_everything }
+		every_other_country = {
+			limit = {
+				ursus_unifier = yes
+				NOT = {
+					has_government = communism
+				}
+			}
+			UCM = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+		random_other_country = {
+			limit = {
+				ursus_unifier = yes
+				has_government = communism
+			}
+			set_autonomy = {
+				target = UCM
+				autonomy_state = autonomy_ursus_resistance_ally
+			}
+		}
+		# declare_war_on = { target = KZC type = annex_everything }
+		# declare_war_on = { target = BUS type = annex_everything }
+		# declare_war_on = { target = BLT type = annex_everything }
+		set_politics = {
+			ruling_party = communism
+			elections_allowed = no
+		}
+		set_popularities = {
+			communism = 100
+		}
+		inherit_technology = URS
+		load_oob = UCM_uprising
+	}
+	ULB = {
+		declare_war_on = { target = URS type = annex_everything }
+		declare_war_on = { target = UCM type = annex_everything }
+		declare_war_on = { target = UFS type = annex_everything }
+		every_other_country = {
+			limit = {
+				ursus_unifier = yes
+				NOT = {
+					OR = {
+						has_government = liberalism
+						original_tag = UFE
+					}
+				}
+			}
+			ULB = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+		random_other_country = {
+			limit = {
+				ursus_unifier = yes
+				OR = {
+					has_government = liberalism
+					original_tag = UFE
+				}
+			}
+			set_autonomy = {
+				target = ULB
+				autonomy_state = autonomy_ursus_resistance_ally
+			}
+		}
+		# declare_war_on = { target = KZC type = annex_everything }
+		# declare_war_on = { target = BUS type = annex_everything }
+		# declare_war_on = { target = BLT type = annex_everything }
+		set_politics = {
+			ruling_party = liberalism
+			elections_allowed = no
+		}
+		set_popularities = {
+			liberalism = 100
+		}
+		inherit_technology = URS
+		load_oob = ULB_uprising
+	}
+	UFS = {
+		declare_war_on = { target = URS type = annex_everything }
+		declare_war_on = { target = UCM type = annex_everything }
+		declare_war_on = { target = ULB type = annex_everything }
+		every_other_country = {
+			limit = {
+				ursus_unifier = yes
+				NOT = {
+					OR = {
+						has_government = fascism
+						original_tag = KMG
+					}
+				}
+			}
+			UFS = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+		random_other_country = {
+			limit = {
+				ursus_unifier = yes
+				OR = {
+					has_government = fascism
+					original_tag = KMG
+				}
+			}
+			set_autonomy = {
+				target = UFS
+				autonomy_state = autonomy_ursus_resistance_ally
+			}
+		}
+		# declare_war_on = { target = KZC type = annex_everything }
+		# declare_war_on = { target = BUS type = annex_everything }
+		# declare_war_on = { target = BLT type = annex_everything }
+		set_politics = {
+			ruling_party = fascism
+			elections_allowed = no
+		}
+		set_popularities = {
+			fascism = 100
+		}
+		inherit_technology = URS
+		load_oob = UFS_uprising
+	}
+	KZC = {
+		declare_war_on = { target = URS type = annex_everything }
+		# declare_war_on = { target = UCM type = annex_everything }
+		# declare_war_on = { target = ULB type = annex_everything }
+		# declare_war_on = { target = UFS type = annex_everything }
+		# declare_war_on = { target = BUS type = annex_everything }
+		# declare_war_on = { target = BLT type = annex_everything }
+
+		inherit_technology = URS
+		load_oob = KZC_uprising
+	}
+	BUS = {
+		declare_war_on = { target = URS type = annex_everything }
+		# declare_war_on = { target = UCM type = annex_everything }
+		# declare_war_on = { target = ULB type = annex_everything }
+		# declare_war_on = { target = UFS type = annex_everything }
+		# declare_war_on = { target = KZC type = annex_everything }
+		# declare_war_on = { target = BLT type = annex_everything }
+
+		inherit_technology = URS
+		load_oob = BUS_uprising
+	}
+	BLT = {
+		declare_war_on = { target = URS type = annex_everything }
+		# declare_war_on = { target = UCM type = annex_everything }
+		# declare_war_on = { target = ULB type = annex_everything }
+		# declare_war_on = { target = UFS type = annex_everything }
+		# declare_war_on = { target = KZC type = annex_everything }
+		# declare_war_on = { target = BUS type = annex_everything }
+
+		inherit_technology = URS
+		load_oob = BLT_uprising
+	}
+}
+
+central_tundria_trade_influence_change = {
+	add_to_variable = { trade_influence = tit }
+	custom_effect_tooltip = central_tundria_trade_influence_change_tt
+}
+
+# ==============================================================================
+# 角逐者自动混战（2026-09-22）
+#
+# on_monthly 对每个仍带 East_Ursus_Upheaval_Enabled 旗标的国家各跑一次。
+# 需求：每个角逐者定期对其余角逐者宣战，直到只剩一个角逐者为止。
+#
+# 只靠原有的 East_Ursus_Upheaval_War_With_X 决议为什么不够：
+#   · 那些决议的 visible 要求 AI「has_war = no」，只要角逐者被区外势力（帝国 / 玩家 /
+#     乌卡战争）拖住，整场混战就永久卡死；
+#   · 还要求 is_neighbor_of，隔着第三方领地的两个角逐者永远打不到一起；
+#   · War_With_UFE 当时还漏了本区放行分支，东冻原内部根本打不到科雷马。
+#
+# 三级递进，节奏由 Upheaval_Auto_War_Timer（单位：月）控制：
+#   T1 本区对手且全国无战事 → 走原备战决议（25 PP + 15 天备战 + 和议后 120 天冷却）
+#   T2 本区没有可打的 → 任何接壤的角逐者，直接 annex_everything 宣战
+#   T3 僵持超过 6 个月（互不接壤的死局）→ 无视邻接，随机挑一个还活着的角逐者宣战
+# 只剩一个角逐者（Upheaval_ContendersReal_Num <= 1）时整条循环自动失效。
+# ==============================================================================
+
+East_Ursus_Upheaval_Auto_War_Loop = {
+	# ================================================================================================
+	# 2026-09-23：自动互宣重写
+	#   旧实现把「备战决议一定点得上、declare_war_on 一定打得成」当成前提，四处会把宣战悄悄吞掉，
+	#   表现就是角逐者各自挂机、谁也不打谁：
+	#   1) T1 先写 Upheaval_Auto_War_Picked = 1 才 activate_decision。决议点不起来（25 PP 不够、
+	#      在 days_re_enable = 120 冷却里、visible 那串 AI 节奏条件没过）时本轮机会已经吃掉，
+	#      而计时器在 T1 这条路里从来不清零，于是之后每个月都在重跑同一个失败的 T1，
+	#      T2/T3 永远轮不到 —— game.log 里「EUU 自动备战」四年零输出就是这里。
+	#   2) T2/T3 拿 save_event_target_as 存的临时事件目标去宣战，且 log 打在宣战之前、
+	#      又把计时器归零：1097.11~1100.11 每三个月刷一次「EUU 直接宣战」而场上并没有新战争。
+	#      同文件 Ursus_area_uprising 里跑得通的写法是 X = { declare_war_on = { target = PREV } }，
+	#      现在统一成它，并且宣完当场 has_war_with 复查，真开成战才算这一轮成功。
+	#   3) 附庸不能自主宣战、也不能被第三国宣战，旧的过滤只挡了 is_subject_of = ROOT 一种。
+	#   4) 「已经和某个角逐者打着」以前不看有没有接壤，一旦对非邻国开了场打不着的假战争，
+	#      计时器就永久归零、整条链冻住；现在只认有前线（接壤）的战争。
+	# ================================================================================================
+
+	# 附庸开不了战，单独留一行日志，免得排查时这里是完全安静的
+	if = {
+		limit = {
+			is_ai = yes
+			exists = yes
+			has_country_flag = East_Ursus_Upheaval_Enabled
+			is_subject = yes
+		}
+		log = "[GetDateText]: [Root.GetName]: EUU 本方是附庸，宣不了战"
+	}
+
+	if = {
+		limit = {
+			is_ai = yes
+			exists = yes
+			has_country_flag = East_Ursus_Upheaval_Enabled
+			NOT = { is_subject = yes }
+			NOT = { has_country_flag = East_Ursus_Upheaval_preparing_expansion }	# 已有备战在跑，等它跑完
+			check_variable = { Upheaval_ContendersReal_Num > 1 }	# 只剩一个角逐者就不再auto开战
+		}
+
+		if = {
+			limit = { NOT = { has_variable = Upheaval_Auto_War_Timer } }
+			set_variable = { Upheaval_Auto_War_Timer = 0 }	# 兼容机制开启后才加上的旧存档
+		}
+
+		# 已经和某个接壤的角逐者打着 → 不另开战线，计时清零，等这一仗打完
+		if = {
+			limit = {
+				any_enemy_country = {
+					ursus_unifier = yes
+					has_country_flag = East_Ursus_Upheaval_Enabled
+					is_neighbor_of = ROOT
+				}
+			}
+			set_variable = { Upheaval_Auto_War_Timer = 0 }
+		}
+		else = {
+			add_to_variable = { Upheaval_Auto_War_Timer = 1 }
+
+			if = {
+				limit = { check_variable = { Upheaval_Auto_War_Timer > 1 } }
+				set_variable = { Upheaval_Auto_War_Picked = 0 }
+
+				# ---- T1：本区对手，优先走原备战决议（保住那 15 天备战的演出）----
+				if = {
+					limit = { has_war = no }
+					if = {
+						limit = { east_tundria_ursus = yes }
+						East_Ursus_Upheaval_Auto_War_Prep_East = yes
+					}
+					else_if = {
+						limit = { central_tundria_ursus = yes }
+						East_Ursus_Upheaval_Auto_War_Prep_Central = yes
+					}
+				}
+				# 决议到底挂上没有，看它 complete_effect 里那枚旗标；没挂上就不算消耗本轮机会
+				if = {
+					limit = { check_variable = { Upheaval_Auto_War_Picked = 1 } }
+					if = {
+						limit = { has_country_flag = East_Ursus_Upheaval_preparing_expansion }
+						set_variable = { Upheaval_Auto_War_Timer = 0 }
+					}
+					else = {
+						set_variable = { Upheaval_Auto_War_Picked = 0 }
+					}
+				}
+
+				# ---- T2：本区决议走不通（已亡 / 已交火 / 不接壤 / 冷却中）→ 接壤即宣战 ----
+				if = {
+					limit = { NOT = { check_variable = { Upheaval_Auto_War_Picked = 1 } } }
+					if = {
+						limit = { east_tundria_ursus = yes }
+						East_Ursus_Upheaval_Auto_War_Near_East = yes
+						East_Ursus_Upheaval_Auto_War_Near_Central = yes
+					}
+					else_if = {
+						limit = { central_tundria_ursus = yes }
+						East_Ursus_Upheaval_Auto_War_Near_Central = yes
+						East_Ursus_Upheaval_Auto_War_Near_East = yes
+					}
+					else = {
+						East_Ursus_Upheaval_Auto_War_Near_East = yes
+						East_Ursus_Upheaval_Auto_War_Near_Central = yes
+					}
+				}
+
+				# ---- T3：憋了半年还没法动手（剩下的人互不接壤），硬开一仗把局推动 ----
+				if = {
+					limit = {
+						NOT = { check_variable = { Upheaval_Auto_War_Picked = 1 } }
+						check_variable = { Upheaval_Auto_War_Timer > 6 }
+					}
+					East_Ursus_Upheaval_Auto_War_Force = yes
+				}
+			}
+		}
+	}
+}
+
+# T1：东冻原内部（REU / SKH / UFE 互为对手），逐条对齐原决议的 visible/available，
+#     否则 activate_decision 会静默失败、白占一次机会。
+#     这里只负责「点决议」，点没点上由调用方查 East_Ursus_Upheaval_preparing_expansion 旗标。
+East_Ursus_Upheaval_Auto_War_Prep_East = {
+	if = {
+		limit = {
+			NOT = { check_variable = { Upheaval_Auto_War_Picked = 1 } }
+			NOT = { original_tag = REU }
+			NOT = { original_tag = UFE }	# War_With_REU：科雷马要先解决萨坎哈
+			NOT = { has_war_with = REU }
+			is_neighbor_of = REU
+			REU = {
+				exists = yes
+				has_country_flag = East_Ursus_Upheaval_Enabled
+				NOT = { is_subject_of = ROOT }
+				is_subject = no
+			}
+		}
+		set_variable = { Upheaval_Auto_War_Picked = 1 }
+		log = "[GetDateText]: [Root.GetName]: EUU 自动备战 → REU"
+		activate_decision = East_Ursus_Upheaval_War_With_REU
+	}
+	if = {
+		limit = {
+			NOT = { check_variable = { Upheaval_Auto_War_Picked = 1 } }
+			NOT = { original_tag = SKH }
+			NOT = { has_war_with = SKH }
+			is_neighbor_of = SKH
+			SKH = {
+				exists = yes
+				has_country_flag = East_Ursus_Upheaval_Enabled
+				NOT = { is_subject_of = ROOT }
+				is_subject = no
+			}
+			# War_With_SKH 的 available：科雷马要等萨坎哈坐大（占 202 或 REU_SKH_War 已满 150 天）
+			OR = {
+				NOT = { original_tag = UFE }
+				SKH = {
+					OR = {
+						controls_state = 202
+						has_country_flag = {
+							flag = REU_SKH_War
+							days > 150
+						}
+					}
+				}
+			}
+		}
+		set_variable = { Upheaval_Auto_War_Picked = 1 }
+		log = "[GetDateText]: [Root.GetName]: EUU 自动备战 → SKH"
+		activate_decision = East_Ursus_Upheaval_War_With_SKH
+	}
+	if = {
+		limit = {
+			NOT = { check_variable = { Upheaval_Auto_War_Picked = 1 } }
+			NOT = { original_tag = UFE }
+			NOT = { has_war_with = UFE }
+			is_neighbor_of = UFE
+			UFE = {
+				exists = yes
+				has_country_flag = East_Ursus_Upheaval_Enabled
+				NOT = { is_subject_of = ROOT }
+				is_subject = no
+			}
+		}
+		set_variable = { Upheaval_Auto_War_Picked = 1 }
+		log = "[GetDateText]: [Root.GetName]: EUU 自动备战 → UFE"
+		activate_decision = East_Ursus_Upheaval_War_With_UFE
+	}
+}
+
+# T1：中冻原内部（KMG / BAK / SGT / OMN / NAX）
+East_Ursus_Upheaval_Auto_War_Prep_Central = {
+	if = {
+		limit = {
+			NOT = { check_variable = { Upheaval_Auto_War_Picked = 1 } }
+			NOT = { original_tag = KMG }
+			NOT = { has_war_with = KMG }
+			is_neighbor_of = KMG
+			KMG = {
+				exists = yes
+				has_country_flag = East_Ursus_Upheaval_Enabled
+				NOT = { is_subject_of = ROOT }
+				is_subject = no
+			}
+		}
+		set_variable = { Upheaval_Auto_War_Picked = 1 }
+		log = "[GetDateText]: [Root.GetName]: EUU 自动备战 → KMG"
+		activate_decision = East_Ursus_Upheaval_War_With_KMG
+	}
+	if = {
+		limit = {
+			NOT = { check_variable = { Upheaval_Auto_War_Picked = 1 } }
+			NOT = { original_tag = BAK }
+			NOT = { has_war_with = BAK }
+			is_neighbor_of = BAK
+			BAK = {
+				exists = yes
+				has_country_flag = East_Ursus_Upheaval_Enabled
+				NOT = { is_subject_of = ROOT }
+				is_subject = no
+			}
+		}
+		set_variable = { Upheaval_Auto_War_Picked = 1 }
+		log = "[GetDateText]: [Root.GetName]: EUU 自动备战 → BAK"
+		activate_decision = East_Ursus_Upheaval_War_With_BAK
+	}
+	if = {
+		limit = {
+			NOT = { check_variable = { Upheaval_Auto_War_Picked = 1 } }
+			NOT = { original_tag = SGT }
+			NOT = { has_war_with = SGT }
+			is_neighbor_of = SGT
+			SGT = {
+				exists = yes
+				has_country_flag = East_Ursus_Upheaval_Enabled
+				NOT = { is_subject_of = ROOT }
+				is_subject = no
+			}
+		}
+		set_variable = { Upheaval_Auto_War_Picked = 1 }
+		log = "[GetDateText]: [Root.GetName]: EUU 自动备战 → SGT"
+		activate_decision = East_Ursus_Upheaval_War_With_SGT
+	}
+	if = {
+		limit = {
+			NOT = { check_variable = { Upheaval_Auto_War_Picked = 1 } }
+			NOT = { original_tag = OMN }
+			NOT = { has_war_with = OMN }
+			is_neighbor_of = OMN
+			OMN = {
+				exists = yes
+				has_country_flag = East_Ursus_Upheaval_Enabled
+				NOT = { is_subject_of = ROOT }
+				is_subject = no
+			}
+		}
+		set_variable = { Upheaval_Auto_War_Picked = 1 }
+		log = "[GetDateText]: [Root.GetName]: EUU 自动备战 → OMN"
+		activate_decision = East_Ursus_Upheaval_War_With_OMN
+	}
+	if = {
+		limit = {
+			NOT = { check_variable = { Upheaval_Auto_War_Picked = 1 } }
+			NOT = { original_tag = NAX }
+			NOT = { has_war_with = NAX }
+			is_neighbor_of = NAX
+			NAX = {
+				exists = yes
+				has_country_flag = East_Ursus_Upheaval_Enabled
+				NOT = { is_subject_of = ROOT }
+				is_subject = no
+			}
+		}
+		set_variable = { Upheaval_Auto_War_Picked = 1 }
+		log = "[GetDateText]: [Root.GetName]: EUU 自动备战 → NAX"
+		activate_decision = East_Ursus_Upheaval_War_With_NAX
+	}
+}
+
+# T2：东冻原里任意一个接壤、还活着、尚未交手、双方都能自主行动的角逐者 —— 直接宣战
+#     （走 declare_war_on 而不是决议，因此不受决议 visible 的 has_war = no 与本区节奏限制）
+East_Ursus_Upheaval_Auto_War_Near_East = {
+	random_other_country = {
+		limit = {
+			east_tundria_ursus = yes
+			exists = yes
+			has_country_flag = East_Ursus_Upheaval_Enabled
+			is_neighbor_of = ROOT
+			NOT = { is_subject_of = ROOT }
+			is_subject = no
+			NOT = { is_in_faction_with = ROOT }
+			ROOT = { NOT = { has_war_with = PREV } }
+		}
+		ROOT = {
+			declare_war_on = { target = PREV type = annex_everything }
+			if = {
+				limit = { has_war_with = PREV }
+				set_variable = { Upheaval_Auto_War_Picked = 1 }
+				set_variable = { Upheaval_Auto_War_Timer = 0 }
+				log = "[GetDateText]: [Root.GetName]: EUU 已开打（东冻原）"
+			}
+			else = {
+				log = "[GetDateText]: [Root.GetName]: EUU 宣战被引擎拒绝（东冻原）"
+			}
+		}
+	}
+}
+
+East_Ursus_Upheaval_Auto_War_Near_Central = {
+	random_other_country = {
+		limit = {
+			central_tundria_ursus = yes
+			exists = yes
+			has_country_flag = East_Ursus_Upheaval_Enabled
+			is_neighbor_of = ROOT
+			NOT = { is_subject_of = ROOT }
+			is_subject = no
+			NOT = { is_in_faction_with = ROOT }
+			ROOT = { NOT = { has_war_with = PREV } }
+		}
+		ROOT = {
+			declare_war_on = { target = PREV type = annex_everything }
+			if = {
+				limit = { has_war_with = PREV }
+				set_variable = { Upheaval_Auto_War_Picked = 1 }
+				set_variable = { Upheaval_Auto_War_Timer = 0 }
+				log = "[GetDateText]: [Root.GetName]: EUU 已开打（中冻原）"
+			}
+			else = {
+				log = "[GetDateText]: [Root.GetName]: EUU 宣战被引擎拒绝（中冻原）"
+			}
+		}
+	}
+}
+
+# T3：剩下的角逐者互不接壤时的兜底。没有前线的话这仗只能靠和议收场，所以放最后、且要已经憋满半年。
+East_Ursus_Upheaval_Auto_War_Force = {
+	random_other_country = {
+		limit = {
+			ursus_unifier = yes
+			exists = yes
+			has_country_flag = East_Ursus_Upheaval_Enabled
+			NOT = { is_subject_of = ROOT }
+			is_subject = no
+			NOT = { is_in_faction_with = ROOT }
+			ROOT = { NOT = { has_war_with = PREV } }
+		}
+		ROOT = {
+			declare_war_on = { target = PREV type = annex_everything }
+			if = {
+				limit = { has_war_with = PREV }
+				set_variable = { Upheaval_Auto_War_Picked = 1 }
+				set_variable = { Upheaval_Auto_War_Timer = 0 }
+				log = "[GetDateText]: [Root.GetName]: EUU 僵持兜底宣战"
+			}
+			else = {
+				log = "[GetDateText]: [Root.GetName]: EUU 兜底宣战被引擎拒绝"
+			}
+		}
+	}
+}

@@ -1,0 +1,664 @@
+ideas = {
+	country = {
+		#工具人精神
+		#战乱经济学
+		KMG_War_Economic_Effect = {
+			desc = "KMG_ration_desc"
+			modifier = {
+				
+			}
+		}
+		#战乱经济学（衰减1）
+		KMG_War_Economic_Effect_tool_one = {
+			name = KMG_War_Economic_Effect
+			modifier = {
+				consumer_goods_factor = 0.05
+				production_speed_buildings_factor = -0.05
+				line_change_production_efficiency_factor = -0.03
+				production_factory_efficiency_gain_factor = -0.05
+				production_factory_max_efficiency_factor = -0.02
+				industrial_capacity_factory = -0.075
+				stability_factor = -0.05
+			}
+		}
+		#战乱经济学（衰减2）
+		KMG_War_Economic_Effect_tool_two = {
+			name = KMG_War_Economic_Effect
+			modifier = {
+				consumer_goods_factor = 0.025
+				production_speed_buildings_factor = -0.05
+				line_change_production_efficiency_factor = -0.03
+				production_factory_efficiency_gain_factor = -0.05
+				production_factory_max_efficiency_factor = -0.02
+				industrial_capacity_factory = -0.05
+				stability_factor = -0.05
+			}
+		}
+		#最高经济苏维埃
+		KMG_Supreme_Economic_Council = {
+			modifier = {
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+		#最高经济苏维埃（衰减0）
+		KMG_Supreme_Economic_Council_tool = {
+			name = KMG_Supreme_Economic_Council
+			modifier = {
+				
+			}
+		}
+		#最高经济苏维埃（衰减1）
+		KMG_Supreme_Economic_Council_tool_one = {
+			name = KMG_Supreme_Economic_Council
+			modifier = {
+				consumer_goods_factor = 0.05
+				production_speed_buildings_factor = -0.05
+				line_change_production_efficiency_factor = -0.03
+				production_factory_efficiency_gain_factor = -0.05
+				production_factory_max_efficiency_factor = -0.02
+				industrial_capacity_factory = -0.075
+				stability_factor = -0.05
+			}
+		}
+		#最高经济苏维埃（衰减2）
+		KMG_Supreme_Economic_Council_tool_two = {
+			name = KMG_Supreme_Economic_Council
+			modifier = {
+				consumer_goods_factor = 0.025
+				production_speed_buildings_factor = -0.05
+				line_change_production_efficiency_factor = -0.03
+				production_factory_efficiency_gain_factor = -0.05
+				production_factory_max_efficiency_factor = -0.02
+				industrial_capacity_factory = -0.05
+				stability_factor = -0.05
+			}
+		}
+		#寡头经济体制
+		KMG_Oligarchic_economic_system = {
+			modifier = {
+				industrial_capacity_factory = 0.1
+			}
+		}
+		#寡头经济体制（衰减0）
+		KMG_Oligarchic_economic_system_tool = {
+			name = KMG_Oligarchic_economic_system
+			modifier = {
+				
+			}
+		}
+		#寡头经济体制（衰减1）
+		KMG_Oligarchic_economic_system_tool_one = {
+			name = KMG_Oligarchic_economic_system
+			modifier = {
+				stability_factor = -0.2
+				consumer_goods_factor = 0.05
+				production_speed_buildings_factor = -0.05
+				line_change_production_efficiency_factor = -0.03
+				production_factory_efficiency_gain_factor = -0.05
+				production_factory_max_efficiency_factor = -0.02
+				industrial_capacity_factory = -0.075
+				stability_factor = -0.05
+			}
+		}
+		#寡头经济体制（衰减2）
+		KMG_Oligarchic_economic_system_tool_two = {
+			name = KMG_Oligarchic_economic_system
+			modifier = {
+				consumer_goods_factor = 0.025
+				production_speed_buildings_factor = -0.05
+				line_change_production_efficiency_factor = -0.03
+				production_factory_efficiency_gain_factor = -0.05
+				production_factory_max_efficiency_factor = -0.02
+				industrial_capacity_factory = -0.05
+				stability_factor = -0.05
+			}
+		}
+		#战火之殇
+		KMG_Damage_of_War = {
+			modifier = {
+				
+			}
+		}
+		#战火之殇（衰减）
+		KMG_Damage_of_War_tool = {
+			name = KMG_Damage_of_War
+			modifier = {
+				conscription = -0.001
+				army_attack_factor = -0.01
+				army_defence_factor = -0.01
+				breakthrough_factor = -0.01
+			}
+		}
+		#先锋之军
+		KMG_Vanguard_army = {
+			modifier = {
+				army_attack_factor = 0.1
+			}
+		}
+		#先锋之军（衰减0）
+		KMG_Vanguard_army_tool = {
+			name = KMG_Vanguard_army
+			modifier = {
+				
+			}
+		}
+		#先锋之军（衰减1）
+		KMG_Vanguard_army_tool_one = {
+			name = KMG_Vanguard_army
+			modifier = {
+				conscription = -0.001
+				army_attack_factor = -0.01
+				army_defence_factor = -0.01
+				breakthrough_factor = -0.01
+			}
+		}
+		#意志取胜
+		KMG_Victory_of_will = {
+			modifier = {
+				army_org_regain = 0.1
+				land_reinforce_rate = 0.05
+			}
+		}
+		#意志取胜（衰减0）
+		KMG_Victory_of_will_tool = {
+			name = KMG_Victory_of_will
+			modifier = {
+				
+			}
+		}
+		#意志取胜（衰减1）
+		KMG_Victory_of_will_tool_one = {
+			name = KMG_Victory_of_will
+			modifier = {
+				conscription = -0.001
+				army_attack_factor = -0.01
+				army_defence_factor = -0.01
+				breakthrough_factor = -0.01
+			}
+		}
+		
+		#配给制
+		KMG_ration = {
+			desc = "KMG_ration_desc"
+			picture = KMG_rationing_system
+			modifier = {
+				stability_factor = -0.2
+				consumer_goods_factor = -0.15
+			}
+		}
+		#重组远东大学
+		KMG_Reorganizing_University = {
+			desc = "KMG_Reorganizing_University_desc"
+			picture = KMG_far_eastern_university_reorganization
+			modifier = {
+				research_speed_factor = 0.07
+			}
+		}
+		#现代化铁路系统
+		KMG_transport_network = {
+			desc = "KMG_transport_network_desc"
+			picture = URS_transportation_network_construction
+			modifier = {
+				out_of_supply_factor = -0.1
+				supply_node_range = 0.1
+				supply_consumption_factor = -0.05
+			}
+		}
+		#旅游业繁荣
+		KMG_Prosperous_tourism = {
+			desc = "KMG_Prosperous_tourism_desc"
+			picture = KMG_tourism_boom
+			modifier = {
+				political_power_factor = 0.05
+				consumer_goods_factor = -0.05
+			}
+		}
+		#扩大生产
+		KMG_expand_production = {
+			desc = "KMG_expand_production_desc"
+			picture = KMG_improve_working_system
+			modifier = {
+				industrial_capacity_factory = 0.1
+			}
+		}
+		#参军狂热
+		KMG_military_enlistment_frenzy = {
+			desc = "KMG_military_enlistment_frenzy_desc"
+			picture = KMG_military_craze
+			modifier = {
+				training_time_factor = -0.5
+			}
+		}
+		#钢铁浪潮
+		KMG_Steel_tide = {
+			desc = "KMG_Steel_tide_desc"
+			picture = TAR_motorized_idea_cost_idea
+			equipment_bonus = {
+				motorized = {
+					build_cost_ic = -0.1
+				}
+			}
+		}
+		#钢铁浪潮2
+		KMG_Steel_tide_2 = {
+			desc = "KMG_Steel_tide_desc"
+			picture = VCA_armored_vehicle_production_expansion
+			equipment_bonus = {
+				motorized = {
+					build_cost_ic = -0.1
+				}
+				mechanized = {
+					build_cost_ic = -0.1
+				}
+				armor = {
+					build_cost_ic = -0.05
+				}
+			}
+		}
+		#军事工业发展
+		KMG_Military_industry_development = {
+			desc = "KMG_Military_industry_development_desc"
+			picture = URS_high_production
+			modifier = {
+				research_speed_factor = 0.05
+				industrial_capacity_factory = 0.1
+				military_industrial_organization_funds_gain = 0.1
+			}
+		}
+		#能源垄断
+		KMG_Energy_monopoly = {
+			desc = "KMG_Energy_monopoly_desc"
+			picture = KMG_Energy_monopoly
+			modifier = {
+				local_resources_factor = 0.05
+				fuel_gain_factor_from_states = 0.15
+			}
+		}
+		#战争税
+		KMG_War_taxes = {
+			desc = "KMG_war_taxes_desc"
+			picture = KMG_war_tax
+			modifier = {
+				stability_factor = -0.1
+				consumer_goods_factor = -0.15
+			}
+		}
+		#内部动荡
+		KMG_Internal_turmoil = {
+			desc = "KMG_Internal_turmoil_desc"
+			picture = URS_afterwave_of_great_rebellion
+			modifier = {
+				stability_factor = -0.15
+				political_power_factor = -0.2
+			}
+		}
+		
+		KMG_descendant_of_rebellion = {
+			picture = KMG_descendant_of_rebellion
+
+			modifier = {
+				training_time_factor = 0.2
+				experience_gain_army_factor = -0.15
+				command_power_gain_mult = -0.15
+			}
+		}
+
+		KMG_decentralized_industrialization_1 = {
+			name = KMG_decentralized_industrialization
+			picture = KMG_decentralized_industrialization
+
+			modifier = {
+				production_speed_buildings_factor = -0.1
+				production_factory_efficiency_gain_factor = -0.1
+				production_factory_max_efficiency_factor = -0.1
+				industrial_capacity_factory = -0.1
+			}
+		}
+
+		KMG_decentralized_industrialization_2 = {
+			name = KMG_decentralized_industrialization
+			picture = KMG_decentralized_industrialization
+
+			modifier = {
+				production_factory_efficiency_gain_factor = -0.05
+				production_factory_max_efficiency_factor = -0.05
+			}
+		}
+		
+		KMG_decentralized_industrialization_3 = {
+			name = KMG_decentralized_industrialization
+			picture = KMG_decentralized_industrialization
+
+			modifier = {
+				consumer_goods_factor = -0.15
+			}
+		}
+		
+		KMG_decentralized_industrialization_4 = {
+			name = KMG_decentralized_industrialization
+			picture = KMG_decentralized_industrialization
+
+			modifier = {
+				consumer_goods_factor = -0.15
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+
+		KMG_hidden_in_woods = {
+			picture = KMG_hidden_in_woods
+
+			modifier = {
+				political_power_factor = -0.15
+				research_speed_factor = -0.15
+			}
+		}
+
+		KMG_prepare_to_decouple = {
+			picture = KMG_prepare_to_decouple
+
+			modifier = {
+				consumer_goods_factor = -0.15
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_max_efficiency_factor = 0.1
+				industrial_capacity_factory = 0.1
+			}
+		}
+
+		KMG_local_militia_1 = {
+			name = KMG_local_militia
+			picture = KMG_local_militia
+
+			modifier = {
+				training_time_factor = -0.1
+				experience_gain_army_unit_factor = -0.05
+				army_org_factor = -0.05
+			}
+		}
+
+		KMG_local_militia_2 = {
+			name = KMG_local_militia
+			picture = KMG_local_militia
+
+			modifier = {
+				training_time_factor = -0.1
+				experience_gain_army_unit_factor = -0.05
+				army_org_factor = -0.05
+				army_org_regain = 0.05
+			}
+		}
+
+		KMG_secret_army_1 = {
+			name = KMG_secret_army
+			picture = KMG_secret_army
+
+			modifier = {
+				training_time_factor = 0.1
+				planning_speed = 0.1
+				army_org_factor = 0.05
+				army_org_regain = -0.05
+			}
+		}
+
+		KMG_secret_army_2 = {
+			name = KMG_secret_army
+			picture = KMG_secret_army
+
+			modifier = {
+				training_time_factor = 0.1
+				planning_speed = 0.1
+				army_org_factor = 0.05
+				army_org_regain = -0.05
+				land_reinforce_rate = 0.05
+			}
+		}
+
+		KMG_death_horseman = {
+			picture = KMG_death_horseman
+
+			modifier = {
+				weekly_manpower = 2000
+				conscription_factor = 0.1
+			}
+		}
+
+		KMG_war_tax = {
+			picture = KMG_war_tax
+
+			modifier = {
+				stability_factor = -0.05
+				political_power_factor = 0.1
+				industrial_capacity_factory = 0.20
+				production_speed_buildings_factor = 0.20
+			}
+		}
+
+		KMG_rationing_system = {
+			picture = KMG_rationing_system
+
+			modifier = {
+				stability_factor = -0.05
+				consumer_goods_factor = -0.05
+			}
+		}
+
+		KMG_tourism_boom = {
+			picture = KMG_tourism_boom
+
+			modifier = {
+				political_power_factor = 0.25
+				consumer_goods_factor = -0.05
+			}
+		}
+
+		KMG_republican_ideals = {
+			picture = KMG_republican_ideals
+
+			modifier = {
+				political_power_gain = 0.1
+				compliance_growth = 0.05
+				conscription_factor = 0.05
+			}
+		}
+
+		KMG_nationalist_fervor = {
+			picture = KMG_nationalist_fervor
+
+			modifier = {
+				war_support_weekly = 0.001
+				army_org_regain = 0.05
+			}
+		}
+
+		KMG_military_craze = {
+			picture = KMG_military_craze
+
+			modifier = {
+				training_time_army_factor = -0.2
+			}
+		}
+
+		KMG_improve_working_system = {
+			picture = KMG_improve_working_system
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+			}
+		}
+
+		KMG_the_will_to_win_1 = {
+			name = KMG_the_will_to_win
+			picture = KMG_the_will_to_win
+
+			modifier = {
+				army_org_factor = 0.1
+				army_org_regain = 0.1
+				land_reinforce_rate = 0.05
+			}
+		}
+
+		KMG_the_will_to_win_2 = {
+			name = KMG_the_will_to_win
+			picture = KMG_the_will_to_win
+
+			modifier = {
+				army_org_factor = 0.1
+				army_org_regain = 0.1
+				land_reinforce_rate = 0.05
+				experience_gain_army_unit_factor = 0.1
+				experience_loss_factor = -0.1
+			}
+		}
+
+		KMG_the_will_to_win_3 = {
+			name = KMG_the_will_to_win
+			picture = KMG_the_will_to_win
+
+			modifier = {
+				army_org_factor = 0.1
+				army_org_regain = 0.1
+				land_reinforce_rate = 0.05
+				org_loss_when_moving = -0.05
+				experience_gain_army_unit_factor = 0.1
+				experience_loss_factor = -0.1
+			}
+		}
+
+		KMG_the_will_to_win_4 = {
+			name = KMG_the_will_to_win
+			picture = KMG_the_will_to_win
+
+			modifier = {
+				army_org_factor = 0.1
+				army_org_regain = 0.1
+				land_reinforce_rate = 0.05
+				org_loss_when_moving = -0.05
+				experience_gain_army_unit_factor = 0.2
+				experience_loss_factor = -0.2
+			}
+		}
+
+		KMG_the_will_to_win_5 = {
+			name = KMG_the_will_to_win
+			picture = KMG_the_will_to_win
+
+			modifier = {
+				army_org_factor = 0.1
+				army_org_regain = 0.1
+				land_reinforce_rate = 0.1
+				org_loss_when_moving = -0.1
+				experience_gain_army_unit_factor = 0.2
+				experience_loss_factor = -0.2
+			}
+		}
+
+		KMG_the_will_to_win_6 = {
+			name = KMG_the_will_to_win
+			picture = KMG_the_will_to_win
+
+			modifier = {
+				army_org_factor = 0.15
+				army_org_regain = 0.15
+				land_reinforce_rate = 0.05
+				org_loss_when_moving = -0.1
+				experience_gain_army_unit_factor = 0.2
+				experience_loss_factor = -0.2
+			}
+		}
+
+		KMG_the_will_to_win_7 = {
+			name = KMG_the_will_to_win
+			picture = KMG_the_will_to_win
+
+			modifier = {
+				army_org_factor = 0.15
+				army_org_regain = 0.15
+				land_reinforce_rate = 0.1
+				org_loss_when_moving = -0.15
+				experience_loss_factor = -0.2
+				experience_gain_army_unit_factor = 0.2
+			}
+		}
+
+		KMG_vanguard_army_1 = {
+			name = KMG_vanguard_army
+			picture = KMG_vanguard_army
+
+			modifier = {
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+			}
+		}
+
+		KMG_vanguard_army_2 = {
+			name = KMG_vanguard_army
+			picture = KMG_vanguard_army
+
+			modifier = {
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+				breakthrough_factor = 0.1
+			}
+		}
+
+		KMG_vanguard_army_3 = {
+			name = KMG_vanguard_army
+			picture = KMG_vanguard_army
+
+			modifier = {
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+				army_speed_factor = 0.05
+			}
+		}
+
+		KMG_vanguard_army_4 = {
+			name = KMG_vanguard_army
+			picture = KMG_vanguard_army
+
+			modifier = {
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+				breakthrough_factor = 0.1
+				army_speed_factor = 0.05
+			}
+		}
+
+		KMG_vanguard_army_5 = {
+			name = KMG_vanguard_army
+			picture = KMG_vanguard_army
+
+			modifier = {
+				army_attack_factor = 0.15
+				army_defence_factor = 0.15
+				breakthrough_factor = 0.15
+				army_speed_factor = 0.05
+			}
+		}
+
+		KMG_vanguard_army_6 = {
+			name = KMG_vanguard_army
+			picture = KMG_vanguard_army
+
+			modifier = {
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+				breakthrough_factor = 0.1
+				army_speed_factor = 0.1
+			}
+		}
+
+		KMG_vanguard_army_7 = {
+			name = KMG_vanguard_army
+			picture = KMG_vanguard_army
+
+			modifier = {
+				army_attack_factor = 0.15
+				army_defence_factor = 0.15
+				breakthrough_factor = 0.15
+				army_speed_factor = 0.1
+			}
+		}
+	}
+}

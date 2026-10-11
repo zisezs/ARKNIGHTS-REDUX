@@ -1,0 +1,1417 @@
+######################################################
+# 叙拉古 (SRC) · 拉维妮娅线 —— 荆棘王座：大审判时代
+# 由 E:/tmp/src_lv_build.js 从 E:/tmp/src_lv_data_*.js 生成，**不要手改**。
+#
+# 形式：共享国策簇。由 common/national_focus/SRC.txt 的 SRC_federal_tree 以
+#   shared_focus 引用并入主树，坐标带 y = 24..31（政治 0..7 / 产业 9..15 /
+#   对外扩张 17..22，y = 23 留空作分隔），横向收在 x = ±8 内。
+#
+# 解锁：**靠事件**。1101.9.1 由 common/on_actions/SRC_lavinia_on_actions.txt 弹
+#   src_lv.1【莱昂图索总统被撞飞了！】，选「拉维妮娅是亲密战友！」才置
+#   SRC_lv_flag_succession；只有起始格 		available 读这面旗，
+#   后面 36 格全靠 prerequisite 继承（与对外扩张树用 date 卡闸同一套路）。
+#   三棵老树（政治 / 产业 / 扩张）不受影响，照常可点 —— 用户 2026-09-19 定稿。
+#
+# 排版：起始 (0,24) → 四分支各 7 格（中心 x = -7 / -3 / +3 / +7，双翼 ±1，
+#   y=25 头 → 26 双翼 → 27 汇聚 → 28 双翼 → 29 尾）→ 整合行 y=30 七格（x = -6..+6 步 2）
+#   → 终局 y=31 回 x=0。包围盒 17 列 × 8 行。
+#
+# 长期加成：四条路线各一个会成长的民族精神（law_order / judgment_era / prison_nation / penitence_economy），
+#   每格每变量 3%~5% 一档，单项满档 ≤20%（2026-09-20 把 25% 档削到 15%）（lo_pp +20% / lo_intel +20% / lo_ws +15% / lo_stab +20% / je_pp +15% / je_fac +15% / je_ws +15% / pr_recr +20% / pr_fac +20% / pr_stab -6% / pr_infra +20% / pe_pp +20% / pe_fac +15% / pe_cons +6% / pe_res +15%）。
+#   满档表由生成器按数据表算出，见 common/dynamic_modifiers/SRC_lavinia_dynamic_modifiers.txt 文件头。
+#
+# 按项目约定不实装「解锁科技」与外交条目：科技 → add_tech_bonus，
+#   外资撤离/关系冰点 → 限期精神与政治点，宣战结盟语义只留在文案里。
+# 图标：方框 + 意大利语缩写（100x88），生成器 docs/gen_src_lv_icons.py，清单 E:/tmp/src_lv_icons.json
+######################################################
+
+shared_focus = { #1. 莱昂图索总统被撞飞了！
+	id = SRC_lv_succession
+	icon = GFX_focus_SRC_lv_succession
+	x = 0
+	y = 24
+	cost = 2
+	available_if_capitulated = yes
+	# 闸门：1101.9.1 继任事件选「拉维妮娅是亲密战友！」才给旗（events/SRC_lavinia.txt）
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = SRC_lv_tt_need_succession
+			has_country_flag = SRC_lv_flag_succession
+		}
+	}
+	ai_will_do = {
+		base = 25
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_succession_polity
+		custom_effect_tooltip = SRC_lv_tt_succession_leader
+		custom_effect_tooltip = SRC_lv_tt_counterattack
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_era
+			SRC_lv_succession_takeover_effect = yes
+			add_political_power = 40
+			add_war_support = 0.05
+			add_ideas = SRC_lv_counterattack
+			add_dynamic_modifier = { modifier = SRC_lv_dyn_judgment_era }
+			set_variable = { SRC_lv_verdicts = 0 }
+			country_event = { id = src_lv.101 days = 1 }
+		}
+	}
+}
+
+shared_focus = { #2. 特别法庭成立
+	id = SRC_lv_special_court
+	icon = GFX_focus_SRC_lv_special_court
+	x = -7
+	y = 25
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_lv_succession
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_lo_pp
+		custom_effect_tooltip = SRC_lv_tt_lo_intel
+		custom_effect_tooltip = SRC_lv_tt_special_court
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_special_court
+			add_political_power = 50
+			add_war_support = 0.04
+			add_dynamic_modifier = { modifier = SRC_lv_dyn_law_order }
+			country_event = { id = src_lv.102 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_law_order_modify_tt
+		add_to_variable = {
+			SRC_lv_lo_pp = 0.05
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			SRC_lv_lo_intel = 0.05
+			tooltip = intel_network_gain_factor_tt
+		}
+	}
+}
+
+shared_focus = { #3. 法官即警察
+	id = SRC_lv_judge_police
+	icon = GFX_focus_SRC_lv_judge_police
+	x = -8
+	y = 26
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_special_court
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_lo_ws
+		custom_effect_tooltip = SRC_lv_tt_lo_intel
+		custom_effect_tooltip = SRC_lv_tt_judge_police
+		custom_effect_tooltip = SRC_lv_tt_gendarmerie
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_judge_police
+			add_political_power = 40
+			army_experience = 25
+			SRC_lv_gendarmerie_levee_effect = yes
+			country_event = { id = src_lv.103 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_law_order_modify_tt
+		add_to_variable = {
+			SRC_lv_lo_ws = 0.05
+			tooltip = war_support_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_lo_intel = 0.05
+			tooltip = intel_network_gain_factor_tt
+		}
+	}
+}
+
+shared_focus = { #4. 城邦联合法院集权
+	id = SRC_lv_court_centralized
+	icon = GFX_focus_SRC_lv_court_centralized
+	x = -6
+	y = 26
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_special_court
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_lo_stab
+		custom_effect_tooltip = SRC_lv_tt_lo_pp
+		custom_effect_tooltip = SRC_lv_tt_court_centralized
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_court_centralized
+			remove_ideas = SRC_United_Court
+			add_political_power = 45
+			add_stability = 0.03
+			country_event = { id = src_lv.104 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_law_order_modify_tt
+		add_to_variable = {
+			SRC_lv_lo_stab = 0.05
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_lo_pp = 0.05
+			tooltip = political_power_gain_tt
+		}
+	}
+}
+
+shared_focus = { #5. 紧急审判程序永久化
+	id = SRC_lv_emergency_trials
+	icon = GFX_focus_SRC_lv_emergency_trials
+	x = -7
+	y = 27
+	cost = 6
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_lv_judge_police
+	}
+	prerequisite = {
+		focus = SRC_lv_court_centralized
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_lo_pp
+		custom_effect_tooltip = SRC_lv_tt_lo_ws
+		custom_effect_tooltip = SRC_lv_tt_emergency_trials
+		custom_effect_tooltip = SRC_lv_tt_zone_2
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_emergency_trial
+			add_war_support = 0.06
+			add_political_power = 30
+			SRC_lv_purge_family_zone_effect = yes
+			SRC_lv_purge_family_zone_effect = yes
+			add_to_variable = { SRC_lv_verdicts = 1 }
+			clamp_variable = { var = SRC_lv_verdicts min = 0 max = 24 }
+			country_event = { id = src_lv.105 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_law_order_modify_tt
+		add_to_variable = {
+			SRC_lv_lo_pp = 0.05
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			SRC_lv_lo_ws = 0.05
+			tooltip = war_support_factor_tt
+		}
+	}
+}
+
+shared_focus = { #6. 无罪推定废除
+	id = SRC_lv_presumption_guilt
+	icon = GFX_focus_SRC_lv_presumption_guilt
+	x = -8
+	y = 28
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_emergency_trials
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_lo_stab
+		custom_effect_tooltip = SRC_lv_tt_lo_intel
+		custom_effect_tooltip = SRC_lv_tt_presumption_guilt
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_presumption_guilt
+			add_political_power = -30
+			add_war_support = 0.05
+			SRC_lv_advisor_purge_effect = yes
+			country_event = { id = src_lv.106 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_law_order_modify_tt
+		add_to_variable = {
+			SRC_lv_lo_stab = 0.05
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_lo_intel = 0.05
+			tooltip = intel_network_gain_factor_tt
+		}
+	}
+}
+
+shared_focus = { #7. 荆棘手套法则
+	id = SRC_lv_thorn_glove_law
+	icon = GFX_focus_SRC_lv_thorn_glove_law
+	x = -6
+	y = 28
+	cost = 6
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_emergency_trials
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_lo_stab
+		custom_effect_tooltip = SRC_lv_tt_lo_ws
+		custom_effect_tooltip = SRC_lv_tt_thorn_glove
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_thorn_glove
+			add_timed_idea = { idea = SRC_lv_timed_thorn_oath days = 365 }
+			add_political_power = 35
+			country_event = { id = src_lv.107 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_law_order_modify_tt
+		add_to_variable = {
+			SRC_lv_lo_ws = 0.05
+			tooltip = war_support_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_lo_stab = 0.05
+			tooltip = stability_factor_tt
+		}
+	}
+}
+
+shared_focus = { #8. 法律即秩序
+	id = SRC_lv_law_is_order
+	icon = GFX_focus_SRC_lv_law_is_order
+	x = -7
+	y = 29
+	cost = 7
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 22
+	}
+	prerequisite = {
+		focus = SRC_lv_thorn_glove_law
+	}
+	prerequisite = {
+		focus = SRC_lv_presumption_guilt
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_lo_stab
+		custom_effect_tooltip = SRC_lv_tt_lo_pp
+		custom_effect_tooltip = SRC_lv_tt_lo_intel
+		custom_effect_tooltip = SRC_lv_tt_law_is_order
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_law_is_order
+			remove_ideas = SRC_Mafia_State
+			add_political_power = 60
+			add_stability = 0.05
+			add_dynamic_modifier = { modifier = SRC_lv_dyn_law_order }
+			country_event = { id = src_lv.108 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_law_order_modify_tt
+		add_to_variable = {
+			SRC_lv_lo_pp = 0.05
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			SRC_lv_lo_stab = 0.05
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_lo_intel = 0.05
+			tooltip = intel_network_gain_factor_tt
+		}
+	}
+}
+
+shared_focus = { #9. 十二家族清算令
+	id = SRC_lv_twelve_settlement
+	icon = GFX_focus_SRC_lv_twelve_settlement
+	x = -3
+	y = 25
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_lv_succession
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_je_pp
+		custom_effect_tooltip = SRC_lv_tt_je_fac
+		custom_effect_tooltip = SRC_lv_tt_twelve_settlement
+		custom_effect_tooltip = SRC_lv_tt_zone_3
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_twelve_list
+			remove_ideas = SRC_Twelve_Families
+			SRC_lv_advisor_purge_effect = yes
+			add_political_power = 45
+			SRC_lv_purge_family_zone_effect = yes
+			SRC_lv_purge_family_zone_effect = yes
+			SRC_lv_purge_family_zone_effect = yes
+			add_to_variable = { SRC_lv_verdicts = 3 }
+			clamp_variable = { var = SRC_lv_verdicts min = 0 max = 24 }
+			country_event = { id = src_lv.109 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_judgment_era_modify_tt
+		add_to_variable = {
+			SRC_lv_je_pp = 0.03
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			SRC_lv_je_fac = 0.03
+			tooltip = industrial_capacity_factory_tt
+		}
+	}
+}
+
+shared_focus = { #10. 萨卢佐审判
+	id = SRC_lv_saluzzo_trial
+	icon = GFX_focus_SRC_lv_saluzzo_trial
+	x = -4
+	y = 26
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_twelve_settlement
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_je_pp
+		custom_effect_tooltip = SRC_lv_tt_je_ws
+		custom_effect_tooltip = SRC_lv_tt_saluzzo_trial
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_saluzzo_done
+			SRC_lv_saluzzo_convicted_effect = yes
+			add_war_support = 0.06
+			add_political_power = 40
+			SRC_lv_purge_family_zone_effect = yes
+			SRC_lv_purge_family_zone_effect = yes
+			add_to_variable = { SRC_lv_verdicts = 2 }
+			clamp_variable = { var = SRC_lv_verdicts min = 0 max = 24 }
+			country_event = { id = src_lv.110 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_judgment_era_modify_tt
+		add_to_variable = {
+			SRC_lv_je_ws = 0.03
+			tooltip = war_support_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_je_pp = 0.03
+			tooltip = political_power_gain_tt
+		}
+	}
+}
+
+shared_focus = { #11. 威尼斯审判
+	id = SRC_lv_venezia_trial
+	icon = GFX_focus_SRC_lv_venezia_trial
+	x = -2
+	y = 26
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_twelve_settlement
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_je_fac
+		custom_effect_tooltip = SRC_lv_tt_je_ws
+		custom_effect_tooltip = SRC_lv_tt_venezia_trial
+		custom_effect_tooltip = SRC_lv_tt_dock_confiscate
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_venezia_done
+			SRC_lv_venezia_convicted_effect = yes
+			capital_scope = { add_building_construction = { type = dockyard level = 2 instant_build = yes } }
+			add_political_power = 35
+			SRC_lv_purge_family_zone_effect = yes
+			add_to_variable = { SRC_lv_verdicts = 2 }
+			clamp_variable = { var = SRC_lv_verdicts min = 0 max = 24 }
+			country_event = { id = src_lv.111 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_judgment_era_modify_tt
+		add_to_variable = {
+			SRC_lv_je_fac = 0.03
+			tooltip = industrial_capacity_factory_tt
+		}
+		add_to_variable = {
+			SRC_lv_je_ws = 0.03
+			tooltip = war_support_factor_tt
+		}
+	}
+}
+
+shared_focus = { #12. 罗塞蒂审判
+	id = SRC_lv_rossati_trial
+	icon = GFX_focus_SRC_lv_rossati_trial
+	x = -3
+	y = 27
+	cost = 6
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_lv_saluzzo_trial
+	}
+	prerequisite = {
+		focus = SRC_lv_venezia_trial
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_je_pp
+		custom_effect_tooltip = SRC_lv_tt_je_fac
+		custom_effect_tooltip = SRC_lv_tt_rossati_trial
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_rossati_done
+			SRC_lv_rossati_convicted_effect = yes
+			add_political_power = 50
+			add_war_support = 0.04
+			add_tech_bonus = { bonus = 0.6 uses = industry_tech }
+			SRC_lv_purge_family_zone_effect = yes
+			add_to_variable = { SRC_lv_verdicts = 2 }
+			clamp_variable = { var = SRC_lv_verdicts min = 0 max = 24 }
+			country_event = { id = src_lv.112 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_judgment_era_modify_tt
+		add_to_variable = {
+			SRC_lv_je_pp = 0.03
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			SRC_lv_je_fac = 0.03
+			tooltip = industrial_capacity_factory_tt
+		}
+	}
+}
+
+shared_focus = { #13. 贝洛内自查
+	id = SRC_lv_bellone_audit
+	icon = GFX_focus_SRC_lv_bellone_audit
+	x = -4
+	y = 28
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_rossati_trial
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_je_pp
+		custom_effect_tooltip = SRC_lv_tt_je_ws
+		custom_effect_tooltip = SRC_lv_tt_bellone_audit
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_bellone_audit
+			add_political_power = 60
+			capital_scope = { add_extra_state_shared_building_slots = 2 }
+			SRC_lv_purge_family_zone_effect = yes
+			add_to_variable = { SRC_lv_verdicts = 1 }
+			clamp_variable = { var = SRC_lv_verdicts min = 0 max = 24 }
+			country_event = { id = src_lv.113 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_judgment_era_modify_tt
+		add_to_variable = {
+			SRC_lv_je_ws = 0.03
+			tooltip = war_support_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_je_pp = 0.03
+			tooltip = political_power_gain_tt
+		}
+	}
+}
+
+shared_focus = { #14. 企业化家族追诉
+	id = SRC_lv_corporate_prosecution
+	icon = GFX_focus_SRC_lv_corporate_prosecution
+	x = -2
+	y = 28
+	cost = 6
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_lv_rossati_trial
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_je_fac
+		custom_effect_tooltip = SRC_lv_tt_je_ws
+		custom_effect_tooltip = SRC_lv_tt_corporate_prosecution
+		custom_effect_tooltip = SRC_lv_tt_confiscated_factories
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_corporate_pursued
+			add_political_power = 55
+			random_owned_state = { limit = { is_capital = no } add_building_construction = { type = industrial_complex level = 2 instant_build = yes } }
+			random_owned_state = { limit = { is_capital = no } add_building_construction = { type = industrial_complex level = 2 instant_build = yes } }
+			SRC_lv_purge_family_zone_effect = yes
+			add_to_variable = { SRC_lv_verdicts = 2 }
+			clamp_variable = { var = SRC_lv_verdicts min = 0 max = 24 }
+			country_event = { id = src_lv.114 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_judgment_era_modify_tt
+		add_to_variable = {
+			SRC_lv_je_fac = 0.03
+			tooltip = industrial_capacity_factory_tt
+		}
+		add_to_variable = {
+			SRC_lv_je_ws = 0.03
+			tooltip = war_support_factor_tt
+		}
+	}
+}
+
+shared_focus = { #15. 灰厅余孽扫除
+	id = SRC_lv_grey_hall_dissolved
+	icon = GFX_focus_SRC_lv_grey_hall_dissolved
+	x = -3
+	y = 29
+	cost = 7
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 22
+	}
+	prerequisite = {
+		focus = SRC_lv_bellone_audit
+	}
+	prerequisite = {
+		focus = SRC_lv_corporate_prosecution
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_je_pp
+		custom_effect_tooltip = SRC_lv_tt_je_fac
+		custom_effect_tooltip = SRC_lv_tt_je_ws
+		custom_effect_tooltip = SRC_lv_tt_grey_hall_dissolved
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_grey_hall_gone
+			remove_ideas = SRC_Grey_Hall
+			remove_ideas = SRC_Joint_Council
+			add_political_power = 80
+			add_stability = 0.05
+			add_dynamic_modifier = { modifier = SRC_lv_dyn_judgment_era }
+			country_event = { id = src_lv.115 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_judgment_era_modify_tt
+		add_to_variable = {
+			SRC_lv_je_pp = 0.03
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			SRC_lv_je_fac = 0.03
+			tooltip = industrial_capacity_factory_tt
+		}
+		add_to_variable = {
+			SRC_lv_je_ws = 0.03
+			tooltip = war_support_factor_tt
+		}
+	}
+}
+
+shared_focus = { #16. 全民登记制度
+	id = SRC_lv_national_registry
+	icon = GFX_focus_SRC_lv_national_registry
+	x = 3
+	y = 25
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_lv_succession
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pr_fac
+		custom_effect_tooltip = SRC_lv_tt_pr_recr
+		custom_effect_tooltip = SRC_lv_tt_national_registry
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_registry
+			add_political_power = 50
+			add_dynamic_modifier = { modifier = SRC_lv_dyn_prison_nation }
+			administration_improve = yes
+			country_event = { id = src_lv.116 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_prison_nation_modify_tt
+		add_to_variable = {
+			SRC_lv_pr_recr = 0.05
+			tooltip = recruitable_population_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_pr_fac = 0.05
+			tooltip = industrial_capacity_factory_tt
+		}
+	}
+}
+
+shared_focus = { #17. 市民积分与刑罚挂钩
+	id = SRC_lv_points_and_punishment
+	icon = GFX_focus_SRC_lv_points_and_punishment
+	x = 2
+	y = 26
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_national_registry
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pr_infra
+		custom_effect_tooltip = SRC_lv_tt_pr_stab
+		custom_effect_tooltip = SRC_lv_tt_points_punishment
+		custom_effect_tooltip = SRC_lv_tt_points_civic
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_points_punishment
+			add_political_power = 40
+			if = {
+				limit = {
+					has_dynamic_modifier = { modifier = SRC_civic_points_system }
+				}
+				SRC_civic_points_up_10_effect = yes
+			}
+			add_stability = -0.03
+			country_event = { id = src_lv.117 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_prison_nation_modify_tt
+		add_to_variable = {
+			SRC_lv_pr_stab = -0.02
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_pr_infra = 0.05
+			tooltip = production_speed_infrastructure_factor_tt
+		}
+	}
+}
+
+shared_focus = { #18. 劳改营建设
+	id = SRC_lv_labour_camps
+	icon = GFX_focus_SRC_lv_labour_camps
+	x = 4
+	y = 26
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_national_registry
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pr_fac
+		custom_effect_tooltip = SRC_lv_tt_pr_infra
+		custom_effect_tooltip = SRC_lv_tt_labour_camps
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_camps
+			add_political_power = 30
+			random_owned_state = { limit = { is_capital = no } add_building_construction = { type = infrastructure level = 2 instant_build = yes } }
+			random_owned_state = { limit = { is_capital = no } add_building_construction = { type = infrastructure level = 2 instant_build = yes } }
+			random_owned_state = { limit = { is_capital = no } add_building_construction = { type = industrial_complex level = 1 instant_build = yes } }
+			country_event = { id = src_lv.118 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_prison_nation_modify_tt
+		add_to_variable = {
+			SRC_lv_pr_infra = 0.05
+			tooltip = production_speed_infrastructure_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_pr_fac = 0.05
+			tooltip = industrial_capacity_factory_tt
+		}
+	}
+}
+
+shared_focus = { #19. 移动城市监狱化改造
+	id = SRC_lv_city_prison_plan
+	icon = GFX_focus_SRC_lv_city_prison_plan
+	x = 3
+	y = 27
+	cost = 6
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_lv_points_and_punishment
+	}
+	prerequisite = {
+		focus = SRC_lv_labour_camps
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pr_infra
+		custom_effect_tooltip = SRC_lv_tt_pr_recr
+		custom_effect_tooltip = SRC_lv_tt_city_prison_plan
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_city_prison
+			add_political_power = 45
+			capital_scope = { add_extra_state_shared_building_slots = 2 }
+			random_owned_state = { limit = { is_capital = no } add_extra_state_shared_building_slots = 2 }
+			random_owned_state = { limit = { is_capital = no } add_extra_state_shared_building_slots = 2 }
+			industrial_improve = yes
+			country_event = { id = src_lv.119 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_prison_nation_modify_tt
+		add_to_variable = {
+			SRC_lv_pr_infra = 0.05
+			tooltip = production_speed_infrastructure_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_pr_recr = 0.05
+			tooltip = recruitable_population_factor_tt
+		}
+	}
+}
+
+shared_focus = { #20. 赎罪配额制度
+	id = SRC_lv_penitence_quota
+	icon = GFX_focus_SRC_lv_penitence_quota
+	x = 2
+	y = 28
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_city_prison_plan
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pr_fac
+		custom_effect_tooltip = SRC_lv_tt_pr_stab
+		custom_effect_tooltip = SRC_lv_tt_quota
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_quota
+			add_political_power = 60
+			random_owned_state = { limit = { is_capital = no } add_building_construction = { type = industrial_complex level = 2 instant_build = yes } }
+			SRC_lv_purge_family_zone_effect = yes
+			SRC_lv_purge_family_zone_effect = yes
+			add_to_variable = { SRC_lv_verdicts = 1 }
+			clamp_variable = { var = SRC_lv_verdicts min = 0 max = 24 }
+			country_event = { id = src_lv.120 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_prison_nation_modify_tt
+		add_to_variable = {
+			SRC_lv_pr_fac = 0.05
+			tooltip = industrial_capacity_factory_tt
+		}
+		add_to_variable = {
+			SRC_lv_pr_stab = -0.02
+			tooltip = stability_factor_tt
+		}
+	}
+}
+
+shared_focus = { #21. 连坐制度
+	id = SRC_lv_guilt_by_association
+	icon = GFX_focus_SRC_lv_guilt_by_association
+	x = 4
+	y = 28
+	cost = 6
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_city_prison_plan
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pr_recr
+		custom_effect_tooltip = SRC_lv_tt_pr_stab
+		custom_effect_tooltip = SRC_lv_tt_association
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_association
+			add_war_support = 0.06
+			add_political_power = -20
+			SRC_lv_purge_family_zone_effect = yes
+			SRC_lv_purge_family_zone_effect = yes
+			add_to_variable = { SRC_lv_verdicts = 2 }
+			clamp_variable = { var = SRC_lv_verdicts min = 0 max = 24 }
+			country_event = { id = src_lv.121 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_prison_nation_modify_tt
+		add_to_variable = {
+			SRC_lv_pr_stab = -0.02
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_pr_recr = 0.05
+			tooltip = recruitable_population_factor_tt
+		}
+	}
+}
+
+shared_focus = { #22. 人人有牢坐
+	id = SRC_lv_everyone_a_cell
+	icon = GFX_focus_SRC_lv_everyone_a_cell
+	x = 3
+	y = 29
+	cost = 7
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 22
+	}
+	prerequisite = {
+		focus = SRC_lv_penitence_quota
+	}
+	prerequisite = {
+		focus = SRC_lv_guilt_by_association
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pr_fac
+		custom_effect_tooltip = SRC_lv_tt_pr_infra
+		custom_effect_tooltip = SRC_lv_tt_pr_recr
+		custom_effect_tooltip = SRC_lv_tt_everyone_a_cell
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_everyone_cell
+			add_political_power = 80
+			add_war_support = 0.05
+			every_owned_state = {
+				limit = {
+					is_capital = no
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			country_event = { id = src_lv.122 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_prison_nation_modify_tt
+		add_to_variable = {
+			SRC_lv_pr_infra = 0.05
+			tooltip = production_speed_infrastructure_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_pr_fac = 0.05
+			tooltip = industrial_capacity_factory_tt
+		}
+		add_to_variable = {
+			SRC_lv_pr_recr = 0.05
+			tooltip = recruitable_population_factor_tt
+		}
+	}
+}
+
+shared_focus = { #23. 赎罪经济
+	id = SRC_lv_penitence_economy
+	icon = GFX_focus_SRC_lv_penitence_economy
+	x = 7
+	y = 25
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_lv_succession
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pe_pp
+		custom_effect_tooltip = SRC_lv_tt_pe_fac
+		custom_effect_tooltip = SRC_lv_tt_penitence_economy
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_pen_economy
+			add_political_power = 45
+			add_dynamic_modifier = { modifier = SRC_lv_dyn_penitence_economy }
+			industrial_improve = yes
+			country_event = { id = src_lv.123 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_penitence_economy_modify_tt
+		add_to_variable = {
+			SRC_lv_pe_pp = 0.05
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			SRC_lv_pe_fac = 0.05
+			tooltip = industrial_capacity_factory_tt
+		}
+	}
+}
+
+shared_focus = { #24. 强迫劳动产业
+	id = SRC_lv_forced_labour
+	icon = GFX_focus_SRC_lv_forced_labour
+	x = 6
+	y = 26
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_penitence_economy
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pe_fac
+		custom_effect_tooltip = SRC_lv_tt_pe_cons
+		custom_effect_tooltip = SRC_lv_tt_forced_labour
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_forced_labour
+			random_owned_state = { limit = { is_capital = no } add_building_construction = { type = infrastructure level = 2 instant_build = yes } }
+			random_owned_state = { limit = { is_capital = no } add_building_construction = { type = industrial_complex level = 2 instant_build = yes } }
+			random_owned_state = {
+				limit = {
+					is_capital = no
+				}
+				add_resource = {
+					type = steel
+					amount = 4
+				}
+			}
+			agricultural_improve = yes
+			country_event = { id = src_lv.124 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_penitence_economy_modify_tt
+		add_to_variable = {
+			SRC_lv_pe_fac = 0.05
+			tooltip = industrial_capacity_factory_tt
+		}
+		add_to_variable = {
+			SRC_lv_pe_cons = 0.02
+			tooltip = consumer_goods_factor_tt
+		}
+	}
+}
+
+shared_focus = { #25. 思想改造学校
+	id = SRC_lv_reeducation_school
+	icon = GFX_focus_SRC_lv_reeducation_school
+	x = 8
+	y = 26
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_penitence_economy
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pe_res
+		custom_effect_tooltip = SRC_lv_tt_pe_cons
+		custom_effect_tooltip = SRC_lv_tt_reeducation_school
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_school
+			add_political_power = 35
+			add_tech_bonus = { bonus = 0.7 uses = industry_tech }
+			educational_improve = yes
+			country_event = { id = src_lv.125 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_penitence_economy_modify_tt
+		add_to_variable = {
+			SRC_lv_pe_res = 0.03
+			tooltip = research_speed_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_pe_cons = 0.02
+			tooltip = consumer_goods_factor_tt
+		}
+	}
+}
+
+shared_focus = { #26. 荆棘教育
+	id = SRC_lv_thorn_education
+	icon = GFX_focus_SRC_lv_thorn_education
+	x = 7
+	y = 27
+	cost = 6
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 20
+	}
+	prerequisite = {
+		focus = SRC_lv_reeducation_school
+	}
+	prerequisite = {
+		focus = SRC_lv_forced_labour
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pe_res
+		custom_effect_tooltip = SRC_lv_tt_pe_pp
+		custom_effect_tooltip = SRC_lv_tt_thorn_education
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_thorn_education
+			add_political_power = 50
+			add_stability = 0.04
+			add_tech_bonus = { bonus = 0.5 uses = infantry_tech }
+			educational_improve = yes
+			country_event = { id = src_lv.126 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_penitence_economy_modify_tt
+		add_to_variable = {
+			SRC_lv_pe_res = 0.03
+			tooltip = research_speed_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_pe_pp = 0.05
+			tooltip = political_power_gain_tt
+		}
+	}
+}
+
+shared_focus = { #27. 新叙拉古人
+	id = SRC_lv_new_siracusan
+	icon = GFX_focus_SRC_lv_new_siracusan
+	x = 6
+	y = 28
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 18
+	}
+	prerequisite = {
+		focus = SRC_lv_thorn_education
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pe_res
+		custom_effect_tooltip = SRC_lv_tt_pe_pp
+		custom_effect_tooltip = SRC_lv_tt_new_siracusan
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_new_siracusan
+			add_political_power = 55
+			add_war_support = 0.05
+			add_stability = 0.05
+			country_event = { id = src_lv.127 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_penitence_economy_modify_tt
+		add_to_variable = {
+			SRC_lv_pe_pp = 0.05
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			SRC_lv_pe_res = 0.03
+			tooltip = research_speed_factor_tt
+		}
+	}
+}
+
+shared_focus = { #28. 罪与罚的辩证法
+	id = SRC_lv_dialectic_of_sin
+	icon = GFX_focus_SRC_lv_dialectic_of_sin
+	x = 8
+	y = 28
+	cost = 6
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_thorn_education
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pe_res
+		custom_effect_tooltip = SRC_lv_tt_pe_cons
+		custom_effect_tooltip = SRC_lv_tt_dialectic_sin
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_dialectic
+			add_political_power = 40
+			add_stability = -0.02
+			capital_scope = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			country_event = { id = src_lv.128 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_penitence_economy_modify_tt
+		add_to_variable = {
+			SRC_lv_pe_cons = 0.02
+			tooltip = consumer_goods_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_pe_res = 0.03
+			tooltip = research_speed_factor_tt
+		}
+	}
+}
+
+shared_focus = { #29. 人人有罪赎
+	id = SRC_lv_everyone_pays
+	icon = GFX_focus_SRC_lv_everyone_pays
+	x = 7
+	y = 29
+	cost = 7
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 22
+	}
+	prerequisite = {
+		focus = SRC_lv_new_siracusan
+	}
+	prerequisite = {
+		focus = SRC_lv_dialectic_of_sin
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_pe_res
+		custom_effect_tooltip = SRC_lv_tt_pe_pp
+		custom_effect_tooltip = SRC_lv_tt_pe_fac
+		custom_effect_tooltip = SRC_lv_tt_everyone_pays
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_everyone_pays
+			add_political_power = 80
+			add_stability = 0.06
+			add_dynamic_modifier = { modifier = SRC_lv_dyn_penitence_economy }
+			poverty_improve = yes
+			country_event = { id = src_lv.129 days = 1 }
+		}
+		custom_effect_tooltip = SRC_lv_dyn_penitence_economy_modify_tt
+		add_to_variable = {
+			SRC_lv_pe_res = 0.03
+			tooltip = research_speed_factor_tt
+		}
+		add_to_variable = {
+			SRC_lv_pe_pp = 0.05
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			SRC_lv_pe_fac = 0.05
+			tooltip = industrial_capacity_factory_tt
+		}
+	}
+}
+
+shared_focus = { #30. 德克萨斯的位置
+	id = SRC_lv_texas_position
+	icon = GFX_focus_SRC_lv_texas_position
+	x = -6
+	y = 30
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_law_is_order
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_texas_position
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_texas_watch
+			add_political_power = 40
+			add_timed_idea = { idea = SRC_lv_timed_texas_watch days = 730 }
+			country_event = { id = src_lv.130 days = 1 }
+		}
+	}
+}
+
+shared_focus = { #31. 德米特里的忠诚
+	id = SRC_lv_dmitri_loyalty
+	icon = GFX_focus_SRC_lv_dmitri_loyalty
+	x = -4
+	y = 30
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_grey_hall_dissolved
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_dmitri_loyalty
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_dmitri_loyal
+			activate_advisor = SRC_Dmitri_Bellone
+			add_political_power = 30
+			add_timed_idea = { idea = SRC_lv_timed_dmitri_logistics days = 730 }
+			country_event = { id = src_lv.131 days = 1 }
+		}
+	}
+}
+
+shared_focus = { #32. 拉普兰德的态度
+	id = SRC_lv_lappland_stance
+	icon = GFX_focus_SRC_lv_lappland_stance
+	x = -2
+	y = 30
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_grey_hall_dissolved
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_lappland_stance
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_lappland_watching
+			add_political_power = 35
+			add_army_experience = 40
+			add_war_support = 0.05
+			country_event = { id = src_lv.132 days = 1 }
+		}
+	}
+}
+
+shared_focus = { #33. 西西里夫人的遗产
+	id = SRC_lv_madam_legacy
+	icon = GFX_focus_SRC_lv_madam_legacy
+	x = 0
+	y = 30
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_everyone_a_cell
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_madam_legacy
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_madam_legacy
+			add_political_power = 60
+			add_stability = 0.05
+			add_timed_idea = { idea = SRC_lv_timed_madam_arms days = 730 }
+			country_event = { id = src_lv.133 days = 1 }
+		}
+	}
+}
+
+shared_focus = { #34. 狼之主的中立
+	id = SRC_lv_wolf_lords_neutral
+	icon = GFX_focus_SRC_lv_wolf_lords_neutral
+	x = 2
+	y = 30
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_everyone_a_cell
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_wolf_neutral
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_wolf_neutral
+			add_political_power = 30
+			add_timed_idea = { idea = SRC_lv_timed_wolf_pact days = 730 }
+			country_event = { id = src_lv.134 days = 1 }
+		}
+	}
+}
+
+shared_focus = { #35. 外部势力的反应
+	id = SRC_lv_foreign_reaction
+	icon = GFX_focus_SRC_lv_foreign_reaction
+	x = 4
+	y = 30
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_everyone_pays
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_foreign_reaction
+		custom_effect_tooltip = SRC_lv_tt_capital_flight
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_capital_flight
+			add_political_power = 80
+			add_timed_idea = { idea = SRC_lv_timed_capital_flight days = 540 }
+			country_event = { id = src_lv.135 days = 1 }
+		}
+	}
+}
+
+shared_focus = { #36. 罗德岛的最后通牒
+	id = SRC_lv_rodus_ultimatum
+	icon = GFX_focus_SRC_lv_rodus_ultimatum
+	x = 6
+	y = 30
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 16
+	}
+	prerequisite = {
+		focus = SRC_lv_everyone_pays
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_rodus_ultimatum
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_ri_tension
+			add_political_power = 40
+			add_stability = 0.04
+			add_timed_idea = { idea = SRC_lv_timed_ri_medical days = 730 }
+			country_event = { id = src_lv.136 days = 1 }
+		}
+	}
+}
+
+shared_focus = { #37. 荆棘王座
+	id = SRC_lv_thorn_throne
+	icon = GFX_focus_SRC_lv_thorn_throne
+	x = 0
+	y = 31
+	cost = 10
+	available_if_capitulated = yes
+	ai_will_do = {
+		base = 30
+	}
+	prerequisite = {
+		focus = SRC_lv_texas_position
+	}
+	prerequisite = {
+		focus = SRC_lv_dmitri_loyalty
+	}
+	prerequisite = {
+		focus = SRC_lv_lappland_stance
+	}
+	prerequisite = {
+		focus = SRC_lv_madam_legacy
+	}
+	prerequisite = {
+		focus = SRC_lv_wolf_lords_neutral
+	}
+	prerequisite = {
+		focus = SRC_lv_foreign_reaction
+	}
+	prerequisite = {
+		focus = SRC_lv_rodus_ultimatum
+	}
+	completion_reward = {
+		custom_effect_tooltip = SRC_lv_tt_throne_polity
+		custom_effect_tooltip = SRC_lv_tt_throne_spirits
+		custom_effect_tooltip = SRC_lv_tt_throne_verdicts
+		hidden_effect = {
+			set_country_flag = SRC_lv_flag_throne
+			remove_ideas = SRC_lv_counterattack
+			SRC_lv_advisor_purge_effect = yes
+			SRC_lv_legacy_spirits_clear_effect = yes
+			SRC_lv_judicial_republic_proclaim_effect = yes
+			add_dynamic_modifier = { modifier = SRC_lv_dyn_thorn_throne }
+			every_owned_state = {
+				limit = {
+					has_dynamic_modifier = { modifier = SRC_dyn_family_entrenchment }
+				}
+				remove_dynamic_modifier = { modifier = SRC_dyn_family_entrenchment }
+			}
+			every_state = {
+				limit = {
+					is_owned_by = SRC
+				}
+				add_core_of = SRC
+			}
+			add_political_power = 150
+			add_stability = 0.2
+			add_war_support = 0.1
+			news_event = { id = src_lv_news.2 hours = 6 }
+			country_event = { id = src_lv.137 days = 1 }
+		}
+	}
+}

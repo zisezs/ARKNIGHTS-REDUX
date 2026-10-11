@@ -1,0 +1,937 @@
+######################################################
+# 第十一次乌卡战争 · 乌萨斯侧专属链（脚本效果）
+# ──────────────────────────────────────────────────────────────
+# 配套文件（六处接线，漏一处即静默失效）：
+#   决议正文  common/decisions/URS_Kazimierz_War_Decisions.txt
+#   决议分类  common/decisions/categories/URS_Kazimierz_War_categories.txt
+#   事件      events/URS_Kazimierz_War.txt            namespace = ursus_kzmwar
+#   钩子      common/on_actions/URS_Kazimierz_War_on_actions.txt  （on_monthly_URS / on_weekly_URS）
+#   战时精神  common/dynamic_modifiers/URS_Kazimierz_War_dynamic_modifiers.txt
+#   文案      localisation/simp_chinese/ARF_URS_Kazimierz_War_l_simp_chinese.yml
+#
+# 三段设计（2026-09-26 重制版，一切都握在玩家手里）：
+#   ① 境内六路叛军：各一条 0–100 进度变量 URS_revolt_<x>，每月按 URS_revolt_growth 增长。
+#      满格有两条出路：玩家用「引蛇出洞」替它选日子（次日／一月／两月／三月之后），或放任不管 ——
+#      月度判定会当场公示并排在一个月后自炸。两条路都只走一次，反过的那路此后进度钉在 0。
+#      起义落地时割走该路起义区、建政、承继科技、向帝国宣战；被标过 URS_suppressed 的州夺不走，
+#      若一整路都被标过，则不立国、不宣战（只有一声空响）。
+#      真拿到地满两个月后这路又没了地盘，即判为平定：备战度 +1 加一批缴获 ——「以叛制战」。
+#   ② 备战度 URS_kzmwar_prep_level：四级平行备战决议各 +1，每平定一路叛军也 +1（以叛制战）。
+#      它既是对卡西米尔宣战的唯一闸门，也直接折算成战时精神 URS_kzmwar_war_spirit 的强度。
+#   ③ 自动获胜：KZM 投降度 > 65% 时（周度轮询）割乌卡争议三地 + 白和 + 傀儡，
+#      并补发 worldnews_kzm.10「骑士蒙羞」。
+#
+# 2026-09-26 修掉的三处静默失效（都在 error.log 里躺着）：
+#   · any_owned_state / any_state 这类 any_* 触发符里不能再写 limit = { }（那是 every_* 效果用的），
+#     写了报 "Unknown trigger-type: limit"，判定直接废掉 —— 原第 130/144/158/172/186/200 行。
+#   · URS_kzmwar_weekly_check 原来发的是 ursus_kzmwar.30（那是发给卡西米尔的「帝国军集结」预警），
+#     该发 .40；后果是 65% 自动获胜的结算整个是死代码。
+#   · 月度兜底 URS_kzmwar_backstop（备好空转三个月 / 1102.6.1 无战事 / 1102.12.1 硬期限，
+#     外加 URS_kzmwar_finish_prep 与 URS_kzmwar_idle_months、通知事件 .41）已整段删除：
+#     本链改为纯玩家主动引爆，AI 走的是同一条链、靠 ai_will_do 自己动身，不再有人替它下决心的代劳。
+#
+# 引擎要点：
+#   · 决议的 complete_effect 是「点下去当天」执行，days_remove 到点执行 remove_effect。
+#   · news_event 必须用 news_event = { } 触发，写成 country_event 会静默不出。
+#   · 起义效果全部带 exists = no 守卫，与旧的 Ursus_area_uprising（East_Ursus_Upheaval_scripted_effects.txt:551
+#     起，那份没有 exists 守卫）并发也不会重复建国。
+#   · check_variable 用 > / < 比较（>= 在本引擎若干处会静默失效），阈值一律写成 >99 / >64。
+#   · has_country_flag = { flag = X days > 60 } 是「旗标已挂满 60 天」的判法（原版 AUS.txt:2513 先例），
+#     平叛判定靠它挡住「起义当天就被判定为已平定」这种白送红利。
+######################################################
+
+# ── 变量初始化：六路进度 + 增长率 + 备战度 + 战时精神的折算值 ──
+URS_kzmwar_init = {
+	# 乌卡争议三地（哥萨茨 / 别列斯尼亚 / 波罗的海）开局就更不安分
+	set_variable = { URS_revolt_ucm = 15 }
+	set_variable = { URS_revolt_ulb = 10 }
+	set_variable = { URS_revolt_ufs = 10 }
+	set_variable = { URS_revolt_kzc = 30 }
+	set_variable = { URS_revolt_bus = 25 }
+	set_variable = { URS_revolt_blt = 25 }
+	set_variable = { URS_revolt_growth = 2 }
+
+	set_country_flag = URS_kzmwar_prep_inited
+	URS_kzmwar_init_prep_vars = yes
+}
+
+# 重制版新增的三个变量单独立旗初始化：老档（v1 只立了 URS_kzmwar_inited）进月度趟子时会自己补上，
+# 而不会被整份 init 重置掉已经跑了好几年的叛乱进度。
+URS_kzmwar_init_prep_vars = {
+	set_variable = { URS_kzmwar_prep_level = 0 }
+	set_variable = { URS_kzmwar_pacified_num = 0 }
+	set_variable = { URS_kzmwar_erupt_delay = 0 }
+
+	URS_kzmwar_update_war_spirit = yes
+}
+
+# ── 月度：进度推进 + 酝酿起义 + 平叛报捷 ──
+URS_kzmwar_monthly_tick = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_kzmwar_inited }
+		}
+		set_country_flag = URS_kzmwar_inited
+		URS_kzmwar_init = yes
+	}
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_kzmwar_prep_inited }
+		}
+		set_country_flag = URS_kzmwar_prep_inited
+		URS_kzmwar_init_prep_vars = yes
+	}
+
+	# 增长率：平时 2；本国卷入战争 叛军越乱 +2；卡西米尔正在对乌开战（境外输血）+2；清剿期间 -2
+	set_variable = { URS_revolt_growth = 2 }
+	if = {
+		limit = { has_war = yes }
+		add_to_variable = { URS_revolt_growth = 2 }
+	}
+	if = {
+		limit = {
+			has_country_flag = URS_kzmwar_crackdown_on
+		}
+		add_to_variable = { URS_revolt_growth = -2 }
+	}
+	if = {
+		limit = { KZM = { has_war_with = URS } }
+		add_to_variable = { URS_revolt_growth = 2 }
+	}
+
+	# 已建国的势力不再计「境内进度」（那是战场，不是隐患）；反过一次的也不再接着涨（钉在 0）
+	if = {
+		limit = {
+			UCM = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ucm }
+		}
+		add_to_variable = { URS_revolt_ucm = URS_revolt_growth }
+	}
+	else = {
+		set_variable = { URS_revolt_ucm = 0 }
+	}
+	if = {
+		limit = {
+			ULB = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ulb }
+		}
+		add_to_variable = { URS_revolt_ulb = URS_revolt_growth }
+	}
+	else = {
+		set_variable = { URS_revolt_ulb = 0 }
+	}
+	if = {
+		limit = {
+			UFS = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ufs }
+		}
+		add_to_variable = { URS_revolt_ufs = URS_revolt_growth }
+	}
+	else = {
+		set_variable = { URS_revolt_ufs = 0 }
+	}
+	if = {
+		limit = {
+			KZC = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_kzc }
+		}
+		add_to_variable = { URS_revolt_kzc = URS_revolt_growth }
+	}
+	else = {
+		set_variable = { URS_revolt_kzc = 0 }
+	}
+	if = {
+		limit = {
+			BUS = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_bus }
+		}
+		add_to_variable = { URS_revolt_bus = URS_revolt_growth }
+	}
+	else = {
+		set_variable = { URS_revolt_bus = 0 }
+	}
+	if = {
+		limit = {
+			BLT = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_pacified_blt }
+		}
+		add_to_variable = { URS_revolt_blt = URS_revolt_growth }
+	}
+	else = {
+		set_variable = { URS_revolt_blt = 0 }
+	}
+
+	clamp_variable = { var = URS_revolt_ucm min = 0 max = 100 }
+	clamp_variable = { var = URS_revolt_ulb min = 0 max = 100 }
+	clamp_variable = { var = URS_revolt_ufs min = 0 max = 100 }
+	clamp_variable = { var = URS_revolt_kzc min = 0 max = 100 }
+	clamp_variable = { var = URS_revolt_bus min = 0 max = 100 }
+	clamp_variable = { var = URS_revolt_blt min = 0 max = 100 }
+
+	# 满格即酝酿；手里没这块地就没什么可反的，进度回落到 90 等下次
+	# （any_owned_state 里直接写状态触发符，不能再套 limit —— 套了整个判定静默失效）
+	if = {
+		limit = {
+			check_variable = { URS_revolt_ucm > 99 }
+			UCM = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_ucm }
+		}
+		if = {
+			limit = { any_owned_state = { UCM_uprising_area = yes } }
+			URS_kzmwar_brew_ucm = yes
+			URS_kzmwar_brew_goes_public = yes
+		}
+		else = {
+			set_variable = { URS_revolt_ucm = 90 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { URS_revolt_ulb > 99 }
+			ULB = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_ulb }
+		}
+		if = {
+			limit = { any_owned_state = { ULB_uprising_area = yes } }
+			URS_kzmwar_brew_ulb = yes
+			URS_kzmwar_brew_goes_public = yes
+		}
+		else = {
+			set_variable = { URS_revolt_ulb = 90 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { URS_revolt_ufs > 99 }
+			UFS = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_ufs }
+		}
+		if = {
+			limit = { any_owned_state = { UFS_uprising_area = yes } }
+			URS_kzmwar_brew_ufs = yes
+			URS_kzmwar_brew_goes_public = yes
+		}
+		else = {
+			set_variable = { URS_revolt_ufs = 90 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { URS_revolt_kzc > 99 }
+			KZC = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_kzc }
+		}
+		if = {
+			limit = { any_owned_state = { KZC_uprising_area = yes } }
+			URS_kzmwar_brew_kzc = yes
+			URS_kzmwar_brew_goes_public = yes
+		}
+		else = {
+			set_variable = { URS_revolt_kzc = 90 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { URS_revolt_bus > 99 }
+			BUS = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_bus }
+		}
+		if = {
+			limit = { any_owned_state = { BUS_uprising_area = yes } }
+			URS_kzmwar_brew_bus = yes
+			URS_kzmwar_brew_goes_public = yes
+		}
+		else = {
+			set_variable = { URS_revolt_bus = 90 }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { URS_revolt_blt > 99 }
+			BLT = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_blt }
+		}
+		if = {
+			limit = { any_owned_state = { BLT_uprising_area = yes } }
+			URS_kzmwar_brew_blt = yes
+			URS_kzmwar_brew_goes_public = yes
+		}
+		else = {
+			set_variable = { URS_revolt_blt = 90 }
+		}
+	}
+
+	URS_kzmwar_pacify_sweep = yes
+}
+
+# ── 引蛇出洞：把某一路顶到临界（玩家点火与月度自燃共用这四行）──
+# 一路一辈子只反一次：已 pacified 过的那路不再给第二张牌，免得「引爆—平叛—引爆」刷备战度
+URS_kzmwar_brew_ucm = {
+	if = {
+		limit = {
+			UCM = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_ucm }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ucm }
+		}
+		set_country_flag = URS_kzmwar_brewing_ucm
+		set_variable = { URS_revolt_ucm = 100 }
+	}
+}
+URS_kzmwar_brew_ulb = {
+	if = {
+		limit = {
+			ULB = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_ulb }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ulb }
+		}
+		set_country_flag = URS_kzmwar_brewing_ulb
+		set_variable = { URS_revolt_ulb = 100 }
+	}
+}
+URS_kzmwar_brew_ufs = {
+	if = {
+		limit = {
+			UFS = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_ufs }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ufs }
+		}
+		set_country_flag = URS_kzmwar_brewing_ufs
+		set_variable = { URS_revolt_ufs = 100 }
+	}
+}
+URS_kzmwar_brew_kzc = {
+	if = {
+		limit = {
+			KZC = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_kzc }
+			NOT = { has_country_flag = URS_kzmwar_pacified_kzc }
+		}
+		set_country_flag = URS_kzmwar_brewing_kzc
+		set_variable = { URS_revolt_kzc = 100 }
+	}
+}
+URS_kzmwar_brew_bus = {
+	if = {
+		limit = {
+			BUS = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_bus }
+			NOT = { has_country_flag = URS_kzmwar_pacified_bus }
+		}
+		set_country_flag = URS_kzmwar_brewing_bus
+		set_variable = { URS_revolt_bus = 100 }
+	}
+}
+URS_kzmwar_brew_blt = {
+	if = {
+		limit = {
+			BLT = { exists = no }
+			NOT = { has_country_flag = URS_kzmwar_brewing_blt }
+			NOT = { has_country_flag = URS_kzmwar_pacified_blt }
+		}
+		set_country_flag = URS_kzmwar_brewing_blt
+		set_variable = { URS_revolt_blt = 100 }
+	}
+}
+
+# 放任不管的结局：满格当月即公示——发告急文书，并把起事排在一个月后。
+# 「引蛇出洞」抢在这之前动手，改的就是这个日子（已排期时后到的路径并入前一个日子）。
+URS_kzmwar_brew_goes_public = {
+	set_variable = { URS_kzmwar_erupt_delay = 30 }
+	URS_kzmwar_send_warnings = yes
+	URS_kzmwar_schedule_eruption = yes
+}
+
+# ── 择日之前不发告急文书：日子是玩家在上一步定下的 ──
+URS_kzmwar_send_warnings = {
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_ucm }
+		country_event = { id = ursus_kzmwar.10 }
+	}
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_ulb }
+		country_event = { id = ursus_kzmwar.11 }
+	}
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_ufs }
+		country_event = { id = ursus_kzmwar.12 }
+	}
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_kzc }
+		country_event = { id = ursus_kzmwar.13 }
+	}
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_bus }
+		country_event = { id = ursus_kzmwar.14 }
+	}
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_blt }
+		country_event = { id = ursus_kzmwar.15 }
+	}
+}
+
+# ── 定下起事之日（同一时刻只允许一纸起事令在路上；日子按变量分派成字面天数）──
+URS_kzmwar_schedule_eruption = {
+	if = {
+		limit = { NOT = { has_country_flag = URS_kzmwar_erupt_scheduled } }
+		set_country_flag = URS_kzmwar_erupt_scheduled
+		if = {
+			limit = { check_variable = { URS_kzmwar_erupt_delay < 1 } }
+			country_event = { id = ursus_kzmwar.20 days = 1 }
+		}
+		else_if = {
+			limit = { check_variable = { URS_kzmwar_erupt_delay < 45 } }
+			country_event = { id = ursus_kzmwar.20 days = 30 }
+		}
+		else_if = {
+			limit = { check_variable = { URS_kzmwar_erupt_delay < 75 } }
+			country_event = { id = ursus_kzmwar.20 days = 60 }
+		}
+		else = {
+			country_event = { id = ursus_kzmwar.20 days = 90 }
+		}
+	}
+}
+
+# ── 择日时反悔：把酝酿中的那几路收回卷宗，进度留在临界附近 ──
+URS_kzmwar_cancel_brewing = {
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_ucm }
+		clr_country_flag = URS_kzmwar_brewing_ucm
+		set_variable = { URS_revolt_ucm = 92 }
+	}
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_ulb }
+		clr_country_flag = URS_kzmwar_brewing_ulb
+		set_variable = { URS_revolt_ulb = 92 }
+	}
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_ufs }
+		clr_country_flag = URS_kzmwar_brewing_ufs
+		set_variable = { URS_revolt_ufs = 92 }
+	}
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_kzc }
+		clr_country_flag = URS_kzmwar_brewing_kzc
+		set_variable = { URS_revolt_kzc = 92 }
+	}
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_bus }
+		clr_country_flag = URS_kzmwar_brewing_bus
+		set_variable = { URS_revolt_bus = 92 }
+	}
+	if = {
+		limit = { has_country_flag = URS_kzmwar_brewing_blt }
+		clr_country_flag = URS_kzmwar_brewing_blt
+		set_variable = { URS_revolt_blt = 92 }
+	}
+}
+
+# ── 六路起义落地：写法对齐 Ursus_area_uprising（割该路起义区 → 建国 → 承继科技 → 宣乌萨斯）──
+# 只有真拿到地才算「反成了」：起义区被整肃净尽的那一路就地 fizzled，不立国、不宣战，
+# 自然也不会在两个月后被误判成「已平定」而白送一份备战红利。
+URS_kzmwar_erupt_ucm = {
+	if = {
+		limit = { UCM = { exists = no } }
+		every_owned_state = {
+			limit = {
+				UCM_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			add_core_of = UCM
+			transfer_state_to = UCM
+		}
+		if = {
+			limit = { UCM = { any_owned_state = { always = yes } } }
+			set_country_flag = URS_kzmwar_erupted_ucm
+			UCM = {
+				set_politics = {
+					ruling_party = communism
+					elections_allowed = no
+				}
+				set_popularities = { communism = 100 }
+				inherit_technology = URS
+				load_oob = UCM_uprising
+				declare_war_on = { target = URS type = annex_everything }
+			}
+		}
+	}
+	URS = { set_variable = { URS_revolt_ucm = 0 } }
+}
+
+URS_kzmwar_erupt_ulb = {
+	if = {
+		limit = { ULB = { exists = no } }
+		every_owned_state = {
+			limit = {
+				ULB_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			add_core_of = ULB
+			transfer_state_to = ULB
+		}
+		if = {
+			limit = { ULB = { any_owned_state = { always = yes } } }
+			set_country_flag = URS_kzmwar_erupted_ulb
+			ULB = {
+				set_politics = {
+					ruling_party = liberalism
+					elections_allowed = no
+				}
+				set_popularities = { liberalism = 100 }
+				inherit_technology = URS
+				load_oob = ULB_uprising
+				declare_war_on = { target = URS type = annex_everything }
+			}
+		}
+	}
+	URS = { set_variable = { URS_revolt_ulb = 0 } }
+}
+
+URS_kzmwar_erupt_ufs = {
+	if = {
+		limit = { UFS = { exists = no } }
+		every_owned_state = {
+			limit = {
+				UFS_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			add_core_of = UFS
+			transfer_state_to = UFS
+		}
+		if = {
+			limit = { UFS = { any_owned_state = { always = yes } } }
+			set_country_flag = URS_kzmwar_erupted_ufs
+			UFS = {
+				set_politics = {
+					ruling_party = fascism
+					elections_allowed = no
+				}
+				set_popularities = { fascism = 100 }
+				inherit_technology = URS
+				load_oob = UFS_uprising
+				declare_war_on = { target = URS type = annex_everything }
+			}
+		}
+	}
+	URS = { set_variable = { URS_revolt_ufs = 0 } }
+}
+
+# 这三路就是乌卡争议三地，也是第十一次乌卡战争的赌注，故不加核心、只割地（与 Ursus_area_uprising 一致）
+URS_kzmwar_erupt_kzc = {
+	if = {
+		limit = { KZC = { exists = no } }
+		every_owned_state = {
+			limit = {
+				KZC_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			transfer_state_to = KZC
+		}
+		if = {
+			limit = { KZC = { any_owned_state = { always = yes } } }
+			set_country_flag = URS_kzmwar_erupted_kzc
+			KZC = {
+				inherit_technology = URS
+				load_oob = KZC_uprising
+				declare_war_on = { target = URS type = annex_everything }
+			}
+		}
+	}
+	URS = { set_variable = { URS_revolt_kzc = 0 } }
+}
+
+URS_kzmwar_erupt_bus = {
+	if = {
+		limit = { BUS = { exists = no } }
+		every_owned_state = {
+			limit = {
+				BUS_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			transfer_state_to = BUS
+		}
+		if = {
+			limit = { BUS = { any_owned_state = { always = yes } } }
+			set_country_flag = URS_kzmwar_erupted_bus
+			BUS = {
+				inherit_technology = URS
+				load_oob = BUS_uprising
+				declare_war_on = { target = URS type = annex_everything }
+			}
+		}
+	}
+	URS = { set_variable = { URS_revolt_bus = 0 } }
+}
+
+URS_kzmwar_erupt_blt = {
+	if = {
+		limit = { BLT = { exists = no } }
+		every_owned_state = {
+			limit = {
+				BLT_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			transfer_state_to = BLT
+		}
+		if = {
+			limit = { BLT = { any_owned_state = { always = yes } } }
+			set_country_flag = URS_kzmwar_erupted_blt
+			BLT = {
+				inherit_technology = URS
+				load_oob = BLT_uprising
+				declare_war_on = { target = URS type = annex_everything }
+			}
+		}
+	}
+	URS = { set_variable = { URS_revolt_blt = 0 } }
+}
+
+# ── 整肃：压低进度 + 把该路两块起义区标为已清剿（起事时夺不走）+ 记一次镇压 ──
+# URS_suppress_num 是旧系统 URS_war_with_east（URS_Decisions.txt:1040 要 >12）也在读的计数器，
+# 本链的镇压同样往里加，是当初收拢成单链时留下的连通，别当多余字段删掉。
+URS_kzmwar_suppress_ucm = {
+	if = {
+		limit = { UCM = { exists = no } }
+		random_owned_state = {
+			limit = {
+				UCM_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		random_owned_state = {
+			limit = {
+				UCM_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		subtract_from_variable = { URS_revolt_ucm = 40 }
+		clamp_variable = { var = URS_revolt_ucm min = 0 max = 100 }
+	}
+	add_to_variable = { URS_suppress_num = 1 }
+}
+
+URS_kzmwar_suppress_ulb = {
+	if = {
+		limit = { ULB = { exists = no } }
+		random_owned_state = {
+			limit = {
+				ULB_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		random_owned_state = {
+			limit = {
+				ULB_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		subtract_from_variable = { URS_revolt_ulb = 40 }
+		clamp_variable = { var = URS_revolt_ulb min = 0 max = 100 }
+	}
+	add_to_variable = { URS_suppress_num = 1 }
+}
+
+URS_kzmwar_suppress_ufs = {
+	if = {
+		limit = { UFS = { exists = no } }
+		random_owned_state = {
+			limit = {
+				UFS_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		random_owned_state = {
+			limit = {
+				UFS_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		subtract_from_variable = { URS_revolt_ufs = 40 }
+		clamp_variable = { var = URS_revolt_ufs min = 0 max = 100 }
+	}
+	add_to_variable = { URS_suppress_num = 1 }
+}
+
+URS_kzmwar_suppress_kzc = {
+	if = {
+		limit = { KZC = { exists = no } }
+		random_owned_state = {
+			limit = {
+				KZC_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		random_owned_state = {
+			limit = {
+				KZC_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		subtract_from_variable = { URS_revolt_kzc = 40 }
+		clamp_variable = { var = URS_revolt_kzc min = 0 max = 100 }
+	}
+	add_to_variable = { URS_suppress_num = 1 }
+}
+
+URS_kzmwar_suppress_bus = {
+	if = {
+		limit = { BUS = { exists = no } }
+		random_owned_state = {
+			limit = {
+				BUS_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		random_owned_state = {
+			limit = {
+				BUS_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		subtract_from_variable = { URS_revolt_bus = 40 }
+		clamp_variable = { var = URS_revolt_bus min = 0 max = 100 }
+	}
+	add_to_variable = { URS_suppress_num = 1 }
+}
+
+URS_kzmwar_suppress_blt = {
+	if = {
+		limit = { BLT = { exists = no } }
+		random_owned_state = {
+			limit = {
+				BLT_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		random_owned_state = {
+			limit = {
+				BLT_uprising_area = yes
+				NOT = { has_state_flag = URS_suppressed }
+			}
+			set_state_flag = URS_suppressed
+		}
+		subtract_from_variable = { URS_revolt_blt = 40 }
+		clamp_variable = { var = URS_revolt_blt min = 0 max = 100 }
+	}
+	add_to_variable = { URS_suppress_num = 1 }
+}
+
+URS_kzmwar_suppress_all = {
+	URS_kzmwar_suppress_ucm = yes
+	URS_kzmwar_suppress_ulb = yes
+	URS_kzmwar_suppress_ufs = yes
+	URS_kzmwar_suppress_kzc = yes
+	URS_kzmwar_suppress_bus = yes
+	URS_kzmwar_suppress_blt = yes
+}
+
+# ── 备战度：四级备战决议各 +1，每平定一路叛军也 +1；改动后立刻重折算精神 ──
+URS_kzmwar_add_prep_level = {
+	add_to_variable = { URS_kzmwar_prep_level = 1 }
+	URS_kzmwar_update_war_spirit = yes
+}
+
+# 折算封顶 6 档：4 级备战 + 平定 2 路就已经是满buff，防止后期无上限堆叠
+URS_kzmwar_update_war_spirit = {
+	set_variable = { URS_kzmwar_sm_temp = URS_kzmwar_prep_level }
+	clamp_variable = { var = URS_kzmwar_sm_temp min = 0 max = 6 }
+
+	set_variable = { URS_kzmwar_sm_attack = URS_kzmwar_sm_temp }
+	multiply_variable = { URS_kzmwar_sm_attack = 0.03 }
+	set_variable = { URS_kzmwar_sm_break = URS_kzmwar_sm_temp }
+	multiply_variable = { URS_kzmwar_sm_break = 0.04 }
+	set_variable = { URS_kzmwar_sm_conscription = URS_kzmwar_sm_temp }
+	multiply_variable = { URS_kzmwar_sm_conscription = 0.06 }
+	set_variable = { URS_kzmwar_sm_arms = URS_kzmwar_sm_temp }
+	multiply_variable = { URS_kzmwar_sm_arms = 0.08 }
+	set_variable = { URS_kzmwar_sm_supply = URS_kzmwar_sm_temp }
+	multiply_variable = { URS_kzmwar_sm_supply = -0.03 }
+}
+
+# ── 以叛制战：造反满两个月后这路又没了地盘，就算平定，交一份备战红利 ──
+URS_kzmwar_pacify_sweep = {
+	if = {
+		limit = {
+			has_country_flag = { flag = URS_kzmwar_erupted_ucm days > 60 }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ucm }
+			UCM = { exists = no }
+		}
+		set_country_flag = URS_kzmwar_pacified_ucm
+		URS_kzmwar_pacify_reward = yes
+	}
+	if = {
+		limit = {
+			has_country_flag = { flag = URS_kzmwar_erupted_ulb days > 60 }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ulb }
+			ULB = { exists = no }
+		}
+		set_country_flag = URS_kzmwar_pacified_ulb
+		URS_kzmwar_pacify_reward = yes
+	}
+	if = {
+		limit = {
+			has_country_flag = { flag = URS_kzmwar_erupted_ufs days > 60 }
+			NOT = { has_country_flag = URS_kzmwar_pacified_ufs }
+			UFS = { exists = no }
+		}
+		set_country_flag = URS_kzmwar_pacified_ufs
+		URS_kzmwar_pacify_reward = yes
+	}
+	if = {
+		limit = {
+			has_country_flag = { flag = URS_kzmwar_erupted_kzc days > 60 }
+			NOT = { has_country_flag = URS_kzmwar_pacified_kzc }
+			KZC = { exists = no }
+		}
+		set_country_flag = URS_kzmwar_pacified_kzc
+		URS_kzmwar_pacify_reward = yes
+	}
+	if = {
+		limit = {
+			has_country_flag = { flag = URS_kzmwar_erupted_bus days > 60 }
+			NOT = { has_country_flag = URS_kzmwar_pacified_bus }
+			BUS = { exists = no }
+		}
+		set_country_flag = URS_kzmwar_pacified_bus
+		URS_kzmwar_pacify_reward = yes
+	}
+	if = {
+		limit = {
+			has_country_flag = { flag = URS_kzmwar_erupted_blt days > 60 }
+			NOT = { has_country_flag = URS_kzmwar_pacified_blt }
+			BLT = { exists = no }
+		}
+		set_country_flag = URS_kzmwar_pacified_blt
+		URS_kzmwar_pacify_reward = yes
+	}
+}
+
+URS_kzmwar_pacify_reward = {
+	add_war_support = 0.05
+	add_stability = 0.05
+	add_manpower = 30000
+	add_equipment_to_stockpile = {
+		type = infantry_equipment
+		amount = 6000
+		producer = URS
+	}
+	URS_kzmwar_add_prep_level = yes
+	country_event = { id = ursus_kzmwar.42 }
+}
+
+# ── 对卡西米尔开战：先给被宣方预警，两天后才真宣战 ──
+URS_kzmwar_open_hostilities = {
+	if = {
+		limit = { NOT = { has_country_flag = URS_kzmwar_war_started } }
+		set_country_flag = URS_kzmwar_war_started
+		KZM = {
+			country_event = { id = ursus_kzmwar.30 }
+		}
+		news_event = {
+			id = ursus_kzmwar.50
+			days = 2
+		}
+		URS_kzmwar_do_declare = yes
+	}
+}
+
+# 真宣战：乌卡战争 = 乌萨斯 vs 卡西米尔及其在乌萨斯境内的三支哥萨克/别列斯尼亚/波罗的海臂助
+URS_kzmwar_do_declare = {
+	country_event = { id = ursus_kzmwar.31 days = 2 }
+}
+
+URS_kzmwar_declare_now = {
+	URS = {
+		declare_war_on = { target = KZM type = annex_everything }
+		if = {
+			limit = { KZC = { exists = yes NOT = { is_puppet_of = URS } } }
+			URS = { declare_war_on = { target = KZC type = annex_everything } }
+		}
+		if = {
+			limit = { BUS = { exists = yes NOT = { is_puppet_of = URS } } }
+			URS = { declare_war_on = { target = BUS type = annex_everything } }
+		}
+		if = {
+			limit = { BLT = { exists = yes NOT = { is_puppet_of = URS } } }
+			URS = { declare_war_on = { target = BLT type = annex_everything } }
+		}
+		# 开战即把备战度结算成战时精神，两年内有效；之后再平叛涨的档数靠变量重算自动跟上
+		if = {
+			limit = { NOT = { has_country_flag = URS_kzmwar_spirit_on } }
+			set_country_flag = URS_kzmwar_spirit_on
+			URS_kzmwar_update_war_spirit = yes
+			add_dynamic_modifier = {
+				modifier = URS_kzmwar_war_spirit
+				days = 730
+			}
+		}
+	}
+}
+
+# ── 自动获胜：割乌卡争议三地 → 白和 → 傀儡 ──
+# 顺序照抄 Peace_on_actions.txt:152-167（先割地再白和，白和不会回退脚本割走的州）
+URS_kzmwar_autovictory_settle = {
+	if = {
+		limit = { NOT = { has_country_flag = URS_kzmwar_autowon } }
+		set_country_flag = URS_kzmwar_autowon
+		KZM = {
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_Ursus_Kozacy_area = yes
+						is_Ursus_Belaursnia_area = yes
+						is_Ursus_Balti_area = yes
+					}
+				}
+				transfer_state_to = URS
+			}
+		}
+		URS = {
+			if = {
+				limit = { has_war_with = KZM }
+				white_peace = KZM
+			}
+			if = {
+				limit = { has_war_with = KZC }
+				white_peace = KZC
+			}
+			if = {
+				limit = { has_war_with = BUS }
+				white_peace = BUS
+			}
+			if = {
+				limit = { has_war_with = BLT }
+				white_peace = BLT
+			}
+			puppet = KZM
+		}
+		news_event = { id = worldnews_kzm.10 }
+	}
+}
+
+# ── 周度：自动获胜判定（原版这里误发成 .30，导致整个结算是死代码）──
+URS_kzmwar_weekly_check = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_kzmwar_autowon }
+			has_war_with = KZM
+			KZM = {
+				exists = yes
+				NOT = { is_puppet_of = URS }
+				surrender_progress > 0.65
+			}
+		}
+		country_event = { id = ursus_kzmwar.40 }
+	}
+}

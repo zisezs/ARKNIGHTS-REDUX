@@ -1,0 +1,148 @@
+# ============================================================================
+# 乌萨斯帝国 ·「费奥多尔初步改革」面板的脚本文本
+# ============================================================================
+#
+# 用法：loc 里以方括号引用，例如
+#   URS_dr_reform_row0_eff: "效率：[URS_dr_reform_eff_state_loc]"
+#   URS_dr_reform_row0_pct: "[URS_dr_reform_pct_state_loc]"
+#
+# 档位（设计稿口径）：0..35 差 / 36..50 均衡 / 51..80 良好 / 81..100 高效。
+# 定义块按「从高到低」排列——命中第一条就走，兜底项（always = yes）必须放最后，
+# 否则会把后面所有条目全截胡（这个工程踩过一次）。
+# ============================================================================
+
+# ---------------- 效率档位：国家 ----------------
+defined_text = {
+	name = URS_dr_reform_eff_state_loc
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_state < 81 } } }
+		localization_key = URS_dr_reform_eff_4
+	}
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_state < 51 } } }
+		localization_key = URS_dr_reform_eff_3
+	}
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_state < 36 } } }
+		localization_key = URS_dr_reform_eff_2
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = URS_dr_reform_eff_1
+	}
+}
+
+# ---------------- 效率档位：军队 ----------------
+defined_text = {
+	name = URS_dr_reform_eff_army_loc
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_army < 81 } } }
+		localization_key = URS_dr_reform_eff_4
+	}
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_army < 51 } } }
+		localization_key = URS_dr_reform_eff_3
+	}
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_army < 36 } } }
+		localization_key = URS_dr_reform_eff_2
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = URS_dr_reform_eff_1
+	}
+}
+
+# ---------------- 效率档位：群众 ----------------
+defined_text = {
+	name = URS_dr_reform_eff_people_loc
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_people < 81 } } }
+		localization_key = URS_dr_reform_eff_4
+	}
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_people < 51 } } }
+		localization_key = URS_dr_reform_eff_3
+	}
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_people < 36 } } }
+		localization_key = URS_dr_reform_eff_2
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = URS_dr_reform_eff_1
+	}
+}
+
+# ---------------- 效率档位：资源 ----------------
+defined_text = {
+	name = URS_dr_reform_eff_resource_loc
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_resource < 81 } } }
+		localization_key = URS_dr_reform_eff_4
+	}
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_resource < 51 } } }
+		localization_key = URS_dr_reform_eff_3
+	}
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_e_resource < 36 } } }
+		localization_key = URS_dr_reform_eff_2
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = URS_dr_reform_eff_1
+	}
+}
+
+# ---------------- 进度读数：国家 ----------------
+defined_text = {
+	name = URS_dr_reform_pct_state_loc
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_p_state < 100 } } }
+		localization_key = URS_dr_reform_done
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = URS_dr_reform_row0_pctnum
+	}
+}
+
+# ---------------- 进度读数：军队 ----------------
+defined_text = {
+	name = URS_dr_reform_pct_army_loc
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_p_army < 100 } } }
+		localization_key = URS_dr_reform_done
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = URS_dr_reform_row1_pctnum
+	}
+}
+
+# ---------------- 进度读数：群众 ----------------
+defined_text = {
+	name = URS_dr_reform_pct_people_loc
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_p_people < 100 } } }
+		localization_key = URS_dr_reform_done
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = URS_dr_reform_row2_pctnum
+	}
+}
+
+# ---------------- 进度读数：资源 ----------------
+defined_text = {
+	name = URS_dr_reform_pct_resource_loc
+	text = {
+		trigger = { NOT = { check_variable = { URS_rf_p_resource < 100 } } }
+		localization_key = URS_dr_reform_done
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = URS_dr_reform_row3_pctnum
+	}
+}

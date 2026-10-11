@@ -1,0 +1,79 @@
+# ============================================================================
+# 卡西米尔 (KZM) · 复国骑士团 —— 州分区触发符
+#
+# 把 KZM 全部 26 个本土州划成四片，对应中间分支的四格国策 / 四条决议。
+# 州 id 出处：history/states/<id>-State_<id>.txt 里 owner = KZM 的那些，
+#            州名见 localisation/simp_chinese/state_names_l_simp_chinese.yml
+# 覆盖检查：4 + 7 + 6 + 9 = 26，与 KZM 本土州数一致（见 docs/_kzm_resto_check.js 第 1 项）
+#
+# 用法：州作用域内平铺调用（any_owned_state / random_owned_state 的 limit 里直接写名字，
+#       不要在 any_* 里再套 limit —— 那是 every_* 才有的）
+# ============================================================================
+
+# ---- 一、首都圈：大骑士领与其三块腹地 ----
+# 304 大骑士领（卡瓦莱利亚基）/ 215 大卡西米尔 / 262 小卡西米尔 / 290 圣骑士领
+KZM_resto_heartland_area = {
+	OR = {
+		state = 304
+		state = 215
+		state = 262
+		state = 290
+	}
+}
+
+# ---- 二、特锦赛诸城：竞技骑士团与看台所在 ----
+# 336 卡瓦托夫 / 315 卢布林 / 287 佛罗茨 / 293 瓦格斯克 / 319 落德兹 / 316 落德兹领 / 280 利沃尔托克
+KZM_resto_arena_cities_area = {
+	OR = {
+		state = 336
+		state = 315
+		state = 287
+		state = 293
+		state = 319
+		state = 316
+		state = 280
+	}
+}
+
+# ---- 三、南部山地与村落：滴水村一线，通往北部的必经之路 ----
+# 322 西塔特拉 / 354 东塔特拉 / 367 里瑟尔 / 370 希罗塔基亚 / 380 卡塞雷斯 / 327 韦托马切
+KZM_resto_highlands_area = {
+	OR = {
+		state = 322
+		state = 354
+		state = 367
+		state = 370
+		state = 380
+		state = 327
+	}
+}
+
+# ---- 四、湖区与林间：移动城市少走的路，流民与无牌骑士的藏身处 ----
+# 268 滨湖骑士领 / 270 韦尔诺 / 323 奥布雷斯切 / 332 摩祖尔斯卡 / 360 卡亚维斯托夫
+# 219 波德莱切 / 221 库兰维德 / 242 库洛雅德卡 / 296 克拉兹瓦夫
+KZM_resto_lakes_area = {
+	OR = {
+		state = 268
+		state = 270
+		state = 323
+		state = 332
+		state = 360
+		state = 219
+		state = 221
+		state = 242
+		state = 296
+	}
+}
+
+# ---- 五、四片通判：这条州能不能长出一块根据地 ----
+KZM_resto_bastion_eligible = {
+	OR = {
+		KZM_resto_heartland_area = yes
+		KZM_resto_arena_cities_area = yes
+		KZM_resto_highlands_area = yes
+		KZM_resto_lakes_area = yes
+	}
+	NOT = {
+		has_dynamic_modifier = { modifier = KZM_dyn_reso_bastion }
+	}
+}

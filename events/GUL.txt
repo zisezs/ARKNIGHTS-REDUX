@@ -1,0 +1,1181 @@
+add_namespace = event_gul
+add_namespace = event_gul_hidden
+
+#重新触发镇压抵抗的任务
+country_event = {
+	id = event_gul_hidden.1
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { NOT = { has_country_flag = UFE_leader_dead_flag } }
+			activate_mission = GUL_rebel_decisions_1
+		}
+	}
+}
+#支持游击队flag
+country_event = {
+	id = event_gul_hidden.2
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { has_country_flag = activate_GUL_rebel_decisions_6_flag }
+			clr_country_flag = activate_GUL_rebel_decisions_6_flag
+		}
+	}
+}
+#镇压游击队flag
+country_event = {
+	id = event_gul_hidden.3
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { has_country_flag = activate_GUL_rebel_decisions_8_flag }
+			clr_country_flag = activate_GUL_rebel_decisions_8_flag
+		}
+	}
+}
+#完成国策：强化领地安保法
+country_event = {
+	id = event_gul_hidden.4
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		complete_national_focus = {
+			focus = GUL_Ling_Di_An_Bao_Fa
+			use_side_message = yes
+			originator_name = GUL_Normandy
+		}
+		clr_country_flag = GUL_Ling_Di_An_Bao_Fa_in_progress_flag
+	}
+}
+#完成国策：增加占领开销
+country_event = {
+	id = event_gul_hidden.5
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		complete_national_focus = {
+			focus = GUL_Zeng_Jia_Kai_Xiao
+			use_side_message = yes
+			originator_name = GUL_Normandy
+		}
+		clr_country_flag = GUL_Zeng_Jia_Kai_Xiao_in_progress_flag
+	}
+}
+#完成国策：应付洪灾
+country_event = {
+	id = event_gul_hidden.6
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		complete_national_focus = {
+			focus = GUL_Ying_Dui_Hong_Zai
+			use_side_message = yes
+			originator_name = GUL_Normandy
+		}
+		clr_country_flag = GUL_Ying_Dui_Hong_Zai_in_progress_flag
+	}
+}
+#完成国策：民族工业
+country_event = {
+	id = event_gul_hidden.7
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		complete_national_focus = {
+			focus = GUL_Min_Zu_Gong_Ye
+			use_side_message = yes
+			originator_name = GUL_Normandy
+		}
+		clr_country_flag = GUL_Min_Zu_Gong_Ye_in_progress_flag
+	}
+}
+#完成国策：转移财产
+country_event = {
+	id = event_gul_hidden.8
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		complete_national_focus = {
+			focus = GUL_Zhuan_Yi_Cai_Chan
+			use_side_message = yes
+			originator_name = GUL_Normandy
+		}
+		clr_country_flag = GUL_Zhuan_Yi_Cai_Chan_in_progress_flag
+	}
+}
+#本地化事件：工厂被夺取
+country_event = {
+	id = event_gul_hidden.9
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		country_event = {
+			id = event_gul.1
+		}
+	}
+}
+#支持抵抗flag
+country_event = {
+	id = event_gul_hidden.10
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { has_country_flag = activate_GUL_rebel_decisions_2_flag }
+			clr_country_flag = activate_GUL_rebel_decisions_2_flag
+		}
+	}
+}
+#游击决议中转
+country_event = {
+	id = event_gul_hidden.11
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { NOT = { has_country_flag = gul_resistance_action_hide } }
+			country_event = {
+				id = event_gul.53
+			}
+			else = {
+				every_state = {
+					limit = { has_state_flag = gul_resistance_action }
+					clr_state_flag = gul_resistance_action
+				}
+			}
+		}
+	}
+}
+#劫掠决议中转
+country_event = {
+	id = event_gul_hidden.12
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { NOT = { has_country_flag = gul_resistance_attack_action_hide } }
+			country_event = {
+				id = event_gul.54
+			}
+			else = {
+				every_state = {
+					limit = { has_state_flag = gul_resistance_attack_action }
+					clr_state_flag = gul_resistance_attack_action
+				}
+			}
+		}
+	}
+}
+#扫荡决议中转
+country_event = {
+	id = event_gul_hidden.13
+	
+	hidden = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		if = {
+			limit = { NOT = { has_country_flag = gul_resistance_enemy_action_hide } }
+			country_event = {
+				id = event_gul.52
+			}
+			else = {
+				every_state = {
+					limit = { has_state_flag = gul_resistance_enemy_action }
+					clr_state_flag = gul_resistance_enemy_action
+				}
+			}
+		}
+	}
+}
+
+##可见事件
+#我国在xx的工厂被高卢抵抗组织夺取
+country_event = {
+	id = event_gul.1
+	title = event_gul.1.t
+	desc = event_gul.1.desc
+	
+	immediate = {
+		hidden_effect = {
+			every_state = {
+				limit = { has_state_flag = gul_rebel_in_this_area_flag }
+				save_event_target_as = gul_rebel_in_this_area
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = event_gul.1.a
+		GUL = {
+			set_temp_variable = { vic_ocup_fac_num_tool = 0 }
+			subtract_from_temp_variable = { vic_ocup_fac_num_tool = event_target:gul_rebel_in_this_area.vic_ocup_civs_num_var }
+			subtract_from_temp_variable = { vic_ocup_fac_num_tool = event_target:gul_rebel_in_this_area.vic_ocup_mils_num_var }
+			custom_effect_tooltip = GUL_broken_economy_idea_tt
+			add_to_variable = {
+				GUL.vic_ocup_fac_num_var = vic_ocup_fac_num_tool
+				tooltip = vic_ocup_fac_num_tt
+			}
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		event_target:gul_rebel_in_this_area = {
+			custom_effect_tooltip = things_had_happened_oh_shit_tt
+			effect_tooltip = {
+				custom_effect_tooltip = gul_rebel_in_this_area_tt
+			}
+			clr_state_flag = gul_rebel_in_this_area_flag
+			if = {
+				limit = { check_variable = { vic_ocup_civs_num_var > 0 } }
+				VIC = {
+					set_temp_variable = { industrial_complex_sub = event_target:gul_rebel_in_this_area.vic_ocup_civs_num_var }
+					set_temp_variable = { industrial_complex_var = 0 }
+					subtract_from_temp_variable = { industrial_complex_var = industrial_complex_sub }
+					add_offsite_building = { type = industrial_complex level = industrial_complex_var }
+				}
+			}
+			if = {
+				limit = { check_variable = { vic_ocup_mils_num_var > 0 } }
+				VIC = {
+					set_temp_variable = { arms_factory_sub = event_target:gul_rebel_in_this_area.vic_ocup_mils_num_var }
+					set_temp_variable = { arms_factory_var = 0 }
+					subtract_from_temp_variable = { arms_factory_var = arms_factory_sub }
+					add_offsite_building = { type = arms_factory level = arms_factory_var }
+				}
+			}
+			
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+#高卢资产转移完成
+country_event = {
+	id = event_gul.2
+	title = event_gul.2.t
+	desc = event_gul.2.desc
+
+	is_triggered_only = yes
+	
+	immediate = {
+		vic_factory_back_effect0 = yes
+	}
+	
+	#安置在温德米尔
+	option = {
+		name = event_gul.2.a
+		581 = {
+			vic_factory_back_effect1 = yes
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		vic_factory_back_effect2 = yes
+	}
+	
+	#安置在开斯特
+	option = {
+		name = event_gul.2.b
+		916 = {
+			vic_factory_back_effect1 = yes
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		vic_factory_back_effect2 = yes
+	}
+	
+	#安置在威灵顿
+	option = {
+		name = event_gul.2.c
+		593 = {
+			vic_factory_back_effect1 = yes
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		vic_factory_back_effect2 = yes
+	}
+	
+	#安置在高多汀
+	option = {
+		name = event_gul.2.d
+		638 = {
+			vic_factory_back_effect1 = yes
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		vic_factory_back_effect2 = yes
+	}
+}
+#攻破鲁昂集中营
+country_event = {
+	id = event_gul.3
+	title = event_gul.3.t
+	desc = event_gul.3.d
+
+	is_triggered_only = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = event_gul.3.a
+	}
+}
+#我国在高卢的工业投资全数被夺占
+country_event = {
+	id = event_gul.4
+	title = event_gul.4.t
+	desc = event_gul.4.d
+
+	is_triggered_only = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = event_gul.4.a
+	}
+}
+#开始国策：强化领地安保法
+country_event = {
+	id = event_gul.5
+	title = event_gul.5.t
+	desc = event_gul.5.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.5.a
+		custom_effect_tooltip = {
+			localization_key = GUL_Normandy_focuss_in_progress_tt
+			CHARACTER = GUL_Normandy
+			FOCUS = GUL_Ling_Di_An_Bao_Fa
+		}
+		hidden_effect = {
+			activate_shine_on_focus = GUL_Ling_Di_An_Bao_Fa
+			set_country_flag = { flag = GUL_Ling_Di_An_Bao_Fa_in_progress_flag days = 56 value = 1 }
+			country_event = { id = event_gul_hidden.4 days = 56 }
+		}
+	}
+}
+#开始国策：增加占领开销
+country_event = {
+	id = event_gul.6
+	title = event_gul.6.t
+	desc = event_gul.6.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.6.a
+		custom_effect_tooltip = {
+			localization_key = GUL_Normandy_focuss_in_progress_tt
+			CHARACTER = GUL_Normandy
+			FOCUS = GUL_Zeng_Jia_Kai_Xiao
+		}
+		hidden_effect = {
+			activate_shine_on_focus = GUL_Zeng_Jia_Kai_Xiao
+			set_country_flag = { flag = GUL_Zeng_Jia_Kai_Xiao_in_progress_flag days = 56 value = 1 }
+			country_event = { id = event_gul_hidden.5 days = 56 }
+		}
+	}
+}
+#开始国策：应付洪灾
+country_event = {
+	id = event_gul.7
+	title = event_gul.7.t
+	desc = event_gul.7.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.7.a
+		custom_effect_tooltip = {
+			localization_key = GUL_Normandy_focuss_in_progress_tt
+			CHARACTER = GUL_Normandy
+			FOCUS = GUL_Ying_Dui_Hong_Zai
+		}
+		hidden_effect = {
+			activate_shine_on_focus = GUL_Ying_Dui_Hong_Zai
+			set_country_flag = { flag = GUL_Ying_Dui_Hong_Zai_in_progress_flag days = 56 value = 1 }
+			country_event = { id = event_gul_hidden.6 days = 56 }
+		}
+	}
+}
+#开始国策：民族工业
+country_event = {
+	id = event_gul.8
+	title = event_gul.8.t
+	desc = event_gul.8.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.8.a
+		custom_effect_tooltip = {
+			localization_key = GUL_Normandy_focuss_in_progress_tt
+			CHARACTER = GUL_Normandy
+			FOCUS = GUL_Min_Zu_Gong_Ye
+		}
+		hidden_effect = {
+			activate_shine_on_focus = GUL_Min_Zu_Gong_Ye
+			set_country_flag = { flag = GUL_Min_Zu_Gong_Ye_in_progress_flag days = 56 value = 1 }
+			country_event = { id = event_gul_hidden.7 days = 56 }
+		}
+	}
+}
+#开始国策：转移产业
+country_event = {
+	id = event_gul.9
+	title = event_gul.9.t
+	desc = event_gul.9.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.9.a
+		custom_effect_tooltip = {
+			localization_key = GUL_Normandy_focuss_in_progress_tt
+			CHARACTER = GUL_Normandy
+			FOCUS = GUL_Zhuan_Yi_Cai_Chan
+		}
+		hidden_effect = {
+			activate_shine_on_focus = GUL_Zhuan_Yi_Cai_Chan
+			set_country_flag = { flag = GUL_Zhuan_Yi_Cai_Chan_in_progress_flag days = 56 value = 1 }
+			country_event = { id = event_gul_hidden.8 days = 56 }
+		}
+	}
+}
+#本地化工具：夺取工厂
+country_event = {
+	id = event_gul.10
+	title = event_gul.10.t
+	
+	is_triggered_only = yes
+}
+#永不屈服的高卢
+country_event = {
+	id = event_gul.11
+	title = event_gul.11.t
+	desc = event_gul.11.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.11.a
+		
+	}
+}
+#鲁昂大剧院刺杀行动
+country_event = {
+	id = event_gul.12
+	title = event_gul.12.t
+	desc = event_gul.12.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.12.a
+		
+	}
+}
+#鲁昂剧院爆炸案  #触发新闻：高卢抵抗组织在鲁昂制造爆炸
+country_event = {
+	id = event_gul.13
+	title = event_gul.13.t
+	desc = event_gul.13.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.13.a
+		
+	}
+}
+#塞纳河水位报警
+country_event = {
+	id = event_gul.14
+	title = event_gul.14.t
+	desc = event_gul.14.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.14.a
+		
+	}
+}
+#林贡斯地震  #触发新闻：高卢地区发生大地震
+country_event = {
+	id = event_gul.15
+	title = event_gul.15.t
+	desc = event_gul.15.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.15.a
+		
+	}
+}
+#大洪灾！
+country_event = {
+	id = event_gul.16
+	title = event_gul.16.t
+	desc = event_gul.16.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.16.a
+		
+	}
+}
+#难民涌入鲁昂
+country_event = {
+	id = event_gul.17
+	title = event_gul.17.t
+	desc = event_gul.17.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.17.a
+		
+	}
+}
+#鲁昂罢工
+country_event = {
+	id = event_gul.18
+	title = event_gul.18.t
+	desc = event_gul.18.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.18.a
+		
+	}
+}
+#民族工业法案
+country_event = {
+	id = event_gul.19
+	title = event_gul.19.t
+	desc = event_gul.19.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.19.a
+		
+	}
+}
+#圣水工厂纵火案
+country_event = {
+	id = event_gul.20
+	title = event_gul.20.t
+	desc = event_gul.20.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.20.a
+		
+	}
+}
+#农民起义席卷各地
+country_event = {
+	id = event_gul.21
+	title = event_gul.21.t
+	desc = event_gul.21.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.21.a
+		
+	}
+}
+#全国大罢工
+country_event = {
+	id = event_gul.22
+	title = event_gul.22.t
+	desc = event_gul.22.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.22.a
+		
+	}
+}
+#殖民政府瘫痪
+country_event = {
+	id = event_gul.23
+	title = event_gul.23.t
+	desc = event_gul.23.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.23.a
+		
+	}
+}
+#帕黎斯动乱
+country_event = {
+	id = event_gul.24
+	title = event_gul.24.t
+	desc = event_gul.24.d
+
+	is_triggered_only = yes
+	
+	#立刻镇压！
+	option = {
+		name = event_gul.24.a
+		
+	}
+}
+#帕黎斯血案
+country_event = {
+	id = event_gul.25
+	title = event_gul.25.t
+	desc = event_gul.25.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_gul.25.a
+		
+	}
+}
+#诺曼底公爵请求援助
+country_event = {
+	id = event_gul.26
+	title = event_gul.26.t
+	desc = event_gul.26.d
+
+	is_triggered_only = yes
+	
+	#去你妈的！我们哪里还有精力管这些？
+	option = {
+		name = event_gul.26.a
+		
+	}
+}
+#维多利亚自顾不暇 #触发新闻：维多利亚抛弃高卢殖民地
+country_event = {
+	id = event_gul.27
+	title = event_gul.27.t
+	desc = event_gul.27.d
+
+	is_triggered_only = yes
+	
+	#机会要来了！
+	option = {
+		name = event_gul.27.a
+		
+	}
+}
+#诺曼底公爵逃离高卢
+country_event = {
+	id = event_gul.28
+	title = event_gul.28.t
+	desc = event_gul.28.d
+
+	is_triggered_only = yes
+	
+	#为着这一天，高卢人等待了六十年！
+	option = {
+		name = event_gul.28.a
+		
+	}
+}
+#解散殖民政府 #触发新闻：高卢抵抗组织发动起义
+country_event = {
+	id = event_gul.29
+	title = event_gul.29.t
+	desc = event_gul.29.d
+
+	is_triggered_only = yes
+	
+	#万岁！祖国万岁!
+	option = {
+		name = event_gul.29.a
+		
+	}
+}
+#与哥伦比亚的交涉
+country_event = {
+	id = event_gul.30
+	title = event_gul.30.t
+	desc = event_gul.30.d
+
+	is_triggered_only = yes
+	
+	#我们需要在外交上打破封锁
+	option = {
+		name = event_gul.30.a
+		
+	}
+}
+#吉伦特派政治家
+country_event = {
+	id = event_gul.31
+	title = event_gul.31.t
+	desc = event_gul.31.d
+
+	is_triggered_only = yes
+	
+	#我们现在需要团结一致
+	option = {
+		name = event_gul.31.a
+		
+	}
+}
+#吉伦特派政治家
+country_event = {
+	id = event_gul.31
+	title = event_gul.31.t
+	desc = event_gul.31.d
+
+	is_triggered_only = yes
+	
+	#我们现在需要团结一致
+	option = {
+		name = event_gul.31.a
+		
+	}
+}
+#抓紧控制林贡斯
+country_event = {
+	id = event_gul.32
+	title = event_gul.32.t
+	desc = event_gul.32.d
+
+	is_triggered_only = yes
+	
+	#绝对不能让维多利亚人抢先！
+	option = {
+		name = event_gul.32.a
+		
+	}
+}
+#联合政府大会
+country_event = {
+	id = event_gul.33
+	title = event_gul.33.t
+	desc = event_gul.33.d
+
+	is_triggered_only = yes
+	
+	#绝对不能让维多利亚人抢先！
+	option = {
+		name = event_gul.33.a
+		
+	}
+}
+#制定临时纲领
+country_event = {
+	id = event_gul.34
+	title = event_gul.34.t
+	desc = event_gul.34.d
+
+	is_triggered_only = yes
+	
+	#这将维护新生政权的稳定
+	option = {
+		name = event_gul.34.a
+		
+	}
+}
+#首都屠杀事件
+country_event = {
+	id = event_gul.35
+	title = event_gul.35.t
+	desc = event_gul.35.d
+
+	is_triggered_only = yes
+	
+	#天哪
+	option = {
+		name = event_gul.35.a
+		
+	}
+}
+#是屠杀还是义举？
+country_event = {
+	id = event_gul.36
+	title = event_gul.36.t
+	desc = event_gul.36.d
+
+	is_triggered_only = yes
+	
+	#还是赶紧让这事儿翻篇吧
+	option = {
+		name = event_gul.36.a
+		
+	}
+	#这些从哥伦比亚来的先生小姐怎么跟书呆子似的？
+	option = {
+		name = event_gul.36.b
+		
+	}
+}
+#审判战犯和卖国贼
+country_event = {
+	id = event_gul.37
+	title = event_gul.37.t
+	desc = event_gul.37.d
+
+	is_triggered_only = yes
+	
+	#和解确实有道理，但吉伦特派过于软弱
+	option = {
+		name = event_gul.37.a
+		
+	}
+	#去你妈的，你们在哥伦比亚躲着，哪里知道我们受的苦？
+	option = {
+		name = event_gul.37.b
+		
+	}
+}
+#政府提议尽快进军勃艮第
+country_event = {
+	id = event_gul.38
+	title = event_gul.38.t
+	desc = event_gul.38.d
+
+	is_triggered_only = yes
+	
+	#是的，机不可失
+	option = {
+		name = event_gul.38.a
+		
+	}
+}
+#吉伦特派干预军事行动
+country_event = {
+	id = event_gul.39
+	title = event_gul.39.t
+	desc = event_gul.39.d
+
+	is_triggered_only = yes
+	
+	#算了算了，不要把矛盾闹太大
+	option = {
+		name = event_gul.39.a
+		
+	}
+}
+#物价危机
+country_event = {
+	id = event_gul.40
+	title = event_gul.40.t
+	desc = event_gul.40.d
+
+	is_triggered_only = yes
+	
+	#这片土地真是多灾多难
+	option = {
+		name = event_gul.40.a
+		
+	}
+}
+#经济政策分歧
+country_event = {
+	id = event_gul.41
+	title = event_gul.41.t
+	desc = event_gul.41.d
+
+	is_triggered_only = yes
+	
+	#争论就争论，能不能别破坏团结？
+	option = {
+		name = event_gul.41.a
+		
+	}
+}
+#保尔·莫拉被审查
+country_event = {
+	id = event_gul.42
+	title = event_gul.42.t
+	desc = event_gul.42.d
+
+	is_triggered_only = yes
+	
+	#他们疯了！
+	option = {
+		name = event_gul.42.a
+		
+	}
+}
+#民众被激怒
+country_event = {
+	id = event_gul.43
+	title = event_gul.43.t
+	desc = event_gul.43.d
+
+	is_triggered_only = yes
+	
+	#这么困难的时刻怎么能内斗呢？
+	option = {
+		name = event_gul.43.a
+		
+	}
+}
+#保尔·莫拉无罪
+country_event = {
+	id = event_gul.44
+	title = event_gul.44.t
+	desc = event_gul.44.d
+
+	is_triggered_only = yes
+	
+	#他本来就无罪
+	option = {
+		name = event_gul.44.a
+		
+	}
+}
+#经济政策的讨论陷入僵局
+country_event = {
+	id = event_gul.45
+	title = event_gul.45.t
+	desc = event_gul.45.d
+
+	is_triggered_only = yes
+	
+	#联合政府似乎要联合不下去了
+	option = {
+		name = event_gul.45.a
+		
+	}
+}
+#政治斗争失控
+country_event = {
+	id = event_gul.46
+	title = event_gul.46.t
+	desc = event_gul.46.d
+
+	is_triggered_only = yes
+	
+	#最坏的结果发生了
+	option = {
+		name = event_gul.46.a
+		
+	}
+}
+#首都民众起义！
+country_event = {
+	id = event_gul.47
+	title = event_gul.47.t
+	desc = event_gul.47.d
+
+	is_triggered_only = yes
+	
+	#人民已经不耐烦了！
+	option = {
+		name = event_gul.47.a
+		
+	}
+}
+#勃艮第进军受挫
+country_event = {
+	id = event_gul.48
+	title = event_gul.48.t
+	desc = event_gul.48.d
+
+	is_triggered_only = yes
+	
+	#吉伦特派闯了个大祸
+	option = {
+		name = event_gul.48.a
+		
+	}
+}
+#吉伦特派代表失言
+country_event = {
+	id = event_gul.49
+	title = event_gul.49.t
+	desc = event_gul.49.d
+
+	is_triggered_only = yes
+	
+	#傻逼
+	option = {
+		name = event_gul.49.a
+		
+	}
+}
+#民兵和民众以武力威胁政府
+country_event = {
+	id = event_gul.50
+	title = event_gul.50.t
+	desc = event_gul.50.d
+
+	is_triggered_only = yes
+	
+	#认命吧
+	option = {
+		name = event_gul.50.a
+		
+	}
+}
+#吉伦特派倒台
+country_event = {
+	id = event_gul.51
+	title = event_gul.51.t
+	desc = event_gul.51.d
+
+	is_triggered_only = yes
+	
+	#这已经是你们最好的结局了
+	option = {
+		name = event_gul.51.a
+		
+	}
+}
+#xx的游击队被镇压
+country_event = {
+	id = event_gul.52
+	title = event_gul.52.t
+	desc = event_gul.52.d
+
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			every_state = {
+				limit = { has_state_flag = gul_resistance_enemy_action }
+				save_event_target_as = gul_resistance_enemy_in_this_area
+			}
+		}
+	}
+	
+	#侵略者不得好死！
+	option = {
+		name = event_gul.52.a
+		hidden_effect = {
+			every_state = {
+				limit = { has_state_flag = gul_resistance_enemy_action }
+				clr_state_flag = gul_resistance_enemy_action
+			}
+		}
+	}
+	#此种消息令人心痛，不要再发这类事件了
+	option = {
+		name = event_gul.52.b
+		set_country_flag = gul_resistance_enemy_action_hide
+		hidden_effect = {
+			every_state = {
+				limit = { has_state_flag = gul_resistance_enemy_action }
+				clr_state_flag = gul_resistance_enemy_action
+			}
+		}
+	}
+}
+#xx遭到高卢游击队渗透
+country_event = {
+	id = event_gul.53
+	title = event_gul.53.t
+	desc = event_gul.53.d
+
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			every_state = {
+				limit = { has_state_flag = gul_resistance_action }
+				save_event_target_as = gul_resistance_in_this_area
+			}
+		}
+	}
+	
+	#这群踩不死的蟑螂！
+	option = {
+		name = event_gul.53.a
+		hidden_effect = {
+			every_state = {
+				limit = { has_state_flag = gul_resistance_action }
+				clr_state_flag = gul_resistance_action
+			}
+		}
+	}
+	#别发这类事件了，眼不见心不烦
+	option = {
+		name = event_gul.53.b
+		set_country_flag = gul_resistance_action_hide
+		hidden_effect = {
+			every_state = {
+				limit = { has_state_flag = gul_resistance_action }
+				clr_state_flag = gul_resistance_action
+			}
+		}
+	}
+}
+#xx的军火库被高卢游击队劫掠
+country_event = {
+	id = event_gul.54
+	title = event_gul.54.t
+	desc = event_gul.54.d
+
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			every_state = {
+				limit = { has_state_flag = gul_resistance_attack_action }
+				save_event_target_as = gul_resistance_attack_in_this_area
+			}
+		}
+	}
+	
+	#他们凭什么敢抵抗！
+	option = {
+		name = event_gul.54.a
+		hidden_effect = {
+			every_state = {
+				limit = { has_state_flag = gul_resistance_attack_action }
+				clr_state_flag = gul_resistance_attack_action
+			}
+		}
+	}
+	#别发这类事件了，眼不见心不烦
+	option = {
+		name = event_gul.54.b
+		set_country_flag = gul_resistance_attack_action_hide
+		hidden_effect = {
+			every_state = {
+				limit = { has_state_flag = gul_resistance_attack_action }
+				clr_state_flag = gul_resistance_attack_action
+			}
+		}
+	}
+}

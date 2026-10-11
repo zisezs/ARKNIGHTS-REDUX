@@ -1,0 +1,268 @@
+# ==============================================================================
+# 乌萨斯 · 顾问簇（开局顾问 / 陆军部长 / 圣愚帝国顾问）
+# 由 docs/_urs_advisors_build.py 生成，勿手改。
+#
+#  · 开局可用：阿洛伊泽（维特的人）、第三局局长、卡托加区厂长、沃伦佐娃夫人、
+#             艾丽塔、海军总司令（空缺）
+#  · 需国策解锁：军事部长／陆军总司令／空军总司令／总参谋长（军事树旗标），
+#               圣愚线 6 位（圣愚线旗标）
+#  · 效果落在 common/country_leader/URS_advisor_traits.txt 的特质上；
+#    「/日」类与一次性变量项由 common/on_actions/URS_fool_advisor_on_actions.txt
+#    的 on_daily_URS 处理。
+#
+# 肖像：本批角色未配图（沿用默认占位），与 mod 内既有顾问一致。
+# ==============================================================================
+
+characters = {
+
+	# 阿洛伊泽·戈尔奇科娃 —— 近卫军皇家直属营中尉 · 维特的人
+	URS_Aloyze_Gorchikova = {
+		name = URS_Aloyze_Gorchikova
+		advisor = {
+			slot = political_advisor
+			idea_token = URS_Aloyze_Gorchikova
+			traits = { URS_vittes_lieutenant }
+			desc = URS_Aloyze_Gorchikova_desc
+			ai_will_do = {
+				factor = 100
+			}
+		}
+		advisor = {
+			slot = second_in_command
+			idea_token = URS_Aloyze_Gorchikova_chief_of_staff
+			traits = { URS_ursus_chief_of_staff }
+			desc = URS_Aloyze_Gorchikova_desc
+			available = {
+				has_country_flag = URS_mil_general_staff
+			}
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 第三局局长 —— 情报与科技机构负责人
+	URS_Director_Third_Bureau = {
+		name = URS_Director_Third_Bureau
+		advisor = {
+			slot = political_advisor
+			idea_token = URS_Director_Third_Bureau
+			traits = { URS_third_bureau_director }
+			desc = URS_Director_Third_Bureau_desc
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 卡托加区厂长 —— 经济部长
+	URS_Katoga_Factory_Manager = {
+		name = URS_Katoga_Factory_Manager
+		advisor = {
+			slot = political_advisor
+			idea_token = URS_Katoga_Factory_Manager
+			traits = { URS_katoga_manager }
+			desc = URS_Katoga_Factory_Manager_desc
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 沃伦佐娃夫人 —— 外交部长
+	URS_Foreign_Minister_Vorontsova = {
+		name = URS_Foreign_Minister_Vorontsova
+		advisor = {
+			slot = political_advisor
+			idea_token = URS_Foreign_Minister_Vorontsova
+			traits = { URS_vorontsova_diplomat }
+			desc = URS_Foreign_Minister_Vorontsova_desc
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 艾丽塔·瓦卢耶娃 —— 科研部长
+	URS_Research_Minister_Elita = {
+		name = URS_Research_Minister_Elita
+		advisor = {
+			slot = political_advisor
+			idea_token = URS_Research_Minister_Elita
+			traits = { URS_sarcophagus_accountant }
+			desc = URS_Research_Minister_Elita_desc
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 斯韦特兰纳·卜提里娜 —— 军事部长 · 第一集团军元帅
+	URS_War_Minister_Svetlana = {
+		name = URS_War_Minister_Svetlana
+		advisor = {
+			slot = army_chief
+			idea_token = URS_War_Minister_Svetlana
+			traits = { URS_first_army_marshal }
+			desc = URS_War_Minister_Svetlana_desc
+			available = {
+				has_country_flag = URS_mil_general_staff
+			}
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 叶甫根尼 —— 陆军总司令 · 第四集团军总司令
+	URS_Army_Commander_Evgeny = {
+		name = URS_Army_Commander_Evgeny
+		advisor = {
+			slot = high_command
+			idea_token = URS_Army_Commander_Evgeny
+			traits = { URS_fourth_army_commander }
+			desc = URS_Army_Commander_Evgeny_desc
+			ledger = army
+			available = {
+				has_country_flag = URS_fool_state_flag
+			}
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 海军总司令（空缺） —— 海军总司令 · 空缺
+	URS_Navy_Commander_Vacant = {
+		name = URS_Navy_Commander_Vacant
+		advisor = {
+			slot = navy_chief
+			idea_token = URS_Navy_Commander_Vacant
+			traits = { URS_no_navy }
+			desc = URS_Navy_Commander_Vacant_desc
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 斯乔帕·拉辛 —— 空军总司令 · 谢钦兵团首领
+	URS_Air_Commander_Razin = {
+		name = URS_Air_Commander_Razin
+		advisor = {
+			slot = air_chief
+			idea_token = URS_Air_Commander_Razin
+			traits = { URS_freecorps_air_leader }
+			desc = URS_Air_Commander_Razin_desc
+			available = {
+				has_country_flag = URS_mil_freecorps
+			}
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 圣愚卫队指挥官 —— 圣愚卫队统领
+	URS_Fool_Guard_Commander = {
+		name = URS_Fool_Guard_Commander
+		advisor = {
+			slot = high_command
+			idea_token = URS_Fool_Guard_Commander
+			traits = { URS_fool_guard_leader }
+			desc = URS_Fool_Guard_Commander_desc
+			ledger = army
+			available = {
+				has_country_flag = URS_fool_guard_formed
+			}
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 内卫指挥官 —— 内务部长
+	URS_Interior_Minister_Guards = {
+		name = URS_Interior_Minister_Guards
+		advisor = {
+			slot = political_advisor
+			idea_token = URS_Interior_Minister_Guards
+			traits = { URS_sainted_guards_commander }
+			desc = URS_Interior_Minister_Guards_desc
+			available = {
+				has_country_flag = URS_guards_sainted
+			}
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 娜迦（锚定形态） —— 圣愚的「声音」
+	URS_Naga_Anchored = {
+		name = URS_Naga_Anchored
+		advisor = {
+			slot = political_advisor
+			idea_token = URS_Naga_Anchored
+			traits = { URS_naga_voice }
+			desc = URS_Naga_Anchored_desc
+			available = {
+				has_country_flag = URS_demonic_campaign_begins
+			}
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 别乔克 —— 敲钟者（未敲响）
+	URS_Bielchok = {
+		name = URS_Bielchok
+		advisor = {
+			slot = political_advisor
+			idea_token = URS_Bielchok
+			traits = { URS_bell_ringer }
+			desc = URS_Bielchok_desc
+			available = {
+				has_country_flag = URS_demonic_campaign_begins
+			}
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 雷尔金 —— 远北矿区矿工领袖（被监视中）
+	URS_Rerkin = {
+		name = URS_Rerkin
+		advisor = {
+			slot = political_advisor
+			idea_token = URS_Rerkin
+			traits = { URS_miner_leader }
+			desc = URS_Rerkin_desc
+			available = {
+				has_country_flag = URS_mine_anchored
+			}
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 普瑞赛斯的声音 —— 石棺深处的辩论者
+	URS_Priestess_Voice = {
+		name = URS_Priestess_Voice
+		advisor = {
+			slot = political_advisor
+			idea_token = URS_Priestess_Voice
+			traits = { URS_priestess_debate }
+			desc = URS_Priestess_Voice_desc
+			available = {
+				has_country_flag = URS_priestess_approval
+			}
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+}

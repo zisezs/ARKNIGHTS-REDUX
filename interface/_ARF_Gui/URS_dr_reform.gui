@@ -1,0 +1,188 @@
+# ============================================================================
+# 乌萨斯帝国 ·「费奥多尔初步改革」决议分类页顶部的面板
+# ============================================================================
+#
+# 挂在分类 URS_dr_reform_decisions 上（common/decisions/categories/URS_dream_categories.txt
+# 的 scripted_gui = URS_dr_reform_gui），绑定在
+# common/scripted_guis/URS_Feodor_Reform_GUI.txt。
+#
+# 控件名是两边唯一的接口，拼错不会报错、只会得到一个死控件：
+#   进度条四条 URS_dr_reform_row{i}_bar，对应 scripted_gui 的 properties.frame。
+#   对账脚本 docs/validate_urs_dr_reform.js。
+#
+# 版式：文字左起 x=10，进度条 x=124（贴图 176x32），百分比 x=306，效率 x=350。
+# 右边沿 500，与「帝国宫廷」面板（482）同一量级，超出会被分类页裁掉。
+# ============================================================================
+guiTypes = {
+	containerWindowType = {
+		name = "URS_dr_reform_window"
+		size = { width = 100% height = 400 }
+		position = { x = 0 y = 0 }
+
+		instantTextBoxType = {
+			name = "URS_dr_reform_title"
+			position = { x = 10 y = -10 }
+			maxWidth = 500
+			maxHeight = 34
+			format = center
+			font = "hoi_36header"
+			text = "URS_dr_reform_title_text"
+		}
+
+		instantTextBoxType = {
+			name = "URS_dr_reform_chips"
+			position = { x = 10 y = 26 }
+			maxWidth = 500
+			maxHeight = 44
+			format = center
+			font = "hoi_18mbs"
+			text = "URS_dr_reform_chips_text"
+		}
+
+		# ---------------- 国家 ----------------
+		instantTextBoxType = {
+			name = "URS_dr_reform_row0_name"
+			position = { x = 10 y = 80 }
+			maxWidth = 110
+			maxHeight = 20
+			format = left
+			font = "hoi_18mbs"
+			text = "URS_dr_reform_row0_name_text"
+		}
+		iconType = {
+			name = "URS_dr_reform_row0_bar"
+			position = { x = 124 y = 80 }
+			quadTextureSprite = "GFX_East_Ursus_Upheaval_Stats_MilitarySupplies_ProgressBar"
+		}
+		instantTextBoxType = {
+			name = "URS_dr_reform_row0_pct"
+			position = { x = 306 y = 80 }
+			maxWidth = 44
+			maxHeight = 20
+			format = left
+			font = "hoi_18mbs"
+			text = "URS_dr_reform_row0_pct_text"
+		}
+		instantTextBoxType = {
+			name = "URS_dr_reform_row0_eff"
+			position = { x = 350 y = 80 }
+			maxWidth = 150
+			maxHeight = 20
+			format = left
+			font = "hoi_16mbs"
+			text = "URS_dr_reform_row0_eff_text"
+		}
+
+		# ---------------- 军队 ----------------
+		instantTextBoxType = {
+			name = "URS_dr_reform_row1_name"
+			position = { x = 10 y = 138 }
+			maxWidth = 110
+			maxHeight = 20
+			format = left
+			font = "hoi_18mbs"
+			text = "URS_dr_reform_row1_name_text"
+		}
+		iconType = {
+			name = "URS_dr_reform_row1_bar"
+			position = { x = 124 y = 138 }
+			quadTextureSprite = "GFX_East_Ursus_Upheaval_Stats_MilitarySupplies_ProgressBar"
+		}
+		instantTextBoxType = {
+			name = "URS_dr_reform_row1_pct"
+			position = { x = 306 y = 138 }
+			maxWidth = 44
+			maxHeight = 20
+			format = left
+			font = "hoi_18mbs"
+			text = "URS_dr_reform_row1_pct_text"
+		}
+		instantTextBoxType = {
+			name = "URS_dr_reform_row1_eff"
+			position = { x = 350 y = 138 }
+			maxWidth = 150
+			maxHeight = 20
+			format = left
+			font = "hoi_16mbs"
+			text = "URS_dr_reform_row1_eff_text"
+		}
+
+		# ---------------- 群众 ----------------
+		instantTextBoxType = {
+			name = "URS_dr_reform_row2_name"
+			position = { x = 10 y = 196 }
+			maxWidth = 110
+			maxHeight = 20
+			format = left
+			font = "hoi_18mbs"
+			text = "URS_dr_reform_row2_name_text"
+		}
+		iconType = {
+			name = "URS_dr_reform_row2_bar"
+			position = { x = 124 y = 196 }
+			quadTextureSprite = "GFX_East_Ursus_Upheaval_Stats_MilitarySupplies_ProgressBar"
+		}
+		instantTextBoxType = {
+			name = "URS_dr_reform_row2_pct"
+			position = { x = 306 y = 196 }
+			maxWidth = 44
+			maxHeight = 20
+			format = left
+			font = "hoi_18mbs"
+			text = "URS_dr_reform_row2_pct_text"
+		}
+		instantTextBoxType = {
+			name = "URS_dr_reform_row2_eff"
+			position = { x = 350 y = 196 }
+			maxWidth = 150
+			maxHeight = 20
+			format = left
+			font = "hoi_16mbs"
+			text = "URS_dr_reform_row2_eff_text"
+		}
+
+		# ---------------- 资源 ----------------
+		instantTextBoxType = {
+			name = "URS_dr_reform_row3_name"
+			position = { x = 10 y = 254 }
+			maxWidth = 110
+			maxHeight = 20
+			format = left
+			font = "hoi_18mbs"
+			text = "URS_dr_reform_row3_name_text"
+		}
+		iconType = {
+			name = "URS_dr_reform_row3_bar"
+			position = { x = 124 y = 254 }
+			quadTextureSprite = "GFX_East_Ursus_Upheaval_Stats_MilitarySupplies_ProgressBar"
+		}
+		instantTextBoxType = {
+			name = "URS_dr_reform_row3_pct"
+			position = { x = 306 y = 254 }
+			maxWidth = 44
+			maxHeight = 20
+			format = left
+			font = "hoi_18mbs"
+			text = "URS_dr_reform_row3_pct_text"
+		}
+		instantTextBoxType = {
+			name = "URS_dr_reform_row3_eff"
+			position = { x = 350 y = 254 }
+			maxWidth = 150
+			maxHeight = 20
+			format = left
+			font = "hoi_16mbs"
+			text = "URS_dr_reform_row3_eff_text"
+		}
+
+		instantTextBoxType = {
+			name = "URS_dr_reform_hint"
+			position = { x = 10 y = 312 }
+			maxWidth = 500
+			maxHeight = 80
+			format = center
+			font = "hoi_16mbs"
+			text = "URS_dr_reform_hint_text"
+		}
+	}
+}

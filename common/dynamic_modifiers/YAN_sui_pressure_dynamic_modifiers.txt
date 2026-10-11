@@ -1,0 +1,21 @@
+# ==============================================================================
+#  大炎 · 岁压（【岁醒】开局树的国家级 DEBUFF）
+#  · 数值全部由 yan_sui_pressure(0..100) 派生，改岁压只需动一个变量；
+#    派生与钳制见 common/scripted_effects/YAN_sui_pressure_scripted_effects.txt
+#  · 岁压 100 = 工厂/船坞产能 −100%（用户口径：极其严重，相当于产能归零）
+#  · 生成器 E:/tmp/sui12/gen_suixing.js
+# ==============================================================================
+
+YAN_sui_pressure = {
+	icon = GFX_idea_YAN_sui_pressure
+
+	enable = { always = yes }
+
+	industrial_capacity_factory = YAN_sui_p_fac_var
+	industrial_capacity_dockyard = YAN_sui_p_dock_var
+	production_speed_buildings_factor = YAN_sui_p_build_var
+	research_speed_factor = YAN_sui_p_res_var
+	army_org_factor = YAN_sui_p_org_var
+	supply_consumption_factor = YAN_sui_p_sup_var
+	stability_factor = YAN_sui_p_stab_var
+}

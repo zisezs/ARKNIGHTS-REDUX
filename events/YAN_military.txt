@@ -1,0 +1,89 @@
+# 大炎军改事件（主干五个 + 收官「黑蓑影卫密报」）
+# 生成器：docs/_yan_mil_build.py（改数据表重跑，勿手改产物）
+
+add_namespace = yan_mil
+
+country_event = {
+	id = yan_mil.1
+	title = yan_mil.1.t
+	desc = yan_mil.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_mil.1.a
+	}
+}
+
+country_event = {
+	id = yan_mil.2
+	title = yan_mil.2.t
+	desc = yan_mil.2.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_mil.2.a
+	}
+}
+
+country_event = {
+	id = yan_mil.3
+	title = yan_mil.3.t
+	desc = yan_mil.3.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_mil.3.a
+	}
+}
+
+country_event = {
+	id = yan_mil.4
+	title = yan_mil.4.t
+	desc = yan_mil.4.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_mil.4.a
+	}
+}
+
+country_event = {
+	id = yan_mil.10
+	title = yan_mil.10.t
+	desc = yan_mil.10.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_mil.10.a
+	}
+}
+
+country_event = {
+	id = yan_mil.11
+	title = yan_mil.11.t
+	desc = yan_mil.11.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_mil.11.a
+		custom_effect_tooltip = yan_mil.11_hap_tt
+		if = {
+			limit = { country_exists = HAP }
+			create_wargoal = { type = take_state_focus target = HAP }
+			HAP = {
+				add_ideas = HAP_abuse_demon_power
+				load_oob = "HAP_demon_army"
+			}
+		}
+		if = {
+			limit = { country_exists = TNT }
+			create_wargoal = { type = take_state_focus target = TNT }
+		}
+	}
+}

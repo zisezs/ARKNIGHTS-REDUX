@@ -1,0 +1,31 @@
+KMG_balance_of_power_category = {
+	icon = GFX_KMG_decision_category_radicalization
+	allowed = {
+		original_tag = KMG
+	}
+	priority = 3
+}
+
+KMG_trade_decisions = {
+	icon = GFX_KMG_decision_category_trade
+	allowed = {
+		original_tag = KMG
+	}
+	visible = {
+		NOT = {
+			has_country_flag = East_Ursus_Upheaval_Enabled
+		}
+		has_country_flag = KMG_trade_begin
+	}
+	visible_when_empty = yes
+	priority = 3
+}
+
+KMG_ART_OF_CONQUEST = {
+	icon = GFX_decision_category_NOR_fascist_deploy_prep
+	allowed = {
+		original_tag = KMG
+	}
+
+	priority = 1000
+}

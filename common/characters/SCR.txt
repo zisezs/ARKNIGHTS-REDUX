@@ -1,0 +1,292 @@
+	characters = {
+
+		############################################
+		# 猩红剧团 — 剧团长
+		############################################
+		SCR_director_char = {
+			name = SCR_director_char
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/SCR/director.png"
+					small = "gfx/leaders/SCR/director.png"
+				}
+			}
+			can_be_captured = no
+			country_leader = {
+				ideology = mysticism_subtype
+				traits = {
+					the_director
+				}
+			}
+		}
+
+		############################################
+		# 高卢先锋国 — 卢西恩·德·高卢（血钻本人）
+		############################################
+		SCR_lucian_gaul_char = {
+			name = SCR_lucian_gaul_char
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/SCR/lucian_gaul.png"
+					small = "gfx/leaders/SCR/lucian_gaul.png"
+				}
+			}
+			can_be_captured = no
+			country_leader = {
+				ideology = despotism_subtype
+				traits = {
+					the_director
+				}
+			}
+		}
+
+		############################################
+		# 傀影 / 卢西恩 — "血钻"
+		############################################
+		SCR_lucian_char = {
+			name = SCR_lucian_char
+			portraits = {
+				army = {
+					large = "gfx/leaders/SCR/lucian.png"
+					small = "gfx/leaders/SCR/lucian_small.png"
+				}
+			}
+			can_be_captured = no
+			corps_commander = {
+				skill = 5
+				attack_skill = 5
+				defense_skill = 3
+				planning_skill = 4
+				logistics_skill = 3
+				traits = {
+					trait_SCR_blood_diamond_song
+					trickster
+					war_hero
+				}
+			}
+		}
+
+		############################################
+		# 暮落 / "沉渊"
+		############################################
+		SCR_muluo_char = {
+			name = SCR_muluo_char
+			portraits = {
+				army = {
+					large = "gfx/leaders/SCR/muluo.png"
+					small = "gfx/leaders/SCR/muluo_small.png"
+				}
+			}
+			corps_commander = {
+				skill = 3
+				attack_skill = 2
+				defense_skill = 4
+				planning_skill = 3
+				logistics_skill = 4
+				traits = {
+					trait_SCR_illusionist
+					organizer
+				}
+			}
+		}
+
+		############################################
+		# "白英花"
+		############################################
+		SCR_athanasia_char = {
+			name = SCR_athanasia_char
+			portraits = {
+				army = {
+					large = "gfx/leaders/SCR/athanasia.png"
+					small = "gfx/leaders/SCR/athanasia_small.png"
+				}
+			}
+			can_be_captured = no
+			corps_commander = {
+				skill = 5
+				attack_skill = 5
+				defense_skill = 4
+				planning_skill = 3
+				logistics_skill = 2
+				traits = {
+					trait_SCR_strict_teacher
+					brilliant_strategist
+					war_hero
+				}
+			}
+		}
+
+		############################################
+		# 剧作家 — 文化顾问
+		############################################
+		SCR_playwright_char = {
+			name = SCR_playwright_char
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/SCR/playwright.png"
+					small = "gfx/leaders/SCR/playwright_small.png"
+				}
+			}
+			advisor = {
+				slot = political_advisor
+				idea_token = SCR_playwright_advisor
+				cost = 100
+				traits = {
+				}
+			}
+		}
+
+		############################################
+		# 剧团军官 — 舞台监督与唱诗班长
+		############################################
+		SCR_stagehand_char = {
+			name = SCR_stagehand_char
+			portraits = {
+				army = {
+					large = "gfx/leaders/SCR/stagehand.png"
+					small = "gfx/leaders/SCR/stagehand_small.png"
+				}
+			}
+			corps_commander = {
+				skill = 2
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+				traits = {
+					trait_SCR_stage_mastery
+				}
+			}
+		}
+		SCR_choirmaster_char = {
+			name = SCR_choirmaster_char
+			portraits = {
+				army = {
+					large = "gfx/leaders/SCR/choirmaster.png"
+					small = "gfx/leaders/SCR/choirmaster_small.png"
+				}
+			}
+			corps_commander = {
+				skill = 2
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 3
+				traits = {
+					organizer
+				}
+			}
+		}
+
+		############################################
+		# 「高卢点名册」内阁顾问（12 位，随第二幕国策逐一点名解锁）
+		############################################
+		SCR_adv_pol_1 = {
+			name = SCR_adv_pol_1
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_1.png"
+					small = "gfx/leaders/_generic/generic_1_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_2 = {
+			name = SCR_adv_pol_2
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_5.png"
+					small = "gfx/leaders/_generic/generic_5_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_3 = {
+			name = SCR_adv_pol_3
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_2.png"
+					small = "gfx/leaders/_generic/generic_2_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_4 = {
+			name = SCR_adv_pol_4
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_3.png"
+					small = "gfx/leaders/_generic/generic_3_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_5 = {
+			name = SCR_adv_pol_5
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_1.png"
+					small = "gfx/leaders/_generic/generic_1_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_6 = {
+			name = SCR_adv_pol_6
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_2.png"
+					small = "gfx/leaders/_generic/generic_2_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_7 = {
+			name = SCR_adv_pol_7
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_1.png"
+					small = "gfx/leaders/_generic/generic_1_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_8 = {
+			name = SCR_adv_pol_8
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_6.png"
+					small = "gfx/leaders/_generic/generic_6_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_9 = {
+			name = SCR_adv_pol_9
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_2.png"
+					small = "gfx/leaders/_generic/generic_2_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_10 = {
+			name = SCR_adv_pol_10
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_1.png"
+					small = "gfx/leaders/_generic/generic_1_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_11 = {
+			name = SCR_adv_pol_11
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_7.png"
+					small = "gfx/leaders/_generic/generic_7_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_12 = {
+			name = SCR_adv_pol_12
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_2.png"
+					small = "gfx/leaders/_generic/generic_2_small.png"
+				}
+			}
+		}
+	}

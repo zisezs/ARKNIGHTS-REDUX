@@ -1,0 +1,962 @@
+ideas = {
+	hidden_ideas = {
+		#反动势力必死无疑
+		REU_propaganda_idea = {
+
+			allowed = {
+				tag = REU
+			}
+			
+			available = {
+				has_war_with = REU
+			}
+			
+			removal_cost = -1
+			
+			targeted_modifier = {
+		        tag = REU
+		        attack_bonus_against = -0.05
+		        defense_bonus_against = -0.05
+				breakthrough_bonus_against = -0.05
+	        }
+		}
+	}
+	country = {
+		
+		#击灭乌萨斯
+		REU_destroy_urs = {
+			
+			picture = REU_Wanderers_on_tundra
+			
+			allowed = {
+				tag = REU
+			}
+			
+			removal_cost = -1
+			
+			targeted_modifier = {
+		        tag = URS
+		        attack_bonus_against = 0.1
+		        defense_bonus_against = 0.1
+				breakthrough_bonus_against = 0.1
+	        }
+		}
+		
+		REU_Partisan_team = {
+			picture = GFX_REU_Partisan_team
+			
+			modifier = {
+				army_org_factor = 0.01
+				army_org_regain = 0.02
+				planning_speed = 0.04
+			}
+		}
+
+		REU_People_Partisan_A = {
+			picture = GFX_REU_People_Partisan
+			
+			modifier = {
+				army_org_factor = 0.03
+				army_org_regain = 0.05
+				planning_speed = 0.02
+			}
+		}
+
+		REU_People_Partisan_B = {
+			picture = GFX_REU_People_Partisan
+			
+			modifier = {
+				army_org_factor = 0.01
+				army_org_regain = 0.02
+				planning_speed = 0.04
+				experience_gain_army_factor = 0.02
+			}
+		}
+		
+		REU_People_Partisan_2 = {
+			picture = GFX_REU_People_Partisan
+			
+			modifier = {
+				army_org_factor = 0.03
+				army_org_regain = 0.04
+				planning_speed = 0.06
+				experience_gain_army_factor = 0.05
+			}
+		}
+
+		REU_Political_commissar_1 = {
+			picture = GFX_REU_Political_commissar
+			
+			modifier = {
+				army_org_factor = 0.01
+				army_org_regain = 0.02
+			}
+		}
+
+		REU_Political_commissar_2 = {
+			picture = GFX_REU_Political_commissar
+			
+			modifier = {
+				army_org_factor = 0.02
+				army_org_regain = 0.05
+			}
+		}
+
+		REU_Exemplary_role_of_activists_1 = {
+			picture = GFX_REU_Exemplary_role_of_activists
+			
+			modifier = {
+				political_power_gain = 0.02
+			}
+		}
+
+		REU_Exemplary_role_of_activists_2 = {
+			picture = GFX_REU_Exemplary_role_of_activists
+			
+			modifier = {
+				political_power_gain = 0.06
+			}
+		}
+
+		REU_Three_Rules_Of_Discipline = {
+			picture = GFX_REU_Three_Rules_Of_Discipline
+
+			modifier = {
+				army_org_factor = 0.02
+				army_org_regain = 0.03
+				org_loss_at_low_org_factor = -0.02
+				org_loss_when_moving = -0.01
+			}
+		}
+
+		REU_March_Wound = {
+			picture = GFX_REU_March_Wound
+
+			modifier = {
+				industrial_capacity_factory = -0.15
+				production_speed_buildings_factor = -0.5
+			}
+		}
+
+		REU_New_Comer = {
+			picture = GFX_REU_New_Comer_Rural
+
+			modifier = {
+				stability_factor = -0.2
+				war_stability_factor = -0.2
+				war_support_factor = -0.2
+			}
+		}
+
+		REU_production_campaign = {
+			picture = GFX_REU_production_campaign
+
+			modifier = {
+				industrial_capacity_factory = 0.1
+				production_speed_buildings_factor = 0.2
+				production_factory_efficiency_gain_factor = 0.05
+				line_change_production_efficiency_factor = 0.1
+			}
+		}
+
+		REU_village_democracy_experiment = {
+			picture = GFX_REU_village_democracy_experiment
+			
+			modifier = {
+				stability_factor = 0.03
+				monthly_population = 0.02
+			}
+		}
+
+		REU_reorganize_central_government = {
+			picture = GFX_REU_reorganize_central_government
+			
+			modifier = {
+				stability_factor = -0.1
+				war_stability_factor = -0.1
+				war_support_factor = -0.1
+				political_power_factor = -0.2
+			}
+		}
+
+		REU_reorganize_central_government_1 = {
+			picture = GFX_REU_reorganize_central_government
+			
+			modifier = {
+				stability_factor = -0.05
+				war_stability_factor = -0.05
+				war_support_factor = -0.05
+				political_power_factor = -0.1
+			}
+		}
+
+		REU_reorganize_central_government_2 = {
+			picture = GFX_REU_reorganize_central_government
+		}
+
+		REU_reorganize_central_government_3 = {
+			picture = GFX_REU_reorganize_central_government
+			
+			modifier = {
+				stability_factor = 0.05
+				war_stability_factor = 0.05
+				war_support_factor = 0.05
+				political_power_factor = 0.1
+			}
+		}
+
+		REU_reorganize_central_government_4 = {
+			picture = GFX_REU_reorganize_central_government
+			
+			modifier = {
+				stability_factor = 0.1
+				war_stability_factor = 0.1
+				war_support_factor = 0.1
+				political_power_factor = 0.2
+			}
+		}
+
+		REU_GPU_intelligence_agency = {
+			picture = GFX_REU_GPU_intelligence_agency
+			
+			modifier = {
+				operative_slot = 1
+				new_operative_slot_bonus = 1
+				intel_from_combat_factor = 0.05
+				intelligence_agency_defense = 0.08
+				intel_network_gain_factor = 0.05
+			}
+		}
+
+		REU_GPU_intelligence_agency_1 = {
+			picture = GFX_REU_GPU_intelligence_agency
+			
+			modifier = {
+				operative_slot = 1
+				new_operative_slot_bonus = 1
+				intel_from_combat_factor = 0.05
+				intelligence_agency_defense = 0.08
+				intel_network_gain_factor = 0.05
+				resistance_decay_on_our_occupied_states = -0.05
+				resistance_growth_on_our_occupied_states = 0.05
+			}
+		}
+
+		REU_GPU_intelligence_agency_2 = {
+			picture = GFX_REU_GPU_intelligence_agency
+			
+			modifier = {
+				operative_slot = 1
+				new_operative_slot_bonus = 1
+				intel_from_combat_factor = 0.05
+				intelligence_agency_defense = 0.08
+				intel_network_gain_factor = 0.05
+				resistance_decay_on_our_occupied_states = -0.05
+				resistance_growth_on_our_occupied_states = 0.05
+				agency_upgrade_time = -0.05
+			}
+		}
+
+		REU_Soviet_ministry_of_foreign_affairs = {
+			picture = GFX_REU_Soviet_ministry_of_foreign_affairs
+			
+			modifier = {
+				opinion_gain_monthly_factor = 0.05
+				opinion_gain_monthly_same_ideology_factor = 0.1
+				send_volunteer_size = 1
+			}
+		}
+
+		REU_Soviet_ministry_of_industry = {
+			picture = GFX_REU_Soviet_ministry_of_industry
+			
+			modifier = {
+				production_speed_buildings_factor = 0.05
+				conversion_cost_civ_to_mil_factor = -0.1
+				conversion_cost_mil_to_civ_factor = -0.1
+				industrial_capacity_factory = 0.05
+				line_change_production_efficiency_factor = 0.05
+				local_resources_factor = 0.1
+			}
+		}
+
+		REU_Soviet_ministry_of_industry_1 = {
+			picture = GFX_REU_Soviet_ministry_of_industry
+			
+			modifier = {
+				production_speed_buildings_factor = 0.05
+				conversion_cost_civ_to_mil_factor = -0.2
+				conversion_cost_mil_to_civ_factor = -0.2
+				industrial_capacity_factory = 0.1
+				production_factory_efficiency_gain_factor = 0.1
+				line_change_production_efficiency_factor = 0.05
+				industry_repair_factor = 0.05
+				local_resources_factor = 0.1
+			}
+		}
+
+		REU_Soviet_ministry_of_industry_2 = {
+			picture = GFX_REU_Soviet_ministry_of_industry
+			
+			modifier = {
+				production_speed_buildings_factor = 0.1
+				conversion_cost_civ_to_mil_factor = -0.2
+				conversion_cost_mil_to_civ_factor = -0.2
+				production_factory_max_efficiency_factor = 0.05
+				industrial_capacity_factory = 0.1
+				production_factory_efficiency_gain_factor = 0.1
+				line_change_production_efficiency_factor = 0.1
+				industry_repair_factor = 0.05
+				local_resources_factor = 0.1
+			}
+		}
+
+		REU_Soviet_ministry_of_industry_3 = {
+			picture = GFX_REU_Soviet_ministry_of_industry
+			
+			modifier = {
+				production_speed_buildings_factor = 0.1
+				conversion_cost_civ_to_mil_factor = -0.2
+				conversion_cost_mil_to_civ_factor = -0.2
+				production_factory_max_efficiency_factor = 0.1
+				industrial_capacity_factory = 0.15
+				production_factory_efficiency_gain_factor = 0.1
+				line_change_production_efficiency_factor = 0.15
+				industry_repair_factor = 0.05
+				local_resources_factor = 0.15
+			}
+		}
+
+		REU_Soviet_ministry_of_finance = {
+			picture = GFX_REU_Soviet_ministry_of_finance
+			
+			modifier = {
+				consumer_goods_factor = -0.1
+				supply_node_range = 0.1
+			}
+		}
+
+		REU_Soviet_ministry_of_national_defense = {
+			picture = GFX_REU_Soviet_ministry_of_national_defense
+			
+			modifier = {
+				training_time_factor = -0.05
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+		
+		REU_Soviet_ministry_of_national_defense_1 = {
+			picture = GFX_REU_Soviet_ministry_of_national_defense
+			name = REU_Soviet_ministry_of_national_defense
+			
+			modifier = {
+				training_time_factor = -0.05
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+				army_org_factor = 0.05
+			}
+		}
+		
+		REU_Soviet_ministry_of_national_defense_2 = {
+			picture = GFX_REU_Soviet_ministry_of_national_defense
+			name = REU_Soviet_ministry_of_national_defense
+			
+			modifier = {
+				training_time_factor = -0.15
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				conscription = 0.01
+			}
+		}
+		
+		REU_Soviet_ministry_of_national_defense_3 = {
+			picture = GFX_REU_Soviet_ministry_of_national_defense
+			name = REU_Soviet_ministry_of_national_defense
+			
+			modifier = {
+				training_time_factor = -0.15
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+				army_org_factor = 0.05
+				conscription = 0.01
+			}
+		}
+		
+		REU_Soviet_ministry_of_national_defense_4 = {
+			picture = GFX_REU_Soviet_ministry_of_national_defense
+			name = REU_Soviet_ministry_of_national_defense
+			
+			modifier = {
+				training_time_factor = -0.15
+				army_attack_factor = 0.15
+				army_defence_factor = 0.15
+				army_org_factor = 0.05
+				army_org_regain = 0.05
+				conscription = 0.01
+			}
+		}
+
+		REU_Revise_grain_collection_system = {
+			picture = GFX_REU_Revise_grain_collection_system
+			
+			modifier = {
+				supply_factor = 0.02
+				stability_factor = -0.05
+			}
+		}
+
+		REU_Foreign_research_assistance = {
+			picture = GFX_REU_Foreign_research_assistance
+			
+			modifier = {
+				research_speed_factor = 0.05
+			}
+		}
+
+		REU_Foreign_experts_voluntary = {
+			picture = GFX_REU_Foreign_experts
+			
+			modifier = {
+				research_speed_factor = 0.02
+				production_factory_efficiency_gain_factor = 0.02
+				production_factory_max_efficiency_factor = 0.02
+			}
+		}
+
+		REU_Foreign_capital_entering = {
+			picture = GFX_REU_Foreign_capital_entering
+			
+			modifier = {
+				stability_factor = -0.05
+				consumer_goods_factor = -0.15
+			}
+		}
+
+		REU_resource_export_committee = {
+			picture = GFX_REU_resource_export_committee
+			
+			modifier = {
+				trade_opinion_factor = 0.1
+			}
+		}
+
+		REU_no_discrimination_committee = {
+			picture = GFX_REU_no_discrimination_committee
+			
+			modifier = {
+				stability_factor = 0.01
+				monthly_population = 0.01
+			}
+		}
+
+		REU_national_relation_committee = {
+			picture = GFX_REU_national_relation_committee
+			
+			modifier = {
+				stability_factor = 0.01
+				war_support_factor = 0.01
+			}
+		}
+
+		REU_base_industry = {
+			picture = GFX_REU_base_industry
+
+			modifier = {
+				industrial_capacity_factory = -0.5
+			}
+		}
+
+		#新军装
+		REU_new_uniform = {
+			picture = REU_new_uniform
+
+			allowed = {
+				tag = REU
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				acclimatization_cold_climate_gain_factor = 0.1
+				acclimatization_hot_climate_gain_factor = 0.1
+				army_org_factor = 0.05
+			}
+		}
+
+		#用于剧本界面的假民族精神
+		REU_youji_economic_modifier_bookmark_idea = {
+			name = REU_youji_economic_modifier
+			picture = REU_Wanderers_on_tundra
+
+			modifier = {
+				production_speed_buildings_factor = -0.05
+				production_factory_max_efficiency_factor = -0.1
+				production_factory_efficiency_gain_factor = -0.1
+				research_speed_factor = -0.15
+				industrial_capacity_factory = -0.1
+			}
+		}
+		REU_reunion_political_modifier_bookmark_idea = {
+			name = REU_reunion_political_modifier
+			picture = REU_New_Comer
+
+			modifier = {
+				political_power_factor = -0.15
+				stability_factor = -0.05
+				war_support_factor = 0.15
+			}
+		}
+		REU_ganranzhe_youjidui_modifier_bookmark_idea = {
+			name = REU_ganranzhe_youjidui_modifier
+			picture = REU_Fire_kid
+
+			modifier = {
+				army_org_factor = -0.1
+				conscription_factor = 0.1
+				army_morale_factor = -0.05
+				army_org_regain = -0.05
+				army_attack_factor = -0.05
+				army_defence_factor = -0.05
+				equipment_capture_factor = 0.1
+			}
+		}
+		#国家紧急状态委员会
+		REU_state_emergency_committee = {
+			picture = REU_Soviet_ministry_of_national_defense
+
+			allowed = {
+				tag = REU
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.10
+				war_support_factor = 0.20
+				war_stability_factor = -0.20
+				political_power_gain = 0.25
+			}
+		}
+
+		#乌萨斯永生
+		REU_ursus_immortal = {
+			picture = REU_production_campaign
+
+			allowed = {
+				tag = REU
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_factory_max_efficiency_factor = 0.10
+				production_factory_efficiency_gain_factor = 0.10
+				industrial_capacity_factory = 0.10
+				production_factory_start_efficiency_factor = 0.05
+				production_speed_buildings_factor = 0.05
+				research_speed_factor = 0.05
+			}
+		}
+
+		#政协会议
+		REU_cppcc_conference = {
+			picture = REU_village_democracy_experiment
+
+			allowed = {
+				tag = REU
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = 0.05
+				war_support_factor = 0.10
+				war_stability_factor = -0.20
+				political_power_factor = -0.10
+				research_speed_factor = 0.10
+				production_speed_industrial_complex_factor = 0.15
+				production_speed_arms_factory_factor = 0.10
+			}
+		}
+
+		#基层民主常态化
+		REU_grassroots_democracy_normalized = {
+			picture = REU_reorganize_central_government
+
+			allowed = {
+				tag = REU
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_factory_max_efficiency_factor = 0.10
+				production_factory_efficiency_gain_factor = 0.10
+				industrial_capacity_factory = 0.15
+				production_factory_start_efficiency_factor = 0.10
+				production_speed_buildings_factor = 0.15
+				global_building_slots = 1
+			}
+		}
+
+		#人民民主制度
+		REU_peoples_democratic_system = {
+			picture = REU_Exemplary_role_of_activists
+
+			allowed = {
+				tag = REU
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_factory_max_efficiency_factor = 0.10
+				production_factory_efficiency_gain_factor = 0.10
+				industrial_capacity_factory = 0.15
+				production_factory_start_efficiency_factor = 0.10
+				production_speed_buildings_factor = 0.15
+				global_building_slots = 1
+				#追加：每日政治点数获取
+				political_power_gain = 0.35
+				#追加：地区内最大工业值
+				global_building_slots_factor = 0.10
+			}
+
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.2
+					instant = yes
+				}
+				artillery_equipment = {
+					build_cost_ic = -0.2
+					instant = yes
+				}
+				armor = {
+					build_cost_ic = -0.2
+					instant = yes
+				}
+			}
+		}
+
+
+
+
+		#大鸣大放
+		REU_great_airing = {
+			picture = REU_Political_commissar
+
+			allowed = {
+				tag = REU
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.05
+				political_power_factor = -0.05
+				production_factory_efficiency_gain_factor = -0.05
+				production_factory_max_efficiency_factor = 0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+
+
+		#教育民众
+		REU_educate_the_masses = {
+			picture = REU_Three_Rules_Of_Discipline
+
+			allowed = {
+				tag = REU
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = 0.05
+				political_power_factor = -0.10
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = -0.05
+				industrial_capacity_factory = 0.075
+			}
+		}
+		# ==== 由 Redux 移植：弑君者之名（配套 REU_In_the_name_of_the_Regicide 国策）====
+		REU_In_the_name_of_the_Regicide = {
+			picture = GFX_idea_REU_In_the_name_of_the_Regicide
+			
+			removal_cost = -1
+			
+			modifier = {
+				political_power_gain = 0.3
+				war_support_factor = 0.15
+				stability_factor = 0.15
+				army_attack_factor = 0.15
+				army_defence_factor = 0.15
+				army_morale_factor = 0.15
+				breakthrough_factor = 0.15
+				planning_speed = 0.2
+				experience_gain_army_factor = 0.5
+				conscription_factor = 0.2
+				research_speed_factor = 0.15
+				surrender_limit = 0.2
+				consumer_goods_factor = -0.05
+				operative_slot = 2
+				intel_network_gain_factor = 0.5
+				operation_outcome = 0.25
+				enemy_operative_detection_chance = 20
+				enemy_operative_capture_chance_factor = 0.3
+			}
+		}
+	}
+	# tank_manufacturer = { 
+	# 	designer = yes
+	# 	REU_Buldrokkasteegrad_tank_factory = {
+	# 		picture = REU_Buldrokkasteegrad_tank_factory
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			armor = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# 	REU_Holquit_armor_institute = {
+	# 		picture = REU_Holquit_armor_institute
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			armor = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# 	REU_Sanwein_landship_factory = {
+	# 		picture = REU_Sanwein_landship_factory
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			armor = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# }
+	# aircraft_manufacturer = { 
+	# 	designer = yes
+	# 	REU_Misha_aircraft_design_beurau = {
+	# 		picture = REU_Misha_aircraft_design_beurau
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			air_equipment = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# 	REU_Sukhoi_aircraft_design_beurau = {
+	# 		picture = REU_Sukhoi_aircraft_design_beurau
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			air_equipment = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# 	REU_Tupolev_aircraft_design_beurau = {
+	# 		picture = REU_Tupolev_aircraft_design_beurau
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			air_equipment = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# 	REU_Gamov_aircraft_design_beurau = {
+	# 		picture = REU_Gamov_aircraft_design_beurau
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			air_equipment = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# }
+	# naval_manufacturer = { 
+	# 	designer = yes
+	# 	REU_Kirsk_naval_manufacturer = {
+	# 		picture = REU_Kirsk_naval_manufacturer
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			naval_equipment = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# }
+	# materiel_manufacturer = {
+	# 	designer = yes
+	# 	REU_Krish_arsenal = {
+	# 		picture = REU_Krish_arsenal
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			infantry_weapons = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# 	REU_East_gun_manufacturer = {
+	# 		picture = REU_East_gun_manufacturer
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			infantry_weapons = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# 	REU_Bragol_motor = {
+	# 		picture = REU_Bragol_motor
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			infantry_weapons = 0.15
+	# 		}
+
+	# 		traits = {
+				
+	# 		}
+	# 	}
+	# }
+	# industrial_concern = {
+
+	# 	REU_Far_east_renmin_university = {
+	# 		picture = REU_Far_east_renmin_university
+
+	# 		allowed = {
+	# 			original_tag = REU
+	# 		}
+	# 		available = {
+	# 			always = no
+	# 		}
+			
+	# 		cost = 150
+			
+	# 		research_bonus = {
+	# 			industry = 0.15
+	# 		}
+	# 	}
+	# }
+}

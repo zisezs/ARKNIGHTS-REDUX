@@ -1,0 +1,33 @@
+ideas = {
+
+### 国家精神 ###
+# 注：1094 开局的民族精神已整合为 4 条成长型动态修正符，见
+#     common/dynamic_modifiers/LTN_political_dynamic_modifiers.txt
+#     本文件只保留「1100 庆典终幕」才会挂上的两条一次性精神。
+
+	country = {
+		#二者唯一（白塔独奏终幕：黑女皇封入荒域、失声之后换上）
+		LTN_one_voice = {
+			desc = LTN_one_voice_desc
+			picture = ""
+			modifier = {
+				political_power_gain = 0.25
+				stability_factor = -0.05
+				war_support_factor = -0.05
+			}
+		}
+	}
+
+	country = {
+		#铁腕摄政（黑塔独奏终幕）
+		LTN_grimm_regency = {
+			desc = LTN_grimm_regency_desc
+			picture = ""
+			modifier = {
+				war_support_factor = 0.15
+				stability_factor = -0.05
+				conscription_factor = 0.05
+			}
+		}
+	}
+}

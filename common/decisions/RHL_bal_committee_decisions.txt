@@ -1,0 +1,233 @@
+######################################################
+# 莱茵生命（RHL）· 泰拉平衡委员会 · 决议（6 条）· 1098 年解锁
+# ──────────────────────────────────────────────────────────────
+# 结构：本文件顶层块名 = 决议分类键，决议必须写在块内部（分类声明见
+#       common/decisions/categories/RHL_bal_committee_categories.txt）。
+#       平铺到顶层会被逐条 "Unknown category for : <id> It will be ignored" 静默丢弃。
+#
+# AI 权重（2026-09-13）：6 条全部 ai_will_do = factor 10000 = AI 必定优先点
+#   （原为 base = 0，即玩家专属）。改自 docs/_rhl_ai_priority.py。
+#   ⚠ 本组与 RHL_war_decisions.txt 的 RHL_war_gul / RHL_war_scr / RHL_war_zzz 互斥：
+#     邀请高卢/剧团入阵营（add_to_faction）与对它们宣战不能共存，废土军事通行权与
+#     对废土宣战同理 —— 那 3 条已留成玩家专属（ai_will_do base = 0），本组优先。
+#
+# 依赖链：
+#   决议1 成立委员会（根）
+#     ├─ 决议2 邀请谢拉格（KJG）   ┐
+#     ├─ 决议3 邀请高卢共和国（GUL）├ 支线成组：三条互不影响，可任意顺序
+#     ├─ 决议4 邀请猩红剧团（SCR）  ┘
+#     └─ 决议5 废土（ZZZ）军事通行权  ┐ 委员会成立后的单边能力
+#        决议6 越过程序正当化战争目标 ┘
+#   后 5 条均以 has_country_flag = RHL_bal_faction_founded（决议1 置位）为前置。
+#
+# 引擎要点（均有原版先例）：
+#   · add_to_faction：由「阵营领袖」发起，ROOT（=莱茵生命，创建者即领袖）写
+#     add_to_faction = <新成员>。（原版 BALTIC / DEN）
+#   · give_military_access：在 X 作用域写 give_military_access = ROOT =「X 给 ROOT 通行权」。
+#     （原版 CHI_decisions：YUN = { give_military_access = ROOT }）
+#   · set_rule：一次只写一条规则，可将规则置 yes 或 no。（原版 india_goe / RAJ_GOE / BALTIC）
+#   · 无政体/存在性等使用限制，唯一消耗是 cost（政治点）；下列存在性判断只防误点。
+######################################################
+
+RHL_bal_committee = {
+
+	# ══════════════════════════ 1. 根：成立委员会 ══════════════════════════
+	RHL_bal_found_committee = {
+		icon = GFX_decision_generic_form_nation
+
+		cost = 150
+		fire_only_once = yes
+
+		visible = {
+			# [临时放宽] 验收用 —— 原为 1098 年门槛，还原请运行 _rhl_temp_dategate.py on
+			date > 1094.6.1
+		}
+
+		available = {
+			is_in_faction = no
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RHL_bal_found_committee_tt
+			hidden_effect = {
+				set_rule = { can_create_factions = yes }
+				create_faction_from_template = faction_template_terra_balance_committee
+				add_faction_initiative = 1
+				set_country_flag = RHL_bal_faction_founded
+			}
+		}
+
+		ai_will_do = {
+			factor = 10000
+		}
+	}
+
+	# ══════════════════════ 2. 邀请谢拉格（KJG） ══════════════════════
+	RHL_bal_invite_kjerag = {
+		icon = GFX_decision_generic_political_discourse
+
+		cost = 100
+		fire_only_once = yes
+
+		visible = {
+			# [临时放宽] 验收用 —— 原为 1098 年门槛，还原请运行 _rhl_temp_dategate.py on
+			date > 1094.6.1
+			has_country_flag = RHL_bal_faction_founded
+			KJG = { exists = yes }
+			NOT = { KJG = { is_in_faction_with = ROOT } }
+		}
+
+		available = {
+			is_faction_leader = yes
+			KJG = {
+				exists = yes
+				NOT = { is_in_faction = yes }
+				NOT = { is_subject = yes }
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RHL_bal_invite_kjerag_tt
+			hidden_effect = { add_to_faction = KJG }
+		}
+
+		ai_will_do = {
+			factor = 10000
+		}
+	}
+
+	# ══════════════════════ 3. 邀请高卢共和国（GUL） ══════════════════════
+	RHL_bal_invite_gaul = {
+		icon = GFX_decision_generic_political_address
+
+		cost = 100
+		fire_only_once = yes
+
+		visible = {
+			# [临时放宽] 验收用 —— 原为 1098 年门槛，还原请运行 _rhl_temp_dategate.py on
+			date > 1094.6.1
+			has_country_flag = RHL_bal_faction_founded
+			GUL = { exists = yes }
+			NOT = { GUL = { is_in_faction_with = ROOT } }
+		}
+
+		available = {
+			is_faction_leader = yes
+			GUL = {
+				exists = yes
+				NOT = { is_in_faction = yes }
+				NOT = { is_subject = yes }
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RHL_bal_invite_gaul_tt
+			hidden_effect = { add_to_faction = GUL }
+		}
+
+		ai_will_do = {
+			factor = 10000
+		}
+	}
+
+	# ══════════════════════ 4. 邀请猩红剧团（SCR） ══════════════════════
+	RHL_bal_invite_troupe = {
+		icon = GFX_decision_generic_political_rally
+
+		cost = 100
+		fire_only_once = yes
+
+		visible = {
+			# [临时放宽] 验收用 —— 原为 1098 年门槛，还原请运行 _rhl_temp_dategate.py on
+			date > 1094.6.1
+			has_country_flag = RHL_bal_faction_founded
+			SCR = { exists = yes }
+			NOT = { SCR = { is_in_faction_with = ROOT } }
+		}
+
+		available = {
+			is_faction_leader = yes
+			SCR = {
+				exists = yes
+				NOT = { is_in_faction = yes }
+				NOT = { is_subject = yes }
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RHL_bal_invite_troupe_tt
+			hidden_effect = { add_to_faction = SCR }
+		}
+
+		ai_will_do = {
+			factor = 10000
+		}
+	}
+
+	# ══════════════════ 5. 废土（ZZZ）军事通行权 ══════════════════
+	RHL_bal_zzz_access = {
+		icon = GFX_decision_generic_military
+
+		cost = 75
+		fire_only_once = yes
+
+		visible = {
+			# [临时放宽] 验收用 —— 原为 1098 年门槛，还原请运行 _rhl_temp_dategate.py on
+			date > 1094.6.1
+			has_country_flag = RHL_bal_faction_founded
+			ZZZ = { exists = yes }
+			NOT = { has_military_access_to = ZZZ }
+		}
+
+		available = {
+			ZZZ = { exists = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RHL_bal_zzz_access_tt
+			hidden_effect = { ZZZ = { give_military_access = ROOT } }
+		}
+
+		ai_will_do = {
+			factor = 10000
+		}
+	}
+
+	# ══════════════ 6. 越过程序：无视规则正当化战争目标 ══════════════
+	RHL_bal_free_wargoal = {
+		icon = GFX_decision_generic_army_support
+
+		cost = 200
+		fire_only_once = yes
+
+		visible = {
+			# [临时放宽] 验收用 —— 原为 1098 年门槛，还原请运行 _rhl_temp_dategate.py on
+			date > 1094.6.1
+			has_country_flag = RHL_bal_faction_founded
+		}
+
+		available = {
+			has_country_flag = RHL_bal_faction_founded
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RHL_bal_free_wargoal_tt
+			hidden_effect = {
+				# 解除「只能在构成威胁的国家上正当化」的限制
+				set_rule = { can_only_justify_war_on_threat_country = no }
+				# 允许对同意识形态国家宣战
+				set_rule = { can_declare_war_on_same_ideology = yes }
+				# 允许正当化/生成战争目标（本 mod 企业技术官僚政体同款规则）
+				set_rule = { can_generate_wargoal_when_threatened = yes }
+				set_country_flag = RHL_bal_procedure_overridden
+			}
+		}
+
+		ai_will_do = {
+			factor = 10000
+		}
+	}
+}

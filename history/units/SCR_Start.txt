@@ -1,0 +1,113 @@
+# 猩红剧团开局序列 — "演出必须继续"
+# SCR_Start
+
+division_template = {
+	name = "巡回剧务团"
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+	}
+	support = {
+		engineer = { x = 0 y = 0 }
+	}
+	priority = 1
+}
+
+division_template = {
+	name = "红幕近卫"
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+	}
+	support = {
+		engineer = { x = 0 y = 0 }
+		artillery = { x = 0 y = 1 }
+	}
+	priority = 2
+}
+
+division_template = {
+	name = "白英花学员队"
+	regiments = {
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia = { x = 1 y = 0 }
+		militia = { x = 1 y = 1 }
+	}
+	priority = 0
+}
+
+division_template = {
+	name = "提线人偶连"
+	regiments = {
+		motorized = { x = 0 y = 0 }
+		motorized = { x = 1 y = 0 }
+	}
+	support = {
+		recon = { x = 0 y = 0 }
+	}
+	priority = 2
+}
+
+units = {
+	division = {
+		name = "第1红幕近卫"
+		location = 11938
+		division_template = "红幕近卫"
+		start_experience_factor = 0.4
+	}
+	division = {
+		name = "第1巡回剧务团"
+		location = 11938
+		division_template = "巡回剧务团"
+		start_experience_factor = 0.2
+	}
+	division = {
+		name = "第2巡回剧务团"
+		location = 12256
+		division_template = "巡回剧务团"
+		start_experience_factor = 0.2
+	}
+	division = {
+		name = "第3巡回剧务团"
+		location = 13082
+		division_template = "巡回剧务团"
+		start_experience_factor = 0.2
+	}
+	division = {
+		name = "第1提线人偶连"
+		location = 11938
+		division_template = "提线人偶连"
+		start_experience_factor = 0.3
+	}
+	division = {
+		name = "第1白英花学员队"
+		location = 16811
+		division_template = "白英花学员队"
+		start_experience_factor = 0.1
+	}
+	division = {
+		name = "第2白英花学员队"
+		location = 16862
+		division_template = "白英花学员队"
+		start_experience_factor = 0.1
+	}
+	division = {
+		name = "第4巡回剧务团"
+		location = 16876
+		division_template = "巡回剧务团"
+		start_experience_factor = 0.2
+	}
+	division = {
+		name = "第2红幕近卫"
+		location = 11938
+		division_template = "红幕近卫"
+		start_experience_factor = 0.4
+	}
+}

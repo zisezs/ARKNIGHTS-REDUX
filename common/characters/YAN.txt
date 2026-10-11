@@ -1,0 +1,650 @@
+characters = {
+	# ================================================================
+	#  大炎 · 人物
+	#  · 领袖：魏遵礼（本家）
+	#  · 顾问：太傅/太尉/宁辞秋/梁洵/椿/左乐/魏彦吾/虞澄/老天师/
+	#          左宣辽/陈晖洁/重岳/均/令/年/夕/黍/余
+	#  · 立绘：魏遵礼用 dds；重岳/令/年/夕/黍/余/椿/左乐/魏彦吾/陈晖洁已接 prts 官方头像
+	#          （大 156x210 / 小 65x67，生成器 E:/tmp/sui12/adapt_yan_faces.js + wire_yan_faces.js），
+	#          其余仍用 gfx/leaders/_unknown/404_unknown_small.dds 占位，出图后照同规格补即可
+	#  · 顾问必须先在 history/countries/YAN - Yan.txt 里 recruit_character
+	#    入池，否则政府面板里根本不会出现；入池后用 available 决定何时可雇。
+	#  · 每个 advisor 块都写 allowed = { original_tag = YAN }：
+	#    省略时该顾问可能被其他国家雇走（原版所有 advisor 都显式写 allowed）。
+	#  · 需求表里的「政治顾问 / 军事参谋 / 陆军部长 / 理论家」四档都是开局可雇，
+	#    不要另加国策门槛；只有「特殊顾问」一档需要解锁。
+	#  · ⚠️ 2026-09-21 适配：旧主树被【岁相的荒唐梦】整树替换后，原先挂在 YAN_Agent_* /
+	#    YAN_Chen_Huijie_holds_shudao / YAN_Zuo_Le_takes_office 上的门槛全部落在 .bak 里
+	#    （引擎不读 .bak → has_completed_focus 恒假 → 这 8 个人从此雇不到）。现改挂到**生效**格子上：
+	#      岁片六位 → 各自线的出山格（同格还 recruit_character = YAN_gen_*，将领与顾问同时到位）
+	#        重岳 YAN_chc_zhongyue_chu「解朔之籍」   令 YAN_chc_ling_chu「赴征辟」
+	#        年  YAN_chc_nian_chu「与工部立约」      夕 YAN_chc_xi_chu「焚香启卷」
+	#        黍  YAN_chc_shu_chu「自大荒奉召」       余 YAN_chc_yu_chu「灶下受命」
+	#      陈晖洁·天喟之剑 → 颉线出山格 YAN_chc_jie_chu「太史阁启遗稿」（书刀随史官出山）
+	#      左乐·秉烛人监正 → 岁醒树 YAN_SX_Seal_Suiling「岁陵封禁」（该格文案就是「秉烛人换成了禁军」）；
+	#        同时给椿加 visible 反向锁：封禁之后她不再出现在可聘池里，接任关系由面板自己讲清楚。
+	#      老天师·天师支援参谋仍挂 YAN_mil_support_root「天枢整军」（军事共享树，本来就是活的）
+	#    出山格本身还要 has_country_flag = yan_sui_pact（【与岁同行】带完成才解锁），
+	#    所以这六位最早也在玩家走完那条约定之后才可能入阁。
+	# ================================================================
+
+	YAN_Wei_Zunli = {
+		name = YAN_Wei_Zunli
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/YAN/Wei_Zunli.dds"
+			}
+		}
+		gender = male
+		country_leader = {
+			desc = YAN_Wei_Zunli_desc
+			ideology = eastern_constitutionalism_subtype
+			traits = { Yan_the_emperor }
+		}
+		country_leader = {
+			desc = YAN_Wei_Zunli_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { Yan_the_emperor }
+		}
+		country_leader = {
+			desc = YAN_Wei_Zunli_desc
+			ideology = absolute_monarchy_subtype
+			traits = { Yan_the_emperor }
+		}
+	}
+
+	YAN_Sun_Zaizhi = {
+		name = YAN_Sun_Zaizhi
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds" #gfx/leaders/YAN/Sun_Zaizhi.jpg
+			}
+		}
+		gender = male
+		country_leader = {
+			desc = YAN_Sun_Zaizhi_desc
+			ideology = plumism_subtype
+		}
+	}
+
+	YAN_Li_Shouting = {
+		name = YAN_Li_Shouting
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds" #gfx/leaders/YAN/Li_Shouting.jpg
+			}
+		}
+		gender = male
+		country_leader = {
+			desc = YAN_Li_Shouting_desc
+			ideology = communism_subtype
+		}
+	}
+
+	# ============================ 顾问 ============================
+
+	# 太傅 —— 政治改革者 / 国策统筹（理论家）
+	YAN_Taifu = {
+		name = YAN_Taifu
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Taifu_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Taifu_advisor }
+			desc = YAN_Taifu_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+		advisor = {
+			slot = theorist
+			ledger = army
+			idea_token = YAN_Taifu_theorist_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Taifu_theorist }
+			desc = YAN_Taifu_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 太尉 —— 主战派 / 陆军部长
+	YAN_Taiwei = {
+		name = YAN_Taiwei
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Taiwei_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Taiwei_advisor }
+			desc = YAN_Taiwei_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+		advisor = {
+			slot = army_chief
+			idea_token = YAN_Taiwei_army_chief_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Taiwei_army_chief }
+			desc = YAN_Taiwei_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 宁辞秋 —— 外交家
+	YAN_Ning_Chunqiu = {
+		name = YAN_Ning_Chunqiu
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Ning_Chunqiu_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Ning_Chunqiu_advisor }
+			desc = YAN_Ning_Chunqiu_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 梁洵 —— 建设专家 / 后勤参谋
+	YAN_Liang_Xun = {
+		name = YAN_Liang_Xun
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Liang_Xun_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Liang_Xun_advisor }
+			desc = YAN_Liang_Xun_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = YAN_Liang_Xun_high_command_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Liang_Xun_high_command }
+			desc = YAN_Liang_Xun_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 椿 —— 司岁台监正（岁陵封禁后由左乐接任，之后不再进可聘池）
+	YAN_Chun = {
+		name = YAN_Chun
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/YAN/court/YAN_chun_small.png"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Chun_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			visible = {
+				NOT = { has_completed_focus = YAN_SX_Seal_Suiling }
+			}
+			traits = { YAN_Chun_advisor }
+			desc = YAN_Chun_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 左乐 —— 秉烛人监正（需完成【岁醒】树「岁陵封禁」：禁军接管禁区，年轻人接手司岁台）
+	YAN_Zuo_Le = {
+		name = YAN_Zuo_Le
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/YAN/court/YAN_Zuo_Le_small.png"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Zuo_Le_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			available = {
+				has_completed_focus = YAN_SX_Seal_Suiling
+			}
+			traits = { YAN_Zuo_Le_advisor }
+			desc = YAN_Zuo_Le_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 魏彦吾 —— 政治强人 / 陆军部长（需「兄弟对峙」线见到人）
+	YAN_Wei_Yanwu = {
+		name = YAN_Wei_Yanwu
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/YAN/court/YAN_Wei_Yanwu_small.png"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Wei_Yanwu_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Wei_Yanwu_advisor }
+			desc = YAN_Wei_Yanwu_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+		advisor = {
+			slot = army_chief
+			idea_token = YAN_Wei_Yanwu_army_chief_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Wei_Yanwu_army_chief }
+			desc = YAN_Wei_Yanwu_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 虞澄 —— 司法改革者
+	YAN_Yu_Cheng = {
+		name = YAN_Yu_Cheng
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Yu_Cheng_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Yu_Cheng_advisor }
+			desc = YAN_Yu_Cheng_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 老天师 —— 科研顾问 / 天师支援参谋（需「天师府」）
+	YAN_Lao_Tianshi = {
+		name = YAN_Lao_Tianshi
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Lao_Tianshi_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Lao_Tianshi_advisor }
+			desc = YAN_Lao_Tianshi_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = YAN_Lao_Tianshi_high_command_idea
+			allowed = {
+				original_tag = YAN
+			}
+			available = {
+				has_completed_focus = YAN_mil_support_root
+			}
+			traits = { YAN_Lao_Tianshi_high_command }
+			desc = YAN_Lao_Tianshi_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 左宣辽 —— 玉门防御参谋 / 陆军部长
+	YAN_Zuo_Xuanliao = {
+		name = YAN_Zuo_Xuanliao
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = YAN_Zuo_Xuanliao_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Zuo_Xuanliao_advisor }
+			desc = YAN_Zuo_Xuanliao_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+		advisor = {
+			slot = army_chief
+			idea_token = YAN_Zuo_Xuanliao_army_chief_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Zuo_Xuanliao_army_chief }
+			desc = YAN_Zuo_Xuanliao_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 陈晖洁 —— 机动参谋（天喟之剑条目需颉出山：书刀随史官出山，刀才真正成为剑）
+	YAN_Chen_Huijie = {
+		name = YAN_Chen_Huijie
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/YAN/court/YAN_Chen_Huijie_small.png"
+			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = YAN_Chen_Huijie_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Chen_Huijie_advisor }
+			desc = YAN_Chen_Huijie_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Chen_Huijie_special_idea
+			allowed = {
+				original_tag = YAN
+			}
+			available = {
+				has_completed_focus = YAN_chc_jie_chu
+			}
+			traits = { YAN_Chen_Huijie_special }
+			desc = YAN_Chen_Huijie_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 重岳 —— 练兵参谋 / 代理人顾问（需「解朔之籍」出山格）
+	YAN_Chong_Yue = {
+		name = YAN_Chong_Yue
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/YAN/gen/YAN_gen_zhongyue_small.png"
+			}
+		}
+		advisor = {
+			slot = high_command
+			idea_token = YAN_Chong_Yue_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Chong_Yue_advisor }
+			desc = YAN_Chong_Yue_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Chong_Yue_agent_idea
+			allowed = {
+				original_tag = YAN
+			}
+			available = {
+				has_completed_focus = YAN_chc_zhongyue_chu
+			}
+			traits = { YAN_Chong_Yue_advisor }
+			desc = YAN_Chong_Yue_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 均 —— 律法理论家（代理人）
+	YAN_Jun = {
+		name = YAN_Jun
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			}
+		}
+		advisor = {
+			slot = theorist
+			ledger = army
+			idea_token = YAN_Jun_theorist_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Jun_theorist }
+			desc = YAN_Jun_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 令 —— 安定理论家 / 代理人顾问（理论家开局可雇；织梦者条目需「赴征辟」出山格）
+	YAN_Ling = {
+		name = YAN_Ling
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/YAN/gen/YAN_gen_ling_small.png"
+			}
+		}
+		advisor = {
+			slot = theorist
+			ledger = army
+			idea_token = YAN_Ling_theorist_idea
+			allowed = {
+				original_tag = YAN
+			}
+			traits = { YAN_Ling_theorist }
+			desc = YAN_Ling_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Ling_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			available = {
+				has_completed_focus = YAN_chc_ling_chu
+			}
+			traits = { YAN_Ling_advisor }
+			desc = YAN_Ling_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 年 —— 工业顾问（代理人，需「与工部立约」出山格）
+	YAN_Nian = {
+		name = YAN_Nian
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/YAN/gen/YAN_gen_nian_small.png"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Nian_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			available = {
+				has_completed_focus = YAN_chc_nian_chu
+			}
+			traits = { YAN_Nian_advisor }
+			desc = YAN_Nian_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 夕 —— 文化顾问（代理人，需「焚香启卷」出山格）
+	YAN_Xi = {
+		name = YAN_Xi
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/YAN/gen/YAN_gen_xi_small.png"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Xi_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			available = {
+				has_completed_focus = YAN_chc_xi_chu
+			}
+			traits = { YAN_Xi_advisor }
+			desc = YAN_Xi_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 黍 —— 农业/补给顾问（代理人，需「自大荒奉召」出山格）
+	YAN_Shu = {
+		name = YAN_Shu
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/YAN/gen/YAN_gen_shu_small.png"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Shu_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			available = {
+				has_completed_focus = YAN_chc_shu_chu
+			}
+			traits = { YAN_Shu_advisor }
+			desc = YAN_Shu_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+
+	# 余 —— 补给顾问（代理人，需「灶下受命」出山格）
+	YAN_Yu = {
+		name = YAN_Yu
+		portraits = {
+			civilian = {
+				small = "gfx/leaders/YAN/gen/YAN_gen_yu_small.png"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_Yu_advisor_idea
+			allowed = {
+				original_tag = YAN
+			}
+			available = {
+				has_completed_focus = YAN_chc_yu_chu
+			}
+			traits = { YAN_Yu_advisor }
+			desc = YAN_Yu_desc
+			cost = 150
+			ai_will_do = {
+				factor = 100
+			}
+		}
+	}
+}
+

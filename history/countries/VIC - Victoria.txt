@@ -1,0 +1,277 @@
+capital = 434
+
+oob = "VIC_Start"
+
+recruit_character = VIC_Council_of_Victoria
+recruit_character = VWI_Clark_Atney
+recruit_character = VWI_Ashley_Brownwood
+recruit_character = VWI_William_Beneridge
+recruit_character = VWI_Datzdali
+recruit_character = VWI_Ashley_Cecil
+recruit_character = VWI_Nellie_Birmingham
+
+recruit_character = VIC_Alexandrina_Vina_Victoria
+recruit_character = VIC_Hannah_Jackson
+recruit_character = VIC_Kate_Morrigan
+recruit_character = VIC_Isabel_Montagu
+
+add_ideas = {
+	no_voting
+	working_law_18h
+	isolation_management
+	major_country
+
+	subsistence_agriculture
+	scale_factory
+	high_illiteracy_rate
+	inefficient_administration
+	rampant_poverty
+
+	VIC_aftermath_of_financial_boom_idea
+	VIC_post_revolutionary_chaos_idea
+	VIC_victors_of_the_Great_War_idea
+}
+
+add_dynamic_modifier = {
+	modifier = VIC_Sarkaz_invation_dynamic_modifier
+}
+
+add_to_variable = {
+	var = VIC_Sarkaz_invation_stability_factor_dynamic_var
+	value = -0.3
+}
+add_to_variable = {
+	var = VIC_Sarkaz_invation_war_support_factor_dynamic_var
+	value = -0.2
+}
+add_to_variable = {
+	var = VIC_Sarkaz_invation_monthly_population_dynamic_var
+	value = -0.05
+}
+add_to_variable = {
+	var = VIC_Sarkaz_invation_political_power_factor_dynamic_var
+	value = -0.2
+}
+add_to_variable = {
+	var = VIC_Sarkaz_invation_production_speed_buildings_factor_dynamic_var
+	value = -0.1
+}
+add_to_variable = {
+	var = VIC_Sarkaz_invation_industrial_capacity_factory_dynamic_var
+	value = -0.1
+}
+add_to_variable = {
+	var = VIC_Sarkaz_invation_production_factory_max_efficiency_factor_dynamic_var
+	value = -0.1
+}
+add_to_variable = {
+	var = VIC_Sarkaz_invation_production_factory_efficiency_gain_factor_dynamic_var
+	value = -0.1
+}
+
+country_event = {
+	id = event_vic.15
+	days = 50
+}
+country_event = {
+	id = event_vic.14
+	days = 60
+}
+country_event = {
+	id = event_vic.6
+	days = 300
+}
+country_event = {
+	id = event_vic.5
+	days = 500
+}
+country_event = {
+	id = event_vic.31
+	days = 1000
+}
+
+set_autonomy = {
+	target = DOA
+	autonomy_state = autonomy_victoria_colony
+}
+set_autonomy = {
+	target = DOM
+	autonomy_state = autonomy_victoria_colony
+}
+set_autonomy = {
+	target = VDA
+	autonomy_state = autonomy_victoria_protectorate
+}
+set_autonomy = {
+	target = GUL
+	autonomy_state = autonomy_victoria_protectorate
+}
+set_autonomy = {
+	target = DCN
+	autonomy_state = autonomy_victoria_supervised_state
+}
+
+set_research_slots = 4
+set_stability = 0.5
+set_war_support = 0.4
+
+country_lock_all_division_template = yes
+
+set_technology = {
+	infantry_weapons_0 = 1
+	infantry_weapons_improvement_1 = 1
+	infantry_weapons_improvement_2 = 1
+	arts_weapons_0 = 1
+	arts_weapons_improvement_1 = 1
+	support_weapons_1 = 1
+	tech_support = 1
+	LRD_tech_shengchan_0 = 1
+	LRD_tech_shengchan_2 = 1
+	LRD_tech_tumu_0 = 1
+	fuel_silos = 1
+	LRD_tech_jisuanji_0 = 1
+	LRD_tech_jisuanji_1 = 1
+	crystal_electronic_unit = 1
+	transistor_computer = 1
+	integrated_circuit_computer_1 = 1
+	MSA_radar = 1
+	PESA_radar = 1
+	tech_support = 1
+	tech_engineers = 1
+	tech_recon = 1
+	basic_train = 1
+	motorized_infantry_0 = 1
+	motorized_infantry_1 = 1
+	mechanized_infantry_1 = 1
+	artillery_0 = 1
+	artillery_improvement_1 = 1
+	artillery_1 = 1
+	sp_artillery_1 = 1
+	antitank_0 = 1
+	antitank_improvement_1 = 1
+	antitank_1 = 1
+	rocket_artillery_0 = 1
+	rocket_artillery_improvement_1 = 1
+	antiair_0 = 1
+	antiair_improvement_1 = 1
+	antiair_1 = 1
+	sp_antiair_1 = 1
+	LRD_tech_energy_1 = 1
+	light_tank_0 = 1
+	light_tank_1 = 1
+	medium_tank_0 = 1
+	medium_tank_1 = 1
+	heavy_tank_0 = 1
+	heavy_tank_1 = 1
+	landship_0 = 1
+	landship_1 = 1
+	air_engines = 1
+	jet_engines_1 = 1
+	small_airframe_0 = 1
+	small_airframe_1 = 1
+	medium_airframe_0 = 1
+	medium_airframe_1 = 1
+	large_airframe_0 = 1
+	transport_plane_0 = 1
+	helicopter_0 = 1
+	airborne_bombs = 1
+	aa_cannon_1 = 1
+	aircraft_construction = 1
+}
+
+create_equipment_variant = {
+	type = landship_chassis_1
+	parent_version = 0
+	modules = {
+		turret_type_slot = tank_super_heavy_four_man_tank_turret
+		main_armament_slot = tank_heavy_cannon_2
+		suspension_type_slot = tank_bogie_suspension
+		armor_type_slot = tank_riveted_armor
+		engine_type_slot = tank_gasoline_engine
+		special_type_slot_1 = tank_heavy_cannon_2
+		special_type_slot_3 = additional_machine_guns
+		special_type_slot_2 = tank_radio_1
+		special_type_slot_4 = sloped_armor
+	}
+	upgrades = {
+		tank_nsb_armor_upgrade = 2
+		tank_nsb_engine_upgrade = 2
+	}
+}
+
+create_equipment_variant = {
+	name = "FV4020“百夫长”"
+	type = medium_tank_chassis_1
+	parent_version = 0
+	modules = {
+		turret_type_slot = tank_medium_two_man_tank_turret
+		main_armament_slot = tank_medium_cannon_2
+		suspension_type_slot = tank_torsion_bar_suspension
+		armor_type_slot = tank_riveted_armor
+		engine_type_slot = tank_gasoline_engine
+	}
+	upgrades = {
+		tank_nsb_armor_upgrade = 2
+		tank_nsb_engine_upgrade = 2
+	}
+}
+
+create_equipment_variant = {
+	name = "吞火者 F MK.21"
+	type = small_plane_airframe_0
+	modules = {
+		fixed_main_weapon_slot = aircraft_cannon_1
+		fixed_aircraft_cannon_slot = aircraft_cannon_1
+		engine_type_slot = engine_1x
+		plane_wingform_slot = straight_wing
+		special_type_slot_1 = empty
+	}
+}
+
+create_equipment_variant = {
+	name = "短矛 F MK.4"
+	type = small_plane_airframe_1
+	modules = {
+		fixed_main_weapon_slot = air_to_air_hardpoint_1
+		fixed_aircraft_cannon_slot = aircraft_cannon_1
+		engine_type_slot = engine_1x
+		plane_wingform_slot = straight_wing
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+	}
+}
+
+create_equipment_variant = {
+	name = "猎人 A MK.1"
+	type = small_plane_cas_airframe_1
+	modules = {
+		fixed_main_weapon_slot = air_to_ground_hardpoint_1
+		fixed_aircraft_cannon_slot = aircraft_cannon_1
+		engine_type_slot = jet_engine_1_1x
+		plane_wingform_slot = straight_wing
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+	}
+}
+
+set_politics = {
+	ruling_party = conservatism
+	elections_allowed = no
+}
+set_popularities = {
+	communism = 1
+	socialism = 2
+	progressivism = 8
+	liberalism = 23
+	conservatism = 34
+	authoritarianism = 26
+	despotism = 5
+	fascism = 1
+	mysticism = 0
+	special = 0
+}
+
+# ARF 特殊兵种：开局授予专属兵种科技（ARF 特殊兵种模块维护，请勿手改）
+set_technology = {
+	arf_steam_knight_company_tech = 1
+}

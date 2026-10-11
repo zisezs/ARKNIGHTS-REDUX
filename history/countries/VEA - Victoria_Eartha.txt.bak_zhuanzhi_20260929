@@ -1,0 +1,61 @@
+capital = 433
+
+oob = "VEA_Start"
+
+recruit_character = VIC_Clovicia #克洛维希娅
+recruit_character = VIC_Aleida_Cumberland #阿勒黛·坎伯兰
+recruit_character = VIC_Rochelle_Rockwell #罗谢尔·洛克威尔
+recruit_character = VIC_Feist_Ironman #菲斯特·“铁人”
+
+activate_advisor = VIC_Aleida_Cumberland #阿勒黛·坎伯兰
+
+add_ideas = {
+	no_voting #无选举
+	working_law_14h #十四小时工作制
+	equal_treatment #平等对待
+	local_warlord #地方军阀
+
+	subsistence_agriculture #自给农业
+	electric_tool_production #电动工具生产
+	high_illiteracy_rate #高文盲率
+	useless_government #政府形同虚设
+	rampant_poverty #普遍贫困
+}
+
+set_stability = 0.3
+set_war_support = 0.6
+set_research_slots = 2
+
+set_technology = {
+	infantry_weapons_0 = 1
+	artillery_0 = 1
+	tech_support = 1
+	basic_machine_tools = 1
+	punched_card_computer = 1
+	tech_recon = 1
+	motorized_infantry_0 = 1
+	power_plant = 1
+}
+
+set_politics = {
+	ruling_party = despotism
+	elections_allowed = no
+}
+
+set_popularities = {
+	communism = 0
+	socialism = 0
+	progressivism = 0
+	liberalism = 0
+	conservatism = 0
+	authoritarianism = 0
+	despotism = 100
+	fascism = 0
+	mysticism = 0
+	special = 0
+}
+
+# ARF 特殊兵种：开局授予专属兵种科技（ARF 特殊兵种模块维护，请勿手改）
+set_technology = {
+	arf_steam_knight_company_tech = 1
+}

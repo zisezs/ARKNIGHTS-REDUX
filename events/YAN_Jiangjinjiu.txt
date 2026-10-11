@@ -1,0 +1,454 @@
+# ==============================================================================
+#  大炎 · 将进酒（事件链 · 10 环）
+#  · 原作 act15side《将进酒》，地点尚蜀，时间早春
+#  · 视角：一只黑色酒盏入境尚蜀，礼部与司岁台争管辖，玩家以朝廷身份裁定。
+#  · 出场角色照原作：梁洵（尚蜀知府）/ 宁辞秋（礼部左侍郎·钦差）/ 左乐（秉烛人）/
+#    太合（肃政院副监察御史）/ 太傅 / 老鲤 / 郑清钺 / 杜遥夜 / 尚冢 / 慎楼 /
+#    克洛丝 / 乌有 / 夜半 / 惊蛰（麟青砚）/ 年 / 夕 / 令 / 颉（字迹）/ 岁相
+#  · 起链 1095.5.1，每 60 天一环，见 YAN_sidestory_scripted_effects.txt。
+#  · 设定要点：酒盏是岁之代理人分离出的一缕意识所凝，寄宿其中者为「岁相」；
+#    盏所过之处「器伥」四起，器物活化。司岁台本属礼部下属，因旧祸事而地位拔高，
+#    两部门的管辖之争是本链的政治主轴。
+# ==============================================================================
+
+add_namespace = yan_jjj
+
+# ------------------------------------------------------------------
+# 1 黑盏 —— 司岁台与礼部争一只盏
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_jjj.1
+	title = yan_jjj.1.t
+	desc = yan_jjj.1.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_jjj.2 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_jjj.1.a
+		ai_chance = { base = 40 }
+		add_political_power = -30
+		add_to_variable = { yan_agent_trust = -8 }
+		add_to_variable = { yan_sui_awakening = -4 }
+		custom_effect_tooltip = yan_ss_trust_m8_tt
+		custom_effect_tooltip = yan_ss_sui_m4_tt
+	}
+
+	option = {
+		name = yan_jjj.1.b
+		ai_chance = { base = 30 }
+		add_political_power = -20
+		add_to_variable = { yan_agent_trust = 5 }
+		custom_effect_tooltip = yan_ss_trust_p5_tt
+	}
+
+	option = {
+		name = yan_jjj.1.c
+		ai_chance = { base = 30 }
+		add_political_power = 25
+		add_stability = -0.03
+	}
+}
+
+# ------------------------------------------------------------------
+# 2 无理手 —— 梁洵反手雇了那个龙门人
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_jjj.2
+	title = yan_jjj.2.t
+	desc = yan_jjj.2.d
+	picture = GFX_report_event_Generic_Lungmen_Office
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_jjj.3 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_jjj.2.a
+		ai_chance = { base = 40 }
+		add_political_power = -40
+		add_to_variable = { yan_sui_awakening = -5 }
+		custom_effect_tooltip = yan_ss_sui_m5_tt
+	}
+
+	option = {
+		name = yan_jjj.2.b
+		ai_chance = { base = 30 }
+		add_political_power = 30
+		add_to_variable = { yan_agent_trust = -5 }
+		add_to_variable = { yan_sui_awakening = 4 }
+		custom_effect_tooltip = yan_ss_trust_m5_tt
+		custom_effect_tooltip = yan_ss_sui_p4_tt
+	}
+
+	option = {
+		name = yan_jjj.2.c
+		ai_chance = { base = 30 }
+		add_political_power = -50
+		add_to_variable = { yan_sui_awakening = -3 }
+		add_to_variable = { yan_agent_trust = -3 }
+		custom_effect_tooltip = yan_ss_sui_m3_tt
+		custom_effect_tooltip = yan_ss_trust_m3_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 3 行裕 —— 客栈里动了手
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_jjj.3
+	title = yan_jjj.3.t
+	desc = yan_jjj.3.d
+	picture = GFX_report_event_Generic_Bar
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_jjj.4 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_jjj.3.a
+		ai_chance = { base = 40 }
+		add_political_power = -25
+		add_stability = -0.04
+	}
+
+	option = {
+		name = yan_jjj.3.b
+		ai_chance = { base = 30 }
+		add_political_power = 20
+		add_stability = -0.02
+	}
+
+	option = {
+		name = yan_jjj.3.c
+		ai_chance = { base = 30 }
+		add_political_power = -35
+		add_stability = 0.04
+		add_war_support = 0.02
+	}
+}
+
+# ------------------------------------------------------------------
+# 4 旧账 —— 挑山人十年上下山扫墓
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_jjj.4
+	title = yan_jjj.4.t
+	desc = yan_jjj.4.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_jjj.5 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_jjj.4.a
+		ai_chance = { base = 40 }
+		add_political_power = -30
+		add_stability = -0.03
+		army_experience = 10
+	}
+
+	option = {
+		name = yan_jjj.4.b
+		ai_chance = { base = 30 }
+		add_political_power = -25
+		add_to_variable = { yan_agent_trust = 5 }
+		custom_effect_tooltip = yan_ss_trust_p5_tt
+	}
+
+	option = {
+		name = yan_jjj.4.c
+		ai_chance = { base = 30 }
+		add_political_power = 30
+		add_to_variable = { yan_sui_awakening = 5 }
+		custom_effect_tooltip = yan_ss_sui_p5_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 5 器伥 —— 茶壶、挂画、镇纸都活了
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_jjj.5
+	title = yan_jjj.5.t
+	desc = yan_jjj.5.d
+	picture = GFX_report_event_Generic_Mansion_Room
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_jjj.6 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_jjj.5.a
+		ai_chance = { base = 45 }
+		add_political_power = -45
+		add_stability = -0.06
+		add_to_variable = { yan_sui_awakening = -4 }
+		custom_effect_tooltip = yan_ss_sui_m4_tt
+	}
+
+	option = {
+		name = yan_jjj.5.b
+		ai_chance = { base = 30 }
+		add_political_power = -20
+		add_stability = -0.04
+		add_to_variable = { yan_sui_awakening = 4 }
+		custom_effect_tooltip = yan_ss_sui_p4_tt
+	}
+
+	option = {
+		name = yan_jjj.5.c
+		ai_chance = { base = 25 }
+		add_political_power = -60
+		add_to_variable = { yan_sui_awakening = -8 }
+		add_to_variable = { yan_agent_trust = -6 }
+		custom_effect_tooltip = yan_ss_sui_m8_tt
+		custom_effect_tooltip = yan_ss_trust_m6_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 6 除岁 —— 左乐交底
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_jjj.6
+	title = yan_jjj.6.t
+	desc = yan_jjj.6.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_jjj.7 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_jjj.6.a
+		ai_chance = { base = 35 }
+		add_political_power = -50
+		add_war_support = 0.05
+		add_to_variable = { yan_sui_awakening = -10 }
+		add_to_variable = { yan_agent_trust = -15 }
+		custom_effect_tooltip = yan_ss_sui_m10_tt
+		custom_effect_tooltip = yan_ss_trust_m15_tt
+	}
+
+	option = {
+		name = yan_jjj.6.b
+		ai_chance = { base = 35 }
+		add_political_power = -25
+		add_to_variable = { yan_agent_trust = 15 }
+		add_to_variable = { yan_sui_awakening = 5 }
+		custom_effect_tooltip = yan_ss_trust_p15_tt
+		custom_effect_tooltip = yan_ss_sui_p5_tt
+	}
+
+	option = {
+		name = yan_jjj.6.c
+		ai_chance = { base = 30 }
+		add_political_power = 40
+		add_stability = -0.05
+	}
+}
+
+# ------------------------------------------------------------------
+# 7 忘水坪 —— 攥江峰顶，盏被打飞出崖
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_jjj.7
+	title = yan_jjj.7.t
+	desc = yan_jjj.7.d
+	picture = GFX_report_event_Generic_Snowfield_Twilight
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_jjj.8 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_jjj.7.a
+		ai_chance = { base = 40 }
+		add_political_power = -40
+		add_to_variable = { yan_sui_awakening = -6 }
+		custom_effect_tooltip = yan_ss_sui_m6_tt
+	}
+
+	option = {
+		name = yan_jjj.7.b
+		ai_chance = { base = 30 }
+		add_political_power = -35
+		army_experience = 25
+		add_manpower = 5000
+	}
+
+	option = {
+		name = yan_jjj.7.c
+		ai_chance = { base = 30 }
+		add_political_power = -50
+		add_stability = 0.05
+		add_to_variable = { yan_sui_awakening = -3 }
+		custom_effect_tooltip = yan_ss_sui_m3_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 8 岁相 —— 凉亭凭空显现，令一记琴音
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_jjj.8
+	title = yan_jjj.8.t
+	desc = yan_jjj.8.d
+	picture = GFX_report_event_Generic_Manor_Garden
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_jjj.9 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_jjj.8.a
+		ai_chance = { base = 40 }
+		add_political_power = -30
+		add_stability = 0.04
+		add_to_variable = { yan_shudao_integrity = 10 }
+		custom_effect_tooltip = yan_ss_shudao_p10_tt
+	}
+
+	option = {
+		name = yan_jjj.8.b
+		ai_chance = { base = 30 }
+		add_political_power = 35
+		add_to_variable = { yan_shudao_integrity = -15 }
+		custom_effect_tooltip = yan_ss_shudao_m15_tt
+	}
+
+	option = {
+		name = yan_jjj.8.c
+		ai_chance = { base = 30 }
+		add_political_power = -25
+		add_to_variable = { yan_agent_trust = 10 }
+		add_to_variable = { yan_sui_awakening = -5 }
+		custom_effect_tooltip = yan_ss_trust_p10_tt
+		custom_effect_tooltip = yan_ss_sui_m5_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 9 再弈 —— 一百八十一枚黑子
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_jjj.9
+	title = yan_jjj.9.t
+	desc = yan_jjj.9.d
+	picture = GFX_report_event_Generic_poker
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = yan_jjj.10 days = 60 }
+		}
+	}
+
+	option = {
+		name = yan_jjj.9.a
+		ai_chance = { base = 40 }
+		add_political_power = -40
+		add_to_variable = { yan_sui_awakening = 5 }
+		add_to_variable = { yan_bufan_prep = 10 }
+		custom_effect_tooltip = yan_ss_sui_p5_tt
+		custom_effect_tooltip = yan_ss_bufan_p10_tt
+	}
+
+	option = {
+		name = yan_jjj.9.b
+		ai_chance = { base = 25 }
+		add_political_power = 30
+		add_to_variable = { yan_sui_awakening = 8 }
+		custom_effect_tooltip = yan_ss_sui_p8_tt
+	}
+
+	option = {
+		name = yan_jjj.9.c
+		ai_chance = { base = 35 }
+		add_political_power = -50
+		add_to_variable = { yan_shudao_integrity = 15 }
+		add_to_variable = { yan_sui_awakening = -6 }
+		custom_effect_tooltip = yan_ss_shudao_p15_tt
+		custom_effect_tooltip = yan_ss_sui_m6_tt
+	}
+}
+
+# ------------------------------------------------------------------
+# 10 五五之间 —— 太傅私访尚蜀（收尾）
+# ------------------------------------------------------------------
+country_event = {
+	id = yan_jjj.10
+	title = yan_jjj.10.t
+	desc = yan_jjj.10.d
+	picture = GFX_report_event_Generic_Palace_Hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_jjj.10.a
+		ai_chance = { base = 40 }
+		add_dynamic_modifier = { modifier = yan_jjj_twelve_towers }
+		add_political_power = -80
+		add_to_variable = { yan_agent_trust = 15 }
+		add_to_variable = { yan_bufan_prep = 15 }
+		custom_effect_tooltip = yan_ss_trust_p15_tt
+		custom_effect_tooltip = yan_ss_bufan_p15_tt
+	}
+
+	option = {
+		name = yan_jjj.10.b
+		ai_chance = { base = 35 }
+		add_dynamic_modifier = { modifier = yan_jjj_shangshu_quiet }
+		add_political_power = -30
+		add_stability = 0.05
+		add_to_variable = { yan_agent_trust = 8 }
+		custom_effect_tooltip = yan_ss_trust_p8_tt
+	}
+
+	option = {
+		name = yan_jjj.10.c
+		ai_chance = { base = 25 }
+		add_dynamic_modifier = { modifier = yan_jjj_shangshu_quiet }
+		add_political_power = 50
+		add_stability = -0.08
+		add_to_variable = { yan_agent_trust = -12 }
+		custom_effect_tooltip = yan_ss_trust_m12_tt
+	}
+}

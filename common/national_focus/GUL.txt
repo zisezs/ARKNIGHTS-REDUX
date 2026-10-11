@@ -1,0 +1,698 @@
+focus_tree = {
+	id = GUL_Di_Kang_Bu_Xiu
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = GUL
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = GUL_Di_Kang_Bu_Xiu
+	}
+	
+	####公爵国策
+	#强化领地安保法
+	focus = {
+		id = GUL_Ling_Di_An_Bao_Fa 
+		icon = GFX_focus_RAJ_union_busting
+		cost = 8
+		x = 5
+		y = 0
+		relative_position_id = GUL_Di_Kang_Bu_Xiu
+		
+		available = {
+			if = { #公爵政府正在进行该国策
+				limit = {
+					has_country_flag = GUL_Ling_Di_An_Bao_Fa_in_progress_flag
+				}
+				set_temp_variable = { temp_focus_days = 8 } 
+				multiply_temp_variable = { temp_focus_days = 7 } 
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = GUL_Normandy_focus_in_progress_tt
+						CHARACTER = GUL_Normandy
+						FLAG_DAYS = [?GUL_Ling_Di_An_Bao_Fa_in_progress_flag:days]
+					}
+					always = no 
+				}
+			}
+			else = { #公爵政府还没开始
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = GUL_focus_can_only_be_completed_by_GUL_Normandy_tt
+						CHARACTER = GUL_Normandy
+					}
+					always = no
+				}
+			}
+		}
+		
+		completion_reward = {
+			custom_effect_tooltip = GUL_political_idea_1_tt
+			add_to_variable = {
+				stability_factor_var = -0.05
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				political_power_factor_var = -0.05
+				tooltip = political_power_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = GUL_Ling_Di_An_Bao_Fa_tt
+			add_to_variable = { GUL_rebel_decisions_1_days = -7 } 
+		}
+	}
+	#增加占领开销
+	focus = {
+		id = GUL_Zeng_Jia_Kai_Xiao
+		icon = GFX_focus_RAJ_war_taxes
+		cost = 8
+		x = 0
+		y = 1
+		relative_position_id = GUL_Ling_Di_An_Bao_Fa
+		prerequisite = {
+			focus = GUL_Ling_Di_An_Bao_Fa
+		}
+		
+		available = {
+			if = { #公爵政府正在进行该国策
+				limit = {
+					has_country_flag = GUL_Zeng_Jia_Kai_Xiao_in_progress_flag
+				}
+				set_temp_variable = { temp_focus_days = 8 } 
+				multiply_temp_variable = { temp_focus_days = 7 } 
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = GUL_Normandy_focus_in_progress_tt
+						CHARACTER = GUL_Normandy
+						FLAG_DAYS = [?GUL_Zeng_Jia_Kai_Xiao_in_progress_flag:days]
+					}
+					always = no 
+				}
+			}
+			else = { #公爵政府还没开始
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = GUL_focus_can_only_be_completed_by_GUL_Normandy_tt
+						CHARACTER = GUL_Normandy
+					}
+					always = no
+				}
+			}
+		}
+		
+		completion_reward = {
+			custom_effect_tooltip = GUL_broken_economy_idea_tt
+			add_to_variable = {
+				consumer_goods_factor_var = 0.15
+				tooltip = consumer_goods_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = GUL_Zeng_Jia_Kai_Xiao_tt
+			add_to_variable = { GUL_rebel_decisions_2_days_var = 7 }
+		}
+	}
+	#应对洪灾
+	focus = {
+		id = GUL_Ying_Dui_Hong_Zai
+		icon = GFX_focus_BEL_flooded_tank_barriers
+		cost = 8
+		x = 2
+		y = 0
+		relative_position_id = GUL_Ling_Di_An_Bao_Fa
+		
+		available = {
+			if = { #公爵政府正在进行该国策
+				limit = {
+					has_country_flag = GUL_Ying_Dui_Hong_Zai_in_progress_flag
+				}
+				set_temp_variable = { temp_focus_days = 8 } 
+				multiply_temp_variable = { temp_focus_days = 7 } 
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = GUL_Normandy_focus_in_progress_tt
+						CHARACTER = GUL_Normandy
+						FLAG_DAYS = [?GUL_Ying_Dui_Hong_Zai_in_progress_flag:days]
+					}
+					always = no 
+				}
+			}
+			else = { #公爵政府还没开始
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = GUL_focus_can_only_be_completed_by_GUL_Normandy_tt
+						CHARACTER = GUL_Normandy
+					}
+					always = no
+				}
+			}
+		}
+		
+		completion_reward = {
+			
+		}
+	}
+	#民族工业法
+	focus = {
+		id = GUL_Min_Zu_Gong_Ye
+		icon = GFX_focus_generic_industry_investment
+		cost = 8
+		x = 0
+		y = 1
+		relative_position_id = GUL_Ying_Dui_Hong_Zai
+		prerequisite = {
+			focus = GUL_Ying_Dui_Hong_Zai
+		}
+		
+		available = {
+			if = { #公爵政府正在进行该国策
+				limit = {
+					has_country_flag = GUL_Min_Zu_Gong_Ye_in_progress_flag
+				}
+				set_temp_variable = { temp_focus_days = 8 } 
+				multiply_temp_variable = { temp_focus_days = 7 } 
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = GUL_Normandy_focus_in_progress_tt
+						CHARACTER = GUL_Normandy
+						FLAG_DAYS = [?GUL_Min_Zu_Gong_Ye_in_progress_flag:days]
+					}
+					always = no 
+				}
+			}
+			else = { #公爵政府还没开始
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = GUL_focus_can_only_be_completed_by_GUL_Normandy_tt
+						CHARACTER = GUL_Normandy
+					}
+					always = no
+				}
+			}
+		}
+		
+		completion_reward = {
+			custom_effect_tooltip = GUL_broken_economy_idea_tt
+			add_to_variable = {
+				consumer_goods_factor_var = -0.05
+				tooltip = consumer_goods_factor_tt
+			}
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 0
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 0
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#转移财产
+	focus = {
+		id = GUL_Zhuan_Yi_Cai_Chan
+		icon = GFX_focus_RAJ_bathe_in_hellfire
+		cost = 8
+		x = -1
+		y = 1
+		relative_position_id = GUL_Min_Zu_Gong_Ye
+		prerequisite = {
+			focus = GUL_Min_Zu_Gong_Ye
+		}
+		prerequisite = {
+			focus = GUL_Zeng_Jia_Kai_Xiao
+		}
+		
+		available = {
+			if = { #公爵政府正在进行该国策
+				limit = {
+					has_country_flag = GUL_Zhuan_Yi_Cai_Chan_in_progress_flag
+				}
+				set_temp_variable = { temp_focus_days = 8 } 
+				multiply_temp_variable = { temp_focus_days = 7 } 
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = GUL_Normandy_focus_in_progress_tt
+						CHARACTER = GUL_Normandy
+						FLAG_DAYS = [?GUL_Zhuan_Yi_Cai_Chan_in_progress_flag:days]
+					}
+					always = no 
+				}
+			}
+			else = { #公爵政府还没开始
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = GUL_focus_can_only_be_completed_by_GUL_Normandy_tt
+						CHARACTER = GUL_Normandy
+					}
+					always = no
+				}
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					any_state = {
+						OR = {
+							has_dynamic_modifier = {
+								modifier = vic_ocup_civ_state_modifier
+								scope = VIC
+							}
+							has_dynamic_modifier = {
+								modifier = vic_ocup_mils_state_modifier
+								scope = VIC
+							}
+						}
+					}
+				}
+				custom_effect_tooltip = GUL_broken_economy_idea_tt
+				custom_effect_tooltip = GUL_broken_economy_idea_tt2
+				custom_effect_tooltip = generic_skip_one_line_tt
+				every_state = {
+					limit = {
+						has_dynamic_modifier = {
+							modifier = vic_ocup_civ_state_modifier
+							scope = VIC
+						}
+					}
+					hidden_effect = {
+						remove_dynamic_modifier = {
+							modifier = vic_ocup_civ_state_modifier
+							scope = VIC
+						}
+					}
+					effect_tooltip = {
+						remove_ideas = vic_ocup_civ_state_modifier
+					}
+				}
+				every_state = {
+					limit = {
+						has_dynamic_modifier = {
+							modifier = vic_ocup_mils_state_modifier
+							scope = VIC
+						}
+					}
+					hidden_effect = {
+						remove_dynamic_modifier = {
+							modifier = vic_ocup_mils_state_modifier
+							scope = VIC
+						}
+					}
+					effect_tooltip = {
+						remove_ideas = vic_ocup_mils_state_modifier
+					}
+				}
+				custom_effect_tooltip = generic_skip_one_line_tt
+				VIC = {
+					country_event = {
+						id = event_gul.2
+					}
+				}
+			}
+			else = {
+				custom_effect_tooltip = GUL_Zhuan_Yi_Cai_Chan_tt
+				VIC = {
+					country_event = {
+						id = event_gul.4
+					}
+				}
+			}
+		}
+	}
+
+	#抵抗不休
+	focus = {
+		id = GUL_Di_Kang_Bu_Xiu
+		icon = GFX_focus_AFG_against_kabul
+		cost = 5
+		x = 5
+		y = 0
+		
+		select_effect = {
+			set_country_flag = GUL_Di_Kang_Bu_Xiu_flag #用于禁止取消
+		}
+		
+		completion_reward = {
+			381 = {
+				gul_rebel_level_up = yes #抵抗升级
+				clr_state_flag = gul_focus_action
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = GUL_Qin_Jin_Quan_Li_tt
+			add_to_variable = { GUL_rebel_decisions_2_days_var = -7 }
+		}
+	}
+
+	#倾尽全力
+	focus = {
+		id = GUL_Qin_Jin_Quan_Li
+		icon = GFX_focus_JAP_organize_the_student_movements
+		cost = 5
+		prerequisite = {
+			focus = GUL_Di_Kang_Bu_Xiu
+		}
+		x = 0
+		y = 1
+		relative_position_id = GUL_Di_Kang_Bu_Xiu
+
+		completion_reward = {
+			add_political_power = 15
+			add_war_support = 0.05
+			custom_effect_tooltip = GUL_Qin_Jin_Quan_Li_tt
+			add_to_variable = { GUL_rebel_decisions_2_days_var = -7 }
+		}
+	}
+	
+	#最后一战的宣言
+	focus = {
+		id = GUL_Zui_Hou_Yi_Zhan
+		icon = GFX_focus_PRC_stoke_the_flames 
+		cost = 5
+		prerequisite = {
+			focus = GUL_Di_Kang_Bu_Xiu
+		}
+		x = 2
+		y = 1
+		relative_position_id = GUL_Di_Kang_Bu_Xiu
+
+		completion_reward = {
+			custom_effect_tooltip = GUL_political_idea_1_tt
+			add_to_variable = {
+				political_power_factor_var = 0.15
+				tooltip = political_power_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_political_power = 25
+			custom_effect_tooltip = GUL_Zui_Hou_Yi_Zhan_tt
+			add_to_variable = { GUL_rebel_decisions_2_cost_var = -10 } 
+		}
+	}
+	
+	#殖民政府中的内应
+	focus = {
+		id = GUL_Nei_Ying
+		icon = GFX_focus_RAJ_a_policy_of_silence
+		cost = 5
+		prerequisite = {
+			focus = GUL_Di_Kang_Bu_Xiu
+		}
+		x = -2
+		y = 2
+		relative_position_id = GUL_Di_Kang_Bu_Xiu
+
+		completion_reward = {
+			custom_effect_tooltip = GUL_political_idea_1_tt
+			add_to_variable = {
+				political_power_factor_var = 0.25
+				tooltip = political_power_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = GUL_Nei_Ying_tt
+			add_to_variable = { GUL_rebel_decisions_3_cost_var = -10 } 
+		}
+	}
+	
+	#阻击战略
+	focus = {
+		id = GUL_Zu_Ji_Zhan_lue
+		icon = GFX_focus_generic_sabotage
+		cost = 5
+		prerequisite = {
+			focus = GUL_Qin_Jin_Quan_Li
+		}
+		x = 0
+		y = 1
+		relative_position_id = GUL_Qin_Jin_Quan_Li
+
+		completion_reward = {
+			add_political_power = 50
+			custom_effect_tooltip = GUL_Zu_Ji_Zhan_lue_tt
+			add_to_variable = { GUL_rebel_decisions_1_days = 7 } 
+			add_to_variable = { GUL_rebel_decisions_3_cost_var = -10 } 
+		}
+	}
+	
+	#召回海外流亡者
+	focus = {
+		id = GUL_Zhao_Hui_Liu_Wang
+		icon = GFX_focus_generic_commission
+		cost = 5
+		prerequisite = {
+			focus = GUL_Zui_Hou_Yi_Zhan
+		}
+		x = 0
+		y = 1
+		relative_position_id = GUL_Zui_Hou_Yi_Zhan
+
+		completion_reward = {
+			add_political_power = 25
+		}
+	}
+	
+	#转守为攻
+	focus = {
+		id = GUL_Zhuan_Shou_Wei_Gong
+		icon = GFX_focus_PRC_raid_weapon_depots 
+		cost = 5
+		prerequisite = {
+			focus = GUL_Nei_Ying
+			focus = GUL_Zu_Ji_Zhan_lue
+		}
+		x = -1
+		y = 1
+		relative_position_id = GUL_Zu_Ji_Zhan_lue
+
+		completion_reward = {
+			custom_effect_tooltip = GUL_Zhuan_Shou_Wei_Gong_tt
+			hidden_effect = {
+				add_units_to_division_template = {
+					template_name = "解放游击部队"
+					regiments = {
+						militia = 1
+					}
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = GUL_Qin_Jin_Quan_Li_tt
+			add_to_variable = { GUL_rebel_decisions_2_days_var = -7 }
+		}
+	}
+	
+	#国际支持
+	focus = {
+		id = GUL_Guo_Ji_Zhi_Chi
+		icon = GFX_focus_generic_arms_trade
+		cost = 5
+		prerequisite = {
+			focus = GUL_Zhao_Hui_Liu_Wang
+			focus = GUL_Zu_Ji_Zhan_lue
+		}
+		x = -1
+		y = 1
+		relative_position_id = GUL_Zhao_Hui_Liu_Wang
+
+		completion_reward = {
+			add_political_power = 15
+		}
+	}
+	
+	#国民自卫军法案
+	focus = {
+		id = GUL_Guo_Min_Zi_Wei_Jun
+		icon = GFX_focus_generic_army_attack
+		cost = 4
+		prerequisite = {
+			focus = GUL_Nei_Ying
+		}
+		x = -1
+		y = 2
+		relative_position_id = GUL_Nei_Ying
+
+		completion_reward = {
+			show_unit_leaders_tooltip = GUL_la_fei_te
+			custom_effect_tooltip = unlock_army_chief_tooltip
+			show_ideas_tooltip = GUL_la_fei_te_idea
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = GUL_Guo_Min_Zi_Wei_Jun_tt
+			division_template = {
+				name = "国民自卫军"
+				division_names_group = GUL_INF_04
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 2 y = 1 }
+					infantry = { x = 2 y = 2 }
+					infantry = { x = 2 y = 3 }
+					artillery_brigade = { x = 3 y = 0 }
+					artillery_brigade = { x = 3 y = 1 }
+					artillery_brigade = { x = 3 y = 2 }
+					anti_air_brigade = { x = 3 y = 3 }
+					anti_air_brigade = { x = 4 y = 0 }
+					anti_tank_brigade = { x = 4 y = 1 }
+					anti_tank_brigade = { x = 4 y = 2 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "division_template = \"国民自卫军\" start_experience_factor = 0.4 start_equipment_factor = 1"
+					owner = GUL
+					count = 3
+				}
+			}
+		}
+	}
+	
+	#大屠杀的血泪记忆
+	focus = {
+		id = GUL_Da_Tu_Sha_Ji_Yi
+		icon = GFX_focus_RAJ_a_private_military
+		cost = 4
+		prerequisite = {
+			focus = GUL_Zui_Hou_Yi_Zhan
+		}
+		x = 1
+		y = 3
+		relative_position_id = GUL_Zui_Hou_Yi_Zhan
+
+		completion_reward = {
+			custom_effect_tooltip = GUL_bloody_memory_ideas_modifier_tt
+			custom_effect_tooltip = GUL_Da_Tu_Sha_Ji_Yi_tt
+			hidden_effect = {
+				swap_ideas = {
+					remove_idea = GUL_bloody_memory_ideas_1
+					add_idea = GUL_bloody_memory_ideas_2
+				}
+				swap_ideas = {
+					remove_idea = GUL_bloody_memory_ideas_1_hidden
+					add_idea = GUL_bloody_memory_ideas_2_hidden
+				}
+			}
+			add_political_power = 75
+			add_war_support = 0.1
+			add_stability = -0.1
+		}
+	}
+	
+	#高卢万岁
+	focus = {
+		id = GUL_Gao_Lu_Wan_Sui
+		icon = GFX_focus_generic_happy_cheer
+		cost = 4
+		#prerequisite = {
+		#	focus = GUL_Zu_Ji_Zhan_lue
+		#}
+		x = 0
+		y = 2
+		relative_position_id = GUL_Zu_Ji_Zhan_lue
+		
+		# 附庸没有宣战权：高卢开局是维多利亚的保护国，而 gul_independ_flag 一开局就被
+		# on_war_relation_added 置上，这格会在还是附庸时被点亮；国策只能完成一次，那三句
+		# declare_war_on 全部落空后就再没有补救途径。等 event_vic.3 的 end_puppet = GUL 之后再放开。
+		available = {
+			has_global_flag = gul_independ_flag
+			is_puppet = no
+		}
+
+		completion_reward = {
+			GUL = {
+				GUL_make_reunification_wars = yes
+			}
+		}
+	}
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
+}

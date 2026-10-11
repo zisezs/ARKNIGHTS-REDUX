@@ -1,0 +1,36 @@
+# ============================================================================
+# 乌萨斯帝国 ·「费奥多尔初步改革」面板
+# ============================================================================
+#
+# context_type = decision_category + 分类上的 scripted_gui = URS_dr_reform_gui，
+# 窗口 URS_dr_reform_window 定义在 interface/_ARF_Gui/URS_dr_reform.gui。
+#
+# properties.frame 取的是**当前国家**（这里就是 URS）的变量，值域 0..100，
+# 由 gfx 里的 progress.lua 画成进度条。先例：
+#   common/scripted_guis/East_Ursus_Upheaval_DecisionGUI.txt
+#     Stats_CivilianChaos_ProgressBar = { frame = Upheaval_Chaos_Progress }
+#
+# 控件名必须与 .gui 一字不差——拼错不报错，只是进度条永远是空的。
+# 对账脚本：docs/validate_urs_dr_reform.js
+#
+# 不需要 effects（面板上没有按钮），triggers 也不需要——分类自己的 visible
+# 已经卡住 URS_dr_reform_open 了。
+# ============================================================================
+scripted_gui = {
+
+	URS_dr_reform_gui = {
+		context_type = decision_category
+		window_name = "URS_dr_reform_window"
+
+		visible = {
+			always = yes
+		}
+
+		properties = {
+			URS_dr_reform_row0_bar = { frame = URS_rf_p_state }
+			URS_dr_reform_row1_bar = { frame = URS_rf_p_army }
+			URS_dr_reform_row2_bar = { frame = URS_rf_p_people }
+			URS_dr_reform_row3_bar = { frame = URS_rf_p_resource }
+		}
+	}
+}

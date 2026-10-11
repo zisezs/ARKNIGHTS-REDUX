@@ -1,0 +1,26 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) · 外交带用到的好感修正（设计稿 11_外交国策树设计.md §五）
+# 顶层包 opinion_modifiers = { } —— 与原版 common/opinion_modifiers/00_opinion_modifiers.txt 一致
+# decay 让好感自然回落，不永久锁死关系。
+# ============================================================================
+
+opinion_modifiers = {
+
+	# 东线：莱塔尼亚向卡兹戴尔提供义从与军火（B3「义从与军火」）
+	# 由 reverse_add_opinion_modifier 发出，作用在对方对我国的看法上。
+	LTN_aid_bond = {
+		value = 25
+		min_trust = -50
+		days = 180
+		decay = 1
+	}
+
+	# 南线：对叙拉古的监视与戒备（D3「叙拉古牌」）
+	# 负值——把边境的敌意摆在台面上，为 SRC 的收网流程留一个可读的信号。
+	LTN_south_watch = {
+		value = -20
+		max_trust = 50
+		days = 180
+		decay = 1
+	}
+}

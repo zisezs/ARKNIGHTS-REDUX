@@ -1,0 +1,628 @@
+# ==============================================================================
+# 全局 AI 强化战略 —— 对**所有国家**生效
+#
+# 为什么要这份文件：descriptor.mod 里 replace_path 掉了 common/ai_strategy，
+# 原版那份 default.txt 不存在，本模组的 AI 基础行为只由两份文件构成：
+#   · common/ai_strategy/default.txt   —— 原版同名词条的模组改写版
+#   · 本文件                            —— 补上原版给各国的那些通用战略条目
+#
+# 语法要点（写错不会报错，会被静默忽略，务必照抄）：
+#   · 块名自由，enable/abort 是国家作用域触发符；abort_when_not_enabled 表示
+#     enable 一不成立就立刻撤掉本块。
+#   · 同一个 type+id 在多个块里出现是**叠加**，因此下面凡与 default.txt 撞项的
+#     都只给增量，不重复给绝对值。
+#   · num_of_* 一律用 > / < 比较，写 >= 会让整块静默失效。
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. 陆军 XP 与换代编：让 AI 真的去改师、改装备、点学说
+#    （原版 AI 最典型的症状就是拿着开局模板用到投降）
+# ------------------------------------------------------------------------------
+REC_global_land_xp_push = {
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	# XP 欲望分配：改编制 > 换装备改型 > 点学说 > 开军魂
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = division_template
+		value = 120
+	}
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = equipment_variant
+		value = 80
+	}
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = unlock_doctrine
+		value = 50
+	}
+	# 降低"造新改型装备"的 XP 门槛（负值 = 更早开始换代装备）
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = upgrade_xp_cutoff
+		value = -20
+	}
+
+	# 编制偏好：步兵为主干，中型坦克与机械化是拳头，骑兵尽早淘汰
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = 25
+	}
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 30
+	}
+	ai_strategy = {
+		type = template_prio
+		id = mechanized
+		value = 20
+	}
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = 15
+	}
+	ai_strategy = {
+		type = template_prio
+		id = mountaineers
+		value = 8
+	}
+	ai_strategy = {
+		type = template_prio
+		id = cavalry
+		value = -60
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 2. 发展策略·前期：先修厂、先要枪炮，别一上来堆军工厂
+# ------------------------------------------------------------------------------
+REC_global_early_economy = {
+	enable = {
+		date < 1097.1.1
+		has_war = no
+		num_of_civilian_factories < 40
+	}
+	abort_when_not_enabled = yes
+
+	# 目标：至少 25 座民工厂打底；军工与民工的比例前期压一点，先解决电力与基建
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 25
+	}
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = -20
+	}
+	ai_strategy = {
+		type = factory_build_score_factor
+		value = 150
+	}
+	ai_strategy = {
+		type = building_target
+		id = originium_powerplant
+		value = 4
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 3. 发展策略·扩军：军工产能、师数量、后勤运力
+# ------------------------------------------------------------------------------
+REC_global_arms_buildup = {
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 40
+	}
+	ai_strategy = {
+		type = factory_build_score_factor
+		value = 200
+	}
+	ai_strategy = {
+		type = force_build_armies
+		value = 100
+	}
+	# 想要多少个师（在 default.txt 的基础上再加 25%）
+	ai_strategy = {
+		type = ai_wanted_divisions_factor
+		value = 25
+	}
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = 10
+	}
+	ai_strategy = {
+		type = build_army
+		id = motorized
+		value = 4
+	}
+	# 后勤：AI 常年把卡车/机车饿死导致攻势停摆，这里给硬保底
+	ai_strategy = {
+		type = min_wanted_supply_trucks
+		value = 300
+	}
+	ai_strategy = {
+		type = min_wanted_supply_trains
+		value = 60
+	}
+	# 留一点预备队，但不要多（越高越倾向于把师扣在后面）
+	ai_strategy = {
+		type = spare_unit_factor
+		value = 20
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 3b. 战时经济：一旦开打（或已进入 1100 年之后）就把产能硬掰向军工。
+#     单独一块是为了不和上面的前期民用偏向在同一时期叠加抵消。
+# ------------------------------------------------------------------------------
+REC_global_war_economy = {
+	enable = {
+		OR = {
+			has_war = yes
+			date > 1100.1.1
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 35
+	}
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 60
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 4. 产能调整·装备线：步兵/支援/火炮优先，别把工厂喂给用不上的东西
+#    equipment_production_factor 是百分比增量（+25 = 需求上浮 25%）
+# ------------------------------------------------------------------------------
+REC_global_equipment_lines = {
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 25
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = support
+		value = 30
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 20
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_tank
+		value = 15
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_air
+		value = 15
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 10
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = motorized
+		value = 10
+	}
+	# 支援连与火炮常常只有个位数工厂，最容易在开战当天断档
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = support
+		value = 1
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = artillery
+		value = 1
+	}
+	# 正偏移 = 不要求囤够旧装备就升级换代
+	ai_strategy = {
+		type = production_upgrade_desire_offset
+		id = infantry_equipment_1
+		value = 100
+	}
+	ai_strategy = {
+		type = production_upgrade_desire_offset
+		id = artillery_equipment_1
+		value = 100
+	}
+	ai_strategy = {
+		type = production_upgrade_desire_offset
+		id = medium_tank_chassis_1
+		value = 100
+	}
+	# 需求都满足之后的溢出产能去处：炮、中型底盘、火车
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = artillery_equipment
+		value = 6
+	}
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = medium_tank_chassis
+		value = 6
+	}
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = train
+		value = 4
+	}
+	# 少囤装备、多拉部队上场（default.txt 那条 +35 是给 150 师以上大国的，这里全体回调一点）
+	ai_strategy = {
+		type = equipment_stockpile_surplus_ratio
+		value = -15
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 5. 研发：工业/支援/班用火力这些"沉默收益"必须持续排进队列
+#    research_weight_factor 是对该科技 ai_will_do 的百分比修正
+# ------------------------------------------------------------------------------
+REC_global_research_industry = {
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_shengchan_0
+		value = 40
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_shengchan_2
+		value = 35
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_shengchan_3
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_shengchan_6
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_tumu_0
+		value = 35
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_tumu_1
+		value = 30
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_shiyou_1
+		value = 20
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_energy_1
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_energy_2
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = MSA_radar
+		value = 20
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = PESA_radar
+		value = 20
+	}
+}
+
+REC_global_research_army = {
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_support
+		value = 30
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_engineers
+		value = 35
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_recon
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_logistics_company
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_maintenance_company
+		value = 20
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_field_hospital
+		value = 20
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_signal_company
+		value = 15
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = infantry_weapons_1
+		value = 35
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = infantry_weapons_2
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = arts_weapons_1
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = support_weapons_2
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = artillery_1
+		value = 30
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = antitank_1
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = antiair_1
+		value = 20
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = medium_tank_1
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = medium_tank_2
+		value = 20
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = motorized_infantry_0
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = mechanized_infantry_1
+		value = 25
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 6. 空军：CAS 与战斗机必须成建制，否则地面推进被对面炸
+# ------------------------------------------------------------------------------
+REC_global_air_push = {
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = unit_ratio
+		id = light_cas
+		value = 40
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = medium_cas
+		value = 25
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = tactical_bomber
+		value = 15
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = cas
+		value = 25
+	}
+	# 让 AI 把工厂在"造飞机"这件事上平衡分配，而不是攒着不动
+	ai_strategy = {
+		type = air_factory_balance
+		value = 30
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 7. 进攻欲望·战时：与我国接壤的战线一律全力压上，其余战线保持推进
+#    front_control 的 country_trigger 作用域 = 敌国，FROM = 我们自己
+#    priority 越高越优先；IBR 等手搓国家的专属战略用 200，不会互相打架
+# ------------------------------------------------------------------------------
+REC_global_aggression_neighbours = {
+	enable = {
+		has_war = yes
+		num_divisions > 15
+	}
+	abort = {
+		OR = {
+			has_war = no
+			num_divisions < 10
+		}
+	}
+
+	# 邻国战线：ready 就开打（配合 defines 里 LOCATION_BALANCE_TO_ADVANCE 的负值）
+	ai_strategy = {
+		type = front_control
+		country_trigger = {
+			is_neighbor_of = FROM
+		}
+		ratio = 0.05
+		priority = 60
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+		manual_attack = yes
+	}
+	# 跨海/远程战线：也要执行命令，但用 balanced，别把师扔进绞肉机
+	ai_strategy = {
+		type = front_control
+		country_trigger = {
+			NOT = {
+				is_neighbor_of = FROM
+			}
+		}
+		ratio = 0.05
+		priority = 30
+		ordertype = front
+		execution_type = balanced
+		execute_order = yes
+		manual_attack = yes
+	}
+	# 兵力往主攻方向集中，而不是沿边境铺一 thin line
+	ai_strategy = {
+		type = force_concentration_factor
+		value = 30
+	}
+	ai_strategy = {
+		type = force_concentration_target_weight
+		country_trigger = {
+			is_neighbor_of = FROM
+		}
+		value = 40
+	}
+	# 邻国战线多要兵：让 AI 真的把编制填满到进攻方向
+	ai_strategy = {
+		type = front_unit_request
+		country_trigger = {
+			is_neighbor_of = FROM
+		}
+		value = 30
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 8. 进攻欲望·平时：更愿意动手、更少把 PP 花在保证与修关系上
+#    avoid_starting_wars 是无目标项，与 conquer 相加，是全局开战意愿的总闸门。
+#    嫌太能打的把这个 -120 往 0 收（-60 / -30）。
+# ------------------------------------------------------------------------------
+REC_global_peace_aggression = {
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = avoid_starting_wars
+		value = -120
+	}
+	# 决议/国策解锁项优先吃到 PP
+	ai_strategy = {
+		type = pp_spend_amount
+		id = decision
+		value = 150
+	}
+	ai_strategy = {
+		type = pp_spend_amount
+		id = idea
+		value = 60
+	}
+	ai_strategy = {
+		type = pp_spend_priority
+		id = guarantee
+		value = -60
+	}
+	ai_strategy = {
+		type = pp_spend_priority
+		id = relation
+		value = -80
+	}
+	ai_strategy = {
+		type = pp_spend_priority
+		id = become_faction_leader
+		value = 120
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 9. 海军：AI 普遍只会堆战列舰，这里把护航/潜艇优先给足，避免被断供
+# ------------------------------------------------------------------------------
+REC_global_navy_escort = {
+	enable = {
+		naval_base > 0
+	}
+	abort_when_not_enabled = yes
+
+	# 护航与潜艇优先于大舰（default.txt 已经强制 1 座工厂产 convoy，这里不再重复）
+	ai_strategy = {
+		type = unit_ratio
+		id = convoy
+		value = 25
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = naval_screen
+		value = 15
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = naval_escort
+		value = 15
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = naval_submarine
+		value = 10
+	}
+}

@@ -1,0 +1,211 @@
+# ==============================================================================
+#  大炎·奇迹工程 —— 决议
+#
+#  · YAN_miracle_terminal          ：玩家看得见、点得着的唯一一条，作用＝开 / 关终端面板
+#  · YAN_mir_build_<key> × 9  ：脚本专用的计时施工令，由面板「开工」按钮 activate_decision
+#      平时没有旗标所以不可见；开工瞬间置旗标 → 决议栏里出现一条自带进度条的工程令；
+#      期满 complete_effect 在施工州一次落成真建筑 + 挂永久州级 BUFF
+#
+#  生成物。真源 docs/yan_miracle_data.cjs，改完跑 node docs/gen_yan_miracle.cjs
+# ==============================================================================
+
+YAN_Miracle_Category = {
+
+	# ---------------- 入口 ----------------
+	YAN_miracle_terminal = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { always = yes }
+		available = { always = yes }
+
+		cost = 0
+		days_remove = 0
+
+		complete_effect = {
+			YAN_Mir_Open = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ---------------- 广厦万间 · JZJ-01 · 工期 90 日 · 造价 60 政点 ----------------
+	YAN_mir_build_guangsha = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { has_country_flag = yan_mir_act_guangsha }
+		available = { always = yes }
+
+		days_remove = 90
+
+		# ⚠️ custom_effect_tooltip 不是决议的顶层键（原版决议里全在 effect 块内部，缩进 ≥3 层），
+		#    放顶层会被判 Unexpected token，而且会把紧跟的键一起带坏。
+		complete_effect = {
+			custom_effect_tooltip = YAN_MIR_GUANGSHA_TT
+			YAN_Mir_Finish_guangsha = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ---------------- 熔金巨炉 · JZJ-02 · 工期 120 日 · 造价 80 政点 ----------------
+	YAN_mir_build_rongjin = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { has_country_flag = yan_mir_act_rongjin }
+		available = { always = yes }
+
+		days_remove = 120
+
+		# ⚠️ custom_effect_tooltip 不是决议的顶层键（原版决议里全在 effect 块内部，缩进 ≥3 层），
+		#    放顶层会被判 Unexpected token，而且会把紧跟的键一起带坏。
+		complete_effect = {
+			custom_effect_tooltip = YAN_MIR_RONGJIN_TT
+			YAN_Mir_Finish_rongjin = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ---------------- 都江金堤 · JZJ-03 · 工期 100 日 · 造价 70 政点 ----------------
+	YAN_mir_build_dujiang = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { has_country_flag = yan_mir_act_dujiang }
+		available = { always = yes }
+
+		days_remove = 100
+
+		# ⚠️ custom_effect_tooltip 不是决议的顶层键（原版决议里全在 effect 块内部，缩进 ≥3 层），
+		#    放顶层会被判 Unexpected token，而且会把紧跟的键一起带坏。
+		complete_effect = {
+			custom_effect_tooltip = YAN_MIR_DUJIANG_TT
+			YAN_Mir_Finish_dujiang = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ---------------- 转漕长渠 · JZJ-04 · 工期 110 日 · 造价 75 政点 ----------------
+	YAN_mir_build_zhuancao = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { has_country_flag = yan_mir_act_zhuancao }
+		available = { always = yes }
+
+		days_remove = 110
+
+		# ⚠️ custom_effect_tooltip 不是决议的顶层键（原版决议里全在 effect 块内部，缩进 ≥3 层），
+		#    放顶层会被判 Unexpected token，而且会把紧跟的键一起带坏。
+		complete_effect = {
+			custom_effect_tooltip = YAN_MIR_ZHUANCAO_TT
+			YAN_Mir_Finish_zhuancao = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ---------------- 镇岳军械城 · JZJ-05 · 工期 150 日 · 造价 100 政点 ----------------
+	YAN_mir_build_zhenyue = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { has_country_flag = yan_mir_act_zhenyue }
+		available = { always = yes }
+
+		days_remove = 150
+
+		# ⚠️ custom_effect_tooltip 不是决议的顶层键（原版决议里全在 effect 块内部，缩进 ≥3 层），
+		#    放顶层会被判 Unexpected token，而且会把紧跟的键一起带坏。
+		complete_effect = {
+			custom_effect_tooltip = YAN_MIR_ZHENYUE_TT
+			YAN_Mir_Finish_zhenyue = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ---------------- 飞云船坞 · JZJ-06 · 工期 140 日 · 造价 90 政点 ----------------
+	YAN_mir_build_feiyun = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { has_country_flag = yan_mir_act_feiyun }
+		available = { always = yes }
+
+		days_remove = 140
+
+		# ⚠️ custom_effect_tooltip 不是决议的顶层键（原版决议里全在 effect 块内部，缩进 ≥3 层），
+		#    放顶层会被判 Unexpected token，而且会把紧跟的键一起带坏。
+		complete_effect = {
+			custom_effect_tooltip = YAN_MIR_FEIYUN_TT
+			YAN_Mir_Finish_feiyun = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ---------------- 司天观星台 · JZJ-07 · 工期 110 日 · 造价 70 政点 ----------------
+	YAN_mir_build_sitian = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { has_country_flag = yan_mir_act_sitian }
+		available = { always = yes }
+
+		days_remove = 110
+
+		# ⚠️ custom_effect_tooltip 不是决议的顶层键（原版决议里全在 effect 块内部，缩进 ≥3 层），
+		#    放顶层会被判 Unexpected token，而且会把紧跟的键一起带坏。
+		complete_effect = {
+			custom_effect_tooltip = YAN_MIR_SITIAN_TT
+			YAN_Mir_Finish_sitian = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ---------------- 玉门塞垣 · JZJ-08 · 工期 160 日 · 造价 100 政点 ----------------
+	YAN_mir_build_yumen = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { has_country_flag = yan_mir_act_yumen }
+		available = { always = yes }
+
+		days_remove = 160
+
+		# ⚠️ custom_effect_tooltip 不是决议的顶层键（原版决议里全在 effect 块内部，缩进 ≥3 层），
+		#    放顶层会被判 Unexpected token，而且会把紧跟的键一起带坏。
+		complete_effect = {
+			custom_effect_tooltip = YAN_MIR_YUMEN_TT
+			YAN_Mir_Finish_yumen = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# ---------------- 移动城市·龙门 · JZJ-09 · 工期 200 日 · 造价 140 政点 ----------------
+	YAN_mir_build_longmen = {
+		icon = GFX_decision_generic_construction
+
+		allowed = { original_tag = YAN }
+		visible = { has_country_flag = yan_mir_act_longmen }
+		available = { always = yes }
+
+		days_remove = 200
+
+		# ⚠️ custom_effect_tooltip 不是决议的顶层键（原版决议里全在 effect 块内部，缩进 ≥3 层），
+		#    放顶层会被判 Unexpected token，而且会把紧跟的键一起带坏。
+		complete_effect = {
+			custom_effect_tooltip = YAN_MIR_LONGMEN_TT
+			YAN_Mir_Finish_longmen = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+}

@@ -1,0 +1,17 @@
+# ============================================================================
+# 乌萨斯 (URS) · 阶段树切换效果
+# ============================================================================
+#
+# 由 common/on_actions/URS_reform_on_actions.txt 的 on_monthly_URS 调用；
+# 也可从决议 / 事件里直接写 URS_load_reform_tree = yes。
+#
+# 口径：load_focus_tree 会把当前正在点的树顶掉，已完成的国策保留
+#      （keep_completed = yes）——与 DUB_restoration / RHL_wt / REU 的做法一致。
+#      切过去之后军事簇 / 经济簇 / 发展度簇仍然可见（两棵树各自 shared_focus 引用了同一批 75 条）。
+#
+# ============================================================================
+
+URS_load_reform_tree = {
+	load_focus_tree = { tree = URS_return_to_start keep_completed = yes }
+	set_country_flag = URS_reform_tree_loaded
+}

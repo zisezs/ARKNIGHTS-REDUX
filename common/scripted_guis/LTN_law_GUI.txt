@@ -1,0 +1,396 @@
+# ==============================================================================
+#  莱塔尼亚 ·「金律乐章 · 调律台」—— scripted_gui 【生成物，真源 docs/gen_ltn_law.cjs】
+#
+#  窗口 interface/_ARF_Gui/LTN_law.gui 的控件名是两边唯一的接口：
+#  拼错不报错，只会得到死按钮。对账脚本 docs/validate_ltn_law.cjs。
+#
+#  打开方式：决议 LTN_law_dec_open 置旗标 LTN_law_open（visible 成立）。
+#  数值判定一律走 scripted_effect（common/scripted_effects/LTN_law_scripted_effects.txt），
+#  这里只写变量与旗标。
+# ==============================================================================
+
+scripted_gui = {
+	LTN_law_Main = {
+		context_type = player_context
+		window_name = "LTN_law_Main_GUI"
+		
+		visible = {
+			is_ai = no
+			has_country_flag = LTN_law_open
+		}
+		
+		effects = {
+			LTN_law_Tab_main_click = {
+				set_variable = { LTN_law_view = 0 }
+			}
+			LTN_law_Tab_cards_click = {
+				set_variable = { LTN_law_view = 1 }
+			}
+			LTN_law_Tab_hist_click = {
+				set_variable = { LTN_law_view = 2 }
+			}
+			LTN_law_Tab_close_click = {
+				clr_country_flag = LTN_law_open
+			}
+			
+			LTN_law_V1_TaxBtn_click = { LTN_law_tax_1 = yes }
+			LTN_law_V1_LevBtn_click = { LTN_law_levy_1 = yes }
+			LTN_law_V1_ArtBtn_click = { LTN_law_arts_1 = yes }
+			LTN_law_V1_ToneBtn_click = { LTN_law_tone_1 = yes }
+			LTN_law_V2_TaxBtn_click = { LTN_law_tax_2 = yes }
+			LTN_law_V2_LevBtn_click = { LTN_law_levy_2 = yes }
+			LTN_law_V2_ArtBtn_click = { LTN_law_arts_2 = yes }
+			LTN_law_V2_ToneBtn_click = { LTN_law_tone_2 = yes }
+			LTN_law_V3_TaxBtn_click = { LTN_law_tax_3 = yes }
+			LTN_law_V3_LevBtn_click = { LTN_law_levy_3 = yes }
+			LTN_law_V3_ArtBtn_click = { LTN_law_arts_3 = yes }
+			LTN_law_V3_ToneBtn_click = { LTN_law_tone_3 = yes }
+			LTN_law_V4_TaxBtn_click = { LTN_law_tax_4 = yes }
+			LTN_law_V4_LevBtn_click = { LTN_law_levy_4 = yes }
+			LTN_law_V4_ArtBtn_click = { LTN_law_arts_4 = yes }
+			LTN_law_V4_ToneBtn_click = { LTN_law_tone_4 = yes }
+			LTN_law_V5_TaxBtn_click = { LTN_law_tax_5 = yes }
+			LTN_law_V5_LevBtn_click = { LTN_law_levy_5 = yes }
+			LTN_law_V5_ArtBtn_click = { LTN_law_arts_5 = yes }
+			LTN_law_V5_ToneBtn_click = { LTN_law_tone_5 = yes }
+			LTN_law_V6_TaxBtn_click = { LTN_law_tax_6 = yes }
+			LTN_law_V6_LevBtn_click = { LTN_law_levy_6 = yes }
+			LTN_law_V6_ArtBtn_click = { LTN_law_arts_6 = yes }
+			LTN_law_V6_ToneBtn_click = { LTN_law_tone_6 = yes }
+			LTN_law_V7_TaxBtn_click = { LTN_law_tax_7 = yes }
+			LTN_law_V7_LevBtn_click = { LTN_law_levy_7 = yes }
+			LTN_law_V7_ArtBtn_click = { LTN_law_arts_7 = yes }
+			LTN_law_V7_ToneBtn_click = { LTN_law_tone_7 = yes }
+			LTN_law_V8_TaxBtn_click = { LTN_law_tax_8 = yes }
+			LTN_law_V8_LevBtn_click = { LTN_law_levy_8 = yes }
+			LTN_law_V8_ArtBtn_click = { LTN_law_arts_8 = yes }
+			LTN_law_V8_ToneBtn_click = { LTN_law_tone_8 = yes }
+			LTN_law_V9_TaxBtn_click = { LTN_law_tax_9 = yes }
+			LTN_law_V9_LevBtn_click = { LTN_law_levy_9 = yes }
+			LTN_law_V9_ArtBtn_click = { LTN_law_arts_9 = yes }
+			LTN_law_V9_ToneBtn_click = { LTN_law_tone_9 = yes }
+			
+			LTN_law_Btn_Preview_click = {
+				if = {
+					limit = {
+						has_political_power > 24
+						NOT = { check_variable = { LTN_law_cooldown > 0 } }
+					}
+						add_political_power = -25
+						LTN_law_effect_preview = yes
+						set_country_flag = LTN_law_previewed
+				}
+			}
+			LTN_law_Btn_Enact_click = {
+				if = {
+					limit = {
+						has_political_power > 49
+						NOT = { check_variable = { LTN_law_cooldown > 0 } }
+					}
+						LTN_law_effect_promulgate = yes
+				}
+			}
+			LTN_law_Btn_Reset_click = {
+				if = {
+					limit = { NOT = { check_variable = { LTN_law_cooldown > 0 } } }
+						LTN_law_effect_reset = yes
+				}
+			}
+			
+			LTN_law_Card_pleb_click = { LTN_law_flip_pleb = yes }
+			LTN_law_Card_herald_click = { LTN_law_flip_herald = yes }
+			LTN_law_Card_siracusa_click = { LTN_law_flip_siracusa = yes }
+			LTN_law_Card_inhib_click = { LTN_law_flip_inhib = yes }
+			LTN_law_Card_theatre_click = { LTN_law_flip_theatre = yes }
+			LTN_law_Card_guard_click = { LTN_law_flip_guard = yes }
+			LTN_law_Card_band_click = { LTN_law_flip_band = yes }
+		}
+		
+		triggers = {
+			# ---- 页签：三页互斥（容器级）----
+			LTN_law_Page_Main_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Page_Cards_visible = { check_variable = { LTN_law_view = 1 compare = equals } }
+			LTN_law_Page_Hist_visible = { check_variable = { LTN_law_view = 2 compare = equals } }
+			
+			# ---- 页内控件兜底显隐：容器级之外的第二重保险 ----
+			#   控件级 _visible 是本 mod 图鉴 / 奇迹面板验证过的机制；
+			#   容器级触发器万一不生效，这里保证三页内容不会叠在一起。
+			LTN_law_V1_Name_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V1_Tax_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V1_Lev_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V1_Art_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V1_Tone_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V1_Mood_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V1_TaxBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V1_LevBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V1_ArtBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V1_ToneBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V2_Name_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V2_Tax_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V2_Lev_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V2_Art_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V2_Tone_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V2_Mood_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V2_TaxBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V2_LevBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V2_ArtBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V2_ToneBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V3_Name_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V3_Tax_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V3_Lev_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V3_Art_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V3_Tone_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V3_Mood_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V3_TaxBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V3_LevBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V3_ArtBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V3_ToneBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V4_Name_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V4_Tax_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V4_Lev_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V4_Art_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V4_Tone_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V4_Mood_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V4_TaxBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V4_LevBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V4_ArtBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V4_ToneBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V5_Name_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V5_Tax_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V5_Lev_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V5_Art_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V5_Tone_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V5_Mood_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V5_TaxBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V5_LevBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V5_ArtBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V5_ToneBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V6_Name_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V6_Tax_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V6_Lev_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V6_Art_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V6_Tone_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V6_Mood_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V6_TaxBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V6_LevBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V6_ArtBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V6_ToneBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V7_Name_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V7_Tax_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V7_Lev_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V7_Art_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V7_Tone_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V7_Mood_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V7_TaxBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V7_LevBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V7_ArtBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V7_ToneBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V8_Name_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V8_Tax_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V8_Lev_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V8_Art_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V8_Tone_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V8_Mood_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V8_TaxBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V8_LevBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V8_ArtBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V8_ToneBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V9_Name_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V9_Tax_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V9_Lev_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V9_Art_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V9_Tone_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V9_Mood_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V9_TaxBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V9_LevBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V9_ArtBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_V9_ToneBtn_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Sum_Head_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Sum_Harmony_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Sum_Source_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Sum_Dev_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Sum_CR_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Sum_Conf_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Cost_Hint_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Btn_Preview_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Btn_Enact_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Btn_Reset_visible = { check_variable = { LTN_law_view = 0 compare = equals } }
+			LTN_law_Cards_Title_visible = { check_variable = { LTN_law_view = 1 compare = equals } }
+			LTN_law_Card_pleb_visible = { check_variable = { LTN_law_view = 1 compare = equals } }
+			LTN_law_Card_herald_visible = { check_variable = { LTN_law_view = 1 compare = equals } }
+			LTN_law_Card_siracusa_visible = { check_variable = { LTN_law_view = 1 compare = equals } }
+			LTN_law_Card_inhib_visible = { check_variable = { LTN_law_view = 1 compare = equals } }
+			LTN_law_Card_theatre_visible = { check_variable = { LTN_law_view = 1 compare = equals } }
+			LTN_law_Card_guard_visible = { check_variable = { LTN_law_view = 1 compare = equals } }
+			LTN_law_Card_band_visible = { check_variable = { LTN_law_view = 1 compare = equals } }
+			LTN_law_Hist_Title_visible = { check_variable = { LTN_law_view = 2 compare = equals } }
+			LTN_law_Hist_Version_visible = { check_variable = { LTN_law_view = 2 compare = equals } }
+			LTN_law_Hist_Body_visible = { check_variable = { LTN_law_view = 2 compare = equals } }
+			
+			# ---- 五档和谐：顶栏只亮一档 ----
+			LTN_law_Tier_0_visible = { check_variable = { LTN_law_harmony > 1 } }
+			LTN_law_Tier_1_visible = { check_variable = { LTN_law_harmony > 0 } check_variable = { LTN_law_harmony < 2 } }
+			LTN_law_Tier_2_visible = { NOT = { check_variable = { LTN_law_harmony > 0 } } NOT = { check_variable = { LTN_law_harmony < 0 } } }
+			LTN_law_Tier_3_visible = { check_variable = { LTN_law_harmony < 0 } check_variable = { LTN_law_harmony > -2 } }
+			LTN_law_Tier_4_visible = { check_variable = { LTN_law_harmony < -1 } }
+			
+			# ---- 三档预测：稳 / 险 / 崩（含页兜底）----
+			LTN_law_Fc_Stable_visible = {
+				check_variable = { LTN_law_harmony > 0 }
+				check_variable = { LTN_law_view = 0 compare = equals }
+			}
+			LTN_law_Fc_Risky_visible = {
+				NOT = { check_variable = { LTN_law_harmony > 0 } }
+				NOT = { check_variable = { LTN_law_harmony < 0 } }
+				check_variable = { LTN_law_view = 0 compare = equals }
+			}
+			LTN_law_Fc_Crash_visible = {
+				check_variable = { LTN_law_harmony < 0 }
+				check_variable = { LTN_law_view = 0 compare = equals }
+			}
+			
+			# ---- 余波提示（含页兜底）----
+			LTN_law_Cooldown_visible = {
+				check_variable = { LTN_law_cooldown > 0 }
+				check_variable = { LTN_law_view = 0 compare = equals }
+			}
+			
+			# ---- 三个主按钮 ----
+			LTN_law_Btn_Preview_click_enabled = {
+				has_political_power > 24
+				NOT = { check_variable = { LTN_law_cooldown > 0 } }
+			}
+			LTN_law_Btn_Enact_click_enabled = {
+				has_political_power > 49
+				NOT = { check_variable = { LTN_law_cooldown > 0 } }
+			}
+			LTN_law_Btn_Reset_click_enabled = {
+				NOT = { check_variable = { LTN_law_cooldown > 0 } }
+			}
+			
+			# ---- 条款卡：启用高亮 / 冲突闪红 / 未解锁压暗（均含页兜底）----
+			LTN_law_CardOn_pleb_visible = {
+				has_country_flag = LTN_law_c_pleb
+				check_variable = { LTN_law_view = 1 compare = equals }
+			}
+			LTN_law_CardConf_pleb_visible = { always = no }
+			LTN_law_CardOn_herald_visible = {
+				has_country_flag = LTN_law_c_herald
+				check_variable = { LTN_law_view = 1 compare = equals }
+			}
+			LTN_law_CardConf_herald_visible = {
+				has_country_flag = LTN_law_c_herald
+				check_variable = { LTN_law_dev > 3 }
+				check_variable = { LTN_law_view = 1 compare = equals }
+			}
+			LTN_law_CardOn_siracusa_visible = {
+				has_country_flag = LTN_law_c_siracusa
+				check_variable = { LTN_law_view = 1 compare = equals }
+			}
+			LTN_law_CardConf_siracusa_visible = { always = no }
+			LTN_law_CardLock_siracusa_visible = {
+				NOT = { has_country_flag = LTN_score_decoded }
+				check_variable = { LTN_law_view = 1 compare = equals }
+			}
+			LTN_law_CardOn_inhib_visible = {
+				has_country_flag = LTN_law_c_inhib
+				check_variable = { LTN_law_view = 1 compare = equals }
+			}
+			LTN_law_CardConf_inhib_visible = { always = no }
+			LTN_law_CardOn_theatre_visible = {
+				has_country_flag = LTN_law_c_theatre
+				check_variable = { LTN_law_view = 1 compare = equals }
+			}
+			LTN_law_CardConf_theatre_visible = { always = no }
+			LTN_law_CardOn_guard_visible = {
+				has_country_flag = LTN_law_c_guard
+				check_variable = { LTN_law_view = 1 compare = equals }
+			}
+			LTN_law_CardConf_guard_visible = {
+				has_country_flag = LTN_law_c_guard
+				check_variable = { LTN_law_taxhigh > 3 }
+				check_variable = { LTN_law_view = 1 compare = equals }
+			}
+			LTN_law_CardOn_band_visible = {
+				has_country_flag = LTN_law_c_band
+				check_variable = { LTN_law_view = 1 compare = equals }
+			}
+			LTN_law_CardConf_band_visible = { always = no }
+			
+			# ---- 条款卡：余波期内不可改 ----
+			LTN_law_Card_pleb_click_enabled = {
+				NOT = { check_variable = { LTN_law_cooldown > 0 } }
+			}
+			LTN_law_Card_herald_click_enabled = {
+				NOT = { check_variable = { LTN_law_cooldown > 0 } }
+			}
+			LTN_law_Card_siracusa_click_enabled = {
+				NOT = { check_variable = { LTN_law_cooldown > 0 } }
+				has_country_flag = LTN_score_decoded
+			}
+			LTN_law_Card_inhib_click_enabled = {
+				NOT = { check_variable = { LTN_law_cooldown > 0 } }
+			}
+			LTN_law_Card_theatre_click_enabled = {
+				NOT = { check_variable = { LTN_law_cooldown > 0 } }
+			}
+			LTN_law_Card_guard_click_enabled = {
+				NOT = { check_variable = { LTN_law_cooldown > 0 } }
+			}
+			LTN_law_Card_band_click_enabled = {
+				NOT = { check_variable = { LTN_law_cooldown > 0 } }
+			}
+		}
+		
+		properties = {
+			# 音孔刻度（帧 0..4）
+			LTN_law_V1_Tax = { frame = LTN_law_voice_1_tax }
+			LTN_law_V1_Lev = { frame = LTN_law_voice_1_levy }
+			LTN_law_V1_Art = { frame = LTN_law_voice_1_arts }
+			LTN_law_V1_Tone = { frame = LTN_law_voice_1_tone }
+			LTN_law_Lamp_1 = { frame = LTN_law_voice_1_lamp }
+			LTN_law_V2_Tax = { frame = LTN_law_voice_2_tax }
+			LTN_law_V2_Lev = { frame = LTN_law_voice_2_levy }
+			LTN_law_V2_Art = { frame = LTN_law_voice_2_arts }
+			LTN_law_V2_Tone = { frame = LTN_law_voice_2_tone }
+			LTN_law_Lamp_2 = { frame = LTN_law_voice_2_lamp }
+			LTN_law_V3_Tax = { frame = LTN_law_voice_3_tax }
+			LTN_law_V3_Lev = { frame = LTN_law_voice_3_levy }
+			LTN_law_V3_Art = { frame = LTN_law_voice_3_arts }
+			LTN_law_V3_Tone = { frame = LTN_law_voice_3_tone }
+			LTN_law_Lamp_3 = { frame = LTN_law_voice_3_lamp }
+			LTN_law_V4_Tax = { frame = LTN_law_voice_4_tax }
+			LTN_law_V4_Lev = { frame = LTN_law_voice_4_levy }
+			LTN_law_V4_Art = { frame = LTN_law_voice_4_arts }
+			LTN_law_V4_Tone = { frame = LTN_law_voice_4_tone }
+			LTN_law_Lamp_4 = { frame = LTN_law_voice_4_lamp }
+			LTN_law_V5_Tax = { frame = LTN_law_voice_5_tax }
+			LTN_law_V5_Lev = { frame = LTN_law_voice_5_levy }
+			LTN_law_V5_Art = { frame = LTN_law_voice_5_arts }
+			LTN_law_V5_Tone = { frame = LTN_law_voice_5_tone }
+			LTN_law_Lamp_5 = { frame = LTN_law_voice_5_lamp }
+			LTN_law_V6_Tax = { frame = LTN_law_voice_6_tax }
+			LTN_law_V6_Lev = { frame = LTN_law_voice_6_levy }
+			LTN_law_V6_Art = { frame = LTN_law_voice_6_arts }
+			LTN_law_V6_Tone = { frame = LTN_law_voice_6_tone }
+			LTN_law_Lamp_6 = { frame = LTN_law_voice_6_lamp }
+			LTN_law_V7_Tax = { frame = LTN_law_voice_7_tax }
+			LTN_law_V7_Lev = { frame = LTN_law_voice_7_levy }
+			LTN_law_V7_Art = { frame = LTN_law_voice_7_arts }
+			LTN_law_V7_Tone = { frame = LTN_law_voice_7_tone }
+			LTN_law_Lamp_7 = { frame = LTN_law_voice_7_lamp }
+			LTN_law_V8_Tax = { frame = LTN_law_voice_8_tax }
+			LTN_law_V8_Lev = { frame = LTN_law_voice_8_levy }
+			LTN_law_V8_Art = { frame = LTN_law_voice_8_arts }
+			LTN_law_V8_Tone = { frame = LTN_law_voice_8_tone }
+			LTN_law_Lamp_8 = { frame = LTN_law_voice_8_lamp }
+			LTN_law_V9_Tax = { frame = LTN_law_voice_9_tax }
+			LTN_law_V9_Lev = { frame = LTN_law_voice_9_levy }
+			LTN_law_V9_Art = { frame = LTN_law_voice_9_arts }
+			LTN_law_V9_Tone = { frame = LTN_law_voice_9_tone }
+			LTN_law_Lamp_9 = { frame = LTN_law_voice_9_lamp }
+			# 失范风险条（帧 0..10）
+			LTN_law_RiskBar = { frame = LTN_law_risk }
+		}
+	}
+}

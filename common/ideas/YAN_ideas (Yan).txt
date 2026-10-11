@@ -1,0 +1,374 @@
+ideas = {
+	country = {
+		#  大炎 · 民族精神
+		#  · 开局持有：天命 / 十字路口 / 女帝改革的遗产 / 岁相(岁兽之患) +
+		#              真龙治下 / 敕封神明 / 三公六部 / 移动城邦 / 司岁台秉烛 /
+		#              尚武传统 / 太师冤案 / 山海众渗透 / 书刀在天镜阁 / 不反源石
+		#  · 国策解锁：见各条注释，多为「替换」旧精神（on_add remove_ideas）
+		#  · 无对应引擎修正的说明行（对巨兽攻击等）走
+		#    common/modifier_definitions/YAN_modifiers_definition.txt 的 yan_*_tt
+
+		# ---------------- 开局 · 承平 --------------------------------
+
+		YAN_Mandate_of_heaven = {
+			picture = YAN_Mandate_of_heaven
+
+			modifier = {
+				stability_factor = 0.15
+				production_speed_buildings_factor = -0.2
+
+				# 天命维系国势：抵消每个发展档位自带的月度回落，把开局五维钉在本档
+				agricultural_development_monthly_modifier = 0.08
+				industrial_development_monthly_modifier = 0.16
+				educational_development_monthly_modifier = 0.08
+				administrative_development_monthly_modifier = 0.08
+				poverty_development_monthly_modifier = 0.16
+			}
+		}
+
+		YAN_Crossroad = {
+			picture = YAN_Crossroad
+
+			modifier = {
+				consumer_goods_factor = 0.2
+				line_change_production_efficiency_factor = -0.15
+				production_factory_efficiency_gain_factor = -0.15
+			}
+
+			on_add = {
+				set_temp_variable = { infected_modifier_add_num = 0.05 }
+				Infected_Modifier_add = yes
+			}
+
+			on_remove = {
+				set_temp_variable = { infected_modifier_add_num = -0.05 }
+				Infected_Modifier_add = yes
+			}
+		}
+
+		YAN_Legacy_of_the_female_emperor_reforms = {
+			picture = YAN_Legacy_of_the_female_emperor_reforms
+
+			modifier = {
+				political_power_factor = 0.1
+				political_advisor_cost_factor = -0.3
+			}
+		}
+
+		# 真龙治下，国祚永昌
+		YAN_True_dragon_reign = {
+			picture = YAN_True_dragon_reign
+
+			modifier = {
+				stability_factor = 0.1
+				political_power_factor = 0.2
+				war_support_factor = -0.05
+			}
+		}
+
+		# 敕封神明，大炎子民
+		YAN_Divine_subjects = {
+			picture = YAN_Divine_subjects
+
+			modifier = {
+				army_core_defence_factor = 0.1
+				yan_attack_vs_behemoth_tt = 0.1
+				yan_diplomatic_relation_tt = -10
+			}
+		}
+
+		# 三公六部，承平暗弱
+		YAN_Three_dukes = {
+			picture = YAN_Three_dukes
+
+			modifier = {
+				production_speed_buildings_factor = 0.05
+				experience_gain_army = -0.05
+				war_support_factor = -0.05
+			}
+		}
+
+		# 移动城邦与源石矿脉
+		YAN_Mobile_cities = {
+			picture = YAN_Mobile_cities
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+				production_speed_buildings_factor = 0.1
+				army_fuel_consumption_factor = 0.1
+				stability_factor = -0.05
+			}
+		}
+
+		# 司岁台秉烛（可经「秉烛新制」升级）
+		YAN_Sishuitai_candle = {
+			picture = YAN_Sishuitai_candle
+
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.05
+				yan_agent_surveillance_tt = 0.1
+			}
+		}
+
+		# 尚武传统
+		YAN_Martial_tradition = {
+			picture = YAN_Martial_tradition
+
+			modifier = {
+				experience_gain_army = 0.05
+				army_attack_factor = 0.05
+				training_time_factor = -0.05
+			}
+		}
+
+		# ---------------- 开局 · 沉疴 --------------------------------
+
+		# 岁相 —— 岁兽之患（国策可移除）
+		YAN_Sui_signs = {
+			picture = YAN_Sui_signs
+
+			modifier = {
+				stability_factor = -0.1
+				research_speed_factor = -0.05
+				yan_sui_awakening_monthly_tt = 1
+			}
+		}
+
+		# 太师冤案（国策「天下一白」移除）
+		YAN_Taishi_injustice = {
+			picture = YAN_Taishi_injustice
+
+			modifier = {
+				stability_factor = -0.05
+				political_power_factor = -0.1
+			}
+		}
+
+		# 山海众渗透（国策「剿灭 / 招安」移除）
+		YAN_Shanhaizhong = {
+			picture = YAN_Shanhaizhong
+
+			modifier = {
+				stability_factor = -0.05
+				army_core_defence_factor = -0.05
+			}
+		}
+
+		# 书刀在天镜阁（若完整度过低会被太尉夺取，见「书刀案」）
+		YAN_Shudao_in_Tianjingge = {
+			picture = YAN_Shudao_in_Tianjingge
+
+			modifier = {
+				political_power_factor = 0.1
+				stability_factor = 0.05
+			}
+		}
+
+		# 不反源石（解锁「启动不反」决议）
+		YAN_Bufan_originium = {
+			picture = YAN_Bufan_originium
+
+			modifier = {
+				yan_bufan_unlock_tt = 1
+			}
+		}
+
+		# ---------------- 国策解锁 · 善政 --------------------------------
+
+		# 太师昭雪（太师平反线终点）
+		YAN_Taishi_rehabilitated = {
+			picture = YAN_Taishi_rehabilitated
+
+			modifier = {
+				stability_factor = 0.1
+				political_power_factor = 0.25
+				war_support_factor = 0.05
+			}
+
+			on_add = {
+				remove_ideas = YAN_Taishi_injustice
+			}
+		}
+
+		# 兄弟同心（真龙与魏彦吾和解）
+		YAN_Brothers_one_heart = {
+			picture = YAN_Brothers_one_heart
+
+			modifier = {
+				stability_factor = 0.1
+				command_power_gain = 0.5
+				political_power_factor = 0.15
+			}
+		}
+
+		# 秉烛新制（司岁台改革，替换司岁台秉烛）
+		YAN_Bingzhu_new_system = {
+			picture = YAN_Bingzhu_new_system
+
+			modifier = {
+				intel_network_gain_factor = 0.2
+				political_power_factor = 0.1
+				stability_factor = 0.05
+			}
+
+			on_add = {
+				remove_ideas = YAN_Sishuitai_candle
+			}
+		}
+
+		# 天喟之剑（陈晖洁持书刀）
+		YAN_Tiankui_sword = {
+			picture = YAN_Tiankui_sword
+
+			modifier = {
+				army_attack_factor = 0.1
+				breakthrough_factor = 0.1
+				war_support_factor = 0.1
+			}
+		}
+
+		# 代理人一家（代理人合作线）
+		YAN_Agents_family = {
+			picture = YAN_Agents_family
+
+			modifier = {
+				experience_gain_army = 0.1
+				stability_factor = 0.1
+				yan_agent_advisor_unlock_tt = 1
+			}
+		}
+
+		# 望之枷锁（岁陵决战 · 望取代岁）
+		YAN_Wang_shackles = {
+			picture = YAN_Wang_shackles
+
+			modifier = {
+				stability_factor = 0.15
+				war_support_factor = 0.1
+				political_power_factor = 0.25
+				research_speed_factor = -0.05
+			}
+		}
+
+		# 新岁之影（望取代岁，人形岁兽坐镇岁陵）
+		YAN_New_sui_shadow = {
+			picture = YAN_New_sui_shadow
+
+			modifier = {
+				yan_attack_vs_behemoth_tt = 0.15
+				army_core_defence_factor = 0.1
+				stability_factor = -0.05
+			}
+		}
+
+		# 岁兽之祸终结
+		YAN_Sui_calamity_ended = {
+			picture = YAN_Sui_calamity_ended
+
+			modifier = {
+				stability_factor = 0.2
+				war_support_factor = 0.1
+			}
+
+			on_add = {
+				remove_ideas = YAN_Sui_signs
+			}
+		}
+
+		# ---------------- 国策解锁 · 外交与我方 --------------------------------
+
+		# 罗德岛合作
+		YAN_Rhodes_cooperation = {
+			picture = YAN_Rhodes_cooperation
+
+			modifier = {
+				research_speed_factor = 0.05
+				yan_medical_research_tt = 0.1
+			}
+		}
+
+		# ---------------- 国策解锁 · 恶果 --------------------------------
+
+		# 书刀案（书刀被太尉夺取）
+		YAN_Shudao_case = {
+			picture = YAN_Shudao_case
+
+			modifier = {
+				stability_factor = -0.15
+				political_power_factor = -0.15
+				war_support_factor = 0.1
+			}
+
+			on_add = {
+				remove_ideas = YAN_Shudao_in_Tianjingge
+			}
+		}
+
+		# 巨兽苏醒（岁陵决战拖延过久）
+		YAN_Behemoths_awaken = {
+			picture = YAN_Behemoths_awaken
+
+			modifier = {
+				army_core_defence_factor = 0.1
+				stability_factor = -0.1
+			}
+		}
+
+		# 岁兽之乱（苏醒度触顶而未备不反 / 未走棋局）
+		YAN_Sui_disaster = {
+			picture = YAN_Sui_disaster
+
+			modifier = {
+				stability_factor = -0.3
+				war_support_factor = -0.1
+				army_core_defence_factor = -0.1
+			}
+		}
+
+		# 真龙陨落（启动不反的长期代价）
+		YAN_True_dragon_fallen = {
+			picture = YAN_True_dragon_fallen
+
+			modifier = {
+				stability_factor = -0.2
+				political_power_factor = -0.2
+				war_support_factor = 0.1
+			}
+		}
+
+		# 邪魔影响（与乌萨斯帝国作战时自动施加）
+		YAN_Xiemo_influence = {
+			picture = YAN_Sui_disaster
+
+			modifier = {
+				supply_consumption_factor = 0.2
+				army_defence_factor = -0.3
+				army_org_factor = -0.3
+			}
+
+			on_add = {
+				add_ideas = YAN_Lao_Tianshi_guashuai
+			}
+
+			on_remove = {
+				remove_ideas = YAN_Lao_Tianshi_guashuai
+			}
+		}
+
+		# 老天师挂帅 —— 邪魔压境当月起自动请出，随【邪魔影响】一同解除
+		YAN_Lao_Tianshi_guashuai = {
+			picture = YAN_Lao_Tianshi_guashuai
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.3
+				army_fuel_consumption_factor = -0.5
+				navy_fuel_consumption_factor = -0.5
+				air_fuel_consumption_factor = -0.5
+			}
+		}
+
+	}
+}

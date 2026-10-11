@@ -1,0 +1,925 @@
+# 大炎 ·「宰府朝议」面板版面（照原版 GER_inner_circle_scripted_gui 重建）：真龙座 + 12 席已就任者
+# 生成器：E:/tmp/sui12/gen_court.js（改数据表重跑，勿手改产物）
+# 注意：containerWindowType 的 size 只能写 width/height
+
+# 席位几何 = 原版 GER 三席版式 × 0.7（贴图已预缩到 0.7，见 gen_court_panel_art.js；gui 里不写 scale）
+@YAN_SEAT_W = 112
+# 席位容器高 = 头像框底边（84）：instantTextBoxType 的 center_down 是「顶边贴父容器底 + y」，名牌/特质文字才落得准
+@YAN_SEAT_H = 84
+@YAN_TEXT_X = -56
+
+guiTypes = {
+	containerWindowType = {
+		name = "yan_court_ui_window"
+		orientation = lower_left
+		position = { x = 0 y = 0 }
+		size = { width = 600 height = 700 }
+		clipping = no
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_inner_circle_decor_bg"
+		}
+		iconType = {
+			name = "yan_court_spotlight"
+			spriteType = "GFX_spotlight_overlay"
+			orientation = upper_left
+			position = { x = 23 y = 24 }
+			alwaystransparent = yes
+		}
+
+		# ---- 真龙座（原版 fuhrer_container ×0.85：170x137 / 内层 105x137 / 立绘 52x52 居中于环口）----
+		containerWindowType = {
+			name = "yan_court_leader_container"
+			orientation = center_up
+			position = { x = -85 y = 6 }
+			size = { width = 170 height = 137 }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_leader_portrait_container"
+				orientation = center_up
+				position = { x = -53 y = 0 }
+				size = { width = 105 height = 137 }
+				clipping = no
+				iconType = {
+					name = "yan_court_leader_portrait"
+					spriteType = "GFX_portrait_YAN_Wei_Zunli_panel"
+					orientation = upper_left
+					position = { x = 26 y = 43 }
+					alwaystransparent = yes
+				}
+				iconType = {
+					name = "yan_court_leader_frame"
+					spriteType = "GFX_yan_leader_frame"
+					orientation = center
+					position = { x = 0 y = 0 }
+					centerposition = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_leader_ribbon"
+				spriteType = "GFX_yan_leader_ribbon"
+				orientation = center
+				position = { x = 0 y = 81 }
+				centerposition = yes
+			}
+			instantTextBoxType = {
+				name = "yan_court_leader_name"
+				orientation = center_down
+				position = { x = -85 y = 0 }
+				font = "hoi_18mbs"
+				text = "YAN_court_leader_label"
+				format = center
+				maxWidth = 170
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_leader_trait_box"
+				spriteType = "GFX_yan_leader_trait_box"
+				orientation = center
+				position = { x = 0 y = 94 }
+				centerposition = yes
+			}
+			instantTextBoxType = {
+				name = "yan_court_leader_title"
+				orientation = center_down
+				position = { x = -85 y = 17 }
+				font = "hoi_16mbs"
+				text = "YAN_court_leader_title"
+				format = center
+				maxWidth = 170
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 1 席 · 山水 ----
+		containerWindowType = {
+			name = "yan_court_seat_1_container"
+			orientation = center_up
+			position = { x = -296 y = 215 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_1_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_1_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc1]
+				}
+				iconType = {
+					name = "yan_court_seat_1_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_1_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc1]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_1_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName1]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_1_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc1]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_1_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle1]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 2 席 · 长街 ----
+		containerWindowType = {
+			name = "yan_court_seat_2_container"
+			orientation = center_up
+			position = { x = -176 y = 215 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_2_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_2_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc2]
+				}
+				iconType = {
+					name = "yan_court_seat_2_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_2_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc2]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_2_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName2]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_2_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc2]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_2_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle2]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 3 席 · 烟火 ----
+		containerWindowType = {
+			name = "yan_court_seat_3_container"
+			orientation = center_up
+			position = { x = -56 y = 215 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_3_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_3_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc3]
+				}
+				iconType = {
+					name = "yan_court_seat_3_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_3_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc3]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_3_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName3]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_3_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc3]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_3_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle3]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 4 席 · 弦歌 ----
+		containerWindowType = {
+			name = "yan_court_seat_4_container"
+			orientation = center_up
+			position = { x = 64 y = 215 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_4_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_4_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc4]
+				}
+				iconType = {
+					name = "yan_court_seat_4_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_4_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc4]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_4_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName4]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_4_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc4]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_4_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle4]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 5 席 · 锻坊 ----
+		containerWindowType = {
+			name = "yan_court_seat_5_container"
+			orientation = center_up
+			position = { x = 184 y = 215 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_5_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_5_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc5]
+				}
+				iconType = {
+					name = "yan_court_seat_5_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_5_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc5]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_5_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName5]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_5_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc5]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_5_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle5]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 6 席 · 百谷 ----
+		containerWindowType = {
+			name = "yan_court_seat_6_container"
+			orientation = center_up
+			position = { x = -296 y = 377 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_6_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_6_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc6]
+				}
+				iconType = {
+					name = "yan_court_seat_6_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_6_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc6]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_6_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName6]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_6_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc6]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_6_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle6]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 7 席 · 宰府 ----
+		containerWindowType = {
+			name = "yan_court_seat_7_container"
+			orientation = center_up
+			position = { x = -176 y = 377 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_7_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_7_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc7]
+				}
+				iconType = {
+					name = "yan_court_seat_7_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_7_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc7]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_7_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName7]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_7_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc7]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_7_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle7]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 8 席 · 兵革 ----
+		containerWindowType = {
+			name = "yan_court_seat_8_container"
+			orientation = center_up
+			position = { x = -56 y = 377 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_8_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_8_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc8]
+				}
+				iconType = {
+					name = "yan_court_seat_8_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_8_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc8]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_8_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName8]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_8_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc8]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_8_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle8]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 9 席 · 北门 ----
+		containerWindowType = {
+			name = "yan_court_seat_9_container"
+			orientation = center_up
+			position = { x = 64 y = 377 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_9_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_9_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc9]
+				}
+				iconType = {
+					name = "yan_court_seat_9_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_9_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc9]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_9_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName9]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_9_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc9]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_9_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle9]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 10 席 · 西馆 ----
+		containerWindowType = {
+			name = "yan_court_seat_10_container"
+			orientation = center_up
+			position = { x = 184 y = 377 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_10_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_10_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc10]
+				}
+				iconType = {
+					name = "yan_court_seat_10_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_10_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc10]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_10_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName10]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_10_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc10]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_10_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle10]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 11 席 · 东抚 ----
+		containerWindowType = {
+			name = "yan_court_seat_11_container"
+			orientation = center_up
+			position = { x = -116 y = 539 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_11_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_11_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc11]
+				}
+				iconType = {
+					name = "yan_court_seat_11_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_11_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc11]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_11_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName11]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_11_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc11]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_11_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle11]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+		# ---- 第 12 席 · 南库 ----
+		containerWindowType = {
+			name = "yan_court_seat_12_container"
+			orientation = center_up
+			position = { x = 4 y = 539 }
+			size = { width = @YAN_SEAT_W height = @YAN_SEAT_H }
+			clipping = no
+
+			containerWindowType = {
+				name = "yan_court_seat_12_portrait_container"
+				orientation = center_up
+				position = { x = -32 y = 0 }
+				size = { width = 64 height = 83 }
+				clipping = no
+				iconType = {
+					name = "yan_court_seat_12_frame"
+					spriteType = "GFX_yan_seat_frame_empty"
+					orientation = center
+					position = { x = 0 y = -8 }
+					centerposition = yes
+					context_aware_tooltip = [GetYANCourtSeatDesc12]
+				}
+				iconType = {
+					name = "yan_court_seat_12_portrait"
+					spriteType = "GFX_yan_seat_blank"
+					orientation = upper_left
+					position = { x = 5 y = -9 }
+					alwaystransparent = yes
+				}
+			}
+			iconType = {
+				name = "yan_court_seat_12_name_box"
+				spriteType = "GFX_yan_seat_name_box"
+				orientation = center
+				position = { x = 0 y = 49 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc12]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_12_name"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 0 }
+				font = "hoi_18mbs"
+				context_aware_text = [GetYANCourtSeatName12]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "yan_court_seat_12_trait_box"
+				spriteType = "GFX_yan_seat_trait_box"
+				orientation = center
+				position = { x = 0 y = 71 }
+				centerposition = yes
+				context_aware_tooltip = [GetYANCourtSeatDesc12]
+			}
+			instantTextBoxType = {
+				name = "yan_court_seat_12_title"
+				orientation = center_down
+				position = { x = @YAN_TEXT_X y = 16 }
+				font = "hoi_16mbs"
+				context_aware_text = [GetYANCourtSeatTitle12]
+				format = center
+				maxWidth = @YAN_SEAT_W
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+		}
+
+	}
+}

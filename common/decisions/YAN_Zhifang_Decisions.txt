@@ -1,0 +1,777 @@
+# ==============================================================================
+#  大炎 · 兵部·职方司 —— 外交与义从决议组
+#  ------------------------------------------------------------------------------
+#  分类见 common/decisions/categories/YAN_zhifang_categories.txt
+#  （id = YAN_Zhifang_Affairs，allowed = original_tag = YAN）
+#
+#  结构：9 条通用框架 + 8 条方向（一方向一条，一次性）
+#    框架：开衙置籍 → 勘战册（读数）→ 募义从三档（引擎原版志愿军额度）
+#          → 漕输军械 / 召回义从 / 义从叙功 / 恤义从之家
+#    方向：东国光元府 HGS、檀国 DKK、安南 ANA、米诺斯邦联 MIN、
+#          卡兹戴尔红军 KAC、叙拉古 SRC、莱塔尼亚 LTN、卡西米尔 KZM
+#
+#  真做的部分（引擎级，不是文案）：
+#    · 三档义从籍挂 common/ideas/YAN_zhifang_ideas.txt 的 send_volunteer_size /
+#      send_volunteer_divisions_required / send_volunteers_tension /
+#      air_volunteer_cap —— 原版外交界面「派遣志愿军」那条行动的额度真的被抬高
+#    · add_relation_rule_override = { target = X can_send_volunteers = yes }
+#      打开对特定国家的派志愿军许可（原版 121 处先例的写法）
+#    · 遣义从＝真的在受援国首都落「炎字义从」满编师（共用效果 YAN_zf_corps_effect）
+#    · 捐械＝真的 send/add_equipment_to_stockpile 给受援国，我方库房同步扣减
+#    · 召回＝真的 recall_volunteers_from（按 has_volunteers_amount_from 找对象）
+#  不动的部分：不宣战、不结盟、不保证、不管市场准入，也不写任何关系修正 ——
+#    这些在本工程的旧账里都是「容易出 bug」的一类。
+#
+#  旗标（给别的内容当钩子用）：
+#    yan_zf_open（衙门已开）＋ 各方向 yan_zf_sent_XXX
+#  变量（国家作用域，读数见
+#    common/scripted_localisation/YAN_zf_read_scripted_localisation.txt）：
+#    yan_zf_belligerents / yan_zf_hot_fronts / yan_zf_sent / yan_zf_levy_tier
+#  文案：localisation/simp_chinese/ARF_YAN_Zhifang_l_simp_chinese.yml
+#  自检：node docs/validate_yan_zhifang.js
+# ==============================================================================
+
+YAN_Zhifang_Affairs = {
+
+	# ══════════════════════════ 框架 ══════════════════════════
+
+	# ── 1) 职方司置义从籍：开衙，本组其余决议的总闸 ────────────────
+	YAN_zf_open_registry = {
+		icon = GFX_decision_generic_construction
+
+		visible = {
+			always = yes
+		}
+
+		cost = 40
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_open_tt
+			hidden_effect = {
+				set_country_flag = yan_zf_open
+				set_variable = { yan_zf_belligerents = 0 }
+				set_variable = { yan_zf_hot_fronts = 0 }
+				set_variable = { yan_zf_sent = 0 }
+				set_variable = { yan_zf_levy_tier = 0 }
+				YAN_zf_survey_effect = yes
+			}
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	# ── 2) 勘战册：纯读数，天下谁在打、我们已遣几路、义从籍第几档 ──
+	YAN_zf_war_register = {
+		icon = GFX_decision_generic_intelligence_operation
+
+		visible = {
+			has_country_flag = yan_zf_open
+		}
+
+		cost = 0
+		cooldown = 15
+
+		complete_effect = {
+			hidden_effect = {
+				YAN_zf_survey_effect = yes
+			}
+			custom_effect_tooltip = YAN_zf_read_belligerents
+			custom_effect_tooltip = YAN_zf_read_hot_fronts
+			custom_effect_tooltip = YAN_zf_read_sent
+			custom_effect_tooltip = YAN_zf_read_levy
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	# ── 3) 募义从·乡勇（一档）────────────────────────────────────
+	YAN_zf_levy_militia = {
+		icon = GFX_decision_generic_cavalry
+
+		visible = {
+			has_country_flag = yan_zf_open
+		}
+
+		available = {
+			NOT = { has_idea = YAN_Yicong_Levy_1 }
+		}
+
+		cost = 80
+		days_remove = 70
+		fire_only_once = yes
+
+		complete_effect = {
+			add_manpower = -25000
+		}
+
+		remove_effect = {
+			add_ideas = YAN_Yicong_Levy_1
+			set_variable = { yan_zf_levy_tier = 1 }
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	# ── 4) 募义从·锐士（二档，添航空志愿队）──────────────────────
+	YAN_zf_levy_picketers = {
+		icon = GFX_decision_generic_construction
+
+		visible = {
+			has_country_flag = yan_zf_open
+		}
+
+		available = {
+			has_idea = YAN_Yicong_Levy_1
+			NOT = { has_idea = YAN_Yicong_Levy_2 }
+		}
+
+		cost = 150
+		days_remove = 90
+		fire_only_once = yes
+
+		complete_effect = {
+			add_manpower = -40000
+		}
+
+		remove_effect = {
+			add_ideas = YAN_Yicong_Levy_2
+			set_variable = { yan_zf_levy_tier = 2 }
+		}
+
+		ai_will_do = {
+			factor = 12
+		}
+	}
+
+	# ── 5) 编炎字义从师（三档，旗号立起）────────────────────────
+	YAN_zf_levy_division = {
+		icon = GFX_decision_generic_military
+
+		visible = {
+			has_country_flag = yan_zf_open
+		}
+
+		available = {
+			has_idea = YAN_Yicong_Levy_2
+			NOT = { has_idea = YAN_Yicong_Levy_3 }
+		}
+
+		cost = 220
+		days_remove = 120
+		fire_only_once = yes
+
+		complete_effect = {
+			add_manpower = -60000
+		}
+
+		remove_effect = {
+			add_ideas = YAN_Yicong_Levy_3
+			set_variable = { yan_zf_levy_tier = 3 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ── 6) 漕输军械：给此刻真在交战的重点方向送一批枪，可再来一次 ──
+	YAN_zf_arms_convoy = {
+		icon = GFX_decision_generic_trucks
+
+		visible = {
+			has_country_flag = yan_zf_open
+		}
+
+		available = {
+			has_equipment = { infantry_equipment > 2999 }
+			any_country = {
+				exists = yes
+				has_war = yes
+				OR = {
+					tag = HGS
+					tag = DKK
+					tag = ANA
+					tag = MIN
+					tag = KAC
+					tag = SRC
+					tag = LTN
+					tag = KZM
+				}
+			}
+		}
+
+		cost = 60
+		days_remove = 30
+		cooldown = 60
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_arms_convoy_tt
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = YAN_zf_arms_convoy_done_tt
+			every_country = {
+				limit = {
+					exists = yes
+					has_war = yes
+					OR = {
+						tag = HGS
+						tag = DKK
+						tag = ANA
+						tag = MIN
+						tag = KAC
+						tag = SRC
+						tag = LTN
+						tag = KZM
+					}
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 3000
+					producer = YAN
+				}
+				YAN = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = -3000
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 7) 召回义从：把原版那一路志愿军叫回来（已捐出去的收不回）──
+	YAN_zf_recall_volunteers = {
+		icon = GFX_decision_generic_naval
+
+		visible = {
+			has_country_flag = yan_zf_open
+		}
+
+		available = {
+			check_variable = { yan_zf_sent > 0 }
+		}
+
+		cost = 50
+		days_remove = 60
+		cooldown = 180
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_recall_tt
+		}
+
+		remove_effect = {
+			add_manpower = 20000
+			add_stability = -0.03
+			hidden_effect = {
+				every_country = {
+					limit = {
+						has_volunteers_amount_from = {
+							tag = YAN
+							count > 0
+						}
+					}
+					YAN = {
+						recall_volunteers_from = PREV
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 8) 义从叙功：从外国战场上带回的东西，论功行赏 ────────────
+	YAN_zf_merit = {
+		icon = GFX_decision_generic_army_support
+
+		visible = {
+			has_country_flag = yan_zf_open
+		}
+
+		available = {
+			check_variable = { yan_zf_sent > 0 }
+		}
+
+		cost = 60
+		cooldown = 365
+
+		complete_effect = {
+			army_experience = 30
+			add_war_support = 0.04
+			add_stability = 0.03
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 9) 恤义从之家：人没回来的，朝廷养其老幼 ──────────────────
+	YAN_zf_relief = {
+		icon = GFX_decision_generic_welfare
+
+		visible = {
+			has_country_flag = yan_zf_open
+		}
+
+		available = {
+			check_variable = { yan_zf_sent > 0 }
+		}
+
+		cost = 100
+		cooldown = 180
+
+		complete_effect = {
+			add_stability = 0.08
+			add_manpower = 40000
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ══════════════════════════ 八条方向 ══════════════════════════
+
+	# ── 东：援东国光元政府（光严军南下）──────────────────────────
+	YAN_zf_aid_HGS = {
+		icon = GFX_decision_generic_motorized
+
+		visible = {
+			country_exists = HGS
+		}
+
+		available = {
+			has_country_flag = yan_zf_open
+			HGS = { has_war = yes }
+			NOT = { has_war_with = HGS }
+			has_equipment = { infantry_equipment > 7999 }
+		}
+
+		cost = 150
+		days_remove = 60
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_aid_HGS_tt
+			add_manpower = -40000
+			add_relation_rule_override = {
+				target = HGS
+				can_send_volunteers = yes
+			}
+		}
+
+		cancel_effect = {
+			add_manpower = 20000
+		}
+
+		remove_effect = {
+			set_country_flag = yan_zf_sent_HGS
+			army_experience = 25
+			HGS = {
+				YAN_zf_corps_effect = yes
+				YAN_zf_corps_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				add_stability = 0.05
+				add_war_support = 0.05
+			}
+			hidden_effect = {
+				add_to_variable = { yan_zf_sent = 1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 东：援檀国（江防告急）───────────────────────────────────
+	YAN_zf_aid_DKK = {
+		icon = GFX_decision_generic_naval
+
+		visible = {
+			country_exists = DKK
+		}
+
+		available = {
+			has_country_flag = yan_zf_open
+			DKK = { has_war = yes }
+			NOT = { has_war_with = DKK }
+			has_equipment = { infantry_equipment > 7999 }
+		}
+
+		cost = 140
+		days_remove = 60
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_aid_DKK_tt
+			add_manpower = -36000
+			add_relation_rule_override = {
+				target = DKK
+				can_send_volunteers = yes
+			}
+		}
+
+		cancel_effect = {
+			add_manpower = 18000
+		}
+
+		remove_effect = {
+			set_country_flag = yan_zf_sent_DKK
+			army_experience = 25
+			DKK = {
+				YAN_zf_corps_effect = yes
+				YAN_zf_corps_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				add_stability = 0.05
+				add_war_support = 0.05
+			}
+			hidden_effect = {
+				add_to_variable = { yan_zf_sent = 1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 南：援安南（大越起事之后）───────────────────────────────
+	YAN_zf_aid_ANA = {
+		icon = GFX_decision_generic_military
+
+		visible = {
+			country_exists = ANA
+		}
+
+		available = {
+			has_country_flag = yan_zf_open
+			ANA = { has_war = yes }
+			NOT = { has_war_with = ANA }
+			has_equipment = { infantry_equipment > 7999 }
+		}
+
+		cost = 130
+		days_remove = 56
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_aid_ANA_tt
+			add_manpower = -32000
+			add_relation_rule_override = {
+				target = ANA
+				can_send_volunteers = yes
+			}
+		}
+
+		cancel_effect = {
+			add_manpower = 16000
+		}
+
+		remove_effect = {
+			set_country_flag = yan_zf_sent_ANA
+			army_experience = 25
+			ANA = {
+				YAN_zf_corps_effect = yes
+				YAN_zf_corps_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				add_stability = 0.05
+				add_war_support = 0.05
+			}
+			hidden_effect = {
+				add_to_variable = { yan_zf_sent = 1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 南：援米诺斯邦联（海岛无险，只能靠人填）─────────────────
+	YAN_zf_aid_MIN = {
+		icon = GFX_decision_generic_naval
+
+		visible = {
+			country_exists = MIN
+		}
+
+		available = {
+			has_country_flag = yan_zf_open
+			MIN = { has_war = yes }
+			NOT = { has_war_with = MIN }
+			has_equipment = { infantry_equipment > 3999 }
+		}
+
+		cost = 120
+		days_remove = 90
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_aid_MIN_tt
+			add_manpower = -20000
+			add_relation_rule_override = {
+				target = MIN
+				can_send_volunteers = yes
+			}
+		}
+
+		cancel_effect = {
+			add_manpower = 10000
+		}
+
+		remove_effect = {
+			set_country_flag = yan_zf_sent_MIN
+			army_experience = 20
+			MIN = {
+				YAN_zf_corps_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				add_stability = 0.05
+				add_war_support = 0.05
+			}
+			hidden_effect = {
+				add_to_variable = { yan_zf_sent = 1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 西：援卡兹戴尔红军（三方内战里的赤旗一方）───────────────
+	YAN_zf_aid_KAC = {
+		icon = GFX_decision_generic_political_rally
+
+		visible = {
+			country_exists = KAC
+		}
+
+		available = {
+			has_country_flag = yan_zf_open
+			KAC = { has_war = yes }
+			NOT = { has_war_with = KAC }
+			has_equipment = { infantry_equipment > 7999 }
+		}
+
+		cost = 160
+		days_remove = 120
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_aid_KAC_tt
+			add_manpower = -40000
+			add_relation_rule_override = {
+				target = KAC
+				can_send_volunteers = yes
+			}
+		}
+
+		cancel_effect = {
+			add_manpower = 20000
+		}
+
+		remove_effect = {
+			set_country_flag = yan_zf_sent_KAC
+			army_experience = 30
+			KAC = {
+				YAN_zf_corps_effect = yes
+				YAN_zf_corps_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				add_stability = 0.05
+				add_war_support = 0.05
+			}
+			hidden_effect = {
+				add_to_variable = { yan_zf_sent = 1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 西：援叙拉古（联邦之乱，义从驻在城邦之外）───────────────
+	YAN_zf_aid_SRC = {
+		icon = GFX_decision_generic_military
+
+		visible = {
+			country_exists = SRC
+		}
+
+		available = {
+			has_country_flag = yan_zf_open
+			SRC = { has_war = yes }
+			NOT = { has_war_with = SRC }
+			has_equipment = { infantry_equipment > 3999 }
+		}
+
+		cost = 120
+		days_remove = 105
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_aid_SRC_tt
+			add_manpower = -24000
+			add_relation_rule_override = {
+				target = SRC
+				can_send_volunteers = yes
+			}
+		}
+
+		cancel_effect = {
+			add_manpower = 12000
+		}
+
+		remove_effect = {
+			set_country_flag = yan_zf_sent_SRC
+			army_experience = 20
+			SRC = {
+				YAN_zf_corps_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				add_stability = 0.05
+				add_war_support = 0.05
+			}
+			hidden_effect = {
+				add_to_variable = { yan_zf_sent = 1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 西：援莱塔尼亚（高卢兵锋所指之处）───────────────────────
+	YAN_zf_aid_LTN = {
+		icon = GFX_decision_generic_tank
+
+		visible = {
+			country_exists = LTN
+		}
+
+		available = {
+			has_country_flag = yan_zf_open
+			LTN = { has_war = yes }
+			NOT = { has_war_with = LTN }
+			has_equipment = { infantry_equipment > 7999 }
+		}
+
+		cost = 150
+		days_remove = 120
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_aid_LTN_tt
+			add_manpower = -36000
+			add_relation_rule_override = {
+				target = LTN
+				can_send_volunteers = yes
+			}
+		}
+
+		cancel_effect = {
+			add_manpower = 18000
+		}
+
+		remove_effect = {
+			set_country_flag = yan_zf_sent_LTN
+			army_experience = 30
+			LTN = {
+				YAN_zf_corps_effect = yes
+				YAN_zf_corps_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				add_stability = 0.05
+				add_war_support = 0.05
+			}
+			hidden_effect = {
+				add_to_variable = { yan_zf_sent = 1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ── 北：援卡西米尔（宿敌的敌人，恰好是我们的朋友）───────────
+	YAN_zf_aid_KZM = {
+		icon = GFX_decision_generic_cavalry
+
+		visible = {
+			country_exists = KZM
+		}
+
+		available = {
+			has_country_flag = yan_zf_open
+			KZM = { has_war = yes }
+			NOT = { has_war_with = KZM }
+			has_equipment = { infantry_equipment > 7999 }
+		}
+
+		cost = 150
+		days_remove = 70
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_zf_aid_KZM_tt
+			add_manpower = -40000
+			add_relation_rule_override = {
+				target = KZM
+				can_send_volunteers = yes
+			}
+		}
+
+		cancel_effect = {
+			add_manpower = 20000
+		}
+
+		remove_effect = {
+			set_country_flag = yan_zf_sent_KZM
+			army_experience = 30
+			KZM = {
+				YAN_zf_corps_effect = yes
+				YAN_zf_corps_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				YAN_zf_gift_arms_effect = yes
+				add_stability = 0.05
+				add_war_support = 0.05
+			}
+			hidden_effect = {
+				add_to_variable = { yan_zf_sent = 1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+}

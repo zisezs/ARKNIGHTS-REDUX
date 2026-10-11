@@ -1,0 +1,1120 @@
+# ==============================================================================
+# éç¨ AI ç¼å¶æ¨¡æ¿ ââ é¤ UFE / URS / REU ä»¥å¤çææå½å®¶ï¼è¿ä¸¤å®¶æåèªç
+# ai_templates æä»¶ï¼é  blocked_for äºæ¥ï¼ä¸ä¸ª role ä¸ä¸ªå½å®¶åªè½å½ä¸­ä¸ä»½ï¼
+# å¦åå¼æè¡ä¸ºæªå®ä¹ï¼ã
+#
+# é¶æ¢¯å¼æ¢ä»£ï¼æ¯ä¸ª role ç» 2~5 æ¡£ target_templateï¼ç¨ upgrade_prio çç¸å¯¹é«ä½
+# å³å®å½åçååªä¸æ¡£ï¼replace_at_match/replace_with è´è´£"ææ»¡è¿ä¸æ¡£åå¾ä¸èµ°"ã
+# é¨æ§ç»ä¸æãåå·¥äº§è½ + ç¸å³ç§æãç»ï¼é¿ååºç°"å°å½çå 17 å¢å¸ã
+# ç»æé¿æç¼ºè£ç¼ºåãå¸æ°¸è¿æä¸æ»¡"çæåµã
+#
+# å¯ç¨å¢/æ¯æ´è¿åµç§ä»¥æ¬æ¨¡ç» common/units/ ä¸ºåï¼æ²¡æè¶éå/ç°ä»£å¦åã
+# ä¸¤æ å¦åãå·ç«å¦åãè£ç²è½¦ï¼ææ¬æä»¶ä¸å¾ä¸å¼ç¨ã
+# ==============================================================================
+
+armor_generic = {
+
+	blocked_for = {
+		UFE URS REU SRC
+	}
+
+	role = armor
+
+	# role çº§æ¢ä»£ä¼åçº§ï¼è£ç²å¸æ¢ä»£æ¯æ­¥åµå¤ï¼ä½ä¹ä¸è½åæå¨é¨éå XP
+	upgrade_prio = {
+		base = 2
+
+		modifier = {
+			factor = 3
+			has_tech = medium_tank_1
+		}
+		modifier = {
+			factor = 3
+			has_tech = medium_tank_2
+		}
+		modifier = {
+			factor = 0
+			num_of_military_factories < 3
+		}
+	}
+
+	# ---- ç¬¬ 1 æ¡£ï¼æ©æè½»åå¦åå¸ï¼æ²¡æä¸­åå¦ååºçåçè¿æ¸¡ç¼æï¼----
+	armor_light_001 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 4
+				NOT = { has_tech = medium_tank_0 }
+			}
+			modifier = {
+				factor = 0
+				has_tech = medium_tank_1
+			}
+		}
+
+		can_upgrade_in_field = {
+			has_equipment = { light_tank_chassis < 500 }
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				anti_tank = 1
+			}
+
+			regiments = {
+				light_armor = 5
+				motorized = 4
+			}
+		}
+
+		# 1.5 > 1.0ï¼åªæå½ upgrade_prio è®©ä½ç»ä¸ä¸æ¡£æ¶ææ¢è£
+		replace_at_match = 1.5
+		replace_with = armor_medium_001
+		target_min_match = 0.5
+	}
+
+	# ---- ç¬¬ 2 æ¡£ï¼ä¸­åå¦å + æ©æåæ­¥åµæ··æï¼è½ååºä¸­ååºçå°±ååï¼----
+	armor_medium_001 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 3
+				has_tech = medium_tank_1
+			}
+			modifier = {
+				factor = 2
+				num_of_military_factories > 12
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regiments = {
+				medium_armor = 4
+				motorized = 4
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = armor_medium_002
+		target_min_match = 0.5
+	}
+
+	# ---- ç¬¬ 3 æ¡£ï¼å¶å¼ä¸­åå¦åå¸ï¼èªèµ°ç®/çµå¼ç«ç® + é²ç©ºï¼----
+	armor_medium_002 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 4
+				has_tech = medium_tank_2
+			}
+			modifier = {
+				factor = 4
+				num_of_military_factories > 25
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				anti_air = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 1
+				anti_air_support = 1
+			}
+
+			regiments = {
+				medium_armor = 6
+				motorized = 5
+				mot_artillery_brigade = 1
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = armor_medium_003
+		target_min_match = 0.5
+	}
+
+	# ---- ç¬¬ 4 æ¡£ï¼ä¸»åè£ç²åï¼æºæ¢°åæ­¥åµéè¡ï¼åè£ç²/ç«åé½å¤ï¼----
+	armor_medium_003 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 5
+				has_tech = medium_tank_3
+			}
+			modifier = {
+				factor = 5
+				num_of_military_factories > 40
+			}
+			modifier = {
+				factor = 2
+				has_tech = mechanized_infantry_1
+			}
+		}
+
+		target_template = {
+
+			reinforce_prio = 2
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				anti_air = 1
+				firepower = 1
+				field_hospital = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 2
+				anti_tank_support = 1
+				anti_air_support = 1
+				firepower_support = 1
+			}
+
+			regiments = {
+				medium_armor = 7
+				mechanized = 6
+				mot_anti_tank_brigade = 1
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = armor_heavy_004
+		target_min_match = 0.4
+	}
+
+	# ---- ç¬¬ 5 æ¡£ï¼éåçªç ´å¸ï¼å¦åå·¥ä¸å·²ç»æº¢åºçé¡¶çº§å¤§å½ï¼----
+	armor_heavy_004 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 8
+				has_tech = heavy_tank_1
+			}
+			modifier = {
+				factor = 8
+				num_of_military_factories > 80
+			}
+			modifier = {
+				factor = 0
+				num_of_military_factories < 60
+			}
+		}
+
+		target_template = {
+
+			reinforce_prio = 2
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				anti_air = 1
+				firepower = 1
+				field_hospital = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 2
+				anti_tank_support = 1
+				anti_air_support = 1
+				firepower_support = 1
+			}
+
+			regiments = {
+				heavy_armor = 5
+				mechanized = 5
+				mot_artillery_brigade = 2
+			}
+		}
+	}
+}
+
+landship_generic = {
+
+	blocked_for = {
+		UFE URS REU
+	}
+
+	role = landship
+
+	upgrade_prio = {
+		base = 1
+
+		modifier = {
+			factor = 2
+			has_tech = landship_0
+		}
+
+		# éè¡è°æ¯åéå½ï¼åå·¥ä¸è¶³ 50 å®¶çå½å®¶ä¸å¾ä¸è¦å»ç¢°
+		modifier = {
+			factor = 0
+			num_of_military_factories < 50
+		}
+	}
+
+	landship_001 = {
+		upgrade_prio = {
+			factor = 1
+
+			modifier = {
+				factor = 3
+				num_of_military_factories > 79
+			}
+		}
+
+		target_template = {
+
+			reinforce_prio = 2
+
+			support = {
+				engineer = 1
+				recon = 1
+				artillery = 1
+				anti_air = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 1
+				anti_air_support = 1
+			}
+
+			regiments = {
+				landship = 2
+				motorized = 4
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = landship_002
+		target_min_match = 0.5
+	}
+
+	landship_002 = {
+		upgrade_prio = {
+			factor = 1
+
+			modifier = {
+				factor = 4
+				num_of_military_factories > 119
+			}
+			modifier = {
+				factor = 2
+				has_tech = landship_1
+			}
+		}
+
+		target_template = {
+
+			reinforce_prio = 2
+
+			support = {
+				engineer = 1
+				recon = 1
+				artillery = 1
+				anti_air = 1
+				firepower = 1
+				field_hospital = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 2
+				anti_tank_support = 1
+				anti_air_support = 1
+			}
+
+			regiments = {
+				landship = 3
+				mechanized = 5
+			}
+		}
+	}
+}
+
+infantry_generic = {
+
+	blocked_for = {
+		UFE URS REU SRC DUB
+	}
+
+	role = infantry
+
+	# æ­¥åµä»æ¯ç»å¯¹ä¸»åï¼æ¢ä»£ä¼åçº§ç»è¶³
+	upgrade_prio = {
+		base = 3
+
+		modifier = {
+			factor = 2
+			num_of_military_factories > 10
+		}
+		modifier = {
+			factor = 2
+			num_of_military_factories > 40
+		}
+		modifier = {
+			factor = 0
+			num_of_military_factories < 2
+		}
+	}
+
+	# ---- ç¬¬ 1 æ¡£ï¼æ¸©é¥±åæ­¥åµå¸ï¼ç¼ºç®ãç¼ºå·¥åµä¹è½åæå¼æ¶å­ï¼----
+	infantry_001 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 5
+				num_of_military_factories < 6
+			}
+			modifier = {
+				factor = 0
+				num_of_military_factories > 12
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				artillery = 1
+			}
+
+			regiments = {
+				infantry = 7
+			}
+		}
+
+		replace_at_match = 1.2
+		replace_with = infantry_002
+		target_min_match = 0.6
+	}
+
+	# ---- ç¬¬ 2 æ¡£ï¼åºçº¿æ­¥åµå¸ï¼1 ä¸ªç®åµå¢ + ä¾¦å¯ï¼----
+	infantry_002 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 4
+				num_of_military_factories > 9
+			}
+			modifier = {
+				factor = 0
+				NOT = { has_tech = artillery_0 }
+			}
+		}
+
+		can_upgrade_in_field = {
+			has_equipment = { artillery_equipment > 1000 }
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				recon = 1
+				artillery = 1
+				signal_company = 1
+			}
+
+			regiments = {
+				infantry = 9
+				artillery_brigade = 1
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = infantry_003
+		target_min_match = 0.6
+	}
+
+	# ---- ç¬¬ 3 æ¡£ï¼æ­£è§æ­¥åµå¸ï¼2 ç® + 1 åå¦åï¼å¢å±æ¯æ´è¿èµ·æ­¥ï¼----
+	infantry_003 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 5
+				num_of_military_factories > 30
+			}
+			modifier = {
+				factor = 5
+				date > 1100.1.1
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				recon = 1
+				artillery = 1
+				anti_air = 1
+				field_hospital = 1
+				logistics_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 1
+				anti_tank_support = 1
+			}
+
+			regiments = {
+				infantry = 9
+				artillery_brigade = 2
+				anti_tank_brigade = 1
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = infantry_004
+		target_min_match = 0.5
+	}
+
+	# ---- ç¬¬ 4 æ¡£ï¼åæå¤§åï¼11 æ­¥ + 2 ç® + åå¦å/é²ç©ºå¢ï¼ç«ååç¼æï¼----
+	infantry_004 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 6
+				num_of_military_factories > 45
+			}
+			modifier = {
+				factor = 5
+				date > 1102.1.1
+			}
+			modifier = {
+				factor = 2
+				has_tech = antitank_2
+			}
+			modifier = {
+				factor = 0
+				NOT = { has_tech = antitank_1 }
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				recon = 1
+				artillery = 1
+				anti_air = 1
+				firepower = 1
+				field_hospital = 1
+				signal_company = 1
+				logistics_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 2
+				anti_tank_support = 1
+				anti_air_support = 1
+				firepower_support = 1
+			}
+
+			regiments = {
+				infantry = 11
+				artillery_brigade = 2
+				anti_tank_brigade = 1
+				anti_air_brigade = 1
+			}
+		}
+	}
+}
+
+# default_unit_production æ©å°±ç»äº role_ratio militia = 5ï¼ä½éç¨æä»¶é
+# ä¸ç´æ²¡æ militia æ¡£ target_template ââ ç¼ºæ¡£æ¶è¿é¨åç¼å¶éé¢ä¼è¢«æµªè´¹ã
+militia_generic = {
+
+	blocked_for = {
+		UFE URS REU SRC DUB
+	}
+
+	role = militia
+
+	upgrade_prio = {
+		base = 1
+
+		modifier = {
+			factor = 4
+			manpower_per_military_factory < 800
+		}
+		modifier = {
+			factor = 4
+			num_of_military_factories < 8
+		}
+		modifier = {
+			factor = 0
+			num_of_military_factories > 40
+		}
+	}
+
+	militia_default = {
+
+		reinforce_prio = 0
+		custom_icon = 7
+
+		upgrade_prio = {
+			base = 2
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				recon = 1
+			}
+
+			regiments = {
+				militia = 6
+			}
+		}
+	}
+}
+
+garrison_generic = {
+
+	blocked_for = {
+		UFE URS REU
+	}
+
+	role = garrison
+
+	upgrade_prio = {
+		base = 0.5
+
+		modifier = {
+			factor = 20
+			NOT = { ai_has_role_template = garrison }
+		}
+	}
+
+	garrison_generic = {
+		reinforce_prio = 0
+		custom_icon = 7
+
+		upgrade_prio = {
+			base = 2
+
+			modifier = {
+				factor = 1
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				military_police = 1
+			}
+
+			regiments = {
+				infantry = 6
+			}
+		}
+	}
+}
+
+suppression_generic = {
+
+	role = suppression
+
+	blocked_for = {
+		UFE URS REU
+	}
+
+	upgrade_prio = {
+		base = 0.5
+
+		modifier = {
+			factor = 20
+			has_war = yes
+		}
+	}
+
+	suppression_generic = {
+
+		reinforce_prio = 0
+		custom_icon = 13
+
+		upgrade_prio = {
+			base = 2
+		}
+
+		target_template = {
+
+			support = {
+				military_police = 1
+				engineer = 1
+			}
+
+			regiments = {
+				cavalry = 4
+			}
+		}
+	}
+}
+
+mountaineers_generic = {
+
+	blocked_for = {
+		UFE URS REU
+	}
+
+	role = mountaineers
+
+	upgrade_prio = {
+		base = 2
+
+		modifier = {
+			factor = 0
+			NOT = {
+				has_tech = mountaineers_1
+			}
+		}
+	}
+
+	mountaineers_default = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 1
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				recon = 1
+				artillery = 1
+				anti_tank = 1
+				field_hospital = 1
+				logistics_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 1
+				anti_tank_support = 1
+			}
+
+			regiments = {
+				mountaineers = 9
+				artillery_brigade = 2
+			}
+		}
+	}
+}
+
+paratrooper_generic = {
+
+	blocked_for = {
+		UFE URS REU
+	}
+
+	role = paratroopers
+
+	upgrade_prio = {
+		base = 2
+
+		modifier = {
+			factor = 0
+			NOT = {
+				has_tech = paratroopers_1
+			}
+		}
+	}
+
+	paratrooper_default = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 1
+			}
+		}
+
+		target_template = {
+
+			reinforce_prio = 2
+
+			support = {
+				engineer = 1
+				recon = 1
+				artillery = 1
+				anti_tank = 1
+				field_hospital = 1
+			}
+
+			regimental_support = {
+				anti_tank_support = 1
+				artillery_support = 1
+			}
+
+			regiments = {
+				paratrooper = 9
+				artillery_brigade = 1
+			}
+		}
+	}
+}
+
+# ä¸¤æ çªå»ï¼role_ratio marines é»è®¤ä¸º 0ï¼default_unit_productionï¼ï¼
+# è¿éåªæ¯ææ¡£è¡¥é½ï¼ä»»ä½å½å®¶æ³ç¨ marines ç´æ¥è° role_ratio å³å¯ã
+marines_generic = {
+
+	blocked_for = {
+		UFE URS REU
+	}
+
+	role = marines
+
+	upgrade_prio = {
+		base = 1
+
+		modifier = {
+			factor = 0
+			num_of_naval_factories < 10
+		}
+	}
+
+	marines_default = {
+
+		upgrade_prio = {
+			base = 1
+		}
+
+		target_template = {
+
+			reinforce_prio = 2
+
+			support = {
+				engineer = 1
+				recon = 1
+				artillery = 1
+				anti_tank = 1
+				field_hospital = 1
+				logistics_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 1
+				anti_tank_support = 1
+			}
+
+			regiments = {
+				marine = 8
+				artillery_brigade = 1
+			}
+		}
+	}
+}
+
+air_assault_generic = {
+
+	role = air_assault
+
+	blocked_for = {
+		UFE URS REU
+	}
+
+	upgrade_prio = {
+		factor = 2
+
+		modifier = {
+			factor = 0
+			NOT = {
+				has_tech = air_assault_1
+			}
+		}
+		modifier = {
+			factor = 8
+			num_of_military_factories > 80
+		}
+	}
+
+	air_assault_default = {
+
+		upgrade_prio = {
+			factor = 1
+
+			modifier = {
+				factor = 8
+				num_of_military_factories > 80
+			}
+		}
+
+		target_template = {
+
+			reinforce_prio = 2
+
+			support = {
+				engineer = 1
+				helicopter_recon = 1
+				anti_tank = 1
+				artillery = 1
+				field_hospital = 1
+				maintenance_company = 1
+				logistics_company = 1
+			}
+
+			regiments = {
+				armed_helicopter = 5
+				air_assault = 6
+			}
+		}
+	}
+}
+
+motorized_generic = {
+
+	role = motorized
+
+	upgrade_prio = {
+		base = 5
+	}
+
+	# æ³¨æï¼URS / REU æèªå·±çè£ç²ä¸æ­¥åµæ¡£ï¼ä½æ²¡ææ©æåæ¡£ï¼
+	# æä»¥è¿éåªå±è½ UFEï¼æ¹å¨åæ ·ä¼ä½ç¨å°ä¹è¨æ¯ä¸åæå¤ã
+	blocked_for = {
+		UFE
+	}
+
+	mobile_early_mot_generic = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 3
+				has_tech = motorized_infantry_0
+			}
+			modifier = {
+				factor = 0
+				num_of_military_factories < 15
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+			}
+
+			regiments = {
+				motorized = 9
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = mobile_mid_generic
+		target_min_match = 0.5
+	}
+
+	mobile_mid_generic = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 4
+				has_tech = motorized_infantry_1
+			}
+			modifier = {
+				factor = 3
+				num_of_military_factories > 30
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				anti_air = 1
+				field_hospital = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 1
+				anti_air_support = 1
+			}
+
+			regiments = {
+				motorized = 9
+				mot_artillery_brigade = 2
+				mot_anti_tank_brigade = 1
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = mobile_mid_mech_generic
+		target_min_match = 0.4
+	}
+
+	mobile_mid_mech_generic = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 5
+				has_tech = mechanized_infantry_1
+			}
+			modifier = {
+				factor = 4
+				num_of_military_factories > 50
+			}
+		}
+
+		target_template = {
+
+			reinforce_prio = 2
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				anti_air = 1
+				firepower = 1
+				field_hospital = 1
+				signal_company = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 2
+				anti_tank_support = 1
+				anti_air_support = 1
+				firepower_support = 1
+			}
+
+			regiments = {
+				mechanized = 6
+				motorized = 6
+				mot_artillery_brigade = 2
+				mot_anti_tank_brigade = 1
+			}
+		}
+	}
+}
+
+hq_generic = {
+	role = hq_role
+
+	# éå¢åå¸ä»¤é¨ç±å¼æå¨æ´ç¼æ¶èªè¡åå»ºï¼è¿éä¿æ 0ï¼ä¸å»æ¢æ¢ä»£ XP
+	upgrade_prio = {
+		base = 0
+	}
+
+	blocked_for = {
+		UFE REU URS
+	}
+
+	hq_default = {
+		upgrade_prio = {
+			base = 0
+		}
+
+		target_template = {
+			support = {
+				hq_support_company = 1
+			}
+
+			regiments = {
+				infantry = 4
+			}
+		}
+	}
+}
+
+# REGIMENTS:
+#infantry
+#light_armor
+#modern_armor
+#heavy_armor
+#medium_armor
+#light_armor
+#anti_tank
+#cavalry
+#motorized
+#mechanized
+#marine
+#mountaineers
+#paratrooper
+#rocket_artillery
+#light_tank_destroyer
+#medium_tank_destroyer_brigade
+#heavy_tank_destroyer_brigade
+#super_heavy_tank_destroyer_brigade
+#modern_tank_destroyer_brigade
+#anti_air
+#artillery
+
+# SUPPORT:
+#engineer
+#recon
+#signal_company
+#maintenance_company
+#anti_tank_brigade
+#anti_air_brigade
+#artillery_brigade
+#field_hospital
+#logistics_company
+#military_police
+#light_sp_anti_air_brigade
+#light_sp_artillery_brigade

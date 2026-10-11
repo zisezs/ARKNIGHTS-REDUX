@@ -1,0 +1,954 @@
+ideas = {
+	country = {
+		VWI_Sarkaz_soldiers_idea = {
+
+			modifier = {
+				weekly_manpower = 300
+				army_attack_factor = 0.03
+				army_defence_factor = 0.03
+				army_org_regain = 0.05
+			}
+
+			cancel = {
+				has_global_flag = VIC_civil_war_end
+			}
+		}
+
+		VWI_light_weapons_factory_idea = {
+			picture = Upheaval_increased_factory_output
+
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+				support_equipment = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		VWI_focus_on_artillery_production_idea = {
+			picture = Upheaval_increased_factory_output
+
+			equipment_bonus = {
+				artillery_equipment = {
+					build_cost_ic = -0.05
+					instant = yes
+				}
+				anti_tank_equipment = {
+					build_cost_ic = -0.05
+					instant = yes
+				}
+				armor = {
+					build_cost_ic = 0.1
+					instant = yes
+				}
+			}
+		}
+
+		VWI_new_model_army_idea = {
+
+			modifier = {
+				equipment_capture_factor = 0.05
+				war_support_factor = 0.1
+				army_org_factor = 0.05
+				army_morale_factor = 0.05
+			}
+		}
+		
+		#优质火炮
+		VWI_supper_artillery_idea = {
+			
+			equipment_bonus = {
+				artillery_equipment = {
+					soft_attack = 0.1
+					build_cost_ic = -0.05
+					instant = yes
+				}
+				anti_tank_equipment = {
+					hard_attack = 0.1
+					ap_attack = 0.2
+					build_cost_ic = -0.05
+					instant = yes
+				}
+			}
+		}
+
+		VWI_military_debuff_idea = {
+
+			modifier = {
+				army_morale_factor = -0.05
+				army_org_factor = -0.05
+				army_strength_factor = -0.05
+			}
+		}
+
+		VWI_military_buff_idea = {
+
+			modifier = {
+				war_support_factor = 0.1
+				max_command_power = 20
+				army_morale_factor = -0.05
+				army_org_factor = -0.05
+				army_strength_factor = -0.05
+			}
+		}
+
+		VWI_military_buff_dummy_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+			}
+		}
+		
+		#步兵师扩编
+		VWI_infantry_division_expansion_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				training_time_army_factor = -0.1
+				army_strength_factor = 0.1
+				conscription = 0.005
+				army_defence_factor = 0.03
+			}
+		}
+		
+		#炮兵集中运用
+		VWI_concentrated_use_of_artillery_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				army_artillery_attack_factor = 0.05
+				army_artillery_defence_factor = 0.05
+				land_reinforce_rate = 0.02
+				coordination_bonus = 0.02
+			}
+		}
+		
+		#炮兵支援理论
+		VWI_artillery_support_theory_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				planning_speed = 0.1
+				army_infantry_attack_factor = 0.05
+				army_infantry_defence_factor = 0.05
+			}
+		}
+		
+		#大炮兵主义
+		VWI_maintain_authority_academy_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				army_artillery_attack_factor = 0.1
+				army_artillery_defence_factor = 0.1
+				max_planning = 0.05
+			}
+		}
+		
+		#制订射表
+		VWI_make_shooting_table_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				army_artillery_attack_factor = 0.05
+				army_artillery_defence_factor = 0.05
+				army_attack_factor = 0.02
+				coordination_bonus = 0.02
+				experience_loss_factor = -0.1
+			}
+		}
+		
+		#选拔突击队
+		VWI_position_infiltration_team_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				army_org_factor = 0.1
+				army_attack_factor = 0.02
+				army_defence_factor = 0.02
+				pocket_penalty = -0.15
+				breakthrough_factor = 0.05
+				land_reinforce_rate = 0.05
+			}
+		}
+		
+		#突破能力训练
+		VWI_breakthrough_ability_training_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				breakthrough_factor = 0.05
+				land_reinforce_rate = 0.02
+				coordination_bonus = 0.02
+				intel_from_combat_factor = 0.05
+				recon_factor = 0.05
+				army_attack_factor = 0.02
+			}
+		}
+		
+		#阵地隐匿
+		VWI_hidden_position_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				cas_damage_reduction = 0.05
+				enemy_army_bonus_air_superiority_factor = -0.05
+				army_defence_factor = 0.05
+				dig_in_speed_factor = 0.1
+				max_dig_in = 5
+				army_morale_factor = 0.05
+			}
+		}
+		
+		#非对称制空
+		VWI_asymmetric_air_control_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				enemy_army_bonus_air_superiority_factor = -0.1
+				cas_damage_reduction = 0.1
+			}
+		}
+		
+		#加强宪兵队
+		VWI_draw_military_cantonment_system_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				resistance_growth = -0.15
+				resistance_decay = 0.05
+				compliance_growth = 0.15
+				required_garrison_factor = -0.15
+				army_morale_factor = 0.1
+			}
+		}
+		
+		#风暴突击队
+		VWI_storm_troopers_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				army_infantry_attack_factor = 0.05
+				army_infantry_defence_factor = 0.05
+				breakthrough_factor = 0.05
+				land_reinforce_rate = 0.02
+				coordination_bonus = 0.02
+				intel_from_combat_factor = 0.05
+				recon_factor = 0.05
+			}
+		}
+		
+		#适应性陆军
+		VWI_storm_Commando_Expansion_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				special_forces_cap = 0.05
+				acclimatization_hot_climate_gain_factor = 0.15
+				acclimatization_cold_climate_gain_factor = 0.15
+				army_org_factor = 0.05
+				army_strength_factor = 0.05
+				enemy_army_bonus_air_superiority_factor = -0.05
+				cas_damage_reduction = 0.05
+			}
+		}
+
+		VWI_improve_ground_handling_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				air_doctrine_cost_factor = -0.1
+				air_mission_efficiency_factor = 0.05
+				air_manpower_requirement_factor = -0.25
+			}
+		}
+
+		VWI_we_will_meet_again_military_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				surrender_limit = 0.05
+				war_support_factor = 0.1
+			}
+		}
+
+		VWI_creation_of_MI5_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				operative_slot = 1
+			}
+		}
+
+		VWI_arouse_revolutionary_enthusiasm_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				conscription = 0.005
+				army_attack_factor = 0.05
+			}
+		}
+
+		VWI_get_the_support_of_the_Young_Officers_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				max_command_power_mult = 0.25
+				experience_gain_army_factor = 0.1
+			}
+		}
+
+		VWI_revolutionary_terror_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				resistance_growth = -0.15
+				resistance_decay = 0.05
+				compliance_growth = 0.15
+			}
+		}
+
+		VWI_expand_the_powers_of_police_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				compliance_growth = 0.15
+				required_garrison_factor = -0.1
+			}
+		}
+
+		VWI_keep_calm_and_carry_on_military_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				war_support_factor = 0.1
+				max_planning = 0.05
+				max_command_power_mult = 0.25
+			}
+		}
+
+		VWI_strengthen_rear_control_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				intelligence_agency_defense = 0.1
+				root_out_resistance_effectiveness_factor = 0.1
+			}
+		}
+
+		VWI_eliminate_hostile_guerrillas_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				resistance_growth = -0.1
+				resistance_damage_to_garrison_on_our_occupied_states = 0.1
+			}
+		}
+
+		VWI_Terra_bless_the_Queen_military_idea = {
+			name = VWI_military_buff_idea
+
+			modifier = {
+				army_strength_factor = 0.05
+				army_morale_factor = 0.05
+			}
+		}
+		
+		#初始debuff
+		VWI_politics_debuff_idea = {
+
+			modifier = {
+				stability_factor = -0.15
+			}
+		}
+
+		VWI_politics_buff_idea = {
+
+			modifier = {
+				political_power_gain = 0.2
+				stability_factor = -0.05
+			}
+		}
+
+		VWI_politics_buff_dummy_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+			}
+		}
+
+		VWI_keep_distance_Rhode_Island_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				authoritarianism_drift = 0.02
+			}
+		}
+
+		VWI_enable_Delphine_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				despotism_drift = 0.02
+			}
+		}
+
+		# VWI_transfer_Lentinium_politicians_idea = {
+		# 	name = VWI_politics_buff_idea
+
+		# 	modifier = {
+		# 		political_power_gain = 0.1
+		# 		administrative_development_monthly_modifier = 0.02
+		# 	}
+		# }
+
+		VWI_refugee_relief_act_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				political_power_gain = -0.1
+				consumer_goods_factor = -0.1
+				authoritarianism_drift = 0.01
+				progressivism_drift = 0.01
+			}
+		}
+
+		VWI_asset_protection_act_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				conservatism_drift = 0.01
+				despotism_drift = 0.01
+				consumer_goods_factor = 0.1
+				stability_factor = 0.1
+				war_support_factor = 0.05
+			}
+		}
+
+		VWI_Windermere_Declaration_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				political_power_gain = 0.05
+				compliance_growth = 0.1
+			}
+		}
+
+		VWI_we_will_meet_again_politics_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				political_power_gain = 0.1
+			}
+		}
+
+		VWI_cut_with_royalists_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				liberalism_drift = 0.01
+				war_support_factor = 0.1
+			}
+		}
+
+		VWI_republicans_invited_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				administrative_development_monthly_modifier = 0.04
+			}
+		}
+
+		VWI_Beveridge_Report_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				monthly_population = 0.07
+				political_power_gain = 0.1
+				poverty_development_monthly_modifier = 0.02
+			}
+		}
+
+		VWI_parliamentary_dominant_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				liberalism_drift = 0.01
+				progressivism_drift =0.04
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		VWI_presidential_system_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				authoritarianism_drift = 0.01
+				despotism_drift = 0.01
+				industrial_capacity_factory = 0.05
+			}
+		}
+
+		VWI_promote_the_spirit_of_democracy_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				liberalism_drift = 0.01
+				progressivism_drif = 0.04
+				authoritarianism_drift = 0.01
+				stability_factor = 0.1
+			}
+		}
+
+		VWI_promote_leader_worship_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				authoritarianism_drift = 0.01
+				despotism_drift = 0.01
+				fascism_drift = 0.01
+				war_support_factor = 0.1
+			}
+		}
+
+		VWI_preparation_of_new_local_council_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				stability_factor = 0.1
+				political_power = 0.1
+			}
+		}
+
+		VWI_proportion_of_military_representatives_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				war_support_factor = 0.1
+				command_power_gain = 0.1
+				military_high_command_cost_factor = -0.10
+				authoritarianism_drift = 0.01
+			}
+		}
+
+		VWI_all_seats_are_open_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				stability_factor = 0.1
+				political_power_gain = 0.1
+				military_political_advisor_cost_factor = -0.25
+				liberalism_drift = 0.01
+			}
+		}
+
+		VWI_proclaim_the_Provisional_Government_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				party_popularity_stability_factor = 0.3
+				war_support_factor = 0.1
+				surrender_limit = 0.1
+			}
+		}
+
+		VWI_Terra_bless_the_Queen_politics_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				political_power_gain = 0.1
+			}
+		}
+
+		VWI_formation_of_wartime_parliament_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				war_support_factor = 0.1
+				political_power_gain = 0.1
+			}
+		}
+
+		VWI_formation_of_wartime_parliament_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				stability_factor = 0.1
+				conservatism_drift = 0.01
+				despotism_drift = 0.01
+			}
+		}
+
+		VWI_acknowledging_the_history_of_the_revolution_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				war_support_factor = 0.05
+				authoritarianism_drift = 0.01
+				compliance_growth = 0.15
+			}
+		}
+
+		VWI_restore_the_honor_of_the_former_king_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				party_popularity_stability_factor = 0.3
+				conservatism_drift = 0.01
+				liberalism_drift = 0.01
+			}
+		}
+
+		VWI_promised_post_war_elections_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				stability_factor = 0.1
+				conservatism_drift = 0.01
+				despotism_drift = 0.01
+			}
+		}
+
+		VWI_form_civilian_government_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				administrative_development_monthly_modifier = 0.03
+			}
+		}
+
+		VWI_trying_traitors_idea = {
+			name = VWI_politics_buff_idea
+
+			modifier = {
+				administrative_development_monthly_modifier = 0.03
+			}
+		}
+		
+		VWI_economy_debuff_idea = {
+
+			modifier = {
+				production_factory_max_efficiency_factor = -0.05
+				production_factory_efficiency_gain_factor = -0.1
+				industrial_capacity_factory = -0.1
+			}
+		}
+
+		VWI_economy_buff_idea = {
+
+			modifier = {
+				production_factory_max_efficiency_factor = -0.05
+				production_factory_efficiency_gain_factor = -0.1
+				industrial_capacity_factory = -0.1
+				production_factory_start_efficiency_factor = 0.05
+			}
+		}
+
+		VWI_economy_buff_dummy_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+			}
+		}
+
+		VWI_provisional_Military_Control_Council_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				political_power_gain = 0.1
+				political_advisor_cost_factor = -0.1
+				trade_laws_cost_factor = -0.2
+				mobilization_laws_cost_factor = -0.2
+				economy_cost_factor = -0.2
+				administrative_development_monthly_modifier = 0.02
+			}
+		}
+
+		VWI_maintain_production_of_essential_goods_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				stability_factor = 0.1
+				war_support_factor = 0.05
+				industrial_capacity_factory = 0.025
+			}
+		}
+
+		VWI_full_mobilization_of_industry_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				industrial_capacity_factory = 0.025
+				production_factory_efficiency_gain_factor = 0.05
+			}
+		}
+
+		VWI_expansion_research_institutes_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				research_speed_factor = 0.05
+				educational_development_monthly_modifier = 0.03
+				consumer_goods_factor = 0.05
+			}
+		}
+
+		VWI_issuance_temporary_currency_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				political_power_gain = 0.1
+				industrial_capacity_factory = 0.1
+				consumer_goods_factor = 0.1
+			}
+		}
+
+		VWI_distribution_ration_vouchers_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				consumer_goods_factor = -0.1
+				production_speed_arms_factory_factor = 0.1
+				production_speed_industrial_complex_factor = 0.1
+			}
+		}
+
+		VWI_investment_less_developed_regions_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				poverty_development_monthly_modifier = 0.05
+			}
+		}
+
+		VWI_construction_military_facilities_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				max_fuel_factor = 0.2
+				production_speed_infrastructure_factor = 0.15
+				conversion_cost_civ_to_mil_factor = -0.2
+			}
+		}
+
+		VWI_fight_black_market_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				political_power_gain = 0.2
+				war_support_factor = 0.05
+				administrative_development_monthly_modifier = 0.02
+			}
+		}
+
+		VWI_improve_transportation_network_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				production_speed_infrastructure_factor = 0.1
+				production_speed_rail_way_factor = 0.1
+				production_speed_supply_node_factor = 0.1
+			}
+		}
+
+		VWI_securing_industrial_electricity_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				production_speed_originium_powerplant_factor = 0.1
+				production_speed_new_energy_powerplant_factor = 0.1
+			}
+		}
+
+		VWI_respect_workers_demands_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				line_change_production_efficiency_factor = 0.05
+				production_factory_efficiency_gain_factor = -0.05
+			}
+		}
+
+		VWI_prisoner_Labor_Corps_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				stability_factor = -0.05
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		VWI_agricultural_microcredit_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				production_speed_industrial_complex_factor = 0.05
+				agricultural_development_monthly_modifier = 0.02
+			}
+		}
+
+		VWI_expanding_light_weapons_production_capacity_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				equipment_conversion_speed = 0.25
+				no_supply_grace = 120
+			}
+		}
+
+		VWI_relaxation_work_restrictions_infected_people_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				production_speed_buildings_factor = 0.05
+				industrial_development_monthly_modifier = 0.02
+			}
+		}
+
+		VWI_volunteer_engineering_teams_formed_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				stability_factor = 0.05
+				repair_speed_arms_factory_factor = 0.1
+				repair_speed_infrastructure_factor = 0.1
+				administrative_development_monthly_modifier = 0.01
+			}
+		}
+
+		VWI_increase_support_military_enterprises_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				industrial_capacity_factory = 0.1
+				industrial_development_monthly_modifier = 0.02
+			}
+		}
+
+		VWI_work_for_people_with_Victoria_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				global_building_slots = 1
+				production_factory_max_efficiency_factor = 0.1
+			}
+		}
+
+		VWI_improve_resource_production_processes_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				local_resources_factor = 0.05
+			}
+		}
+
+		VWI_continue_the_rationing_system_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				stability_factor = -0.1
+				war_support_factor = -0.1
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		VWI_unified_management_of_military_factories_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				production_lack_of_resource_penalty_factor = -0.1
+				industrial_capacity_factory = 0.025
+				equipment_conversion_speed = 0.025
+			}
+		}
+
+		VWI_compensation_for_private_enterprises_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				consumer_goods_factor = -0.1
+				production_speed_industrial_complex_factor = 0.15
+			}
+		}
+
+		VWI_restoration_of_the_domestic_market_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				consumer_goods_factor = 0.1
+				production_factory_start_efficiency_factor = 0.05
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		VWI_recognition_of_trade_union_status_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				stability_factor = -0.1
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+
+		VWI_control_of_trade_unions_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				political_power_gain = -0.1
+				production_factory_efficiency_gain_factor = 0.05
+			}
+		}
+
+		VWI_continuation_of_the_war_tax_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				industrial_capacity_factory = 0.025
+				production_factory_start_efficiency_factor = 0.05
+			}
+		}
+
+		VWI_liberalization_of_rationing_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				stability_factor = 0.1
+				consumer_goods_factor = 0.1
+				political_power_gain = 0.1
+			}
+		}
+
+		VWI_securing_living_supplies_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
+				consumer_goods_factor = 0.1
+				monthly_population = 0.07
+			}
+		}
+
+		VWI_healing_the_wounds_of_war_idea = {
+			name = VWI_economy_buff_idea
+
+			modifier = {
+				production_speed_infrastructure_factor = 0.15
+				industry_repair_factor = 0.2
+			}
+		}
+
+		VWI_model_army_idea = {
+
+			modifier = {
+				war_support_factor = 0.1
+				combat_width_factor = -0.05
+				org_loss_when_moving = -0.05
+				pocket_penalty = -0.05
+			}
+		}
+	}
+}

@@ -1,0 +1,50 @@
+# 叙拉古 · 灰厅-铳与秩序：战争支持度 → 稳定度 联动（阶梯式）
+# 每 20% 战争支持度提供 +20% 稳定度；仅在持有 SRC_Grey_Hall 精神时生效。
+# 挂载见 common/on_actions/SRC_on_actions.txt（on_startup 正式挂载 + on_monthly 兜底）。
+
+SRC_grey_hall_tier1 = {
+	icon = GFX_idea_SRC_Grey_Hall
+
+	enable = {
+		has_idea = SRC_Grey_Hall
+		has_war_support > 0.2
+		NOT = { has_war_support > 0.4 }
+	}
+
+	stability_factor = 0.2
+}
+
+SRC_grey_hall_tier2 = {
+	icon = GFX_idea_SRC_Grey_Hall
+
+	enable = {
+		has_idea = SRC_Grey_Hall
+		has_war_support > 0.4
+		NOT = { has_war_support > 0.6 }
+	}
+
+	stability_factor = 0.4
+}
+
+SRC_grey_hall_tier3 = {
+	icon = GFX_idea_SRC_Grey_Hall
+
+	enable = {
+		has_idea = SRC_Grey_Hall
+		has_war_support > 0.6
+		NOT = { has_war_support > 0.8 }
+	}
+
+	stability_factor = 0.6
+}
+
+SRC_grey_hall_tier4 = {
+	icon = GFX_idea_SRC_Grey_Hall
+
+	enable = {
+		has_idea = SRC_Grey_Hall
+		has_war_support > 0.8
+	}
+
+	stability_factor = 0.8
+}

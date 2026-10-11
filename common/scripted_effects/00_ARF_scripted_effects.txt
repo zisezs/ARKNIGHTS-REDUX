@@ -1,0 +1,33 @@
+store_puppet_goverment = {
+	set_variable = { store_ideology_communism = THIS.party_popularity_100@communism }
+	set_variable = { store_ideology_socialism = THIS.party_popularity_100@socialism }
+	set_variable = { store_ideology_progressivism = THIS.party_popularity_100@progressivism }
+	set_variable = { store_ideology_liberalism = THIS.party_popularity_100@liberalism }
+	set_variable = { store_ideology_conservatism = THIS.party_popularity_100@conservatism }
+	set_variable = { store_ideology_authoritarianism = THIS.party_popularity_100@authoritarianism }
+	set_variable = { store_ideology_despotism = THIS.party_popularity_100@despotism }
+	set_variable = { store_ideology_fascism = THIS.party_popularity_100@fascism }
+	set_variable = { store_ideology_mysticism = THIS.party_popularity_100@mysticism }
+	set_variable = { store_ideology_special = THIS.party_popularity_100@special }
+
+	set_variable = { store_ideology_goverment = THIS.current_party_ideology_group }
+}
+
+puppet_not_change_goverment = {
+	set_popularities = {
+		communism = var:THIS.store_ideology_communism
+		socialism = var:THIS.store_ideology_socialism
+		progressivism = var:THIS.store_ideology_progressivism
+		liberalism = var:THIS.store_ideology_liberalism
+		conservatism = var:THIS.store_ideology_conservatism
+		authoritarianism = var:THIS.store_ideology_authoritarianism
+		despotism = var:THIS.store_ideology_despotism
+		fascism = var:THIS.store_ideology_fascism
+		mysticism = var:THIS.store_ideology_mysticism
+		special = var:THIS.store_ideology_special
+	}
+
+	set_political_party = {
+		ideology = var:THIS.store_ideology_goverment
+	}
+}

@@ -1,0 +1,89 @@
+# ============================================================================
+# 叙拉古 (SRC) · 对外扩张「七丘的狼崽子们」—— 钩子（2026-09-19）
+#
+# 两件事需要引擎在"国策之外"帮忙盯着：
+#   1) 对博尔扎诺 / 克罗地亚迪纳摩的战事一开，两国首都立刻拉起边境民团 30 师。
+#      → on_war（全局钩子，战争双方都会触发，所以一律用显式 TAG 作用域判定，
+#        不依赖 ROOT/FROM 的先后，见 REU_on_actions.txt 的同款写法）。
+#        守卫旗标挂在被动员的那一方身上（效果本身就是用它的作用域跑的），
+#        同一个国家整局只拉一次。
+#   2) 莱塔尼亚被打到抵抗不足两成（surrender_progress > 0.8）就停战收作附庸。
+#      → on_weekly_SRC（原版口径的"SRC 国家作用域、每周一次"；2026-09-26 前是月度，
+#        月度会漏掉崩盘窗口，见下面那条钩子的注释），
+#        判定通过当场执行 SRC_exp_ltan_kneel_effect 并弹 src_exp.1 报信。
+#        收网那一段还带双塔协定的善后（附庸会把整个阵营拆散、全地图一起停战），
+#        逻辑都在 SRC_exp_effects.txt 里，这里只管判定与触发。
+#        另一半兜底在 common/on_actions/Peace_on_actions.txt：莱塔尼亚真投降了也不许吞。
+#        不用 on_monthly + every_country —— 那个写法会把次数乘上场上国家数量
+#        （见 SRC_civilwar_on_actions.txt 的血泪注释）。
+#
+# 同名 on_action 跨文件是合并，所以新建本文件而不是改 SRC_on_actions.txt。
+# ============================================================================
+on_actions = {
+
+	on_war = {
+		effect = {
+			# ── 博尔扎诺：边境民团动员 ──
+			if = {
+				limit = {
+					SRC = { has_war_with = BZN }
+					NOT = { BZN = { has_country_flag = SRC_exp_flag_levee_bzn } }
+				}
+				BZN = { SRC_exp_bzn_levee_effect = yes }
+			}
+			# ── 克罗地亚迪纳摩：边境民团动员 ──
+			if = {
+				limit = {
+					SRC = { has_war_with = MRA }
+					NOT = { MRA = { has_country_flag = SRC_exp_flag_levee_mra } }
+				}
+				MRA = { SRC_exp_mra_levee_effect = yes }
+			}
+		}
+	}
+
+	# 莱塔尼亚臣服：三条路任一即到，每周查一次
+	#   ① 抵抗崩盘（设计稿口径 surrender_progress > 0.8）
+	#   ② 帝都陷落：叙拉古是城邦体量，填不满大帝国的投降条，但首都是啃得下来的
+	#   ③ 仗打完还握着莱塔尼亚的核心州 = 议和赢了（宣战决议 fire_only_once，
+	#      这一条不在这里补一刀，"打赢了却没有傀儡"就再也没有第二次机会）
+	# 三条都要求 SRC_exp_flag_ltan_war（宣战决议真的按下去过），
+	# 免得叙拉古自己的地本来就带莱塔尼亚法理时被白捡一次臣服。
+	# ⚠ 2026-09-26：原来这里是 on_monthly_SRC + 只认 ① —— 月度会整个跳过崩盘窗口，
+	#   而 ① 单独存在时对小国基本够不着（表现就是"打赢了却没有傀儡"）。
+	on_weekly_SRC = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_country_flag = SRC_exp_flag_ltan_vassal }
+					has_country_flag = SRC_exp_flag_ltan_war
+					country_exists = LTN
+					LTN = { is_subject = no }
+					OR = {
+						AND = {
+							has_war_with = LTN
+							OR = {
+								LTN = { surrender_progress > 0.8 }
+								LTN = {
+									capital_scope = {
+										is_controlled_by = SRC
+									}
+								}
+							}
+						}
+						AND = {
+							NOT = { has_war_with = LTN }
+							any_owned_state = {
+								is_core_of = LTN
+								NOT = { is_core_of = SRC }
+							}
+						}
+					}
+				}
+				log = "SRC_exp: 莱塔尼亚臣服条件达成，收网（on_weekly_SRC）"
+				SRC_exp_ltan_kneel_effect = yes
+				country_event = { id = src_exp.1 days = 1 }
+			}
+		}
+	}
+}

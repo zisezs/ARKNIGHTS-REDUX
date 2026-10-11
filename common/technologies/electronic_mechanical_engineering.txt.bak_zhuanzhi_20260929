@@ -1,0 +1,850 @@
+technologies = {
+
+	# =====================================================================
+	# 工业与电子（民用页 civ_folder）
+	# 本文件：雷达 / 计算机 / 火控 / 核科技
+	# 结构与分支参照「国家熔炉 - TFR科技重置」的民用科技树重排
+	# =====================================================================
+
+	#####################################
+	# 计算机
+	#####################################
+
+	punched_card_computer = {
+
+		research_speed_factor = 0.01
+
+		path = {
+			leads_to_tech = vacuum_tube_computer
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = radio 
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1
+		start_year = 1033
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 0 }
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		categories = {
+			electronics
+			encryption_tech
+			decryption_tech
+			computing_tech
+		}
+	}
+
+	vacuum_tube_computer = {
+
+		research_speed_factor = 0.02
+
+		path = {
+			leads_to_tech = crystal_electronic_unit
+			research_cost_coeff = 1
+		}
+
+		research_cost = 1
+		start_year = 1051
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 2 }
+		}
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		categories = {
+			electronics
+			encryption_tech
+			decryption_tech
+			computing_tech
+		}
+	}
+
+	crystal_electronic_unit = {
+
+		research_speed_factor = 0.02
+
+		enable_equipment_modules = {
+			bomb_sights_1
+		}
+		
+		path = {
+			leads_to_tech = transistor_computer
+			research_cost_coeff = 1
+		}
+
+		enable_equipment_modules = { 
+			ship_fire_control_system_0
+		}
+		
+		research_cost = 2
+		start_year = 1058
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 4 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+		}
+		
+		categories = {
+			electronics
+			encryption_tech
+			decryption_tech
+			computing_tech
+		}
+	}
+
+	transistor_computer = {
+
+		research_speed_factor = 0.03
+
+		enable_equipment_modules = {
+			stabilizer
+		}
+		
+		path = {
+			leads_to_tech = integrated_circuit_computer_1
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = basic_fire_control_system
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 1068
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 6 }
+		}
+		
+		ai_will_do = {
+			factor = 20
+		}
+		
+		categories = {
+			electronics
+			encryption_tech
+			decryption_tech
+			computing_tech
+		}
+	}
+
+	integrated_circuit_computer_1 = {
+
+		research_speed_factor = 0.05
+		
+		path = {
+			leads_to_tech = integrated_circuit_computer_2
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2.5
+		start_year = 1076
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 8 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+		
+		categories = {
+			electronics
+			encryption_tech
+			decryption_tech
+			computing_tech
+		}
+	}
+	
+	integrated_circuit_computer_2 = {
+
+		research_speed_factor = 0.07
+
+		enable_equipment_modules = {
+			bomb_sights_2
+		}
+
+		path = {
+			leads_to_tech = integrated_circuit_computer_3
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = improved_fire_control_system
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2.5
+		start_year = 1086
+		
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 10 }
+		}
+		
+		ai_will_do = {
+			factor = 3
+		}
+		
+		categories = {
+			electronics
+			encryption_tech
+			decryption_tech
+			computing_tech
+		}
+	}
+	
+	integrated_circuit_computer_3 = {
+
+		research_speed_factor = 0.08
+		
+		path = {
+			leads_to_tech = integrated_circuit_computer_4
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2.5
+		start_year = 1096
+		
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 12 }
+		}
+		
+		ai_will_do = {
+			factor = 3
+		}
+		
+		categories = {
+			electronics
+			encryption_tech
+			decryption_tech
+			computing_tech
+		}
+	}
+
+	integrated_circuit_computer_4 = {
+
+		research_speed_factor = 0.09
+
+		enable_equipment_modules = {
+			tank_ads
+			drone_hardpoint
+			remote_control_system
+			electronic_warfare_device
+		}
+
+		path = {
+			leads_to_tech = weak_ai 
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2.5
+		start_year = 1100
+		
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 14 }
+		}
+		
+		ai_will_do = {
+			factor = 3
+		}
+		
+		categories = {
+			electronics
+			encryption_tech
+			decryption_tech
+			computing_tech
+		}
+	}
+
+	weak_ai = {
+
+		research_speed_factor = 0.1
+
+		enable_equipment_modules = {
+			automatic_pilot_1
+		}
+
+		path = {
+			leads_to_tech = strong_ai 
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = advanced_fire_control_system
+			research_cost_coeff = 1
+		}
+
+		research_cost = 4
+		start_year = 1105
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 16 }
+		}
+
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				is_major = no
+				factor = 0.25
+			}
+		}
+
+		categories = {
+			electronics
+			encryption_tech
+			decryption_tech
+			computing_tech
+		}
+	}
+
+	strong_ai = {
+
+		research_speed_factor = 0.1
+
+		enable_equipment_modules = {
+			automatic_pilot_2
+		}
+
+		research_cost = 4
+		start_year = 1111
+		folder = {
+			name = civ_folder
+			position = { x = 2 y = 18 }
+		}
+
+		ai_will_do = {
+			factor = 4
+			modifier = {
+				is_major = no
+				factor = 0.25
+			}
+		}
+
+		categories = {
+			electronics
+			encryption_tech
+			decryption_tech
+			computing_tech
+		}
+	}
+	
+	#####################################
+	# 雷达与电子
+	#####################################
+
+	radio = {
+
+		land_reinforce_rate = 0.05
+		coordination_bonus = 0.04
+
+		enable_equipment_modules = { 
+			tank_radio_1
+			air_radio_1
+		}
+		
+		path = {
+			leads_to_tech = radio_detection 
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 1.75
+		start_year = 1033
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 0 }
+		}
+		
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				factor = 6
+				has_war = yes
+			}
+			modifier = {
+				is_major = yes
+				factor = 2
+			}
+			modifier = {
+				tag = UFE
+				factor = 25
+			}
+		}
+		
+		categories = {
+			electronics
+			radar_tech
+		}
+	}
+	
+	radio_detection = {
+
+		coordination_bonus = 0.01
+		
+		enable_equipment_modules = {
+			ship_radar_1
+		}
+
+		enable_building = {
+			building = radar_station
+			level = 1
+		}
+
+		path = {
+			leads_to_tech = pulse_doppler_radar 
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 1.75
+		start_year = 1033
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 2 }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+		categories = {
+			electronics
+			radar_tech
+		}
+	}
+	
+	pulse_doppler_radar = {
+		
+		coordination_bonus = 0.01
+
+		enable_building = {
+			building = radar_station
+			level = 2
+		}
+
+		path = {
+			leads_to_tech = monopulse_radar 
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 1.25
+		start_year = 1058
+		
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 4 }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+		categories = {
+			electronics
+			radar_tech
+		}
+	}
+	
+	monopulse_radar = {
+
+		coordination_bonus = 0.01
+
+		enable_equipment_modules = { 
+			tank_radio_2
+			air_radio_2
+			ship_radar_2
+		}
+
+		enable_building = {
+			building = radar_station
+			level = 3
+		}
+
+		path = {
+			leads_to_tech = over_the_horizon_radar 
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 1.25
+		start_year = 1068
+		
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 6 }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+		categories = {
+			electronics
+			radar_tech
+		}
+	}
+	
+	over_the_horizon_radar = {
+
+		coordination_bonus = 0.01
+		static_anti_air_hit_chance_factor = 0.2
+		
+		enable_equipment_modules = { 
+			air_radar_1
+			AWACS_1
+			tank_radar_1
+			ship_radar_3
+		}
+
+		enable_building = {
+			building = radar_station
+			level = 4
+		}
+
+		path = {
+			leads_to_tech = passive_phased_array_radar 
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 1.5
+		start_year = 1086
+		
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 8 }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+		categories = {
+			electronics
+			radar_tech
+		}
+	}
+	
+	passive_phased_array_radar = {
+
+		coordination_bonus = 0.01
+		static_anti_air_hit_chance_factor = 0.2
+
+		enable_building = {
+			building = radar_station
+			level = 5
+		}
+
+		path = {
+			leads_to_tech = active_phased_array_radar 
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 1096
+		
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 10 }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+		categories = {
+			electronics
+			radar_tech
+		}
+	}
+
+	active_phased_array_radar = {
+
+		coordination_bonus = 0.01
+		static_anti_air_hit_chance_factor = 0.2
+
+		enable_equipment_modules = {
+			tank_radio_3
+			air_radio_3
+			air_radar_2
+			AWACS_2
+			tank_radar_2
+			ship_radar_4
+		}
+
+		enable_building = {
+			building = radar_station
+			level = 6
+		}
+
+		path = {
+			leads_to_tech = anti_jamming_radar 
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 1100
+		
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 12 }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+		categories = {
+			electronics
+			radar_tech
+		}
+	}
+	
+	anti_jamming_radar = {
+		
+		coordination_bonus = 0.01
+		static_anti_air_hit_chance_factor = 0.2
+
+		enable_equipment_modules = {
+			air_radar_3
+			AWACS_3
+			tank_radar_3
+		}
+		
+		enable_building = {
+			building = radar_station
+			level = 7
+		}
+		
+		research_cost = 2.5
+		start_year = 1108
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 14 }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+		categories = {
+			electronics
+			radar_tech
+		}
+	}
+
+	#####################################
+	# 火控
+	#####################################
+
+	basic_fire_control_system = {
+
+		enable_equipment_modules = { 
+			ship_fire_control_system_1
+			tank_fire_control_system_1
+		}
+		
+		research_cost = 1
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 6 }
+		}
+		
+		ai_will_do = {
+			factor = 0.75
+			modifier = {
+				is_major = yes
+				factor = 3
+			}
+			modifier = {
+				OR = {
+					can_research = improved_fire_control_system
+					has_tech = improved_fire_control_system
+				}
+				factor = 0
+			}
+		}
+		
+		categories = {
+			electronics
+			computing_tech
+			naval_equipment
+		}
+	}
+
+	improved_fire_control_system = {
+
+		enable_equipment_modules = { 
+			ship_fire_control_system_2
+			tank_fire_control_system_2
+		}
+		
+		research_cost = 1
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 8 }
+		}
+		
+		ai_will_do = {
+			factor = 0.75
+			modifier = {
+				is_major = yes
+				factor = 3
+			}
+			modifier = {
+				OR = {
+					can_research = advanced_fire_control_system
+					has_tech = advanced_fire_control_system
+				}
+				factor = 0
+			}
+		}
+		
+		categories = {
+			electronics
+			computing_tech
+			naval_equipment
+		}
+	}
+
+	advanced_fire_control_system = {
+
+		enable_equipment_modules = { 
+			ship_fire_control_system_3
+			tank_fire_control_system_3
+		}
+		
+		research_cost = 1
+		folder = {
+			name = civ_folder
+			position = { x = 4 y = 10 }
+		}
+		
+		ai_will_do = {
+			factor = 0.75
+			modifier = {
+				is_major = yes
+				factor = 3
+			}			
+		}
+		
+		categories = {
+			electronics
+			computing_tech
+			naval_equipment
+		}
+	}
+	
+	#####################################
+	# 核科技
+	#####################################
+
+	atomic_research = {
+
+		research_speed_factor = 0.06
+		
+		path = {
+			leads_to_tech = nuclear_reactor 
+			research_cost_coeff = 1
+		}
+		
+		start_year = 1105
+		research_cost = 5
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 0 }
+		}
+		
+		ai_will_do = {
+			base = 1
+			
+			modifier = {
+				factor = 1.2
+				date > "1106.1.1"
+			}
+			
+			modifier = {
+				factor = 1.4
+				date > "1108.1.1"
+			}
+			
+			modifier = {
+				factor = 1.6
+				date > "1110.1.1"
+			}
+			
+			modifier = {
+				is_major = yes
+				factor = 2
+			}
+		}
+		
+		categories = {
+			nuclear
+		}
+	}
+	
+	nuclear_reactor = {
+
+		enable_building = {
+			building = nuclear_reactor
+			level = 1
+		}
+
+		path = {
+			leads_to_tech = nukes 
+			research_cost_coeff = 1
+		}
+
+		start_year = 1108
+		research_cost = 5
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 2 }
+		}
+
+		ai_will_do = {
+			factor = 3
+			modifier = {
+				is_major = yes
+				factor = 4
+			}
+		}
+		
+		categories = {
+			nuclear
+		}		
+	}
+	
+	nukes = {
+
+		nuclear_production = 1
+	
+		start_year = 1111
+		research_cost = 5
+		folder = {
+			name = civ_folder
+			position = { x = 0 y = 4 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		categories = {
+			nuclear
+		}
+	}
+}

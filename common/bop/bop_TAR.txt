@@ -1,0 +1,55 @@
+TAR_power_balance = {
+	initial_value = 0
+	left_side = TAR_bop_iron_duke_side
+	right_side = TAR_bop_red_dragon_side
+	decision_category = TAR_balance_of_power_category
+	#Middle
+	range = {
+		id = TAR_balance_range
+		min = -0.15
+		max = 0.15
+		modifier = {
+			political_power_gain = 0.1
+		}
+	}
+
+	#iron duke side
+	side = {
+		id = TAR_bop_iron_duke_side
+		icon = GFX_TAR_bop_iron_duke_side
+		range = {
+			id = TAR_iron_duke_range
+			min = -1
+			max = -0.15
+			modifier = {
+				stability_factor = -0.1
+				production_speed_buildings_factor = -0.20
+				production_factory_max_efficiency_factor = -0.1
+				max_planning_factor = -0.1
+				war_support_factor = 0.1
+				line_change_production_efficiency_factor = 0.2
+				planning_speed = 0.20
+			}
+		}
+	}
+
+	#red dragon side	
+	side = {
+		id = TAR_bop_red_dragon_side
+		icon = GFX_TAR_bop_red_dragon_side
+		range = {
+			id = TAR_red_dragon_range
+			min = 0.15
+			max = 1
+			modifier = {
+				stability_factor = 0.025
+				production_speed_buildings_factor = 0.05
+				production_factory_max_efficiency_factor = 0.025
+				max_planning_factor = 0.025
+				war_support_factor = -0.05
+				line_change_production_efficiency_factor = -0.05
+				planning_speed = -0.05
+			}
+		}
+	}
+}

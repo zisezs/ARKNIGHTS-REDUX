@@ -1,0 +1,7385 @@
+﻿focus_tree = {
+	id = REU_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = REU
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = REU_Light_the_spark
+	}
+	
+	#点燃星火
+	focus = {
+		id = REU_Light_the_spark
+		icon = GFX_focus_REU_Light_the_spark
+		cost = 1
+
+		allow_branch = {
+			NOT = {
+				has_country_flag = REU_Sarkaz_red_army
+			}
+		}
+
+		x = 4
+		y = 0
+
+		select_effect = {
+			unlock_decision_category_tooltip = REU_base_construction_decisions
+			custom_effect_tooltip = REU_propaganda_in_state_tt
+			activate_mission = REU_get_supplies
+		}
+		completion_reward = {
+			unlock_decision_category_tooltip = REU_base_construction_decisions
+			custom_effect_tooltip = REU_propaganda_in_state_tt
+			activate_mission = REU_get_supplies
+			set_variable = { REU_Supplies = 5 }
+			set_variable = { REU_Supplies_x01 = 0.5 }
+			set_variable = { REU_infiltrated_state_max_num = 2 }
+			set_variable = { REU_infiltration_cost = 100 }
+			set_country_flag = REU_Alina_Not_Being_Attacked
+			set_country_flag = REU_base_construction
+			add_to_variable = { REU_get_supplies_num = 1}
+			add_political_power = 200
+			country_event = {
+				id = event_reu.3
+				days = 3
+			}
+
+			hidden_effect = {
+				add_dynamic_modifier = {
+					modifier = REU_supply_dynamic_modifier
+				}
+			}
+		}
+	}
+
+	# #寻找柴薪
+	# focus = {
+	# 	id = REU_Looking_for_firewood
+	# 	icon = GFX_focus_REU_Looking_for_firewood
+	# 	cost = 1
+	# 	prerequisite = {
+	# 		focus = REU_Light_the_spark
+	# 	}
+	# 	x = -1
+	# 	y = 1
+	# 	relative_position_id = REU_Light_the_spark
+
+	# 	completion_reward = {
+	# 		unlock_decision_tooltip = {
+	# 			decision = REU_rescue_infected
+	# 			show_effect_tooltip = yes
+	# 		}
+	# 		set_country_flag = REU_rescue_infected
+	# 		add_political_power = 50
+	# 	}
+	# }
+
+	# #等待寒风
+	# focus = {
+	# 	id = REU_Wait_for_the_cold_wind
+	# 	icon = GFX_focus_REU_Wait_for_the_cold_wind
+	# 	cost = 1
+	# 	prerequisite = {
+	# 		focus = REU_Free
+	# 		focus = REU_Lost
+	# 	}
+	# 	prerequisite = {
+	# 		focus = REU_To_improve_the_conditions_of_the_campsite
+	# 	}
+	# 	x = 0
+	# 	y = 3
+	# 	relative_position_id = REU_Light_the_spark
+
+	# 	completion_reward = {
+	# 		add_political_power = 50
+	# 		country_event = {
+	# 			id = event_reu.4
+	# 		}
+	# 	}
+	# }
+
+	#改善营地条件
+	focus = {
+		id = REU_To_improve_the_conditions_of_the_campsite
+		icon = GFX_focus_REU_To_improve_the_conditions_of_the_campsite
+		cost = 4
+		prerequisite = {
+			focus = REU_Light_the_spark
+		}
+		x = -2
+		y = 1
+		relative_position_id = REU_Light_the_spark
+
+		completion_reward = {
+			custom_effect_tooltip = REU_reunion_political_modifier_tt
+			add_to_variable = {
+				stability_factor_var = 0.05
+				tooltip = stability_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_temp_variable = {
+				spl = -1
+			}
+			REU_supplies_add = yes
+			set_temp_variable = { industrial_development_monthly_effect_add_var = 0.01 }
+			industrial_development_monthly_add = yes
+			set_temp_variable = { educational_development_monthly_effect_add_var = 0.01 }
+			educational_development_monthly_add = yes
+		}
+	}
+
+	#培养侦查小队
+	focus = {
+		id = REU_Make_recon_Squad
+		icon = GFX_focus_REU_Make_recon_Squad
+		cost = 4
+		prerequisite = {
+			focus = REU_Light_the_spark
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Light_the_spark
+
+		completion_reward = {
+			custom_effect_tooltip = REU_ganranzhe_youjidui_modifier_tt
+			add_to_variable = {
+				recon_factor_var = 0.05
+				tooltip = recon_factor_tt
+			}
+			add_to_variable = {
+				intel_from_combat_factor_var = 0.05
+				tooltip = intel_from_combat_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			army_experience = 20
+		}
+	}
+
+	#主动出击
+	focus = {
+		id = REU_Free
+		icon = GFX_focus_REU_Free
+		cost = 4
+		prerequisite = {
+			focus = REU_Make_recon_Squad
+			focus = REU_Promotion_team
+		}
+		mutually_exclusive = { focus = REU_Lost }
+		x = -1
+		y = 1
+		relative_position_id = REU_Make_recon_Squad
+
+		completion_reward = {
+			custom_effect_tooltip = REU_raid_add_equipments_tt
+			set_country_flag = REU_raid_add_equipments
+			add_war_support = 0.01
+			add_command_power = 50
+		}
+	}
+	
+	#避免牺牲
+	focus = {
+		id = REU_Lost
+		icon = GFX_focus_REU_Lost
+		cost = 4
+		prerequisite = {
+			focus = REU_Make_recon_Squad
+			focus = REU_Promotion_team
+		}
+		mutually_exclusive = { focus = REU_Free }
+		x = 1
+		y = 1
+		relative_position_id = REU_Make_recon_Squad
+
+		completion_reward = {
+			custom_effect_tooltip = REU_raid_reduce_damage_tt
+			set_country_flag = REU_raid_reduce_damage
+			add_stability = 0.01
+			add_command_power = 50
+		}
+	}
+	
+	# #黑龙与白兔子
+	# focus = {
+	# 	id = REU_Talulah_Frostnova
+	# 	icon = GFX_focus_REU_Talulah_Frostnova
+	# 	cost = 1
+	# 	prerequisite = {
+	# 		focus = REU_Wait_for_the_cold_wind
+	# 	}
+	# 	allow_branch = {
+	# 		has_country_flag = REU_Future_plans
+	# 		NOT = {
+	# 			has_country_flag = REU_Sarkaz_red_army
+	# 		}
+	# 	}
+	# 	x = 0
+	# 	y = 1
+	# 	relative_position_id = REU_Wait_for_the_cold_wind
+
+	# 	completion_reward = {
+	# 		custom_effect_tooltip = REU_reunion_political_modifier_tt
+	# 		add_to_variable = {
+	# 			stability_factor_var = 0.03
+	# 			tooltip = stability_factor_tt
+	# 		}
+	# 		custom_effect_tooltip = generic_skip_one_line_tt
+	# 		country_event = {
+	# 			id = event_reu.6
+	# 		}
+	# 		country_event = {
+	# 			id = event_reu.7
+	# 			days = 3
+	# 		}
+	# 	}
+	# }
+
+	# #让同伴安息
+	# focus = {
+	# 	id = REU_A_good_sleep
+	# 	icon = GFX_focus_REU_A_good_sleep
+	# 	cost = 1
+	# 	prerequisite = {
+	# 		focus = REU_Talulah_Frostnova
+	# 	}
+	# 	x = 0
+	# 	y = 1
+	# 	relative_position_id = REU_Talulah_Frostnova
+
+	# 	completion_reward = {
+	# 		custom_effect_tooltip = REU_reunion_political_modifier_tt
+	# 		add_to_variable = {
+	# 			political_power_factor_var = 0.02
+	# 			tooltip = political_power_factor_tt
+	# 		}
+	# 		custom_effect_tooltip = generic_skip_one_line_tt
+	# 		country_event = {
+	# 			id = event_reu.8
+	# 		}
+	# 	}
+	# }
+
+	# #拮据的口粮
+	# focus = {
+	# 	id = REU_Nothing_to_eat
+	# 	icon = GFX_focus_REU_Nothing_to_eat
+	# 	cost = 2
+	# 	prerequisite = {
+	# 		focus = REU_A_good_sleep
+	# 	}
+	# 	x = 0
+	# 	y = 1
+	# 	relative_position_id = REU_A_good_sleep
+
+	# 	completion_reward = {
+	# 		country_event = {
+	# 			id = event_reu.9
+	# 		}
+	# 	}
+	# }
+	
+	# #走上冰面
+	# focus = {
+	# 	id = REU_Walk_on_the_ice
+	# 	icon = GFX_focus_REU_Walk_on_the_ice
+	# 	cost = 2
+	# 	prerequisite = {
+	# 		focus = REU_Talulah_Frostnova
+	# 	}
+	# 	x = -3
+	# 	y = 1
+	# 	relative_position_id = REU_Talulah_Frostnova
+
+	# 	completion_reward = {
+	# 		add_political_power = 50
+	# 		country_event = {
+	# 			id = event_reu.10
+	# 		}
+	# 	}
+	# }
+
+	# #夺取药品
+	# focus = {
+	# 	id = REU_Take_the_medicine
+	# 	icon = GFX_focus_REU_Take_the_medicine
+	# 	cost = 3
+	# 	prerequisite = {
+	# 		focus = REU_Walk_on_the_ice
+	# 	}
+	# 	x = 1
+	# 	y = 1
+	# 	relative_position_id = REU_Walk_on_the_ice
+
+	# 	completion_reward = {
+	# 		add_political_power = 100
+	# 	}
+	# }
+
+	#建立物资贸易渠道
+	focus = {
+		id = REU_Establish_material_exchange_channels
+		icon = GFX_focus_REU_Establish_material_exchange_channels
+		cost = 4
+		prerequisite = {
+			focus = REU_To_improve_the_conditions_of_the_campsite
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_To_improve_the_conditions_of_the_campsite
+
+		completion_reward = {
+			add_to_variable = {
+				REU_get_supplies_num = 1
+				tooltip = REU_get_supplies_tt
+			}
+			country_event = {
+				id = event_reu.11
+			}
+		}
+	}
+	
+	# #精锐雪怪
+	# focus = {
+	# 	id = REU_Elite_Finn
+	# 	icon = GFX_focus_REU_Elite_Finn
+	# 	cost = 2
+	# 	prerequisite = {
+	# 		focus = REU_Light_the_spark
+	# 	}
+	# 	x = 4
+	# 	y = 1
+	# 	relative_position_id = REU_Light_the_spark
+
+	# 	completion_reward = {
+	# 		custom_effect_tooltip = REU_ganranzhe_youjidui_modifier_tt
+	# 		add_to_variable = {
+	# 			acclimatization_cold_climate_gain_factor_var = 0.02
+	# 			tooltip = acclimatization_cold_climate_gain_factor_tt
+	# 		}
+	# 		add_to_variable = {
+	# 			winter_attrition_factor_var = -0.02
+	# 			tooltip = winter_attrition_factor_tt
+	# 		}
+	# 		custom_effect_tooltip = generic_skip_one_line_tt
+	# 		army_experience = 15
+	# 		add_manpower = 100
+	# 	}
+	# }
+
+	#武装孩子们
+	focus = {
+		id = REU_Fire_kid
+		icon = GFX_focus_REU_Fire_kid
+		cost = 4
+		prerequisite = {
+			focus = REU_Make_recon_Squad
+		}
+		prerequisite = {
+			focus = REU_Promotion_team
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Promotion_team
+
+		completion_reward = {
+			custom_effect_tooltip = REU_ganranzhe_youjidui_modifier_tt
+			add_to_variable = {
+				conscription_factor_var = 0.02
+				tooltip = conscription_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_manpower = 30
+			country_event = {
+				id = event_reu.12
+			}
+			add_corps_commander_role = {
+				character = REU_Skullshatterer
+				
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+				traits = { ARF_infected scavenger urban_assault_specialist rising_star }
+			}
+			add_corps_commander_role = {
+				character = REU_Faust
+				skill = 1
+				attack_skill = 2
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+				traits = { commando trait_cautious scavenger rising_star }
+			}
+		}
+	}
+
+	#推广小组作战
+	focus = {
+		id = REU_Promotion_team
+		icon = GFX_focus_REU_Promotion_team
+		cost = 4
+		prerequisite = {
+			focus = REU_Light_the_spark
+		}
+		x = 2
+		y = 1
+		relative_position_id = REU_Light_the_spark
+
+		completion_reward = {
+			custom_effect_tooltip = REU_ganranzhe_youjidui_modifier_tt
+			add_to_variable = {
+				army_org_factor_var = 0.03
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				planning_speed_var = 0.02
+				tooltip = planning_speed_tt
+			}
+		}
+	}
+
+	#感染者们的老师
+	focus = {
+		id = REU_The_teacher_of_the_infected
+		icon = GFX_focus_REU_The_teacher_of_the_infected
+		cost = 7
+		prerequisite = {
+			focus = REU_Establish_material_exchange_channels
+		}
+		prerequisite = {
+			focus = REU_Fire_kid
+		}
+		prerequisite = {
+			focus = REU_Free
+			focus = REU_Lost
+		}
+		
+		available = {
+			has_country_flag = REU_Alina_Not_Being_Attacked
+		}
+
+		cancel_if_invalid = yes
+
+		x = 0
+		y = 3
+		relative_position_id = REU_Light_the_spark
+
+		completion_reward = {
+			custom_effect_tooltip = REU_The_teacher_of_the_infected_tt
+		}
+	}
+
+	#筹备城市宣传组织
+	focus = {
+		id = REU_Prepare_the_city_propaganda_organization
+		icon = GFX_focus_REU_Prepare_the_city_propaganda_organization
+		cost = 7
+		prerequisite = {
+			focus = REU_The_teacher_of_the_infected
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_The_teacher_of_the_infected
+
+	}
+
+	#切城侦查行动
+	focus = {
+		id = REU_Chernobog_recon
+		icon = GFX_focus_REU_Chernobog_recon
+		cost = 7
+		prerequisite = {
+			focus = REU_The_teacher_of_the_infected
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_The_teacher_of_the_infected
+	}
+	
+	#光自卡兹戴尔
+	focus = {
+		id = REU_Light_from_Kazdel
+		icon = GFX_focus_REU_Light_from_Kazdel
+		cost = 1
+		x = 5
+		y = 0
+
+		allow_branch = {
+			has_country_flag = REU_Sarkaz_red_army
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = REU_reunion_political_modifier_tt
+			add_to_variable = {
+				stability_factor_var = 0.03
+				tooltip = stability_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_manpower = 2000
+			set_temp_variable = {
+				spl = 5
+			}
+			REU_supplies_add = yes
+			set_temp_variable = { agricultural_development_monthly_effect_add_var = 0.02 }
+			agricultural_development_monthly_add = yes
+			country_event = {
+				id = event_reu.24
+				days = 5
+			}
+		}
+	}
+
+	#康拉德·克内希到来
+	focus = {
+		id = REU_Communism_coming
+		icon = GFX_focus_REU_Communism_coming
+		cost = 3
+		prerequisite = {
+			focus = REU_Light_from_Kazdel
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Light_from_Kazdel
+
+		select_effect = {
+			country_event = {
+				id = event_reu.25
+				days = 3
+			}
+		}
+		completion_reward = {
+			add_research_slot = 1
+			custom_effect_tooltip = REU_Communism_coming_tt
+			KAC_red_army_come = yes
+		}
+	}
+
+	#两支部队，两个指挥
+	focus = {
+		id = REU_One_by_one
+		icon = GFX_focus_REU_One_by_one
+		cost = 1
+		prerequisite = {
+			focus = REU_Communism_coming
+		}
+		mutually_exclusive = { focus = REU_One_by_more }
+		available = {
+			has_country_flag = choose_REU_One_by_one
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Communism_coming
+
+		completion_reward = {
+			custom_effect_tooltip = REU_ganranzhe_youjidui_modifier_tt
+			add_to_variable = {
+				army_org_factor_var = -0.03
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				army_org_regain_var = 0.05
+				tooltip = army_org_regain_tt
+			}
+			add_to_variable = {
+				planning_speed_var = -0.02
+				tooltip = planning_speed_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_command_power = 25
+		}
+	}
+	#采用混合编制
+	focus = {
+		id = REU_One_by_more
+		icon = GFX_focus_REU_One_by_more
+		cost = 1
+		prerequisite = {
+			focus = REU_Communism_coming
+		}
+		mutually_exclusive = { focus = REU_One_by_one }
+		available = {
+			has_country_flag = choose_REU_One_by_more
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Communism_coming
+
+		completion_reward = {
+			custom_effect_tooltip = REU_ganranzhe_youjidui_modifier_tt
+			add_to_variable = {
+				army_org_factor_var = 0.02
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				planning_speed_var = 0.03
+				tooltip = planning_speed_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			army_experience = 15
+		}
+	}
+
+	#自强不息
+	focus = {
+		id = REU_Unremitting
+		icon = GFX_focus_REU_Unremitting
+		cost = 1
+		prerequisite = {
+			focus = REU_One_by_more
+			focus = REU_One_by_one
+		}
+		mutually_exclusive = { focus = REU_Rely_on_transactions }
+		available = {
+			has_country_flag = choose_REU_Unremitting
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_One_by_one
+
+		completion_reward = {
+			custom_effect_tooltip = REU_youji_economic_modifier_tt
+			add_to_variable = {
+				research_speed_factor_var = 0.05
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = effect_mission_change_tt
+					NAME = REU_get_supplies
+					CHANGE = REU_get_supplies_factory_tt
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_offsite_building = {
+				type = arms_factory
+				level = 3
+			}
+			add_to_variable = { REU_offsite_arms_factory = 3 }
+			set_temp_variable = { industrial_development_monthly_effect_add_var = 0.02 }
+			industrial_development_monthly_add = yes
+			add_political_power = 100
+			unlock_decision_tooltip = REU_add_offsite_arms_factory
+			unlock_decision_tooltip = REU_add_offsite_industrial_complex
+		}
+	}
+
+	#依赖交易
+	focus = {
+		id = REU_Rely_on_transactions
+		icon = GFX_focus_REU_Rely_on_transactions
+		cost = 1
+		prerequisite = {
+			focus = REU_One_by_more
+			focus = REU_One_by_one
+		}
+		mutually_exclusive = { focus = REU_Unremitting }
+		available = {
+			has_country_flag = choose_REU_Rely_on_transactions
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_One_by_more
+
+		completion_reward = {
+			custom_effect_tooltip = REU_reunion_political_modifier_tt
+			add_to_variable = {
+				political_power_factor_var = 0.05
+				tooltip = political_power_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = effect_mission_change_tt
+					NAME = REU_get_supplies
+					CHANGE = REU_get_supplies_deal_tt
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_offsite_building = {
+				type = arms_factory
+				level = 3
+			}
+			add_to_variable = { REU_offsite_arms_factory = 3 }
+			add_political_power = 100
+			unlock_decision_tooltip = REU_add_offsite_arms_factory
+			unlock_decision_tooltip = REU_add_offsite_industrial_complex
+		}
+	}
+
+	#康拉德的新学生
+	focus = {
+		id = REU_The_new_communists
+		icon = GFX_focus_REU_The_new_communists
+		cost = 1
+		prerequisite = {
+			focus = REU_Rely_on_transactions
+			focus = REU_Unremitting
+		}
+		available = {
+			NOT = {
+				has_country_flag = REU_exterminate_start
+			}
+		}
+		x = 3
+		y = 3
+		relative_position_id = REU_Communism_coming
+
+		completion_reward = {
+			custom_effect_tooltip = REU_reunion_political_modifier_tt
+			add_to_variable = {
+				communism_drift_var = 0.05
+				tooltip = communism_drift_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			unlock_decision_tooltip = REU_spread_communism_in_base
+			set_party_name = {
+				ideology = communism
+				long_name = REU_Reunion_long
+				name = REU_Reunion
+			}
+			country_event = {
+				id = event_reu.31
+			}
+			hidden_effect = {
+				complete_national_focus = REU_Vanguard_organization
+				complete_national_focus = REU_Class_view
+				complete_national_focus = REU_Mass_line
+			}
+		}
+	}
+	
+	#第一课：群众路线
+	focus = {
+		id = REU_Mass_line
+		icon = GFX_focus_REU_Mass_line
+		cost = 1
+		prerequisite = {
+			focus = REU_The_new_communists
+		}
+		x = -6
+		y = 1
+		relative_position_id = REU_The_new_communists
+
+		completion_reward = {
+			add_political_power = 25
+
+			country_event = {
+				id = event_reu.41
+				days = 5
+			}
+		}
+	}
+
+	#相互拥抱
+	focus = {
+		id = REU_Hug_each_other
+		icon = GFX_focus_REU_Hug_each_other
+		cost = 2
+		prerequisite = {
+			focus = REU_Mass_line
+		}
+		available = {
+			NOT = {
+				has_country_flag = REU_exterminate_start
+			}
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Mass_line
+
+		completion_reward = {
+			custom_effect_tooltip = REU_base_in_state_tt
+			set_variable = { REU_infiltrated_state_max_num = 3 }
+			set_variable = { REU_infiltration_cost = 50 }
+
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+			country_event = {
+				id = event_reu.33
+			}
+		}
+	}
+
+	#让战士们回家
+	focus = {
+		id = REU_Let_the_soldiers_go_home
+		icon = GFX_focus_REU_Let_the_soldiers_go_home
+		cost = 2
+		prerequisite = {
+			focus = REU_Mass_line
+		}
+		available = {
+			NOT = {
+				has_country_flag = REU_exterminate_start
+			}
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Mass_line
+
+		completion_reward = {
+			add_stability = 0.01
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+			set_temp_variable = { agricultural_development_monthly_effect_add_var = 0.02 }
+			agricultural_development_monthly_add = yes
+			country_event = {
+				id = event_reu.34
+			}
+		}
+	}
+
+	#第二课：阶级观点
+	focus = {
+		id = REU_Class_view
+		icon = GFX_focus_REU_Class_view
+		cost = 1
+		prerequisite = {
+			focus = REU_The_new_communists
+		}
+		x = -2
+		y = 1
+		relative_position_id = REU_The_new_communists
+
+		completion_reward = {
+			add_political_power = 25
+
+			country_event = {
+				id = event_reu.46
+				days = 10
+			}
+		}
+	}
+
+	#抗税斗争
+	focus = {
+		id = REU_Anti-tax_struggle
+		icon = GFX_focus_REU_Anti-tax_struggle
+		cost = 2
+		prerequisite = {
+			focus = REU_Class_view
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Class_view
+
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.04
+			}
+			set_temp_variable = { poverty_development_monthly_effect_add_var = 0.01 }
+			poverty_development_monthly_add = yes
+			country_event = {
+				id = event_reu.35
+			}
+		}
+
+		bypass = {
+			has_country_flag = REU_exterminate_start
+		}
+	}
+	#公审大会
+	focus = {
+		id = REU_Public_trial_meeting
+		icon = GFX_focus_REU_Public_trial_meeting
+		cost = 2
+		prerequisite = {
+			focus = REU_Class_view
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Class_view
+
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.04
+			}
+			add_political_power = 100
+			country_event = {
+				id = event_reu.37
+			}
+		}
+
+		bypass = {
+			has_country_flag = REU_exterminate_start
+		}
+	}
+
+	#第三课：先锋组织
+	focus = {
+		id = REU_Vanguard_organization
+		icon = GFX_focus_REU_Vanguard_organization
+		cost = 1
+		prerequisite = {
+			focus = REU_The_new_communists
+		}
+		x = 2
+		y = 1
+		relative_position_id = REU_The_new_communists
+		
+		completion_reward = {
+			add_political_power = 25
+
+			country_event = {
+				id = event_reu.45
+				days = 15
+			}
+		}
+	}
+
+	#与白区的交易
+	focus = {
+		id = REU_Deal_with_the_white_area
+		icon = GFX_focus_REU_Deal_with_the_white_area
+		cost = 2
+		prerequisite = {
+			focus = REU_Rely_on_transactions
+			focus = REU_Unremitting
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = REU_exterminate_start
+			}
+		}
+		x = 2
+		y = 0
+		relative_position_id = REU_The_experience_of_tundra
+
+		completion_reward = {
+			unlock_decision_tooltip = REU_smuggle_weapons
+			unlock_decision_tooltip = REU_smuggle_industry_blueprint
+			unlock_decision_tooltip = REU_smuggle_electronics_blueprint
+			unlock_decision_tooltip = REU_smuggle_military_learning_materials
+			set_country_flag = REU_smuggle_in_white_area
+			country_event = {
+				id = event_reu.39
+			}
+		}
+	}
+
+	#民主管理的尝试
+	focus = {
+		id = REU_Democratic_management
+		icon = GFX_focus_REU_Democratic_management
+		cost = 2
+		prerequisite = {
+			focus = REU_The_experience_of_tundra
+			focus = REU_Deal_with_the_white_area
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = REU_exterminate_start
+			}
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_The_experience_of_tundra
+
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.04
+			}
+			swap_ideas = {
+				remove_idea = working_law_14h
+				add_idea = working_law_12h
+			}
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.02 }
+			administrative_development_monthly_add = yes
+		}
+	}
+	#冻原的经验
+	focus = {
+		id = REU_The_experience_of_tundra
+		icon = GFX_focus_REU_The_experience_of_tundra
+		cost = 2
+		prerequisite = {
+			focus = REU_Rely_on_transactions
+			focus = REU_Unremitting
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = REU_exterminate_start
+			}
+		}
+		x = -6
+		y = 3
+		relative_position_id = REU_Communism_coming
+
+		completion_reward = {
+			custom_effect_tooltip = REU_ganranzhe_youjidui_modifier_tt
+			add_to_variable = {
+				acclimatization_cold_climate_gain_factor_var = 0.03
+				tooltip = acclimatization_cold_climate_gain_factor_tt
+			}
+			add_to_variable = {
+				winter_attrition_factor_var = -0.03
+				tooltip = winter_attrition_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			REU_Conrad_Knecht = {
+				gain_xp = 100
+			}
+			REU_Gergo_Franz = {
+				gain_xp = 100
+			}
+			REU_Bal_Kailin = {
+				gain_xp = 100
+			}
+
+			army_experience = 50
+
+			country_event = {
+				id = event_reu.40
+			}
+		}
+	}
+
+	#积极分子学习班
+	focus = {
+		id = REU_Activist_study_class
+		icon = GFX_focus_REU_Activist_study_class
+		cost = 2
+		prerequisite = {
+			focus = REU_Vanguard_organization
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = REU_exterminate_start
+			}
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Vanguard_organization
+
+		completion_reward = {
+			custom_effect_tooltip = REU_reunion_political_modifier_tt
+			add_to_variable = {
+				political_power_factor_var = 0.02
+				tooltip = political_power_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_popularity = {
+				ideology = communism
+				popularity = 0.04
+			}
+			set_temp_variable = { educational_development_monthly_effect_add_var = 0.02 }
+			educational_development_monthly_add = yes
+			country_event = {
+				id = event_reu.44
+			}
+			add_political_power = 25
+		}
+	}
+	#政治委员
+	focus = {
+		id = REU_Political_commissar
+		icon = GFX_focus_REU_Political_commissar
+		cost = 2
+		prerequisite = {
+			focus = REU_Vanguard_organization
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = REU_exterminate_start
+			}
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Vanguard_organization
+
+		completion_reward = {
+			custom_effect_tooltip = REU_ganranzhe_youjidui_modifier_tt
+			add_to_variable = {
+				army_org_regain_var = 0.05
+				tooltip = army_org_regain_tt
+			}
+			add_to_variable = {
+				political_power_factor_var = 0.01
+				tooltip = political_power_factor_tt
+			}
+			add_to_variable = {
+				stability_factor_var = 0.02
+				tooltip = stability_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.02 }
+			administrative_development_monthly_add = yes
+		}
+	}
+
+	#召开第一届整合运动萨卡兹红军大会
+	focus = {
+		id = REU_The_first_Congress
+		icon = GFX_focus_REU_The_first_Congress
+		cost = 3
+		prerequisite = {
+			focus = REU_The_new_communists
+		}
+		x = 5
+		y = 1
+		relative_position_id = REU_The_new_communists
+
+		available = {
+			date > 1095.12.10
+			NOT = {
+				has_country_flag = REU_exterminate_start
+			}
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = REU_Before_leave_base_tt
+		}
+
+		bypass = {
+			has_country_flag = REU_exterminate_start
+		}
+	}
+
+	#反清剿紧急会议
+	focus = {
+		id = REU_emergency_meeting
+		icon = GFX_focus_REU_emergency_meeting
+		cost = 1
+
+		available = {
+			has_country_flag = REU_exterminate_start
+		}
+		allow_branch = {
+			has_country_flag = REU_exterminate_start
+		}
+		x = 22
+		y = 0
+		completion_reward = {
+			set_country_flag = REU_rapid_marching
+			country_event = {
+				id = event_reu.52
+			}
+		}
+	}
+	#轻装上阵
+	focus = {
+		id = REU_Light_Pack
+		icon = GFX_focus_REU_Light_Pack
+		cost = 2
+		prerequisite = {
+			focus = REU_emergency_meeting
+		}
+		mutually_exclusive = { focus = REU_Take_Everything }
+		x = -3
+		y = 1
+		relative_position_id = REU_emergency_meeting
+
+		completion_reward = {
+			set_temp_variable = { industrial_development_monthly_effect_add_var = -0.05 }
+			industrial_development_monthly_add = yes
+		}
+	}
+	#带走一切
+	focus = {
+		id = REU_Take_Everything
+		icon = GFX_focus_REU_Take_Everything
+		cost = 2
+		prerequisite = {
+			focus = REU_emergency_meeting
+		}
+		mutually_exclusive = { focus = REU_Light_Pack }
+		x = -1
+		y = 1
+		relative_position_id = REU_emergency_meeting
+
+		completion_reward = {
+			set_temp_variable = { industrial_development_monthly_effect_add_var = -0.02 }
+			industrial_development_monthly_add = yes
+		}
+	}
+	#化整为零
+	focus = {
+		id = REU_whole_to_parts
+		icon = GFX_focus_REU_whole_to_parts
+		cost = 2
+		prerequisite = {
+			focus = REU_emergency_meeting
+		}
+		mutually_exclusive = { focus = REU_Avoid_involvement }
+		x = 1
+		y = 1
+		relative_position_id = REU_emergency_meeting
+
+		completion_reward = {
+			set_temp_variable = {
+				spl = -2
+			}
+			REU_supplies_add = yes
+			country_event = {
+				id = event_reu.57
+			}
+		}
+	}
+	#避免牵连
+	focus = {
+		id = REU_Avoid_involvement
+		icon = GFX_focus_REU_Avoid_involvement
+		cost = 2
+		prerequisite = {
+			focus = REU_emergency_meeting
+		}
+		mutually_exclusive = { focus = REU_whole_to_parts }
+		x = 3
+		y = 1
+		relative_position_id = REU_emergency_meeting
+
+		completion_reward = {
+			country_event = {
+				id = event_reu.58
+			}
+		}
+	}
+	#进入布拉戈维申斯克
+	focus = {
+		id = REU_enter_Blagoveshchensk
+		icon = GFX_focus_REU_enter_Blagoveshchensk
+		cost = 2
+		prerequisite = {
+			focus = REU_Light_Pack
+			focus = REU_Take_Everything
+		}
+		prerequisite = {
+			focus = REU_whole_to_parts
+			focus = REU_Avoid_involvement
+		}
+		x = 0
+		y = 2
+		relative_position_id = REU_emergency_meeting
+
+		available = {
+			NOT = {
+				has_country_flag = REU_rapid_marching
+			}
+		}
+
+		completion_reward = {
+			every_owned_state = {
+				limit = { is_core_of = BWS }
+				add_core_of = REU
+				remove_core_of = BWS
+			}
+			clr_country_flag = REU_base_construction
+
+			set_variable = { REU_onsite_arms_factory = REU_offsite_arms_factory }
+			divide_variable = { REU_onsite_arms_factory = 5 }
+			round_variable = REU_onsite_arms_factory
+			multiply_variable = { REU_offsite_arms_factory = -1 }
+			set_variable = { REU_onsite_industrial_complex = REU_offsite_industrial_complex }
+			divide_variable = { REU_onsite_industrial_complex = 5 }
+			round_variable = REU_onsite_industrial_complex
+			multiply_variable = { REU_offsite_industrial_complex = -1 }
+
+			custom_effect_tooltip = REU_onsite_factories_tt
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = effect_lock_decision_category_tt
+					NAME = REU_base_construction_decisions
+				}
+			}
+
+			hidden_effect = {
+				add_offsite_building = {
+					type = arms_factory
+					level = REU_offsite_arms_factory
+				}
+				add_offsite_building = {
+					type = industrial_complex
+					level = REU_offsite_industrial_complex
+				}
+
+				251 = {
+					add_extra_state_shared_building_slots = REU.REU_onsite_arms_factory
+					add_building_construction = {
+						type = arms_factory
+						level = REU.REU_onsite_arms_factory
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = REU.REU_onsite_industrial_complex
+					add_building_construction = {
+						type = industrial_complex
+						level = REU.REU_onsite_industrial_complex
+						instant_build = yes
+					}
+				}
+
+				remove_dynamic_modifier = {
+					modifier = REU_supply_dynamic_modifier
+				}
+
+				UTA = {
+					transfer_state = 131
+					annex_country = {
+						target = BRS
+					}
+					every_owned_state = {
+						limit = { is_core_of = BRS }
+						add_core_of = UTA
+						remove_core_of = BRS
+					}
+				}
+			}
+
+			country_event = {
+				id = event_reu.59
+			}
+		}
+	}
+
+	#我们的第二故乡
+	focus = {
+		id = REU_second_hometown
+		icon = GFX_focus_REU_second_hometown
+		cost = 2
+		prerequisite = {
+			focus = REU_enter_Blagoveshchensk
+		}
+		x = -5
+		y = 1
+		relative_position_id = REU_enter_Blagoveshchensk
+
+		completion_reward = {
+			custom_effect_tooltip = REU_youji_economic_modifier_tt
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.2
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_to_variable = {
+				research_speed_factor_var = 0.03
+				tooltip = research_speed_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			unlock_decision_category_tooltip = East_Ursus_Development_Decisions
+			set_country_flag = East_Ursus_Development
+		}
+	}
+	
+	#整合运动改组大会
+	focus = {
+		id = REU_reorganization_congress
+		icon = GFX_focus_REU_reorganization_congress
+		cost = 2
+		prerequisite = {
+			focus = REU_enter_Blagoveshchensk
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_enter_Blagoveshchensk
+
+		completion_reward = {
+			country_event = {
+				id = event_reu.60
+			}
+			set_country_flag = REU_reorganization_congress
+			hidden_effect = {
+				remove_advisor_role = {
+					character = REU_Alina
+					slot = second_in_command
+				}
+			}
+			add_advisor_role = {
+				character = REU_Alina
+				activate = yes
+				advisor = {
+					slot = second_in_command
+					idea_token = REU_Alina_second_in_command
+					traits = { peoples_teacher }
+					desc = REU_Alina_advisor_after_desc
+					can_be_fired = no
+				}
+			}
+			retire_character = REU_Demidov_Kirilyevich_Yastlin
+			retire_character = REU_Tintine_Ivanovitch_Smirnov
+			retire_character = REU_Alexander_Levich_Beselowski
+			retire_character = REU_Stepan_Andreevich_Kashov
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.03 }
+			administrative_development_monthly_add = yes
+			add_popularity = {
+				ideology = communism
+				popularity = 0.2
+			}
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+	#整编部队
+	focus = {
+		id = REU_integrated_forces
+		icon = GFX_focus_REU_integrated_forces
+		cost = 2
+		prerequisite = {
+			focus = REU_enter_Blagoveshchensk
+		}
+		x = 5
+		y = 1
+		relative_position_id = REU_enter_Blagoveshchensk
+
+		completion_reward = {
+			add_manpower = 2000
+			division_template = {
+				name = "人民游击队"
+				division_names_group = REU_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+				}
+			}
+
+			capital_scope = {
+				create_unit = {
+					division = "name = \"人民游击队\" division_template = \"人民游击队\" start_experience_factor = 1 start_equipment_factor = 1 start_manpower_factor = 1"
+					owner = ROOT
+					count = 5
+				}
+			}
+
+			set_country_flag = REU_integrated_forces_flag
+			show_unit_leaders_tooltip = REU_Fyodor_Pavlovich_Batrov
+			show_unit_leaders_tooltip = REU_Nasta_Fyodorovna_Vatutina
+		}
+
+		ai_will_do = { factor = 500 }
+	}
+	
+	#萨卡兹与乌萨斯
+	focus = {
+		id = REU_Sarkaz_and_Ursus
+		icon = GFX_focus_REU_Sarkaz_and_Ursus
+		cost = 2
+		prerequisite = {
+			focus = REU_second_hometown
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_second_hometown
+
+		completion_reward = {
+			add_stability = 0.05
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.02 }
+			administrative_development_monthly_add = yes
+			country_event = {
+				id = event_reu.61
+			}
+		}
+	}
+
+	#在拉泽的经验
+	focus = {
+		id = REU_Rase_experience
+		icon = GFX_focus_REU_Rase_experience
+		cost = 2
+		prerequisite = {
+			focus = REU_second_hometown
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_second_hometown
+
+		completion_reward = {
+			add_political_power = 200
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.02 }
+			administrative_development_monthly_add = yes
+		}
+		
+		ai_will_do = { factor = 1000 }
+	}
+
+	#深入群众
+	focus = {
+		id = REU_deep_in_mass
+		icon = GFX_focus_REU_deep_in_mass
+		cost = 2
+		prerequisite = {
+			focus = REU_reorganization_congress
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_reorganization_congress
+
+		completion_reward = {
+			custom_effect_tooltip = REU_youji_economic_modifier_tt
+			add_to_variable = {
+				production_factory_max_efficiency_factor_var = 0.02
+				tooltip = production_factory_max_efficiency_factor_tt
+			}
+			add_to_variable = {
+				production_factory_efficiency_gain_factor_var = 0.02
+				tooltip = production_factory_efficiency_gain_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.02 }
+			administrative_development_monthly_add = yes
+		}
+
+		ai_will_do = { factor = 1000 }
+	}
+
+	#重开干部学校
+	focus = {
+		id = REU_leaders_school
+		icon = GFX_focus_REU_leaders_school
+		cost = 2
+		prerequisite = {
+			focus = REU_reorganization_congress
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_reorganization_congress
+		
+		completion_reward = {
+			custom_effect_tooltip = REU_reunion_political_modifier_tt
+			add_to_variable = {
+				mobilization_speed_var = 0.15
+				tooltip = mobilization_speed_tt
+			}
+			add_to_variable = {
+				political_power_factor_var = 0.05
+				tooltip = political_power_factor_tt
+			}
+			add_to_variable = {
+				stability_factor_var = 0.05
+				tooltip = stability_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.02 }
+			administrative_development_monthly_add = yes
+		}
+	}
+	#重建小组指挥体系
+	focus = {
+		id = REU_group_command_system
+		icon = GFX_focus_REU_group_command_system
+		cost = 2
+		prerequisite = {
+			focus = REU_integrated_forces
+		}
+		available = {
+			OR = {
+				has_completed_focus = REU_One_by_one
+				has_completed_focus = REU_One_by_more
+			}
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_integrated_forces
+
+		completion_reward = {
+			custom_effect_tooltip = REU_ganranzhe_youjidui_modifier_tt
+			add_to_variable = {
+				land_night_attack_var = 0.05
+				tooltip = land_night_attack_tt
+			}
+			add_to_variable = {
+				land_reinforce_rate_var = 0.02
+				tooltip = land_reinforce_rate_tt
+			}
+			add_to_variable = {
+				coordination_bonus_var = 0.02
+				tooltip = coordination_bonus_tt
+			}
+
+			if = {
+				limit = {
+					has_country_flag = REU_raid_reduce_damage_tt
+				}
+				custom_effect_tooltip = REU_raid_add_equipments_tt
+				set_country_flag = REU_raid_add_equipments
+			}
+			else_if = {
+				limit = {
+					has_country_flag = REU_raid_add_equipments_tt
+				}
+				custom_effect_tooltip = REU_raid_reduce_damage_tt
+				set_country_flag = REU_raid_reduce_damage
+			}
+		}
+	}
+	#土地再分配
+	focus = {
+		id = REU_land_redistribution
+		icon = GFX_focus_REU_land_redistribution
+		cost = 2
+		prerequisite = {
+			focus = REU_Sarkaz_and_Ursus
+		}
+		prerequisite = {
+			focus = REU_Rase_experience
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Rase_experience
+
+		completion_reward = {
+			custom_effect_tooltip = REU_youji_economic_modifier_tt
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			251 = {
+				set_state_category = large_town
+			}
+
+			custom_effect_tooltip = REU_base_strengthen_in_state_tt
+			set_variable = { REU_infiltrated_state_max_num = 3 }
+			set_variable = { REU_infiltration_cost = 25 }
+
+			set_temp_variable = { agricultural_development_monthly_effect_add_var = 0.03 }
+			agricultural_development_monthly_add = yes
+		}
+		
+		ai_will_do = { factor = 1000 }
+	}
+	#召开第一届苏维埃大会
+	focus = {
+		id = REU_first_Soviets_Congress
+		icon = GFX_focus_REU_first_Soviets_Congress
+		cost = 2
+		prerequisite = {
+			focus = REU_deep_in_mass
+		}
+		prerequisite = {
+			focus = REU_leaders_school
+		}
+		available = {
+			has_completed_focus = REU_land_redistribution
+			has_completed_focus = REU_integrated_forces
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_deep_in_mass
+
+		completion_reward = {
+			hidden_effect = {
+				remove_dynamic_modifier = {
+					modifier = REU_reunion_political_modifier
+				}
+				add_dynamic_modifier = {
+					modifier = REU_communism_political_modifier
+				}
+				remove_dynamic_modifier = {
+					modifier = REU_ganranzhe_youjidui_modifier
+				}
+				add_dynamic_modifier = {
+					modifier = REU_red_army_modifier
+				}
+				remove_dynamic_modifier = {
+					modifier = REU_youji_economic_modifier
+				}
+				add_dynamic_modifier = {
+					modifier = REU_revolution_economic_modifier
+				}
+			}
+			hidden_effect = {
+				#AI切经济法案
+				if = {
+					limit = {
+						has_idea = civilian_economy
+					}
+					swap_ideas = {
+						remove_idea = civilian_economy
+						add_idea = war_economy
+					}
+				}
+				if = {
+					limit = {
+						has_idea = low_economic_mobilisation
+					}
+					swap_ideas = {
+						remove_idea = low_economic_mobilisation
+						add_idea = war_economy
+					}
+				}
+				if = {
+					limit = {
+						has_idea = partial_economic_mobilisation
+					}
+					swap_ideas = {
+						remove_idea = partial_economic_mobilisation
+						add_idea = war_economy
+					}
+				}
+			}
+			custom_effect_tooltip = REU_youji_economic_modifier_change_tt
+			add_to_variable = {
+				production_factory_max_efficiency_factor_var = 0.03
+				tooltip = production_factory_max_efficiency_factor_tt
+			}
+			add_to_variable = {
+				production_factory_efficiency_gain_factor_var = 0.03
+				tooltip = production_factory_efficiency_gain_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_ganranzhe_youjidui_modifier_change_tt
+			add_to_variable = {
+				army_attack_factor_var = 0.05
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				army_defence_factor_var = 0.05
+				tooltip = army_defence_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_reunion_political_modifier_change_tt
+			add_to_variable = {
+				war_support_factor_var = 0.05
+				tooltip = war_support_factor_tt
+			}
+			add_to_variable = {
+				political_power_factor_var = 0.05
+				tooltip = political_power_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_variable = { REU_propaganda_limit = 1 }
+			unlock_decision_category_tooltip = REU_propaganda_decisions
+			unlock_decision_tooltip = REU_propaganda_decision_3
+			unlock_decision_tooltip = REU_propaganda_decision_5
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_politics = {
+				ruling_party = communism
+				long_name = REU_Ursus_Bolshevik_long
+				name = REU_Ursus_Bolshevik
+			}
+			set_cosmetic_tag = REU_Soviet_RedArmy
+			add_popularity = {
+				ideology = communism
+				popularity = 0.30
+			}
+			add_political_power = 50
+			country_event = {
+				id = event_reu.76
+				days = 10
+			}
+			set_country_flag = REU_first_Soviets_Congress_flag
+		}
+		
+		ai_will_do = { factor = 1000 }
+	}
+	#加强政委权力
+	focus = {
+		id = REU_political_commissar_power
+		icon = GFX_focus_REU_political_commissar_power
+		cost = 2
+		prerequisite = {
+			focus = REU_group_command_system
+		}
+		available = {
+			has_completed_focus = REU_first_Soviets_Congress
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_group_command_system
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				army_org_factor_var = 0.03
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				army_morale_factor_var = 0.02
+				tooltip = army_morale_factor_tt
+			}
+			add_to_variable = {
+				army_org_regain_var = 0.02
+				tooltip = army_org_regain_tt
+			}
+		}
+
+	}
+	#建立情报系统
+	focus = {
+		id = REU_establish_intelligence_system
+		icon = GFX_focus_REU_establish_intelligence_system
+		cost = 2
+		prerequisite = {
+			focus = REU_group_command_system
+		}
+		available = { has_completed_focus = REU_first_Soviets_Congress }
+		x = 1
+		y = 1
+		relative_position_id = REU_group_command_system
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				operative_slot_var = 1
+				tooltip = operative_slot_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			create_intelligence_agency = {
+				name = "G.P.U"
+				icon = GFX_intelligence_agency_logo_agency
+			}
+			country_event = {
+				id = event_reu.62
+			}
+		}
+	}
+
+	#农村民主实验
+	focus = {
+		id = REU_village_democracy_experiment
+		icon = GFX_focus_REU_village_democracy_experiment
+		cost = 5
+		prerequisite = {
+			focus = REU_land_redistribution
+		}
+		available = { has_completed_focus = REU_first_Soviets_Congress }
+		x = 0
+		y = 1
+		relative_position_id = REU_land_redistribution
+
+		completion_reward = {
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = {
+				stability_factor_var = 0.05
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				stability_weekly_var = 0.001
+				tooltip = stability_weekly_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.02 }
+			administrative_development_monthly_add = yes
+			set_temp_variable = { poverty_development_monthly_effect_add_var = 0.02 }
+			poverty_development_monthly_add = yes
+			country_event = {
+				id = event_reu.63
+			}
+		}
+	}
+	
+	#民政部
+	focus = {
+		id = REU_ministry_of_finance
+		icon = GFX_focus_REU_ministry_of_finance
+		cost = 5
+		prerequisite = {
+			focus = REU_land_redistribution
+		}
+		prerequisite = {
+			focus = REU_first_Soviets_Congress
+		}
+		x = -3
+		y = 1
+		relative_position_id = REU_first_Soviets_Congress
+
+		completion_reward = {
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = {
+				consumer_goods_expected_value_var = -0.05
+				tooltip = consumer_goods_expected_value_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_country_flag = REU_finance_ministry
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 1
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#工业部
+	focus = {
+		id = REU_ministry_of_industry
+		icon = GFX_focus_REU_ministry_of_industry
+		cost = 5
+		prerequisite = {
+			focus = REU_first_Soviets_Congress
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_first_Soviets_Congress
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				production_speed_buildings_factor_var = 0.1
+				tooltip = production_speed_buildings_factor_tt
+			}
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.1
+				tooltip = industrial_capacity_factory_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_country_flag = REU_industry_ministry
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = arms_factory
+										size > 1
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	#外交部
+	focus = {
+		id = REU_ministry_of_foreign_affairs
+		icon = GFX_focus_REU_ministry_of_foreign_affairs
+		cost = 5
+		prerequisite = {
+			focus = REU_first_Soviets_Congress
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_first_Soviets_Congress
+
+		completion_reward = {
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = {
+				resource_trade_cost_bonus_per_factory_var = 2
+				tooltip = resource_trade_cost_bonus_per_factory_tt
+			}
+			add_to_variable = {
+				send_volunteer_size_var = 5
+				tooltip = send_volunteer_size_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_country_flag = REU_ministry_of_foreign_affairs_flag
+			custom_effect_tooltip = unlock_political_advisor_tooltip
+			show_ideas_tooltip = REU_Inessa_dHerbenville_political_advisor
+			add_political_power = 75
+
+			if = {
+				limit = {
+					UFT = {
+						exists = yes
+					}
+				}
+				country_event = {
+					id = event_reu.116
+					days = 15
+				}
+			}
+		}
+	}
+
+	#国防部
+	focus = {
+		id = REU_ministry_of_national_defense
+		icon = GFX_focus_REU_ministry_of_national_defense
+		cost = 5
+		prerequisite = {
+			focus = REU_first_Soviets_Congress
+		}
+		x = 3
+		y = 1
+		relative_position_id = REU_first_Soviets_Congress
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				conscription_var = 0.005
+				tooltip = conscription_tt
+			}
+			add_to_variable = {
+				army_strength_factor_var = 0.05
+				tooltip = army_strength_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_country_flag = REU_national_defense_ministry
+			army_experience = 25
+		}
+	}
+	#开设军官学校
+	focus = {
+		id = REU_military_officers_school
+		icon = GFX_focus_REU_military_officers_school
+		cost = 5
+		prerequisite = {
+			focus = REU_political_commissar_power
+		}
+		prerequisite = {
+			focus = REU_establish_intelligence_system
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_political_commissar_power
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				experience_loss_factor_var = -0.05
+				tooltip = experience_loss_factor_tt
+			}
+			add_to_variable = {
+				breakthrough_factor_var = 0.05
+				tooltip = breakthrough_factor_tt
+			}
+			add_to_variable = {
+				army_org_factor_var = 0.02
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				army_morale_factor_var = 0.03
+				tooltip = army_morale_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			army_experience = 25
+			every_unit_leader = { 
+				gain_xp = 200
+			}
+		}
+
+	}
+	#扫盲计划
+	focus = {
+		id = REU_base_literacy_program
+		icon = GFX_focus_REU_base_literacy_program
+		cost = 5
+		prerequisite = {
+			focus = REU_village_democracy_experiment
+		}
+		prerequisite = {
+			focus = REU_ministry_of_finance
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_village_democracy_experiment
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				research_speed_factor_var = 0.05
+				tooltip = research_speed_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_temp_variable = { educational_development_monthly_effect_add_var = 0.02 }
+			educational_development_monthly_add = yes
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.02 }
+			administrative_development_monthly_add = yes
+			country_event = {
+				id = event_reu.64
+			}
+		}
+	}
+	#大生产运动
+	focus = {
+		id = REU_production_campaign
+		icon = GFX_focus_REU_production_campaign
+		cost = 5
+		prerequisite = {
+			focus = REU_village_democracy_experiment
+		}
+		prerequisite = {
+			focus = REU_ministry_of_industry
+		}
+		
+		x = -1
+		y = 1
+		relative_position_id = REU_ministry_of_finance
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				production_factory_max_efficiency_factor_var = 0.05
+				tooltip = production_factory_max_efficiency_factor_tt
+			}
+			add_to_variable = {
+				production_factory_efficiency_gain_factor_var = 0.05
+				tooltip = production_factory_efficiency_gain_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			unlock_decision_tooltip = {
+			    decision = REU_propaganda_decision_1
+			    show_effect_tooltip = no
+				show_modifiers = yes
+			}
+			set_temp_variable = { industrial_development_monthly_effect_add_var = 0.02 }
+			industrial_development_monthly_add = yes
+			set_country_flag = REU_production_campaign_flag
+		}
+	}
+	#恢复运输系统
+	focus = {
+		id = REU_restore_transportation_system
+		icon = GFX_focus_REU_restore_transportation_system
+		cost = 5
+		prerequisite = {
+			focus = REU_ministry_of_finance
+		}
+		prerequisite = {
+			focus = REU_ministry_of_industry
+		}
+		
+		x = 1
+		y = 1
+		relative_position_id = REU_ministry_of_finance
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				supply_consumption_factor_var = -0.05
+				tooltip = supply_consumption_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			build_railway = {
+				level = 3
+				fallback = yes
+				start_state = 251
+				target_state = 232
+			}
+			251 = {
+				add_building_construction = {
+					type = supply_node
+					level = 1
+					instant_build = yes
+					province = 4074
+				}
+			}
+			set_temp_variable = { industrial_development_monthly_effect_add_var = 0.02 }
+			industrial_development_monthly_add = yes
+			country_event = {
+				id = event_reu.65
+			}
+		}
+	}
+	#寻求科研合作
+	focus = {
+		id = REU_Foreign_research_assistance
+		icon = GFX_focus_REU_foreign_research_assistance
+		cost = 5
+		prerequisite = {
+			focus = REU_ministry_of_industry
+		}
+		prerequisite = {
+			focus = REU_ministry_of_foreign_affairs
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_ministry_of_industry
+
+		completion_reward = {
+			add_timed_idea = { idea = REU_Foreign_research_assistance days = 365 }
+			country_event = {
+				id = event_reu.75
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = arms_factory
+										size > 1
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#外国设备逆向工程
+	focus = {
+		id = REU_reverse_engineering
+		icon = GFX_focus_REU_reverse_engineering
+		cost = 5
+		prerequisite = {
+			focus = REU_ministry_of_foreign_affairs
+		}
+		prerequisite = {
+			focus = REU_ministry_of_national_defense
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_ministry_of_foreign_affairs
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+			set_temp_variable = { industrial_development_monthly_effect_add_var = 0.02 }
+			industrial_development_monthly_add = yes
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = arms_factory
+										size > 1
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#政治建军原则
+	focus = {
+		id = REU_political_army
+		icon = GFX_focus_REU_political_army
+		cost = 8
+		prerequisite = {
+			focus = REU_ministry_of_national_defense
+		}
+		prerequisite = {
+			focus = REU_military_officers_school
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_military_officers_school
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				land_doctrine_cost_factor_var = 0.1
+				tooltip = land_doctrine_cost_factor_tt
+			}
+			add_to_variable = {
+				army_attack_factor_var = 0.05
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				army_defence_factor_var = 0.05
+				tooltip = army_defence_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt	
+			add_popularity = {
+				ideology = communism
+				popularity = 0.04
+			}
+		}
+	}
+	#地方民兵训练
+	focus = {
+		id = REU_local_militia
+		icon = GFX_focus_REU_local_militia
+		cost = 5
+		prerequisite = {
+			focus = REU_ministry_of_national_defense
+		}
+		prerequisite = {
+			focus = REU_military_officers_school
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_military_officers_school
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				conscription_var = 0.005
+				tooltip = conscription_tt
+			}
+			add_to_variable = {
+				conscription_factor_var = 0.03
+				tooltip = conscription_factor_tt
+			}
+			add_to_variable = {
+				army_defence_factor_var = 0.05
+				tooltip = army_defence_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt	
+			add_stability = 0.05
+			# custom_effect_tooltip = REU_local_militia_tt
+			# division_template = {
+			# 	name = "民兵队"
+			# 	division_names_group = ROOT_INF_02
+			# 	regiments = {
+			# 		infantry = { x = 0 y = 0 }
+			# 		infantry = { x = 0 y = 1 }
+			# 		infantry = { x = 0 y = 2 }
+			# 		infantry = { x = 0 y = 3 }
+			# 		infantry = { x = 0 y = 4 }
+			# 	}
+			# }
+		}
+	}
+	#设置广播电台
+	focus = {
+		id = REU_set_radios
+		icon = GFX_focus_REU_set_radios
+		cost = 5
+		prerequisite = {
+			focus = REU_base_literacy_program
+		}
+
+		available = {
+			owns_state = 202
+		}
+
+		x = -2
+		y = 1
+		relative_position_id = REU_base_literacy_program
+
+		completion_reward = {
+			set_technology = {
+				radio = 1
+			}
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = radar_tech
+			}
+			set_technology = {
+				radio_detection = 1
+			}
+			251 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			country_event = {
+				id = event_reu.98
+			}
+		}
+	}
+	#恢复教育秩序
+	focus = {
+		id = REU_restore_educational_order
+		icon = GFX_focus_REU_restore_educational_order
+		cost = 5
+		prerequisite = {
+			focus = REU_base_literacy_program
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_base_literacy_program
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				research_speed_factor_var = 0.05
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				military_industrial_organization_research_bonus_var = 0.05
+				tooltip = military_industrial_organization_research_bonus_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			unlock_decision_tooltip = {
+			    decision = REU_propaganda_decision_7
+			    show_effect_tooltip = no
+				show_modifiers = yes
+			}
+			set_temp_variable = { educational_development_monthly_effect_add_var = 0.03 }
+			educational_development_monthly_add = yes
+			set_country_flag = REU_restore_educational_order_flag
+		}
+	}
+	#修订粮食征收制度
+	focus = {
+		id = REU_Revise_grain_collection_system
+		icon = GFX_focus_REU_revise_grain_collection_system
+		cost = 5
+		prerequisite = {
+			focus = REU_production_campaign
+		}
+		prerequisite = {
+			focus = REU_restore_transportation_system
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_production_campaign
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				consumer_goods_factor_var = -0.1
+				tooltip = consumer_goods_factor_tt
+			}
+		}
+	}
+	#重建落后城区
+	focus = {
+		id = REU_reconstruct_backward_urban
+		icon = GFX_focus_REU_reconstruct_backward_urban
+		cost = 7
+		prerequisite = {
+			focus = REU_restore_transportation_system
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_restore_transportation_system
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				global_building_slots_factor_var = 0.1
+				tooltip = global_building_slots_factor_tt
+			}
+			add_to_variable = {
+				production_speed_industrial_complex_factor_var = 0.05
+				tooltip = production_speed_industrial_complex_factor_tt
+			}
+			add_to_variable = {
+				production_speed_arms_factory_factor_var = 0.05
+				tooltip = production_speed_arms_factory_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt 
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 1
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#引入外资
+	focus = {
+		id = REU_foreign_capital_under_control
+		icon = GFX_focus_REU_foreign_capital_under_control
+		cost = 5
+		prerequisite = {
+			focus = REU_restore_transportation_system
+		}
+		prerequisite = {
+			focus = REU_Foreign_research_assistance
+		}
+		x = 2
+		y = 1
+		relative_position_id = REU_restore_transportation_system
+
+		completion_reward = {
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = {
+				consumer_goods_expected_value_var = -0.03
+				tooltip = consumer_goods_expected_value_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			country_event = {
+				id = event_reu.66
+			}
+		}
+	}
+	#采购通信设备
+	focus = {
+		id = REU_procurement_communication_equipment
+		icon = GFX_focus_REU_procurement_communication_equipment
+		cost = 5
+		prerequisite = {
+			focus = REU_reverse_engineering
+		}
+		prerequisite = {
+			focus = REU_political_army
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_reverse_engineering
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				land_night_attack_var = 0.05
+				tooltip = land_night_attack_tt
+			}
+			add_to_variable = {
+				land_reinforce_rate_var = 0.02
+				tooltip = land_reinforce_rate_tt
+			}
+			add_to_variable = {
+				coordination_bonus_var = 0.02
+				tooltip = coordination_bonus_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt	
+			add_tech_bonus = {
+				bonus = 2
+				uses = 5
+				category = electronics
+			}
+		}
+	}
+	#实验性铳械部队
+	focus = {
+		id = REU_experimental_gunnery_unit
+		icon = GFX_focus_REU_experimental_gunnery_unit
+		cost = 5
+		prerequisite = {
+			focus = REU_political_army
+		}
+		prerequisite = {
+			focus = REU_local_militia
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_local_militia
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				supply_consumption_factor_var = -0.05
+				tooltip = supply_consumption_factor_tt
+			}
+			add_to_variable = {
+				experience_loss_factor_var = -0.05
+				tooltip = experience_loss_factor_tt
+			}
+			add_to_variable = {
+				army_attack_factor_var = 0.05
+				tooltip = army_attack_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt	
+			# custom_effect_tooltip = REU_experimental_gunnery_unit_tt
+			# division_template = {
+			# 	name = "近卫步兵团"
+			# 	division_names_group = ROOT_INF_02
+			# 	regiments = {
+			# 		infantry = { x = 0 y = 0 }
+			# 		infantry = { x = 0 y = 1 }
+			# 		infantry = { x = 1 y = 0 }
+			# 		infantry = { x = 1 y = 1 }
+			# 		infantry = { x = 1 y = 1 }
+			# 		infantry = { x = 1 y = 1 }
+			# 		infantry = { x = 1 y = 1 }
+			# 	}
+			# }
+			country_event = {
+				id = event_reu.67
+			}
+		}
+	}
+	
+	#军事审查制度
+	focus = {
+		id = REU_publication_censorship_system
+		icon = GFX_focus_REU_publication_censorship_system
+		cost = 5
+		prerequisite = {
+			focus = REU_local_militia
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_local_militia
+
+		completion_reward = {
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = {
+				war_support_factor_var = 0.05
+				tooltip = war_support_factor_tt
+			}
+			add_to_variable = {
+				war_stability_factor_var = 0.1
+				tooltip = war_stability_factor_tt
+			}
+			add_to_variable = {
+				weekly_casualties_war_support_var = 0.005
+				tooltip = weekly_casualties_war_support_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_popularity = {
+				ideology = communism
+				popularity = 0.03
+			}
+			add_stability = 0.03
+		}
+	}
+	
+	#设置天灾气象中心
+	focus = {
+		id = REU_natural_disaster_meteorological_center
+		icon = GFX_focus_REU_natural_disaster_meteorological_center
+		cost = 5
+		prerequisite = {
+			focus = REU_set_radios
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_set_radios
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				war_support_factor_var = -0.12
+				tooltip = attrition_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_tech_bonus = {
+				bonus = 3
+				uses = 1
+				category = radar_tech
+			}
+		}
+	}
+	#改善医疗条件
+	focus = {
+		id = REU_Improving_medical_conditions
+		icon = GFX_focus_REU_oripathy_scientific_prevention_control
+		cost = 5
+		prerequisite = {
+			focus = REU_restore_educational_order
+		}
+		prerequisite = {
+			focus = REU_Revise_grain_collection_system
+		}
+		available = {
+			NOT = { has_idea = REU_Revise_grain_collection_system }
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_restore_educational_order
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				cas_damage_reduction_var = 0.05
+				tooltip = cas_damage_reduction_tt
+			}
+			add_to_variable = {
+				enemy_army_bonus_air_superiority_factor_var = -0.05
+				tooltip = enemy_army_bonus_air_superiority_factor_tt
+			}
+			add_to_variable = {
+				army_strength_factor_var = 0.05
+				tooltip = army_strength_factor_tt
+			}
+			add_to_variable = {
+				experience_loss_factor_var = -0.05
+				tooltip = experience_loss_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = hospital_tech
+			}
+			country_event = {
+				id = event_reu.74
+			}
+		}
+	}
+
+	#工业集中计划
+	focus = {
+		id = REU_industrial_recovery_plan
+		icon = GFX_focus_REU_industrial_recovery_plan
+		cost = 5
+		prerequisite = {
+			focus = REU_reconstruct_backward_urban
+		}
+		mutually_exclusive = { focus = REU_worders_autonomy }
+		x = -1
+		y = 1
+		relative_position_id = REU_reconstruct_backward_urban
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				line_change_production_efficiency_factor_var = 0.1
+				tooltip = line_change_production_efficiency_factor_tt
+			}
+			add_to_variable = {
+				production_factory_start_efficiency_factor_var = 0.1
+				tooltip = production_factory_start_efficiency_factor_tt
+			}
+			add_to_variable = {
+				local_resources_factor_var = 0.1
+				tooltip = local_resources_factor_tt
+			}
+			add_to_variable = {
+				global_building_slots_factor_var = 0.1
+				tooltip = global_building_slots_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = rural
+						has_state_category = wasteland
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			set_temp_variable = { industrial_development_monthly_effect_add_var = 0.02 }
+			industrial_development_monthly_add = yes
+			country_event = {
+				id = event_reu.68
+			}
+		}
+	}
+
+	#推广工人自治
+	focus = {
+		id = REU_worders_autonomy
+		icon = GFX_focus_REU_worders_autonomy
+		cost = 8
+		prerequisite = {
+			focus = REU_reconstruct_backward_urban
+		}
+		mutually_exclusive = { focus = REU_industrial_recovery_plan }
+
+		available = {
+			has_completed_focus = REU_Democratic_management
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_reconstruct_backward_urban
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				production_factory_efficiency_gain_factor_var = 0.05
+				tooltip = production_factory_efficiency_gain_factor_tt
+			}
+			add_to_variable = {
+				production_factory_max_efficiency_factor_var = 0.05
+				tooltip = production_factory_max_efficiency_factor_tt
+			}
+			add_to_variable = {
+				consumer_goods_factor_var = -0.05
+				tooltip = consumer_goods_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			swap_ideas = {
+				remove_idea = working_law_12h
+				add_idea = working_law_8h
+			}
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.02 }
+			administrative_development_monthly_add = yes
+			set_temp_variable = { poverty_development_monthly_effect_add_var = 0.02 }
+			poverty_development_monthly_add = yes
+		}
+	}
+	#统筹资源开发
+	focus = {
+		id = REU_coordinated_resource_development
+		icon = GFX_focus_REU_coordinated_resource_development
+		cost = 5
+		prerequisite = {
+			focus = REU_foreign_capital_under_control
+		}
+
+		available = {
+			owns_state = 1039
+			OR = {
+				has_completed_focus = REU_worders_autonomy
+				has_completed_focus = REU_industrial_recovery_plan
+			}
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_foreign_capital_under_control
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				local_resources_factor_var = 0.05
+				tooltip = local_resources_factor_tt
+			}
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+		}
+	}
+	#建立赤色空军
+	focus = {
+		id = REU_Red_Air_Force
+		icon = GFX_focus_REU_Red_Air_Force
+				cost = 5
+		prerequisite = {
+			focus = REU_procurement_communication_equipment
+		}
+		prerequisite = {
+			focus = REU_Experimental_armored_forces
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_procurement_communication_equipment
+
+		completion_reward = {
+			add_dynamic_modifier = {
+				modifier = REU_red_air_force_modifier
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_country_flag = REU_red_air_force_flag
+			custom_effect_tooltip = unlock_air_chief_tooltip
+			show_ideas_tooltip = REU_Mariya_Mikhaylovna_Malinina_air_chief
+			show_ideas_tooltip = REU_Alexander_Alexandrovich_Kryukovsky_air_chief
+			custom_effect_tooltip = unlock_high_command_tooltip
+			show_ideas_tooltip = REU_Mariya_Mikhaylovna_Malinina_high_command
+			show_ideas_tooltip = REU_Alexander_Alexandrovich_Kryukovsky_high_command
+			set_technology = {
+				paratroopers_1 = 1
+				transport_plane_0 = 1
+				helicopter_0 = 1
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = helicopter
+			}
+		}
+	}
+	#清剿“蛇鳞”
+	focus = {
+		id = REU_suppress_snake_scale
+		icon = GFX_focus_REU_suppress_snake_scale
+		cost = 5
+		prerequisite = {
+			focus = REU_publication_censorship_system
+		}
+
+		available = {
+			controls_state = 30
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_publication_censorship_system
+
+		completion_reward = {
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = { enemy_operative_detection_chance_var = 5 }
+			effect_tooltip = {
+				add_to_variable = {
+					enemy_operative_detection_chance_var = 0.05
+					tooltip = enemy_operative_detection_chance_tt
+				}
+			}
+			add_to_variable = {
+				enemy_operative_capture_chance_factor_var = 0.1
+				tooltip = enemy_operative_capture_chance_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			set_temp_variable = { administrative_development_monthly_effect_add_var = 0.02 }
+			administrative_development_monthly_add = yes
+		}
+	}
+	#接管远东大学
+	focus = {
+		id = REU_take_over_university
+		icon = GFX_focus_REU_take_over_university
+		cost = 5
+		prerequisite = {
+			focus = REU_restore_educational_order
+		}
+
+		available = {
+			controls_state = 38
+		}
+		x = 0
+		y = 2
+		relative_position_id = REU_restore_educational_order
+
+		completion_reward = {
+			add_research_slot = 1
+			country_event = {
+				id = event_reu.69
+			}
+		}
+	}
+	#发展旅游业
+	focus = {
+		id = REU_develop_tourism
+		icon = GFX_focus_REU_develop_tourism
+		cost = 5
+		prerequisite = {
+			focus = REU_Improving_medical_conditions
+		}
+		prerequisite = {
+			focus = REU_industrial_recovery_plan
+			focus = REU_worders_autonomy
+		}
+	
+		available = {
+			owns_state = 147
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Improving_medical_conditions
+
+		completion_reward = {
+			147 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			country_event = {
+				id = event_reu.72
+			}
+		}
+	}
+	#资源输出委员会
+	focus = {
+		id = REU_resource_export_committee
+		icon = GFX_focus_REU_resource_export_committee
+		cost = 5
+		prerequisite = {
+			focus = REU_industrial_recovery_plan
+			focus = REU_worders_autonomy
+		}
+		prerequisite = {
+			focus = REU_coordinated_resource_development
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_coordinated_resource_development
+
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_tt
+			add_to_variable = {
+				local_resources_factor_var = 0.1
+				tooltip = local_resources_factor_tt
+			}
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_popularity = {
+				ideology = communism
+				popularity = 0.04
+			}
+			set_temp_variable = { poverty_development_monthly_effect_add_var = 0.03 }
+			poverty_development_monthly_add = yes
+		}
+	}
+	#成立P部门
+	focus = {
+		id = REU_Prepare_the_P_department
+		icon = GFX_focus_REU_red_internal_guard
+		cost = 5
+		prerequisite = {
+			focus = REU_Red_Air_Force
+		}
+		prerequisite = {
+			focus = REU_suppress_snake_scale
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Red_Air_Force
+
+		completion_reward = {
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = { enemy_operative_detection_chance_var = 5 }
+			effect_tooltip = {
+				add_to_variable = {
+					enemy_operative_detection_chance_var = 0.05
+					tooltip = enemy_operative_detection_chance_tt
+				}
+			}
+			add_to_variable = {
+				enemy_operative_capture_chance_factor_var = 0.05
+				tooltip = enemy_operative_capture_chance_factor_tt
+			}
+			add_to_variable = {
+				intel_network_gain_factor_var = 0.1
+				tooltip = intel_network_gain_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			country_event = {
+				id = event_reu.73
+			}
+		}
+	}
+
+	#第三阶段
+	#召开临时苏维埃大会
+	focus = { 
+		id = REU_Phase_3
+		icon = GFX_focus_REU_Phase_3
+		cost = 5
+		x = 40
+		y = 0
+		allow_branch = {
+			has_country_flag = East_Ursus_Unification_After
+		}
+		available = {
+			has_country_flag = East_Ursus_Unification_After
+		}
+		completion_reward = {
+			custom_effect_tooltip = REU_revolution_economic_modifier_change_tt
+			add_to_variable = {
+				production_factory_efficiency_gain_factor_var = 0.05
+				tooltip = production_factory_efficiency_gain_factor_tt
+			}
+			add_to_variable = {
+				production_factory_max_efficiency_factor_var = 0.05
+				tooltip = production_factory_max_efficiency_factor_tt
+			}
+			hidden_effect = {
+				remove_dynamic_modifier = {
+					modifier = REU_revolution_economic_modifier
+				}
+				add_dynamic_modifier = {
+					modifier = REU_industrial_program_modifier
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_propaganda_limit_add_to_1_tt
+			add_to_variable = { REU_propaganda_limit = 1 }
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				conscription_var = 0.005
+				tooltip = conscription_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = {
+				stability_weekly_var = 0.001
+				tooltip = stability_weekly_tt
+			}			
+		}
+
+
+	}
+	#塔露拉线-理想的拂晓
+	focus = {
+		id = REU_The_dawn_for_ideal
+		icon = GFX_focus_REU_The_dawn_for_ideal
+		cost = 5
+		prerequisite = {
+			focus = REU_Phase_3
+		}
+		mutually_exclusive = { focus = REU_The_final_march }
+		x = -7
+		y = 1
+		available = {
+			
+		}
+		
+		historical_ai = {
+			OR = {
+				has_game_rule = {
+					rule = REU_ai_behavior
+					option = LEFT
+				}
+				has_game_rule = {
+					rule = REU_ai_behavior
+					option = RANDOM
+				}
+			}
+		}
+		
+		relative_position_id = REU_Phase_3
+
+		completion_reward = {
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_to_variable = {
+				research_speed_factor_var = 0.02
+				tooltip = research_speed_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 1
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#塔露拉线-乐于歌唱
+	focus = {
+		id = REU_Willing_to_sing
+		icon = GFX_focus_REU_Willing_to_sing
+		cost = 5
+		prerequisite = {
+			focus = REU_The_dawn_for_ideal
+		}
+		x = -2
+		y = 1
+		relative_position_id = REU_The_dawn_for_ideal
+
+		completion_reward = {
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = {
+				war_stability_factor_var = 0.1
+				tooltip = war_stability_factor_tt
+			}
+			add_to_variable = {
+				weekly_casualties_war_support_var = 0.005
+				tooltip = weekly_casualties_war_support_tt
+			}
+			add_to_variable = {
+				war_support_factor_var = 0.1
+				tooltip = war_support_factor_tt
+			}
+		}
+	}
+	#塔露拉线-善于反抗
+	focus = {
+		id = REU_Good_at_resisting
+		icon = GFX_focus_REU_Good_at_resisting
+		cost = 5
+		prerequisite = {
+			focus = REU_The_dawn_for_ideal
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_The_dawn_for_ideal
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				recon_factor_var = 0.1
+				tooltip = recon_factor_tt
+			}
+			add_to_variable = {
+				intel_from_combat_factor_var = 0.08
+				tooltip = intel_from_combat_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = rural
+						has_state_category = wasteland
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#塔露拉线-敢于梦想
+	focus = {
+		id = REU_Dare_to_dream
+		icon = GFX_focus_REU_Dare_to_dream
+		cost = 5
+		prerequisite = {
+			focus = REU_The_dawn_for_ideal
+		}
+		x = 2
+		y = 1
+		relative_position_id = REU_The_dawn_for_ideal
+
+		completion_reward = {
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				research_speed_factor_var = 0.05
+				tooltip = research_speed_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_tech_bonus = {
+				name = REU_Dare_to_dream
+				bonus = 0.5
+				uses = 2
+				category = industry
+				category = rocketry
+				category = nuclear
+				category = electronics
+				category = infantry_weapons
+				category = mio_cat_all_artillery_equipment
+				category = mio_cat_tech_all_armor_and_modules
+			}
+		}
+	}
+	#塔露拉线-统一党内思想
+	focus = {
+		id = REU_Unify_the_thinking_within_the_party
+		icon = GFX_focus_REU_Unify_the_thinking_within_the_party
+		cost = 6
+		prerequisite = {
+			focus = REU_Willing_to_sing
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Willing_to_sing
+
+		completion_reward = {
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = {
+				enemy_operative_detection_chance_var = 2
+				tooltip = enemy_operative_detection_chance_tt
+			}
+			add_to_variable = {
+				enemy_operative_capture_chance_factor_var = 0.05
+				tooltip = enemy_operative_capture_chance_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				operative_slot_var = 1
+				tooltip = operative_slot_tt
+			}
+		}
+	}
+	#塔露拉线-艰苦朴素精神
+	focus = {
+		id = REU_The_spirit_of_hard_work_and_simplicity
+		icon = GFX_focus_REU_The_spirit_of_hard_work_and_simplicity
+		cost = 5
+		prerequisite = {
+			focus = REU_Good_at_resisting
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Good_at_resisting
+
+		completion_reward = {
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				consumer_goods_factor_var = -0.1
+				tooltip = consumer_goods_factor_tt
+			}
+			add_to_variable = {
+				production_speed_buildings_factor_var = 0.05
+				tooltip = production_speed_buildings_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = industrial_complex
+										size > 1
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#塔露拉线-改良载具生产
+	focus = {
+		id = REU_Improved_vehicle_production
+		icon = GFX_focus_REU_Improved_vehicle_production
+		cost = 6
+		prerequisite = {
+			focus = REU_Good_at_resisting
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Good_at_resisting
+
+		completion_reward = {
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				production_factory_efficiency_gain_factor_var = 0.05
+				tooltip = production_factory_efficiency_gain_factor_tt
+			}
+			add_to_variable = {
+				production_factory_max_efficiency_factor_var = 0.05
+				tooltip = production_factory_max_efficiency_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = rural
+						has_state_category = wasteland
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#塔露拉线-鼓励革命艺术
+	focus = {
+		id = REU_Encourage_revolutionary_arts
+		icon = GFX_focus_REU_Encourage_revolutionary_arts
+		cost = 5
+		prerequisite = {
+			focus = REU_Dare_to_dream
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Dare_to_dream
+
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.1
+			add_political_power = 100
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				weekly_manpower_var = 200
+				tooltip = weekly_manpower_tt
+			}
+			add_to_variable = {
+				army_org_regain_var = 0.05
+				tooltip = army_org_regain_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = {
+				mobilization_speed_var = 0.1
+				tooltip = mobilization_speed_tt
+			}
+			add_to_variable = {
+				political_power_factor_var = 0.05
+				tooltip = political_power_factor_tt
+			}
+			add_to_variable = {
+				war_support_factor = 0.05
+				tooltip = war_support_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			country_event = {
+				id = event_reu.109
+			}
+		}
+	}
+	#塔露拉线-推进农业合作化
+	focus = {
+		id = REU_Agricultural_cooperatives
+		icon = GFX_focus_REU_Agricultural_cooperatives
+		cost = 5
+		prerequisite = {
+			focus = REU_Unify_the_thinking_within_the_party
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Unify_the_thinking_within_the_party
+
+		completion_reward = {
+			custom_effect_tooltip = REU_communism_political_modifier_tt
+			add_to_variable = {
+				monthly_population_var = 0.5
+				tooltip = monthly_population_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				global_building_slots_factor_var = 0.15
+				tooltip = global_building_slots_factor_tt
+			}
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+					
+			custom_effect_tooltip = generic_skip_one_line_tt
+			
+			country_event = {
+				id = event_reu.112
+			}
+		}
+	}
+	#塔露拉线-发掘术士人才 
+	focus = {
+		id = REU_Discover_Warlock_talent
+		icon = GFX_focus_REU_Discover_Warlock_talent
+		cost = 6
+		prerequisite = {
+			focus = REU_The_spirit_of_hard_work_and_simplicity
+		}
+		prerequisite = {
+			focus = REU_Improved_vehicle_production
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_The_spirit_of_hard_work_and_simplicity
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				army_attack_factor_var = 0.05
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				army_defence_factor_var = 0.05
+				tooltip = army_defence_factor_tt
+			}
+		}
+	}
+	#塔露拉线-炮兵火力突袭
+	focus = {
+		id = REU_Artillery_fire_raid
+		icon = GFX_focus_REU_Artillery_fire_raid
+		cost = 5
+		prerequisite = {
+			focus = REU_The_spirit_of_hard_work_and_simplicity
+		}
+		prerequisite = {
+			focus = REU_Improved_vehicle_production
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Improved_vehicle_production
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				breakthrough_factor_var = 0.05
+				tooltip = breakthrough_factor_tt
+			}
+			add_to_variable = {
+				army_speed_factor_var = 0.1
+				tooltip = army_speed_factor_tt
+			}
+			add_to_variable = {
+				coordination_bonus_var = 0.02
+				tooltip = coordination_bonus_tt
+			}
+			add_to_variable = {
+				land_reinforce_rate_var = 0.02
+				tooltip = land_reinforce_rate_tt
+			}
+		}
+	}
+	#塔露拉线-击灭乌萨斯军国主义
+	focus = {
+		id = REU_Defeat_Ursus_militarism
+		icon = GFX_focus_REU_Defeat_Ursus_militarism
+		cost = 6
+		prerequisite = {
+			focus = REU_Encourage_revolutionary_arts
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Encourage_revolutionary_arts
+
+		completion_reward = {
+			add_timed_idea = { idea = REU_destroy_urs days = 180 }
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = rural
+						has_state_category = wasteland
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#塔露拉线-革命教育 科研速度
+	focus = {
+		id = REU_Revolutionary_education
+		icon = GFX_focus_REU_Revolutionary_education
+		cost = 5
+		prerequisite = {
+			focus = REU_Agricultural_cooperatives
+		}
+		prerequisite = {
+			focus = REU_Discover_Warlock_talent
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Agricultural_cooperatives
+
+		completion_reward = {
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				research_speed_factor_var = 0.05
+				tooltip = research_speed_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_research_slot = 1
+			add_tech_bonus = {
+				name = REU_Revolutionary_education
+				bonus = 3
+				uses = 2
+				category = industry
+				category = electronics
+			}
+		}
+	}
+	#塔露拉线-前敌能动性
+	focus = {
+		id = REU_Front_line_initiative
+		icon = GFX_focus_REU_Front_line_initiative
+		cost = 5
+		prerequisite = {
+			focus = REU_Discover_Warlock_talent
+		}
+		prerequisite = {
+			focus = REU_Artillery_fire_raid
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Discover_Warlock_talent
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				breakthrough_factor_var = 0.05
+				tooltip = breakthrough_factor_tt
+			}
+			add_to_variable = {
+				army_speed_factor_var = 0.1
+				tooltip = army_speed_factor_tt
+			}
+			add_to_variable = {
+				coordination_bonus_var = 0.03
+				tooltip = coordination_bonus_tt
+			}
+			add_to_variable = {
+				land_reinforce_rate_var = 0.03
+				tooltip = land_reinforce_rate_tt
+			}
+			
+			custom_effect_tooltip = generic_skip_one_line_tt
+			
+			country_event = {
+				id = event_reu.107
+			}
+		}
+	}
+	#塔露拉线-军民情谊
+	focus = {
+		id = REU_Civil-military_friendship
+		icon = GFX_focus_REU_Civil-military_friendship
+		cost = 5
+		prerequisite = {
+			focus = REU_Artillery_fire_raid
+		}
+		prerequisite = {
+			focus = REU_Defeat_Ursus_militarism
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Artillery_fire_raid
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				training_time_factor_var = -0.15
+				tooltip = training_time_factor_tt
+			}
+			add_to_variable = {
+				conscription_factor_var = 0.05
+				tooltip = conscription_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = rural
+						has_state_category = wasteland
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#塔露拉线-新式工事建造
+	focus = {
+		id = REU_Modern_fortifications
+		icon = GFX_focus_REU_Modern_fortifications
+		cost = 5
+		prerequisite = {
+			focus = REU_Front_line_initiative
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Front_line_initiative
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				dig_in_speed_factor_var = 0.15
+				tooltip = dig_in_speed_factor_tt
+			}
+			add_to_variable = {
+				max_dig_in_var = 5
+				tooltip = max_dig_in_tt
+			}
+			add_to_variable = {
+				cas_damage_reduction_var = 0.05
+				tooltip = cas_damage_reduction_tt
+			}
+		}
+	}
+	#塔露拉线-多梯队轮战
+	focus = {
+		id = REU_Multi-echelon_rounds
+		icon = GFX_focus_REU_Multi-echelon_rounds
+		cost = 5
+		prerequisite = {
+			focus = REU_Front_line_initiative
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Front_line_initiative
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				org_loss_when_moving_var = -0.15
+				tooltip = org_loss_when_moving_tt
+			}
+			add_to_variable = {
+				army_strength_factor_var = 0.05
+				tooltip = army_strength_factor_tt
+			}
+			add_to_variable = {
+				experience_loss_factor_var = -0.05
+				tooltip = experience_loss_factor_tt
+			}
+		}
+	}
+	#塔露拉线-全域作战
+	focus = {
+		id = REU_All-domain_combat
+		icon = GFX_focus_REU_All-domain_combat
+		cost = 5
+		prerequisite = {
+			focus = REU_Modern_fortifications
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Modern_fortifications
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				acclimatization_cold_climate_gain_factor_var = 0.05
+				tooltip = acclimatization_cold_climate_gain_factor_tt
+			}
+			add_to_variable = {
+				acclimatization_hot_climate_gain_factor_var = 0.1
+				tooltip = acclimatization_hot_climate_gain_factor_tt
+			}
+			add_to_variable = {
+				winter_attrition_factor_var = -0.05
+				tooltip = winter_attrition_factor_tt
+			}
+			add_to_variable = {
+				heat_attrition_factor_var = -0.1
+				tooltip = heat_attrition_factor_tt
+			}
+			add_to_variable = {
+				terrain_trait_xp_gain_factor_var = 0.3
+				tooltip = terrain_trait_xp_gain_factor_tt
+			}
+		}
+	}
+	#塔露拉线-大兵团协同
+	focus = {
+		id = REU_Large_corps_synergy
+		icon = GFX_focus_REU_Large_corps_synergy
+		cost = 5
+		prerequisite = {
+			focus = REU_Modern_fortifications
+		}
+		prerequisite = {
+			focus = REU_Multi-echelon_rounds
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Modern_fortifications
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				supply_consumption_factor_var = -0.1
+				tooltip = supply_consumption_factor_tt
+			}
+			add_to_variable = {
+				attrition_var = -0.08
+				tooltip = attrition_tt
+			}
+			add_to_variable = {
+				army_org_factor_var = 0.05
+				tooltip = army_org_factor_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			country_event = {
+				id = event_reu.105
+			}
+		}
+	}
+	#塔露拉线-赤夜突袭
+	focus = {
+		id = REU_Red_Night_raid
+		icon = GFX_focus_REU_Red_Night_raid
+		cost = 5
+		prerequisite = {
+			focus = REU_Multi-echelon_rounds
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Multi-echelon_rounds
+		
+		available = {
+			has_completed_focus = REU_Red_Air_Force
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				land_night_attack_var = 0.05
+				tooltip = land_night_attack_tt
+			}
+			add_to_variable = {
+				coordination_bonus_var = 0.02
+				tooltip = coordination_bonus_tt
+			}
+			add_to_variable = {
+				land_reinforce_rate_var = 0.02
+				tooltip = land_reinforce_rate_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_red_air_force_modifier_tt
+			add_to_variable = {
+				air_night_penalty_var = -0.15
+				tooltip = air_night_penalty_tt
+			}
+		}
+	}
+	#爱国者线-最后的行军
+	focus = {
+		id = REU_The_final_march
+		icon = GFX_focus_REU_The_final_march
+		cost = 5
+		prerequisite = {
+			focus = REU_Phase_3
+		}
+		mutually_exclusive = { focus = REU_The_dawn_for_ideal }
+		x = 7
+		y = 1
+		available = {
+			
+		}
+		
+		historical_ai = {
+			OR = {
+				has_game_rule = {
+					rule = REU_ai_behavior
+					option = RIHGT
+				}
+				has_game_rule = {
+					rule = REU_ai_behavior
+					option = RANDOM
+				}
+			}
+		}
+		
+		relative_position_id = REU_Phase_3
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				org_loss_when_moving_var = -0.2
+				tooltip = org_loss_when_moving_tt
+			}
+			add_to_variable = {
+				army_attack_factor_var = 0.05
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				army_strength_factor_var = 0.05
+				tooltip = army_strength_factor_tt
+			}
+			add_to_variable = {
+				army_morale_factor_var = 0.05
+				tooltip = army_morale_factor_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_country_leader_role = {
+				character = REU_Buldrokkastee
+
+				promote_leader = yes
+
+				country_leader = {
+					ideology = stratocratic_communism_subtype
+					traits = { the_patriot }
+					desc = REU_Buldrokkastee_desc
+				}
+			}
+		}
+	}
+	#爱国者线-忠诚之士
+	focus = {
+		id = REU_Loyal_soldiers
+		icon = GFX_focus_REU_Loyal_soldiers
+		cost = 5
+		prerequisite = {
+			focus = REU_The_final_march
+		}
+		x = -2
+		y = 1
+		relative_position_id = REU_The_final_march
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				army_org_factor_var = 0.05
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				army_org_regain_var = 0.05
+				tooltip = army_org_regain_tt
+			}
+			add_to_variable = {
+				army_morale_factor_var = 0.1
+				tooltip = army_morale_factor_tt
+			}
+		}
+	}
+	#爱国者线-先锋之军
+	focus = {
+		id = REU_Vanguard_Army
+		icon = GFX_focus_REU_Vanguard_Army
+		cost = 5
+		prerequisite = {
+			focus = REU_The_final_march
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_The_final_march
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				army_speed_factor_var = 0.15
+				tooltip = army_speed_factor_tt
+			}
+			add_to_variable = {
+				breakthrough_factor_var = 0.1
+				tooltip = breakthrough_factor_tt
+			}
+			add_to_variable = {
+				experience_loss_factor_var = -0.05
+				tooltip = experience_loss_factor_tt
+			}
+			add_to_variable = {
+				intel_from_combat_factor_var = 0.1
+				tooltip = intel_from_combat_factor_tt
+			}
+		}
+	}
+	#爱国者线-善战之师
+	focus = {
+		id = REU_Warriors
+		icon = GFX_focus_REU_Warriors
+		cost = 5
+		prerequisite = {
+			focus = REU_The_final_march
+		}
+		x = 2
+		y = 1
+		relative_position_id = REU_The_final_march
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				army_infantry_attack_factor_var = 0.05
+				tooltip = army_infantry_attack_factor_tt
+			}
+			add_to_variable = {
+				army_infantry_defence_factor_var = 0.05
+				tooltip = army_infantry_defence_factor_tt
+			}
+			add_to_variable = {
+				army_artillery_attack_factor_var = 0.1
+				tooltip = army_artillery_attack_factor_tt
+			}
+			add_to_variable = {
+				army_artillery_defence_factor_var = 0.1
+				tooltip = army_artillery_defence_factor_tt
+			}
+		}
+	}
+	#爱国者线-令行禁止
+	focus = {
+		id = REU_Orders_and_prohibitions
+		icon = GFX_focus_REU_Orders_and_prohibitions
+		cost = 5
+		prerequisite = {
+			focus = REU_Loyal_soldiers
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Loyal_soldiers
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				army_org_factor_var = 0.05
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				coordination_bonus_var = 0.02
+				tooltip = coordination_bonus_tt
+			}
+			add_to_variable = {
+				land_reinforce_rate_var = 0.05
+				tooltip = land_reinforce_rate_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			
+			country_event = {
+				id = event_reu.110
+			}
+		}
+	}
+	#爱国者线-大规模装甲突击
+	focus = {
+		id = REU_Massive_armored_assault
+		icon = GFX_focus_REU_Massive_armored_assault
+		cost = 5
+		prerequisite = {
+			focus = REU_Vanguard_Army
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Vanguard_Army
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				army_armor_attack_factor_var = 0.05
+				tooltip = army_armor_attack_factor_tt
+			}
+			add_to_variable = {
+				army_armor_defence_factor_var = 0.05
+				tooltip = army_armor_defence_factor_tt
+			}
+			add_to_variable = {
+				intel_from_combat_factor_var = 0.1
+				tooltip = intel_from_combat_factor_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			country_event = {
+				id = event_reu.101
+			}
+		}
+	}
+	#爱国者线-现代步兵战术
+	focus = {
+		id = REU_Modern_infantry_tactics
+		icon = GFX_focus_REU_Modern_infantry_tactics
+		cost = 6
+		prerequisite = {
+			focus = REU_Vanguard_Army
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Vanguard_Army
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				motorized_attack_factor_var = 0.05
+				tooltip = motorized_attack_factor_tt
+			}
+			add_to_variable = {
+				motorized_defence_factor_var = 0.05
+				tooltip = motorized_defence_factor_tt
+			}
+			add_to_variable = {
+				mechanized_attack_factor_var = 0.05
+				tooltip = mechanized_attack_factor_tt
+			}
+			add_to_variable = {
+				mechanized_defence_factor_var = 0.05
+				tooltip = mechanized_defence_factor_tt
+			}
+		}
+	}
+	#爱国者线-多兵团联合作战
+	focus = {
+		id = REU_Joint_operations_of_multiple_corps
+		icon = GFX_focus_REU_Joint_operations_of_multiple_corps
+		cost = 6
+		prerequisite = {
+			focus = REU_Warriors
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Warriors
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				army_armor_attack_factor_var = 0.05
+				tooltip = army_armor_attack_factor_tt
+			}
+			add_to_variable = {
+				army_armor_defence_factor_var = 0.05
+				tooltip = army_armor_defence_factor_tt
+			}
+			add_to_variable = {
+				coordination_bonus_var = 0.02
+				tooltip = coordination_bonus_tt
+			}
+		}
+	}
+	#爱国者线-军事化工厂管理
+	focus = {
+		id = REU_Militarization_of_plant_management
+		icon = GFX_focus_REU_Militarization_of_plant_management
+		cost = 5
+		prerequisite = {
+			focus = REU_Orders_and_prohibitions
+		}
+		prerequisite = {
+			focus = REU_Massive_armored_assault
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Orders_and_prohibitions
+
+		completion_reward = {
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				industrial_capacity_factory_var = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_to_variable = {
+				production_factory_start_efficiency_factor_var = 0.05
+				tooltip = production_factory_start_efficiency_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = arms_factory
+										size > 1
+										include_locked = yes
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			
+			country_event = {
+				id = event_reu.111
+			}
+		}
+	}
+	#爱国者线-集中化指挥体系
+	focus = {
+		id = REU_Centralized_command_system
+		icon = GFX_focus_REU_Centralized_command_system
+		cost = 5
+		prerequisite = {
+			focus = REU_Massive_armored_assault
+		}
+		prerequisite = {
+			focus = REU_Modern_infantry_tactics
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Massive_armored_assault
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				planning_speed_var = 0.2
+				tooltip = planning_speed_tt
+			}
+			add_to_variable = {
+				supply_consumption_factor_var = -0.05
+				tooltip = supply_consumption_factor_tt
+			}
+			add_to_variable = {
+				army_strength_factor_var = 0.05
+				tooltip = army_strength_factor_tt
+			}
+			add_to_variable = {
+				experience_loss_factor_var = -0.05
+				tooltip = experience_loss_factor_tt
+			}
+		}
+	}
+	#爱国者线-开设军事学院
+	focus = {
+		id = REU_Military_Academy
+		icon = GFX_focus_REU_Military_Academy
+		cost = 5
+		prerequisite = {
+			focus = REU_Modern_infantry_tactics
+		}
+		prerequisite = {
+			focus = REU_Joint_operations_of_multiple_corps
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Modern_infantry_tactics
+		
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				army_strength_factor_var = 0.05
+				tooltip = army_strength_factor_tt
+			}
+			add_to_variable = {
+				max_dig_in_var = 5
+				tooltip = max_dig_in_tt
+			}
+			add_to_variable = {
+				dig_in_speed_factor_var = 0.1
+				tooltip = dig_in_speed_factor_tt
+			}
+			add_to_variable = {
+				land_doctrine_cost_factor_var = -0.1
+				tooltip = land_doctrine_cost_factor_tt
+			}
+		}
+	}
+	#爱国者线-军事纠察部队
+	focus = {
+		id = REU_Military_pickets
+		icon = GFX_focus_REU_Military_pickets
+		cost = 5
+		prerequisite = {
+			focus = REU_Militarization_of_plant_management
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_Militarization_of_plant_management
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				army_org_factor_var = 0.05
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				army_morale_factor_var = 0.05
+				tooltip = army_morale_factor_tt
+			}
+		}
+	}
+	#爱国者线-先进军用工程装备
+	focus = {
+		id = REU_Advanced_military_engineering_equipment
+		icon = GFX_focus_REU_Advanced_military_engineering_equipment
+		cost = 5
+		prerequisite = {
+			focus = REU_Militarization_of_plant_management
+		}
+		prerequisite = {
+			focus = REU_Centralized_command_system
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Militarization_of_plant_management
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				max_dig_in_var = 5
+				tooltip = max_dig_in_tt
+			}
+			add_to_variable = {
+				dig_in_speed_factor_var = 0.25
+				tooltip = dig_in_speed_factor_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			country_event = {
+				id = event_reu.104
+			}
+		}
+	}
+	#爱国者线-专门后勤部队
+	focus = {
+		id = REU_Specialized_logistics_troops
+		icon = GFX_focus_REU_Specialized_logistics_troops
+		cost = 5
+		prerequisite = {
+			focus = REU_Centralized_command_system
+		}
+		prerequisite = {
+			focus = REU_Military_Academy
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Centralized_command_system
+	
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				supply_consumption_factor_var = -0.15
+				tooltip = supply_consumption_factor_tt
+			}
+		}
+	}
+	#爱国者线-特种侦察兵
+	focus = {
+		id = REU_Special_Scouts
+		icon = GFX_focus_REU_Special_Scouts
+		cost = 5
+		prerequisite = {
+			focus = REU_Military_Academy
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Military_Academy
+	
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				coordination_bonus_var = 0.02
+				tooltip = coordination_bonus_tt
+			}
+			add_to_variable = {
+				land_reinforce_rate_var = 0.02
+				tooltip = land_reinforce_rate_tt
+			}
+			add_to_variable = {
+				recon_factor_var = 0.1
+				tooltip = recon_factor_tt
+			}
+			add_to_variable = {
+				intel_from_combat_factor_var = 0.1
+				tooltip = intel_from_combat_factor_tt
+			}
+		}
+	}
+	#爱国者线-全地形作战训练
+	focus = {
+		id = REU_All-terrain_combat_training
+		icon = GFX_focus_REU_All-terrain_combat_training
+		cost = 5
+		prerequisite = {
+			focus = REU_Advanced_military_engineering_equipment
+		}
+		prerequisite = {
+			focus = REU_Specialized_logistics_troops
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Advanced_military_engineering_equipment
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				acclimatization_cold_climate_gain_factor_var = 0.05
+				tooltip = acclimatization_cold_climate_gain_factor_tt
+			}
+			add_to_variable = {
+				acclimatization_hot_climate_gain_factor_var = 0.1
+				tooltip = acclimatization_hot_climate_gain_factor_tt
+			}
+			add_to_variable = {
+				winter_attrition_factor_var = -0.05
+				tooltip = winter_attrition_factor_tt
+			}
+			add_to_variable = {
+				heat_attrition_factor_var = -0.1
+				tooltip = heat_attrition_factor_tt
+			}
+			add_to_variable = {
+				terrain_trait_xp_gain_factor_var = 0.3
+				tooltip = terrain_trait_xp_gain_factor_tt
+			}
+		}
+	}
+	#爱国者线-鏖战蓝天
+	focus = {
+		id = REU_Multi-level_reserves
+		icon = GFX_focus_REU_Multi-level_reserves
+		cost = 5
+		prerequisite = {
+			focus = REU_Advanced_military_engineering_equipment
+		}
+		prerequisite = {
+			focus = REU_Specialized_logistics_troops
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Specialized_logistics_troops
+
+		available = {
+			has_completed_focus = REU_Red_Air_Force
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_air_force_modifier_tt
+			add_to_variable = {
+				air_weather_penalty_var = -0.1
+				tooltip = air_weather_penalty_tt
+			}
+			add_to_variable = {
+				air_wing_xp_loss_when_killed_factor_var = -0.1
+				tooltip = air_wing_xp_loss_when_killed_factor_tt
+			}
+			add_to_variable = {
+				air_range_factor_var = 0.15
+				tooltip = air_range_factor_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			
+			country_event = {
+				id = event_reu.106
+			}
+		}
+	}
+	#爱国者线-空中大炮
+	focus = {
+		id = REU_Lead_by_example
+		icon = GFX_focus_REU_Lead_by_example
+		cost = 5
+		prerequisite = {
+			focus = REU_Military_pickets
+		}
+		prerequisite = {
+			focus = REU_All-terrain_combat_training
+		}
+		x = -1
+		y = 1
+		relative_position_id = REU_All-terrain_combat_training
+
+		available = {
+			has_completed_focus = REU_Red_Air_Force
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_air_force_modifier_tt
+			add_to_variable = {
+				air_cas_present_factor_var = 0.1
+				tooltip = air_cas_present_factor_tt
+			}
+			add_to_variable = {
+				air_mission_efficiency_var = 0.1
+				tooltip = air_mission_efficiency_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				enemy_army_bonus_air_superiority_factor_var = -0.1
+				tooltip = enemy_army_bonus_air_superiority_factor_tt
+			}
+		}
+	}
+	#爱国者线-铁翼英雄
+	focus = {
+		id = REU_Movement_Annihilation_War
+		icon = GFX_focus_REU_Movement_Annihilation_War
+		cost = 5
+		prerequisite = {
+			focus = REU_All-terrain_combat_training
+		}
+		prerequisite = {
+			focus = REU_Multi-level_reserves
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_All-terrain_combat_training
+
+		available = {
+			has_completed_focus = REU_Red_Air_Force
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_air_force_modifier_tt
+			add_to_variable = {
+				air_ace_generation_chance_factor_var = 0.15
+				tooltip = air_ace_generation_chance_factor_tt
+			}
+			add_to_variable = {
+				air_mission_xp_gain_factor_var = 0.1
+				tooltip = air_mission_xp_gain_factor_tt
+			}
+			add_to_variable = {
+				air_agility_factor_var = 0.1
+				tooltip = air_agility_factor_tt
+			}
+		}
+	}
+	#爱国者线-空地立体作战
+	focus = {
+		id = REU_Air-ground_three-dimensional_combat
+		icon = GFX_focus_REU_Air-ground_three-dimensional_combat
+		cost = 5
+		prerequisite = {
+			focus = REU_Multi-level_reserves
+		}
+		prerequisite = {
+			focus = REU_Special_Scouts
+		}
+		x = 1
+		y = 1
+		relative_position_id = REU_Multi-level_reserves
+
+		available = {
+			has_completed_focus = REU_Red_Air_Force
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_air_force_modifier_tt
+			add_to_variable = {
+				air_night_penalty_var = -0.2
+				tooltip = air_night_penalty_tt
+			}
+			add_to_variable = {
+				air_cas_present_factor_var = 0.1
+				tooltip = air_cas_present_factor_tt
+			}
+		}
+	}
+	#通用宣战线-终局之战
+	focus = {
+		id = REU_Berserk_into_Saint_Grypherburg
+		icon = GFX_focus_REU_Berserk_into_Saint_Grypherburg
+		cost = 5
+		prerequisite = {
+			focus = REU_The_dawn_for_ideal
+			focus = REU_The_final_march
+		}
+		x = 0
+		y = 2
+		relative_position_id = REU_Phase_3
+
+		completion_reward = {
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				production_factory_efficiency_gain_factor_var = 0.05
+				tooltip = production_factory_efficiency_gain_factor_tt
+			}
+			add_to_variable = {
+				production_factory_max_efficiency_factor_var = 0.05
+				tooltip = production_factory_max_efficiency_factor_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			unlock_decision_tooltip = {
+			    decision = REU_propaganda_decision_8
+			    show_effect_tooltip = no
+				show_modifiers = yes
+			}
+			set_country_flag = REU_Berserk_into_Saint_Grypherburg_flag
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			country_event = {
+				id = event_reu.102
+			}
+		}
+	}
+	#通用宣战线-联络大都市工人
+	focus = {
+		id = REU_Contact_Metropolitan_Workers
+		icon = GFX_focus_REU_Contact_Metropolitan_Workers
+		cost = 5
+		prerequisite = {
+			focus = REU_Berserk_into_Saint_Grypherburg
+		}
+		x = -2
+		y = 1
+		relative_position_id = REU_Berserk_into_Saint_Grypherburg
+
+		completion_reward = {
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				production_factory_max_efficiency_factor_var = 0.05
+				tooltip = production_factory_max_efficiency_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			unlock_decision_tooltip = {
+			    decision = REU_propaganda_decision_6
+			    show_effect_tooltip = yes
+				show_modifiers = no
+			}
+			set_country_flag = REU_Contact_Metropolitan_Workers_flag
+		}
+	}
+	#通用宣战线-联络少数民族地区
+	focus = {
+		id = REU_Reaching_out_to_ethnic_minorities
+		icon = GFX_focus_REU_Reaching_out_to_ethnic_minorities
+		cost = 5
+		prerequisite = {
+			focus = REU_Berserk_into_Saint_Grypherburg
+		}
+		x = 2
+		y = 1
+		relative_position_id = REU_Berserk_into_Saint_Grypherburg
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				conscription_var = 0.005
+				tooltip = conscription_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			unlock_decision_tooltip = {
+			    decision = REU_propaganda_decision_6
+			    show_effect_tooltip = yes
+				show_modifiers = no
+			}
+			set_country_flag = REU_Reaching_out_to_ethnic_minorities_flag
+		}
+	}
+	#通用宣战线-设立武器设计所
+	focus = {
+		id = REU_Weapons_Design_Institute
+		icon = GFX_focus_REU_Weapons_Design_Institute
+		cost = 5
+		prerequisite = {
+			focus = REU_Contact_Metropolitan_Workers
+		}
+		prerequisite = {
+			focus = REU_Reaching_out_to_ethnic_minorities
+		}
+		x = 2
+		y = 1
+		relative_position_id = REU_Contact_Metropolitan_Workers
+
+		completion_reward = {
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				military_industrial_organization_research_bonus_var = 0.05
+				tooltip = military_industrial_organization_research_bonus_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = rural
+						has_state_category = wasteland
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#通用宣战线-呼唤全国感染者
+	focus = {
+		id = REU_Call_for_the_infected
+		icon = GFX_focus_REU_Call_for_the_infected
+		cost = 5
+		prerequisite = {
+			focus = REU_Contact_Metropolitan_Workers
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Contact_Metropolitan_Workers
+
+		completion_reward = {
+			custom_effect_tooltip = REU_red_army_modifier_tt
+			add_to_variable = {
+				weekly_manpower_var = 500
+				tooltip = weekly_manpower_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_command_power = 25
+		}
+	}
+	#通用宣战线-转向大规模战争
+	focus = {
+		id = REU_Turn_to_large-scale_wars
+		icon = GFX_focus_REU_Turn_to_large-scale_wars
+		cost = 5
+		prerequisite = {
+			focus = REU_Reaching_out_to_ethnic_minorities
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Reaching_out_to_ethnic_minorities
+
+		completion_reward = {
+			custom_effect_tooltip = REU_industrial_program_modifier_tt
+			add_to_variable = {
+				production_factory_start_efficiency_factor_var = 0.05
+				tooltip = production_factory_start_efficiency_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = rural
+						has_state_category = wasteland
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#通用宣战线-支援前线运动
+	focus = {
+		id = REU_Support_the_front_line
+		icon = GFX_focus_REU_Support_the_front_line
+		cost = 5
+		prerequisite = {
+			focus = REU_Call_for_the_infected
+		}
+		prerequisite = {
+			focus = REU_Turn_to_large-scale_wars
+		}
+		x = 2
+		y = 1
+		relative_position_id = REU_Call_for_the_infected
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = rural
+						has_state_category = wasteland
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	#通用宣战线-鼓励义务劳动
+	focus = {
+		id = REU_Encourage_voluntary_labor
+		icon = GFX_focus_REU_Encourage_voluntary_labor
+		cost = 5
+		prerequisite = {
+			focus = REU_Call_for_the_infected
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Call_for_the_infected
+
+		completion_reward = {
+			unlock_decision_tooltip = {
+			    decision = REU_propaganda_decision_2
+			    show_effect_tooltip = no
+				show_modifiers = yes
+			}
+			set_country_flag = REU_Encourage_voluntary_labor_flag
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			country_event = {
+				id = event_reu.103
+			}
+		}
+	}
+	#通用宣战线-镇压反革命分子
+	focus = {
+		id = REU_Suppression_of_counter-revolutionaries
+		icon = GFX_focus_REU_Suppression_of_counter-revolutionaries
+		cost = 5
+		prerequisite = {
+			focus = REU_Turn_to_large-scale_wars
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Turn_to_large-scale_wars
+
+		completion_reward = {
+			unlock_decision_tooltip = {
+			    decision = REU_propaganda_decision_4
+			    show_effect_tooltip = no
+				show_modifiers = yes
+			}
+			set_country_flag = REU_Suppression_of_counter_revolutionaries_flag
+		}
+	}
+	#通用宣战线-战时共产主义
+	focus = {
+		id = REU_War_communism
+		icon = GFX_focus_REU_War_communism
+		cost = 5
+		prerequisite = {
+			focus = REU_Encourage_voluntary_labor
+		}
+		prerequisite = {
+			focus = REU_Suppression_of_counter-revolutionaries
+		}
+		x = 2
+		y = 2
+		relative_position_id = REU_Encourage_voluntary_labor
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = civilian_economy
+				}
+				swap_ideas = {
+					remove_idea = civilian_economy
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					has_idea = low_economic_mobilisation
+				}
+				swap_ideas = {
+					remove_idea = low_economic_mobilisation
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					has_idea = partial_economic_mobilisation
+				}
+				swap_ideas = {
+					remove_idea = partial_economic_mobilisation
+					add_idea = war_economy
+				}
+			}
+			if = {
+				limit = {
+					or = {
+						has_idea = war_economy
+						has_idea = tot_economic_mobilisation
+					}
+				}
+				add_political_power = 150
+			}
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = rural
+						has_state_category = wasteland
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			
+			country_event = {
+				id = event_reu.108
+			}
+		}
+	}
+
+	# ===== 自 TNO The East is Red 移植: REU_democracy_reform 农村民主改革分支 =====
+focus = {
+	id = REU_Alina_plan
+	icon = GFX_goals_REU_Alina_plan
+	cost = 3
+	x = 0
+	y = 1
+	prerequisite = {
+		focus = REU_democracy_reform
+	}
+	mutually_exclusive = {
+		focus = REU_Knecht_suggestion
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#教育民众
+		add_ideas = REU_educate_the_masses
+	}
+}
+
+focus = {
+	id = REU_Knecht_suggestion
+	icon = GFX_goals_REU_Knecht_suggestion
+	cost = 3
+	x = -4
+	y = 1
+	mutually_exclusive = {
+		focus = REU_Alina_plan
+	}
+	prerequisite = {
+		focus = REU_democracy_reform
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#大鸣大放
+		add_ideas = REU_great_airing
+	}
+}
+
+focus = {
+	id = REU_able_to_act
+	icon = GFX_goals_REU_able_to_act
+	cost = 3
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = REU_liberate_poor_people
+	}
+	prerequisite = {
+		focus = REU_disclosure_conference
+	}
+	relative_position_id = REU_liberate_poor_people
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = REU_dem_reform.103
+	}
+}
+
+focus = {
+	id = REU_all_honor_to_us
+	icon = GFX_goals_REU_all_honor_to_us
+	cost = 3
+	x = 6
+	y = 1
+	mutually_exclusive = {
+		focus = REU_all_honor_to_you
+	}
+	prerequisite = {
+		focus = REU_able_to_act
+		focus = REU_high_quality_decisions
+	}
+	prerequisite = {
+		focus = REU_more_important_thing
+	}
+	relative_position_id = REU_able_to_act
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_dem_reform_end
+		if = {
+			limit = { OR = { NOT = { has_completed_focus = REU_able_to_act }
+						 NOT = { has_completed_focus = REU_high_quality_decisions } }
+						 NOT = { has_completed_focus = REU_more_important_thing } }
+			custom_effect_tooltip = REU_dem_reform_not_ended_yet
+		}
+		else_if = {
+			limit = { has_completed_focus = REU_Knecht_suggestion
+					  check_variable = { REU_dem_reform_score > 31 } }
+			if = {
+				limit = { check_variable = { REU_dem_reform_radical = REU_dem_reform_conservative } }
+				custom_effect_tooltip = REU_dem_reform_complete_success
+				country_event = REU_dem_reform.1
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_perfect
+				}
+			}
+			else_if = {
+				limit = { check_variable = { REU_dem_reform_radical > REU_dem_reform_conservative } }
+				country_event = REU_dem_reform.2
+				custom_effect_tooltip = REU_dem_reform_partial_success
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_succeed
+				}
+			}
+			else_if = {
+				limit = { check_variable = { REU_dem_reform_radical < REU_dem_reform_conservative } }
+				country_event = REU_dem_reform.3
+				custom_effect_tooltip = REU_dem_reform_partial_success
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_succeed
+				}
+			}
+		}
+		else_if = {
+			limit = { has_completed_focus = REU_Knecht_suggestion
+					  check_variable = { REU_dem_reform_score < 31.01 } }
+			custom_effect_tooltip = REU_dem_reform_fail
+			random_list = {
+				50 = { country_event = REU_dem_reform.2 }
+				50 = { country_event = REU_dem_reform.3 }
+			}
+			hidden_effect = {
+				set_country_flag = REU_dem_reform_failed
+			}
+		}
+		else_if = {
+			limit = { has_completed_focus = REU_Alina_plan
+					  check_variable = { REU_dem_reform_score > 31 } }
+			if = {
+				limit = { check_variable = { REU_dem_reform_radical = REU_dem_reform_conservative } }
+				custom_effect_tooltip = REU_dem_reform_complete_success
+				country_event = REU_dem_reform.4
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_perfect
+				}
+			}
+			else_if = {
+				limit = { check_variable = { REU_dem_reform_radical > REU_dem_reform_conservative } }
+				country_event = REU_dem_reform.5
+				custom_effect_tooltip = REU_dem_reform_partial_success
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_succeed
+				}
+			}
+			else_if = {
+				limit = { check_variable = { REU_dem_reform_radical < REU_dem_reform_conservative } }
+				country_event = REU_dem_reform.6
+				custom_effect_tooltip = REU_dem_reform_partial_success
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_succeed
+				}
+			}
+		}
+		else_if = {
+			limit = { has_completed_focus = REU_Alina_plan
+					  check_variable = { REU_dem_reform_score < 31.01 } }
+			custom_effect_tooltip = REU_dem_reform_fail
+			random_list = {
+				50 = { country_event = REU_dem_reform.5 }
+				50 = { country_event = REU_dem_reform.6 }
+			}
+			hidden_effect = {
+				set_country_flag = REU_dem_reform_failed
+			}
+		}
+	}
+}
+
+focus = {
+	id = REU_all_honor_to_you
+	icon = GFX_focus_REU_The_dawn_for_ideal
+	cost = 3
+	x = 2
+	y = 1
+	mutually_exclusive = {
+		focus = REU_all_honor_to_us
+	}
+	prerequisite = {
+		focus = REU_able_to_act
+		focus = REU_high_quality_decisions
+	}
+	prerequisite = {
+		focus = REU_more_important_thing
+	}
+	relative_position_id = REU_able_to_act
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_dem_reform_end
+		if = {
+			limit = { OR = { NOT = { has_completed_focus = REU_able_to_act }
+						 NOT = { has_completed_focus = REU_high_quality_decisions } }
+						 NOT = { has_completed_focus = REU_more_important_thing } }
+			custom_effect_tooltip = REU_dem_reform_not_ended_yet
+		}
+		else_if = {
+			limit = { has_completed_focus = REU_Knecht_suggestion
+					  check_variable = { REU_dem_reform_score > 36 } }
+			if = {
+				limit = { check_variable = { REU_dem_reform_radical = REU_dem_reform_conservative } }
+				custom_effect_tooltip = REU_dem_reform_complete_success
+				country_event = REU_dem_reform.1
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_perfect
+				}
+			}
+			else_if = {
+				limit = { check_variable = { REU_dem_reform_radical > REU_dem_reform_conservative } }
+				country_event = REU_dem_reform.2
+				custom_effect_tooltip = REU_dem_reform_partial_success
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_succeed
+				}
+			}
+			else_if = {
+				limit = { check_variable = { REU_dem_reform_radical < REU_dem_reform_conservative } }
+				country_event = REU_dem_reform.3
+				custom_effect_tooltip = REU_dem_reform_partial_success
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_succeed
+				}
+			}
+		}
+		else_if = {
+			limit = { has_completed_focus = REU_Knecht_suggestion
+					  check_variable = { REU_dem_reform_score < 36.01 } }
+			custom_effect_tooltip = REU_dem_reform_fail
+			random_list = {
+				50 = { country_event = REU_dem_reform.2 }
+				50 = { country_event = REU_dem_reform.3 }
+			}
+			hidden_effect = {
+				set_country_flag = REU_dem_reform_failed
+			}
+		}
+		else_if = {
+			limit = { has_completed_focus = REU_Alina_plan
+					  check_variable = { REU_dem_reform_score > 36 } }
+			if = {
+				limit = { check_variable = { REU_dem_reform_radical = REU_dem_reform_conservative } }
+				custom_effect_tooltip = REU_dem_reform_complete_success
+				country_event = REU_dem_reform.4
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_perfect
+				}
+			}
+			else_if = {
+				limit = { check_variable = { REU_dem_reform_radical > REU_dem_reform_conservative } }
+				country_event = REU_dem_reform.5
+				custom_effect_tooltip = REU_dem_reform_partial_success
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_succeed
+				}
+			}
+			else_if = {
+				limit = { check_variable = { REU_dem_reform_radical < REU_dem_reform_conservative } }
+				country_event = REU_dem_reform.6
+				custom_effect_tooltip = REU_dem_reform_partial_success
+				hidden_effect = {
+					set_country_flag = REU_dem_reform_succeed
+				}
+			}
+		}
+		else_if = {
+			limit = { has_completed_focus = REU_Alina_plan
+					  check_variable = { REU_dem_reform_score < 36.01 } }
+			custom_effect_tooltip = REU_dem_reform_fail
+			random_list = {
+				50 = { country_event = REU_dem_reform.5 }
+				50 = { country_event = REU_dem_reform.6 }
+			}
+			hidden_effect = {
+				set_country_flag = REU_dem_reform_failed
+			}
+		}
+	}
+}
+
+focus = {
+	id = REU_audience_and_guidance
+	icon = GFX_goals_REU_audience_and_guidance
+	cost = 3
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = REU_Alina_plan
+	}
+	relative_position_id = REU_Alina_plan
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = REU_dem_reform.202
+	}
+}
+
+focus = {
+	id = REU_clean_the_grass_roots
+	icon = GFX_goals_REU_disclosure_conference
+	cost = 3
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = REU_Alina_plan
+	}
+	relative_position_id = REU_Alina_plan
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = REU_dem_reform.201
+	}
+}
+
+focus = {
+	id = REU_disclosure_conference
+	icon = GFX_goals_REU_clean_the_grass_roots
+	cost = 3
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = REU_Knecht_suggestion
+	}
+	relative_position_id = REU_Knecht_suggestion
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = REU_dem_reform.102
+	}
+}
+
+focus = {
+	id = REU_high_quality_decisions
+	icon = GFX_goals_REU_high_quality_decisions
+	cost = 3
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = REU_audience_and_guidance
+	}
+	prerequisite = {
+		focus = REU_clean_the_grass_roots
+	}
+	relative_position_id = REU_audience_and_guidance
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = REU_dem_reform.203
+	}
+}
+
+focus = {
+	id = REU_liberate_poor_people
+	icon = GFX_goals_REU_liberate_poor_people
+	cost = 3
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = REU_Knecht_suggestion
+	}
+	relative_position_id = REU_Knecht_suggestion
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = REU_dem_reform.101
+	}
+}
+
+focus = {
+	id = REU_master_of_balance
+	icon = GFX_focus_REU_A_public_debate
+	x = 4
+	y = 1
+	prerequisite = {
+		focus = REU_democracy_reform
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#改革进行时：全国所有地区 120 天动态修正
+		every_owned_state = {
+			add_dynamic_modifier = {
+				modifier = REU_reform_in_progress_modifier
+				days = 120
+			}
+		}
+	}
+}
+
+focus = {
+	id = REU_more_important_thing
+	icon = GFX_goals_REU_more_important_thing
+	cost = 3
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = REU_principal_of_democracy
+	}
+	prerequisite = {
+		focus = REU_principal_of_organization
+	}
+	relative_position_id = REU_principal_of_organization
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = REU_dem_reform.303
+	}
+}
+
+focus = {
+	id = REU_principal_of_democracy
+	icon = GFX_goals_REU_principal_of_democracy
+	cost = 3
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = REU_master_of_balance
+	}
+	relative_position_id = REU_master_of_balance
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = REU_dem_reform.302
+	}
+}
+
+focus = {
+	id = REU_principal_of_organization
+	icon = GFX_goals_REU_principal_of_organization
+	cost = 3
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = REU_master_of_balance
+	}
+	relative_position_id = REU_master_of_balance
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = REU_dem_reform.301
+	}
+}
+
+focus = {
+	id = REU_democracy_reform
+	icon = GFX_goals_REU_democracy_reform
+	cost = 3
+	x = 11
+	y = 13
+	available = {
+		has_country_flag = Ursus_Unification
+		has_country_flag = REU_poster_delivered_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		set_variable = { REU_dem_reform_score = 0 }
+		set_variable = { REU_dem_reform_radical = 0 }
+		set_variable = { REU_dem_reform_conservative = 0 }
+	}
+}
+
+
+# ===== REU 民主改革后续三分支（紧急手段 / 稍有进步 / 大获成功） =====
+focus = {
+	id = REU_emergency_measures
+	icon = GFX_focus_REU_Buy_time
+	cost = 3
+	x = -6
+	y = 5
+	prerequisite = {
+		focus = REU_all_honor_to_you
+		focus = REU_all_honor_to_us
+	}
+	mutually_exclusive = {
+		focus = REU_slight_progress
+		focus = REU_great_success
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_dem_reform_failed
+		has_country_flag = REU_dem_reform_path_failed
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#专制主义政党改名：苏联武装力量
+		set_party_name = {
+			ideology = despotism
+			long_name = REU_Soviet_Armed_Forces_long
+			name = REU_Soviet_Armed_Forces
+		}
+		#专制主义（苏联武装力量）政党领袖变为叶莲娜，塔露拉仍是国家元首
+		hidden_effect = {
+			promote_character = {
+				character = REU_Yelena
+				ideology = despotism_subtype
+			}
+		}
+		custom_effect_tooltip = REU_emergency_measures_leader_tt
+		#专制主义支持度+15%
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.15
+		}
+		#原“加入执政联盟”为无效效果（HOI4 无此 effect），已移除
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#国家紧急状态委员会
+		add_ideas = REU_state_emergency_committee
+	}
+}
+
+focus = {
+	id = REU_army_supports_the_left
+	icon = GFX_focus_REU_Elite_vanguard
+	cost = 3
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = REU_emergency_measures
+	}
+	relative_position_id = REU_emergency_measures
+	available = {
+		has_country_flag = REU_dem_reform_failed
+		has_country_flag = REU_dem_reform_path_failed
+		has_completed_focus = REU_emergency_measures
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#专制主义支持度+10%
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.10
+		}
+		#基础稳定度+10%
+		add_stability = 0.1
+		#基础战争支持度+10%
+		add_war_support = 0.1
+		#政治点数-200
+		add_political_power = -200
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#红军buff增加效果
+		custom_effect_tooltip = REU_red_army_modifier_change_tt
+		add_to_variable = {
+			despotism_drift_var = 0.01
+			tooltip = despotism_drift_tt
+		}
+		add_to_variable = {
+			army_attack_factor_var = 0.05
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			army_defence_factor_var = 0.05
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			army_org_factor_var = 0.05
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			breakthrough_factor_var = 0.05
+			tooltip = breakthrough_factor_tt
+		}
+	}
+}
+
+focus = {
+	id = REU_talulah_personality_cult
+	icon = GFX_focus_REU_The_nice_book
+	cost = 3
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = REU_emergency_measures
+	}
+	relative_position_id = REU_emergency_measures
+	available = {
+		has_country_flag = REU_dem_reform_failed
+		has_country_flag = REU_dem_reform_path_failed
+		has_completed_focus = REU_emergency_measures
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#共产党政治局buff追加效果
+		custom_effect_tooltip = REU_communism_political_modifier_change_tt
+		add_to_variable = {
+			political_power_gain_var = 0.35
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			communism_drift_var = 0.01
+			tooltip = communism_drift_tt
+		}
+		add_to_variable = {
+			land_reinforce_rate_var = 0.05
+			tooltip = land_reinforce_rate_tt
+		}
+		add_to_variable = {
+			coordination_bonus_var = 0.05
+			tooltip = coordination_bonus_tt
+		}
+		add_to_variable = {
+			compliance_growth_var = 0.02
+			tooltip = compliance_growth_tt
+		}
+		add_to_variable = {
+			army_attack_factor_var = 0.05
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			army_defence_factor_var = 0.10
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			supply_consumption_factor_var = -0.10
+			tooltip = supply_consumption_factor_tt
+		}
+		add_to_variable = {
+			research_speed_factor_var = 0.05
+			tooltip = research_speed_factor_tt
+		}
+	}
+}
+
+focus = {
+	id = REU_savior_of_the_revolution
+	icon = GFX_focus_REU_Exemplary_role
+	cost = 3
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = REU_army_supports_the_left
+	}
+	prerequisite = {
+		focus = REU_talulah_personality_cult
+	}
+	relative_position_id = REU_army_supports_the_left
+	available = {
+		has_completed_focus = REU_army_supports_the_left
+		has_completed_focus = REU_talulah_personality_cult
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#专制主义支持度+10%
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.10
+		}
+		#塔露拉获得领袖特质
+		add_country_leader_trait = REU_great_teacher_helmsman
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#乌萨斯永生
+		add_ideas = REU_ursus_immortal
+	}
+}
+
+focus = {
+	id = REU_slight_progress
+	icon = GFX_focus_REU_mobilize_the_masses
+	cost = 3
+	x = 0
+	y = 5
+	prerequisite = {
+		focus = REU_all_honor_to_you
+		focus = REU_all_honor_to_us
+	}
+	mutually_exclusive = {
+		focus = REU_emergency_measures
+		focus = REU_great_success
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_dem_reform_succeed
+		has_country_flag = REU_dem_reform_path_succeed
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#进步主义支持度+20%
+		add_popularity = {
+			ideology = progressivism
+			popularity = 0.20
+		}
+		#社会主义支持度+20%
+		add_popularity = {
+			ideology = socialism
+			popularity = 0.20
+		}
+		#进步主义政党改名：布尔什维克（温和派）
+		set_party_name = {
+			ideology = progressivism
+			long_name = REU_Bolshevik_Moderates_long
+			name = REU_Bolshevik_Moderates
+		}
+		#社会主义政党改名：乌萨斯工团主义联盟
+		set_party_name = {
+			ideology = socialism
+			long_name = REU_Ursus_Syndicalist_Union_long
+			name = REU_Ursus_Syndicalist_Union
+		}
+		#原“进步主义与社会主义加入执政联盟”为无效效果（HOI4 无此 effect），已移除
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#政协会议
+		add_ideas = REU_cppcc_conference
+	}
+}
+
+focus = {
+	id = REU_socialist_education_movement
+	icon = GFX_focus_CPC_socialist_education
+	cost = 3
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = REU_slight_progress
+	}
+	relative_position_id = REU_slight_progress
+	available = {
+		has_country_flag = REU_dem_reform_succeed
+		has_country_flag = REU_dem_reform_path_succeed
+		has_completed_focus = REU_slight_progress
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#科研槽+1
+		add_research_slot = 1
+		#基础稳定度+10%
+		add_stability = 0.1
+		#基础战争支持率+10%
+		add_war_support = 0.1
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#共产党政治局buff追加效果
+		custom_effect_tooltip = REU_communism_political_modifier_change_tt
+		add_to_variable = {
+			political_power_gain_var = 0.35
+			tooltip = political_power_gain_tt
+		}
+		add_to_variable = {
+			communism_drift_var = 0.01
+			tooltip = communism_drift_tt
+		}
+		add_to_variable = {
+			land_reinforce_rate_var = 0.05
+			tooltip = land_reinforce_rate_tt
+		}
+		add_to_variable = {
+			coordination_bonus_var = 0.05
+			tooltip = coordination_bonus_tt
+		}
+		add_to_variable = {
+			compliance_growth_var = 0.02
+			tooltip = compliance_growth_tt
+		}
+		add_to_variable = {
+			army_attack_factor_var = 0.05
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			army_defence_factor_var = 0.10
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			supply_consumption_factor_var = -0.10
+			tooltip = supply_consumption_factor_tt
+		}
+		add_to_variable = {
+			research_speed_factor_var = 0.15
+			tooltip = research_speed_factor_tt
+		}
+	}
+}
+
+focus = {
+	id = REU_participate_in_politics
+	icon = REU_Socialism_of_the_people
+	cost = 3
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = REU_slight_progress
+	}
+	relative_position_id = REU_slight_progress
+	available = {
+		has_country_flag = REU_dem_reform_succeed
+		has_country_flag = REU_dem_reform_path_succeed
+		has_completed_focus = REU_slight_progress
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#政协会议buff追加效果
+		custom_effect_tooltip = REU_cppcc_conference_modifier_change_tt
+		add_to_variable = {
+			production_factory_max_efficiency_factor_var = 0.10
+			tooltip = production_factory_max_efficiency_factor_tt
+		}
+		add_to_variable = {
+			production_factory_efficiency_gain_factor_var = 0.10
+			tooltip = production_factory_efficiency_gain_factor_tt
+		}
+		add_to_variable = {
+			industrial_capacity_factory_var = 0.10
+			tooltip = industrial_capacity_factory_tt
+		}
+		add_to_variable = {
+			production_factory_start_efficiency_factor_var = 0.10
+			tooltip = production_factory_start_efficiency_factor_tt
+		}
+		add_to_variable = {
+			production_speed_buildings_factor_var = 0.10
+			tooltip = production_speed_buildings_factor_tt
+		}
+		add_to_variable = {
+			global_building_slots_var = 1
+			tooltip = global_building_slots_tt
+		}
+	}
+}
+
+focus = {
+	id = REU_civilian_revolution
+	icon = GFX_focus_REU_Mass_working_group
+	cost = 3
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = REU_socialist_education_movement
+	}
+	prerequisite = {
+		focus = REU_participate_in_politics
+	}
+	relative_position_id = REU_socialist_education_movement
+	available = {
+		has_completed_focus = REU_socialist_education_movement
+		has_completed_focus = REU_participate_in_politics
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#红军buff追加效果
+		custom_effect_tooltip = REU_red_army_modifier_change_tt
+		add_to_variable = {
+			land_reinforce_rate_var = 0.05
+			tooltip = land_reinforce_rate_tt
+		}
+		add_to_variable = {
+			coordination_bonus_var = 0.05
+			tooltip = coordination_bonus_tt
+		}
+		add_to_variable = {
+			supply_consumption_factor_var = -0.10
+			tooltip = supply_consumption_factor_tt
+		}
+		add_to_variable = {
+			army_speed_factor_var = 0.10
+			tooltip = army_speed_factor_tt
+		}
+		add_to_variable = {
+			acclimatization_cold_climate_gain_factor_var = 0.10
+			tooltip = acclimatization_cold_climate_gain_factor_tt
+		}
+		add_to_variable = {
+			acclimatization_hot_climate_gain_factor_var = 0.10
+			tooltip = acclimatization_hot_climate_gain_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#共产党政治局buff追加效果
+		custom_effect_tooltip = REU_communism_political_modifier_change_tt
+		add_to_variable = {
+			global_building_slots_factor_var = 0.20
+			tooltip = global_building_slots_factor_tt
+		}
+		add_to_variable = {
+			monthly_population_var = 0.10
+			tooltip = monthly_population_tt
+		}
+		add_to_variable = {
+			conscription_factor_var = 0.025
+			tooltip = conscription_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#塔露拉增加领袖特质：革命的熊心
+		add_country_leader_trait = REU_revolutionary_bear_heart
+	}
+}
+
+focus = {
+	id = REU_great_success
+	icon = GFX_focus_REU_Hug_each_other
+	cost = 3
+	x = 6
+	y = 5
+	prerequisite = {
+		focus = REU_all_honor_to_you
+		focus = REU_all_honor_to_us
+	}
+	mutually_exclusive = {
+		focus = REU_emergency_measures
+		focus = REU_slight_progress
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_dem_reform_perfect
+		has_country_flag = REU_dem_reform_path_perfect
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#共产主义支持度设置为100%
+		set_political_party = {
+			ideology = communism
+			popularity = 100
+		}
+		#基层民主常态化
+		add_ideas = REU_grassroots_democracy_normalized
+	}
+}
+
+focus = {
+	id = REU_people_democracy
+	icon = GFX_focus_REU_to_all_workers
+	cost = 3
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = REU_great_success
+	}
+	relative_position_id = REU_great_success
+	available = {
+		has_country_flag = REU_dem_reform_perfect
+		has_country_flag = REU_dem_reform_path_perfect
+		has_completed_focus = REU_great_success
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#科研槽+1
+		add_research_slot = 1
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#共产党政治局buff追加效果
+		custom_effect_tooltip = REU_communism_political_modifier_change_tt
+		add_to_variable = {
+			global_building_slots_factor_var = 0.10
+			tooltip = global_building_slots_factor_tt
+		}
+		add_to_variable = {
+			monthly_population_var = 0.10
+			tooltip = monthly_population_tt
+		}
+		add_to_variable = {
+			conscription_factor_var = 0.05
+			tooltip = conscription_factor_tt
+		}
+		add_to_variable = {
+			research_speed_factor_var = 0.15
+			tooltip = research_speed_factor_tt
+		}
+	}
+}
+
+focus = {
+	id = REU_democratic_centralism
+	icon = GFX_focus_REU_reorganization_congress
+	cost = 3
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = REU_great_success
+	}
+	relative_position_id = REU_great_success
+	available = {
+		has_country_flag = REU_dem_reform_perfect
+		has_country_flag = REU_dem_reform_path_perfect
+		has_completed_focus = REU_great_success
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#人民民主制度替代基层民主常态化
+		remove_ideas = REU_grassroots_democracy_normalized
+		add_ideas = REU_peoples_democratic_system
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#共产党政治局buff追加效果
+		custom_effect_tooltip = REU_communism_political_modifier_change_tt
+		add_to_variable = {
+			global_building_slots_factor_var = 0.20
+			tooltip = global_building_slots_factor_tt
+		}
+		add_to_variable = {
+			monthly_population_var = 0.10
+			tooltip = monthly_population_tt
+		}
+		add_to_variable = {
+			conscription_factor_var = 0.025
+			tooltip = conscription_factor_tt
+		}
+		add_to_variable = {
+			compliance_growth_var = 0.02
+			tooltip = compliance_growth_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#苏维埃中央最高政治局就任共产主义国家领导人，替代塔露拉
+		custom_effect_tooltip = REU_democratic_centralism_leader_tt
+		hidden_effect = {
+			recruit_character = REU_supreme_politburo
+			promote_character = {
+				character = REU_supreme_politburo
+				ideology = bolshevism_subtype
+			}
+		}
+	}
+}
+
+focus = {
+	id = REU_dawn_of_ursus
+	icon = REU_eighth_national_congress
+	cost = 3
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = REU_people_democracy
+	}
+	prerequisite = {
+		focus = REU_democratic_centralism
+	}
+	relative_position_id = REU_people_democracy
+	available = {
+		has_completed_focus = REU_people_democracy
+		has_completed_focus = REU_democratic_centralism
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#科研槽+1
+		add_research_slot = 1
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#红军buff追加效果
+		custom_effect_tooltip = REU_red_army_modifier_change_tt
+		add_to_variable = {
+			land_reinforce_rate_var = 0.05
+			tooltip = land_reinforce_rate_tt
+		}
+		add_to_variable = {
+			coordination_bonus_var = 0.05
+			tooltip = coordination_bonus_tt
+		}
+		add_to_variable = {
+			supply_consumption_factor_var = -0.10
+			tooltip = supply_consumption_factor_tt
+		}
+		add_to_variable = {
+			army_speed_factor_var = 0.10
+			tooltip = army_speed_factor_tt
+		}
+		add_to_variable = {
+			acclimatization_cold_climate_gain_factor_var = 0.10
+			tooltip = acclimatization_cold_climate_gain_factor_tt
+		}
+		add_to_variable = {
+			acclimatization_hot_climate_gain_factor_var = 0.10
+			tooltip = acclimatization_hot_climate_gain_factor_tt
+		}
+		add_to_variable = {
+			army_attack_against_major_factor_var = 0.05
+			tooltip = army_attack_against_major_factor_tt
+		}
+		add_to_variable = {
+			army_defence_against_major_factor_var = 0.05
+			tooltip = army_defence_against_major_factor_tt
+		}
+		add_to_variable = {
+			army_breakthrough_against_major_factor_var = 0.05
+			tooltip = army_breakthrough_against_major_factor_tt
+		}
+		add_to_variable = {
+			army_attack_against_minor_factor_var = 0.05
+			tooltip = army_attack_against_minor_factor_tt
+		}
+		add_to_variable = {
+			army_defence_against_minor_factor_var = 0.05
+			tooltip = army_defence_against_minor_factor_tt
+		}
+		add_to_variable = {
+			army_breakthrough_against_minor_factor_var = 0.05
+			tooltip = army_breakthrough_against_minor_factor_tt
+		}
+		add_to_variable = {
+			army_attack_factor_var = 0.05
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			army_defence_factor_var = 0.05
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			breakthrough_factor_var = 0.05
+			tooltip = breakthrough_factor_tt
+		}
+		add_to_variable = {
+			army_armor_attack_factor_var = 0.15
+			tooltip = army_armor_attack_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+# ==== 以下 31 个国策由 Redux(需要被整合的子mod) 完整移植 ====
+# ==== 链A: REU_Lyudmila_laughs_last (22) / 链B: REU_Extreme_Urgency (9) ====
+	focus = {
+		id = REU_Lyudmila_laughs_last
+		icon = GFX_focus_REU_Lyudmila_laughs_last
+		cost = 5
+		x = 26
+		y = 11
+
+		available = {
+			has_country_leader = {
+				character = REU_Lyudmila
+				ruling_only = yes
+			}
+			has_country_flag = REU_Talulah_Mad_Purge_Ended
+		}
+        allow_branch = {
+		has_country_flag = REU_Talulah_Mad_Purge_Ended
+	    }
+		completion_reward = {
+			custom_effect_tooltip = REU_ludmila_office_unlock_tt
+			REU_Ludmila_Unlock = yes
+			set_variable = { REU_ludmila_delta = 5 }
+			REU_Ludmila_Add_Affection = yes
+			add_political_power = 150
+			add_command_power = 75
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = REU_Lyudmila_control_the_army
+		icon = GFX_focus_REU_Lyudmila_control_the_army
+		cost = 3
+		prerequisite = {
+			focus = REU_Lyudmila_laughs_last
+		}
+		x = -4
+		y = 1
+		relative_position_id = REU_Lyudmila_laughs_last
+
+		completion_reward = {
+			add_war_support = 0.05
+			add_army_experience = 50
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 3000
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_army_spirit_tt
+			add_to_variable = {
+				REU_lud_army = 0.08
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_army_lite = 0.05
+				tooltip = breakthrough_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_army_int = 2
+				tooltip = max_dig_in_tt
+			}
+			add_to_variable = {
+				REU_lud_army_neg = -0.03
+				tooltip = supply_consumption_factor_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_army_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Lyudmila_loyal_guard
+		icon = GFX_focus_REU_Lyudmila_loyal_guard
+		cost = 3
+		prerequisite = {
+			focus = REU_Lyudmila_control_the_army
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Lyudmila_control_the_army
+
+		completion_reward = {
+			add_stability = 0.05
+			add_army_experience = 50
+			add_manpower = 25000
+			create_corps_commander = {
+				name = "Konstantin Rakhimov"
+				traits = { commando trickster }
+				skill = 4
+				attack_skill = 4
+				defense_skill = 3
+				planning_skill = 4
+				logistics_skill = 3
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_army_spirit_tt
+			add_to_variable = {
+				REU_lud_army = 0.10
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_army_lite = 0.06
+				tooltip = coordination_bonus_tt
+			}
+			add_to_variable = {
+				REU_lud_army_int = 3
+				tooltip = max_dig_in_tt
+			}
+			add_to_variable = {
+				REU_lud_army_neg = -0.04
+				tooltip = supply_consumption_factor_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_army_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Lyudmila_commissar_eye
+		icon = GFX_focus_REU_Lyudmila_commissar_eye
+		cost = 3
+		prerequisite = {
+			focus = REU_Lyudmila_loyal_guard
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Lyudmila_loyal_guard
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_army_experience = 75
+			create_corps_commander = {
+				name = "Vera Korablyova"
+				traits = { organisational_leader unyielding_defender }
+				skill = 4
+				attack_skill = 3
+				defense_skill = 4
+				planning_skill = 4
+				logistics_skill = 3
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_army_spirit_tt
+			add_to_variable = {
+				REU_lud_army = 0.12
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_army_lite = 0.07
+				tooltip = land_reinforce_rate_tt
+			}
+			add_to_variable = {
+				REU_lud_army_int = 3
+				tooltip = max_dig_in_tt
+			}
+			add_to_variable = {
+				REU_lud_army_neg = -0.05
+				tooltip = supply_consumption_factor_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_army_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Lyudmila_purge_the_bureaucracy
+		icon = GFX_focus_REU_Lyudmila_purge_the_bureaucracy
+		cost = 3
+		prerequisite = {
+			focus = REU_Lyudmila_laughs_last
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Lyudmila_laughs_last
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.03
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_apparatus_spirit_tt
+			add_to_variable = {
+				REU_lud_apparatus = 0.10
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				REU_lud_apparatus_lite = 0.05
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_apparatus_neg = -0.02
+				tooltip = consumer_goods_factor_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_apparatus_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Lyudmila_obedient_apparatus
+		icon = GFX_focus_REU_Lyudmila_obedient_apparatus
+		cost = 3
+		prerequisite = {
+			focus = REU_Lyudmila_purge_the_bureaucracy
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Lyudmila_purge_the_bureaucracy
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 100
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_apparatus_spirit_tt
+			add_to_variable = {
+				REU_lud_apparatus = 0.12
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				REU_lud_apparatus_lite = 0.06
+				tooltip = production_speed_buildings_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_apparatus_neg = -0.03
+				tooltip = consumer_goods_factor_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_apparatus_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Lyudmila_rubber_stamp
+		icon = GFX_focus_REU_Lyudmila_rubber_stamp
+		cost = 3
+		prerequisite = {
+			focus = REU_Lyudmila_obedient_apparatus
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Lyudmila_obedient_apparatus
+
+		completion_reward = {
+			add_political_power = 200
+			add_stability = 0.05
+			add_research_slot = 1
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_apparatus_spirit_tt
+			add_to_variable = {
+				REU_lud_apparatus = 0.15
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				REU_lud_apparatus_lite = 0.08
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_apparatus_neg = -0.03
+				tooltip = consumer_goods_factor_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_apparatus_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Lyudmila_win_the_masses
+		icon = GFX_focus_REU_Lyudmila_win_the_masses
+		cost = 3
+		prerequisite = {
+			focus = REU_Lyudmila_laughs_last
+		}
+		x = 4
+		y = 1
+		relative_position_id = REU_Lyudmila_laughs_last
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_manpower = 20000
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_masses_spirit_tt
+			add_to_variable = {
+				REU_lud_masses = 0.08
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_masses_lite = 0.06
+				tooltip = conscription_factor_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_masses_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Lyudmila_voice_of_the_people
+		icon = GFX_focus_REU_Lyudmila_voice_of_the_people
+		cost = 3
+		prerequisite = {
+			focus = REU_Lyudmila_win_the_masses
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Lyudmila_win_the_masses
+
+		completion_reward = {
+			add_political_power = 75
+			add_stability = 0.05
+			add_war_support = 0.05
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_masses_spirit_tt
+			add_to_variable = {
+				REU_lud_masses = 0.08
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_masses_lite = 0.06
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_masses_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Lyudmila_bread_and_calm
+		icon = GFX_focus_REU_Lyudmila_bread_and_calm
+		cost = 3
+		prerequisite = {
+			focus = REU_Lyudmila_voice_of_the_people
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Lyudmila_voice_of_the_people
+
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.05
+			add_offsite_building = {
+				type = industrial_complex
+				level = 3
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_masses_spirit_tt
+			add_to_variable = {
+				REU_lud_masses = 0.10
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_masses_lite = 0.08
+				tooltip = production_factory_max_efficiency_factor_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_masses_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Lyudmila_long_live_chairman
+		icon = GFX_focus_REU_Lyudmila_long_live_chairman
+		cost = 5
+		prerequisite = {
+			focus = REU_Lyudmila_commissar_eye
+		}
+		prerequisite = {
+			focus = REU_Lyudmila_rubber_stamp
+		}
+		prerequisite = {
+			focus = REU_Lyudmila_bread_and_calm
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Lyudmila_rubber_stamp
+
+		completion_reward = {
+			set_variable = { REU_ludmila_delta = 10 }
+			REU_Ludmila_Add_Affection = yes
+			add_stability = 0.1
+			add_political_power = 200
+			set_country_flag = REU_Lyudmila_supreme_leader
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_supreme_spirit_tt
+			add_to_variable = {
+				REU_lud_supreme = 0.25
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				REU_lud_supreme_lite = 0.20
+				tooltip = army_morale_factor_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_supreme_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Death_Bell_for_Tyrants
+		icon = GFX_focus_REU_Death_Bell_for_Tyrants
+		cost = 5
+		prerequisite = {
+			focus = REU_Lyudmila_long_live_chairman
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Lyudmila_long_live_chairman
+
+		available = {
+			has_country_leader = {
+				character = REU_Lyudmila
+				ruling_only = yes
+			}
+		}
+
+		completion_reward = {
+			add_political_power = 100
+			add_command_power = 150
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_supreme_spirit_tt
+			add_to_variable = {
+				REU_lud_supreme = 0.10
+				tooltip = political_power_gain_tt
+			}
+			add_to_variable = {
+				REU_lud_supreme_lite = 0.10
+				tooltip = army_morale_factor_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_supreme_spirit
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_gpu_spirit_tt
+			add_to_variable = {
+				REU_lud_gpu_int = 1
+				tooltip = operative_slot_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_gpu_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Revolutionary_Suppression_Work_Teams
+		icon = GFX_focus_REU_Revolutionary_Suppression_Work_Teams
+		cost = 3
+		prerequisite = {
+			focus = REU_Death_Bell_for_Tyrants
+		}
+		x = -4
+		y = 1
+		relative_position_id = REU_Death_Bell_for_Tyrants
+
+		completion_reward = {
+			add_army_experience = 50
+			add_war_support = 0.05
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2000
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_gpu_spirit_tt
+			add_to_variable = {
+				REU_lud_gpu = 0.10
+				tooltip = intel_network_gain_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_neg = -0.05
+				tooltip = resistance_growth_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_gpu_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Infected_Workers_Intelligence_Bureau
+		icon = GFX_focus_REU_Infected_Workers_Intelligence_Bureau
+		cost = 3
+		prerequisite = {
+			focus = REU_Revolutionary_Suppression_Work_Teams
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Revolutionary_Suppression_Work_Teams
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.05
+			add_command_power = 50
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_gpu_spirit_tt
+			add_to_variable = {
+				REU_lud_gpu = 0.10
+				tooltip = intel_network_gain_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_neg = -0.05
+				tooltip = resistance_growth_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_gpu_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Deicide_Executioners
+		icon = GFX_focus_REU_Deicide_Executioners
+		cost = 3
+		prerequisite = {
+			focus = REU_Infected_Workers_Intelligence_Bureau
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Infected_Workers_Intelligence_Bureau
+
+		completion_reward = {
+			add_army_experience = 50
+			add_war_support = 0.05
+			add_command_power = 50
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_gpu_spirit_tt
+			add_to_variable = {
+				REU_lud_gpu = 0.10
+				tooltip = intel_network_gain_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_neg = -0.05
+				tooltip = resistance_growth_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_gpu_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Black_Blade_Task_Force
+		icon = GFX_focus_REU_Black_Blade_Task_Force
+		cost = 3
+		prerequisite = {
+			focus = REU_Deicide_Executioners
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Deicide_Executioners
+
+		completion_reward = {
+			add_army_experience = 75
+			add_war_support = 0.05
+			add_command_power = 150
+			create_corps_commander = {
+				name = "Ignat Voronin"
+				traits = { old_guard commando }
+				skill = 4
+				attack_skill = 4
+				defense_skill = 3
+				planning_skill = 4
+				logistics_skill = 3
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_gpu_spirit_tt
+			add_to_variable = {
+				REU_lud_gpu = 0.10
+				tooltip = intel_network_gain_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_int = 1
+				tooltip = operative_slot_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_int2 = 5
+			}
+			add_to_variable = {
+				REU_lud_gpu_neg = -0.05
+				tooltip = resistance_growth_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_gpu_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Infiltrate_Ursus_Warlords
+		icon = GFX_focus_REU_Infiltrate_Ursus_Warlords
+		cost = 3
+		prerequisite = {
+			focus = REU_Death_Bell_for_Tyrants
+		}
+		x = 4
+		y = 1
+		relative_position_id = REU_Death_Bell_for_Tyrants
+
+		completion_reward = {
+			add_political_power = 100
+			add_command_power = 50
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_gpu_spirit_tt
+			add_to_variable = {
+				REU_lud_gpu = 0.08
+				tooltip = intel_network_gain_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_neg = -0.05
+				tooltip = resistance_growth_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_gpu_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Core_Circle_Leaders_List
+		icon = GFX_focus_REU_Core_Circle_Leaders_List
+		cost = 3
+		prerequisite = {
+			focus = REU_Infiltrate_Ursus_Warlords
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Infiltrate_Ursus_Warlords
+
+		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.05
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_gpu_spirit_tt
+			add_to_variable = {
+				REU_lud_gpu = 0.08
+				tooltip = intel_network_gain_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_neg = -0.05
+				tooltip = resistance_growth_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_gpu_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Court_Advisor_Program
+		icon = GFX_focus_REU_Court_Advisor_Program
+		cost = 3
+		prerequisite = {
+			focus = REU_Core_Circle_Leaders_List
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Core_Circle_Leaders_List
+
+		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.05
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_gpu_spirit_tt
+			add_to_variable = {
+				REU_lud_gpu = 0.08
+				tooltip = intel_network_gain_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_neg = -0.05
+				tooltip = resistance_growth_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_gpu_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Tyrant_Watch_Network
+		icon = GFX_focus_REU_Tyrant_Watch_Network
+		cost = 3
+		prerequisite = {
+			focus = REU_Court_Advisor_Program
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Court_Advisor_Program
+
+		completion_reward = {
+			add_political_power = 200
+			add_stability = 0.05
+			add_command_power = 100
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_gpu_spirit_tt
+			add_to_variable = {
+				REU_lud_gpu = 0.08
+				tooltip = intel_network_gain_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_int = 1
+				tooltip = operative_slot_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_int2 = 5
+			}
+			add_to_variable = {
+				REU_lud_gpu_neg = -0.05
+				tooltip = resistance_growth_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_gpu_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Operation_Regicide
+		icon = GFX_focus_REU_Operation_Regicide
+		cost = 5
+		prerequisite = {
+			focus = REU_Black_Blade_Task_Force
+		}
+		prerequisite = {
+			focus = REU_Tyrant_Watch_Network
+		}
+		x = 0
+		y = 5
+		relative_position_id = REU_Death_Bell_for_Tyrants
+
+		completion_reward = {
+			custom_effect_tooltip = REU_regicide_unlock_tt
+			set_country_flag = REU_regicide_unlocked
+			add_war_support = 0.15
+			add_political_power = 150
+			add_command_power = 300
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = REU_lud_gpu_spirit_tt
+			add_to_variable = {
+				REU_lud_gpu = 0.15
+				tooltip = intel_network_gain_factor_tt
+			}
+			add_to_variable = {
+				REU_lud_gpu_neg = -0.05
+				tooltip = resistance_growth_tt
+			}
+			add_dynamic_modifier = {
+				modifier = REU_lud_gpu_spirit
+			}
+		}
+	}
+
+	focus = {
+		id = REU_In_the_name_of_the_Regicide
+		icon = GFX_focus_REU_In_the_name_of_the_Regicide
+		cost = 5
+		prerequisite = {
+			focus = REU_Operation_Regicide
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Operation_Regicide
+
+		completion_reward = {
+			add_ideas = REU_In_the_name_of_the_Regicide
+			add_stability = 0.05
+			add_war_support = 0.1
+			add_political_power = 200
+			add_research_slot = 2
+			add_command_power = 200
+		}
+	}
+
+	focus = {
+		id = REU_Extreme_Urgency
+		icon = GFX_focus_REU_Emergency_meeting
+		cost = 1
+		x = 60
+		y = 0
+
+		available = {
+			KAC = { has_war = yes }
+		}
+        allow_branch = {
+			KAC = { has_war = yes }
+		}
+		completion_reward = {
+			custom_effect_tooltip = REU_Kazdel_Urgency_tt
+		}
+	}
+
+	focus = {
+		id = REU_Cleanse_the_Bloodied_Red_Flag
+		icon = GFX_focus_REU_red_internal_guard
+		cost = 1
+		prerequisite = {
+			focus = REU_Extreme_Urgency
+		}
+		mutually_exclusive = {
+			focus = REU_Revolution_is_not_Blind_Sacrifice
+		}
+		x = -2
+		y = 1
+		relative_position_id = REU_Extreme_Urgency
+
+		completion_reward = {
+			custom_effect_tooltip = REU_Cleanse_the_Bloodied_Red_Flag_tt
+			KAC = {
+				division_template = {
+					name = "整合运动志愿军"
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+						infantry = { x = 1 y = 3 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"整合运动志愿军\" division_template = \"整合运动志愿军\" start_experience_factor = 0.3 start_equipment_factor = 1"
+						owner = KAC
+						count = 2
+					}
+				}
+				add_stability = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Mend_the_Broken_Antlers
+		icon = GFX_focus_REU_industrial_recovery_plan
+		cost = 1
+		prerequisite = {
+			focus = REU_Cleanse_the_Bloodied_Red_Flag
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Cleanse_the_Bloodied_Red_Flag
+
+		completion_reward = {
+			custom_effect_tooltip = REU_Mend_the_Broken_Antlers_tt
+			KAC = {
+				add_offsite_building = {
+					type = arms_factory
+					level = 4
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 2000
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Lift_Comrades_from_the_Blood
+		icon = GFX_focus_REU_mobilize_the_masses
+		cost = 1
+		prerequisite = {
+			focus = REU_Mend_the_Broken_Antlers
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Mend_the_Broken_Antlers
+
+		completion_reward = {
+			custom_effect_tooltip = REU_Lift_Comrades_from_the_Blood_tt
+			KAC = {
+				add_manpower = 20000
+				capital_scope = {
+					create_unit = {
+						division = "name = \"整合运动志愿军\" division_template = \"整合运动志愿军\" start_experience_factor = 0.3 start_equipment_factor = 1"
+						owner = KAC
+						count = 4
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Roar_for_Light
+		icon = GFX_focus_REU_Berserk_into_Saint_Grypherburg
+		cost = 1
+		prerequisite = {
+			focus = REU_Lift_Comrades_from_the_Blood
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Lift_Comrades_from_the_Blood
+
+		completion_reward = {
+			custom_effect_tooltip = REU_Roar_for_Light_tt
+			every_country = {
+				limit = {
+					has_war_with = KAC
+					NOT = { tag = REU }
+				}
+				ROOT = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+			if = {
+				limit = { KAC = { exists = yes } }
+				set_autonomy = {
+					target = KAC
+					autonomy_state = autonomy_puppet
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Revolution_is_not_Blind_Sacrifice
+		icon = GFX_focus_REU_Let_the_soldiers_go_home
+		cost = 1
+		prerequisite = {
+			focus = REU_Extreme_Urgency
+		}
+		mutually_exclusive = {
+			focus = REU_Cleanse_the_Bloodied_Red_Flag
+		}
+		x = 2
+		y = 1
+		relative_position_id = REU_Extreme_Urgency
+
+		completion_reward = {
+			custom_effect_tooltip = REU_Revolution_is_not_Blind_Sacrifice_tt
+			KAC = {
+				add_manpower = -20000
+			}
+			add_manpower = 15000
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2000
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Keep_the_Revolutionary_Spark
+		icon = GFX_focus_REU_resistance_seeds
+		cost = 1
+		prerequisite = {
+			focus = REU_Revolution_is_not_Blind_Sacrifice
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Revolution_is_not_Blind_Sacrifice
+
+		completion_reward = {
+			custom_effect_tooltip = REU_Keep_the_Revolutionary_Spark_tt
+			KAC = {
+				every_owned_state = {
+					limit = {
+						is_core_of = KAC
+					}
+					add_dynamic_modifier = {
+						modifier = REU_KAC_guerrilla_resistance
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Rendezvous_on_the_Snowfield
+		icon = GFX_focus_REU_Act_together
+		cost = 1
+		prerequisite = {
+			focus = REU_Keep_the_Revolutionary_Spark
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Keep_the_Revolutionary_Spark
+
+		completion_reward = {
+			custom_effect_tooltip = REU_Rendezvous_on_the_Snowfield_tt
+			KAZ = {
+				annex_country = {
+					target = KAC
+				}
+			}
+			division_template = {
+				name = "卡兹戴尔红军"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 2 y = 1 }
+					infantry = { x = 2 y = 2 }
+					infantry = { x = 2 y = 3 }
+					infantry = { x = 3 y = 0 }
+					infantry = { x = 3 y = 1 }
+					infantry = { x = 3 y = 2 }
+					infantry = { x = 3 y = 3 }
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"卡兹戴尔红军\" division_template = \"卡兹戴尔红军\" start_experience_factor = 0.5 start_equipment_factor = 1"
+					owner = REU
+					count = 1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = REU_Not_for_Fleeting_Glory
+		icon = GFX_focus_REU_Buy_time
+		cost = 1
+		prerequisite = {
+			focus = REU_Rendezvous_on_the_Snowfield
+		}
+		x = 0
+		y = 1
+		relative_position_id = REU_Rendezvous_on_the_Snowfield
+
+		completion_reward = {
+			custom_effect_tooltip = REU_Not_for_Fleeting_Glory_tt
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = KAZ
+				expire = 1095
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = KAQ
+				expire = 1095
+			}
+		}
+	}
+}

@@ -1,0 +1,221 @@
+capital = 1034
+
+set_convoys = 500
+set_stability = 0.7
+set_war_support = 0.3
+set_research_slots = 4
+starting_train_buffer = 2
+set_fuel_ratio = 0.8
+add_command_power = 0
+
+oob = "YAN_Start"
+
+recruit_character = YAN_Wei_Zunli
+recruit_character = YAN_Sun_Zaizhi
+recruit_character = YAN_Li_Shouting
+
+# —— 顾问入池（入池只决定「有没有这个人」，能否雇佣由各 advisor 块的 available 决定）——
+# 政治顾问 / 军事参谋 / 陆军部长 / 理论家：开局即可雇
+recruit_character = YAN_Taifu
+recruit_character = YAN_Taiwei
+recruit_character = YAN_Ning_Chunqiu
+recruit_character = YAN_Liang_Xun
+recruit_character = YAN_Chun
+recruit_character = YAN_Yu_Cheng
+recruit_character = YAN_Wei_Yanwu
+recruit_character = YAN_Lao_Tianshi
+recruit_character = YAN_Zuo_Xuanliao
+recruit_character = YAN_Chen_Huijie
+recruit_character = YAN_Chong_Yue
+recruit_character = YAN_Jun
+recruit_character = YAN_Ling
+# 特殊顾问：需各自国策解锁
+recruit_character = YAN_Zuo_Le
+recruit_character = YAN_Nian
+recruit_character = YAN_Xi
+recruit_character = YAN_Shu
+recruit_character = YAN_Yu
+
+add_ideas = {
+	volunteer_only
+	export_focus
+	civilian_economy
+	major_country
+	
+	elite_voting
+	working_law_14h
+	equal_treatment
+	mechanized_agriculture #机械化农业（农 4/5）
+	automated_factory #工厂自动化（工 5/5）
+	primary_education #普及初等教育（教 4/5）
+	normal_operation #正常运转（政 4/6）
+	very_low_poverty #极低贫困（贫 5/6）
+
+	YAN_Mandate_of_heaven
+	YAN_Crossroad
+	YAN_Legacy_of_the_female_emperor_reforms
+	YAN_Sui_signs
+
+	# —— 重制新增的开局民族精神 ——
+	YAN_Divine_subjects
+	YAN_Three_dukes
+	YAN_Mobile_cities
+	YAN_Sishuitai_candle
+	YAN_Martial_tradition
+	YAN_Taishi_injustice
+	YAN_Shanhaizhong
+	YAN_Shudao_in_Tianjingge
+	YAN_Bufan_originium
+}
+
+create_faction_from_template = faction_template_shenzhou_league
+
+set_autonomy = {
+	target = YYZ
+	autonomy_state = autonomy_yan_protectorate
+}
+set_autonomy = {
+	target = YAB
+	autonomy_state = autonomy_yan_protectorate
+}
+set_autonomy = {
+	target = YNW
+	autonomy_state = autonomy_yan_protectorate
+}
+set_autonomy = {
+	target = LUM
+	autonomy_state = autonomy_yan_protectorate
+}
+set_autonomy = {
+	target = HGS
+	autonomy_state = autonomy_yan_tributary_state
+}
+set_autonomy = {
+	target = TNT
+	autonomy_state = autonomy_yan_tributary_state
+}
+set_autonomy = {
+	target = ANA
+	autonomy_state = autonomy_yan_tributary_state
+}
+set_autonomy = {
+	target = DKK
+	autonomy_state = autonomy_yan_tributary_state
+}
+set_autonomy = {
+	target = MAJ
+	autonomy_state = autonomy_yan_tributary_state
+}
+
+# ================================================================
+#  开局科技树（重制 · 对标 CLB / VIC 的顶级列强档位）
+#  · YAN 是 major_country（common/ideas/_regime_level.txt），1094 年开局应给全底子
+#  · 与 history/units/YAN_Start.txt 的编制严格自洽，否则开局的师是空壳：
+#      重装甲营（玄极巨兵实验旅）→ heavy_tank_0 / heavy_tank_1
+#      机械化营                → mechanized_infantry_1
+#      工兵 / 侦察 / 宪兵 / 后勤 / 维修五个支援连 → tech_engineers / tech_recon /
+#          tech_military_police / tech_logistics_company / tech_maintenance_company
+#      百灶空卫两支联队        → small_airframe_1 / medium_airframe_1
+#  · 特色取向：装甲走重坦线（不点 landship）、炮兵与防空全线点满、
+#    后勤与维修支援连齐全；不点直升机线（YAN 的空中身份是钦天监防空，不是空突）
+# ================================================================
+set_technology = {
+
+	# ---- 步兵武器 ----
+	infantry_weapons_0 = 1
+	infantry_weapons_improvement_1 = 1
+	infantry_weapons_improvement_2 = 1
+	arts_weapons_0 = 1
+	arts_weapons_improvement_1 = 1
+	support_weapons_1 = 1
+
+	# ---- 工业与电子 ----
+	basic_machine_tools = 1
+	assembly_line_production = 1
+	construction_1 = 1
+	fuel_silos = 1
+	power_plant = 1
+	punched_card_computer = 1
+	vacuum_tube_computer = 1
+	crystal_electronic_unit = 1
+	transistor_computer = 1
+	integrated_circuit_computer_1 = 1
+	radio = 1
+	radio_detection = 1
+
+	# ---- 支援连（对应 OOB 用到的五个支援连） ----
+	tech_support = 1
+	tech_engineers = 1
+	tech_recon = 1
+	tech_military_police = 1
+	tech_logistics_company = 1
+	tech_maintenance_company = 1
+
+	# ---- 摩托化、机械化与铁路 ----
+	basic_train = 1
+	motorized_infantry_0 = 1
+	motorized_infantry_1 = 1
+	mechanized_infantry_1 = 1
+
+	# ---- 炮兵 / 反坦克 / 火箭炮 ----
+	artillery_0 = 1
+	artillery_improvement_1 = 1
+	artillery_1 = 1
+	sp_artillery_1 = 1
+	antitank_0 = 1
+	antitank_improvement_1 = 1
+	antitank_1 = 1
+	rocket_artillery_0 = 1
+	rocket_artillery_improvement_1 = 1
+
+	# ---- 防空 ----
+	antiair_0 = 1
+	antiair_improvement_1 = 1
+	antiair_1 = 1
+	sp_antiair_1 = 1
+
+	# ---- 装甲：开局即有重型坦克（玄极巨兵的装备来源） ----
+	light_tank_0 = 1
+	light_tank_1 = 1
+	medium_tank_0 = 1
+	medium_tank_1 = 1
+	heavy_tank_0 = 1
+	heavy_tank_1 = 1
+
+	# ---- 空军 ----
+	air_engines = 1
+	jet_engines_1 = 1
+	small_airframe_0 = 1
+	small_airframe_1 = 1
+	medium_airframe_0 = 1
+	medium_airframe_1 = 1
+	large_airframe_0 = 1
+	transport_plane_0 = 1
+	aa_cannon_1 = 1
+	aircraft_construction = 1
+	airborne_bombs = 1
+}
+
+set_politics = {
+	ruling_party = authoritarianism
+	elections_allowed = no
+}
+
+set_popularities = {
+	communism = 3
+	socialism = 0
+	progressivism = 0
+	liberalism = 6
+	conservatism = 34
+	authoritarianism = 45
+	despotism = 12
+	fascism = 0
+	mysticism = 0
+	special = 0
+}
+
+# ARF 特殊兵种：开局授予专属兵种科技（ARF 特殊兵种模块维护，请勿手改）
+set_technology = {
+	arf_dragon_guard_tech = 1
+	arf_shadow_guard_tech = 1
+}

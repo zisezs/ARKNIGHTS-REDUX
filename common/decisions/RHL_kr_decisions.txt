@@ -1,0 +1,32 @@
+# ══════════════════════════════════════════════════════════════════════
+#  莱茵生命 · 决议【请她回来担任总辖】
+#  【由 docs/gen_rhl_kristen.cjs 生成，勿手改】真源 docs/rhl_kristen_data.cjs
+#  顶层块名 = 分类 id，挂在火箭模块已有的「地平弧光」计划分类下（原版 political_actions
+#  在几十个文件里重复同一个分类名，同名分类会合并）；分类的 icon/allowed 只在
+#  common/decisions/categories/RHL_rocket_categories.txt 声明一次，这里重复会让整块解析失败。
+#  冷却字段真名 days_re_enable；PP 判断写 has_political_power > N（裸 = 会被静默跳过）。
+# ══════════════════════════════════════════════════════════════════════
+RHL_rocket_program = {
+
+	RHL_decision_kristen_chancellor = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { original_tag = RHL }
+		visible = {
+			is_ai = no
+		}
+		available = {
+			has_political_power > 199
+			NOT = { has_country_leader_with_trait = RHL_lone_star }
+		}
+		cost = 200
+		# 不写 fire_only_once：available 已经判「领袖身上有没有该特质」，
+		# 换成功一次决议就自己消失；万一哪一步被引擎挡了（角色转籍失败那类），
+		# 玩家还能再攒政治点重试一次。
+		complete_effect = {
+			RHL_kr_make_chancellor = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

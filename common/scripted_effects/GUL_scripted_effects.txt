@@ -1,0 +1,494 @@
+#抵抗运动修正烈度
+#减少
+gul_rebel_level_down = {
+	if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier1
+			}
+		}
+		remove_dynamic_modifier = {
+			modifier = gul_rebel_state_modifier1
+		}
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier2
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_rebel_state_modifier2_tool
+				add_idea = gul_rebel_state_modifier1_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier2
+			}
+			add_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier3
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_rebel_state_modifier3_tool
+				add_idea = gul_rebel_state_modifier2_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier3
+			}
+			add_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier2
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier4
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_rebel_state_modifier4_tool
+				add_idea = gul_rebel_state_modifier3_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier4
+			}
+			add_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier3
+			}
+		}
+	}
+}
+#增加
+gul_rebel_level_up = {
+	if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier3
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_rebel_state_modifier3_tool
+				add_idea = gul_rebel_state_modifier4_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier3
+			}
+			add_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier4
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier2
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_rebel_state_modifier2_tool
+				add_idea = gul_rebel_state_modifier3_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier2
+			}
+			add_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier3
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier1
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_rebel_state_modifier1_tool
+				add_idea = gul_rebel_state_modifier2_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier1
+			}
+			add_dynamic_modifier = {
+				modifier = gul_rebel_state_modifier2
+			}
+		}
+	}
+	else = {
+		add_dynamic_modifier = {
+			modifier = gul_rebel_state_modifier1
+		}
+	}	
+}
+#游击活动修正烈度
+#减少
+gul_resistance_level_down = {
+	if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier1
+			}
+		}
+		remove_dynamic_modifier = {
+			modifier = gul_resistance_state_modifier1
+		}
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier2
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_resistance_state_modifier2_tool
+				add_idea = gul_resistance_state_modifier1_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier2
+			}
+			add_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier3
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_resistance_state_modifier3_tool
+				add_idea = gul_resistance_state_modifier2_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier3
+			}
+			add_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier2
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier4
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_resistance_state_modifier4_tool
+				add_idea = gul_resistance_state_modifier3_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier4
+			}
+			add_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier3
+			}
+		}
+	}
+}
+#增加
+gul_resistance_level_up = {
+	if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier3
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_resistance_state_modifier3_tool
+				add_idea = gul_resistance_state_modifier4_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier3
+			}
+			add_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier4
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier2
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_resistance_state_modifier2_tool
+				add_idea = gul_resistance_state_modifier3_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier2
+			}
+			add_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier3
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier1
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = gul_resistance_state_modifier1_tool
+				add_idea = gul_resistance_state_modifier2_tool
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier1
+			}
+			add_dynamic_modifier = {
+				modifier = gul_resistance_state_modifier2
+			}
+		}
+	}
+	else = {
+		add_dynamic_modifier = {
+			modifier = gul_resistance_state_modifier1
+		}
+	}	
+}
+##起义引爆
+GUL_independ_war_start = {
+	hidden_effect = {
+		set_global_flag = gul_independ_flag
+		while_loop_effect = {
+			limit = {
+				check_variable = { get_weapon_1000_var > 0 }
+			}
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 1000
+					producer = GUL
+				}
+				add_to_variable = { get_weapon_1000_var = -1 }
+			}
+		}
+		every_state = {
+			limit = {
+				has_state_flag = GUL_rebel_state
+			}
+			clr_state_flag = GUL_rebel_state
+		}
+		every_state = {
+			limit = {
+				has_state_flag = GUL_rebel_state
+			}
+			clr_state_flag = GUL_rebel_state
+		}
+		every_state = {
+			limit = {
+				has_dynamic_modifier = { modifier = gul_rebel_state_modifier2 }
+				controller = { original_tag = GUL }
+			}
+			create_unit = {
+				division = "division_template = \"解放游击部队\" start_experience_factor = 0.4"
+				owner = GUL
+				count = 2
+			}
+			remove_dynamic_modifier = { modifier = gul_rebel_state_modifier2 }
+		}
+		every_state = {
+			limit = {
+				has_dynamic_modifier = { modifier = gul_rebel_state_modifier3 }
+				controller = { original_tag = GUL }
+			}
+			create_unit = {
+				division = "division_template = \"解放游击部队\" start_experience_factor = 0.4"
+				owner = GUL
+				count = 4
+			}
+			remove_dynamic_modifier = { modifier = gul_rebel_state_modifier3 }
+		}
+		every_state = {
+			limit = {
+				has_dynamic_modifier = { modifier = gul_rebel_state_modifier4 }
+				controller = { original_tag = GUL }
+			}
+			create_unit = {
+				division = "division_template = \"解放游击部队\" start_experience_factor = 0.4"
+				owner = GUL
+				count = 6
+			}
+			remove_dynamic_modifier = { modifier = gul_rebel_state_modifier4 }
+		}
+	}
+}
+#转移工厂
+vic_factory_back_effect0 = {
+	hidden_effect = {
+		set_variable = { VIC.gul_mils_back = 0 }
+		set_variable = { VIC.gul_civs_back = 0 }
+		every_state = {
+			limit = {
+				has_dynamic_modifier = {
+					modifier = vic_ocup_civ_state_modifier
+					scope = VIC
+				}
+			}
+			add_to_variable = { VIC.gul_civs_back = THIS.vic_ocup_civs_num_var }
+		}
+		every_state = {
+			limit = {
+				has_dynamic_modifier = {
+					modifier = vic_ocup_mils_state_modifier
+					scope = VIC
+				}
+			}
+			add_to_variable = { VIC.gul_mils_back = THIS.vic_ocup_mils_num_var }
+		}
+		set_variable = { slot_var = VIC.gul_mils_back }
+		add_to_variable = { slot_var = VIC.gul_civs_back }
+	}
+}
+vic_factory_back_effect1 = {
+	add_extra_state_shared_building_slots = VIC.slot_var
+	if = {
+		limit = { check_variable = { VIC.gul_civs_back > 0 } }
+		add_building_construction = {
+			type = industrial_complex
+			level = VIC.gul_civs_back
+			instant_build = yes
+		}
+	}
+	if = {
+		limit = { check_variable = { VIC.gul_mils_back > 0 } }
+		add_building_construction = {
+			type = arms_factory
+			level = VIC.gul_mils_back
+			instant_build = yes
+		}
+	}
+}
+vic_factory_back_effect2 = {
+	GUL = {
+		custom_effect_tooltip = GUL_broken_economy_idea_tt
+		custom_effect_tooltip = GUL_broken_economy_idea_tt2
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+	every_state = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = vic_ocup_civ_state_modifier
+				scope = VIC
+			}
+		}
+		hidden_effect = {
+			add_to_variable = { VIC.gul_civs_back = THIS.vic_ocup_civs_num_var }
+			remove_dynamic_modifier = {
+				modifier = vic_ocup_civ_state_modifier
+				scope = VIC
+			}
+		}
+		effect_tooltip = {
+			remove_ideas = vic_ocup_civ_state_modifier
+		}
+	}
+	every_state = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = vic_ocup_mils_state_modifier
+				scope = VIC
+			}
+		}
+		hidden_effect = {
+			add_to_variable = { VIC.gul_mils_back = THIS.vic_ocup_mils_num_var }
+			remove_dynamic_modifier = {
+				modifier = vic_ocup_mils_state_modifier
+				scope = VIC
+			}
+		}
+		effect_tooltip = {
+			remove_ideas = vic_ocup_mils_state_modifier
+		}
+	}
+	custom_effect_tooltip = generic_skip_one_line_tt
+	custom_effect_tooltip = vic_sub_offsite_building_tt
+	if = {
+		limit = { check_variable = { VIC.gul_civs_back > 0 } }
+		set_temp_variable = { end_industrial_complex_sub = VIC.gul_civs_back }
+		set_temp_variable = { end_industrial_complex_var = 0 }
+		subtract_from_temp_variable = { end_industrial_complex_var = end_industrial_complex_sub }
+		add_offsite_building = { type = industrial_complex level = end_industrial_complex_var }
+	}
+	if = {
+		limit = { check_variable = { VIC.gul_mils_back > 0 } }
+		set_temp_variable = { end_arms_factory_sub = VIC.gul_mils_back }
+		set_temp_variable = { end_arms_factory_var = 0 }
+		subtract_from_temp_variable = { end_arms_factory_var = end_arms_factory_sub }
+		add_offsite_building = { type = arms_factory level = end_arms_factory_var }
+	}
+}
+#光复战争：对仍然存在、且尚未交战的分裂政权分别宣战（可重复调用，跳过已打过的）
+GUL_make_reunification_wars = {
+	hidden_effect = {
+		if = {
+			limit = {
+				BRT = { exists = yes }
+				NOT = { has_war_with = BRT }
+			}
+			declare_war_on = { target = BRT type = annex_everything }
+		}
+		if = {
+			limit = {
+				VFA = { exists = yes }
+				NOT = { has_war_with = VFA }
+			}
+			declare_war_on = { target = VFA type = annex_everything }
+		}
+		if = {
+			limit = {
+				VVI = { exists = yes }
+				NOT = { has_war_with = VVI }
+			}
+			declare_war_on = { target = VVI type = annex_everything }
+		}
+	}
+}

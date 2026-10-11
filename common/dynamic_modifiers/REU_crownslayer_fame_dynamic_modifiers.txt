@@ -1,0 +1,19 @@
+# 弑君者威名：条件型国家修正（原版模板 0_dynamic_modifiers.txt 说明：enable 不满足则不生效，逐日自动重估）
+# 由 common/on_actions/REU_crownslayer_fame_on_actions.txt 在开局挂到 REU 上，长期驻留。
+REU_crownslayer_fame_modifier = {
+	icon = GFX_idea_REU_In_the_name_of_the_Regicide
+
+	enable = {
+		has_country_leader = {
+			character = REU_Lyudmila
+			ruling_only = yes
+		}
+		any_country = {
+			has_war_with = PREV
+			has_government = despotism
+		}
+	}
+
+	custom_modifier_tooltip = REU_crownslayer_fame_modifier_tt
+	breakthrough_factor = 0.2
+}

@@ -1,0 +1,66 @@
+ideas = {
+	country = {
+		# ---- 狼之主的狂猎：荒野之上更古老的非人秩序 ----
+		# 扣大量稳定度、加大量战争支持度
+		SRC_Wild_Hunt = {
+			picture = SRC_Wild_Hunt
+
+			modifier = {
+				stability_factor = -0.25
+				war_support_factor = 0.25
+			}
+		}
+
+		# ---- 灰厅-铳与秩序：战争支持度越高，稳定度越高（联动见 dynamic_modifiers） ----
+		SRC_Grey_Hall = {
+			picture = SRC_Grey_Hall
+
+			modifier = {
+				custom_modifier_tooltip = SRC_Grey_Hall_ws_tt
+				modifier_army_sub_unit_category_all_infantry_attack_factor = 0.1
+			}
+		}
+
+		# ---- 十二家族的蛰伏：家族私兵不听号令，军队僵化 ----
+		SRC_Twelve_Families = {
+			picture = SRC_Twelve_Families
+
+			modifier = {
+				training_time_factor = 1
+				army_attack_factor = -0.2
+				army_defence_factor = -0.2
+			}
+		}
+
+		# ---- 形同虚设的城邦联合议事会 ----
+		SRC_Joint_Council = {
+			picture = SRC_Joint_Council
+
+			modifier = {
+				political_power_gain = 0.05
+				conscription_factor = 0.1
+			}
+		}
+
+		# ---- 名头响亮的城邦联合法院 ----
+		SRC_United_Court = {
+			picture = SRC_United_Court
+
+			modifier = {
+				stability_weekly = 0.01
+				industrial_capacity_factory = 0.2
+			}
+		}
+
+		# ---- 秩序井然的黑帮之国 ----
+		SRC_Mafia_State = {
+			picture = SRC_Mafia_State
+
+			modifier = {
+				stability_factor = 0.1
+				production_speed_buildings_factor = -0.2
+				industrial_capacity_factory = -0.2
+			}
+		}
+	}
+}

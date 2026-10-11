@@ -1,0 +1,31 @@
+# 守旧派家族联军（叙拉古内战）
+# 开局零领土，只是"存在"以便被事件引用；真正的割州、定都、执政党与领袖
+# 在 SRC_civil_war_breakout_effect 里当场重跑（见 common/scripted_effects/SRC_civilwar_effects.txt）
+# 这里的 set_politics / 领袖 ideology 必须同组：authoritarianism ← oligarchy_subtype
+capital = 585
+
+set_politics = {
+	ruling_party = authoritarianism
+	last_election = "1094.6.1.12"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	communism = 0
+	socialism = 0
+	progressivism = 0
+	liberalism = 0
+	conservatism = 25
+	authoritarianism = 60
+	despotism = 10
+	fascism = 5
+	mysticism = 0
+	special = 0
+}
+
+set_research_slots = 1
+set_stability = 0.35
+set_war_support = 0.5
+
+recruit_character = SR1_Alberto_Ribelle

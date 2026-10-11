@@ -1,0 +1,263 @@
+on_actions = {
+	on_startup = {
+		#移除展示民族精神
+		effect = {
+			UFE = {
+				remove_ideas = UFE_wasteland_idea
+				remove_ideas = UFE_yuan_zhu_min
+			}
+		}
+		#领导权决议
+		effect = {
+			set_variable = { REU.win_points = 5 }
+			set_variable = { UFE.win_points = 0 }
+		}
+	}
+	on_monthly_UFE = {
+		#每月皮草
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						has_idea = UFE_picao_trade_idea_1
+						has_idea = UFE_picao_trade_idea_2
+						has_idea = UFE_picao_trade_idea_3
+					}
+				}
+				add_to_variable = { picao_var = modifier@picao_gain_every_month }
+			}
+		}
+		#每月地区修正扩张
+		effect = {
+			if = {
+				limit = {
+					any_core_state = {
+						NOT = { 
+							has_dynamic_modifier = { modifier = UFE_left_state_modifier }
+						}
+					}
+					any_core_state = {
+						has_dynamic_modifier = { modifier = UFE_left_state_modifier }
+					}
+				}
+				random_core_state = {
+					limit = {
+						has_dynamic_modifier = { modifier = UFE_left_state_modifier }
+						any_neighbor_state = {
+							NOT =  { has_dynamic_modifier = { modifier = UFE_left_state_modifier } } 
+							is_core_of = UFE
+						}
+					}
+					random_neighbor_state = {
+						limit = {
+							NOT = {
+								has_dynamic_modifier = { modifier = UFE_left_state_modifier }
+							}
+							is_core_of = UFE
+						}
+						add_dynamic_modifier = { modifier = UFE_left_state_modifier }
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_core_state = {
+						NOT = { 
+							has_dynamic_modifier = { modifier = UFE_right_state_modifier }
+						}
+					}
+					any_core_state = {
+						has_dynamic_modifier = { modifier = UFE_right_state_modifier }
+					}
+				}
+				random_core_state = {
+					limit = {
+						has_dynamic_modifier = { modifier = UFE_right_state_modifier }
+						any_neighbor_state = {
+							NOT =  { has_dynamic_modifier = { modifier = UFE_right_state_modifier } } 
+							is_core_of = UFE
+						}
+					}
+					random_neighbor_state = {
+						limit = {
+							NOT = {
+								has_dynamic_modifier = { modifier = UFE_right_state_modifier }
+							}
+							is_core_of = UFE
+						}
+						add_dynamic_modifier = { modifier = UFE_right_state_modifier }
+					}
+				}
+			}
+		}
+	}
+	on_weekly_UFE = {
+		#刺杀
+		effect = {
+			if = {
+				limit = {
+					has_country_leader = {
+						character = UFE_despotism_leader
+						ruling_only = yes
+					}
+				}
+				random_list = {
+					1 = {
+						if = {
+							limit = {
+								has_idea = UFE_kill_leader_idea_1
+							}
+							#遇刺身亡
+							country_event = {
+								id = UFE_special_events.3
+							}
+						}
+					}
+					1 = {
+						if = {
+							limit = {
+								has_idea = UFE_kill_leader_idea_2
+							}
+							#遇刺身亡
+							country_event = {
+								id = UFE_special_events.3
+							}
+						}
+					}
+					2 = {
+						if = {
+							limit = {
+								has_idea = UFE_kill_leader_idea_3
+							}
+							#遇刺身亡
+							country_event = {
+								id = UFE_special_events.3
+							}
+						}
+					}
+					#无事发生
+					16 = {
+					
+					}
+				}
+			}
+		}
+	}
+	on_war_relation_added = {
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ROOT = { tag = UFE }
+							FROM = { tag = REU }
+						}
+						AND = {
+							FROM = { tag = UFE }
+							ROOT = { tag = REU }
+						}
+					}
+					UFE = { NOT = { has_country_flag = UFE_vs_REU_war_flag } }
+				}
+				UFE = {
+					set_country_flag = UFE_vs_REU_war_flag
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ROOT = { tag = UFE }
+							FROM = { tag = URS }
+						}
+						AND = {
+							FROM = { tag = UFE }
+							ROOT = { tag = URS }
+						}
+					}
+					UFE = { NOT = { has_country_flag = UFE_vs_URS_war_flag } }
+				}
+				UFE = {
+					set_country_flag = UFE_vs_URS_war_flag
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							ROOT = { tag = UFE }
+							FROM = { tag = URS }
+						}
+						AND = {
+							ROOT = { tag = URS }
+							FROM = { tag = UFE }
+						}
+					}
+					NOT = { has_global_flag = UFE_vs_URS_war_flag } 
+				}
+				UFE = {
+					set_global_flag = UFE_vs_URS_war_flag
+					news_event = {
+						id = UFE_news_events.5
+					}
+					#偶发事件
+					country_event = {
+						id = UFE_special_events.32
+						days = 75
+						random_days = 12
+					}
+					country_event = {
+						id = UFE_special_events.33
+						days = 250
+						random_days = 24
+					}
+					country_event = {
+						id = UFE_special_events.34
+						days = 290
+						random_days = 24
+					}
+					country_event = {
+						id = UFE_special_events.35
+						days = 330
+						random_days = 24
+					}
+					country_event = {
+						id = UFE_special_events.36
+						days = 370
+						random_days = 24
+					}
+					#经济危机
+					country_event = {
+						id = UFE_special_events.20
+						days = 200
+					}
+				}
+			}
+		}
+	}
+	#已确保军队忠诚
+	on_unit_leader_created = {
+		effect = {
+			character = {
+				if = { 
+					limit = {
+						is_army_leader = yes
+					}
+					if = {
+						limit = {	
+							FROM = { has_completed_focus = UFE_QueBao_JunDui }
+						}
+						root = {
+							set_character_flag = UFE_democratic_character_flag
+						}
+						
+					}
+				}
+			}
+		}
+	}
+}

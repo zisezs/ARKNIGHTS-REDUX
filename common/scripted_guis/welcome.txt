@@ -1,0 +1,99 @@
+scripted_gui = {
+
+	country_intro = {
+		context_type = player_context
+		window_name = "country_intro_container"
+		dirty = country_intro_variable
+
+		ai_enabled = { always = no }
+
+		visible = {
+			has_variable = country_intro_variable
+		}
+
+		triggers = {
+			#tab_1_visible = { tag_has_country_intro = yes }
+			#tab_2_visible = { tag_has_path_guide = yes }
+
+			tab_1_click_enabled = { NOT = { check_variable = { country_intro_variable = 1 } } }
+			tab_2_click_enabled = { NOT = { check_variable = { country_intro_variable = 2 } } }
+			tab_3_click_enabled = { NOT = { check_variable = { country_intro_variable = 3 } } }
+			tab_4_click_enabled = { NOT = { check_variable = { country_intro_variable = 4 } } }
+			tab_5_click_enabled = { NOT = { check_variable = { country_intro_variable = 5 } } }
+		}
+
+		effects = {
+			tab_1_click = { set_variable = { country_intro_variable = 1 } }
+			tab_2_click = { set_variable = { country_intro_variable = 2 } }
+			tab_3_click = { set_variable = { country_intro_variable = 3 } }
+			tab_4_click = { set_variable = { country_intro_variable = 4 } }
+			tab_5_click = { set_variable = { country_intro_variable = 5 } }
+
+			mod_options_button_click = { clear_variable = country_intro_variable }
+		}
+	}
+
+	country_intro_tab_1 = {
+		context_type = player_context
+		window_name = country_intro_tab_1_container
+		parent_window_name = "country_intro_container"
+		dirty = country_intro_variable
+
+		ai_enabled = { always = no }
+
+		visible = {
+			check_variable = { country_intro_variable = 1 }
+		}
+	}
+
+	country_intro_tab_2 = {
+		context_type = player_context
+		window_name = country_intro_tab_2_container
+		parent_window_name = "country_intro_container"
+		dirty = country_intro_variable
+		dirty = country_intro_spoilers_revealed
+
+		ai_enabled = { always = no }
+
+		visible = {
+			check_variable = { country_intro_variable = 2 }
+		}
+
+		triggers = {
+			country_intro_tab_2_reveal_spoilers_button_visible = { NOT = { has_variable = country_intro_spoilers_revealed } }
+			country_intro_tab_2_header_visible = { has_variable = country_intro_spoilers_revealed }
+			country_intro_tab_2_content_visible = { has_variable = country_intro_spoilers_revealed }
+		}
+
+		effects = {
+			country_intro_tab_2_reveal_spoilers_button_click = { set_variable = { country_intro_spoilers_revealed = 1 } }
+		}
+	}
+
+	country_intro_tab_3 = {
+		context_type = player_context
+		window_name = country_intro_tab_3_container
+		parent_window_name = "country_intro_container"
+		dirty = country_intro_variable
+
+		ai_enabled = { always = no }
+
+		visible = {
+			check_variable = { country_intro_variable = 3 }
+		}
+	}
+
+	country_intro_tab_4 = {
+		context_type = player_context
+		window_name = country_intro_tab_4_container
+		parent_window_name = "country_intro_container"
+		dirty = country_intro_variable
+
+		ai_enabled = { always = no }
+
+		visible = {
+			check_variable = { country_intro_variable = 4 }
+		}
+	}
+}
+
