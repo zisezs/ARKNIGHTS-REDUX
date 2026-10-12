@@ -1,0 +1,976 @@
+######################
+## 伊比利亚（IBR）政治国策簇 —— 共享国策
+## 由 common/national_focus/IBR.txt 末尾的 shared_focus 引用并入主树 IBR_torch_of_iberia
+##
+## 依据：《昨日海》剧情（审判庭 / 岛民互助会 / 阿戈尔打捞三方）。
+## 34 格、两对互斥（线首 黄金世纪 ↔ 纯白之心；两个终幕 圣徒艾丽妮万岁 ↔ 女皇埃斯特菲尼娅万岁）；
+##   草案见 Downloads/NEW_tree.txt（编号 1..34 的映射在下面的对照表）。
+##
+## 分批填充中：格名/坐标/前置/互斥已全部定稿，正文与效果按批次逐格补 ——
+##   数据表里有 desc 的就生成 <id>_desc、有 fx 的就写进 completion_reward，两者都没有的仍是空块占位。
+##   效果已按 LADDER/ONCE/DEBUFF 三张表铺满三条线（含两个终幕的换领袖事件）；国策正文 <id>_desc 目前只有根格。
+##
+## 版式：整簇落在主树与军事簇之间的空行带 —— 列带 x = -19..-5，行带 y = 8..18。
+##   主树占 y 0..7，军事簇占 y 15..21，发展度簇占 y 23..27 —— 本簇与三区的格点互不重叠，
+##   由 docs/_ibr_political_check.cjs 硬校验（军事簇 2026-10-11 整簇右移过一格，别在这里抄死它的坐标）。
+##   同排任意两格 Δx ≥ 2；根格 (-12,8) 落在包围盒水平中线上；
+##   极值列不留孤点；连线一律向下（dy ≥ 1），汇聚格取双肩列的中点。
+##
+## 与草案的两处差别（草案里 25/27 的前置 26 排在它们下面，箭头朝上）：
+##   25 圣徒卡门的密信、27 克莱门莎的援助 各下移一行到 y=17，
+##   26 筹备大选 仍留在 y=16（照草案保持「无前置的第二入口」，同军事簇根格）。
+##
+## 图标 34 张已实装：GFX_focus_IBR_pol_*，100x100 PNG 在 gfx/interface/goals/IBR/，帧注册在 interface/_ARF_goals/IBR_goals.gfx；
+##   字形/拉丁铭文/轴带色写在 docs/ibr_icon_data.cjs 的 POL 表，改表重跑 node docs/gen_ibr_icons.cjs --pol 即可（勿跑 --install）。
+## 局部化：localisation/simp_chinese/ARF_IBR_political_l_simp_chinese.yml
+##
+## 生成器 docs/gen_ibr_political.cjs（改数据表重跑，勿手改产物）
+######################
+## 草案编号对照：
+##    1  IBR_pol_wrath_and_change  永恒愤怒，永恒变革
+##    2  IBR_pol_golden_century  伊比利亚·黄金世纪
+##    3  IBR_pol_pure_heart  伊比利亚·纯白之心
+##    4  IBR_pol_scrap_wreck_anchor  废铁、烂船与破锚
+##    5  IBR_pol_trickster_leader_king  骗子、统帅与国王
+##    6  IBR_pol_who_fires_guns  铳枪为谁而轰鸣
+##    7  IBR_pol_who_draws_blade  刺剑为谁而出鞘
+##    8  IBR_pol_islanders_landsmen  岛民与陆民
+##    9  IBR_pol_who_judges_sin  罪孽为谁而审判
+##   10  IBR_pol_army_of_inquisition  审判庭的惩戒军？
+##   11  IBR_pol_army_of_the_people  伊比利亚人民的惩戒军！
+##   12  IBR_pol_aegir_and_libertini  阿戈尔人与黎博利人
+##   13  IBR_pol_reorganize_mutual_aid  改组互助会
+##   14  IBR_pol_suppress_mutual_aid  镇压互助会
+##   15  IBR_pol_you_are_iberian  你们是伊比利亚人！
+##   16  IBR_pol_we_are_iberian  大家是伊比利亚人！
+##   17  IBR_pol_i_honour_you  伊比利亚人，我敬你！
+##   18  IBR_pol_secret_conclave  审判庭秘密会议
+##   19  IBR_pol_saint_irene  圣徒艾丽妮万岁！
+##   20  IBR_pol_three_forces  惩戒军、国防军与深海舰队
+##   21  IBR_pol_true_crown_false_king  真王冠、真王座与假国王
+##   22  IBR_pol_toledo_fallen_star  德·托莱多家族的黯淡之星！
+##   23  IBR_pol_king_not_master  要国王，不要主人！
+##   24  IBR_pol_subjects_not_slaves  是臣民，不是奴仆！
+##   25  IBR_pol_carmen_secret_letter  圣徒卡门的密信
+##   26  IBR_pol_prepare_first_election  筹备伊比利亚第一次大选！
+##   27  IBR_pol_clementia_aid  克莱门莎的援助
+##   28  IBR_pol_empress_estefania  女皇埃斯特菲尼娅万岁！
+##   29  IBR_pol_restore_confidence  重建黄金时代的自信
+##   30  IBR_pol_restore_courage  重拾开拓时代的勇气
+##   31  IBR_pol_golden_age_returns  黄金时代将再次归来！
+##   32  IBR_pol_review_dogma  极端教条再审核
+##   33  IBR_pol_retrial_records  争议卷宗再审判
+##   34  IBR_pol_saint_last_journey  圣徒的退休前旅行
+##
+
+shared_focus = { #永恒愤怒，永恒变革
+	id = IBR_pol_wrath_and_change
+	icon = GFX_focus_IBR_pol_wrath_and_change
+	x = -12
+	y = 8
+	cost = 5
+	prerequisite = {
+		focus = IBR_eternal_lighthouse
+	}
+	available = {
+		has_war = no
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		# 待实装前置：伊比利亚内战已经结束（现在不实装；【处于和平】是它的近义条件，已挂在 available）
+		custom_effect_tooltip = IBR_pol_wrath_and_change_fx_tt
+		add_ideas = {
+			IBR_broken_garrisons
+			IBR_bandits_and_warlords
+			IBR_aegir_malicious_interference
+		}
+	}
+}
+
+shared_focus = { #伊比利亚·黄金世纪
+	id = IBR_pol_golden_century
+	icon = GFX_focus_IBR_pol_golden_century
+	x = -9
+	y = 9
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_wrath_and_change
+	}
+	mutually_exclusive = {
+		focus = IBR_pol_pure_heart
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_golden_century_fx_tt
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = IBR_pol_golden_century_dm } } }
+			add_dynamic_modifier = { modifier = IBR_pol_golden_century_dm }
+		}
+		add_to_variable = { var = IBR_pol_gc_eff value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_out value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_cg value = -0.05 }
+		add_political_power = 25
+	}
+}
+
+shared_focus = { #伊比利亚·纯白之心
+	id = IBR_pol_pure_heart
+	icon = GFX_focus_IBR_pol_pure_heart
+	x = -15
+	y = 9
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_wrath_and_change
+	}
+	mutually_exclusive = {
+		focus = IBR_pol_golden_century
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		# 国策正文待填（用户：暂无）；决议组 IBR_purification_category 由类目 allowed 里的本格前置自动解锁
+		custom_effect_tooltip = IBR_pol_pure_heart_fx_tt
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = IBR_pol_pure_heart_dm } } }
+			add_dynamic_modifier = { modifier = IBR_pol_pure_heart_dm }
+		}
+		add_to_variable = { var = IBR_pol_ph_org value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_atk value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_def value = 0.05 }
+		add_political_power = 25
+		custom_effect_tooltip = IBR_pol_pure_heart_tt
+	}
+}
+
+shared_focus = { #废铁、烂船与破锚
+	id = IBR_pol_scrap_wreck_anchor
+	icon = GFX_focus_IBR_pol_scrap_wreck_anchor
+	x = -6
+	y = 11
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_trickster_leader_king
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_scrap_wreck_anchor_fx_tt
+		add_to_variable = { var = IBR_pol_gc_eff value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_out value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_cg value = -0.05 }
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+}
+
+shared_focus = { #骗子、统帅与国王
+	id = IBR_pol_trickster_leader_king
+	icon = GFX_focus_IBR_pol_trickster_leader_king
+	x = -6
+	y = 10
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_golden_century
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_trickster_leader_king_fx_tt
+		add_to_variable = { var = IBR_pol_gc_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_ws value = 0.01 }
+		add_to_variable = { var = IBR_pol_gc_stab value = 0.01 }
+		swap_ideas = {
+			remove_idea = IBR_bandits_and_warlords
+			add_idea = IBR_countryside_regathering
+		}
+	}
+}
+
+shared_focus = { #铳枪为谁而轰鸣
+	id = IBR_pol_who_fires_guns
+	icon = GFX_focus_IBR_pol_who_fires_guns
+	x = -18
+	y = 10
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_pure_heart
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_who_fires_guns_fx_tt
+		add_to_variable = { var = IBR_pol_ph_exp value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_stab value = 0.01 }
+		army_experience = 25
+	}
+}
+
+shared_focus = { #刺剑为谁而出鞘
+	id = IBR_pol_who_draws_blade
+	icon = GFX_focus_IBR_pol_who_draws_blade
+	x = -18
+	y = 11
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_who_fires_guns
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_who_draws_blade_fx_tt
+		add_to_variable = { var = IBR_pol_ph_org value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_atk value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_def value = 0.05 }
+		army_experience = 25
+	}
+}
+
+shared_focus = { #岛民与陆民
+	id = IBR_pol_islanders_landsmen
+	icon = GFX_focus_IBR_pol_islanders_landsmen
+	x = -12
+	y = 10
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_pure_heart
+		focus = IBR_pol_golden_century
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_islanders_landsmen_fx_tt
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = IBR_pol_unity_nation_dm } } }
+			add_dynamic_modifier = { modifier = IBR_pol_unity_nation_dm }
+		}
+		add_to_variable = { var = IBR_pol_un_res value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_build value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_cons value = 0.05 }
+		random_owned_controlled_state = { add_manpower = 20000 }
+	}
+}
+
+shared_focus = { #罪孽为谁而审判
+	id = IBR_pol_who_judges_sin
+	icon = GFX_focus_IBR_pol_who_judges_sin
+	x = -18
+	y = 12
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_who_draws_blade
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_who_judges_sin_fx_tt
+		add_to_variable = { var = IBR_pol_ph_exp value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_stab value = 0.01 }
+		swap_ideas = {
+			remove_idea = IBR_broken_garrisons
+			add_idea = IBR_inquisition_reforming
+		}
+	}
+}
+
+shared_focus = { #审判庭的惩戒军？
+	id = IBR_pol_army_of_inquisition
+	icon = GFX_focus_IBR_pol_army_of_inquisition
+	x = -19
+	y = 13
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_who_judges_sin
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_army_of_inquisition_fx_tt
+		add_to_variable = { var = IBR_pol_ph_org value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_atk value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_def value = 0.05 }
+		add_political_power = 25
+	}
+}
+
+shared_focus = { #伊比利亚人民的惩戒军！
+	id = IBR_pol_army_of_the_people
+	icon = GFX_focus_IBR_pol_army_of_the_people
+	x = -17
+	y = 13
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_who_judges_sin
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_army_of_the_people_fx_tt
+		add_to_variable = { var = IBR_pol_ph_exp value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_stab value = 0.01 }
+		army_experience = 50
+	}
+}
+
+shared_focus = { #阿戈尔人与黎博利人
+	id = IBR_pol_aegir_and_libertini
+	icon = GFX_focus_IBR_pol_aegir_and_libertini
+	x = -12
+	y = 11
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_islanders_landsmen
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_aegir_and_libertini_fx_tt
+		add_to_variable = { var = IBR_pol_un_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_ws value = 0.01 }
+		add_to_variable = { var = IBR_pol_un_stab value = 0.01 }
+		swap_ideas = {
+			remove_idea = IBR_aegir_malicious_interference
+			add_idea = IBR_mirialium_cautious_contact
+		}
+		add_stability = 0.02
+	}
+}
+
+shared_focus = { #改组互助会
+	id = IBR_pol_reorganize_mutual_aid
+	icon = GFX_focus_IBR_pol_reorganize_mutual_aid
+	x = -11
+	y = 12
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_aegir_and_libertini
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_reorganize_mutual_aid_fx_tt
+		add_to_variable = { var = IBR_pol_un_res value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_build value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_cons value = 0.05 }
+		add_stability = 0.02
+	}
+}
+
+shared_focus = { #镇压互助会
+	id = IBR_pol_suppress_mutual_aid
+	icon = GFX_focus_IBR_pol_suppress_mutual_aid
+	x = -13
+	y = 12
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_aegir_and_libertini
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_suppress_mutual_aid_fx_tt
+		add_to_variable = { var = IBR_pol_un_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_ws value = 0.01 }
+		add_to_variable = { var = IBR_pol_un_stab value = 0.01 }
+		add_political_power = 25
+		add_war_support = 0.03
+	}
+}
+
+shared_focus = { #你们是伊比利亚人！
+	id = IBR_pol_you_are_iberian
+	icon = GFX_focus_IBR_pol_you_are_iberian
+	x = -13
+	y = 13
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_suppress_mutual_aid
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_you_are_iberian_fx_tt
+		add_to_variable = { var = IBR_pol_un_res value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_build value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_cons value = 0.05 }
+		random_owned_controlled_state = { add_manpower = 25000 }
+	}
+}
+
+shared_focus = { #大家是伊比利亚人！
+	id = IBR_pol_we_are_iberian
+	icon = GFX_focus_IBR_pol_we_are_iberian
+	x = -11
+	y = 13
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_reorganize_mutual_aid
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_we_are_iberian_fx_tt
+		add_to_variable = { var = IBR_pol_un_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_ws value = 0.01 }
+		add_to_variable = { var = IBR_pol_un_stab value = 0.01 }
+		add_stability = 0.03
+	}
+}
+
+shared_focus = { #伊比利亚人，我敬你！
+	id = IBR_pol_i_honour_you
+	icon = GFX_focus_IBR_pol_i_honour_you
+	x = -12
+	y = 14
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_you_are_iberian
+	}
+	prerequisite = {
+		focus = IBR_pol_we_are_iberian
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_i_honour_you_fx_tt
+		add_to_variable = { var = IBR_pol_un_res value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_build value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_cons value = 0.05 }
+		add_political_power = 50
+	}
+}
+
+shared_focus = { #审判庭秘密会议
+	id = IBR_pol_secret_conclave
+	icon = GFX_focus_IBR_pol_secret_conclave
+	x = -18
+	y = 14
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_army_of_inquisition
+	}
+	prerequisite = {
+		focus = IBR_pol_army_of_the_people
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_secret_conclave_fx_tt
+		add_to_variable = { var = IBR_pol_ph_org value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_atk value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_def value = 0.05 }
+		add_political_power = 50
+	}
+}
+
+shared_focus = { #圣徒艾丽妮万岁！
+	id = IBR_pol_saint_irene
+	icon = GFX_focus_IBR_pol_saint_irene
+	x = -15
+	y = 18
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_golden_age_returns
+	}
+	prerequisite = {
+		focus = IBR_pol_saint_last_journey
+	}
+	mutually_exclusive = {
+		focus = IBR_pol_empress_estefania
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_saint_irene_fx_tt
+		add_political_power = 75
+		add_stability = 0.05
+		army_experience = 75
+		custom_effect_tooltip = IBR_pol_saint_irene_tt
+		hidden_effect = {
+			country_event = { id = ibr_pol.1 days = 1 }
+		}
+		clamp_variable = { var = IBR_pol_ph_org min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_ph_atk min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_ph_def min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_ph_exp min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_ph_pp min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_ph_stab min = 0 max = 0.05 }
+	}
+}
+
+shared_focus = { #惩戒军、国防军与深海舰队
+	id = IBR_pol_three_forces
+	icon = GFX_focus_IBR_pol_three_forces
+	x = -5
+	y = 12
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_scrap_wreck_anchor
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_three_forces_fx_tt
+		add_to_variable = { var = IBR_pol_gc_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_ws value = 0.01 }
+		add_to_variable = { var = IBR_pol_gc_stab value = 0.01 }
+		army_experience = 25
+		navy_experience = 25
+	}
+}
+
+shared_focus = { #真王冠、真王座与假国王
+	id = IBR_pol_true_crown_false_king
+	icon = GFX_focus_IBR_pol_true_crown_false_king
+	x = -7
+	y = 12
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_scrap_wreck_anchor
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_true_crown_false_king_fx_tt
+		add_to_variable = { var = IBR_pol_gc_eff value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_out value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_cg value = -0.05 }
+		add_stability = 0.02
+	}
+}
+
+shared_focus = { #德·托莱多家族的黯淡之星！
+	id = IBR_pol_toledo_fallen_star
+	icon = GFX_focus_IBR_pol_toledo_fallen_star
+	x = -6
+	y = 13
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_three_forces
+	}
+	prerequisite = {
+		focus = IBR_pol_true_crown_false_king
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_toledo_fallen_star_fx_tt
+		add_to_variable = { var = IBR_pol_gc_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_ws value = 0.01 }
+		add_to_variable = { var = IBR_pol_gc_stab value = 0.01 }
+		add_political_power = 50
+	}
+}
+
+shared_focus = { #要国王，不要主人！
+	id = IBR_pol_king_not_master
+	icon = GFX_focus_IBR_pol_king_not_master
+	x = -7
+	y = 14
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_toledo_fallen_star
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_king_not_master_fx_tt
+		add_to_variable = { var = IBR_pol_gc_eff value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_out value = 0.05 }
+		add_stability = 0.03
+	}
+}
+
+shared_focus = { #是臣民，不是奴仆！
+	id = IBR_pol_subjects_not_slaves
+	icon = GFX_focus_IBR_pol_subjects_not_slaves
+	x = -5
+	y = 14
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_toledo_fallen_star
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_subjects_not_slaves_fx_tt
+		add_to_variable = { var = IBR_pol_gc_cg value = -0.05 }
+		add_to_variable = { var = IBR_pol_gc_pp value = 0.05 }
+		add_war_support = 0.05
+	}
+}
+
+shared_focus = { #圣徒卡门的密信
+	id = IBR_pol_carmen_secret_letter
+	icon = GFX_focus_IBR_pol_carmen_secret_letter
+	x = -7
+	y = 17
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_prepare_first_election
+	}
+	prerequisite = {
+		focus = IBR_pol_king_not_master
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_carmen_secret_letter_fx_tt
+		add_to_variable = { var = IBR_pol_gc_ws value = 0.01 }
+		add_to_variable = { var = IBR_pol_gc_stab value = 0.01 }
+		add_stability = 0.03
+	}
+}
+
+shared_focus = { #筹备伊比利亚第一次大选！
+	id = IBR_pol_prepare_first_election
+	icon = GFX_focus_IBR_pol_prepare_first_election
+	x = -6
+	y = 16
+	cost = 5
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_prepare_first_election_fx_tt
+		add_to_variable = { var = IBR_pol_gc_eff value = 0.05 }
+		add_to_variable = { var = IBR_pol_gc_out value = 0.05 }
+		remove_ideas = { IBR_countryside_regathering }
+		add_political_power = 50
+	}
+}
+
+shared_focus = { #克莱门莎的援助
+	id = IBR_pol_clementia_aid
+	icon = GFX_focus_IBR_pol_clementia_aid
+	x = -5
+	y = 17
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_prepare_first_election
+	}
+	prerequisite = {
+		focus = IBR_pol_subjects_not_slaves
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_clementia_aid_fx_tt
+		add_to_variable = { var = IBR_pol_gc_cg value = -0.05 }
+		add_to_variable = { var = IBR_pol_gc_pp value = 0.05 }
+		add_offsite_building = { type = arms_factory level = 1 }
+	}
+}
+
+shared_focus = { #女皇埃斯特菲尼娅万岁！
+	id = IBR_pol_empress_estefania
+	icon = GFX_focus_IBR_pol_empress_estefania
+	x = -9
+	y = 18
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_prepare_first_election
+	}
+	prerequisite = {
+		focus = IBR_pol_golden_age_returns
+	}
+	mutually_exclusive = {
+		focus = IBR_pol_saint_irene
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_empress_estefania_fx_tt
+		add_to_variable = { var = IBR_pol_gc_ws value = 0.01 }
+		add_to_variable = { var = IBR_pol_gc_stab value = 0.01 }
+		add_political_power = 100
+		add_stability = 0.05
+		add_war_support = 0.05
+		custom_effect_tooltip = IBR_pol_empress_estefania_tt
+		hidden_effect = {
+			country_event = { id = ibr_pol.2 days = 1 }
+		}
+		clamp_variable = { var = IBR_pol_gc_eff min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_gc_out min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_gc_cg min = -0.25 max = 0.25 }
+		clamp_variable = { var = IBR_pol_gc_pp min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_gc_ws min = 0 max = 0.05 }
+		clamp_variable = { var = IBR_pol_gc_stab min = 0 max = 0.05 }
+	}
+}
+
+shared_focus = { #重建黄金时代的自信
+	id = IBR_pol_restore_confidence
+	icon = GFX_focus_IBR_pol_restore_confidence
+	x = -11
+	y = 15
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_i_honour_you
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_restore_confidence_fx_tt
+		add_to_variable = { var = IBR_pol_un_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_ws value = 0.01 }
+		add_to_variable = { var = IBR_pol_un_stab value = 0.01 }
+		add_war_support = 0.05
+	}
+}
+
+shared_focus = { #重拾开拓时代的勇气
+	id = IBR_pol_restore_courage
+	icon = GFX_focus_IBR_pol_restore_courage
+	x = -13
+	y = 15
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_i_honour_you
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_restore_courage_fx_tt
+		add_to_variable = { var = IBR_pol_un_res value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_build value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_cons value = 0.05 }
+		remove_ideas = { IBR_mirialium_cautious_contact }
+		add_stability = 0.03
+	}
+}
+
+shared_focus = { #黄金时代将再次归来！
+	id = IBR_pol_golden_age_returns
+	icon = GFX_focus_IBR_pol_golden_age_returns
+	x = -12
+	y = 16
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_restore_confidence
+	}
+	prerequisite = {
+		focus = IBR_pol_restore_courage
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_golden_age_returns_fx_tt
+		add_to_variable = { var = IBR_pol_un_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_un_ws value = 0.01 }
+		add_to_variable = { var = IBR_pol_un_stab value = 0.01 }
+		add_political_power = 50
+		army_experience = 50
+		navy_experience = 50
+		add_stability = 0.05
+		clamp_variable = { var = IBR_pol_un_res min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_un_build min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_un_cons min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_un_pp min = 0 max = 0.25 }
+		clamp_variable = { var = IBR_pol_un_ws min = 0 max = 0.05 }
+		clamp_variable = { var = IBR_pol_un_stab min = 0 max = 0.05 }
+	}
+}
+
+shared_focus = { #极端教条再审核
+	id = IBR_pol_review_dogma
+	icon = GFX_focus_IBR_pol_review_dogma
+	x = -17
+	y = 15
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_secret_conclave
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_review_dogma_fx_tt
+		add_to_variable = { var = IBR_pol_ph_exp value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_stab value = 0.01 }
+		add_political_power = 25
+		add_stability = 0.02
+	}
+}
+
+shared_focus = { #争议卷宗再审判
+	id = IBR_pol_retrial_records
+	icon = GFX_focus_IBR_pol_retrial_records
+	x = -19
+	y = 15
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_secret_conclave
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_retrial_records_fx_tt
+		add_to_variable = { var = IBR_pol_ph_org value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_atk value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_def value = 0.05 }
+		add_stability = 0.03
+	}
+}
+
+shared_focus = { #圣徒的退休前旅行
+	id = IBR_pol_saint_last_journey
+	icon = GFX_focus_IBR_pol_saint_last_journey
+	x = -18
+	y = 16
+	cost = 5
+	prerequisite = {
+		focus = IBR_pol_review_dogma
+	}
+	prerequisite = {
+		focus = IBR_pol_retrial_records
+	}
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = IBR_pol_saint_last_journey_fx_tt
+		add_to_variable = { var = IBR_pol_ph_exp value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_pp value = 0.05 }
+		add_to_variable = { var = IBR_pol_ph_stab value = 0.01 }
+		remove_ideas = { IBR_inquisition_reforming }
+		add_research_slot = 1
+	}
+}

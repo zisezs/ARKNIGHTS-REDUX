@@ -1,0 +1,791 @@
+######################
+## 伊比利亚（IBR）军事国策簇 —— 共享国策
+## 由 common/national_focus/IBR.txt 的 IBR_torch_of_iberia 以 shared_focus = <id> 引用并入主树
+## 版式：起始国策无前置，向下连 6 列列首；每列纯纵向 4 格、前置只连本列；
+##       每条路线在两列之下加一个收尾国策；三个收尾共同连到最终国策。
+## 坐标区 x = -3..11, y = 15..21（主树 y 0..7，发展度树 DEV y 9..13，三区不重叠）
+##       三条线以陆军轴 x = 4 为中轴左右展开：甲线 -3/-1、乙线 3/5、丙线 9/11
+## 每格完成的正面收益走「升级型民族精神」阶梯（见 IBR_military_ideas.txt）：甲线【收回的海洋遗产】、
+##   乙线【惩戒军团重生】、丙线【重铸的无敌舰队】、终幕【永恒征服】；乙线另推进负面精神【名册上的惩戒军】。
+## 生成器 docs/gen_ibr_military.cjs（改数据表重跑，勿手改产物）
+######################
+
+shared_focus = { #锈蚀的黄金与发潮的火药
+	id = IBR_mil_root
+	icon = GFX_focus_IBR_mil_root
+	x = 4
+	y = 15
+	cost = 4
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = IBR_hollow_roster } } } add_dynamic_modifier = { modifier = IBR_hollow_roster } }
+		army_experience = 20
+		custom_effect_tooltip = IBR_mil_root_tt
+	}
+}
+
+shared_focus = { #清点弃城之夜的名册
+	id = IBR_mil_lessons_1
+	icon = GFX_focus_IBR_mil_lessons_1
+	x = -3
+	y = 16
+	cost = 4
+	prerequisite = { focus = IBR_mil_root }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		if = { limit = { has_idea = IBR_lost_maritime_heritage } remove_ideas = { IBR_lost_maritime_heritage } }
+		army_experience = 30
+		IBR_upgrade_heritage_effect = yes
+		custom_effect_tooltip = IBR_mil_lessons_1_tt
+	}
+}
+
+shared_focus = { #开放海图与战时档案
+	id = IBR_mil_lessons_2
+	icon = GFX_focus_IBR_mil_lessons_2
+	x = -3
+	y = 17
+	cost = 4
+	prerequisite = { focus = IBR_mil_lessons_1 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 40
+		navy_experience = 15
+		IBR_upgrade_heritage_effect = yes
+	}
+}
+
+shared_focus = { #岸防炮台校射演练
+	id = IBR_mil_lessons_3
+	icon = GFX_focus_IBR_mil_lessons_3
+	x = -3
+	y = 18
+	cost = 4
+	prerequisite = { focus = IBR_mil_lessons_2 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 30
+		navy_experience = 30
+		IBR_upgrade_heritage_effect = yes
+	}
+}
+
+shared_focus = { #灯塔瞭望链
+	id = IBR_mil_lessons_4
+	icon = GFX_focus_IBR_mil_lessons_4
+	x = -3
+	y = 19
+	cost = 4
+	prerequisite = { focus = IBR_mil_lessons_3 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 20
+		navy_experience = 40
+		add_political_power = 40
+		IBR_upgrade_heritage_effect = yes
+	}
+}
+
+shared_focus = { #参谋轮习于灯塔之下
+	id = IBR_mil_lessons_5
+	icon = GFX_focus_IBR_mil_lessons_5
+	x = -1
+	y = 16
+	cost = 4
+	prerequisite = { focus = IBR_mil_root }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		if = { limit = { has_idea = IBR_lost_maritime_heritage } remove_ideas = { IBR_lost_maritime_heritage } }
+		army_experience = 50
+		navy_experience = 20
+		IBR_upgrade_heritage_effect = yes
+	}
+}
+
+shared_focus = { #表彰从深海归来的人
+	id = IBR_mil_lessons_6
+	icon = GFX_focus_IBR_mil_lessons_6
+	x = -1
+	y = 17
+	cost = 4
+	prerequisite = { focus = IBR_mil_lessons_5 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 30
+		navy_experience = 15
+		add_political_power = 60
+		IBR_upgrade_heritage_effect = yes
+	}
+}
+
+shared_focus = { #重组锈蚀的龙骨
+	id = IBR_mil_lessons_7
+	icon = GFX_focus_IBR_mil_lessons_7
+	x = -1
+	y = 18
+	cost = 4
+	prerequisite = { focus = IBR_mil_lessons_6 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 15
+		navy_experience = 50
+		IBR_upgrade_heritage_effect = yes
+	}
+}
+
+shared_focus = { #深海战例讲习所
+	id = IBR_mil_lessons_8
+	icon = GFX_focus_IBR_mil_lessons_8
+	x = -1
+	y = 19
+	cost = 4
+	prerequisite = { focus = IBR_mil_lessons_7 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 40
+		navy_experience = 40
+		IBR_upgrade_heritage_effect = yes
+	}
+}
+
+shared_focus = { #把那一夜写进操典
+	id = IBR_mil_lessons_9
+	icon = GFX_focus_IBR_mil_lessons_9
+	x = -2
+	y = 20
+	cost = 4
+	prerequisite = { focus = IBR_mil_lessons_4 focus = IBR_mil_lessons_8 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 60
+		navy_experience = 50
+		IBR_upgrade_heritage_effect = yes
+		IBR_upgrade_sun_effect = yes
+		custom_effect_tooltip = IBR_mil_capstone_tt
+	}
+}
+
+shared_focus = { #教区征发令
+	id = IBR_mil_shield_1
+	icon = GFX_focus_IBR_mil_shield_1
+	x = 3
+	y = 16
+	cost = 4
+	prerequisite = { focus = IBR_mil_root }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 35
+		add_manpower = 40000
+		IBR_upgrade_shield_effect = yes
+		custom_effect_tooltip = IBR_hollow_roster_modify_tt
+		add_to_variable = {
+			IBR_mil_ro_0 = 0.03
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_1 = 0.02
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_2 = 0.02
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_3 = -0.03
+			tooltip = IBR_mil_ro_3_value_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_4 = 0.02
+			tooltip = conscription_factor_tt
+		}
+	}
+}
+
+shared_focus = { #山地火枪营
+	id = IBR_mil_shield_2
+	icon = GFX_focus_IBR_mil_shield_2
+	x = 3
+	y = 17
+	cost = 4
+	prerequisite = { focus = IBR_mil_shield_1 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 40
+		add_manpower = 30000
+		IBR_upgrade_shield_effect = yes
+		custom_effect_tooltip = IBR_hollow_roster_modify_tt
+		add_to_variable = {
+			IBR_mil_ro_0 = 0.03
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_1 = 0.02
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_2 = 0.02
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_3 = -0.03
+			tooltip = IBR_mil_ro_3_value_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_4 = 0.02
+			tooltip = conscription_factor_tt
+		}
+	}
+}
+
+shared_focus = { #要塞炮术学校
+	id = IBR_mil_shield_3
+	icon = GFX_focus_IBR_mil_shield_3
+	x = 3
+	y = 18
+	cost = 4
+	prerequisite = { focus = IBR_mil_shield_2 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 45
+		IBR_upgrade_shield_effect = yes
+		custom_effect_tooltip = IBR_hollow_roster_modify_tt
+		add_to_variable = {
+			IBR_mil_ro_0 = 0.03
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_1 = 0.02
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_2 = 0.02
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_3 = -0.03
+			tooltip = IBR_mil_ro_3_value_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_4 = 0.02
+			tooltip = conscription_factor_tt
+		}
+	}
+}
+
+shared_focus = { #军械自给作坊
+	id = IBR_mil_shield_4
+	icon = GFX_focus_IBR_mil_shield_4
+	x = 3
+	y = 19
+	cost = 4
+	prerequisite = { focus = IBR_mil_shield_3 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 40
+		add_political_power = 50
+		IBR_upgrade_shield_effect = yes
+		custom_effect_tooltip = IBR_hollow_roster_modify_tt
+		add_to_variable = {
+			IBR_mil_ro_0 = 0.03
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_1 = 0.02
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_2 = 0.02
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_3 = -0.03
+			tooltip = IBR_mil_ro_3_value_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_4 = 0.02
+			tooltip = conscription_factor_tt
+		}
+	}
+}
+
+shared_focus = { #督练区制度
+	id = IBR_mil_shield_5
+	icon = GFX_focus_IBR_mil_shield_5
+	x = 5
+	y = 16
+	cost = 4
+	prerequisite = { focus = IBR_mil_root }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 55
+		add_political_power = 30
+		IBR_upgrade_shield_effect = yes
+		custom_effect_tooltip = IBR_hollow_roster_modify_tt
+		add_to_variable = {
+			IBR_mil_ro_0 = 0.03
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_1 = 0.02
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_2 = 0.02
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_3 = -0.03
+			tooltip = IBR_mil_ro_3_value_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_4 = 0.02
+			tooltip = conscription_factor_tt
+		}
+	}
+}
+
+shared_focus = { #高原骑兵团巡边
+	id = IBR_mil_shield_6
+	icon = GFX_focus_IBR_mil_shield_6
+	x = 5
+	y = 17
+	cost = 4
+	prerequisite = { focus = IBR_mil_shield_5 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 40
+		add_manpower = 25000
+		IBR_upgrade_shield_effect = yes
+		custom_effect_tooltip = IBR_hollow_roster_modify_tt
+		add_to_variable = {
+			IBR_mil_ro_0 = 0.03
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_1 = 0.02
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_2 = 0.02
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_3 = -0.03
+			tooltip = IBR_mil_ro_3_value_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_4 = 0.02
+			tooltip = conscription_factor_tt
+		}
+	}
+}
+
+shared_focus = { #伤兵与抚恤行会
+	id = IBR_mil_shield_7
+	icon = GFX_focus_IBR_mil_shield_7
+	x = 5
+	y = 18
+	cost = 4
+	prerequisite = { focus = IBR_mil_shield_6 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 35
+		add_manpower = 50000
+		IBR_upgrade_shield_effect = yes
+		custom_effect_tooltip = IBR_hollow_roster_modify_tt
+		add_to_variable = {
+			IBR_mil_ro_0 = 0.03
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_1 = 0.02
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_2 = 0.02
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_3 = -0.03
+			tooltip = IBR_mil_ro_3_value_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_4 = 0.02
+			tooltip = conscription_factor_tt
+		}
+	}
+}
+
+shared_focus = { #常备师团定额
+	id = IBR_mil_shield_8
+	icon = GFX_focus_IBR_mil_shield_8
+	x = 5
+	y = 19
+	cost = 4
+	prerequisite = { focus = IBR_mil_shield_7 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 60
+		IBR_upgrade_shield_effect = yes
+		custom_effect_tooltip = IBR_hollow_roster_modify_tt
+		add_to_variable = {
+			IBR_mil_ro_0 = 0.03
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_1 = 0.02
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_2 = 0.02
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_3 = -0.03
+			tooltip = IBR_mil_ro_3_value_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_4 = 0.02
+			tooltip = conscription_factor_tt
+		}
+	}
+}
+
+shared_focus = { #惩戒军团重生
+	id = IBR_mil_shield_9
+	icon = GFX_focus_IBR_mil_shield_9
+	x = 4
+	y = 20
+	cost = 4
+	prerequisite = { focus = IBR_mil_shield_4 focus = IBR_mil_shield_8 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		remove_dynamic_modifier = { modifier = IBR_hollow_roster }
+		army_experience = 60
+		IBR_upgrade_shield_effect = yes
+		IBR_upgrade_sun_effect = yes
+		custom_effect_tooltip = IBR_hollow_roster_modify_tt
+		add_to_variable = {
+			IBR_mil_ro_0 = 0.03
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_1 = 0.02
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_2 = 0.02
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_3 = -0.03
+			tooltip = IBR_mil_ro_3_value_tt
+		}
+		add_to_variable = {
+			IBR_mil_ro_4 = 0.02
+			tooltip = conscription_factor_tt
+		}
+		clamp_variable = { var = IBR_mil_ro_0 min = -0.27 max = 0 }
+		clamp_variable = { var = IBR_mil_ro_1 min = -0.18 max = 0 }
+		clamp_variable = { var = IBR_mil_ro_2 min = -0.18 max = 0 }
+		clamp_variable = { var = IBR_mil_ro_3 min = 0 max = 0.27 }
+		clamp_variable = { var = IBR_mil_ro_4 min = -0.18 max = 0 }
+		custom_effect_tooltip = IBR_mil_capstone_tt
+	}
+}
+
+shared_focus = { #打捞港内沉船
+	id = IBR_mil_navy_1
+	icon = GFX_focus_IBR_mil_navy_1
+	x = 9
+	y = 16
+	cost = 4
+	prerequisite = { focus = IBR_mil_root }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		navy_experience = 40
+		IBR_upgrade_armada_effect = yes
+	}
+}
+
+shared_focus = { #航海兄弟会招募
+	id = IBR_mil_navy_2
+	icon = GFX_focus_IBR_mil_navy_2
+	x = 9
+	y = 17
+	cost = 4
+	prerequisite = { focus = IBR_mil_navy_1 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		navy_experience = 40
+		add_manpower = 30000
+		IBR_upgrade_armada_effect = yes
+	}
+}
+
+shared_focus = { #海图局与水文测量
+	id = IBR_mil_navy_3
+	icon = GFX_focus_IBR_mil_navy_3
+	x = 9
+	y = 18
+	cost = 4
+	prerequisite = { focus = IBR_mil_navy_2 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		navy_experience = 50
+		add_political_power = 30
+		IBR_upgrade_armada_effect = yes
+	}
+}
+
+shared_focus = { #快炮艇夜袭队
+	id = IBR_mil_navy_4
+	icon = GFX_focus_IBR_mil_navy_4
+	x = 9
+	y = 19
+	cost = 4
+	prerequisite = { focus = IBR_mil_navy_3 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		navy_experience = 45
+		add_manpower = 20000
+		IBR_upgrade_armada_effect = yes
+	}
+}
+
+shared_focus = { #船台与索具场扩建
+	id = IBR_mil_navy_5
+	icon = GFX_focus_IBR_mil_navy_5
+	x = 11
+	y = 16
+	cost = 4
+	prerequisite = { focus = IBR_mil_root }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		navy_experience = 50
+		add_political_power = 40
+		IBR_upgrade_armada_effect = yes
+	}
+}
+
+shared_focus = { #银船队护航编组
+	id = IBR_mil_navy_6
+	icon = GFX_focus_IBR_mil_navy_6
+	x = 11
+	y = 17
+	cost = 4
+	prerequisite = { focus = IBR_mil_navy_5 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		navy_experience = 55
+		IBR_upgrade_armada_effect = yes
+	}
+}
+
+shared_focus = { #三桅旗舰下水
+	id = IBR_mil_navy_7
+	icon = GFX_focus_IBR_mil_navy_7
+	x = 11
+	y = 18
+	cost = 4
+	prerequisite = { focus = IBR_mil_navy_6 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		navy_experience = 60
+		IBR_upgrade_armada_effect = yes
+	}
+}
+
+shared_focus = { #水手长期服役令
+	id = IBR_mil_navy_8
+	icon = GFX_focus_IBR_mil_navy_8
+	x = 11
+	y = 19
+	cost = 4
+	prerequisite = { focus = IBR_mil_navy_7 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		navy_experience = 60
+		add_manpower = 20000
+		IBR_upgrade_armada_effect = yes
+	}
+}
+
+shared_focus = { #重铸无敌舰队
+	id = IBR_mil_navy_9
+	icon = GFX_focus_IBR_mil_navy_9
+	x = 10
+	y = 20
+	cost = 4
+	prerequisite = { focus = IBR_mil_navy_4 focus = IBR_mil_navy_8 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		navy_experience = 70
+		IBR_upgrade_armada_effect = yes
+		IBR_upgrade_sun_effect = yes
+		custom_effect_tooltip = IBR_mil_capstone_tt
+	}
+}
+
+shared_focus = { #永恒征服
+	id = IBR_mil_final
+	icon = GFX_focus_IBR_mil_final
+	x = 4
+	y = 21
+	cost = 4
+	prerequisite = { focus = IBR_mil_lessons_9 focus = IBR_mil_shield_9 focus = IBR_mil_navy_9 }
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		factor = 3
+	}
+
+	completion_reward = {
+		army_experience = 60
+		navy_experience = 60
+		add_political_power = 60
+		IBR_upgrade_sun_effect = yes
+		custom_effect_tooltip = IBR_mil_final_tt
+	}
+}
+
