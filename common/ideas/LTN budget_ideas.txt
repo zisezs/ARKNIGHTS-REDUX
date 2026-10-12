@@ -1,0 +1,108 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) ·「联合帝国预算计划」—— 一次性民族精神
+#
+# 长期加成一律走 idea（国策 reward 里直接写修正符会被引擎静默吞掉）。
+# picture 复用 interface/_ARF_ideas/LTN_ideas.gfx 已注册的 GFX_idea_LTN_*（不新出图）。
+# ⚠️ ideas 里不写 desc =（引擎报 Unexpected token: desc），描述走 loc 键 <id>_desc 自动取。
+# 计时型（180/100 天）由 common/scripted_effects/LTN_budget_effects.txt 的月度脉冲摘除。
+# ============================================================================
+
+ideas = {
+
+	country = {
+		# 预算案以微弱多数通过：+10% 消费品需求（拨款本身）、+15% 企业产出
+		LTN_budget_act_passed = {
+			picture = GFX_idea_LTN_dyn_treasury
+			modifier = {
+				consumer_goods_factor = 0.10
+				industrial_capacity_factory = 0.15
+				political_power_gain = 0.05
+			}
+		}
+	}
+
+	country = {
+		# 温和法案：预算案流案之后保守派推出来的东西
+		LTN_budget_act_mild = {
+			picture = GFX_idea_LTN_dyn_electors_fetter
+			modifier = {
+				consumer_goods_factor = 0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+	}
+
+	country = {
+		# 预算拨款的工地：+20% 建造速度，为期 180 天
+		LTN_budget_construction_fund = {
+			picture = GFX_idea_LTN_dyn_atelier
+			modifier = {
+				production_speed_buildings_factor = 0.20
+			}
+		}
+	}
+
+	country = {
+		# 莱式军官团：陆军进攻 +5%
+		LTN_leithanien_officer_corps = {
+			picture = GFX_idea_LTN_dyn_ironlaw
+			modifier = {
+				army_attack_factor = 0.05
+			}
+		}
+	}
+
+	country = {
+		# 统一思想：科研速度 +10%
+		LTN_unified_thought = {
+			picture = GFX_idea_LTN_dyn_golden_law
+			modifier = {
+				research_speed_factor = 0.10
+			}
+		}
+	}
+
+	country = {
+		# 新风尚：言论部分开放换来的长期科研潜力损耗 -5%
+		LTN_new_zeitgeist = {
+			picture = GFX_idea_LTN_dyn_outreach
+			modifier = {
+				research_speed_factor = -0.05
+			}
+		}
+	}
+
+	country = {
+		# 巫妖的告别：弗莱蒙特带族离开，为期 100 天
+		LTN_lich_farewell = {
+			picture = GFX_idea_LTN_dyn_old_echo
+			modifier = {
+				research_speed_factor = -0.10
+				political_power_gain = -0.05
+			}
+		}
+	}
+
+	country = {
+		# 黑清算时刻：白女皇的行政效率被下议院拖住
+		LTN_black_moment = {
+			picture = GFX_idea_LTN_dyn_twin_rule
+			modifier = {
+				political_power_gain = -0.15
+				political_power_cost = 0.10
+			}
+		}
+	}
+
+	country = {
+		# 高塔的守护者：终幕，双子女皇同袍
+		LTN_guardian_of_the_tower = {
+			picture = GFX_idea_LTN_one_voice
+			modifier = {
+				stability_factor = 0.10
+				war_support_factor = 0.10
+				drift_defence_factor = 0.15
+			}
+		}
+	}
+}

@@ -1,0 +1,103 @@
+######################
+## 伊比利亚 政治线 · 民族精神（溃局与缓和档） ##
+## 【永恒愤怒，永恒变革】授予三个溃局负面；
+## 三条路线各认领一个，沿路换到"缓和档"（强度减半），线尾 remove_ideas 彻底清零。
+## 三个正面精神不在这里 —— 它们是变量驱动的动态修正符，见 common/dynamic_modifiers/IBR_political_dynamic_modifiers.txt
+######################
+
+ideas = {
+	country = {
+
+		# —— 溃局（开局，来自国策【永恒愤怒，永恒变革】） ——
+
+		# 溃散的地方驻军 —— 国防军与惩戒军把利刃刺向同胞（左线认领）
+		IBR_broken_garrisons = {
+			picture = IBR_broken_garrisons
+			modifier = {
+				army_org_factor = -0.30
+				army_attack_factor = -0.30
+				army_defence_factor = -0.30
+				experience_gain_army_factor = -0.50
+			}
+		}
+
+		# 盗匪与军阀横行 —— 旧王室与旧贵族的卑鄙怯懦（右线认领）
+		IBR_bandits_and_warlords = {
+			picture = IBR_bandits_and_warlords
+			modifier = {
+				production_factory_max_efficiency_factor = -0.30
+				political_power_factor = -0.20
+				consumer_goods_factor = 0.20
+				industrial_capacity_factory = -0.20
+			}
+		}
+
+		# 阿戈尔的恶意干涉 —— 种族仇杀与来自海上的手（中线认领）
+		IBR_aegir_malicious_interference = {
+			picture = IBR_aegir_malicious_interference
+			modifier = {
+				research_speed_factor = -0.50
+				conscription_factor = -0.30
+				production_speed_buildings_factor = -0.30
+			}
+		}
+
+		# —— 缓和档（沿路 swap_ideas 换上去，强度减半） ——
+
+		# 重整中的惩戒军（左线 · 罪孽为谁而审判）
+		IBR_inquisition_reforming = {
+			picture = IBR_inquisition_reforming
+			modifier = {
+				army_org_factor = -0.15
+				army_attack_factor = -0.15
+				army_defence_factor = -0.15
+				experience_gain_army_factor = -0.25
+			}
+		}
+
+		# 收拢中的乡野（右线 · 骗子、统帅与国王）
+		IBR_countryside_regathering = {
+			picture = IBR_countryside_regathering
+			modifier = {
+				production_factory_max_efficiency_factor = -0.15
+				political_power_factor = -0.10
+				consumer_goods_factor = 0.10
+				industrial_capacity_factory = -0.10
+			}
+		}
+
+		# 谨慎接触中的弥利亚留姆（中线 · 阿戈尔人与黎博利人）
+		IBR_mirialium_cautious_contact = {
+			picture = IBR_mirialium_cautious_contact
+			modifier = {
+				research_speed_factor = -0.25
+				conscription_factor = -0.15
+				production_speed_buildings_factor = -0.15
+			}
+		}
+
+		# —— 终幕决议换上的轻档负面（比缓和档再轻一半） ——
+
+		# 被镇压的恶徒（终幕决议【碾碎不忠者！】把【盗匪与军阀横行】换成本档）
+		IBR_crushed_brigands = {
+			picture = IBR_crushed_brigands
+			modifier = {
+				production_factory_max_efficiency_factor = -0.10
+				political_power_factor = -0.05
+				consumer_goods_factor = 0.05
+				industrial_capacity_factory = -0.05
+			}
+		}
+
+		# 暂且安心的国防军（终幕决议【女皇陛下的全国巡礼！】把【溃散的地方驻军】换成本档）
+		IBR_reassured_defence_army = {
+			picture = IBR_reassured_defence_army
+			modifier = {
+				army_org_factor = -0.10
+				army_attack_factor = -0.10
+				army_defence_factor = -0.10
+				experience_gain_army_factor = -0.15
+			}
+		}
+	}
+}
