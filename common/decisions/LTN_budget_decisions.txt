@@ -1,0 +1,84 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) ·「联合帝国预算计划」—— 政治线决议
+#
+# 挂在既有页签 LTN_court_decisions（帝国宫廷）里，不新建分类；
+# 页签可见性由 common/decisions/categories/LTN_categories.txt 的起始格门槛决定。
+#
+# 本 mod 的三条硬规矩（都踩过，照 LTN_decisions.txt 头注释）：
+#   · 决议没有 completion_reward 这个键
+#   · 计时决议不写 cancel_trigger —— 块内是「与」，条件一翻转会被静默自取消
+#   · 可见性一律用 has_completed_focus / 旗标，不靠 allow
+#
+# 图标全部取自本工程 LTN_decisions.txt / LTN_ops_decisions.txt 已用过的名单
+# ============================================================================
+
+LTN_court_decisions = {
+
+	# ---- 选帝侯在行动：预算机器要人盯着，点一下压一次忠诚度 ----
+	# 设计稿里那句「施瓦结里伯爵那里可以同时开启进度条（逼迫玩家定时点一下）」的落点。
+	# 存续期内不动数值；每次点击 = 诸侯被迫在拨款单上签字（预算优势 +5），
+	# 但忠诚度被压下去（-5）、密谋度抬头（+5）。到期后 60 天可以再点一次。
+	LTN_dec_elector_in_action = {
+		icon = GFX_decision_generic_political_rally
+		cost = 20
+		days_remove = 30
+		days_re_enable = 60
+
+		available = {
+			has_country_flag = LTN_elector_watch_open
+		}
+
+		visible = {
+			OR = {
+				has_completed_focus = LTN_break_the_silence
+				has_completed_focus = LTN_the_count_is_right
+			}
+		}
+
+		complete_effect = {
+			add_to_variable = { LTN_budget_sup = 5 }
+			custom_effect_tooltip = LTN_budget_sup_tt
+		}
+
+		remove_effect = {
+			subtract_from_variable = { LTN_loyal_viol = 5 }
+			subtract_from_variable = { LTN_loyal_cello = 5 }
+			subtract_from_variable = { LTN_ebl_stab = 0.05 }
+			add_to_variable = { LTN_conspiracy = 5 }
+			custom_effect_tooltip = LTN_loyal_both_tt
+			custom_effect_tooltip = LTN_conspiracy_tt
+		}
+
+		ai_will_do = { base = 35 }
+	}
+
+	# ---- 拉拢一位选帝侯：黑清算时刻倒计时的解药，最多三家 ----
+	LTN_dec_coopt_elector = {
+		icon = GFX_decision_generic_fundraising
+		cost = 45
+		days_remove = 20
+		days_re_enable = 30
+
+		available = {
+			check_variable = { LTN_ct_black > 0 }
+			check_variable = { LTN_coopt_count < 3 }
+			check_variable = { LTN_conspiracy < 90 }
+		}
+
+		visible = {
+			has_completed_focus = LTN_where_is_your_other_half
+		}
+
+		complete_effect = {
+			add_to_variable = { LTN_coopt_count = 1 }
+			add_to_variable = { LTN_loyal_viol = 10 }
+			add_to_variable = { LTN_loyal_cello = 10 }
+			add_to_variable = { LTN_ebl_stab = 0.05 }
+			add_to_variable = { LTN_ebl_drift = 0.05 }
+			subtract_from_variable = { LTN_conspiracy = 10 }
+			custom_effect_tooltip = LTN_coopt_tt
+		}
+
+		ai_will_do = { base = 60 }
+	}
+}

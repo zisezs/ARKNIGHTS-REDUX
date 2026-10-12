@@ -150,10 +150,10 @@ LTN_score_prep_decisions = {
 	LTN_prep_copy_audit = {
 		icon = GFX_decision_generic_research
 		available = {
-			has_completed_focus = LTN_read_the_score
+			has_completed_focus = LTN_tell_the_ministers
 			check_variable = { var = LTN_score_insight value = 6 compare = less_than }
 		}
-		allowed = { has_completed_focus = LTN_read_the_score }
+		allowed = { has_completed_focus = LTN_tell_the_ministers }
 		cost = 30
 		days_remove = 30
 		days_re_enable = 180
@@ -171,8 +171,8 @@ LTN_score_prep_decisions = {
 	# ---- B2 与选帝侯会签 ----
 	LTN_prep_elector_pact = {
 		icon = GFX_decision_generic_political_discourse
-		available = { has_completed_focus = LTN_electors_consent }
-		allowed = { has_completed_focus = LTN_electors_consent }
+		available = { has_completed_focus = LTN_elector_loyalty_problem }
+		allowed = { has_completed_focus = LTN_elector_loyalty_problem }
 		cost = 40
 		days_remove = 40
 		days_re_enable = 240
@@ -190,8 +190,8 @@ LTN_score_prep_decisions = {
 	# ---- B3 乐章预演 ----
 	LTN_prep_rehearsal = {
 		icon = GFX_decision_generic_political_address
-		available = { has_completed_focus = LTN_the_rehearsal }
-		allowed = { has_completed_focus = LTN_the_rehearsal }
+		available = { has_completed_focus = LTN_open_final_vote }
+		allowed = { has_completed_focus = LTN_open_final_vote }
 		cost = 35
 		days_remove = 30
 		days_re_enable = 120
@@ -208,10 +208,10 @@ LTN_score_prep_decisions = {
 	LTN_prep_new_law_proclaim = {
 		icon = GFX_decision_generic_nationalism
 		available = {
-			has_completed_focus = LTN_new_golden_law
+			has_completed_focus = LTN_round_table_law
 			NOT = { has_country_flag = LTN_new_law_proclaimed }
 		}
-		allowed = { has_completed_focus = LTN_new_golden_law }
+		allowed = { has_completed_focus = LTN_round_table_law }
 		cost = 100
 		days_remove = 90
 		fire_only_once = yes
