@@ -1,0 +1,275 @@
+######################
+## 伊比利亚 决议组 · 审判庭大净化 ##
+## 由国策 IBR_pol_pure_heart（伊比利亚·纯白之心）解锁（类目 allowed 见 common/decisions/categories/IBR_decision_categories.txt）
+## 三个数值是国家变量，0~100，起始 50，每 7 天回落 1%（on_weekly_IBR，见 common/on_actions/IBR_on_actions.txt）：
+##   IBR_pur_purity      审判官纯洁性
+##   IBR_pur_discipline  惩戒军纪律性
+##   IBR_pur_trust       民众信任度
+######################
+
+IBR_purification_category = {
+
+	#净化状况（纯状态条，不可点击，只显示三个数值）
+	IBR_purification_status = {
+		icon = GFX_decision_generic_nationalism
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	#重申审判庭建立初衷
+	IBR_reassert_founding_ideal = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = {
+			original_tag = IBR
+		}
+
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { var = IBR_pur_purity value = 5 tooltip = IBR_pur_purity_tt }
+			add_to_variable = { var = IBR_pur_trust value = 1 tooltip = IBR_pur_trust_tt }
+			clamp_variable = { var = IBR_pur_purity min = 0 max = 100 }
+			clamp_variable = { var = IBR_pur_trust min = 0 max = 100 }
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	#镇压极端派审判官
+	IBR_suppress_extremist_inquisitors = {
+		icon = GFX_decision_generic_operation
+
+		allowed = {
+			original_tag = IBR
+		}
+
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { var = IBR_pur_purity value = 2 tooltip = IBR_pur_purity_tt }
+			add_to_variable = { var = IBR_pur_discipline value = 2 tooltip = IBR_pur_discipline_tt }
+			clamp_variable = { var = IBR_pur_purity min = 0 max = 100 }
+			clamp_variable = { var = IBR_pur_discipline min = 0 max = 100 }
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	#点验各教堂的铳械（国策 · 铳枪为谁而轰鸣）
+	IBR_inventory_church_arms = {
+		icon = GFX_decision_generic_army_support
+
+		allowed = {
+			original_tag = IBR
+		}
+
+		available = {
+			has_completed_focus = IBR_pol_who_fires_guns
+		}
+
+		cost = 25
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { var = IBR_pur_discipline value = 3 tooltip = IBR_pur_discipline_tt }
+			add_to_variable = { var = IBR_pur_purity value = 2 tooltip = IBR_pur_purity_tt }
+			clamp_variable = { var = IBR_pur_discipline min = 0 max = 100 }
+			clamp_variable = { var = IBR_pur_purity min = 0 max = 100 }
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	#考核剑术教习（国策 · 刺剑为谁而出鞘）
+	IBR_review_fencing_masters = {
+		icon = GFX_decision_generic_military
+
+		allowed = {
+			original_tag = IBR
+		}
+
+		available = {
+			has_completed_focus = IBR_pol_who_draws_blade
+		}
+
+		days_re_enable = 45
+
+		complete_effect = {
+			add_to_variable = { var = IBR_pur_discipline value = 2 tooltip = IBR_pur_discipline_tt }
+			add_to_variable = { var = IBR_pur_purity value = 1 tooltip = IBR_pur_purity_tt }
+			add_to_variable = { var = IBR_pur_trust value = 1 tooltip = IBR_pur_trust_tt }
+			clamp_variable = { var = IBR_pur_discipline min = 0 max = 100 }
+			clamp_variable = { var = IBR_pur_purity min = 0 max = 100 }
+			clamp_variable = { var = IBR_pur_trust min = 0 max = 100 }
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	#开棺重审陈年血案（国策 · 罪孽为谁而审判）
+	# 代价：稳定度 −5%；换来的信任度是全组最高的一档
+	IBR_reopen_old_blood_cases = {
+		icon = GFX_decision_generic_civil_support
+
+		allowed = {
+			original_tag = IBR
+		}
+
+		available = {
+			has_completed_focus = IBR_pol_who_judges_sin
+		}
+
+		days_re_enable = 60
+
+		complete_effect = {
+			add_stability = -0.05
+			add_to_variable = { var = IBR_pur_trust value = 4 tooltip = IBR_pur_trust_tt }
+			add_to_variable = { var = IBR_pur_purity value = 2 tooltip = IBR_pur_purity_tt }
+			clamp_variable = { var = IBR_pur_trust min = 0 max = 100 }
+			clamp_variable = { var = IBR_pur_purity min = 0 max = 100 }
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+	#公开审务档案
+	IBR_open_inquisition_archives = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = {
+			original_tag = IBR
+		}
+
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { var = IBR_pur_purity value = 3 tooltip = IBR_pur_purity_tt }
+			add_to_variable = { var = IBR_pur_trust value = 2 tooltip = IBR_pur_trust_tt }
+			clamp_variable = { var = IBR_pur_purity min = 0 max = 100 }
+			clamp_variable = { var = IBR_pur_trust min = 0 max = 100 }
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	#清理走私与私刑
+	IBR_crack_down_on_vigilantes = {
+		icon = GFX_decision_generic_operation
+
+		allowed = {
+			original_tag = IBR
+		}
+
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { var = IBR_pur_discipline value = 3 tooltip = IBR_pur_discipline_tt }
+			add_to_variable = { var = IBR_pur_trust value = 1 tooltip = IBR_pur_trust_tt }
+			clamp_variable = { var = IBR_pur_discipline min = 0 max = 100 }
+			clamp_variable = { var = IBR_pur_trust min = 0 max = 100 }
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+	}
+}
+
+######################
+## 余烬清算 —— 两个终幕国策各自的"把溃局换成轻档"决议 ##
+## 类目见 common/decisions/categories/IBR_decision_categories.txt（visible = OR 两个终幕）
+## 换上的轻档负面在 common/ideas/IBR_political_ideas.txt
+######################
+
+IBR_purge_remnants_category = {
+
+	#碾碎不忠者！（左终幕 · 圣徒艾丽妮万岁）
+	# 代价：稳定度 + 步兵装备；把【盗匪与军阀横行】换成【被镇压的恶徒】
+	IBR_crush_the_disloyal = {
+		icon = GFX_decision_generic_army_support
+
+		allowed = {
+			original_tag = IBR
+		}
+
+		available = {
+			has_completed_focus = IBR_pol_saint_irene
+			has_idea = IBR_bandits_and_warlords
+			has_equipment = {
+				infantry_equipment > 4999
+			}
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			add_stability = -0.10
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5000
+			}
+			swap_ideas = {
+				remove_idea = IBR_bandits_and_warlords
+				add_idea = IBR_crushed_brigands
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	#女皇陛下的全国巡礼！（右终幕 · 女皇埃斯特菲尼娅万岁！）
+	# 代价：150 政治点 + 巡礼 180 天；到期把【溃散的地方驻军】换成【暂且安心的国防军】
+	IBR_imperial_progress = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = {
+			original_tag = IBR
+		}
+
+		available = {
+			has_completed_focus = IBR_pol_empress_estefania
+			has_idea = IBR_broken_garrisons
+		}
+
+		cost = 150
+		days_remove = 180
+		fire_only_once = yes
+
+		complete_effect = {
+			add_war_support = 0.03
+		}
+
+		remove_effect = {
+			swap_ideas = {
+				remove_idea = IBR_broken_garrisons
+				add_idea = IBR_reassured_defence_army
+			}
+			add_stability = 0.03
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+}

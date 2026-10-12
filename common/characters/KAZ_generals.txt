@@ -1,0 +1,237 @@
+# ==============================================================================
+# 卡兹戴尔 · 开局将领（11 位）
+#
+# 全部在 history/countries/KAZ - Kazdel.txt 里 recruit_character，开局即可用。
+# 元帅特雷西斯本人见 common/characters/KAZ.txt（KAZ_King_Theresis，已挂元帅块）。
+#
+# 肖像：gfx/leaders/KAZ/KAZ_<名>.png（156x210）+ KAZ_<名>_small.png（65x67）
+# 精灵注册在 interface/_ARF_goals/KAZ_general_portraits.gfx
+# ==============================================================================
+
+characters = {
+
+	# 特蕾西娅 —— 陆军元帅 + 开局国家领导人（进步主义）
+	KAZ_gen_Theresia = {
+		name = KAZ_gen_Theresia
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/KAZ/KAZ_Theresia.png"
+				small = "gfx/leaders/KAZ/KAZ_Theresia_small.png"
+			}
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Theresia.png"
+				small = "gfx/leaders/KAZ/KAZ_Theresia_small.png"
+			}
+		}
+		gender = female
+		country_leader = {
+			ideology = progressivism_subtype
+			traits = { KAZ_merciful_demon_king }
+			expire = "1965.1.1.1"
+			id = -1
+			desc = KAZ_gen_Theresia_desc
+		}
+		field_marshal = {
+			skill = 5
+			attack_skill = 6
+			defense_skill = 6
+			planning_skill = 4
+			logistics_skill = 4
+			traits = { ARF_babel war_hero logistics_wizard inspirational_leader trait_cautious expert_delegator thorough_planner media_personality }
+		}
+	}
+
+	# 凯尔希 —— 军团司令
+	KAZ_gen_Kaltsit = {
+		name = KAZ_gen_Kaltsit
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Kaltsit.png"
+				small = "gfx/leaders/KAZ/KAZ_Kaltsit_small.png"
+			}
+		}
+		gender = female
+		corps_commander = {
+			skill = 3
+			attack_skill = 4
+			defense_skill = 2
+			planning_skill = 4
+			logistics_skill = 4
+			traits = { ARF_babel old_guard trait_cautious commando adaptable trickster media_personality skilled_staffer CHI_commissar_officer }
+		}
+	}
+
+	# 博士 —— 军团司令
+	KAZ_gen_Doctor = {
+		name = KAZ_gen_Doctor
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Doctor.png"
+				small = "gfx/leaders/KAZ/KAZ_Doctor_small.png"
+			}
+		}
+		corps_commander = {
+			skill = 5
+			attack_skill = 5
+			defense_skill = 6
+			planning_skill = 5
+			logistics_skill = 5
+			traits = { ARF_babel brilliant_strategist unyielding_defender aggressive_assaulter infantry_expert panzer_expert offensive_doctrine harsh_leader combined_arms_expert expert_improviser CHI_staffer_officer }
+		}
+	}
+
+	# 菈玛莲 —— 军团司令
+	KAZ_gen_Lamalian = {
+		name = KAZ_gen_Lamalian
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Lamalian.png"
+				small = "gfx/leaders/KAZ/KAZ_Lamalian_small.png"
+			}
+		}
+		gender = female
+		corps_commander = {
+			skill = 4
+			attack_skill = 5
+			defense_skill = 5
+			planning_skill = 4
+			logistics_skill = 4
+			traits = { ARF_babel ARF_military_commission compassionate_leader war_hero hill_fighter urban_assault_specialist trait_engineer ranger }
+		}
+	}
+
+	# 杜卡雷 —— 军团司令
+	KAZ_gen_Dukare = {
+		name = KAZ_gen_Dukare
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Dukare.png"
+				small = "gfx/leaders/KAZ/KAZ_Dukare_small.png"
+			}
+		}
+		corps_commander = {
+			skill = 4
+			attack_skill = 6
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 6
+			traits = { ARF_military_commission war_hero trait_reckless old_guard commando trickster logistics_wizard ambusher }
+		}
+	}
+
+	# 孽茨雷 —— 军团司令
+	KAZ_gen_Niezilei = {
+		name = KAZ_gen_Niezilei
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Niezilei.png"
+				small = "gfx/leaders/KAZ/KAZ_Niezilei_small.png"
+			}
+		}
+		corps_commander = {
+			skill = 4
+			attack_skill = 7
+			defense_skill = 4
+			planning_skill = 3
+			logistics_skill = 5
+			traits = { ARF_military_commission war_hero career_officer inflexible_strategist urban_assault_specialist skilled_staffer fortress_buster aggressive_assaulter }
+		}
+	}
+
+	# 阿斯卡纶 —— 军团司令
+	KAZ_gen_Ascalon = {
+		name = KAZ_gen_Ascalon
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Ascalon.png"
+				small = "gfx/leaders/KAZ/KAZ_Ascalon_small.png"
+			}
+		}
+		gender = female
+		corps_commander = {
+			skill = 2
+			attack_skill = 4
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 3
+			traits = { ARF_babel trait_cautious commando infantry_officer camouflage_expert adaptable guerilla_fighter rising_star }
+		}
+	}
+
+	# 曼弗雷德 —— 军团司令
+	KAZ_gen_Manfred = {
+		name = KAZ_gen_Manfred
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Manfred.png"
+				small = "gfx/leaders/KAZ/KAZ_Manfred_small.png"
+			}
+		}
+		gender = male
+		corps_commander = {
+			skill = 2
+			attack_skill = 3
+			defense_skill = 4
+			planning_skill = 2
+			logistics_skill = 4
+			traits = { ARF_military_commission trait_cautious career_officer infantry_officer harsh_leader commando camouflage_expert ambusher urban_assault_specialist rising_star }
+		}
+	}
+
+	# 隐得来希 —— 军团司令
+	KAZ_gen_Entelechy = {
+		name = KAZ_gen_Entelechy
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Entelechy.png"
+				small = "gfx/leaders/KAZ/KAZ_Entelechy_small.png"
+			}
+		}
+		corps_commander = {
+			skill = 3
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 5
+			traits = { ARF_babel ARF_military_commission trait_cautious logistics_wizard rising_star infantry_officer ambusher trait_engineer scavenger }
+		}
+	}
+
+	# 奎萨图什塔 —— 军团司令
+	KAZ_gen_Quizatoshita = {
+		name = KAZ_gen_Quizatoshita
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Quizatoshita.png"
+				small = "gfx/leaders/KAZ/KAZ_Quizatoshita_small.png"
+			}
+		}
+		corps_commander = {
+			skill = 4
+			attack_skill = 4
+			defense_skill = 3
+			planning_skill = 4
+			logistics_skill = 2
+			traits = { ARF_military_commission trait_reckless war_hero ambusher media_personality aggressive_assaulter }
+		}
+	}
+
+	# 变形者集群 —— 军团司令
+	KAZ_gen_Metamorphosis = {
+		name = KAZ_gen_Metamorphosis
+		portraits = {
+			army = {
+				large = "gfx/leaders/KAZ/KAZ_Metamorphosis.png"
+				small = "gfx/leaders/KAZ/KAZ_Metamorphosis_small.png"
+			}
+		}
+		corps_commander = {
+			skill = 3
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 6
+			logistics_skill = 3
+			traits = { ARF_military_commission trait_cautious career_officer ambusher urban_assault_specialist camouflage_expert }
+		}
+	}
+}

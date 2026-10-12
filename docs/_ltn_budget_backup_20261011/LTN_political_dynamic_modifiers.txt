@@ -1,0 +1,147 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) · 成长型民族精神（9 条 53 枚变量，每档 5%）
+#
+# 由 docs/gen_ltn_rewards.cjs 生成，勿手改；改数值改生成器的 SPIRITS 表。
+# 数值全在 5% 的格子上：初值与满档都是 5% 的整数倍（每周型为 0.5%），
+# 每格国策对每枚变量只加一档 ±5%（每周型 ±0.5%）。
+# 初值在 history/countries/LTN - Leithanien.txt；喂养在 common/national_focus/LTN_political.txt 各格。
+#
+# 铁律：国家级 DM 带 icon 即在政治栏显示为民族精神；一个 reward 里同一变量只写一次；
+#       每格重挂一次 add_dynamic_modifier（幂等，写在 hidden_effect 里免得刷屏）；
+#       targeted_modifier 在这里不生效。
+# 键名核过原版 documentation/modifiers_documentation.md 或原版数据文件。
+# ============================================================================
+
+# ---- 【双塔共治】 ----
+LTN_dyn_twin_rule = {
+	icon = GFX_idea_LTN_dyn_twin_rule
+	enable = {
+		always = yes
+	}
+
+	political_power_gain = LTN_tw_ppg   # 每档 5%：初值 5% → 满档 25%
+	political_power_factor = LTN_tw_ppf   # 每档 5%：初值 5% → 满档 25%
+	stability_factor = LTN_tw_stab   # 每档 5%：初值 -10% → 满档 25%
+	war_support_factor = LTN_tw_ws   # 每档 5%：初值 0% → 满档 25%
+	drift_defence_factor = LTN_tw_drift   # 每档 5%：初值 5% → 满档 25%
+	stability_weekly = LTN_tw_week   # 每档 0.5%：初值 -0.5% → 满档 1%
+}
+
+# ---- 【金律乐章】 ----
+LTN_dyn_golden_law = {
+	icon = GFX_idea_LTN_dyn_golden_law
+	enable = {
+		always = yes
+	}
+
+	stability_factor = LTN_law_stab   # 每档 5%：初值 10% → 满档 25%
+	research_speed_factor = LTN_law_res   # 每档 5%：初值 5% → 满档 25%
+	political_power_gain = LTN_law_ppg   # 每档 5%：初值 5% → 满档 25%
+	drift_defence_factor = LTN_law_drift   # 每档 5%：初值 15% → 满档 25%
+	experience_gain_army_factor = LTN_law_exp   # 每档 5%：初值 0% → 满档 25%
+	stability_weekly = LTN_law_week   # 每档 0.5%：初值 -0.5% → 满档 1%
+}
+
+# ---- 【尘世遗响】 ----
+LTN_dyn_old_echo = {
+	icon = GFX_idea_LTN_dyn_old_echo
+	enable = {
+		always = yes
+	}
+
+	political_power_gain = LTN_echo_ppg   # 每档 5%：初值 -5% → 满档 25%
+	stability_factor = LTN_echo_stab   # 每档 5%：初值 -5% → 满档 25%
+	research_speed_factor = LTN_echo_res   # 每档 5%：初值 0% → 满档 15%
+	drift_defence_factor = LTN_echo_drift   # 每档 5%：初值 0% → 满档 25%
+	consumer_goods_factor = LTN_echo_cons   # 每档 5%：初值 0% → 满档 -15%
+	stability_weekly = LTN_echo_week   # 每档 0.5%：初值 -1% → 满档 0.5%
+}
+
+# ---- 【先有诸侯，再有皇帝】 ----
+LTN_dyn_electors_fetter = {
+	icon = GFX_idea_LTN_dyn_electors_fetter
+	enable = {
+		always = yes
+	}
+
+	political_power_gain = LTN_fet_ppg   # 每档 5%：初值 -10% → 满档 25%
+	conscription_factor = LTN_fet_con   # 每档 5%：初值 -10% → 满档 25%
+	production_speed_buildings_factor = LTN_fet_build   # 每档 5%：初值 -10% → 满档 25%
+	industrial_capacity_factory = LTN_fet_fac   # 每档 5%：初值 -10% → 满档 25%
+	training_time_factor = LTN_fet_train   # 每档 5%：初值 10% → 满档 -25%
+	stability_factor = LTN_fet_stab   # 每档 5%：初值 5% → 满档 25%
+}
+
+# ---- 【帝国金库】 ----
+LTN_dyn_treasury = {
+	icon = GFX_idea_LTN_dyn_treasury
+	enable = {
+		always = yes
+	}
+
+	production_speed_buildings_factor = LTN_tre_build   # 每档 5%：初值 0% → 满档 25%
+	production_factory_max_efficiency_factor = LTN_tre_prod   # 每档 5%：初值 0% → 满档 25%
+	industrial_capacity_factory = LTN_tre_fac   # 每档 5%：初值 0% → 满档 25%
+	production_factory_efficiency_gain_factor = LTN_tre_eff   # 每档 5%：初值 0% → 满档 25%
+	consumer_goods_factor = LTN_tre_cons   # 每档 5%：初值 0% → 满档 -25%
+	stability_factor = LTN_tre_stab   # 每档 5%：初值 -5% → 满档 25%
+}
+
+# ---- 【双轨工坊】 ----
+LTN_dyn_atelier = {
+	icon = GFX_idea_LTN_dyn_atelier
+	enable = {
+		always = yes
+	}
+
+	research_speed_factor = LTN_atl_res   # 每档 5%：初值 0% → 满档 25%
+	production_factory_max_efficiency_factor = LTN_atl_maxeff   # 每档 5%：初值 0% → 满档 25%
+	production_factory_efficiency_gain_factor = LTN_atl_effg   # 每档 5%：初值 0% → 满档 25%
+	production_speed_industrial_complex_factor = LTN_atl_ind   # 每档 5%：初值 0% → 满档 25%
+	production_speed_arms_factory_factor = LTN_atl_arms   # 每档 5%：初值 0% → 满档 25%
+	consumer_goods_factor = LTN_atl_cons   # 每档 5%：初值 0% → 满档 -25%
+}
+
+# ---- 【律剑】 ----
+LTN_dyn_ironlaw = {
+	icon = GFX_idea_LTN_dyn_ironlaw
+	enable = {
+		always = yes
+	}
+
+	army_attack_factor = LTN_irn_atk   # 每档 5%：初值 0% → 满档 25%
+	army_defence_factor = LTN_irn_def   # 每档 5%：初值 0% → 满档 25%
+	army_org_factor = LTN_irn_org   # 每档 5%：初值 0% → 满档 25%
+	breakthrough_factor = LTN_irn_btk   # 每档 5%：初值 0% → 满档 25%
+	planning_speed_factor = LTN_irn_plan   # 每档 5%：初值 0% → 满档 25%
+	experience_gain_army_factor = LTN_irn_exp   # 每档 5%：初值 0% → 满档 25%
+}
+
+# ---- 【九区兵制】 ----
+LTN_dyn_host = {
+	icon = GFX_idea_LTN_dyn_host
+	enable = {
+		always = yes
+	}
+
+	conscription_factor = LTN_hos_con   # 每档 5%：初值 0% → 满档 25%
+	recruitable_population_factor = LTN_hos_pop   # 每档 5%：初值 0% → 满档 25%
+	training_time_factor = LTN_hos_train   # 每档 5%：初值 0% → 满档 -25%
+	land_reinforce_rate = LTN_hos_reinf   # 每档 5%：初值 0% → 满档 25%
+	army_org_regain = LTN_hos_regain   # 每档 5%：初值 0% → 满档 25%
+	army_morale_factor = LTN_hos_morale   # 每档 5%：初值 0% → 满档 25%
+}
+
+# ---- 【四境通达】 ----
+LTN_dyn_outreach = {
+	icon = GFX_idea_LTN_dyn_outreach
+	enable = {
+		always = yes
+	}
+
+	political_power_gain = LTN_out_ppg   # 每档 5%：初值 0% → 满档 25%
+	stability_factor = LTN_out_stab   # 每档 5%：初值 0% → 满档 25%
+	drift_defence_factor = LTN_out_drift   # 每档 5%：初值 0% → 满档 25%
+	war_support_factor = LTN_out_ws   # 每档 5%：初值 0% → 满档 25%
+	consumer_goods_factor = LTN_out_cons   # 每档 5%：初值 0% → 满档 -25%
+}

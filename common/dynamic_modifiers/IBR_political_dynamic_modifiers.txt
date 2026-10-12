@@ -1,0 +1,52 @@
+# ============================================================================
+# IBR_political_dynamic_modifiers.txt —— 伊比利亚（IBR）政治线三个可升级民族精神
+# 每条键一枚独立变量（防一变量挂多键翻倍）。
+#
+# 机制：变量全部从 0 起步，国策每格 add_to_variable 推一档（+5%，稳定/战争支持 +1%），
+#   满档 +25% / +5%，收尾格与终幕 clamp_variable 封顶。
+#   同一条线上另有一个"溃局"负面精神走三档（原档 → 缓和档 → remove_ideas），
+#   所以玩家看到的是：负面逐格缩小、正面逐格长大 —— 同一条键的净轨迹 −30% → +25%。
+#
+# 挂载与初值见 common/national_focus/IBR_political_shared.txt 的线首格（3 / 8 / 2）：
+#   set_variable 给初值 + if = { limit = { NOT = { has_dynamic_modifier = { modifier = X } } } add_dynamic_modifier = { modifier = X } }
+# 生成器 docs/gen_ibr_political.cjs（改 LADDER/ONCE/DEBUFF 表重跑，勿手改本文件）
+# ===========================================================================
+
+# 左线 · 伊比利亚·纯白之心（审判庭与惩戒军）
+IBR_pol_pure_heart_dm = {
+	enable = { always = yes }
+	icon = GFX_idea_IBR_pure_heart_of_iberia
+
+	army_org_factor = IBR_pol_ph_org
+	army_attack_factor = IBR_pol_ph_atk
+	army_defence_factor = IBR_pol_ph_def
+	experience_gain_army_factor = IBR_pol_ph_exp
+	political_power_factor = IBR_pol_ph_pp
+	stability_factor = IBR_pol_ph_stab
+}
+
+# 中线 · 团结之国（岛民与阿戈尔）
+IBR_pol_unity_nation_dm = {
+	enable = { always = yes }
+	icon = GFX_idea_IBR_unity_nation
+
+	research_speed_factor = IBR_pol_un_res
+	production_speed_buildings_factor = IBR_pol_un_build
+	conscription_factor = IBR_pol_un_cons
+	political_power_factor = IBR_pol_un_pp
+	war_support_factor = IBR_pol_un_ws
+	stability_factor = IBR_pol_un_stab
+}
+
+# 右线 · 黄金世纪（王权与大选）
+IBR_pol_golden_century_dm = {
+	enable = { always = yes }
+	icon = GFX_idea_IBR_golden_century
+
+	production_factory_max_efficiency_factor = IBR_pol_gc_eff
+	industrial_capacity_factory = IBR_pol_gc_out
+	consumer_goods_factor = IBR_pol_gc_cg
+	political_power_factor = IBR_pol_gc_pp
+	war_support_factor = IBR_pol_gc_ws
+	stability_factor = IBR_pol_gc_stab
+}

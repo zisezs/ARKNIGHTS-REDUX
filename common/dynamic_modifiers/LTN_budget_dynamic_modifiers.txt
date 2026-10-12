@@ -1,0 +1,31 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) ·「联合帝国预算计划」—— 成长型民族精神（政治线新版）
+#
+# 这一条精神是「选帝侯忠诚度」的唯一数值出口：
+#   LTN_loyal_viol / LTN_loyal_cello  两派忠诚度（0~100，开局部 50）只当仪表读数，
+#   真正进修正符的是下面 5 枚 5% 档变量；国策与事件每次同时写「仪表 + 档位」两笔，
+#   所以不派生、不除法、不 clamp —— 与旧政治线的喂养口径完全一致。
+#
+# 档位满档（见 LTN_budget_effects.txt 的头注释）：
+#   LTN_ebl_stab   -20% ~ +20%   两派合计忠诚
+#   LTN_ebl_drift  -25% ~ +25%   两派合计忠诚
+#   LTN_ebl_ppg    -25% ~  +0%   密谋度越高越难办事
+#   LTN_ebl_cons    +0% ~ +25%   买诸侯的账
+#   LTN_ebl_build  -10% ~ +10%   两派合计忠诚
+#
+# icon 复用 interface/_ARF_ideas/LTN_ideas.gfx 已注册的 GFX_idea_LTN_dyn_electors_fetter
+# （国家级 DM 带 icon 即在政治栏显示为民族精神；不新出图）
+# ============================================================================
+
+LTN_dyn_elector_bloc = {
+	icon = GFX_idea_LTN_dyn_electors_fetter
+	enable = {
+		always = yes
+	}
+
+	stability_factor = LTN_ebl_stab
+	drift_defence_factor = LTN_ebl_drift
+	political_power_gain = LTN_ebl_ppg
+	consumer_goods_factor = LTN_ebl_cons
+	production_speed_buildings_factor = LTN_ebl_build
+}

@@ -24,3 +24,45 @@ IBR_deep_category = {
 		base = 90
 	}
 }
+
+# 审判庭大净化 —— 国策【伊比利亚·纯白之心】解锁
+# 注意：类目 allowed 只在开局判一次（放 original_tag 这类静态条件），
+#       随游戏进程变化的条件必须写 visible —— 原版 AST/AFG 的类目就是 visible = { has_completed_focus = ... }
+IBR_purification_category = {
+
+	icon = GFX_decision_category_generic_political_actions
+
+	allowed = {
+		original_tag = IBR
+	}
+
+	visible = {
+		has_completed_focus = IBR_pol_pure_heart
+	}
+
+	priority = {
+		base = 95
+	}
+}
+
+# 余烬清算 —— 两个终幕国策解锁（左终幕【圣徒艾丽妮万岁】：碾碎不忠者！／右终幕【女皇埃斯特菲尼娅万岁！】：女皇陛下的全国巡礼！）
+# 两个终幕分属互斥的两条线，所以类目用 OR 判可见、每条决议各自 available 卡本线终幕。
+IBR_purge_remnants_category = {
+
+	icon = GFX_decision_category_generic_political_actions
+
+	allowed = {
+		original_tag = IBR
+	}
+
+	visible = {
+		OR = {
+			has_completed_focus = IBR_pol_saint_irene
+			has_completed_focus = IBR_pol_empress_estefania
+		}
+	}
+
+	priority = {
+		base = 94
+	}
+}

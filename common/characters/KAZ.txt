@@ -3,15 +3,36 @@ characters = {
         name = KAZ_King_Theresis
         portraits = {
             civilian = {
-                large = gfx/leaders/KAZ/King_Theresis.dds
+                large = "gfx/leaders/KAZ/KAZ_Theresis.png"
+                small = "gfx/leaders/KAZ/KAZ_Theresis_small.png"
+            }
+            army = {
+                large = "gfx/leaders/KAZ/KAZ_Theresis.png"
+                small = "gfx/leaders/KAZ/KAZ_Theresis_small.png"
             }
         }
+        gender = male
         country_leader = {
 			ideology = military_junta_subtype
 			traits = { the_practitioner }
 			expire = "1965.1.1.1"
 			id = -1
 			desc = KAZ_King_Theresis_desc
+		}
+		field_marshal = {
+			skill = 5
+			attack_skill = 7
+			defense_skill = 5
+			planning_skill = 5
+			logistics_skill = 3
+			traits = { ARF_military_commission war_hero career_officer old_guard trait_cautious aggressive_assaulter fast_planner fortress_buster media_personality }
+		}
+		advisor = {
+			slot = second_in_command
+			idea_token = KAZ_Theresis_second_in_command
+			traits = { the_practitioner }
+			desc = KAZ_King_Theresis_desc
+			can_be_fired = no
 		}
     }
     KAZ_Sarrick_Warrenworth = {

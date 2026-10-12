@@ -78,6 +78,30 @@ on_actions = {
 			}
 			#威胁度上下限
 			clamp_variable = { var = IBR_deep_threat min = 0 max = 150 }
+			#两个终幕的换领袖纠偏：事件里的 add_country_leader_role 已把领袖角色挂上（会存档），
+			#万一台上不是本人（老存档、或中途被别的脚本 retire 过），用 promote_character 拉回来。判据是终幕旗标。
+			if = {
+				limit = {
+					has_country_flag = IBR_irene_entroned
+					NOT = { has_country_leader = { character = IBR_Irene ruling_only = yes } }
+				}
+				retire_country_leader = yes
+				promote_character = {
+					character = IBR_Irene
+					ideology = authoritarian_democracy_subtype
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = IBR_estefania_entroned
+					NOT = { has_country_leader = { character = IBR_Estefania ruling_only = yes } }
+				}
+				retire_country_leader = yes
+				promote_character = {
+					character = IBR_Estefania
+					ideology = authoritarian_democracy_subtype
+				}
+			}
 		}
 	}
 }
@@ -92,6 +116,67 @@ on_actions = {
 			IBR = {
 				#堕天使事件链
 				country_event = { id = ibr.108 days = 1 }
+			}
+		}
+	}
+}
+
+######################
+## 伊比利亚 每周钩子 · 审判庭大净化 ##
+## 三个纯洁性数值每 7 天回落 1%；初值 50 由国策 IBR_pol_pure_heart 写入，
+## 这里的 has_variable 兜底是为了旧存档读进来时不悬空。
+######################
+
+on_actions = {
+	on_weekly_IBR = {
+		effect = {
+			if = {
+				limit = {
+					has_completed_focus = IBR_pol_pure_heart
+				}
+				if = {
+					limit = { NOT = { has_variable = IBR_pur_purity } }
+					set_variable = { var = IBR_pur_purity value = 50 }
+				}
+				if = {
+					limit = { NOT = { has_variable = IBR_pur_discipline } }
+					set_variable = { var = IBR_pur_discipline value = 50 }
+				}
+				if = {
+					limit = { NOT = { has_variable = IBR_pur_trust } }
+					set_variable = { var = IBR_pur_trust value = 50 }
+				}
+				subtract_from_variable = { var = IBR_pur_purity value = 1 }
+				subtract_from_variable = { var = IBR_pur_discipline value = 1 }
+				subtract_from_variable = { var = IBR_pur_trust value = 1 }
+				clamp_variable = { var = IBR_pur_purity min = 0 max = 100 }
+				clamp_variable = { var = IBR_pur_discipline min = 0 max = 100 }
+				clamp_variable = { var = IBR_pur_trust min = 0 max = 100 }
+				#任一项推满，给一次政治点奖励（旗标防重复）
+				if = {
+					limit = {
+						check_variable = { var = IBR_pur_purity value = 99 compare = greater_than }
+						NOT = { has_country_flag = IBR_pur_purity_maxed }
+					}
+					set_country_flag = IBR_pur_purity_maxed
+					add_political_power = 50
+				}
+				if = {
+					limit = {
+						check_variable = { var = IBR_pur_discipline value = 99 compare = greater_than }
+						NOT = { has_country_flag = IBR_pur_discipline_maxed }
+					}
+					set_country_flag = IBR_pur_discipline_maxed
+					add_political_power = 50
+				}
+				if = {
+					limit = {
+						check_variable = { var = IBR_pur_trust value = 99 compare = greater_than }
+						NOT = { has_country_flag = IBR_pur_trust_maxed }
+					}
+					set_country_flag = IBR_pur_trust_maxed
+					add_political_power = 50
+				}
 			}
 		}
 	}

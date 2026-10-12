@@ -310,13 +310,20 @@ KZM_resto_great_uprising = {
 	}
 
 	# ---- 八、第十二次乌卡战争 ----
+	# 战争目标 = take_core_state（原版现成类型，只索回声明国自己的核心州），不是 annex_everything：
+	# 全吞乌萨斯会把乌萨斯系（整合运动等）的统一链一起掐死——它们够不到也整合不了那些州，
+	# 卡在「东达利亚苏维埃共和国」上不去「苏维埃联盟」。只收回本土后，乌萨斯主体仍在，
+	# 乌萨斯系照样能东乌萨斯统一、吃野怪、最后宣告乌萨斯统一。
+	# ⚠ 不要为它自定义 wargoal 类型：原版每个 wargoal 类型都有一条同名本地化键
+	#   （localisation/*/goals_l_*.yml），自定义类型漏了那条键会让引擎在加载收尾直接闪退
+	#   （0xc0000409）。原版 take_core_state 在 localisation 里是齐的，直接用。
 	if = {
 		limit = {
 			is_subject = no
 			URS = { exists = yes }
 			NOT = { has_war_with = URS }
 		}
-		KZM = { declare_war_on = { target = URS type = annex_everything } }
+		KZM = { declare_war_on = { target = URS type = take_core_state } }
 	}
 
 	# ---- 九、起兵 ----

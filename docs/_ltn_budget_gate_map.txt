@@ -1,0 +1,28 @@
+莱塔尼亚政治线重做 —— 旧门槛改指对照表
+生成时间 2026-10-11 / 脚本 docs/_ltn_budget_repoint.cjs（幂等，二次运行报告 0 处改动）
+原件备份 docs/_ltn_budget_backup_20261011/
+
+旧「双塔共治」政治段 33 格被外部当门槛引用的共 15 格，改指如下（29 处）：
+
+  旧格（已删）                          新格（预算带）                     语义依据
+  ------------------------------------  ---------------------------------  ------------------------------------
+  LTN_twin_rule                    →    LTN_new_year                      起始格；帝国宫廷页签可见性 + bm1 路线卡
+  LTN_bridge_of_towers             →    LTN_tell_the_ministers            开局内政类决议（双塔议事）/ MIO 解锁
+  LTN_empress_festival             →    LTN_voice_on_tour                 女皇庆典三档筹备 → 巡演（3 处）
+  LTN_royal_orchestra              →    LTN_voice_on_tour                 乐团相关决议
+  LTN_fix_the_capital              →    LTN_tell_the_ministers            首都行政决议
+  LTN_read_the_score               →    LTN_tell_the_ministers            调律台预备决议 + 页签可见性（3 处）
+  LTN_nine_copies                  →    LTN_elector_loyalty_problem       九份抄本 → 诸侯忠诚难题
+  LTN_electors_consent             →    LTN_elector_loyalty_problem       诸侯协议预备决议（2 处）
+  LTN_gendarme_and_spy             →    LTN_imperial_overture             宪兵/密探链 → 帝国序曲（巫王残党「密探在行动」）
+  LTN_hall_of_the_law              →    LTN_hlinmarts_plan                金律殿堂决议（2 处）+ 秘密页签可见性
+  LTN_annihilation_warrant         →    LTN_hlinmarts_plan                湮灭授权 → 集权夺权 + MIO 解锁
+  LTN_kill_at_the_start            →    LTN_lambs_and_goats_return        扼杀在起点 → 凯旋清算
+  LTN_the_rehearsal                →    LTN_open_final_vote               彩排 → 最终投票（2 处）
+  LTN_new_golden_law               →    LTN_round_table_law               新金律 → 圆桌修律（2 处）
+  LTN_art_patronage                →    LTN_serious_research              艺术赞助 → 科研
+
+另外两项：
+  DEV_development_shared.txt 的 25 格共享国策门槛是 has_focus_tree = LTN_political_focus，
+    树 id 没变，不受影响。
+  旧政治段一共 set_country_flag 24 枚旗标，全工程没有任何地方读它们（已扫），删干净无后患。

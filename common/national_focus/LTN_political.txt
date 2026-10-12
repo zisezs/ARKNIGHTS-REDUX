@@ -1,36 +1,34 @@
 # ============================================================================
-# 莱塔尼亚联合帝国 (LTN) · 「双塔共治」政治线【双塔之下】
+# 莱塔尼亚联合帝国 (LTN) · 国策树
 #
-# 结构（26 格）：起始格 1 + 路线 22 + 终幕 3
+# 【政治带】=「联合帝国预算计划」26 格，y=0..18（2026-10-11 重做）
+#   起始格 LTN_new_year（新的一年）；顶替旧「双塔共治」政治段 33 格。
+#   主轴：预算计划 → 帝国会议 → 最终投票 → 赫琳玛特百日集权 → 新金律
+#   版式：中轴 x=0 + 菱形双肩 x=±4，死头格 LTN_elector_loyalty_problem 走内列 x=-2；
+#         包围盒 x∈[-4,4] 对称、起始格落在顶行中线、极值列各有 6~7 格（无孤立节点）。
 #
-#                        [双塔共治]  x=0  y=0
-#      ┌──────────┬───────────────┼───────────────┬──────────┐
-#   双塔的殿堂    白塔的晚霞        黑塔的剑        宫廷与诸侯
-#    x=-13      x=-9  x=-7        x=7   x=9         x=13
-#    ┌────────┐   ┌────┬────┐   ┌────┬────┐   ┌────────┐
-#    │ 廊桥   │   │晚霞│共鸣│   │权威│律法│   │ 宫廷   │  y=1
-#    ├────────┤   ├────┼────┤   ├────┼────┤   ├────────┤
-#    │ 庆典   │   │赞助│剧目│   │湮灭│密探│   │ 定都   │  y=2
-#    ├────────┤   ├────┼────┤   ├────┼────┤   ├────────┤
-#    │ 乐团   │   │声厅│永恒│   │扼杀│殿堂│   │ 抄本   │  y=3
-#    ├────────┤   ├────┴────┤   ├────┴────┤   ├────────┤
-#    │双塔齐鸣│   │  共鸣之极 │   │  剑锋之极 │   │  九区奉行│  y=4
-#    └────────┘   └─────────┘   └─────────┘   └────────┘
-#         └───  白塔独奏(-4) ── 合奏(0) ── 黑塔独奏(4)  ───┘   y=5
+# 【经济带】金库与工坊  y=20..25   线首 LTN_imperial_treasury
+# 【军事带】点兵册      y=27..32   线首 LTN_muster_roll
+# 【外交带】双塔之外    y=34..39   线首 LTN_foreign_towers
+#   —— 三条带的节点内容一字未改，只做 y+13 平移（2026-10-11 为让开新政治带）。
+#   各自线首无前置，跨带零前置引用，所以平移不影响可达性。
 #
-# 排版口径：节点容器 165x128、图标 100x88；列内 Δx=2、线间 Δx=4、同行 Δx>=2；
-#           起始格无前置、向下扇出 6 个列首；只有 y=5 的三个终幕格允许汇聚跨路线前置；
-#           包围盒 x∈[-13,13]、中线 0，根节点在顶行中线，极值列各 4 格（非孤立节点）。
+# 政治带配套文件（改政治线先看这些）：
+#   事件    events/LTN_budget.txt                        （命名空间 LTN_budget，15 个）
+#   决议    common/decisions/LTN_budget_decisions.txt    （选帝侯在行动 / 拉拢选帝侯）
+#   精神    common/ideas/LTN budget_ideas.txt            （9 条一次性精神）
+#   仪表    common/dynamic_modifiers/LTN_budget_dynamic_modifiers.txt（诸侯的效忠）
+#   脉冲    common/scripted_effects/LTN_budget_effects.txt + common/on_actions/LTN_on_actions.txt
+#   初值    history/countries/LTN - Leithanien.txt 末尾的「预算计划」段
+#   文案    localisation/simp_chinese/ARF_LTN_budget_l_simp_chinese.yml
+#   自检    node docs/_ltn_budget_check.cjs
 #
-# 数值载体：4 条成长型民族精神（common/dynamic_modifiers/LTN_political_dynamic_modifiers.txt）
-#   LTN_dyn_twin_rule / LTN_dyn_golden_law / LTN_dyn_old_echo / LTN_dyn_electors_fetter
-#   本树每一格都重挂一次 add_dynamic_modifier（幂等）并 add_to_variable 喂养；
-#   一个 reward 里同一变量只写一次。满档钳制见 DM 文件注释。
+# 旧政治段被外部当门槛用的 15 格，门槛已全部改指新格，对照表见
+#   docs/_ltn_budget_gate_map.txt（决议/军工企业/书签三处）
 #
-# 图标：interface/_ARF_goals/LTN_goals.gfx（26 条，由 docs/gen_ltn_icons.cjs 生成，勿手改）
-# 定位：initial_show_position = LTN_twin_rule
+# 图标：26 格全部复用 interface/_ARF_goals/LTN_goals.gfx 已注册的 GFX_focus_LTN_*，不新出图。
+# 定位：initial_show_position = LTN_new_year
 # ============================================================================
-
 focus_tree = {
 	id = LTN_political_focus
 	country = {
@@ -43,1245 +41,699 @@ focus_tree = {
 	default = no
 
 	initial_show_position = {
-		focus = LTN_twin_rule
+		focus = LTN_new_year
 	}
 
 	# =====================================================================
-	# 起始格 · 双塔共治
+	# 政治带【联合帝国预算计划】y=0..18（2026-10-11 重做，顶替旧「双塔共治」政治段）
+	#
+	# 版式：中轴脊柱 x=0 + 菱形双肩 x=±4，死头格 选帝侯的忠诚难题 放在内列 x=-2
+	#       （不让孤立单格落在包围盒极值上）；包围盒 x∈[-4,4] 对称，起始格在顶行中线。
+	#       同排 Δx=2 起步，双肩与中轴 Δx=4。节点容器 165x128、图标 100x88。
+	# 汇聚：一个 prerequisite 块里写多行 focus = 引擎按「或」判定（见 DUB_redeem_diplo_shared.txt:1372
+	#       那种三选一互斥汇聚的实证用法），所以菱形落点一律用 OR 前置，不写第二个 prerequisite 块。
+	# 时长：cost 单位是周。7天=1 / 14天=2 / 17天=2.4285714 / 20天=2.8571428 / 27天=3.8571428。
+	# 互斥：打破沉默↔施瓦结里伯爵、白女皇计划↔要求自由党嘘声、公平竞争↔趁手的官僚、
+	#       艰难通过↔预算案失败。投票只给「艰难通过」挂 passed 旗标，「失败」用 NOT 兜底，避免死锁。
+	#
+	# 数值载体：LTN_dyn_elector_bloc【诸侯的效忠】(common/dynamic_modifiers/LTN_budget_dynamic_modifiers.txt)
+	# 成对写入的口径（全带统一，别自创比例）：
+	#   仪表 LTN_loyal_viol / LTN_loyal_cello 每 ±10  → 精神档位 LTN_ebl_stab、LTN_ebl_drift 各同向 ±0.05
+	#   仪表 LTN_conspiracy 每 ±10                →  LTN_ebl_ppg 反向 ±0.05、LTN_ebl_cons 同向 ±0.05
+	#   LTN_ebl_build 只在预算线本身动，一档 0.05
+	# 一个 reward 里同一变量只写一次；长期加成一律 add_ideas，不直接写修正符。
+	#
+	# 事件：events/LTN_budget.txt    决议：common/decisions/LTN_budget_decisions.txt
+	# 文案：localisation/simp_chinese/ARF_LTN_budget_l_simp_chinese.yml
+	# 图标：全部复用 interface/_ARF_goals/LTN_goals.gfx 已注册的 GFX_focus_LTN_*（不新出图）
+	# 自检：node docs/_ltn_budget_check.cjs
 	# =====================================================================
+
+	# ---- 0 · 新的一年（起始格） ----
 	focus = {
-		id = LTN_twin_rule
-		icon = GFX_focus_LTN_twin_rule
-		cost = 2
+		id = LTN_new_year
+		icon = GFX_focus_LTN_empress_festival
+		cost = 1
 		x = 0
 		y = 0
 		ai_will_do = {
 			base = 100
 		}
 		completion_reward = {
-			add_political_power = 25
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
+			add_political_power = 10
+			add_stability = 0.05
 			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
+				LTN_budget_effect_init = yes
+				add_dynamic_modifier = { modifier = LTN_dyn_elector_bloc }
 			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
 		}
 	}
 
-	# =====================================================================
-	# 路线一 · 双塔的殿堂（单列 x=-13）
-	# =====================================================================
-
-	# 1-1 廊桥
+	# ---- 1 · 告诉大臣，理清现状 ----
 	focus = {
-		id = LTN_bridge_of_towers
-		icon = GFX_focus_LTN_bridge_of_towers
-		cost = 4
-		prerequisite = { focus = LTN_twin_rule }
-		x = -13
+		id = LTN_tell_the_ministers
+		icon = GFX_focus_LTN_read_the_score
+		cost = 3.8571428
+		prerequisite = {
+			focus = LTN_new_year
+		}
+		x = 0
 		y = 1
 		ai_will_do = {
-			base = 70
+			base = 90
 		}
 		completion_reward = {
-			add_stability = 0.03
-			add_political_power = 50
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_drift = 0.05
-				tooltip = drift_defence_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
+			country_event = { id = LTN_budget.1 }
 		}
 	}
 
-	# 1-2 女皇庆典
+	# ---- 2 · 选帝侯的忠诚难题（左冲突支，死头格） ----
 	focus = {
-		id = LTN_empress_festival
-		icon = GFX_focus_LTN_empress_festival
-		cost = 4
-		prerequisite = { focus = LTN_bridge_of_towers }
-		x = -13
+		id = LTN_elector_loyalty_problem
+		icon = GFX_focus_LTN_electors_consent
+		cost = 2
+		prerequisite = {
+			focus = LTN_tell_the_ministers
+		}
+		x = -2
 		y = 2
 		ai_will_do = {
-			base = 70
+			base = 80
 		}
 		completion_reward = {
-			add_political_power = 60
-			set_country_flag = LTN_festival_prepared
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
+			add_political_power = 100
+			add_stability = 0.10
+			add_to_variable = { LTN_loyal_viol = 10 tooltip = LTN_loyal_viol_tt }
+			add_to_variable = { LTN_loyal_cello = 10 tooltip = LTN_loyal_cello_tt }
+			add_to_variable = { LTN_ebl_stab = 0.05 }
+			add_to_variable = { LTN_ebl_drift = 0.05 }
 			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
+				set_country_flag = LTN_elector_watch_open
+				add_dynamic_modifier = { modifier = LTN_dyn_elector_bloc }
 			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_exp = 0.05
-				tooltip = experience_gain_army_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
 		}
 	}
 
-	# 1-3 皇家乐团
+	# ---- 3 · 开启联合帝国预算计划 ----
 	focus = {
-		id = LTN_royal_orchestra
-		icon = GFX_focus_LTN_royal_orchestra
-		cost = 4
-		prerequisite = { focus = LTN_empress_festival }
-		x = -13
+		id = LTN_open_budget_plan
+		icon = GFX_focus_LTN_imperial_treasury
+		cost = 3.8571428
+		prerequisite = {
+			focus = LTN_tell_the_ministers
+		}
+		x = 0
+		y = 2
+		ai_will_do = {
+			base = 95
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_to_variable = { LTN_budget_sup = 10 tooltip = LTN_budget_sup_tt }
+			subtract_from_variable = { LTN_loyal_viol = 15 }
+			subtract_from_variable = { LTN_loyal_cello = 15 }
+			subtract_from_variable = { LTN_ebl_stab = 0.10 }
+			subtract_from_variable = { LTN_ebl_drift = 0.10 }
+			subtract_from_variable = { LTN_ebl_build = 0.05 }
+			custom_effect_tooltip = LTN_loyal_both_tt
+			custom_effect_tooltip = LTN_budget_economy_tt
+			hidden_effect = {
+				add_dynamic_modifier = { modifier = LTN_dyn_elector_bloc }
+			}
+		}
+	}
+
+	# ---- 4 · 打破不该的沉默（激进支，开启忠诚度仪表） ----
+	focus = {
+		id = LTN_break_the_silence
+		icon = GFX_focus_LTN_voice_of_the_empress
+		cost = 2
+		prerequisite = {
+			focus = LTN_open_budget_plan
+		}
+		mutually_exclusive = {
+			focus = LTN_the_count_is_right
+		}
+		x = -4
 		y = 3
 		ai_will_do = {
 			base = 70
 		}
 		completion_reward = {
-			army_experience = 25
-			add_command_power = 20
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
+			set_country_flag = LTN_elector_watch_open
+			add_political_power = 30
+			add_to_variable = { LTN_conspiracy = 10 tooltip = LTN_conspiracy_tt }
+			add_to_variable = { LTN_ebl_ppg = -0.05 }
+			add_to_variable = { LTN_ebl_cons = 0.05 }
 			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
+				add_dynamic_modifier = { modifier = LTN_dyn_elector_bloc }
 			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
 		}
 	}
 
-	# 1-4 双塔齐鸣（本路线收尾）
+	# ---- 5 · 施瓦结里伯爵是对的（保守支，同样开启仪表） ----
 	focus = {
-		id = LTN_twin_resonance
-		icon = GFX_focus_LTN_twin_resonance
-		cost = 5
-		prerequisite = { focus = LTN_royal_orchestra }
-		x = -13
-		y = 4
-		ai_will_do = {
-			base = 70
-		}
-		completion_reward = {
-			add_stability = 0.03
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_ws = 0.05
-				tooltip = war_support_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# =====================================================================
-	# 路线二 · 白塔的晚霞（双列 x=-9 / -7，收尾 x=-8）
-	# =====================================================================
-
-	# 2-1 晚霞恒久
-	focus = {
-		id = LTN_endless_sunset
-		icon = GFX_focus_LTN_endless_sunset
-		cost = 4
-		prerequisite = { focus = LTN_twin_rule }
-		x = -9
-		y = 1
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_stability = 0.03
-			add_political_power = 50
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_ppf = 0.05
-				tooltip = political_power_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 2-2 共鸣术式
-	focus = {
-		id = LTN_resonance_sigils
-		icon = GFX_focus_LTN_resonance_sigils
-		cost = 4
-		prerequisite = { focus = LTN_twin_rule }
-		x = -7
-		y = 1
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_stability = 0.02
-			add_command_power = 25
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			add_to_variable = {
-				LTN_tw_drift = 0.05
-				tooltip = drift_defence_factor_tt
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_res = 0.05
-				tooltip = research_speed_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 2-3 艺术赞助
-	focus = {
-		id = LTN_art_patronage
-		icon = GFX_focus_LTN_art_patronage
-		cost = 4
-		prerequisite = { focus = LTN_endless_sunset }
-		x = -9
-		y = 2
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_political_power = 75
-			add_stability = 0.02
-# >>> LTN_growth
-# <<< LTN_growth
-		}
-	}
-
-	# 2-4 指定剧目
-	focus = {
-		id = LTN_designated_repertoire
-		icon = GFX_focus_LTN_designated_repertoire
-		cost = 4
-		prerequisite = { focus = LTN_resonance_sigils }
-		x = -7
-		y = 2
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_stability = 0.03
-			add_political_power = 50
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 2-5 伊维格娜德音乐厅
-	focus = {
-		id = LTN_ivignad_hall
-		icon = GFX_focus_LTN_ivignad_hall
-		cost = 4
-		prerequisite = { focus = LTN_art_patronage }
-		x = -9
-		y = 3
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_research_slot = 1
-			add_stability = 0.02
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_exp = 0.05
-				tooltip = experience_gain_army_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 2-6 永恒恩典
-	focus = {
-		id = LTN_eternal_grace
-		icon = GFX_focus_LTN_eternal_grace
-		cost = 4
-		prerequisite = { focus = LTN_designated_repertoire }
-		x = -7
-		y = 3
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_stability = 0.02
-			add_political_power = 50
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			add_to_variable = {
-				LTN_tw_ws = 0.05
-				tooltip = war_support_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 2-7 共鸣之极（本路线收尾）
-	focus = {
-		id = LTN_apex_of_resonance
-		icon = GFX_focus_LTN_apex_of_resonance
-		cost = 5
-		prerequisite = { focus = LTN_ivignad_hall }
-		prerequisite = { focus = LTN_eternal_grace }
-		x = -8
-		y = 4
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_stability = 0.03
-			set_country_flag = LTN_white_ascendant
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			add_to_variable = {
-				LTN_law_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# =====================================================================
-	# 路线三 · 黑塔的剑（双列 x=7 / 9，收尾 x=8）
-	# =====================================================================
-
-	# 3-1 无情权威
-	focus = {
-		id = LTN_grimm_authority
-		icon = GFX_focus_LTN_grimm_authority
-		cost = 4
-		prerequisite = { focus = LTN_twin_rule }
-		x = 7
-		y = 1
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_war_support = 0.05
-			add_stability = -0.02
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			add_to_variable = {
-				LTN_echo_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			add_to_variable = {
-				LTN_echo_res = 0.05
-				tooltip = research_speed_factor_tt
-			}
-			add_to_variable = {
-				LTN_echo_cons = -0.05
-				tooltip = consumer_goods_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 3-2 金律法卫的剑
-	focus = {
-		id = LTN_sword_of_the_guard
-		icon = GFX_focus_LTN_sword_of_the_guard
-		cost = 4
-		prerequisite = { focus = LTN_twin_rule }
-		x = 9
-		y = 1
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			army_experience = 25
-			add_command_power = 20
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_ppf = 0.05
-				tooltip = political_power_factor_tt
-			}
-			add_to_variable = {
-				LTN_tw_drift = 0.05
-				tooltip = drift_defence_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 3-3 湮灭授权
-	focus = {
-		id = LTN_annihilation_warrant
-		icon = GFX_focus_LTN_annihilation_warrant
-		cost = 4
-		prerequisite = { focus = LTN_grimm_authority }
-		x = 7
-		y = 2
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_war_support = 0.03
-			add_stability = -0.02
-			set_country_flag = LTN_annihilation_authorized
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_res = 0.05
-				tooltip = research_speed_factor_tt
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_drift = 0.05
-				tooltip = drift_defence_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 3-4 宪兵与密探
-	focus = {
-		id = LTN_gendarme_and_spy
-		icon = GFX_focus_LTN_gendarme_and_spy
-		cost = 4
-		prerequisite = { focus = LTN_sword_of_the_guard }
-		x = 9
-		y = 2
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_political_power = 50
-			set_country_flag = LTN_spy_network
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_exp = 0.05
-				tooltip = experience_gain_army_factor_tt
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			add_to_variable = {
-				LTN_echo_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 3-5 扼杀在起点
-	focus = {
-		id = LTN_kill_at_the_start
-		icon = GFX_focus_LTN_kill_at_the_start
-		cost = 4
-		prerequisite = { focus = LTN_annihilation_warrant }
-		x = 7
-		y = 3
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			army_experience = 25
-			add_war_support = 0.02
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			add_to_variable = {
-				LTN_tw_ws = 0.05
-				tooltip = war_support_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 3-6 金律殿堂
-	focus = {
-		id = LTN_hall_of_the_law
+		id = LTN_the_count_is_right
 		icon = GFX_focus_LTN_hall_of_the_law
-		cost = 4
-		prerequisite = { focus = LTN_gendarme_and_spy }
-		x = 9
-		y = 3
-		ai_will_do = {
-			base = 65
+		cost = 2
+		prerequisite = {
+			focus = LTN_open_budget_plan
 		}
-		completion_reward = {
-			add_political_power = 50
-			set_country_flag = LTN_secret_inquiry
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_drift = 0.05
-				tooltip = drift_defence_factor_tt
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_cons = -0.05
-				tooltip = consumer_goods_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
+		mutually_exclusive = {
+			focus = LTN_break_the_silence
 		}
-	}
-
-	# 3-7 剑锋之极（本路线收尾）
-	focus = {
-		id = LTN_apex_of_the_sword
-		icon = GFX_focus_LTN_apex_of_the_sword
-		cost = 5
-		prerequisite = { focus = LTN_kill_at_the_start }
-		prerequisite = { focus = LTN_hall_of_the_law }
-		x = 8
-		y = 4
-		ai_will_do = {
-			base = 65
-		}
-		completion_reward = {
-			add_war_support = 0.05
-			set_country_flag = LTN_black_ascendant
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_week = 0.005
-				tooltip = stability_weekly_tt
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_week = 0.005
-				tooltip = stability_weekly_tt
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			add_to_variable = {
-				LTN_echo_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			add_to_variable = {
-				LTN_echo_res = 0.05
-				tooltip = research_speed_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# =====================================================================
-	# 路线四 · 宫廷与诸侯（单列 x=13）
-	# =====================================================================
-
-	# 4-1 帝国宫廷
-	focus = {
-		id = LTN_imperial_court
-		icon = GFX_focus_LTN_imperial_court
-		cost = 4
-		prerequisite = { focus = LTN_twin_rule }
-		x = 13
-		y = 1
-		ai_will_do = {
-			base = 60
-		}
-		completion_reward = {
-			add_political_power = 50
-			add_stability = 0.02
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-				add_dynamic_modifier = { modifier = LTN_dyn_electors_fetter }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			custom_effect_tooltip = LTN_fet_modify_tt
-			add_to_variable = {
-				LTN_fet_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			add_to_variable = {
-				LTN_fet_con = 0.05
-				tooltip = conscription_factor_tt
-			}
-			add_to_variable = {
-				LTN_fet_train = -0.05
-				tooltip = training_time_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 4-2 定都崔林特尔梅
-	focus = {
-		id = LTN_fix_the_capital
-		icon = GFX_focus_LTN_fix_the_capital
-		cost = 4
-		prerequisite = { focus = LTN_imperial_court }
-		x = 13
-		y = 2
-		ai_will_do = {
-			base = 60
-		}
-		completion_reward = {
-			add_stability = 0.03
-			set_country_flag = LTN_capital_fixed
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_electors_fetter }
-			}
-			custom_effect_tooltip = LTN_fet_modify_tt
-			add_to_variable = {
-				LTN_fet_build = 0.05
-				tooltip = production_speed_buildings_factor_tt
-			}
-			add_to_variable = {
-				LTN_fet_fac = 0.05
-				tooltip = industrial_capacity_factory_tt
-			}
-			add_to_variable = {
-				LTN_fet_train = -0.05
-				tooltip = training_time_factor_tt
-			}
-			add_to_variable = {
-				LTN_fet_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-
-	# 4-3 九份抄本
-	focus = {
-		id = LTN_nine_copies
-		icon = GFX_focus_LTN_nine_copies
-		cost = 4
-		prerequisite = { focus = LTN_fix_the_capital }
-		x = 13
+		x = 4
 		y = 3
 		ai_will_do = {
 			base = 60
 		}
 		completion_reward = {
-			add_political_power = 50
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
+			set_country_flag = LTN_elector_watch_open
+			add_political_power = 40
+			add_to_variable = { LTN_loyal_cello = 10 tooltip = LTN_loyal_cello_tt }
+			add_to_variable = { LTN_ebl_stab = 0.05 }
+			add_to_variable = { LTN_ebl_drift = 0.05 }
+			add_to_variable = { LTN_conspiracy = 5 }
 			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_electors_fetter }
+				add_dynamic_modifier = { modifier = LTN_dyn_elector_bloc }
 			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_ppf = 0.05
-				tooltip = political_power_factor_tt
-			}
-			add_to_variable = {
-				LTN_tw_drift = 0.05
-				tooltip = drift_defence_factor_tt
-			}
-			custom_effect_tooltip = LTN_fet_modify_tt
-			add_to_variable = {
-				LTN_fet_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			add_to_variable = {
-				LTN_fet_con = 0.05
-				tooltip = conscription_factor_tt
-			}
-			add_to_variable = {
-				LTN_fet_build = 0.05
-				tooltip = production_speed_buildings_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
 		}
 	}
 
-	# 4-4 九区奉行（本路线收尾）
+	# ---- 6 · 让女皇之声巡演 ----
 	focus = {
-		id = LTN_the_nine_regions
-		icon = GFX_focus_LTN_the_nine_regions
-		cost = 5
-		prerequisite = { focus = LTN_nine_copies }
-		x = 13
+		id = LTN_voice_on_tour
+		icon = GFX_focus_LTN_royal_orchestra
+		cost = 2
+		prerequisite = {
+			focus = LTN_break_the_silence
+		}
+		x = -4
 		y = 4
 		ai_will_do = {
-			base = 60
+			base = 75
 		}
 		completion_reward = {
-			add_stability = -0.02
-			add_war_support = 0.03
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-				add_dynamic_modifier = { modifier = LTN_dyn_electors_fetter }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_ws = 0.05
-				tooltip = war_support_factor_tt
-			}
-			add_to_variable = {
-				LTN_tw_week = 0.005
-				tooltip = stability_weekly_tt
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			add_to_variable = {
-				LTN_law_exp = 0.05
-				tooltip = experience_gain_army_factor_tt
-			}
-			custom_effect_tooltip = LTN_fet_modify_tt
-			add_to_variable = {
-				LTN_fet_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
+			country_event = { id = LTN_budget.2 }
+			add_to_variable = { LTN_loyal_viol = 5 }
+			add_to_variable = { LTN_ebl_drift = 0.05 }
+			custom_effect_tooltip = LTN_tour_intel_tt
 		}
 	}
 
-	# =====================================================================
-	# 终幕三格（y=5，互斥）—— 1100 庆典事件链可提前置旗标解锁
-	# =====================================================================
-
-	# 5-1 白塔独奏
+	# ---- 7 · 要求自由党嘘声 ----
 	focus = {
-		id = LTN_solo_of_the_white
+		id = LTN_hush_the_liberals
+		icon = GFX_focus_LTN_designated_repertoire
+		cost = 1
+		prerequisite = {
+			focus = LTN_the_count_is_right
+		}
+		mutually_exclusive = {
+			focus = LTN_white_empress_plan
+		}
+		x = 4
+		y = 4
+		ai_will_do = {
+			base = 55
+		}
+		completion_reward = {
+			subtract_from_variable = { LTN_budget_sup = 10 }
+			add_to_variable = { LTN_loyal_cello = 5 }
+			add_to_variable = { LTN_ebl_stab = 0.05 }
+			add_to_variable = { LTN_ebl_drift = 0.05 }
+			custom_effect_tooltip = LTN_liberals_unrest_tt
+			hidden_effect = {
+				add_stability = -0.02
+			}
+		}
+	}
+
+	# ---- 8 · 白女皇计划（要等巡演事件链收场） ----
+	focus = {
+		id = LTN_white_empress_plan
 		icon = GFX_focus_LTN_solo_of_the_white
-		cost = 5
-		prerequisite = { focus = LTN_apex_of_resonance }
-		mutually_exclusive = { focus = LTN_duet }
-		mutually_exclusive = { focus = LTN_solo_of_the_black }
+		cost = 2
+		prerequisite = {
+			focus = LTN_voice_on_tour
+		}
+		mutually_exclusive = {
+			focus = LTN_hush_the_liberals
+		}
 		x = -4
 		y = 5
 		available = {
-			OR = {
-				has_country_flag = LTN_black_silenced
-				date > 1100.5.31
-			}
+			has_country_flag = LTN_tour_done
 		}
 		ai_will_do = {
-			base = 60
+			base = 80
 		}
 		completion_reward = {
-			remove_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-			add_ideas = LTN_one_voice
-			add_stability = -0.03
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
+			add_political_power = 20
+			add_to_variable = { LTN_loyal_viol = 10 tooltip = LTN_loyal_viol_tt }
+			add_to_variable = { LTN_ebl_stab = 0.05 }
+			add_to_variable = { LTN_ebl_drift = 0.05 }
+			custom_effect_tooltip = LTN_diet_blocs_tt
 			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
+				if = {
+					limit = { check_variable = { LTN_loyal_cello > LTN_loyal_viol } }
+					add_stability = 0.05
+				}
+				else = {
+					add_stability = -0.05
+				}
 			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_res = 0.05
-				tooltip = research_speed_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
 		}
 	}
 
-	# 5-2 合奏（隐藏最优解）
+	# ---- 9 · 开启帝国会议（无效果，只开吵） ----
 	focus = {
-		id = LTN_duet
-		icon = GFX_focus_LTN_duet
-		cost = 5
-		prerequisite = { focus = LTN_apex_of_resonance }
-		prerequisite = { focus = LTN_apex_of_the_sword }
-		mutually_exclusive = { focus = LTN_solo_of_the_white }
-		mutually_exclusive = { focus = LTN_solo_of_the_black }
+		id = LTN_open_imperial_diet
+		icon = GFX_focus_LTN_imperial_court
+		cost = 1
+		prerequisite = {
+			focus = LTN_white_empress_plan
+			focus = LTN_hush_the_liberals
+		}
 		x = 0
-		y = 5
-		available = {
-			OR = {
-				has_country_flag = LTN_both_alive
-				date > 1099.12.31
-			}
-		}
+		y = 6
 		ai_will_do = {
-			base = 60
+			base = 90
 		}
 		completion_reward = {
-			add_stability = 0.03
-			set_country_flag = LTN_duet_achieved
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_week = 0.005
-				tooltip = stability_weekly_tt
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_week = 0.005
-				tooltip = stability_weekly_tt
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			add_to_variable = {
-				LTN_echo_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			add_to_variable = {
-				LTN_echo_week = 0.005
-				tooltip = stability_weekly_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
+			country_event = { id = LTN_budget.4 }
 		}
 	}
 
-	# 5-3 黑塔独奏
+	# ---- 10 · 公平竞争（中左翼合作） ----
 	focus = {
-		id = LTN_solo_of_the_black
-		icon = GFX_focus_LTN_solo_of_the_black
-		cost = 5
-		prerequisite = { focus = LTN_apex_of_the_sword }
-		mutually_exclusive = { focus = LTN_solo_of_the_white }
-		mutually_exclusive = { focus = LTN_duet }
+		id = LTN_fair_competition
+		icon = GFX_focus_LTN_ivignad_hall
+		cost = 2
+		prerequisite = {
+			focus = LTN_open_imperial_diet
+		}
+		mutually_exclusive = {
+			focus = LTN_useful_bureaucracy
+		}
+		x = -4
+		y = 7
+		ai_will_do = {
+			base = 70
+		}
+		completion_reward = {
+			add_to_variable = { LTN_budget_sup = 15 tooltip = LTN_budget_sup_tt }
+			add_to_variable = { LTN_loyal_viol = 10 }
+			add_to_variable = { LTN_ebl_stab = 0.05 }
+			add_to_variable = { LTN_ebl_drift = 0.05 }
+			custom_effect_tooltip = LTN_viol_bloc_tt
+		}
+	}
+
+	# ---- 11 · 趁手的官僚（保守派合作） ----
+	focus = {
+		id = LTN_useful_bureaucracy
+		icon = GFX_focus_LTN_copyright_act
+		cost = 2
+		prerequisite = {
+			focus = LTN_open_imperial_diet
+		}
+		mutually_exclusive = {
+			focus = LTN_fair_competition
+		}
 		x = 4
-		y = 5
+		y = 7
+		ai_will_do = {
+			base = 70
+		}
+		completion_reward = {
+			add_to_variable = { LTN_budget_sup = 10 tooltip = LTN_budget_sup_tt }
+			add_to_variable = { LTN_loyal_cello = 10 }
+			add_to_variable = { LTN_ebl_stab = 0.05 }
+			add_to_variable = { LTN_ebl_build = 0.05 }
+			custom_effect_tooltip = LTN_cello_bloc_tt
+		}
+	}
+
+	# ---- 12 · 开启最终投票 ----
+	focus = {
+		id = LTN_open_final_vote
+		icon = GFX_focus_LTN_nine_copies
+		cost = 2
+		prerequisite = {
+			focus = LTN_fair_competition
+			focus = LTN_useful_bureaucracy
+		}
+		x = 0
+		y = 8
+		ai_will_do = {
+			base = 95
+		}
+		completion_reward = {
+			add_to_variable = { LTN_budget_sup = 10 tooltip = LTN_budget_sup_tt }
+			country_event = { id = LTN_budget.5 }
+		}
+	}
+
+	# ---- 13 · 艰难通过（投票赢） ----
+	focus = {
+		id = LTN_narrow_passage
+		icon = GFX_focus_LTN_new_golden_law
+		cost = 2.4285714
+		prerequisite = {
+			focus = LTN_open_final_vote
+		}
+		mutually_exclusive = {
+			focus = LTN_budget_defeat
+		}
+		x = -4
+		y = 9
 		available = {
-			OR = {
-				has_country_flag = LTN_white_yields
-				date > 1100.5.31
-			}
+			has_country_flag = LTN_budget_passed
 		}
 		ai_will_do = {
-			base = 60
+			base = 100
 		}
 		completion_reward = {
-			remove_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-			add_ideas = LTN_grimm_regency
-			add_war_support = 0.05
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
+			add_ideas = LTN_budget_act_passed
+			add_ideas = LTN_budget_construction_fund
+			add_stability = 0.15
+			custom_effect_tooltip = LTN_budget_act_passed_tt
 			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
+				set_variable = { LTN_ct_build = 180 }
 			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_week = 0.005
-				tooltip = stability_weekly_tt
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_drift = 0.05
-				tooltip = drift_defence_factor_tt
-			}
-			add_to_variable = {
-				LTN_echo_week = 0.005
-				tooltip = stability_weekly_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
 		}
 	}
 
-	# =====================================================================
-	# 政治带 · 中线【金律的修订】（2026-09-30 扩展，x=-2 / 2，收尾 x=0）
-	# 填的是 y=1..4、x∈[-6,6] 的中央空档；前置仍只连起始格，
-	# 用 available 卡在【九份抄本】之后——改了乐章，前面所有的账都要重算。
-	# =====================================================================
+	# ---- 14 · 联合帝国预算案失败（投票输） ----
+	focus = {
+		id = LTN_budget_defeat
+		icon = GFX_focus_LTN_endless_sunset
+		cost = 2.4285714
+		prerequisite = {
+			focus = LTN_open_final_vote
+		}
+		mutually_exclusive = {
+			focus = LTN_narrow_passage
+		}
+		x = 4
+		y = 9
+		available = {
+			NOT = { has_country_flag = LTN_budget_passed }
+		}
+		ai_will_do = {
+			base = 40
+		}
+		completion_reward = {
+			add_ideas = LTN_budget_act_mild
+			add_stability = -0.15
+			add_to_variable = { LTN_loyal_cello = 10 tooltip = LTN_loyal_cello_tt }
+			add_to_variable = { LTN_ebl_stab = 0.05 }
+			add_to_variable = { LTN_ebl_drift = 0.05 }
+			country_event = { id = LTN_budget.6 }
+		}
+	}
 
+	# ---- 15 · 赫琳玛特计划（百日集权，真正的纸牌屋） ----
 	focus = {
-		id = LTN_read_the_score
-		icon = GFX_focus_LTN_read_the_score
-		cost = 4
-		prerequisite = { focus = LTN_twin_rule }
-		x = -2
-		y = 1
-		available = {
-			has_completed_focus = LTN_nine_copies
+		id = LTN_hlinmarts_plan
+		icon = GFX_focus_LTN_solo_of_the_black
+		cost = 2
+		prerequisite = {
+			focus = LTN_narrow_passage
+			focus = LTN_budget_defeat
 		}
-		ai_will_do = { base = 55 }
-		completion_reward = {
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			add_to_variable = {
-				LTN_tw_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_res = 0.05
-				tooltip = research_speed_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-	focus = {
-		id = LTN_electors_consent
-		icon = GFX_focus_LTN_electors_consent
-		cost = 4
-		prerequisite = { focus = LTN_twin_rule }
-		x = 2
-		y = 1
-		available = {
-			has_completed_focus = LTN_nine_copies
-		}
-		ai_will_do = { base = 55 }
-		completion_reward = {
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_drift = 0.05
-				tooltip = drift_defence_factor_tt
-			}
-			add_to_variable = {
-				LTN_echo_res = 0.05
-				tooltip = research_speed_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-	focus = {
-		id = LTN_first_annotation
-		icon = GFX_focus_LTN_first_annotation
-		cost = 4
-		prerequisite = { focus = LTN_read_the_score }
-		x = -2
-		y = 2
-		ai_will_do = { base = 55 }
-		completion_reward = {
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			add_to_variable = {
-				LTN_echo_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			add_to_variable = {
-				LTN_echo_drift = 0.05
-				tooltip = drift_defence_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-	focus = {
-		id = LTN_the_rehearsal
-		icon = GFX_focus_LTN_the_rehearsal
-		cost = 4
-		prerequisite = { focus = LTN_electors_consent }
-		x = 2
-		y = 2
-		ai_will_do = { base = 55 }
-		completion_reward = {
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_drift = 0.05
-				tooltip = drift_defence_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-	focus = {
-		id = LTN_rewrite_the_voice
-		icon = GFX_focus_LTN_rewrite_the_voice
-		cost = 4
-		prerequisite = { focus = LTN_first_annotation }
-		x = -2
-		y = 3
-		ai_will_do = { base = 55 }
-		completion_reward = {
-			add_stability = -0.02
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			add_to_variable = {
-				LTN_echo_cons = -0.05
-				tooltip = consumer_goods_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-	focus = {
-		id = LTN_fixing_the_pitch
-		icon = GFX_focus_LTN_fixing_the_pitch
-		cost = 4
-		prerequisite = { focus = LTN_the_rehearsal }
-		x = 2
-		y = 3
-		ai_will_do = { base = 55 }
-		completion_reward = {
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
-			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
-			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_ppf = 0.05
-				tooltip = political_power_factor_tt
-			}
-			add_to_variable = {
-				LTN_tw_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			add_to_variable = {
-				LTN_tw_ws = 0.05
-				tooltip = war_support_factor_tt
-			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_ppg = 0.05
-				tooltip = political_power_gain_tt
-			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_stab = 0.05
-				tooltip = stability_factor_tt
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
-		}
-	}
-	focus = {
-		id = LTN_new_golden_law
-		icon = GFX_focus_LTN_new_golden_law
-		cost = 5
-		prerequisite = { focus = LTN_rewrite_the_voice }
-		prerequisite = { focus = LTN_fixing_the_pitch }
 		x = 0
-		y = 4
-		ai_will_do = { base = 55 }
+		y = 10
+		ai_will_do = {
+			base = 90
+		}
 		completion_reward = {
-			add_stability = 0.03
-			set_country_flag = LTN_new_golden_law
-# >>> LTN_growth
-			custom_effect_tooltip = generic_skip_one_line_tt
+			set_country_flag = LTN_coup_window_open
+			add_political_power = 50
+			add_to_variable = { LTN_conspiracy = -10 tooltip = LTN_conspiracy_tt }
+			add_to_variable = { LTN_loyal_viol = -10 }
+			add_to_variable = { LTN_loyal_cello = -10 }
+			subtract_from_variable = { LTN_ebl_stab = 0.05 }
+			subtract_from_variable = { LTN_ebl_drift = 0.05 }
+			custom_effect_tooltip = LTN_loyal_both_tt
+			custom_effect_tooltip = LTN_coup_100_tt
 			hidden_effect = {
-				add_dynamic_modifier = { modifier = LTN_dyn_twin_rule }
-				add_dynamic_modifier = { modifier = LTN_dyn_golden_law }
-				add_dynamic_modifier = { modifier = LTN_dyn_old_echo }
+				country_event = { id = LTN_budget.15 days = 100 }
 			}
-			custom_effect_tooltip = LTN_tw_modify_tt
-			add_to_variable = {
-				LTN_tw_drift = 0.05
-				tooltip = drift_defence_factor_tt
+		}
+	}
+
+	# ---- 16 · 白色羊羔和山羊凯旋而归 ----
+	focus = {
+		id = LTN_lambs_and_goats_return
+		icon = GFX_focus_LTN_the_nine_regions
+		cost = 1
+		prerequisite = {
+			focus = LTN_hlinmarts_plan
+		}
+		x = -4
+		y = 11
+		ai_will_do = {
+			base = 85
+		}
+		completion_reward = {
+			add_stability = 0.10
+			add_war_support = 0.05
+			subtract_from_variable = { LTN_conspiracy = 30 }
+			add_to_variable = { LTN_loyal_viol = 20 }
+			add_to_variable = { LTN_loyal_cello = 20 }
+			add_to_variable = { LTN_ebl_stab = 0.10 }
+			add_to_variable = { LTN_ebl_drift = 0.10 }
+			add_political_power = 80
+			custom_effect_tooltip = LTN_conspiracy_tt
+			custom_effect_tooltip = LTN_loyal_both_tt
+			hidden_effect = {
+				country_event = { id = LTN_budget.13 days = 5 }
 			}
-			custom_effect_tooltip = LTN_law_modify_tt
-			add_to_variable = {
-				LTN_law_exp = 0.05
-				tooltip = experience_gain_army_factor_tt
+		}
+	}
+
+	# ---- 17 · 白羊，你的另一半呢（与凯旋并行） ----
+	focus = {
+		id = LTN_where_is_your_other_half
+		icon = GFX_focus_LTN_listening_machine
+		cost = 2
+		prerequisite = {
+			focus = LTN_hlinmarts_plan
+		}
+		x = 4
+		y = 11
+		ai_will_do = {
+			base = 50
+		}
+		completion_reward = {
+			add_ideas = LTN_black_moment
+			custom_effect_tooltip = LTN_black_moment_start_tt
+			hidden_effect = {
+				set_variable = { LTN_ct_black = 100 }
 			}
-			custom_effect_tooltip = LTN_echo_modify_tt
-			add_to_variable = {
-				LTN_echo_week = 0.005
-				tooltip = stability_weekly_tt
+		}
+	}
+
+	# ---- 18 · 沉默的她和冠冕（凯旋 + 白羊汇总） ----
+	focus = {
+		id = LTN_silent_her_and_crown
+		icon = GFX_focus_LTN_kill_at_the_start
+		cost = 1
+		prerequisite = {
+			focus = LTN_lambs_and_goats_return
+			focus = LTN_where_is_your_other_half
+		}
+		x = 0
+		y = 12
+		ai_will_do = {
+			base = 80
+		}
+		completion_reward = {
+			capital_scope = {
+				create_unit = {
+					division = "division_template = \"女皇之声\" start_experience_factor = 0.7 start_equipment_factor = 1.0"
+					owner = ROOT
+					count = 4
+				}
 			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-# <<< LTN_growth
+			add_to_variable = { LTN_loyal_cello = -10 tooltip = LTN_cello_bloc_tt }
+			subtract_from_variable = { LTN_ebl_stab = 0.05 }
+			subtract_from_variable = { LTN_ebl_drift = 0.05 }
+			custom_effect_tooltip = LTN_shetling_note_tt
+		}
+	}
+
+	# ---- 19 · 永恒盛典的胜利 ----
+	focus = {
+		id = LTN_victory_of_eternal_festival
+		icon = GFX_focus_LTN_twin_resonance
+		cost = 2
+		prerequisite = {
+			focus = LTN_silent_her_and_crown
+		}
+		x = 0
+		y = 13
+		ai_will_do = {
+			base = 85
+		}
+		completion_reward = {
+			add_ideas = LTN_leithanien_officer_corps
+			army_experience = 60
+			add_war_support = 0.10
+			add_to_variable = { LTN_loyal_viol = 10 }
+			add_to_variable = { LTN_loyal_cello = 10 }
+			add_to_variable = { LTN_ebl_drift = 0.05 }
+			add_to_variable = { LTN_ebl_stab = 0.05 }
+			custom_effect_tooltip = LTN_gaul_submission_tt
+		}
+	}
+
+	# ---- 20 · 帝国序曲再次奏响（新金律初稿，无效果，事件奖励） ----
+	focus = {
+		id = LTN_imperial_overture
+		icon = GFX_focus_LTN_annihilation_warrant
+		cost = 2.8571428
+		prerequisite = {
+			focus = LTN_victory_of_eternal_festival
+		}
+		x = 0
+		y = 14
+		ai_will_do = {
+			base = 80
+		}
+		completion_reward = {
+			set_country_flag = LTN_new_law_draft
+			custom_effect_tooltip = LTN_new_law_draft_tt
+			country_event = { id = LTN_budget.14 }
+		}
+	}
+
+	# ---- 21 · 路德维格大学的整肃 ----
+	focus = {
+		id = LTN_ludwig_purge
+		icon = GFX_focus_LTN_trial_academy
+		cost = 2
+		prerequisite = {
+			focus = LTN_imperial_overture
+		}
+		x = -4
+		y = 15
+		ai_will_do = {
+			base = 75
+		}
+		completion_reward = {
+			add_ideas = LTN_unified_thought
+			add_ideas = LTN_new_zeitgeist
+			country_event = { id = LTN_budget.8 }
+			custom_effect_tooltip = LTN_academy_purge_tt
+		}
+	}
+
+	# ---- 22 · 圆桌上的金律（与整肃同排） ----
+	focus = {
+		id = LTN_round_table_law
+		icon = GFX_focus_LTN_fixing_the_pitch
+		cost = 2
+		prerequisite = {
+			focus = LTN_imperial_overture
+		}
+		x = 4
+		y = 15
+		ai_will_do = {
+			base = 70
+		}
+		completion_reward = {
+			add_to_variable = { LTN_loyal_viol = 15 }
+			add_to_variable = { LTN_loyal_cello = 15 }
+			add_to_variable = { LTN_ebl_stab = 0.05 }
+			add_to_variable = { LTN_ebl_drift = 0.10 }
+			add_to_variable = { LTN_ebl_build = 0.05 }
+			army_experience = 325
+			custom_effect_tooltip = LTN_loyal_both_tt
+			custom_effect_tooltip = LTN_round_table_14_tt
+			hidden_effect = {
+				country_event = { id = LTN_budget.10 days = 14 }
+			}
+		}
+	}
+
+	# ---- 23 · 严肃和认真的科研（最终辩论） ----
+	focus = {
+		id = LTN_serious_research
+		icon = GFX_focus_LTN_crystal_industry
+		cost = 3.8571428
+		prerequisite = {
+			focus = LTN_ludwig_purge
+		}
+		x = -4
+		y = 16
+		ai_will_do = {
+			base = 65
+		}
+		completion_reward = {
+			custom_effect_tooltip = LTN_final_debate_req_tt
+			hidden_effect = {
+				country_event = { id = LTN_budget.11 }
+			}
+		}
+	}
+
+	# ---- 24 · 梦想成真（科研 + 圆桌汇总） ----
+	focus = {
+		id = LTN_dream_comes_true
+		icon = GFX_focus_LTN_apex_of_resonance
+		cost = 2
+		prerequisite = {
+			focus = LTN_serious_research
+			focus = LTN_round_table_law
+		}
+		x = 0
+		y = 17
+		ai_will_do = {
+			base = 90
+		}
+		completion_reward = {
+			add_political_power = 325
+			country_event = { id = LTN_budget.12 }
+			custom_effect_tooltip = LTN_lower_house_tt
+		}
+	}
+
+	# ---- 25 · 万岁，胜利者的桂冠（终幕） ----
+	focus = {
+		id = LTN_laurel_of_victory
+		icon = GFX_focus_LTN_army_of_the_empire
+		cost = 2
+		prerequisite = {
+			focus = LTN_dream_comes_true
+		}
+		x = 0
+		y = 18
+		ai_will_do = {
+			base = 100
+		}
+		completion_reward = {
+			add_ideas = LTN_guardian_of_the_tower
+			add_stability = 0.10
+			add_war_support = 0.10
+			set_country_flag = LTN_twin_laurel
+			custom_effect_tooltip = LTN_guardian_of_the_tower_tt
 		}
 	}
 
 	# =====================================================================
-	# 经济带【金库与工坊】y=7..12（2026-09-30 追加）
+	# 经济带【金库与工坊】y=20..25（2026-09-30 追加，2026-10-11 平移 +13）
 	# =====================================================================
+
 
 	focus = {
 		id = LTN_imperial_treasury
 		icon = GFX_focus_LTN_imperial_treasury
 		cost = 2
 		x = 0
-		y = 7
+		y = 20
 		ai_will_do = {
 			base = 100
 		}
@@ -1319,7 +771,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_imperial_treasury }
 		x = -13
-		y = 8
+		y = 21
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			add_political_power = 50
@@ -1361,7 +813,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_ducat_standard }
 		x = -13
-		y = 9
+		y = 22
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			add_stability = -0.02
@@ -1403,7 +855,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_land_tax }
 		x = -13
-		y = 10
+		y = 23
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1440,7 +892,7 @@ focus_tree = {
 		cost = 5
 		prerequisite = { focus = LTN_reclaim_the_mints }
 		x = -13
-		y = 11
+		y = 24
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1481,7 +933,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_imperial_treasury }
 		x = -9
-		y = 8
+		y = 21
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1510,7 +962,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_imperial_treasury }
 		x = -7
-		y = 8
+		y = 21
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1551,7 +1003,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_instrument_guilds }
 		x = -9
-		y = 9
+		y = 22
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1584,7 +1036,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_dual_track_design }
 		x = -7
-		y = 9
+		y = 22
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1607,7 +1059,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_crystal_industry }
 		x = -9
-		y = 10
+		y = 23
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1640,7 +1092,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_instrument_export }
 		x = -7
-		y = 10
+		y = 23
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1674,7 +1126,7 @@ focus_tree = {
 		prerequisite = { focus = LTN_factory_zones }
 		prerequisite = { focus = LTN_artisan_schools }
 		x = -8
-		y = 11
+		y = 24
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			set_country_flag = LTN_workshop_apex
@@ -1710,7 +1162,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_imperial_treasury }
 		x = 7
-		y = 8
+		y = 21
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1733,7 +1185,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_imperial_treasury }
 		x = 9
-		y = 8
+		y = 21
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1756,7 +1208,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_engine_core }
 		x = 7
-		y = 9
+		y = 22
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			add_political_power = 50
@@ -1780,7 +1232,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_granary_network }
 		x = 9
-		y = 9
+		y = 22
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1807,7 +1259,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_trade_routes }
 		x = 7
-		y = 10
+		y = 23
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1834,7 +1286,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_relief_rail }
 		x = 9
-		y = 10
+		y = 23
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			add_stability = 0.02
@@ -1849,7 +1301,7 @@ focus_tree = {
 		prerequisite = { focus = LTN_mobile_city_works }
 		prerequisite = { focus = LTN_storm_relief }
 		x = 8
-		y = 11
+		y = 24
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			set_country_flag = LTN_routes_apex
@@ -1875,7 +1327,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_imperial_treasury }
 		x = 13
-		y = 8
+		y = 21
 		ai_will_do = { base = 60 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1908,7 +1360,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_copyright_act }
 		x = 13
-		y = 9
+		y = 22
 		ai_will_do = { base = 60 }
 		completion_reward = {
 			add_political_power = 50
@@ -1938,7 +1390,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_tourism_towns }
 		x = 13
-		y = 10
+		y = 23
 		ai_will_do = { base = 60 }
 		completion_reward = {
 # >>> LTN_growth
@@ -1971,7 +1423,7 @@ focus_tree = {
 		cost = 5
 		prerequisite = { focus = LTN_art_market }
 		x = 13
-		y = 11
+		y = 24
 		ai_will_do = { base = 60 }
 		completion_reward = {
 			add_stability = 0.02
@@ -2014,7 +1466,7 @@ focus_tree = {
 		mutually_exclusive = { focus = LTN_chartered_guilds }
 		mutually_exclusive = { focus = LTN_free_market }
 		x = -4
-		y = 12
+		y = 25
 		ai_will_do = { base = 60 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2046,7 +1498,7 @@ focus_tree = {
 		mutually_exclusive = { focus = LTN_state_monopoly }
 		mutually_exclusive = { focus = LTN_free_market }
 		x = 0
-		y = 12
+		y = 25
 		ai_will_do = { base = 60 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2072,7 +1524,7 @@ focus_tree = {
 		mutually_exclusive = { focus = LTN_state_monopoly }
 		mutually_exclusive = { focus = LTN_chartered_guilds }
 		x = 4
-		y = 12
+		y = 25
 		ai_will_do = { base = 60 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2109,7 +1561,7 @@ focus_tree = {
 	}
 
 	# =====================================================================
-	# 军事带【点兵册】y=14..19（2026-09-30 追加）
+	# 军事带【点兵册】y=27..32（2026-09-30 追加）
 	# =====================================================================
 
 	focus = {
@@ -2117,7 +1569,7 @@ focus_tree = {
 		icon = GFX_focus_LTN_muster_roll
 		cost = 2
 		x = 0
-		y = 14
+		y = 27
 		ai_will_do = {
 			base = 100
 		}
@@ -2155,7 +1607,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_muster_roll }
 		x = -13
-		y = 15
+		y = 28
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2198,7 +1650,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_private_host_limits }
 		x = -13
-		y = 16
+		y = 29
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			add_manpower = 30000
@@ -2240,7 +1692,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_military_schools }
 		x = -13
-		y = 17
+		y = 30
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2283,7 +1735,7 @@ focus_tree = {
 		cost = 5
 		prerequisite = { focus = LTN_standing_army }
 		x = -13
-		y = 18
+		y = 31
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			add_command_power = 30
@@ -2328,7 +1780,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_muster_roll }
 		x = -9
-		y = 15
+		y = 28
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			army_experience = 25
@@ -2356,7 +1808,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_muster_roll }
 		x = -7
-		y = 15
+		y = 28
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			add_command_power = 25
@@ -2384,7 +1836,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_expand_the_guard }
 		x = -9
-		y = 16
+		y = 29
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2411,7 +1863,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_voice_of_the_empress }
 		x = -7
-		y = 16
+		y = 29
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			army_experience = 25
@@ -2439,7 +1891,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_veil_ritual }
 		x = -9
-		y = 17
+		y = 30
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			add_manpower = 25000
@@ -2467,7 +1919,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_golden_melody }
 		x = -7
-		y = 17
+		y = 30
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2495,7 +1947,7 @@ focus_tree = {
 		prerequisite = { focus = LTN_caster_battalions }
 		prerequisite = { focus = LTN_trial_academy }
 		x = -8
-		y = 18
+		y = 31
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			set_country_flag = LTN_blade_apex
@@ -2525,7 +1977,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_muster_roll }
 		x = 7
-		y = 15
+		y = 28
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2556,7 +2008,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_muster_roll }
 		x = 9
-		y = 15
+		y = 28
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2587,7 +2039,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_listening_machine }
 		x = 7
-		y = 16
+		y = 29
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2614,7 +2066,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_border_posts }
 		x = 9
-		y = 16
+		y = 29
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2641,7 +2093,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_field_corps }
 		x = 7
-		y = 17
+		y = 30
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2672,7 +2124,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_shard_curtain }
 		x = 9
-		y = 17
+		y = 30
 		ai_will_do = { base = 65 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2700,7 +2152,7 @@ focus_tree = {
 		prerequisite = { focus = LTN_rift_blockade }
 		prerequisite = { focus = LTN_mobile_fortress }
 		x = 8
-		y = 18
+		y = 31
 		ai_will_do = { base = 65 }
 		completion_reward = {
 			add_war_support = 0.03
@@ -2731,7 +2183,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_muster_roll }
 		x = 13
-		y = 15
+		y = 28
 		ai_will_do = { base = 60 }
 		completion_reward = {
 			army_experience = 20
@@ -2767,7 +2219,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_mass_production_units }
 		x = 13
-		y = 16
+		y = 29
 		ai_will_do = { base = 60 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2802,7 +2254,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_dual_track_ordnance }
 		x = 13
-		y = 17
+		y = 30
 		ai_will_do = { base = 60 }
 		completion_reward = {
 			add_command_power = 30
@@ -2845,7 +2297,7 @@ focus_tree = {
 		cost = 5
 		prerequisite = { focus = LTN_stone_dice }
 		x = 13
-		y = 18
+		y = 31
 		ai_will_do = { base = 60 }
 		completion_reward = {
 			set_country_flag = LTN_quartermaster_apex
@@ -2890,7 +2342,7 @@ focus_tree = {
 		mutually_exclusive = { focus = LTN_sword_of_the_towers }
 		mutually_exclusive = { focus = LTN_hosts_of_the_nine }
 		x = -4
-		y = 19
+		y = 32
 		ai_will_do = { base = 60 }
 		completion_reward = {
 			add_war_support = 0.03
@@ -2923,7 +2375,7 @@ focus_tree = {
 		mutually_exclusive = { focus = LTN_army_of_the_empire }
 		mutually_exclusive = { focus = LTN_hosts_of_the_nine }
 		x = 0
-		y = 19
+		y = 32
 		ai_will_do = { base = 60 }
 		completion_reward = {
 # >>> LTN_growth
@@ -2963,7 +2415,7 @@ focus_tree = {
 		mutually_exclusive = { focus = LTN_army_of_the_empire }
 		mutually_exclusive = { focus = LTN_sword_of_the_towers }
 		x = 4
-		y = 19
+		y = 32
 		ai_will_do = { base = 60 }
 		completion_reward = {
 			add_manpower = 50000
@@ -2997,7 +2449,7 @@ focus_tree = {
 	}
 
 	# ══════════════════════════════════════════════════════════════════════
-	# 第四带 · 外交（y=21..26，设计稿 11_外交国策树设计.md）
+	# 第四带 · 外交（y=34..39，设计稿 11_外交国策树设计.md）
 	# 版式：起始 x=0/y=21 → 扇出四条路线列首（x=-11 / -5 / 5 / 11，列间距 ≥4）
 	#       每条路线纵向 4 格；三个终幕在 y=26 跨列汇聚（x=-4/0/4，两两互斥）
 	# 效果：本树按 2026-10-01 定档「全真做」——宣战、入伙、附庸升降、宣称都直接写在
@@ -3009,7 +2461,7 @@ focus_tree = {
 		icon = GFX_focus_LTN_foreign_towers
 		cost = 4
 		x = 0
-		y = 21
+		y = 34
 		ai_will_do = { base = 60 }
 		completion_reward = {
 			add_political_power = 20
@@ -3041,7 +2493,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_foreign_towers }
 		x = -11
-		y = 22
+		y = 35
 		ai_will_do = { base = 55 }
 		completion_reward = {
 			add_political_power = 25
@@ -3068,7 +2520,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_twin_pact_rite }
 		x = -11
-		y = 23
+		y = 36
 		ai_will_do = { base = 50 }
 		completion_reward = {
 			add_political_power = 30
@@ -3102,7 +2554,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_open_the_gate }
 		x = -11
-		y = 24
+		y = 37
 		ai_will_do = { base = 45 }
 		completion_reward = {
 			set_autonomy = { target = WGG autonomous_state = autonomy_colony freedom_level = 0.7 }
@@ -3132,7 +2584,7 @@ focus_tree = {
 		cost = 5
 		prerequisite = { focus = LTN_border_lords }
 		x = -11
-		y = 25
+		y = 38
 		ai_will_do = { base = 50 }
 		completion_reward = {
 			add_political_power = 40
@@ -3164,7 +2616,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_foreign_towers }
 		x = -5
-		y = 22
+		y = 35
 		ai_will_do = { base = 55 }
 		completion_reward = {
 			add_political_power = 20
@@ -3194,7 +2646,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_kazdel_protocol }
 		x = -5
-		y = 23
+		y = 36
 		ai_will_do = { base = 50 }
 		completion_reward = {
 			add_stability = 0.01
@@ -3222,7 +2674,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_steppe_road }
 		x = -5
-		y = 24
+		y = 37
 		ai_will_do = { base = 45 }
 		completion_reward = {
 			add_war_support = 0.02
@@ -3253,7 +2705,7 @@ focus_tree = {
 		cost = 5
 		prerequisite = { focus = LTN_aid_pool }
 		x = -5
-		y = 25
+		y = 38
 		ai_will_do = { base = 50 }
 		completion_reward = {
 			add_political_power = 35
@@ -3285,7 +2737,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_foreign_towers }
 		x = 5
-		y = 22
+		y = 35
 		ai_will_do = { base = 50 }
 		completion_reward = {
 			add_war_support = 0.02
@@ -3319,7 +2771,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_northern_watch }
 		x = 5
-		y = 23
+		y = 36
 		ai_will_do = { base = 45 }
 		completion_reward = {
 			add_war_support = 0.02
@@ -3350,7 +2802,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_river_debt }
 		x = 5
-		y = 24
+		y = 37
 		ai_will_do = { base = 55 }
 		completion_reward = {
 			capital_scope = {
@@ -3386,7 +2838,7 @@ focus_tree = {
 		cost = 5
 		prerequisite = { focus = LTN_war_industry }
 		x = 5
-		y = 25
+		y = 38
 		available = {
 			num_of_factories > 120
 			has_war_support > 0.5
@@ -3439,7 +2891,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_foreign_towers }
 		x = 11
-		y = 22
+		y = 35
 		ai_will_do = { base = 45 }
 		completion_reward = {
 			add_political_power = 25
@@ -3473,7 +2925,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_south_claim }
 		x = 11
-		y = 23
+		y = 36
 		ai_will_do = { base = 50 }
 		completion_reward = {
 			add_stability = 0.02
@@ -3500,7 +2952,7 @@ focus_tree = {
 		cost = 4
 		prerequisite = { focus = LTN_hold_the_net }
 		x = 11
-		y = 24
+		y = 37
 		ai_will_do = { base = 45 }
 		completion_reward = {
 			add_political_power = 30
@@ -3534,7 +2986,7 @@ focus_tree = {
 		cost = 5
 		prerequisite = { focus = LTN_siracusa_card }
 		x = 11
-		y = 25
+		y = 38
 		ai_will_do = { base = 45 }
 		completion_reward = {
 			add_war_support = 0.03
@@ -3569,7 +3021,7 @@ focus_tree = {
 		mutually_exclusive = { focus = LTN_golden_world }
 		mutually_exclusive = { focus = LTN_lord_of_continent }
 		x = -4
-		y = 26
+		y = 39
 		ai_will_do = { base = 60 }
 		completion_reward = {
 			add_stability = 0.05
@@ -3598,7 +3050,7 @@ focus_tree = {
 		mutually_exclusive = { focus = LTN_concert_of_four }
 		mutually_exclusive = { focus = LTN_lord_of_continent }
 		x = 0
-		y = 26
+		y = 39
 		ai_will_do = { base = 55 }
 		completion_reward = {
 			add_stability = 0.04
@@ -3627,7 +3079,7 @@ focus_tree = {
 		mutually_exclusive = { focus = LTN_concert_of_four }
 		mutually_exclusive = { focus = LTN_golden_world }
 		x = 4
-		y = 26
+		y = 39
 		ai_will_do = { base = 50 }
 		completion_reward = {
 			add_war_support = 0.06

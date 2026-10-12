@@ -1,0 +1,535 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) ·「联合帝国预算计划」—— 事件
+#
+# 命名空间 LTN_budget（调律台用 LTN_law、废弃样板用 test_ltn，互不占用）
+#
+#  · LTN_budget.1   大臣们的账本      ← 国策【告诉大臣，理清现状】
+#  · LTN_budget.2   巡演启程          ← 国策【让女皇之声巡演】
+#  · LTN_budget.3   巡演归来          ← .2 之后 21 天，置 LTN_tour_done（白女皇计划的前置门）
+#  · LTN_budget.4   帝国会议的争吵    ← 国策【开启帝国会议】
+#  · LTN_budget.5   金律共鸣厅的表决  ← 国策【开启最终投票】，计票走 LTN_budget_effect_vote
+#  · LTN_budget.6   施彤领的公开信    ← 国策【联合帝国预算案失败】
+#  · LTN_budget.7   诸侯的抵制        ← 月度脉冲：密谋度 > 74（每 6 个月最多一次）
+#  · LTN_budget.8   巫妖的告别        ← 国策【路德维格大学的整肃】
+#  · LTN_budget.9   清算时刻的账单    ← 黑清算倒计时到期且未拉拢满三家
+#  · LTN_budget.10  新乐章修订法案    ← 国策【圆桌上的金律】
+#  · LTN_budget.11  最终辩论          ← 国策【严肃和认真的科研】
+#  · LTN_budget.12  下议院议长选举    ← 国策【梦想成真】
+#  · LTN_budget.13  密探在行动        ← 国策【白色羊羔和山羊凯旋而归】之后 5 天
+#  · LTN_budget.14  边境的军报        ← 国策【帝国序曲再次奏响】
+#  · LTN_budget.15  判断者的名册      ← 国策【赫琳玛特计划】排期 100 天
+#
+# 文案见 localisation/simp_chinese/ARF_LTN_budget_l_simp_chinese.yml
+# 忠诚度/密谋度/预算优势三个仪表：LTN_loyal_viol / LTN_loyal_cello / LTN_conspiracy / LTN_budget_sup
+# 精神档位（5% 一档）与仪表值成对写入，不做派生算式，见 LTN_budget_effects.txt 头注释
+# ============================================================================
+
+add_namespace = LTN_budget
+
+# ---- 1 · 大臣们的账本 ----
+country_event = {
+	id = LTN_budget.1
+	title = LTN_budget.1.t
+	desc = LTN_budget.1.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.1.oa
+		ai_chance = { factor = 40 }
+		add_political_power = -50
+		add_to_variable = { LTN_budget_sup = 15 }
+		custom_effect_tooltip = LTN_budget_sup_tt
+	}
+	option = {
+		name = LTN_budget.1.ob
+		ai_chance = { factor = 35 }
+		add_political_power = -50
+		add_to_variable = { LTN_budget_sup = 10 }
+		subtract_from_variable = { LTN_conspiracy = 15 }
+		if = { limit = { NOT = { check_variable = { LTN_conspiracy > 20 } } } set_variable = { LTN_conspiracy = 20 } }
+		custom_effect_tooltip = LTN_conspiracy_tt
+		custom_effect_tooltip = LTN_budget_sup_tt
+	}
+	option = {
+		name = LTN_budget.1.oc
+		ai_chance = { factor = 25 }
+		add_political_power = -50
+		add_to_variable = { LTN_budget_sup = 5 }
+		add_to_variable = { LTN_loyal_cello = 10 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		add_to_variable = { LTN_ebl_drift = 0.05 }
+		custom_effect_tooltip = LTN_loyal_cello_tt
+	}
+}
+
+# ---- 2 · 巡演启程 ----
+country_event = {
+	id = LTN_budget.2
+	title = LTN_budget.2.t
+	desc = LTN_budget.2.d
+	picture = GFX_report_event_german_speech
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.2.oa
+		ai_chance = { factor = 50 }
+		add_to_variable = { LTN_loyal_viol = 5 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		add_to_variable = { LTN_ebl_drift = 0.05 }
+		set_country_flag = LTN_tour_watched
+		custom_effect_tooltip = LTN_tour_watched_tt
+	}
+	option = {
+		name = LTN_budget.2.ob
+		ai_chance = { factor = 30 }
+		add_to_variable = { LTN_loyal_viol = 10 }
+		add_to_variable = { LTN_loyal_cello = -5 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		subtract_from_variable = { LTN_conspiracy = 10 }
+		set_country_flag = LTN_tour_watched
+		custom_effect_tooltip = LTN_loyal_viol_tt
+	}
+	option = {
+		name = LTN_budget.2.oc
+		ai_chance = { factor = 20 }
+		add_political_power = 30
+		subtract_from_variable = { LTN_conspiracy = 5 }
+		custom_effect_tooltip = LTN_conspiracy_tt
+	}
+}
+
+# ---- 3 · 巡演归来（开白女皇计划的前置门） ----
+country_event = {
+	id = LTN_budget.3
+	title = LTN_budget.3.t
+	desc = LTN_budget.3.d
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = LTN
+		has_country_flag = LTN_tour_watched
+	}
+
+	mean_time_to_happen = { days = 21 }
+
+	option = {
+		name = LTN_budget.3.oa
+		ai_chance = { factor = 60 }
+		set_country_flag = LTN_tour_done
+		add_stability = 0.03
+		add_political_power = 25
+	}
+	option = {
+		name = LTN_budget.3.ob
+		ai_chance = { factor = 40 }
+		set_country_flag = LTN_tour_done
+		add_to_variable = { LTN_budget_sup = 10 }
+		add_to_variable = { LTN_loyal_viol = 5 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		custom_effect_tooltip = LTN_budget_sup_tt
+	}
+}
+
+# ---- 4 · 帝国会议的争吵 ----
+country_event = {
+	id = LTN_budget.4
+	title = LTN_budget.4.t
+	desc = LTN_budget.4.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.4.oa
+		ai_chance = { factor = 45 }
+		add_to_variable = { LTN_budget_sup = 10 }
+		subtract_from_variable = { LTN_conspiracy = 5 }
+		custom_effect_tooltip = LTN_budget_sup_tt
+	}
+	option = {
+		name = LTN_budget.4.ob
+		ai_chance = { factor = 35 }
+		add_to_variable = { LTN_loyal_cello = 10 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		add_to_variable = { LTN_ebl_build = 0.05 }
+		custom_effect_tooltip = LTN_loyal_cello_tt
+	}
+	option = {
+		name = LTN_budget.4.oc
+		ai_chance = { factor = 20 }
+		add_political_power = -25
+		add_to_variable = { LTN_budget_sup = 15 }
+		custom_effect_tooltip = LTN_budget_sup_tt
+	}
+}
+
+# ---- 5 · 金律共鸣厅的表决 ----
+country_event = {
+	id = LTN_budget.5
+	title = LTN_budget.5.t
+	desc = LTN_budget.5.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = { LTN_budget_effect_vote = yes }
+	}
+
+	option = {
+		name = LTN_budget.5.oa
+		trigger = { has_country_flag = LTN_budget_passed }
+		ai_chance = { factor = 100 }
+		add_political_power = 25
+	}
+	option = {
+		name = LTN_budget.5.ob
+		trigger = { has_country_flag = LTN_budget_failed }
+		ai_chance = { factor = 100 }
+		add_political_power = -15
+	}
+}
+
+# ---- 6 · 施彤领的公开信 ----
+country_event = {
+	id = LTN_budget.6
+	title = LTN_budget.6.t
+	desc = LTN_budget.6.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.6.oa
+		ai_chance = { factor = 60 }
+		add_to_variable = { LTN_loyal_cello = 5 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		custom_effect_tooltip = LTN_loyal_cello_tt
+	}
+	option = {
+		name = LTN_budget.6.ob
+		ai_chance = { factor = 40 }
+		add_to_variable = { LTN_conspiracy = 10 }
+		custom_effect_tooltip = LTN_conspiracy_tt
+	}
+}
+
+# ---- 7 · 诸侯的抵制（月度脉冲，密谋度爆表） ----
+country_event = {
+	id = LTN_budget.7
+	title = LTN_budget.7.t
+	desc = LTN_budget.7.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = LTN_budget.7.oa
+		ai_chance = { factor = 40 }
+		add_political_power = -50
+		subtract_from_variable = { LTN_conspiracy = 25 }
+		add_to_variable = { LTN_loyal_viol = 5 }
+		add_to_variable = { LTN_loyal_cello = 5 }
+		add_to_variable = { LTN_ebl_ppg = 0.05 }
+		custom_effect_tooltip = LTN_conspiracy_tt
+	}
+	option = {
+		name = LTN_budget.7.ob
+		ai_chance = { factor = 35 }
+		add_stability = -0.05
+		subtract_from_variable = { LTN_conspiracy = 10 }
+		subtract_from_variable = { LTN_loyal_viol = 10 }
+		subtract_from_variable = { LTN_ebl_stab = 0.05 }
+		subtract_from_variable = { LTN_ebl_drift = 0.05 }
+		custom_effect_tooltip = LTN_loyal_viol_tt
+	}
+	option = {
+		name = LTN_budget.7.oc
+		ai_chance = { factor = 25 }
+		subtract_from_variable = { LTN_budget_sup = 10 }
+		add_to_variable = { LTN_loyal_cello = 10 }
+		add_to_variable = { LTN_ebl_build = 0.05 }
+		custom_effect_tooltip = LTN_budget_sup_tt
+	}
+}
+
+# ---- 8 · 巫妖的告别 ----
+country_event = {
+	id = LTN_budget.8
+	title = LTN_budget.8.t
+	desc = LTN_budget.8.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.8.oa
+		ai_chance = { factor = 55 }
+		add_ideas = LTN_lich_farewell
+		set_variable = { LTN_ct_lich = 100 }
+		set_country_flag = LTN_lich_gone
+	}
+	option = {
+		name = LTN_budget.8.ob
+		ai_chance = { factor = 45 }
+		add_political_power = -40
+		add_ideas = LTN_lich_farewell
+		set_variable = { LTN_ct_lich = 60 }
+		set_country_flag = LTN_lich_gone
+		custom_effect_tooltip = LTN_ct_lich_tt
+	}
+}
+
+# ---- 9 · 清算时刻的账单 ----
+country_event = {
+	id = LTN_budget.9
+	title = LTN_budget.9.t
+	desc = LTN_budget.9.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.9.oa
+		ai_chance = { factor = 100 }
+		add_stability = -0.05
+		subtract_from_variable = { LTN_ebl_ppg = 0.05 }
+	}
+}
+
+# ---- 10 · 新乐章修订法案 ----
+country_event = {
+	id = LTN_budget.10
+	title = LTN_budget.10.t
+	desc = LTN_budget.10.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.10.oa
+		ai_chance = { factor = 50 }
+		set_country_flag = LTN_veto_abolished
+		add_stability = 0.05
+		add_to_variable = { LTN_loyal_viol = 5 }
+		add_to_variable = { LTN_loyal_cello = -10 }
+		subtract_from_variable = { LTN_ebl_stab = 0.05 }
+		custom_effect_tooltip = LTN_veto_abolished_tt
+	}
+	option = {
+		name = LTN_budget.10.ob
+		ai_chance = { factor = 50 }
+		set_country_flag = LTN_veto_kept
+		add_political_power = 40
+		add_to_variable = { LTN_loyal_cello = 10 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		add_to_variable = { LTN_ebl_drift = 0.05 }
+		custom_effect_tooltip = LTN_loyal_cello_tt
+	}
+}
+
+# ---- 11 · 最终辩论 ----
+country_event = {
+	id = LTN_budget.11
+	title = LTN_budget.11.t
+	desc = LTN_budget.11.d
+	picture = GFX_report_event_german_speech
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.11.oa
+		trigger = {
+			OR = {
+				has_war_with = GUL
+				AND = {
+					has_war = yes
+					surrender_progress < 0.25
+				}
+			}
+		}
+		ai_chance = { factor = 100 }
+		add_political_power = 80
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_to_variable = { LTN_budget_sup = 15 }
+		custom_effect_tooltip = LTN_final_debate_win_tt
+	}
+	option = {
+		name = LTN_budget.11.ob
+		trigger = {
+			NOT = {
+				OR = {
+					has_war_with = GUL
+					AND = {
+						has_war = yes
+						surrender_progress < 0.25
+					}
+				}
+			}
+		}
+		ai_chance = { factor = 100 }
+		add_political_power = 80
+		add_stability = 0.05
+		add_war_support = 0.05
+	}
+}
+
+# ---- 12 · 下议院议长选举 ----
+country_event = {
+	id = LTN_budget.12
+	title = LTN_budget.12.t
+	desc = LTN_budget.12.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.12.oa
+		ai_chance = { factor = 50 }
+		set_country_flag = LTN_speaker_elected
+		add_political_power = 50
+		add_to_variable = { LTN_budget_sup = 10 }
+		custom_effect_tooltip = LTN_budget_sup_tt
+	}
+	option = {
+		name = LTN_budget.12.ob
+		ai_chance = { factor = 50 }
+		set_country_flag = LTN_speaker_appointed
+		add_political_power = 25
+		add_to_variable = { LTN_loyal_cello = 10 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		custom_effect_tooltip = LTN_loyal_cello_tt
+	}
+}
+
+# ---- 13 · 密探在行动 ----
+country_event = {
+	id = LTN_budget.13
+	title = LTN_budget.13.t
+	desc = LTN_budget.13.d
+	picture = GFX_report_event_Generic_Urban_Unrest_2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.13.oa
+		ai_chance = { factor = 55 }
+		add_political_power = -35
+		subtract_from_variable = { LTN_conspiracy = 30 }
+		if = { limit = { NOT = { check_variable = { LTN_conspiracy > 5 } } } set_variable = { LTN_conspiracy = 5 } }
+		custom_effect_tooltip = LTN_conspiracy_tt
+	}
+	option = {
+		name = LTN_budget.13.ob
+		ai_chance = { factor = 45 }
+		add_stability = -0.05
+		subtract_from_variable = { LTN_conspiracy = 15 }
+		add_to_variable = { LTN_loyal_viol = -5 }
+		subtract_from_variable = { LTN_ebl_stab = 0.05 }
+		custom_effect_tooltip = LTN_loyal_viol_tt
+	}
+}
+
+# ---- 14 · 边境的军报（高卢复国 / 玻利瓦尔 / 伊比利亚 任选其一的战果） ----
+country_event = {
+	id = LTN_budget.14
+	title = LTN_budget.14.t
+	desc = LTN_budget.14.d
+	picture = GFX_report_event_Generic_Barracks
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.14.oa
+		ai_chance = { factor = 50 }
+		add_war_support = 0.10
+		army_experience = 60
+		add_to_variable = { LTN_loyal_viol = 5 }
+		add_to_variable = { LTN_loyal_cello = 5 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		custom_effect_tooltip = LTN_loyal_both_tt
+	}
+	option = {
+		name = LTN_budget.14.ob
+		ai_chance = { factor = 50 }
+		add_political_power = 60
+		subtract_from_variable = { LTN_conspiracy = 20 }
+		custom_effect_tooltip = LTN_conspiracy_tt
+	}
+}
+
+# ---- 15 · 一百天之后：判断者的名册（赫琳玛特集权倒计时到期，由国策排期） ----
+country_event = {
+	id = LTN_budget.15
+	title = LTN_budget.15.t
+	desc = LTN_budget.15.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_budget.15.oa
+		ai_chance = { factor = 40 }
+		add_political_power = -60
+		add_stability = -0.10
+		add_war_support = 0.10
+		subtract_from_variable = { LTN_conspiracy = 40 }
+		subtract_from_variable = { LTN_loyal_viol = 10 }
+		subtract_from_variable = { LTN_loyal_cello = 10 }
+		subtract_from_variable = { LTN_ebl_stab = 0.05 }
+		if = {
+			limit = { NOT = { check_variable = { LTN_conspiracy > 5 } } }
+			set_variable = { LTN_conspiracy = 5 }
+		}
+		set_country_flag = LTN_judges_executed
+		custom_effect_tooltip = LTN_loyal_both_tt
+		custom_effect_tooltip = LTN_conspiracy_tt
+	}
+	option = {
+		name = LTN_budget.15.ob
+		ai_chance = { factor = 35 }
+		add_political_power = -25
+		add_stability = 0.05
+		add_to_variable = { LTN_loyal_viol = 15 }
+		add_to_variable = { LTN_loyal_cello = 5 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		add_to_variable = { LTN_ebl_drift = 0.05 }
+		subtract_from_variable = { LTN_conspiracy = 20 }
+		set_country_flag = LTN_judges_exiled
+		custom_effect_tooltip = LTN_loyal_viol_tt
+		custom_effect_tooltip = LTN_conspiracy_tt
+	}
+	option = {
+		name = LTN_budget.15.oc
+		ai_chance = { factor = 25 }
+		add_political_power = 40
+		add_stability = -0.05
+		add_to_variable = { LTN_conspiracy = 15 }
+		add_to_variable = { LTN_loyal_cello = 15 }
+		add_to_variable = { LTN_ebl_stab = 0.05 }
+		add_to_variable = { LTN_ebl_ppg = -0.05 }
+		add_to_variable = { LTN_ebl_cons = 0.05 }
+		set_country_flag = LTN_judges_pardoned
+		custom_effect_tooltip = LTN_loyal_cello_tt
+		custom_effect_tooltip = LTN_conspiracy_tt
+	}
+}

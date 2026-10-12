@@ -9,7 +9,11 @@ tags={
 	"Ideologies"
 	"Historical"
 }
-name="重铸明日Arknights:Recasting Future Redux"
+dependencies={
+	"明日方舟：重铸明日-Arknights:Recasting Future"
+}
+name="重铸明日Redux Arknights:Recasting Future Redux"
+picture="thumbnail"
 replace_path="common/ai_equipment"
 replace_path="common/ai_focuses"
 replace_path="common/ai_strategy"
@@ -50,5 +54,6 @@ replace_path="history/units"
 replace_path="map/strategicregions"
 replace_path="map/terrain"
 replace_path="portraits"
-supported_version="1.19.*"
+supported_version="1.19.3.0"
+path="D:/NEW HOI4 MOD"
 remote_file_id="3800721405"
