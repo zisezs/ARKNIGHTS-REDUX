@@ -1,0 +1,93 @@
+add_namespace = ibr_pol
+
+######################
+## 伊比利亚 政治簇 · 两个终幕的换领袖事件 ##
+## 由国策 completion_reward 里的 hidden_effect 发出。换领袖这几步不能直接写在 reward 里：
+##   引擎会为 tooltip 反复求值 reward，promote_character / add_country_leader_role 会每帧刷错误日志。
+## 两位终幕人物都【没有】静态 country_leader 块 —— 有的话 add_country_leader_role 会被整句拒（连 promote 一起失效）。
+##
+## 写法照原版 AAT_Denmark.txt:10393 与 exe 内建说明：
+##   add_country_leader_role 的嵌套 country_leader 块只吃 ideology / expire / traits，
+##   角色文件里的 id = -1 写在这里会让整条效果解析失败（日志不报、领袖不换）。
+##   并且这里用「切到角色作用域」的形式，不往效果里塞 character = 参数。
+## 顺序：旗标去重 → retire 在任党魁 → 角色作用域里 add_country_leader_role + promote_leader → 兜底再 promote 一次。
+######################
+
+#圣徒艾丽妮上台（国策【圣徒艾丽妮万岁！】）
+country_event = {
+	id = ibr_pol.1
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_country_flag = IBR_irene_entroned }
+			}
+			set_country_flag = IBR_irene_entroned
+			retire_country_leader = yes
+			IBR_Irene = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						ideology = authoritarian_democracy_subtype
+						expire = "2000.1.1"
+						traits = { IBR_fire_of_judgement }
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_country_leader = { character = IBR_Irene ruling_only = yes } }
+			}
+			retire_country_leader = yes
+			promote_character = {
+				character = IBR_Irene
+				ideology = authoritarian_democracy_subtype
+			}
+		}
+	}
+}
+
+#埃斯特菲尼娅·科隆·德·托莱多上台，并把执政党改名（国策【女皇埃斯特菲尼娅万岁！】）
+country_event = {
+	id = ibr_pol.2
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_country_flag = IBR_estefania_entroned }
+			}
+			set_country_flag = IBR_estefania_entroned
+			set_party_name = {
+				ideology = authoritarianism
+				name = IBR_toledo_legitimist
+				long_name = IBR_toledo_legitimist_long
+			}
+			retire_country_leader = yes
+			IBR_Estefania = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						ideology = authoritarian_democracy_subtype
+						expire = "2000.1.1"
+						traits = { IBR_false_crown_true_king }
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_country_leader = { character = IBR_Estefania ruling_only = yes } }
+			}
+			retire_country_leader = yes
+			promote_character = {
+				character = IBR_Estefania
+				ideology = authoritarian_democracy_subtype
+			}
+		}
+	}
+}
