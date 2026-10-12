@@ -265,3 +265,27 @@ give_guarantee = BLV
 set_technology = {
 	arf_golden_law_guard_tech = 1
 }
+
+# ============================================================================
+# 「联合帝国预算计划」政治线初值（2026-10-11 追加）
+#   仪表值 LTN_loyal_viol / LTN_loyal_cello / LTN_conspiracy 只在 loc 里读数，
+#   进修正符的是 LTN_ebl_* 五枚 5% 档变量；两套成对写入，见
+#   common/scripted_effects/LTN_budget_effects.txt 头注释。
+#   on_startup 里的 LTN_budget_effect_init 是兜底（老存档没有这段 history 也能跑）。
+# ============================================================================
+set_country_flag = LTN_budget_vars_set
+set_variable = { LTN_loyal_viol = 50 }
+set_variable = { LTN_loyal_cello = 50 }
+set_variable = { LTN_conspiracy = 40 }
+set_variable = { LTN_budget_sup = 0 }
+set_variable = { LTN_coopt_count = 0 }
+set_variable = { LTN_ct_build = 0 }
+set_variable = { LTN_ct_lich = 0 }
+set_variable = { LTN_ct_black = 0 }
+set_variable = { LTN_ct_resist = 0 }
+set_variable = { LTN_ebl_stab = 0 }
+set_variable = { LTN_ebl_drift = 0 }
+set_variable = { LTN_ebl_ppg = 0 }
+set_variable = { LTN_ebl_cons = 0 }
+set_variable = { LTN_ebl_build = 0 }
+add_dynamic_modifier = { modifier = LTN_dyn_elector_bloc }
