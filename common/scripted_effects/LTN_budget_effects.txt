@@ -1,0 +1,114 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) ·「联合帝国预算计划」—— scripted effects
+#
+#  · LTN_budget_effect_init        幂等初始化（history 已写初值，这里只兜老存档）
+#  · LTN_budget_effect_tick        月度脉冲，挂在 common/on_actions/LTN_on_actions.txt 的 on_monthly_LTN
+#  · LTN_budget_effect_black_deadline  黑清算时刻到期结算
+#  · LTN_budget_effect_vote        帝国会议计票 → 置 LTN_budget_passed / LTN_budget_failed
+#
+# 口径：变量算术只用本工程已经跑通过的写法 ——
+#   add_to_variable / subtract_from_variable 短式、check_variable 的 `A < B` 短式、
+#   set_variable 的 `A = 数` 短式。不用除法、不用 clamp_variable、else 里不写 limit。
+#   忠诚度是「仪表值(0~100) + 精神档位(5% 一档)」成对写入，不做派生算式。
+# ============================================================================
+
+LTN_budget_effect_init = {
+	if = {
+		limit = { NOT = { has_country_flag = LTN_budget_vars_set } }
+		set_country_flag = LTN_budget_vars_set
+		set_variable = { LTN_loyal_viol = 50 }
+		set_variable = { LTN_loyal_cello = 50 }
+		set_variable = { LTN_conspiracy = 40 }
+		set_variable = { LTN_budget_sup = 0 }
+		set_variable = { LTN_coopt_count = 0 }
+		set_variable = { LTN_ct_build = 0 }
+		set_variable = { LTN_ct_lich = 0 }
+		set_variable = { LTN_ct_black = 0 }
+		set_variable = { LTN_ct_resist = 0 }
+	}
+}
+
+LTN_budget_effect_tick = {
+	# 三段倒计时：180 天预算拨款工地 / 100 天巫妖告别 / 100 天黑清算时刻
+	if = {
+		limit = { check_variable = { LTN_ct_build > 0 } }
+		subtract_from_variable = { LTN_ct_build = 30 }
+		if = {
+			limit = { NOT = { check_variable = { LTN_ct_build > 0 } } }
+			set_variable = { LTN_ct_build = 0 }
+			remove_ideas = LTN_budget_construction_fund
+		}
+	}
+	if = {
+		limit = { check_variable = { LTN_ct_lich > 0 } }
+		subtract_from_variable = { LTN_ct_lich = 30 }
+		if = {
+			limit = { NOT = { check_variable = { LTN_ct_lich > 0 } } }
+			set_variable = { LTN_ct_lich = 0 }
+			remove_ideas = LTN_lich_farewell
+			add_political_power = 25
+		}
+	}
+	if = {
+		limit = { check_variable = { LTN_ct_black > 0 } }
+		subtract_from_variable = { LTN_ct_black = 30 }
+		if = {
+			limit = { NOT = { check_variable = { LTN_ct_black > 0 } } }
+			set_variable = { LTN_ct_black = 0 }
+			LTN_budget_effect_black_deadline = yes
+		}
+	}
+
+	# 密谋度 75 以上：选帝侯联手抵制，每半年最多一次
+	if = {
+		limit = { NOT = { check_variable = { LTN_ct_resist > 0 } } }
+		if = {
+			limit = {
+				check_variable = { LTN_conspiracy > 74 }
+				has_country_flag = LTN_elector_watch_open
+				NOT = { has_war_with = GUL }
+			}
+			set_variable = { LTN_ct_resist = 6 }
+			country_event = { id = LTN_budget.7 days = 3 }
+		}
+	}
+	if = {
+		limit = { check_variable = { LTN_ct_resist > 0 } }
+		subtract_from_variable = { LTN_ct_resist = 1 }
+	}
+}
+
+LTN_budget_effect_black_deadline = {
+	if = {
+		limit = { check_variable = { LTN_coopt_count > 2 } }
+		remove_ideas = LTN_black_moment
+		add_political_power = 60
+		add_stability = 0.05
+		set_country_flag = LTN_black_moment_cleared
+	}
+	if = {
+		limit = { NOT = { check_variable = { LTN_coopt_count > 2 } } }
+		set_country_flag = LTN_black_moment_stuck
+		country_event = { id = LTN_budget.9 days = 1 }
+	}
+}
+
+# 计票：预算优势 >=50 稳过；35~49 只在保守派没翻脸时险过；否则流案
+LTN_budget_effect_vote = {
+	if = {
+		limit = { check_variable = { LTN_budget_sup > 49 } }
+		set_country_flag = LTN_budget_passed
+	}
+	if = {
+		limit = {
+			NOT = { has_country_flag = LTN_budget_passed }
+			check_variable = { LTN_budget_sup > 34 }
+			check_variable = { LTN_loyal_cello < 55 }
+		}
+		set_country_flag = LTN_budget_passed
+	}
+	if = {
+		limit = { NOT = { has_country_flag = LTN_budget_passed } }
+		set_country_flag = LTN_budget_failed
+	}
+}

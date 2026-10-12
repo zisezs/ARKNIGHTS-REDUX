@@ -1136,3 +1136,68 @@ CLB_senate_reload = {
 	add_to_variable = { senate_fascism_seats = senate_fascism_seats_2 }
 	add_to_variable = { senate_fascism_seats = senate_fascism_seats_3 }
 }
+
+# ----------------------------------------------------------------------------
+# 谢拉格战线脱身
+#
+# 问题：决议 CLB_KJG（common/decisions/CLB_decisions.txt）把谢拉格 add_to_faction 进
+#       哥伦比亚阵营，fire_only_once 且无退出条件 —— 哥伦比亚被永久拖进谢拉格战场，
+#       与维多利亚/莱塔尼亚在雪境无限绞肉、兵力堆积、卡顿。
+#
+# 修法：谢拉格「投降」或「丢地过半」时，哥伦比亚收手：
+#   ① 把谢拉格以及阵营内其它已投降成员踢出阵营
+#      （remove_from_faction 由阵营领袖调用，参数=要踢的国家）
+#   ② 哥伦比亚自己对维多利亚、莱塔尼亚白和撤军
+# 被踢出去的势力各自的战争照旧，从此自己面对维多利亚/莱塔尼亚。
+#
+# 触发挂在 common/on_actions/CLB_on_actions.txt 的 on_monthly_CLB，一次性旗标去重。
+# 作用域：国家（哥伦比亚）。
+# ----------------------------------------------------------------------------
+CLB_kjerag_disengage = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = CLB_kjerag_disengaged }
+			KJG = {
+				exists = yes
+				is_in_faction_with = ROOT
+				OR = {
+					has_capitulated = yes
+					surrender_progress > 0.5
+				}
+			}
+		}
+		set_country_flag = CLB_kjerag_disengaged
+
+		hidden_effect = {
+			# ① 踢人：谢拉格 + 阵营内其它已投降成员
+			#    用 every_country（遍历国表，稳定）而非 every_faction_member
+			#    —— 后者一边遍历阵营成员一边删成员，迭代器会漂。
+			if = {
+				limit = { is_faction_leader = yes }
+				every_country = {
+					limit = {
+						NOT = { tag = ROOT }
+						is_in_faction_with = ROOT
+						OR = {
+							has_capitulated = yes
+							surrender_progress > 0.5
+						}
+					}
+					ROOT = {
+						remove_from_faction = PREV
+					}
+				}
+			}
+
+			# ② 哥伦比亚对维多利亚、莱塔尼亚白和，撤军保全自身
+			if = {
+				limit = { has_war_with = VIC }
+				white_peace = VIC
+			}
+			if = {
+				limit = { has_war_with = LTN }
+				white_peace = LTN
+			}
+		}
+	}
+}
