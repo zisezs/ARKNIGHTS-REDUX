@@ -7,13 +7,13 @@
 #      ① has_country_leader = { character = REU_Lyudmila ruling_only = yes }
 #      ② has_country_flag = REU_Talulah_Mad_Purge_Ended（原本全 mod 无来源）
 #  · 换在任领袖必须两步：retire_country_leader 退掉在任者 + promote_character 推她上党魁。
-#    （只 add_country_leader_role + promote_leader 推不动在任的那位——实测塔露拉会留在位上。）
+#    （只 add_country_leader_role + promote_leader 推不动在任的那位——实测塔露拉会留在位上；
+#      且她定义里已有 bolshevism_subtype 领袖角色，重复 add 会报
+#      "Character already has a country leader role for ideology"。）
 #  · despotism 执政（常态，塔露拉走 resistance_group_subtype）：直接调既有例程
 #    REU_Ludmila_Coup_Take_Power（办公室脚本，自带在位保护），不动执政党。
 #  · 其他执政家族（如已完成革命的 communism）：先保证 communism 执政，
-#    补一个 bolshevism_subtype 的领袖角色，再退职 + promote_character 推她。
-#    ⚠️ 她定义里只有 advisor / corps_commander，**没有任何 country_leader 角色**，
-#       不补角色直接 promote_character 会找不到她的党，领袖纹丝不动。
+#    再退职 + promote_character 推她（bolshevism_subtype）。
 # ==============================================================================
 
 REU_Lyudmila_Take_Power_Category = {
@@ -50,20 +50,6 @@ REU_Lyudmila_Take_Power_Category = {
 						limit = { NOT = { has_government = communism } }
 						set_politics = {
 							ruling_party = communism
-						}
-					}
-					# 她定义里没有 bolshevism_subtype 的领袖角色（只有 advisor），
-					# 不先补一个，下面的 promote_character 找不到她的党，领袖不会换人。
-					# 只加一次 —— 重复 add 会报 "Character already has a country leader role for ideology"。
-					if = {
-						limit = { NOT = { has_country_flag = REU_ludmila_bolshevik_leader_role } }
-						set_country_flag = REU_ludmila_bolshevik_leader_role
-						add_country_leader_role = {
-							character = REU_Lyudmila
-							country_leader = {
-								ideology = bolshevism_subtype
-								traits = { REU_crownslayer REU_crownslayer_fame }
-							}
 						}
 					}
 					if = {
