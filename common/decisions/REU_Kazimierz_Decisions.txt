@@ -1,0 +1,60 @@
+# ==============================================================================
+#  【解放卡西米尔】—— 整合运动对卡西米尔的战争目标决议
+# ------------------------------------------------------------------------------
+#  分类见 common/decisions/categories/REU_decision_categroies.txt
+#  （REU_Kazimierz_Category，显示名「解放卡西米尔」）。
+#
+#  解锁：1102 年 1 月 1 日之后可用（同 YAN_fool_threat_decisions / Ursus_Unification_War
+#        的写法：门槛写在 available 里，分类本身不隐藏，1102 年前整组可见但点不动）。
+#  效果：获得对卡西米尔（KZM）的全面征服（annex_everything）战争目标，
+#        由玩家自行决定何时宣战（create_wargoal，同 REU_World_War_Decisions 写法）。
+#
+#  可重复：不与 KZM 交战、且手上还没有对 KZM 的战争目标时才可点。
+#  战争目标用掉（宣战后）或过期后，本条会重新出现，可再次获取。
+#
+#  AI 权重：ai_will_do = base 0 —— 玩家专属，AI 永不点击。
+# ==============================================================================
+
+REU_Kazimierz_Category = {
+
+	REU_liberate_kazimierz = {
+		icon = GFX_decision_generic_guerilla_base
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			KZM = { exists = yes }
+			NOT = { has_war_with = KZM }
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_liberate_kazimierz_tt_after_1102
+				date > 1102.1.1
+			}
+			KZM = { exists = yes }
+			NOT = { has_war_with = KZM }
+			NOT = { has_wargoal_against = KZM }
+			# 附庸不该宣战，走吞并
+			NOT = { KZM = { is_subject_of = ROOT } }
+		}
+
+		cost = 100
+
+		complete_effect = {
+			custom_effect_tooltip = REU_liberate_kazimierz_tt
+			hidden_effect = {
+				create_wargoal = {
+					target = KZM
+					type = annex_everything
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+}

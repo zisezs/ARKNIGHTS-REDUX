@@ -2862,13 +2862,10 @@ Ursus_Unification_War_Decisions_GUI = {
 
 		icon = GFX_decision_generic_form_nation
 		available = {
-			all_owned_state = {
-				is_core_of = ROOT
-			}
-			OR = {		#谈判收编或直接打亡第四集团军，都算统一
-				has_subject = UFA
-				UFA = { exists = no }
-			}
+			# 拥有圣骏堡（STATE_110，帝国本部）
+			owns_state = 110
+			# 工厂数量大于 300（num_of_factories = 民用 + 军用 + 船坞）
+			num_of_factories > 300
 		}
 
 		fire_only_once = yes
