@@ -82,3 +82,69 @@ KAZ_ai_decisions = {
 		}
 	}
 }
+
+KAZ_dual_regime_bop_decisions = {
+	KAZ_revolutionary_policies = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = {
+			tag = KAZ
+		}
+
+		available = {
+			has_country_flag = KAZ_bop_begins
+			has_country_flag = KAZ_side_with_grove
+			NOT = {
+				has_country_flag = KAZ_bop_ends
+			}
+		}
+
+		cost = 100
+		days_remove = 10
+		days_re_enable = 0
+		priority = 10
+
+		complete_effect = {
+			add_power_balance_value = {
+				id = KAZ_dual_regime_bop
+				value = -0.1
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	KAZ_make_compromises = {
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = {
+			tag = KAZ
+		}
+
+		available = {
+			has_country_flag = KAZ_bop_begins
+			has_country_flag = KAZ_side_with_davila
+			NOT = {
+				has_country_flag = KAZ_bop_ends
+			}
+		}
+
+		cost = 100
+		days_remove = 10
+		days_re_enable = 0
+		priority = 10
+
+		complete_effect = {
+			add_power_balance_value = {
+				id = KAZ_dual_regime_bop
+				value = 0.1
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+}

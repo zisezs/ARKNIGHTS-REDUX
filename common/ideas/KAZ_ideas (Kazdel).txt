@@ -1,55 +1,104 @@
 ideas = {
 	country = {
-		#内战的余波
+		#内战的阴影
 		KAZ_aftermath_of_civil_war = {
+			desc = KAZ_aftermath_of_civil_war_desc
 			picture = KAZ_aftermath_of_civil_war
 
 			modifier = {
-				stability_factor = -0.15
-				war_support_factor = -0.15
+				political_power_gain = -0.1
+				stability_factor = -0.3
+				war_support_factor = -0.2
 			}
 		}
-		#卡兹戴尔复仇主义
+		#卡兹戴尔帝国的幽灵
 		KAZ_Kazdel_revanchism = {
+			desc = KAZ_Kazdel_revanchism_desc
 			picture = KAZ_Kazdel_revanchism
 
 			modifier = {
-				custom_modifier_tooltip = KAZ_Kazdel_revanchism_tt
-				war_stability_factor = 0.15
+				political_power_gain = -0.1
+				stability_factor = -0.15
 				war_support_factor = 0.15
+				army_attack_factor = 0.1
 			}
 		}
 		#提卡兹之血
 		KAZ_blood_of_Tikaz = {
+			desc = KAZ_blood_of_Tikaz_desc
 			picture = KAZ_blood_of_Tikaz
 
 			modifier = {
-				breakthrough_factor = 0.05
+				despotism_drift = 0.01
+				breakthrough = 0.05
+				experience_loss_factor = -0.1
+				army_org_factor = 0.1
 			}
 		}
 		#感染者国家
 		KAZ_country_of_infected = {
+			desc = KAZ_country_of_infected_desc
 			picture = KAZ_country_of_infected
 
 			modifier = {
-				
+				industrial_capacity_factory = -0.2
+				production_factory_max_efficiency_factor = -0.2
+				production_factory_efficiency_gain_factor = -0.2
+				local_resources_factor = 0.1
+				monthly_population = -0.2
+				conscription_factor = -0.25
+				stability_factor = -0.1
+				consumer_goods_factor = 0.35
 			}
 		}
 		#泰拉弃民
 		KAZ_abandoned_by_Terra = {
+			desc = KAZ_abandoned_by_Terra_desc
 			picture = KAZ_abandoned_by_Terra
 
 			modifier = {
-				trade_opinion_factor = -0.5
-				min_export = -0.3
+				min_export = -0.2
+				local_resources_factor = 0.05
+				research_speed_factor = -0.1
+				industrial_capacity_factory = -0.1
+				production_factory_max_efficiency_factor = -0.1
+				consumer_goods_factor = 0.05
 			}
 		}
-		#卡兹戴尔干涉军
+		#卡兹戴尔国防军
 		KAZ_Kazdel_interference_army = {
+			desc = KAZ_Kazdel_interference_army_desc
 			picture = KAZ_Kazdel_interference_army
 
 			modifier = {
 				custom_modifier_tooltip = KAZ_Kazdel_interference_army_tt
+				army_attack_factor = 0.025
+				army_defence_factor = 0.025
+				breakthrough = 0.025
+				army_org_factor = 0.025
+				army_morale_factor = 0.025
+				land_reinforce_rate = 0.02
+				coordination_bonus = 0.02
+			}
+			on_add = {
+				country_lock_all_division_template = yes
+			}
+			on_remove = {
+				country_lock_all_division_template = no
+			}
+		}
+		#巴别塔计划
+		KAZ_babel_plan = {
+			desc = KAZ_babel_plan_desc
+			picture = KAZ_babel_plan
+
+			modifier = {
+				progressivism_drift = 0.01
+				industrial_capacity_factory = 0.1
+				production_speed_industrial_complex_factor = 0.1
+				consumer_goods_factor = -0.05
+				global_building_slots_factor = -0.1
+				production_factory_efficiency_gain_factor = -0.05
 			}
 		}
 	}

@@ -1,0 +1,323 @@
+# ============================================================================
+# 卡兹戴尔 (KAZ) · 国策树结构框架
+# 来源：KX Weitiao -> common/national_focus/Chile_KR.txt
+#       区间 CHL_the_day_of_judgement ~ CHL_normal_day_in_san_diago（共 18 格）
+# 说明：仅搬运结构（id / icon / 坐标 / cost / 前置 / 互斥 / 相对锚点）。
+#       available、ai_will_do、completion_reward 均为空壳，待填。
+#       所有非开局国策的 x/y 均以开局国策 KAZ_the_unavoidable 为锚点。
+# ============================================================================
+focus_tree = {
+	id = KAZ_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = KAZ
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = KAZ_the_unavoidable
+	}
+
+	focus = {
+		id = KAZ_the_unavoidable
+		icon = GFX_goal_KAZ_the_day_of_judgement
+		x = 0
+		y = 0
+		cost = 3
+		cancelable = no
+		completion_reward = {
+			custom_effect_tooltip = KAZ_the_unavoidable_effect_tt
+			set_power_balance = {
+				id = KAZ_dual_regime_bop
+				left_side = KAZ_dual_regime_grove_power
+				right_side = KAZ_dual_regime_davila_power
+				set_value = 0
+			}
+			set_country_flag = KAZ_bop_begins
+		}
+	}
+
+	focus = {
+		id = KAZ_pledge_allegiance_to_theresia
+		icon = GFX_goal_KAZ_choose_grove
+		x = -3
+		y = 1
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		mutually_exclusive = {
+			focus = KAZ_follow_general_theresis
+		}
+		prerequisite = {
+			focus = KAZ_the_unavoidable
+		}
+		completion_reward = {
+			set_country_flag = KAZ_side_with_grove
+			clr_country_flag = KAZ_side_with_davila
+		}
+	}
+
+	focus = {
+		id = KAZ_follow_general_theresis
+		icon = GFX_goal_KAZ_choose_davila
+		x = 3
+		y = 1
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		mutually_exclusive = {
+			focus = KAZ_pledge_allegiance_to_theresia
+		}
+		prerequisite = {
+			focus = KAZ_the_unavoidable
+		}
+		completion_reward = {
+			set_country_flag = KAZ_side_with_davila
+			clr_country_flag = KAZ_side_with_grove
+		}
+	}
+
+	focus = {
+		id = KAZ_ensure_army
+		icon = GFX_goal_KAZ_ensure_army
+		x = -4
+		y = 2
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_pledge_allegiance_to_theresia
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_sway_unions
+		icon = GFX_goal_KAZ_sway_unions
+		x = -2
+		y = 2
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_pledge_allegiance_to_theresia
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_land_reform_act
+		icon = GFX_goal_KAZ_land_reform_act
+		x = -5
+		y = 3
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_ensure_army
+		}
+		prerequisite = {
+			focus = KAZ_sway_unions
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_win_petty_bourgeois_support
+		icon = GFX_goal_KAZ_seek_internationale_support
+		x = -3
+		y = 3
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_ensure_army
+		}
+		prerequisite = {
+			focus = KAZ_sway_unions
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_promise_to_reformists
+		icon = GFX_goal_KAZ_compromise_with_democrats
+		x = -1
+		y = 3
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_ensure_army
+		}
+		prerequisite = {
+			focus = KAZ_sway_unions
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_adjust_army_positions
+		icon = GFX_goal_KAZ_expel_san_diago_garrison
+		x = -4
+		y = 4
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_land_reform_act
+		}
+		prerequisite = {
+			focus = KAZ_win_petty_bourgeois_support
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_establish_popular_front
+		icon = GFX_goal_KAZ_establish_popular_front
+		x = -2
+		y = 4
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_promise_to_reformists
+		}
+		prerequisite = {
+			focus = KAZ_win_petty_bourgeois_support
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_military_commission_order_7
+		icon = GFX_goal_KAZ_50_act
+		x = 2
+		y = 2
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_follow_general_theresis
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_relocate_londinium_factories
+		icon = GFX_goal_KAZ_coceat_support
+		x = 4
+		y = 2
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_follow_general_theresis
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_dismantle_demon_king_alliance
+		icon = GFX_goal_KAZ_crackdown_on_union
+		x = 1
+		y = 3
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_military_commission_order_7
+		}
+		prerequisite = {
+			focus = KAZ_relocate_londinium_factories
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_dissolve_coordination_council
+		icon = GFX_goal_KAZ_disband_department_of_defence
+		x = 3
+		y = 3
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_military_commission_order_7
+		}
+		prerequisite = {
+			focus = KAZ_relocate_londinium_factories
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_restore_political_inspection
+		icon = GFX_goal_KAZ_restore_political_police
+		x = 5
+		y = 3
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_military_commission_order_7
+		}
+		prerequisite = {
+			focus = KAZ_relocate_londinium_factories
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_mobilize_shadow_army
+		icon = GFX_goal_KAZ_arrest_Benitez
+		x = 2
+		y = 4
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_dismantle_demon_king_alliance
+		}
+		prerequisite = {
+			focus = KAZ_dissolve_coordination_council
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_public_charity
+		icon = GFX_goal_KAZ_soup_stations
+		x = 4
+		y = 4
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_restore_political_inspection
+		}
+		prerequisite = {
+			focus = KAZ_dissolve_coordination_council
+		}
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = KAZ_kazdel_just_wait
+		icon = GFX_goal_KAZ_normal_day_in_san_diago
+		x = 0
+		y = 5
+		cost = 3
+		relative_position_id = KAZ_the_unavoidable
+		prerequisite = {
+			focus = KAZ_mobilize_shadow_army
+			focus = KAZ_public_charity
+			focus = KAZ_adjust_army_positions
+			focus = KAZ_establish_popular_front
+		}
+		completion_reward = {
+		}
+	}
+
+}
