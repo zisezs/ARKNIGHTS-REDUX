@@ -1,141 +1,458 @@
+# ==============================================================================
+# 卡兹戴尔 · 开局部队（KAZ_Start）
+#
+# 编制（4 种）：
+#   卡兹戴尔国防军（军委会系）= 九步(3x3) + 一炮 + 炮兵支援连 + 工兵连 + 侦查连
+#   卡兹戴尔王庭军           = 九摩托化步兵(3x3) + 炮支 + 工兵连
+#   卡兹戴尔国防军（魔王系） = 八步(2x4) + 一炮 + 工兵支援连 + 侦察连
+#   巴别塔干员小队           = 两合成步兵营 + 四民兵
+#
+# 开局发放：军委会系 20 · 魔王系 15 · 王庭军 10 · 干员小队 5 = 50 支，
+# 按类型交错后轮流落位到卡兹戴尔全部 23 座城市（州 victory_points 省），
+# 力求平均分散。
+#
+# 兵种 id 对照（见 common/units/ 与 localisation/simp_chinese/replace/r_unit_l_*）：
+#   infantry=步兵  motorized=摩托化步兵  militia=民兵  synth_infantry=合成化步兵营
+#   artillery_brigade=火炮兵(线列)  artillery=火炮支援连  engineer=工兵连  recon=骑兵侦察分队
+# ==============================================================================
+
 division_template = {
-	name = "步兵师"
+	name = "卡兹戴尔国防军（军委会系）"
 	division_names_group = KAZ_INF_01
 	regiments = {
+		# 九步：3x3
 		infantry = { x = 0 y = 0 }
 		infantry = { x = 0 y = 1 }
 		infantry = { x = 0 y = 2 }
-	
+
 		infantry = { x = 1 y = 0 }
 		infantry = { x = 1 y = 1 }
 		infantry = { x = 1 y = 2 }
+
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
+
+		# 一炮
+		artillery_brigade = { x = 3 y = 0 }
+	}
+	support = {
+		# 一炮兵支援连 · 一工兵连 · 一侦查连
+		artillery = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+		recon = { x = 0 y = 2 }
+	}
+}
+division_template = {
+	name = "卡兹戴尔王庭军"
+	regiments = {
+		# 九摩托化步兵：3x3
+		motorized = { x = 0 y = 0 }
+		motorized = { x = 0 y = 1 }
+		motorized = { x = 0 y = 2 }
+
+		motorized = { x = 1 y = 0 }
+		motorized = { x = 1 y = 1 }
+		motorized = { x = 1 y = 2 }
+
+		motorized = { x = 2 y = 0 }
+		motorized = { x = 2 y = 1 }
+		motorized = { x = 2 y = 2 }
+	}
+	support = {
+		# 一炮支 · 一工兵连
+		artillery = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+	}
+}
+division_template = {
+	name = "卡兹戴尔国防军（魔王系）"
+	division_names_group = KAZ_INF_01
+	regiments = {
+		# 八步：2x4
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 0 y = 3 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+		infantry = { x = 1 y = 3 }
+
+		# 一炮
+		artillery_brigade = { x = 2 y = 0 }
+	}
+	support = {
+		# 一工兵支援连 · 一侦察连
+		engineer = { x = 0 y = 0 }
+		recon = { x = 0 y = 1 }
+	}
+}
+division_template = {
+	name = "巴别塔干员小队"
+	regiments = {
+		# 两合成步兵营
+		synth_infantry = { x = 0 y = 0 }
+		synth_infantry = { x = 0 y = 1 }
+
+		# 四民兵：2x2
+		militia = { x = 1 y = 0 }
+		militia = { x = 1 y = 1 }
+
+		militia = { x = 2 y = 0 }
+		militia = { x = 2 y = 1 }
 	}
 }
 
 units = {
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第1军"
+		location = 12670		# state 263
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第2军"
+		location = 15235		# state 279
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第3军"
+		location = 12536		# state 289
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第4军"
+		location = 3335		# state 307
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第5军"
+		location = 11553		# state 333
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第6军"
+		location = 15615		# state 343
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第7军"
+		location = 1400		# state 344
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第8军"
+		location = 15720		# state 347
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第9军"
+		location = 11728		# state 348
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第10军"
+		location = 7666		# state 349
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第11军"
+		location = 10152		# state 386
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第12军"
+		location = 11374		# state 392
+		division_template = "卡兹戴尔国防军（军委会系）"
 		start_experience_factor = 0.5
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "军事委员会第13军"
+		location = 9514		# state 395
+		division_template = "卡兹戴尔国防军（军委会系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "军事委员会第14军"
+		location = 2735		# state 396
+		division_template = "卡兹戴尔国防军（军委会系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "军事委员会第15军"
+		location = 5703		# state 398
+		division_template = "卡兹戴尔国防军（军委会系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "军事委员会第16军"
+		location = 7470		# state 399
+		division_template = "卡兹戴尔国防军（军委会系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "军事委员会第17军"
+		location = 16046		# state 423
+		division_template = "卡兹戴尔国防军（军委会系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "军事委员会第18军"
+		location = 5313		# state 448
+		division_template = "卡兹戴尔国防军（军委会系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "军事委员会第19军"
+		location = 4486		# state 459
+		division_template = "卡兹戴尔国防军（军委会系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "军事委员会第20军"
+		location = 5232		# state 460
+		division_template = "卡兹戴尔国防军（军委会系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第1军"
+		location = 12395		# state 464
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第2军"
+		location = 9098		# state 702
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第3军"
+		location = 5687		# state 1045
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第4军"
+		location = 12670		# state 263
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第5军"
+		location = 15235		# state 279
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第6军"
+		location = 12536		# state 289
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第7军"
+		location = 3335		# state 307
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第8军"
+		location = 11553		# state 333
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第9军"
+		location = 15615		# state 343
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第10军"
+		location = 1400		# state 344
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第11军"
+		location = 15720		# state 347
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第12军"
+		location = 11728		# state 348
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第13军"
+		location = 7666		# state 349
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第14军"
+		location = 10152		# state 386
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "魔王系第15军"
+		location = 11374		# state 392
+		division_template = "卡兹戴尔国防军（魔王系）"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "王庭军第1军"
+		location = 9514		# state 395
+		division_template = "卡兹戴尔王庭军"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "王庭军第2军"
+		location = 2735		# state 396
+		division_template = "卡兹戴尔王庭军"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "王庭军第3军"
+		location = 5703		# state 398
+		division_template = "卡兹戴尔王庭军"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "王庭军第4军"
+		location = 7470		# state 399
+		division_template = "卡兹戴尔王庭军"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "王庭军第5军"
+		location = 16046		# state 423
+		division_template = "卡兹戴尔王庭军"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "王庭军第6军"
+		location = 5313		# state 448
+		division_template = "卡兹戴尔王庭军"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "王庭军第7军"
+		location = 4486		# state 459
+		division_template = "卡兹戴尔王庭军"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "王庭军第8军"
+		location = 5232		# state 460
+		division_template = "卡兹戴尔王庭军"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "王庭军第9军"
+		location = 12395		# state 464
+		division_template = "卡兹戴尔王庭军"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "王庭军第10军"
+		location = 9098		# state 702
+		division_template = "卡兹戴尔王庭军"
+		start_experience_factor = 0.5
+		start_equipment_factor = 0.7
+	}
+	division = {
+		name = "巴别塔干员第1小队"
+		location = 5687		# state 1045
+		division_template = "巴别塔干员小队"
 		start_experience_factor = 0.8
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "巴别塔干员第2小队"
+		location = 12670		# state 263
+		division_template = "巴别塔干员小队"
 		start_experience_factor = 0.8
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "巴别塔干员第3小队"
+		location = 15235		# state 279
+		division_template = "巴别塔干员小队"
 		start_experience_factor = 0.8
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "巴别塔干员第4小队"
+		location = 12536		# state 289
+		division_template = "巴别塔干员小队"
 		start_experience_factor = 0.8
 		start_equipment_factor = 0.7
 	}
 	division = {
-		location = 16181
-		division_template = "步兵师"
-		start_experience_factor = 0.8
-		start_equipment_factor = 0.7
-	}
-	division = {
-		location = 16181
-		division_template = "步兵师"
-		start_experience_factor = 0.8
-		start_equipment_factor = 0.7
-	}
-	division = {
-		location = 16181
-		division_template = "步兵师"
-		start_experience_factor = 0.8
-		start_equipment_factor = 0.7
-	}
-	division = {
-		location = 16181
-		division_template = "步兵师"
-		start_experience_factor = 0.8
-		start_equipment_factor = 0.7
-	}
-	division = {
-		location = 16181
-		division_template = "步兵师"
+		name = "巴别塔干员第5小队"
+		location = 3335		# state 307
+		division_template = "巴别塔干员小队"
 		start_experience_factor = 0.8
 		start_equipment_factor = 0.7
 	}

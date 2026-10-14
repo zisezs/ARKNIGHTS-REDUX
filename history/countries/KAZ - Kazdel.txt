@@ -12,11 +12,11 @@ add_ideas = {
 	working_law_14h
 	equal_treatment
 
-	barren_land
-	handcraft_workshop
-	illiteracy_widespread
-	useless_government
-	severe_poverty
+	subsistence_agriculture
+	small_production_line
+	high_illiteracy_rate
+	inefficient_administration
+	widespread_poverty
 
 	KAZ_aftermath_of_civil_war
 	KAZ_Kazdel_revanchism
@@ -24,6 +24,15 @@ add_ideas = {
 	KAZ_country_of_infected
 	KAZ_abandoned_by_Terra
 	KAZ_Kazdel_interference_army
+	KAZ_babel_plan
+}
+
+# 卡兹戴尔国防军：开局即锁定全部部队编制（无法训练新部队、无法编辑或解散编制）
+# 注意：idea 里的 on_add 只在「游戏开始之后」添加该民族精神时才会执行，
+#       通过 history 的 add_ideas 发放不会触发，因此必须在这里手动补上同样的效果。
+country_lock_all_division_template = {
+	is_locked = yes
+	desc = KAZ_Kazdel_interference_army_tt
 }
 
 news_event = { id = worldnews_kaz.1 days = 60 }
