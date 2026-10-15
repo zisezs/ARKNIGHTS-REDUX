@@ -1,179 +1,140 @@
 # ==============================================================================
 #  大炎 · 岁相入阁精神（【岁相的荒唐梦】）
-#  · 每人一枚：YAN_chc_<拼音>；每档两个Modifier键各配一枚变量（_a1/_a2…），国策原地成长。
+#  · 四领域各一枚：YAN_chc_dom_<领域>；修正键按领域归一，同一键被多人使用时合并为一枚领域变量。
 #  · 单键终值封顶 +20%：三档 3/5/7 + 危机 3 + 终局 2。
 #  · 收束精神 YAN_chc_dream_crown（八域不散 / 九州同举）。
 #  · 文案键 = modifier id（_desc）；生成器 E:/tmp/sui12/gen_dreamtree.js
 # ==============================================================================
 
-# ---------------- 重岳（守土相）· 玉门屏风 ----------------
-YAN_chc_zhongyue = {
-	icon = GFX_idea_YAN_chc_zhongyue
+# ========== 四领域精神（2026-10-14 由十二岁相精神合并）==========
+#  · 领域入口完成时挂载；同一修正键被同领域多人使用时合并为一枚领域变量，数值相加 —— 总量与原 12 枚完全等价。
+#  · 变量由各人的国策原地写入（名已换为 YAN_chc_dom_<领域>_<n>_var），单键终值仍封顶 ±20%。
+
+# ---------------- 经世济民（黍·绩·年） ----------------
+YAN_chc_dom_economy = {
+	icon = GFX_idea_YAN_chc_dom_economy
 
 	enable = { always = yes }
 
-	army_defence_factor = YAN_chc_zhongyue_a1_var
-	production_speed_buildings_factor = YAN_chc_zhongyue_a2_var
-	army_org_factor = YAN_chc_zhongyue_b1_var
-	training_time_factor = YAN_chc_zhongyue_b2_var
-	experience_gain_army_factor = YAN_chc_zhongyue_c1_var
-	command_power_gain = YAN_chc_zhongyue_c2_var
+	recruitable_population_factor = YAN_chc_dom_economy_1_var
+	conscription_factor = YAN_chc_dom_economy_2_var
+	supply_consumption_factor = YAN_chc_dom_economy_3_var
+	attrition = YAN_chc_dom_economy_4_var
+	research_speed_factor = YAN_chc_dom_economy_5_var
+	stability_factor = YAN_chc_dom_economy_6_var
+	industrial_capacity_factory = YAN_chc_dom_economy_7_var
+	production_factory_max_efficiency_factor = YAN_chc_dom_economy_8_var
+	consumer_goods_factor = YAN_chc_dom_economy_9_var
+	production_speed_arms_factory_factor = YAN_chc_dom_economy_10_var
+	political_power_gain = YAN_chc_dom_economy_11_var
+	industrial_capacity_dockyard = YAN_chc_dom_economy_12_var
+	experience_gain_army_factor = YAN_chc_dom_economy_13_var
+	army_attack_factor = YAN_chc_dom_economy_14_var
 }
 
-# ---------------- 望（暗相）· 十九道 ----------------
-YAN_chc_wang = {
-	icon = GFX_idea_YAN_chc_wang
+# ---------------- 朝纲有序（令·均·颉） ----------------
+YAN_chc_dom_domestic = {
+	icon = GFX_idea_YAN_chc_dom_domestic
 
 	enable = { always = yes }
 
-	political_power_gain = YAN_chc_wang_a1_var
-	intel_network_gain_factor = YAN_chc_wang_a2_var
-	war_support_factor = YAN_chc_wang_b1_var
-	surrender_limit = YAN_chc_wang_b2_var
-	army_attack_factor = YAN_chc_wang_c1_var
-	breakthrough_factor = YAN_chc_wang_c2_var
+	stability_factor = YAN_chc_dom_domestic_1_var
+	conscription_factor = YAN_chc_dom_domestic_2_var
+	supply_consumption_factor = YAN_chc_dom_domestic_3_var
+	out_of_supply_factor = YAN_chc_dom_domestic_4_var
+	research_speed_factor = YAN_chc_dom_domestic_5_var
+	political_power_gain = YAN_chc_dom_domestic_6_var
+	political_power_factor = YAN_chc_dom_domestic_7_var
+	resistance_target = YAN_chc_dom_domestic_8_var
+	intel_network_gain_factor = YAN_chc_dom_domestic_9_var
+	army_morale_factor = YAN_chc_dom_domestic_10_var
+	training_time_factor = YAN_chc_dom_domestic_11_var
+	production_speed_buildings_factor = YAN_chc_dom_domestic_12_var
+	recruitable_population_factor = YAN_chc_dom_domestic_13_var
 }
 
-# ---------------- 令（礼相）· 苍生为子 ----------------
-YAN_chc_ling = {
-	icon = GFX_idea_YAN_chc_ling
+# ---------------- 兵略筹谋（重岳·望·易） ----------------
+YAN_chc_dom_military = {
+	icon = GFX_idea_YAN_chc_dom_military
 
 	enable = { always = yes }
 
-	stability_factor = YAN_chc_ling_a1_var
-	conscription_factor = YAN_chc_ling_a2_var
-	supply_consumption_factor = YAN_chc_ling_b1_var
-	out_of_supply_factor = YAN_chc_ling_b2_var
-	research_speed_factor = YAN_chc_ling_c1_var
-	political_power_gain = YAN_chc_ling_c2_var
+	army_defence_factor = YAN_chc_dom_military_1_var
+	production_speed_buildings_factor = YAN_chc_dom_military_2_var
+	army_org_factor = YAN_chc_dom_military_3_var
+	training_time_factor = YAN_chc_dom_military_4_var
+	experience_gain_army_factor = YAN_chc_dom_military_5_var
+	command_power_gain = YAN_chc_dom_military_6_var
+	political_power_gain = YAN_chc_dom_military_7_var
+	intel_network_gain_factor = YAN_chc_dom_military_8_var
+	war_support_factor = YAN_chc_dom_military_9_var
+	surrender_limit = YAN_chc_dom_military_10_var
+	army_attack_factor = YAN_chc_dom_military_11_var
+	breakthrough_factor = YAN_chc_dom_military_12_var
+	research_speed_factor = YAN_chc_dom_military_13_var
+	global_building_slots_factor = YAN_chc_dom_military_14_var
+	equipment_capture_factor = YAN_chc_dom_military_15_var
 }
 
-# ---------------- 均（律相）· 炎律 ----------------
-YAN_chc_jun = {
-	icon = GFX_idea_YAN_chc_jun
+# ---------------- 四海往来（方·夕·余） ----------------
+YAN_chc_dom_diplomacy = {
+	icon = GFX_idea_YAN_chc_dom_diplomacy
 
 	enable = { always = yes }
 
-	stability_factor = YAN_chc_jun_a1_var
-	political_power_factor = YAN_chc_jun_a2_var
-	resistance_target = YAN_chc_jun_b1_var
-	intel_network_gain_factor = YAN_chc_jun_b2_var
-	army_morale_factor = YAN_chc_jun_c1_var
-	training_time_factor = YAN_chc_jun_c2_var
+	production_speed_buildings_factor = YAN_chc_dom_diplomacy_1_var
+	consumer_goods_factor = YAN_chc_dom_diplomacy_2_var
+	attrition = YAN_chc_dom_diplomacy_3_var
+	army_org_regain = YAN_chc_dom_diplomacy_4_var
+	recruitable_population_factor = YAN_chc_dom_diplomacy_5_var
+	stability_factor = YAN_chc_dom_diplomacy_6_var
+	political_power_factor = YAN_chc_dom_diplomacy_7_var
+	research_speed_factor = YAN_chc_dom_diplomacy_8_var
+	land_reinforce_rate = YAN_chc_dom_diplomacy_9_var
+	supply_consumption_factor = YAN_chc_dom_diplomacy_10_var
+	war_support_factor = YAN_chc_dom_diplomacy_11_var
+	political_power_gain = YAN_chc_dom_diplomacy_12_var
+	army_morale_factor = YAN_chc_dom_diplomacy_13_var
 }
-
-# ---------------- 颉（史相）· 不妄书 ----------------
-YAN_chc_jie = {
-	icon = GFX_idea_YAN_chc_jie
+# ---------------- 经世济民 · 收尾「百工丰饶」 ----------------
+YAN_chc_dom_economy_end = {
+	icon = GFX_idea_YAN_chc_dom_economy_end
 
 	enable = { always = yes }
 
-	political_power_gain = YAN_chc_jie_a1_var
-	production_speed_buildings_factor = YAN_chc_jie_a2_var
-	conscription_factor = YAN_chc_jie_b1_var
-	recruitable_population_factor = YAN_chc_jie_b2_var
-	intel_network_gain_factor = YAN_chc_jie_c1_var
-	research_speed_factor = YAN_chc_jie_c2_var
+	industrial_capacity_factory = 0.08
+	consumer_goods_factor = -0.08
 }
 
-# ---------------- 黍（农相）· 百谷 ----------------
-YAN_chc_shu = {
-	icon = GFX_idea_YAN_chc_shu
+# ---------------- 朝纲有序 · 收尾「纲纪肃然」 ----------------
+YAN_chc_dom_domestic_end = {
+	icon = GFX_idea_YAN_chc_dom_domestic_end
 
 	enable = { always = yes }
 
-	recruitable_population_factor = YAN_chc_shu_a1_var
-	conscription_factor = YAN_chc_shu_a2_var
-	supply_consumption_factor = YAN_chc_shu_b1_var
-	attrition = YAN_chc_shu_b2_var
-	research_speed_factor = YAN_chc_shu_c1_var
-	stability_factor = YAN_chc_shu_c2_var
+	stability_factor = 0.08
+	political_power_factor = 0.08
 }
 
-# ---------------- 绩（贾相）· 普天大利 ----------------
-YAN_chc_ji = {
-	icon = GFX_idea_YAN_chc_ji
+# ---------------- 兵略筹谋 · 收尾「长城永固」 ----------------
+YAN_chc_dom_military_end = {
+	icon = GFX_idea_YAN_chc_dom_military_end
 
 	enable = { always = yes }
 
-	industrial_capacity_factory = YAN_chc_ji_a1_var
-	production_factory_max_efficiency_factor = YAN_chc_ji_a2_var
-	consumer_goods_factor = YAN_chc_ji_b1_var
-	production_speed_arms_factory_factor = YAN_chc_ji_b2_var
-	political_power_gain = YAN_chc_ji_c1_var
-	industrial_capacity_dockyard = YAN_chc_ji_c2_var
+	army_defence_factor = 0.08
+	army_org_factor = 0.08
 }
 
-# ---------------- 易（博相）· 界园 ----------------
-YAN_chc_yi = {
-	icon = GFX_idea_YAN_chc_yi
+# ---------------- 四海往来 · 收尾「四海同席」 ----------------
+YAN_chc_dom_diplomacy_end = {
+	icon = GFX_idea_YAN_chc_dom_diplomacy_end
 
 	enable = { always = yes }
 
-	intel_network_gain_factor = YAN_chc_yi_a1_var
-	research_speed_factor = YAN_chc_yi_a2_var
-	production_speed_buildings_factor = YAN_chc_yi_b1_var
-	global_building_slots_factor = YAN_chc_yi_b2_var
-	army_defence_factor = YAN_chc_yi_c1_var
-	equipment_capture_factor = YAN_chc_yi_c2_var
+	stability_factor = 0.08
+	research_speed_factor = 0.08
 }
-
-# ---------------- 年（工相）· 天有洪炉 ----------------
-YAN_chc_nian = {
-	icon = GFX_idea_YAN_chc_nian
-
-	enable = { always = yes }
-
-	production_speed_arms_factory_factor = YAN_chc_nian_a1_var
-	production_factory_max_efficiency_factor = YAN_chc_nian_a2_var
-	experience_gain_army_factor = YAN_chc_nian_b1_var
-	army_attack_factor = YAN_chc_nian_b2_var
-	political_power_gain = YAN_chc_nian_c1_var
-	research_speed_factor = YAN_chc_nian_c2_var
-}
-
-# ---------------- 方（医相）· 戥秤 ----------------
-YAN_chc_fang = {
-	icon = GFX_idea_YAN_chc_fang
-
-	enable = { always = yes }
-
-	production_speed_buildings_factor = YAN_chc_fang_a1_var
-	consumer_goods_factor = YAN_chc_fang_a2_var
-	attrition = YAN_chc_fang_b1_var
-	army_org_regain = YAN_chc_fang_b2_var
-	recruitable_population_factor = YAN_chc_fang_c1_var
-	stability_factor = YAN_chc_fang_c2_var
-}
-
-# ---------------- 夕（艺相）· 画院 ----------------
-YAN_chc_xi = {
-	icon = GFX_idea_YAN_chc_xi
-
-	enable = { always = yes }
-
-	political_power_factor = YAN_chc_xi_a1_var
-	consumer_goods_factor = YAN_chc_xi_a2_var
-	research_speed_factor = YAN_chc_xi_b1_var
-	production_speed_buildings_factor = YAN_chc_xi_b2_var
-	stability_factor = YAN_chc_xi_c1_var
-	land_reinforce_rate = YAN_chc_xi_c2_var
-}
-
-# ---------------- 余（膳相）· 桌子坐满 ----------------
-YAN_chc_yu = {
-	icon = GFX_idea_YAN_chc_yu
-
-	enable = { always = yes }
-
-	recruitable_population_factor = YAN_chc_yu_a1_var
-	supply_consumption_factor = YAN_chc_yu_a2_var
-	stability_factor = YAN_chc_yu_b1_var
-	war_support_factor = YAN_chc_yu_b2_var
-	political_power_gain = YAN_chc_yu_c1_var
-	army_morale_factor = YAN_chc_yu_c2_var
-}
-
 # ---------------- 【与岁同行】· 岁片临朝 ----------------
 YAN_sui_pact_reign = {
 	icon = GFX_idea_YAN_chc_pact
