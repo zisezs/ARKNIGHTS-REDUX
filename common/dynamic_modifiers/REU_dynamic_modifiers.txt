@@ -54,6 +54,12 @@ REU_communism_political_modifier = {
 	global_building_slots_factor = global_building_slots_factor_var
 	#追加：适役人口
 	conscription_factor = conscription_factor_var
+	#追加：陆军师组织度恢复速率
+	army_morale_factor = army_morale_factor_var
+	#追加：陆军师HP
+	army_strength_factor = army_strength_factor_var
+	#追加：组织度低于25%时的损失
+	org_loss_at_low_org_factor = org_loss_at_low_org_factor_var
 	
 	communism_drift = communism_drift_var
 	political_power_factor = political_power_factor_var
@@ -125,6 +131,8 @@ REU_red_army_modifier = {
 	conscription_factor = conscription_factor_var
 	conscription = conscription_var
 	planning_speed = planning_speed_var
+	#追加：计划上限
+	max_planning_factor = max_planning_factor_var
 	army_org_factor = army_org_factor_var
 	army_org_regain = army_org_regain_var
 	army_morale_factor = army_morale_factor_var
@@ -405,3 +413,58 @@ REU_KAC_guerrilla_resistance = {
 	recruitable_population_factor = -0.5
 	local_factories = -0.5
 }
+
+#克内希计划
+REU_knecht_plan_modifier = {
+	enable = { always = yes }
+	icon = GFX_idea_REU_village_democracy_experiment
+	#追加：生活消费品工厂系数
+	consumer_goods_factor = knecht_plan_consumer_goods_factor_var
+	#追加：稳定度
+	stability_factor = knecht_plan_stability_factor_var
+	#追加：政治点数
+	political_power_factor = knecht_plan_political_power_factor_var
+	#追加：战争支持度
+	war_support_factor = knecht_plan_war_support_factor_var
+	#追加：堑壕深度
+	max_dig_in = knecht_plan_max_dig_in_var
+	#追加：增援率
+	land_reinforce_rate = knecht_plan_land_reinforce_rate_var
+	#追加：工厂产出
+	industrial_capacity_factory = knecht_plan_industrial_capacity_factory_var
+	#追加：对主要国家攻防突破
+	army_attack_against_major_factor = knecht_plan_army_attack_against_major_factor_var
+	army_defence_against_major_factor = knecht_plan_army_defence_against_major_factor_var
+	army_breakthrough_against_major_factor = knecht_plan_army_breakthrough_against_major_factor_var
+}
+
+#阿丽娜教育
+REU_alina_education_modifier = {
+	enable = { always = yes }
+	icon = GFX_idea_REU_Three_Rules_Of_Discipline
+	#追加：政治点数
+	political_power_factor = alina_education_political_power_factor_var
+	#追加：稳定度
+	stability_factor = alina_education_stability_factor_var
+	#追加：生活消费品工厂系数
+	consumer_goods_factor = alina_education_consumer_goods_factor_var
+	#追加：科研速度
+	research_speed_factor = alina_education_research_speed_factor_var
+	#追加：增援率
+	land_reinforce_rate = alina_education_land_reinforce_rate_var
+	#追加：补给消耗
+	supply_consumption_factor = alina_education_supply_consumption_factor_var
+	#追加：生产效率上限
+	production_factory_max_efficiency_factor = alina_education_production_factory_max_efficiency_factor_var
+	#追加：生产效率增长
+	production_factory_efficiency_gain_factor = alina_education_production_factory_efficiency_gain_factor_var
+	#追加：地区最大工业值
+	global_building_slots = alina_education_global_building_slots_var
+	#追加：对主要国家攻防突破
+	army_attack_against_major_factor = alina_education_army_attack_against_major_factor_var
+	army_defence_against_major_factor = alina_education_army_defence_against_major_factor_var
+	army_breakthrough_against_major_factor = alina_education_army_breakthrough_against_major_factor_var
+	#追加：陆军师攻击
+	army_attack_factor = alina_education_army_attack_factor_var
+}
+

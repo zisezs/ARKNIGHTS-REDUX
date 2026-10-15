@@ -1,4 +1,4 @@
-﻿focus_tree = {
+focus_tree = {
 	id = REU_focus
 	country = {
 		factor = 0
@@ -3251,6 +3251,11 @@
 					instant_build = yes
 				}
 			}
+			country_event = {
+				id = event_reu.118
+				days = 3
+				random_days = 27
+			}
 		}
 	}
 	#塔露拉线-乐于歌唱
@@ -4992,578 +4997,7 @@
 		}
 	}
 
-	# ===== 自 TNO The East is Red 移植: REU_democracy_reform 农村民主改革分支 =====
-focus = {
-	id = REU_Alina_plan
-	icon = GFX_goals_REU_Alina_plan
-	cost = 3
-	x = 0
-	y = 1
-	prerequisite = {
-		focus = REU_democracy_reform
-	}
-	mutually_exclusive = {
-		focus = REU_Knecht_suggestion
-	}
-	relative_position_id = REU_democracy_reform
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		#教育民众
-		add_ideas = REU_educate_the_masses
-	}
-}
 
-focus = {
-	id = REU_Knecht_suggestion
-	icon = GFX_goals_REU_Knecht_suggestion
-	cost = 3
-	x = -4
-	y = 1
-	mutually_exclusive = {
-		focus = REU_Alina_plan
-	}
-	prerequisite = {
-		focus = REU_democracy_reform
-	}
-	relative_position_id = REU_democracy_reform
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		#大鸣大放
-		add_ideas = REU_great_airing
-	}
-}
-
-focus = {
-	id = REU_able_to_act
-	icon = GFX_goals_REU_able_to_act
-	cost = 3
-	x = 1
-	y = 1
-	prerequisite = {
-		focus = REU_liberate_poor_people
-	}
-	prerequisite = {
-		focus = REU_disclosure_conference
-	}
-	relative_position_id = REU_liberate_poor_people
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		country_event = REU_dem_reform.103
-	}
-}
-
-focus = {
-	id = REU_all_honor_to_us
-	icon = GFX_goals_REU_all_honor_to_us
-	cost = 3
-	x = 6
-	y = 1
-	mutually_exclusive = {
-		focus = REU_all_honor_to_you
-	}
-	prerequisite = {
-		focus = REU_able_to_act
-		focus = REU_high_quality_decisions
-	}
-	prerequisite = {
-		focus = REU_more_important_thing
-	}
-	relative_position_id = REU_able_to_act
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		custom_effect_tooltip = REU_dem_reform_end
-		if = {
-			limit = { OR = { NOT = { has_completed_focus = REU_able_to_act }
-						 NOT = { has_completed_focus = REU_high_quality_decisions } }
-						 NOT = { has_completed_focus = REU_more_important_thing } }
-			custom_effect_tooltip = REU_dem_reform_not_ended_yet
-		}
-		else_if = {
-			limit = { has_completed_focus = REU_Knecht_suggestion
-					  check_variable = { REU_dem_reform_score > 31 } }
-			if = {
-				limit = { check_variable = { REU_dem_reform_radical = REU_dem_reform_conservative } }
-				custom_effect_tooltip = REU_dem_reform_complete_success
-				country_event = REU_dem_reform.1
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_perfect
-				}
-			}
-			else_if = {
-				limit = { check_variable = { REU_dem_reform_radical > REU_dem_reform_conservative } }
-				country_event = REU_dem_reform.2
-				custom_effect_tooltip = REU_dem_reform_partial_success
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_succeed
-				}
-			}
-			else_if = {
-				limit = { check_variable = { REU_dem_reform_radical < REU_dem_reform_conservative } }
-				country_event = REU_dem_reform.3
-				custom_effect_tooltip = REU_dem_reform_partial_success
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_succeed
-				}
-			}
-		}
-		else_if = {
-			limit = { has_completed_focus = REU_Knecht_suggestion
-					  check_variable = { REU_dem_reform_score < 31.01 } }
-			custom_effect_tooltip = REU_dem_reform_fail
-			random_list = {
-				50 = { country_event = REU_dem_reform.2 }
-				50 = { country_event = REU_dem_reform.3 }
-			}
-			hidden_effect = {
-				set_country_flag = REU_dem_reform_failed
-			}
-		}
-		else_if = {
-			limit = { has_completed_focus = REU_Alina_plan
-					  check_variable = { REU_dem_reform_score > 31 } }
-			if = {
-				limit = { check_variable = { REU_dem_reform_radical = REU_dem_reform_conservative } }
-				custom_effect_tooltip = REU_dem_reform_complete_success
-				country_event = REU_dem_reform.4
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_perfect
-				}
-			}
-			else_if = {
-				limit = { check_variable = { REU_dem_reform_radical > REU_dem_reform_conservative } }
-				country_event = REU_dem_reform.5
-				custom_effect_tooltip = REU_dem_reform_partial_success
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_succeed
-				}
-			}
-			else_if = {
-				limit = { check_variable = { REU_dem_reform_radical < REU_dem_reform_conservative } }
-				country_event = REU_dem_reform.6
-				custom_effect_tooltip = REU_dem_reform_partial_success
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_succeed
-				}
-			}
-		}
-		else_if = {
-			limit = { has_completed_focus = REU_Alina_plan
-					  check_variable = { REU_dem_reform_score < 31.01 } }
-			custom_effect_tooltip = REU_dem_reform_fail
-			random_list = {
-				50 = { country_event = REU_dem_reform.5 }
-				50 = { country_event = REU_dem_reform.6 }
-			}
-			hidden_effect = {
-				set_country_flag = REU_dem_reform_failed
-			}
-		}
-	}
-}
-
-focus = {
-	id = REU_all_honor_to_you
-	icon = GFX_focus_REU_The_dawn_for_ideal
-	cost = 3
-	x = 2
-	y = 1
-	mutually_exclusive = {
-		focus = REU_all_honor_to_us
-	}
-	prerequisite = {
-		focus = REU_able_to_act
-		focus = REU_high_quality_decisions
-	}
-	prerequisite = {
-		focus = REU_more_important_thing
-	}
-	relative_position_id = REU_able_to_act
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		custom_effect_tooltip = REU_dem_reform_end
-		if = {
-			limit = { OR = { NOT = { has_completed_focus = REU_able_to_act }
-						 NOT = { has_completed_focus = REU_high_quality_decisions } }
-						 NOT = { has_completed_focus = REU_more_important_thing } }
-			custom_effect_tooltip = REU_dem_reform_not_ended_yet
-		}
-		else_if = {
-			limit = { has_completed_focus = REU_Knecht_suggestion
-					  check_variable = { REU_dem_reform_score > 36 } }
-			if = {
-				limit = { check_variable = { REU_dem_reform_radical = REU_dem_reform_conservative } }
-				custom_effect_tooltip = REU_dem_reform_complete_success
-				country_event = REU_dem_reform.1
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_perfect
-				}
-			}
-			else_if = {
-				limit = { check_variable = { REU_dem_reform_radical > REU_dem_reform_conservative } }
-				country_event = REU_dem_reform.2
-				custom_effect_tooltip = REU_dem_reform_partial_success
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_succeed
-				}
-			}
-			else_if = {
-				limit = { check_variable = { REU_dem_reform_radical < REU_dem_reform_conservative } }
-				country_event = REU_dem_reform.3
-				custom_effect_tooltip = REU_dem_reform_partial_success
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_succeed
-				}
-			}
-		}
-		else_if = {
-			limit = { has_completed_focus = REU_Knecht_suggestion
-					  check_variable = { REU_dem_reform_score < 36.01 } }
-			custom_effect_tooltip = REU_dem_reform_fail
-			random_list = {
-				50 = { country_event = REU_dem_reform.2 }
-				50 = { country_event = REU_dem_reform.3 }
-			}
-			hidden_effect = {
-				set_country_flag = REU_dem_reform_failed
-			}
-		}
-		else_if = {
-			limit = { has_completed_focus = REU_Alina_plan
-					  check_variable = { REU_dem_reform_score > 36 } }
-			if = {
-				limit = { check_variable = { REU_dem_reform_radical = REU_dem_reform_conservative } }
-				custom_effect_tooltip = REU_dem_reform_complete_success
-				country_event = REU_dem_reform.4
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_perfect
-				}
-			}
-			else_if = {
-				limit = { check_variable = { REU_dem_reform_radical > REU_dem_reform_conservative } }
-				country_event = REU_dem_reform.5
-				custom_effect_tooltip = REU_dem_reform_partial_success
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_succeed
-				}
-			}
-			else_if = {
-				limit = { check_variable = { REU_dem_reform_radical < REU_dem_reform_conservative } }
-				country_event = REU_dem_reform.6
-				custom_effect_tooltip = REU_dem_reform_partial_success
-				hidden_effect = {
-					set_country_flag = REU_dem_reform_succeed
-				}
-			}
-		}
-		else_if = {
-			limit = { has_completed_focus = REU_Alina_plan
-					  check_variable = { REU_dem_reform_score < 36.01 } }
-			custom_effect_tooltip = REU_dem_reform_fail
-			random_list = {
-				50 = { country_event = REU_dem_reform.5 }
-				50 = { country_event = REU_dem_reform.6 }
-			}
-			hidden_effect = {
-				set_country_flag = REU_dem_reform_failed
-			}
-		}
-	}
-}
-
-focus = {
-	id = REU_audience_and_guidance
-	icon = GFX_goals_REU_audience_and_guidance
-	cost = 3
-	x = 1
-	y = 1
-	prerequisite = {
-		focus = REU_Alina_plan
-	}
-	relative_position_id = REU_Alina_plan
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		country_event = REU_dem_reform.202
-	}
-}
-
-focus = {
-	id = REU_clean_the_grass_roots
-	icon = GFX_goals_REU_disclosure_conference
-	cost = 3
-	x = -1
-	y = 1
-	prerequisite = {
-		focus = REU_Alina_plan
-	}
-	relative_position_id = REU_Alina_plan
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		country_event = REU_dem_reform.201
-	}
-}
-
-focus = {
-	id = REU_disclosure_conference
-	icon = GFX_goals_REU_clean_the_grass_roots
-	cost = 3
-	x = 1
-	y = 1
-	prerequisite = {
-		focus = REU_Knecht_suggestion
-	}
-	relative_position_id = REU_Knecht_suggestion
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		country_event = REU_dem_reform.102
-	}
-}
-
-focus = {
-	id = REU_high_quality_decisions
-	icon = GFX_goals_REU_high_quality_decisions
-	cost = 3
-	x = -1
-	y = 1
-	prerequisite = {
-		focus = REU_audience_and_guidance
-	}
-	prerequisite = {
-		focus = REU_clean_the_grass_roots
-	}
-	relative_position_id = REU_audience_and_guidance
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		country_event = REU_dem_reform.203
-	}
-}
-
-focus = {
-	id = REU_liberate_poor_people
-	icon = GFX_goals_REU_liberate_poor_people
-	cost = 3
-	x = -1
-	y = 1
-	prerequisite = {
-		focus = REU_Knecht_suggestion
-	}
-	relative_position_id = REU_Knecht_suggestion
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		country_event = REU_dem_reform.101
-	}
-}
-
-focus = {
-	id = REU_master_of_balance
-	icon = GFX_focus_REU_A_public_debate
-	x = 4
-	y = 1
-	prerequisite = {
-		focus = REU_democracy_reform
-	}
-	relative_position_id = REU_democracy_reform
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		#改革进行时：全国所有地区 120 天动态修正
-		every_owned_state = {
-			add_dynamic_modifier = {
-				modifier = REU_reform_in_progress_modifier
-				days = 120
-			}
-		}
-	}
-}
-
-focus = {
-	id = REU_more_important_thing
-	icon = GFX_goals_REU_more_important_thing
-	cost = 3
-	x = -1
-	y = 1
-	prerequisite = {
-		focus = REU_principal_of_democracy
-	}
-	prerequisite = {
-		focus = REU_principal_of_organization
-	}
-	relative_position_id = REU_principal_of_organization
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		country_event = REU_dem_reform.303
-	}
-}
-
-focus = {
-	id = REU_principal_of_democracy
-	icon = GFX_goals_REU_principal_of_democracy
-	cost = 3
-	x = -1
-	y = 1
-	prerequisite = {
-		focus = REU_master_of_balance
-	}
-	relative_position_id = REU_master_of_balance
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		country_event = REU_dem_reform.302
-	}
-}
-
-focus = {
-	id = REU_principal_of_organization
-	icon = GFX_goals_REU_principal_of_organization
-	cost = 3
-	x = 1
-	y = 1
-	prerequisite = {
-		focus = REU_master_of_balance
-	}
-	relative_position_id = REU_master_of_balance
-	available = {
-	}
-	bypass = {
-		always = no
-	}
-	cancel_if_invalid = yes
-	continue_if_invalid = no
-	available_if_capitulated = no
-	ai_will_do = {
-		factor = 1
-	}
-	completion_reward = {
-		country_event = REU_dem_reform.301
-	}
-}
 
 focus = {
 	id = REU_democracy_reform
@@ -5572,7 +5006,8 @@ focus = {
 	x = 11
 	y = 13
 	available = {
-		has_country_flag = Ursus_Unification
+		has_country_flag = East_Ursus_Unification_After
+		has_completed_focus = REU_The_dawn_for_ideal
 		has_country_flag = REU_poster_delivered_flag
 	}
 	bypass = {
@@ -5588,8 +5023,1280 @@ focus = {
 		set_variable = { REU_dem_reform_score = 0 }
 		set_variable = { REU_dem_reform_radical = 0 }
 		set_variable = { REU_dem_reform_conservative = 0 }
+		set_country_flag = REU_Knecht_plan_help
+		set_country_flag = REU_Alina_education_help
 	}
 }
+focus = {
+	id = REU_Knecht_plan
+	icon = GFX_goals_REU_Knecht_suggestion
+	cost = 3
+	x = -4
+	y = 1
+	prerequisite = {
+		focus = REU_democracy_reform
+	}
+	mutually_exclusive = {
+		focus = REU_Alina_education
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_Knecht_plan_help
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = { id = REU_dem_reform.7 }
+		#大鸣大放（克内希计划原本的buff）
+		add_ideas = REU_great_airing
+		#克内希计划buff（由后续国策追加）
+		add_dynamic_modifier = {
+			modifier = REU_knecht_plan_modifier
+		}
+	}
+}
+
+focus = {
+	id = REU_Alina_education
+	icon = GFX_goals_REU_Alina_plan
+	cost = 3
+	x = 4
+	y = 1
+	prerequisite = {
+		focus = REU_democracy_reform
+	}
+	mutually_exclusive = {
+		focus = REU_Knecht_plan
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_Alina_education_help
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = { id = REU_dem_reform.8 }
+		#教育民众（阿丽娜引导的老buff）
+		add_ideas = REU_educate_the_masses
+		#阿丽娜教育buff（由后续国策追加）
+		add_dynamic_modifier = {
+			modifier = REU_alina_education_modifier
+		}
+	}
+}
+
+focus = {
+	id = REU_post_commune_wall_poster
+	icon = GFX_goals_REU_audience_and_guidance
+	cost = 3
+	x = -5
+	y = 2
+	prerequisite = {
+		focus = REU_Knecht_plan
+	}
+	mutually_exclusive = {
+		focus = REU_urge_social_construction
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_post_commune_wall_poster_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = socialism
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = progressivism
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = despotism
+			popularity = -0.25
+		}
+		#舆论监督
+		add_ideas = REU_public_opinion_supervision
+	}
+}
+
+focus = {
+	id = REU_urge_social_construction
+	icon = GFX_goals_REU_disclosure_conference
+	cost = 3
+	x = -3
+	y = 2
+	prerequisite = {
+		focus = REU_Knecht_plan
+	}
+	mutually_exclusive = {
+		focus = REU_post_commune_wall_poster
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_urge_social_construction_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = despotism
+			popularity = 0.10
+		}
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+			}
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+			set_state_flag = REU_urge_social_construction_build_slot
+		}
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+				NOT = { has_state_flag = REU_urge_social_construction_build_slot }
+			}
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+			set_state_flag = REU_urge_social_construction_build_slot
+		}
+		#指令性经济
+		add_ideas = REU_command_economy
+	}
+}
+
+focus = {
+	id = REU_democratic_spirit_education
+	icon = GFX_goals_REU_principal_of_democracy
+	cost = 3
+	x = 3
+	y = 2
+	prerequisite = {
+		focus = REU_Alina_education
+	}
+	mutually_exclusive = {
+		focus = REU_consolidate_existing_values
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_democratic_spirit_education_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#社会主义民主教育
+		add_ideas = REU_socialist_democratic_education
+		#两张工业科技研究卡（100%）
+		add_tech_bonus = {
+			name = REU_dem_reform_industry_card
+			bonus = 1
+			uses = 2
+			category = industry
+		}
+	}
+}
+
+focus = {
+	id = REU_consolidate_existing_values
+	icon = GFX_focus_REU_The_dawn_for_ideal
+	cost = 3
+	x = 5
+	y = 2
+	prerequisite = {
+		focus = REU_Alina_education
+	}
+	mutually_exclusive = {
+		focus = REU_democratic_spirit_education
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_consolidate_existing_values_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#塔露拉同志的领导
+		add_ideas = REU_talulah_leadership
+	}
+}
+
+focus = {
+	id = REU_decentralize_cadre_power
+	icon = GFX_focus_REU_reorganize_central_government
+	cost = 3
+	x = -4
+	y = 3
+	prerequisite = {
+		focus = REU_Knecht_plan
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_communism_political_modifier_tt
+		#地区最大工业值 +10%
+		add_to_variable = {
+			global_building_slots_factor_var = 0.10
+			tooltip = global_building_slots_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#增加一个科研槽
+		add_research_slot = 1
+	}
+}
+
+focus = {
+	id = REU_establish_red_cadre_school
+	icon = GFX_focus_REU_leaders_school
+	cost = 3
+	x = 4
+	y = 3
+	prerequisite = {
+		focus = REU_Alina_education
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_communism_political_modifier_tt
+		#共产党政治局追加：科研速度 +10%
+		add_to_variable = {
+			research_speed_factor_var = 0.10
+			tooltip = research_speed_factor_tt
+		}
+		#共产党政治局追加：工厂产出 +5%
+		add_to_variable = {
+			industrial_capacity_factory_var = 0.05
+			tooltip = industrial_capacity_factory_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+		#随机两个核心地块各 +2 建筑槽 +1 民用工厂
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			set_state_flag = REU_establish_red_cadre_school_state_1
+		}
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+				NOT = { has_state_flag = REU_establish_red_cadre_school_state_1 }
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			set_state_flag = REU_establish_red_cadre_school_state_2
+		}
+	}
+}
+
+focus = {
+	id = REU_liberate_the_poor_and_speak
+	icon = GFX_goals_REU_liberate_poor_people
+	cost = 3
+	x = -6
+	y = 3
+	prerequisite = {
+		focus = REU_urge_social_construction
+		focus = REU_post_commune_wall_poster
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = { id = REU_dem_reform.14 }
+		add_political_power = 100
+		add_stability = 0.10
+		add_war_support = 0.10
+		every_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+}
+
+focus = {
+	id = REU_seek_army_assistance
+	icon = GFX_goals_REU_able_to_act
+	cost = 3
+	x = -2
+	y = 3
+	prerequisite = {
+		focus = REU_urge_social_construction
+		focus = REU_post_commune_wall_poster
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = { id = REU_dem_reform.9 }
+		army_experience = 50
+		add_doctrine_cost_reduction = {
+			name = REU_dem_reform_land_doctrine_card
+			cost_reduction = 0.5
+			uses = 2
+			category = land_doctrine
+		}
+	}
+}
+
+focus = {
+	id = REU_consolidate_scientific_spirit
+	icon = GFX_focus_REU_The_dawn_for_ideal
+	cost = 3
+	x = 2
+	y = 3
+	prerequisite = {
+		focus = REU_consolidate_existing_values
+		focus = REU_democratic_spirit_education
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = { id = REU_dem_reform.10 }
+		custom_effect_tooltip = REU_alina_education_modifier_tt
+		add_to_variable = {
+			alina_education_political_power_factor_var = -0.20
+			tooltip = political_power_factor_tt
+		}
+		add_to_variable = {
+			alina_education_consumer_goods_factor_var = -0.10
+			tooltip = consumer_goods_factor_tt
+		}
+		add_to_variable = {
+			alina_education_research_speed_factor_var = 0.075
+			tooltip = research_speed_factor_tt
+		}
+		add_to_variable = {
+			alina_education_land_reinforce_rate_var = 0.01
+			tooltip = land_reinforce_rate_tt
+		}
+		add_to_variable = {
+			alina_education_supply_consumption_factor_var = -0.10
+			tooltip = supply_consumption_factor_tt
+		}
+		add_to_variable = {
+			alina_education_production_factory_max_efficiency_factor_var = 0.025
+			tooltip = production_factory_max_efficiency_factor_tt
+		}
+		add_to_variable = {
+			alina_education_army_attack_against_major_factor_var = 0.075
+			tooltip = army_attack_against_major_factor_tt
+		}
+		add_to_variable = {
+			alina_education_army_defence_against_major_factor_var = 0.075
+			tooltip = army_defence_against_major_factor_tt
+		}
+		add_to_variable = {
+			alina_education_army_breakthrough_against_major_factor_var = 0.075
+			tooltip = army_breakthrough_against_major_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_appeal_to_the_broad_left_front
+	icon = GFX_goals_REU_liberate_poor_people
+	cost = 3
+	x = 6
+	y = 3
+	prerequisite = {
+		focus = REU_consolidate_existing_values
+		focus = REU_democratic_spirit_education
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		country_event = { id = REU_dem_reform.13 }
+		add_popularity = {
+			ideology = communism
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = progressivism
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = socialism
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = conservatism
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = authoritarianism
+			popularity = 0.10
+		}
+		add_political_power = -200
+		army_experience = 25
+		add_stability = 0.10
+	}
+}
+
+focus = {
+	id = REU_hand_over_the_microphone
+	icon = GFX_goals_REU_high_quality_decisions
+	cost = 3
+	x = -7
+	y = 4
+	prerequisite = {
+		focus = REU_liberate_the_poor_and_speak
+	}
+	mutually_exclusive = {
+		focus = REU_promote_party_committee_guidance
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_hand_over_the_microphone_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_knecht_plan_modifier_tt
+		add_to_variable = {
+			knecht_plan_consumer_goods_factor_var = -0.10
+			tooltip = consumer_goods_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_stability_factor_var = -0.05
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_political_power_factor_var = 0.15
+			tooltip = political_power_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_promote_party_committee_guidance
+	icon = GFX_goals_REU_clean_the_grass_roots
+	cost = 3
+	x = -5
+	y = 4
+	prerequisite = {
+		focus = REU_liberate_the_poor_and_speak
+	}
+	mutually_exclusive = {
+		focus = REU_hand_over_the_microphone
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_promote_party_committee_guidance_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_knecht_plan_modifier_tt
+		add_to_variable = {
+			knecht_plan_consumer_goods_factor_var = -0.20
+			tooltip = consumer_goods_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_stability_factor_var = 0.05
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_political_power_factor_var = 0.10
+			tooltip = political_power_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_war_support_factor_var = 0.05
+			tooltip = war_support_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_army_backs_revolutionary_left
+	icon = GFX_goals_REU_more_important_thing
+	cost = 3
+	x = -3
+	y = 4
+	prerequisite = {
+		focus = REU_seek_army_assistance
+	}
+	mutually_exclusive = {
+		focus = REU_army_upholds_loyalty_tradition
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_army_backs_revolutionary_left_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_red_army_modifier_tt
+		add_to_variable = {
+			army_infantry_attack_factor_var = 0.025
+			tooltip = army_infantry_attack_factor_tt
+		}
+		add_to_variable = {
+			army_infantry_defence_factor_var = 0.025
+			tooltip = army_infantry_defence_factor_tt
+		}
+		add_to_variable = {
+			stability_factor_var = 0.05
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			max_planning_factor_var = 0.05
+			tooltip = max_planning_factor_tt
+		}
+		add_to_variable = {
+			army_org_factor_var = -0.05
+			tooltip = army_org_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_army_upholds_loyalty_tradition
+	icon = GFX_goals_REU_principal_of_organization
+	cost = 3
+	x = -1
+	y = 4
+	prerequisite = {
+		focus = REU_seek_army_assistance
+	}
+	mutually_exclusive = {
+		focus = REU_army_backs_revolutionary_left
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_army_upholds_loyalty_tradition_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_red_army_modifier_tt
+		add_to_variable = {
+			army_infantry_attack_factor_var = 0.05
+			tooltip = army_infantry_attack_factor_tt
+		}
+		add_to_variable = {
+			army_infantry_defence_factor_var = 0.05
+			tooltip = army_infantry_defence_factor_tt
+		}
+		add_to_variable = {
+			max_planning_factor_var = 0.075
+			tooltip = max_planning_factor_tt
+		}
+		add_to_variable = {
+			army_org_factor_var = 0.05
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			breakthrough_factor_var = 0.05
+			tooltip = breakthrough_factor_tt
+		}
+		add_to_variable = {
+			experience_loss_factor_var = -0.05
+			tooltip = experience_loss_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_compulsory_education
+	icon = GFX_goals_REU_audience_and_guidance
+	cost = 3
+	x = 1
+	y = 4
+	prerequisite = {
+		focus = REU_consolidate_scientific_spirit
+	}
+	mutually_exclusive = {
+		focus = REU_mass_basic_education
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_compulsory_education_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		#任意三个地块各 +1 建筑位 +1 民用工厂
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			set_state_flag = REU_compulsory_education_state_1
+		}
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+				NOT = { has_state_flag = REU_compulsory_education_state_1 }
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			set_state_flag = REU_compulsory_education_state_2
+		}
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+				NOT = { has_state_flag = REU_compulsory_education_state_1 }
+				NOT = { has_state_flag = REU_compulsory_education_state_2 }
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			set_state_flag = REU_compulsory_education_state_3
+		}
+	}
+}
+
+focus = {
+	id = REU_mass_basic_education
+	icon = GFX_goals_REU_disclosure_conference
+	cost = 3
+	x = 3
+	y = 4
+	prerequisite = {
+		focus = REU_consolidate_scientific_spirit
+	}
+	mutually_exclusive = {
+		focus = REU_compulsory_education
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_mass_basic_education_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_alina_education_modifier_tt
+		add_to_variable = {
+			alina_education_consumer_goods_factor_var = -0.10
+			tooltip = consumer_goods_factor_tt
+		}
+		add_to_variable = {
+			alina_education_global_building_slots_var = 1
+			tooltip = global_building_slots_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_socialist_league
+	icon = GFX_goals_REU_high_quality_decisions
+	cost = 3
+	x = 5
+	y = 4
+	prerequisite = {
+		focus = REU_appeal_to_the_broad_left_front
+	}
+	mutually_exclusive = {
+		focus = REU_strengthen_party_leadership
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_socialist_league_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = communism
+			popularity = 0.10
+		}
+		custom_effect_tooltip = REU_red_army_modifier_tt
+		add_to_variable = {
+			planning_speed_var = 0.10
+			tooltip = planning_speed_tt
+		}
+		add_to_variable = {
+			max_planning_factor_var = 0.10
+			tooltip = max_planning_factor_tt
+		}
+		add_to_variable = {
+			army_org_factor_var = 0.15
+			tooltip = army_org_factor_tt
+		}
+		add_to_variable = {
+			army_defence_factor_var = 0.05
+			tooltip = army_defence_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_strengthen_party_leadership
+	icon = GFX_goals_REU_clean_the_grass_roots
+	cost = 3
+	x = 7
+	y = 4
+	prerequisite = {
+		focus = REU_appeal_to_the_broad_left_front
+	}
+	mutually_exclusive = {
+		focus = REU_socialist_league
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_strengthen_party_leadership_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_communism_political_modifier_tt
+		add_to_variable = {
+			political_power_factor_var = 0.15
+			tooltip = political_power_factor_tt
+		}
+		add_to_variable = {
+			land_reinforce_rate_var = 0.02
+			tooltip = land_reinforce_rate_tt
+		}
+		add_to_variable = {
+			army_morale_factor_var = 0.10
+			tooltip = army_morale_factor_tt
+		}
+		add_to_variable = {
+			org_loss_at_low_org_factor_var = -0.10
+			tooltip = org_loss_at_low_org_factor_tt
+		}
+		add_to_variable = {
+			army_strength_factor_var = 0.025
+			tooltip = army_strength_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_this_is_the_final_struggle
+	icon = GFX_focus_REU_A_public_debate
+	cost = 3
+	x = -5
+	y = 5
+	prerequisite = {
+		focus = REU_army_backs_revolutionary_left
+		focus = REU_hand_over_the_microphone
+		focus = REU_post_commune_wall_poster
+	}
+	mutually_exclusive = {
+		focus = REU_plan_in_disadvantage
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_completed_focus = REU_Knecht_plan
+		has_completed_focus = REU_liberate_the_poor_and_speak
+		has_completed_focus = REU_seek_army_assistance
+		OR = {
+			has_country_flag = REU_post_commune_wall_poster_flag
+			has_country_flag = REU_hand_over_the_microphone_flag
+			has_country_flag = REU_army_backs_revolutionary_left_flag
+		}
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_knecht_plan_modifier_tt
+		add_to_variable = {
+			knecht_plan_army_attack_against_major_factor_var = 0.10
+			tooltip = army_attack_against_major_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_army_defence_against_major_factor_var = 0.10
+			tooltip = army_defence_against_major_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_army_breakthrough_against_major_factor_var = 0.10
+			tooltip = army_breakthrough_against_major_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_stability_factor_var = 0.20
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_war_support_factor_var = 0.20
+			tooltip = war_support_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_industrial_capacity_factory_var = 0.05
+			tooltip = industrial_capacity_factory_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_plan_in_disadvantage
+	icon = GFX_goals_REU_all_honor_to_us
+	cost = 3
+	x = -3
+	y = 5
+	prerequisite = {
+		focus = REU_promote_party_committee_guidance
+		focus = REU_army_upholds_loyalty_tradition
+		focus = REU_urge_social_construction
+	}
+	mutually_exclusive = {
+		focus = REU_this_is_the_final_struggle
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_country_flag = REU_army_upholds_loyalty_tradition_flag
+		has_country_flag = REU_urge_social_construction_flag
+		has_country_flag = REU_promote_party_committee_guidance_flag
+		has_completed_focus = REU_Knecht_plan
+		has_completed_focus = REU_liberate_the_poor_and_speak
+		has_completed_focus = REU_seek_army_assistance
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		add_political_power = -200
+		custom_effect_tooltip = REU_knecht_plan_modifier_tt
+		add_to_variable = {
+			knecht_plan_stability_factor_var = 0.20
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_war_support_factor_var = 0.20
+			tooltip = war_support_factor_tt
+		}
+		add_to_variable = {
+			knecht_plan_max_dig_in_var = 1
+			tooltip = max_dig_in_tt
+		}
+		add_to_variable = {
+			knecht_plan_land_reinforce_rate_var = 0.01
+			tooltip = land_reinforce_rate_tt
+		}
+		add_to_variable = {
+			knecht_plan_political_power_factor_var = -0.10
+			tooltip = political_power_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_greatest_common_divisor
+	icon = GFX_goals_REU_more_important_thing
+	cost = 3
+	x = 3
+	y = 5
+	prerequisite = {
+		focus = REU_compulsory_education
+		focus = REU_socialist_league
+		focus = REU_democratic_spirit_education
+	}
+	mutually_exclusive = {
+		focus = REU_walk_alone_in_silence
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		OR = {
+			has_country_flag = REU_compulsory_education_flag
+			has_country_flag = REU_democratic_spirit_education_flag
+			has_country_flag = REU_socialist_league_flag
+		}
+		has_completed_focus = REU_Alina_education
+		has_completed_focus = REU_appeal_to_the_broad_left_front
+		has_completed_focus = REU_consolidate_scientific_spirit
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = REU_alina_education_modifier_tt
+		add_to_variable = {
+			alina_education_political_power_factor_var = -0.05
+			tooltip = political_power_factor_tt
+		}
+		add_to_variable = {
+			alina_education_stability_factor_var = -0.05
+			tooltip = stability_factor_tt
+		}
+		add_to_variable = {
+			alina_education_production_factory_efficiency_gain_factor_var = 0.15
+			tooltip = production_factory_efficiency_gain_factor_tt
+		}
+		add_to_variable = {
+			alina_education_production_factory_max_efficiency_factor_var = 0.15
+			tooltip = production_factory_max_efficiency_factor_tt
+		}
+		add_to_variable = {
+			alina_education_army_attack_factor_var = 0.025
+			tooltip = army_attack_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_walk_alone_in_silence
+	icon = GFX_goals_REU_principal_of_organization
+	cost = 3
+	x = 5
+	y = 5
+	prerequisite = {
+		focus = REU_mass_basic_education
+		focus = REU_strengthen_party_leadership
+		focus = REU_consolidate_existing_values
+	}
+	mutually_exclusive = {
+		focus = REU_greatest_common_divisor
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+		has_completed_focus = REU_mass_basic_education
+		has_completed_focus = REU_strengthen_party_leadership
+		has_country_flag = REU_mass_basic_education_flag
+		has_country_flag = REU_consolidate_existing_values_flag
+		has_country_flag = REU_strengthen_party_leadership_flag
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		add_political_power = -100
+		custom_effect_tooltip = REU_red_army_modifier_tt
+		add_to_variable = {
+			army_attack_factor_var = 0.10
+			tooltip = army_attack_factor_tt
+		}
+		add_to_variable = {
+			army_defence_factor_var = 0.10
+			tooltip = army_defence_factor_tt
+		}
+		add_to_variable = {
+			army_armor_attack_factor_var = 0.10
+			tooltip = army_armor_attack_factor_tt
+		}
+		add_to_variable = {
+			army_armor_defence_factor_var = 0.10
+			tooltip = army_armor_defence_factor_tt
+		}
+		custom_effect_tooltip = generic_skip_one_line_tt
+	}
+}
+
+focus = {
+	id = REU_examine_revolutionary_achievements
+	icon = GFX_goals_REU_able_to_act
+	cost = 3
+	x = 0
+	y = 6
+	prerequisite = {
+		focus = REU_walk_alone_in_silence
+		focus = REU_greatest_common_divisor
+		focus = REU_plan_in_disadvantage
+		focus = REU_this_is_the_final_struggle
+	}
+	relative_position_id = REU_democracy_reform
+	available = {
+	}
+	bypass = {
+		always = no
+	}
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = 	completion_reward = {
+		#克内希线：完成「这是最后的斗争！」且三项 flag 齐备 → 圆满完成线
+		if = {
+			limit = {
+				has_completed_focus = REU_this_is_the_final_struggle
+				has_country_flag = REU_post_commune_wall_poster_flag
+				has_country_flag = REU_hand_over_the_microphone_flag
+				has_country_flag = REU_army_backs_revolutionary_left_flag
+			}
+			set_country_flag = REU_dem_reform_perfect
+			set_country_flag = REU_dem_reform_path_perfect
+			country_event = { id = REU_dem_reform.15 }
+		}
+		#克内希线：完成「这是最后的斗争！」但三项 flag 未齐 → 基本完成线
+		else_if = {
+			limit = {
+				has_completed_focus = REU_this_is_the_final_struggle
+			}
+			set_country_flag = REU_dem_reform_succeed
+			set_country_flag = REU_dem_reform_path_succeed
+			country_event = { id = REU_dem_reform.16 }
+		}
+		#克内希线：完成「计划陷入不利……」→ 失败线
+		else_if = {
+			limit = {
+				has_completed_focus = REU_plan_in_disadvantage
+			}
+			set_country_flag = REU_dem_reform_failed
+			set_country_flag = REU_dem_reform_path_failed
+			country_event = { id = REU_dem_reform.17 }
+		}
+		#阿丽娜线：完成「最大公约数」且三项 flag 齐备 → 圆满完成线
+		else_if = {
+			limit = {
+				has_completed_focus = REU_greatest_common_divisor
+				has_country_flag = REU_democratic_spirit_education_flag
+				has_country_flag = REU_compulsory_education_flag
+				has_country_flag = REU_socialist_league_flag
+			}
+			set_country_flag = REU_dem_reform_perfect
+			set_country_flag = REU_dem_reform_path_perfect
+			country_event = { id = REU_dem_reform.15 }
+		}
+		#阿丽娜线：完成「最大公约数」但三项 flag 未齐 → 基本完成线
+		else_if = {
+			limit = {
+				has_completed_focus = REU_greatest_common_divisor
+			}
+			set_country_flag = REU_dem_reform_succeed
+			set_country_flag = REU_dem_reform_path_succeed
+			country_event = { id = REU_dem_reform.16 }
+		}
+		#阿丽娜线：完成「默默独行……」→ 失败线
+		else_if = {
+			limit = {
+				has_completed_focus = REU_walk_alone_in_silence
+			}
+			set_country_flag = REU_dem_reform_failed
+			set_country_flag = REU_dem_reform_path_failed
+			country_event = { id = REU_dem_reform.17 }
+		}
+		#兜底：以上条件均未匹配时按失败线处理
+		else = {
+			set_country_flag = REU_dem_reform_failed
+			set_country_flag = REU_dem_reform_path_failed
+			country_event = { id = REU_dem_reform.17 }
+		}
+	}
+}
+
 
 
 # ===== REU 民主改革后续三分支（紧急手段 / 稍有进步 / 大获成功） =====
@@ -5598,10 +6305,9 @@ focus = {
 	icon = GFX_focus_REU_Buy_time
 	cost = 3
 	x = -6
-	y = 5
+	y = 7
 	prerequisite = {
-		focus = REU_all_honor_to_you
-		focus = REU_all_honor_to_us
+		focus = REU_examine_revolutionary_achievements
 	}
 	mutually_exclusive = {
 		focus = REU_slight_progress
@@ -5821,10 +6527,9 @@ focus = {
 	icon = GFX_focus_REU_mobilize_the_masses
 	cost = 3
 	x = 0
-	y = 5
+	y = 7
 	prerequisite = {
-		focus = REU_all_honor_to_you
-		focus = REU_all_honor_to_us
+		focus = REU_examine_revolutionary_achievements
 	}
 	mutually_exclusive = {
 		focus = REU_emergency_measures
@@ -6080,10 +6785,9 @@ focus = {
 	icon = GFX_focus_REU_Hug_each_other
 	cost = 3
 	x = 6
-	y = 5
+	y = 7
 	prerequisite = {
-		focus = REU_all_honor_to_you
-		focus = REU_all_honor_to_us
+		focus = REU_examine_revolutionary_achievements
 	}
 	mutually_exclusive = {
 		focus = REU_emergency_measures
