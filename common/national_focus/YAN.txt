@@ -12,13 +12,12 @@
 #   军事簇   y 14..25 ：shared_focus 引用 YAN_military_shared.txt（本文件不占该区）
 #   核心集团 y 3..9  ：shared_focus 引用 YAN_court_shared.txt（内政八域 8 席 + 外交五方 5 席 = 91 格，
 #                      每席 1 头格 + 6 下属格；树中央注册 inlay_window「宰府朝议」面板，占 x -2.7..+2.7 / y 3..8）
-#   四领域   y 27..35 ：【左中右并排】四域自左向右排开（域中心 x -36/-12/+12/+36）
-#                      每域：总起(y27) → 三名代理人【左/中/右】并排(y29..33，簇宽 5 格、中心间距 6) → 收尾(y35，需三人终局)
-#   四领域分配：经济=黍·绩·年 / 内政=令·均·颉 / 军事=重岳·望·易 / 外交=方·夕·余
-#   收束带   y 39..43 ：望日之期 → 岁陵惊动 → 岁陵决战 → 八域不散 → 九州同举
+#   十二相   y 27..47 ：4 列 × 3 行，每块 3 列 × 5 行（出山 → 立基 → 甲/乙/丙三带并排 → 危机 → 终局）
+#                      三带各由原三档合一（id 仍取终档 a3/b3/c3），块内 Δx=2、Δy=1，块间 Δx=12、Δy=8
+#   收束带   y 51..55 ：望日之期 → 岁陵惊动 → 岁陵决战 → 八域不散 → 九州同举
 
-# 【解锁】根格「与岁同行」完成 → 四大领域入口开放 → 各入口再开放所属三相出山格
-#         （入口仅作分类与开放门槛，四领域之间不互斥；领域内三相也各自独立）。
+# 【解锁】根格「与岁同行」完成 → 置旗 yan_sui_pact → 十二相 12 个出山格的 available 打开
+#         （这就是"岁片国策树"的开关；出山格本身不写 prerequisite，避免跨 27 行的长连线）。
 # 【无互斥】十二相全部可点，任何一格都不锁其它格（"荒唐梦"的玩法口径）。
 # 【保号】YAN_Suiling_Stirring / YAN_Suiling_Decisive / YAN_Wang_replaces_Sui 三个旧 id
 #         原样保留（事件 yan_sui.10 与既有脚本按 id 触发），前置改挂本树收束带。
@@ -49,7 +48,7 @@ focus_tree = {
 
 	shortcut = {
 		name = YAN_shortcut_dream_left
-		target = YAN_chc_domain_economy
+		target = YAN_chc_zhongyue_chu
 		scroll_wheel_factor = 0.05
 	}
 
@@ -61,7 +60,7 @@ focus_tree = {
 
 	shortcut = {
 		name = YAN_shortcut_dream_right
-		target = YAN_chc_domain_diplomacy
+		target = YAN_chc_wang_chu
 		scroll_wheel_factor = 0.95
 	}
 
@@ -267,99 +266,15 @@ focus_tree = {
 		}
 	}
 
-	# YAN_chc_domain_economy
-	focus = {
-		id = YAN_chc_domain_economy
-		icon = GFX_focus_generic_industry_1
-		x = -36
-		y = 27
-		cost = 1
-		available = {
-			has_country_flag = yan_sui_pact
-		}
-		available_if_capitulated = yes
-		ai_will_do = {
-			factor = 40
-		}
-		completion_reward = {
-			set_country_flag = yan_domain_economy
-			add_dynamic_modifier = { modifier = YAN_chc_dom_economy }
-		}
-	}
-
-	# YAN_chc_domain_domestic
-	focus = {
-		id = YAN_chc_domain_domestic
-		icon = GFX_focus_generic_court
-		x = -12
-		y = 27
-		cost = 1
-		available = {
-			has_country_flag = yan_sui_pact
-		}
-		available_if_capitulated = yes
-		ai_will_do = {
-			factor = 40
-		}
-		completion_reward = {
-			set_country_flag = yan_domain_domestic
-			add_dynamic_modifier = { modifier = YAN_chc_dom_domestic }
-		}
-	}
-
-	# YAN_chc_domain_military
-	focus = {
-		id = YAN_chc_domain_military
-		icon = GFX_focus_generic_army_doctrines_2
-		x = 12
-		y = 27
-		cost = 1
-		available = {
-			has_country_flag = yan_sui_pact
-		}
-		available_if_capitulated = yes
-		ai_will_do = {
-			factor = 40
-		}
-		completion_reward = {
-			set_country_flag = yan_domain_military
-			add_dynamic_modifier = { modifier = YAN_chc_dom_military }
-		}
-	}
-
-	# YAN_chc_domain_diplomacy
-	focus = {
-		id = YAN_chc_domain_diplomacy
-		icon = GFX_focus_generic_arms_trade
-		x = 36
-		y = 27
-		cost = 1
-		available = {
-			has_country_flag = yan_sui_pact
-		}
-		available_if_capitulated = yes
-		ai_will_do = {
-			factor = 40
-		}
-		completion_reward = {
-			set_country_flag = yan_domain_diplomacy
-			add_dynamic_modifier = { modifier = YAN_chc_dom_diplomacy }
-		}
-	}
-
 	# YAN_chc_zhongyue_chu
 	focus = {
 		id = YAN_chc_zhongyue_chu
 		icon = GFX_focus_YAN_chc_zhongyue_chu
-		x = 5
-		y = 29
+		x = -18
+		y = 27
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_military
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_military
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -367,6 +282,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_zhongyue }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_zhongyue_ok
@@ -380,8 +296,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_zhongyue_zb
 		icon = GFX_focus_YAN_chc_zhongyue_zb
-		x = 5
-		y = 30
+		x = -18
+		y = 28
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_zhongyue_chu
@@ -401,8 +317,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_zhongyue_a3
 		icon = GFX_focus_YAN_chc_zhongyue_a3
-		x = 3
-		y = 31
+		x = -20
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_zhongyue_zb
@@ -415,11 +331,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_zhongyue_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_1_var = 0.15
+				YAN_chc_zhongyue_a1_var = 0.15
 				tooltip = army_defence_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_2_var = 0.15
+				YAN_chc_zhongyue_a2_var = 0.15
 				tooltip = production_speed_buildings_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_zhongyue_a_p15_tt
@@ -432,8 +348,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_zhongyue_b3
 		icon = GFX_focus_YAN_chc_zhongyue_b3
-		x = 5
-		y = 31
+		x = -18
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_zhongyue_zb
@@ -446,11 +362,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_zhongyue_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_3_var = 0.15
+				YAN_chc_zhongyue_b1_var = 0.15
 				tooltip = army_org_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_4_var = -0.15
+				YAN_chc_zhongyue_b2_var = -0.15
 				tooltip = training_time_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_zhongyue_b_p15_tt
@@ -463,8 +379,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_zhongyue_c3
 		icon = GFX_focus_YAN_chc_zhongyue_c3
-		x = 7
-		y = 31
+		x = -16
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_zhongyue_zb
@@ -477,11 +393,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_zhongyue_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_5_var = 0.15
+				YAN_chc_zhongyue_c1_var = 0.15
 				tooltip = experience_gain_army_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_6_var = 0.15
+				YAN_chc_zhongyue_c2_var = 0.15
 				tooltip = command_power_gain_tt
 			}
 			custom_effect_tooltip = YAN_chc_zhongyue_c_p15_tt
@@ -494,8 +410,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_zhongyue_cri
 		icon = GFX_focus_YAN_chc_zhongyue_cri
-		x = 5
-		y = 32
+		x = -18
+		y = 30
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_zhongyue_a3
@@ -516,27 +432,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_zhongyue_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_1_var = 0.03
+				YAN_chc_zhongyue_a1_var = 0.03
 				tooltip = army_defence_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_2_var = 0.03
+				YAN_chc_zhongyue_a2_var = 0.03
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_3_var = 0.03
+				YAN_chc_zhongyue_b1_var = 0.03
 				tooltip = army_org_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_4_var = -0.03
+				YAN_chc_zhongyue_b2_var = -0.03
 				tooltip = training_time_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_5_var = 0.03
+				YAN_chc_zhongyue_c1_var = 0.03
 				tooltip = experience_gain_army_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_6_var = 0.03
+				YAN_chc_zhongyue_c2_var = 0.03
 				tooltip = command_power_gain_tt
 			}
 			custom_effect_tooltip = YAN_chc_zhongyue_cri_tt
@@ -547,8 +463,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_zhongyue_fin
 		icon = GFX_focus_YAN_chc_zhongyue_fin
-		x = 5
-		y = 33
+		x = -18
+		y = 31
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_zhongyue_cri
@@ -564,27 +480,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_zhongyue_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_1_var = 0.02
+				YAN_chc_zhongyue_a1_var = 0.02
 				tooltip = army_defence_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_2_var = 0.02
+				YAN_chc_zhongyue_a2_var = 0.02
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_3_var = 0.02
+				YAN_chc_zhongyue_b1_var = 0.02
 				tooltip = army_org_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_4_var = -0.02
+				YAN_chc_zhongyue_b2_var = -0.02
 				tooltip = training_time_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_5_var = 0.02
+				YAN_chc_zhongyue_c1_var = 0.02
 				tooltip = experience_gain_army_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_6_var = 0.02
+				YAN_chc_zhongyue_c2_var = 0.02
 				tooltip = command_power_gain_tt
 			}
 			set_country_flag = yan_chc_zhongyue_done
@@ -598,15 +514,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_wang_chu
 		icon = GFX_focus_YAN_chc_wang_chu
-		x = 12
-		y = 29
+		x = 18
+		y = 27
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_military
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_military
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -614,6 +526,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_wang }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_wang_ok
@@ -627,8 +540,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_wang_zb
 		icon = GFX_focus_YAN_chc_wang_zb
-		x = 12
-		y = 30
+		x = 18
+		y = 28
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_wang_chu
@@ -648,8 +561,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_wang_a3
 		icon = GFX_focus_YAN_chc_wang_a3
-		x = 10
-		y = 31
+		x = 16
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_wang_zb
@@ -662,11 +575,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_wang_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_7_var = 0.15
+				YAN_chc_wang_a1_var = 0.15
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_8_var = 0.15
+				YAN_chc_wang_a2_var = 0.15
 				tooltip = intel_network_gain_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_wang_a_p15_tt
@@ -681,8 +594,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_wang_b3
 		icon = GFX_focus_YAN_chc_wang_b3
-		x = 12
-		y = 31
+		x = 18
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_wang_zb
@@ -695,11 +608,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_wang_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_9_var = 0.15
+				YAN_chc_wang_b1_var = 0.15
 				tooltip = war_support_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_10_var = 0.15
+				YAN_chc_wang_b2_var = 0.15
 				tooltip = surrender_limit_tt
 			}
 			custom_effect_tooltip = YAN_chc_wang_b_p15_tt
@@ -714,8 +627,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_wang_c3
 		icon = GFX_focus_YAN_chc_wang_c3
-		x = 14
-		y = 31
+		x = 20
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_wang_zb
@@ -728,11 +641,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_wang_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_11_var = 0.15
+				YAN_chc_wang_c1_var = 0.15
 				tooltip = army_attack_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_12_var = 0.15
+				YAN_chc_wang_c2_var = 0.15
 				tooltip = breakthrough_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_wang_c_p15_tt
@@ -747,8 +660,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_wang_cri
 		icon = GFX_focus_YAN_chc_wang_cri
-		x = 12
-		y = 32
+		x = 18
+		y = 30
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_wang_a3
@@ -769,27 +682,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_wang_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_7_var = 0.03
+				YAN_chc_wang_a1_var = 0.03
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_8_var = 0.03
+				YAN_chc_wang_a2_var = 0.03
 				tooltip = intel_network_gain_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_9_var = 0.03
+				YAN_chc_wang_b1_var = 0.03
 				tooltip = war_support_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_10_var = 0.03
+				YAN_chc_wang_b2_var = 0.03
 				tooltip = surrender_limit_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_11_var = 0.03
+				YAN_chc_wang_c1_var = 0.03
 				tooltip = army_attack_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_12_var = 0.03
+				YAN_chc_wang_c2_var = 0.03
 				tooltip = breakthrough_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_wang_cri_tt
@@ -800,8 +713,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_wang_fin
 		icon = GFX_focus_YAN_chc_wang_fin
-		x = 12
-		y = 33
+		x = 18
+		y = 31
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_wang_cri
@@ -817,27 +730,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_wang_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_7_var = 0.02
+				YAN_chc_wang_a1_var = 0.02
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_8_var = 0.02
+				YAN_chc_wang_a2_var = 0.02
 				tooltip = intel_network_gain_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_9_var = 0.02
+				YAN_chc_wang_b1_var = 0.02
 				tooltip = war_support_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_10_var = 0.02
+				YAN_chc_wang_b2_var = 0.02
 				tooltip = surrender_limit_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_11_var = 0.02
+				YAN_chc_wang_c1_var = 0.02
 				tooltip = army_attack_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_12_var = 0.02
+				YAN_chc_wang_c2_var = 0.02
 				tooltip = breakthrough_factor_tt
 			}
 			set_country_flag = yan_chc_wang_done
@@ -851,15 +764,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ling_chu
 		icon = GFX_focus_YAN_chc_ling_chu
-		x = -19
-		y = 29
+		x = -6
+		y = 27
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_domestic
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_domestic
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -867,6 +776,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_ling }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_ling_ok
@@ -880,8 +790,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ling_zb
 		icon = GFX_focus_YAN_chc_ling_zb
-		x = -19
-		y = 30
+		x = -6
+		y = 28
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_ling_chu
@@ -901,8 +811,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ling_a3
 		icon = GFX_focus_YAN_chc_ling_a3
-		x = -21
-		y = 31
+		x = -8
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_ling_zb
@@ -915,11 +825,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_ling_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_1_var = 0.15
+				YAN_chc_ling_a1_var = 0.15
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_2_var = 0.15
+				YAN_chc_ling_a2_var = 0.15
 				tooltip = conscription_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_ling_a_p15_tt
@@ -934,8 +844,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ling_b3
 		icon = GFX_focus_YAN_chc_ling_b3
-		x = -19
-		y = 31
+		x = -6
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_ling_zb
@@ -948,11 +858,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_ling_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_3_var = -0.15
+				YAN_chc_ling_b1_var = -0.15
 				tooltip = supply_consumption_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_4_var = -0.15
+				YAN_chc_ling_b2_var = -0.15
 				tooltip = out_of_supply_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_ling_b_p15_tt
@@ -967,8 +877,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ling_c3
 		icon = GFX_focus_YAN_chc_ling_c3
-		x = -17
-		y = 31
+		x = -4
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_ling_zb
@@ -981,11 +891,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_ling_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_5_var = 0.15
+				YAN_chc_ling_c1_var = 0.15
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_6_var = 0.15
+				YAN_chc_ling_c2_var = 0.15
 				tooltip = political_power_gain_tt
 			}
 			custom_effect_tooltip = YAN_chc_ling_c_p15_tt
@@ -1000,8 +910,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ling_cri
 		icon = GFX_focus_YAN_chc_ling_cri
-		x = -19
-		y = 32
+		x = -6
+		y = 30
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_ling_a3
@@ -1022,27 +932,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_ling_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_1_var = 0.03
+				YAN_chc_ling_a1_var = 0.03
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_2_var = 0.03
+				YAN_chc_ling_a2_var = 0.03
 				tooltip = conscription_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_3_var = -0.03
+				YAN_chc_ling_b1_var = -0.03
 				tooltip = supply_consumption_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_4_var = -0.03
+				YAN_chc_ling_b2_var = -0.03
 				tooltip = out_of_supply_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_5_var = 0.03
+				YAN_chc_ling_c1_var = 0.03
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_6_var = 0.03
+				YAN_chc_ling_c2_var = 0.03
 				tooltip = political_power_gain_tt
 			}
 			custom_effect_tooltip = YAN_chc_ling_cri_tt
@@ -1053,8 +963,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ling_fin
 		icon = GFX_focus_YAN_chc_ling_fin
-		x = -19
-		y = 33
+		x = -6
+		y = 31
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_ling_cri
@@ -1070,27 +980,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_ling_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_1_var = 0.02
+				YAN_chc_ling_a1_var = 0.02
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_2_var = 0.02
+				YAN_chc_ling_a2_var = 0.02
 				tooltip = conscription_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_3_var = -0.02
+				YAN_chc_ling_b1_var = -0.02
 				tooltip = supply_consumption_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_4_var = -0.02
+				YAN_chc_ling_b2_var = -0.02
 				tooltip = out_of_supply_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_5_var = 0.02
+				YAN_chc_ling_c1_var = 0.02
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_6_var = 0.02
+				YAN_chc_ling_c2_var = 0.02
 				tooltip = political_power_gain_tt
 			}
 			set_country_flag = yan_chc_ling_done
@@ -1102,15 +1012,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jun_chu
 		icon = GFX_focus_YAN_chc_jun_chu
-		x = -12
-		y = 29
+		x = 18
+		y = 35
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_domestic
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_domestic
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -1118,6 +1024,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_jun }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_jun_ok
@@ -1131,8 +1038,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jun_zb
 		icon = GFX_focus_YAN_chc_jun_zb
-		x = -12
-		y = 30
+		x = 18
+		y = 36
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_jun_chu
@@ -1152,8 +1059,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jun_a3
 		icon = GFX_focus_YAN_chc_jun_a3
-		x = -14
-		y = 31
+		x = 16
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_jun_zb
@@ -1166,11 +1073,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_jun_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_1_var = 0.15
+				YAN_chc_jun_a1_var = 0.15
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_7_var = 0.15
+				YAN_chc_jun_a2_var = 0.15
 				tooltip = political_power_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_jun_a_p15_tt
@@ -1185,8 +1092,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jun_b3
 		icon = GFX_focus_YAN_chc_jun_b3
-		x = -12
-		y = 31
+		x = 18
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_jun_zb
@@ -1199,11 +1106,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_jun_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_8_var = -0.15
+				YAN_chc_jun_b1_var = -0.15
 				tooltip = resistance_target_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_9_var = 0.15
+				YAN_chc_jun_b2_var = 0.15
 				tooltip = intel_network_gain_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_jun_b_p15_tt
@@ -1218,8 +1125,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jun_c3
 		icon = GFX_focus_YAN_chc_jun_c3
-		x = -10
-		y = 31
+		x = 20
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_jun_zb
@@ -1232,11 +1139,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_jun_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_10_var = 0.15
+				YAN_chc_jun_c1_var = 0.15
 				tooltip = army_morale_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_11_var = -0.15
+				YAN_chc_jun_c2_var = -0.15
 				tooltip = training_time_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_jun_c_p15_tt
@@ -1251,8 +1158,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jun_cri
 		icon = GFX_focus_YAN_chc_jun_cri
-		x = -12
-		y = 32
+		x = 18
+		y = 38
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_jun_a3
@@ -1273,27 +1180,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_jun_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_1_var = 0.03
+				YAN_chc_jun_a1_var = 0.03
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_7_var = 0.03
+				YAN_chc_jun_a2_var = 0.03
 				tooltip = political_power_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_8_var = -0.03
+				YAN_chc_jun_b1_var = -0.03
 				tooltip = resistance_target_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_9_var = 0.03
+				YAN_chc_jun_b2_var = 0.03
 				tooltip = intel_network_gain_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_10_var = 0.03
+				YAN_chc_jun_c1_var = 0.03
 				tooltip = army_morale_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_11_var = -0.03
+				YAN_chc_jun_c2_var = -0.03
 				tooltip = training_time_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_jun_cri_tt
@@ -1304,8 +1211,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jun_fin
 		icon = GFX_focus_YAN_chc_jun_fin
-		x = -12
-		y = 33
+		x = 18
+		y = 39
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_jun_cri
@@ -1321,27 +1228,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_jun_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_1_var = 0.02
+				YAN_chc_jun_a1_var = 0.02
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_7_var = 0.02
+				YAN_chc_jun_a2_var = 0.02
 				tooltip = political_power_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_8_var = -0.02
+				YAN_chc_jun_b1_var = -0.02
 				tooltip = resistance_target_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_9_var = 0.02
+				YAN_chc_jun_b2_var = 0.02
 				tooltip = intel_network_gain_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_10_var = 0.02
+				YAN_chc_jun_c1_var = 0.02
 				tooltip = army_morale_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_11_var = -0.02
+				YAN_chc_jun_c2_var = -0.02
 				tooltip = training_time_factor_tt
 			}
 			set_country_flag = yan_chc_jun_done
@@ -1353,15 +1260,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jie_chu
 		icon = GFX_focus_YAN_chc_jie_chu
-		x = -5
-		y = 29
+		x = 18
+		y = 43
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_domestic
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_domestic
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -1369,6 +1272,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_jie }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_jie_ok
@@ -1382,8 +1286,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jie_zb
 		icon = GFX_focus_YAN_chc_jie_zb
-		x = -5
-		y = 30
+		x = 18
+		y = 44
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_jie_chu
@@ -1403,8 +1307,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jie_a3
 		icon = GFX_focus_YAN_chc_jie_a3
-		x = -7
-		y = 31
+		x = 16
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_jie_zb
@@ -1417,11 +1321,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_jie_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_6_var = 0.15
+				YAN_chc_jie_a1_var = 0.15
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_12_var = 0.15
+				YAN_chc_jie_a2_var = 0.15
 				tooltip = production_speed_buildings_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_jie_a_p15_tt
@@ -1436,8 +1340,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jie_b3
 		icon = GFX_focus_YAN_chc_jie_b3
-		x = -5
-		y = 31
+		x = 18
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_jie_zb
@@ -1450,11 +1354,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_jie_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_2_var = 0.15
+				YAN_chc_jie_b1_var = 0.15
 				tooltip = conscription_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_13_var = 0.15
+				YAN_chc_jie_b2_var = 0.15
 				tooltip = recruitable_population_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_jie_b_p15_tt
@@ -1469,8 +1373,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jie_c3
 		icon = GFX_focus_YAN_chc_jie_c3
-		x = -3
-		y = 31
+		x = 20
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_jie_zb
@@ -1483,11 +1387,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_jie_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_9_var = 0.15
+				YAN_chc_jie_c1_var = 0.15
 				tooltip = intel_network_gain_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_5_var = 0.15
+				YAN_chc_jie_c2_var = 0.15
 				tooltip = research_speed_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_jie_c_p15_tt
@@ -1502,8 +1406,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jie_cri
 		icon = GFX_focus_YAN_chc_jie_cri
-		x = -5
-		y = 32
+		x = 18
+		y = 46
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_jie_a3
@@ -1524,27 +1428,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_jie_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_6_var = 0.03
+				YAN_chc_jie_a1_var = 0.03
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_12_var = 0.03
+				YAN_chc_jie_a2_var = 0.03
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_2_var = 0.03
+				YAN_chc_jie_b1_var = 0.03
 				tooltip = conscription_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_13_var = 0.03
+				YAN_chc_jie_b2_var = 0.03
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_9_var = 0.03
+				YAN_chc_jie_c1_var = 0.03
 				tooltip = intel_network_gain_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_5_var = 0.03
+				YAN_chc_jie_c2_var = 0.03
 				tooltip = research_speed_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_jie_cri_tt
@@ -1555,8 +1459,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_jie_fin
 		icon = GFX_focus_YAN_chc_jie_fin
-		x = -5
-		y = 33
+		x = 18
+		y = 47
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_jie_cri
@@ -1572,27 +1476,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_jie_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_domestic_6_var = 0.02
+				YAN_chc_jie_a1_var = 0.02
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_12_var = 0.02
+				YAN_chc_jie_a2_var = 0.02
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_2_var = 0.02
+				YAN_chc_jie_b1_var = 0.02
 				tooltip = conscription_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_13_var = 0.02
+				YAN_chc_jie_b2_var = 0.02
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_9_var = 0.02
+				YAN_chc_jie_c1_var = 0.02
 				tooltip = intel_network_gain_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_domestic_5_var = 0.02
+				YAN_chc_jie_c2_var = 0.02
 				tooltip = research_speed_factor_tt
 			}
 			set_country_flag = yan_chc_jie_done
@@ -1604,15 +1508,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_shu_chu
 		icon = GFX_focus_YAN_chc_shu_chu
-		x = -43
-		y = 29
+		x = 6
+		y = 27
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_economy
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_economy
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -1620,6 +1520,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_shu }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_shu_ok
@@ -1633,8 +1534,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_shu_zb
 		icon = GFX_focus_YAN_chc_shu_zb
-		x = -43
-		y = 30
+		x = 6
+		y = 28
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_shu_chu
@@ -1654,8 +1555,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_shu_a3
 		icon = GFX_focus_YAN_chc_shu_a3
-		x = -45
-		y = 31
+		x = 4
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_shu_zb
@@ -1668,11 +1569,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_shu_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_1_var = 0.15
+				YAN_chc_shu_a1_var = 0.15
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_2_var = 0.15
+				YAN_chc_shu_a2_var = 0.15
 				tooltip = conscription_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_shu_a_p15_tt
@@ -1687,8 +1588,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_shu_b3
 		icon = GFX_focus_YAN_chc_shu_b3
-		x = -43
-		y = 31
+		x = 6
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_shu_zb
@@ -1701,11 +1602,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_shu_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_3_var = -0.15
+				YAN_chc_shu_b1_var = -0.15
 				tooltip = supply_consumption_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_4_var = -0.15
+				YAN_chc_shu_b2_var = -0.15
 				tooltip = attrition_tt
 			}
 			custom_effect_tooltip = YAN_chc_shu_b_p15_tt
@@ -1720,8 +1621,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_shu_c3
 		icon = GFX_focus_YAN_chc_shu_c3
-		x = -41
-		y = 31
+		x = 8
+		y = 29
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_shu_zb
@@ -1734,11 +1635,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_shu_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_5_var = 0.15
+				YAN_chc_shu_c1_var = 0.15
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_6_var = 0.15
+				YAN_chc_shu_c2_var = 0.15
 				tooltip = stability_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_shu_c_p15_tt
@@ -1753,8 +1654,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_shu_cri
 		icon = GFX_focus_YAN_chc_shu_cri
-		x = -43
-		y = 32
+		x = 6
+		y = 30
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_shu_a3
@@ -1775,27 +1676,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_shu_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_1_var = 0.03
+				YAN_chc_shu_a1_var = 0.03
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_2_var = 0.03
+				YAN_chc_shu_a2_var = 0.03
 				tooltip = conscription_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_3_var = -0.03
+				YAN_chc_shu_b1_var = -0.03
 				tooltip = supply_consumption_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_4_var = -0.03
+				YAN_chc_shu_b2_var = -0.03
 				tooltip = attrition_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_5_var = 0.03
+				YAN_chc_shu_c1_var = 0.03
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_6_var = 0.03
+				YAN_chc_shu_c2_var = 0.03
 				tooltip = stability_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_shu_cri_tt
@@ -1806,8 +1707,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_shu_fin
 		icon = GFX_focus_YAN_chc_shu_fin
-		x = -43
-		y = 33
+		x = 6
+		y = 31
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_shu_cri
@@ -1823,27 +1724,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_shu_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_1_var = 0.02
+				YAN_chc_shu_a1_var = 0.02
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_2_var = 0.02
+				YAN_chc_shu_a2_var = 0.02
 				tooltip = conscription_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_3_var = -0.02
+				YAN_chc_shu_b1_var = -0.02
 				tooltip = supply_consumption_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_4_var = -0.02
+				YAN_chc_shu_b2_var = -0.02
 				tooltip = attrition_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_5_var = 0.02
+				YAN_chc_shu_c1_var = 0.02
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_6_var = 0.02
+				YAN_chc_shu_c2_var = 0.02
 				tooltip = stability_factor_tt
 			}
 			set_country_flag = yan_chc_shu_done
@@ -1857,15 +1758,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ji_chu
 		icon = GFX_focus_YAN_chc_ji_chu
-		x = -36
-		y = 29
+		x = 6
+		y = 35
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_economy
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_economy
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -1873,6 +1770,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_ji }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_ji_ok
@@ -1886,8 +1784,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ji_zb
 		icon = GFX_focus_YAN_chc_ji_zb
-		x = -36
-		y = 30
+		x = 6
+		y = 36
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_ji_chu
@@ -1907,8 +1805,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ji_a3
 		icon = GFX_focus_YAN_chc_ji_a3
-		x = -38
-		y = 31
+		x = 4
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_ji_zb
@@ -1921,11 +1819,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_ji_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_7_var = 0.15
+				YAN_chc_ji_a1_var = 0.15
 				tooltip = industrial_capacity_factory_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_8_var = 0.15
+				YAN_chc_ji_a2_var = 0.15
 				tooltip = production_factory_max_efficiency_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_ji_a_p15_tt
@@ -1938,8 +1836,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ji_b3
 		icon = GFX_focus_YAN_chc_ji_b3
-		x = -36
-		y = 31
+		x = 6
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_ji_zb
@@ -1952,11 +1850,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_ji_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_9_var = -0.15
+				YAN_chc_ji_b1_var = -0.15
 				tooltip = consumer_goods_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_10_var = 0.15
+				YAN_chc_ji_b2_var = 0.15
 				tooltip = production_speed_arms_factory_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_ji_b_p15_tt
@@ -1969,8 +1867,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ji_c3
 		icon = GFX_focus_YAN_chc_ji_c3
-		x = -34
-		y = 31
+		x = 8
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_ji_zb
@@ -1983,11 +1881,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_ji_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_11_var = 0.15
+				YAN_chc_ji_c1_var = 0.15
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_12_var = 0.15
+				YAN_chc_ji_c2_var = 0.15
 				tooltip = industrial_capacity_dockyard_tt
 			}
 			custom_effect_tooltip = YAN_chc_ji_c_p15_tt
@@ -2000,8 +1898,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ji_cri
 		icon = GFX_focus_YAN_chc_ji_cri
-		x = -36
-		y = 32
+		x = 6
+		y = 38
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_ji_a3
@@ -2022,27 +1920,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_ji_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_7_var = 0.03
+				YAN_chc_ji_a1_var = 0.03
 				tooltip = industrial_capacity_factory_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_8_var = 0.03
+				YAN_chc_ji_a2_var = 0.03
 				tooltip = production_factory_max_efficiency_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_9_var = -0.03
+				YAN_chc_ji_b1_var = -0.03
 				tooltip = consumer_goods_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_10_var = 0.03
+				YAN_chc_ji_b2_var = 0.03
 				tooltip = production_speed_arms_factory_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_11_var = 0.03
+				YAN_chc_ji_c1_var = 0.03
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_12_var = 0.03
+				YAN_chc_ji_c2_var = 0.03
 				tooltip = industrial_capacity_dockyard_tt
 			}
 			custom_effect_tooltip = YAN_chc_ji_cri_tt
@@ -2053,8 +1951,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_ji_fin
 		icon = GFX_focus_YAN_chc_ji_fin
-		x = -36
-		y = 33
+		x = 6
+		y = 39
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_ji_cri
@@ -2070,27 +1968,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_ji_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_7_var = 0.02
+				YAN_chc_ji_a1_var = 0.02
 				tooltip = industrial_capacity_factory_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_8_var = 0.02
+				YAN_chc_ji_a2_var = 0.02
 				tooltip = production_factory_max_efficiency_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_9_var = -0.02
+				YAN_chc_ji_b1_var = -0.02
 				tooltip = consumer_goods_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_10_var = 0.02
+				YAN_chc_ji_b2_var = 0.02
 				tooltip = production_speed_arms_factory_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_11_var = 0.02
+				YAN_chc_ji_c1_var = 0.02
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_12_var = 0.02
+				YAN_chc_ji_c2_var = 0.02
 				tooltip = industrial_capacity_dockyard_tt
 			}
 			set_country_flag = yan_chc_ji_done
@@ -2102,15 +2000,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yi_chu
 		icon = GFX_focus_YAN_chc_yi_chu
-		x = 19
-		y = 29
+		x = -18
+		y = 35
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_military
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_military
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -2118,6 +2012,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_yi }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_yi_ok
@@ -2131,8 +2026,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yi_zb
 		icon = GFX_focus_YAN_chc_yi_zb
-		x = 19
-		y = 30
+		x = -18
+		y = 36
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_yi_chu
@@ -2152,8 +2047,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yi_a3
 		icon = GFX_focus_YAN_chc_yi_a3
-		x = 17
-		y = 31
+		x = -20
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_yi_zb
@@ -2166,11 +2061,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_yi_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_8_var = 0.15
+				YAN_chc_yi_a1_var = 0.15
 				tooltip = intel_network_gain_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_13_var = 0.15
+				YAN_chc_yi_a2_var = 0.15
 				tooltip = research_speed_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_yi_a_p15_tt
@@ -2183,8 +2078,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yi_b3
 		icon = GFX_focus_YAN_chc_yi_b3
-		x = 19
-		y = 31
+		x = -18
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_yi_zb
@@ -2197,11 +2092,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_yi_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_2_var = 0.15
+				YAN_chc_yi_b1_var = 0.15
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_14_var = 0.15
+				YAN_chc_yi_b2_var = 0.15
 				tooltip = global_building_slots_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_yi_b_p15_tt
@@ -2214,8 +2109,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yi_c3
 		icon = GFX_focus_YAN_chc_yi_c3
-		x = 21
-		y = 31
+		x = -16
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_yi_zb
@@ -2228,11 +2123,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_yi_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_1_var = 0.15
+				YAN_chc_yi_c1_var = 0.15
 				tooltip = army_defence_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_15_var = 0.15
+				YAN_chc_yi_c2_var = 0.15
 				tooltip = equipment_capture_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_yi_c_p15_tt
@@ -2245,8 +2140,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yi_cri
 		icon = GFX_focus_YAN_chc_yi_cri
-		x = 19
-		y = 32
+		x = -18
+		y = 38
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_yi_a3
@@ -2267,27 +2162,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_yi_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_8_var = 0.03
+				YAN_chc_yi_a1_var = 0.03
 				tooltip = intel_network_gain_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_13_var = 0.03
+				YAN_chc_yi_a2_var = 0.03
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_2_var = 0.03
+				YAN_chc_yi_b1_var = 0.03
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_14_var = 0.03
+				YAN_chc_yi_b2_var = 0.03
 				tooltip = global_building_slots_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_1_var = 0.03
+				YAN_chc_yi_c1_var = 0.03
 				tooltip = army_defence_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_15_var = 0.03
+				YAN_chc_yi_c2_var = 0.03
 				tooltip = equipment_capture_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_yi_cri_tt
@@ -2298,8 +2193,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yi_fin
 		icon = GFX_focus_YAN_chc_yi_fin
-		x = 19
-		y = 33
+		x = -18
+		y = 39
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_yi_cri
@@ -2315,27 +2210,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_yi_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_military_8_var = 0.02
+				YAN_chc_yi_a1_var = 0.02
 				tooltip = intel_network_gain_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_13_var = 0.02
+				YAN_chc_yi_a2_var = 0.02
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_2_var = 0.02
+				YAN_chc_yi_b1_var = 0.02
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_14_var = 0.02
+				YAN_chc_yi_b2_var = 0.02
 				tooltip = global_building_slots_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_1_var = 0.02
+				YAN_chc_yi_c1_var = 0.02
 				tooltip = army_defence_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_military_15_var = 0.02
+				YAN_chc_yi_c2_var = 0.02
 				tooltip = equipment_capture_factor_tt
 			}
 			set_country_flag = yan_chc_yi_done
@@ -2347,15 +2242,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_nian_chu
 		icon = GFX_focus_YAN_chc_nian_chu
-		x = -29
-		y = 29
+		x = 6
+		y = 43
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_economy
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_economy
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -2363,6 +2254,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_nian }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_nian_ok
@@ -2376,8 +2268,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_nian_zb
 		icon = GFX_focus_YAN_chc_nian_zb
-		x = -29
-		y = 30
+		x = 6
+		y = 44
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_nian_chu
@@ -2397,8 +2289,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_nian_a3
 		icon = GFX_focus_YAN_chc_nian_a3
-		x = -31
-		y = 31
+		x = 4
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_nian_zb
@@ -2411,11 +2303,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_nian_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_10_var = 0.15
+				YAN_chc_nian_a1_var = 0.15
 				tooltip = production_speed_arms_factory_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_8_var = 0.15
+				YAN_chc_nian_a2_var = 0.15
 				tooltip = production_factory_max_efficiency_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_nian_a_p15_tt
@@ -2430,8 +2322,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_nian_b3
 		icon = GFX_focus_YAN_chc_nian_b3
-		x = -29
-		y = 31
+		x = 6
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_nian_zb
@@ -2444,11 +2336,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_nian_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_13_var = 0.15
+				YAN_chc_nian_b1_var = 0.15
 				tooltip = experience_gain_army_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_14_var = 0.15
+				YAN_chc_nian_b2_var = 0.15
 				tooltip = army_attack_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_nian_b_p15_tt
@@ -2463,8 +2355,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_nian_c3
 		icon = GFX_focus_YAN_chc_nian_c3
-		x = -27
-		y = 31
+		x = 8
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_nian_zb
@@ -2477,11 +2369,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_nian_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_11_var = 0.15
+				YAN_chc_nian_c1_var = 0.15
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_5_var = 0.15
+				YAN_chc_nian_c2_var = 0.15
 				tooltip = research_speed_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_nian_c_p15_tt
@@ -2496,8 +2388,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_nian_cri
 		icon = GFX_focus_YAN_chc_nian_cri
-		x = -29
-		y = 32
+		x = 6
+		y = 46
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_nian_a3
@@ -2518,27 +2410,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_nian_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_10_var = 0.03
+				YAN_chc_nian_a1_var = 0.03
 				tooltip = production_speed_arms_factory_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_8_var = 0.03
+				YAN_chc_nian_a2_var = 0.03
 				tooltip = production_factory_max_efficiency_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_13_var = 0.03
+				YAN_chc_nian_b1_var = 0.03
 				tooltip = experience_gain_army_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_14_var = 0.03
+				YAN_chc_nian_b2_var = 0.03
 				tooltip = army_attack_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_11_var = 0.03
+				YAN_chc_nian_c1_var = 0.03
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_5_var = 0.03
+				YAN_chc_nian_c2_var = 0.03
 				tooltip = research_speed_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_nian_cri_tt
@@ -2549,8 +2441,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_nian_fin
 		icon = GFX_focus_YAN_chc_nian_fin
-		x = -29
-		y = 33
+		x = 6
+		y = 47
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_nian_cri
@@ -2566,27 +2458,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_nian_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_economy_10_var = 0.02
+				YAN_chc_nian_a1_var = 0.02
 				tooltip = production_speed_arms_factory_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_8_var = 0.02
+				YAN_chc_nian_a2_var = 0.02
 				tooltip = production_factory_max_efficiency_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_13_var = 0.02
+				YAN_chc_nian_b1_var = 0.02
 				tooltip = experience_gain_army_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_14_var = 0.02
+				YAN_chc_nian_b2_var = 0.02
 				tooltip = army_attack_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_11_var = 0.02
+				YAN_chc_nian_c1_var = 0.02
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_economy_5_var = 0.02
+				YAN_chc_nian_c2_var = 0.02
 				tooltip = research_speed_factor_tt
 			}
 			set_country_flag = yan_chc_nian_done
@@ -2600,15 +2492,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_fang_chu
 		icon = GFX_focus_YAN_chc_fang_chu
-		x = 29
-		y = 29
+		x = -18
+		y = 43
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_diplomacy
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_diplomacy
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -2616,6 +2504,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_fang }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_fang_ok
@@ -2629,8 +2518,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_fang_zb
 		icon = GFX_focus_YAN_chc_fang_zb
-		x = 29
-		y = 30
+		x = -18
+		y = 44
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_fang_chu
@@ -2650,8 +2539,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_fang_a3
 		icon = GFX_focus_YAN_chc_fang_a3
-		x = 27
-		y = 31
+		x = -20
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_fang_zb
@@ -2664,11 +2553,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_fang_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_1_var = 0.15
+				YAN_chc_fang_a1_var = 0.15
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_2_var = -0.15
+				YAN_chc_fang_a2_var = -0.15
 				tooltip = consumer_goods_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_fang_a_p15_tt
@@ -2681,8 +2570,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_fang_b3
 		icon = GFX_focus_YAN_chc_fang_b3
-		x = 29
-		y = 31
+		x = -18
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_fang_zb
@@ -2695,11 +2584,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_fang_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_3_var = -0.15
+				YAN_chc_fang_b1_var = -0.15
 				tooltip = attrition_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_4_var = 0.15
+				YAN_chc_fang_b2_var = 0.15
 				tooltip = army_org_regain_tt
 			}
 			custom_effect_tooltip = YAN_chc_fang_b_p15_tt
@@ -2712,8 +2601,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_fang_c3
 		icon = GFX_focus_YAN_chc_fang_c3
-		x = 31
-		y = 31
+		x = -16
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_fang_zb
@@ -2726,11 +2615,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_fang_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_5_var = 0.15
+				YAN_chc_fang_c1_var = 0.15
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_6_var = 0.15
+				YAN_chc_fang_c2_var = 0.15
 				tooltip = stability_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_fang_c_p15_tt
@@ -2743,8 +2632,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_fang_cri
 		icon = GFX_focus_YAN_chc_fang_cri
-		x = 29
-		y = 32
+		x = -18
+		y = 46
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_fang_a3
@@ -2765,27 +2654,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_fang_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_1_var = 0.03
+				YAN_chc_fang_a1_var = 0.03
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_2_var = -0.03
+				YAN_chc_fang_a2_var = -0.03
 				tooltip = consumer_goods_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_3_var = -0.03
+				YAN_chc_fang_b1_var = -0.03
 				tooltip = attrition_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_4_var = 0.03
+				YAN_chc_fang_b2_var = 0.03
 				tooltip = army_org_regain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_5_var = 0.03
+				YAN_chc_fang_c1_var = 0.03
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_6_var = 0.03
+				YAN_chc_fang_c2_var = 0.03
 				tooltip = stability_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_fang_cri_tt
@@ -2796,8 +2685,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_fang_fin
 		icon = GFX_focus_YAN_chc_fang_fin
-		x = 29
-		y = 33
+		x = -18
+		y = 47
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_fang_cri
@@ -2813,27 +2702,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_fang_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_1_var = 0.02
+				YAN_chc_fang_a1_var = 0.02
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_2_var = -0.02
+				YAN_chc_fang_a2_var = -0.02
 				tooltip = consumer_goods_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_3_var = -0.02
+				YAN_chc_fang_b1_var = -0.02
 				tooltip = attrition_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_4_var = 0.02
+				YAN_chc_fang_b2_var = 0.02
 				tooltip = army_org_regain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_5_var = 0.02
+				YAN_chc_fang_c1_var = 0.02
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_6_var = 0.02
+				YAN_chc_fang_c2_var = 0.02
 				tooltip = stability_factor_tt
 			}
 			set_country_flag = yan_chc_fang_done
@@ -2847,15 +2736,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_xi_chu
 		icon = GFX_focus_YAN_chc_xi_chu
-		x = 36
-		y = 29
+		x = -6
+		y = 35
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_diplomacy
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_diplomacy
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -2863,6 +2748,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_xi }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_xi_ok
@@ -2876,8 +2762,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_xi_zb
 		icon = GFX_focus_YAN_chc_xi_zb
-		x = 36
-		y = 30
+		x = -6
+		y = 36
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_xi_chu
@@ -2897,8 +2783,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_xi_a3
 		icon = GFX_focus_YAN_chc_xi_a3
-		x = 34
-		y = 31
+		x = -8
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_xi_zb
@@ -2911,11 +2797,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_xi_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_7_var = 0.15
+				YAN_chc_xi_a1_var = 0.15
 				tooltip = political_power_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_2_var = -0.15
+				YAN_chc_xi_a2_var = -0.15
 				tooltip = consumer_goods_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_xi_a_p15_tt
@@ -2930,8 +2816,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_xi_b3
 		icon = GFX_focus_YAN_chc_xi_b3
-		x = 36
-		y = 31
+		x = -6
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_xi_zb
@@ -2944,11 +2830,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_xi_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_8_var = 0.15
+				YAN_chc_xi_b1_var = 0.15
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_1_var = 0.15
+				YAN_chc_xi_b2_var = 0.15
 				tooltip = production_speed_buildings_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_xi_b_p15_tt
@@ -2963,8 +2849,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_xi_c3
 		icon = GFX_focus_YAN_chc_xi_c3
-		x = 38
-		y = 31
+		x = -4
+		y = 37
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_xi_zb
@@ -2977,11 +2863,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_xi_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_6_var = 0.15
+				YAN_chc_xi_c1_var = 0.15
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_9_var = 0.15
+				YAN_chc_xi_c2_var = 0.15
 				tooltip = land_reinforce_rate_tt
 			}
 			custom_effect_tooltip = YAN_chc_xi_c_p15_tt
@@ -2996,8 +2882,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_xi_cri
 		icon = GFX_focus_YAN_chc_xi_cri
-		x = 36
-		y = 32
+		x = -6
+		y = 38
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_xi_a3
@@ -3018,27 +2904,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_xi_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_7_var = 0.03
+				YAN_chc_xi_a1_var = 0.03
 				tooltip = political_power_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_2_var = -0.03
+				YAN_chc_xi_a2_var = -0.03
 				tooltip = consumer_goods_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_8_var = 0.03
+				YAN_chc_xi_b1_var = 0.03
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_1_var = 0.03
+				YAN_chc_xi_b2_var = 0.03
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_6_var = 0.03
+				YAN_chc_xi_c1_var = 0.03
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_9_var = 0.03
+				YAN_chc_xi_c2_var = 0.03
 				tooltip = land_reinforce_rate_tt
 			}
 			custom_effect_tooltip = YAN_chc_xi_cri_tt
@@ -3049,8 +2935,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_xi_fin
 		icon = GFX_focus_YAN_chc_xi_fin
-		x = 36
-		y = 33
+		x = -6
+		y = 39
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_xi_cri
@@ -3066,27 +2952,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_xi_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_7_var = 0.02
+				YAN_chc_xi_a1_var = 0.02
 				tooltip = political_power_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_2_var = -0.02
+				YAN_chc_xi_a2_var = -0.02
 				tooltip = consumer_goods_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_8_var = 0.02
+				YAN_chc_xi_b1_var = 0.02
 				tooltip = research_speed_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_1_var = 0.02
+				YAN_chc_xi_b2_var = 0.02
 				tooltip = production_speed_buildings_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_6_var = 0.02
+				YAN_chc_xi_c1_var = 0.02
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_9_var = 0.02
+				YAN_chc_xi_c2_var = 0.02
 				tooltip = land_reinforce_rate_tt
 			}
 			set_country_flag = yan_chc_xi_done
@@ -3100,15 +2986,11 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yu_chu
 		icon = GFX_focus_YAN_chc_yu_chu
-		x = 43
-		y = 29
+		x = -6
+		y = 43
 		cost = 3
-		prerequisite = {
-			focus = YAN_chc_domain_diplomacy
-		}
 		available = {
 			has_country_flag = yan_sui_pact
-			has_country_flag = yan_domain_diplomacy
 		}
 		available_if_capitulated = yes
 		ai_will_do = {
@@ -3116,6 +2998,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = YAN_chc_yu }
 			add_to_variable = { yan_agent_trust = 5 }
 			custom_effect_tooltip = YAN_chc_trust_u5_tt
 			set_country_flag = yan_chc_yu_ok
@@ -3129,8 +3012,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yu_zb
 		icon = GFX_focus_YAN_chc_yu_zb
-		x = 43
-		y = 30
+		x = -6
+		y = 44
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_yu_chu
@@ -3150,8 +3033,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yu_a3
 		icon = GFX_focus_YAN_chc_yu_a3
-		x = 41
-		y = 31
+		x = -8
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_yu_zb
@@ -3164,11 +3047,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_yu_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_5_var = 0.15
+				YAN_chc_yu_a1_var = 0.15
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_10_var = -0.15
+				YAN_chc_yu_a2_var = -0.15
 				tooltip = supply_consumption_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_yu_a_p15_tt
@@ -3183,8 +3066,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yu_b3
 		icon = GFX_focus_YAN_chc_yu_b3
-		x = 43
-		y = 31
+		x = -6
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_yu_zb
@@ -3197,11 +3080,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_yu_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_6_var = 0.15
+				YAN_chc_yu_b1_var = 0.15
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_11_var = 0.15
+				YAN_chc_yu_b2_var = 0.15
 				tooltip = war_support_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_yu_b_p15_tt
@@ -3216,8 +3099,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yu_c3
 		icon = GFX_focus_YAN_chc_yu_c3
-		x = 45
-		y = 31
+		x = -4
+		y = 45
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_yu_zb
@@ -3230,11 +3113,11 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = YAN_chc_yu_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_12_var = 0.15
+				YAN_chc_yu_c1_var = 0.15
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_13_var = 0.15
+				YAN_chc_yu_c2_var = 0.15
 				tooltip = army_morale_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_yu_c_p15_tt
@@ -3249,8 +3132,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yu_cri
 		icon = GFX_focus_YAN_chc_yu_cri
-		x = 43
-		y = 32
+		x = -6
+		y = 46
 		cost = 2
 		prerequisite = {
 			focus = YAN_chc_yu_a3
@@ -3271,27 +3154,27 @@ focus_tree = {
 			add_stability = -0.02
 			custom_effect_tooltip = YAN_chc_yu_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_5_var = 0.03
+				YAN_chc_yu_a1_var = 0.03
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_10_var = -0.03
+				YAN_chc_yu_a2_var = -0.03
 				tooltip = supply_consumption_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_6_var = 0.03
+				YAN_chc_yu_b1_var = 0.03
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_11_var = 0.03
+				YAN_chc_yu_b2_var = 0.03
 				tooltip = war_support_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_12_var = 0.03
+				YAN_chc_yu_c1_var = 0.03
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_13_var = 0.03
+				YAN_chc_yu_c2_var = 0.03
 				tooltip = army_morale_factor_tt
 			}
 			custom_effect_tooltip = YAN_chc_yu_cri_tt
@@ -3302,8 +3185,8 @@ focus_tree = {
 	focus = {
 		id = YAN_chc_yu_fin
 		icon = GFX_focus_YAN_chc_yu_fin
-		x = 43
-		y = 33
+		x = -6
+		y = 47
 		cost = 3
 		prerequisite = {
 			focus = YAN_chc_yu_cri
@@ -3319,27 +3202,27 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = YAN_chc_yu_modify_tt
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_5_var = 0.02
+				YAN_chc_yu_a1_var = 0.02
 				tooltip = recruitable_population_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_10_var = -0.02
+				YAN_chc_yu_a2_var = -0.02
 				tooltip = supply_consumption_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_6_var = 0.02
+				YAN_chc_yu_b1_var = 0.02
 				tooltip = stability_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_11_var = 0.02
+				YAN_chc_yu_b2_var = 0.02
 				tooltip = war_support_factor_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_12_var = 0.02
+				YAN_chc_yu_c1_var = 0.02
 				tooltip = political_power_gain_tt
 			}
 			add_to_variable = {
-				YAN_chc_dom_diplomacy_13_var = 0.02
+				YAN_chc_yu_c2_var = 0.02
 				tooltip = army_morale_factor_tt
 			}
 			set_country_flag = yan_chc_yu_done
@@ -3349,131 +3232,12 @@ focus_tree = {
 		}
 	}
 
-	# YAN_chc_domain_economy_end
-	focus = {
-		id = YAN_chc_domain_economy_end
-		icon = GFX_focus_YAN_chc_domain_economy_end
-		x = -36
-		y = 35
-		cost = 3
-		prerequisite = {
-			focus = YAN_chc_shu_fin
-		}
-		prerequisite = {
-			focus = YAN_chc_ji_fin
-		}
-		prerequisite = {
-			focus = YAN_chc_nian_fin
-		}
-		available_if_capitulated = yes
-		ai_will_do = {
-			factor = 25
-		}
-
-		completion_reward = {
-			add_dynamic_modifier = { modifier = YAN_chc_dom_economy_end }
-			add_political_power = 50
-			add_stability = 0.03
-			set_country_flag = yan_domain_economy_done
-			custom_effect_tooltip = YAN_chc_domain_economy_end_tt
-		}
-	}
-
-	# YAN_chc_domain_domestic_end
-	focus = {
-		id = YAN_chc_domain_domestic_end
-		icon = GFX_focus_YAN_chc_domain_domestic_end
-		x = -12
-		y = 35
-		cost = 3
-		prerequisite = {
-			focus = YAN_chc_ling_fin
-		}
-		prerequisite = {
-			focus = YAN_chc_jun_fin
-		}
-		prerequisite = {
-			focus = YAN_chc_jie_fin
-		}
-		available_if_capitulated = yes
-		ai_will_do = {
-			factor = 25
-		}
-
-		completion_reward = {
-			add_dynamic_modifier = { modifier = YAN_chc_dom_domestic_end }
-			add_political_power = 50
-			add_stability = 0.03
-			set_country_flag = yan_domain_domestic_done
-			custom_effect_tooltip = YAN_chc_domain_domestic_end_tt
-		}
-	}
-
-	# YAN_chc_domain_military_end
-	focus = {
-		id = YAN_chc_domain_military_end
-		icon = GFX_focus_YAN_chc_domain_military_end
-		x = 12
-		y = 35
-		cost = 3
-		prerequisite = {
-			focus = YAN_chc_zhongyue_fin
-		}
-		prerequisite = {
-			focus = YAN_chc_wang_fin
-		}
-		prerequisite = {
-			focus = YAN_chc_yi_fin
-		}
-		available_if_capitulated = yes
-		ai_will_do = {
-			factor = 25
-		}
-
-		completion_reward = {
-			add_dynamic_modifier = { modifier = YAN_chc_dom_military_end }
-			add_political_power = 50
-			add_stability = 0.03
-			set_country_flag = yan_domain_military_done
-			custom_effect_tooltip = YAN_chc_domain_military_end_tt
-		}
-	}
-
-	# YAN_chc_domain_diplomacy_end
-	focus = {
-		id = YAN_chc_domain_diplomacy_end
-		icon = GFX_focus_YAN_chc_domain_diplomacy_end
-		x = 36
-		y = 35
-		cost = 3
-		prerequisite = {
-			focus = YAN_chc_fang_fin
-		}
-		prerequisite = {
-			focus = YAN_chc_xi_fin
-		}
-		prerequisite = {
-			focus = YAN_chc_yu_fin
-		}
-		available_if_capitulated = yes
-		ai_will_do = {
-			factor = 25
-		}
-
-		completion_reward = {
-			add_dynamic_modifier = { modifier = YAN_chc_dom_diplomacy_end }
-			add_political_power = 50
-			add_stability = 0.03
-			set_country_flag = yan_domain_diplomacy_done
-			custom_effect_tooltip = YAN_chc_domain_diplomacy_end_tt
-		}
-	}
 	# YAN_chc_wangri
 	focus = {
 		id = YAN_chc_wangri
 		icon = GFX_focus_YAN_chc_wangri
 		x = 0
-		y = 39
+		y = 51
 		cost = 4
 		prerequisite = {
 			focus = YAN_chc_zhongyue_fin
@@ -3507,7 +3271,7 @@ focus_tree = {
 		id = YAN_Suiling_Stirring
 		icon = GFX_focus_YAN_Suiling_Stirring
 		x = 0
-		y = 40
+		y = 52
 		cost = 1
 		prerequisite = {
 			focus = YAN_chc_wangri
@@ -3543,7 +3307,7 @@ focus_tree = {
 		id = YAN_Suiling_Decisive
 		icon = GFX_focus_YAN_Suiling_Decisive
 		x = 0
-		y = 41
+		y = 53
 		cost = 4
 		prerequisite = {
 			focus = YAN_Suiling_Stirring
@@ -3611,7 +3375,7 @@ focus_tree = {
 		id = YAN_Wang_replaces_Sui
 		icon = GFX_focus_YAN_Wang_replaces_Sui
 		x = -8
-		y = 42
+		y = 54
 		cost = 4
 		prerequisite = {
 			focus = YAN_Suiling_Decisive
@@ -3640,7 +3404,7 @@ focus_tree = {
 		id = YAN_chc_crown_a
 		icon = GFX_focus_YAN_chc_crown_a
 		x = 0
-		y = 42
+		y = 54
 		cost = 4
 		prerequisite = {
 			focus = YAN_Suiling_Decisive
@@ -3682,7 +3446,7 @@ focus_tree = {
 		id = YAN_chc_crown_b
 		icon = GFX_focus_YAN_chc_crown_b
 		x = 0
-		y = 43
+		y = 55
 		cost = 5
 		prerequisite = {
 			focus = YAN_chc_crown_a

@@ -1,0 +1,18 @@
+on_actions = {
+
+	# 卡兹戴尔 tag 介绍事件链：开局 3 天后发给玩家执掌的 KAZ
+	on_startup = {
+		effect = {
+			every_country = {
+				limit = {
+					original_tag = KAZ
+					is_ai = no
+				}
+				country_event = {
+					id = kaz_intro.1
+					days = 3
+				}
+			}
+		}
+	}
+}

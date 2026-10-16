@@ -3253,8 +3253,8 @@ focus_tree = {
 			}
 			country_event = {
 				id = event_reu.118
-				days = 3
-				random_days = 27
+				days = 30
+				random_days = 15
 			}
 		}
 	}
@@ -6227,7 +6227,7 @@ focus = {
 	ai_will_do = {
 		factor = 1
 	}
-	completion_reward = 	completion_reward = {
+	completion_reward = {
 		#克内希线：完成「这是最后的斗争！」且三项 flag 齐备 → 圆满完成线
 		if = {
 			limit = {
@@ -6236,8 +6236,6 @@ focus = {
 				has_country_flag = REU_hand_over_the_microphone_flag
 				has_country_flag = REU_army_backs_revolutionary_left_flag
 			}
-			set_country_flag = REU_dem_reform_perfect
-			set_country_flag = REU_dem_reform_path_perfect
 			country_event = { id = REU_dem_reform.15 }
 		}
 		#克内希线：完成「这是最后的斗争！」但三项 flag 未齐 → 基本完成线
@@ -6245,8 +6243,6 @@ focus = {
 			limit = {
 				has_completed_focus = REU_this_is_the_final_struggle
 			}
-			set_country_flag = REU_dem_reform_succeed
-			set_country_flag = REU_dem_reform_path_succeed
 			country_event = { id = REU_dem_reform.16 }
 		}
 		#克内希线：完成「计划陷入不利……」→ 失败线
@@ -6254,8 +6250,6 @@ focus = {
 			limit = {
 				has_completed_focus = REU_plan_in_disadvantage
 			}
-			set_country_flag = REU_dem_reform_failed
-			set_country_flag = REU_dem_reform_path_failed
 			country_event = { id = REU_dem_reform.17 }
 		}
 		#阿丽娜线：完成「最大公约数」且三项 flag 齐备 → 圆满完成线
@@ -6266,8 +6260,6 @@ focus = {
 				has_country_flag = REU_compulsory_education_flag
 				has_country_flag = REU_socialist_league_flag
 			}
-			set_country_flag = REU_dem_reform_perfect
-			set_country_flag = REU_dem_reform_path_perfect
 			country_event = { id = REU_dem_reform.15 }
 		}
 		#阿丽娜线：完成「最大公约数」但三项 flag 未齐 → 基本完成线
@@ -6275,8 +6267,6 @@ focus = {
 			limit = {
 				has_completed_focus = REU_greatest_common_divisor
 			}
-			set_country_flag = REU_dem_reform_succeed
-			set_country_flag = REU_dem_reform_path_succeed
 			country_event = { id = REU_dem_reform.16 }
 		}
 		#阿丽娜线：完成「默默独行……」→ 失败线
@@ -6284,14 +6274,10 @@ focus = {
 			limit = {
 				has_completed_focus = REU_walk_alone_in_silence
 			}
-			set_country_flag = REU_dem_reform_failed
-			set_country_flag = REU_dem_reform_path_failed
 			country_event = { id = REU_dem_reform.17 }
 		}
 		#兜底：以上条件均未匹配时按失败线处理
 		else = {
-			set_country_flag = REU_dem_reform_failed
-			set_country_flag = REU_dem_reform_path_failed
 			country_event = { id = REU_dem_reform.17 }
 		}
 	}
@@ -6316,7 +6302,6 @@ focus = {
 	relative_position_id = REU_democracy_reform
 	available = {
 		has_country_flag = REU_dem_reform_failed
-		has_country_flag = REU_dem_reform_path_failed
 	}
 	bypass = {
 		always = no
@@ -6538,7 +6523,6 @@ focus = {
 	relative_position_id = REU_democracy_reform
 	available = {
 		has_country_flag = REU_dem_reform_succeed
-		has_country_flag = REU_dem_reform_path_succeed
 	}
 	bypass = {
 		always = no
@@ -6575,7 +6559,9 @@ focus = {
 		#原“进步主义与社会主义加入执政联盟”为无效效果（HOI4 无此 effect），已移除
 		custom_effect_tooltip = generic_skip_one_line_tt
 		#政协会议
-		add_ideas = REU_cppcc_conference
+		add_dynamic_modifier = {
+			modifier = REU_cppcc_conference_modifier
+		}
 	}
 }
 
@@ -6680,27 +6666,27 @@ focus = {
 		#政协会议buff追加效果
 		custom_effect_tooltip = REU_cppcc_conference_modifier_change_tt
 		add_to_variable = {
-			production_factory_max_efficiency_factor_var = 0.10
+			cppcc_production_factory_max_efficiency_factor_var = 0.10
 			tooltip = production_factory_max_efficiency_factor_tt
 		}
 		add_to_variable = {
-			production_factory_efficiency_gain_factor_var = 0.10
+			cppcc_production_factory_efficiency_gain_factor_var = 0.10
 			tooltip = production_factory_efficiency_gain_factor_tt
 		}
 		add_to_variable = {
-			industrial_capacity_factory_var = 0.10
+			cppcc_industrial_capacity_factory_var = 0.10
 			tooltip = industrial_capacity_factory_tt
 		}
 		add_to_variable = {
-			production_factory_start_efficiency_factor_var = 0.10
+			cppcc_production_factory_start_efficiency_factor_var = 0.10
 			tooltip = production_factory_start_efficiency_factor_tt
 		}
 		add_to_variable = {
-			production_speed_buildings_factor_var = 0.10
+			cppcc_production_speed_buildings_factor_var = 0.10
 			tooltip = production_speed_buildings_factor_tt
 		}
 		add_to_variable = {
-			global_building_slots_var = 1
+			cppcc_global_building_slots_var = 1
 			tooltip = global_building_slots_tt
 		}
 	}
@@ -6796,7 +6782,6 @@ focus = {
 	relative_position_id = REU_democracy_reform
 	available = {
 		has_country_flag = REU_dem_reform_perfect
-		has_country_flag = REU_dem_reform_path_perfect
 	}
 	bypass = {
 		always = no
