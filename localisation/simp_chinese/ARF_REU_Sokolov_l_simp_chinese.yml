@@ -41,15 +41,112 @@
  REU_sokolov_train_intel_desc: "§Y情报嗅觉§! 当前 Lv.[?REU_sok_intel_lv|0] / 10。\n训练一次：计划上限 §G+1%§!、断补惩罚 §G-1%§!。"
  REU_sokolov_train_blade: "特训 · 匕首与盾"
  REU_sokolov_train_blade_desc: "§Y匕首与盾§! 当前 Lv.[?REU_sok_blade_lv|0] / 10。\n训练一次：进攻 §G+1%§!、防御 §G+1%§!。"
- REU_Sokolov_Training_Category: "索科洛夫的特训"
- REU_Sokolov_Training_Category_desc: "柳德米拉亲自带她带得最久的那个兵。§Y索科洛夫在军中时，本页决议才会出现。§!"
+
+#结业徽记（四课全满时由核心效果自动授予）
+ REU_sokolov_graduate: "特训 · 结业"
+ REU_sokolov_graduate_desc: "§L四门课全部练到了满级。柳德米拉带过不少人，把每一课都磨到底的，只有他一个。§!"
+
+#洗点决议（退款 = 累计已投入政治点数的 70%）
+ REU_sokolov_respec_scout: "洗点 · 侦察好手"
+ REU_sokolov_respec_scout_desc: "把「侦察好手」清零重练，退还已投入政治点数的 §G70%§!——地图上的那点本事，换种练法也行。"
+ REU_sokolov_respec_night: "洗点 · 夜行无声"
+ REU_sokolov_respec_night_desc: "把「夜行无声」清零重练，退还已投入政治点数的 §G70%§!。"
+ REU_sokolov_respec_intel: "洗点 · 情报嗅觉"
+ REU_sokolov_respec_intel_desc: "把「情报嗅觉」清零重练，退还已投入政治点数的 §G70%§!。"
+ REU_sokolov_respec_blade: "洗点 · 匕首与盾"
+ REU_sokolov_respec_blade_desc: "把「匕首与盾」清零重练，退还已投入政治点数的 §G70%§!。"
+ REU_Sokolov_Training_Category: "将领特训"
+ REU_Sokolov_Training_Category_desc: "柳德米拉把训练场向她的心腹们敞开。§Y花名册里任一名将领在军中时，本页决议才会出现。§!"
+
+#受训对象切换（面板与训练决议都作用于「当前受训对象」）
+ REU_sokolov_target_sokolov: "受训对象：索科洛夫"
+ REU_sokolov_target_sokolov_desc: "把训练对象指回索科洛夫——柳德米拉身边待得最久的那个人。"
+ REU_sokolov_target_yelena: "受训对象：叶莲娜「霜星」"
+ REU_sokolov_target_yelena_desc: "让霜星也来领一份，把她的那份经验磨成能带兵的东西。"
+ REU_sokolov_target_alina: "受训对象：阿丽娜"
+ REU_sokolov_target_alina_desc: "把阿丽娜编进特训序列。"
+ REU_sokolov_target_mudrock: "受训对象：泥岩「波希墨丝」"
+ REU_sokolov_target_mudrock_desc: "连泥岩也来磨一遍——她大概会嫌无聊，但有用。"
 
 #加点面板（独立浮动窗口）
  REU_sok_panel_title: "索科洛夫的特训"
  REU_sok_panel_pp: "政治点数 §Y[?political_power|0]§!"
- REU_sok_panel_footer: "§T每门 10 级：主属性每级 §G+1%§!（满 §G20%§!）、副属性每级 §G±1%§!（满 §G14%§!）。点击每行右侧的 ＋ 花政治点数升级。§!"
+ REU_sok_panel_footer: "§T每门 10 级：主属性每级 §G+1%§!（满 §G20%§!），副属性每级 §G±1%§!（满 §G14%§!）。点右侧 ＋ 花政治点数升级。§!"
  REU_sok_max_label: "§G已满级§!"
  REU_sok_scout_name: "侦察好手"
  REU_sok_night_name: "夜行无声"
  REU_sok_intel_name: "情报嗅觉"
  REU_sok_blade_name: "匕首与盾"
+
+#专精分叉（Lv5 二选一；分支加成由分支特质承载）
+ REU_sok_br_scout_a: "鹰眼"
+ REU_sok_br_scout_a_desc: "§L先于对手看见战场：侦查再拔高一档。§!"
+ REU_sokolov_branch_scout_a: "专精 · 鹰眼"
+ REU_sokolov_branch_scout_a_desc: "§Y侦察好手§! 的专精方向：侦查再 §G+5%§!。\n§T二选一，选定后另一支不再可选（洗点可重选）。§!"
+ REU_sok_br_scout_b: "棋手"
+ REU_sok_br_scout_b_desc: "§L把每一次协同都算在前面：计划成形得更快。§!"
+ REU_sokolov_branch_scout_b: "专精 · 棋手"
+ REU_sokolov_branch_scout_b_desc: "§Y侦察好手§! 的专精方向：计划速度再 §G+8%§!。\n§T二选一，选定后另一支不再可选（洗点可重选）。§!"
+ REU_sok_br_night_a: "夜枭"
+ REU_sok_br_night_a_desc: "§L越是黑，越是他熟悉的时辰。§!"
+ REU_sokolov_branch_night_a: "专精 · 夜枭"
+ REU_sokolov_branch_night_a_desc: "§Y夜行无声§! 的专精方向：夜战攻击再 §G+5%§!。\n§T二选一，选定后另一支不再可选（洗点可重选）。§!"
+ REU_sok_br_night_b: "影卫"
+ REU_sok_br_night_b_desc: "§L把队伍完整地带回来，本身就是一种胜利。§!"
+ REU_sokolov_branch_night_b: "专精 · 影卫"
+ REU_sokolov_branch_night_b_desc: "§Y夜行无声§! 的专精方向：损耗再 §G-5%§!。\n§T二选一，选定后另一支不再可选（洗点可重选）。§!"
+ REU_sok_br_intel_a: "耳目"
+ REU_sok_br_intel_a_desc: "§L眼线铺得更开，计划的上限也更高。§!"
+ REU_sokolov_branch_intel_a: "专精 · 耳目"
+ REU_sokolov_branch_intel_a_desc: "§Y情报嗅觉§! 的专精方向：计划上限再 §G+5%§!。\n§T二选一，选定后另一支不再可选（洗点可重选）。§!"
+ REU_sok_br_intel_b: "参谋"
+ REU_sok_br_intel_b_desc: "§L从碎片里拼出的判断，越来越快。§!"
+ REU_sokolov_branch_intel_b: "专精 · 参谋"
+ REU_sokolov_branch_intel_b_desc: "§Y情报嗅觉§! 的专精方向：计划速度再 §G+8%§!。\n§T二选一，选定后另一支不再可选（洗点可重选）。§!"
+ REU_sok_br_blade_a: "匕首"
+ REU_sok_br_blade_a_desc: "§L留给前面那一下，磨得更利。§!"
+ REU_sokolov_branch_blade_a: "专精 · 匕首"
+ REU_sokolov_branch_blade_a_desc: "§Y匕首与盾§! 的专精方向：进攻再 §G+8%§!。\n§T二选一，选定后另一支不再可选（洗点可重选）。§!"
+ REU_sok_br_blade_b: "盾墙"
+ REU_sok_br_blade_b_desc: "§L护住身后的人，站得更稳。§!"
+ REU_sokolov_branch_blade_b: "专精 · 盾墙"
+ REU_sokolov_branch_blade_b_desc: "§Y匕首与盾§! 的专精方向：防御再 §G+8%§!。\n§T二选一，选定后另一支不再可选（洗点可重选）。§!"
+
+# ==============================================================================
+# 2026-10-16 扩展：面板改三页 —— 训练 / 将领属性 / 选择特质
+#  布局与接线由 docs/将领加点系统/工具/gen_reu_sokolov_gui.cjs 生成，键名同源。
+# ==============================================================================
+
+#页签
+ REU_sok_tab_train: "训练"
+ REU_sok_tab_train_tt: "四门特训课：花政治点数逐级升级。"
+ REU_sok_tab_attr: "将领属性"
+ REU_sok_tab_attr_tt: "查看当前受训者的基础四维，以及已经练出来的特质。"
+ REU_sok_tab_trait: "选择特质"
+ REU_sok_tab_trait_tt: "给当前受训者挂上原版将领特质，花政治点数。"
+
+#顶栏 / 受训对象（原为四条决议，已搬进面板）
+ REU_sok_close_tt: "收起面板（进度不会丢）"
+ REU_sok_tgt_sokolov: "索科洛夫"
+ REU_sok_tgt_yelena: "叶莲娜"
+ REU_sok_tgt_alina: "阿丽娜"
+ REU_sok_tgt_mudrock: "泥岩"
+
+#训练行 ＋ 钮的悬停说明
+ REU_sok_scout_up_tt: "花政治点数把「侦察好手」升一级。"
+ REU_sok_night_up_tt: "花政治点数把「夜行无声」升一级。"
+ REU_sok_intel_up_tt: "花政治点数把「情报嗅觉」升一级。"
+ REU_sok_blade_up_tt: "花政治点数把「匕首与盾」升一级。"
+
+#将领属性页
+ REU_sok_sec_base: "基础四维"
+ REU_sok_sec_album: "将领已练出的特质"
+ REU_sok_album_count: "已拥有 §Y[?REU_sel_trait_count|0]§! / 23"
+ REU_sok_side_traits: "特质 §Y[?REU_sel_trait_count|0]§! / 23"
+
+#选择特质页
+ REU_sok_hint_trait: "§T给当前受训者挂上原版将领特质，花政治点数；已拥有的不可重复选。按钮变灰＝政治点数不够。§!"
+ REU_sok_trait_pick: "选择"
+ REU_sok_trait_owned: "§G已拥有§!"
+ REU_sok_trait_reset: "洗去额外特质"
+ REU_sok_trait_reset_tt: "移除全部通过本面板挂上的特质，退还已投入政治点数的 §G50%§!。"

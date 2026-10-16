@@ -1,66 +1,89 @@
 # ==============================================================================
-#  索科洛夫的特训 —— 「这一级付得起吗」判定（供面板按钮置灰用）
-#  · 作用域：国家。等级取国家侧镜像变量 REU_sok_<skill>_lv。
-#  · 费用阶梯 = 10 + 5×当前等级；这里按等级逐档写死，避免依赖
-#    check_variable 对政治点数动态变量的读数（静默失效风险）。
+#  将领特训 / 加点系统 —— 触发（**由 gen_reu_train_roster.cjs 生成，勿手改**）
+#  · REU_Train_Has_Target：是否已选定受训对象（决议显隐用）
+#  · REU_Sok_Afford_<课>：当前这一级付得起吗（面板按钮置灰用）
+#    ⚠ has_political_power 只认 > / <，不认 >=（写 > N-1）
 # ==============================================================================
+
+REU_Train_Has_Target = {
+	OR = {
+			has_country_flag = REU_train_target_sokolov
+			has_country_flag = REU_train_target_yelena
+			has_country_flag = REU_train_target_alina
+			has_country_flag = REU_train_target_mudrock
+	}
+}
 
 REU_Sok_Afford_Scout = {
 	OR = {
-		AND = { check_variable = { REU_sok_scout_lv = 0 } has_political_power > 9 }
-		AND = { check_variable = { REU_sok_scout_lv = 1 } has_political_power > 14 }
-		AND = { check_variable = { REU_sok_scout_lv = 2 } has_political_power > 19 }
-		AND = { check_variable = { REU_sok_scout_lv = 3 } has_political_power > 24 }
-		AND = { check_variable = { REU_sok_scout_lv = 4 } has_political_power > 29 }
-		AND = { check_variable = { REU_sok_scout_lv = 5 } has_political_power > 34 }
-		AND = { check_variable = { REU_sok_scout_lv = 6 } has_political_power > 39 }
-		AND = { check_variable = { REU_sok_scout_lv = 7 } has_political_power > 44 }
-		AND = { check_variable = { REU_sok_scout_lv = 8 } has_political_power > 49 }
-		AND = { check_variable = { REU_sok_scout_lv = 9 } has_political_power > 54 }
+		AND = { check_variable = { REU_sel_scout_lv = 0 } has_political_power > 9 }
+		AND = { check_variable = { REU_sel_scout_lv = 1 } has_political_power > 14 }
+		AND = { check_variable = { REU_sel_scout_lv = 2 } has_political_power > 19 }
+		AND = { check_variable = { REU_sel_scout_lv = 3 } has_political_power > 24 }
+		AND = { check_variable = { REU_sel_scout_lv = 4 } has_political_power > 29 }
+		AND = { check_variable = { REU_sel_scout_lv = 5 } has_political_power > 34 }
+		AND = { check_variable = { REU_sel_scout_lv = 6 } has_political_power > 39 }
+		AND = { check_variable = { REU_sel_scout_lv = 7 } has_political_power > 44 }
+		AND = { check_variable = { REU_sel_scout_lv = 8 } has_political_power > 49 }
+		AND = { check_variable = { REU_sel_scout_lv = 9 } has_political_power > 54 }
 	}
 }
 
 REU_Sok_Afford_Night = {
 	OR = {
-		AND = { check_variable = { REU_sok_night_lv = 0 } has_political_power > 9 }
-		AND = { check_variable = { REU_sok_night_lv = 1 } has_political_power > 14 }
-		AND = { check_variable = { REU_sok_night_lv = 2 } has_political_power > 19 }
-		AND = { check_variable = { REU_sok_night_lv = 3 } has_political_power > 24 }
-		AND = { check_variable = { REU_sok_night_lv = 4 } has_political_power > 29 }
-		AND = { check_variable = { REU_sok_night_lv = 5 } has_political_power > 34 }
-		AND = { check_variable = { REU_sok_night_lv = 6 } has_political_power > 39 }
-		AND = { check_variable = { REU_sok_night_lv = 7 } has_political_power > 44 }
-		AND = { check_variable = { REU_sok_night_lv = 8 } has_political_power > 49 }
-		AND = { check_variable = { REU_sok_night_lv = 9 } has_political_power > 54 }
+		AND = { check_variable = { REU_sel_night_lv = 0 } has_political_power > 9 }
+		AND = { check_variable = { REU_sel_night_lv = 1 } has_political_power > 14 }
+		AND = { check_variable = { REU_sel_night_lv = 2 } has_political_power > 19 }
+		AND = { check_variable = { REU_sel_night_lv = 3 } has_political_power > 24 }
+		AND = { check_variable = { REU_sel_night_lv = 4 } has_political_power > 29 }
+		AND = { check_variable = { REU_sel_night_lv = 5 } has_political_power > 34 }
+		AND = { check_variable = { REU_sel_night_lv = 6 } has_political_power > 39 }
+		AND = { check_variable = { REU_sel_night_lv = 7 } has_political_power > 44 }
+		AND = { check_variable = { REU_sel_night_lv = 8 } has_political_power > 49 }
+		AND = { check_variable = { REU_sel_night_lv = 9 } has_political_power > 54 }
 	}
 }
 
 REU_Sok_Afford_Intel = {
 	OR = {
-		AND = { check_variable = { REU_sok_intel_lv = 0 } has_political_power > 9 }
-		AND = { check_variable = { REU_sok_intel_lv = 1 } has_political_power > 14 }
-		AND = { check_variable = { REU_sok_intel_lv = 2 } has_political_power > 19 }
-		AND = { check_variable = { REU_sok_intel_lv = 3 } has_political_power > 24 }
-		AND = { check_variable = { REU_sok_intel_lv = 4 } has_political_power > 29 }
-		AND = { check_variable = { REU_sok_intel_lv = 5 } has_political_power > 34 }
-		AND = { check_variable = { REU_sok_intel_lv = 6 } has_political_power > 39 }
-		AND = { check_variable = { REU_sok_intel_lv = 7 } has_political_power > 44 }
-		AND = { check_variable = { REU_sok_intel_lv = 8 } has_political_power > 49 }
-		AND = { check_variable = { REU_sok_intel_lv = 9 } has_political_power > 54 }
+		AND = { check_variable = { REU_sel_intel_lv = 0 } has_political_power > 9 }
+		AND = { check_variable = { REU_sel_intel_lv = 1 } has_political_power > 14 }
+		AND = { check_variable = { REU_sel_intel_lv = 2 } has_political_power > 19 }
+		AND = { check_variable = { REU_sel_intel_lv = 3 } has_political_power > 24 }
+		AND = { check_variable = { REU_sel_intel_lv = 4 } has_political_power > 29 }
+		AND = { check_variable = { REU_sel_intel_lv = 5 } has_political_power > 34 }
+		AND = { check_variable = { REU_sel_intel_lv = 6 } has_political_power > 39 }
+		AND = { check_variable = { REU_sel_intel_lv = 7 } has_political_power > 44 }
+		AND = { check_variable = { REU_sel_intel_lv = 8 } has_political_power > 49 }
+		AND = { check_variable = { REU_sel_intel_lv = 9 } has_political_power > 54 }
 	}
 }
 
 REU_Sok_Afford_Blade = {
 	OR = {
-		AND = { check_variable = { REU_sok_blade_lv = 0 } has_political_power > 9 }
-		AND = { check_variable = { REU_sok_blade_lv = 1 } has_political_power > 14 }
-		AND = { check_variable = { REU_sok_blade_lv = 2 } has_political_power > 19 }
-		AND = { check_variable = { REU_sok_blade_lv = 3 } has_political_power > 24 }
-		AND = { check_variable = { REU_sok_blade_lv = 4 } has_political_power > 29 }
-		AND = { check_variable = { REU_sok_blade_lv = 5 } has_political_power > 34 }
-		AND = { check_variable = { REU_sok_blade_lv = 6 } has_political_power > 39 }
-		AND = { check_variable = { REU_sok_blade_lv = 7 } has_political_power > 44 }
-		AND = { check_variable = { REU_sok_blade_lv = 8 } has_political_power > 49 }
-		AND = { check_variable = { REU_sok_blade_lv = 9 } has_political_power > 54 }
+		AND = { check_variable = { REU_sel_blade_lv = 0 } has_political_power > 9 }
+		AND = { check_variable = { REU_sel_blade_lv = 1 } has_political_power > 14 }
+		AND = { check_variable = { REU_sel_blade_lv = 2 } has_political_power > 19 }
+		AND = { check_variable = { REU_sel_blade_lv = 3 } has_political_power > 24 }
+		AND = { check_variable = { REU_sel_blade_lv = 4 } has_political_power > 29 }
+		AND = { check_variable = { REU_sel_blade_lv = 5 } has_political_power > 34 }
+		AND = { check_variable = { REU_sel_blade_lv = 6 } has_political_power > 39 }
+		AND = { check_variable = { REU_sel_blade_lv = 7 } has_political_power > 44 }
+		AND = { check_variable = { REU_sel_blade_lv = 8 } has_political_power > 49 }
+		AND = { check_variable = { REU_sel_blade_lv = 9 } has_political_power > 54 }
+	}
+}
+
+# 是否至少拥有一枚「选择特质」候选（面板「洗去额外特质」按钮显隐 / 置灰）
+REU_Sok_Trait_Any_Owned = {
+	OR = {
+		has_country_flag = REU_tt_panzer_leader
+		has_country_flag = REU_tt_infantry_leader
+		has_country_flag = REU_tt_armor_officer
+		has_country_flag = REU_tt_harsh_leader
+		has_country_flag = REU_tt_winter_specialist
+		has_country_flag = REU_tt_desert_fox
+		has_country_flag = REU_tt_fortress_buster
+		has_country_flag = REU_tt_trickster
 	}
 }

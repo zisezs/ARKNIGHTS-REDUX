@@ -1,11 +1,12 @@
 # ==============================================================================
-#  索科洛夫的特训 —— 加点面板（独立浮动窗口）
-#  · context_type = player_context：面板是独立窗口，入口是决议分类页里的一条决议
-#    （REU_sokolov_training_open 决议 set_country_flag = REU_sokolov_training_open）。
-#  · 效果与触发按元素名自动接线；按钮元素名见 interface/_ARF_Gui/REU_Sokolov_Training.gui。
-#  · 行文字（等级 / 当前加成 / 下一级费用）由 defined_text 动态生成，见
-#    common/scripted_localisation/REU_Sokolov_Training_scripted_loc.txt。
-#  · 进度条 frame 读国家侧镜像变量 REU_sok_<skill>_lv（0~10）。
+#  将领特训 / 加点系统 —— 面板接线（**由 gen_reu_sokolov_gui.cjs 生成，勿手改**）
+#  · context_type = player_context：独立浮动窗口，入口是决议「打开特训面板」。
+#  · 元素名与 interface/_ARF_Gui/REU_Sokolov_Training.gui 同源，不存在拼错。
+#  · 面板读的都是**国家侧镜像**：REU_sel_<skill>_lv/_cost/_br（练度）、
+#    REU_sel_atk/def/pln/log/sk（基础四维）、REU_tt_<特质> 旗标（已拥有特质）、
+#    REU_sel_trait_count（已拥有数）。由效果 REU_Train_Sync_Mirror 在状态变化时重刷。
+#  · 页签状态 = 国家变量 REU_sok_ui_tab（0 训练 / 1 属性 / 2 特质）。切页**不靠容器级
+#    visible**：页内每个控件都写了自己的页条件（控件级 _visible 是验证过的写法）。
 # ==============================================================================
 
 scripted_gui = {
@@ -24,51 +25,254 @@ scripted_gui = {
 			REU_Sok_Night_Up_click = { REU_Sokolov_Training_Night_Up = yes }
 			REU_Sok_Intel_Up_click = { REU_Sokolov_Training_Intel_Up = yes }
 			REU_Sok_Blade_Up_click = { REU_Sokolov_Training_Blade_Up = yes }
-
 			REU_Sok_Close_click = { REU_Sokolov_Training_Close = yes }
+			REU_Sok_Tab1_click = { set_variable = { REU_sok_ui_tab = 0 } }
+			REU_Sok_Tab2_click = { set_variable = { REU_sok_ui_tab = 1 } }
+			REU_Sok_Tab3_click = { set_variable = { REU_sok_ui_tab = 2 } }
+			REU_Sok_Tgt_Sokolov_click = { REU_Sokolov_Training_Select_Sokolov = yes }
+			REU_Sok_Tgt_Yelena_click = { REU_Sokolov_Training_Select_Yelena = yes }
+			REU_Sok_Tgt_Alina_click = { REU_Sokolov_Training_Select_Alina = yes }
+			REU_Sok_Tgt_Mudrock_click = { REU_Sokolov_Training_Select_Mudrock = yes }
+			REU_SokTr_PanzerLeader_Btn_click = { REU_Sokolov_Training_Trait_PanzerLeader = yes }
+			REU_SokTr_InfantryLeader_Btn_click = { REU_Sokolov_Training_Trait_InfantryLeader = yes }
+			REU_SokTr_ArmorOfficer_Btn_click = { REU_Sokolov_Training_Trait_ArmorOfficer = yes }
+			REU_SokTr_HarshLeader_Btn_click = { REU_Sokolov_Training_Trait_HarshLeader = yes }
+			REU_SokTr_WinterSpecialist_Btn_click = { REU_Sokolov_Training_Trait_WinterSpecialist = yes }
+			REU_SokTr_DesertFox_Btn_click = { REU_Sokolov_Training_Trait_DesertFox = yes }
+			REU_SokTr_FortressBuster_Btn_click = { REU_Sokolov_Training_Trait_FortressBuster = yes }
+			REU_SokTr_Trickster_Btn_click = { REU_Sokolov_Training_Trait_Trickster = yes }
+			REU_Sok_TraitReset_Btn_click = { REU_Sokolov_Training_Trait_Reset = yes }
 		}
 
 		triggers = {
-			# 「升级」按钮：未满级 且 政治点数够付下一级
-			REU_Sok_Scout_Up_click_enabled = {
-				has_character = REU_Sokolov
-				REU_Sokolov = { check_variable = { REU_sok_scout_lv < 10 } }
-				REU_Sok_Afford_Scout = yes
-			}
-			REU_Sok_Night_Up_click_enabled = {
-				has_character = REU_Sokolov
-				REU_Sokolov = { check_variable = { REU_sok_night_lv < 10 } }
-				REU_Sok_Afford_Night = yes
-			}
-			REU_Sok_Intel_Up_click_enabled = {
-				has_character = REU_Sokolov
-				REU_Sokolov = { check_variable = { REU_sok_intel_lv < 10 } }
-				REU_Sok_Afford_Intel = yes
-			}
-			REU_Sok_Blade_Up_click_enabled = {
-				has_character = REU_Sokolov
-				REU_Sokolov = { check_variable = { REU_sok_blade_lv < 10 } }
-				REU_Sok_Afford_Blade = yes
-			}
+			# ---- 显隐（页条件已在生成时并与控件自身条件）----
+			REU_Sok_Page_Train_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Scout_Bg_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Scout_Icon_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Scout_Name_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Scout_Text_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Scout_Next_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Scout_Bar_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Scout_Up_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } REU_Train_Has_Target = yes check_variable = { REU_sel_scout_lv < 10 } }
+			REU_Sok_Scout_Max_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } REU_Train_Has_Target = yes check_variable = { REU_sel_scout_lv = 10 } }
+			REU_Sok_Night_Bg_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Night_Icon_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Night_Name_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Night_Text_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Night_Next_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Night_Bar_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Night_Up_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } REU_Train_Has_Target = yes check_variable = { REU_sel_night_lv < 10 } }
+			REU_Sok_Night_Max_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } REU_Train_Has_Target = yes check_variable = { REU_sel_night_lv = 10 } }
+			REU_Sok_Intel_Bg_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Intel_Icon_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Intel_Name_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Intel_Text_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Intel_Next_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Intel_Bar_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Intel_Up_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } REU_Train_Has_Target = yes check_variable = { REU_sel_intel_lv < 10 } }
+			REU_Sok_Intel_Max_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } REU_Train_Has_Target = yes check_variable = { REU_sel_intel_lv = 10 } }
+			REU_Sok_Blade_Bg_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Blade_Icon_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Blade_Name_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Blade_Text_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Blade_Next_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Blade_Bar_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Blade_Up_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } REU_Train_Has_Target = yes check_variable = { REU_sel_blade_lv < 10 } }
+			REU_Sok_Blade_Max_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } REU_Train_Has_Target = yes check_variable = { REU_sel_blade_lv = 10 } }
+			REU_Sok_Train_Footer_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Page_Attr_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_Sok_Attr_Sec_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_Sok_Attr_Count_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUGuerrillaPillar_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUGuerrillaPillar_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_guerrilla_pillar }
+			REU_SokAlb_REUGuerrillaPillar_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUGuerrillaPillar_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUCrownslayerConfidant_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUCrownslayerConfidant_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_crownslayer_confidant }
+			REU_SokAlb_REUCrownslayerConfidant_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUCrownslayerConfidant_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUScoutAdept_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUScoutAdept_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_scout_adept }
+			REU_SokAlb_REUScoutAdept_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUScoutAdept_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUNightAdept_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUNightAdept_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_night_adept }
+			REU_SokAlb_REUNightAdept_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUNightAdept_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUIntelAdept_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUIntelAdept_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_intel_adept }
+			REU_SokAlb_REUIntelAdept_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUIntelAdept_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUBladeAdept_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUBladeAdept_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_blade_adept }
+			REU_SokAlb_REUBladeAdept_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUBladeAdept_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrScoutA_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrScoutA_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_sok_br_scout_a }
+			REU_SokAlb_REUSokBrScoutA_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrScoutA_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrScoutB_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrScoutB_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_sok_br_scout_b }
+			REU_SokAlb_REUSokBrScoutB_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrScoutB_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrNightA_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrNightA_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_sok_br_night_a }
+			REU_SokAlb_REUSokBrNightA_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrNightA_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrNightB_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrNightB_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_sok_br_night_b }
+			REU_SokAlb_REUSokBrNightB_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrNightB_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrIntelA_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrIntelA_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_sok_br_intel_a }
+			REU_SokAlb_REUSokBrIntelA_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrIntelA_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrIntelB_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrIntelB_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_sok_br_intel_b }
+			REU_SokAlb_REUSokBrIntelB_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrIntelB_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrBladeA_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrBladeA_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_sok_br_blade_a }
+			REU_SokAlb_REUSokBrBladeA_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrBladeA_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrBladeB_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrBladeB_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_sok_br_blade_b }
+			REU_SokAlb_REUSokBrBladeB_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokBrBladeB_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokolovGraduate_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokolovGraduate_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_REU_sokolov_graduate }
+			REU_SokAlb_REUSokolovGraduate_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_REUSokolovGraduate_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_PanzerLeader_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_PanzerLeader_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_panzer_leader }
+			REU_SokAlb_PanzerLeader_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_PanzerLeader_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_InfantryLeader_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_InfantryLeader_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_infantry_leader }
+			REU_SokAlb_InfantryLeader_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_InfantryLeader_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_ArmorOfficer_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_ArmorOfficer_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_armor_officer }
+			REU_SokAlb_ArmorOfficer_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_ArmorOfficer_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_HarshLeader_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_HarshLeader_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_harsh_leader }
+			REU_SokAlb_HarshLeader_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_HarshLeader_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_WinterSpecialist_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_WinterSpecialist_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_winter_specialist }
+			REU_SokAlb_WinterSpecialist_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_WinterSpecialist_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_DesertFox_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_DesertFox_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_desert_fox }
+			REU_SokAlb_DesertFox_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_DesertFox_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_FortressBuster_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_FortressBuster_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_fortress_buster }
+			REU_SokAlb_FortressBuster_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_FortressBuster_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_Trickster_Bg_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_Trickster_On_visible = { check_variable = { REU_sok_ui_tab = 1 } has_country_flag = REU_tt_trickster }
+			REU_SokAlb_Trickster_Icon_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_SokAlb_Trickster_Name_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_Sok_Page_Trait_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_Sok_Trait_Hint_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_Sok_TraitReset_Btn_visible = { check_variable = { REU_sok_ui_tab = 2 } REU_Sok_Trait_Any_Owned = yes }
+			REU_SokTr_PanzerLeader_Bg_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_PanzerLeader_Icon_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_PanzerLeader_Name_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_PanzerLeader_Desc_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_PanzerLeader_Cost_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_panzer_leader } }
+			REU_SokTr_PanzerLeader_Btn_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_panzer_leader } }
+			REU_SokTr_PanzerLeader_Owned_visible = { check_variable = { REU_sok_ui_tab = 2 } has_country_flag = REU_tt_panzer_leader  }
+			REU_SokTr_InfantryLeader_Bg_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_InfantryLeader_Icon_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_InfantryLeader_Name_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_InfantryLeader_Desc_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_InfantryLeader_Cost_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_infantry_leader } }
+			REU_SokTr_InfantryLeader_Btn_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_infantry_leader } }
+			REU_SokTr_InfantryLeader_Owned_visible = { check_variable = { REU_sok_ui_tab = 2 } has_country_flag = REU_tt_infantry_leader  }
+			REU_SokTr_ArmorOfficer_Bg_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_ArmorOfficer_Icon_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_ArmorOfficer_Name_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_ArmorOfficer_Desc_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_ArmorOfficer_Cost_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_armor_officer } }
+			REU_SokTr_ArmorOfficer_Btn_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_armor_officer } }
+			REU_SokTr_ArmorOfficer_Owned_visible = { check_variable = { REU_sok_ui_tab = 2 } has_country_flag = REU_tt_armor_officer  }
+			REU_SokTr_HarshLeader_Bg_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_HarshLeader_Icon_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_HarshLeader_Name_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_HarshLeader_Desc_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_HarshLeader_Cost_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_harsh_leader } }
+			REU_SokTr_HarshLeader_Btn_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_harsh_leader } }
+			REU_SokTr_HarshLeader_Owned_visible = { check_variable = { REU_sok_ui_tab = 2 } has_country_flag = REU_tt_harsh_leader  }
+			REU_SokTr_WinterSpecialist_Bg_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_WinterSpecialist_Icon_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_WinterSpecialist_Name_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_WinterSpecialist_Desc_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_WinterSpecialist_Cost_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_winter_specialist } }
+			REU_SokTr_WinterSpecialist_Btn_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_winter_specialist } }
+			REU_SokTr_WinterSpecialist_Owned_visible = { check_variable = { REU_sok_ui_tab = 2 } has_country_flag = REU_tt_winter_specialist  }
+			REU_SokTr_DesertFox_Bg_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_DesertFox_Icon_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_DesertFox_Name_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_DesertFox_Desc_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_DesertFox_Cost_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_desert_fox } }
+			REU_SokTr_DesertFox_Btn_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_desert_fox } }
+			REU_SokTr_DesertFox_Owned_visible = { check_variable = { REU_sok_ui_tab = 2 } has_country_flag = REU_tt_desert_fox  }
+			REU_SokTr_FortressBuster_Bg_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_FortressBuster_Icon_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_FortressBuster_Name_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_FortressBuster_Desc_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_FortressBuster_Cost_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_fortress_buster } }
+			REU_SokTr_FortressBuster_Btn_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_fortress_buster } }
+			REU_SokTr_FortressBuster_Owned_visible = { check_variable = { REU_sok_ui_tab = 2 } has_country_flag = REU_tt_fortress_buster  }
+			REU_SokTr_Trickster_Bg_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_Trickster_Icon_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_Trickster_Name_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_Trickster_Desc_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_SokTr_Trickster_Cost_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_trickster } }
+			REU_SokTr_Trickster_Btn_visible = { check_variable = { REU_sok_ui_tab = 2 } NOT = { has_country_flag = REU_tt_trickster } }
+			REU_SokTr_Trickster_Owned_visible = { check_variable = { REU_sok_ui_tab = 2 } has_country_flag = REU_tt_trickster  }
+			REU_Sok_Tab1_On_visible = { NOT = { check_variable = { REU_sok_ui_tab = 1 } } NOT = { check_variable = { REU_sok_ui_tab = 2 } } }
+			REU_Sok_Tab2_On_visible = { check_variable = { REU_sok_ui_tab = 1 } }
+			REU_Sok_Tab3_On_visible = { check_variable = { REU_sok_ui_tab = 2 } }
+			REU_Sok_Tgt_Sokolov_visible = { has_character = REU_Sokolov }
+			REU_Sok_Tgt_Sokolov_On_visible = { has_country_flag = REU_train_target_sokolov }
+			REU_Sok_Tgt_Yelena_visible = { has_character = REU_Yelena }
+			REU_Sok_Tgt_Yelena_On_visible = { has_country_flag = REU_train_target_yelena }
+			REU_Sok_Tgt_Alina_visible = { has_character = REU_Alina }
+			REU_Sok_Tgt_Alina_On_visible = { has_country_flag = REU_train_target_alina }
+			REU_Sok_Tgt_Mudrock_visible = { has_character = REU_Mudrock }
+			REU_Sok_Tgt_Mudrock_On_visible = { has_country_flag = REU_train_target_mudrock }
 
-			# 满级后隐藏「升级」按钮
-			REU_Sok_Scout_Up_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_scout_lv < 10 } } }
-			REU_Sok_Night_Up_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_night_lv < 10 } } }
-			REU_Sok_Intel_Up_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_intel_lv < 10 } } }
-			REU_Sok_Blade_Up_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_blade_lv < 10 } } }
-
-			# 满级后出现「已满级」小标
-			REU_Sok_Scout_Max_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_scout_lv = 10 } } }
-			REU_Sok_Night_Max_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_night_lv = 10 } } }
-			REU_Sok_Intel_Max_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_intel_lv = 10 } } }
-			REU_Sok_Blade_Max_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_blade_lv = 10 } } }
+			# ---- 点击可用性 ----
+			REU_Sok_Scout_Up_click_enabled = { REU_Train_Has_Target = yes check_variable = { REU_sel_scout_lv < 10 } REU_Sok_Afford_Scout = yes }
+			REU_Sok_Night_Up_click_enabled = { REU_Train_Has_Target = yes check_variable = { REU_sel_night_lv < 10 } REU_Sok_Afford_Night = yes }
+			REU_Sok_Intel_Up_click_enabled = { REU_Train_Has_Target = yes check_variable = { REU_sel_intel_lv < 10 } REU_Sok_Afford_Intel = yes }
+			REU_Sok_Blade_Up_click_enabled = { REU_Train_Has_Target = yes check_variable = { REU_sel_blade_lv < 10 } REU_Sok_Afford_Blade = yes }
+			REU_Sok_Tgt_Sokolov_click_enabled = { has_character = REU_Sokolov NOT = { has_country_flag = REU_train_target_sokolov } }
+			REU_Sok_Tgt_Yelena_click_enabled = { has_character = REU_Yelena NOT = { has_country_flag = REU_train_target_yelena } }
+			REU_Sok_Tgt_Alina_click_enabled = { has_character = REU_Alina NOT = { has_country_flag = REU_train_target_alina } }
+			REU_Sok_Tgt_Mudrock_click_enabled = { has_character = REU_Mudrock NOT = { has_country_flag = REU_train_target_mudrock } }
+			REU_SokTr_PanzerLeader_Btn_click_enabled = { REU_Train_Has_Target = yes has_political_power > 34 NOT = { has_country_flag = REU_tt_panzer_leader } }
+			REU_SokTr_InfantryLeader_Btn_click_enabled = { REU_Train_Has_Target = yes has_political_power > 34 NOT = { has_country_flag = REU_tt_infantry_leader } }
+			REU_SokTr_ArmorOfficer_Btn_click_enabled = { REU_Train_Has_Target = yes has_political_power > 29 NOT = { has_country_flag = REU_tt_armor_officer } }
+			REU_SokTr_HarshLeader_Btn_click_enabled = { REU_Train_Has_Target = yes has_political_power > 24 NOT = { has_country_flag = REU_tt_harsh_leader } }
+			REU_SokTr_WinterSpecialist_Btn_click_enabled = { REU_Train_Has_Target = yes has_political_power > 29 NOT = { has_country_flag = REU_tt_winter_specialist } }
+			REU_SokTr_DesertFox_Btn_click_enabled = { REU_Train_Has_Target = yes has_political_power > 24 NOT = { has_country_flag = REU_tt_desert_fox } }
+			REU_SokTr_FortressBuster_Btn_click_enabled = { REU_Train_Has_Target = yes has_political_power > 34 NOT = { has_country_flag = REU_tt_fortress_buster } }
+			REU_SokTr_Trickster_Btn_click_enabled = { REU_Train_Has_Target = yes has_political_power > 44 NOT = { has_country_flag = REU_tt_trickster } }
+			REU_Sok_TraitReset_Btn_click_enabled = { REU_Train_Has_Target = yes REU_Sok_Trait_Any_Owned = yes }
 		}
 
 		properties = {
-			REU_Sok_Scout_Bar = { frame = REU_sok_scout_lv }
-			REU_Sok_Night_Bar = { frame = REU_sok_night_lv }
-			REU_Sok_Intel_Bar = { frame = REU_sok_intel_lv }
-			REU_Sok_Blade_Bar = { frame = REU_sok_blade_lv }
+			# 头像随受训对象切换：defined_text 按当前旗标返回 GFX_REU_portrait_<key>
+			REU_Sok_Side_Portrait = { image = "[REU_GetTrainPortrait]" }
+			REU_Sok_Scout_Bar = { frame = REU_sel_scout_lv }
+			REU_Sok_Night_Bar = { frame = REU_sel_night_lv }
+			REU_Sok_Intel_Bar = { frame = REU_sel_intel_lv }
+			REU_Sok_Blade_Bar = { frame = REU_sel_blade_lv }
 		}
 	}
 }
