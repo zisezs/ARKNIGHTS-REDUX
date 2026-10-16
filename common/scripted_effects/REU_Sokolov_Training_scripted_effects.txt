@@ -1,0 +1,234 @@
+# ==============================================================================
+#  索科洛夫的特训 —— 加点逻辑
+#  · 面板本体：interface/_ARF_Gui/REU_Sokolov_Training.gui
+#    接线：common/scripted_guis/REU_Sokolov_Training.txt
+#  · 决议栏也能逐级训练：common/decisions/REU_Sokolov_Training_Decisions.txt
+#    （决议用 cost = var:REU_sok_<skill>_cost 自己扣费，只调 <X>_Core）
+#  · 每个技能 10 级；主属性 Lv1=11% 每级 +1% → Lv10=20%；
+#    副属性 Lv1=5%（负向 -5%）每级 ±1% → Lv10=±14%。全部加成由角色级
+#    动态修正符 REU_sokolov_training_dm 承载（数值写在角色变量里）。
+#  · 升级消耗（政治点数）递增：cost = 10 + 5×当前等级
+#      开课 10 → 15 → 20 → 25 → 30 → 35 → 40 → 45 → 50 → 55（满级合计 325）
+#  · 变量作用域：
+#      角色 REU_Sokolov 上： REU_sok_<skill>_lv / _prim / _sec（驱动动态修正符）
+#      国家（镜像，供面板读数/进度条/费用判断、决议 cost）： REU_sok_<skill>_lv / _cost
+#    lv 由国家侧与角色侧**各自同步 +1**（不跨作用域读），两边始终一致。
+#
+#  ⚠ 2026-10-16 两个实机教训（都来自 error.log）：
+#   1) HOI4 **不支持 scripted_effect 的 $参数$ 语法**（原版 scripted_effects 里零处 $，
+#      那是 HOI5/Vic3 的写法）。写成带参数调用会被当成未知 effect 报错，
+#      整个效果/决议块解析失败 → 点了什么都不发生。故本文件一课一枚显式效果，**不用参数**。
+#   2) 判定「付得起」不能用 has_political_power >= N（该 trigger 不吃 >=，静默判假，
+#      与原版 num_of_* 同病）；一律写 has_political_power > (N-1)。
+# ==============================================================================
+
+# —— 打开 / 关闭面板（决议栏入口与 ✕ 用）——
+REU_Sokolov_Training_Open = {
+	set_country_flag = REU_sokolov_training_open
+	# 首次打开：把四门课的等级变量显式归零（国家侧镜像 + 角色侧），消除 undefined 判定歧义
+	if = { limit = { NOT = { has_variable = REU_sok_scout_lv } } set_variable = { REU_sok_scout_lv = 0 } }
+	if = { limit = { NOT = { has_variable = REU_sok_night_lv } } set_variable = { REU_sok_night_lv = 0 } }
+	if = { limit = { NOT = { has_variable = REU_sok_intel_lv } } set_variable = { REU_sok_intel_lv = 0 } }
+	if = { limit = { NOT = { has_variable = REU_sok_blade_lv } } set_variable = { REU_sok_blade_lv = 0 } }
+	if = {
+		limit = { has_character = REU_Sokolov }
+		REU_Sokolov = {
+			if = { limit = { NOT = { has_variable = REU_sok_scout_lv } } set_variable = { REU_sok_scout_lv = 0 } }
+			if = { limit = { NOT = { has_variable = REU_sok_night_lv } } set_variable = { REU_sok_night_lv = 0 } }
+			if = { limit = { NOT = { has_variable = REU_sok_intel_lv } } set_variable = { REU_sok_intel_lv = 0 } }
+			if = { limit = { NOT = { has_variable = REU_sok_blade_lv } } set_variable = { REU_sok_blade_lv = 0 } }
+		}
+	}
+	REU_Sokolov_Training_Refresh_Costs = yes
+}
+
+REU_Sokolov_Training_Close = {
+	clr_country_flag = REU_sokolov_training_open
+}
+
+# —— 刷新四条「下一级费用」到国家侧变量（面板置灰判定、决议 cost 用）——
+REU_Sokolov_Training_Refresh_Costs = {
+	set_variable = { REU_sok_scout_cost = REU_sok_scout_lv }
+	multiply_variable = { REU_sok_scout_cost = 5 }
+	add_to_variable = { REU_sok_scout_cost = 10 }
+
+	set_variable = { REU_sok_night_cost = REU_sok_night_lv }
+	multiply_variable = { REU_sok_night_cost = 5 }
+	add_to_variable = { REU_sok_night_cost = 10 }
+
+	set_variable = { REU_sok_intel_cost = REU_sok_intel_lv }
+	multiply_variable = { REU_sok_intel_cost = 5 }
+	add_to_variable = { REU_sok_intel_cost = 10 }
+
+	set_variable = { REU_sok_blade_cost = REU_sok_blade_lv }
+	multiply_variable = { REU_sok_blade_cost = 5 }
+	add_to_variable = { REU_sok_blade_cost = 10 }
+}
+
+# ==============================================================================
+#  核心：各课升一级（**不扣费**；费用由调用方处理）
+#    · 面板路径 = <X>_Up（先扣费再调 Core）
+#    · 决议路径 = 决议自身 cost = var:… 扣费，直接调 <X>_Core
+# ==============================================================================
+
+# —— ① 侦察好手：侦查 ↑ / 计划速度 ↑ ——
+REU_Sokolov_Training_Scout_Core = {
+	if = {
+		limit = {
+			has_character = REU_Sokolov
+			REU_Sokolov = { check_variable = { REU_sok_scout_lv < 10 } }
+		}
+		add_to_variable = { REU_sok_scout_lv = 1 }
+		REU_Sokolov = { add_to_variable = { REU_sok_scout_lv = 1 } }
+		REU_Sokolov = {
+			if = {
+				limit = { check_variable = { REU_sok_scout_lv = 1 } }
+				set_variable = { REU_sok_scout_prim = 0.11 }
+				set_variable = { REU_sok_scout_sec = 0.05 }
+				add_unit_leader_trait = REU_scout_adept
+			}
+			else = {
+				add_to_variable = { REU_sok_scout_prim = 0.01 }
+				add_to_variable = { REU_sok_scout_sec = 0.01 }
+			}
+		}
+		REU_Sokolov_Training_Attach_DM = yes
+		REU_Sokolov_Training_Refresh_Costs = yes
+	}
+}
+
+# —— ② 夜行无声：夜战攻击 ↑ / 损耗 ↓（副属性为负向，每级 -1%）——
+REU_Sokolov_Training_Night_Core = {
+	if = {
+		limit = {
+			has_character = REU_Sokolov
+			REU_Sokolov = { check_variable = { REU_sok_night_lv < 10 } }
+		}
+		add_to_variable = { REU_sok_night_lv = 1 }
+		REU_Sokolov = { add_to_variable = { REU_sok_night_lv = 1 } }
+		REU_Sokolov = {
+			if = {
+				limit = { check_variable = { REU_sok_night_lv = 1 } }
+				set_variable = { REU_sok_night_prim = 0.11 }
+				set_variable = { REU_sok_night_sec = -0.05 }
+				add_unit_leader_trait = REU_night_adept
+			}
+			else = {
+				add_to_variable = { REU_sok_night_prim = 0.01 }
+				add_to_variable = { REU_sok_night_sec = -0.01 }
+			}
+		}
+		REU_Sokolov_Training_Attach_DM = yes
+		REU_Sokolov_Training_Refresh_Costs = yes
+	}
+}
+
+# —— ③ 情报嗅觉：计划上限 ↑ / 断补惩罚 ↓（副属性为负向）——
+REU_Sokolov_Training_Intel_Core = {
+	if = {
+		limit = {
+			has_character = REU_Sokolov
+			REU_Sokolov = { check_variable = { REU_sok_intel_lv < 10 } }
+		}
+		add_to_variable = { REU_sok_intel_lv = 1 }
+		REU_Sokolov = { add_to_variable = { REU_sok_intel_lv = 1 } }
+		REU_Sokolov = {
+			if = {
+				limit = { check_variable = { REU_sok_intel_lv = 1 } }
+				set_variable = { REU_sok_intel_prim = 0.11 }
+				set_variable = { REU_sok_intel_sec = -0.05 }
+				add_unit_leader_trait = REU_intel_adept
+			}
+			else = {
+				add_to_variable = { REU_sok_intel_prim = 0.01 }
+				add_to_variable = { REU_sok_intel_sec = -0.01 }
+			}
+		}
+		REU_Sokolov_Training_Attach_DM = yes
+		REU_Sokolov_Training_Refresh_Costs = yes
+	}
+}
+
+# —— ④ 匕首与盾：进攻 ↑ / 防御 ↑ ——
+REU_Sokolov_Training_Blade_Core = {
+	if = {
+		limit = {
+			has_character = REU_Sokolov
+			REU_Sokolov = { check_variable = { REU_sok_blade_lv < 10 } }
+		}
+		add_to_variable = { REU_sok_blade_lv = 1 }
+		REU_Sokolov = { add_to_variable = { REU_sok_blade_lv = 1 } }
+		REU_Sokolov = {
+			if = {
+				limit = { check_variable = { REU_sok_blade_lv = 1 } }
+				set_variable = { REU_sok_blade_prim = 0.11 }
+				set_variable = { REU_sok_blade_sec = 0.05 }
+				add_unit_leader_trait = REU_blade_adept
+			}
+			else = {
+				add_to_variable = { REU_sok_blade_prim = 0.01 }
+				add_to_variable = { REU_sok_blade_sec = 0.01 }
+			}
+		}
+		REU_Sokolov_Training_Attach_DM = yes
+		REU_Sokolov_Training_Refresh_Costs = yes
+	}
+}
+
+# —— 把角色级动态修正符挂上（幂等，一次即可）——
+REU_Sokolov_Training_Attach_DM = {
+	if = {
+		limit = {
+			has_character = REU_Sokolov
+			NOT = { has_country_flag = REU_sokolov_dm_added }
+		}
+		set_country_flag = REU_sokolov_dm_added
+		REU_Sokolov = {
+			add_dynamic_modifier = { modifier = REU_sokolov_training_dm }
+		}
+	}
+}
+
+# ==============================================================================
+#  面板路径：先扣本级费用，再升级（费用从国家侧 cost 变量取）
+# ==============================================================================
+
+REU_Sokolov_Training_Scout_Up = {
+	if = {
+		limit = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_scout_lv < 10 } } }
+		set_variable = { REU_sok_pay = REU_sok_scout_cost }
+		multiply_variable = { REU_sok_pay = -1 }
+		add_political_power = var:REU_sok_pay
+	}
+	REU_Sokolov_Training_Scout_Core = yes
+}
+
+REU_Sokolov_Training_Night_Up = {
+	if = {
+		limit = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_night_lv < 10 } } }
+		set_variable = { REU_sok_pay = REU_sok_night_cost }
+		multiply_variable = { REU_sok_pay = -1 }
+		add_political_power = var:REU_sok_pay
+	}
+	REU_Sokolov_Training_Night_Core = yes
+}
+
+REU_Sokolov_Training_Intel_Up = {
+	if = {
+		limit = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_intel_lv < 10 } } }
+		set_variable = { REU_sok_pay = REU_sok_intel_cost }
+		multiply_variable = { REU_sok_pay = -1 }
+		add_political_power = var:REU_sok_pay
+	}
+	REU_Sokolov_Training_Intel_Core = yes
+}
+
+REU_Sokolov_Training_Blade_Up = {
+	if = {
+		limit = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_blade_lv < 10 } } }
+		set_variable = { REU_sok_pay = REU_sok_blade_cost }
+		multiply_variable = { REU_sok_pay = -1 }
+		add_political_power = var:REU_sok_pay
+	}
+	REU_Sokolov_Training_Blade_Core = yes
+}

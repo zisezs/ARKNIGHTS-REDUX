@@ -51,6 +51,8 @@ on_actions = {
 			# （Unlock 幂等：置 REU_ludmila_unlocked + 把正文拉到见面章节首节点 + 发一次解锁通知）
 			REU = {
 				REU_Ludmila_Unlock = yes
+				# 索科洛夫特训：初始化四条「下一级费用」变量（训练决议用 cost = var:…，开局就得有值）
+				REU_Sokolov_Training_Refresh_Costs = yes
 			}
 		}
 	}
@@ -89,6 +91,13 @@ on_actions = {
 				set_global_flag = REU_soviet_ursus_se_shown
 				news_event = { id = reuse.1 }
 			}
+		}
+	}
+
+	# 索科洛夫特训：每月兜一次费用变量（等级一变，核心效果已即时刷新；这里只作老档/异常保险）
+	on_monthly_REU = {
+		effect = {
+			REU_Sokolov_Training_Refresh_Costs = yes
 		}
 	}
 }

@@ -1,0 +1,74 @@
+# ==============================================================================
+#  索科洛夫的特训 —— 加点面板（独立浮动窗口）
+#  · context_type = player_context：面板是独立窗口，入口是决议分类页里的一条决议
+#    （REU_sokolov_training_open 决议 set_country_flag = REU_sokolov_training_open）。
+#  · 效果与触发按元素名自动接线；按钮元素名见 interface/_ARF_Gui/REU_Sokolov_Training.gui。
+#  · 行文字（等级 / 当前加成 / 下一级费用）由 defined_text 动态生成，见
+#    common/scripted_localisation/REU_Sokolov_Training_scripted_loc.txt。
+#  · 进度条 frame 读国家侧镜像变量 REU_sok_<skill>_lv（0~10）。
+# ==============================================================================
+
+scripted_gui = {
+
+	REU_Sokolov_Training_GUI = {
+		context_type = player_context
+		window_name = "REU_Sokolov_Training_Window"
+
+		visible = {
+			is_ai = no
+			has_country_flag = REU_sokolov_training_open
+		}
+
+		effects = {
+			REU_Sok_Scout_Up_click = { REU_Sokolov_Training_Scout_Up = yes }
+			REU_Sok_Night_Up_click = { REU_Sokolov_Training_Night_Up = yes }
+			REU_Sok_Intel_Up_click = { REU_Sokolov_Training_Intel_Up = yes }
+			REU_Sok_Blade_Up_click = { REU_Sokolov_Training_Blade_Up = yes }
+
+			REU_Sok_Close_click = { REU_Sokolov_Training_Close = yes }
+		}
+
+		triggers = {
+			# 「升级」按钮：未满级 且 政治点数够付下一级
+			REU_Sok_Scout_Up_click_enabled = {
+				has_character = REU_Sokolov
+				REU_Sokolov = { check_variable = { REU_sok_scout_lv < 10 } }
+				REU_Sok_Afford_Scout = yes
+			}
+			REU_Sok_Night_Up_click_enabled = {
+				has_character = REU_Sokolov
+				REU_Sokolov = { check_variable = { REU_sok_night_lv < 10 } }
+				REU_Sok_Afford_Night = yes
+			}
+			REU_Sok_Intel_Up_click_enabled = {
+				has_character = REU_Sokolov
+				REU_Sokolov = { check_variable = { REU_sok_intel_lv < 10 } }
+				REU_Sok_Afford_Intel = yes
+			}
+			REU_Sok_Blade_Up_click_enabled = {
+				has_character = REU_Sokolov
+				REU_Sokolov = { check_variable = { REU_sok_blade_lv < 10 } }
+				REU_Sok_Afford_Blade = yes
+			}
+
+			# 满级后隐藏「升级」按钮
+			REU_Sok_Scout_Up_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_scout_lv < 10 } } }
+			REU_Sok_Night_Up_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_night_lv < 10 } } }
+			REU_Sok_Intel_Up_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_intel_lv < 10 } } }
+			REU_Sok_Blade_Up_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_blade_lv < 10 } } }
+
+			# 满级后出现「已满级」小标
+			REU_Sok_Scout_Max_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_scout_lv = 10 } } }
+			REU_Sok_Night_Max_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_night_lv = 10 } } }
+			REU_Sok_Intel_Max_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_intel_lv = 10 } } }
+			REU_Sok_Blade_Max_visible = { has_character = REU_Sokolov REU_Sokolov = { check_variable = { REU_sok_blade_lv = 10 } } }
+		}
+
+		properties = {
+			REU_Sok_Scout_Bar = { frame = REU_sok_scout_lv }
+			REU_Sok_Night_Bar = { frame = REU_sok_night_lv }
+			REU_Sok_Intel_Bar = { frame = REU_sok_intel_lv }
+			REU_Sok_Blade_Bar = { frame = REU_sok_blade_lv }
+		}
+	}
+}

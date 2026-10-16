@@ -1,0 +1,67 @@
+# ==============================================================================
+#  索科洛夫的特训 —— 面板动态行文字（由 docs/将领加点系统/工具/gen_reu_sokolov_content.cjs 生成，勿手改）
+#  · 每行文字按角色等级 REU_sok_<skill>_lv 分档；defined_text 取第一条命中的 text，
+#    故高档在前、Lv0 的兜底块必须放在最后。
+#  · 被 interface/_ARF_Gui/REU_Sokolov_Training.gui 以 [REU_GetSok<Skill>] 引用。
+# ==============================================================================
+
+defined_text = {
+	name = REU_GetSokScout
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_scout_lv = 10 } } } localization_key = REU_sok_scout_L10 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_scout_lv = 9 } } } localization_key = REU_sok_scout_L9 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_scout_lv = 8 } } } localization_key = REU_sok_scout_L8 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_scout_lv = 7 } } } localization_key = REU_sok_scout_L7 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_scout_lv = 6 } } } localization_key = REU_sok_scout_L6 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_scout_lv = 5 } } } localization_key = REU_sok_scout_L5 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_scout_lv = 4 } } } localization_key = REU_sok_scout_L4 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_scout_lv = 3 } } } localization_key = REU_sok_scout_L3 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_scout_lv = 2 } } } localization_key = REU_sok_scout_L2 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_scout_lv = 1 } } } localization_key = REU_sok_scout_L1 }
+	text = { trigger = { always = yes } localization_key = REU_sok_scout_L0 }
+}
+
+defined_text = {
+	name = REU_GetSokNight
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_night_lv = 10 } } } localization_key = REU_sok_night_L10 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_night_lv = 9 } } } localization_key = REU_sok_night_L9 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_night_lv = 8 } } } localization_key = REU_sok_night_L8 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_night_lv = 7 } } } localization_key = REU_sok_night_L7 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_night_lv = 6 } } } localization_key = REU_sok_night_L6 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_night_lv = 5 } } } localization_key = REU_sok_night_L5 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_night_lv = 4 } } } localization_key = REU_sok_night_L4 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_night_lv = 3 } } } localization_key = REU_sok_night_L3 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_night_lv = 2 } } } localization_key = REU_sok_night_L2 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_night_lv = 1 } } } localization_key = REU_sok_night_L1 }
+	text = { trigger = { always = yes } localization_key = REU_sok_night_L0 }
+}
+
+defined_text = {
+	name = REU_GetSokIntel
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_intel_lv = 10 } } } localization_key = REU_sok_intel_L10 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_intel_lv = 9 } } } localization_key = REU_sok_intel_L9 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_intel_lv = 8 } } } localization_key = REU_sok_intel_L8 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_intel_lv = 7 } } } localization_key = REU_sok_intel_L7 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_intel_lv = 6 } } } localization_key = REU_sok_intel_L6 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_intel_lv = 5 } } } localization_key = REU_sok_intel_L5 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_intel_lv = 4 } } } localization_key = REU_sok_intel_L4 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_intel_lv = 3 } } } localization_key = REU_sok_intel_L3 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_intel_lv = 2 } } } localization_key = REU_sok_intel_L2 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_intel_lv = 1 } } } localization_key = REU_sok_intel_L1 }
+	text = { trigger = { always = yes } localization_key = REU_sok_intel_L0 }
+}
+
+defined_text = {
+	name = REU_GetSokBlade
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_blade_lv = 10 } } } localization_key = REU_sok_blade_L10 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_blade_lv = 9 } } } localization_key = REU_sok_blade_L9 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_blade_lv = 8 } } } localization_key = REU_sok_blade_L8 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_blade_lv = 7 } } } localization_key = REU_sok_blade_L7 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_blade_lv = 6 } } } localization_key = REU_sok_blade_L6 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_blade_lv = 5 } } } localization_key = REU_sok_blade_L5 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_blade_lv = 4 } } } localization_key = REU_sok_blade_L4 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_blade_lv = 3 } } } localization_key = REU_sok_blade_L3 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_blade_lv = 2 } } } localization_key = REU_sok_blade_L2 }
+	text = { trigger = { REU_Sokolov = { check_variable = { REU_sok_blade_lv = 1 } } } localization_key = REU_sok_blade_L1 }
+	text = { trigger = { always = yes } localization_key = REU_sok_blade_L0 }
+}
+

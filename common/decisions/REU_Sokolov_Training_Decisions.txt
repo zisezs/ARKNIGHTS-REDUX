@@ -1,43 +1,42 @@
 # ==============================================================================
-#  柳德米拉小姐对索科洛夫进行特训！—— 4 条子决议
+#  索科洛夫的特训 —— 决议栏
+#  · 两条开关决议：打开 / 收起独立加点面板（面板本体见 scripted_guis）。
+#  · 四条训练决议：每点一次 = 该课升一级。费用由决议自身 cost = var:… 扣，
+#    所以这里只调 <skill>_Core（不扣费的核心）。
+#  · 面板的 ＋ 钮与这四条决议走**同一套**核心效果，进度互通。
+#  · 面板本体：interface/_ARF_Gui/REU_Sokolov_Training.gui
+#    接线：common/scripted_guis/REU_Sokolov_Training.txt（context_type = player_context）
+#    逻辑：common/scripted_effects/REU_Sokolov_Training_scripted_effects.txt
 #  · 分类见 common/decisions/categories/REU_decision_categroies.txt
-#    （REU_Sokolov_Training_Category，索科洛夫在军中时开放）
+#    （REU_Sokolov_Training_Category，索科洛夫在军中时开放）。
 #  · 索科洛夫（REU_Sokolov）由 history/countries/REU - Reunion.txt 开局征召。
-#  · 一条决议 = 一节特训课：花政治点数 → 索科洛夫获得一个原创将领特质
-#    （特质本身写在 common/unit_leader/REU_traits.txt）。
-#  · 4 节彼此独立、可任选顺序；拿到特质后该条从列表里消失。
-#  · 效果统一走「custom_effect_tooltip + hidden_effect」，
-#    原因是 add_unit_leader_trait 的自动 tooltip 说不清拿到了什么。
 # ==============================================================================
 
 REU_Sokolov_Training_Category = {
 
-	# ---- 第一课 · 侦察好手（50 pp） ----
-	REU_sokolov_training_scout = {
-		icon = GFX_decision_generic_intelligence_operation
+	# ---- 打开加点面板 ----
+	REU_sokolov_training_open = {
+		icon = GFX_decision_generic_military
 
 		allowed = {
 			original_tag = REU
 		}
 
 		visible = {
+			is_ai = no
 			has_character = REU_Sokolov
-			REU_Sokolov = { NOT = { has_trait = REU_scout_adept } }
+			NOT = { has_country_flag = REU_sokolov_training_open }
 		}
 
 		available = {
 			has_character = REU_Sokolov
 		}
 
-		cost = 50
+		cost = 0
+		days_remove = 0
 
 		complete_effect = {
-			custom_effect_tooltip = REU_sokolov_training_scout_tt
-			hidden_effect = {
-				REU_Sokolov = {
-					add_unit_leader_trait = REU_scout_adept
-				}
-			}
+			REU_Sokolov_Training_Open = yes
 		}
 
 		ai_will_do = {
@@ -45,32 +44,28 @@ REU_Sokolov_Training_Category = {
 		}
 	}
 
-	# ---- 第二课 · 夜行无声（75 pp） ----
-	REU_sokolov_training_night = {
-		icon = GFX_decision_generic_operation
+	# ---- 关闭加点面板（面板右上角 ✕ 也能关） ----
+	REU_sokolov_training_close = {
+		icon = GFX_decision_generic_political_discourse
 
 		allowed = {
 			original_tag = REU
 		}
 
 		visible = {
-			has_character = REU_Sokolov
-			REU_Sokolov = { NOT = { has_trait = REU_silent_steps } }
+			is_ai = no
+			has_country_flag = REU_sokolov_training_open
 		}
 
 		available = {
-			has_character = REU_Sokolov
+			has_country_flag = REU_sokolov_training_open
 		}
 
-		cost = 75
+		cost = 0
+		days_remove = 0
 
 		complete_effect = {
-			custom_effect_tooltip = REU_sokolov_training_night_tt
-			hidden_effect = {
-				REU_Sokolov = {
-					add_unit_leader_trait = REU_silent_steps
-				}
-			}
+			REU_Sokolov_Training_Close = yes
 		}
 
 		ai_will_do = {
@@ -78,32 +73,29 @@ REU_Sokolov_Training_Category = {
 		}
 	}
 
-	# ---- 第三课 · 情报嗅觉（100 pp） ----
-	REU_sokolov_training_intel = {
-		icon = GFX_decision_generic_research
+	# ---- 训练 · 侦察好手（每点一次升一级）----
+	REU_sokolov_train_scout = {
+		icon = GFX_REU_Sokolov_icon_scout
 
 		allowed = {
 			original_tag = REU
 		}
 
 		visible = {
+			is_ai = no
 			has_character = REU_Sokolov
-			REU_Sokolov = { NOT = { has_trait = REU_intel_scent } }
+			REU_Sokolov = { check_variable = { REU_sok_scout_lv < 10 } }
 		}
 
 		available = {
 			has_character = REU_Sokolov
 		}
 
-		cost = 100
+		cost = var:REU_sok_scout_cost
+		days_remove = 0
 
 		complete_effect = {
-			custom_effect_tooltip = REU_sokolov_training_intel_tt
-			hidden_effect = {
-				REU_Sokolov = {
-					add_unit_leader_trait = REU_intel_scent
-				}
-			}
+			REU_Sokolov_Training_Scout_Core = yes
 		}
 
 		ai_will_do = {
@@ -111,32 +103,89 @@ REU_Sokolov_Training_Category = {
 		}
 	}
 
-	# ---- 第四课 · 匕首与盾（125 pp） ----
-	REU_sokolov_training_blade = {
-		icon = GFX_decision_generic_assault
+	# ---- 训练 · 夜行无声 ----
+	REU_sokolov_train_night = {
+		icon = GFX_REU_Sokolov_icon_night
 
 		allowed = {
 			original_tag = REU
 		}
 
 		visible = {
+			is_ai = no
 			has_character = REU_Sokolov
-			REU_Sokolov = { NOT = { has_trait = REU_dagger_and_shield } }
+			REU_Sokolov = { check_variable = { REU_sok_night_lv < 10 } }
 		}
 
 		available = {
 			has_character = REU_Sokolov
 		}
 
-		cost = 125
+		cost = var:REU_sok_night_cost
+		days_remove = 0
 
 		complete_effect = {
-			custom_effect_tooltip = REU_sokolov_training_blade_tt
-			hidden_effect = {
-				REU_Sokolov = {
-					add_unit_leader_trait = REU_dagger_and_shield
-				}
-			}
+			REU_Sokolov_Training_Night_Core = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 训练 · 情报嗅觉 ----
+	REU_sokolov_train_intel = {
+		icon = GFX_REU_Sokolov_icon_intel
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			is_ai = no
+			has_character = REU_Sokolov
+			REU_Sokolov = { check_variable = { REU_sok_intel_lv < 10 } }
+		}
+
+		available = {
+			has_character = REU_Sokolov
+		}
+
+		cost = var:REU_sok_intel_cost
+		days_remove = 0
+
+		complete_effect = {
+			REU_Sokolov_Training_Intel_Core = yes
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	# ---- 训练 · 匕首与盾 ----
+	REU_sokolov_train_blade = {
+		icon = GFX_REU_Sokolov_icon_blade
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			is_ai = no
+			has_character = REU_Sokolov
+			REU_Sokolov = { check_variable = { REU_sok_blade_lv < 10 } }
+		}
+
+		available = {
+			has_character = REU_Sokolov
+		}
+
+		cost = var:REU_sok_blade_cost
+		days_remove = 0
+
+		complete_effect = {
+			REU_Sokolov_Training_Blade_Core = yes
 		}
 
 		ai_will_do = {

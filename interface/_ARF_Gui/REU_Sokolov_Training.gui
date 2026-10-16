@@ -1,0 +1,309 @@
+# ==============================================================================
+#  索科洛夫的特训 —— 加点面板（独立浮动窗口）
+#  · 由 common/scripted_guis/REU_Sokolov_Training.txt 驱动
+#  · 显示条件：国家旗标 REU_sokolov_training_open
+#  · 布局：窗口 960x640（居中）；标题栏 66 高；四行技能卡（900x110，间隔 14）
+#  · 贴图：gfx/interface/REU_sokolov_training/（docs/将领加点系统/工具/gen_reu_sokolov_panel.cjs 生成）
+#    字体沿用柳德米拉面板的 REU_Lud_*（深底用白字版）
+# ==============================================================================
+guiTypes = {
+
+	containerWindowType = {
+		name = "REU_Sokolov_Training_Window"
+		position = { x = 0 y = 0 }
+		size = { width = 960 height = 640 }
+		orientation = center
+		origo = center
+		moveable = yes
+		click_to_front = yes
+
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_REU_Sokolov_panel_bg"
+		}
+
+		# ---- 标题 ----
+		instantTextBoxType = {
+			name = "REU_Sok_Title"
+			position = { x = 30 y = 16 }
+			font = "REU_Lud_title26d"
+			text = "REU_sok_panel_title"
+			maxWidth = 520
+			maxHeight = 34
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "REU_Sok_PP"
+			position = { x = 580 y = 22 }
+			font = "REU_Lud_text20d"
+			text = "REU_sok_panel_pp"
+			maxWidth = 320
+			maxHeight = 26
+			fixedsize = yes
+			format = right
+			alwaystransparent = yes
+		}
+
+		buttonType = {
+			name = "REU_Sok_Close"
+			position = { x = 912 y = 16 }
+			quadTextureSprite = "GFX_REU_Sokolov_close_btn"
+			clicksound = click_default
+		}
+
+		# ======================= 第一行 · 侦察好手 =======================
+		iconType = {
+			name = "REU_Sok_Scout_Bg"
+			position = { x = 30 y = 86 }
+			spriteType = "GFX_REU_Sokolov_row_bg"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Scout_Icon"
+			position = { x = 48 y = 113 }
+			spriteType = "GFX_REU_Sokolov_icon_scout"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Scout_Name"
+			position = { x = 122 y = 98 }
+			font = "REU_Lud_title26d"
+			text = "REU_sok_scout_name"
+			maxWidth = 420
+			maxHeight = 32
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Scout_Text"
+			position = { x = 122 y = 132 }
+			font = "REU_Lud_text20d"
+			text = "[REU_GetSokScout]"
+			maxWidth = 700
+			maxHeight = 26
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Scout_Bar"
+			position = { x = 122 y = 164 }
+			spriteType = "GFX_REU_Sokolov_bar"
+			frame = 0
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Scout_Up"
+			position = { x = 862 y = 119 }
+			quadTextureSprite = "GFX_REU_Sokolov_plus_btn"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Scout_Max"
+			position = { x = 842 y = 128 }
+			font = "REU_Lud_text16d"
+			text = "REU_sok_max_label"
+			maxWidth = 84
+			maxHeight = 26
+			fixedsize = yes
+			format = centre
+			alwaystransparent = yes
+		}
+
+		# ======================= 第二行 · 夜行无声 =======================
+		iconType = {
+			name = "REU_Sok_Night_Bg"
+			position = { x = 30 y = 210 }
+			spriteType = "GFX_REU_Sokolov_row_bg"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Night_Icon"
+			position = { x = 48 y = 237 }
+			spriteType = "GFX_REU_Sokolov_icon_night"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Night_Name"
+			position = { x = 122 y = 222 }
+			font = "REU_Lud_title26d"
+			text = "REU_sok_night_name"
+			maxWidth = 420
+			maxHeight = 32
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Night_Text"
+			position = { x = 122 y = 256 }
+			font = "REU_Lud_text20d"
+			text = "[REU_GetSokNight]"
+			maxWidth = 700
+			maxHeight = 26
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Night_Bar"
+			position = { x = 122 y = 288 }
+			spriteType = "GFX_REU_Sokolov_bar"
+			frame = 0
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Night_Up"
+			position = { x = 862 y = 243 }
+			quadTextureSprite = "GFX_REU_Sokolov_plus_btn"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Night_Max"
+			position = { x = 842 y = 252 }
+			font = "REU_Lud_text16d"
+			text = "REU_sok_max_label"
+			maxWidth = 84
+			maxHeight = 26
+			fixedsize = yes
+			format = centre
+			alwaystransparent = yes
+		}
+
+		# ======================= 第三行 · 情报嗅觉 =======================
+		iconType = {
+			name = "REU_Sok_Intel_Bg"
+			position = { x = 30 y = 334 }
+			spriteType = "GFX_REU_Sokolov_row_bg"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Intel_Icon"
+			position = { x = 48 y = 361 }
+			spriteType = "GFX_REU_Sokolov_icon_intel"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Intel_Name"
+			position = { x = 122 y = 346 }
+			font = "REU_Lud_title26d"
+			text = "REU_sok_intel_name"
+			maxWidth = 420
+			maxHeight = 32
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Intel_Text"
+			position = { x = 122 y = 380 }
+			font = "REU_Lud_text20d"
+			text = "[REU_GetSokIntel]"
+			maxWidth = 700
+			maxHeight = 26
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Intel_Bar"
+			position = { x = 122 y = 412 }
+			spriteType = "GFX_REU_Sokolov_bar"
+			frame = 0
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Intel_Up"
+			position = { x = 862 y = 367 }
+			quadTextureSprite = "GFX_REU_Sokolov_plus_btn"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Intel_Max"
+			position = { x = 842 y = 376 }
+			font = "REU_Lud_text16d"
+			text = "REU_sok_max_label"
+			maxWidth = 84
+			maxHeight = 26
+			fixedsize = yes
+			format = centre
+			alwaystransparent = yes
+		}
+
+		# ======================= 第四行 · 匕首与盾 =======================
+		iconType = {
+			name = "REU_Sok_Blade_Bg"
+			position = { x = 30 y = 458 }
+			spriteType = "GFX_REU_Sokolov_row_bg"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Blade_Icon"
+			position = { x = 48 y = 485 }
+			spriteType = "GFX_REU_Sokolov_icon_blade"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Blade_Name"
+			position = { x = 122 y = 470 }
+			font = "REU_Lud_title26d"
+			text = "REU_sok_blade_name"
+			maxWidth = 420
+			maxHeight = 32
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Blade_Text"
+			position = { x = 122 y = 504 }
+			font = "REU_Lud_text20d"
+			text = "[REU_GetSokBlade]"
+			maxWidth = 700
+			maxHeight = 26
+			fixedsize = yes
+			format = left
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Blade_Bar"
+			position = { x = 122 y = 536 }
+			spriteType = "GFX_REU_Sokolov_bar"
+			frame = 0
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Blade_Up"
+			position = { x = 862 y = 491 }
+			quadTextureSprite = "GFX_REU_Sokolov_plus_btn"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Blade_Max"
+			position = { x = 842 y = 500 }
+			font = "REU_Lud_text16d"
+			text = "REU_sok_max_label"
+			maxWidth = 84
+			maxHeight = 26
+			fixedsize = yes
+			format = centre
+			alwaystransparent = yes
+		}
+
+		# ---- 页脚 ----
+		instantTextBoxType = {
+			name = "REU_Sok_Footer"
+			position = { x = 30 y = 586 }
+			font = "REU_Lud_text16d"
+			text = "REU_sok_panel_footer"
+			maxWidth = 880
+			maxHeight = 44
+			format = left
+			alwaystransparent = yes
+		}
+	}
+}

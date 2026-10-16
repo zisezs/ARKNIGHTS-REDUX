@@ -1,0 +1,95 @@
+# ==============================================================================
+#  索科洛夫的特训 —— 加点面板贴图注册
+#  贴图由 docs/将领加点系统/工具/gen_reu_sokolov_panel.cjs 生成，位于 gfx/interface/REU_sokolov_training/
+#  按钮一律用最简 spriteType（不加 effectFile）——多帧状态机效果会让单帧贴图
+#  渲染失败 / 点击失效（见柳德米拉面板 gfx 的注释）。
+# ==============================================================================
+spriteTypes = {
+
+	spriteType = {
+		name = "GFX_REU_Sokolov_panel_bg"
+		texturefile = "gfx/interface/REU_sokolov_training/panel_bg.png"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_REU_Sokolov_row_bg"
+		texturefile = "gfx/interface/REU_sokolov_training/row_bg.png"
+		legacy_lazy_load = no
+	}
+
+	# 进度条：11 帧（0 = 空，10 = 满），用 frame = REU_sok_<skill>_lv 切换
+	spriteType = {
+		name = "GFX_REU_Sokolov_bar"
+		texturefile = "gfx/interface/REU_sokolov_training/bar_11.png"
+		noOfFrames = 11
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_REU_Sokolov_plus_btn"
+		texturefile = "gfx/interface/REU_sokolov_training/plus_btn.png"
+		legacy_lazy_load = no
+	}
+
+	# 关闭按钮（40x40，金 ✕）
+	spriteType = {
+		name = "GFX_REU_Sokolov_close_btn"
+		texturefile = "gfx/interface/REU_sokolov_training/close_btn.png"
+		legacy_lazy_load = no
+	}
+
+	# 四枚技能行图标（56x56 矢量）
+	spriteType = {
+		name = "GFX_REU_Sokolov_icon_scout"
+		texturefile = "gfx/interface/REU_sokolov_training/icon_scout.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_icon_night"
+		texturefile = "gfx/interface/REU_sokolov_training/icon_night.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_icon_intel"
+		texturefile = "gfx/interface/REU_sokolov_training/icon_intel.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_icon_blade"
+		texturefile = "gfx/interface/REU_sokolov_training/icon_blade.png"
+		legacy_lazy_load = no
+	}
+}
+
+bitmapfonts = {
+
+	# 浅底深墨字（小号）：柳德米拉面板只做了 20/26 的深字版，这里补一枚 16 号。
+	# 度量与 REU_Lud_text16 逐字一致，只是字色改深；面板改用浅底后用它。
+	bitmapfont = {
+		name = "REU_Lud_text16d"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+		}
+		color = 0xff1b1d22
+
+		textcolors = {
+			G = { 22 106 40 }
+			R = { 176 28 40 }
+			Y = { 150 100 8 }
+			H = { 150 100 8 }
+			T = { 27 29 34 }
+			W = { 255 255 255 }
+		}
+	}
+	bitmapfont_override = {
+		name = "REU_Lud_text16d"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+			"gfx/fonts/Arial_14b"
+		}
+		languages = { "l_simp_chinese" }
+	}
+}
