@@ -120,14 +120,19 @@ REU_Regicide_Category = {
 	priority = 7
 }
 
-#柳德米拉小姐对索科洛夫进行特训！（索科洛夫在军中时开放）
+#将领特训 / 加点系统（花名册里任一名成员在军中时开放）
 REU_Sokolov_Training_Category = {
 	icon = GFX_decision_category_generic_political_actions
 	allowed = {
 		original_tag = REU
 	}
 	visible = {
-		has_character = REU_Sokolov
+		OR = {
+			has_character = REU_Sokolov
+			has_character = REU_Yelena
+			has_character = REU_Alina
+			has_character = REU_Mudrock
+		}
 	}
 	visible_when_empty = yes
 	priority = 8

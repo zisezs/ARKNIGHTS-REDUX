@@ -1,0 +1,32 @@
+# ==============================================================================
+#  索科洛夫的特训 —— 角色级动态修正符
+#  · 挂在索科洛夫（REU_Sokolov）本人身上（add_dynamic_modifier 支持 CHARACTER 作用域）：
+#    修正符数值直接写角色变量名，四课的全部百分比加成随等级原地成长。
+#  · 变量（都在角色作用域上）：
+#      REU_sok_<skill>_prim : 主属性百分比 —— Lv1 = 0.11，每升一级 +0.01 → Lv10 = 0.20
+#      REU_sok_<skill>_sec  : 副属性百分比 —— Lv1 = 0.05（负向为 -0.05），每级 +0.01 → ±0.14
+#    变量未定义时按 0 处理；本修正符只在索科洛夫开课后被挂上。
+#  · 变量名一律用 REU_sok_ 前缀，避免和 REU_dynamic_modifiers.txt 里的共享变量池
+#    互相重复计数（参见 SKILL 笔记 hoi4-dynamic-spirit-scaling §C）。
+#  · 这是 DM 的**顶层定义文件**，不能套 dynamic_modifiers = { } 外壳。
+# ==============================================================================
+
+REU_sokolov_training_dm = {
+	enable = { always = yes }
+
+	# 第一课 · 侦察好手：侦查 / 计划速度
+	recon_factor   = REU_sok_scout_prim
+	planning_speed = REU_sok_scout_sec
+
+	# 第二课 · 夜行无声：夜战攻击 / 减损
+	land_night_attack = REU_sok_night_prim
+	attrition         = REU_sok_night_sec
+
+	# 第三课 · 情报嗅觉：计划加成上限 / 断补惩罚
+	max_planning         = REU_sok_intel_prim
+	out_of_supply_factor = REU_sok_intel_sec
+
+	# 第四课 · 匕首与盾：进攻 / 防御
+	army_attack_factor  = REU_sok_blade_prim
+	army_defence_factor = REU_sok_blade_sec
+}

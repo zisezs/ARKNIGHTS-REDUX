@@ -1,0 +1,2170 @@
+# ==============================================================================
+#  将领特训 / 加点系统 —— 效果（**由 docs/将领加点系统/工具/gen_reu_train_roster.cjs 生成，勿手改**）
+#
+#  · 四门课 × 10 级；主属性 Lv1=11% 每级 +1% → 20%；副属性 Lv1=±5% 每级 ±1% → ±14%。
+#  · 数值成长由**角色级动态修正符** REU_sokolov_training_dm 承载（数值写角色变量）。
+#  · 可受训者（花名册）见 ROSTER；选择 = 一个国家旗标，训练走"国家侧派发"。
+#  · 变量：
+#      角色 REU_sok_<skill>_lv / _prim / _sec      —— 该角色自己的练度
+#      国家 REU_mir_<key>_<skill>_lv / _br         —— 每个成员的国家侧镜像
+#      国家 REU_sel_<skill>_lv / _cost / _br       —— 当前受训者的镜像副本（面板读数用）
+#  · 教训：HOI4 不支持 scripted_effect 的 $参数$；has_political_power 不吃 >=（写 > N-1）。
+# ==============================================================================
+
+# —— 打开 / 关闭面板 ——
+REU_Sokolov_Training_Open = {
+	set_country_flag = REU_sokolov_training_open
+	set_variable = { REU_sok_ui_tab = 0 }
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+REU_Sokolov_Training_Close = {
+	clr_country_flag = REU_sokolov_training_open
+}
+
+# —— 刷新「下一级费用」= 10 + 5×当前等级（读当前受训者的镜像副本）——
+REU_Sokolov_Training_Refresh_Costs = {
+	set_variable = { REU_sel_scout_cost = REU_sel_scout_lv }
+	multiply_variable = { REU_sel_scout_cost = 5 }
+	add_to_variable = { REU_sel_scout_cost = 10 }
+	set_variable = { REU_sel_night_cost = REU_sel_night_lv }
+	multiply_variable = { REU_sel_night_cost = 5 }
+	add_to_variable = { REU_sel_night_cost = 10 }
+	set_variable = { REU_sel_intel_cost = REU_sel_intel_lv }
+	multiply_variable = { REU_sel_intel_cost = 5 }
+	add_to_variable = { REU_sel_intel_cost = 10 }
+	set_variable = { REU_sel_blade_cost = REU_sel_blade_lv }
+	multiply_variable = { REU_sel_blade_cost = 5 }
+	add_to_variable = { REU_sel_blade_cost = 10 }
+}
+
+# —— 受训对象：索科洛夫 ——
+REU_Sokolov_Training_Select_Sokolov = {
+	clr_country_flag = REU_train_target_sokolov
+	clr_country_flag = REU_train_target_yelena
+	clr_country_flag = REU_train_target_alina
+	clr_country_flag = REU_train_target_mudrock
+	set_country_flag = REU_train_target_sokolov
+	set_variable = { REU_sel_scout_lv = REU_mir_sokolov_scout_lv }
+	set_variable = { REU_sel_night_lv = REU_mir_sokolov_night_lv }
+	set_variable = { REU_sel_intel_lv = REU_mir_sokolov_intel_lv }
+	set_variable = { REU_sel_blade_lv = REU_mir_sokolov_blade_lv }
+	set_variable = { REU_sel_scout_br = REU_mir_sokolov_scout_br }
+	set_variable = { REU_sel_night_br = REU_mir_sokolov_night_br }
+	set_variable = { REU_sel_intel_br = REU_mir_sokolov_intel_br }
+	set_variable = { REU_sel_blade_br = REU_mir_sokolov_blade_br }
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— 受训对象：叶莲娜「霜星」 ——
+REU_Sokolov_Training_Select_Yelena = {
+	clr_country_flag = REU_train_target_sokolov
+	clr_country_flag = REU_train_target_yelena
+	clr_country_flag = REU_train_target_alina
+	clr_country_flag = REU_train_target_mudrock
+	set_country_flag = REU_train_target_yelena
+	set_variable = { REU_sel_scout_lv = REU_mir_yelena_scout_lv }
+	set_variable = { REU_sel_night_lv = REU_mir_yelena_night_lv }
+	set_variable = { REU_sel_intel_lv = REU_mir_yelena_intel_lv }
+	set_variable = { REU_sel_blade_lv = REU_mir_yelena_blade_lv }
+	set_variable = { REU_sel_scout_br = REU_mir_yelena_scout_br }
+	set_variable = { REU_sel_night_br = REU_mir_yelena_night_br }
+	set_variable = { REU_sel_intel_br = REU_mir_yelena_intel_br }
+	set_variable = { REU_sel_blade_br = REU_mir_yelena_blade_br }
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— 受训对象：阿丽娜 ——
+REU_Sokolov_Training_Select_Alina = {
+	clr_country_flag = REU_train_target_sokolov
+	clr_country_flag = REU_train_target_yelena
+	clr_country_flag = REU_train_target_alina
+	clr_country_flag = REU_train_target_mudrock
+	set_country_flag = REU_train_target_alina
+	set_variable = { REU_sel_scout_lv = REU_mir_alina_scout_lv }
+	set_variable = { REU_sel_night_lv = REU_mir_alina_night_lv }
+	set_variable = { REU_sel_intel_lv = REU_mir_alina_intel_lv }
+	set_variable = { REU_sel_blade_lv = REU_mir_alina_blade_lv }
+	set_variable = { REU_sel_scout_br = REU_mir_alina_scout_br }
+	set_variable = { REU_sel_night_br = REU_mir_alina_night_br }
+	set_variable = { REU_sel_intel_br = REU_mir_alina_intel_br }
+	set_variable = { REU_sel_blade_br = REU_mir_alina_blade_br }
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— 受训对象：泥岩「波希墨丝」 ——
+REU_Sokolov_Training_Select_Mudrock = {
+	clr_country_flag = REU_train_target_sokolov
+	clr_country_flag = REU_train_target_yelena
+	clr_country_flag = REU_train_target_alina
+	clr_country_flag = REU_train_target_mudrock
+	set_country_flag = REU_train_target_mudrock
+	set_variable = { REU_sel_scout_lv = REU_mir_mudrock_scout_lv }
+	set_variable = { REU_sel_night_lv = REU_mir_mudrock_night_lv }
+	set_variable = { REU_sel_intel_lv = REU_mir_mudrock_intel_lv }
+	set_variable = { REU_sel_blade_lv = REU_mir_mudrock_blade_lv }
+	set_variable = { REU_sel_scout_br = REU_mir_mudrock_scout_br }
+	set_variable = { REU_sel_night_br = REU_mir_mudrock_night_br }
+	set_variable = { REU_sel_intel_br = REU_mir_mudrock_intel_br }
+	set_variable = { REU_sel_blade_br = REU_mir_mudrock_blade_br }
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 侦察好手：角色侧升级（THIS = 受训者）——
+REU_Sokolov_Training_Scout_Scoped = {
+	add_to_variable = { REU_sok_scout_lv = 1 }
+	if = {
+		limit = { check_variable = { REU_sok_scout_lv = 1 } }
+		set_variable = { REU_sok_scout_prim = 0.11 }
+		set_variable = { REU_sok_scout_sec = 0.05 }
+		add_unit_leader_trait = REU_scout_adept
+	}
+	else = {
+		add_to_variable = { REU_sok_scout_prim = 0.01 }
+		add_to_variable = { REU_sok_scout_sec = 0.01 }
+	}
+	# 动态修正符幂等重挂（doc：已存在则刷新，不会叠加）
+	add_dynamic_modifier = { modifier = REU_sokolov_training_dm }
+	REU_Sokolov_Training_Check_Graduation = yes
+}
+
+# —— ① 侦察好手：国家侧派发（改镜像副本 + 进角色作用域）——
+REU_Sokolov_Training_Scout_Apply = {
+	if = {
+		limit = {
+			has_country_flag = REU_train_target_sokolov
+			has_character = REU_Sokolov
+			check_variable = { REU_sel_scout_lv < 10 }
+		}
+		add_to_variable = { REU_mir_sokolov_scout_lv = 1 }
+		add_to_variable = { REU_sel_scout_lv = 1 }
+		REU_Sokolov = { REU_Sokolov_Training_Scout_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_yelena
+			has_character = REU_Yelena
+			check_variable = { REU_sel_scout_lv < 10 }
+		}
+		add_to_variable = { REU_mir_yelena_scout_lv = 1 }
+		add_to_variable = { REU_sel_scout_lv = 1 }
+		REU_Yelena = { REU_Sokolov_Training_Scout_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_alina
+			has_character = REU_Alina
+			check_variable = { REU_sel_scout_lv < 10 }
+		}
+		add_to_variable = { REU_mir_alina_scout_lv = 1 }
+		add_to_variable = { REU_sel_scout_lv = 1 }
+		REU_Alina = { REU_Sokolov_Training_Scout_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_mudrock
+			has_character = REU_Mudrock
+			check_variable = { REU_sel_scout_lv < 10 }
+		}
+		add_to_variable = { REU_mir_mudrock_scout_lv = 1 }
+		add_to_variable = { REU_sel_scout_lv = 1 }
+		REU_Mudrock = { REU_Sokolov_Training_Scout_Scoped = yes }
+	}
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 侦察好手：面板入口（先扣费，再派发）——
+REU_Sokolov_Training_Scout_Up = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_scout_lv < 10 }
+		}
+		set_variable = { REU_sok_pay = REU_sel_scout_cost }
+		multiply_variable = { REU_sok_pay = -1 }
+		add_political_power = var:REU_sok_pay
+		REU_Sokolov_Training_Scout_Apply = yes
+	}
+}
+
+# —— ① 侦察好手：洗点（退还 70%，按当前等级查表）——
+REU_Sokolov_Training_Scout_Respec = {
+	if = {
+		limit = { check_variable = { REU_sel_scout_lv > 0 } }
+		if = {
+			limit = { check_variable = { REU_sel_scout_lv = 1 } }
+			add_political_power = 7
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_scout_lv = 2 } }
+			add_political_power = 18
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_scout_lv = 3 } }
+			add_political_power = 32
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_scout_lv = 4 } }
+			add_political_power = 49
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_scout_lv = 5 } }
+			add_political_power = 70
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_scout_lv = 6 } }
+			add_political_power = 95
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_scout_lv = 7 } }
+			add_political_power = 123
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_scout_lv = 8 } }
+			add_political_power = 154
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_scout_lv = 9 } }
+			add_political_power = 189
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_scout_lv = 10 } }
+			add_political_power = 228
+		}
+	}
+	# 镜像副本清零
+	set_variable = { REU_sel_scout_lv = 0 }
+	set_variable = { REU_sel_scout_br = 0 }
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_scout_lv = 0 }
+		set_variable = { REU_mir_sokolov_scout_br = 0 }
+		REU_Sokolov = {
+			set_variable = { REU_sok_scout_lv = 0 }
+			set_variable = { REU_sok_scout_prim = 0 }
+			set_variable = { REU_sok_scout_sec = 0 }
+			remove_unit_leader_trait = REU_scout_adept
+			remove_unit_leader_trait = REU_sok_br_scout_a
+			remove_unit_leader_trait = REU_sok_br_scout_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_scout_lv = 0 }
+		set_variable = { REU_mir_yelena_scout_br = 0 }
+		REU_Yelena = {
+			set_variable = { REU_sok_scout_lv = 0 }
+			set_variable = { REU_sok_scout_prim = 0 }
+			set_variable = { REU_sok_scout_sec = 0 }
+			remove_unit_leader_trait = REU_scout_adept
+			remove_unit_leader_trait = REU_sok_br_scout_a
+			remove_unit_leader_trait = REU_sok_br_scout_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_scout_lv = 0 }
+		set_variable = { REU_mir_alina_scout_br = 0 }
+		REU_Alina = {
+			set_variable = { REU_sok_scout_lv = 0 }
+			set_variable = { REU_sok_scout_prim = 0 }
+			set_variable = { REU_sok_scout_sec = 0 }
+			remove_unit_leader_trait = REU_scout_adept
+			remove_unit_leader_trait = REU_sok_br_scout_a
+			remove_unit_leader_trait = REU_sok_br_scout_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_scout_lv = 0 }
+		set_variable = { REU_mir_mudrock_scout_br = 0 }
+		REU_Mudrock = {
+			set_variable = { REU_sok_scout_lv = 0 }
+			set_variable = { REU_sok_scout_prim = 0 }
+			set_variable = { REU_sok_scout_sec = 0 }
+			remove_unit_leader_trait = REU_scout_adept
+			remove_unit_leader_trait = REU_sok_br_scout_a
+			remove_unit_leader_trait = REU_sok_br_scout_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 侦察好手：专精分叉 A ——
+REU_Sokolov_Training_Scout_Branch_A = {
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_scout_br = 1 }
+		set_variable = { REU_sel_scout_br = 1 }
+		REU_Sokolov = { add_unit_leader_trait = REU_sok_br_scout_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_scout_br = 1 }
+		set_variable = { REU_sel_scout_br = 1 }
+		REU_Yelena = { add_unit_leader_trait = REU_sok_br_scout_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_scout_br = 1 }
+		set_variable = { REU_sel_scout_br = 1 }
+		REU_Alina = { add_unit_leader_trait = REU_sok_br_scout_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_scout_br = 1 }
+		set_variable = { REU_sel_scout_br = 1 }
+		REU_Mudrock = { add_unit_leader_trait = REU_sok_br_scout_a }
+	}
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 侦察好手：专精分叉 B ——
+REU_Sokolov_Training_Scout_Branch_B = {
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_scout_br = 2 }
+		set_variable = { REU_sel_scout_br = 2 }
+		REU_Sokolov = { add_unit_leader_trait = REU_sok_br_scout_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_scout_br = 2 }
+		set_variable = { REU_sel_scout_br = 2 }
+		REU_Yelena = { add_unit_leader_trait = REU_sok_br_scout_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_scout_br = 2 }
+		set_variable = { REU_sel_scout_br = 2 }
+		REU_Alina = { add_unit_leader_trait = REU_sok_br_scout_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_scout_br = 2 }
+		set_variable = { REU_sel_scout_br = 2 }
+		REU_Mudrock = { add_unit_leader_trait = REU_sok_br_scout_b }
+	}
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 夜行无声：角色侧升级（THIS = 受训者）——
+REU_Sokolov_Training_Night_Scoped = {
+	add_to_variable = { REU_sok_night_lv = 1 }
+	if = {
+		limit = { check_variable = { REU_sok_night_lv = 1 } }
+		set_variable = { REU_sok_night_prim = 0.11 }
+		set_variable = { REU_sok_night_sec = -0.05 }
+		add_unit_leader_trait = REU_night_adept
+	}
+	else = {
+		add_to_variable = { REU_sok_night_prim = 0.01 }
+		add_to_variable = { REU_sok_night_sec = -0.01 }
+	}
+	# 动态修正符幂等重挂（doc：已存在则刷新，不会叠加）
+	add_dynamic_modifier = { modifier = REU_sokolov_training_dm }
+	REU_Sokolov_Training_Check_Graduation = yes
+}
+
+# —— ① 夜行无声：国家侧派发（改镜像副本 + 进角色作用域）——
+REU_Sokolov_Training_Night_Apply = {
+	if = {
+		limit = {
+			has_country_flag = REU_train_target_sokolov
+			has_character = REU_Sokolov
+			check_variable = { REU_sel_night_lv < 10 }
+		}
+		add_to_variable = { REU_mir_sokolov_night_lv = 1 }
+		add_to_variable = { REU_sel_night_lv = 1 }
+		REU_Sokolov = { REU_Sokolov_Training_Night_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_yelena
+			has_character = REU_Yelena
+			check_variable = { REU_sel_night_lv < 10 }
+		}
+		add_to_variable = { REU_mir_yelena_night_lv = 1 }
+		add_to_variable = { REU_sel_night_lv = 1 }
+		REU_Yelena = { REU_Sokolov_Training_Night_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_alina
+			has_character = REU_Alina
+			check_variable = { REU_sel_night_lv < 10 }
+		}
+		add_to_variable = { REU_mir_alina_night_lv = 1 }
+		add_to_variable = { REU_sel_night_lv = 1 }
+		REU_Alina = { REU_Sokolov_Training_Night_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_mudrock
+			has_character = REU_Mudrock
+			check_variable = { REU_sel_night_lv < 10 }
+		}
+		add_to_variable = { REU_mir_mudrock_night_lv = 1 }
+		add_to_variable = { REU_sel_night_lv = 1 }
+		REU_Mudrock = { REU_Sokolov_Training_Night_Scoped = yes }
+	}
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 夜行无声：面板入口（先扣费，再派发）——
+REU_Sokolov_Training_Night_Up = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_night_lv < 10 }
+		}
+		set_variable = { REU_sok_pay = REU_sel_night_cost }
+		multiply_variable = { REU_sok_pay = -1 }
+		add_political_power = var:REU_sok_pay
+		REU_Sokolov_Training_Night_Apply = yes
+	}
+}
+
+# —— ① 夜行无声：洗点（退还 70%，按当前等级查表）——
+REU_Sokolov_Training_Night_Respec = {
+	if = {
+		limit = { check_variable = { REU_sel_night_lv > 0 } }
+		if = {
+			limit = { check_variable = { REU_sel_night_lv = 1 } }
+			add_political_power = 7
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_night_lv = 2 } }
+			add_political_power = 18
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_night_lv = 3 } }
+			add_political_power = 32
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_night_lv = 4 } }
+			add_political_power = 49
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_night_lv = 5 } }
+			add_political_power = 70
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_night_lv = 6 } }
+			add_political_power = 95
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_night_lv = 7 } }
+			add_political_power = 123
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_night_lv = 8 } }
+			add_political_power = 154
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_night_lv = 9 } }
+			add_political_power = 189
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_night_lv = 10 } }
+			add_political_power = 228
+		}
+	}
+	# 镜像副本清零
+	set_variable = { REU_sel_night_lv = 0 }
+	set_variable = { REU_sel_night_br = 0 }
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_night_lv = 0 }
+		set_variable = { REU_mir_sokolov_night_br = 0 }
+		REU_Sokolov = {
+			set_variable = { REU_sok_night_lv = 0 }
+			set_variable = { REU_sok_night_prim = 0 }
+			set_variable = { REU_sok_night_sec = 0 }
+			remove_unit_leader_trait = REU_night_adept
+			remove_unit_leader_trait = REU_sok_br_night_a
+			remove_unit_leader_trait = REU_sok_br_night_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_night_lv = 0 }
+		set_variable = { REU_mir_yelena_night_br = 0 }
+		REU_Yelena = {
+			set_variable = { REU_sok_night_lv = 0 }
+			set_variable = { REU_sok_night_prim = 0 }
+			set_variable = { REU_sok_night_sec = 0 }
+			remove_unit_leader_trait = REU_night_adept
+			remove_unit_leader_trait = REU_sok_br_night_a
+			remove_unit_leader_trait = REU_sok_br_night_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_night_lv = 0 }
+		set_variable = { REU_mir_alina_night_br = 0 }
+		REU_Alina = {
+			set_variable = { REU_sok_night_lv = 0 }
+			set_variable = { REU_sok_night_prim = 0 }
+			set_variable = { REU_sok_night_sec = 0 }
+			remove_unit_leader_trait = REU_night_adept
+			remove_unit_leader_trait = REU_sok_br_night_a
+			remove_unit_leader_trait = REU_sok_br_night_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_night_lv = 0 }
+		set_variable = { REU_mir_mudrock_night_br = 0 }
+		REU_Mudrock = {
+			set_variable = { REU_sok_night_lv = 0 }
+			set_variable = { REU_sok_night_prim = 0 }
+			set_variable = { REU_sok_night_sec = 0 }
+			remove_unit_leader_trait = REU_night_adept
+			remove_unit_leader_trait = REU_sok_br_night_a
+			remove_unit_leader_trait = REU_sok_br_night_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 夜行无声：专精分叉 A ——
+REU_Sokolov_Training_Night_Branch_A = {
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_night_br = 1 }
+		set_variable = { REU_sel_night_br = 1 }
+		REU_Sokolov = { add_unit_leader_trait = REU_sok_br_night_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_night_br = 1 }
+		set_variable = { REU_sel_night_br = 1 }
+		REU_Yelena = { add_unit_leader_trait = REU_sok_br_night_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_night_br = 1 }
+		set_variable = { REU_sel_night_br = 1 }
+		REU_Alina = { add_unit_leader_trait = REU_sok_br_night_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_night_br = 1 }
+		set_variable = { REU_sel_night_br = 1 }
+		REU_Mudrock = { add_unit_leader_trait = REU_sok_br_night_a }
+	}
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 夜行无声：专精分叉 B ——
+REU_Sokolov_Training_Night_Branch_B = {
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_night_br = 2 }
+		set_variable = { REU_sel_night_br = 2 }
+		REU_Sokolov = { add_unit_leader_trait = REU_sok_br_night_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_night_br = 2 }
+		set_variable = { REU_sel_night_br = 2 }
+		REU_Yelena = { add_unit_leader_trait = REU_sok_br_night_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_night_br = 2 }
+		set_variable = { REU_sel_night_br = 2 }
+		REU_Alina = { add_unit_leader_trait = REU_sok_br_night_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_night_br = 2 }
+		set_variable = { REU_sel_night_br = 2 }
+		REU_Mudrock = { add_unit_leader_trait = REU_sok_br_night_b }
+	}
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 情报嗅觉：角色侧升级（THIS = 受训者）——
+REU_Sokolov_Training_Intel_Scoped = {
+	add_to_variable = { REU_sok_intel_lv = 1 }
+	if = {
+		limit = { check_variable = { REU_sok_intel_lv = 1 } }
+		set_variable = { REU_sok_intel_prim = 0.11 }
+		set_variable = { REU_sok_intel_sec = -0.05 }
+		add_unit_leader_trait = REU_intel_adept
+	}
+	else = {
+		add_to_variable = { REU_sok_intel_prim = 0.01 }
+		add_to_variable = { REU_sok_intel_sec = -0.01 }
+	}
+	# 动态修正符幂等重挂（doc：已存在则刷新，不会叠加）
+	add_dynamic_modifier = { modifier = REU_sokolov_training_dm }
+	REU_Sokolov_Training_Check_Graduation = yes
+}
+
+# —— ① 情报嗅觉：国家侧派发（改镜像副本 + 进角色作用域）——
+REU_Sokolov_Training_Intel_Apply = {
+	if = {
+		limit = {
+			has_country_flag = REU_train_target_sokolov
+			has_character = REU_Sokolov
+			check_variable = { REU_sel_intel_lv < 10 }
+		}
+		add_to_variable = { REU_mir_sokolov_intel_lv = 1 }
+		add_to_variable = { REU_sel_intel_lv = 1 }
+		REU_Sokolov = { REU_Sokolov_Training_Intel_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_yelena
+			has_character = REU_Yelena
+			check_variable = { REU_sel_intel_lv < 10 }
+		}
+		add_to_variable = { REU_mir_yelena_intel_lv = 1 }
+		add_to_variable = { REU_sel_intel_lv = 1 }
+		REU_Yelena = { REU_Sokolov_Training_Intel_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_alina
+			has_character = REU_Alina
+			check_variable = { REU_sel_intel_lv < 10 }
+		}
+		add_to_variable = { REU_mir_alina_intel_lv = 1 }
+		add_to_variable = { REU_sel_intel_lv = 1 }
+		REU_Alina = { REU_Sokolov_Training_Intel_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_mudrock
+			has_character = REU_Mudrock
+			check_variable = { REU_sel_intel_lv < 10 }
+		}
+		add_to_variable = { REU_mir_mudrock_intel_lv = 1 }
+		add_to_variable = { REU_sel_intel_lv = 1 }
+		REU_Mudrock = { REU_Sokolov_Training_Intel_Scoped = yes }
+	}
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 情报嗅觉：面板入口（先扣费，再派发）——
+REU_Sokolov_Training_Intel_Up = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_intel_lv < 10 }
+		}
+		set_variable = { REU_sok_pay = REU_sel_intel_cost }
+		multiply_variable = { REU_sok_pay = -1 }
+		add_political_power = var:REU_sok_pay
+		REU_Sokolov_Training_Intel_Apply = yes
+	}
+}
+
+# —— ① 情报嗅觉：洗点（退还 70%，按当前等级查表）——
+REU_Sokolov_Training_Intel_Respec = {
+	if = {
+		limit = { check_variable = { REU_sel_intel_lv > 0 } }
+		if = {
+			limit = { check_variable = { REU_sel_intel_lv = 1 } }
+			add_political_power = 7
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_intel_lv = 2 } }
+			add_political_power = 18
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_intel_lv = 3 } }
+			add_political_power = 32
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_intel_lv = 4 } }
+			add_political_power = 49
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_intel_lv = 5 } }
+			add_political_power = 70
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_intel_lv = 6 } }
+			add_political_power = 95
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_intel_lv = 7 } }
+			add_political_power = 123
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_intel_lv = 8 } }
+			add_political_power = 154
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_intel_lv = 9 } }
+			add_political_power = 189
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_intel_lv = 10 } }
+			add_political_power = 228
+		}
+	}
+	# 镜像副本清零
+	set_variable = { REU_sel_intel_lv = 0 }
+	set_variable = { REU_sel_intel_br = 0 }
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_intel_lv = 0 }
+		set_variable = { REU_mir_sokolov_intel_br = 0 }
+		REU_Sokolov = {
+			set_variable = { REU_sok_intel_lv = 0 }
+			set_variable = { REU_sok_intel_prim = 0 }
+			set_variable = { REU_sok_intel_sec = 0 }
+			remove_unit_leader_trait = REU_intel_adept
+			remove_unit_leader_trait = REU_sok_br_intel_a
+			remove_unit_leader_trait = REU_sok_br_intel_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_intel_lv = 0 }
+		set_variable = { REU_mir_yelena_intel_br = 0 }
+		REU_Yelena = {
+			set_variable = { REU_sok_intel_lv = 0 }
+			set_variable = { REU_sok_intel_prim = 0 }
+			set_variable = { REU_sok_intel_sec = 0 }
+			remove_unit_leader_trait = REU_intel_adept
+			remove_unit_leader_trait = REU_sok_br_intel_a
+			remove_unit_leader_trait = REU_sok_br_intel_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_intel_lv = 0 }
+		set_variable = { REU_mir_alina_intel_br = 0 }
+		REU_Alina = {
+			set_variable = { REU_sok_intel_lv = 0 }
+			set_variable = { REU_sok_intel_prim = 0 }
+			set_variable = { REU_sok_intel_sec = 0 }
+			remove_unit_leader_trait = REU_intel_adept
+			remove_unit_leader_trait = REU_sok_br_intel_a
+			remove_unit_leader_trait = REU_sok_br_intel_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_intel_lv = 0 }
+		set_variable = { REU_mir_mudrock_intel_br = 0 }
+		REU_Mudrock = {
+			set_variable = { REU_sok_intel_lv = 0 }
+			set_variable = { REU_sok_intel_prim = 0 }
+			set_variable = { REU_sok_intel_sec = 0 }
+			remove_unit_leader_trait = REU_intel_adept
+			remove_unit_leader_trait = REU_sok_br_intel_a
+			remove_unit_leader_trait = REU_sok_br_intel_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 情报嗅觉：专精分叉 A ——
+REU_Sokolov_Training_Intel_Branch_A = {
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_intel_br = 1 }
+		set_variable = { REU_sel_intel_br = 1 }
+		REU_Sokolov = { add_unit_leader_trait = REU_sok_br_intel_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_intel_br = 1 }
+		set_variable = { REU_sel_intel_br = 1 }
+		REU_Yelena = { add_unit_leader_trait = REU_sok_br_intel_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_intel_br = 1 }
+		set_variable = { REU_sel_intel_br = 1 }
+		REU_Alina = { add_unit_leader_trait = REU_sok_br_intel_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_intel_br = 1 }
+		set_variable = { REU_sel_intel_br = 1 }
+		REU_Mudrock = { add_unit_leader_trait = REU_sok_br_intel_a }
+	}
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 情报嗅觉：专精分叉 B ——
+REU_Sokolov_Training_Intel_Branch_B = {
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_intel_br = 2 }
+		set_variable = { REU_sel_intel_br = 2 }
+		REU_Sokolov = { add_unit_leader_trait = REU_sok_br_intel_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_intel_br = 2 }
+		set_variable = { REU_sel_intel_br = 2 }
+		REU_Yelena = { add_unit_leader_trait = REU_sok_br_intel_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_intel_br = 2 }
+		set_variable = { REU_sel_intel_br = 2 }
+		REU_Alina = { add_unit_leader_trait = REU_sok_br_intel_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_intel_br = 2 }
+		set_variable = { REU_sel_intel_br = 2 }
+		REU_Mudrock = { add_unit_leader_trait = REU_sok_br_intel_b }
+	}
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 匕首与盾：角色侧升级（THIS = 受训者）——
+REU_Sokolov_Training_Blade_Scoped = {
+	add_to_variable = { REU_sok_blade_lv = 1 }
+	if = {
+		limit = { check_variable = { REU_sok_blade_lv = 1 } }
+		set_variable = { REU_sok_blade_prim = 0.11 }
+		set_variable = { REU_sok_blade_sec = 0.05 }
+		add_unit_leader_trait = REU_blade_adept
+	}
+	else = {
+		add_to_variable = { REU_sok_blade_prim = 0.01 }
+		add_to_variable = { REU_sok_blade_sec = 0.01 }
+	}
+	# 动态修正符幂等重挂（doc：已存在则刷新，不会叠加）
+	add_dynamic_modifier = { modifier = REU_sokolov_training_dm }
+	REU_Sokolov_Training_Check_Graduation = yes
+}
+
+# —— ① 匕首与盾：国家侧派发（改镜像副本 + 进角色作用域）——
+REU_Sokolov_Training_Blade_Apply = {
+	if = {
+		limit = {
+			has_country_flag = REU_train_target_sokolov
+			has_character = REU_Sokolov
+			check_variable = { REU_sel_blade_lv < 10 }
+		}
+		add_to_variable = { REU_mir_sokolov_blade_lv = 1 }
+		add_to_variable = { REU_sel_blade_lv = 1 }
+		REU_Sokolov = { REU_Sokolov_Training_Blade_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_yelena
+			has_character = REU_Yelena
+			check_variable = { REU_sel_blade_lv < 10 }
+		}
+		add_to_variable = { REU_mir_yelena_blade_lv = 1 }
+		add_to_variable = { REU_sel_blade_lv = 1 }
+		REU_Yelena = { REU_Sokolov_Training_Blade_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_alina
+			has_character = REU_Alina
+			check_variable = { REU_sel_blade_lv < 10 }
+		}
+		add_to_variable = { REU_mir_alina_blade_lv = 1 }
+		add_to_variable = { REU_sel_blade_lv = 1 }
+		REU_Alina = { REU_Sokolov_Training_Blade_Scoped = yes }
+	}
+	else_if = {
+		limit = {
+			has_country_flag = REU_train_target_mudrock
+			has_character = REU_Mudrock
+			check_variable = { REU_sel_blade_lv < 10 }
+		}
+		add_to_variable = { REU_mir_mudrock_blade_lv = 1 }
+		add_to_variable = { REU_sel_blade_lv = 1 }
+		REU_Mudrock = { REU_Sokolov_Training_Blade_Scoped = yes }
+	}
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 匕首与盾：面板入口（先扣费，再派发）——
+REU_Sokolov_Training_Blade_Up = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_blade_lv < 10 }
+		}
+		set_variable = { REU_sok_pay = REU_sel_blade_cost }
+		multiply_variable = { REU_sok_pay = -1 }
+		add_political_power = var:REU_sok_pay
+		REU_Sokolov_Training_Blade_Apply = yes
+	}
+}
+
+# —— ① 匕首与盾：洗点（退还 70%，按当前等级查表）——
+REU_Sokolov_Training_Blade_Respec = {
+	if = {
+		limit = { check_variable = { REU_sel_blade_lv > 0 } }
+		if = {
+			limit = { check_variable = { REU_sel_blade_lv = 1 } }
+			add_political_power = 7
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_blade_lv = 2 } }
+			add_political_power = 18
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_blade_lv = 3 } }
+			add_political_power = 32
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_blade_lv = 4 } }
+			add_political_power = 49
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_blade_lv = 5 } }
+			add_political_power = 70
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_blade_lv = 6 } }
+			add_political_power = 95
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_blade_lv = 7 } }
+			add_political_power = 123
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_blade_lv = 8 } }
+			add_political_power = 154
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_blade_lv = 9 } }
+			add_political_power = 189
+		}
+		else_if = {
+			limit = { check_variable = { REU_sel_blade_lv = 10 } }
+			add_political_power = 228
+		}
+	}
+	# 镜像副本清零
+	set_variable = { REU_sel_blade_lv = 0 }
+	set_variable = { REU_sel_blade_br = 0 }
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_blade_lv = 0 }
+		set_variable = { REU_mir_sokolov_blade_br = 0 }
+		REU_Sokolov = {
+			set_variable = { REU_sok_blade_lv = 0 }
+			set_variable = { REU_sok_blade_prim = 0 }
+			set_variable = { REU_sok_blade_sec = 0 }
+			remove_unit_leader_trait = REU_blade_adept
+			remove_unit_leader_trait = REU_sok_br_blade_a
+			remove_unit_leader_trait = REU_sok_br_blade_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_blade_lv = 0 }
+		set_variable = { REU_mir_yelena_blade_br = 0 }
+		REU_Yelena = {
+			set_variable = { REU_sok_blade_lv = 0 }
+			set_variable = { REU_sok_blade_prim = 0 }
+			set_variable = { REU_sok_blade_sec = 0 }
+			remove_unit_leader_trait = REU_blade_adept
+			remove_unit_leader_trait = REU_sok_br_blade_a
+			remove_unit_leader_trait = REU_sok_br_blade_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_blade_lv = 0 }
+		set_variable = { REU_mir_alina_blade_br = 0 }
+		REU_Alina = {
+			set_variable = { REU_sok_blade_lv = 0 }
+			set_variable = { REU_sok_blade_prim = 0 }
+			set_variable = { REU_sok_blade_sec = 0 }
+			remove_unit_leader_trait = REU_blade_adept
+			remove_unit_leader_trait = REU_sok_br_blade_a
+			remove_unit_leader_trait = REU_sok_br_blade_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_blade_lv = 0 }
+		set_variable = { REU_mir_mudrock_blade_br = 0 }
+		REU_Mudrock = {
+			set_variable = { REU_sok_blade_lv = 0 }
+			set_variable = { REU_sok_blade_prim = 0 }
+			set_variable = { REU_sok_blade_sec = 0 }
+			remove_unit_leader_trait = REU_blade_adept
+			remove_unit_leader_trait = REU_sok_br_blade_a
+			remove_unit_leader_trait = REU_sok_br_blade_b
+			remove_unit_leader_trait = REU_sokolov_graduate
+		}
+	}
+	REU_Sokolov_Training_Refresh_Costs = yes
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 匕首与盾：专精分叉 A ——
+REU_Sokolov_Training_Blade_Branch_A = {
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_blade_br = 1 }
+		set_variable = { REU_sel_blade_br = 1 }
+		REU_Sokolov = { add_unit_leader_trait = REU_sok_br_blade_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_blade_br = 1 }
+		set_variable = { REU_sel_blade_br = 1 }
+		REU_Yelena = { add_unit_leader_trait = REU_sok_br_blade_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_blade_br = 1 }
+		set_variable = { REU_sel_blade_br = 1 }
+		REU_Alina = { add_unit_leader_trait = REU_sok_br_blade_a }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_blade_br = 1 }
+		set_variable = { REU_sel_blade_br = 1 }
+		REU_Mudrock = { add_unit_leader_trait = REU_sok_br_blade_a }
+	}
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— ① 匕首与盾：专精分叉 B ——
+REU_Sokolov_Training_Blade_Branch_B = {
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_mir_sokolov_blade_br = 2 }
+		set_variable = { REU_sel_blade_br = 2 }
+		REU_Sokolov = { add_unit_leader_trait = REU_sok_br_blade_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_mir_yelena_blade_br = 2 }
+		set_variable = { REU_sel_blade_br = 2 }
+		REU_Yelena = { add_unit_leader_trait = REU_sok_br_blade_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_mir_alina_blade_br = 2 }
+		set_variable = { REU_sel_blade_br = 2 }
+		REU_Alina = { add_unit_leader_trait = REU_sok_br_blade_b }
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_mir_mudrock_blade_br = 2 }
+		set_variable = { REU_sel_blade_br = 2 }
+		REU_Mudrock = { add_unit_leader_trait = REU_sok_br_blade_b }
+	}
+	REU_Train_Sync_Mirror = yes
+}
+
+# —— 结业判定：四课全满 → 授予「特训·结业」（THIS = 受训者，幂等）——
+REU_Sokolov_Training_Check_Graduation = {
+	if = {
+		limit = {
+			check_variable = { REU_sok_scout_lv = 10 }
+			check_variable = { REU_sok_night_lv = 10 }
+			check_variable = { REU_sok_intel_lv = 10 }
+			check_variable = { REU_sok_blade_lv = 10 }
+			NOT = { has_trait = REU_sokolov_graduate }
+		}
+		add_unit_leader_trait = REU_sokolov_graduate
+	}
+}
+
+# ==============================================================================
+#  面板镜像同步（面板跑在国家作用域，读不到角色身上的特质与属性 → 每次状态变化后重刷）
+#  · 清掉全部 REU_tt_<特质> 旗标，再按当前受训者重新置位（面板的图鉴/按钮显隐只读旗标）；
+#  · 把该员的基础四维写进国家变量 REU_sel_atk/def/pln/log/sk（值取自 training_data.cjs 的 STATS，
+#    源头是 common/characters/REU.txt；改角色文件后要重跑生成器）；
+#  · 调用点：打开面板 / 换人 / 训练 / 专精 / 洗点 / 选特质 / 洗去特质。
+# ==============================================================================
+REU_Train_Sync_Mirror = {
+	if = {
+		limit = { NOT = { has_country_flag = REU_train_paid_init } }
+		set_country_flag = REU_train_paid_init
+		set_variable = { REU_mir_sokolov_trait_paid = 0 }
+		set_variable = { REU_mir_yelena_trait_paid = 0 }
+		set_variable = { REU_mir_alina_trait_paid = 0 }
+		set_variable = { REU_mir_mudrock_trait_paid = 0 }
+	}
+	clr_country_flag = REU_tt_REU_guerrilla_pillar
+	clr_country_flag = REU_tt_REU_crownslayer_confidant
+	clr_country_flag = REU_tt_REU_scout_adept
+	clr_country_flag = REU_tt_REU_night_adept
+	clr_country_flag = REU_tt_REU_intel_adept
+	clr_country_flag = REU_tt_REU_blade_adept
+	clr_country_flag = REU_tt_REU_sok_br_scout_a
+	clr_country_flag = REU_tt_REU_sok_br_scout_b
+	clr_country_flag = REU_tt_REU_sok_br_night_a
+	clr_country_flag = REU_tt_REU_sok_br_night_b
+	clr_country_flag = REU_tt_REU_sok_br_intel_a
+	clr_country_flag = REU_tt_REU_sok_br_intel_b
+	clr_country_flag = REU_tt_REU_sok_br_blade_a
+	clr_country_flag = REU_tt_REU_sok_br_blade_b
+	clr_country_flag = REU_tt_REU_sokolov_graduate
+	clr_country_flag = REU_tt_panzer_leader
+	clr_country_flag = REU_tt_infantry_leader
+	clr_country_flag = REU_tt_armor_officer
+	clr_country_flag = REU_tt_harsh_leader
+	clr_country_flag = REU_tt_winter_specialist
+	clr_country_flag = REU_tt_desert_fox
+	clr_country_flag = REU_tt_fortress_buster
+	clr_country_flag = REU_tt_trickster
+	set_variable = { REU_sel_trait_count = 0 }
+	if = {
+		limit = { has_country_flag = REU_train_target_sokolov }
+		set_variable = { REU_sel_atk = 4 }
+		set_variable = { REU_sel_def = 4 }
+		set_variable = { REU_sel_pln = 4 }
+		set_variable = { REU_sel_log = 4 }
+		set_variable = { REU_sel_sk = 1 }
+		set_variable = { REU_sel_trait_paid = REU_mir_sokolov_trait_paid }
+		REU_Sokolov = {
+			if = {
+				limit = { has_trait = REU_guerrilla_pillar }
+				ROOT = {
+					set_country_flag = REU_tt_REU_guerrilla_pillar
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_crownslayer_confidant }
+				ROOT = {
+					set_country_flag = REU_tt_REU_crownslayer_confidant
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_scout_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_scout_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_night_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_night_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_intel_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_intel_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_blade_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_blade_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_scout_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_scout_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_scout_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_scout_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_night_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_night_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_night_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_night_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_intel_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_intel_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_intel_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_intel_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_blade_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_blade_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_blade_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_blade_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sokolov_graduate }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sokolov_graduate
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = panzer_leader }
+				ROOT = {
+					set_country_flag = REU_tt_panzer_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = infantry_leader }
+				ROOT = {
+					set_country_flag = REU_tt_infantry_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = armor_officer }
+				ROOT = {
+					set_country_flag = REU_tt_armor_officer
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = harsh_leader }
+				ROOT = {
+					set_country_flag = REU_tt_harsh_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = winter_specialist }
+				ROOT = {
+					set_country_flag = REU_tt_winter_specialist
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = desert_fox }
+				ROOT = {
+					set_country_flag = REU_tt_desert_fox
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = fortress_buster }
+				ROOT = {
+					set_country_flag = REU_tt_fortress_buster
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = trickster }
+				ROOT = {
+					set_country_flag = REU_tt_trickster
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_yelena }
+		set_variable = { REU_sel_atk = 2 }
+		set_variable = { REU_sel_def = 3 }
+		set_variable = { REU_sel_pln = 2 }
+		set_variable = { REU_sel_log = 1 }
+		set_variable = { REU_sel_sk = 2 }
+		set_variable = { REU_sel_trait_paid = REU_mir_yelena_trait_paid }
+		REU_Yelena = {
+			if = {
+				limit = { has_trait = REU_guerrilla_pillar }
+				ROOT = {
+					set_country_flag = REU_tt_REU_guerrilla_pillar
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_crownslayer_confidant }
+				ROOT = {
+					set_country_flag = REU_tt_REU_crownslayer_confidant
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_scout_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_scout_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_night_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_night_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_intel_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_intel_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_blade_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_blade_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_scout_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_scout_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_scout_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_scout_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_night_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_night_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_night_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_night_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_intel_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_intel_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_intel_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_intel_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_blade_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_blade_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_blade_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_blade_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sokolov_graduate }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sokolov_graduate
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = panzer_leader }
+				ROOT = {
+					set_country_flag = REU_tt_panzer_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = infantry_leader }
+				ROOT = {
+					set_country_flag = REU_tt_infantry_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = armor_officer }
+				ROOT = {
+					set_country_flag = REU_tt_armor_officer
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = harsh_leader }
+				ROOT = {
+					set_country_flag = REU_tt_harsh_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = winter_specialist }
+				ROOT = {
+					set_country_flag = REU_tt_winter_specialist
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = desert_fox }
+				ROOT = {
+					set_country_flag = REU_tt_desert_fox
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = fortress_buster }
+				ROOT = {
+					set_country_flag = REU_tt_fortress_buster
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = trickster }
+				ROOT = {
+					set_country_flag = REU_tt_trickster
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_alina }
+		set_variable = { REU_sel_atk = 2 }
+		set_variable = { REU_sel_def = 3 }
+		set_variable = { REU_sel_pln = 4 }
+		set_variable = { REU_sel_log = 4 }
+		set_variable = { REU_sel_sk = 2 }
+		set_variable = { REU_sel_trait_paid = REU_mir_alina_trait_paid }
+		REU_Alina = {
+			if = {
+				limit = { has_trait = REU_guerrilla_pillar }
+				ROOT = {
+					set_country_flag = REU_tt_REU_guerrilla_pillar
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_crownslayer_confidant }
+				ROOT = {
+					set_country_flag = REU_tt_REU_crownslayer_confidant
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_scout_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_scout_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_night_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_night_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_intel_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_intel_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_blade_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_blade_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_scout_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_scout_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_scout_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_scout_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_night_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_night_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_night_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_night_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_intel_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_intel_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_intel_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_intel_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_blade_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_blade_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_blade_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_blade_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sokolov_graduate }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sokolov_graduate
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = panzer_leader }
+				ROOT = {
+					set_country_flag = REU_tt_panzer_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = infantry_leader }
+				ROOT = {
+					set_country_flag = REU_tt_infantry_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = armor_officer }
+				ROOT = {
+					set_country_flag = REU_tt_armor_officer
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = harsh_leader }
+				ROOT = {
+					set_country_flag = REU_tt_harsh_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = winter_specialist }
+				ROOT = {
+					set_country_flag = REU_tt_winter_specialist
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = desert_fox }
+				ROOT = {
+					set_country_flag = REU_tt_desert_fox
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = fortress_buster }
+				ROOT = {
+					set_country_flag = REU_tt_fortress_buster
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = trickster }
+				ROOT = {
+					set_country_flag = REU_tt_trickster
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = REU_train_target_mudrock }
+		set_variable = { REU_sel_atk = 1 }
+		set_variable = { REU_sel_def = 4 }
+		set_variable = { REU_sel_pln = 2 }
+		set_variable = { REU_sel_log = 2 }
+		set_variable = { REU_sel_sk = 1 }
+		set_variable = { REU_sel_trait_paid = REU_mir_mudrock_trait_paid }
+		REU_Mudrock = {
+			if = {
+				limit = { has_trait = REU_guerrilla_pillar }
+				ROOT = {
+					set_country_flag = REU_tt_REU_guerrilla_pillar
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_crownslayer_confidant }
+				ROOT = {
+					set_country_flag = REU_tt_REU_crownslayer_confidant
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_scout_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_scout_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_night_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_night_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_intel_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_intel_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_blade_adept }
+				ROOT = {
+					set_country_flag = REU_tt_REU_blade_adept
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_scout_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_scout_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_scout_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_scout_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_night_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_night_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_night_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_night_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_intel_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_intel_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_intel_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_intel_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_blade_a }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_blade_a
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sok_br_blade_b }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sok_br_blade_b
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = REU_sokolov_graduate }
+				ROOT = {
+					set_country_flag = REU_tt_REU_sokolov_graduate
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = panzer_leader }
+				ROOT = {
+					set_country_flag = REU_tt_panzer_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = infantry_leader }
+				ROOT = {
+					set_country_flag = REU_tt_infantry_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = armor_officer }
+				ROOT = {
+					set_country_flag = REU_tt_armor_officer
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = harsh_leader }
+				ROOT = {
+					set_country_flag = REU_tt_harsh_leader
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = winter_specialist }
+				ROOT = {
+					set_country_flag = REU_tt_winter_specialist
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = desert_fox }
+				ROOT = {
+					set_country_flag = REU_tt_desert_fox
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = fortress_buster }
+				ROOT = {
+					set_country_flag = REU_tt_fortress_buster
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+			if = {
+				limit = { has_trait = trickster }
+				ROOT = {
+					set_country_flag = REU_tt_trickster
+					add_to_variable = { REU_sel_trait_count = 1 }
+				}
+			}
+		}
+	}
+}
+
+# —— 选择特质：panzer_leader（35 政治点；未拥有才可点）——
+REU_Sokolov_Training_Trait_PanzerLeader = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			has_political_power > 34
+			NOT = { has_country_flag = REU_tt_panzer_leader }
+		}
+		add_political_power = -35
+		if = {
+			limit = { has_country_flag = REU_train_target_sokolov }
+			REU_Sokolov = { add_unit_leader_trait = panzer_leader }
+			add_to_variable = { REU_mir_sokolov_trait_paid = 35 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_yelena }
+			REU_Yelena = { add_unit_leader_trait = panzer_leader }
+			add_to_variable = { REU_mir_yelena_trait_paid = 35 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_alina }
+			REU_Alina = { add_unit_leader_trait = panzer_leader }
+			add_to_variable = { REU_mir_alina_trait_paid = 35 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_mudrock }
+			REU_Mudrock = { add_unit_leader_trait = panzer_leader }
+			add_to_variable = { REU_mir_mudrock_trait_paid = 35 }
+		}
+		REU_Train_Sync_Mirror = yes
+	}
+}
+
+# —— 选择特质：infantry_leader（35 政治点；未拥有才可点）——
+REU_Sokolov_Training_Trait_InfantryLeader = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			has_political_power > 34
+			NOT = { has_country_flag = REU_tt_infantry_leader }
+		}
+		add_political_power = -35
+		if = {
+			limit = { has_country_flag = REU_train_target_sokolov }
+			REU_Sokolov = { add_unit_leader_trait = infantry_leader }
+			add_to_variable = { REU_mir_sokolov_trait_paid = 35 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_yelena }
+			REU_Yelena = { add_unit_leader_trait = infantry_leader }
+			add_to_variable = { REU_mir_yelena_trait_paid = 35 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_alina }
+			REU_Alina = { add_unit_leader_trait = infantry_leader }
+			add_to_variable = { REU_mir_alina_trait_paid = 35 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_mudrock }
+			REU_Mudrock = { add_unit_leader_trait = infantry_leader }
+			add_to_variable = { REU_mir_mudrock_trait_paid = 35 }
+		}
+		REU_Train_Sync_Mirror = yes
+	}
+}
+
+# —— 选择特质：armor_officer（30 政治点；未拥有才可点）——
+REU_Sokolov_Training_Trait_ArmorOfficer = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			has_political_power > 29
+			NOT = { has_country_flag = REU_tt_armor_officer }
+		}
+		add_political_power = -30
+		if = {
+			limit = { has_country_flag = REU_train_target_sokolov }
+			REU_Sokolov = { add_unit_leader_trait = armor_officer }
+			add_to_variable = { REU_mir_sokolov_trait_paid = 30 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_yelena }
+			REU_Yelena = { add_unit_leader_trait = armor_officer }
+			add_to_variable = { REU_mir_yelena_trait_paid = 30 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_alina }
+			REU_Alina = { add_unit_leader_trait = armor_officer }
+			add_to_variable = { REU_mir_alina_trait_paid = 30 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_mudrock }
+			REU_Mudrock = { add_unit_leader_trait = armor_officer }
+			add_to_variable = { REU_mir_mudrock_trait_paid = 30 }
+		}
+		REU_Train_Sync_Mirror = yes
+	}
+}
+
+# —— 选择特质：harsh_leader（25 政治点；未拥有才可点）——
+REU_Sokolov_Training_Trait_HarshLeader = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			has_political_power > 24
+			NOT = { has_country_flag = REU_tt_harsh_leader }
+		}
+		add_political_power = -25
+		if = {
+			limit = { has_country_flag = REU_train_target_sokolov }
+			REU_Sokolov = { add_unit_leader_trait = harsh_leader }
+			add_to_variable = { REU_mir_sokolov_trait_paid = 25 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_yelena }
+			REU_Yelena = { add_unit_leader_trait = harsh_leader }
+			add_to_variable = { REU_mir_yelena_trait_paid = 25 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_alina }
+			REU_Alina = { add_unit_leader_trait = harsh_leader }
+			add_to_variable = { REU_mir_alina_trait_paid = 25 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_mudrock }
+			REU_Mudrock = { add_unit_leader_trait = harsh_leader }
+			add_to_variable = { REU_mir_mudrock_trait_paid = 25 }
+		}
+		REU_Train_Sync_Mirror = yes
+	}
+}
+
+# —— 选择特质：winter_specialist（30 政治点；未拥有才可点）——
+REU_Sokolov_Training_Trait_WinterSpecialist = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			has_political_power > 29
+			NOT = { has_country_flag = REU_tt_winter_specialist }
+		}
+		add_political_power = -30
+		if = {
+			limit = { has_country_flag = REU_train_target_sokolov }
+			REU_Sokolov = { add_unit_leader_trait = winter_specialist }
+			add_to_variable = { REU_mir_sokolov_trait_paid = 30 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_yelena }
+			REU_Yelena = { add_unit_leader_trait = winter_specialist }
+			add_to_variable = { REU_mir_yelena_trait_paid = 30 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_alina }
+			REU_Alina = { add_unit_leader_trait = winter_specialist }
+			add_to_variable = { REU_mir_alina_trait_paid = 30 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_mudrock }
+			REU_Mudrock = { add_unit_leader_trait = winter_specialist }
+			add_to_variable = { REU_mir_mudrock_trait_paid = 30 }
+		}
+		REU_Train_Sync_Mirror = yes
+	}
+}
+
+# —— 选择特质：desert_fox（25 政治点；未拥有才可点）——
+REU_Sokolov_Training_Trait_DesertFox = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			has_political_power > 24
+			NOT = { has_country_flag = REU_tt_desert_fox }
+		}
+		add_political_power = -25
+		if = {
+			limit = { has_country_flag = REU_train_target_sokolov }
+			REU_Sokolov = { add_unit_leader_trait = desert_fox }
+			add_to_variable = { REU_mir_sokolov_trait_paid = 25 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_yelena }
+			REU_Yelena = { add_unit_leader_trait = desert_fox }
+			add_to_variable = { REU_mir_yelena_trait_paid = 25 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_alina }
+			REU_Alina = { add_unit_leader_trait = desert_fox }
+			add_to_variable = { REU_mir_alina_trait_paid = 25 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_mudrock }
+			REU_Mudrock = { add_unit_leader_trait = desert_fox }
+			add_to_variable = { REU_mir_mudrock_trait_paid = 25 }
+		}
+		REU_Train_Sync_Mirror = yes
+	}
+}
+
+# —— 选择特质：fortress_buster（35 政治点；未拥有才可点）——
+REU_Sokolov_Training_Trait_FortressBuster = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			has_political_power > 34
+			NOT = { has_country_flag = REU_tt_fortress_buster }
+		}
+		add_political_power = -35
+		if = {
+			limit = { has_country_flag = REU_train_target_sokolov }
+			REU_Sokolov = { add_unit_leader_trait = fortress_buster }
+			add_to_variable = { REU_mir_sokolov_trait_paid = 35 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_yelena }
+			REU_Yelena = { add_unit_leader_trait = fortress_buster }
+			add_to_variable = { REU_mir_yelena_trait_paid = 35 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_alina }
+			REU_Alina = { add_unit_leader_trait = fortress_buster }
+			add_to_variable = { REU_mir_alina_trait_paid = 35 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_mudrock }
+			REU_Mudrock = { add_unit_leader_trait = fortress_buster }
+			add_to_variable = { REU_mir_mudrock_trait_paid = 35 }
+		}
+		REU_Train_Sync_Mirror = yes
+	}
+}
+
+# —— 选择特质：trickster（45 政治点；未拥有才可点）——
+REU_Sokolov_Training_Trait_Trickster = {
+	if = {
+		limit = {
+			REU_Train_Has_Target = yes
+			has_political_power > 44
+			NOT = { has_country_flag = REU_tt_trickster }
+		}
+		add_political_power = -45
+		if = {
+			limit = { has_country_flag = REU_train_target_sokolov }
+			REU_Sokolov = { add_unit_leader_trait = trickster }
+			add_to_variable = { REU_mir_sokolov_trait_paid = 45 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_yelena }
+			REU_Yelena = { add_unit_leader_trait = trickster }
+			add_to_variable = { REU_mir_yelena_trait_paid = 45 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_alina }
+			REU_Alina = { add_unit_leader_trait = trickster }
+			add_to_variable = { REU_mir_alina_trait_paid = 45 }
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_mudrock }
+			REU_Mudrock = { add_unit_leader_trait = trickster }
+			add_to_variable = { REU_mir_mudrock_trait_paid = 45 }
+		}
+		REU_Train_Sync_Mirror = yes
+	}
+}
+
+# —— 洗去额外特质（退还已投入的 50%，移除全部候选特质）——
+REU_Sokolov_Training_Trait_Reset = {
+	if = {
+		limit = { REU_Train_Has_Target = yes }
+		if = {
+			limit = { check_variable = { REU_sel_trait_paid > 0 } }
+			set_variable = { REU_sok_pay = REU_sel_trait_paid }
+			divide_variable = { REU_sok_pay = 2 }
+			add_political_power = var:REU_sok_pay
+		}
+		if = {
+			limit = { has_country_flag = REU_train_target_sokolov }
+			set_variable = { REU_mir_sokolov_trait_paid = 0 }
+			REU_Sokolov = {
+				remove_unit_leader_trait = panzer_leader
+				remove_unit_leader_trait = infantry_leader
+				remove_unit_leader_trait = armor_officer
+				remove_unit_leader_trait = harsh_leader
+				remove_unit_leader_trait = winter_specialist
+				remove_unit_leader_trait = desert_fox
+				remove_unit_leader_trait = fortress_buster
+				remove_unit_leader_trait = trickster
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_yelena }
+			set_variable = { REU_mir_yelena_trait_paid = 0 }
+			REU_Yelena = {
+				remove_unit_leader_trait = panzer_leader
+				remove_unit_leader_trait = infantry_leader
+				remove_unit_leader_trait = armor_officer
+				remove_unit_leader_trait = harsh_leader
+				remove_unit_leader_trait = winter_specialist
+				remove_unit_leader_trait = desert_fox
+				remove_unit_leader_trait = fortress_buster
+				remove_unit_leader_trait = trickster
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_alina }
+			set_variable = { REU_mir_alina_trait_paid = 0 }
+			REU_Alina = {
+				remove_unit_leader_trait = panzer_leader
+				remove_unit_leader_trait = infantry_leader
+				remove_unit_leader_trait = armor_officer
+				remove_unit_leader_trait = harsh_leader
+				remove_unit_leader_trait = winter_specialist
+				remove_unit_leader_trait = desert_fox
+				remove_unit_leader_trait = fortress_buster
+				remove_unit_leader_trait = trickster
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = REU_train_target_mudrock }
+			set_variable = { REU_mir_mudrock_trait_paid = 0 }
+			REU_Mudrock = {
+				remove_unit_leader_trait = panzer_leader
+				remove_unit_leader_trait = infantry_leader
+				remove_unit_leader_trait = armor_officer
+				remove_unit_leader_trait = harsh_leader
+				remove_unit_leader_trait = winter_specialist
+				remove_unit_leader_trait = desert_fox
+				remove_unit_leader_trait = fortress_buster
+				remove_unit_leader_trait = trickster
+			}
+		}
+		REU_Train_Sync_Mirror = yes
+	}
+}

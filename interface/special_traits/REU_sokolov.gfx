@@ -1,0 +1,34 @@
+# ==============================================================================
+#  索科洛夫（REU_Sokolov）专属将领特质图标
+#  · 引擎按约定查 GFX_trait_<特质 id>，缺 sprite 就是空图标且**零报错**——
+#    所以每加一个自建特质，都要来这里补一条同名 sprite。
+#  · 画布 23x33，与原版人格特质贴图同尺寸（gfx/interface/traits/**/*.dds 实测）。
+#  · 贴图是矢量画的，生成器：docs/将领加点系统/工具/gen_reu_sokolov_panel.cjs
+#  · 特质定义：common/unit_leader/REU_traits.txt
+# ==============================================================================
+spriteTypes = {
+
+	# 游击队支柱
+	SpriteType = { name = "GFX_trait_REU_guerrilla_pillar"      texturefile = "gfx/interface/REU_sokolov_training/trait_REU_guerrilla_pillar.png"      transparencecheck = yes legacy_lazy_load = no }
+	# 弑君者的心腹
+	SpriteType = { name = "GFX_trait_REU_crownslayer_confidant" texturefile = "gfx/interface/REU_sokolov_training/trait_REU_crownslayer_confidant.png" transparencecheck = yes legacy_lazy_load = no }
+
+	# 特训四课徽记
+	SpriteType = { name = "GFX_trait_REU_scout_adept"           texturefile = "gfx/interface/REU_sokolov_training/trait_REU_scout_adept.png"           transparencecheck = yes legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_REU_night_adept"           texturefile = "gfx/interface/REU_sokolov_training/trait_REU_night_adept.png"           transparencecheck = yes legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_REU_intel_adept"           texturefile = "gfx/interface/REU_sokolov_training/trait_REU_intel_adept.png"           transparencecheck = yes legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_REU_blade_adept"           texturefile = "gfx/interface/REU_sokolov_training/trait_REU_blade_adept.png"           transparencecheck = yes legacy_lazy_load = no }
+
+	# 特训·结业（四课全满）
+	SpriteType = { name = "GFX_trait_REU_sokolov_graduate"      texturefile = "gfx/interface/REU_sokolov_training/trait_REU_sokolov_graduate.png"      transparencecheck = yes legacy_lazy_load = no }
+
+	# 专精分叉徽记（四课 × 两支；A 金 / B 钢蓝）
+	SpriteType = { name = "GFX_trait_REU_sok_br_scout_a"        texturefile = "gfx/interface/REU_sokolov_training/trait_REU_sok_br_scout_a.png"        transparencecheck = yes legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_REU_sok_br_scout_b"        texturefile = "gfx/interface/REU_sokolov_training/trait_REU_sok_br_scout_b.png"        transparencecheck = yes legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_REU_sok_br_night_a"        texturefile = "gfx/interface/REU_sokolov_training/trait_REU_sok_br_night_a.png"        transparencecheck = yes legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_REU_sok_br_night_b"        texturefile = "gfx/interface/REU_sokolov_training/trait_REU_sok_br_night_b.png"        transparencecheck = yes legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_REU_sok_br_intel_a"        texturefile = "gfx/interface/REU_sokolov_training/trait_REU_sok_br_intel_a.png"        transparencecheck = yes legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_REU_sok_br_intel_b"        texturefile = "gfx/interface/REU_sokolov_training/trait_REU_sok_br_intel_b.png"        transparencecheck = yes legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_REU_sok_br_blade_a"        texturefile = "gfx/interface/REU_sokolov_training/trait_REU_sok_br_blade_a.png"        transparencecheck = yes legacy_lazy_load = no }
+	SpriteType = { name = "GFX_trait_REU_sok_br_blade_b"        texturefile = "gfx/interface/REU_sokolov_training/trait_REU_sok_br_blade_b.png"        transparencecheck = yes legacy_lazy_load = no }
+}

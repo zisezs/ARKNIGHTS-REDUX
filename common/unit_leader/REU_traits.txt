@@ -54,8 +54,16 @@ leader_traits = {
 	}
 
 	########################################
-	# 柳德米拉特训：第一课 · 侦察好手
+	# 柳德米拉特训：四课「掌握」徽记
+	#  · 每个技能升到 Lv1（开课）时授予对应徽记；徽记本身只给一点
+	#    离散技能点（整数属性，无法按 1% 平滑成长）。
+	#  · 四课的百分比加成（侦查 / 夜战 / 计划 / 攻防…）**随等级成长**，
+	#    全部由角色级动态修正符 REU_sokolov_training_dm 承载，
+	#    数值写在角色变量里（见 common/dynamic_modifiers/REU_Sokolov_Training_dm.txt）。
+	#  · 因此：徽记 = 身份 + 一点技能；面板 = 全部百分比练度。
 	########################################
+
+	# 侦察好手 —— 掌握：计划技能 +1
 	REU_scout_adept = {
 		type = land
 		trait_type = personality_trait
@@ -63,10 +71,6 @@ leader_traits = {
 
 		planning_skill = 1
 
-		modifier = {
-			recon_factor = 0.2
-		}
-
 		ai_will_do = {
 			factor = 0
 		}
@@ -75,20 +79,45 @@ leader_traits = {
 		}
 	}
 
-	########################################
-	# 柳德米拉特训：第二课 · 夜行无声
-	########################################
-	REU_silent_steps = {
+	# 夜行无声 —— 掌握：防御技能 +1
+	REU_night_adept = {
 		type = land
 		trait_type = personality_trait
 		show_in_combat = yes
 
 		defense_skill = 1
 
-		modifier = {
-			land_night_attack = 0.15
-			attrition = -0.1
+		ai_will_do = {
+			factor = 0
 		}
+		new_commander_weight = {
+			base = 0
+		}
+	}
+
+	# 情报嗅觉 —— 掌握：计划技能 +1
+	REU_intel_adept = {
+		type = land
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		planning_skill = 1
+
+		ai_will_do = {
+			factor = 0
+		}
+		new_commander_weight = {
+			base = 0
+		}
+	}
+
+	# 匕首与盾 —— 掌握：攻击技能 +1
+	REU_blade_adept = {
+		type = land
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		attack_skill = 1
 
 		ai_will_do = {
 			factor = 0
@@ -99,9 +128,11 @@ leader_traits = {
 	}
 
 	########################################
-	# 柳德米拉特训：第三课 · 情报嗅觉
+	# 特训·结业 —— 四课全部练到 Lv10 的结业徽记
+	#  · 由 REU_Sokolov_Training_Check_Graduation 在每次升级后判定授予。
+	#  · 全局小加成 + 计划技能 +1；图标见 interface/special_traits/REU_sokolov.gfx
 	########################################
-	REU_intel_scent = {
+	REU_sokolov_graduate = {
 		type = land
 		trait_type = personality_trait
 		show_in_combat = yes
@@ -109,8 +140,9 @@ leader_traits = {
 		planning_skill = 1
 
 		modifier = {
-			max_planning = 0.15
-			out_of_supply_factor = -0.1
+			army_attack_factor = 0.05
+			army_defence_factor = 0.05
+			planning_speed = 0.10
 		}
 
 		ai_will_do = {
@@ -121,20 +153,140 @@ leader_traits = {
 		}
 	}
 
-	########################################
-	# 柳德米拉特训：第四课 · 匕首与盾
-	########################################
-	REU_dagger_and_shield = {
+	# —— 专精分叉 · 侦察好手 → 鹰眼（Lv5 二选一）——
+	REU_sok_br_scout_a = {
 		type = land
 		trait_type = personality_trait
 		show_in_combat = yes
 
-		attack_skill = 1
-		defense_skill = 1
+		modifier = {
+			recon_factor = 0.05
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+		new_commander_weight = {
+			base = 0
+		}
+	}
+
+	# —— 专精分叉 · 侦察好手 → 棋手（Lv5 二选一）——
+	REU_sok_br_scout_b = {
+		type = land
+		trait_type = personality_trait
+		show_in_combat = yes
 
 		modifier = {
-			army_attack_factor = 0.1
-			army_defence_factor = 0.1
+			planning_speed = 0.08
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+		new_commander_weight = {
+			base = 0
+		}
+	}
+
+	# —— 专精分叉 · 夜行无声 → 夜枭（Lv5 二选一）——
+	REU_sok_br_night_a = {
+		type = land
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			land_night_attack = 0.05
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+		new_commander_weight = {
+			base = 0
+		}
+	}
+
+	# —— 专精分叉 · 夜行无声 → 影卫（Lv5 二选一）——
+	REU_sok_br_night_b = {
+		type = land
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			attrition = -0.05
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+		new_commander_weight = {
+			base = 0
+		}
+	}
+
+	# —— 专精分叉 · 情报嗅觉 → 耳目（Lv5 二选一）——
+	REU_sok_br_intel_a = {
+		type = land
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			max_planning = 0.05
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+		new_commander_weight = {
+			base = 0
+		}
+	}
+
+	# —— 专精分叉 · 情报嗅觉 → 参谋（Lv5 二选一）——
+	REU_sok_br_intel_b = {
+		type = land
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			planning_speed = 0.08
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+		new_commander_weight = {
+			base = 0
+		}
+	}
+
+	# —— 专精分叉 · 匕首与盾 → 匕首（Lv5 二选一）——
+	REU_sok_br_blade_a = {
+		type = land
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			army_attack_factor = 0.08
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+		new_commander_weight = {
+			base = 0
+		}
+	}
+
+	# —— 专精分叉 · 匕首与盾 → 盾墙（Lv5 二选一）——
+	REU_sok_br_blade_b = {
+		type = land
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			army_defence_factor = 0.08
 		}
 
 		ai_will_do = {

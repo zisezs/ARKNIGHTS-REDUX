@@ -1,146 +1,366 @@
 # ==============================================================================
-#  柳德米拉小姐对索科洛夫进行特训！—— 4 条子决议
-#  · 分类见 common/decisions/categories/REU_decision_categroies.txt
-#    （REU_Sokolov_Training_Category，索科洛夫在军中时开放）
-#  · 索科洛夫（REU_Sokolov）由 history/countries/REU - Reunion.txt 开局征召。
-#  · 一条决议 = 一节特训课：花政治点数 → 索科洛夫获得一个原创将领特质
-#    （特质本身写在 common/unit_leader/REU_traits.txt）。
-#  · 4 节彼此独立、可任选顺序；拿到特质后该条从列表里消失。
-#  · 效果统一走「custom_effect_tooltip + hidden_effect」，
-#    原因是 add_unit_leader_trait 的自动 tooltip 说不清拿到了什么。
+#  将领特训 / 加点系统 —— 决议栏（**由 docs/将领加点系统/工具/gen_reu_train_roster.cjs 生成，勿手改**）
+#  · 换受训对象 / 逐级训练 / 专精分叉 / 洗点，全在这里。
+#  · 面板入口见 common/scripted_guis/REU_Sokolov_Training.txt。
+#  · 花名册：索科洛夫 / 叶莲娜「霜星」 / 阿丽娜 / 泥岩「波希墨丝」
 # ==============================================================================
 
 REU_Sokolov_Training_Category = {
 
-	# ---- 第一课 · 侦察好手（50 pp） ----
-	REU_sokolov_training_scout = {
-		icon = GFX_decision_generic_intelligence_operation
-
-		allowed = {
-			original_tag = REU
-		}
-
+	# ---- 打开 / 关闭加点面板 ----
+	REU_sokolov_training_open = {
+		icon = GFX_decision_generic_military
+		allowed = { original_tag = REU }
 		visible = {
-			has_character = REU_Sokolov
-			REU_Sokolov = { NOT = { has_trait = REU_scout_adept } }
+			is_ai = no
+			NOT = { has_country_flag = REU_sokolov_training_open }
 		}
-
-		available = {
-			has_character = REU_Sokolov
-		}
-
-		cost = 50
-
-		complete_effect = {
-			custom_effect_tooltip = REU_sokolov_training_scout_tt
-			hidden_effect = {
-				REU_Sokolov = {
-					add_unit_leader_trait = REU_scout_adept
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 0
-		}
+		available = { always = yes }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Open = yes }
+		ai_will_do = { base = 0 }
 	}
 
-	# ---- 第二课 · 夜行无声（75 pp） ----
-	REU_sokolov_training_night = {
-		icon = GFX_decision_generic_operation
-
-		allowed = {
-			original_tag = REU
-		}
-
+	REU_sokolov_training_close = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { original_tag = REU }
 		visible = {
-			has_character = REU_Sokolov
-			REU_Sokolov = { NOT = { has_trait = REU_silent_steps } }
+			is_ai = no
+			has_country_flag = REU_sokolov_training_open
 		}
-
-		available = {
-			has_character = REU_Sokolov
-		}
-
-		cost = 75
-
-		complete_effect = {
-			custom_effect_tooltip = REU_sokolov_training_night_tt
-			hidden_effect = {
-				REU_Sokolov = {
-					add_unit_leader_trait = REU_silent_steps
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 0
-		}
+		available = { has_country_flag = REU_sokolov_training_open }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Close = yes }
+		ai_will_do = { base = 0 }
 	}
 
-	# ---- 第三课 · 情报嗅觉（100 pp） ----
-	REU_sokolov_training_intel = {
-		icon = GFX_decision_generic_research
-
-		allowed = {
-			original_tag = REU
-		}
-
+	# ---- 受训对象：索科洛夫 ----
+	REU_sokolov_target_sokolov = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { original_tag = REU }
 		visible = {
+			is_ai = no
 			has_character = REU_Sokolov
-			REU_Sokolov = { NOT = { has_trait = REU_intel_scent } }
+			NOT = { has_country_flag = REU_train_target_sokolov }
 		}
-
-		available = {
-			has_character = REU_Sokolov
-		}
-
-		cost = 100
-
-		complete_effect = {
-			custom_effect_tooltip = REU_sokolov_training_intel_tt
-			hidden_effect = {
-				REU_Sokolov = {
-					add_unit_leader_trait = REU_intel_scent
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 0
-		}
+		available = { has_character = REU_Sokolov }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Select_Sokolov = yes }
+		ai_will_do = { base = 0 }
 	}
 
-	# ---- 第四课 · 匕首与盾（125 pp） ----
-	REU_sokolov_training_blade = {
-		icon = GFX_decision_generic_assault
-
-		allowed = {
-			original_tag = REU
-		}
-
+	# ---- 受训对象：叶莲娜「霜星」 ----
+	REU_sokolov_target_yelena = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { original_tag = REU }
 		visible = {
-			has_character = REU_Sokolov
-			REU_Sokolov = { NOT = { has_trait = REU_dagger_and_shield } }
+			is_ai = no
+			has_character = REU_Yelena
+			NOT = { has_country_flag = REU_train_target_yelena }
 		}
+		available = { has_character = REU_Yelena }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Select_Yelena = yes }
+		ai_will_do = { base = 0 }
+	}
 
-		available = {
-			has_character = REU_Sokolov
+	# ---- 受训对象：阿丽娜 ----
+	REU_sokolov_target_alina = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			has_character = REU_Alina
+			NOT = { has_country_flag = REU_train_target_alina }
 		}
+		available = { has_character = REU_Alina }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Select_Alina = yes }
+		ai_will_do = { base = 0 }
+	}
 
-		cost = 125
-
-		complete_effect = {
-			custom_effect_tooltip = REU_sokolov_training_blade_tt
-			hidden_effect = {
-				REU_Sokolov = {
-					add_unit_leader_trait = REU_dagger_and_shield
-				}
-			}
+	# ---- 受训对象：泥岩「波希墨丝」 ----
+	REU_sokolov_target_mudrock = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			has_character = REU_Mudrock
+			NOT = { has_country_flag = REU_train_target_mudrock }
 		}
+		available = { has_character = REU_Mudrock }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Select_Mudrock = yes }
+		ai_will_do = { base = 0 }
+	}
 
-		ai_will_do = {
-			base = 0
+	# ---- 训练 · 侦察好手（每点一次升一级）----
+	REU_sokolov_train_scout = {
+		icon = GFX_REU_Sokolov_icon_scout
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_scout_lv < 10 }
 		}
+		available = { check_variable = { REU_sel_scout_lv < 10 } }
+		cost = var:REU_sel_scout_cost
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Scout_Apply = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 洗点 · 侦察好手（已开课才出现）----
+	REU_sokolov_respec_scout = {
+		icon = GFX_REU_Sokolov_icon_scout
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_scout_lv > 0 }
+		}
+		available = { check_variable = { REU_sel_scout_lv > 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Scout_Respec = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 专精 · 侦察好手 → A（Lv5 起、未选分支时出现）----
+	REU_sokolov_branch_scout_a = {
+		icon = GFX_REU_Sokolov_icon_scout
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_scout_lv > 4 }
+			check_variable = { REU_sel_scout_br = 0 }
+		}
+		available = { check_variable = { REU_sel_scout_br = 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Scout_Branch_A = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 专精 · 侦察好手 → B（Lv5 起、未选分支时出现）----
+	REU_sokolov_branch_scout_b = {
+		icon = GFX_REU_Sokolov_icon_scout
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_scout_lv > 4 }
+			check_variable = { REU_sel_scout_br = 0 }
+		}
+		available = { check_variable = { REU_sel_scout_br = 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Scout_Branch_B = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 训练 · 夜行无声（每点一次升一级）----
+	REU_sokolov_train_night = {
+		icon = GFX_REU_Sokolov_icon_night
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_night_lv < 10 }
+		}
+		available = { check_variable = { REU_sel_night_lv < 10 } }
+		cost = var:REU_sel_night_cost
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Night_Apply = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 洗点 · 夜行无声（已开课才出现）----
+	REU_sokolov_respec_night = {
+		icon = GFX_REU_Sokolov_icon_night
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_night_lv > 0 }
+		}
+		available = { check_variable = { REU_sel_night_lv > 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Night_Respec = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 专精 · 夜行无声 → A（Lv5 起、未选分支时出现）----
+	REU_sokolov_branch_night_a = {
+		icon = GFX_REU_Sokolov_icon_night
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_night_lv > 4 }
+			check_variable = { REU_sel_night_br = 0 }
+		}
+		available = { check_variable = { REU_sel_night_br = 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Night_Branch_A = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 专精 · 夜行无声 → B（Lv5 起、未选分支时出现）----
+	REU_sokolov_branch_night_b = {
+		icon = GFX_REU_Sokolov_icon_night
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_night_lv > 4 }
+			check_variable = { REU_sel_night_br = 0 }
+		}
+		available = { check_variable = { REU_sel_night_br = 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Night_Branch_B = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 训练 · 情报嗅觉（每点一次升一级）----
+	REU_sokolov_train_intel = {
+		icon = GFX_REU_Sokolov_icon_intel
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_intel_lv < 10 }
+		}
+		available = { check_variable = { REU_sel_intel_lv < 10 } }
+		cost = var:REU_sel_intel_cost
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Intel_Apply = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 洗点 · 情报嗅觉（已开课才出现）----
+	REU_sokolov_respec_intel = {
+		icon = GFX_REU_Sokolov_icon_intel
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_intel_lv > 0 }
+		}
+		available = { check_variable = { REU_sel_intel_lv > 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Intel_Respec = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 专精 · 情报嗅觉 → A（Lv5 起、未选分支时出现）----
+	REU_sokolov_branch_intel_a = {
+		icon = GFX_REU_Sokolov_icon_intel
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_intel_lv > 4 }
+			check_variable = { REU_sel_intel_br = 0 }
+		}
+		available = { check_variable = { REU_sel_intel_br = 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Intel_Branch_A = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 专精 · 情报嗅觉 → B（Lv5 起、未选分支时出现）----
+	REU_sokolov_branch_intel_b = {
+		icon = GFX_REU_Sokolov_icon_intel
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_intel_lv > 4 }
+			check_variable = { REU_sel_intel_br = 0 }
+		}
+		available = { check_variable = { REU_sel_intel_br = 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Intel_Branch_B = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 训练 · 匕首与盾（每点一次升一级）----
+	REU_sokolov_train_blade = {
+		icon = GFX_REU_Sokolov_icon_blade
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_blade_lv < 10 }
+		}
+		available = { check_variable = { REU_sel_blade_lv < 10 } }
+		cost = var:REU_sel_blade_cost
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Blade_Apply = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 洗点 · 匕首与盾（已开课才出现）----
+	REU_sokolov_respec_blade = {
+		icon = GFX_REU_Sokolov_icon_blade
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_blade_lv > 0 }
+		}
+		available = { check_variable = { REU_sel_blade_lv > 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Blade_Respec = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 专精 · 匕首与盾 → A（Lv5 起、未选分支时出现）----
+	REU_sokolov_branch_blade_a = {
+		icon = GFX_REU_Sokolov_icon_blade
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_blade_lv > 4 }
+			check_variable = { REU_sel_blade_br = 0 }
+		}
+		available = { check_variable = { REU_sel_blade_br = 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Blade_Branch_A = yes }
+		ai_will_do = { base = 0 }
+	}
+
+	# ---- 专精 · 匕首与盾 → B（Lv5 起、未选分支时出现）----
+	REU_sokolov_branch_blade_b = {
+		icon = GFX_REU_Sokolov_icon_blade
+		allowed = { original_tag = REU }
+		visible = {
+			is_ai = no
+			REU_Train_Has_Target = yes
+			check_variable = { REU_sel_blade_lv > 4 }
+			check_variable = { REU_sel_blade_br = 0 }
+		}
+		available = { check_variable = { REU_sel_blade_br = 0 } }
+		cost = 0
+		days_remove = 0
+		complete_effect = { REU_Sokolov_Training_Blade_Branch_B = yes }
+		ai_will_do = { base = 0 }
 	}
 }

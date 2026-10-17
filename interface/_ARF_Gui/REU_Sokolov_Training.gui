@@ -1,0 +1,1812 @@
+# ==============================================================================
+#  索科洛夫的特训 —— 加点 / 将领当前信息 / 选择特质 面板
+#  **由 docs/将领加点系统/工具/gen_reu_sokolov_gui.cjs 生成，勿手改**
+#  · 接线在 common/scripted_guis/REU_Sokolov_Training.txt（同源生成，名字必然一致）
+#  · 显示条件：国家旗标 REU_sokolov_training_open
+#  · 面板底与按钮是生图素材（gen_reu_sokolov_steel.cjs）；钢板/格子/铭牌是矢量
+#    （gen_reu_sokolov_panel.cjs）。iconType/buttonType **没有 size 键**，贴图多大就多大。
+#  · 字体一律浅色版：REU_Lud_title26 / REU_Lud_text20 / REU_Lud_text16
+# ==============================================================================
+guiTypes = {
+
+	containerWindowType = {
+		name = "REU_Sokolov_Training_Window"
+		position = { x = 0 y = 0 }
+		size = { width = 960 height = 640 }
+		orientation = center
+		origo = center
+		moveable = yes
+		click_to_front = yes
+
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_REU_Sokolov_panel_bg"
+		}
+
+		# ---- 顶带：铭牌标题 / 政治点数读板 / 关闭 ----
+		iconType = {
+			name = "REU_Sok_Nameplate"
+			position = { x = 66 y = 24 }
+			spriteType = "GFX_REU_Sokolov_nameplate"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Title"
+			position = { x = 78 y = 30 }
+			maxWidth = 326
+			maxHeight = 32
+			font = "REU_Lud_title26"
+			text = "[REU_GetTrainName]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_PPPlate"
+			position = { x = 566 y = 26 }
+			spriteType = "GFX_REU_Sokolov_pp_plate"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_PP"
+			position = { x = 576 y = 32 }
+			maxWidth = 250
+			maxHeight = 26
+			font = "REU_Lud_text20"
+			text = "REU_sok_panel_pp"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Close"
+			position = { x = 846 y = 26 }
+			quadTextureSprite = "GFX_REU_Sokolov_close_btn"
+			pdx_tooltip = "REU_sok_close_tt"
+			clicksound = click_default
+		}
+
+		# ---- 受训对象切换（原为四条决议，搬进面板；决议栏那四条保留作兜底）----
+		buttonType = {
+			name = "REU_Sok_Tgt_Sokolov"
+			position = { x = 66 y = 128 }
+			quadTextureSprite = "GFX_REU_Sokolov_chip_tgt"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_tgt_sokolov"
+			pdx_tooltip = "REU_sokolov_target_sokolov"
+			clicksound = click_default
+		}
+		iconType = {
+			name = "REU_Sok_Tgt_Sokolov_On"
+			position = { x = 66 y = 160 }
+			spriteType = "GFX_REU_Sokolov_underline_88"
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Tgt_Yelena"
+			position = { x = 158 y = 128 }
+			quadTextureSprite = "GFX_REU_Sokolov_chip_tgt"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_tgt_yelena"
+			pdx_tooltip = "REU_sokolov_target_yelena"
+			clicksound = click_default
+		}
+		iconType = {
+			name = "REU_Sok_Tgt_Yelena_On"
+			position = { x = 158 y = 160 }
+			spriteType = "GFX_REU_Sokolov_underline_88"
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Tgt_Alina"
+			position = { x = 250 y = 128 }
+			quadTextureSprite = "GFX_REU_Sokolov_chip_tgt"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_tgt_alina"
+			pdx_tooltip = "REU_sokolov_target_alina"
+			clicksound = click_default
+		}
+		iconType = {
+			name = "REU_Sok_Tgt_Alina_On"
+			position = { x = 250 y = 160 }
+			spriteType = "GFX_REU_Sokolov_underline_88"
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Tgt_Mudrock"
+			position = { x = 342 y = 128 }
+			quadTextureSprite = "GFX_REU_Sokolov_chip_tgt"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_tgt_mudrock"
+			pdx_tooltip = "REU_sokolov_target_mudrock"
+			clicksound = click_default
+		}
+		iconType = {
+			name = "REU_Sok_Tgt_Mudrock_On"
+			position = { x = 342 y = 160 }
+			spriteType = "GFX_REU_Sokolov_underline_88"
+			alwaystransparent = yes
+		}
+
+		# ---- 页签（训练 / 将领属性 / 选择特质）----
+		buttonType = {
+			name = "REU_Sok_Tab1"
+			position = { x = 570 y = 128 }
+			quadTextureSprite = "GFX_REU_Sokolov_chip_tab"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_tab_train"
+			pdx_tooltip = "REU_sok_tab_train_tt"
+			clicksound = click_default
+		}
+		iconType = {
+			name = "REU_Sok_Tab1_On"
+			position = { x = 570 y = 160 }
+			spriteType = "GFX_REU_Sokolov_underline_100"
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Tab2"
+			position = { x = 676 y = 128 }
+			quadTextureSprite = "GFX_REU_Sokolov_chip_tab"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_tab_attr"
+			pdx_tooltip = "REU_sok_tab_attr_tt"
+			clicksound = click_default
+		}
+		iconType = {
+			name = "REU_Sok_Tab2_On"
+			position = { x = 676 y = 160 }
+			spriteType = "GFX_REU_Sokolov_underline_100"
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Tab3"
+			position = { x = 782 y = 128 }
+			quadTextureSprite = "GFX_REU_Sokolov_chip_tab"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_tab_trait"
+			pdx_tooltip = "REU_sok_tab_trait_tt"
+			clicksound = click_default
+		}
+		iconType = {
+			name = "REU_Sok_Tab3_On"
+			position = { x = 782 y = 160 }
+			spriteType = "GFX_REU_Sokolov_underline_100"
+			alwaystransparent = yes
+		}
+
+		# ================= 常驻侧栏 · 将领当前信息 =================
+		iconType = {
+			name = "REU_Sok_Side_Plate"
+			position = { x = 66 y = 166 }
+			spriteType = "GFX_REU_Sokolov_side_plate"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Side_Portrait"
+			position = { x = 78 y = 172 }
+			spriteType = "GFX_REU_portrait_sokolov"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Side_Name"
+			position = { x = 66 y = 384 }
+			maxWidth = 180
+			maxHeight = 24
+			font = "REU_Lud_text20"
+			text = "[REU_GetTrainNameShort]"
+			format = center
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Side_Rank"
+			position = { x = 66 y = 408 }
+			maxWidth = 180
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "[REU_GetSokRank]"
+			format = center
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Side_Div"
+			position = { x = 76 y = 428 }
+			spriteType = "GFX_REU_Sokolov_divider_v"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Side_Atk"
+			position = { x = 80 y = 438 }
+			maxWidth = 152
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "[REU_GetDimAtk]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Side_Def"
+			position = { x = 80 y = 458 }
+			maxWidth = 152
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "[REU_GetDimDef]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Side_Pln"
+			position = { x = 80 y = 478 }
+			maxWidth = 152
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "[REU_GetDimPln]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Side_Log"
+			position = { x = 80 y = 498 }
+			maxWidth = 152
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "[REU_GetDimLog]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Side_Traits"
+			position = { x = 66 y = 518 }
+			maxWidth = 180
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_side_traits"
+			format = center
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+
+		# ================= 页 0 · 训练 =================
+	containerWindowType = {
+		name = "REU_Sok_Page_Train"
+		position = { x = 0 y = 0 }
+		size = { width = 960 height = 640 }
+		iconType = {
+			name = "REU_Sok_Scout_Bg"
+			position = { x = 256 y = 166 }
+			spriteType = "GFX_REU_Sokolov_row_bg"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Scout_Icon"
+			position = { x = 272 y = 178 }
+			spriteType = "GFX_REU_Sokolov_icon_scout"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Scout_Name"
+			position = { x = 336 y = 167 }
+			maxWidth = 300
+			maxHeight = 20
+			font = "REU_Lud_text20"
+			text = "REU_sok_scout_name"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Scout_Text"
+			position = { x = 336 y = 188 }
+			maxWidth = 400
+			maxHeight = 17
+			font = "REU_Lud_text16"
+			text = "[REU_GetSokScout]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Scout_Next"
+			position = { x = 336 y = 205 }
+			maxWidth = 400
+			maxHeight = 17
+			font = "REU_Lud_text16"
+			text = "[REU_GetSokScoutNext]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Scout_Bar"
+			position = { x = 336 y = 226 }
+			spriteType = "GFX_REU_Sokolov_bar"
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Scout_Up"
+			position = { x = 840 y = 185 }
+			quadTextureSprite = "GFX_REU_Sokolov_plus_btn"
+			pdx_tooltip = "REU_sok_scout_up_tt"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Scout_Max"
+			position = { x = 740 y = 196 }
+			maxWidth = 96
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_max_label"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Night_Bg"
+			position = { x = 256 y = 252 }
+			spriteType = "GFX_REU_Sokolov_row_bg"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Night_Icon"
+			position = { x = 272 y = 264 }
+			spriteType = "GFX_REU_Sokolov_icon_night"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Night_Name"
+			position = { x = 336 y = 253 }
+			maxWidth = 300
+			maxHeight = 20
+			font = "REU_Lud_text20"
+			text = "REU_sok_night_name"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Night_Text"
+			position = { x = 336 y = 274 }
+			maxWidth = 400
+			maxHeight = 17
+			font = "REU_Lud_text16"
+			text = "[REU_GetSokNight]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Night_Next"
+			position = { x = 336 y = 291 }
+			maxWidth = 400
+			maxHeight = 17
+			font = "REU_Lud_text16"
+			text = "[REU_GetSokNightNext]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Night_Bar"
+			position = { x = 336 y = 312 }
+			spriteType = "GFX_REU_Sokolov_bar"
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Night_Up"
+			position = { x = 840 y = 271 }
+			quadTextureSprite = "GFX_REU_Sokolov_plus_btn"
+			pdx_tooltip = "REU_sok_night_up_tt"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Night_Max"
+			position = { x = 740 y = 282 }
+			maxWidth = 96
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_max_label"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Intel_Bg"
+			position = { x = 256 y = 338 }
+			spriteType = "GFX_REU_Sokolov_row_bg"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Intel_Icon"
+			position = { x = 272 y = 350 }
+			spriteType = "GFX_REU_Sokolov_icon_intel"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Intel_Name"
+			position = { x = 336 y = 339 }
+			maxWidth = 300
+			maxHeight = 20
+			font = "REU_Lud_text20"
+			text = "REU_sok_intel_name"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Intel_Text"
+			position = { x = 336 y = 360 }
+			maxWidth = 400
+			maxHeight = 17
+			font = "REU_Lud_text16"
+			text = "[REU_GetSokIntel]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Intel_Next"
+			position = { x = 336 y = 377 }
+			maxWidth = 400
+			maxHeight = 17
+			font = "REU_Lud_text16"
+			text = "[REU_GetSokIntelNext]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Intel_Bar"
+			position = { x = 336 y = 398 }
+			spriteType = "GFX_REU_Sokolov_bar"
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Intel_Up"
+			position = { x = 840 y = 357 }
+			quadTextureSprite = "GFX_REU_Sokolov_plus_btn"
+			pdx_tooltip = "REU_sok_intel_up_tt"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Intel_Max"
+			position = { x = 740 y = 368 }
+			maxWidth = 96
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_max_label"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Blade_Bg"
+			position = { x = 256 y = 424 }
+			spriteType = "GFX_REU_Sokolov_row_bg"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Blade_Icon"
+			position = { x = 272 y = 436 }
+			spriteType = "GFX_REU_Sokolov_icon_blade"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Blade_Name"
+			position = { x = 336 y = 425 }
+			maxWidth = 300
+			maxHeight = 20
+			font = "REU_Lud_text20"
+			text = "REU_sok_blade_name"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Blade_Text"
+			position = { x = 336 y = 446 }
+			maxWidth = 400
+			maxHeight = 17
+			font = "REU_Lud_text16"
+			text = "[REU_GetSokBlade]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Blade_Next"
+			position = { x = 336 y = 463 }
+			maxWidth = 400
+			maxHeight = 17
+			font = "REU_Lud_text16"
+			text = "[REU_GetSokBladeNext]"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_Sok_Blade_Bar"
+			position = { x = 336 y = 484 }
+			spriteType = "GFX_REU_Sokolov_bar"
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_Blade_Up"
+			position = { x = 840 y = 443 }
+			quadTextureSprite = "GFX_REU_Sokolov_plus_btn"
+			pdx_tooltip = "REU_sok_blade_up_tt"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Blade_Max"
+			position = { x = 740 y = 454 }
+			maxWidth = 96
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_max_label"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Train_Footer"
+			position = { x = 256 y = 510 }
+			maxWidth = 638
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_panel_footer"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+	}
+
+		# ================= 页 1 · 将领属性（特质图鉴）=================
+	containerWindowType = {
+		name = "REU_Sok_Page_Attr"
+		position = { x = 0 y = 0 }
+		size = { width = 960 height = 640 }
+		instantTextBoxType = {
+			name = "REU_Sok_Attr_Sec"
+			position = { x = 256 y = 166 }
+			maxWidth = 400
+			maxHeight = 24
+			font = "REU_Lud_text20"
+			text = "REU_sok_sec_album"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_Sok_Attr_Count"
+			position = { x = 700 y = 168 }
+			maxWidth = 194
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_album_count"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUGuerrillaPillar_Bg"
+			position = { x = 256 y = 196 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUGuerrillaPillar_On"
+			position = { x = 256 y = 196 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUGuerrillaPillar_Icon"
+			position = { x = 264 y = 206 }
+			spriteType = "GFX_trait_REU_guerrilla_pillar"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUGuerrillaPillar_Name"
+			position = { x = 292 y = 212 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_guerrilla_pillar"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUCrownslayerConfidant_Bg"
+			position = { x = 415 y = 196 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUCrownslayerConfidant_On"
+			position = { x = 415 y = 196 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUCrownslayerConfidant_Icon"
+			position = { x = 423 y = 206 }
+			spriteType = "GFX_trait_REU_crownslayer_confidant"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUCrownslayerConfidant_Name"
+			position = { x = 451 y = 212 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_crownslayer_confidant"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUScoutAdept_Bg"
+			position = { x = 574 y = 196 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUScoutAdept_On"
+			position = { x = 574 y = 196 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUScoutAdept_Icon"
+			position = { x = 582 y = 206 }
+			spriteType = "GFX_trait_REU_scout_adept"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUScoutAdept_Name"
+			position = { x = 610 y = 212 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_scout_adept"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUNightAdept_Bg"
+			position = { x = 733 y = 196 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUNightAdept_On"
+			position = { x = 733 y = 196 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUNightAdept_Icon"
+			position = { x = 741 y = 206 }
+			spriteType = "GFX_trait_REU_night_adept"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUNightAdept_Name"
+			position = { x = 769 y = 212 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_night_adept"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUIntelAdept_Bg"
+			position = { x = 256 y = 252 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUIntelAdept_On"
+			position = { x = 256 y = 252 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUIntelAdept_Icon"
+			position = { x = 264 y = 262 }
+			spriteType = "GFX_trait_REU_intel_adept"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUIntelAdept_Name"
+			position = { x = 292 y = 268 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_intel_adept"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUBladeAdept_Bg"
+			position = { x = 415 y = 252 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUBladeAdept_On"
+			position = { x = 415 y = 252 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUBladeAdept_Icon"
+			position = { x = 423 y = 262 }
+			spriteType = "GFX_trait_REU_blade_adept"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUBladeAdept_Name"
+			position = { x = 451 y = 268 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_blade_adept"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrScoutA_Bg"
+			position = { x = 574 y = 252 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrScoutA_On"
+			position = { x = 574 y = 252 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrScoutA_Icon"
+			position = { x = 582 y = 262 }
+			spriteType = "GFX_trait_REU_sok_br_scout_a"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUSokBrScoutA_Name"
+			position = { x = 610 y = 268 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_br_scout_a"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrScoutB_Bg"
+			position = { x = 733 y = 252 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrScoutB_On"
+			position = { x = 733 y = 252 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrScoutB_Icon"
+			position = { x = 741 y = 262 }
+			spriteType = "GFX_trait_REU_sok_br_scout_b"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUSokBrScoutB_Name"
+			position = { x = 769 y = 268 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_br_scout_b"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrNightA_Bg"
+			position = { x = 256 y = 308 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrNightA_On"
+			position = { x = 256 y = 308 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrNightA_Icon"
+			position = { x = 264 y = 318 }
+			spriteType = "GFX_trait_REU_sok_br_night_a"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUSokBrNightA_Name"
+			position = { x = 292 y = 324 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_br_night_a"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrNightB_Bg"
+			position = { x = 415 y = 308 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrNightB_On"
+			position = { x = 415 y = 308 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrNightB_Icon"
+			position = { x = 423 y = 318 }
+			spriteType = "GFX_trait_REU_sok_br_night_b"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUSokBrNightB_Name"
+			position = { x = 451 y = 324 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_br_night_b"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrIntelA_Bg"
+			position = { x = 574 y = 308 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrIntelA_On"
+			position = { x = 574 y = 308 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrIntelA_Icon"
+			position = { x = 582 y = 318 }
+			spriteType = "GFX_trait_REU_sok_br_intel_a"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUSokBrIntelA_Name"
+			position = { x = 610 y = 324 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_br_intel_a"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrIntelB_Bg"
+			position = { x = 733 y = 308 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrIntelB_On"
+			position = { x = 733 y = 308 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrIntelB_Icon"
+			position = { x = 741 y = 318 }
+			spriteType = "GFX_trait_REU_sok_br_intel_b"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUSokBrIntelB_Name"
+			position = { x = 769 y = 324 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_br_intel_b"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrBladeA_Bg"
+			position = { x = 256 y = 364 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrBladeA_On"
+			position = { x = 256 y = 364 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrBladeA_Icon"
+			position = { x = 264 y = 374 }
+			spriteType = "GFX_trait_REU_sok_br_blade_a"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUSokBrBladeA_Name"
+			position = { x = 292 y = 380 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_br_blade_a"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrBladeB_Bg"
+			position = { x = 415 y = 364 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrBladeB_On"
+			position = { x = 415 y = 364 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokBrBladeB_Icon"
+			position = { x = 423 y = 374 }
+			spriteType = "GFX_trait_REU_sok_br_blade_b"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUSokBrBladeB_Name"
+			position = { x = 451 y = 380 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_br_blade_b"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokolovGraduate_Bg"
+			position = { x = 574 y = 364 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokolovGraduate_On"
+			position = { x = 574 y = 364 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_REUSokolovGraduate_Icon"
+			position = { x = 582 y = 374 }
+			spriteType = "GFX_trait_REU_sokolov_graduate"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_REUSokolovGraduate_Name"
+			position = { x = 610 y = 380 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sokolov_graduate"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_PanzerLeader_Bg"
+			position = { x = 733 y = 364 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_PanzerLeader_On"
+			position = { x = 733 y = 364 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_PanzerLeader_Icon"
+			position = { x = 741 y = 374 }
+			spriteType = "GFX_trait_panzer_leader"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_PanzerLeader_Name"
+			position = { x = 769 y = 380 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "panzer_leader"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_InfantryLeader_Bg"
+			position = { x = 256 y = 420 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_InfantryLeader_On"
+			position = { x = 256 y = 420 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_InfantryLeader_Icon"
+			position = { x = 264 y = 430 }
+			spriteType = "GFX_trait_infantry_leader"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_InfantryLeader_Name"
+			position = { x = 292 y = 436 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "infantry_leader"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_ArmorOfficer_Bg"
+			position = { x = 415 y = 420 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_ArmorOfficer_On"
+			position = { x = 415 y = 420 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_ArmorOfficer_Icon"
+			position = { x = 423 y = 430 }
+			spriteType = "GFX_trait_armor_officer"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_ArmorOfficer_Name"
+			position = { x = 451 y = 436 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "armor_officer"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_HarshLeader_Bg"
+			position = { x = 574 y = 420 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_HarshLeader_On"
+			position = { x = 574 y = 420 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_HarshLeader_Icon"
+			position = { x = 582 y = 430 }
+			spriteType = "GFX_trait_harsh_leader"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_HarshLeader_Name"
+			position = { x = 610 y = 436 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "harsh_leader"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_WinterSpecialist_Bg"
+			position = { x = 733 y = 420 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_WinterSpecialist_On"
+			position = { x = 733 y = 420 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_WinterSpecialist_Icon"
+			position = { x = 741 y = 430 }
+			spriteType = "GFX_trait_winter_specialist"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_WinterSpecialist_Name"
+			position = { x = 769 y = 436 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "winter_specialist"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_DesertFox_Bg"
+			position = { x = 256 y = 476 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_DesertFox_On"
+			position = { x = 256 y = 476 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_DesertFox_Icon"
+			position = { x = 264 y = 486 }
+			spriteType = "GFX_trait_desert_fox"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_DesertFox_Name"
+			position = { x = 292 y = 492 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "desert_fox"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_FortressBuster_Bg"
+			position = { x = 415 y = 476 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_FortressBuster_On"
+			position = { x = 415 y = 476 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_FortressBuster_Icon"
+			position = { x = 423 y = 486 }
+			spriteType = "GFX_trait_fortress_buster"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_FortressBuster_Name"
+			position = { x = 451 y = 492 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "fortress_buster"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_Trickster_Bg"
+			position = { x = 574 y = 476 }
+			spriteType = "GFX_REU_Sokolov_cell"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_Trickster_On"
+			position = { x = 574 y = 476 }
+			spriteType = "GFX_REU_Sokolov_cell_on"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokAlb_Trickster_Icon"
+			position = { x = 582 y = 486 }
+			spriteType = "GFX_trait_trickster"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokAlb_Trickster_Name"
+			position = { x = 610 y = 492 }
+			maxWidth = 112
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "trickster"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+	}
+
+		# ================= 页 2 · 选择特质 =================
+	containerWindowType = {
+		name = "REU_Sok_Page_Trait"
+		position = { x = 0 y = 0 }
+		size = { width = 960 height = 640 }
+		instantTextBoxType = {
+			name = "REU_Sok_Trait_Hint"
+			position = { x = 256 y = 166 }
+			maxWidth = 490
+			maxHeight = 20
+			font = "REU_Lud_text16"
+			text = "REU_sok_hint_trait"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_Sok_TraitReset_Btn"
+			position = { x = 764 y = 164 }
+			quadTextureSprite = "GFX_REU_Sokolov_btn_wide"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_trait_reset"
+			pdx_tooltip = "REU_sok_trait_reset_tt"
+			clicksound = click_default
+		}
+		iconType = {
+			name = "REU_SokTr_PanzerLeader_Bg"
+			position = { x = 256 y = 196 }
+			spriteType = "GFX_REU_Sokolov_row_sm"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_PanzerLeader_Icon"
+			position = { x = 268 y = 205 }
+			spriteType = "GFX_trait_panzer_leader"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_PanzerLeader_Name"
+			position = { x = 300 y = 201 }
+			maxWidth = 250
+			maxHeight = 22
+			font = "REU_Lud_text20"
+			text = "panzer_leader"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_PanzerLeader_Desc"
+			position = { x = 300 y = 224 }
+			maxWidth = 250
+			maxHeight = 30
+			font = "REU_Lud_text16"
+			text = "panzer_leader_desc"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_PanzerLeader_Cost"
+			position = { x = 268 y = 254 }
+			maxWidth = 150
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_cost_panzer_leader"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_SokTr_PanzerLeader_Btn"
+			position = { x = 436 y = 240 }
+			quadTextureSprite = "GFX_REU_Sokolov_btn"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_trait_pick"
+			pdx_tooltip = "panzer_leader_desc"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_PanzerLeader_Owned"
+			position = { x = 426 y = 254 }
+			maxWidth = 120
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_owned"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_InfantryLeader_Bg"
+			position = { x = 575 y = 196 }
+			spriteType = "GFX_REU_Sokolov_row_sm"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_InfantryLeader_Icon"
+			position = { x = 587 y = 205 }
+			spriteType = "GFX_trait_infantry_leader"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_InfantryLeader_Name"
+			position = { x = 619 y = 201 }
+			maxWidth = 250
+			maxHeight = 22
+			font = "REU_Lud_text20"
+			text = "infantry_leader"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_InfantryLeader_Desc"
+			position = { x = 619 y = 224 }
+			maxWidth = 250
+			maxHeight = 30
+			font = "REU_Lud_text16"
+			text = "infantry_leader_desc"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_InfantryLeader_Cost"
+			position = { x = 587 y = 254 }
+			maxWidth = 150
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_cost_infantry_leader"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_SokTr_InfantryLeader_Btn"
+			position = { x = 755 y = 240 }
+			quadTextureSprite = "GFX_REU_Sokolov_btn"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_trait_pick"
+			pdx_tooltip = "infantry_leader_desc"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_InfantryLeader_Owned"
+			position = { x = 745 y = 254 }
+			maxWidth = 120
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_owned"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_ArmorOfficer_Bg"
+			position = { x = 256 y = 282 }
+			spriteType = "GFX_REU_Sokolov_row_sm"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_ArmorOfficer_Icon"
+			position = { x = 268 y = 291 }
+			spriteType = "GFX_trait_armor_officer"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_ArmorOfficer_Name"
+			position = { x = 300 y = 287 }
+			maxWidth = 250
+			maxHeight = 22
+			font = "REU_Lud_text20"
+			text = "armor_officer"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_ArmorOfficer_Desc"
+			position = { x = 300 y = 310 }
+			maxWidth = 250
+			maxHeight = 30
+			font = "REU_Lud_text16"
+			text = "armor_officer_desc"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_ArmorOfficer_Cost"
+			position = { x = 268 y = 340 }
+			maxWidth = 150
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_cost_armor_officer"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_SokTr_ArmorOfficer_Btn"
+			position = { x = 436 y = 326 }
+			quadTextureSprite = "GFX_REU_Sokolov_btn"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_trait_pick"
+			pdx_tooltip = "armor_officer_desc"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_ArmorOfficer_Owned"
+			position = { x = 426 y = 340 }
+			maxWidth = 120
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_owned"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_HarshLeader_Bg"
+			position = { x = 575 y = 282 }
+			spriteType = "GFX_REU_Sokolov_row_sm"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_HarshLeader_Icon"
+			position = { x = 587 y = 291 }
+			spriteType = "GFX_trait_harsh_leader"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_HarshLeader_Name"
+			position = { x = 619 y = 287 }
+			maxWidth = 250
+			maxHeight = 22
+			font = "REU_Lud_text20"
+			text = "harsh_leader"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_HarshLeader_Desc"
+			position = { x = 619 y = 310 }
+			maxWidth = 250
+			maxHeight = 30
+			font = "REU_Lud_text16"
+			text = "harsh_leader_desc"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_HarshLeader_Cost"
+			position = { x = 587 y = 340 }
+			maxWidth = 150
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_cost_harsh_leader"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_SokTr_HarshLeader_Btn"
+			position = { x = 755 y = 326 }
+			quadTextureSprite = "GFX_REU_Sokolov_btn"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_trait_pick"
+			pdx_tooltip = "harsh_leader_desc"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_HarshLeader_Owned"
+			position = { x = 745 y = 340 }
+			maxWidth = 120
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_owned"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_WinterSpecialist_Bg"
+			position = { x = 256 y = 368 }
+			spriteType = "GFX_REU_Sokolov_row_sm"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_WinterSpecialist_Icon"
+			position = { x = 268 y = 377 }
+			spriteType = "GFX_trait_winter_specialist"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_WinterSpecialist_Name"
+			position = { x = 300 y = 373 }
+			maxWidth = 250
+			maxHeight = 22
+			font = "REU_Lud_text20"
+			text = "winter_specialist"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_WinterSpecialist_Desc"
+			position = { x = 300 y = 396 }
+			maxWidth = 250
+			maxHeight = 30
+			font = "REU_Lud_text16"
+			text = "winter_specialist_desc"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_WinterSpecialist_Cost"
+			position = { x = 268 y = 426 }
+			maxWidth = 150
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_cost_winter_specialist"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_SokTr_WinterSpecialist_Btn"
+			position = { x = 436 y = 412 }
+			quadTextureSprite = "GFX_REU_Sokolov_btn"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_trait_pick"
+			pdx_tooltip = "winter_specialist_desc"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_WinterSpecialist_Owned"
+			position = { x = 426 y = 426 }
+			maxWidth = 120
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_owned"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_DesertFox_Bg"
+			position = { x = 575 y = 368 }
+			spriteType = "GFX_REU_Sokolov_row_sm"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_DesertFox_Icon"
+			position = { x = 587 y = 377 }
+			spriteType = "GFX_trait_desert_fox"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_DesertFox_Name"
+			position = { x = 619 y = 373 }
+			maxWidth = 250
+			maxHeight = 22
+			font = "REU_Lud_text20"
+			text = "desert_fox"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_DesertFox_Desc"
+			position = { x = 619 y = 396 }
+			maxWidth = 250
+			maxHeight = 30
+			font = "REU_Lud_text16"
+			text = "desert_fox_desc"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_DesertFox_Cost"
+			position = { x = 587 y = 426 }
+			maxWidth = 150
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_cost_desert_fox"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_SokTr_DesertFox_Btn"
+			position = { x = 755 y = 412 }
+			quadTextureSprite = "GFX_REU_Sokolov_btn"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_trait_pick"
+			pdx_tooltip = "desert_fox_desc"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_DesertFox_Owned"
+			position = { x = 745 y = 426 }
+			maxWidth = 120
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_owned"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_FortressBuster_Bg"
+			position = { x = 256 y = 454 }
+			spriteType = "GFX_REU_Sokolov_row_sm"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_FortressBuster_Icon"
+			position = { x = 268 y = 463 }
+			spriteType = "GFX_trait_fortress_buster"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_FortressBuster_Name"
+			position = { x = 300 y = 459 }
+			maxWidth = 250
+			maxHeight = 22
+			font = "REU_Lud_text20"
+			text = "fortress_buster"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_FortressBuster_Desc"
+			position = { x = 300 y = 482 }
+			maxWidth = 250
+			maxHeight = 30
+			font = "REU_Lud_text16"
+			text = "fortress_buster_desc"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_FortressBuster_Cost"
+			position = { x = 268 y = 512 }
+			maxWidth = 150
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_cost_fortress_buster"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_SokTr_FortressBuster_Btn"
+			position = { x = 436 y = 498 }
+			quadTextureSprite = "GFX_REU_Sokolov_btn"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_trait_pick"
+			pdx_tooltip = "fortress_buster_desc"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_FortressBuster_Owned"
+			position = { x = 426 y = 512 }
+			maxWidth = 120
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_owned"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_Trickster_Bg"
+			position = { x = 575 y = 454 }
+			spriteType = "GFX_REU_Sokolov_row_sm"
+			alwaystransparent = yes
+		}
+		iconType = {
+			name = "REU_SokTr_Trickster_Icon"
+			position = { x = 587 y = 463 }
+			spriteType = "GFX_trait_trickster"
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_Trickster_Name"
+			position = { x = 619 y = 459 }
+			maxWidth = 250
+			maxHeight = 22
+			font = "REU_Lud_text20"
+			text = "trickster"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_Trickster_Desc"
+			position = { x = 619 y = 482 }
+			maxWidth = 250
+			maxHeight = 30
+			font = "REU_Lud_text16"
+			text = "trickster_desc"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_Trickster_Cost"
+			position = { x = 587 y = 512 }
+			maxWidth = 150
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_cost_trickster"
+			format = left
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "REU_SokTr_Trickster_Btn"
+			position = { x = 755 y = 498 }
+			quadTextureSprite = "GFX_REU_Sokolov_btn"
+			buttonFont = "REU_Lud_text16"
+			buttonText = "REU_sok_trait_pick"
+			pdx_tooltip = "trickster_desc"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "REU_SokTr_Trickster_Owned"
+			position = { x = 745 y = 512 }
+			maxWidth = 120
+			maxHeight = 18
+			font = "REU_Lud_text16"
+			text = "REU_sok_trait_owned"
+			format = right
+			fixedsize = yes
+			alwaystransparent = yes
+		}
+	}
+	}
+}

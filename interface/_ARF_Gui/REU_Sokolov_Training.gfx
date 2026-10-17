@@ -1,0 +1,184 @@
+# ==============================================================================
+#  索科洛夫的特训 —— 面板贴图注册
+#  贴图来源：
+#    · panel_bg / btn / btn_wide / chip_tab / chip_tgt —— 生图素材，
+#      由 docs/将领加点系统/工具/gen_reu_sokolov_steel.cjs 裁切缩放产出
+#    · 其余钢板 / 格子 / 铭牌 / 进度条 / 图标 —— 矢量，
+#      由 docs/将领加点系统/工具/gen_reu_sokolov_panel.cjs 产出
+#  按钮一律用最简 spriteType（不加 effectFile）——多帧状态机效果会让单帧贴图
+#  渲染失败 / 点击失效（见柳德米拉面板 gfx 的注释）。
+#  ⚠ iconType / buttonType **没有 size 键**：贴图原生尺寸 = 显示尺寸，
+#    所以每张 fill 类贴图都按显示尺寸逐张生成，尺寸常量在 training_data.cjs 的 LAYOUT。
+# ==============================================================================
+spriteTypes = {
+
+	# ---- 面板底（生图拼的钢框 + 仪表盘内区，960x640）----
+	spriteType = {
+		name = "GFX_REU_Sokolov_panel_bg"
+		texturefile = "gfx/interface/REU_sokolov_training/panel_bg.png"
+		legacy_lazy_load = no
+	}
+
+	# ---- 钢板条：训练行 638x80 / 特质候选卡 311x83 ----
+	spriteType = {
+		name = "GFX_REU_Sokolov_row_bg"
+		texturefile = "gfx/interface/REU_sokolov_training/row_bg.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_row_sm"
+		texturefile = "gfx/interface/REU_sokolov_training/row_sm.png"
+		legacy_lazy_load = no
+	}
+
+	# ---- 侧栏底板 180x373 / 标题铭牌 350x44 / 政治点数读板 270x36 ----
+	spriteType = {
+		name = "GFX_REU_Sokolov_side_plate"
+		texturefile = "gfx/interface/REU_sokolov_training/side_plate.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_nameplate"
+		texturefile = "gfx/interface/REU_sokolov_training/nameplate.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_pp_plate"
+		texturefile = "gfx/interface/REU_sokolov_training/pp_plate.png"
+		legacy_lazy_load = no
+	}
+
+	# ---- 分隔线 ----
+	spriteType = {
+		name = "GFX_REU_Sokolov_divider_h"
+		texturefile = "gfx/interface/REU_sokolov_training/divider_h.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_divider_v"
+		texturefile = "gfx/interface/REU_sokolov_training/divider_v.png"
+		legacy_lazy_load = no
+	}
+
+	# ---- 图鉴格 154x52（常态 / 已拥有加暖金底）----
+	spriteType = {
+		name = "GFX_REU_Sokolov_cell"
+		texturefile = "gfx/interface/REU_sokolov_training/cell.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_cell_on"
+		texturefile = "gfx/interface/REU_sokolov_training/cell_on.png"
+		legacy_lazy_load = no
+	}
+
+	# ---- 按键盘/按钮（生图钢制板）----
+	spriteType = {
+		name = "GFX_REU_Sokolov_btn"
+		texturefile = "gfx/interface/REU_sokolov_training/btn.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_btn_wide"
+		texturefile = "gfx/interface/REU_sokolov_training/btn_wide.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_chip_tab"
+		texturefile = "gfx/interface/REU_sokolov_training/chip_tab.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_chip_tgt"
+		texturefile = "gfx/interface/REU_sokolov_training/chip_tgt.png"
+		legacy_lazy_load = no
+	}
+
+	# ---- 选中项下划线（88 / 100 / 120）----
+	spriteType = {
+		name = "GFX_REU_Sokolov_underline_88"
+		texturefile = "gfx/interface/REU_sokolov_training/underline_88.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_underline_100"
+		texturefile = "gfx/interface/REU_sokolov_training/underline_100.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_underline_120"
+		texturefile = "gfx/interface/REU_sokolov_training/underline_120.png"
+		legacy_lazy_load = no
+	}
+
+	# ---- ＋ / ✕ ----
+	spriteType = {
+		name = "GFX_REU_Sokolov_plus_btn"
+		texturefile = "gfx/interface/REU_sokolov_training/plus_btn.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_close_btn"
+		texturefile = "gfx/interface/REU_sokolov_training/close_btn.png"
+		legacy_lazy_load = no
+	}
+
+	# ---- 进度条：11 帧（0 = 空，10 = 满），用 frame = REU_sel_<skill>_lv 切换 ----
+	spriteType = {
+		name = "GFX_REU_Sokolov_bar"
+		texturefile = "gfx/interface/REU_sokolov_training/bar_11.png"
+		noOfFrames = 11
+		legacy_lazy_load = no
+	}
+
+	# ---- 四枚技能行图标（56x56 矢量）----
+	spriteType = {
+		name = "GFX_REU_Sokolov_icon_scout"
+		texturefile = "gfx/interface/REU_sokolov_training/icon_scout.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_icon_night"
+		texturefile = "gfx/interface/REU_sokolov_training/icon_night.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_icon_intel"
+		texturefile = "gfx/interface/REU_sokolov_training/icon_intel.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_Sokolov_icon_blade"
+		texturefile = "gfx/interface/REU_sokolov_training/icon_blade.png"
+		legacy_lazy_load = no
+	}
+
+	# ---- 侧栏头像：直接引用角色文件里的同一张贴图（原生 156x210）----
+	#   与 common/characters/REU.txt 的 army/civilian.large 同源；换人的图随角色文件走。
+	spriteType = {
+		name = "GFX_REU_portrait_sokolov"
+		texturefile = "gfx/leaders/REU/Sokolov.dds"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_portrait_yelena"
+		texturefile = "gfx/leaders/REU/Yelena_stage_1.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_portrait_alina"
+		texturefile = "gfx/leaders/REU/Alina_stage_1.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_REU_portrait_mudrock"
+		texturefile = "gfx/leaders/REU/Mudrock.png"
+		legacy_lazy_load = no
+	}
+}
+
+bitmapfonts = {
+
+	# 深钢底需要**浅字**：REU_Lud_title26 / text20 / text16 定义在
+	# interface/_ARF_Gui/REU_Ludmila_Office.gfx（白字），这里直接复用，不重复定义。
+}
