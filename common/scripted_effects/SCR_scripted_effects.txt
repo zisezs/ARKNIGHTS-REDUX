@@ -138,3 +138,33 @@ SCR_dolls_recruit_effect = {
 		}
 	}
 }
+
+# 乡土自卫队 — 6 步兵营 + 工兵的锁定模板；首次执行创建模板，之后每次补 1 个满编师。
+SCR_militia_unlock_effect = {
+	if = {
+		limit = { NOT = { has_country_flag = SCR_militia_unlocked_flag } }
+		set_country_flag = SCR_militia_unlocked_flag
+		division_template = {
+			name = "乡土自卫队"
+			is_locked = yes
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 0 y = 2 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+				infantry = { x = 1 y = 2 }
+			}
+			support = {
+				engineer = { x = 0 y = 0 }
+			}
+			priority = 2
+		}
+	}
+	capital_scope = {
+		create_unit = {
+			division = "division_template = \"乡土自卫队\" start_experience_factor = 0.5 start_equipment_factor = 0.8 start_manpower_factor = 1"
+			owner = ROOT
+		}
+	}
+}

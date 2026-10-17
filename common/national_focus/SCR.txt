@@ -50,6 +50,10 @@ focus_tree = {
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
 			custom_effect_tooltip = SCR_dyn_leadership_tooltip
+			# ---- 【旧树自动演出】启动 起 ----
+			custom_effect_tooltip = SCR_legacy_auto_start_tt
+			SCR_legacy_auto_start = yes
+			# ---- 【旧树自动演出】启动 止 ----
 		}
 	}
 
@@ -59,6 +63,26 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_crown_of_embers }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -91,6 +115,26 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_gather_the_displaced }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -125,6 +169,26 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_sole_director }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -158,6 +222,26 @@ focus_tree = {
 		x = -1
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_archives_of_embers }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -190,6 +274,26 @@ focus_tree = {
 		x = 1
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_gallic_salon }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -222,6 +326,26 @@ focus_tree = {
 		x = 0
 		y = 4
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_crown_settled }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -255,6 +379,26 @@ focus_tree = {
 		x = -1
 		y = 5
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_herald_on_the_road }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -288,6 +432,26 @@ focus_tree = {
 		x = 1
 		y = 5
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_pillage_the_myth }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -320,6 +484,26 @@ focus_tree = {
 		x = 0
 		y = 6
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_vanguard_state }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -328,30 +512,6 @@ focus_tree = {
 			focus = SCR_pillage_the_myth
 		}
 		completion_reward = {
-			set_politics = {
-				ruling_party = despotism
-				elections_allowed = no
-			}
-			set_popularities = {
-				despotism = 65
-				mysticism = 15
-				authoritarianism = 10
-				conservatism = 5
-				liberalism = 2
-				progressivism = 1
-				socialism = 1
-				communism = 1
-			}
-			add_country_leader_role = {
-				character = SCR_lucian_gaul_char
-				promote_leader = yes
-				country_leader = {
-					ideology = despotism_subtype
-					traits = {
-						the_director
-					}
-				}
-			}
 			add_stability = 0.10
 			add_war_support = 0.10
 			add_political_power = 150
@@ -371,11 +531,8 @@ focus_tree = {
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
 			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 			custom_effect_tooltip = SCR_vanguard_state_tooltip
-			hidden_effect = {
-				news_event = {
-					id = scrse.3
-				}
-			}
+			# 是否正式立国交给事件 scr.28 由玩家决定（见 events/SCR.txt）
+			country_event = { id = scr.28 }
 		}
 	}
 
@@ -385,6 +542,26 @@ focus_tree = {
 		x = -1
 		y = 7
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_first_decree }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -417,6 +594,26 @@ focus_tree = {
 		x = 1
 		y = 7
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_court_of_stages }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -453,6 +650,26 @@ focus_tree = {
 		x = 6
 		y = 0
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_roll_call_of_gaul }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -498,6 +715,26 @@ focus_tree = {
 		x = 5
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_script_for_insurgents }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -549,6 +786,26 @@ focus_tree = {
 		x = 7
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_no_improvisation }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -596,6 +853,26 @@ focus_tree = {
 		x = 6
 		y = 2
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_stage_managers_of_the_wilds }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -648,6 +925,26 @@ focus_tree = {
 		x = 5
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_ledger_of_names }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -696,6 +993,26 @@ focus_tree = {
 		x = 7
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_kind_theaters }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -745,6 +1062,26 @@ focus_tree = {
 		x = 6
 		y = 4
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_the_audience_sits_down }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -795,6 +1132,26 @@ focus_tree = {
 		x = 5
 		y = 5
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_loyalty_is_a_line }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -843,6 +1200,26 @@ focus_tree = {
 		x = 7
 		y = 5
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_understudy_battalions }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -892,6 +1269,26 @@ focus_tree = {
 		x = 6
 		y = 6
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_curtain_around_gaul }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -942,6 +1339,26 @@ focus_tree = {
 		x = 5
 		y = 7
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_whisper_networks }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -990,6 +1407,26 @@ focus_tree = {
 		x = 7
 		y = 7
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_dont_clap_yet }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1042,6 +1479,26 @@ focus_tree = {
 		x = 12
 		y = 0
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_march_music }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1078,6 +1535,26 @@ focus_tree = {
 		x = 11
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_rehearse_the_old_guard }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1117,6 +1594,26 @@ focus_tree = {
 		x = 13
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_script_of_the_grand_campaign }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1156,6 +1653,26 @@ focus_tree = {
 		x = 12
 		y = 2
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_veterans_choir }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1204,6 +1721,26 @@ focus_tree = {
 		x = 11
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_officers_school_on_wheels }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1243,6 +1780,26 @@ focus_tree = {
 		x = 13
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_artillery_interlude }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1285,6 +1842,26 @@ focus_tree = {
 		x = 12
 		y = 4
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_the_army_remembers }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1334,6 +1911,26 @@ focus_tree = {
 		x = 11
 		y = 5
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_gaulish_drill }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1371,6 +1968,26 @@ focus_tree = {
 		x = 13
 		y = 5
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_supply_caravan_restored }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1417,6 +2034,26 @@ focus_tree = {
 		x = 12
 		y = 6
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_encore_of_the_empire }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1467,6 +2104,26 @@ focus_tree = {
 		x = 11
 		y = 7
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_old_guard_flag }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1505,6 +2162,26 @@ focus_tree = {
 		x = 13
 		y = 7
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_generals_box }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1557,6 +2234,26 @@ focus_tree = {
 		x = 18
 		y = 0
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_ledger_of_ruins }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1586,6 +2283,26 @@ focus_tree = {
 		x = 17
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_stage_of_iron }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1632,6 +2349,26 @@ focus_tree = {
 		x = 19
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_harvest_the_ruins }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1672,6 +2409,26 @@ focus_tree = {
 		x = 18
 		y = 2
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_forge_chorus }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1705,6 +2462,26 @@ focus_tree = {
 		x = 17
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_rebuild_the_roads }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1746,6 +2523,26 @@ focus_tree = {
 		x = 19
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_light_in_the_basement }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1778,6 +2575,26 @@ focus_tree = {
 		x = 18
 		y = 4
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_the_land_remembers }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1826,6 +2643,26 @@ focus_tree = {
 		x = 17
 		y = 5
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_farmers_take_a_bow }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1859,6 +2696,26 @@ focus_tree = {
 		x = 19
 		y = 5
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_trade_on_old_roads }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1906,6 +2763,26 @@ focus_tree = {
 		x = 18
 		y = 6
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_city_that_refuses_to_close }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1940,6 +2817,26 @@ focus_tree = {
 		x = 17
 		y = 7
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_muses_exchange }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -1973,6 +2870,26 @@ focus_tree = {
 		x = 19
 		y = 7
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_archive_tower }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2011,6 +2928,26 @@ focus_tree = {
 		x = 26
 		y = 0
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_shadow_over_salon }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2035,6 +2972,26 @@ focus_tree = {
 		x = 25
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_ledger_of_old_blood }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2054,6 +3011,26 @@ focus_tree = {
 		x = 27
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_dressers_of_the_aristocracy }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2072,6 +3049,26 @@ focus_tree = {
 		x = 26
 		y = 2
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_puppets_in_the_salons }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2096,6 +3093,26 @@ focus_tree = {
 		x = 25
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_the_marriage_contract }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2113,6 +3130,26 @@ focus_tree = {
 		x = 27
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_forged_genealogy }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2130,6 +3167,26 @@ focus_tree = {
 		x = 26
 		y = 4
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_ministers_of_the_wing }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2155,6 +3212,26 @@ focus_tree = {
 		x = 25
 		y = 5
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_voices_in_the_assembly }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2173,6 +3250,26 @@ focus_tree = {
 		x = 27
 		y = 5
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_the_chief_of_the_deep_office }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2197,6 +3294,26 @@ focus_tree = {
 		x = 26
 		y = 6
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_the_state_wears_a_mask }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2223,6 +3340,26 @@ focus_tree = {
 		x = 26
 		y = 7
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_the_deep_government }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2255,6 +3392,26 @@ focus_tree = {
 		x = 34
 		y = 0
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_return_to_londinium }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2279,6 +3436,26 @@ focus_tree = {
 		x = 33
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_survey_the_rubble }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2298,6 +3475,26 @@ focus_tree = {
 		x = 35
 		y = 1
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_requiem_for_the_capital }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2316,6 +3513,26 @@ focus_tree = {
 		x = 34
 		y = 2
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_forest_of_scaffolds }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2341,6 +3558,26 @@ focus_tree = {
 		x = 33
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_foundation_of_the_grand_theatre }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2365,6 +3602,26 @@ focus_tree = {
 		x = 35
 		y = 3
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_homeward_act }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
@@ -2383,16 +3640,44 @@ focus_tree = {
 		x = 34
 		y = 4
 		cost = 5
+		# ---- 【旧树自动演出】自动推进锁 起 ----
+		available = {
+			if = {
+				limit = { has_shine_effect_on_focus = SCR_lights_of_londinium_again }
+				custom_override_tooltip = {
+					tooltip = {
+						localization_key = SCR_legacy_auto_progress_tt
+						FLAG_DAYS = [?SCR_legacy_auto_prog:days]
+					}
+					always = no
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						owns_state = 483
+						has_full_control_of_state = 483
+					}
+				}
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_wait_tt
+					always = no
+				}
+			}
+			else = {
+				custom_override_tooltip = {
+					tooltip = SCR_legacy_auto_tt
+					always = no
+				}
+			}
+		}
+		# ---- 【旧树自动演出】自动推进锁 止 ----
 		ai_will_do = {
 			base = 10
 		}
 		prerequisite = {
 			focus = SCR_foundation_of_the_grand_theatre
 			focus = SCR_homeward_act
-		}
-		available = {
-			owns_state = 483
-			has_full_control_of_state = 483
 		}
 		completion_reward = {
 			add_timed_idea = {
@@ -2424,309 +3709,94 @@ focus_tree = {
 		}
 	}
 
-	########################################################################
-	# 独立支线树「第二次四皇会战」— 战时终幕（x 10-18，y 10-15）
-	# 树根仅需处于战争中即可启动；左翼=老近卫军线，右翼=总动员线
-	# 全部分支国策 BUFF 均并入民族精神「高卢，高卢！」(SCR_dyn_gaul_gaul)
-	# 终点「我梦见一片焦土」按投降进度分流：<10% 士气正盛 / >50% 焦土核爆割地
-	########################################################################
-
-	focus = {
-		id = SCR_second_war_of_four_emperors
-		icon = GFX_focus_SCR_second_war_of_four_emperors
-		x = 14
-		y = 10
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		available = {
-			has_war = yes
-		}
-		completion_reward = {
-			add_political_power = 50
-			add_war_support = 0.05
-			set_variable = { var = SCR_dyn_gaul value = 0 }
-			set_variable = { var = SCR_dyn_gaul_lite value = 0 }
-			add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_tooltip
-		}
-	}
-
-	focus = {
-		id = SCR_old_guard_reformed
-		icon = GFX_focus_SCR_old_guard_reformed
-		x = 13
-		y = 11
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		prerequisite = {
-			focus = SCR_second_war_of_four_emperors
-		}
-		completion_reward = {
-			add_manpower = 6000
-			army_experience = 15
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_modify_tt
-			add_to_variable = {
-				SCR_dyn_gaul = 0.03
-				tooltip = SCR_dyn_gaul_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_tooltip
-		}
-	}
-
-	focus = {
-		id = SCR_citizens_take_arms
-		icon = GFX_focus_SCR_citizens_take_arms
-		x = 12
-		y = 12
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		prerequisite = {
-			focus = SCR_old_guard_reformed
-		}
-		completion_reward = {
-			add_manpower = 10000
-			add_war_support = 0.03
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_modify_tt
-			add_to_variable = {
-				SCR_dyn_gaul_lite = 0.02
-				tooltip = SCR_dyn_gaul_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_tooltip
-		}
-	}
-
-	focus = {
-		id = SCR_sing_troupe_eagle
-		icon = GFX_focus_SCR_sing_troupe_eagle
-		x = 11
-		y = 13
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		prerequisite = {
-			focus = SCR_citizens_take_arms
-		}
-		completion_reward = {
-			add_political_power = 50
-			add_stability = 0.03
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_modify_tt
-			add_to_variable = {
-				SCR_dyn_gaul = 0.02
-				tooltip = SCR_dyn_gaul_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_tooltip
-		}
-	}
-
-	focus = {
-		id = SCR_originium_furnace_faster
-		icon = GFX_focus_SCR_originium_furnace_faster
-		x = 10
-		y = 14
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		prerequisite = {
-			focus = SCR_sing_troupe_eagle
-		}
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = infantry_equipment_1
-				amount = 1500
-			}
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_modify_tt
-			add_to_variable = {
-				SCR_dyn_gaul_lite = 0.02
-				tooltip = SCR_dyn_gaul_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_tooltip
-		}
-	}
-
-	focus = {
-		id = SCR_infected_come_here
-		icon = GFX_focus_SCR_infected_come_here
-		x = 15
-		y = 11
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		prerequisite = {
-			focus = SCR_second_war_of_four_emperors
-		}
-		available = {
-			casualties > 100000
-		}
-		completion_reward = {
-			add_manpower = 20000
-			add_stability = -0.03
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_modify_tt
-			add_to_variable = {
-				SCR_dyn_gaul_lite = 0.02
-				tooltip = SCR_dyn_gaul_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_tooltip
-		}
-	}
-
-	focus = {
-		id = SCR_everyone_drink_originium
-		icon = GFX_focus_SCR_everyone_drink_originium
-		x = 16
-		y = 12
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		prerequisite = {
-			focus = SCR_infected_come_here
-		}
-		completion_reward = {
-			army_experience = 25
-			add_stability = -0.03
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_modify_tt
-			add_to_variable = {
-				SCR_dyn_gaul = 0.03
-				tooltip = SCR_dyn_gaul_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_tooltip
-		}
-	}
-
-	focus = {
-		id = SCR_gaul_no_retreat
-		icon = GFX_focus_SCR_gaul_no_retreat
-		x = 17
-		y = 13
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		prerequisite = {
-			focus = SCR_everyone_drink_originium
-		}
-		completion_reward = {
-			army_experience = 10
-			add_war_support = 0.03
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_modify_tt
-			add_to_variable = {
-				SCR_dyn_gaul = 0.03
-				tooltip = SCR_dyn_gaul_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_tooltip
-		}
-	}
-
-	focus = {
-		id = SCR_lingones_we_stay
-		icon = GFX_focus_SCR_lingones_we_stay
-		x = 18
-		y = 14
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		prerequisite = {
-			focus = SCR_gaul_no_retreat
-		}
-		available = {
-			owns_state = 483
-			has_full_control_of_state = 483
-		}
-		completion_reward = {
-			483 = {
-				add_extra_state_shared_building_slots = 2
-				add_building = {
-					building = arms_factory
-					level = 2
-					instant = yes
-				}
-			}
-			add_war_support = 0.05
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_modify_tt
-			add_to_variable = {
-				SCR_dyn_gaul_lite = 0.02
-				tooltip = SCR_dyn_gaul_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
-			custom_effect_tooltip = SCR_dyn_gaul_gaul_tooltip
-		}
-	}
-
-	focus = {
-		id = SCR_dream_of_scorched_earth
-		icon = GFX_focus_SCR_dream_of_scorched_earth
-		x = 14
-		y = 15
-		cost = 2
-		ai_will_do = {
-			base = 10
-		}
-		prerequisite = {
-			focus = SCR_originium_furnace_faster
-			focus = SCR_lingones_we_stay
-		}
-		completion_reward = {
-			if = {
-				limit = {
-					surrender_progress < 0.1
-				}
-				add_war_support = 0.10
-				add_stability = 0.05
-				add_timed_idea = {
-					idea = SCR_morale_high
-					days = 365
-				}
-			}
-			else = {
-				if = {
-					limit = {
-						surrender_progress > 0.5
-					}
-					hidden_effect = {
-						news_event = {
-							id = scrse.2
-						}
-					}
-					every_owned_state = {
-						limit = {
-							is_core_of = SCR
-						}
-						transfer_state_to = ZZZ
-					}
-					ZZZ = {
-						every_owned_state = {
-							limit = {
-								is_core_of = SCR
-							}
-							bathe_in_hellfire_nuclear = yes
-							add_dynamic_modifier = {
-								modifier = fallout_atomic
-								days = 730
-							}
-						}
-						add_ideas = SCR_manmade_originium_storm
-					}
-				}
-			}
-		}
-	}
+	# ---- 【科西嘉线】shared_focus 引用 自动生成 起 ----
+	shared_focus = SCR_corsica_1
+	shared_focus = SCR_corsica_2
+	shared_focus = SCR_corsica_3
+	shared_focus = SCR_corsica_4
+	shared_focus = SCR_corsica_5
+	shared_focus = SCR_corsica_6
+	shared_focus = SCR_corsica_7
+	shared_focus = SCR_corsica_8
+	shared_focus = SCR_corsica_9
+	shared_focus = SCR_corsica_10
+	shared_focus = SCR_corsica_11
+	shared_focus = SCR_corsica_12
+	shared_focus = SCR_corsica_13
+	shared_focus = SCR_corsica_14
+	shared_focus = SCR_corsica_15
+	shared_focus = SCR_corsica_16
+	shared_focus = SCR_corsica_17
+	shared_focus = SCR_corsica_18
+	shared_focus = SCR_corsica_19
+	shared_focus = SCR_corsica_20
+	shared_focus = SCR_corsica_21
+	shared_focus = SCR_corsica_22
+	shared_focus = SCR_corsica_23
+	shared_focus = SCR_corsica_24
+	shared_focus = SCR_corsica_25
+	shared_focus = SCR_corsica_26
+	shared_focus = SCR_corsica_27
+	shared_focus = SCR_corsica_28
+	shared_focus = SCR_corsica_29
+	shared_focus = SCR_corsica_30
+	shared_focus = SCR_corsica_31
+	shared_focus = SCR_corsica_32
+	shared_focus = SCR_corsica_33
+	shared_focus = SCR_corsica_34
+	shared_focus = SCR_corsica_35
+	shared_focus = SCR_corsica_36
+	shared_focus = SCR_corsica_37
+	shared_focus = SCR_corsica_38
+	shared_focus = SCR_corsica_39
+	shared_focus = SCR_corsica_40
+	shared_focus = SCR_corsica_41
+	shared_focus = SCR_corsica_42
+	shared_focus = SCR_corsica_44
+	shared_focus = SCR_corsica_45
+	shared_focus = SCR_corsica_46
+	shared_focus = SCR_corsica_47
+	shared_focus = SCR_corsica_48
+	shared_focus = SCR_corsica_49
+	shared_focus = SCR_corsica_50
+	shared_focus = SCR_corsica_51
+	shared_focus = SCR_corsica_52
+	shared_focus = SCR_corsica_53
+	shared_focus = SCR_corsica_54
+	shared_focus = SCR_corsica_55
+	shared_focus = SCR_corsica_56
+	shared_focus = SCR_corsica_57
+	shared_focus = SCR_corsica_58
+	shared_focus = SCR_corsica_59
+	shared_focus = SCR_corsica_60
+	shared_focus = SCR_corsica_61
+	shared_focus = SCR_corsica_62
+	shared_focus = SCR_corsica_63
+	shared_focus = SCR_corsica_64
+	shared_focus = SCR_corsica_65
+	shared_focus = SCR_corsica_66
+	shared_focus = SCR_corsica_67
+	shared_focus = SCR_corsica_68
+	shared_focus = SCR_corsica_69
+	shared_focus = SCR_corsica_70
+	shared_focus = SCR_corsica_71
+	shared_focus = SCR_corsica_72
+	shared_focus = SCR_corsica_73
+	shared_focus = SCR_corsica_74
+	shared_focus = SCR_corsica_76
+	shared_focus = SCR_corsica_77
+	shared_focus = SCR_corsica_78
+	shared_focus = SCR_corsica_79
+	shared_focus = SCR_corsica_80
+	# ---- 【科西嘉线】shared_focus 引用 自动生成 止 ----
+	# ---- 【转线树】shared_focus 引用 自动生成 起 ----
+	shared_focus = SCR_switch_1
+	shared_focus = SCR_switch_2
+	shared_focus = SCR_switch_3
+	shared_focus = SCR_switch_4
+	shared_focus = SCR_switch_5
+	shared_focus = SCR_switch_6
+	# ---- 【转线树】shared_focus 引用 自动生成 止 ----
 	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
 	shared_focus = DEV_agri_1
 	shared_focus = DEV_agri_2
