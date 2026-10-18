@@ -151,3 +151,45 @@ SCR_bloody_carnival = {
 	icon = GFX_idea_SCR_bloody_carnival
 	recruitable_population_factor = -1
 }
+
+# 科西嘉线专属成长精神 —— 世界之都的倒影
+SCR_dyn_corsica = {
+	icon = GFX_idea_SCR_dyn_corsica
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	political_power_gain = SCR_dyn_corsica
+	stability_factor = SCR_dyn_corsica
+	war_support_factor = SCR_dyn_corsica
+	research_speed_factor = SCR_dyn_corsica_lite
+	production_speed_buildings_factor = SCR_dyn_corsica_lite
+	army_attack_factor = SCR_dyn_corsica_army
+	army_defence_factor = SCR_dyn_corsica_army
+	army_morale_factor = SCR_dyn_corsica_army
+	encryption = SCR_dyn_corsica_int
+	decryption = SCR_dyn_corsica_int
+}
+
+# 经济线升级精神 —— 新经济秩序
+SCR_dyn_corsica_economy = {
+	icon = GFX_idea_SCR_dyn_corsica_economy
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	production_speed_buildings_factor = SCR_dyn_corsica_economy
+	production_factory_efficiency_gain_factor = SCR_dyn_corsica_economy
+	production_factory_max_efficiency_factor = SCR_dyn_corsica_economy
+	research_speed_factor = SCR_dyn_corsica_economy_lite
+	consumer_goods_factor = SCR_dyn_corsica_economy_cg
+}
+
+# 军事线升级精神 —— 高卢战争机器
+SCR_dyn_corsica_military = {
+	icon = GFX_idea_SCR_dyn_corsica_military
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	army_attack_factor = SCR_dyn_corsica_military
+	army_defence_factor = SCR_dyn_corsica_military
+	army_morale_factor = SCR_dyn_corsica_military
+	experience_gain_army_factor = SCR_dyn_corsica_military_lite
+	conscription_factor = SCR_dyn_corsica_military_lite
+	max_dig_in_factor = SCR_dyn_corsica_military_lite
+}

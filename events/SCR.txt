@@ -453,3 +453,147 @@ country_event = {
 		name = scr.25.a
 	}
 }
+
+# 卢西恩终局 — 高卢先锋国的加冕
+country_event = {
+	id = scr.26
+	title = scr.26.t
+	desc = scr.26.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+
+	immediate = {
+		drop_cosmetic_tag = yes
+		set_politics = { ruling_party = despotism elections_allowed = no }
+		if = {
+			limit = { NOT = { has_country_leader = { character = SCR_lucian_gaul_char ruling_only = yes } } }
+			retire_country_leader = yes
+			promote_character = { character = SCR_lucian_gaul_char ideology = despotism_subtype }
+		}
+		set_party_name = {
+			ideology = despotism
+			name = SCR_despotism_subtype_party
+			long_name = SCR_despotism_subtype_party_long
+		}
+		set_country_flag = SCR_lucian_ending_flag
+	}
+
+	option = {
+		name = scr.26.a
+		add_political_power = 150
+		add_war_support = 0.05
+	}
+	option = {
+		name = scr.26.b
+		add_stability = 0.05
+		army_experience = 25
+	}
+}
+
+# 科西嘉莉终局 — 高卢倒影皇廷的加冕
+country_event = {
+	id = scr.27
+	title = scr.27.t
+	desc = scr.27.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+
+	immediate = {
+		set_popularities = {
+			communism = 1
+			socialism = 1
+			progressivism = 2
+			liberalism = 3
+			conservatism = 4
+			authoritarianism = 8
+			despotism = 8
+			fascism = 3
+			mysticism = 15
+			special = 55
+		}
+		if = {
+			limit = { NOT = { has_character = SCR_corsica_char } }
+			recruit_character = SCR_corsica_char
+		}
+		set_politics = { ruling_party = special elections_allowed = no }
+		if = {
+			limit = { NOT = { has_country_leader = { character = SCR_corsica_char ruling_only = yes } } }
+			retire_country_leader = yes
+			promote_character = { character = SCR_corsica_char ideology = special_corsica_subtype }
+		}
+		set_party_name = {
+			ideology = special
+			name = SCR_corsica_party
+			long_name = SCR_corsica_party_long
+		}
+		set_cosmetic_tag = SCR_Gallic_Reflection
+		set_country_flag = SCR_corsica_ending_flag
+	}
+
+	option = {
+		name = scr.27.a
+		add_political_power = 150
+		add_stability = 0.05
+	}
+	option = {
+		name = scr.27.b
+		add_war_support = 0.05
+		army_experience = 25
+	}
+}
+
+# 高卢先锋国 — 立国与否（国策「高卢先锋国」完成时触发）
+country_event = {
+	id = scr.28
+	title = scr.28.t
+	desc = scr.28.d
+	picture = GFX_report_event_SCR_gaul_restoration
+
+	is_triggered_only = yes
+
+	option = {
+		name = scr.28.a
+		set_politics = {
+			ruling_party = despotism
+			elections_allowed = no
+		}
+		set_popularities = {
+			despotism = 65
+			mysticism = 15
+			authoritarianism = 10
+			conservatism = 5
+			liberalism = 2
+			progressivism = 1
+			socialism = 1
+			communism = 1
+		}
+		add_country_leader_role = {
+			character = SCR_lucian_gaul_char
+			promote_leader = yes
+			country_leader = {
+				ideology = despotism_subtype
+				traits = {
+					the_director
+				}
+			}
+		}
+		set_party_name = {
+			ideology = despotism
+			name = SCR_despotism_subtype_party
+			long_name = SCR_despotism_subtype_party_long
+		}
+		custom_effect_tooltip = SCR_vanguard_state_accept_tt
+		news_event = { id = scrse.3 }
+		ai_chance = { base = 90 }
+	}
+
+	option = {
+		name = scr.28.b
+		add_political_power = 75
+		add_stability = 0.05
+		custom_effect_tooltip = SCR_vanguard_state_decline_tt
+		ai_chance = { base = 10 }
+	}
+}
