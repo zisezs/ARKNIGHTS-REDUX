@@ -1,0 +1,1422 @@
+######################################################
+# 猩红剧团（SCR）【皇帝的归来】国策树 —— 63 格
+# 设计稿：docs/SCR_皇帝的归来_设计/NEW_tree.txt（相对坐标 x -4..18 / y 9..25）
+# 落点：既有内容包围盒底线 20 +2 行起、水平居中 → 平移 (dx=10, dy=13)
+#       实际占位 x 6..28 / y 22..38
+# 挂载：SCR.txt 内 shared_focus 引用（取代 DEV 共享发展度树的位置）
+# 生成器：docs/gen_scr_emperor_returns.cjs（勿手改本文件）
+# 效果：两条动态民族精神 + 隐藏 idea 的 targeted_modifier（对莱塔尼亚/三公爵领）。
+######################################################
+
+shared_focus = {
+	id = SCR_er_87
+	icon = GFX_focus_SCR_er_87
+	x = 17
+	y = 22
+	cost = 5
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_new_emperor_gain_tt
+		add_to_variable = { SCR_dyn_new_emperor_pp = -0.1 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_new_emperor_stab = 0.1 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_new_emperor_recruit = 0.02 tooltip = recruitable_population_factor_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_new_emperor }
+		custom_effect_tooltip = SCR_er_old_gaul_gain_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = -0.2 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_old_gaul_stab = -0.2 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_ws = -0.2 tooltip = war_support_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_recruit = -0.1 tooltip = recruitable_population_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_build = -0.2 tooltip = production_speed_buildings_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+		hidden_effect = {
+			country_event = { id = scr_er.3 }
+		}
+		custom_effect_tooltip = SCR_er_bacchus_mercy_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_88
+	icon = GFX_focus_SCR_er_88
+	x = 12
+	y = 25
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_130
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		hidden_effect = {
+			add_ideas = SCR_er_hidden_ltn_breakthrough_1
+		}
+		custom_effect_tooltip = SCR_er_ltn_breakthrough_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_89
+	icon = GFX_focus_SCR_er_89
+	x = 22
+	y = 25
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_131
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_ws = 0.05 tooltip = war_support_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_core_attack = 0.1 tooltip = army_core_attack_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_90
+	icon = GFX_focus_SCR_er_90
+	x = 13
+	y = 26
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_88
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = 0.05 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_old_gaul_stab = 0.05 tooltip = stability_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_91
+	icon = GFX_focus_SCR_er_91
+	x = 21
+	y = 26
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_89
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = 0.05 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_old_gaul_stab = 0.05 tooltip = stability_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_92
+	icon = GFX_focus_SCR_er_92
+	x = 17
+	y = 25
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_151
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_new_emperor_modify_tt
+		add_to_variable = { SCR_dyn_new_emperor_stab = 0.1 tooltip = stability_factor_tt }
+		hidden_effect = {
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_emperor } } add_dynamic_modifier = { modifier = SCR_dyn_new_emperor } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } } add_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } } add_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_93
+	icon = GFX_focus_SCR_er_93
+	x = 17
+	y = 26
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_92
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_new_emperor_modify_tt
+		add_to_variable = { SCR_dyn_new_emperor_pp = -0.1 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_new_emperor_stab = -0.1 tooltip = stability_factor_tt }
+		hidden_effect = {
+			country_event = { id = scr_er.4 }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_emperor } } add_dynamic_modifier = { modifier = SCR_dyn_new_emperor } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } } add_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } } add_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } }
+		}
+		custom_effect_tooltip = SCR_er_private_state_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_94
+	icon = GFX_focus_SCR_er_94
+	x = 11
+	y = 27
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_90
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = 0.1 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_old_gaul_stab = 0.05 tooltip = stability_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_95
+	icon = GFX_focus_SCR_er_95
+	x = 13
+	y = 27
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_90
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = 0.05 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_old_gaul_stab = 0.1 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_recruit = 0.05 tooltip = recruitable_population_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_96
+	icon = GFX_focus_SCR_er_96
+	x = 18
+	y = 27
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_93
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_new_emperor_modify_tt
+		add_to_variable = { SCR_dyn_new_emperor_weekly = 0.01 tooltip = stability_weekly_tt }
+		hidden_effect = {
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_emperor } } add_dynamic_modifier = { modifier = SCR_dyn_new_emperor } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } } add_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } } add_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_97
+	icon = GFX_focus_SCR_er_97
+	x = 21
+	y = 27
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_91
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_ws = 0.05 tooltip = war_support_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_core_defence = 0.1 tooltip = army_core_defence_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_98
+	icon = GFX_focus_SCR_er_98
+	x = 23
+	y = 27
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_91
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_research = 0.05 tooltip = research_speed_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_build = 0.05 tooltip = production_speed_buildings_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_99
+	icon = GFX_focus_SCR_er_99
+	x = 16
+	y = 27
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_93
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_new_emperor_modify_tt
+		add_to_variable = { SCR_dyn_new_emperor_army_attack = 0.1 tooltip = army_attack_factor_tt }
+		hidden_effect = {
+			country_event = { id = scr_er.5 }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_emperor } } add_dynamic_modifier = { modifier = SCR_dyn_new_emperor } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } } add_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } } add_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } }
+		}
+		custom_effect_tooltip = SCR_er_bone_bearer_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_100
+	icon = GFX_focus_SCR_er_100
+	x = 16
+	y = 28
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_99
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		hidden_effect = {
+			every_military_industrial_organization = { include_invisible = yes add_mio_funds = 1000 }
+		}
+		custom_effect_tooltip = SCR_er_mio_funds_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_101
+	icon = GFX_focus_SCR_er_101
+	x = 18
+	y = 28
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_96
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_new_emperor_modify_tt
+		add_to_variable = { SCR_dyn_new_emperor_stab = -0.5 tooltip = stability_factor_tt }
+		hidden_effect = {
+			country_event = { id = scr_er.6 }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_emperor } } add_dynamic_modifier = { modifier = SCR_dyn_new_emperor } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } } add_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } } add_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } }
+		}
+		custom_effect_tooltip = SCR_er_this_is_an_order_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_102
+	icon = GFX_focus_SCR_er_102
+	x = 10
+	y = 28
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_94
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_stab = 0.05 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_recruit = 0.05 tooltip = recruitable_population_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_reinforce = 0.05 tooltip = land_reinforce_rate_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_103
+	icon = GFX_focus_SCR_er_103
+	x = 13
+	y = 28
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_95
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_stab = 0.05 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_recruit = 0.05 tooltip = recruitable_population_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_104
+	icon = GFX_focus_SCR_er_104
+	x = 21
+	y = 28
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_97
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_stab = -0.2 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_ws = 0.2 tooltip = war_support_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_weekly = 0.01 tooltip = stability_weekly_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_105
+	icon = GFX_focus_SCR_er_105
+	x = 24
+	y = 28
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_98
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_build = 0.05 tooltip = production_speed_buildings_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_factory = 0.05 tooltip = industrial_capacity_factory_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_106
+	icon = GFX_focus_SCR_er_106
+	x = 10
+	y = 29
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_102
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_build = 0.1 tooltip = production_speed_buildings_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_factory = 0.05 tooltip = industrial_capacity_factory_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_107
+	icon = GFX_focus_SCR_er_107
+	x = 13
+	y = 29
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_103
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_stab = 0.05 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_recruit = 0.05 tooltip = recruitable_population_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_hp = 0.05 tooltip = army_strength_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_108
+	icon = GFX_focus_SCR_er_108
+	x = 13
+	y = 30
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_107
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_ws = 0.05 tooltip = war_support_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_hp = 0.05 tooltip = army_strength_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_109
+	icon = GFX_focus_SCR_er_109
+	x = 21
+	y = 29
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_104
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = 0.05 tooltip = political_power_gain_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_110
+	icon = GFX_focus_SCR_er_110
+	x = 21
+	y = 30
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_109
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_stab = 0.05 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_research = 0.05 tooltip = research_speed_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_111
+	icon = GFX_focus_SCR_er_111
+	x = 24
+	y = 29
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_105
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_research_slot = 1
+		add_to_variable = { SCR_dyn_old_gaul_research = 0.1 tooltip = research_speed_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_112
+	icon = GFX_focus_SCR_er_112
+	x = 17
+	y = 29
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_101
+		focus = SCR_er_100
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		hidden_effect = {
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_emperor } } remove_dynamic_modifier = { modifier = SCR_dyn_new_emperor } }
+			add_dynamic_modifier = { modifier = SCR_dyn_theatre_empress }
+		}
+		custom_effect_tooltip = SCR_er_empress_rename_tt
+		custom_effect_tooltip = SCR_er_not_a_toy_gain_tt
+		add_to_variable = { SCR_dyn_not_a_toy_pp = -0.2 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_stab = -0.2 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_ws = -0.2 tooltip = war_support_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_factory = -0.2 tooltip = industrial_capacity_factory_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+		hidden_effect = {
+			country_event = { id = scr_er.7 }
+		}
+		custom_effect_tooltip = SCR_er_lucien_invitation_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_113
+	icon = GFX_focus_SCR_er_113
+	x = 10
+	y = 30
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_106
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = 0.05 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_old_gaul_resources = 0.2 tooltip = local_resources_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_114
+	icon = GFX_focus_SCR_er_114
+	x = 11
+	y = 31
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_108
+		focus = SCR_er_113
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_trickle = 0.1 tooltip = casualty_trickleback_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_115
+	icon = GFX_focus_SCR_er_115
+	x = 24
+	y = 30
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_111
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_build = 0.05 tooltip = production_speed_buildings_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_factory = 0.05 tooltip = industrial_capacity_factory_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_116
+	icon = GFX_focus_SCR_er_116
+	x = 23
+	y = 31
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_115
+		focus = SCR_er_110
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = 0.1 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_old_gaul_recruit = 0.05 tooltip = recruitable_population_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_117
+	icon = GFX_focus_SCR_er_117
+	x = 16
+	y = 30
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_112
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_supply = 0.1 tooltip = supply_consumption_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_attack = -0.1 tooltip = army_attack_factor_tt }
+		hidden_effect = {
+			country_event = { id = scr_er.8 }
+		}
+		custom_effect_tooltip = SCR_er_army_rectification_tt
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_118
+	icon = GFX_focus_SCR_er_118
+	x = 16
+	y = 31
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_117
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_supply = -0.1 tooltip = supply_consumption_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_attack = 0.05 tooltip = army_attack_factor_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_119
+	icon = GFX_focus_SCR_er_119
+	x = 18
+	y = 30
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_112
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_build = -0.1 tooltip = production_speed_buildings_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_mobilization = -0.2 tooltip = mobilization_speed_tt }
+		hidden_effect = {
+			country_event = { id = scr_er.9 }
+		}
+		custom_effect_tooltip = SCR_er_court_rectification_tt
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_120
+	icon = GFX_focus_SCR_er_120
+	x = 18
+	y = 31
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_119
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_pp = 0.05 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_build = 0.05 tooltip = production_speed_buildings_factor_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_121
+	icon = GFX_focus_SCR_er_121
+	x = 14
+	y = 32
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_118
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_stab = -0.3 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_ws = -0.3 tooltip = war_support_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_supply = -0.1 tooltip = supply_consumption_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_attack = 0.1 tooltip = army_attack_factor_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_122
+	icon = GFX_focus_SCR_er_122
+	x = 20
+	y = 32
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_120
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_political_power = 100
+		add_to_variable = { SCR_dyn_not_a_toy_stab = -0.3 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_weekly = 0.02 tooltip = stability_weekly_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_mobilization = 0.2 tooltip = mobilization_speed_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_123
+	icon = GFX_focus_SCR_er_123
+	x = 23
+	y = 33
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_122
+		focus = SCR_er_116
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_pp = -0.15 tooltip = political_power_gain_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_124
+	icon = GFX_focus_SCR_er_124
+	x = 11
+	y = 33
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_121
+		focus = SCR_er_114
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_defence = 0.1 tooltip = army_defence_factor_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_125
+	icon = GFX_focus_SCR_er_125
+	x = 11
+	y = 34
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_124
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_ws = 0.1 tooltip = war_support_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_attack = 0.05 tooltip = army_attack_factor_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_126
+	icon = GFX_focus_SCR_er_126
+	x = 23
+	y = 34
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_123
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_great_infrastructure_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_127
+	icon = GFX_focus_SCR_er_127
+	x = 16
+	y = 36
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_125
+		focus = SCR_er_148
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_glory_hand_tt
+		add_dynamic_modifier = { modifier = SCR_dyn_glory_hand }
+	}
+}
+shared_focus = {
+	id = SCR_er_128
+	icon = GFX_focus_SCR_er_128
+	x = 18
+	y = 36
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_126
+		focus = SCR_er_150
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		division_template = {
+			name = "颂乐人偶师"
+			is_locked = yes
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 0 y = 2 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+				infantry = { x = 1 y = 2 }
+				infantry = { x = 2 y = 0 }
+				infantry = { x = 2 y = 1 }
+				infantry = { x = 2 y = 2 }
+			}
+			support = {
+				engineer = { x = 0 y = 0 }
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"颂乐人偶师\" division_template = \"颂乐人偶师\" start_experience_factor = 0.3 start_equipment_factor = 1"
+				owner = ROOT
+				count = 16
+			}
+		}
+		custom_effect_tooltip = SCR_er_puppet_division_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_129
+	icon = GFX_focus_SCR_er_129
+	x = 17
+	y = 38
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_128
+		focus = SCR_er_127
+		focus = SCR_er_145
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		hidden_effect = {
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } } remove_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_emperor } } remove_dynamic_modifier = { modifier = SCR_dyn_new_emperor } }
+			add_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } remove_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world }
+			country_event = { id = scr_er.11 }
+		}
+		custom_effect_tooltip = SCR_er_final_rename_tt
+		custom_effect_tooltip = SCR_er_unfinished_business_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_130
+	icon = GFX_focus_SCR_er_130
+	x = 11
+	y = 24
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_87
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = 0.05 tooltip = political_power_gain_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_131
+	icon = GFX_focus_SCR_er_131
+	x = 23
+	y = 24
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_87
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_stab = -0.05 tooltip = stability_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_ws = 0.05 tooltip = war_support_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_132
+	icon = GFX_focus_SCR_er_132
+	x = 9
+	y = 26
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_88
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		hidden_effect = {
+			add_ideas = SCR_er_hidden_ltn_attack_1
+		}
+		custom_effect_tooltip = SCR_er_ltn_attack_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_133
+	icon = GFX_focus_SCR_er_133
+	x = 8
+	y = 27
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_132
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		hidden_effect = {
+			add_ideas = SCR_er_hidden_ltn_breakthrough_2
+		}
+		custom_effect_tooltip = SCR_er_ltn_breakthrough_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_134
+	icon = GFX_focus_SCR_er_134
+	x = 7
+	y = 28
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_133
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		hidden_effect = {
+			add_ideas = SCR_er_hidden_ltn_attack_2
+		}
+		custom_effect_tooltip = SCR_er_ltn_attack_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_135
+	icon = GFX_focus_SCR_er_135
+	x = 6
+	y = 29
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_134
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		if = { limit = { country_exists = LTN } LTN = { country_event = { id = scr_er.1 } } }
+		custom_effect_tooltip = SCR_er_ltn_822_event_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_136
+	icon = GFX_focus_SCR_er_136
+	x = 7
+	y = 30
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_135
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+shared_focus = {
+	id = SCR_er_137
+	icon = GFX_focus_SCR_er_137
+	x = 25
+	y = 26
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_89
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_ws = 0.05 tooltip = war_support_factor_tt }
+		hidden_effect = {
+			add_ideas = SCR_er_hidden_duke_breakthrough_1
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+		custom_effect_tooltip = SCR_er_duke_breakthrough_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_138
+	icon = GFX_focus_SCR_er_138
+	x = 26
+	y = 27
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_137
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		hidden_effect = {
+			add_ideas = SCR_er_hidden_duke_breakthrough_2
+		}
+		custom_effect_tooltip = SCR_er_duke_breakthrough_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_139
+	icon = GFX_focus_SCR_er_139
+	x = 27
+	y = 28
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_138
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_operative = 1 tooltip = operative_slot_tt }
+		hidden_effect = {
+			add_ideas = SCR_er_hidden_duke_breakthrough_3
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+		custom_effect_tooltip = SCR_er_duke_breakthrough_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_140
+	icon = GFX_focus_SCR_er_140
+	x = 28
+	y = 29
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_139
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_army_defence = -0.1 tooltip = army_defence_factor_tt }
+		hidden_effect = {
+			add_ideas = SCR_er_hidden_duke_breakthrough_4
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+		custom_effect_tooltip = SCR_er_duke_breakthrough_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_141
+	icon = GFX_focus_SCR_er_141
+	x = 27
+	y = 30
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_140
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		hidden_effect = {
+			country_event = { id = scr_er.2 }
+		}
+		custom_effect_tooltip = SCR_er_londinium_fireworks_tt
+	}
+}
+shared_focus = {
+	id = SCR_er_143
+	icon = GFX_focus_SCR_er_143
+	x = 17
+	y = 33
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_144
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_hp = -0.05 tooltip = army_strength_factor_tt }
+		add_to_variable = { SCR_dyn_old_gaul_training = -0.3 tooltip = training_time_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_144
+	icon = GFX_focus_SCR_er_144
+	x = 17
+	y = 32
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_118
+		focus = SCR_er_120
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = -0.1 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_old_gaul_recruit = 0.05 tooltip = recruitable_population_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_145
+	icon = GFX_focus_SCR_er_145
+	x = 17
+	y = 34
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_143
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_old_gaul_modify_tt
+		add_to_variable = { SCR_dyn_old_gaul_pp = 0.1 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_old_gaul_consumer_goods = -0.2 tooltip = consumer_goods_factor_tt }
+		hidden_effect = {
+			if = { limit = { NOT = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } NOT = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } } add_dynamic_modifier = { modifier = SCR_dyn_old_gaul_disaster } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } } add_dynamic_modifier = { modifier = SCR_dyn_new_gaul_world } }
+		}
+	}
+}
+shared_focus = {
+	id = SCR_er_147
+	icon = GFX_focus_SCR_er_147
+	x = 14
+	y = 33
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_121
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_ws = 0.2 tooltip = war_support_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_army_xp = 0.2 tooltip = experience_gain_army_factor_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_148
+	icon = GFX_focus_SCR_er_148
+	x = 14
+	y = 34
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_147
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_supply = -0.05 tooltip = supply_consumption_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_attack = 0.1 tooltip = army_attack_factor_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_149
+	icon = GFX_focus_SCR_er_149
+	x = 20
+	y = 33
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_122
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_build = 0.05 tooltip = production_speed_buildings_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_mobilization = 0.05 tooltip = mobilization_speed_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_150
+	icon = GFX_focus_SCR_er_150
+	x = 20
+	y = 34
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_149
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_not_a_toy_modify_tt
+		add_to_variable = { SCR_dyn_not_a_toy_build = 0.05 tooltip = production_speed_buildings_factor_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_mobilization = 0.05 tooltip = mobilization_speed_tt }
+		add_to_variable = { SCR_dyn_not_a_toy_factory = 0.1 tooltip = industrial_capacity_factory_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_not_a_toy }
+	}
+}
+shared_focus = {
+	id = SCR_er_151
+	icon = GFX_focus_SCR_er_151
+	x = 17
+	y = 24
+	cost = 5
+	prerequisite = {
+		focus = SCR_er_87
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = SCR_er_new_emperor_modify_tt
+		add_to_variable = { SCR_dyn_new_emperor_pp = 0.1 tooltip = political_power_gain_tt }
+		add_to_variable = { SCR_dyn_new_emperor_stab = -0.1 tooltip = stability_factor_tt }
+		hidden_effect = {
+			country_event = { id = scr_er.10 }
+			add_dynamic_modifier = { modifier = SCR_dyn_empress_noncore_penalty }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_new_emperor } } add_dynamic_modifier = { modifier = SCR_dyn_new_emperor } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } } add_dynamic_modifier = { modifier = SCR_dyn_theatre_empress } }
+			if = { limit = { has_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } } add_dynamic_modifier = { modifier = SCR_dyn_gaul_reflection } }
+		}
+		custom_effect_tooltip = SCR_er_gaul_pilgrimage_tt
+		custom_effect_tooltip = SCR_er_noncore_penalty_tt
+	}
+}

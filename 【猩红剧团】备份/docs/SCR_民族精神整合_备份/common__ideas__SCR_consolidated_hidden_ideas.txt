@@ -1,0 +1,119 @@
+######################################################
+# SCR 常驻民族精神整合 — 隐藏 idea（不显示在精神栏）
+# 由 docs/gen_scr_consolidate_spirits.cjs 生成，勿手改。
+# 合并值：全额相加后按项目规则封顶（百分比 ±25%，加解密 ±2）。
+######################################################
+
+ideas = {
+	hidden_ideas = {
+
+		# 开局三精神 → 隐藏
+		SCR_hidden_start_theatre = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				political_power_gain = 0.10
+				mysticism_drift = 0.02
+			}
+		}
+		SCR_hidden_start_tragic = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				stability_factor = -0.10
+				war_support_factor = 0.20
+				conscription_factor = -0.05
+			}
+		}
+		SCR_hidden_start_eye = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				encryption = 1
+				decryption = 1
+				political_power_gain = 0.05
+			}
+		}
+
+		# 旧树控制线（深层政府）
+		SCR_hidden_old_control = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				political_power_gain = 0.25
+				compliance_growth = 0.10
+				operation_outcome = 0.15
+				encryption = 2
+				decryption = 2
+			}
+		}
+
+		# 科西嘉政治线：复国誓言 / 万物庆典 / 高卢回声 / 飞页大师 / 血祭坛 / 镜中人
+		SCR_hidden_corsica = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				political_power_gain = 0.25
+				stability_factor = 0.25
+				war_support_factor = 0.05
+				mysticism_drift = 0.025
+				consumer_goods_factor = -0.05
+				encryption = 1
+				decryption = 2
+				operation_outcome = 0.10
+				resistance_growth = -0.10
+				compliance_growth = 0.10
+			}
+		}
+
+		# 科西嘉经济线：丰收节 / 不朽艺术
+		SCR_hidden_corsica_economy = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				consumer_goods_factor = -0.05
+				production_speed_buildings_factor = 0.05
+				monthly_population = 0.10
+				experience_loss_factor = -0.25
+			}
+		}
+
+		# 科西嘉军事线：傀儡工艺 / 傀儡军团 / 星之手术 / 加利亚之盾
+		SCR_hidden_corsica_military = {
+			allowed = { always = no }
+			removal_cost = -1
+			modifier = {
+				research_speed_factor = 0.03
+				experience_gain_army_factor = 0.25
+				non_core_manpower = 0.02
+				supply_consumption_factor = -0.05
+				land_doctrine_cost_factor = -0.10
+				army_defence_factor = 0.10
+				max_dig_in_factor = 0.25
+			}
+		}
+
+		# 战争线（高卢，高卢！）：血色外交 / 永恒巡演 / 高卢之血 / 帝国军旗 / 凯旋 / 帝国旗帜 / 血钻遗产 / 痛苦神殿
+		SCR_hidden_gaul_gaul = {
+			allowed = { always = no }
+			removal_cost = -1
+			targeted_modifier = {
+				tag = VIC
+				attack_bonus_against = 0.05
+				defense_bonus_against = 0.05
+			}
+			modifier = {
+				war_support_factor = 0.25
+				conscription_factor = 0.07
+				justify_war_goal_time = -0.25
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+				stability_factor = 0.05
+				political_power_gain = 0.20
+				army_attack_factor = 0.10
+				army_morale_factor = 0.05
+			}
+		}
+
+	}
+}

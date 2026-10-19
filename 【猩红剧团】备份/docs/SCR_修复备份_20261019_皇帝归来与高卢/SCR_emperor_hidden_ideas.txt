@@ -1,0 +1,110 @@
+######################################################
+# 猩红剧团（SCR）【皇帝的归来】目标国修正 · 隐藏 idea
+# 生成器：docs/gen_scr_emperor_returns.cjs（勿手改本文件）
+#
+# targeted_modifier 在 dynamic_modifier 里不生效，所以对特定国家的
+# 攻击/突破修正放在 hidden_idea 里；国策完成时用 hidden_effect 挂上。
+# 每个 idea = 一档 +5%，多条 idea 的修正在国家身上累加。
+######################################################
+ideas = {
+	hidden_ideas = {
+
+		SCR_er_hidden_ltn_attack_1 = {
+			name = SCR_er_hidden_target_bonus
+			removal_cost = -1
+			targeted_modifier = {
+				tag = LTN
+				attack_bonus_against = 0.05
+			}
+		}
+		SCR_er_hidden_ltn_attack_2 = {
+			name = SCR_er_hidden_target_bonus
+			removal_cost = -1
+			targeted_modifier = {
+				tag = LTN
+				attack_bonus_against = 0.05
+			}
+		}
+		SCR_er_hidden_ltn_breakthrough_1 = {
+			name = SCR_er_hidden_target_bonus
+			removal_cost = -1
+			targeted_modifier = {
+				tag = LTN
+				breakthrough_bonus_against = 0.05
+			}
+		}
+		SCR_er_hidden_ltn_breakthrough_2 = {
+			name = SCR_er_hidden_target_bonus
+			removal_cost = -1
+			targeted_modifier = {
+				tag = LTN
+				breakthrough_bonus_against = 0.05
+			}
+		}
+		SCR_er_hidden_duke_breakthrough_1 = {
+			name = SCR_er_hidden_target_bonus
+			removal_cost = -1
+			targeted_modifier = {
+				tag = VCA
+				breakthrough_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = TAR
+				breakthrough_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = VWI
+				breakthrough_bonus_against = 0.05
+			}
+		}
+		SCR_er_hidden_duke_breakthrough_2 = {
+			name = SCR_er_hidden_target_bonus
+			removal_cost = -1
+			targeted_modifier = {
+				tag = VCA
+				breakthrough_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = TAR
+				breakthrough_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = VWI
+				breakthrough_bonus_against = 0.05
+			}
+		}
+		SCR_er_hidden_duke_breakthrough_3 = {
+			name = SCR_er_hidden_target_bonus
+			removal_cost = -1
+			targeted_modifier = {
+				tag = VCA
+				breakthrough_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = TAR
+				breakthrough_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = VWI
+				breakthrough_bonus_against = 0.05
+			}
+		}
+		SCR_er_hidden_duke_breakthrough_4 = {
+			name = SCR_er_hidden_target_bonus
+			removal_cost = -1
+			targeted_modifier = {
+				tag = VCA
+				breakthrough_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = TAR
+				breakthrough_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = VWI
+				breakthrough_bonus_against = 0.05
+			}
+		}
+
+	}
+}

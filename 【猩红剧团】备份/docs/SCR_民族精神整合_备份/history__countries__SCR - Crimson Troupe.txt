@@ -1,0 +1,191 @@
+# 猩红剧团 — 克莱布拉松林地古堡
+capital = 867
+set_research_slots = 2
+set_convoys = 10
+set_stability = 0.55
+set_war_support = 0.40
+
+# 剧团长的账本从空白开始
+set_variable = {
+	var = SCR_inspiration
+	value = 0
+}
+# 动态民族精神叠加变量（由国策逐级累加）
+set_variable = {
+	var = SCR_dyn_leadership
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_control
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_army
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_rebuild
+	value = 0
+}
+# 四大BUFF子变量（lite 半速效果 / neg 负向效果 / int 整数加密破译）
+set_variable = {
+	var = SCR_dyn_leadership_lite
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_leadership_int
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_leadership_drift
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_control_neg
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_control_int
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_army_lite
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_army_neg
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_army_supply
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_rebuild_lite
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_rebuild_neg
+	value = 0
+}
+# 科西嘉线成长精神（世界之都的倒影）
+set_variable = { var = SCR_dyn_corsica value = 0 }
+set_variable = { var = SCR_dyn_corsica_lite value = 0 }
+set_variable = { var = SCR_dyn_corsica_army value = 0 }
+set_variable = { var = SCR_dyn_corsica_int value = 0 }
+set_variable = { var = SCR_dyn_corsica_economy value = 0 }
+set_variable = { var = SCR_dyn_corsica_economy_lite value = 0 }
+set_variable = { var = SCR_dyn_corsica_economy_cg value = 0 }
+set_variable = { var = SCR_dyn_corsica_military value = 0 }
+set_variable = { var = SCR_dyn_corsica_military_lite value = 0 }
+
+# 战时终幕「第二次四皇会战」— 「高卢，高卢！」合并民族精神变量
+set_variable = {
+	var = SCR_dyn_gaul
+	value = 0
+}
+set_variable = {
+	var = SCR_dyn_gaul_lite
+	value = 0
+}
+
+# 「酒神的大地巡演」面板状态
+set_variable = { SCR_tour_state = 0 }
+set_variable = { SCR_tour_play = 1 }
+set_variable = { SCR_tour_count = 0 }
+set_variable = { SCR_tour_factory = 0 }
+set_variable = { SCR_tour_click = 0 }
+set_variable = { SCR_tour_cd = 0 }
+set_variable = { SCR_tour_all = 0 }
+set_variable = { SCR_bac_tick = 0 }
+
+set_country_flag = SCR_crimson_troupe_country
+
+oob = "SCR_Start"
+
+recruit_character = SCR_director_char
+recruit_character = SCR_lucian_char
+recruit_character = SCR_muluo_char
+recruit_character = SCR_athanasia_char
+recruit_character = SCR_playwright_char
+recruit_character = SCR_stagehand_char
+recruit_character = SCR_choirmaster_char
+recruit_character = SCR_lucian_gaul_char
+recruit_character = SCR_corsica_char
+
+# ── 「亡国法兰西」核心幕僚（common/characters/SCR.txt） ──
+# 内阁：副团长 1、政治顾问 6、三军部长 3、高级指挥部 4
+recruit_character = SCR_Severin_Autun		# 塞维兰·德·欧坦：副团长
+recruit_character = SCR_Clemence_Audran		# 克莱芒丝·奥德兰：流亡国库总管
+recruit_character = SCR_Hubert_Sion			# 于贝尔·德·锡安：旧共和国外交次长
+recruit_character = SCR_Genevieve_Pascal	# 热纳维耶芙·帕斯卡：侨民事务专员
+recruit_character = SCR_Michel_Blanchard	# 米歇尔·布朗夏尔：工业重建委员会主席
+recruit_character = SCR_Theodore_Rousseau	# 泰奥多尔·卢梭：旧警察总监
+recruit_character = SCR_Marguerite_Valois	# 玛格丽特·瓦卢瓦：王家剧院总监
+recruit_character = SCR_Ferdinand_Laval		# 费迪南·德·拉瓦勒：陆军部长
+recruit_character = SCR_Adrien_Coste		# 阿德里安·科斯特：海军部长
+recruit_character = SCR_Elias_Rolland		# 埃利亚斯·罗兰：空军部长
+recruit_character = SCR_Leon_Marceau		# 莱昂·马尔索：高级指挥部
+recruit_character = SCR_Sophie_Montfort		# 索菲·德·蒙福尔：高级指挥部
+recruit_character = SCR_Gaspard_Vigneault	# 加斯帕尔·维尼奥：高级指挥部
+recruit_character = SCR_Auguste_Perrin		# 奥古斯特·佩兰：旧军校教官（高级指挥部）
+# 将领：元帅 1、军团指挥官 6
+recruit_character = SCR_Hector_Villeneuve	# 埃克托尔·德·维尔纳夫：亡国元帅
+recruit_character = SCR_Gabriel_Durand		# 加布里埃尔·杜兰：旧近卫军旅长
+recruit_character = SCR_Isabelle_Moreau		# 伊莎贝尔·莫罗：高卢女猎手
+recruit_character = SCR_Nicolas_Leclerc		# 尼古拉·勒克莱尔：流亡炮兵指挥官
+recruit_character = SCR_Etienne_Bonnaire	# 艾蒂安·博纳尔：战地工程师
+recruit_character = SCR_Lucien_Farge		# 吕西安·法尔热：流亡骑兵指挥官
+recruit_character = SCR_Remy_Chastel		# 雷米·沙泰勒：外籍军团招募官
+
+set_technology = {
+	infantry_weapons_0 = 1
+	infantry_weapons_improvement_1 = 1
+	support_weapons_1 = 1
+	tech_support = 1
+	tech_engineers = 1
+	tech_recon = 1
+	artillery_0 = 1
+	motorized_infantry_0 = 1
+}
+
+add_equipment_to_stockpile = {
+	type = infantry_equipment_1
+	amount = 5000
+}
+add_equipment_to_stockpile = {
+	type = infantry_equipment_0
+	amount = 3000
+}
+add_equipment_to_stockpile = {
+	type = artillery_equipment_0
+	amount = 150
+}
+
+set_politics = {
+	ruling_party = mysticism
+	elections_allowed = no
+}
+set_popularities = {
+	communism = 1
+	socialism = 1
+	progressivism = 2
+	liberalism = 3
+	conservatism = 5
+	authoritarianism = 10
+	despotism = 10
+	fascism = 3
+	mysticism = 65
+	special = 0
+}
+
+add_ideas = {
+	subsistence_agriculture
+	high_illiteracy_rate
+	inefficient_administration
+	rampant_poverty
+	SCR_theatre_is_truth
+	SCR_tragic_aesthetics
+	SCR_eye_of_the_director
+	electric_tool_production
+}

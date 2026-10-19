@@ -1,0 +1,170 @@
+
+######################
+## 猩红剧团 脚本效果 ##
+## 限量部队「近卫军之锋」##
+######################
+
+# 解锁（第三幕根国策「军乐」）：
+# 12 个摩托化步兵团的固定编制、1 个支援连（工兵），上限 4 个师，并立刻拉出 2 个满编师。
+# set_technology 必须在 division_template 之前，否则摩托化营尚未存在、建出的编制会缺装。
+SCR_vanguard_guard_unlock_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_country_flag = SCR_vanguard_guard_unlocked_flag
+			}
+		}
+		set_country_flag = SCR_vanguard_guard_unlocked_flag
+		set_technology = {
+			motorized_infantry_0 = 1
+		}
+		division_template = {
+			name = "近卫军之锋"
+			is_locked = yes
+			regiments = {
+				motorized = { x = 0 y = 0 }
+				motorized = { x = 0 y = 1 }
+				motorized = { x = 0 y = 2 }
+				motorized = { x = 1 y = 0 }
+				motorized = { x = 1 y = 1 }
+				motorized = { x = 1 y = 2 }
+				motorized = { x = 2 y = 0 }
+				motorized = { x = 2 y = 1 }
+				motorized = { x = 2 y = 2 }
+				motorized = { x = 3 y = 0 }
+				motorized = { x = 3 y = 1 }
+				motorized = { x = 3 y = 2 }
+			}
+			support = {
+				engineer = { x = 0 y = 0 }
+			}
+			priority = 3
+		}
+		set_variable = {
+			var = SCR_vanguard_guard_cap
+			value = 4
+		}
+		set_division_template_cap = {
+			division_template = "近卫军之锋"
+			division_cap = SCR_vanguard_guard_cap
+		}
+		capital_scope = {
+			create_unit = {
+				division = "name = \"近卫军之锋 第一师\" division_template = \"近卫军之锋\" start_experience_factor = 1 start_equipment_factor = 1 start_manpower_factor = 1"
+				owner = ROOT
+			}
+			create_unit = {
+				division = "name = \"近卫军之锋 第二师\" division_template = \"近卫军之锋\" start_experience_factor = 1 start_equipment_factor = 1 start_manpower_factor = 1"
+				owner = ROOT
+			}
+		}
+	}
+}
+
+# 陆军线其余 11 个国策各调用一次：师的数量上限 +2（走完即 4 + 11×2 = 26）。
+# 菱形支线同层两翼的完成顺序不固定，故一律按计数器累加，不写死绝对值。
+SCR_vanguard_guard_cap_effect = {
+	if = {
+		limit = {
+			has_country_flag = SCR_vanguard_guard_unlocked_flag
+		}
+		add_to_variable = {
+			var = SCR_vanguard_guard_cap
+			value = 2
+		}
+		set_division_template_cap = {
+			division_template = "近卫军之锋"
+			division_cap = SCR_vanguard_guard_cap
+		}
+	}
+}
+
+# 剧团招聘中！·近卫军之锋：在首都生成 1 个满编近卫军之锋师（模板由「军乐」创建，此处仅发放）。
+SCR_vanguard_guard_recruit_effect = {
+	if = {
+		limit = {
+			has_country_flag = SCR_vanguard_guard_unlocked_flag
+		}
+		capital_scope = {
+			create_unit = {
+				division = "division_template = \"近卫军之锋\" start_experience_factor = 1 start_equipment_factor = 1 start_manpower_factor = 1"
+				owner = ROOT
+			}
+		}
+	}
+}
+
+# 剧团招聘中！·颂乐人偶：8 山地步兵团 + 工兵/火炮支援连，不设编制上限（仅决议发放）。
+# 首次执行时补发山地步兵科技并创建模板（科技必须先于模板，避免缺装），此后每次执行生成 2 个满编师。
+SCR_dolls_recruit_effect = {
+	if = {
+		limit = {
+			NOT = {
+				has_country_flag = SCR_dolls_unlocked_flag
+			}
+		}
+		set_country_flag = SCR_dolls_unlocked_flag
+		set_technology = {
+			mountaineers = 1
+		}
+		division_template = {
+			name = "颂乐人偶"
+			is_locked = yes
+			regiments = {
+				mountaineers = { x = 0 y = 0 }
+				mountaineers = { x = 0 y = 1 }
+				mountaineers = { x = 0 y = 2 }
+				mountaineers = { x = 0 y = 3 }
+				mountaineers = { x = 1 y = 0 }
+				mountaineers = { x = 1 y = 1 }
+				mountaineers = { x = 1 y = 2 }
+				mountaineers = { x = 1 y = 3 }
+			}
+			support = {
+				engineer = { x = 0 y = 0 }
+				artillery = { x = 0 y = 1 }
+			}
+			priority = 2
+		}
+	}
+	capital_scope = {
+		create_unit = {
+			division = "division_template = \"颂乐人偶\" start_experience_factor = 1 start_equipment_factor = 1 start_manpower_factor = 1"
+			owner = ROOT
+		}
+		create_unit = {
+			division = "division_template = \"颂乐人偶\" start_experience_factor = 1 start_equipment_factor = 1 start_manpower_factor = 1"
+			owner = ROOT
+		}
+	}
+}
+
+# 乡土自卫队 — 6 步兵营 + 工兵的锁定模板；首次执行创建模板，之后每次补 1 个满编师。
+SCR_militia_unlock_effect = {
+	if = {
+		limit = { NOT = { has_country_flag = SCR_militia_unlocked_flag } }
+		set_country_flag = SCR_militia_unlocked_flag
+		division_template = {
+			name = "乡土自卫队"
+			is_locked = yes
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 0 y = 2 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+				infantry = { x = 1 y = 2 }
+			}
+			support = {
+				engineer = { x = 0 y = 0 }
+			}
+			priority = 2
+		}
+	}
+	capital_scope = {
+		create_unit = {
+			division = "division_template = \"乡土自卫队\" start_experience_factor = 0.5 start_equipment_factor = 0.8 start_manpower_factor = 1"
+			owner = ROOT
+		}
+	}
+}

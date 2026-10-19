@@ -1,0 +1,801 @@
+	characters = {
+
+		############################################
+		# 猩红剧团 — 剧团长
+		############################################
+		SCR_director_char = {
+			name = SCR_director_char
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/SCR/director.png"
+					small = "gfx/leaders/SCR/director.png"
+				}
+			}
+			can_be_captured = no
+			country_leader = {
+				ideology = mysticism_subtype
+				traits = {
+					the_director
+				}
+			}
+		}
+
+		############################################
+		# 高卢先锋国 — 卢西恩·德·高卢（血钻本人）
+		############################################
+		SCR_lucian_gaul_char = {
+			name = SCR_lucian_gaul_char
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/SCR/lucian_gaul.png"
+					small = "gfx/leaders/SCR/lucian_gaul.png"
+				}
+			}
+			can_be_captured = no
+			country_leader = {
+				ideology = despotism_subtype
+				traits = {
+					the_director
+				}
+			}
+		}
+
+		############################################
+		# 高卢倒影 — 科西嘉莉（皇女）
+		############################################
+		SCR_corsica_char = {
+			name = SCR_corsica_char
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/SCR/corsica.png"
+					small = "gfx/leaders/SCR/corsica_small.png"
+				}
+			}
+			can_be_captured = no
+			country_leader = {
+				ideology = special_corsica_subtype
+				traits = {
+					the_empress
+				}
+			}
+		}
+
+		############################################
+		# 傀影 / 卢西恩 — "血钻"
+		############################################
+		SCR_lucian_char = {
+			name = SCR_lucian_char
+			portraits = {
+				army = {
+					large = "gfx/leaders/SCR/lucian.png"
+					small = "gfx/leaders/SCR/lucian_small.png"
+				}
+			}
+			can_be_captured = no
+			corps_commander = {
+				skill = 5
+				attack_skill = 5
+				defense_skill = 3
+				planning_skill = 4
+				logistics_skill = 3
+				traits = {
+					trait_SCR_blood_diamond_song
+					trickster
+					war_hero
+				}
+			}
+		}
+
+		############################################
+		# 暮落 / "沉渊"
+		############################################
+		SCR_muluo_char = {
+			name = SCR_muluo_char
+			portraits = {
+				army = {
+					large = "gfx/leaders/SCR/muluo.png"
+					small = "gfx/leaders/SCR/muluo_small.png"
+				}
+			}
+			corps_commander = {
+				skill = 3
+				attack_skill = 2
+				defense_skill = 4
+				planning_skill = 3
+				logistics_skill = 4
+				traits = {
+					trait_SCR_illusionist
+					organizer
+				}
+			}
+		}
+
+		############################################
+		# "白英花"
+		############################################
+		SCR_athanasia_char = {
+			name = SCR_athanasia_char
+			portraits = {
+				army = {
+					large = "gfx/leaders/SCR/athanasia.png"
+					small = "gfx/leaders/SCR/athanasia_small.png"
+				}
+			}
+			can_be_captured = no
+			corps_commander = {
+				skill = 5
+				attack_skill = 5
+				defense_skill = 4
+				planning_skill = 3
+				logistics_skill = 2
+				traits = {
+					trait_SCR_strict_teacher
+					brilliant_strategist
+					war_hero
+				}
+			}
+		}
+
+		############################################
+		# 剧作家 — 文化顾问
+		############################################
+		SCR_playwright_char = {
+			name = SCR_playwright_char
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/SCR/playwright.png"
+					small = "gfx/leaders/SCR/playwright_small.png"
+				}
+			}
+			advisor = {
+				slot = political_advisor
+				idea_token = SCR_playwright_advisor
+				cost = 100
+				traits = {
+				}
+			}
+		}
+
+		############################################
+		# 剧团军官 — 舞台监督与唱诗班长
+		############################################
+		SCR_stagehand_char = {
+			name = SCR_stagehand_char
+			portraits = {
+				army = {
+					large = "gfx/leaders/SCR/stagehand.png"
+					small = "gfx/leaders/SCR/stagehand_small.png"
+				}
+			}
+			corps_commander = {
+				skill = 2
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+				traits = {
+					trait_SCR_stage_mastery
+				}
+			}
+		}
+		SCR_choirmaster_char = {
+			name = SCR_choirmaster_char
+			portraits = {
+				army = {
+					large = "gfx/leaders/SCR/choirmaster.png"
+					small = "gfx/leaders/SCR/choirmaster_small.png"
+				}
+			}
+			corps_commander = {
+				skill = 2
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 3
+				traits = {
+					organizer
+				}
+			}
+		}
+
+		############################################
+		# 「高卢点名册」内阁顾问（12 位，随第二幕国策逐一点名解锁）
+		############################################
+		SCR_adv_pol_1 = {
+			name = SCR_adv_pol_1
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_1.png"
+					small = "gfx/leaders/_generic/generic_1_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_2 = {
+			name = SCR_adv_pol_2
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_5.png"
+					small = "gfx/leaders/_generic/generic_5_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_3 = {
+			name = SCR_adv_pol_3
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_2.png"
+					small = "gfx/leaders/_generic/generic_2_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_4 = {
+			name = SCR_adv_pol_4
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_3.png"
+					small = "gfx/leaders/_generic/generic_3_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_5 = {
+			name = SCR_adv_pol_5
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_1.png"
+					small = "gfx/leaders/_generic/generic_1_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_6 = {
+			name = SCR_adv_pol_6
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_2.png"
+					small = "gfx/leaders/_generic/generic_2_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_7 = {
+			name = SCR_adv_pol_7
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_1.png"
+					small = "gfx/leaders/_generic/generic_1_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_8 = {
+			name = SCR_adv_pol_8
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_6.png"
+					small = "gfx/leaders/_generic/generic_6_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_9 = {
+			name = SCR_adv_pol_9
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_2.png"
+					small = "gfx/leaders/_generic/generic_2_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_10 = {
+			name = SCR_adv_pol_10
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_1.png"
+					small = "gfx/leaders/_generic/generic_1_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_11 = {
+			name = SCR_adv_pol_11
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_7.png"
+					small = "gfx/leaders/_generic/generic_7_small.png"
+				}
+			}
+		}
+		SCR_adv_pol_12 = {
+			name = SCR_adv_pol_12
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_2.png"
+					small = "gfx/leaders/_generic/generic_2_small.png"
+				}
+			}
+		}
+
+		############################################
+		# 「亡国法兰西」核心幕僚 —— 开局即可任用
+		# 亡国后仍在为高卢做事的人：旧部长、旧军官、旧会计，
+		# 以及几个相信「国家可以像戏一样重新开演」的疯子。
+		############################################
+
+		# 塞维兰·德·欧坦 —— 副团长，剧团与流亡政府之间的唯一联系人
+		SCR_Severin_Autun = {
+			name = SCR_Severin_Autun
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_4.png"
+					small = "gfx/leaders/_generic/generic_4_small.png"
+				}
+			}
+			gender = male
+			can_be_captured = no
+			advisor = {
+				slot = second_in_command
+				idea_token = SCR_Severin_Autun_second
+				ledger = civilian
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_deputy_director }
+				desc = SCR_Severin_Autun_desc
+				cost = 150
+				ai_will_do = { factor = 3 }
+			}
+		}
+
+		# 克莱芒丝·奥德兰 —— 流亡国库总管
+		SCR_Clemence_Audran = {
+			name = SCR_Clemence_Audran
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_5.png"
+					small = "gfx/leaders/_generic/generic_5_small.png"
+				}
+			}
+			gender = female
+			advisor = {
+				slot = political_advisor
+				idea_token = SCR_Clemence_Audran_political
+				ledger = civilian
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_exile_treasury }
+				desc = SCR_Clemence_Audran_desc
+				cost = 150
+				ai_will_do = { factor = 3 }
+			}
+		}
+
+		# 于贝尔·德·锡安 —— 旧共和国外交次长
+		SCR_Hubert_Sion = {
+			name = SCR_Hubert_Sion
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_6.png"
+					small = "gfx/leaders/_generic/generic_6_small.png"
+				}
+			}
+			gender = male
+			advisor = {
+				slot = political_advisor
+				idea_token = SCR_Hubert_Sion_political
+				ledger = civilian
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_old_diplomat }
+				desc = SCR_Hubert_Sion_desc
+				cost = 150
+				ai_will_do = { factor = 2 }
+			}
+		}
+
+		# 热纳维耶芙·帕斯卡 —— 侨民事务专员
+		SCR_Genevieve_Pascal = {
+			name = SCR_Genevieve_Pascal
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_3.png"
+					small = "gfx/leaders/_generic/generic_3_small.png"
+				}
+			}
+			gender = female
+			advisor = {
+				slot = political_advisor
+				idea_token = SCR_Genevieve_Pascal_political
+				ledger = civilian
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_emigre_affairs }
+				desc = SCR_Genevieve_Pascal_desc
+				cost = 150
+				ai_will_do = { factor = 3 }
+			}
+		}
+
+		# 米歇尔·布朗夏尔 —— 工业重建委员会主席
+		SCR_Michel_Blanchard = {
+			name = SCR_Michel_Blanchard
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_1.png"
+					small = "gfx/leaders/_generic/generic_1_small.png"
+				}
+			}
+			gender = male
+			advisor = {
+				slot = political_advisor
+				idea_token = SCR_Michel_Blanchard_political
+				ledger = civilian
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_reconstruction_board }
+				desc = SCR_Michel_Blanchard_desc
+				cost = 150
+				ai_will_do = { factor = 3 }
+			}
+		}
+
+		# 泰奥多尔·卢梭 —— 旧警察总监
+		SCR_Theodore_Rousseau = {
+			name = SCR_Theodore_Rousseau
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_7.png"
+					small = "gfx/leaders/_generic/generic_7_small.png"
+				}
+			}
+			gender = male
+			advisor = {
+				slot = political_advisor
+				idea_token = SCR_Theodore_Rousseau_political
+				ledger = civilian
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_old_police }
+				desc = SCR_Theodore_Rousseau_desc
+				cost = 150
+				ai_will_do = { factor = 2 }
+			}
+		}
+
+		# 玛格丽特·瓦卢瓦 —— 王家剧院总监
+		SCR_Marguerite_Valois = {
+			name = SCR_Marguerite_Valois
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/_generic/generic_2.png"
+					small = "gfx/leaders/_generic/generic_2_small.png"
+				}
+			}
+			gender = female
+			advisor = {
+				slot = political_advisor
+				idea_token = SCR_Marguerite_Valois_political
+				ledger = civilian
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_culture_ministry }
+				desc = SCR_Marguerite_Valois_desc
+				cost = 150
+				ai_will_do = { factor = 2 }
+			}
+		}
+
+		# 费迪南·德·拉瓦勒 —— 亡国陆军部长
+		SCR_Ferdinand_Laval = {
+			name = SCR_Ferdinand_Laval
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			can_be_captured = no
+			advisor = {
+				slot = army_chief
+				idea_token = SCR_Ferdinand_Laval_army_chief
+				ledger = army
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_last_army_minister }
+				desc = SCR_Ferdinand_Laval_desc
+				cost = 50
+				ai_will_do = { factor = 3 }
+			}
+		}
+
+		# 阿德里安·科斯特 —— 残舰舰队司令
+		SCR_Adrien_Coste = {
+			name = SCR_Adrien_Coste
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			advisor = {
+				slot = navy_chief
+				idea_token = SCR_Adrien_Coste_navy_chief
+				ledger = navy
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_remnant_fleet }
+				desc = SCR_Adrien_Coste_desc
+				cost = 50
+				ai_will_do = { factor = 2 }
+			}
+		}
+
+		# 埃利亚斯·罗兰 —— 航空事务专员
+		SCR_Elias_Rolland = {
+			name = SCR_Elias_Rolland
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			advisor = {
+				slot = air_chief
+				idea_token = SCR_Elias_Rolland_air_chief
+				ledger = air
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_air_commissioner }
+				desc = SCR_Elias_Rolland_desc
+				cost = 50
+				ai_will_do = { factor = 2 }
+			}
+		}
+
+		# 莱昂·马尔索 —— 旧军团总参谋长
+		SCR_Leon_Marceau = {
+			name = SCR_Leon_Marceau
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			advisor = {
+				slot = high_command
+				idea_token = SCR_Leon_Marceau_high_command
+				ledger = army
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_old_staff }
+				desc = SCR_Leon_Marceau_desc
+				cost = 50
+				ai_will_do = { factor = 3 }
+			}
+		}
+
+		# 索菲·德·蒙福尔 —— 侨民自卫军总监
+		SCR_Sophie_Montfort = {
+			name = SCR_Sophie_Montfort
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = female
+			advisor = {
+				slot = high_command
+				idea_token = SCR_Sophie_Montfort_high_command
+				ledger = army
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_emigre_militia }
+				desc = SCR_Sophie_Montfort_desc
+				cost = 50
+				ai_will_do = { factor = 3 }
+			}
+		}
+
+		# 加斯帕尔·维尼奥 —— 军需与交通总监
+		SCR_Gaspard_Vigneault = {
+			name = SCR_Gaspard_Vigneault
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			advisor = {
+				slot = high_command
+				idea_token = SCR_Gaspard_Vigneault_high_command
+				ledger = army
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_logistics_director }
+				desc = SCR_Gaspard_Vigneault_desc
+				cost = 50
+				ai_will_do = { factor = 3 }
+			}
+		}
+
+		# 奥古斯特·佩兰 —— 旧军校教官，高级指挥部
+		# 注：本工程 idea_tags 未在 research_production 下声明 theorist 槽，
+		#     该槽的 ledger 停在 invalid；为避免顾问不显示，改挂 high_command。
+		SCR_Auguste_Perrin = {
+			name = SCR_Auguste_Perrin
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			advisor = {
+				slot = high_command
+				idea_token = SCR_Auguste_Perrin_high_command
+				ledger = army
+				allowed = { original_tag = SCR }
+				traits = { SCR_adv_old_academy }
+				desc = SCR_Auguste_Perrin_desc
+				cost = 50
+				ai_will_do = { factor = 2 }
+			}
+		}
+
+		# 埃克托尔·德·维尔纳夫 —— 亡国元帅
+		SCR_Hector_Villeneuve = {
+			name = SCR_Hector_Villeneuve
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			can_be_captured = no
+			field_marshal = {
+				skill = 5
+				attack_skill = 4
+				defense_skill = 5
+				planning_skill = 5
+				logistics_skill = 3
+				traits = {
+					trait_SCR_last_marshal
+					defensive_doctrine
+					organizer
+					trait_cautious
+				}
+				desc = SCR_Hector_Villeneuve_desc
+			}
+		}
+
+		# 加布里埃尔·杜兰 —— 旧近卫军旅长
+		SCR_Gabriel_Durand = {
+			name = SCR_Gabriel_Durand
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			corps_commander = {
+				skill = 4
+				attack_skill = 4
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 2
+				traits = {
+					trait_SCR_old_guard_charge
+					infantry_leader
+				}
+				desc = SCR_Gabriel_Durand_desc
+			}
+		}
+
+		# 伊莎贝尔·莫罗 —— 高卢女猎手
+		SCR_Isabelle_Moreau = {
+			name = SCR_Isabelle_Moreau
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = female
+			corps_commander = {
+				skill = 4
+				attack_skill = 3
+				defense_skill = 4
+				planning_skill = 3
+				logistics_skill = 2
+				traits = {
+					trait_SCR_maquis_huntress
+					trait_cautious
+				}
+				desc = SCR_Isabelle_Moreau_desc
+			}
+		}
+
+		# 尼古拉·勒克莱尔 —— 流亡炮兵指挥官
+		SCR_Nicolas_Leclerc = {
+			name = SCR_Nicolas_Leclerc
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			corps_commander = {
+				skill = 3
+				attack_skill = 4
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 2
+				traits = {
+					trait_SCR_exile_gunner
+					bearer_of_artillery
+				}
+				desc = SCR_Nicolas_Leclerc_desc
+			}
+		}
+
+		# 艾蒂安·博纳尔 —— 战地工程师
+		SCR_Etienne_Bonnaire = {
+			name = SCR_Etienne_Bonnaire
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			corps_commander = {
+				skill = 3
+				attack_skill = 2
+				defense_skill = 4
+				planning_skill = 3
+				logistics_skill = 4
+				traits = {
+					trait_SCR_field_engineer
+					trait_engineer
+				}
+				desc = SCR_Etienne_Bonnaire_desc
+			}
+		}
+
+		# 吕西安·法尔热 —— 流亡骑兵指挥官
+		SCR_Lucien_Farge = {
+			name = SCR_Lucien_Farge
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			corps_commander = {
+				skill = 4
+				attack_skill = 4
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 3
+				traits = {
+					trait_SCR_cavalry_remnant
+					panzer_leader
+				}
+				desc = SCR_Lucien_Farge_desc
+			}
+		}
+
+		# 雷米·沙泰勒 —— 外籍军团招募官
+		SCR_Remy_Chastel = {
+			name = SCR_Remy_Chastel
+			portraits = {
+				army = {
+					large = "gfx/leaders/_unknown/404_unknown.dds"
+					small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				}
+			}
+			gender = male
+			corps_commander = {
+				skill = 3
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 3
+				traits = {
+					trait_SCR_foreign_legion
+					infantry_leader
+				}
+				desc = SCR_Remy_Chastel_desc
+			}
+		}
+	}

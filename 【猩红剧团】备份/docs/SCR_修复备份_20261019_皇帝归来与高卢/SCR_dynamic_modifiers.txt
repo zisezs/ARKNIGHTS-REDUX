@@ -1,0 +1,373 @@
+# 猩红剧团 (SCR) 动态民族精神 — 四幕四大 BUFF，随国策完成逐级升级
+# 顶层定义（与全 mod 及原版 0_dynamic_modifiers.txt 一致，禁止 dynamic_modifiers={} 包裹）
+# 整合原则：原国策树中零碎的小精神已全部并入对应幕的大 buff；
+#   主变量(满速) + lite 变量(半速：科研/生产等强经济类) + neg 变量(负向) + int 变量(整数加密破译) + drift 变量(按意识形态日漂移)
+# 叠加方式：国策完成时 add_to_variable，再 add_dynamic_modifier 挂载/刷新
+# 注意：本版本引擎修改器白名单与原版不同 —
+#   ideology_drift_factor / operation_reward / declare_war_on_tension_magnitude / 美式 defense 拼写均无效；
+#   已替换为 mysticism_drift / despotism_drift / operation_outcome / foreign_subversive_activites / 英式 defence
+
+# 第一幕：高卢的冠冕
+SCR_dyn_leadership = {
+	icon = GFX_idea_SCR_dyn_leadership
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	political_power_gain = SCR_dyn_leadership
+	stability_factor = SCR_dyn_leadership
+	war_support_factor = SCR_dyn_leadership
+	mysticism_drift = SCR_dyn_leadership_drift
+	despotism_drift = SCR_dyn_leadership_drift
+	research_speed_factor = SCR_dyn_leadership_lite
+	production_speed_buildings_factor = SCR_dyn_leadership_lite
+}
+
+# 第二幕：舞台监督的花名册
+SCR_dyn_control = {
+	icon = GFX_idea_SCR_dyn_control
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	production_factory_efficiency_gain_factor = SCR_dyn_control
+	production_factory_max_efficiency_factor = SCR_dyn_control
+	foreign_subversive_activites = SCR_dyn_control_neg
+	operation_outcome = SCR_dyn_control
+	resistance_growth = SCR_dyn_control_neg
+	encryption = SCR_dyn_control_int
+	decryption = SCR_dyn_control_int
+}
+
+# 第三幕：返场的军团
+SCR_dyn_army = {
+	icon = GFX_idea_SCR_dyn_army
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	army_attack_factor = SCR_dyn_army
+	army_defence_factor = SCR_dyn_army
+	army_morale_factor = SCR_dyn_army
+	war_support_factor = SCR_dyn_army
+	experience_gain_army_factor = SCR_dyn_army_lite
+	conscription_factor = SCR_dyn_army_lite
+	max_dig_in_factor = SCR_dyn_army_lite
+	justify_war_goal_time = SCR_dyn_army_neg
+	supply_consumption_factor = SCR_dyn_army_supply
+}
+
+# 第四幕：不谢幕的脚手架
+SCR_dyn_rebuild = {
+	icon = GFX_idea_SCR_dyn_rebuild
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	production_speed_buildings_factor = SCR_dyn_rebuild
+	stability_factor = SCR_dyn_rebuild
+	political_power_gain = SCR_dyn_rebuild
+	war_support_factor = SCR_dyn_rebuild
+	research_speed_factor = SCR_dyn_rebuild_lite
+	monthly_population = SCR_dyn_rebuild_lite
+	army_core_attack_factor = SCR_dyn_rebuild_lite
+	army_core_defence_factor = SCR_dyn_rebuild_lite
+	consumer_goods_factor = SCR_dyn_rebuild_neg
+	experience_loss_factor = SCR_dyn_rebuild_neg
+}
+
+############################################
+# 州级动态修饰符 — 林贡斯「世界之都，高卢之心」
+# （州级格式照本体 autonomous_state：enable/icon/州级 token）
+# 由「重建林贡斯」终点国策挂载到 state 483
+############################################
+SCR_londinium_heart = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_londinium_heart
+	local_building_slots_factor = 0.25
+	state_resources_factor = 0.25
+	state_production_speed_buildings_factor = 0.25
+	recruitable_population_factor = 0.25
+}
+
+############################################
+# 战时终幕 — 「高卢，高卢！」
+# 「第二次四皇会战」独立支线专用：所有分支国策 BUFF 合并挂载
+# 国策完成时 add_to_variable 增加数值，再 add_dynamic_modifier 刷新
+# 主变量 SCR_dyn_gaul（陆军线）/ 辅变量 SCR_dyn_gaul_lite（动员经济线）
+############################################
+SCR_dyn_gaul_gaul = {
+	icon = GFX_idea_SCR_dyn_gaul_gaul
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	army_attack_factor = SCR_dyn_gaul
+	army_defence_factor = SCR_dyn_gaul
+	army_morale_factor = SCR_dyn_gaul
+	war_support_factor = SCR_dyn_gaul
+	conscription_factor = SCR_dyn_gaul_lite
+	recruitable_population_factor = SCR_dyn_gaul_lite
+	stability_factor = SCR_dyn_gaul_lite
+	political_power_gain = SCR_dyn_gaul_lite
+	production_speed_buildings_factor = SCR_dyn_gaul_lite
+	production_factory_max_efficiency_factor = SCR_dyn_gaul_lite
+	monthly_population = SCR_dyn_gaul_lite
+}
+
+############################################
+# 州级动态修饰符 — 高卢人的灵魂改造
+# 「旧世新神，高卢倒影」吞并高卢后，转为我方核心的每一州都先戴上
+# 「清醒者的盲目顽抗」；「重塑高卢之魂」三决议逐州把它改成三种「陶醉」之一。
+# token 沿用本体州级 DM 实证写法：recruitable_population_factor（地区可用人力）
+# 与 local_factories（地区可用工厂数量）
+############################################
+SCR_blind_resistance = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_blind_resistance
+	recruitable_population_factor = -0.5
+	local_factories = -0.5
+}
+
+# 陶醉于屠杀：人力-20%
+SCR_drunk_on_slaughter = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_drunk_on_slaughter
+	recruitable_population_factor = -0.2
+}
+
+# 陶醉于肉欲：人力+20%
+SCR_drunk_on_lust = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_drunk_on_lust
+	recruitable_population_factor = 0.2
+}
+
+# 陶醉于服从：人力+100%、工厂-50%
+SCR_drunk_on_obedience = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_drunk_on_obedience
+	recruitable_population_factor = 1
+	local_factories = -0.5
+}
+
+############################################
+# 州级限时动态修饰符 — 「血腥狂欢节！」
+# 「猩红剧团的大陆巡演」的产物：把别人的一个地区当场变成舞台。
+# 时长不写在定义里，由决议效果 add_dynamic_modifier 的 days = 365 控制
+############################################
+SCR_bloody_carnival = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_bloody_carnival
+	recruitable_population_factor = -1
+}
+
+# 科西嘉线专属成长精神 —— 世界之都的倒影
+SCR_dyn_corsica = {
+	icon = GFX_idea_SCR_dyn_corsica
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	political_power_gain = SCR_dyn_corsica
+	stability_factor = SCR_dyn_corsica
+	war_support_factor = SCR_dyn_corsica
+	research_speed_factor = SCR_dyn_corsica
+	production_speed_buildings_factor = SCR_dyn_corsica
+	army_attack_factor = SCR_dyn_corsica_army
+	army_defence_factor = SCR_dyn_corsica_army
+	army_morale_factor = SCR_dyn_corsica_army
+	encryption = SCR_dyn_corsica_int
+	decryption = SCR_dyn_corsica_int
+}
+
+# 经济线升级精神 —— 新经济秩序
+SCR_dyn_corsica_economy = {
+	icon = GFX_idea_SCR_dyn_corsica_economy
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	production_speed_buildings_factor = SCR_dyn_corsica_economy
+	production_factory_efficiency_gain_factor = SCR_dyn_corsica_economy
+	production_factory_max_efficiency_factor = SCR_dyn_corsica_economy
+	research_speed_factor = SCR_dyn_corsica_economy_lite
+	consumer_goods_factor = SCR_dyn_corsica_economy_cg
+}
+
+# 军事线升级精神 —— 高卢战争机器
+SCR_dyn_corsica_military = {
+	icon = GFX_idea_SCR_dyn_corsica_military
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	army_attack_factor = SCR_dyn_corsica_military
+	army_defence_factor = SCR_dyn_corsica_military
+	army_morale_factor = SCR_dyn_corsica_military
+	experience_gain_army_factor = SCR_dyn_corsica_military_lite
+	conscription_factor = SCR_dyn_corsica_military_lite
+	max_dig_in_factor = SCR_dyn_corsica_military_lite
+}
+
+############################################
+# 「酒神的大地巡演」州级动态修正
+# 每场巡演持续 365 天；同一州只能巡演一次（州旗标 scr_bac_visited）。
+# 数值口径：正面与负面同时存在，正面总量不超过 +25%（建筑/资源/人力分项）。
+############################################
+
+# 《湖中至宝》—— 金库与湖水都留在当地
+SCR_tour_dm_der_ring = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_tour_der_ring
+	local_factories = 0.25
+	local_resources_factor = 0.15
+	recruitable_population_factor = -0.10
+}
+
+# 《一百零一日》—— 百日之内，所有人都被写进征召名册
+SCR_tour_dm_one_hundred_one_days = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_tour_one_hundred_one_days
+	recruitable_population_factor = 0.25
+	local_factories = -0.15
+}
+
+# 《梦中奇缘》—— 梦游者替剧团修好了屋顶
+SCR_tour_dm_wonderland = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_tour_wonderland
+	recruitable_population_factor = 0.20
+	state_production_speed_buildings_factor = 0.10
+	local_resources_factor = -0.10
+}
+
+# 《霜牡与雪牝》—— 寒铁与双子神的祝福
+SCR_tour_dm_frost_deer = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_tour_frost_deer
+	local_factories = 0.15
+	state_production_speed_buildings_factor = 0.15
+	recruitable_population_factor = -0.15
+}
+
+# 《七丘的狼母》—— 狼母的庇护让补给车队穿过荒原
+SCR_tour_dm_mother_wolf = {
+	enable = { always = yes }
+	icon = GFX_idea_SCR_tour_mother_wolf
+	local_supplies = 2
+	local_factories = 0.10
+	recruitable_population_factor = -0.10
+}
+
+############################################
+# 【皇帝的归来】动态民族精神
+# 国策完成时 add_to_variable 增加数值，再 add_dynamic_modifier 刷新；
+# 数值由 docs/gen_scr_emperor_returns.cjs 生成到 SCR_emperor_returns_shared.txt。
+# 规划中的「对莱塔尼亚攻击/突破」「支援连 HP」「8.22 事件」无可用引擎写法，未实装。
+############################################
+
+# 空剧场里的新皇帝 —— 归来线的开局精神；112 格改名为「剧场女皇，高卢倒影」
+SCR_dyn_new_emperor = {
+	icon = GFX_idea_SCR_dyn_new_emperor
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	political_power_gain = SCR_dyn_new_emperor_pp
+	stability_factor = SCR_dyn_new_emperor_stab
+	recruitable_population_factor = SCR_dyn_new_emperor_recruit
+	stability_weekly = SCR_dyn_new_emperor_weekly
+	army_attack_factor = SCR_dyn_new_emperor_army_attack
+}
+
+# 剧场女皇，高卢倒影 —— 112 格由【空剧场里的新皇帝】改名而来（沿用同一组变量）
+SCR_dyn_theatre_empress = {
+	icon = GFX_idea_SCR_dyn_new_emperor
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	political_power_gain = SCR_dyn_new_emperor_pp
+	stability_factor = SCR_dyn_new_emperor_stab
+	recruitable_population_factor = SCR_dyn_new_emperor_recruit
+	stability_weekly = SCR_dyn_new_emperor_weekly
+	army_attack_factor = SCR_dyn_new_emperor_army_attack
+}
+
+# 高卢倒影 —— 129 格由【剧场女皇，高卢倒影】改名而来（沿用同一组变量）
+SCR_dyn_gaul_reflection = {
+	icon = GFX_idea_SCR_dyn_new_emperor
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	political_power_gain = SCR_dyn_new_emperor_pp
+	stability_factor = SCR_dyn_new_emperor_stab
+	recruitable_population_factor = SCR_dyn_new_emperor_recruit
+	stability_weekly = SCR_dyn_new_emperor_weekly
+	army_attack_factor = SCR_dyn_new_emperor_army_attack
+}
+
+# 国家不是玩具，陛下 —— 112 格获得
+SCR_dyn_not_a_toy = {
+	icon = GFX_idea_SCR_dyn_not_a_toy
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	political_power_gain = SCR_dyn_not_a_toy_pp
+	stability_factor = SCR_dyn_not_a_toy_stab
+	war_support_factor = SCR_dyn_not_a_toy_ws
+	industrial_capacity_factory = SCR_dyn_not_a_toy_factory
+	supply_consumption_factor = SCR_dyn_not_a_toy_supply
+	army_attack_factor = SCR_dyn_not_a_toy_attack
+	production_speed_buildings_factor = SCR_dyn_not_a_toy_build
+	mobilization_speed = SCR_dyn_not_a_toy_mobilization
+	army_defence_factor = SCR_dyn_not_a_toy_defence
+	experience_gain_army_factor = SCR_dyn_not_a_toy_army_xp
+	stability_weekly = SCR_dyn_not_a_toy_weekly
+}
+
+# 非核心地块惩罚 —— 151 格挂载；不可见，由月度 on_action 按非核心地块数重算
+SCR_dyn_empress_noncore_penalty = {
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	stability_factor = SCR_dyn_new_emperor_noncore_penalty
+}
+
+# 军官团精神：荣耀之手 —— 127 格解锁
+SCR_dyn_glory_hand = {
+	icon = GFX_idea_SCR_dyn_glory_hand
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	army_attack_factor = 0.20
+	army_defence_factor = -0.10
+	army_speed_factor = 0.10
+}
+
+# 天灾，矿石病，旧高卢！—— 随国策逐格回收负面并转为正面
+SCR_dyn_old_gaul_disaster = {
+	icon = GFX_idea_SCR_dyn_old_gaul_disaster
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	political_power_gain = SCR_dyn_old_gaul_pp
+	stability_factor = SCR_dyn_old_gaul_stab
+	war_support_factor = SCR_dyn_old_gaul_ws
+	recruitable_population_factor = SCR_dyn_old_gaul_recruit
+	production_speed_buildings_factor = SCR_dyn_old_gaul_build
+	land_reinforce_rate = SCR_dyn_old_gaul_reinforce
+	industrial_capacity_factory = SCR_dyn_old_gaul_factory
+	army_strength_factor = SCR_dyn_old_gaul_hp
+	local_resources_factor = SCR_dyn_old_gaul_resources
+	casualty_trickleback = SCR_dyn_old_gaul_trickle
+	research_speed_factor = SCR_dyn_old_gaul_research
+	army_core_attack_factor = SCR_dyn_old_gaul_core_attack
+	army_core_defence_factor = SCR_dyn_old_gaul_core_defence
+	army_defence_factor = SCR_dyn_old_gaul_army_defence
+	operative_slot = SCR_dyn_old_gaul_operative
+	training_time_factor = SCR_dyn_old_gaul_training
+	consumer_goods_factor = SCR_dyn_old_gaul_consumer_goods
+	stability_weekly = SCR_dyn_old_gaul_weekly
+}
+
+# 旧世界，新高卢 —— 129 格由【天灾，矿石病，旧高卢！】改名而来（沿用同一组变量）
+SCR_dyn_new_gaul_world = {
+	icon = GFX_idea_SCR_dyn_old_gaul_disaster
+	enable = { always = yes }
+	remove_trigger = { always = no }
+	political_power_gain = SCR_dyn_old_gaul_pp
+	stability_factor = SCR_dyn_old_gaul_stab
+	war_support_factor = SCR_dyn_old_gaul_ws
+	recruitable_population_factor = SCR_dyn_old_gaul_recruit
+	production_speed_buildings_factor = SCR_dyn_old_gaul_build
+	land_reinforce_rate = SCR_dyn_old_gaul_reinforce
+	industrial_capacity_factory = SCR_dyn_old_gaul_factory
+	army_strength_factor = SCR_dyn_old_gaul_hp
+	local_resources_factor = SCR_dyn_old_gaul_resources
+	casualty_trickleback = SCR_dyn_old_gaul_trickle
+	research_speed_factor = SCR_dyn_old_gaul_research
+	army_core_attack_factor = SCR_dyn_old_gaul_core_attack
+	army_core_defence_factor = SCR_dyn_old_gaul_core_defence
+	army_defence_factor = SCR_dyn_old_gaul_army_defence
+	operative_slot = SCR_dyn_old_gaul_operative
+	training_time_factor = SCR_dyn_old_gaul_training
+	consumer_goods_factor = SCR_dyn_old_gaul_consumer_goods
+	stability_weekly = SCR_dyn_old_gaul_weekly
+}
