@@ -406,3 +406,10 @@ set_party_name = {
 
 - **「覆水难收」前置冲突**：`SCR_corsica_65` 的前置改为**一个** prerequisite 块，63 / 64 / 62 三选一即可解锁。生成器现在保留 prerequisite 分组语义：**一个块内多个 focus = OR，多个块 = AND**；其余汇聚格（33、42、63、64、71）仍是多个块，保持“全都要”。
 - **国策效果文本清理**：移除「解锁决议分类」「追加效果」「逐级成长」等游戏外说明；分类解锁改用标准 `unlock_decision_category_tooltip`；只保留具体数值、部队、建筑与资源效果。部队提示改用简短的 `SCR_corsica_vanguard_unlock_tt` / `SCR_corsica_dolls_tt`，不再复用主树里的长说明。
+
+### 8.6 子意识形态「剧场皇室」
+
+- `special_corsica_subtype` 的显示名从「高卢倒影皇廷」改为 **「剧场皇室」**；政党名 `SCR_corsica_party` 仍保留「高卢倒影皇廷」，二者分工为“意识形态 / 执政党”。
+- 图标：`gfx/interface/ideologies/special_corsica_subtype.dds`，84×82 未压缩 BGRA8888（与 mod 现有意识形态图标同规格），在 `interface/countrypoliticsview.gfx` 注册 `GFX_ideology_special_corsica_subtype`。
+- 科西嘉莉的 `country_leader` 与 `scr.27` 仍使用 `special_corsica_subtype`，无需改脚本。
+- `【猩红剧团】备份/` 已同步本次全部改动（68 个文件），并在 `文件清单.md` 追加同步记录。
