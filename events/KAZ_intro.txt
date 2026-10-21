@@ -84,3 +84,26 @@ country_event = {
 		name = kaz_intro.5.a
 	}
 }
+
+# 开幕（由开局国策 KAZ_the_unavoidable 完成时触发）
+country_event = {
+	id = kaz_intro.6
+	title = kaz_intro.6.t
+	desc = kaz_intro.6.d
+	picture = GFX_report_event_Generic_Palace_Hall
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = kaz_intro.6.a
+		ai_chance = { factor = 50 }
+		set_country_flag = KAZ_can_choose_grove
+	}
+
+	option = {
+		name = kaz_intro.6.b
+		ai_chance = { factor = 50 }
+		set_country_flag = KAZ_can_choose_davila
+	}
+}

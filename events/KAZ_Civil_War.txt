@@ -1,0 +1,168 @@
+add_namespace = kaz_civilwar
+
+country_event = {
+	id = kaz_civilwar.1
+	title = kaz_civilwar.1.t
+	desc = kaz_civilwar.1.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = KAZ_civil_war_chain_started
+			country_event = {
+				id = kaz_civilwar.2
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = kaz_civilwar.1.a
+	}
+}
+
+country_event = {
+	id = kaz_civilwar.2
+	title = kaz_civilwar.2.t
+	desc = kaz_civilwar.2.d
+	picture = GFX_report_event_Generic_Palace_Hall
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = kaz_civilwar.3
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = kaz_civilwar.2.a
+	}
+}
+
+country_event = {
+	id = kaz_civilwar.3
+	title = kaz_civilwar.3.t
+	desc = kaz_civilwar.3.d
+	picture = GFX_report_event_Generic_Military_Factory
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = kaz_civilwar.4
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = kaz_civilwar.3.a
+
+		custom_effect_tooltip = kaz_civilwar.3.tt
+
+		# 红军取得卡兹戴尔全境宣称
+		KAZ = {
+			every_owned_state = {
+				add_claim_by = KAC
+			}
+		}
+
+		# 北部五州的卡兹戴尔驻军撤回本土
+		263 = {
+			teleport_armies = {
+				limit = { tag = KAZ }
+			}
+		}
+		279 = {
+			teleport_armies = {
+				limit = { tag = KAZ }
+			}
+		}
+		307 = {
+			teleport_armies = {
+				limit = { tag = KAZ }
+			}
+		}
+		343 = {
+			teleport_armies = {
+				limit = { tag = KAZ }
+			}
+		}
+		344 = {
+			teleport_armies = {
+				limit = { tag = KAZ }
+			}
+		}
+
+		# 五州移交卡兹戴尔红军并置核心
+		KAC = {
+			transfer_state = 263
+			transfer_state = 279
+			transfer_state = 307
+			transfer_state = 343
+			transfer_state = 344
+
+			add_state_core = 263
+			add_state_core = 279
+			add_state_core = 307
+			add_state_core = 343
+			add_state_core = 344
+		}
+
+		# 1080 交还龙门
+		LUM = {
+			transfer_state = 1080
+		}
+
+		# 关系恶化，但不宣战
+		add_opinion_modifier = { target = KAC modifier = KAZ_red_army_secession_opinion }
+		KAC = { add_opinion_modifier = { target = KAZ modifier = KAZ_red_army_secession_opinion } }
+	}
+}
+
+country_event = {
+	id = kaz_civilwar.4
+	title = kaz_civilwar.4.t
+	desc = kaz_civilwar.4.d
+	picture = GFX_report_event_Generic_Barracks
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = kaz_civilwar.5
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = kaz_civilwar.4.a
+	}
+}
+
+country_event = {
+	id = kaz_civilwar.5
+	title = kaz_civilwar.5.t
+	desc = kaz_civilwar.5.d
+	picture = GFX_report_event_Generic_Urban_Unrest_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = kaz_civilwar.5.a
+	}
+}

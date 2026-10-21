@@ -108,6 +108,15 @@ VIC_Sarkaz_invation_decisions = {
 		priority = 500
 
 		timeout_effect = {
+			set_country_flag = VIC_first_march_started_flag
+			KAZ = {
+				if = {
+					limit = {
+						NOT = { has_completed_focus = KAZ_kazdel_just_wait }
+					}
+					complete_national_focus = KAZ_kazdel_just_wait
+				}
+			}
 			country_event = {
 				id = event_vic.1
 			}
@@ -241,6 +250,9 @@ VIC_Victoria_parliament_decisions = {
 			custom_trigger_tooltip = {
 				tooltip = VIC_duke_union_morethan_tt
 				check_variable = { VIC_duke_union > 0.75 }
+			}
+			KAZ = {
+				has_completed_focus = KAZ_kazdel_just_wait
 			}
 		}
 

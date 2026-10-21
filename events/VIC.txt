@@ -11,6 +11,7 @@ country_event = {
 	picture = GFX_report_event_VIC_joint_march
 
 	is_triggered_only = yes
+	fire_only_once = yes
 
 	option = {
 		name = event_vic.1.a
@@ -55,6 +56,20 @@ country_event = {
 
 		set_country_flag = VIC_joint_march_failed_flag
 		clr_country_flag = VIC_Victoria_parliament_flag
+
+		KAZ = {
+			if = {
+				limit = {
+					has_completed_focus = KAZ_kazdel_just_wait
+					NOT = { has_country_flag = KAZ_civil_war_chain_started }
+				}
+				set_country_flag = KAZ_civil_war_chain_started
+				country_event = {
+					id = kaz_civilwar.1
+					days = 3
+				}
+			}
+		}
 
 		end_puppet = DOA
 		end_puppet = DOM
