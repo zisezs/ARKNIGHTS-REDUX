@@ -1,0 +1,136 @@
+######################################################
+# 猩红剧团（SCR）【皇帝的归来】目标国修正 · 可见国家精神
+# 生成器：docs/gen_scr_emperor_returns.cjs（勿手改本文件）
+#
+# targeted_modifier 在 dynamic_modifier 与 hidden_ideas 里都不参与结算；
+# 必须放在可见的 country 类 idea 上。每档一个 idea，用 swap_ideas 原地升级。
+######################################################
+ideas = {
+	country = {
+
+		SCR_er_ltn_bonus_1 = {
+			name = SCR_er_ltn_bonus
+			picture = SCR_dyn_old_gaul_disaster
+			allowed = { original_tag = SCR }
+			allowed_civil_war = { always = yes }
+			removal_cost = -1
+			targeted_modifier = {
+				tag = LTN
+				breakthrough_bonus_against = 0.05
+			}
+		}
+		SCR_er_ltn_bonus_2 = {
+			name = SCR_er_ltn_bonus
+			picture = SCR_dyn_old_gaul_disaster
+			allowed = { original_tag = SCR }
+			allowed_civil_war = { always = yes }
+			removal_cost = -1
+			targeted_modifier = {
+				tag = LTN
+				attack_bonus_against = 0.05
+				breakthrough_bonus_against = 0.05
+			}
+		}
+		SCR_er_ltn_bonus_3 = {
+			name = SCR_er_ltn_bonus
+			picture = SCR_dyn_old_gaul_disaster
+			allowed = { original_tag = SCR }
+			allowed_civil_war = { always = yes }
+			removal_cost = -1
+			targeted_modifier = {
+				tag = LTN
+				attack_bonus_against = 0.05
+				breakthrough_bonus_against = 0.1
+			}
+		}
+		SCR_er_ltn_bonus_4 = {
+			name = SCR_er_ltn_bonus
+			picture = SCR_dyn_old_gaul_disaster
+			allowed = { original_tag = SCR }
+			allowed_civil_war = { always = yes }
+			removal_cost = -1
+			targeted_modifier = {
+				tag = LTN
+				attack_bonus_against = 0.1
+				breakthrough_bonus_against = 0.1
+			}
+		}
+		SCR_er_duke_bonus_1 = {
+			name = SCR_er_duke_bonus
+			picture = SCR_dyn_old_gaul_disaster
+			allowed = { original_tag = SCR }
+			allowed_civil_war = { always = yes }
+			removal_cost = -1
+			targeted_modifier = {
+				tag = VCA
+				breakthrough_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = TAR
+				breakthrough_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = VWI
+				breakthrough_bonus_against = 0.05
+			}
+		}
+		SCR_er_duke_bonus_2 = {
+			name = SCR_er_duke_bonus
+			picture = SCR_dyn_old_gaul_disaster
+			allowed = { original_tag = SCR }
+			allowed_civil_war = { always = yes }
+			removal_cost = -1
+			targeted_modifier = {
+				tag = VCA
+				breakthrough_bonus_against = 0.1
+			}
+			targeted_modifier = {
+				tag = TAR
+				breakthrough_bonus_against = 0.1
+			}
+			targeted_modifier = {
+				tag = VWI
+				breakthrough_bonus_against = 0.1
+			}
+		}
+		SCR_er_duke_bonus_3 = {
+			name = SCR_er_duke_bonus
+			picture = SCR_dyn_old_gaul_disaster
+			allowed = { original_tag = SCR }
+			allowed_civil_war = { always = yes }
+			removal_cost = -1
+			targeted_modifier = {
+				tag = VCA
+				breakthrough_bonus_against = 0.15
+			}
+			targeted_modifier = {
+				tag = TAR
+				breakthrough_bonus_against = 0.15
+			}
+			targeted_modifier = {
+				tag = VWI
+				breakthrough_bonus_against = 0.15
+			}
+		}
+		SCR_er_duke_bonus_4 = {
+			name = SCR_er_duke_bonus
+			picture = SCR_dyn_old_gaul_disaster
+			allowed = { original_tag = SCR }
+			allowed_civil_war = { always = yes }
+			removal_cost = -1
+			targeted_modifier = {
+				tag = VCA
+				breakthrough_bonus_against = 0.2
+			}
+			targeted_modifier = {
+				tag = TAR
+				breakthrough_bonus_against = 0.2
+			}
+			targeted_modifier = {
+				tag = VWI
+				breakthrough_bonus_against = 0.2
+			}
+		}
+
+	}
+}

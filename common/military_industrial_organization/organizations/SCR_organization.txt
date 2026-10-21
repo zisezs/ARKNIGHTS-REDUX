@@ -1,0 +1,1005 @@
+# ==============================================================================
+#  猩红剧团 / 高卢 · 军工企业组织（MIO）
+#  --------------------------------------------------------------------------
+#  主题：「异世界的亡国法兰西」——四国战争后，高卢共和国的兵工体系随首都
+#  林贡斯一同化为焦土。幸存的总办、匠人与图纸流亡到剧团的巡演车队里，
+#  在布景板后面重新开动机床。八家机构不是新建的工业，而是亡国工业的残响。
+#
+#  · 树骨架复用 00_generic_organization.txt 的 preset（include = ...），
+#    每家另有 initial_trait 与 4 条专属 add_trait（special_trait_background）。
+#  · 新增节点一律挂在 preset 叶子节点下方，且 y<=5
+#    （原版 MIO 树行距 102px、可视区 640px，y=6 起要滚动才看得见）。
+#  · 专属特质的解锁门控用猩红剧团自己的国策（SCR_...）。
+#  · 组织图标 = 64x64 PNG，生成器 docs/gen_scr_mio_icons.cjs，
+#    精灵定义 interface/military_industrial_organization/SCR_organization_icons.gfx。
+#  · 本地化：localisation/simp_chinese/SCR_l_simp_chinese.yml
+#
+#  取材：SCR 国策树（锻造合唱、铁之舞台、炮兵间奏、废墟清点、重建道路、
+#        旧军团阅兵、将军的箱子、口耳网络、林贡斯重新点灯等）
+# ==============================================================================
+
+
+# ==============================================================================
+# 1 · 林贡斯兵工厂联合体 —— 轻武器与支援装备
+#     首都陷落时，兵工厂的总办把最后三套冲压模具埋进了剧院地窖。
+# ==============================================================================
+SCR_Lingons_Arsenal_organization = {
+	name = SCR_Lingons_Arsenal_organization
+	icon = GFX_scr_mio_lingons_arsenal
+	include = modern_infantry_equipment_organization
+
+	allowed = {
+		original_tag = SCR
+	}
+
+	equipment_type = {
+		infantry_equipment
+		support_equipment
+	}
+	research_categories = {
+		infantry_weapons
+		support_tech
+	}
+
+	initial_trait = {
+		token = SCR_mio_initial_lingons_arsenal
+		name = SCR_mio_initial_lingons_arsenal
+
+		limit_to_equipment_type = { infantry_equipment support_equipment }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.05
+			reliability = 0.05
+		}
+	}
+
+	# 地窖里的旧图纸 —— 亡国前最后一批制式步枪的全套工艺文件
+	add_trait = {
+		token = SCR_mio_trait_lingons_blueprints
+		name = SCR_mio_trait_lingons_blueprints
+		icon = GFX_generic_mio_department_icon_infantry_quality
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_improved_small_arms_bullet_design
+		any_parent = { generic_mio_trait_improved_small_arms_bullet_design }
+
+		available = {
+			FROM = { has_completed_focus = SCR_forge_chorus }
+		}
+
+		limit_to_equipment_type = { infantry_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.08
+			reliability = 0.05
+		}
+	}
+
+	# 可搬迁的工装 —— 机床装在剧团的货车里，今晚拆、明晚装
+	add_trait = {
+		token = SCR_mio_trait_mobile_tooling
+		name = SCR_mio_trait_mobile_tooling
+		icon = GFX_generic_mio_department_icon_infantry_production
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_add_1
+		any_parent = { generic_mio_trait_add_1 }
+
+		available = {
+			FROM = { has_completed_focus = SCR_rebuild_the_roads }
+		}
+
+		production_bonus = {
+			production_capacity_factor = 0.10
+			production_efficiency_gain_factor = 0.05
+		}
+	}
+
+	# 老兵验收 —— 验枪的是打过四国战争的人，不是文书
+	add_trait = {
+		token = SCR_mio_trait_veteran_inspectors
+		name = SCR_mio_trait_veteran_inspectors
+		icon = GFX_generic_mio_department_icon_infantry_offense
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_armor_piercing_rounds
+		any_parent = { generic_mio_trait_armor_piercing_rounds }
+
+		available = {
+			FROM = { has_completed_focus = SCR_rehearse_the_old_guard }
+		}
+
+		limit_to_equipment_type = { infantry_equipment }
+
+		equipment_bonus = {
+			defense = 0.08
+			reliability = 0.05
+		}
+	}
+
+	# 巡回车间 —— 一座不肯关门的城，养出了一支不肯停产的厂
+	add_trait = {
+		token = SCR_mio_trait_travelling_workshop
+		name = SCR_mio_trait_travelling_workshop
+		icon = GFX_generic_mio_department_icon_infantry_line_efficiency
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_anti_vechicle_land_mines
+		any_parent = { generic_mio_trait_anti_vechicle_land_mines }
+
+		available = {
+			FROM = { has_completed_focus = SCR_city_that_refuses_to_close }
+		}
+
+		production_bonus = {
+			production_efficiency_cap_factor = 0.10
+			production_efficiency_gain_factor = 0.05
+		}
+	}
+}
+
+
+# ==============================================================================
+# 2 · 旧王炮兵铸造局 —— 火炮、反坦克与防空
+#     铸造局的铜钟在城破那天被熔成了炮管，从此局徽上不再有钟。
+# ==============================================================================
+SCR_Royal_Foundry_organization = {
+	name = SCR_Royal_Foundry_organization
+	icon = GFX_scr_mio_royal_foundry
+	include = generic_artillery_organization
+
+	allowed = {
+		original_tag = SCR
+	}
+
+	equipment_type = {
+		artillery_equipment
+		anti_tank_equipment
+		anti_air_equipment
+		rocket_artillery_equipment
+	}
+	research_categories = {
+		cat_artillery
+		mio_cat_all_artillery_equipment
+	}
+
+	initial_trait = {
+		token = SCR_mio_initial_royal_foundry
+		name = SCR_mio_initial_royal_foundry
+
+		limit_to_equipment_type = { artillery_equipment anti_tank_equipment anti_air_equipment rocket_artillery_equipment }
+
+		equipment_bonus = {
+			build_cost_ic = -0.05
+			reliability = 0.05
+		}
+	}
+
+	# 熔钟重铸 —— 教堂的铜、雕像的铜、旧币的铜，全部回到炉里
+	add_trait = {
+		token = SCR_mio_trait_recast_bells
+		name = SCR_mio_trait_recast_bells
+		icon = GFX_generic_mio_department_icon_artillery_materials
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_advanced_trajectory_calculations
+		any_parent = { generic_mio_trait_advanced_trajectory_calculations }
+
+		available = {
+			FROM = { has_completed_focus = SCR_harvest_the_ruins }
+		}
+
+		equipment_bonus = {
+			build_cost_ic = -0.05
+			reliability = 0.05
+		}
+	}
+
+	# 高卢装药 —— 药包比别国多一线，射程表因此要重印
+	add_trait = {
+		token = SCR_mio_trait_gallic_charge
+		name = SCR_mio_trait_gallic_charge
+		icon = GFX_generic_mio_department_icon_artillery
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_light_weight_barrels
+		any_parent = { generic_mio_trait_light_weight_barrels }
+
+		available = {
+			FROM = { has_completed_focus = SCR_artillery_interlude }
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.10
+		}
+	}
+
+	# 防空联轴器 —— 把要塞炮架拆成能跟着军团走的防空炮
+	add_trait = {
+		token = SCR_mio_trait_anti_air_coupler
+		name = SCR_mio_trait_anti_air_coupler
+		icon = GFX_generic_mio_department_icon_anti_air_technology
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_super_charges
+		any_parent = { generic_mio_trait_super_charges }
+
+		available = {
+			FROM = { has_completed_focus = SCR_stage_of_iron }
+		}
+
+		limit_to_equipment_type = { anti_air_equipment }
+
+		equipment_bonus = {
+			air_attack = 0.10
+		}
+	}
+
+	# 旧弹道表 —— 亡国前最后一版射表，被一位老炮手背了下来
+	add_trait = {
+		token = SCR_mio_trait_old_ballistics
+		name = SCR_mio_trait_old_ballistics
+		icon = GFX_generic_mio_department_icon_artillery_conversion
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_sliding_breech_block
+		any_parent = { generic_mio_trait_sliding_breech_block }
+
+		available = {
+			FROM = { has_completed_focus = SCR_the_army_remembers }
+		}
+
+		equipment_bonus = {
+			hard_attack = 0.08
+			ap_attack = 0.06
+		}
+	}
+}
+
+
+# ==============================================================================
+# 3 · 阿维尔尼机动车工场 —— 摩托化、机械化与装甲车
+#     工场原本给共和国邮政造卡车；亡国后，同一批底盘开始拉机枪和野战炮。
+# ==============================================================================
+SCR_Arvern_Motors_organization = {
+	name = SCR_Arvern_Motors_organization
+	icon = GFX_scr_mio_arvern_motors
+	include = generic_motorized_mechanized_organization
+
+	allowed = {
+		original_tag = SCR
+	}
+
+	equipment_type = {
+		motorized_equipment
+		mechanized_equipment
+		armored_car_equipment
+	}
+	research_categories = {
+		motorized_equipment
+		mot_rockets
+		cat_armored_cars
+	}
+
+	initial_trait = {
+		token = SCR_mio_initial_arvern_motors
+		name = SCR_mio_initial_arvern_motors
+
+		limit_to_equipment_type = { motorized_equipment mechanized_equipment armored_car_equipment }
+
+		equipment_bonus = {
+			build_cost_ic = -0.05
+			reliability = 0.05
+		}
+	}
+
+	# 邮政底盘 —— 结实、好修、零件到处都有，这正是军团需要的
+	add_trait = {
+		token = SCR_mio_trait_arvern_engine
+		name = SCR_mio_trait_arvern_engine
+		icon = GFX_generic_mio_department_icon_motorized_engine
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_high_powered_engine
+		any_parent = { generic_mio_trait_high_powered_engine }
+
+		available = {
+			FROM = { has_completed_focus = SCR_rebuild_the_roads }
+		}
+
+		limit_to_equipment_type = { motorized_equipment }
+
+		equipment_bonus = {
+			maximum_speed = 0.05
+			reliability = 0.05
+		}
+	}
+
+	# 车队装甲 —— 给运补车队加一层薄钢板，司机说这比祈祷管用
+	add_trait = {
+		token = SCR_mio_trait_armored_convoy
+		name = SCR_mio_trait_armored_convoy
+		icon = GFX_generic_mio_department_icon_motorized_materials
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_armored_pulpit_mount
+		any_parent = { generic_mio_trait_armored_pulpit_mount }
+
+		available = {
+			FROM = { has_completed_focus = SCR_supply_caravan_restored }
+		}
+
+		equipment_bonus = {
+			defense = 0.08
+			reliability = 0.05
+		}
+	}
+
+	# 游击队改装间 —— 林间的修车棚比正规工厂更懂什么叫就地取材
+	add_trait = {
+		token = SCR_mio_trait_maquis_workshops
+		name = SCR_mio_trait_maquis_workshops
+		icon = GFX_generic_mio_department_icon_motorized_mechanized_production
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_land_mine_racks
+		any_parent = { generic_mio_trait_land_mine_racks }
+
+		available = {
+			FROM = { has_completed_focus = SCR_stage_managers_of_the_wilds }
+		}
+
+		production_bonus = {
+			production_capacity_factor = 0.08
+			production_efficiency_gain_factor = 0.05
+		}
+	}
+
+	# 公路竞速 —— 亡国前每年举办的军车越野赛，如今成了驾驶训练大纲
+	add_trait = {
+		token = SCR_mio_trait_road_runners
+		name = SCR_mio_trait_road_runners
+		icon = GFX_generic_mio_department_icon_motorized_mechanized_engine
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_mounted_light_anti_tank_gun
+		any_parent = { generic_mio_trait_mounted_light_anti_tank_gun }
+
+		available = {
+			FROM = { has_completed_focus = SCR_march_music }
+		}
+
+		equipment_bonus = {
+			maximum_speed = 0.05
+			breakthrough = 0.05
+		}
+	}
+}
+
+
+# ==============================================================================
+# 4 · 塞夸尼装甲工场 —— 坦克
+#     工场主是旧共和国的装甲总监，他至今不肯承认那场战争已经结束。
+# ==============================================================================
+SCR_Sequani_Armor_organization = {
+	name = SCR_Sequani_Armor_organization
+	icon = GFX_scr_mio_sequani_armor
+	include = generic_tank_organization
+
+	allowed = {
+		original_tag = SCR
+	}
+
+	equipment_type = {
+		mio_cat_eq_all_light_tank
+		mio_cat_eq_all_medium_tank
+		mio_cat_eq_all_heavy_tank
+	}
+	research_categories = {
+		mio_cat_tech_light_armor_and_modules
+		mio_cat_tech_medium_armor_and_modules
+		mio_cat_tech_heavy_armor_and_modules
+	}
+
+	initial_trait = {
+		token = SCR_mio_initial_sequani_armor
+		name = SCR_mio_initial_sequani_armor
+
+		equipment_bonus = {
+			armor_value = 0.05
+			reliability = 0.05
+		}
+	}
+
+	# 塞夸尼轧钢 —— 旧厂留下的轧机还能压出整块车体正面
+	add_trait = {
+		token = SCR_mio_trait_sequani_plate
+		name = SCR_mio_trait_sequani_plate
+		icon = GFX_generic_mio_department_icon_tank_general_armor
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_quality_improvements
+		any_parent = { generic_mio_trait_quality_improvements }
+
+		available = {
+			FROM = { has_completed_focus = SCR_stage_of_iron }
+		}
+
+		equipment_bonus = {
+			armor_value = 0.10
+		}
+	}
+
+	# 流亡工程师 —— 他们带着图纸来，只要求一台车床和一间不漏雨的屋子
+	add_trait = {
+		token = SCR_mio_trait_exile_engineers
+		name = SCR_mio_trait_exile_engineers
+		icon = GFX_generic_mio_department_icon_tank_general_production
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_mass_production
+		any_parent = { generic_mio_trait_mass_production }
+
+		available = {
+			FROM = { has_completed_focus = SCR_officers_school_on_wheels }
+		}
+
+		production_bonus = {
+			production_capacity_factor = 0.10
+			production_efficiency_gain_factor = 0.05
+		}
+	}
+
+	# 断剑操典 —— 装甲兵在亡国后总结出的近距离支援战法
+	add_trait = {
+		token = SCR_mio_trait_broken_sabre_doctrine
+		name = SCR_mio_trait_broken_sabre_doctrine
+		icon = GFX_generic_mio_department_icon_tank_general_weapons
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_infantry_support_tanks
+		any_parent = { generic_mio_trait_infantry_support_tanks }
+
+		available = {
+			FROM = { has_completed_focus = SCR_generals_box }
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.08
+			defense = 0.05
+		}
+	}
+
+	# 高卢钢 —— 用旧共和国库存钢锭重新热处理，硬度终于稳定
+	add_trait = {
+		token = SCR_mio_trait_gaulish_steel
+		name = SCR_mio_trait_gaulish_steel
+		icon = GFX_generic_mio_department_icon_tank_general_technology
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_anti_tank_specialization
+		any_parent = { generic_mio_trait_anti_tank_specialization }
+
+		available = {
+			FROM = { has_completed_focus = SCR_the_land_remembers }
+		}
+
+		equipment_bonus = {
+			hard_attack = 0.08
+			ap_attack = 0.06
+		}
+	}
+}
+
+
+# ==============================================================================
+# 5 · 特雷维尔航空制造局 —— 飞机
+#     局里的试飞员是亡国后唯一还敢在夜间起飞的人。
+# ==============================================================================
+SCR_Treveri_Aero_organization = {
+	name = SCR_Treveri_Aero_organization
+	icon = GFX_scr_mio_treveri_aero
+	include = generic_general_aircraft_organization
+
+	allowed = {
+		original_tag = SCR
+	}
+
+	equipment_type = {
+		mio_cat_eq_all_small_plane
+		mio_cat_eq_all_medium_plane
+		mio_cat_eq_all_large_plane
+	}
+	research_categories = {
+		air_equipment
+	}
+
+	initial_trait = {
+		token = SCR_mio_initial_treveri_aero
+		name = SCR_mio_initial_treveri_aero
+
+		equipment_bonus = {
+			air_agility = 0.05
+			air_range = 0.05
+		}
+	}
+
+	# 特雷维尔翼型 —— 旧局的机翼图纸，比现役机型还先进半代
+	add_trait = {
+		token = SCR_mio_trait_treveri_wing
+		name = SCR_mio_trait_treveri_wing
+		icon = GFX_generic_mio_department_icon_plane_fighter_quality
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_fighter_aircraft_production
+		any_parent = { generic_mio_trait_fighter_aircraft_production }
+
+		available = {
+			FROM = { has_completed_focus = SCR_forge_chorus }
+		}
+
+		limit_to_equipment_type = { mio_cat_eq_only_light_fighter_no_cv medium_plane_fighter_airframe medium_plane_scout_plane_airframe }
+
+		equipment_bonus = {
+			air_agility = 0.08
+			air_defence = 0.05
+		}
+	}
+
+	# 流亡试飞员 —— 他们不再为国旗起飞，只为证明自己还活着
+	add_trait = {
+		token = SCR_mio_trait_exile_test_pilots
+		name = SCR_mio_trait_exile_test_pilots
+		icon = GFX_generic_mio_department_icon_plane_tactical_bomber_quality
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_bomber_aircraft_production
+		any_parent = { generic_mio_trait_bomber_aircraft_production }
+
+		available = {
+			FROM = { has_completed_focus = SCR_officers_school_on_wheels }
+		}
+
+		limit_to_equipment_type = { small_plane_cas_airframe mio_cat_eq_only_tactical_bomber mio_cat_eq_only_strategic_bomber }
+
+		equipment_bonus = {
+			air_ground_attack = 0.08
+			air_range = 0.05
+		}
+	}
+
+	# 海上侦察 —— 亡国的海岸线没了，但海图还留在局里的档案柜
+	add_trait = {
+		token = SCR_mio_trait_naval_scouts
+		name = SCR_mio_trait_naval_scouts
+		icon = GFX_generic_mio_department_icon_plane_naval_bomber_quality
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_naval_aircraft_production
+		any_parent = { generic_mio_trait_naval_aircraft_production }
+
+		available = {
+			FROM = { has_completed_focus = SCR_trade_on_old_roads }
+		}
+
+		limit_to_equipment_type = { small_plane_naval_bomber_airframe mio_cat_eq_all_cv_aircraft large_plane_maritime_patrol_plane_airframe }
+
+		equipment_bonus = {
+			air_range = 0.10
+			naval_strike_attack = 0.08
+		}
+	}
+
+	# 林贡斯上空 —— 为重新点灯的那座城，重新画一遍防空巡逻航线
+	add_trait = {
+		token = SCR_mio_trait_londinium_sky
+		name = SCR_mio_trait_londinium_sky
+		icon = GFX_generic_mio_department_icon_plane_fighter_combat
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_agility_wing_design
+		any_parent = { generic_mio_trait_agility_wing_design }
+
+		available = {
+			FROM = { has_completed_focus = SCR_lights_of_londinium_again }
+		}
+
+		equipment_bonus = {
+			air_defence = 0.08
+			air_agility = 0.05
+		}
+	}
+}
+
+
+# ==============================================================================
+# 6 · 阿莫里克船台总局 —— 海军舰艇
+#     共和国的主力舰队沉在港里，船台总局把能浮起来的东西重新编了号。
+# ==============================================================================
+SCR_Armorica_Dockyards_organization = {
+	name = SCR_Armorica_Dockyards_organization
+	icon = GFX_scr_mio_armorica_dockyards
+	include = generic_task_force_ship_organization
+
+	allowed = {
+		original_tag = SCR
+	}
+
+	equipment_type = {
+		mio_cat_eq_all_carrier
+		mio_cat_eq_all_cruiser
+		mio_cat_eq_all_destroyer
+	}
+	research_categories = {
+		mio_cat_tech_all_carrier_and_modules
+		mio_cat_tech_all_cruiser_and_modules
+		mio_cat_tech_all_destroyer_and_modules
+	}
+
+	initial_trait = {
+		token = SCR_mio_initial_armorica_dockyards
+		name = SCR_mio_initial_armorica_dockyards
+
+		equipment_bonus = {
+			naval_speed = 0.05
+			reliability = 0.05
+		}
+	}
+
+	# 阿莫里克船壳 —— 大西洋的浪教会船匠把每一道焊缝都做得更厚
+	add_trait = {
+		token = SCR_mio_trait_armorica_hulls
+		name = SCR_mio_trait_armorica_hulls
+		icon = GFX_generic_mio_department_icon_ship_capital_ship_armor
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_advanced_fitting_works
+		any_parent = { generic_mio_trait_advanced_fitting_works }
+
+		available = {
+			FROM = { has_completed_focus = SCR_city_that_refuses_to_close }
+		}
+
+		equipment_bonus = {
+			armor_value = 0.08
+			reliability = 0.05
+		}
+	}
+
+	# 残舰操典 —— 用仅剩的几艘船，练出最省燃料的编队方法
+	add_trait = {
+		token = SCR_mio_trait_remnant_doctrine
+		name = SCR_mio_trait_remnant_doctrine
+		icon = GFX_generic_mio_department_icon_ship_capital_ship_weapons
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_high_velocity_guns
+		any_parent = { generic_mio_trait_high_velocity_guns }
+
+		available = {
+			FROM = { has_completed_focus = SCR_the_army_remembers }
+		}
+
+		limit_to_equipment_type = { mio_cat_eq_all_cruiser }
+
+		equipment_bonus = {
+			hg_attack = 0.08
+			lg_attack = 0.05
+		}
+	}
+
+	# 无声航路 —— 剧团的走私船从不点灯，也不在航海日志上留下名字
+	add_trait = {
+		token = SCR_mio_trait_silent_runners
+		name = SCR_mio_trait_silent_runners
+		icon = GFX_generic_mio_department_icon_ship_capital_screen_utility
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_transom_stern
+		any_parent = { generic_mio_trait_transom_stern }
+
+		available = {
+			FROM = { has_completed_focus = SCR_whisper_networks }
+		}
+
+		equipment_bonus = {
+			surface_visibility = -0.08
+			naval_speed = 0.03
+		}
+	}
+
+	# 远洋续航 —— 没有海外基地，就把补给舱塞进每一寸空船体
+	add_trait = {
+		token = SCR_mio_trait_long_haul
+		name = SCR_mio_trait_long_haul
+		icon = GFX_generic_mio_department_icon_ship_capital_ship_engine
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_underway_replenishment_equipment
+		any_parent = { generic_mio_trait_underway_replenishment_equipment }
+
+		available = {
+			FROM = { has_completed_focus = SCR_trade_on_old_roads }
+		}
+
+		equipment_bonus = {
+			naval_range = 0.10
+			fuel_consumption = -0.05
+		}
+	}
+}
+
+
+# ==============================================================================
+# 7 · 先锋国军需总局 —— 支援装备
+#     总局的档案在城破时被烧了一半，剩下的一半被一位会计背了出来。
+# ==============================================================================
+SCR_Vanguard_Intendance_organization = {
+	name = SCR_Vanguard_Intendance_organization
+	icon = GFX_scr_mio_vanguard_intendance
+	include = generic_support_equipment_organization
+
+	allowed = {
+		original_tag = SCR
+	}
+
+	equipment_type = {
+		support_equipment
+	}
+	research_categories = {
+		support_tech
+	}
+
+	initial_trait = {
+		token = SCR_mio_initial_vanguard_intendance
+		name = SCR_mio_initial_vanguard_intendance
+
+		limit_to_equipment_type = { support_equipment }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+		production_bonus = {
+			production_resource_need_factor = -0.10
+		}
+	}
+
+	# 仓库网 —— 每一座剧院、每一间酒窖都被编进了补给序列
+	add_trait = {
+		token = SCR_mio_trait_depot_network
+		name = SCR_mio_trait_depot_network
+		icon = GFX_generic_mio_department_icon_facilities
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_efficient_scale_up
+		any_parent = { generic_mio_trait_efficient_scale_up }
+
+		available = {
+			FROM = { has_completed_focus = SCR_supply_caravan_restored }
+		}
+
+		limit_to_equipment_type = { support_equipment }
+
+		production_bonus = {
+			production_capacity_factor = 0.10
+		}
+	}
+
+	# 账簿核销 —— 亡国国库的最后一任会计，能把任何损耗做成合法支出
+	add_trait = {
+		token = SCR_mio_trait_ledger_accounting
+		name = SCR_mio_trait_ledger_accounting
+		icon = GFX_generic_mio_department_icon_infantry_materials
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_research_program
+		any_parent = { generic_mio_trait_research_program }
+
+		available = {
+			FROM = { has_completed_focus = SCR_ledger_of_ruins }
+		}
+
+		limit_to_equipment_type = { support_equipment }
+
+		production_bonus = {
+			production_cost_factor = -0.08
+		}
+	}
+
+	# 战地修理包 —— 一套能修好步枪、电话线、炊事车和士气的工具
+	add_trait = {
+		token = SCR_mio_trait_field_repair_kits
+		name = SCR_mio_trait_field_repair_kits
+		icon = GFX_generic_mio_department_icon_infantry_quality
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_light_mortar
+		any_parent = { generic_mio_trait_light_mortar }
+
+		available = {
+			FROM = { has_completed_focus = SCR_rebuild_the_roads }
+		}
+
+		limit_to_equipment_type = { support_equipment }
+
+		equipment_bonus = {
+			reliability = 0.10
+			defense = 0.05
+		}
+	}
+
+	# 部务标准 —— 把各剧团的私账并成一本总账，损耗第一次能被看见
+	add_trait = {
+		token = SCR_mio_trait_ministry_standard
+		name = SCR_mio_trait_ministry_standard
+		icon = GFX_generic_mio_department_icon_infantry_line_efficiency
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_single_shot_man_portable_anti_tank_system
+		any_parent = { generic_mio_trait_single_shot_man_portable_anti_tank_system }
+
+		available = {
+			FROM = { has_completed_focus = SCR_ministers_of_the_wing }
+		}
+
+		limit_to_equipment_type = { support_equipment }
+
+		production_bonus = {
+			production_efficiency_gain_factor = 0.10
+		}
+	}
+}
+
+
+# ==============================================================================
+# 8 · 猩红剧团道具工坊 —— 施术装备与支援装备
+#     剧团的道具师一直知道：舞台上的烟、火与假血，换个配方就是武器。
+# ==============================================================================
+SCR_Crimson_Props_organization = {
+	name = SCR_Crimson_Props_organization
+	icon = GFX_scr_mio_crimson_props
+	include = generic_support_equipment_organization
+
+	allowed = {
+		original_tag = SCR
+	}
+
+	equipment_type = {
+		arts_equipment
+		support_equipment
+	}
+	research_categories = {
+		arts_weapons
+		support_tech
+	}
+
+	initial_trait = {
+		token = SCR_mio_initial_crimson_props
+		name = SCR_mio_initial_crimson_props
+
+		limit_to_equipment_type = { arts_equipment support_equipment }
+
+		equipment_bonus = {
+			build_cost_ic = -0.04
+			soft_attack = 0.05
+		}
+	}
+
+	# 舞台烟幕 —— 道具间的烟饼配方，到了战场上就是遮蔽与突袭
+	add_trait = {
+		token = SCR_mio_trait_stage_smoke
+		name = SCR_mio_trait_stage_smoke
+		icon = GFX_generic_mio_department_icon_infantry_conversion
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_material_recycling
+		any_parent = { generic_mio_trait_material_recycling }
+
+		available = {
+			FROM = { has_completed_focus = SCR_kind_theaters }
+		}
+
+		limit_to_equipment_type = { arts_equipment }
+
+		equipment_bonus = {
+			soft_attack = 0.08
+			reliability = 0.05
+		}
+	}
+
+	# 道具喷火器 —— 舞台上的火龙改良后，射程短了，温度高了
+	add_trait = {
+		token = SCR_mio_trait_prop_flamethrowers
+		name = SCR_mio_trait_prop_flamethrowers
+		icon = GFX_generic_mio_department_icon_infantry_offense
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_scrap_melting
+		any_parent = { generic_mio_trait_scrap_melting }
+
+		available = {
+			FROM = { has_completed_focus = SCR_stage_of_iron }
+		}
+
+		equipment_bonus = {
+			soft_attack = 0.10
+			hard_attack = 0.05
+		}
+	}
+
+	# 演员野战包 —— 每个巡回演员都带一套：绷带、针线、备用面具
+	add_trait = {
+		token = SCR_mio_trait_actor_field_kits
+		name = SCR_mio_trait_actor_field_kits
+		icon = GFX_generic_mio_department_icon_infantry_production
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_high_quality_material_blend
+		any_parent = { generic_mio_trait_high_quality_material_blend }
+
+		available = {
+			FROM = { has_completed_focus = SCR_understudy_battalions }
+		}
+
+		limit_to_equipment_type = { support_equipment }
+
+		equipment_bonus = {
+			defense = 0.08
+			reliability = 0.05
+		}
+	}
+
+	# 谢幕信号 —— 用舞台灯光给前线发信号，比电台更难被截获
+	add_trait = {
+		token = SCR_mio_trait_applause_signal
+		name = SCR_mio_trait_applause_signal
+		icon = GFX_generic_mio_department_icon_infantry_technology
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_mass_production
+		any_parent = { generic_mio_trait_mass_production }
+
+		available = {
+			FROM = { has_completed_focus = SCR_march_music }
+		}
+
+		production_bonus = {
+			production_efficiency_gain_factor = 0.10
+		}
+	}
+}
