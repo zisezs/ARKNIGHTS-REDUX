@@ -2876,7 +2876,42 @@ Ursus_Unification_War_Decisions_GUI = {
 					original_tag = REU
 				}
 				set_cosmetic_tag = Soviet_Union
-				
+
+				if = {
+					limit = {
+						has_character = REU_Talulah
+					}
+					REU_Talulah = {
+						set_portraits = {
+							civilian = { large = GFX_portrait_REU_Talulah_stage_3 }
+							army = { large = GFX_portrait_REU_Talulah_stage_3 }
+						}
+					}
+				}
+
+				if = {
+					limit = {
+						has_character = REU_Alina
+					}
+					REU_Alina = {
+						set_portraits = {
+							civilian = { large = GFX_portrait_REU_Alina_stage_3 }
+						}
+					}
+				}
+
+				if = {
+					limit = {
+						has_character = REU_Yelena
+					}
+					REU_Yelena = {
+						set_portraits = {
+							civilian = { large = GFX_portrait_REU_Yelena_stage_3 }
+							army = { large = GFX_portrait_REU_Yelena_stage_3 }
+						}
+					}
+				}
+
 				hidden_effect = {
 					news_event = {
 						id = worldnews_reu.1

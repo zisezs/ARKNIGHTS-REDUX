@@ -60,10 +60,29 @@ scripted_gui = {
 				}
 			}
 			
-			Alina_visible = {
+			Alina_stage_1_visible = {
 				AND = {
 					has_country_flag = HOG_veiw
 					has_idea = REU_Alina_second_in_command
+					NOT = { has_idea = REU_new_uniform }
+					NOT = { has_country_flag = Ursus_Unification }
+				}
+			}
+
+			Alina_stage_2_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = REU_Alina_second_in_command
+					has_idea = REU_new_uniform
+					NOT = { has_country_flag = Ursus_Unification }
+				}
+			}
+
+			Alina_stage_3_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = REU_Alina_second_in_command
+					has_country_flag = Ursus_Unification
 				}
 			}
 

@@ -12,14 +12,14 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_1
 	x = 7
 	y = 9
-	cost = 4
+	cost = 5
 	completion_reward = {
 		add_political_power = 50
 		add_stability = 0.05
 		add_war_support = 0.05
 		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_to_variable = { SCR_dyn_corsica_lite = 0.01 tooltip = SCR_dyn_corsica_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_ideas = SCR_hidden_corsica
 		unlock_decision_category_tooltip = SCR_corsica_category
 		set_country_flag = SCR_corsica_act1_flag
 	}
@@ -33,14 +33,14 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_2
 	x = 9
 	y = 10
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_1
 	}
 	completion_reward = {
 		add_political_power = 25
-		if = { limit = { has_idea = SCR_timed_gaul_name } remove_ideas = SCR_timed_gaul_name } add_timed_idea = { idea = SCR_timed_gaul_name days = 30 }
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		if = { limit = { has_idea = SCR_timed_gaul_name } remove_idea = SCR_timed_gaul_name } add_timed_idea = { idea = SCR_timed_gaul_name days = 90 }
+		add_to_variable = { SCR_dyn_corsica = 0.01 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
 	ai_will_do = {
@@ -53,7 +53,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_3
 	x = 5
 	y = 10
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_1
 	}
@@ -61,7 +61,7 @@ shared_focus = {
 		add_political_power = 40
 		add_stability = 0.05
 		add_to_variable = { SCR_inspiration = 1 tooltip = SCR_inspiration_gain_tt }
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_to_variable = { SCR_dyn_corsica = 0.01 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
 	ai_will_do = {
@@ -74,16 +74,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_4
 	x = 9
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_2
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_scavenging } remove_ideas = SCR_timed_scavenging } add_timed_idea = { idea = SCR_timed_scavenging days = 30 }
+		if = { limit = { has_idea = SCR_timed_scavenging } remove_idea = SCR_timed_scavenging } add_timed_idea = { idea = SCR_timed_scavenging days = 90 }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_rebuild_lite = 0.02 tooltip = SCR_dyn_rebuild_lite_value_tt }
+		add_to_variable = { SCR_dyn_rebuild_lite = 0.01 tooltip = SCR_dyn_rebuild_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_to_variable = { SCR_dyn_corsica = 0.005 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
 	ai_will_do = {
@@ -96,7 +96,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_5
 	x = 5
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_3
 	}
@@ -104,7 +104,7 @@ shared_focus = {
 		custom_effect_tooltip = SCR_militia_unlock_tt
 		hidden_effect = { SCR_militia_unlock_effect = yes }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_to_variable = { SCR_dyn_corsica = 0.005 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
 	ai_will_do = {
@@ -117,16 +117,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_6
 	x = 5
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_5
 	}
 	completion_reward = {
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_to_variable = { SCR_dyn_corsica = 0.01 tooltip = SCR_dyn_corsica_value_tt }
 		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		if = { limit = { has_idea = SCR_timed_night_ops } remove_ideas = SCR_timed_night_ops } add_timed_idea = { idea = SCR_timed_night_ops days = 30 }
+		if = { limit = { has_idea = SCR_timed_night_ops } remove_idea = SCR_timed_night_ops } add_timed_idea = { idea = SCR_timed_night_ops days = 90 }
 	}
 	ai_will_do = {
 		factor = 1
@@ -138,13 +138,13 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_7
 	x = 9
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_4
 	}
 	completion_reward = {
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_to_variable = { SCR_dyn_corsica = 0.01 tooltip = SCR_dyn_corsica_value_tt }
 		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
@@ -158,7 +158,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_8
 	x = 7
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_7
 	}
@@ -171,7 +171,7 @@ shared_focus = {
 		add_war_support = 0.1
 		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		if = { limit = { has_idea = SCR_timed_return } remove_ideas = SCR_timed_return } add_timed_idea = { idea = SCR_timed_return days = 30 }
+		if = { limit = { has_idea = SCR_timed_return } remove_idea = SCR_timed_return } add_timed_idea = { idea = SCR_timed_return days = 180 }
 		set_country_flag = SCR_gaul_returned_flag
 	}
 	ai_will_do = {
@@ -184,14 +184,14 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_9
 	x = 7
 	y = 13
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_8
 	}
 	completion_reward = {
 		add_political_power = 50
 		army_experience = 25
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_to_variable = { SCR_dyn_corsica = 0.01 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
 	ai_will_do = {
@@ -204,11 +204,12 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_10
 	x = 6
 	y = 14
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_9
 	}
 	completion_reward = {
+		add_ideas = SCR_bloody_diplomacy
 		add_war_support = 0.05
 		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
@@ -223,14 +224,15 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_11
 	x = 8
 	y = 14
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_9
 	}
 	completion_reward = {
+		add_ideas = SCR_eternal_tour
 		add_political_power = 25
 		add_war_support = 0.05
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_to_variable = { SCR_dyn_corsica = 0.005 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
 	ai_will_do = {
@@ -243,17 +245,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_12
 	x = 15
 	y = 9
-	cost = 4
+	cost = 5
 	completion_reward = {
 		add_political_power = 50
 		add_to_variable = { SCR_dyn_rebuild = 0.02 tooltip = SCR_dyn_rebuild_value_tt }
-		add_to_variable = { SCR_dyn_rebuild_lite = 0.02 tooltip = SCR_dyn_rebuild_lite_value_tt }
+		add_to_variable = { SCR_dyn_rebuild_lite = 0.01 tooltip = SCR_dyn_rebuild_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
-		add_ideas = SCR_hidden_corsica_economy
 	}
 	ai_will_do = {
 		factor = 1
@@ -265,18 +266,18 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_13
 	x = 13
 	y = 10
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_12
 	}
 	completion_reward = {
 		add_research_slot = 1
-		add_to_variable = { SCR_dyn_rebuild_lite = 0.02 tooltip = SCR_dyn_rebuild_lite_value_tt }
+		add_to_variable = { SCR_dyn_rebuild_lite = 0.01 tooltip = SCR_dyn_rebuild_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -289,15 +290,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_14
 	x = 17
 	y = 10
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_12
 	}
 	completion_reward = {
+		add_ideas = SCR_harvest_festival
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -310,18 +312,18 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_15
 	x = 12
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_13
 	}
 	completion_reward = {
 		capital_scope = { add_extra_state_shared_building_slots = 2 add_building = { building = industrial_complex level = 1 instant = yes } }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_rebuild = 0.02 tooltip = SCR_dyn_rebuild_value_tt }
+		add_to_variable = { SCR_dyn_rebuild = 0.01 tooltip = SCR_dyn_rebuild_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -334,7 +336,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_16
 	x = 14
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_13
 	}
@@ -343,9 +345,9 @@ shared_focus = {
 		navy_experience = 25
 		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -358,16 +360,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_17
 	x = 16
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_14
 	}
 	completion_reward = {
 		capital_scope = { add_resource = { type = steel amount = 24 } add_resource = { type = aluminium amount = 16 } add_extra_state_shared_building_slots = 2 }
-		if = { limit = { has_idea = SCR_timed_scavenging } remove_ideas = SCR_timed_scavenging } add_timed_idea = { idea = SCR_timed_scavenging days = 30 }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		if = { limit = { has_idea = SCR_timed_scavenging } remove_idea = SCR_timed_scavenging } add_timed_idea = { idea = SCR_timed_scavenging days = 90 }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -380,16 +382,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_18
 	x = 18
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_14
 	}
 	completion_reward = {
 		add_research_slot = 1
+		add_ideas = SCR_puppet_craft
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -402,17 +405,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_19
 	x = 16
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_17
 	}
 	completion_reward = {
 		add_political_power = 50
 		add_stability = 0.05
-		if = { limit = { has_idea = SCR_timed_three_dawns } remove_ideas = SCR_timed_three_dawns } add_timed_idea = { idea = SCR_timed_three_dawns days = 30 }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		if = { limit = { has_idea = SCR_timed_three_dawns } remove_idea = SCR_timed_three_dawns } add_timed_idea = { idea = SCR_timed_three_dawns days = 180 }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -425,19 +428,19 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_20
 	x = 18
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_18
 	}
 	completion_reward = {
 		add_to_variable = { SCR_dyn_army_supply = -0.05 }
 		add_dynamic_modifier = { modifier = SCR_dyn_army }
-		add_to_variable = { SCR_dyn_rebuild_lite = 0.02 tooltip = SCR_dyn_rebuild_lite_value_tt }
+		add_to_variable = { SCR_dyn_rebuild_lite = 0.01 tooltip = SCR_dyn_rebuild_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -450,18 +453,18 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_21
 	x = 14
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_16
 	}
 	completion_reward = {
 		capital_scope = { add_extra_state_shared_building_slots = 2 add_building = { building = arms_factory level = 2 instant = yes } }
-		add_to_variable = { SCR_dyn_rebuild = 0.02 tooltip = SCR_dyn_rebuild_value_tt }
+		add_to_variable = { SCR_dyn_rebuild = 0.01 tooltip = SCR_dyn_rebuild_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-		if = { limit = { has_idea = SCR_timed_overload } remove_ideas = SCR_timed_overload } add_timed_idea = { idea = SCR_timed_overload days = 30 }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		if = { limit = { has_idea = SCR_timed_overload } remove_idea = SCR_timed_overload } add_timed_idea = { idea = SCR_timed_overload days = 180 }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -474,17 +477,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_22
 	x = 12
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_15
 	}
 	completion_reward = {
 		add_equipment_to_stockpile = { type = artillery_equipment amount = 500 }
-		if = { limit = { has_idea = SCR_timed_three_dawns } remove_ideas = SCR_timed_three_dawns } add_timed_idea = { idea = SCR_timed_three_dawns days = 30 }
+		if = { limit = { has_idea = SCR_timed_three_dawns } remove_idea = SCR_timed_three_dawns } add_timed_idea = { idea = SCR_timed_three_dawns days = 180 }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -497,7 +500,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_23
 	x = 14
 	y = 13
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_21
 	}
@@ -505,12 +508,13 @@ shared_focus = {
 		focus = SCR_corsica_22
 	}
 	completion_reward = {
+		add_ideas = SCR_armament_decree_1
 		army_experience = 15
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -523,7 +527,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_24
 	x = 16
 	y = 13
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_20
 	}
@@ -533,10 +537,10 @@ shared_focus = {
 	completion_reward = {
 		add_political_power = 75
 		add_war_support = 0.1
-		if = { limit = { has_idea = SCR_timed_blazing_sun } remove_ideas = SCR_timed_blazing_sun } add_timed_idea = { idea = SCR_timed_blazing_sun days = 30 }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		if = { limit = { has_idea = SCR_timed_blazing_sun } remove_idea = SCR_timed_blazing_sun } add_timed_idea = { idea = SCR_timed_blazing_sun days = 90 }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -549,7 +553,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_25
 	x = 15
 	y = 14
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_24
 	}
@@ -558,12 +562,12 @@ shared_focus = {
 	}
 	completion_reward = {
 		add_political_power = 50
-		if = { limit = { has_idea = SCR_timed_three_dawns } remove_ideas = SCR_timed_three_dawns } add_timed_idea = { idea = SCR_timed_three_dawns days = 30 }
-		add_to_variable = { SCR_dyn_rebuild_lite = 0.02 tooltip = SCR_dyn_rebuild_lite_value_tt }
+		if = { limit = { has_idea = SCR_timed_three_dawns } remove_idea = SCR_timed_three_dawns } add_timed_idea = { idea = SCR_timed_three_dawns days = 180 }
+		add_to_variable = { SCR_dyn_rebuild_lite = 0.01 tooltip = SCR_dyn_rebuild_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -576,16 +580,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_26
 	x = 15
 	y = 15
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_25
 	}
 	completion_reward = {
+		add_ideas = SCR_puppet_legion
 		add_stability = 0.05
-		if = { limit = { has_idea = SCR_timed_infected_amnesty } remove_ideas = SCR_timed_infected_amnesty } add_timed_idea = { idea = SCR_timed_infected_amnesty days = 30 }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		if = { limit = { has_idea = SCR_timed_infected_amnesty } remove_idea = SCR_timed_infected_amnesty } add_timed_idea = { idea = SCR_timed_infected_amnesty days = 180 }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -598,18 +603,18 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_27
 	x = 13
 	y = 16
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_26
 	}
 	completion_reward = {
 		capital_scope = { add_extra_state_shared_building_slots = 2 add_building = { building = industrial_complex level = 2 instant = yes } }
-		add_to_variable = { SCR_dyn_rebuild_lite = 0.02 tooltip = SCR_dyn_rebuild_lite_value_tt }
+		add_to_variable = { SCR_dyn_rebuild_lite = 0.01 tooltip = SCR_dyn_rebuild_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -622,7 +627,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_28
 	x = 17
 	y = 16
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_26
 	}
@@ -631,9 +636,9 @@ shared_focus = {
 		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -646,17 +651,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_29
 	x = 13
 	y = 17
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_27
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_overload } remove_ideas = SCR_timed_overload } add_timed_idea = { idea = SCR_timed_overload days = 30 }
+		if = { limit = { has_idea = SCR_timed_overload } remove_idea = SCR_timed_overload } add_timed_idea = { idea = SCR_timed_overload days = 180 }
 		add_war_support = 0.05
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -669,15 +674,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_30
 	x = 17
 	y = 17
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_28
 	}
 	completion_reward = {
+		add_ideas = SCR_blood_of_gaul
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -690,15 +696,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_31
 	x = 17
 	y = 18
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_30
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_mobilization } remove_ideas = SCR_timed_mobilization } add_timed_idea = { idea = SCR_timed_mobilization days = 30 }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_ideas = SCR_banner_of_empire
+		if = { limit = { has_idea = SCR_timed_mobilization } remove_idea = SCR_timed_mobilization } add_timed_idea = { idea = SCR_timed_mobilization days = 180 }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -711,18 +718,19 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_32
 	x = 13
 	y = 18
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_29
 	}
 	completion_reward = {
 		army_experience = 50
+		add_to_variable = { SCR_dyn_corsica_lite = 0.01 tooltip = SCR_dyn_corsica_lite_value_tt }
 		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -735,7 +743,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_33
 	x = 15
 	y = 19
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_31
 	}
@@ -746,17 +754,20 @@ shared_focus = {
 		focus = SCR_corsica_74
 	}
 	completion_reward = {
+		add_ideas = SCR_triumph
 		army_experience = 25
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.03 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		SCR_gaul_gaul_timed_effect = yes
+		add_to_variable = { SCR_dyn_gaul = 0.03 tooltip = SCR_dyn_gaul_value_tt }
+		add_to_variable = { SCR_dyn_gaul_lite = 0.02 tooltip = SCR_dyn_gaul_lite_value_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
 		custom_effect_tooltip = SCR_vanguard_recruit_tt
 		custom_effect_tooltip = SCR_corsica_dolls_tt
 		hidden_effect = { SCR_vanguard_guard_recruit_effect = yes SCR_dolls_recruit_effect = yes }
 		add_political_power = 100
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -769,7 +780,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_34
 	x = 5
 	y = 16
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_11
 	}
@@ -789,7 +800,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_35
 	x = 9
 	y = 16
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_10
 	}
@@ -809,14 +820,15 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_36
 	x = 6
 	y = 17
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_34
 	}
 	completion_reward = {
 		add_political_power = 50
 		add_stability = 0.05
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_ideas = SCR_oath_of_restoration
+		add_to_variable = { SCR_dyn_corsica = 0.01 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
 	ai_will_do = {
@@ -829,14 +841,15 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_37
 	x = 8
 	y = 17
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_35
 	}
 	completion_reward = {
 		add_political_power = 50
 		add_stability = 0.05
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_ideas = SCR_imperial_banner
+		add_to_variable = { SCR_dyn_corsica = 0.01 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
 	ai_will_do = {
@@ -849,7 +862,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_38
 	x = 8
 	y = 19
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_42
 	}
@@ -857,7 +870,7 @@ shared_focus = {
 		add_political_power = 50
 		add_stability = -0.05
 		add_war_support = 0.05
-		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
+		add_to_variable = { SCR_dyn_corsica_int = 2 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 		set_country_flag = SCR_lucian_path_flag
 	}
@@ -871,7 +884,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_39
 	x = 6
 	y = 19
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_42
 	}
@@ -879,7 +892,7 @@ shared_focus = {
 		add_political_power = 50
 		add_stability = 0.05
 		set_country_flag = SCR_corsica_path_flag
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_to_variable = { SCR_dyn_corsica = 0.005 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
 	ai_will_do = {
@@ -892,7 +905,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_40
 	x = 9
 	y = 20
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_38
 	}
@@ -901,9 +914,11 @@ shared_focus = {
 	}
 	completion_reward = {
 		add_political_power = 100
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_ideas = SCR_triumph
+		add_to_variable = { SCR_dyn_corsica = 0.03 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		SCR_gaul_gaul_timed_effect = yes
+		add_to_variable = { SCR_dyn_gaul = 0.05 tooltip = SCR_dyn_gaul_value_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
 		set_country_flag = SCR_gaul_path_lucian_flag
 		hidden_effect = { country_event = { id = scr.26 } }
 	}
@@ -917,7 +932,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_41
 	x = 5
 	y = 20
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_39
 	}
@@ -926,7 +941,8 @@ shared_focus = {
 	}
 	completion_reward = {
 		add_political_power = 100
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_ideas = SCR_celebration_of_all_things
+		add_to_variable = { SCR_dyn_corsica = 0.03 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 		set_country_flag = SCR_gaul_reshaped_flag
 		set_country_flag = SCR_gaul_path_corsica_flag
@@ -942,7 +958,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_42
 	x = 7
 	y = 18
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_37
 	}
@@ -953,6 +969,7 @@ shared_focus = {
 		add_political_power = 100
 		add_stability = 0.1
 		add_war_support = 0.05
+		add_ideas = SCR_gallic_echo
 		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 	}
@@ -966,16 +983,15 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_44
 	x = 25
 	y = 9
-	cost = 4
+	cost = 5
 	completion_reward = {
 		add_political_power = 50
 		army_experience = 25
 		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
-		add_ideas = SCR_hidden_corsica_military
 	}
 	ai_will_do = {
 		factor = 1
@@ -987,7 +1003,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_45
 	x = 22
 	y = 10
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_44
 	}
@@ -995,11 +1011,12 @@ shared_focus = {
 		focus = SCR_corsica_47
 	}
 	completion_reward = {
+		add_ideas = SCR_blood_diamond_legacy
 		army_experience = 25
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1012,16 +1029,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_46
 	x = 25
 	y = 10
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_44
 	}
 	completion_reward = {
 		add_political_power = 50
 		add_war_support = 0.05
-		if = { limit = { has_idea = SCR_timed_blazing_sun } remove_ideas = SCR_timed_blazing_sun } add_timed_idea = { idea = SCR_timed_blazing_sun days = 30 }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		if = { limit = { has_idea = SCR_timed_blazing_sun } remove_idea = SCR_timed_blazing_sun } add_timed_idea = { idea = SCR_timed_blazing_sun days = 90 }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1034,7 +1051,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_47
 	x = 28
 	y = 10
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_44
 	}
@@ -1042,10 +1059,12 @@ shared_focus = {
 		focus = SCR_corsica_45
 	}
 	completion_reward = {
+		add_ideas = SCR_star_surgery
 		army_experience = 25
+		add_to_variable = { SCR_dyn_corsica_lite = 0.01 tooltip = SCR_dyn_corsica_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1058,15 +1077,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_48
 	x = 21
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_45
 	}
 	completion_reward = {
+		add_ideas = SCR_flyleaf_masters
 		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1079,17 +1099,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_49
 	x = 23
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_45
 	}
 	completion_reward = {
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
+		add_to_variable = { SCR_dyn_corsica_int = 2 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		if = { limit = { has_idea = SCR_timed_night_ops } remove_ideas = SCR_timed_night_ops } add_timed_idea = { idea = SCR_timed_night_ops days = 30 }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		if = { limit = { has_idea = SCR_timed_night_ops } remove_idea = SCR_timed_night_ops } add_timed_idea = { idea = SCR_timed_night_ops days = 90 }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1102,14 +1122,15 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_50
 	x = 23
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_49
 	}
 	completion_reward = {
+		add_ideas = SCR_blood_altar
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1122,17 +1143,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_51
 	x = 21
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_48
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_blazing_sun } remove_ideas = SCR_timed_blazing_sun } add_timed_idea = { idea = SCR_timed_blazing_sun days = 30 }
+		if = { limit = { has_idea = SCR_timed_blazing_sun } remove_idea = SCR_timed_blazing_sun } add_timed_idea = { idea = SCR_timed_blazing_sun days = 90 }
 		army_experience = 25
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1145,17 +1166,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_52
 	x = 21
 	y = 13
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_51
 	}
 	completion_reward = {
 		army_experience = 15
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1168,17 +1189,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_53
 	x = 23
 	y = 13
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_50
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_night_ops } remove_ideas = SCR_timed_night_ops } add_timed_idea = { idea = SCR_timed_night_ops days = 30 }
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		if = { limit = { has_idea = SCR_timed_night_ops } remove_idea = SCR_timed_night_ops } add_timed_idea = { idea = SCR_timed_night_ops days = 90 }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1191,15 +1212,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_54
 	x = 27
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_47
 	}
 	completion_reward = {
 		capital_scope = { add_extra_state_shared_building_slots = 2 add_building = { building = arms_factory level = 2 instant = yes } }
+		add_ideas = SCR_armament_decree_1
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1212,17 +1234,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_55
 	x = 27
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_54
 	}
 	completion_reward = {
 		capital_scope = { add_extra_state_shared_building_slots = 1 add_building_construction = { type = dockyard level = 1 instant_build = yes } }
 		navy_experience = 50
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1235,7 +1257,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_56
 	x = 27
 	y = 13
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_55
 	}
@@ -1245,10 +1267,10 @@ shared_focus = {
 	completion_reward = {
 		navy_experience = 75
 		capital_scope = { add_extra_state_shared_building_slots = 1 add_building_construction = { type = dockyard level = 1 instant_build = yes } }
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1261,7 +1283,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_57
 	x = 29
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_47
 	}
@@ -1269,10 +1291,10 @@ shared_focus = {
 		custom_effect_tooltip = SCR_corsica_vanguard_unlock_tt
 		hidden_effect = { SCR_vanguard_guard_unlock_effect = yes }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1285,15 +1307,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_58
 	x = 29
 	y = 13
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_59
 	}
 	completion_reward = {
+		add_ideas = SCR_temple_of_pain
 		army_experience = 25
 		add_war_support = 0.05
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1306,7 +1329,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_59
 	x = 29
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_57
 	}
@@ -1314,8 +1337,8 @@ shared_focus = {
 		navy_experience = 75
 		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1328,17 +1351,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_60
 	x = 25
 	y = 11
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_46
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_three_dawns } remove_ideas = SCR_timed_three_dawns } add_timed_idea = { idea = SCR_timed_three_dawns days = 30 }
+		if = { limit = { has_idea = SCR_timed_three_dawns } remove_idea = SCR_timed_three_dawns } add_timed_idea = { idea = SCR_timed_three_dawns days = 180 }
 		navy_experience = 50
-		add_to_variable = { SCR_dyn_rebuild_lite = 0.02 tooltip = SCR_dyn_rebuild_lite_value_tt }
+		add_to_variable = { SCR_dyn_rebuild_lite = 0.01 tooltip = SCR_dyn_rebuild_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1351,17 +1374,18 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_61
 	x = 25
 	y = 12
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_60
 	}
 	completion_reward = {
 		army_experience = 50
 		navy_experience = 50
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_ideas = SCR_puppet_craft
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1374,17 +1398,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_62
 	x = 25
 	y = 13
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_61
 	}
 	completion_reward = {
 		add_political_power = 100
 		add_war_support = 0.1
-		if = { limit = { has_idea = SCR_timed_parade } remove_ideas = SCR_timed_parade } add_timed_idea = { idea = SCR_timed_parade days = 30 }
+		if = { limit = { has_idea = SCR_timed_parade } remove_idea = SCR_timed_parade } add_timed_idea = { idea = SCR_timed_parade days = 90 }
 		set_country_flag = SCR_parade_done_flag
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1397,7 +1421,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_63
 	x = 22
 	y = 14
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_53
 	}
@@ -1408,10 +1432,10 @@ shared_focus = {
 		custom_effect_tooltip = SCR_corsica_dolls_tt
 		hidden_effect = { SCR_dolls_recruit_effect = yes }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1424,7 +1448,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_64
 	x = 28
 	y = 14
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_58
 	}
@@ -1434,10 +1458,11 @@ shared_focus = {
 	completion_reward = {
 		custom_effect_tooltip = SCR_vanguard_recruit_tt
 		hidden_effect = { SCR_vanguard_guard_cap_effect = yes SCR_vanguard_guard_recruit_effect = yes }
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_ideas = SCR_blood_of_gaul
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1450,7 +1475,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_65
 	x = 25
 	y = 15
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_63
 		focus = SCR_corsica_64
@@ -1462,8 +1487,8 @@ shared_focus = {
 		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
 		set_country_flag = SCR_final_offensive_flag
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1476,15 +1501,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_66
 	x = 22
 	y = 16
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_65
 	}
 	completion_reward = {
+		add_ideas = SCR_gallic_echo
 		add_political_power = 25
-		if = { limit = { has_idea = SCR_timed_gaul_name } remove_ideas = SCR_timed_gaul_name } add_timed_idea = { idea = SCR_timed_gaul_name days = 30 }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		if = { limit = { has_idea = SCR_timed_gaul_name } remove_idea = SCR_timed_gaul_name } add_timed_idea = { idea = SCR_timed_gaul_name days = 90 }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1497,15 +1523,16 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_67
 	x = 28
 	y = 16
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_65
 	}
 	completion_reward = {
+		add_ideas = SCR_shield_of_gallia
 		army_experience = 25
-		if = { limit = { has_idea = SCR_timed_exercise } remove_ideas = SCR_timed_exercise } add_timed_idea = { idea = SCR_timed_exercise days = 30 }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		if = { limit = { has_idea = SCR_timed_exercise } remove_idea = SCR_timed_exercise } add_timed_idea = { idea = SCR_timed_exercise days = 120 }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1518,18 +1545,19 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_68
 	x = 25
 	y = 16
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_65
 	}
 	completion_reward = {
 		add_political_power = 75
 		add_war_support = 0.1
+		add_ideas = SCR_oath_of_restoration
 		set_country_flag = SCR_proclamation_flag
-		add_to_variable = { SCR_dyn_corsica = 0.02 tooltip = SCR_dyn_corsica_value_tt }
+		add_to_variable = { SCR_dyn_corsica = 0.01 tooltip = SCR_dyn_corsica_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1542,17 +1570,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_69
 	x = 22
 	y = 17
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_66
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_blazing_sun } remove_ideas = SCR_timed_blazing_sun } add_timed_idea = { idea = SCR_timed_blazing_sun days = 30 }
+		if = { limit = { has_idea = SCR_timed_blazing_sun } remove_idea = SCR_timed_blazing_sun } add_timed_idea = { idea = SCR_timed_blazing_sun days = 90 }
 		army_experience = 25
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1565,17 +1593,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_70
 	x = 28
 	y = 17
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_67
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_exercise } remove_ideas = SCR_timed_exercise } add_timed_idea = { idea = SCR_timed_exercise days = 30 }
+		if = { limit = { has_idea = SCR_timed_exercise } remove_idea = SCR_timed_exercise } add_timed_idea = { idea = SCR_timed_exercise days = 120 }
 		army_experience = 50
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		add_to_variable = { SCR_dyn_corsica_army = 0.01 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1588,7 +1616,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_71
 	x = 25
 	y = 18
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_70
 	}
@@ -1599,14 +1627,15 @@ shared_focus = {
 		focus = SCR_corsica_80
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_burn_out } remove_ideas = SCR_timed_burn_out } add_timed_idea = { idea = SCR_timed_burn_out days = 30 }
-		add_to_variable = { SCR_dyn_corsica_army = 0.02 tooltip = SCR_dyn_corsica_army_value_tt }
+		if = { limit = { has_idea = SCR_timed_burn_out } remove_idea = SCR_timed_burn_out } add_timed_idea = { idea = SCR_timed_burn_out days = 365 }
+		add_to_variable = { SCR_dyn_corsica_army = 0.03 tooltip = SCR_dyn_corsica_army_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		SCR_gaul_gaul_timed_effect = yes
+		add_to_variable = { SCR_dyn_gaul = 0.03 tooltip = SCR_dyn_gaul_value_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
 		add_political_power = 50
 		add_stability = -0.05
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1619,7 +1648,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_72
 	x = 15
 	y = 16
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_26
 	}
@@ -1627,12 +1656,12 @@ shared_focus = {
 		add_political_power = 50
 		add_stability = -0.05
 		add_war_support = 0.1
-		if = { limit = { has_idea = SCR_timed_mobilization } remove_ideas = SCR_timed_mobilization } add_timed_idea = { idea = SCR_timed_mobilization days = 30 }
-		add_to_variable = { SCR_dyn_rebuild_neg = -0.02 }
+		if = { limit = { has_idea = SCR_timed_mobilization } remove_idea = SCR_timed_mobilization } add_timed_idea = { idea = SCR_timed_mobilization days = 180 }
+		add_to_variable = { SCR_dyn_rebuild_neg = -0.05 }
 		add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -1645,19 +1674,19 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_73
 	x = 15
 	y = 17
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_72
 	}
 	completion_reward = {
 		add_political_power = 100
 		add_stability = 0.05
-		if = { limit = { has_idea = SCR_timed_terror } remove_ideas = SCR_timed_terror } add_timed_idea = { idea = SCR_timed_terror days = 30 }
+		if = { limit = { has_idea = SCR_timed_terror } remove_idea = SCR_timed_terror } add_timed_idea = { idea = SCR_timed_terror days = 90 }
 		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -1670,17 +1699,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_74
 	x = 15
 	y = 18
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_73
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_borrowed_time } remove_ideas = SCR_timed_borrowed_time } add_timed_idea = { idea = SCR_timed_borrowed_time days = 30 }
+		if = { limit = { has_idea = SCR_timed_borrowed_time } remove_idea = SCR_timed_borrowed_time } add_timed_idea = { idea = SCR_timed_borrowed_time days = 365 }
 		add_political_power = 50
 		add_stability = -0.05
-		add_to_variable = { SCR_dyn_corsica_economy = 0.01 tooltip = SCR_dyn_corsica_economy_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.01 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
-		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.01 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy = 0.008 tooltip = SCR_dyn_corsica_economy_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_lite = 0.003 tooltip = SCR_dyn_corsica_economy_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_economy_cg = -0.003 tooltip = SCR_dyn_corsica_economy_cg_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_economy }
 	}
 	ai_will_do = {
@@ -1693,17 +1722,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_76
 	x = 22
 	y = 19
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_71
 	}
 	completion_reward = {
-		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
+		add_to_variable = { SCR_dyn_corsica_int = 2 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		if = { limit = { has_idea = SCR_timed_three_dawns } remove_ideas = SCR_timed_three_dawns } add_timed_idea = { idea = SCR_timed_three_dawns days = 30 }
+		if = { limit = { has_idea = SCR_timed_three_dawns } remove_idea = SCR_timed_three_dawns } add_timed_idea = { idea = SCR_timed_three_dawns days = 180 }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1716,17 +1745,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_77
 	x = 24
 	y = 19
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_71
 	}
 	completion_reward = {
-		if = { limit = { has_idea = SCR_timed_blazing_sun } remove_ideas = SCR_timed_blazing_sun } add_timed_idea = { idea = SCR_timed_blazing_sun days = 30 }
+		if = { limit = { has_idea = SCR_timed_blazing_sun } remove_idea = SCR_timed_blazing_sun } add_timed_idea = { idea = SCR_timed_blazing_sun days = 90 }
 		custom_effect_tooltip = SCR_militia_unlock_tt
 		hidden_effect = { SCR_militia_unlock_effect = yes }
 		add_political_power = 25
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1739,7 +1768,7 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_78
 	x = 26
 	y = 19
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_71
 	}
@@ -1747,8 +1776,8 @@ shared_focus = {
 		capital_scope = { add_building_construction = { type = bunker level = 3 instant_build = yes } add_dynamic_modifier = { modifier = SCR_londinium_heart } }
 		add_political_power = 25
 		add_stability = 0.05
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1761,16 +1790,17 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_79
 	x = 28
 	y = 19
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_71
 	}
 	completion_reward = {
-		add_to_variable = { SCR_dyn_corsica_int = 1 tooltip = SCR_dyn_corsica_int_value_tt }
+		add_to_variable = { SCR_dyn_corsica_int = 2 tooltip = SCR_dyn_corsica_int_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica }
-		if = { limit = { has_idea = SCR_timed_night_ops } remove_ideas = SCR_timed_night_ops } add_timed_idea = { idea = SCR_timed_night_ops days = 30 }
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_ideas = SCR_mirror_man
+		if = { limit = { has_idea = SCR_timed_night_ops } remove_idea = SCR_timed_night_ops } add_timed_idea = { idea = SCR_timed_night_ops days = 90 }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {
@@ -1783,23 +1813,26 @@ shared_focus = {
 	icon = GFX_focus_SCR_corsica_80
 	x = 25
 	y = 17
-	cost = 4
+	cost = 5
 	prerequisite = {
 		focus = SCR_corsica_68
 	}
 	completion_reward = {
 		set_country_flag = SCR_second_four_emperors_flag
-		SCR_gaul_gaul_timed_effect = yes
+		add_to_variable = { SCR_dyn_gaul = 0.05 tooltip = SCR_dyn_gaul_value_tt }
+		add_to_variable = { SCR_dyn_gaul_lite = 0.03 tooltip = SCR_dyn_gaul_lite_value_tt }
+		add_dynamic_modifier = { modifier = SCR_dyn_gaul_gaul }
+		add_ideas = SCR_triumph
 		add_political_power = 100
 		add_war_support = 0.1
-		if = { limit = { has_idea = SCR_timed_final_war } remove_ideas = SCR_timed_final_war } add_timed_idea = { idea = SCR_timed_final_war days = 30 }
+		if = { limit = { has_idea = SCR_timed_final_war } remove_idea = SCR_timed_final_war } add_timed_idea = { idea = SCR_timed_final_war days = 365 }
 		custom_effect_tooltip = SCR_vanguard_recruit_tt
 		custom_effect_tooltip = SCR_corsica_dolls_tt
 		custom_effect_tooltip = SCR_militia_unlock_tt
 		hidden_effect = { SCR_vanguard_guard_recruit_effect = yes SCR_dolls_recruit_effect = yes SCR_militia_unlock_effect = yes }
 		undefined
-		add_to_variable = { SCR_dyn_corsica_military = 0.02 tooltip = SCR_dyn_corsica_military_value_tt }
-		add_to_variable = { SCR_dyn_corsica_military_lite = 0.02 tooltip = SCR_dyn_corsica_military_lite_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military = 0.006 tooltip = SCR_dyn_corsica_military_value_tt }
+		add_to_variable = { SCR_dyn_corsica_military_lite = 0.003 tooltip = SCR_dyn_corsica_military_lite_value_tt }
 		add_dynamic_modifier = { modifier = SCR_dyn_corsica_military }
 	}
 	ai_will_do = {

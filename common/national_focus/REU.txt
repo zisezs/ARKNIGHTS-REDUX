@@ -6904,49 +6904,55 @@ focus = {
 		custom_effect_tooltip = REU_democratic_centralism_leader_tt
 		hidden_effect = {
 			recruit_character = REU_supreme_politburo
-			# ① 先记下当前执政党的子意识形态，retire 之后就查不到了
-			if = {
-				limit = {
-					has_country_leader_ideology = bolshevism_subtype
-				}
-				set_country_flag = REU_ruling_subtype_is_bolshevism
-			}
-			# ② 补一个 communism_subtype 的领袖角色（带旗标防重复；
-			#    兜底执政党不是布尔什维克时也能推上去）
 			if = {
 				limit = {
 					NOT = { has_country_flag = REU_supreme_politburo_role_added }
 				}
 				set_country_flag = REU_supreme_politburo_role_added
-				add_country_leader_role = {
-					character = REU_supreme_politburo
-					country_leader = {
-						ideology = communism_subtype
-						traits = { REU_iron_flow }
+				if = {
+					limit = {
+						has_country_leader_ideology = bolshevism_subtype
+					}
+					add_country_leader_role = {
+						character = REU_supreme_politburo
+						promote_leader = yes
+						country_leader = {
+							ideology = bolshevism_subtype
+							traits = { REU_iron_flow }
+							desc = REU_supreme_politburo_desc
+						}
+					}
+				}
+				else = {
+					add_country_leader_role = {
+						character = REU_supreme_politburo
+						promote_leader = yes
+						country_leader = {
+							ideology = communism_subtype
+							traits = { REU_iron_flow }
+							desc = REU_supreme_politburo_desc
+						}
 					}
 				}
 			}
-			# ③ 在任领袖必须先退职，否则 promote_character 推不动
-			#    （实测：塔露拉会留在位上）。塔露拉只退任国家领导人，
-			#     元帅角色不受影响，仍可作为将领使用。
 			if = {
 				limit = {
 					NOT = { has_country_leader = { character = REU_supreme_politburo ruling_only = yes } }
 				}
-				retire_country_leader = yes
-			}
-			# ④ 按执政党实际子意识形态推最高政治局上台
-			if = {
-				limit = { has_country_flag = REU_ruling_subtype_is_bolshevism }
-				promote_character = {
-					character = REU_supreme_politburo
-					ideology = bolshevism_subtype
+				if = {
+					limit = {
+						has_country_leader_ideology = bolshevism_subtype
+					}
+					promote_character = {
+						character = REU_supreme_politburo
+						ideology = bolshevism_subtype
+					}
 				}
-			}
-			else = {
-				promote_character = {
-					character = REU_supreme_politburo
-					ideology = communism_subtype
+				else = {
+					promote_character = {
+						character = REU_supreme_politburo
+						ideology = communism_subtype
+					}
 				}
 			}
 		}

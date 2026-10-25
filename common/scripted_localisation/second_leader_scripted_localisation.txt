@@ -401,6 +401,48 @@ defined_text = {
 		localization_key = GFX_Islam_Vitte
 	}
 
+	#REU 整合运动 · 乌萨斯统一
+	text = {
+		trigger = {
+			if = {
+				limit = { 
+					REU = {
+						exists = yes
+					}
+				}
+				AND = {
+					has_idea = REU_Alina_second_in_command
+					has_country_flag = Ursus_Unification
+				}
+			}
+			else = { 
+				always = no
+			}
+		}
+		localization_key = GFX_portrait_REU_Alina_stage_3
+	}
+
+	#REU 整合运动 · 新制服
+	text = {
+		trigger = {
+			if = {
+				limit = { 
+					REU = {
+						exists = yes
+					}
+				}
+				AND = {
+					has_idea = REU_Alina_second_in_command
+					has_idea = REU_new_uniform
+				}
+			}
+			else = { 
+				always = no
+			}
+		}
+		localization_key = GFX_portrait_REU_Alina_stage_2
+	}
+
 	#REU 整合运动
 	text = {
 		trigger = {
@@ -416,7 +458,7 @@ defined_text = {
 				always = no
 			}
 		}
-		localization_key = GFX_Alina
+		localization_key = GFX_portrait_REU_Alina_stage_1
 	}
 
 	#KMG 克缅哥罗德
