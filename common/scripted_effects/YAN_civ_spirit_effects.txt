@@ -1,0 +1,72 @@
+######################################################
+# 大炎 · 内政树【岁陵之乱的余波 / 当变则变】变量初始化与月度累加
+#
+#   · YAN_civ_spirit_init   —— 由国策 YAN_civ_reorder_court 调用一次；
+#     只归零，根格的 -50% 由国策自己 add_to_variable 追加，避免重复叠加。
+#   · YAN_civ_biangze_init  —— 由国策 YAN_civ_hmph 调用一次；同样只归零。
+#   · YAN_civ_spirit_monthly—— 挂在 YAN_monthly_tick 上，把「每月」型变量
+#     累加进「累计」变量（宣政司改革进度 / 改革点数），只在对应变量存在时累加。
+#
+# 修正符归属见 common/dynamic_modifiers/YAN_civ_spirit_dynamic_modifiers.txt
+######################################################
+
+YAN_civ_spirit_init = {
+	set_variable = { YAN_civ_rf_stability = 0 }            # 稳定度
+	set_variable = { YAN_civ_rf_stability_weekly = 0 }     # 每周稳定度
+	set_variable = { YAN_civ_rf_construction = 0 }         # 建造速度
+	set_variable = { YAN_civ_rf_factory_output = 0 }       # 工厂产出
+	set_variable = { YAN_civ_rf_mobilization = 0 }         # 动员速度
+	set_variable = { YAN_civ_rf_pp = 0 }                   # 政治点数获取
+	set_variable = { YAN_civ_rf_research = 0 }             # 科研速度
+	set_variable = { YAN_civ_rf_advisor_cost = 0 }         # 顾问任命花费
+	set_variable = { YAN_civ_rf_army_chief_cost = 0 }      # 陆军部长任命花费
+	set_variable = { YAN_civ_rf_war_support = 0 }          # 战争支持度
+
+	# —— 第二轮：经济效率与建设 ——
+	set_variable = { YAN_civ_rf_consumer_goods = 0 }       # 消费品需求
+	set_variable = { YAN_civ_rf_prod_cap = 0 }             # 工厂最大效率
+	set_variable = { YAN_civ_rf_prod_growth = 0 }          # 工厂效率增长
+	set_variable = { YAN_civ_rf_infrastructure = 0 }       # 基建建造速度
+	set_variable = { YAN_civ_rf_building_slots = 0 }       # 建筑槽位
+
+	# —— 第二轮：军政与后勤 ——
+	set_variable = { YAN_civ_rf_pp_flat = 0 }              # 每月政治点数
+	set_variable = { YAN_civ_rf_command_power = 0 }        # 指挥点数获取
+	set_variable = { YAN_civ_rf_high_command_cost = 0 }    # 总司令任命花费
+	set_variable = { YAN_civ_rf_army_xp = 0 }              # 陆军经验获取
+	set_variable = { YAN_civ_rf_army_org = 0 }             # 陆军组织度
+	set_variable = { YAN_civ_rf_supply = 0 }               # 补给消耗
+	set_variable = { YAN_civ_rf_conscription = 0 }         # 可征募人口
+	set_variable = { YAN_civ_rf_recruitable = 0 }          # 可征兵人口系数
+	set_variable = { YAN_civ_rf_training_time = 0 }         # 陆军训练时长
+	set_variable = { YAN_civ_rf_reinforce = 0 }             # 陆军增援率
+	set_variable = { YAN_civ_rf_army_defence = 0 }          # 陆军防御
+
+	# 编制锁（1 = 不可解散/编辑，巡视禁军营后归 0）
+	set_variable = { YAN_civ_rf_no_disband = 0 }
+
+	# 宣政司改革进度（读数）
+	set_variable = { YAN_civ_rf_progress = 0 }
+	set_variable = { YAN_civ_rf_progress_monthly = 0 }
+}
+
+YAN_civ_biangze_init = {
+	set_variable = { YAN_civ_bz_pp = 0 }                   # 政治点数获取
+	set_variable = { YAN_civ_bz_advisor_cost = 0 }         # 内阁任命花费
+	set_variable = { YAN_civ_bz_stability = 0 }            # 稳定度
+
+	# 改革点数（读数）
+	set_variable = { YAN_civ_bz_points = 0 }
+	set_variable = { YAN_civ_bz_point_monthly = 0 }
+}
+
+YAN_civ_spirit_monthly = {
+	if = {
+		limit = { has_variable = YAN_civ_rf_progress_monthly }
+		add_to_variable = { YAN_civ_rf_progress = YAN_civ_rf_progress_monthly }
+	}
+	if = {
+		limit = { has_variable = YAN_civ_bz_point_monthly }
+		add_to_variable = { YAN_civ_bz_points = YAN_civ_bz_point_monthly }
+	}
+}

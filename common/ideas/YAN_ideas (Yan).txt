@@ -1,40 +1,78 @@
 ideas = {
-	country = {
-		#  大炎 · 民族精神
-		#  · 开局持有：天命 / 十字路口 / 女帝改革的遗产 / 岁相(岁兽之患) +
-		#              真龙治下 / 敕封神明 / 三公六部 / 移动城邦 / 司岁台秉烛 /
-		#              尚武传统 / 太师冤案 / 山海众渗透 / 书刀在天镜阁 / 不反源石
-		#  · 国策解锁：见各条注释，多为「替换」旧精神（on_add remove_ideas）
-		#  · 无对应引擎修正的说明行（对巨兽攻击等）走
-		#    common/modifier_definitions/YAN_modifiers_definition.txt 的 yan_*_tt
+	# ==============================================================================
+	#  大炎 · 民族精神（2026-10-25 开局合并）
+	#
+	#  开局面板只有 1 条：【旧时代的大炎帝国（承平日久）】。
+	#  原 8 条开局精神（天命所归 / 三公六部 / 太师冤案 / 山海众渗透 /
+	#  十字路口 / 移动城邦 / 敕封神明 / 岁兽之患）的修正已逐项相加并入本条。
+	#  按 2026-10-25 决定，旧条目不再单独移除，面板也不再拆分。
+	#
+	#  合并时 production_speed_buildings_factor（-15% +5% +10%）恰为 0，故不书写；
+	#  其余同名修正均已相加。图标暂借天命所归，后续可单独出图。
+	#
+	#  机制门槛 YAN_Shudao_in_Tianjingge / YAN_Bufan_originium 仍在 hidden_ideas，
+	#  不占用政治面板，但仍由决议用 has_idea 判定。
+	#
+	#  2026-10-25：按需求移除五条 *_development_monthly_modifier（原用于抵消
+	#    农4/工5/教4/政4/贫5 档位的月度回落）。大炎挂有 DEV 发展树，
+	#    DEV_dev_tree_sustain 会按 modifier@ 净值自动补差，档位仍不会自行下掉。
+	# ==============================================================================
 
-		# ---------------- 开局 · 承平 --------------------------------
-
-		YAN_Mandate_of_heaven = {
-			picture = YAN_Mandate_of_heaven
-
-			modifier = {
-				stability_factor = 0.15
-				production_speed_buildings_factor = -0.2
-
-				# 天命维系国势：抵消每个发展档位自带的月度回落，把开局五维钉在本档
-				agricultural_development_monthly_modifier = 0.08
-				industrial_development_monthly_modifier = 0.16
-				educational_development_monthly_modifier = 0.08
-				administrative_development_monthly_modifier = 0.08
-				poverty_development_monthly_modifier = 0.16
-			}
+	hidden_ideas = {
+		# 书刀完整度的机制门槛（决议 YAN_decision_erase_history / seal_shudao 使用）
+		YAN_Shudao_in_Tianjingge = {
+			picture = YAN_Shudao_in_Tianjingge
 		}
 
-		YAN_Crossroad = {
-			picture = YAN_Crossroad
+		# 不反源石的机制门槛（决议 prepare_bufan / launch_bufan 使用）
+		YAN_Bufan_originium = {
+			picture = YAN_Bufan_originium
 
 			modifier = {
+				yan_bufan_unlock_tt = 1
+			}
+		}
+	}
+
+	country = {
+		# ---------------- 开局 · 旧时代总精神 --------------------------
+
+		# 旧时代的大炎帝国（承平日久）
+		# 由原 8 条开局精神合并；下列数值为逐项相加后的净值。
+		# 原条目定义已删，图标精灵仍保留在 interface/ideas/YAN_ideas.gfx。
+		YAN_Old_era_yan_empire = {
+			picture = YAN_Old_era_yan_empire
+
+			modifier = {
+				# 政治（天命所归 + 三公六部 + 太师冤案 + 山海众渗透）
+				stability_factor = -0.05
+				political_power_factor = 0.1
+				political_advisor_cost_factor = -0.25
+				war_support_factor = -0.1
+				experience_gain_army = 0.05
+				army_core_defence_factor = 0.05
+
+				# 经济（十字路口 + 移动城邦）
 				consumer_goods_factor = 0.2
 				line_change_production_efficiency_factor = -0.15
 				production_factory_efficiency_gain_factor = -0.15
+				industrial_capacity_factory = 0.05
+				army_fuel_consumption_factor = 0.1
+
+				# 军事（敕封神明 + 岁兽之患）
+				yan_attack_vs_behemoth_tt = 0.1
+				yan_diplomatic_relation_tt = -10
+				army_attack_factor = 0.05
+				training_time_factor = -0.05
+				research_speed_factor = -0.05
+				yan_agent_surveillance_tt = 0.1
+				yan_sui_awakening_monthly_tt = 1
+
+				# 2026-10-25：已按需求移除五条发展度月度加成
+				# （农/工/教/政/贫 *_development_monthly_modifier）。
 			}
 
+			# 原「十字路口」附带的感染者修正
 			on_add = {
 				set_temp_variable = { infected_modifier_add_num = 0.05 }
 				Infected_Modifier_add = yes
@@ -43,134 +81,6 @@ ideas = {
 			on_remove = {
 				set_temp_variable = { infected_modifier_add_num = -0.05 }
 				Infected_Modifier_add = yes
-			}
-		}
-
-		YAN_Legacy_of_the_female_emperor_reforms = {
-			picture = YAN_Legacy_of_the_female_emperor_reforms
-
-			modifier = {
-				political_power_factor = 0.1
-				political_advisor_cost_factor = -0.3
-			}
-		}
-
-		# 真龙治下，国祚永昌
-		YAN_True_dragon_reign = {
-			picture = YAN_True_dragon_reign
-
-			modifier = {
-				stability_factor = 0.1
-				political_power_factor = 0.2
-				war_support_factor = -0.05
-			}
-		}
-
-		# 敕封神明，大炎子民
-		YAN_Divine_subjects = {
-			picture = YAN_Divine_subjects
-
-			modifier = {
-				army_core_defence_factor = 0.1
-				yan_attack_vs_behemoth_tt = 0.1
-				yan_diplomatic_relation_tt = -10
-			}
-		}
-
-		# 三公六部，承平暗弱
-		YAN_Three_dukes = {
-			picture = YAN_Three_dukes
-
-			modifier = {
-				production_speed_buildings_factor = 0.05
-				experience_gain_army = -0.05
-				war_support_factor = -0.05
-			}
-		}
-
-		# 移动城邦与源石矿脉
-		YAN_Mobile_cities = {
-			picture = YAN_Mobile_cities
-
-			modifier = {
-				industrial_capacity_factory = 0.05
-				production_speed_buildings_factor = 0.1
-				army_fuel_consumption_factor = 0.1
-				stability_factor = -0.05
-			}
-		}
-
-		# 司岁台秉烛（可经「秉烛新制」升级）
-		YAN_Sishuitai_candle = {
-			picture = YAN_Sishuitai_candle
-
-			modifier = {
-				political_power_factor = 0.05
-				stability_factor = 0.05
-				yan_agent_surveillance_tt = 0.1
-			}
-		}
-
-		# 尚武传统
-		YAN_Martial_tradition = {
-			picture = YAN_Martial_tradition
-
-			modifier = {
-				experience_gain_army = 0.05
-				army_attack_factor = 0.05
-				training_time_factor = -0.05
-			}
-		}
-
-		# ---------------- 开局 · 沉疴 --------------------------------
-
-		# 岁相 —— 岁兽之患（国策可移除）
-		YAN_Sui_signs = {
-			picture = YAN_Sui_signs
-
-			modifier = {
-				stability_factor = -0.1
-				research_speed_factor = -0.05
-				yan_sui_awakening_monthly_tt = 1
-			}
-		}
-
-		# 太师冤案（国策「天下一白」移除）
-		YAN_Taishi_injustice = {
-			picture = YAN_Taishi_injustice
-
-			modifier = {
-				stability_factor = -0.05
-				political_power_factor = -0.1
-			}
-		}
-
-		# 山海众渗透（国策「剿灭 / 招安」移除）
-		YAN_Shanhaizhong = {
-			picture = YAN_Shanhaizhong
-
-			modifier = {
-				stability_factor = -0.05
-				army_core_defence_factor = -0.05
-			}
-		}
-
-		# 书刀在天镜阁（若完整度过低会被太尉夺取，见「书刀案」）
-		YAN_Shudao_in_Tianjingge = {
-			picture = YAN_Shudao_in_Tianjingge
-
-			modifier = {
-				political_power_factor = 0.1
-				stability_factor = 0.05
-			}
-		}
-
-		# 不反源石（解锁「启动不反」决议）
-		YAN_Bufan_originium = {
-			picture = YAN_Bufan_originium
-
-			modifier = {
-				yan_bufan_unlock_tt = 1
 			}
 		}
 
@@ -185,10 +95,7 @@ ideas = {
 				political_power_factor = 0.25
 				war_support_factor = 0.05
 			}
-
-			on_add = {
-				remove_ideas = YAN_Taishi_injustice
-			}
+			# 2026-10-25：开局精神已合并，太师昭雪不再移除旧条目。
 		}
 
 		# 兄弟同心（真龙与魏彦吾和解）
@@ -202,7 +109,7 @@ ideas = {
 			}
 		}
 
-		# 秉烛新制（司岁台改革，替换司岁台秉烛）
+		# 秉烛新制（司岁台改革；「司岁台秉烛」已并入开局精神【岁兽之患】）
 		YAN_Bingzhu_new_system = {
 			picture = YAN_Bingzhu_new_system
 
@@ -210,10 +117,6 @@ ideas = {
 				intel_network_gain_factor = 0.2
 				political_power_factor = 0.1
 				stability_factor = 0.05
-			}
-
-			on_add = {
-				remove_ideas = YAN_Sishuitai_candle
 			}
 		}
 
@@ -270,9 +173,10 @@ ideas = {
 				stability_factor = 0.2
 				war_support_factor = 0.1
 			}
-
+			# 2026-10-25：开局精神已合并，岁兽之祸终结不再移除旧条目；
+			# 改用旗标停止月度苏醒增长（与原移除「岁兽之患」等价）。
 			on_add = {
-				remove_ideas = YAN_Sui_signs
+				set_country_flag = yan_sui_awakening_stopped
 			}
 		}
 

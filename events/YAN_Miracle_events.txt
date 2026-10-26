@@ -1,0 +1,188 @@
+# 大炎 · 奇迹工程 —— 八百里加急奏报（生成物）
+add_namespace = yan_mir
+
+country_event = {
+	id = yan_mir.1
+	title = yan_mir.1.t
+	desc = yan_mir.1.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = {
+		name = yan_mir.1.a
+		add_political_power = -60
+	}
+	option = {
+		name = yan_mir.1.b
+		YAN_Mir_Event_Progress = yes
+	}
+}
+
+country_event = {
+	id = yan_mir.2
+	title = yan_mir.2.t
+	desc = yan_mir.2.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = {
+		name = yan_mir.2.a
+		add_equipment_to_stockpile = { type = artillery_equipment amount = -200 }
+		add_fuel = -100
+		add_command_power = 25
+	}
+	option = {
+		name = yan_mir.2.b
+		add_stability = -0.03
+		add_command_power = -10
+	}
+}
+
+country_event = {
+	id = yan_mir.3
+	title = yan_mir.3.t
+	desc = yan_mir.3.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = {
+		name = yan_mir.3.a
+		add_political_power = -80
+		add_stability = 0.05
+	}
+	option = {
+		name = yan_mir.3.b
+		add_stability = -0.06
+		set_variable = { YAN_mir_bonus_speed = 0.10 }
+		set_variable = { YAN_mir_bonus_timer = 3 }
+	}
+}
+
+country_event = {
+	id = yan_mir.4
+	title = yan_mir.4.t
+	desc = yan_mir.4.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = {
+		name = yan_mir.4.a
+		add_political_power = -70
+		add_equipment_to_stockpile = { type = support_equipment amount = 600 }
+		add_equipment_to_stockpile = { type = infantry_equipment amount = 400 }
+	}
+	option = {
+		name = yan_mir.4.b
+		add_fuel = -300
+		add_political_power = 120
+	}
+}
+
+country_event = {
+	id = yan_mir.5
+	title = yan_mir.5.t
+	desc = yan_mir.5.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = {
+		name = yan_mir.5.a
+		add_fuel = 400
+		add_political_power = -30
+	}
+	option = {
+		name = yan_mir.5.b
+		add_command_power = 30
+	}
+}
+
+country_event = {
+	id = yan_mir.6
+	title = yan_mir.6.t
+	desc = yan_mir.6.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = {
+		name = yan_mir.6.a
+		add_political_power = -50
+		add_stability = 0.06
+		add_command_power = 20
+	}
+	option = {
+		name = yan_mir.6.b
+		add_command_power = 10
+	}
+}
+
+country_event = {
+	id = yan_mir.7
+	title = yan_mir.7.t
+	desc = yan_mir.7.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = {
+		name = yan_mir.7.a
+		add_political_power = 150
+		add_stability = 0.03
+	}
+	option = {
+		name = yan_mir.7.b
+		add_political_power = 40
+		add_command_power = -15
+	}
+}
+
+country_event = {
+	id = yan_mir.8
+	title = yan_mir.8.t
+	desc = yan_mir.8.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	fire_only_once = no
+
+	option = {
+		name = yan_mir.8.a
+		add_political_power = -90
+		add_command_power = 50
+	}
+	option = {
+		name = yan_mir.8.b
+		add_stability = 0.02
+		set_variable = { YAN_mir_bonus_speed = 0.05 }
+		set_variable = { YAN_mir_bonus_timer = 3 }
+	}
+}
+
+country_event = {
+	id = yan_mir.99
+	title = yan_mir.99.t
+	desc = yan_mir.99.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yan_mir.99.a
+		add_political_power = 150
+		add_stability = 0.05
+		add_war_support = 0.05
+	}
+}

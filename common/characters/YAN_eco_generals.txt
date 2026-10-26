@@ -1,0 +1,60 @@
+######################################################
+# 大炎 · 经济线招募将领（德克萨斯 / 蕾缪乐）
+#
+# 由国策 YAN_eco_emperor_culture（大帝的潮酷文化？）以
+# recruit_character 招募，不入开局将领池。
+# 头像：gfx/leaders/YAN/gen/YAN_gen_*.dds（带框 156x210 + 普通裁切 65x67）
+# 出图器：docs/gen_yan_eco_generals.cjs
+######################################################
+
+characters = {
+	# 德克萨斯 —— 企鹅物流特别顾问
+	YAN_gen_texas = {
+		name = YAN_gen_texas
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_texas.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_texas_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_texas.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_texas_small.dds"
+			}
+		}
+		gender = female
+		corps_commander = {
+			desc = YAN_gen_texas_desc
+			traits = { infantry_leader trickster }
+			skill = 4
+			attack_skill = 5
+			defense_skill = 4
+			logistics_skill = 5
+			planning_skill = 4
+		}
+	}
+
+	# 蕾缪乐 —— 企鹅物流资深干员
+	YAN_gen_lemuen = {
+		name = YAN_gen_lemuen
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_lemuen.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_lemuen_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_lemuen.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_lemuen_small.dds"
+			}
+		}
+		gender = female
+		corps_commander = {
+			desc = YAN_gen_lemuen_desc
+			traits = { commando skilled_staffer }
+			skill = 5
+			attack_skill = 5
+			defense_skill = 4
+			logistics_skill = 3
+			planning_skill = 5
+		}
+	}
+}

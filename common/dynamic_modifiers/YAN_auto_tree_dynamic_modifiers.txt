@@ -1,0 +1,51 @@
+# 大炎自动推进树 · 三个民族精神与地块 buff（2026-10-26）
+# 变量由 YAN_auto_reward_* 累加；动态修正实时显示总值。
+
+YAN_auto_spirit_armor = {
+	icon = GFX_idea_YAN_auto_spirit_armor
+
+	enable = { always = yes }
+
+	army_armor_attack_factor = YAN_auto_armor_atk
+	army_armor_defence_factor = YAN_auto_armor_def
+	army_strength_factor = YAN_auto_armor_hp
+	production_cost_factor = YAN_auto_armor_cost
+
+	# equipment_bonus 无法写进动态修正；装甲厚度由隐藏 idea 实际生效
+	custom_modifier_tooltip = YAN_auto_armor_equip_tt
+}
+
+YAN_auto_spirit_chivalry = {
+	icon = GFX_idea_YAN_auto_spirit_chivalry
+
+	enable = { always = yes }
+
+	army_strength_factor = YAN_auto_chiv_hp
+	supply_consumption_factor = YAN_auto_chiv_supply
+	experience_gain_army_factor = YAN_auto_chiv_army_xp
+	experience_gain_air_factor = YAN_auto_chiv_air_xp
+	army_org_factor = YAN_auto_chiv_org
+	land_reinforce_rate = YAN_auto_chiv_reinforce
+}
+
+YAN_auto_spirit_green = {
+	icon = GFX_idea_YAN_auto_spirit_green
+
+	enable = { always = yes }
+
+	local_resources_factor = YAN_auto_green_resource
+	army_fuel_consumption_factor = YAN_auto_green_fuel
+	production_speed_buildings_factor = YAN_auto_green_build
+	industrial_capacity_factory = YAN_auto_green_output
+	political_power_factor = YAN_auto_green_pp
+	attrition = YAN_auto_green_attrition
+}
+
+# 州级 buff：每 30 天由 YAN_auto_green_monthly 随机挂到一个州
+YAN_auto_green_state_buff = {
+	icon = GFX_idea_YAN_auto_spirit_green
+
+	enable = { always = yes }
+
+	local_building_slots_factor = 0.1
+}

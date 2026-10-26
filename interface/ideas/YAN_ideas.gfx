@@ -1,43 +1,53 @@
 spriteTypes = {
 	# ==============================================================================
-	#  大炎 · 民族精神图标 —— 统一版式：硬核国风方印 + 2x2 琉璃篆四字
+	#  大炎 · 民族精神图标
 	#  · 贴图：gfx/interface/ideas/YAN/<名>.png（60x60 RGBA PNG，与原版槽位 53x53 / 按钮 63x63 相配）
-	#  · 生成器：docs/gen_yan_spirit_icons.py（改字/改色重跑即可，勿手改 PNG；必须用 PIL，
-	#    sharp/librsvg 对中文不吃 font-family，一律回退成宋体，画不出琉璃篆）
 	#  · 精灵名 GFX_idea_YAN_* 不变 → common/ideas 与 dynamic_modifiers 无需改动。
-	#  · 版式 = 来源色甲板 + 双线方框 + 四角角花 + 田字界格 + 四字印面（阅读序：左上→右上→左下→右下）
-	#  · 配色按**来源**（哪份定义文件来的）分九族：guoben 国本朱砂 / junzhong 军种玄铁 /
-	#    yicong 义从靛青 / suixiang 岁相鎏金 / sidestory 剧情石绿 / luxian 路线松花 /
-	#    zaifu 宰府紫棠 / tianshu 天枢缃色 / suiya 岁压霜白。
+	#  · 2026-10-25：开局 8 条精神合并为【旧时代的大炎帝国（承平日久）】，
+	#    列表图标仍借用天命所归贴图；描述内嵌 banner 见本文件末尾。
+	#  · 原 8 条精灵与贴图仍保留：dynamic_modifiers 继续复用，勿删。
+	#  · 其余条目仍是「国风方印 + 2x2 琉璃篆四字」，生成器 docs/gen_yan_spirit_icons.py。
+	#  · 已删精神（女帝遗产 / 真龙治下 / 司岁台秉烛 / 尚武传统）的贴图保留：
+	#    dynamic_modifiers 仍复用这些精灵名，勿删。
 	# ==============================================================================
 
-	# ---------------- 开局 · 承平 ----------------
-	# 天命
+	# ---------------- 开局 · 合并精神 ----------------
+	# 旧时代的大炎帝国（承平日久）—— 列表图标暂借天命所归
+	SpriteType = { name = "GFX_idea_YAN_Old_era_yan_empire"                   texturefile = "gfx/interface/ideas/YAN/YAN_Mandate_of_heaven.png" }
+
+	# ---------------- 原开局 · 政治 4（已合并，精灵保留） ----------------
+	# 天命所归
 	SpriteType = { name = "GFX_idea_YAN_Mandate_of_heaven"                    texturefile = "gfx/interface/ideas/YAN/YAN_Mandate_of_heaven.png" }
+	# 三公六部
+	SpriteType = { name = "GFX_idea_YAN_Three_dukes"                          texturefile = "gfx/interface/ideas/YAN/YAN_Three_dukes.png" }
+	# 太师冤案
+	SpriteType = { name = "GFX_idea_YAN_Taishi_injustice"                     texturefile = "gfx/interface/ideas/YAN/YAN_Taishi_injustice.png" }
+	# 山海众渗透
+	SpriteType = { name = "GFX_idea_YAN_Shanhaizhong"                         texturefile = "gfx/interface/ideas/YAN/YAN_Shanhaizhong.png" }
+
+	# ---------------- 开局 · 经济 2 ----------------
 	# 十字路口（消费品压力）
 	SpriteType = { name = "GFX_idea_YAN_Crossroad"                            texturefile = "gfx/interface/ideas/YAN/YAN_Crossroad.png" }
+	# 移动城邦
+	SpriteType = { name = "GFX_idea_YAN_Mobile_cities"                        texturefile = "gfx/interface/ideas/YAN/YAN_Mobile_cities.png" }
+
+	# ---------------- 开局 · 军事 2 ----------------
+	# 敕封神明
+	SpriteType = { name = "GFX_idea_YAN_Divine_subjects"                      texturefile = "gfx/interface/ideas/YAN/YAN_Divine_subjects.png" }
+	# 岁兽之患
+	SpriteType = { name = "GFX_idea_YAN_Sui_signs"                            texturefile = "gfx/interface/ideas/YAN/YAN_Sui_signs.png" }
+
+	# ---------------- 已删定义 · 贴图保留（dynamic_modifiers 复用） ----------------
 	# 女帝改革的遗产
 	SpriteType = { name = "GFX_idea_YAN_Legacy_of_the_female_emperor_reforms" texturefile = "gfx/interface/ideas/YAN/YAN_Legacy_of_the_female_emperor_reforms.png" }
 	# 真龙治下
 	SpriteType = { name = "GFX_idea_YAN_True_dragon_reign"                    texturefile = "gfx/interface/ideas/YAN/YAN_True_dragon_reign.png" }
-	# 敕封神明
-	SpriteType = { name = "GFX_idea_YAN_Divine_subjects"                      texturefile = "gfx/interface/ideas/YAN/YAN_Divine_subjects.png" }
-	# 三公六部
-	SpriteType = { name = "GFX_idea_YAN_Three_dukes"                          texturefile = "gfx/interface/ideas/YAN/YAN_Three_dukes.png" }
-	# 移动城邦与源石矿脉
-	SpriteType = { name = "GFX_idea_YAN_Mobile_cities"                        texturefile = "gfx/interface/ideas/YAN/YAN_Mobile_cities.png" }
 	# 司岁台秉烛
 	SpriteType = { name = "GFX_idea_YAN_Sishuitai_candle"                     texturefile = "gfx/interface/ideas/YAN/YAN_Sishuitai_candle.png" }
 	# 尚武传统
 	SpriteType = { name = "GFX_idea_YAN_Martial_tradition"                    texturefile = "gfx/interface/ideas/YAN/YAN_Martial_tradition.png" }
 
-	# ---------------- 开局 · 沉疴 ----------------
-	# 岁相
-	SpriteType = { name = "GFX_idea_YAN_Sui_signs"                            texturefile = "gfx/interface/ideas/YAN/YAN_Sui_signs.png" }
-	# 太师冤案
-	SpriteType = { name = "GFX_idea_YAN_Taishi_injustice"                     texturefile = "gfx/interface/ideas/YAN/YAN_Taishi_injustice.png" }
-	# 山海众渗透
-	SpriteType = { name = "GFX_idea_YAN_Shanhaizhong"                         texturefile = "gfx/interface/ideas/YAN/YAN_Shanhaizhong.png" }
+	# ---------------- 隐藏机制门槛（hidden_ideas，不出现在面板） ----------------
 	# 书刀在天镜阁
 	SpriteType = { name = "GFX_idea_YAN_Shudao_in_Tianjingge"                 texturefile = "gfx/interface/ideas/YAN/YAN_Shudao_in_Tianjingge.png" }
 	# 不反源石
@@ -111,4 +121,16 @@ spriteTypes = {
 	SpriteType = { name = "GFX_idea_YAN_chc_dom_military_end"    texturefile = "gfx/interface/ideas/YAN/YAN_chc_dom_military_end.png" }
 	SpriteType = { name = "GFX_idea_YAN_chc_dom_diplomacy_end"    texturefile = "gfx/interface/ideas/YAN/YAN_chc_dom_diplomacy_end.png" }
 
+	# 描述内嵌 banner：500×290 RGBA（旧时代的大炎帝国）
+	SpriteType = {
+		name = "GFX_YAN_Old_era_yan_empire_banner"
+		texturefile = "gfx/texticons/banners/YAN/YAN_Old_era_yan_empire_banner.png"
+		legacy_lazy_load = no
+	}
+
+
+	# ---------------- 自动推进树 · 三个民族精神（2026-10-26） ----------------
+	SpriteType = { name = "GFX_idea_YAN_auto_spirit_armor"    texturefile = "gfx/interface/ideas/YAN/YAN_auto_spirit_armor.png" }
+	SpriteType = { name = "GFX_idea_YAN_auto_spirit_chivalry"  texturefile = "gfx/interface/ideas/YAN/YAN_auto_spirit_chivalry.png" }
+	SpriteType = { name = "GFX_idea_YAN_auto_spirit_green"     texturefile = "gfx/interface/ideas/YAN/YAN_auto_spirit_green.png" }
 }

@@ -1,0 +1,159 @@
+######################################################
+# 大炎 · 军事国策树【大炎帝国军事改革】装备类追加效果
+#
+# 为什么单列隐藏 idea：
+#   动态修正（dynamic_modifiers）只认国家层面的修正符，
+#   无法表达「只作用于某一装备原型」的花费 / 装甲值 / 突破 / 防御。
+#   这三组效果都是一次性国策奖励，放在 hidden_ideas 里用 equipment_bonus
+#   精确落到装备原型；同时国策会把同一组数值写进 YAN_mil_rf_equip_* 变量，
+#   由民族精神的 custom_modifier_tooltip 显示在精神 tooltip 里
+#   （做法同原版苏联空军动态修正：隐藏 NS 承载装备效果 + custom_modifier_tooltip 说明）。
+#
+# 对应国策：
+#   YAN_mil_costume_reform   → YAN_mil_rf_equip_costume
+#   YAN_mil_colossus_concept → YAN_mil_rf_equip_colossus
+#   YAN_mil_holy_king_peace  → YAN_mil_rf_equip_holy_king
+#
+# 改数值时记得同步 docs/yan_mil_reform_data.cjs 里同国策的
+# YAN_mil_rf_equip_* 显示变量，否则民族精神 tooltip 会和真实效果不一致。
+######################################################
+
+ideas = {
+	hidden_ideas = {
+
+		# 服化道体系革新：所有装甲单位 -10% 生产花费；所有空军单位 -10% 生产花费
+		YAN_mil_rf_equip_costume = {
+			removal_cost = -1
+
+			equipment_bonus = {
+				light_tank_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+				}
+			}
+			equipment_bonus = {
+				medium_tank_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+				}
+			}
+			equipment_bonus = {
+				heavy_tank_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+				}
+			}
+			equipment_bonus = {
+				landship_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+				}
+			}
+			equipment_bonus = {
+				sp_artillery_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+				}
+			}
+			equipment_bonus = {
+				sp_aa_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+				}
+			}
+
+			equipment_bonus = {
+				small_plane_airframe = {
+					instant = yes
+					build_cost_ic = -0.10
+				}
+			}
+			equipment_bonus = {
+				cv_small_plane_airframe = {
+					instant = yes
+					build_cost_ic = -0.10
+				}
+			}
+			equipment_bonus = {
+				medium_plane_airframe = {
+					instant = yes
+					build_cost_ic = -0.10
+				}
+			}
+			equipment_bonus = {
+				large_plane_airframe = {
+					instant = yes
+					build_cost_ic = -0.10
+				}
+			}
+		}
+
+		# 玄极巨兵构想：所有装甲单位 -10% 生产花费，装甲厚度 +10%，突破 +10%
+		YAN_mil_rf_equip_colossus = {
+			removal_cost = -1
+
+			equipment_bonus = {
+				light_tank_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+					armor_value = 0.10
+					breakthrough = 0.10
+				}
+			}
+			equipment_bonus = {
+				medium_tank_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+					armor_value = 0.10
+					breakthrough = 0.10
+				}
+			}
+			equipment_bonus = {
+				heavy_tank_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+					armor_value = 0.10
+					breakthrough = 0.10
+				}
+			}
+			equipment_bonus = {
+				landship_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+					armor_value = 0.10
+					breakthrough = 0.10
+				}
+			}
+			equipment_bonus = {
+				sp_artillery_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+					armor_value = 0.10
+					breakthrough = 0.10
+				}
+			}
+			equipment_bonus = {
+				sp_aa_chassis = {
+					instant = yes
+					build_cost_ic = -0.10
+					armor_value = 0.10
+					breakthrough = 0.10
+				}
+			}
+		}
+
+		# 明王圣帝去兵灾：所有步兵装备 +20% 生产花费，防御 +20%
+		YAN_mil_rf_equip_holy_king = {
+			removal_cost = -1
+
+			equipment_bonus = {
+				infantry_equipment = {
+					instant = yes
+					build_cost_ic = 0.20
+					defense = 0.20
+				}
+			}
+		}
+
+	}
+}

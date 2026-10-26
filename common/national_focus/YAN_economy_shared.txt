@@ -1,0 +1,801 @@
+######################
+## 大炎 经济国策树簇（共享国策）—— 重制版（2026-10-23）
+## 由 common/national_focus/YAN.txt 的 YAN_national_focus 以 shared_focus 引用并入主树
+## 坐标区 x = -43..-29 / y = 3..14（2026-10-25 开局三根重排：全体 y+1，根格 -36,3）
+## 本版含布局、图标与国策效果；国策描述（_desc）暂留空串。
+## 效果与 tooltip 数据表：docs/yan_economy_data.cjs；精神 / 法案 / 事件见同批新增文件。
+## 位于内政簇右侧；两个收尾「大炎平稳航行 / 大炎乘风破浪」为 400x400。
+## 生成器：docs/gen_yan_economy_rework.cjs（改表重跑，勿手改产物）
+######################
+
+shared_focus = { #国库空虚...
+	id = YAN_eco_empty_treasury
+	icon = GFX_focus_YAN_eco_rw_empty_treasury
+	x = -36
+	y = 3
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_sui_ling_revolt
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = YAN_sui_banner_lowered_tt
+			has_country_flag = yan_sui_banner_lowered
+		}
+	}
+	ai_will_do = {
+		factor = 40
+	}
+
+	completion_reward = {
+		YAN_eco_spirit_init = yes
+		country_event = { id = yan_eco.1 days = 1 }
+	}
+}
+
+shared_focus = { #金融危机席卷泰拉...
+	id = YAN_eco_financial_crisis
+	icon = GFX_focus_YAN_eco_rw_financial_crisis
+	x = -37
+	y = 5
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_empty_treasury
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		add_timed_idea = { idea = YAN_eco_victoria_blew days = 120 }
+	}
+}
+
+shared_focus = { #朽坏的货架与商品...
+	id = YAN_eco_rotten_shelves
+	icon = GFX_focus_YAN_eco_rw_rotten_shelves
+	x = -35
+	y = 5
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_empty_treasury
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_rotten_shelves_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_factory_output = -0.50 tooltip = industrial_capacity_factory_tt }
+		add_to_variable = { YAN_eco_rf_prod_growth = -0.50 tooltip = production_factory_efficiency_gain_factor_tt }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = -0.50 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = 0.50 tooltip = consumer_goods_factor_tt }
+		add_to_variable = { YAN_eco_rf_stability_weekly = -0.01 tooltip = stability_weekly_tt }
+		add_to_variable = { YAN_eco_rf_monthly_population = -0.50 tooltip = monthly_population_tt }
+	}
+}
+
+shared_focus = { #老资历波澜不惊！
+	id = YAN_eco_veteran_calm
+	icon = GFX_focus_YAN_eco_rw_veteran_calm
+	x = -40
+	y = 6
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_financial_crisis
+	}
+	prerequisite = {
+		focus = YAN_eco_rotten_shelves
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_veteran_calm_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_factory_output = 0.10 tooltip = industrial_capacity_factory_tt }
+		add_to_variable = { YAN_eco_rf_prod_growth = 0.10 tooltip = production_factory_efficiency_gain_factor_tt }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.10 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.10 tooltip = consumer_goods_factor_tt }
+		add_to_variable = { YAN_eco_rf_stability_weekly = 0.01 tooltip = stability_weekly_tt }
+	}
+}
+
+shared_focus = { #陈晖洁执政为民！
+	id = YAN_eco_chen_governs
+	icon = GFX_focus_YAN_eco_rw_chen_governs
+	x = -32
+	y = 6
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_financial_crisis
+	}
+	prerequisite = {
+		focus = YAN_eco_rotten_shelves
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_chen_governs_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_factory_output = 0.10 tooltip = industrial_capacity_factory_tt }
+		add_to_variable = { YAN_eco_rf_prod_growth = 0.10 tooltip = production_factory_efficiency_gain_factor_tt }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.10 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.10 tooltip = consumer_goods_factor_tt }
+		add_to_variable = { YAN_eco_rf_stability_weekly = 0.01 tooltip = stability_weekly_tt }
+	}
+}
+
+shared_focus = { #《悯农》
+	id = YAN_eco_pity_farmer
+	icon = GFX_focus_YAN_eco_rw_pity_farmer
+	x = -42
+	y = 7
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_veteran_calm
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_pity_farmer_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.10 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.10 tooltip = consumer_goods_factor_tt }
+		add_to_variable = { YAN_eco_rf_monthly_population = 0.10 tooltip = monthly_population_tt }
+	}
+}
+
+shared_focus = { #灶火长燃
+	id = YAN_eco_hearth_fire
+	icon = GFX_focus_YAN_eco_rw_hearth_fire
+	x = -38
+	y = 7
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_veteran_calm
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_hearth_fire_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_pp = 0.10 tooltip = political_power_factor_tt }
+	}
+}
+
+shared_focus = { #走在龙门街巷中
+	id = YAN_eco_longmen_streets
+	icon = GFX_focus_YAN_eco_rw_longmen_streets
+	x = -34
+	y = 7
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_chen_governs
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		country_event = { id = yan_eco.2 days = 1 }
+	}
+}
+
+shared_focus = { #汐斯塔之旅的收获
+	id = YAN_eco_siesta_harvest
+	icon = GFX_focus_YAN_eco_rw_siesta_harvest
+	x = -30
+	y = 7
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_chen_governs
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		country_event = { id = yan_eco.3 days = 1 }
+	}
+}
+
+shared_focus = { #科研者走进试验田
+	id = YAN_eco_researchers_field
+	icon = GFX_focus_YAN_eco_rw_researchers_field
+	x = -42
+	y = 8
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_pity_farmer
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_researchers_field_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.10 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.10 tooltip = consumer_goods_factor_tt }
+		add_to_variable = { YAN_eco_rf_monthly_population = 0.10 tooltip = monthly_population_tt }
+	}
+}
+
+shared_focus = { #制定《食品安全法》
+	id = YAN_eco_food_safety_law
+	icon = GFX_focus_YAN_eco_rw_food_safety_law
+	x = -38
+	y = 8
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_hearth_fire
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_food_safety_law_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_consumer_goods = 0.10 tooltip = consumer_goods_factor_tt }
+		add_to_variable = { YAN_eco_rf_monthly_population = 0.10 tooltip = monthly_population_tt }
+	}
+}
+
+shared_focus = { #年的新想法！
+	id = YAN_eco_nian_new_idea
+	icon = GFX_focus_YAN_eco_rw_nian_new_idea
+	x = -40
+	y = 8
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_veteran_calm
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_nian_new_idea_note_tt
+	}
+}
+
+shared_focus = { #开发好位置！
+	id = YAN_eco_develop_good_spots
+	icon = GFX_focus_YAN_eco_rw_develop_good_spots
+	x = -34
+	y = 8
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_longmen_streets
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_develop_good_spots_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_factory_output = 0.05 tooltip = industrial_capacity_factory_tt }
+		add_to_variable = { YAN_eco_rf_prod_growth = 0.05 tooltip = production_factory_efficiency_gain_factor_tt }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.05 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.05 tooltip = consumer_goods_factor_tt }
+		custom_effect_tooltip = YAN_eco_develop_good_spots_note_tt
+	}
+}
+
+shared_focus = { #开放好位置！
+	id = YAN_eco_open_good_spots
+	icon = GFX_focus_YAN_eco_rw_open_good_spots
+	x = -30
+	y = 8
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_siesta_harvest
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_open_good_spots_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_factory_output = 0.05 tooltip = industrial_capacity_factory_tt }
+		add_to_variable = { YAN_eco_rf_prod_growth = 0.05 tooltip = production_factory_efficiency_gain_factor_tt }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.05 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.05 tooltip = consumer_goods_factor_tt }
+	}
+}
+
+shared_focus = { #复兴"大荒模式"
+	id = YAN_eco_wasteland_model
+	icon = GFX_focus_YAN_eco_rw_wasteland_model
+	x = -42
+	y = 9
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_researchers_field
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_wasteland_model_tt
+		217 = {
+			add_state_modifier = {
+				modifier = {
+					local_manpower = 0.50
+					local_supplies = 1.00
+				}
+			}
+		}
+	}
+}
+
+shared_focus = { #小摊贩与大酒楼
+	id = YAN_eco_stalls_restaurants
+	icon = GFX_focus_YAN_eco_rw_stalls_restaurants
+	x = -38
+	y = 9
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_food_safety_law
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_stalls_restaurants_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.10 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_factory_output = 0.10 tooltip = industrial_capacity_factory_tt }
+	}
+}
+
+shared_focus = { #叉烧猫暴力榨金！
+	id = YAN_eco_char_siu_gold
+	icon = GFX_focus_YAN_eco_rw_char_siu_gold
+	x = -35
+	y = 9
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_develop_good_spots
+	}
+	prerequisite = {
+		focus = YAN_eco_phase1_review
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_char_siu_gold_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = -0.05 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.05 tooltip = consumer_goods_factor_tt }
+		add_to_variable = { YAN_eco_rf_pp = 0.10 tooltip = political_power_factor_tt }
+	}
+}
+
+shared_focus = { #验收第一阶段成果
+	id = YAN_eco_phase1_review
+	icon = GFX_focus_YAN_eco_rw_phase1_review
+	x = -32
+	y = 9
+	cost = 5
+	available_if_capitulated = yes
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = YAN_eco_phase1_review_factories_tt
+			num_of_civilian_factories > 220
+		}
+	}
+	prerequisite = {
+		focus = YAN_eco_chen_governs
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_phase1_review_note_tt
+	}
+}
+
+shared_focus = { #就是你，龙门新区！
+	id = YAN_eco_longmen_new_district
+	icon = GFX_focus_YAN_eco_rw_longmen_new_district
+	x = -29
+	y = 9
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_open_good_spots
+	}
+	prerequisite = {
+		focus = YAN_eco_phase1_review
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_longmen_new_district_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_factory_output = 0.05 tooltip = industrial_capacity_factory_tt }
+		add_to_variable = { YAN_eco_rf_prod_growth = 0.05 tooltip = production_factory_efficiency_gain_factor_tt }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.05 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.05 tooltip = consumer_goods_factor_tt }
+		add_timed_idea = { idea = YAN_eco_longmen_governance days = 180 }
+	}
+}
+
+shared_focus = { #谁在铺张浪费？
+	id = YAN_eco_waste_audit
+	icon = GFX_focus_YAN_eco_rw_waste_audit
+	x = -39
+	y = 10
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_stalls_restaurants
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_waste_audit_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.15 tooltip = consumer_goods_factor_tt }
+	}
+}
+
+shared_focus = { #战略资源仓储体系
+	id = YAN_eco_resource_storage
+	icon = GFX_focus_YAN_eco_rw_resource_storage
+	x = -41
+	y = 10
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_wasteland_model
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_resource_storage_tt
+		every_owned_state = {
+			add_state_modifier = {
+				modifier = {
+					local_manpower = 0.10
+					local_supplies = 0.20
+					local_resources_factor = 0.20
+				}
+			}
+		}
+	}
+}
+
+shared_focus = { #坎诺特滚出界园！
+	id = YAN_eco_cannot_out
+	icon = GFX_focus_YAN_eco_rw_cannot_out
+	x = -35
+	y = 10
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_char_siu_gold
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_cannot_out_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_factory_output = 0.05 tooltip = industrial_capacity_factory_tt }
+		add_to_variable = { YAN_eco_rf_prod_growth = 0.05 tooltip = production_factory_efficiency_gain_factor_tt }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.05 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.05 tooltip = consumer_goods_factor_tt }
+		country_event = { id = yan_eco.4 days = 1 }
+	}
+}
+
+shared_focus = { #大帝的潮酷文化？
+	id = YAN_eco_emperor_culture
+	icon = GFX_focus_YAN_eco_rw_emperor_culture
+	x = -29
+	y = 10
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_longmen_new_district
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_emperor_culture_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_factory_output = 0.05 tooltip = industrial_capacity_factory_tt }
+		add_to_variable = { YAN_eco_rf_prod_growth = 0.05 tooltip = production_factory_efficiency_gain_factor_tt }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.05 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.05 tooltip = consumer_goods_factor_tt }
+		recruit_character = YAN_gen_texas
+		recruit_character = YAN_gen_lemuen
+		custom_effect_tooltip = YAN_eco_emperor_culture_note_tt
+	}
+}
+
+shared_focus = { #绿水青山...金山银山
+	id = YAN_eco_green_mountains
+	icon = GFX_focus_YAN_eco_rw_green_mountains
+	x = -42
+	y = 11
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_resource_storage
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_green_mountains_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.10 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_monthly_population = 0.10 tooltip = monthly_population_tt }
+		add_to_variable = { YAN_eco_rf_resources = -0.20 tooltip = local_resources_factor_tt }
+	}
+}
+
+shared_focus = { #平抑市场物价
+	id = YAN_eco_price_stabilization
+	icon = GFX_focus_YAN_eco_rw_price_stabilization
+	x = -38
+	y = 11
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_waste_audit
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_price_stabilization_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.10 tooltip = production_speed_industrial_complex_factor_tt }
+	}
+}
+
+shared_focus = { #放眼国门之外
+	id = YAN_eco_look_beyond_borders
+	icon = GFX_focus_YAN_eco_rw_look_beyond_borders
+	x = -34
+	y = 11
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_cannot_out
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_look_beyond_borders_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_min_export = -0.20 tooltip = min_export_tt }
+	}
+}
+
+shared_focus = { #鸭爵来信
+	id = YAN_eco_duck_letter
+	icon = GFX_focus_YAN_eco_rw_duck_letter
+	x = -30
+	y = 11
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_emperor_culture
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_duck_letter_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_consumer_goods = -0.05 tooltip = consumer_goods_factor_tt }
+		country_event = { id = yan_eco.5 days = 1 }
+	}
+}
+
+shared_focus = { #凡人的烟火气
+	id = YAN_eco_mortal_smoke
+	icon = GFX_focus_YAN_eco_rw_mortal_smoke
+	x = -37
+	y = 12
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_price_stabilization
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_mortal_smoke_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		add_to_variable = { YAN_eco_rf_factory_output = 0.10 tooltip = industrial_capacity_factory_tt }
+		add_to_variable = { YAN_eco_rf_monthly_population = 0.10 tooltip = monthly_population_tt }
+	}
+}
+
+shared_focus = { #镇压邪魔污染
+	id = YAN_eco_suppress_corruption
+	icon = GFX_focus_YAN_eco_rw_suppress_corruption
+	x = -43
+	y = 12
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_green_mountains
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		if = {
+			limit = { has_dynamic_modifier = { modifier = YAN_eco_spirit_waves } }
+			custom_effect_tooltip = YAN_eco_suppress_corruption_tt
+		}
+		else = {
+			hidden_effect = { YAN_eco_rename_steady = yes }
+			custom_effect_tooltip = YAN_eco_suppress_corruption_rename_tt
+		}
+		add_to_variable = { YAN_eco_rf_civ_factory_speed = 0.10 tooltip = production_speed_industrial_complex_factor_tt }
+		add_to_variable = { YAN_eco_rf_monthly_population = 0.10 tooltip = monthly_population_tt }
+	}
+}
+
+shared_focus = { #奇观兴国！
+	id = YAN_eco_wonders
+	icon = GFX_focus_YAN_eco_rw_wonders
+	x = -40
+	y = 12
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_nian_new_idea
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_wonders_tt
+		hidden_effect = {
+			set_variable = { YAN_mir_bonus_speed = 0.25 }
+			set_variable = { YAN_mir_bonus_timer = 24 }
+		}
+	}
+}
+
+shared_focus = { #老陈的述职报告
+	id = YAN_eco_chen_report
+	icon = GFX_focus_YAN_eco_rw_chen_report
+	x = -32
+	y = 12
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_phase1_review
+	}
+	prerequisite = {
+		focus = YAN_eco_look_beyond_borders
+	}
+	prerequisite = {
+		focus = YAN_eco_duck_letter
+	}
+	ai_will_do = {
+		factor = 20
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_chen_report_tt
+		set_country_flag = YAN_eco_trade_law_unlocked
+		hidden_effect = {
+			add_dynamic_modifier = { modifier = YAN_eco_trade_peace }
+			add_dynamic_modifier = { modifier = YAN_eco_trade_war }
+		}
+		custom_effect_tooltip = YAN_eco_chen_report_note_tt
+	}
+}
+
+shared_focus = { #大炎平稳航行...
+	id = YAN_eco_steady_sailing
+	icon = GFX_focus_YAN_eco_rw_steady_sailing
+	x = -40
+	y = 14
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_wonders
+	}
+	prerequisite = {
+		focus = YAN_eco_suppress_corruption
+	}
+	prerequisite = {
+		focus = YAN_eco_mortal_smoke
+	}
+	ai_will_do = {
+		factor = 30
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_steady_sailing_tt
+		set_country_flag = YAN_eco_economy_law_unlocked
+		custom_effect_tooltip = YAN_eco_steady_sailing_note_tt
+	}
+}
+
+shared_focus = { #大炎乘风破浪！
+	id = YAN_eco_ride_waves
+	icon = GFX_focus_YAN_eco_rw_ride_waves
+	x = -32
+	y = 14
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_eco_chen_report
+	}
+	ai_will_do = {
+		factor = 30
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = YAN_eco_ride_waves_tt
+		hidden_effect = { YAN_eco_spirit_ensure = yes }
+		hidden_effect = { YAN_eco_rename_waves = yes }
+		add_to_variable = { YAN_eco_rf_mil_factory_speed = 0.20 tooltip = production_speed_arms_factory_factor_tt }
+	}
+}

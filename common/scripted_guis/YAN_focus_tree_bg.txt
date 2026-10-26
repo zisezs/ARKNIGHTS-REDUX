@@ -1,0 +1,19 @@
+# 大炎 · 国策树页面底图（仅 YAN）
+# context_type = national_focus_context：作用域 = 当前打开国策树的国家。
+# parent_window_name = yan_focus_bg_anchor：1.19.3 实际接受的键名（不是文档里的 parent_window_window，
+#   后者会报 Unexpected token 并回落到主界面）。KR 也用 parent_window_name 挂到嵌套锚点。
+# 锚点在 nationalfocusview.gui 的 tree 容器内、grid_window 之前：画在国策节点下面，
+#   同时保留 tree 原有底图与滚动/缩放输入层。
+# gui 本体：interface/YAN_focus_tree_bg.gui
+
+scripted_gui = {
+	YAN_focus_tree_bg = {
+		context_type = national_focus_context
+		window_name = "yan_focus_tree_bg_window"
+		parent_window_name = yan_focus_bg_anchor
+
+		visible = {
+			original_tag = YAN
+		}
+	}
+}

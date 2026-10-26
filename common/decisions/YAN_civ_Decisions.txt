@@ -1,0 +1,107 @@
+# ==============================================================================
+#  大炎 · 内政树决议组【行政重组】+ 皇帝轮流做
+#  · 由国策【哼！】（YAN_civ_hmph）解锁分类并开放第一项；
+#    【血脉重担】（YAN_civ_blood_burden）开放第二项；两项互斥、终身一次。
+#  · 【岁相临阁】（YAN_civ_suixiang_cabinet）解锁【皇帝轮流做，今年到我家！】，
+#    走事件 yan_civ.3 选十二岁片之一出任国家领导人。
+#  · 数值全部加在【当变则变】的变量上（YAN_civ_bz_*），由动态修正读取。
+# ==============================================================================
+
+YAN_civ_admin_restructure = {
+
+	# ① 忠于君？忠于国？
+	YAN_civ_dec_loyal_to_whom = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_completed_focus = YAN_civ_hmph
+			NOT = { has_country_flag = YAN_civ_admin_choice }
+		}
+		available = {
+			NOT = { has_country_flag = YAN_civ_admin_choice }
+		}
+
+		cost = 0
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_civ_dec_loyal_to_whom_tt
+			set_country_flag = YAN_civ_admin_choice
+			add_to_variable = { YAN_civ_bz_pp = 0.10 tooltip = political_power_factor_tt }
+			add_to_variable = { YAN_civ_bz_advisor_cost = 0.50 tooltip = political_advisor_cost_factor_tt }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	# ② 大炎根基在何处？
+	YAN_civ_dec_where_is_yan_root = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_completed_focus = YAN_civ_blood_burden
+			NOT = { has_country_flag = YAN_civ_admin_choice }
+		}
+		available = {
+			NOT = { has_country_flag = YAN_civ_admin_choice }
+		}
+
+		cost = 0
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = YAN_civ_dec_where_is_yan_root_tt
+			set_country_flag = YAN_civ_admin_choice
+			add_to_variable = { YAN_civ_bz_pp = 0.10 tooltip = political_power_factor_tt }
+			add_to_variable = { YAN_civ_bz_stability = -0.20 tooltip = stability_factor_tt }
+		}
+
+		ai_will_do = {
+			factor = 3
+		}
+	}
+
+	# 皇帝轮流做，今年到我家！ —— 可重复，一次换一位岁片
+	# 台上那位必须先 retire_country_leader 退掉，promote_character 才推得动（见 events/YAN_civ.txt）。
+	YAN_civ_dec_emperor_rotation = {
+		icon = GFX_decision_generic_political_rally
+
+		visible = {
+			has_completed_focus = YAN_civ_suixiang_cabinet
+		}
+
+		available = {
+			has_government = authoritarianism
+			custom_trigger_tooltip = {
+				tooltip = YAN_civ_need_shard_tt
+				OR = {
+					has_character = YAN_gen_zhongyue
+					has_character = YAN_gen_wang
+					has_character = YAN_gen_ling
+					has_character = YAN_gen_jun
+					has_character = YAN_gen_jie
+					has_character = YAN_gen_shu
+					has_character = YAN_gen_ji
+					has_character = YAN_gen_yi
+					has_character = YAN_gen_nian
+					has_character = YAN_gen_fang
+					has_character = YAN_gen_xi
+					has_character = YAN_gen_yu
+				}
+			}
+		}
+
+		cost = 0
+		cooldown = 180
+
+		complete_effect = {
+			country_event = { id = yan_civ.3 days = 1 }
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+}

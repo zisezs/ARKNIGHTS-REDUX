@@ -1,0 +1,793 @@
+######################
+## 大炎 国策树 · 共享簇直连壳（2026-10-25）
+######################
+#
+# 【背景】原主树 YAN.txt 已删除。它除十二相分支与"出山"门外，
+#         真正的内容都定义在三个 shared_focus 文件里：
+#           YAN_internal_shared.txt（28 格）
+#           YAN_economy_shared.txt（33 格）
+#           YAN_military_shared.txt（26 格）
+#         另含 DEV_development_shared.txt（25 格，YAN 坐标偏移）。
+# 【本树】把上述共享国策并入 YAN 国策树。2026-10-25 开局重排：
+#         三条根格同处 y=3，左中右排列，并统一以【岁陵之乱！】为前置。
+# 【id】沿用 YAN_national_focus —— DEV 共享国策的 offset 以 has_focus_tree = YAN_national_focus 判定，
+#       复用该 id 才能让 25 格发展度国策落在原来的 y=57 区域。
+# 【坐标】内政 x -56..-46 / y 3..12；经济 x -43..-29 / y 3..14；
+#         军事 x -26..-8 / y 3..10；新根【岁陵之乱！】(-36,1)；DEV 由 offset 自动落到 y 57+。
+######################
+
+focus_tree = {
+	id = YAN_national_focus
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = YAN
+		}
+	}
+
+	default = no
+
+	initial_show_position = {
+		x = -36
+		y = 2
+	}
+
+	# 国策树指引：内政 / 经济 / 军事（2026-10-26 替换旧「岁相的荒唐梦」引导名）
+	shortcut = {
+		name = YAN_shortcut_dream_left
+		target = YAN_civ_reorder_court
+	}
+
+	shortcut = {
+		name = YAN_shortcut_dream_mid
+		target = YAN_eco_empty_treasury
+	}
+
+	shortcut = {
+		name = YAN_shortcut_dream_right
+		target = YAN_mil_three_armies
+	}
+	# ---- YAN_AUTO_TREE_SHORTCUT_BEGIN ----
+	# 自动推进树快捷入口：name/target = 根格 YAN_auto_21
+	shortcut = {
+		name = YAN_auto_21
+		target = YAN_auto_21
+	}
+	# ---- YAN_AUTO_TREE_SHORTCUT_END ----
+
+	# 岁陵之乱！—— 三条起始国策的共同前置（120 天镇压任务）
+	focus = {
+		id = YAN_sui_ling_revolt
+		icon = GFX_focus_YAN_sui_ling_revolt
+		x = -36
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 40
+		}
+
+		completion_reward = {
+			set_country_flag = yan_sui_uprising_started
+			activate_mission = YAN_mission_suppress_shanhai
+			custom_effect_tooltip = YAN_sui_ling_revolt_tt
+			hidden_effect = {
+				YAN_sui_ling_revolt_costs = yes
+			}
+		}
+	}
+
+	shared_focus = YAN_civ_reorder_court
+	shared_focus = YAN_civ_xi_drowsy
+	shared_focus = YAN_civ_hero_father
+	shared_focus = YAN_civ_ling_hungover
+	shared_focus = YAN_civ_tianshi_junior
+	shared_focus = YAN_civ_rule_by_inaction
+	shared_focus = YAN_civ_sycophants
+	shared_focus = YAN_civ_collect_ballads
+	shared_focus = YAN_civ_map_sketch
+	shared_focus = YAN_civ_aesthetic_forge
+	shared_focus = YAN_civ_literary_mastery
+	shared_focus = YAN_civ_pacification_rite
+	shared_focus = YAN_civ_suishu_bureau
+	shared_focus = YAN_civ_palace_thunder
+	shared_focus = YAN_civ_inspect_guard
+	shared_focus = YAN_civ_officials_thunder
+	shared_focus = YAN_civ_free_roaming
+	shared_focus = YAN_civ_great_dream
+	shared_focus = YAN_civ_thunder_quells
+	shared_focus = YAN_civ_self_knowing
+	shared_focus = YAN_civ_bless_yan
+	shared_focus = YAN_civ_heaven_judgment
+	shared_focus = YAN_civ_hmph
+	shared_focus = YAN_civ_blood_burden
+	shared_focus = YAN_civ_light_breaks_clouds
+	shared_focus = YAN_civ_decisive
+	shared_focus = YAN_civ_suixiang_cabinet
+	shared_focus = YAN_civ_upright_court
+	shared_focus = YAN_eco_empty_treasury
+	shared_focus = YAN_eco_financial_crisis
+	shared_focus = YAN_eco_rotten_shelves
+	shared_focus = YAN_eco_veteran_calm
+	shared_focus = YAN_eco_chen_governs
+	shared_focus = YAN_eco_pity_farmer
+	shared_focus = YAN_eco_hearth_fire
+	shared_focus = YAN_eco_longmen_streets
+	shared_focus = YAN_eco_siesta_harvest
+	shared_focus = YAN_eco_researchers_field
+	shared_focus = YAN_eco_food_safety_law
+	shared_focus = YAN_eco_nian_new_idea
+	shared_focus = YAN_eco_develop_good_spots
+	shared_focus = YAN_eco_open_good_spots
+	shared_focus = YAN_eco_wasteland_model
+	shared_focus = YAN_eco_stalls_restaurants
+	shared_focus = YAN_eco_char_siu_gold
+	shared_focus = YAN_eco_phase1_review
+	shared_focus = YAN_eco_longmen_new_district
+	shared_focus = YAN_eco_waste_audit
+	shared_focus = YAN_eco_resource_storage
+	shared_focus = YAN_eco_cannot_out
+	shared_focus = YAN_eco_emperor_culture
+	shared_focus = YAN_eco_green_mountains
+	shared_focus = YAN_eco_price_stabilization
+	shared_focus = YAN_eco_look_beyond_borders
+	shared_focus = YAN_eco_duck_letter
+	shared_focus = YAN_eco_mortal_smoke
+	shared_focus = YAN_eco_suppress_corruption
+	shared_focus = YAN_eco_wonders
+	shared_focus = YAN_eco_chen_report
+	shared_focus = YAN_eco_steady_sailing
+	shared_focus = YAN_eco_ride_waves
+	shared_focus = YAN_mil_three_armies
+	shared_focus = YAN_mil_chongyue_arrives
+	shared_focus = YAN_mil_martial_codex
+	shared_focus = YAN_mil_cleanse_frontier
+	shared_focus = YAN_mil_wulin_court
+	shared_focus = YAN_mil_martial_spirit
+	shared_focus = YAN_mil_stop_war
+	shared_focus = YAN_mil_nian_studio
+	shared_focus = YAN_mil_challenge_lykawood
+	shared_focus = YAN_mil_costume_reform
+	shared_focus = YAN_mil_colossus_concept
+	shared_focus = YAN_mil_golden_halberd
+	shared_focus = YAN_mil_life_death
+	shared_focus = YAN_mil_holy_king_peace
+	shared_focus = YAN_mil_furnace_driver
+	shared_focus = YAN_mil_chess_calculus
+	shared_focus = YAN_mil_audit_old_debts
+	shared_focus = YAN_mil_inspector
+	shared_focus = YAN_mil_zero_error
+	shared_focus = YAN_mil_computing_center
+	shared_focus = YAN_mil_shared_calamity
+	shared_focus = YAN_mil_great_chivalry
+	shared_focus = YAN_mil_civil_virtue
+	shared_focus = YAN_mil_tianshu_treasury
+	shared_focus = YAN_mil_purge_habits
+	shared_focus = YAN_mil_grand_parade
+	shared_focus = DEV_agri_1
+	shared_focus = DEV_agri_2
+	shared_focus = DEV_agri_3
+	shared_focus = DEV_agri_4
+	shared_focus = DEV_agri_5
+	shared_focus = DEV_ind_1
+	shared_focus = DEV_ind_2
+	shared_focus = DEV_ind_3
+	shared_focus = DEV_ind_4
+	shared_focus = DEV_ind_5
+	shared_focus = DEV_edu_1
+	shared_focus = DEV_edu_2
+	shared_focus = DEV_edu_3
+	shared_focus = DEV_edu_4
+	shared_focus = DEV_edu_5
+	shared_focus = DEV_adm_1
+	shared_focus = DEV_adm_2
+	shared_focus = DEV_adm_3
+	shared_focus = DEV_adm_4
+	shared_focus = DEV_adm_5
+	shared_focus = DEV_pov_1
+	shared_focus = DEV_pov_2
+	shared_focus = DEV_pov_3
+	shared_focus = DEV_pov_4
+	shared_focus = DEV_pov_5
+	# ---- YAN_AUTO_TREE_BEGIN ----
+	# 大炎自动推进树（NEW_tree 16 格）：只保留名字/图标/排版；根格 YAN_auto_21
+	# 自推机制参考猩红剧团；生成器 docs/gen_yan_auto_tree.cjs；数据 docs/yan_auto_tree_data.cjs
+focus = { # 工欲善其事...
+	id = YAN_auto_1
+	icon = GFX_focus_YAN_auto_1
+	x = -56
+	y = 22
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_9
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_1
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_1_tt
+		YAN_auto_reward_1 = yes
+	}
+}
+focus = { # 材料学大跳跃！
+	id = YAN_auto_2
+	icon = GFX_focus_YAN_auto_2
+	x = -57
+	y = 24
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_1
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_2
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_2_tt
+		YAN_auto_reward_2 = yes
+	}
+}
+focus = { # 拷打工造司！
+	id = YAN_auto_3
+	icon = GFX_focus_YAN_auto_3
+	x = -55
+	y = 24
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_1
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_3
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_3_tt
+		YAN_auto_reward_3 = yes
+	}
+}
+focus = { # 玄极巨兵入列！
+	id = YAN_auto_4
+	icon = GFX_focus_YAN_auto_4
+	x = -56
+	y = 26
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_3
+	}
+	prerequisite = {
+		focus = YAN_auto_2
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_4
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_4_tt
+		YAN_auto_reward_4 = yes
+	}
+}
+focus = { # 百灶会议
+	id = YAN_auto_5
+	icon = GFX_focus_YAN_auto_5
+	x = -51
+	y = 22
+	cost = 10
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_10
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_5
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_5_tt
+		YAN_auto_reward_5 = yes
+	}
+}
+focus = { # 现代化军事学院
+	id = YAN_auto_6
+	icon = GFX_focus_YAN_auto_6
+	x = -52
+	y = 24
+	cost = 10
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_5
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_6
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_6_tt
+		YAN_auto_reward_6 = yes
+	}
+}
+focus = { # 斩断歪风邪气！
+	id = YAN_auto_7
+	icon = GFX_focus_YAN_auto_7
+	x = -50
+	y = 24
+	cost = 10
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_5
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_7
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_7_tt
+		YAN_auto_reward_7 = yes
+	}
+}
+focus = { # 大炎军魂
+	id = YAN_auto_8
+	icon = GFX_focus_YAN_auto_8
+	x = -51
+	y = 26
+	cost = 10
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_7
+	}
+	prerequisite = {
+		focus = YAN_auto_6
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_8
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_8_tt
+		YAN_auto_reward_8 = yes
+	}
+}
+focus = { # 年大导演准备开机！
+	id = YAN_auto_9
+	icon = GFX_focus_YAN_auto_9
+	x = -56
+	y = 20
+	cost = 5
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_21
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_9
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_9_tt
+		YAN_auto_reward_9 = yes
+	}
+}
+focus = { # 重岳宗师淬炼新军！
+	id = YAN_auto_10
+	icon = GFX_focus_YAN_auto_10
+	x = -51
+	y = 20
+	cost = 10
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_21
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_10
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_10_tt
+		YAN_auto_reward_10 = yes
+	}
+}
+focus = { # 大炎土地勘测工程
+	id = YAN_auto_11
+	icon = GFX_focus_YAN_auto_11
+	x = -46
+	y = 22
+	cost = 10
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_19
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_11
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_11_tt
+		YAN_auto_reward_11 = yes
+	}
+}
+focus = { # 源石尘清理实践
+	id = YAN_auto_12
+	icon = GFX_focus_YAN_auto_12
+	x = -47
+	y = 24
+	cost = 10
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_11
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_12
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_12_tt
+		YAN_auto_reward_12 = yes
+	}
+}
+focus = { # 物尽其用开发原则
+	id = YAN_auto_13
+	icon = GFX_focus_YAN_auto_13
+	x = -45
+	y = 24
+	cost = 10
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_11
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_13
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_13_tt
+		YAN_auto_reward_13 = yes
+	}
+}
+focus = { # 国家战略：抵抗邪魔
+	id = YAN_auto_14
+	icon = GFX_focus_YAN_auto_14
+	x = -46
+	y = 26
+	cost = 10
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_13
+	}
+	prerequisite = {
+		focus = YAN_auto_12
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_14
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_14_tt
+		YAN_auto_reward_14 = yes
+	}
+}
+focus = { # 农学家黍奔走田野！
+	id = YAN_auto_19
+	icon = GFX_focus_YAN_auto_19
+	x = -46
+	y = 20
+	cost = 10
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_auto_21
+	}
+	available = {
+		if = {
+			limit = {
+				has_shine_effect_on_focus = YAN_auto_19
+			}
+			custom_override_tooltip = {
+				tooltip = {
+					localization_key = YAN_auto_tree_progress_tt
+					FLAG_DAYS = [?YAN_auto_tree_prog:days]
+				}
+				always = no
+			}
+		}
+		else = {
+			custom_override_tooltip = {
+				tooltip = YAN_auto_tree_tt
+				always = no
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_auto_reward_19_tt
+		YAN_auto_reward_19 = yes
+	}
+}
+focus = { # 司岁台的观察日记
+	id = YAN_auto_21
+	icon = GFX_focus_YAN_auto_21
+	x = -51
+	y = 17
+	cost = 5
+	available_if_capitulated = yes
+	ai_will_do = {
+		factor = 0
+	}
+	completion_reward = {
+		hidden_effect = {
+			YAN_auto_tree_start = yes
+		}
+	}
+}
+	# ---- YAN_AUTO_TREE_END ----
+}

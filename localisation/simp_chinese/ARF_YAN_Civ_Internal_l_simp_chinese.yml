@@ -1,0 +1,76 @@
+﻿l_simp_chinese:
+
+# ==============================================================================
+#  大炎（YAN）内政国策树簇 · 效果侧文案
+#   · 动态民族精神【岁陵之乱的余波 / 岁岁今朝 / 当变则变】
+#   · 决议组【行政重组】+ 决议【皇帝轮流做，今年到我家！】
+#   · 事件 yan_civ.1..3
+#   · 说明 token（无法解散部队或编制）
+#  国策本身的名称与 tooltip 在 ARF_YAN_Internal_Rework_l_simp_chinese.yml（生成器产出）。
+# ==============================================================================
+
+# ---------------- 说明 token ----------------
+ yan_civ_no_disband_tt:0 "无法解散部队或编制"
+
+# ---------------- 动态民族精神 ----------------
+ YAN_civ_spirit:0 "岁陵之乱的余波"
+ YAN_civ_spirit_desc:0 "岁陵那一夜之后，朝堂上没人再提「岁」字。十九司的账册翻到一半就合上，军中的编制锁进枢密院的柜子——谁都不敢先动。"
+
+ YAN_civ_spirit_final:0 "岁岁今朝"
+ YAN_civ_spirit_final_desc:0 "\n\n\n\n\n\n£GFX_YAN_civ_sui_jin_zhao_banner£\n\n\n\n\n\n\n\n§R“天喟之剑，当鸣则鸣。”§!\n\n岁陵之事已经摊到朝堂上。朝堂、军中、十九司与各位代理人各有各的算盘，往后的路要朝廷自己定。"
+
+ YAN_civ_biangze_spirit:0 "当变则变"
+ YAN_civ_biangze_spirit_desc:0 "官制不动，政令就出不了宫门。改革点数按月累积，落在中枢每一次改弦上。"
+
+ YAN_civ_spirit_counters_tt:0 "\n§Y宣政司改革进度§!：[?YAN_civ_rf_progress|Y0]（每月 +[?YAN_civ_rf_progress_monthly|Y0]）"
+ YAN_civ_biangze_counters_tt:0 "\n§Y改革点数§!：[?YAN_civ_bz_points|Y0]（每月 +[?YAN_civ_bz_point_monthly|Y0]）"
+
+# ---------------- 国策效果里的黄字说明 ----------------
+ YAN_civ_lock_templates_tt:0 "§R无法解散部队或编制§!"
+ YAN_civ_unlock_templates_tt:0 "§G允许解散部队和编制§!"
+ YAN_civ_reform_progress_add_tt:0 "§Y宣政司改革进度§! 每月 +1"
+ YAN_civ_reform_progress_p2_tt:0 "§Y宣政司改革进度§! +2"
+ YAN_civ_reform_point_add_tt:0 "§Y改革点数§! 每月 +1"
+
+# ---------------- 决议组【行政重组】 ----------------
+ YAN_civ_admin_restructure:0 "行政重组"
+
+ YAN_civ_dec_loyal_to_whom:0 "忠于君？忠于国？"
+ YAN_civ_dec_loyal_to_whom_desc:0 "官制改了，先要定下这一条。选定后不再更改。"
+ YAN_civ_dec_loyal_to_whom_tt:0 "§Y【当变则变】§!追加效果：政治点数获取 +10%，内阁任命花费 +50%"
+
+ YAN_civ_dec_where_is_yan_root:0 "大炎根基在何处？"
+ YAN_civ_dec_where_is_yan_root_desc:0 "确定州郡、军府与宗室各自的权责，往后由谁替朝廷说话。"
+ YAN_civ_dec_where_is_yan_root_tt:0 "§Y【当变则变】§!追加效果：政治点数获取 +10%，稳定度 -20%"
+
+ YAN_civ_dec_emperor_rotation:0 "皇帝轮流做，今年到我家！"
+ YAN_civ_dec_emperor_rotation_desc:0 "十二位岁片都在朝上。让他们轮着坐一回主位。§8（只有在朝的岁片可选——各自「出山」国策未过的，不入此列）§!"
+ YAN_civ_need_shard_tt:0 "朝中至少要有位列朝的岁片§8（完成【岁相的荒唐梦】里对应的「出山」国策）§!"
+
+# ---------------- 事件 yan_civ.1 宣政司改革 ----------------
+ yan_civ.1.t:0 "宣政司改革"
+ yan_civ.1.d:0 "【该事件未完成】"
+ yan_civ.1.a:0 "先勘账目，再议章程"
+ yan_civ.1.b:0 "先定章程，账目后议"
+
+# ---------------- 事件 yan_civ.2 落子无悔 ----------------
+ yan_civ.2.t:0 "落子无悔"
+ yan_civ.2.d:0 "【该事件未完成】"
+ yan_civ.2.a:0 "这盘棋，就下到这里。"
+
+# ---------------- 事件 yan_civ.3 皇帝轮流做 ----------------
+ yan_civ.3.t:0 "皇帝轮流做，今年到我家！"
+ yan_civ.3.d:0 "十二位岁片列在阶下。真龙问：谁来坐这一回？"
+ yan_civ.3.o1:0 "重岳"
+ yan_civ.3.o2:0 "望"
+ yan_civ.3.o3:0 "令"
+ yan_civ.3.o4:0 "均"
+ yan_civ.3.o5:0 "颉"
+ yan_civ.3.o6:0 "黍"
+ yan_civ.3.o7:0 "绩"
+ yan_civ.3.o8:0 "易"
+ yan_civ.3.o9:0 "年"
+ yan_civ.3.o10:0 "方"
+ yan_civ.3.o11:0 "夕"
+ yan_civ.3.o12:0 "余"
+ yan_civ.3.oz:0 "还是算了。"

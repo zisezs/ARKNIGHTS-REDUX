@@ -1,0 +1,176 @@
+# 大炎自动推进树 · 15 格国策效果（2026-10-26）
+# 由国策 completion_reward 调用；变量累加，动态修正实时显示。
+
+# ============================================================
+# 初始化 / 挂载
+# ============================================================
+
+YAN_auto_ensure_armor = {
+	if = { limit = { NOT = { has_variable = YAN_auto_armor_atk } } set_variable = { YAN_auto_armor_atk = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_armor_def } } set_variable = { YAN_auto_armor_def = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_armor_hp } } set_variable = { YAN_auto_armor_hp = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_armor_thick } } set_variable = { YAN_auto_armor_thick = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_armor_cost } } set_variable = { YAN_auto_armor_cost = 0 } }
+	if = {
+		limit = { NOT = { has_dynamic_modifier = { modifier = YAN_auto_spirit_armor } } }
+		add_dynamic_modifier = { modifier = YAN_auto_spirit_armor }
+	}
+}
+
+YAN_auto_ensure_chivalry = {
+	if = { limit = { NOT = { has_variable = YAN_auto_chiv_hp } } set_variable = { YAN_auto_chiv_hp = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_chiv_supply } } set_variable = { YAN_auto_chiv_supply = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_chiv_army_xp } } set_variable = { YAN_auto_chiv_army_xp = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_chiv_air_xp } } set_variable = { YAN_auto_chiv_air_xp = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_chiv_org } } set_variable = { YAN_auto_chiv_org = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_chiv_reinforce } } set_variable = { YAN_auto_chiv_reinforce = 0 } }
+	if = {
+		limit = { NOT = { has_dynamic_modifier = { modifier = YAN_auto_spirit_chivalry } } }
+		add_dynamic_modifier = { modifier = YAN_auto_spirit_chivalry }
+	}
+}
+
+YAN_auto_ensure_green = {
+	if = { limit = { NOT = { has_variable = YAN_auto_green_resource } } set_variable = { YAN_auto_green_resource = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_green_fuel } } set_variable = { YAN_auto_green_fuel = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_green_build } } set_variable = { YAN_auto_green_build = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_green_output } } set_variable = { YAN_auto_green_output = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_green_pp } } set_variable = { YAN_auto_green_pp = 0 } }
+	if = { limit = { NOT = { has_variable = YAN_auto_green_attrition } } set_variable = { YAN_auto_green_attrition = 0 } }
+	if = {
+		limit = { NOT = { has_dynamic_modifier = { modifier = YAN_auto_spirit_green } } }
+		add_dynamic_modifier = { modifier = YAN_auto_spirit_green }
+	}
+}
+
+# ============================================================
+# 积甲成山（装甲）
+# ============================================================
+
+# 9 年大导演准备开机！
+YAN_auto_reward_9 = {
+	YAN_auto_ensure_armor = yes
+	add_to_variable = { YAN_auto_armor_atk = 0.05 }
+	add_to_variable = { YAN_auto_armor_def = 0.05 }
+}
+
+# 1 工欲善其事...
+YAN_auto_reward_1 = {
+	YAN_auto_ensure_armor = yes
+	add_to_variable = { YAN_auto_armor_atk = 0.05 }
+	add_to_variable = { YAN_auto_armor_def = 0.05 }
+}
+
+# 2 材料学大跳跃！
+YAN_auto_reward_2 = {
+	YAN_auto_ensure_armor = yes
+	add_to_variable = { YAN_auto_armor_hp = 0.05 }
+	add_to_variable = { YAN_auto_armor_thick = 0.10 }
+	if = {
+		limit = { NOT = { has_idea = YAN_auto_armor_thickness } }
+		add_ideas = YAN_auto_armor_thickness
+	}
+}
+
+# 3 拷打工造司！
+YAN_auto_reward_3 = {
+	YAN_auto_ensure_armor = yes
+	add_to_variable = { YAN_auto_armor_cost = -0.10 }
+}
+
+# 4 玄极巨兵入列！
+YAN_auto_reward_4 = {
+	YAN_auto_ensure_armor = yes
+	add_to_variable = { YAN_auto_armor_atk = 0.05 }
+	add_to_variable = { YAN_auto_armor_def = 0.05 }
+}
+
+# ============================================================
+# 侠之大者（陆军）
+# ============================================================
+
+# 10 重岳宗师淬炼新军！
+YAN_auto_reward_10 = {
+	YAN_auto_ensure_chivalry = yes
+	add_to_variable = { YAN_auto_chiv_hp = 0.10 }
+}
+
+# 5 百灶会议
+YAN_auto_reward_5 = {
+	YAN_auto_ensure_chivalry = yes
+	add_to_variable = { YAN_auto_chiv_supply = -0.05 }
+	add_to_variable = { YAN_auto_chiv_army_xp = 0.10 }
+}
+
+# 6 现代化军事学院
+YAN_auto_reward_6 = {
+	YAN_auto_ensure_chivalry = yes
+	add_to_variable = { YAN_auto_chiv_army_xp = 0.10 }
+	add_to_variable = { YAN_auto_chiv_air_xp = 0.10 }
+}
+
+# 7 斩断歪风邪气！
+YAN_auto_reward_7 = {
+	YAN_auto_ensure_chivalry = yes
+	add_to_variable = { YAN_auto_chiv_org = 0.10 }
+}
+
+# 8 大炎军魂
+YAN_auto_reward_8 = {
+	YAN_auto_ensure_chivalry = yes
+	add_to_variable = { YAN_auto_chiv_reinforce = 0.05 }
+}
+
+# ============================================================
+# 绿色大炎（经济 / 资源）
+# ============================================================
+
+# 19 农学家黍奔走田野！
+YAN_auto_reward_19 = {
+	YAN_auto_ensure_green = yes
+	add_to_variable = { YAN_auto_green_resource = 0.10 }
+}
+
+# 11 大炎土地勘测工程
+YAN_auto_reward_11 = {
+	YAN_auto_ensure_green = yes
+	set_country_flag = YAN_auto_green_land
+}
+
+# 12 源石尘清理实践
+YAN_auto_reward_12 = {
+	YAN_auto_ensure_green = yes
+	add_to_variable = { YAN_auto_green_resource = 0.10 }
+	add_to_variable = { YAN_auto_green_fuel = -0.10 }
+}
+
+# 13 物尽其用开发原则
+YAN_auto_reward_13 = {
+	YAN_auto_ensure_green = yes
+	add_to_variable = { YAN_auto_green_build = -0.10 }
+	add_to_variable = { YAN_auto_green_output = 0.10 }
+}
+
+# 14 国家战略：抵抗邪魔
+YAN_auto_reward_14 = {
+	YAN_auto_ensure_green = yes
+	add_to_variable = { YAN_auto_green_pp = 0.10 }
+	add_to_variable = { YAN_auto_green_attrition = -0.50 }
+}
+
+# ============================================================
+# 绿色大炎 · 每 30 天随机地块 buff
+# ============================================================
+
+YAN_auto_green_monthly = {
+	if = {
+		limit = {
+			has_country_flag = YAN_auto_green_land
+			has_dynamic_modifier = { modifier = YAN_auto_spirit_green }
+		}
+		random_owned_state = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_auto_green_state_buff } } }
+			add_dynamic_modifier = { modifier = YAN_auto_green_state_buff }
+		}
+	}
+}

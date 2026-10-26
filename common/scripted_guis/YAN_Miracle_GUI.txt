@@ -1,46 +1,37 @@
 # ==============================================================================
-#  大炎·奇迹工程 —— scripted_gui
-#  · YAN_Miracle_Entry ：决议分类页里的入口小面板（宿主窗只有 ~502px 宽，控件右边缘留在 488 以内）
-#  · YAN_Miracle_GUI   ：全屏终端面板
-#
-#  ⚠️ 控件名必须与 interface/_ARF_Gui/YAN_Miracle.gui 完全一致：
-#     拼错不报错，只会得到一批死按钮。docs/validate_yan_miracle.cjs 两边对账。
-#  生成物，真源 docs/gen_yan_miracle.cjs
+#  大炎 · 奇迹工程 —— scripted_gui（生成物）
+#  · 独立浮窗：context_type = player_context，靠 yan_mir_open 开关
+#  · 控件名必须与 interface/_ARF_Gui/YAN_Miracle.gui 完全一致
 # ==============================================================================
 
 scripted_gui = {
 
-	# ---------------- 决议页入口 ----------------
+	# 决议分类页里的入口卡（不占独立窗口；主终端仍是 player_context 浮窗）
 	YAN_Miracle_Entry = {
 		context_type = decision_category
-		window_name = "YAN_Miracle_Entry_GUI"
+		window_name = "YAN_Miracle_Entry"
 
-		visible = { always = yes }
+		visible = {
+			always = yes
+		}
 
 		effects = {
-			YAN_Mir_Entry_Open_click = { YAN_Mir_Open = yes }
-			YAN_Mir_Entry_Roster_click = {
-				YAN_Mir_Open = yes
-				YAN_Mir_ShowRoster = yes
+			YAN_Mir_Entry_Btn_click = {
+				set_country_flag = yan_mir_open
+				set_variable = { YAN_mir_view = 0 }
+				YAN_Mir_Sync_Resources = yes
+				YAN_Mir_Sync_Sel = yes
+				YAN_Mir_Recalc_Work = yes
 			}
 		}
 
 		triggers = {
-			YAN_Mir_Entry_Pip_1_visible = { check_variable = { YAN_mir_total > 1 } }
-			YAN_Mir_Entry_Pip_2_visible = { check_variable = { YAN_mir_total > 3 } }
-			YAN_Mir_Entry_Pip_3_visible = { check_variable = { YAN_mir_total > 5 } }
-			YAN_Mir_Entry_Pip_4_visible = { check_variable = { YAN_mir_total > 7 } }
-			YAN_Mir_Entry_Pip_5_visible = { check_variable = { YAN_mir_total > 9 } }
-			YAN_Mir_Entry_Pip_6_visible = { check_variable = { YAN_mir_total > 10 } }
-			YAN_Mir_Entry_Pip_7_visible = { check_variable = { YAN_mir_total > 12 } }
-			YAN_Mir_Entry_Pip_8_visible = { check_variable = { YAN_mir_total > 14 } }
-			YAN_Mir_Entry_Pip_9_visible = { check_variable = { YAN_mir_total > 16 } }
-			YAN_Mir_Entry_Pip_10_visible = { check_variable = { YAN_mir_total > 18 } }
+			YAN_Mir_Entry_Btn_click_enabled = {
+				NOT = { has_country_flag = yan_mir_open }
+			}
 		}
 	}
 
-
-	# ---------------- 全屏终端 ----------------
 	YAN_Miracle_GUI = {
 		context_type = player_context
 		window_name = "YAN_Miracle_Window"
@@ -51,150 +42,848 @@ scripted_gui = {
 		}
 
 		effects = {
-			YAN_Mir_Close_click = { YAN_Mir_Close = yes }
-			YAN_Mir_Prev_click = { YAN_Mir_Prev = yes }
-			YAN_Mir_Next_click = { YAN_Mir_Next = yes }
-			YAN_Mir_Go_click = { YAN_Mir_BreakGround = yes }
-			YAN_Mir_RosterBtn_click = { YAN_Mir_ShowRoster = yes }
-			YAN_Mir_RosterClose_click = { YAN_Mir_ShowDossier = yes }
-			YAN_Mir_Card_1_click = {
-				set_variable = { YAN_mir_proj = 1 }
-				YAN_Mir_SelectProj = yes
+
+			YAN_Mir_Close_click = {
+				clr_country_flag = yan_mir_open
 			}
-			YAN_Mir_Card_2_click = {
-				set_variable = { YAN_mir_proj = 2 }
-				YAN_Mir_SelectProj = yes
+
+			YAN_Mir_Tab0_click = { set_variable = { YAN_mir_view = 0 } }
+			YAN_Mir_Tab1_click = { set_variable = { YAN_mir_view = 1 } }
+			YAN_Mir_Tab2_click = { set_variable = { YAN_mir_view = 2 } }
+			YAN_Mir_Tab3_click = { set_variable = { YAN_mir_view = 3 } }
+
+			YAN_Mir_P1_click = {
+				set_variable = { YAN_mir_sel = 1 }
+				YAN_Mir_Sync_Sel = yes
 			}
-			YAN_Mir_Card_3_click = {
-				set_variable = { YAN_mir_proj = 3 }
-				YAN_Mir_SelectProj = yes
+			YAN_Mir_P2_click = {
+				set_variable = { YAN_mir_sel = 2 }
+				YAN_Mir_Sync_Sel = yes
 			}
-			YAN_Mir_Card_4_click = {
-				set_variable = { YAN_mir_proj = 4 }
-				YAN_Mir_SelectProj = yes
+			YAN_Mir_P3_click = {
+				set_variable = { YAN_mir_sel = 3 }
+				YAN_Mir_Sync_Sel = yes
 			}
-			YAN_Mir_Card_5_click = {
-				set_variable = { YAN_mir_proj = 5 }
-				YAN_Mir_SelectProj = yes
+			YAN_Mir_P4_click = {
+				set_variable = { YAN_mir_sel = 4 }
+				YAN_Mir_Sync_Sel = yes
 			}
-			YAN_Mir_Card_6_click = {
-				set_variable = { YAN_mir_proj = 6 }
-				YAN_Mir_SelectProj = yes
+			YAN_Mir_P5_click = {
+				set_variable = { YAN_mir_sel = 5 }
+				YAN_Mir_Sync_Sel = yes
 			}
-			YAN_Mir_Card_7_click = {
-				set_variable = { YAN_mir_proj = 7 }
-				YAN_Mir_SelectProj = yes
+			YAN_Mir_P6_click = {
+				set_variable = { YAN_mir_sel = 6 }
+				YAN_Mir_Sync_Sel = yes
 			}
-			YAN_Mir_Card_8_click = {
-				set_variable = { YAN_mir_proj = 8 }
-				YAN_Mir_SelectProj = yes
+			YAN_Mir_Start_click = {
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 1 } }
+					if = {
+						limit = { check_variable = { YAN_mir_stat_wall = 1 } }
+						set_variable = { YAN_mir_stat_wall = 2 }
+					}
+					else = {
+						if = {
+							limit = {
+								check_variable = { YAN_mir_stat_wall < 3 }
+								check_variable = { YAN_mir_work_wall > 0 }
+							}
+							set_variable = { YAN_mir_stat_wall = 1 }
+						}
+					}
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 2 } }
+					if = {
+						limit = { check_variable = { YAN_mir_stat_sisui = 1 } }
+						set_variable = { YAN_mir_stat_sisui = 2 }
+					}
+					else = {
+						if = {
+							limit = {
+								check_variable = { YAN_mir_stat_sisui < 3 }
+								check_variable = { YAN_mir_work_sisui > 0 }
+							}
+							set_variable = { YAN_mir_stat_sisui = 1 }
+						}
+					}
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 3 } }
+					if = {
+						limit = { check_variable = { YAN_mir_stat_observatory = 1 } }
+						set_variable = { YAN_mir_stat_observatory = 2 }
+					}
+					else = {
+						if = {
+							limit = {
+								check_variable = { YAN_mir_stat_observatory < 3 }
+								check_variable = { YAN_mir_work_observatory > 0 }
+							}
+							set_variable = { YAN_mir_stat_observatory = 1 }
+						}
+					}
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 4 } }
+					if = {
+						limit = { check_variable = { YAN_mir_stat_canal = 1 } }
+						set_variable = { YAN_mir_stat_canal = 2 }
+					}
+					else = {
+						if = {
+							limit = {
+								check_variable = { YAN_mir_stat_canal < 3 }
+								check_variable = { YAN_mir_work_canal > 0 }
+							}
+							set_variable = { YAN_mir_stat_canal = 1 }
+						}
+					}
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 5 } }
+					if = {
+						limit = { check_variable = { YAN_mir_stat_furnace = 1 } }
+						set_variable = { YAN_mir_stat_furnace = 2 }
+					}
+					else = {
+						if = {
+							limit = {
+								check_variable = { YAN_mir_stat_furnace < 3 }
+								check_variable = { YAN_mir_work_furnace > 0 }
+							}
+							set_variable = { YAN_mir_stat_furnace = 1 }
+						}
+					}
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 6 } }
+					if = {
+						limit = { check_variable = { YAN_mir_stat_palace = 1 } }
+						set_variable = { YAN_mir_stat_palace = 2 }
+					}
+					else = {
+						if = {
+							limit = {
+								check_variable = { YAN_mir_stat_palace < 3 }
+								check_variable = { YAN_mir_work_palace > 0 }
+							}
+							set_variable = { YAN_mir_stat_palace = 1 }
+						}
+					}
+				}
+				YAN_Mir_Sync_Sel = yes
 			}
-			YAN_Mir_Card_9_click = {
-				set_variable = { YAN_mir_proj = 9 }
-				YAN_Mir_SelectProj = yes
+
+			YAN_Mir_WMinus_click = {
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 1 } }
+					subtract_from_variable = { YAN_mir_work_wall = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_wall < 0 } } set_variable = { YAN_mir_work_wall = 0 } }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 2 } }
+					subtract_from_variable = { YAN_mir_work_sisui = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_sisui < 0 } } set_variable = { YAN_mir_work_sisui = 0 } }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 3 } }
+					subtract_from_variable = { YAN_mir_work_observatory = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_observatory < 0 } } set_variable = { YAN_mir_work_observatory = 0 } }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 4 } }
+					subtract_from_variable = { YAN_mir_work_canal = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_canal < 0 } } set_variable = { YAN_mir_work_canal = 0 } }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 5 } }
+					subtract_from_variable = { YAN_mir_work_furnace = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_furnace < 0 } } set_variable = { YAN_mir_work_furnace = 0 } }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 6 } }
+					subtract_from_variable = { YAN_mir_work_palace = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_palace < 0 } } set_variable = { YAN_mir_work_palace = 0 } }
+				}
+				YAN_Mir_Recalc_Work = yes
+				YAN_Mir_Sync_Sel = yes
 			}
+
+			YAN_Mir_WPlus_click = {
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 1 } }
+					add_to_variable = { YAN_mir_work_wall = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_wall > 15 } } set_variable = { YAN_mir_work_wall = 15 } }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 2 } }
+					add_to_variable = { YAN_mir_work_sisui = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_sisui > 12 } } set_variable = { YAN_mir_work_sisui = 12 } }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 3 } }
+					add_to_variable = { YAN_mir_work_observatory = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_observatory > 10 } } set_variable = { YAN_mir_work_observatory = 10 } }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 4 } }
+					add_to_variable = { YAN_mir_work_canal = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_canal > 18 } } set_variable = { YAN_mir_work_canal = 18 } }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 5 } }
+					add_to_variable = { YAN_mir_work_furnace = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_furnace > 14 } } set_variable = { YAN_mir_work_furnace = 14 } }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 6 } }
+					add_to_variable = { YAN_mir_work_palace = 1 }
+					if = { limit = { check_variable = { YAN_mir_work_palace > 12 } } set_variable = { YAN_mir_work_palace = 12 } }
+				}
+				YAN_Mir_Recalc_Work = yes
+				YAN_Mir_Sync_Sel = yes
+			}
+
+			YAN_Mir_WZero_click = {
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 1 } }
+					set_variable = { YAN_mir_work_wall = 0 }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 2 } }
+					set_variable = { YAN_mir_work_sisui = 0 }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 3 } }
+					set_variable = { YAN_mir_work_observatory = 0 }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 4 } }
+					set_variable = { YAN_mir_work_canal = 0 }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 5 } }
+					set_variable = { YAN_mir_work_furnace = 0 }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 6 } }
+					set_variable = { YAN_mir_work_palace = 0 }
+				}
+				YAN_Mir_Recalc_Work = yes
+				YAN_Mir_Sync_Sel = yes
+			}
+
+			YAN_Mir_WMax_click = {
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 1 } }
+					set_variable = { var = YAN_mir_tmp value = num_of_civilian_factories }
+					subtract_from_variable = { YAN_mir_tmp = YAN_mir_work_total }
+					add_to_variable = { YAN_mir_tmp = YAN_mir_work_wall }
+					if = { limit = { check_variable = { YAN_mir_tmp > 15 } } set_variable = { YAN_mir_tmp = 15 } }
+					if = { limit = { check_variable = { YAN_mir_tmp < 0 } } set_variable = { YAN_mir_tmp = 0 } }
+					set_variable = { YAN_mir_work_wall = YAN_mir_tmp }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 2 } }
+					set_variable = { var = YAN_mir_tmp value = num_of_civilian_factories }
+					subtract_from_variable = { YAN_mir_tmp = YAN_mir_work_total }
+					add_to_variable = { YAN_mir_tmp = YAN_mir_work_sisui }
+					if = { limit = { check_variable = { YAN_mir_tmp > 12 } } set_variable = { YAN_mir_tmp = 12 } }
+					if = { limit = { check_variable = { YAN_mir_tmp < 0 } } set_variable = { YAN_mir_tmp = 0 } }
+					set_variable = { YAN_mir_work_sisui = YAN_mir_tmp }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 3 } }
+					set_variable = { var = YAN_mir_tmp value = num_of_civilian_factories }
+					subtract_from_variable = { YAN_mir_tmp = YAN_mir_work_total }
+					add_to_variable = { YAN_mir_tmp = YAN_mir_work_observatory }
+					if = { limit = { check_variable = { YAN_mir_tmp > 10 } } set_variable = { YAN_mir_tmp = 10 } }
+					if = { limit = { check_variable = { YAN_mir_tmp < 0 } } set_variable = { YAN_mir_tmp = 0 } }
+					set_variable = { YAN_mir_work_observatory = YAN_mir_tmp }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 4 } }
+					set_variable = { var = YAN_mir_tmp value = num_of_civilian_factories }
+					subtract_from_variable = { YAN_mir_tmp = YAN_mir_work_total }
+					add_to_variable = { YAN_mir_tmp = YAN_mir_work_canal }
+					if = { limit = { check_variable = { YAN_mir_tmp > 18 } } set_variable = { YAN_mir_tmp = 18 } }
+					if = { limit = { check_variable = { YAN_mir_tmp < 0 } } set_variable = { YAN_mir_tmp = 0 } }
+					set_variable = { YAN_mir_work_canal = YAN_mir_tmp }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 5 } }
+					set_variable = { var = YAN_mir_tmp value = num_of_civilian_factories }
+					subtract_from_variable = { YAN_mir_tmp = YAN_mir_work_total }
+					add_to_variable = { YAN_mir_tmp = YAN_mir_work_furnace }
+					if = { limit = { check_variable = { YAN_mir_tmp > 14 } } set_variable = { YAN_mir_tmp = 14 } }
+					if = { limit = { check_variable = { YAN_mir_tmp < 0 } } set_variable = { YAN_mir_tmp = 0 } }
+					set_variable = { YAN_mir_work_furnace = YAN_mir_tmp }
+				}
+				if = {
+					limit = { check_variable = { YAN_mir_sel = 6 } }
+					set_variable = { var = YAN_mir_tmp value = num_of_civilian_factories }
+					subtract_from_variable = { YAN_mir_tmp = YAN_mir_work_total }
+					add_to_variable = { YAN_mir_tmp = YAN_mir_work_palace }
+					if = { limit = { check_variable = { YAN_mir_tmp > 12 } } set_variable = { YAN_mir_tmp = 12 } }
+					if = { limit = { check_variable = { YAN_mir_tmp < 0 } } set_variable = { YAN_mir_tmp = 0 } }
+					set_variable = { YAN_mir_work_palace = YAN_mir_tmp }
+				}
+				YAN_Mir_Recalc_Work = yes
+				YAN_Mir_Sync_Sel = yes
+			}
+
+			YAN_Mir_Rush_click = {
+				if = {
+					limit = {
+						check_variable = { YAN_mir_rush_cd < 1 }
+						check_variable = { YAN_mir_stat_sel = 1 }
+						has_political_power > 49
+					}
+					add_political_power = -50
+					add_fuel = -20
+					set_variable = { YAN_mir_rush_cd = 1 }
+					if = {
+						limit = { check_variable = { YAN_mir_sel = 1 } }
+						add_to_variable = { YAN_mir_prog_wall = 3 }
+					}
+					if = {
+						limit = { check_variable = { YAN_mir_sel = 2 } }
+						add_to_variable = { YAN_mir_prog_sisui = 3 }
+					}
+					if = {
+						limit = { check_variable = { YAN_mir_sel = 3 } }
+						add_to_variable = { YAN_mir_prog_observatory = 3 }
+					}
+					if = {
+						limit = { check_variable = { YAN_mir_sel = 4 } }
+						add_to_variable = { YAN_mir_prog_canal = 3 }
+					}
+					if = {
+						limit = { check_variable = { YAN_mir_sel = 5 } }
+						add_to_variable = { YAN_mir_prog_furnace = 3 }
+					}
+					if = {
+						limit = { check_variable = { YAN_mir_sel = 6 } }
+						add_to_variable = { YAN_mir_prog_palace = 3 }
+					}
+					YAN_Mir_Finish_Check = yes
+					YAN_Mir_Sync_Sel = yes
+				}
+			}
+
+			YAN_Mir_Up_tax_click = {
+				if = {
+					limit = {
+						check_variable = { YAN_mir_blvl_tax < 6 }
+						has_political_power > 79
+						has_equipment = { support_equipment > 99 }
+					}
+					add_political_power = -80
+					add_equipment_to_stockpile = { type = support_equipment amount = -100 }
+					add_to_variable = { YAN_mir_blvl_tax = 1 }
+				}
+			}
+
+			YAN_Mir_Up_lumber_click = {
+				if = {
+					limit = {
+						check_variable = { YAN_mir_blvl_lumber < 6 }
+						has_political_power > 59
+						has_equipment = { infantry_equipment > 149 }
+					}
+					add_political_power = -60
+					add_equipment_to_stockpile = { type = infantry_equipment amount = -150 }
+					add_to_variable = { YAN_mir_blvl_lumber = 1 }
+				}
+			}
+
+			YAN_Mir_Up_quarry_click = {
+				if = {
+					limit = {
+						check_variable = { YAN_mir_blvl_quarry < 6 }
+						has_political_power > 59
+						has_equipment = { artillery_equipment > 49 }
+					}
+					add_political_power = -60
+					add_equipment_to_stockpile = { type = artillery_equipment amount = -50 }
+					add_to_variable = { YAN_mir_blvl_quarry = 1 }
+				}
+			}
+
+			YAN_Mir_Up_foundry_click = {
+				if = {
+					limit = {
+						check_variable = { YAN_mir_blvl_foundry < 6 }
+						has_political_power > 89
+						has_equipment = { infantry_equipment > 199 }
+					}
+					add_political_power = -90
+					add_equipment_to_stockpile = { type = infantry_equipment amount = -200 }
+					add_to_variable = { YAN_mir_blvl_foundry = 1 }
+				}
+			}
+
+			YAN_Mir_Up_mine_click = {
+				if = {
+					limit = {
+						check_variable = { YAN_mir_blvl_mine < 6 }
+						has_political_power > 119
+						has_equipment = { artillery_equipment > 79 }
+					}
+					add_political_power = -120
+					add_equipment_to_stockpile = { type = artillery_equipment amount = -80 }
+					add_to_variable = { YAN_mir_blvl_mine = 1 }
+				}
+			}
+
+			YAN_Mir_Up_camp_click = {
+				if = {
+					limit = {
+						check_variable = { YAN_mir_blvl_camp < 6 }
+						has_political_power > 49
+						has_equipment = { infantry_equipment > 99 }
+					}
+					add_political_power = -50
+					add_equipment_to_stockpile = { type = infantry_equipment amount = -100 }
+					add_to_variable = { YAN_mir_blvl_camp = 1 }
+				}
+			}
+
+			YAN_Mir_Edict_dx_click = {
+				if = {
+					limit = { has_country_flag = yan_mir_edict_dx }
+					clr_country_flag = yan_mir_edict_dx
+				}
+				else = {
+					if = {
+						limit = {
+							has_political_power > 149
+						}
+						add_political_power = -150
+						set_country_flag = yan_mir_edict_dx
+					}
+				}
+			}
+
+			YAN_Mir_Edict_qt_click = {
+				if = {
+					limit = { has_country_flag = yan_mir_edict_qt }
+					clr_country_flag = yan_mir_edict_qt
+				}
+				else = {
+					if = {
+						limit = {
+							command_power > 9
+						}
+						add_command_power = -10
+						set_country_flag = yan_mir_edict_qt
+					}
+				}
+			}
+
+			YAN_Mir_Edict_wb_click = {
+				if = {
+					limit = { has_country_flag = yan_mir_edict_wb }
+					clr_country_flag = yan_mir_edict_wb
+					remove_dynamic_modifier = { modifier = yan_mir_edict_wb_dm }
+				}
+				else = {
+					if = {
+						limit = {
+							command_power > 14
+						}
+						add_command_power = -15
+						set_country_flag = yan_mir_edict_wb
+						add_dynamic_modifier = { modifier = yan_mir_edict_wb_dm }
+					}
+				}
+			}
+
+			YAN_Mir_Edict_qj_click = {
+				if = {
+					limit = { has_country_flag = yan_mir_edict_qj }
+					clr_country_flag = yan_mir_edict_qj
+				}
+				else = {
+					if = {
+						limit = {
+							has_political_power > 99
+						}
+						add_political_power = -100
+						set_country_flag = yan_mir_edict_qj
+					}
+				}
+			}
+
+			YAN_Mir_Edict_xx_click = {
+				if = {
+					limit = { has_country_flag = yan_mir_edict_xx }
+					clr_country_flag = yan_mir_edict_xx
+					remove_dynamic_modifier = { modifier = yan_mir_edict_xx_dm }
+				}
+				else = {
+					if = {
+						limit = {
+							has_political_power > 119
+						}
+						add_political_power = -120
+						set_country_flag = yan_mir_edict_xx
+						add_dynamic_modifier = { modifier = yan_mir_edict_xx_dm }
+					}
+				}
+			}
+
+			YAN_Mir_Edict_jt_click = {
+				if = {
+					limit = { has_country_flag = yan_mir_edict_jt }
+					clr_country_flag = yan_mir_edict_jt
+				}
+				else = {
+					if = {
+						limit = {
+							has_political_power > 49
+							command_power > 7
+						}
+						add_political_power = -50
+						add_command_power = -8
+						set_country_flag = yan_mir_edict_jt
+					}
+				}
+			}
+
 		}
 
 		triggers = {
-			# ---- 台账浮层：整块压住中栏，与卷宗互斥 ----
-			YAN_Mir_Roster_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_P1_Sel_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_sel = 1 compare = equals } }
+			YAN_Mir_P2_Sel_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_sel = 2 compare = equals } }
+			YAN_Mir_P3_Sel_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_sel = 3 compare = equals } }
+			YAN_Mir_P4_Sel_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_sel = 4 compare = equals } }
+			YAN_Mir_P5_Sel_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_sel = 5 compare = equals } }
+			YAN_Mir_P6_Sel_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_sel = 6 compare = equals } }
+			YAN_Mir_P1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P1_Name_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P1_Code_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P1_Prog_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P1_Stat_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_wall_PipOff1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_wall_PipOff2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_wall_PipOff3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_wall_PipOff4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_wall_PipOff5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_wall_PipOff6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_wall_PipOff7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_wall_PipOff8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_wall_PipOff9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_wall_PipOff10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P2_Name_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P2_Code_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P2_Prog_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P2_Stat_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_sisui_PipOff1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_sisui_PipOff2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_sisui_PipOff3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_sisui_PipOff4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_sisui_PipOff5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_sisui_PipOff6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_sisui_PipOff7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_sisui_PipOff8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_sisui_PipOff9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_sisui_PipOff10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P3_Name_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P3_Code_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P3_Prog_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P3_Stat_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_observatory_PipOff1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_observatory_PipOff2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_observatory_PipOff3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_observatory_PipOff4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_observatory_PipOff5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_observatory_PipOff6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_observatory_PipOff7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_observatory_PipOff8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_observatory_PipOff9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_observatory_PipOff10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P4_Name_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P4_Code_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P4_Prog_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P4_Stat_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_canal_PipOff1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_canal_PipOff2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_canal_PipOff3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_canal_PipOff4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_canal_PipOff5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_canal_PipOff6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_canal_PipOff7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_canal_PipOff8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_canal_PipOff9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_canal_PipOff10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P5_Name_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P5_Code_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P5_Prog_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P5_Stat_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_furnace_PipOff1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_furnace_PipOff2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_furnace_PipOff3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_furnace_PipOff4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_furnace_PipOff5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_furnace_PipOff6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_furnace_PipOff7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_furnace_PipOff8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_furnace_PipOff9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_furnace_PipOff10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P6_Name_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P6_Code_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P6_Prog_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_P6_Stat_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_palace_PipOff1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_palace_PipOff2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_palace_PipOff3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_palace_PipOff4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_palace_PipOff5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_palace_PipOff6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_palace_PipOff7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_palace_PipOff8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_palace_PipOff9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_palace_PipOff10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Art_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Art_Frame_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Dispatch_Bg_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Name_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Code_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Loc_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Prog_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Stat_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Work_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_WMinus_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_WMinus_T_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_WPlus_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_WPlus_T_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_WZero_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_WZero_T_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_WMax_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_WMax_T_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Start_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Start_T_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Rush_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Rush_T_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Sup_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Hint_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Desc_Bg_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Desc_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Stage_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Edict_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Cost_Bg_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_CostT_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Cost_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Reward_Bg_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_RewardT_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Detail_Reward_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_V1_Title_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_V1_Sub_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_tax_Bg_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_tax_Name_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_tax_Lv_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_tax_Desc_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_tax_Out_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_tax_Cost_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_tax_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_tax_T_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_lumber_Bg_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_lumber_Name_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_lumber_Lv_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_lumber_Desc_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_lumber_Out_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_lumber_Cost_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_lumber_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_lumber_T_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_quarry_Bg_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_quarry_Name_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_quarry_Lv_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_quarry_Desc_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_quarry_Out_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_quarry_Cost_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_quarry_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_quarry_T_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_foundry_Bg_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_foundry_Name_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_foundry_Lv_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_foundry_Desc_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_foundry_Out_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_foundry_Cost_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_foundry_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_foundry_T_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_mine_Bg_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_mine_Name_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_mine_Lv_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_mine_Desc_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_mine_Out_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_mine_Cost_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_mine_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_mine_T_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_camp_Bg_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_camp_Name_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_camp_Lv_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_camp_Desc_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_camp_Out_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Bld_camp_Cost_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_camp_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Up_camp_T_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_V2_Title_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_V2_Sub_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_dx_Bg_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_dx_Name_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_dx_Desc_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_dx_Effect_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_dx_Cost_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_dx_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_dx_Btn_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qt_Bg_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qt_Name_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qt_Desc_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qt_Effect_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qt_Cost_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qt_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qt_Btn_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_wb_Bg_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_wb_Name_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_wb_Desc_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_wb_Effect_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_wb_Cost_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_wb_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_wb_Btn_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qj_Bg_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qj_Name_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qj_Desc_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qj_Effect_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qj_Cost_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qj_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_qj_Btn_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_xx_Bg_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_xx_Name_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_xx_Desc_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_xx_Effect_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_xx_Cost_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_xx_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_xx_Btn_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_jt_Bg_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_jt_Name_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_jt_Desc_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_jt_Effect_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_jt_Cost_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_jt_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Edict_jt_Btn_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_V3_Title_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
+			YAN_Mir_V3_Sub_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
+			YAN_Mir_V3_Bg_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
+			YAN_Mir_V3_Rules_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
+			YAN_Mir_Chron_wall_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
+			YAN_Mir_Chron_sisui_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
+			YAN_Mir_Chron_observatory_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
+			YAN_Mir_Chron_canal_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
+			YAN_Mir_Chron_furnace_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
+			YAN_Mir_Chron_palace_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
 
-			# ---- 左栏九张卡片：选中高亮 / 在营角标 / 封顶挂锁 ----
-			YAN_Mir_CardSel_1_visible = { check_variable = { YAN_mir_proj = 1 compare = equals } }
-			YAN_Mir_Badge_1_visible = { has_country_flag = yan_mir_act_guangsha }
-			YAN_Mir_Lock_1_visible = {
-				check_variable = { YAN_mir_proj = 1 compare = equals }
-				YAN_Mir_Proj_Capped = yes
-			}
-			YAN_Mir_CardSel_2_visible = { check_variable = { YAN_mir_proj = 2 compare = equals } }
-			YAN_Mir_Badge_2_visible = { has_country_flag = yan_mir_act_rongjin }
-			YAN_Mir_Lock_2_visible = {
-				check_variable = { YAN_mir_proj = 2 compare = equals }
-				YAN_Mir_Proj_Capped = yes
-			}
-			YAN_Mir_CardSel_3_visible = { check_variable = { YAN_mir_proj = 3 compare = equals } }
-			YAN_Mir_Badge_3_visible = { has_country_flag = yan_mir_act_dujiang }
-			YAN_Mir_Lock_3_visible = {
-				check_variable = { YAN_mir_proj = 3 compare = equals }
-				YAN_Mir_Proj_Capped = yes
-			}
-			YAN_Mir_CardSel_4_visible = { check_variable = { YAN_mir_proj = 4 compare = equals } }
-			YAN_Mir_Badge_4_visible = { has_country_flag = yan_mir_act_zhuancao }
-			YAN_Mir_Lock_4_visible = {
-				check_variable = { YAN_mir_proj = 4 compare = equals }
-				YAN_Mir_Proj_Capped = yes
-			}
-			YAN_Mir_CardSel_5_visible = { check_variable = { YAN_mir_proj = 5 compare = equals } }
-			YAN_Mir_Badge_5_visible = { has_country_flag = yan_mir_act_zhenyue }
-			YAN_Mir_Lock_5_visible = {
-				check_variable = { YAN_mir_proj = 5 compare = equals }
-				YAN_Mir_Proj_Capped = yes
-			}
-			YAN_Mir_CardSel_6_visible = { check_variable = { YAN_mir_proj = 6 compare = equals } }
-			YAN_Mir_Badge_6_visible = { has_country_flag = yan_mir_act_feiyun }
-			YAN_Mir_Lock_6_visible = {
-				check_variable = { YAN_mir_proj = 6 compare = equals }
-				YAN_Mir_Proj_Capped = yes
-			}
-			YAN_Mir_CardSel_7_visible = { check_variable = { YAN_mir_proj = 7 compare = equals } }
-			YAN_Mir_Badge_7_visible = { has_country_flag = yan_mir_act_sitian }
-			YAN_Mir_Lock_7_visible = {
-				check_variable = { YAN_mir_proj = 7 compare = equals }
-				YAN_Mir_Proj_Capped = yes
-			}
-			YAN_Mir_CardSel_8_visible = { check_variable = { YAN_mir_proj = 8 compare = equals } }
-			YAN_Mir_Badge_8_visible = { has_country_flag = yan_mir_act_yumen }
-			YAN_Mir_Lock_8_visible = {
-				check_variable = { YAN_mir_proj = 8 compare = equals }
-				YAN_Mir_Proj_Capped = yes
-			}
-			YAN_Mir_CardSel_9_visible = { check_variable = { YAN_mir_proj = 9 compare = equals } }
-			YAN_Mir_Badge_9_visible = { has_country_flag = yan_mir_act_longmen }
-			YAN_Mir_Lock_9_visible = {
-				check_variable = { YAN_mir_proj = 9 compare = equals }
-				YAN_Mir_Proj_Capped = yes
-			}
+			YAN_Mir_Tab0_Sel_visible = { check_variable = { YAN_mir_view = 0 compare = equals } }
+			YAN_Mir_Tab1_Sel_visible = { check_variable = { YAN_mir_view = 1 compare = equals } }
+			YAN_Mir_Tab2_Sel_visible = { check_variable = { YAN_mir_view = 2 compare = equals } }
+			YAN_Mir_Tab3_Sel_visible = { check_variable = { YAN_mir_view = 3 compare = equals } }
 
-			# ---- 选址要求逐项 ----
-			YAN_Mir_ChkTxt_1_visible = { check_variable = { YAN_mir_chk_1 > 0 } }
-			YAN_Mir_ChkOk_1_visible = { check_variable = { YAN_mir_chk_1 = 1 compare = equals } }
-			YAN_Mir_ChkNo_1_visible = { check_variable = { YAN_mir_chk_1 = 2 compare = equals } }
-			YAN_Mir_ChkTxt_2_visible = { check_variable = { YAN_mir_chk_2 > 0 } }
-			YAN_Mir_ChkOk_2_visible = { check_variable = { YAN_mir_chk_2 = 1 compare = equals } }
-			YAN_Mir_ChkNo_2_visible = { check_variable = { YAN_mir_chk_2 = 2 compare = equals } }
-			YAN_Mir_ChkTxt_3_visible = { check_variable = { YAN_mir_chk_3 > 0 } }
-			YAN_Mir_ChkOk_3_visible = { check_variable = { YAN_mir_chk_3 = 1 compare = equals } }
-			YAN_Mir_ChkNo_3_visible = { check_variable = { YAN_mir_chk_3 = 2 compare = equals } }
 
-			# ---- 翻页 / 开工 ----
-			YAN_Mir_Prev_visible = { check_variable = { YAN_mir_site_count > 1 } }
-			YAN_Mir_Next_visible = { check_variable = { YAN_mir_site_count > 1 } }
-			YAN_Mir_Rank_visible = { check_variable = { YAN_mir_site_count > 0 } }
-			YAN_Mir_Go_visible = { YAN_Mir_Has_Site = yes }
-			YAN_Mir_Go_click_enabled = { YAN_Mir_Can_Start = yes }
-			YAN_Mir_GoTip_visible = { NOT = { YAN_Mir_Can_Start = yes } }
-			YAN_Mir_NoSite_visible = { NOT = { YAN_Mir_Has_Site = yes } }
-			YAN_Mir_StateName_visible = { check_variable = { YAN_mir_site_count > 0 } }
+			YAN_Mir_Start_click_enabled = { YAN_Mir_CanStart = yes }
+			YAN_Mir_WPlus_click_enabled = { YAN_Mir_CanAdd = yes }
+			YAN_Mir_WMinus_click_enabled = { YAN_Mir_CanSub = yes }
+			YAN_Mir_WMax_click_enabled = { YAN_Mir_CanAdd = yes }
+			YAN_Mir_Rush_click_enabled = { YAN_Mir_CanRush = yes }
 
-			# ---- 合格判定两态互斥 ----
-			YAN_Mir_VerdictOk_visible = { check_variable = { YAN_mir_site_ok = 1 compare = equals } }
-			YAN_Mir_VerdictNo_visible = { NOT = { check_variable = { YAN_mir_site_ok = 1 compare = equals } } }
-
-			# ---- 竣工进度刻度 ----
-			YAN_Mir_Pip_1_visible = { check_variable = { YAN_mir_total > 1 } }
-			YAN_Mir_Pip_2_visible = { check_variable = { YAN_mir_total > 3 } }
-			YAN_Mir_Pip_3_visible = { check_variable = { YAN_mir_total > 5 } }
-			YAN_Mir_Pip_4_visible = { check_variable = { YAN_mir_total > 7 } }
-			YAN_Mir_Pip_5_visible = { check_variable = { YAN_mir_total > 9 } }
-			YAN_Mir_Pip_6_visible = { check_variable = { YAN_mir_total > 10 } }
-			YAN_Mir_Pip_7_visible = { check_variable = { YAN_mir_total > 12 } }
-			YAN_Mir_Pip_8_visible = { check_variable = { YAN_mir_total > 14 } }
-			YAN_Mir_Pip_9_visible = { check_variable = { YAN_mir_total > 16 } }
-			YAN_Mir_Pip_10_visible = { check_variable = { YAN_mir_total > 18 } }
+			YAN_Mir_Up_tax_click_enabled = { YAN_Mir_CanUp_tax = yes }
+			YAN_Mir_Up_lumber_click_enabled = { YAN_Mir_CanUp_lumber = yes }
+			YAN_Mir_Up_quarry_click_enabled = { YAN_Mir_CanUp_quarry = yes }
+			YAN_Mir_Up_foundry_click_enabled = { YAN_Mir_CanUp_foundry = yes }
+			YAN_Mir_Up_mine_click_enabled = { YAN_Mir_CanUp_mine = yes }
+			YAN_Mir_Up_camp_click_enabled = { YAN_Mir_CanUp_camp = yes }
+			YAN_Mir_Edict_dx_click_enabled = { YAN_Mir_CanEdict_dx = yes }
+			YAN_Mir_Edict_qt_click_enabled = { YAN_Mir_CanEdict_qt = yes }
+			YAN_Mir_Edict_wb_click_enabled = { YAN_Mir_CanEdict_wb = yes }
+			YAN_Mir_Edict_qj_click_enabled = { YAN_Mir_CanEdict_qj = yes }
+			YAN_Mir_Edict_xx_click_enabled = { YAN_Mir_CanEdict_xx = yes }
+			YAN_Mir_Edict_jt_click_enabled = { YAN_Mir_CanEdict_jt = yes }
+			YAN_Mir_wall_Pip1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_wall > 0 } }
+			YAN_Mir_wall_Pip2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_wall > 10 } }
+			YAN_Mir_wall_Pip3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_wall > 20 } }
+			YAN_Mir_wall_Pip4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_wall > 30 } }
+			YAN_Mir_wall_Pip5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_wall > 40 } }
+			YAN_Mir_wall_Pip6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_wall > 50 } }
+			YAN_Mir_wall_Pip7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_wall > 60 } }
+			YAN_Mir_wall_Pip8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_wall > 70 } }
+			YAN_Mir_wall_Pip9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_wall > 80 } }
+			YAN_Mir_wall_Pip10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_wall > 90 } }
+			YAN_Mir_sisui_Pip1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_sisui > 0 } }
+			YAN_Mir_sisui_Pip2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_sisui > 10 } }
+			YAN_Mir_sisui_Pip3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_sisui > 20 } }
+			YAN_Mir_sisui_Pip4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_sisui > 30 } }
+			YAN_Mir_sisui_Pip5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_sisui > 40 } }
+			YAN_Mir_sisui_Pip6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_sisui > 50 } }
+			YAN_Mir_sisui_Pip7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_sisui > 60 } }
+			YAN_Mir_sisui_Pip8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_sisui > 70 } }
+			YAN_Mir_sisui_Pip9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_sisui > 80 } }
+			YAN_Mir_sisui_Pip10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_sisui > 90 } }
+			YAN_Mir_observatory_Pip1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_observatory > 0 } }
+			YAN_Mir_observatory_Pip2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_observatory > 10 } }
+			YAN_Mir_observatory_Pip3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_observatory > 20 } }
+			YAN_Mir_observatory_Pip4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_observatory > 30 } }
+			YAN_Mir_observatory_Pip5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_observatory > 40 } }
+			YAN_Mir_observatory_Pip6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_observatory > 50 } }
+			YAN_Mir_observatory_Pip7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_observatory > 60 } }
+			YAN_Mir_observatory_Pip8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_observatory > 70 } }
+			YAN_Mir_observatory_Pip9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_observatory > 80 } }
+			YAN_Mir_observatory_Pip10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_observatory > 90 } }
+			YAN_Mir_canal_Pip1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_canal > 0 } }
+			YAN_Mir_canal_Pip2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_canal > 10 } }
+			YAN_Mir_canal_Pip3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_canal > 20 } }
+			YAN_Mir_canal_Pip4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_canal > 30 } }
+			YAN_Mir_canal_Pip5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_canal > 40 } }
+			YAN_Mir_canal_Pip6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_canal > 50 } }
+			YAN_Mir_canal_Pip7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_canal > 60 } }
+			YAN_Mir_canal_Pip8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_canal > 70 } }
+			YAN_Mir_canal_Pip9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_canal > 80 } }
+			YAN_Mir_canal_Pip10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_canal > 90 } }
+			YAN_Mir_furnace_Pip1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_furnace > 0 } }
+			YAN_Mir_furnace_Pip2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_furnace > 10 } }
+			YAN_Mir_furnace_Pip3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_furnace > 20 } }
+			YAN_Mir_furnace_Pip4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_furnace > 30 } }
+			YAN_Mir_furnace_Pip5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_furnace > 40 } }
+			YAN_Mir_furnace_Pip6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_furnace > 50 } }
+			YAN_Mir_furnace_Pip7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_furnace > 60 } }
+			YAN_Mir_furnace_Pip8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_furnace > 70 } }
+			YAN_Mir_furnace_Pip9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_furnace > 80 } }
+			YAN_Mir_furnace_Pip10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_furnace > 90 } }
+			YAN_Mir_palace_Pip1_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_palace > 0 } }
+			YAN_Mir_palace_Pip2_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_palace > 10 } }
+			YAN_Mir_palace_Pip3_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_palace > 20 } }
+			YAN_Mir_palace_Pip4_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_palace > 30 } }
+			YAN_Mir_palace_Pip5_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_palace > 40 } }
+			YAN_Mir_palace_Pip6_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_palace > 50 } }
+			YAN_Mir_palace_Pip7_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_palace > 60 } }
+			YAN_Mir_palace_Pip8_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_palace > 70 } }
+			YAN_Mir_palace_Pip9_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_palace > 80 } }
+			YAN_Mir_palace_Pip10_visible = { check_variable = { YAN_mir_view = 0 compare = equals } check_variable = { YAN_mir_prog_palace > 90 } }
+			YAN_Mir_Edict_dx_On_visible = { check_variable = { YAN_mir_view = 2 compare = equals } has_country_flag = yan_mir_edict_dx }
+			YAN_Mir_Edict_qt_On_visible = { check_variable = { YAN_mir_view = 2 compare = equals } has_country_flag = yan_mir_edict_qt }
+			YAN_Mir_Edict_wb_On_visible = { check_variable = { YAN_mir_view = 2 compare = equals } has_country_flag = yan_mir_edict_wb }
+			YAN_Mir_Edict_qj_On_visible = { check_variable = { YAN_mir_view = 2 compare = equals } has_country_flag = yan_mir_edict_qj }
+			YAN_Mir_Edict_xx_On_visible = { check_variable = { YAN_mir_view = 2 compare = equals } has_country_flag = yan_mir_edict_xx }
+			YAN_Mir_Edict_jt_On_visible = { check_variable = { YAN_mir_view = 2 compare = equals } has_country_flag = yan_mir_edict_jt }
 		}
 
 		properties = {
-			YAN_Mir_Plate = { image = "[YAN_GetMirPlate]" }
+			YAN_Mir_Art = { image = "[YAN_Mir_GetArt]" }
 		}
 	}
 }

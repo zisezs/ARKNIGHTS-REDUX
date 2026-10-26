@@ -1,0 +1,225 @@
+######################################################
+# 大炎自动推进树（NEW_tree）· 猩红剧团式自推
+# 根格 YAN_auto_21 完成后，按拓扑顺序逐格完成；每格 35 天。
+# 由 docs/gen_yan_auto_tree.cjs 生成；勿手改。
+######################################################
+
+YAN_auto_tree_start = {
+	if = {
+		limit = { NOT = { has_country_flag = YAN_auto_tree_done } }
+		YAN_auto_tree_schedule = yes
+	}
+}
+
+YAN_auto_tree_schedule = {
+	if = {
+		limit = { has_country_flag = YAN_auto_tree_done }
+		# 已完成
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_auto_9
+				has_shine_effect_on_focus = YAN_auto_10
+				has_shine_effect_on_focus = YAN_auto_19
+				has_shine_effect_on_focus = YAN_auto_1
+				has_shine_effect_on_focus = YAN_auto_2
+				has_shine_effect_on_focus = YAN_auto_3
+				has_shine_effect_on_focus = YAN_auto_4
+				has_shine_effect_on_focus = YAN_auto_5
+				has_shine_effect_on_focus = YAN_auto_6
+				has_shine_effect_on_focus = YAN_auto_7
+				has_shine_effect_on_focus = YAN_auto_8
+				has_shine_effect_on_focus = YAN_auto_11
+				has_shine_effect_on_focus = YAN_auto_12
+				has_shine_effect_on_focus = YAN_auto_13
+				has_shine_effect_on_focus = YAN_auto_14
+			}
+		}
+		# 已在推进；只有进度旗标过期（事件丢失）时才补结算
+		if = {
+			limit = { NOT = { has_country_flag = YAN_auto_tree_prog } }
+			YAN_auto_tree_step = yes
+		}
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_9 } }
+		activate_shine_on_focus = YAN_auto_9
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_10 } }
+		activate_shine_on_focus = YAN_auto_10
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_19 } }
+		activate_shine_on_focus = YAN_auto_19
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_1 } }
+		activate_shine_on_focus = YAN_auto_1
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_2 } }
+		activate_shine_on_focus = YAN_auto_2
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_3 } }
+		activate_shine_on_focus = YAN_auto_3
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_4 } }
+		activate_shine_on_focus = YAN_auto_4
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_5 } }
+		activate_shine_on_focus = YAN_auto_5
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_6 } }
+		activate_shine_on_focus = YAN_auto_6
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_7 } }
+		activate_shine_on_focus = YAN_auto_7
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_8 } }
+		activate_shine_on_focus = YAN_auto_8
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_11 } }
+		activate_shine_on_focus = YAN_auto_11
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_12 } }
+		activate_shine_on_focus = YAN_auto_12
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_13 } }
+		activate_shine_on_focus = YAN_auto_13
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_auto_14 } }
+		activate_shine_on_focus = YAN_auto_14
+		set_country_flag = { flag = YAN_auto_tree_prog days = 35 value = 1 }
+		country_event = { id = YAN_auto_tree.1 days = 35 }
+	}
+	else = {
+		set_country_flag = YAN_auto_tree_done
+		clr_country_flag = YAN_auto_tree_prog
+	}
+}
+
+YAN_auto_tree_step = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_9 }
+		deactivate_shine_on_focus = YAN_auto_9
+		complete_national_focus = { focus = YAN_auto_9 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_10 }
+		deactivate_shine_on_focus = YAN_auto_10
+		complete_national_focus = { focus = YAN_auto_10 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_19 }
+		deactivate_shine_on_focus = YAN_auto_19
+		complete_national_focus = { focus = YAN_auto_19 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_1 }
+		deactivate_shine_on_focus = YAN_auto_1
+		complete_national_focus = { focus = YAN_auto_1 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_2 }
+		deactivate_shine_on_focus = YAN_auto_2
+		complete_national_focus = { focus = YAN_auto_2 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_3 }
+		deactivate_shine_on_focus = YAN_auto_3
+		complete_national_focus = { focus = YAN_auto_3 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_4 }
+		deactivate_shine_on_focus = YAN_auto_4
+		complete_national_focus = { focus = YAN_auto_4 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_5 }
+		deactivate_shine_on_focus = YAN_auto_5
+		complete_national_focus = { focus = YAN_auto_5 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_6 }
+		deactivate_shine_on_focus = YAN_auto_6
+		complete_national_focus = { focus = YAN_auto_6 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_7 }
+		deactivate_shine_on_focus = YAN_auto_7
+		complete_national_focus = { focus = YAN_auto_7 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_8 }
+		deactivate_shine_on_focus = YAN_auto_8
+		complete_national_focus = { focus = YAN_auto_8 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_11 }
+		deactivate_shine_on_focus = YAN_auto_11
+		complete_national_focus = { focus = YAN_auto_11 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_12 }
+		deactivate_shine_on_focus = YAN_auto_12
+		complete_national_focus = { focus = YAN_auto_12 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_13 }
+		deactivate_shine_on_focus = YAN_auto_13
+		complete_national_focus = { focus = YAN_auto_13 use_side_message = yes }
+	}
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_auto_14 }
+		deactivate_shine_on_focus = YAN_auto_14
+		complete_national_focus = { focus = YAN_auto_14 use_side_message = yes }
+	}
+	YAN_auto_tree_schedule = yes
+}
+
+YAN_auto_tree_resume = {
+	if = {
+		limit = { has_completed_focus = YAN_auto_21 NOT = { has_country_flag = YAN_auto_tree_done } }
+		YAN_auto_tree_schedule = yes
+	}
+}

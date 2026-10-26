@@ -1,0 +1,156 @@
+# ==============================================================================
+#  大炎 · 岁家十二领袖 —— 【国家领袖】特质库
+#
+# 注意：本文件是【国家领袖】特质库（common/country_leader/），
+#       与将领特质（common/unit_leader/，YAN_sui_generals_traits.txt）不是一回事。
+#   · 国家领袖特质的图标只能用块内 `sprite = N`（原版 1..18 的通用领袖图标），
+#     写成 GFX_trait_* 不会报错但会变空图标 —— 见 interface/special_traits/KZM_restoration.gfx 的注释。
+#   · 图标语义按原版用法挑：9=防御/堑壕 15=情报 13=君主/贵族 12=组织者 14=学者/理论
+#     6=后勤 10=经济/工业 8=装甲/合成 16=火炮 5=动员/常备
+#   · 本地化键 = <id> / <id>_desc（ARF_YAN_ShardLeaders_l_simp_chinese.yml）
+#   · 挂载点：common/characters/YAN_sui_generals.txt 各人的 country_leader 块
+#            （决议【皇帝轮流做，今年到我家！】把人推上元首位后生效）
+# ==============================================================================
+
+leader_traits = {
+
+	# ---------------- 重岳 · 守土相 ----------------
+	# 玉门守将做了百年；数值走「守 + 练兵」，和望/年的进攻线错开。
+	YAN_cl_zhongyue = {
+		random = no
+		sprite = 9
+		army_defence_factor = 0.15
+		army_core_defence_factor = 0.20
+		combat_entrenchment = 2
+		dig_in_speed_factor = 0.25
+		experience_gain_army = 0.15
+		training_time_factor = -0.10
+	}
+
+	# ---------------- 望 · 暗相 ----------------
+	# 一百八十一枚黑子、一盘算到三十步后的棋：计划、情报、政治点数；
+	# 代价是人心浮动（他自己也把命押在棋盘上）。
+	YAN_cl_wang = {
+		random = no
+		sprite = 15
+		max_planning = 0.20
+		planning_speed = 0.25
+		intel_network_gain_factor = 0.25
+		enemy_operative_detection_chance = 0.25
+		political_power_factor = 0.15
+		stability_factor = -0.05
+	}
+
+	# ---------------- 令 · 礼相 ----------------
+	YAN_cl_ling = {
+		random = no
+		sprite = 13
+		stability_factor = 0.20
+		stability_weekly = 0.005
+		army_morale_factor = 0.15
+		political_power_factor = 0.10
+		consumer_goods_factor = -0.05
+	}
+
+	# ---------------- 均 · 律相 ----------------
+	# 《炎律》修订者：稳定、反腐、各类法案与任命都便宜。
+	YAN_cl_jun = {
+		random = no
+		sprite = 12
+		stability_factor = 0.15
+		drift_defence_factor = 0.25
+		political_advisor_cost_factor = -0.20
+		mobilization_laws_cost_factor = -0.25
+		trade_laws_cost_factor = -0.25
+		economy_cost_factor = -0.20
+	}
+
+	# ---------------- 颉 · 史相 ----------------
+	YAN_cl_jie = {
+		random = no
+		sprite = 14
+		research_speed_factor = 0.15
+		intel_network_gain_factor = 0.20
+		compliance_growth = 0.20
+		resistance_target = -0.10
+		political_power_factor = 0.10
+	}
+
+	# ---------------- 黍 · 农相 ----------------
+	YAN_cl_shu = {
+		random = no
+		sprite = 6
+		local_resources_factor = 0.25
+		production_speed_infrastructure_factor = 0.25
+		recruitable_population_factor = 0.10
+		supply_consumption_factor = -0.10
+		consumer_goods_factor = -0.05
+	}
+
+	# ---------------- 绩 · 贾相 ----------------
+	YAN_cl_ji = {
+		random = no
+		sprite = 10
+		industrial_capacity_factory = 0.15
+		production_factory_max_efficiency_factor = 0.10
+		production_speed_buildings_factor = 0.10
+		consumer_goods_factor = -0.10
+		political_power_gain = 0.25
+	}
+
+	# ---------------- 易 · 博相 ----------------
+	YAN_cl_yi = {
+		random = no
+		sprite = 8
+		global_building_slots_factor = 0.15
+		production_speed_buildings_factor = 0.15
+		army_core_defence_factor = 0.15
+		dig_in_speed_factor = 0.20
+		research_speed_factor = 0.05
+	}
+
+	# ---------------- 年 · 工相 ----------------
+	# 十二楼五城、洪炉：军工建造与产线。
+	YAN_cl_nian = {
+		random = no
+		sprite = 16
+		production_speed_arms_factory_factor = 0.20
+		production_factory_max_efficiency_factor = 0.10
+		line_change_production_efficiency_factor = 0.15
+		industrial_capacity_factory = 0.10
+		army_infantry_attack_factor = 0.10
+	}
+
+	# ---------------- 方 · 医相 ----------------
+	YAN_cl_fang = {
+		random = no
+		sprite = 5
+		recruitable_population_factor = 0.15
+		casualty_trickleback = 0.10
+		land_reinforce_rate = 0.10
+		army_morale_factor = 0.10
+		stability_factor = 0.05
+	}
+
+	# ---------------- 夕 · 艺相 ----------------
+	YAN_cl_xi = {
+		random = no
+		sprite = 13
+		political_power_factor = 0.15
+		stability_factor = 0.15
+		consumer_goods_factor = -0.10
+		army_defence_factor = 0.10
+		war_support_factor = 0.05
+	}
+
+	# ---------------- 余 · 膳相 ----------------
+	YAN_cl_yu = {
+		random = no
+		sprite = 6
+		supply_consumption_factor = -0.15
+		army_morale_factor = 0.15
+		consumer_goods_factor = -0.10
+		stability_factor = 0.10
+		attrition = -0.10
+	}
+}
