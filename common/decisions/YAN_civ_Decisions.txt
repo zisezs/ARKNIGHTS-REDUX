@@ -77,15 +77,25 @@ YAN_civ_admin_restructure = {
 			custom_trigger_tooltip = {
 				tooltip = YAN_civ_need_shard_tt
 				OR = {
-					has_character = YAN_gen_zhongyue
+					# 年 / 重岳 / 黍：必须由自动推进树对应收尾国策授权（收尾同时 recruit_character）
+					AND = {
+						has_country_flag = YAN_auto_leader_zhongyue
+						has_character = YAN_gen_zhongyue
+					}
 					has_character = YAN_gen_wang
 					has_character = YAN_gen_ling
 					has_character = YAN_gen_jun
 					has_character = YAN_gen_jie
-					has_character = YAN_gen_shu
+					AND = {
+						has_country_flag = YAN_auto_leader_shu
+						has_character = YAN_gen_shu
+					}
 					has_character = YAN_gen_ji
 					has_character = YAN_gen_yi
-					has_character = YAN_gen_nian
+					AND = {
+						has_country_flag = YAN_auto_leader_nian
+						has_character = YAN_gen_nian
+					}
 					has_character = YAN_gen_fang
 					has_character = YAN_gen_xi
 					has_character = YAN_gen_yu

@@ -1,0 +1,204 @@
+# ==============================================================================
+#  大炎 · 开局将领专属特质（不含岁家十二代理人）
+#  · 只经角色定义授予，不进随机将军池
+#  · 图标名 = GFX_trait_<特质 id>，注册在
+#    interface/special_traits/YAN_starting_generals.gfx
+#  · 图标出图器：1_开发资料/docs/gen_yan_starting_general_trait_icons.ps1
+#  · Modifier 键全部沿用 YAN_sui_generals_traits.txt 已实证过的键
+# ==============================================================================
+
+leader_traits = {
+
+	# 左宣辽「四卫不倾」—— 玉门屏风卫的守城经验
+	YAN_gl_pingfeng = {
+		type = field_marshal
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			army_defence_factor = 0.15
+			max_dig_in = 3
+			attrition = -0.15
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 魏彦吾「赤霄照夜」—— 赤霄剑法与天瞠
+	YAN_gl_chixiao = {
+		type = field_marshal
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			breakthrough_factor = 0.15
+			army_attack_factor = 0.1
+			planning_speed = 0.2
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 太合「铁面整军」—— 肃政院副监察御史，整肃军纪
+	YAN_gl_tiebi = {
+		type = corps_commander
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			army_morale_factor = 0.15
+			org_loss_when_moving = -0.2
+			army_org_regain = 0.1
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 陈晖洁「天喟之剑」—— 赤霄剑法
+	YAN_gl_tiankui = {
+		type = corps_commander
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			breakthrough_factor = 0.2
+			army_attack_factor = 0.1
+			movement = 0.1
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 麟青砚「惊蛰雷动」—— 天师府雷法
+	YAN_gl_leifa = {
+		type = corps_commander
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			army_attack_factor = 0.15
+			breakthrough_factor = 0.1
+			experience_gain_factor = 0.2
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 仇白「剑心通明」—— 重岳弟子，姜齐剑客
+	YAN_gl_jianxin = {
+		type = corps_commander
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			breakthrough_factor = 0.15
+			terrain_penalty_reduction = 0.25
+			movement = 0.1
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 云青萍「武典在握」—— 重岳录武官，《武典》执笔
+	YAN_gl_wudian = {
+		type = corps_commander
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			planning_speed = 0.25
+			max_planning = 0.15
+			experience_gain_factor = 0.2
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 星熊「龙门之盾」—— 龙门近卫局
+	YAN_gl_longmen_dun = {
+		type = corps_commander
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			army_defence_factor = 0.2
+			max_dig_in = 2
+			attrition = -0.1
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 老天师「北境薪火」—— 天师府祖师，北境四百年
+	YAN_gl_beiming = {
+		type = corps_commander
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			army_attack_factor = 0.15
+			attrition = -0.1
+			experience_gain_factor = 0.2
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 左乐「明烛巡游」—— 司岁台秉烛人
+	YAN_gl_bingzhu = {
+		type = corps_commander
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			recon_factor = 0.3
+			planning_speed = 0.15
+			out_of_supply_factor = -0.2
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 郑清钺「问霜护道」—— 行裕镖局总镖头
+	YAN_gl_wenshuang = {
+		type = corps_commander
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			supply_consumption_factor = -0.2
+			attrition = -0.15
+			army_speed_factor = 0.1
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+	# 截云「大漠孤锋」—— 阿纳萨弓手
+	YAN_gl_damo = {
+		type = corps_commander
+		trait_type = personality_trait
+		show_in_combat = yes
+
+		modifier = {
+			movement = 0.15
+			terrain_penalty_reduction = 0.3
+			recon_factor = 0.15
+		}
+
+		ai_will_do = { factor = 0 }
+		new_commander_weight = { base = 0 }
+	}
+
+}

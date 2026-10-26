@@ -14,7 +14,7 @@ characters = {
 	#  · 每个 advisor 块都写 allowed = { original_tag = YAN }：
 	#    省略时该顾问可能被其他国家雇走（原版所有 advisor 都显式写 allowed）。
 	#  · 需求表里的「政治顾问 / 军事参谋 / 陆军部长 / 理论家」四档都是开局可雇，
-	#    不要另加国策门槛；只有「特殊顾问」一档需要解锁。
+	#    不要另加国策门槛；2026-10-26 起十二代理人全部开局可雇，不再有国策门槛。
 	#  · ⚠️ 2026-09-21 适配：旧主树被【岁相的荒唐梦】整树替换后，原先挂在 YAN_Agent_* /
 	#    YAN_Chen_Huijie_holds_shudao / YAN_Zuo_Le_takes_office 上的门槛全部落在 .bak 里
 	#    （引擎不读 .bak → has_completed_focus 恒假 → 这 8 个人从此雇不到）。现改挂到**生效**格子上：
@@ -24,11 +24,10 @@ characters = {
 	#        黍  YAN_chc_shu_chu「自大荒奉召」       余 YAN_chc_yu_chu「灶下受命」
 	#      陈晖洁·天喟之剑 → 颉线出山格 YAN_chc_jie_chu「太史阁启遗稿」（书刀随史官出山）
 	#      左乐·秉烛人监正 → 2026-10-25 岁醒树删除后取消前置，开局即可聘用；椿不再加反向锁。
-	#    ⚠️ 2026-10-25：主树 YAN.txt 已删除，下列 YAN_chc_*_chu 门槛随之恒假，
-	#       七位岁片 / 陈晖洁顾问暂不可聘；大重制接回新树后需重新挂门。
-	#      老天师·天师支援参谋挂 YAN_mil_three_armies「懋戒三军」（军事共享树重制版根格）
-	#    出山格本身还要 has_country_flag = yan_sui_pact（【与岁同行】带完成才解锁），
-	#    所以这六位最早也在玩家走完那条约定之后才可能入阁。
+	#    ✅ 2026-10-26：十二代理人顾问的 YAN_chc_*_chu 门槛已全部移除，开局即可雇用；
+	#       十二将领同时写进 history/countries/YAN - Yan.txt 入池。
+	#       陈晖洁·天喟之剑仍保留 YAN_chc_jie_chu 门槛（非十二代理人）。
+	#      老天师·天师支援参谋挂 YAN_mil_three_armies「懋戒三军」（军事共享树重制版根格）。
 	# ================================================================
 
 	YAN_Wei_Zunli = {
@@ -266,6 +265,10 @@ characters = {
 				large = "gfx/leaders/YAN/court/Portrait_YAN_Zuo_Le.dds"
 				small = "gfx/leaders/YAN/court/Portrait_YAN_Zuo_Le_small.dds"
 			}
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Zuo_Le.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Zuo_Le_small.dds"
+			}
 		}
 		advisor = {
 			slot = political_advisor
@@ -279,6 +282,16 @@ characters = {
 			ai_will_do = {
 				factor = 100
 			}
+		}
+		# 2026-10-26 开局将领：司岁台秉烛人
+		corps_commander = {
+			desc = YAN_Zuo_Le_general_desc
+			traits = { YAN_gl_bingzhu camouflage_expert }
+			skill = 6
+			attack_skill = 5
+			defense_skill = 6
+			logistics_skill = 6
+			planning_skill = 8
 		}
 	}
 
@@ -320,6 +333,16 @@ characters = {
 			ai_will_do = {
 				factor = 100
 			}
+		}
+		# 2026-10-26 开局将领：龙门总督 / 炎武，元帅
+		field_marshal = {
+			desc = YAN_Wei_Yanwu_general_desc
+			traits = { YAN_gl_chixiao offensive_doctrine }
+			skill = 8
+			attack_skill = 8
+			defense_skill = 7
+			logistics_skill = 5
+			planning_skill = 8
 		}
 	}
 
@@ -389,6 +412,16 @@ characters = {
 				factor = 100
 			}
 		}
+		# 2026-10-26 开局将领：天师府祖师，北境火法
+		corps_commander = {
+			desc = YAN_Lao_Tianshi_general_desc
+			traits = { YAN_gl_beiming winter_specialist }
+			skill = 8
+			attack_skill = 8
+			defense_skill = 6
+			logistics_skill = 4
+			planning_skill = 7
+		}
 	}
 
 	# 左宣辽 —— 玉门防御参谋 / 陆军部长
@@ -425,6 +458,16 @@ characters = {
 			ai_will_do = {
 				factor = 100
 			}
+		}
+		# 2026-10-26 开局将领：玉门守将，元帅
+		field_marshal = {
+			desc = YAN_Zuo_Xuanliao_general_desc
+			traits = { YAN_gl_pingfeng defensive_doctrine }
+			skill = 8
+			attack_skill = 6
+			defense_skill = 9
+			logistics_skill = 7
+			planning_skill = 7
 		}
 	}
 
@@ -470,6 +513,16 @@ characters = {
 				factor = 100
 			}
 		}
+		# 2026-10-26 开局将领：龙门近卫局，赤霄剑法
+		corps_commander = {
+			desc = YAN_Chen_Huijie_general_desc
+			traits = { YAN_gl_tiankui urban_assault_specialist }
+			skill = 7
+			attack_skill = 8
+			defense_skill = 6
+			logistics_skill = 5
+			planning_skill = 7
+		}
 	}
 
 	# 重岳 —— 练兵参谋 / 代理人顾问（需「解朔之籍」出山格）
@@ -504,9 +557,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_zhongyue_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Chong_Yue_advisor }
 			desc = YAN_Chong_Yue_desc
 			cost = 150
@@ -574,9 +625,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_ling_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Ling_advisor }
 			desc = YAN_Ling_desc
 			cost = 150
@@ -601,9 +650,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_nian_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Nian_advisor }
 			desc = YAN_Nian_desc
 			cost = 150
@@ -628,9 +675,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_xi_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Xi_advisor }
 			desc = YAN_Xi_desc
 			cost = 150
@@ -655,9 +700,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_shu_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Shu_advisor }
 			desc = YAN_Shu_desc
 			cost = 150
@@ -682,9 +725,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_yu_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Yu_advisor }
 			desc = YAN_Yu_desc
 			cost = 150

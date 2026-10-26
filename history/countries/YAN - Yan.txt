@@ -14,6 +14,17 @@ recruit_character = YAN_Wei_Zunli
 recruit_character = YAN_Sun_Zaizhi
 recruit_character = YAN_Li_Shouting
 
+# —— 开局将领（不含岁家十二代理人；2026-10-26 新增）——
+# 左宣辽 / 魏彦吾 / 陈晖洁 / 老天师 / 左乐 已在下方顾问入池，其将领块写在 characters/YAN.txt；
+# 以下七人是纯将领角色。
+recruit_character = YAN_Taihe
+recruit_character = YAN_Lin_Qingyan
+recruit_character = YAN_Qiubai
+recruit_character = YAN_Yun_Qingping
+recruit_character = YAN_Xingxiong
+recruit_character = YAN_Zheng_Qingyue
+recruit_character = YAN_Jieyun
+
 # —— 顾问入池（入池只决定「有没有这个人」，能否雇佣由各 advisor 块的 available 决定）——
 # 政治顾问 / 军事参谋 / 陆军部长 / 理论家：开局即可雇
 recruit_character = YAN_Taifu
@@ -29,12 +40,26 @@ recruit_character = YAN_Chen_Huijie
 recruit_character = YAN_Chong_Yue
 recruit_character = YAN_Jun
 recruit_character = YAN_Ling
-# 特殊顾问：需各自国策解锁
+# 特殊顾问 / 代理人：2026-10-26 取消国策门槛，开局即可雇
 recruit_character = YAN_Zuo_Le
 recruit_character = YAN_Nian
 recruit_character = YAN_Xi
 recruit_character = YAN_Shu
 recruit_character = YAN_Yu
+
+# —— 十二代理人将领（2026-10-26：旧出山格随树删除，改为开局入池）——
+recruit_character = YAN_gen_zhongyue
+recruit_character = YAN_gen_wang
+recruit_character = YAN_gen_ling
+recruit_character = YAN_gen_jun
+recruit_character = YAN_gen_jie
+recruit_character = YAN_gen_shu
+recruit_character = YAN_gen_ji
+recruit_character = YAN_gen_yi
+recruit_character = YAN_gen_nian
+recruit_character = YAN_gen_fang
+recruit_character = YAN_gen_xi
+recruit_character = YAN_gen_yu
 
 add_ideas = {
 	volunteer_only
@@ -210,4 +235,284 @@ set_popularities = {
 set_technology = {
 	arf_dragon_guard_tech = 1
 	arf_shadow_guard_tech = 1
+}
+
+# ================================================================
+#  大炎 · 开局装备设计（2026-10-26 重制）
+#  ------------------------------------------------------------------
+#  设计文档：..\1_开发资料\docs\YAN_开局装备设计_坦克与战机.md
+#
+#  · 型号全部在此 create_equipment_variant；history/units/YAN_Start.txt
+#    的空军联队用 version_name 逐字引用；陆军重装甲营由引擎按底盘
+#    自动取本国最新型号（heavy_tank_chassis_1 → 玄极·镇岳）。
+#  · 模块可用性严格以本文件上方 set_technology 为准：
+#      轻/中/重坦 0~1 级、炮兵 0~1、反坦 0~1、防空 1、
+#      自行火炮 1、自行防空 1；雷达线 MSA/PESA（tank_radio_1/2）；
+#      air_engines + jet_engines_1；airborne_bombs、aa_cannon_1、
+#      aircraft_construction。
+#  · 本模组没有 tank_*_fixed_superstructure_turret /
+#    tank_close_support_gun 的模块定义，固定战斗室不可用，
+#    因此不设「碎壁」坦克歼击车型号（与工部·碎壁 MIO 条目暂不接）。
+#  · 设计取向：城塞推进。重装为矛、自走炮为锤、防空为伞；
+#    不追极速，追装甲、可靠性与持续作战。
+# ================================================================
+
+# ------------------------------------------------------------------
+#  一、重装 —— 天师府·玄极局「玄极」系列（年主持的十二楼五城工艺）
+# ------------------------------------------------------------------
+
+# 玄极·镇岳：制式重坦。焊接装甲 + 重型加农炮 + 自动装填，
+# 走「移动屏风卫」路线，是玄极巨兵实验旅的现役装备。
+create_equipment_variant = {
+	name = "玄极·镇岳"
+	type = heavy_tank_chassis_1
+	parent_version = 0
+	modules = {
+		main_armament_slot = tank_heavy_cannon_2
+		turret_type_slot = tank_heavy_three_man_tank_turret
+		suspension_type_slot = tank_torsion_bar_suspension
+		armor_type_slot = tank_welded_armor
+		engine_type_slot = tank_gasoline_engine
+		special_type_slot_1 = auto_loader
+		special_type_slot_2 = smoke_launchers
+		special_type_slot_3 = tank_radio_2
+		special_type_slot_4 = extra_ammo_storage
+	}
+	upgrades = {
+		tank_nsb_engine_upgrade = 4
+		tank_nsb_armor_upgrade = 5
+	}
+}
+
+# 玄极·开山：上一代重坦，铆接装甲 + 双人炮塔，退居二线与教学部队。
+create_equipment_variant = {
+	name = "玄极·开山"
+	type = heavy_tank_chassis_0
+	parent_version = 0
+	modules = {
+		main_armament_slot = tank_heavy_cannon_1
+		turret_type_slot = tank_heavy_two_man_tank_turret
+		suspension_type_slot = tank_bogie_suspension
+		armor_type_slot = tank_riveted_armor
+		engine_type_slot = tank_gasoline_engine
+		special_type_slot_1 = smoke_launchers
+		special_type_slot_2 = tank_radio_1
+	}
+	upgrades = {
+		tank_nsb_engine_upgrade = 2
+		tank_nsb_armor_upgrade = 1
+	}
+	obsolete = yes
+}
+
+# ------------------------------------------------------------------
+#  二、中装 —— 工部·监造司「镇军」系列（禁军镇与玉门戍卫的骨架）
+# ------------------------------------------------------------------
+
+# 镇军·承天：制式中型。三人炮塔 + 中型加农炮 + 自动装填，
+# 兼顾线列突破与据点争夺，是大炎装甲部队的数量主力。
+create_equipment_variant = {
+	name = "镇军·承天"
+	type = medium_tank_chassis_1
+	parent_version = 0
+	modules = {
+		main_armament_slot = tank_medium_cannon_2
+		turret_type_slot = tank_medium_three_man_tank_turret
+		suspension_type_slot = tank_torsion_bar_suspension
+		armor_type_slot = tank_welded_armor
+		engine_type_slot = tank_gasoline_engine
+		special_type_slot_1 = auto_loader
+		special_type_slot_2 = smoke_launchers
+		special_type_slot_3 = tank_radio_2
+		special_type_slot_4 = extra_ammo_storage
+	}
+	upgrades = {
+		tank_nsb_engine_upgrade = 4
+		tank_nsb_armor_upgrade = 3
+	}
+}
+
+# 镇军·定远：上一代中型，双人炮塔 + 铆接装甲，编入边军守备师。
+create_equipment_variant = {
+	name = "镇军·定远"
+	type = medium_tank_chassis_0
+	parent_version = 0
+	modules = {
+		main_armament_slot = tank_medium_cannon_1
+		turret_type_slot = tank_medium_two_man_tank_turret
+		suspension_type_slot = tank_bogie_suspension
+		armor_type_slot = tank_riveted_armor
+		engine_type_slot = tank_gasoline_engine
+		special_type_slot_1 = smoke_launchers
+		special_type_slot_2 = tank_radio_1
+	}
+	upgrades = {
+		tank_nsb_engine_upgrade = 2
+		tank_nsb_armor_upgrade = 1
+	}
+	obsolete = yes
+}
+
+# ------------------------------------------------------------------
+#  三、轻装 —— 工部·监造司「追风」系列（驰道机动与斥候）
+# ------------------------------------------------------------------
+
+# 追风·驿骑：克里斯蒂悬挂 + 附加油箱，沿驰道快速转场，
+# 负责侦察、追击败退之敌与护道。
+create_equipment_variant = {
+	name = "追风·驿骑"
+	type = light_tank_chassis_1
+	parent_version = 0
+	modules = {
+		main_armament_slot = tank_small_cannon_2
+		turret_type_slot = tank_light_three_man_tank_turret
+		suspension_type_slot = tank_christie_suspension
+		armor_type_slot = tank_welded_armor
+		engine_type_slot = tank_gasoline_engine
+		special_type_slot_1 = smoke_launchers
+		special_type_slot_2 = tank_radio_1
+		special_type_slot_3 = expanded_fuel_tank
+	}
+	upgrades = {
+		tank_nsb_engine_upgrade = 5
+		tank_nsb_armor_upgrade = 2
+	}
+}
+
+# 追风·斥候：上一代轻型，双人炮塔，配属巡防营与龙门近卫局。
+create_equipment_variant = {
+	name = "追风·斥候"
+	type = light_tank_chassis_0
+	parent_version = 0
+	modules = {
+		main_armament_slot = tank_small_cannon_1
+		turret_type_slot = tank_light_two_man_tank_turret
+		suspension_type_slot = tank_bogie_suspension
+		armor_type_slot = tank_riveted_armor
+		engine_type_slot = tank_gasoline_engine
+		special_type_slot_1 = tank_radio_1
+	}
+	upgrades = {
+		tank_nsb_engine_upgrade = 3
+		tank_nsb_armor_upgrade = 1
+	}
+	obsolete = yes
+}
+
+# ------------------------------------------------------------------
+#  四、自行火炮 —— 工部·监造司「霹雳」系列（破坚）
+# ------------------------------------------------------------------
+
+# 霹雳·破坚：重型榴弹炮上车，专为攻坚与拆除工事而生；
+# 与工部 MIO「破坚」条目（软攻 +15 / 硬攻 +5 / 突破 +10）配套。
+create_equipment_variant = {
+	name = "霹雳·破坚"
+	type = sp_artillery_chassis_1
+	parent_version = 0
+	modules = {
+		main_armament_slot = tank_heavy_howitzer_2
+		turret_type_slot = tank_medium_two_man_tank_turret
+		suspension_type_slot = tank_torsion_bar_suspension
+		armor_type_slot = tank_welded_armor
+		engine_type_slot = tank_gasoline_engine
+		special_type_slot_1 = auto_loader
+		special_type_slot_2 = smoke_launchers
+		special_type_slot_3 = tank_radio_2
+	}
+	upgrades = {
+		tank_nsb_engine_upgrade = 3
+		tank_nsb_armor_upgrade = 2
+	}
+}
+
+# ------------------------------------------------------------------
+#  五、自行防空 —— 钦天监·天灾兵器署「钦天」系列（扫云）
+# ------------------------------------------------------------------
+
+# 钦天·扫云：双联防空炮上车，随装甲纵队行进，
+# 为移动城市与野战军撑起低空伞。
+create_equipment_variant = {
+	name = "钦天·扫云"
+	type = sp_aa_chassis_1
+	parent_version = 0
+	modules = {
+		main_armament_slot = tank_anti_air_cannon_2
+		turret_type_slot = tank_medium_three_man_tank_turret
+		suspension_type_slot = tank_torsion_bar_suspension
+		armor_type_slot = tank_riveted_armor
+		engine_type_slot = tank_gasoline_engine
+		special_type_slot_1 = tank_radio_2
+		special_type_slot_2 = smoke_launchers
+		special_type_slot_3 = extra_ammo_storage
+	}
+	upgrades = {
+		tank_nsb_engine_upgrade = 3
+		tank_nsb_armor_upgrade = 2
+	}
+}
+
+# ------------------------------------------------------------------
+#  六、空军 —— 天师府·空间术法司 / 钦天监·天灾兵器署
+#  大炎不点活塞机深度改进，直接用源石喷气机（jet_engines_1）。
+# ------------------------------------------------------------------
+
+# 朱鸟：单发飞翼喷气战斗机。天师府以「阵图」代替机械飞控，
+# 换来极高的盘旋与爬升；航程与防护由空间术法司 MIO 继续加码。
+create_equipment_variant = {
+	name = "朱鸟"
+	type = small_plane_airframe_1
+	modules = {
+		fixed_main_weapon_slot = air_to_air_hardpoint_1
+		fixed_aircraft_cannon_slot = aircraft_cannon_1
+		engine_type_slot = jet_engine_1_1x
+		plane_wingform_slot = flying_wing
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+	}
+}
+
+# 毕方：三角翼近距支援机，低空火力覆盖与战场遮断。
+create_equipment_variant = {
+	name = "毕方"
+	type = small_plane_cas_airframe_1
+	modules = {
+		fixed_main_weapon_slot = air_to_ground_hardpoint_1
+		fixed_aircraft_cannon_slot = aircraft_cannon_1
+		engine_type_slot = jet_engine_1_1x
+		plane_wingform_slot = delta_wing
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+	}
+}
+
+# 雷公：双发后掠翼战术轰炸机，兼顾战场遮断与对城压制。
+create_equipment_variant = {
+	name = "雷公"
+	type = medium_plane_airframe_1
+	modules = {
+		fixed_main_weapon_slot = medium_hardpoint_1
+		fixed_aircraft_cannon_slot = aircraft_cannon_1
+		fixed_auxiliary_weapon_slot_1 = air_to_ground_hardpoint_1
+		engine_type_slot = jet_engine_1_2x
+		plane_wingform_slot = swept_back_wing
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+		special_type_slot_3 = empty
+	}
+}
+
+# 烛龙：四发重型轰炸机，钦天监「天灾兵器署」的镇国之物；
+# 开局未编入百灶空卫，由玩家自行开线生产。
+create_equipment_variant = {
+	name = "烛龙"
+	type = large_plane_airframe_0
+	modules = {
+		fixed_main_weapon_slot = bomb_bay_1
+		engine_type_slot = jet_engine_1_4x
+		plane_wingform_slot = swept_back_wing
+		special_type_slot_1 = empty
+		special_type_slot_2 = empty
+		special_type_slot_3 = empty
+		special_type_slot_4 = empty
+	}
 }

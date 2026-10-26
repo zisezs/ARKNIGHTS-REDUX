@@ -78,11 +78,16 @@ YAN_auto_reward_3 = {
 	add_to_variable = { YAN_auto_armor_cost = -0.10 }
 }
 
-# 4 玄极巨兵入列！
+# 4 玄极巨兵入列！ —— 联动【皇帝轮流做，今年到我家！】：允许年出任领导人
 YAN_auto_reward_4 = {
 	YAN_auto_ensure_armor = yes
 	add_to_variable = { YAN_auto_armor_atk = 0.05 }
 	add_to_variable = { YAN_auto_armor_def = 0.05 }
+	if = {
+		limit = { NOT = { has_character = YAN_gen_nian } }
+		recruit_character = YAN_gen_nian
+	}
+	set_country_flag = YAN_auto_leader_nian
 }
 
 # ============================================================
@@ -115,10 +120,15 @@ YAN_auto_reward_7 = {
 	add_to_variable = { YAN_auto_chiv_org = 0.10 }
 }
 
-# 8 大炎军魂
+# 8 大炎军魂 —— 联动【皇帝轮流做，今年到我家！】：允许重岳出任领导人
 YAN_auto_reward_8 = {
 	YAN_auto_ensure_chivalry = yes
 	add_to_variable = { YAN_auto_chiv_reinforce = 0.05 }
+	if = {
+		limit = { NOT = { has_character = YAN_gen_zhongyue } }
+		recruit_character = YAN_gen_zhongyue
+	}
+	set_country_flag = YAN_auto_leader_zhongyue
 }
 
 # ============================================================
@@ -151,11 +161,16 @@ YAN_auto_reward_13 = {
 	add_to_variable = { YAN_auto_green_output = 0.10 }
 }
 
-# 14 国家战略：抵抗邪魔
+# 14 国家战略：抵抗邪魔 —— 联动【皇帝轮流做，今年到我家！】：允许黍出任领导人
 YAN_auto_reward_14 = {
 	YAN_auto_ensure_green = yes
 	add_to_variable = { YAN_auto_green_pp = 0.10 }
 	add_to_variable = { YAN_auto_green_attrition = -0.50 }
+	if = {
+		limit = { NOT = { has_character = YAN_gen_shu } }
+		recruit_character = YAN_gen_shu
+	}
+	set_country_flag = YAN_auto_leader_shu
 }
 
 # ============================================================

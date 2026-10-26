@@ -1,11 +1,12 @@
 # ==============================================================================
 #  大炎 · 岁家十二将领（【岁相的荒唐梦】出山格招募）
-#  · 不写进 history：完成各线首格「出山」时由国策 recruit_character 入池。
+#  · 2026-10-26：改为写进 history，开局直接 recruit_character 入池（旧出山格已随树删除）。
 #  · 与同名顾问（YAN_Chong_Yue 等）是两套角色，各自有头像与定位。
 #  · 生成器：E:/tmp/sui12/gen_sui_generals.js（勿手改产物）
 #  ⚠ 2026-10-25 本副本（Redux）手工追加：civilian 头像 + country_leader 块
 #    （内政树决议【皇帝轮流做，今年到我家！】要把十二岁片推上国家领导人位）。
-#    母模组那台生成器重跑会抹掉这两项，重跑后需照同样结构补回。
+#  ⚠ 2026-10-26 再手工追加：望/颉/绩/易/方 的 advisor 块（内阁顾问）。
+#    母模组那台生成器重跑会抹掉以上手工内容，重跑后需照同样结构补回。
 # ==============================================================================
 characters = {
 
@@ -49,10 +50,19 @@ characters = {
 			}
 			civilian = {
 				large = "gfx/leaders/YAN/gen/YAN_gen_wang.dds"
-				small = "gfx/leaders/YAN/gen/YAN_gen_wang_small.dds"
+				small = "gfx/interface/yan_court/seat_blank.png"
 			}
 		}
 		gender = male
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_gen_wang_advisor_idea
+			allowed = { original_tag = YAN }
+			traits = { YAN_Wang_advisor }
+			desc = YAN_gen_wang_desc
+			cost = 150
+			ai_will_do = { factor = 100 }
+		}
 		field_marshal = {
 			desc = YAN_gen_wang_desc
 			traits = { YAN_sui_wang skilled_staffer }
@@ -139,10 +149,19 @@ characters = {
 			}
 			civilian = {
 				large = "gfx/leaders/YAN/gen/YAN_gen_jie.dds"
-				small = "gfx/leaders/YAN/gen/YAN_gen_jie_small.dds"
+				small = "gfx/interface/yan_court/seat_blank.png"
 			}
 		}
 		gender = female
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_gen_jie_advisor_idea
+			allowed = { original_tag = YAN }
+			traits = { YAN_Jie_advisor }
+			desc = YAN_gen_jie_desc
+			cost = 150
+			ai_will_do = { factor = 100 }
+		}
 		corps_commander = {
 			desc = YAN_gen_jie_desc
 			traits = { YAN_sui_jie }
@@ -193,16 +212,27 @@ characters = {
 	YAN_gen_ji = {
 		name = YAN_gen_ji
 		portraits = {
+			# 2026-10-26：绩的头像图（YAN_gen_ji*.dds/png）已按要求删除，
+			# 肖像回落到 404 占位，人物与顾问/将领功能保留。
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_ji.dds"
-				small = "gfx/leaders/YAN/gen/YAN_gen_ji_small.dds"
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
 			}
 			civilian = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_ji.dds"
-				small = "gfx/leaders/YAN/gen/YAN_gen_ji_small.dds"
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+				small = "gfx/interface/yan_court/seat_blank.png"
 			}
 		}
 		gender = male
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_gen_ji_advisor_idea
+			allowed = { original_tag = YAN }
+			traits = { YAN_Ji_advisor }
+			desc = YAN_gen_ji_desc
+			cost = 150
+			ai_will_do = { factor = 100 }
+		}
 		corps_commander = {
 			desc = YAN_gen_ji_desc
 			traits = { YAN_sui_ji }
@@ -229,10 +259,19 @@ characters = {
 			}
 			civilian = {
 				large = "gfx/leaders/YAN/gen/YAN_gen_yi.dds"
-				small = "gfx/leaders/YAN/gen/YAN_gen_yi_small.dds"
+				small = "gfx/interface/yan_court/seat_blank.png"
 			}
 		}
 		gender = male
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_gen_yi_advisor_idea
+			allowed = { original_tag = YAN }
+			traits = { YAN_Yi_advisor }
+			desc = YAN_gen_yi_desc
+			cost = 150
+			ai_will_do = { factor = 100 }
+		}
 		corps_commander = {
 			desc = YAN_gen_yi_desc
 			traits = { YAN_sui_yi }
@@ -289,10 +328,19 @@ characters = {
 			}
 			civilian = {
 				large = "gfx/leaders/YAN/gen/YAN_gen_fang.dds"
-				small = "gfx/leaders/YAN/gen/YAN_gen_fang_small.dds"
+				small = "gfx/interface/yan_court/seat_blank.png"
 			}
 		}
 		gender = male
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_gen_fang_advisor_idea
+			allowed = { original_tag = YAN }
+			traits = { YAN_Fang_advisor }
+			desc = YAN_gen_fang_desc
+			cost = 150
+			ai_will_do = { factor = 100 }
+		}
 		corps_commander = {
 			desc = YAN_gen_fang_desc
 			traits = { YAN_sui_fang }
