@@ -2015,23 +2015,32 @@ country_event = {
 		add_ideas = REU_new_uniform
 
 		#塔露拉
-		REU_Talulah = {
-			set_portraits = {
-				civilian = { large = GFX_portrait_REU_Talulah_stage_2 }
-				army = { large = GFX_portrait_REU_Talulah_stage_2 }
+		if = {
+			limit = { NOT = { has_country_flag = Ursus_Unification } }
+			REU_Talulah = {
+				set_portraits = {
+					civilian = { large = GFX_portrait_REU_Talulah_stage_2 }
+					army = { large = GFX_portrait_REU_Talulah_stage_2 }
+				}
 			}
 		}
 		#阿丽娜
-		REU_Alina = {
-			set_portraits = {
-				civilian = { large = GFX_portrait_REU_Alina_stage_2 }
+		if = {
+			limit = { NOT = { has_country_flag = Ursus_Unification } }
+			REU_Alina = {
+				set_portraits = {
+					civilian = { large = GFX_portrait_REU_Alina_stage_2 }
+				}
 			}
 		}
 		#叶莲娜
-		REU_Yelena = {
-			set_portraits = {
-				civilian = { large = GFX_portrait_REU_Yelena_stage_2 }
-				army = { large = GFX_portrait_REU_Yelena_stage_2 }
+		if = {
+			limit = { NOT = { has_country_flag = Ursus_Unification } }
+			REU_Yelena = {
+				set_portraits = {
+					civilian = { large = GFX_portrait_REU_Yelena_stage_2 }
+					army = { large = GFX_portrait_REU_Yelena_stage_2 }
+				}
 			}
 		}
 		#柳德米拉
@@ -2071,5 +2080,71 @@ country_event = {
 
 	option = {
 		name = event_reu.118.a
+	}
+}
+
+
+#塔露拉的肖像
+country_event = {
+	id = event_reu.119
+	title = event_reu.119.t
+	desc = event_reu.119.d
+	picture = GFX_report_event_REU_Talulah_the_Elder_Sister
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.119.a
+		custom_effect_tooltip = REU_change_portraits_Talulah_tt_E1
+		REU_Talulah = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Talulah_E1 }
+				army = { large = GFX_portrait_REU_Talulah_E1 }
+			}
+		}
+	}
+
+	option = {
+		name = event_reu.119.b
+		custom_effect_tooltip = REU_change_portraits_Talulah_tt_E2
+		REU_Talulah = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Talulah_E2 }
+				army = { large = GFX_portrait_REU_Talulah_E2 }
+			}
+		}
+	}
+
+	option = {
+		name = event_reu.119.c
+		custom_effect_tooltip = REU_change_portraits_Talulah_tt_stage_1
+		REU_Talulah = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Talulah_stage_1 }
+				army = { large = GFX_portrait_REU_Talulah_stage_1 }
+			}
+		}
+	}
+
+	option = {
+		name = event_reu.119.e
+		custom_effect_tooltip = REU_change_portraits_Talulah_tt_stage_2
+		REU_Talulah = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Talulah_stage_2 }
+				army = { large = GFX_portrait_REU_Talulah_stage_2 }
+			}
+		}
+	}
+
+	option = {
+		name = event_reu.119.f
+		custom_effect_tooltip = REU_change_portraits_Talulah_tt_stage_3
+		REU_Talulah = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Talulah_stage_3 }
+				army = { large = GFX_portrait_REU_Talulah_stage_3 }
+			}
+		}
 	}
 }

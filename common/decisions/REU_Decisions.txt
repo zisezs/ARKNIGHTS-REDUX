@@ -1263,6 +1263,31 @@ REU_misc_decisions = {
 		}
 	}
 
+	#塔露拉的肖像
+	REU_change_portraits_Talulah = {
+		icon = GFX_decision_eng_trade_unions_demand
+
+		visible = {
+			has_country_leader = {
+				character = REU_Talulah
+				ruling_only = yes
+			}
+		}
+
+		available = {
+			has_country_leader = {
+				character = REU_Talulah
+				ruling_only = yes
+			}
+		}
+
+		complete_effect = {
+			country_event = {
+				id = event_reu.119
+			}
+		}
+	}
+
 	REU_hidden_misc_decisions = {
 		icon = GFX_decision_generic_break_treaty
 
