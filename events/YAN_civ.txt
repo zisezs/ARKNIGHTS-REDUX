@@ -62,10 +62,8 @@ country_event = {
 
 	option = {
 		name = yan_civ.3.o1
-		trigger = {
-			has_character = YAN_gen_zhongyue
-			has_country_flag = YAN_auto_leader_zhongyue
-		}
+		# 2026-10-26 按要求：不再要求 YAN_auto_leader_* 旗标，在朝即可出任
+		trigger = { has_character = YAN_gen_zhongyue }
 		hidden_effect = {
 			if = {
 				limit = {
@@ -78,67 +76,8 @@ country_event = {
 	}
 
 	option = {
-		name = yan_civ.3.o2
-		trigger = { has_character = YAN_gen_wang }
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_country_leader = { character = YAN_gen_wang ruling_only = yes } }
-				}
-				retire_country_leader = yes
-			}
-		}
-		promote_character = { character = YAN_gen_wang ideology = eastern_authoritarianism_subtype }
-	}
-
-	option = {
-		name = yan_civ.3.o3
-		trigger = { has_character = YAN_gen_ling }
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_country_leader = { character = YAN_gen_ling ruling_only = yes } }
-				}
-				retire_country_leader = yes
-			}
-		}
-		promote_character = { character = YAN_gen_ling ideology = eastern_authoritarianism_subtype }
-	}
-
-	option = {
-		name = yan_civ.3.o4
-		trigger = { has_character = YAN_gen_jun }
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_country_leader = { character = YAN_gen_jun ruling_only = yes } }
-				}
-				retire_country_leader = yes
-			}
-		}
-		promote_character = { character = YAN_gen_jun ideology = eastern_authoritarianism_subtype }
-	}
-
-	option = {
-		name = yan_civ.3.o5
-		trigger = { has_character = YAN_gen_jie }
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_country_leader = { character = YAN_gen_jie ruling_only = yes } }
-				}
-				retire_country_leader = yes
-			}
-		}
-		promote_character = { character = YAN_gen_jie ideology = eastern_authoritarianism_subtype }
-	}
-
-	option = {
 		name = yan_civ.3.o6
-		trigger = {
-			has_character = YAN_gen_shu
-			has_country_flag = YAN_auto_leader_shu
-		}
+		trigger = { has_character = YAN_gen_shu }
 		hidden_effect = {
 			if = {
 				limit = {
@@ -151,39 +90,8 @@ country_event = {
 	}
 
 	option = {
-		name = yan_civ.3.o7
-		trigger = { has_character = YAN_gen_ji }
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_country_leader = { character = YAN_gen_ji ruling_only = yes } }
-				}
-				retire_country_leader = yes
-			}
-		}
-		promote_character = { character = YAN_gen_ji ideology = eastern_authoritarianism_subtype }
-	}
-
-	option = {
-		name = yan_civ.3.o8
-		trigger = { has_character = YAN_gen_yi }
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_country_leader = { character = YAN_gen_yi ruling_only = yes } }
-				}
-				retire_country_leader = yes
-			}
-		}
-		promote_character = { character = YAN_gen_yi ideology = eastern_authoritarianism_subtype }
-	}
-
-	option = {
 		name = yan_civ.3.o9
-		trigger = {
-			has_character = YAN_gen_nian
-			has_country_flag = YAN_auto_leader_nian
-		}
+		trigger = { has_character = YAN_gen_nian }
 		hidden_effect = {
 			if = {
 				limit = {
@@ -195,49 +103,7 @@ country_event = {
 		promote_character = { character = YAN_gen_nian ideology = eastern_authoritarianism_subtype }
 	}
 
-	option = {
-		name = yan_civ.3.o10
-		trigger = { has_character = YAN_gen_fang }
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_country_leader = { character = YAN_gen_fang ruling_only = yes } }
-				}
-				retire_country_leader = yes
-			}
-		}
-		promote_character = { character = YAN_gen_fang ideology = eastern_authoritarianism_subtype }
-	}
-
-	option = {
-		name = yan_civ.3.o11
-		trigger = { has_character = YAN_gen_xi }
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_country_leader = { character = YAN_gen_xi ruling_only = yes } }
-				}
-				retire_country_leader = yes
-			}
-		}
-		promote_character = { character = YAN_gen_xi ideology = eastern_authoritarianism_subtype }
-	}
-
-	option = {
-		name = yan_civ.3.o12
-		trigger = { has_character = YAN_gen_yu }
-		hidden_effect = {
-			if = {
-				limit = {
-					NOT = { has_country_leader = { character = YAN_gen_yu ruling_only = yes } }
-				}
-				retire_country_leader = yes
-			}
-		}
-		promote_character = { character = YAN_gen_yu ideology = eastern_authoritarianism_subtype }
-	}
-
-	# 兜底：十二人都未入朝时也能关掉这封信
+	# 兜底：三人（重岳/年/黍）都未入朝时也能关掉这封信
 	option = {
 		name = yan_civ.3.oz
 		ai_chance = { factor = 0 }

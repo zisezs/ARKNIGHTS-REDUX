@@ -73,38 +73,22 @@ YAN_civ_admin_restructure = {
 		}
 
 		available = {
-			has_government = authoritarianism
+			# 2026-10-27：只允许重岳、年、黍三位出任领导人，其余岁片不出现在选项里。
+			# 三人由自动推进树各自收尾国策 recruit_character 入朝，入朝后即可推他上台。
 			custom_trigger_tooltip = {
 				tooltip = YAN_civ_need_shard_tt
 				OR = {
-					# 年 / 重岳 / 黍：必须由自动推进树对应收尾国策授权（收尾同时 recruit_character）
-					AND = {
-						has_country_flag = YAN_auto_leader_zhongyue
-						has_character = YAN_gen_zhongyue
-					}
-					has_character = YAN_gen_wang
-					has_character = YAN_gen_ling
-					has_character = YAN_gen_jun
-					has_character = YAN_gen_jie
-					AND = {
-						has_country_flag = YAN_auto_leader_shu
-						has_character = YAN_gen_shu
-					}
-					has_character = YAN_gen_ji
-					has_character = YAN_gen_yi
-					AND = {
-						has_country_flag = YAN_auto_leader_nian
-						has_character = YAN_gen_nian
-					}
-					has_character = YAN_gen_fang
-					has_character = YAN_gen_xi
-					has_character = YAN_gen_yu
+					has_character = YAN_gen_zhongyue
+					has_character = YAN_gen_nian
+					has_character = YAN_gen_shu
 				}
 			}
 		}
 
 		cost = 0
-		cooldown = 180
+		# 2026-10-26 修复：cooldown 不是决议的合法键（error.log: Unexpected token: cooldown
+		# near line 107 → 整个决议块被丢弃，游戏内看不到本决议）。可重复决议用 days_re_enable。
+		days_re_enable = 180
 
 		complete_effect = {
 			country_event = { id = yan_civ.3 days = 1 }
