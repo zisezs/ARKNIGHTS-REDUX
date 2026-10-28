@@ -166,8 +166,14 @@ URS_rf_weekly = {
 	clamp_variable = { var = URS_rf_e_people min = 0 max = 100 }
 	clamp_variable = { var = URS_rf_e_resource min = 0 max = 100 }
 
-	# 「某条线做完了」不另存旗标，一律拿 check_variable = { URS_rf_p_xxx < 100 } 的反面判，
-	# 面板的「已完成」、反对派决议的 cancel_trigger 都是这么读的。
+	# ---- 改革线满 100：换成完成档精神（一次性，URS_rf_done_* 防重复）----
+	URS_rf_finish_state = yes
+	URS_rf_finish_army = yes
+	URS_rf_finish_people = yes
+	URS_rf_finish_resource = yes
+
+	# 面板的「已完成」与反对派决议的 cancel_trigger 仍按
+	# check_variable = { URS_rf_p_xxx < 100 } 的反面判；done 旗标只防换档重复。
 
 	# ---- 反对派蛰伏期 ----
 	if = {
@@ -185,6 +191,190 @@ URS_rf_weekly = {
 	if = {
 		limit = { check_variable = { URS_rf_opp_bur_lock > 0 } }
 		subtract_from_variable = { URS_rf_opp_bur_lock = 1 }
+	}
+}
+
+
+# ---------------------------------------------------------------------------
+# 改革线满 100 的收口：把该线的负面精神换成「完成档」
+#   · 每条线只跑一次（URS_rf_done_* 旗标）
+#   · 玩家中途可能已经换过档，所以从最高档往下逐个匹配
+#   · 万一某个精神已被别的脚本摘掉，else 兜底仍然补上完成档
+# ---------------------------------------------------------------------------
+URS_rf_finish_state = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_rf_done_state }
+			NOT = { check_variable = { URS_rf_p_state < 100 } }
+		}
+		set_country_flag = URS_rf_done_state
+		if = {
+			limit = { has_idea = URS_dr_orders_stop_at_the_gate_t5 }
+			swap_ideas = {
+				remove_idea = URS_dr_orders_stop_at_the_gate_t5
+				add_idea = URS_dr_orders_delivered
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_orders_stop_at_the_gate_t4 }
+			swap_ideas = {
+				remove_idea = URS_dr_orders_stop_at_the_gate_t4
+				add_idea = URS_dr_orders_delivered
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_orders_stop_at_the_gate_t3 }
+			swap_ideas = {
+				remove_idea = URS_dr_orders_stop_at_the_gate_t3
+				add_idea = URS_dr_orders_delivered
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_orders_stop_at_the_gate_t2 }
+			swap_ideas = {
+				remove_idea = URS_dr_orders_stop_at_the_gate_t2
+				add_idea = URS_dr_orders_delivered
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_orders_stop_at_the_gate }
+			swap_ideas = {
+				remove_idea = URS_dr_orders_stop_at_the_gate
+				add_idea = URS_dr_orders_delivered
+			}
+		}
+		else = {
+			add_idea = URS_dr_orders_delivered
+		}
+	}
+}
+
+URS_rf_finish_army = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_rf_done_army }
+			NOT = { check_variable = { URS_rf_p_army < 100 } }
+		}
+		set_country_flag = URS_rf_done_army
+		if = {
+			limit = { has_idea = URS_dr_nine_armies_seven_banners_t2 }
+			swap_ideas = {
+				remove_idea = URS_dr_nine_armies_seven_banners_t2
+				add_idea = URS_dr_nine_armies_one
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_nine_armies_seven_banners }
+			swap_ideas = {
+				remove_idea = URS_dr_nine_armies_seven_banners
+				add_idea = URS_dr_nine_armies_one
+			}
+		}
+		else = {
+			add_idea = URS_dr_nine_armies_one
+		}
+	}
+}
+
+URS_rf_finish_people = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_rf_done_people }
+			NOT = { check_variable = { URS_rf_p_people < 100 } }
+		}
+		set_country_flag = URS_rf_done_people
+		if = {
+			limit = { has_idea = URS_dr_afterwave_of_rebellion_t4 }
+			swap_ideas = {
+				remove_idea = URS_dr_afterwave_of_rebellion_t4
+				add_idea = URS_dr_dawn_of_ursus
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_afterwave_of_rebellion_t3 }
+			swap_ideas = {
+				remove_idea = URS_dr_afterwave_of_rebellion_t3
+				add_idea = URS_dr_dawn_of_ursus
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_afterwave_of_rebellion_t2 }
+			swap_ideas = {
+				remove_idea = URS_dr_afterwave_of_rebellion_t2
+				add_idea = URS_dr_dawn_of_ursus
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_afterwave_of_rebellion }
+			swap_ideas = {
+				remove_idea = URS_dr_afterwave_of_rebellion
+				add_idea = URS_dr_dawn_of_ursus
+			}
+		}
+		else = {
+			add_idea = URS_dr_dawn_of_ursus
+		}
+	}
+}
+
+# 资源线有两个精神（矿脉枯竭 / 能源配给制），一次收口两条都换。
+URS_rf_finish_resource = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = URS_rf_done_resource }
+			NOT = { check_variable = { URS_rf_p_resource < 100 } }
+		}
+		set_country_flag = URS_rf_done_resource
+
+		if = {
+			limit = { has_idea = URS_dr_originium_depletion_t3 }
+			swap_ideas = {
+				remove_idea = URS_dr_originium_depletion_t3
+				add_idea = URS_dr_veins_revived
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_originium_depletion_t2 }
+			swap_ideas = {
+				remove_idea = URS_dr_originium_depletion_t2
+				add_idea = URS_dr_veins_revived
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_originium_depletion }
+			swap_ideas = {
+				remove_idea = URS_dr_originium_depletion
+				add_idea = URS_dr_veins_revived
+			}
+		}
+		else = {
+			add_idea = URS_dr_veins_revived
+		}
+
+		if = {
+			limit = { has_idea = URS_dr_energy_rationing_t3 }
+			swap_ideas = {
+				remove_idea = URS_dr_energy_rationing_t3
+				add_idea = URS_dr_lights_on
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_energy_rationing_t2 }
+			swap_ideas = {
+				remove_idea = URS_dr_energy_rationing_t2
+				add_idea = URS_dr_lights_on
+			}
+		}
+		else_if = {
+			limit = { has_idea = URS_dr_energy_rationing }
+			swap_ideas = {
+				remove_idea = URS_dr_energy_rationing
+				add_idea = URS_dr_lights_on
+			}
+		}
+		else = {
+			add_idea = URS_dr_lights_on
+		}
 	}
 }
 

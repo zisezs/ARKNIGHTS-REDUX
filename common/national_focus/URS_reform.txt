@@ -2,13 +2,41 @@
 ## 乌萨斯帝国 · 改革国策树（阶段二）「回到起点」
 ######################
 #
-# 生成器：E:/tmp/lud/gen_urs_trees.cjs（改数据表重跑，勿手改产物）
+# 生成器：E:/tmp/lud/gen_urs_trees.cjs（只产 id / 图标 / cost / 坐标 / 前置）
+#
+# 【2026-10-28 效果手填】骨架来自生成器，53 格效果已手填。
+#   重跑生成器会整体覆盖本文件、把所有 completion_reward 抹掉——不要再跑。
+#
 # 布局：绝对坐标 x/y，1 行 = 1 级，根节点 回到起点 在 (0,0)。
-# 本轮只落 id / 名称 / 图标 / cost / 坐标 / 前置；desc 与效果留空待填。
+# 骨架只落 id / 名称 / 图标 / cost / 坐标 / 前置；desc 未写（沿用既有口径），
+# 效果写在各格 completion_reward 内。
 # 图标暂用原版 GFX_goal_generic_*（其余图标组待接新图）。
 #
 # 军事簇 / 经济簇 / 发展度簇（共 75 条 shared_focus）挂在本树下方 y = 20..34，
 # 与原政治树同址，本文件只做引用，定义仍在各自的 _shared.txt 里。
+#
+# ==========================================================
+# 【民族精神容器】URS_ursus_shall_not_die「乌萨斯还不能死！」
+# ----------------------------------------------------------
+#   旧政治树停用后这个容器没有入口；本树根节点「回到起点」负责挂上。
+#   阶段一「拨动指针」若已挂过，根节点用 has_dynamic_modifier 判重、不重置变量，
+#   阶段一累积的「改革遗产」原样带进阶段二。
+#
+# 【四支线 → 容器变量映射】（每格写 1~2 条 add_to_variable，均带 tooltip）
+#   民生：stability / consumer / opinion / compliance / fuel
+#   军事：attack / conscription / ws / suppress
+#   政治：pp / cost / intel / suppress / stability
+#   工业：industry / research / build / fuel
+#
+# 【满档合计（实装值，含阶段一「滴答」预置的 stability +0.05 / industry +0.05）】
+#   stability +0.23   consumer -0.12   opinion +0.12   compliance +0.24
+#   fuel      +0.16   attack   +0.24   conscription +0.21   ws +0.24
+#   suppress  -0.22   pp +0.21   cost -0.10   intel +0.25
+#   industry  +0.25   research +0.21   build +0.24
+#
+#   分配原则：同一支线内按键轮转，不重复堆一个键；单个国策最多两条。
+#   全部键位绝对值 ≤ 25%（intel 与 industry 正好卡在 25%）。
+# ==========================================================
 #
 focus_tree = {
 	id = URS_return_to_start
@@ -79,13 +107,44 @@ focus_tree = {
 	shared_focus = URS_eco_consumer_goods
 
 
+	# 回到起点（2026-10-28 补：阶段二根节点，挂上「乌萨斯还不能死！」）
 	focus = {
 		id = URS_rt_back_to_start
 		icon = GFX_goal_generic_national_unity
 		cost = 5
 		x = 0
 		y = 0
-		# desc / completion_reward 待填
+
+		completion_reward = {
+			add_political_power = 50
+			set_country_flag = URS_reform_phase2_started
+			# 阶段一「拨动指针」可能已经挂过这个容器；已挂就不重置变量，
+			# 让「改革遗产」原样带进阶段二。
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = URS_ursus_shall_not_die } } }
+				add_dynamic_modifier = { modifier = URS_ursus_shall_not_die }
+				set_variable = { URS_shall_not_die_stability_var = 0 }
+				set_variable = { URS_shall_not_die_pp_var = 0 }
+				set_variable = { URS_shall_not_die_industry_var = 0 }
+				set_variable = { URS_shall_not_die_consumer_var = 0 }
+				set_variable = { URS_shall_not_die_research_var = 0 }
+				set_variable = { URS_shall_not_die_opinion_var = 0 }
+				set_variable = { URS_shall_not_die_intel_var = 0 }
+				set_variable = { URS_shall_not_die_ws_var = 0 }
+				set_variable = { URS_shall_not_die_attack_var = 0 }
+				set_variable = { URS_shall_not_die_suppress_var = 0 }
+				set_variable = { URS_shall_not_die_cost_var = 0 }
+				set_variable = { URS_shall_not_die_conscription_var = 0 }
+				set_variable = { URS_shall_not_die_build_var = 0 }
+				set_variable = { URS_shall_not_die_fuel_var = 0 }
+				set_variable = { URS_shall_not_die_compliance_var = 0 }
+				custom_effect_tooltip = URS_rt_back_to_start_container_tt
+			}
+			else = {
+				custom_effect_tooltip = URS_rt_back_to_start_keep_tt
+			}
+			custom_effect_tooltip = URS_rt_back_to_start_tt
+		}
 	}
 
 	focus = {
@@ -97,7 +156,13 @@ focus_tree = {
 		}
 		x = -6
 		y = 1
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.01 }
+			custom_effect_tooltip = URS_tt_rt_stability_p1
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_consumer_m2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -109,7 +174,13 @@ focus_tree = {
 		}
 		x = 0
 		y = 1
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_intel_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_rt_intel_p5
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_pp_p3
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -121,7 +192,13 @@ focus_tree = {
 		}
 		x = 8
 		y = 1
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_industry_p3
+			add_to_variable = { var = URS_shall_not_die_build_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_build_p4
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -133,7 +210,13 @@ focus_tree = {
 		}
 		x = -6
 		y = 2
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_compliance_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_compliance_p4
+			add_to_variable = { var = URS_shall_not_die_fuel_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_fuel_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -145,7 +228,13 @@ focus_tree = {
 		}
 		x = 0
 		y = 2
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_pp_p3
+			add_to_variable = { var = URS_shall_not_die_cost_var value = -0.05 }
+			custom_effect_tooltip = URS_tt_rt_cost_m5
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -157,7 +246,13 @@ focus_tree = {
 		}
 		x = 8
 		y = 2
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_build_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_build_p4
+			add_to_variable = { var = URS_shall_not_die_research_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_research_p3
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -169,7 +264,21 @@ focus_tree = {
 		}
 		x = -6
 		y = 3
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_opinion_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_opinion_p2
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.01 }
+			custom_effect_tooltip = URS_tt_rt_stability_p1
+			if = {
+				limit = { has_idea = URS_dr_shadow_of_the_late_emperor }
+				swap_ideas = {
+					remove_idea = URS_dr_shadow_of_the_late_emperor
+					add_idea = URS_dr_new_dawn
+				}
+			}
+			custom_effect_tooltip = URS_rt_smash_monument_shadow_tt
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -181,7 +290,13 @@ focus_tree = {
 		}
 		x = 0
 		y = 3
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_pp_p3
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_stability_p3
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -193,7 +308,13 @@ focus_tree = {
 		}
 		x = 5
 		y = 3
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_research_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_research_p3
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_industry_p3
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -205,7 +326,13 @@ focus_tree = {
 		}
 		x = 8
 		y = 3
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_build_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_build_p4
+			add_to_variable = { var = URS_shall_not_die_fuel_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_fuel_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -217,7 +344,13 @@ focus_tree = {
 		}
 		x = 11
 		y = 3
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_industry_p3
+			add_to_variable = { var = URS_shall_not_die_fuel_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_fuel_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -229,7 +362,13 @@ focus_tree = {
 		}
 		x = -9
 		y = 4
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_compliance_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_compliance_p4
+			add_to_variable = { var = URS_shall_not_die_fuel_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_fuel_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -241,7 +380,13 @@ focus_tree = {
 		}
 		x = -6
 		y = 4
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_attack_p3
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_ws_p3
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -253,7 +398,13 @@ focus_tree = {
 		}
 		x = -4
 		y = 4
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_conscription_p3
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_attack_p3
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -265,7 +416,13 @@ focus_tree = {
 		}
 		x = -2
 		y = 4
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_stability_p3
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_pp_p3
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -277,7 +434,13 @@ focus_tree = {
 		}
 		x = 2
 		y = 4
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_pp_p3
+			add_to_variable = { var = URS_shall_not_die_cost_var value = -0.05 }
+			custom_effect_tooltip = URS_tt_rt_cost_m5
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -289,7 +452,13 @@ focus_tree = {
 		}
 		x = 5
 		y = 4
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_build_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_build_p4
+			add_to_variable = { var = URS_shall_not_die_research_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_research_p3
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -301,7 +470,13 @@ focus_tree = {
 		}
 		x = 8
 		y = 4
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_research_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_research_p3
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_industry_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -313,7 +488,13 @@ focus_tree = {
 		}
 		x = 11
 		y = 4
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_research_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_research_p3
+			add_to_variable = { var = URS_shall_not_die_build_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_build_p4
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -325,7 +506,13 @@ focus_tree = {
 		}
 		x = -9
 		y = 5
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_conscription_p3
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -340,7 +527,13 @@ focus_tree = {
 		}
 		x = -6
 		y = 5
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_attack_p3
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_ws_p3
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -352,7 +545,13 @@ focus_tree = {
 		}
 		x = 0
 		y = 5
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_stability_p3
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -364,7 +563,13 @@ focus_tree = {
 		}
 		x = 8
 		y = 5
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_industry_p3
+			add_to_variable = { var = URS_shall_not_die_build_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_build_p4
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -376,7 +581,13 @@ focus_tree = {
 		}
 		x = 11
 		y = 5
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_research_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_research_p3
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_industry_p3
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -388,7 +599,13 @@ focus_tree = {
 		}
 		x = -6
 		y = 6
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_consumer_m2
+			add_to_variable = { var = URS_shall_not_die_opinion_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_opinion_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -400,7 +617,13 @@ focus_tree = {
 		}
 		x = 0
 		y = 6
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_intel_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_rt_intel_p5
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -418,7 +641,13 @@ focus_tree = {
 		}
 		x = 8
 		y = 6
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_industry_p3
+			add_to_variable = { var = URS_shall_not_die_research_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_research_p3
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -430,7 +659,13 @@ focus_tree = {
 		}
 		x = -1
 		y = 7
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_intel_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_rt_intel_p5
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -442,7 +677,13 @@ focus_tree = {
 		}
 		x = 1
 		y = 7
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_consumer_m2
+			add_to_variable = { var = URS_shall_not_die_fuel_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_fuel_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -454,7 +695,13 @@ focus_tree = {
 		}
 		x = -3
 		y = 8
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_conscription_p3
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_attack_p3
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -466,7 +713,13 @@ focus_tree = {
 		}
 		x = -1
 		y = 8
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_intel_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_rt_intel_p5
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_pp_p3
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -478,7 +731,13 @@ focus_tree = {
 		}
 		x = 2
 		y = 8
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_intel_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_rt_intel_p5
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -490,7 +749,13 @@ focus_tree = {
 		}
 		x = 4
 		y = 8
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_consumer_m2
+			add_to_variable = { var = URS_shall_not_die_opinion_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_opinion_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -502,7 +767,13 @@ focus_tree = {
 		}
 		x = -7
 		y = 9
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.01 }
+			custom_effect_tooltip = URS_tt_rt_stability_p1
+			add_to_variable = { var = URS_shall_not_die_compliance_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_compliance_p4
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -514,7 +785,13 @@ focus_tree = {
 		}
 		x = -4
 		y = 9
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_opinion_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_opinion_p2
+			add_to_variable = { var = URS_shall_not_die_fuel_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_fuel_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -526,7 +803,13 @@ focus_tree = {
 		}
 		x = -2
 		y = 9
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_conscription_p3
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -538,7 +821,13 @@ focus_tree = {
 		}
 		x = 0
 		y = 9
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_ws_p3
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -550,7 +839,13 @@ focus_tree = {
 		}
 		x = 3
 		y = 9
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_consumer_m2
+			add_to_variable = { var = URS_shall_not_die_compliance_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_compliance_p4
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -562,7 +857,13 @@ focus_tree = {
 		}
 		x = 5
 		y = 9
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.01 }
+			custom_effect_tooltip = URS_tt_rt_stability_p1
+			add_to_variable = { var = URS_shall_not_die_consumer_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_consumer_m2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -574,7 +875,13 @@ focus_tree = {
 		}
 		x = 8
 		y = 9
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_compliance_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_compliance_p4
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.01 }
+			custom_effect_tooltip = URS_tt_rt_stability_p1
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -586,7 +893,21 @@ focus_tree = {
 		}
 		x = -4
 		y = 10
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_attack_p3
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_ws_p3
+			if = {
+				limit = { has_idea = URS_dr_bloodpeak_scar }
+				swap_ideas = {
+					remove_idea = URS_dr_bloodpeak_scar
+					add_idea = URS_dr_bloodpeak_honor
+				}
+			}
+			custom_effect_tooltip = URS_rt_fifth_army_bloodpeak_tt
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -598,7 +919,13 @@ focus_tree = {
 		}
 		x = -2
 		y = 10
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_conscription_p3
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -610,7 +937,21 @@ focus_tree = {
 		}
 		x = 0
 		y = 10
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_ws_p3
+			if = {
+				limit = { has_idea = URS_dr_holy_fools_threat }
+				swap_ideas = {
+					remove_idea = URS_dr_holy_fools_threat
+					add_idea = URS_dr_fools_silenced
+				}
+			}
+			custom_effect_tooltip = URS_rt_guard_support_fools_tt
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -622,7 +963,13 @@ focus_tree = {
 		}
 		x = 3
 		y = 10
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_attack_p3
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_ws_p3
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -634,7 +981,13 @@ focus_tree = {
 		}
 		x = 5
 		y = 10
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_opinion_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_opinion_p2
+			add_to_variable = { var = URS_shall_not_die_fuel_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_fuel_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -649,7 +1002,13 @@ focus_tree = {
 		}
 		x = -3
 		y = 11
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_ws_p3
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_attack_p3
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -661,7 +1020,13 @@ focus_tree = {
 		}
 		x = 5
 		y = 11
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_conscription_p3
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -673,7 +1038,13 @@ focus_tree = {
 		}
 		x = -3
 		y = 12
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_attack_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_attack_p3
+			add_to_variable = { var = URS_shall_not_die_suppress_var value = -0.02 }
+			custom_effect_tooltip = URS_tt_rt_suppress_m2
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -685,7 +1056,13 @@ focus_tree = {
 		}
 		x = 5
 		y = 12
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_ws_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_ws_p3
+			add_to_variable = { var = URS_shall_not_die_conscription_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_conscription_p3
+			army_experience = 25
+		}
 	}
 
 	focus = {
@@ -703,7 +1080,13 @@ focus_tree = {
 		}
 		x = 0
 		y = 13
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_pp_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_pp_p3
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.03 }
+			custom_effect_tooltip = URS_tt_rt_stability_p3
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -715,7 +1098,13 @@ focus_tree = {
 		}
 		x = 0
 		y = 14
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_compliance_var value = 0.04 }
+			custom_effect_tooltip = URS_tt_rt_compliance_p4
+			add_to_variable = { var = URS_shall_not_die_fuel_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_fuel_p2
+			add_political_power = 25
+		}
 	}
 
 	focus = {
@@ -727,7 +1116,13 @@ focus_tree = {
 		}
 		x = 0
 		y = 15
-		# desc / completion_reward 待填
+		completion_reward = {
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.01 }
+			custom_effect_tooltip = URS_tt_rt_stability_p1
+			add_to_variable = { var = URS_shall_not_die_opinion_var value = 0.02 }
+			custom_effect_tooltip = URS_tt_rt_opinion_p2
+			add_political_power = 25
+		}
 	}
 
 	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----

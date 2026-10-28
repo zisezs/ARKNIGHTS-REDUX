@@ -83,6 +83,8 @@ shared_focus = { #编撰《武籍令》
 		add_to_variable = { YAN_mil_rf_conscription = 0.10 tooltip = conscription_factor_tt }
 		add_to_variable = { YAN_mil_rf_war_support = 0.10 tooltip = war_support_factor_tt }
 		add_to_variable = { YAN_mil_rf_inf_defence = 0.10 tooltip = army_infantry_defence_factor_tt }
+		set_country_flag = YAN_mil_dec_registry_unlocked
+		unlock_decision_tooltip = YAN_mil_dec_registry
 	}
 }
 
@@ -108,6 +110,8 @@ shared_focus = { #洗濯边疆烟尘
 		add_to_variable = { YAN_mil_rf_supply = -0.10 tooltip = supply_consumption_factor_tt }
 		add_to_variable = { YAN_mil_rf_political_power = -0.10 tooltip = political_power_factor_tt }
 		add_to_variable = { YAN_mil_rf_army_xp = 0.10 tooltip = experience_gain_army_factor_tt }
+		set_country_flag = YAN_mil_dec_rotation_unlocked
+		unlock_decision_tooltip = YAN_mil_dec_rotation
 	}
 }
 
@@ -370,6 +374,8 @@ shared_focus = { #明王圣帝去兵灾
 		hidden_effect = {
 			add_ideas = YAN_mil_rf_equip_holy_king
 		}
+		set_country_flag = YAN_mil_dec_pension_unlocked
+		unlock_decision_tooltip = YAN_mil_dec_pension
 	}
 }
 
@@ -465,6 +471,8 @@ shared_focus = { #军中监察使
 		custom_effect_tooltip = YAN_mil_inspector_tt
 		add_to_variable = { YAN_mil_rf_reinforce = 0.02 tooltip = land_reinforce_rate_tt }
 		add_to_variable = { YAN_mil_rf_army_speed = 0.05 tooltip = army_speed_factor_tt }
+		set_country_flag = YAN_mil_dec_arsenal_unlocked
+		unlock_decision_tooltip = YAN_mil_dec_arsenal
 	}
 }
 
@@ -519,6 +527,14 @@ shared_focus = { #大炎军事算力中心
 		add_to_variable = { YAN_mil_rf_mil_factory_speed = -0.10 tooltip = production_speed_arms_factory_factor_tt }
 		add_to_variable = { YAN_mil_rf_planning_speed = 0.20 tooltip = planning_speed_tt }
 		add_to_variable = { YAN_mil_rf_planning_cap = 0.10 tooltip = max_planning_factor_tt }
+		set_country_flag = YAN_mil_dec_drone_unlocked
+		set_country_flag = YAN_mil_dec_air_supremacy_unlocked
+		set_country_flag = YAN_mil_dec_air_support_unlocked
+		set_country_flag = YAN_mil_dec_air_range_unlocked
+		unlock_decision_tooltip = YAN_mil_dec_drone
+		unlock_decision_tooltip = YAN_mil_dec_air_supremacy
+		unlock_decision_tooltip = YAN_mil_dec_air_support
+		unlock_decision_tooltip = YAN_mil_dec_air_range
 	}
 }
 
