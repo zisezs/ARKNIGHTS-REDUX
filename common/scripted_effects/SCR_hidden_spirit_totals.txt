@@ -1,0 +1,149 @@
+# 猩红剧团 · 隐藏精神叠加总览 —— 由 docs/gen_scr_hidden_spirit_panel.cjs 生成，勿手改
+# 每次重算：先清零，再按 has_idea 逐条累加。
+SCR_hidden_spirit_totals_effect = {
+	set_variable = { SCR_hidden_total_army_attack_factor = 0 }
+	set_variable = { SCR_hidden_total_army_defence_factor = 0 }
+	set_variable = { SCR_hidden_total_army_morale_factor = 0 }
+	set_variable = { SCR_hidden_total_army_core_attack_factor = 0 }
+	set_variable = { SCR_hidden_total_army_core_defence_factor = 0 }
+	set_variable = { SCR_hidden_total_war_support_factor = 0 }
+	set_variable = { SCR_hidden_total_conscription_factor = 0 }
+	set_variable = { SCR_hidden_total_experience_gain_army_factor = 0 }
+	set_variable = { SCR_hidden_total_experience_loss_factor = 0 }
+	set_variable = { SCR_hidden_total_max_dig_in_factor = 0 }
+	set_variable = { SCR_hidden_total_supply_consumption_factor = 0 }
+	set_variable = { SCR_hidden_total_justify_war_goal_time = 0 }
+	set_variable = { SCR_hidden_total_non_core_manpower = 0 }
+	set_variable = { SCR_hidden_total_land_doctrine_cost_factor = 0 }
+	set_variable = { SCR_hidden_total_resistance_growth = 0 }
+	set_variable = { SCR_hidden_total_compliance_growth = 0 }
+	set_variable = { SCR_hidden_total_operation_outcome = 0 }
+	set_variable = { SCR_hidden_total_encryption = 0 }
+	set_variable = { SCR_hidden_total_decryption = 0 }
+	set_variable = { SCR_hidden_total_political_power_gain = 0 }
+	set_variable = { SCR_hidden_total_stability_factor = 0 }
+	set_variable = { SCR_hidden_total_consumer_goods_factor = 0 }
+	set_variable = { SCR_hidden_total_production_speed_buildings_factor = 0 }
+	set_variable = { SCR_hidden_total_research_speed_factor = 0 }
+	set_variable = { SCR_hidden_total_monthly_population = 0 }
+	set_variable = { SCR_hidden_total_equipment_infantry_build_cost = 0 }
+	set_variable = { SCR_hidden_total_mysticism_drift = 0 }
+	if = { limit = { has_idea = SCR_hidden_start_theatre }
+		add_to_variable = { SCR_hidden_total_political_power_gain = 10.000 }
+		add_to_variable = { SCR_hidden_total_mysticism_drift = 2.000 }
+	}
+	if = { limit = { has_idea = SCR_hidden_start_tragic }
+		add_to_variable = { SCR_hidden_total_stability_factor = -10.000 }
+		add_to_variable = { SCR_hidden_total_war_support_factor = 20.000 }
+		add_to_variable = { SCR_hidden_total_conscription_factor = -5.000 }
+	}
+	if = { limit = { has_idea = SCR_hidden_start_eye }
+		add_to_variable = { SCR_hidden_total_encryption = 1.000 }
+		add_to_variable = { SCR_hidden_total_decryption = 1.000 }
+		add_to_variable = { SCR_hidden_total_political_power_gain = 5.000 }
+	}
+	if = { limit = { has_idea = SCR_hidden_old_control }
+		add_to_variable = { SCR_hidden_total_political_power_gain = 10.000 }
+		add_to_variable = { SCR_hidden_total_compliance_growth = 10.000 }
+	}
+	if = { limit = { has_idea = SCR_hidden_corsica }
+		add_to_variable = { SCR_hidden_total_mysticism_drift = 2.000 }
+		add_to_variable = { SCR_hidden_total_consumer_goods_factor = -5.000 }
+		add_to_variable = { SCR_hidden_total_operation_outcome = 10.000 }
+		add_to_variable = { SCR_hidden_total_resistance_growth = -10.000 }
+		add_to_variable = { SCR_hidden_total_compliance_growth = 10.000 }
+	}
+	if = { limit = { has_idea = SCR_hidden_corsica_economy }
+		add_to_variable = { SCR_hidden_total_monthly_population = 10.000 }
+		add_to_variable = { SCR_hidden_total_experience_loss_factor = -10.000 }
+	}
+	if = { limit = { has_idea = SCR_hidden_corsica_military }
+		add_to_variable = { SCR_hidden_total_research_speed_factor = 5.000 }
+		add_to_variable = { SCR_hidden_total_non_core_manpower = 2.000 }
+		add_to_variable = { SCR_hidden_total_supply_consumption_factor = -5.000 }
+		add_to_variable = { SCR_hidden_total_land_doctrine_cost_factor = -10.000 }
+	}
+	if = { limit = { has_idea = SCR_armament_decree_1 }
+		add_to_variable = { SCR_hidden_total_equipment_infantry_build_cost = -20.000 }
+	}
+	if = { limit = { has_idea = SCR_armament_decree_2 }
+		add_to_variable = { SCR_hidden_total_equipment_infantry_build_cost = -20.000 }
+	}
+	if = { limit = { has_idea = SCR_banner_of_empire }
+		add_to_variable = { SCR_hidden_total_war_support_factor = 10.000 }
+		add_to_variable = { SCR_hidden_total_conscription_factor = 2.000 }
+	}
+	if = { limit = { has_idea = SCR_blood_altar }
+		add_to_variable = { SCR_hidden_total_resistance_growth = -10.000 }
+		add_to_variable = { SCR_hidden_total_compliance_growth = 10.000 }
+	}
+	if = { limit = { has_idea = SCR_blood_diamond_legacy }
+		add_to_variable = { SCR_hidden_total_war_support_factor = 10.000 }
+		add_to_variable = { SCR_hidden_total_army_morale_factor = 5.000 }
+	}
+	if = { limit = { has_idea = SCR_blood_of_gaul }
+		add_to_variable = { SCR_hidden_total_conscription_factor = 5.000 }
+		add_to_variable = { SCR_hidden_total_justify_war_goal_time = -15.000 }
+	}
+	if = { limit = { has_idea = SCR_celebration_of_all_things }
+		add_to_variable = { SCR_hidden_total_stability_factor = 15.000 }
+		add_to_variable = { SCR_hidden_total_political_power_gain = 25.000 }
+		add_to_variable = { SCR_hidden_total_mysticism_drift = 2.500 }
+		add_to_variable = { SCR_hidden_total_consumer_goods_factor = -5.000 }
+	}
+	if = { limit = { has_idea = SCR_eternal_tour }
+		add_to_variable = { SCR_hidden_total_justify_war_goal_time = -25.000 }
+	}
+	if = { limit = { has_idea = SCR_flyleaf_masters }
+		add_to_variable = { SCR_hidden_total_decryption = 1.000 }
+		add_to_variable = { SCR_hidden_total_operation_outcome = 10.000 }
+	}
+	if = { limit = { has_idea = SCR_gallic_echo }
+		add_to_variable = { SCR_hidden_total_stability_factor = 5.000 }
+		add_to_variable = { SCR_hidden_total_war_support_factor = 5.000 }
+	}
+	if = { limit = { has_idea = SCR_harvest_festival }
+		add_to_variable = { SCR_hidden_total_consumer_goods_factor = -5.000 }
+		add_to_variable = { SCR_hidden_total_production_speed_buildings_factor = 5.000 }
+	}
+	if = { limit = { has_idea = SCR_imperial_banner }
+		add_to_variable = { SCR_hidden_total_war_support_factor = 10.000 }
+		add_to_variable = { SCR_hidden_total_army_attack_factor = 5.000 }
+	}
+	if = { limit = { has_idea = SCR_mirror_man }
+		add_to_variable = { SCR_hidden_total_decryption = 1.000 }
+		add_to_variable = { SCR_hidden_total_encryption = 1.000 }
+	}
+	if = { limit = { has_idea = SCR_oath_of_restoration }
+		add_to_variable = { SCR_hidden_total_stability_factor = 10.000 }
+		add_to_variable = { SCR_hidden_total_political_power_gain = 10.000 }
+	}
+	if = { limit = { has_idea = SCR_puppet_craft }
+		add_to_variable = { SCR_hidden_total_research_speed_factor = 3.000 }
+		add_to_variable = { SCR_hidden_total_experience_gain_army_factor = 10.000 }
+	}
+	if = { limit = { has_idea = SCR_puppet_legion }
+		add_to_variable = { SCR_hidden_total_non_core_manpower = 2.000 }
+		add_to_variable = { SCR_hidden_total_supply_consumption_factor = -5.000 }
+	}
+	if = { limit = { has_idea = SCR_shield_of_gallia }
+		add_to_variable = { SCR_hidden_total_army_defence_factor = 10.000 }
+		add_to_variable = { SCR_hidden_total_max_dig_in_factor = 25.000 }
+	}
+	if = { limit = { has_idea = SCR_star_surgery }
+		add_to_variable = { SCR_hidden_total_experience_gain_army_factor = 15.000 }
+		add_to_variable = { SCR_hidden_total_land_doctrine_cost_factor = -10.000 }
+	}
+	if = { limit = { has_idea = SCR_temple_of_pain }
+		add_to_variable = { SCR_hidden_total_war_support_factor = 10.000 }
+		add_to_variable = { SCR_hidden_total_stability_factor = -5.000 }
+		add_to_variable = { SCR_hidden_total_army_attack_factor = 5.000 }
+	}
+	if = { limit = { has_idea = SCR_triumph }
+		add_to_variable = { SCR_hidden_total_army_core_attack_factor = 5.000 }
+		add_to_variable = { SCR_hidden_total_army_core_defence_factor = 5.000 }
+		add_to_variable = { SCR_hidden_total_stability_factor = 10.000 }
+		add_to_variable = { SCR_hidden_total_war_support_factor = 10.000 }
+		add_to_variable = { SCR_hidden_total_political_power_gain = 15.000 }
+	}
+}

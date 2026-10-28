@@ -168,3 +168,11 @@ SCR_militia_unlock_effect = {
 		}
 	}
 }
+
+# 【高卢，高卢！】30 天限时精神：先摘再挂，重复触发不会报错。
+SCR_gaul_gaul_timed_effect = {
+	if = { limit = { has_idea = SCR_dyn_gaul_gaul } remove_ideas = SCR_dyn_gaul_gaul }
+	if = { limit = { has_idea = SCR_gaul_vic_bonus } remove_ideas = SCR_gaul_vic_bonus }
+	add_timed_idea = { idea = SCR_dyn_gaul_gaul days = 30 }
+	add_timed_idea = { idea = SCR_gaul_vic_bonus days = 30 }
+}

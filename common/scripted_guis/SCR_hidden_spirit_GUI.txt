@@ -1,0 +1,15 @@
+# 猩红剧团 · 隐藏精神总览 —— scripted_gui
+# 生成器：docs/gen_scr_hidden_spirit_panel.cjs
+scripted_gui = {
+
+	SCR_HiddenSpirit_Panel = {
+		context_type = player_context
+		window_name = "SCR_hidden_spirit_window"
+		visible = { is_ai = no has_country_flag = scr_hidden_spirit_panel_open }
+		ai_enabled = { always = no }
+		effects = {
+			SCR_hidden_spirit_close_click = { clr_country_flag = scr_hidden_spirit_panel_open }
+			SCR_hidden_spirit_refresh_click = { SCR_hidden_spirit_totals_effect = yes }
+		}
+	}
+}

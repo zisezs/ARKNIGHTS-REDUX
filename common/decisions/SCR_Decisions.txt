@@ -9,6 +9,28 @@
 SCR_theatre_category = {
 
 	############################################################
+	# 隐藏精神总览 — 决议入口
+	############################################################
+	SCR_open_hidden_spirit_panel = {
+		icon = GFX_decision_generic_political_discourse
+		cost = 0
+		days_re_enable = 0
+		allowed = {
+			original_tag = SCR
+		}
+		visible = {
+			always = yes
+		}
+		complete_effect = {
+			set_country_flag = scr_hidden_spirit_panel_open
+			SCR_hidden_spirit_totals_effect = yes
+		}
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	############################################################
 	# 排演一出悲剧 — 由「戏剧即真实」解锁
 	############################################################
 	SCR_stage_a_tragedy = {
@@ -19,10 +41,10 @@ SCR_theatre_category = {
 			original_tag = SCR
 		}
 		available = {
-			has_idea = SCR_theatre_is_truth
+			has_idea = SCR_hidden_start_theatre
 		}
 		visible = {
-			has_idea = SCR_theatre_is_truth
+			has_idea = SCR_hidden_start_theatre
 		}
 		complete_effect = {
 			add_war_support = 0.03
@@ -419,7 +441,7 @@ SCR_tour_category = {
 		complete_effect = {
 			add_timed_idea = {
 				idea = SCR_play_der_ring
-				days = 90
+				days = 30
 			}
 		}
 		ai_will_do = {
@@ -441,7 +463,7 @@ SCR_tour_category = {
 		complete_effect = {
 			add_timed_idea = {
 				idea = SCR_play_101_days
-				days = 90
+				days = 30
 			}
 		}
 		ai_will_do = {
@@ -486,7 +508,7 @@ SCR_tour_category = {
 		complete_effect = {
 			add_timed_idea = {
 				idea = SCR_play_wonderland
-				days = 90
+				days = 30
 			}
 		}
 		ai_will_do = {
@@ -508,7 +530,7 @@ SCR_tour_category = {
 		complete_effect = {
 			add_timed_idea = {
 				idea = SCR_play_frost_deer
-				days = 90
+				days = 30
 			}
 		}
 		ai_will_do = {
@@ -530,7 +552,7 @@ SCR_tour_category = {
 		complete_effect = {
 			add_timed_idea = {
 				idea = SCR_play_heria
-				days = 90
+				days = 30
 			}
 		}
 		ai_will_do = {
@@ -552,7 +574,7 @@ SCR_tour_category = {
 		complete_effect = {
 			add_timed_idea = {
 				idea = SCR_play_mother_wolf
-				days = 90
+				days = 30
 			}
 		}
 		ai_will_do = {
@@ -613,7 +635,7 @@ SCR_tour_category = {
 		complete_effect = {
 			add_timed_idea = {
 				idea = SCR_play_wild_gold
-				days = 90
+				days = 30
 			}
 		}
 		ai_will_do = {
@@ -635,7 +657,7 @@ SCR_tour_category = {
 		complete_effect = {
 			add_timed_idea = {
 				idea = SCR_play_lullaby
-				days = 90
+				days = 30
 			}
 		}
 		ai_will_do = {
@@ -657,7 +679,7 @@ SCR_tour_category = {
 		complete_effect = {
 			add_timed_idea = {
 				idea = SCR_play_carnival
-				days = 90
+				days = 30
 			}
 		}
 		ai_will_do = {
@@ -1058,8 +1080,8 @@ SCR_corsica_category = {
 			}
 		}
 		complete_effect = {
-			if = { limit = { has_idea = SCR_timed_coronation } remove_idea = SCR_timed_coronation }
-			add_timed_idea = { idea = SCR_timed_coronation days = 180 }
+			if = { limit = { has_idea = SCR_timed_coronation } remove_ideas = SCR_timed_coronation }
+			add_timed_idea = { idea = SCR_timed_coronation days = 30 }
 		}
 		ai_will_do = { base = 10 }
 	}
@@ -1082,8 +1104,8 @@ SCR_corsica_category = {
 			}
 		}
 		complete_effect = {
-			if = { limit = { has_idea = SCR_timed_reflection_tour } remove_idea = SCR_timed_reflection_tour }
-			add_timed_idea = { idea = SCR_timed_reflection_tour days = 180 }
+			if = { limit = { has_idea = SCR_timed_reflection_tour } remove_ideas = SCR_timed_reflection_tour }
+			add_timed_idea = { idea = SCR_timed_reflection_tour days = 30 }
 		}
 		ai_will_do = { base = 10 }
 	}
@@ -1188,8 +1210,8 @@ SCR_corsica_category = {
 		visible = { has_completed_focus = SCR_corsica_38 }
 		available = { has_completed_focus = SCR_corsica_38 }
 		complete_effect = {
-			if = { limit = { has_idea = SCR_timed_terror } remove_idea = SCR_timed_terror }
-			add_timed_idea = { idea = SCR_timed_terror days = 90 }
+			if = { limit = { has_idea = SCR_timed_terror } remove_ideas = SCR_timed_terror }
+			add_timed_idea = { idea = SCR_timed_terror days = 30 }
 		}
 		ai_will_do = { base = 5 }
 	}
@@ -1202,8 +1224,8 @@ SCR_corsica_category = {
 		visible = { has_completed_focus = SCR_corsica_39 }
 		available = { has_completed_focus = SCR_corsica_39 }
 		complete_effect = {
-			if = { limit = { has_idea = SCR_timed_consensus } remove_idea = SCR_timed_consensus }
-			add_timed_idea = { idea = SCR_timed_consensus days = 120 }
+			if = { limit = { has_idea = SCR_timed_consensus } remove_ideas = SCR_timed_consensus }
+			add_timed_idea = { idea = SCR_timed_consensus days = 30 }
 		}
 		ai_will_do = { base = 10 }
 	}
@@ -1216,8 +1238,8 @@ SCR_corsica_category = {
 		visible = { has_completed_focus = SCR_corsica_52 }
 		available = { has_completed_focus = SCR_corsica_52 }
 		complete_effect = {
-			if = { limit = { has_idea = SCR_timed_night_ops } remove_idea = SCR_timed_night_ops }
-			add_timed_idea = { idea = SCR_timed_night_ops days = 90 }
+			if = { limit = { has_idea = SCR_timed_night_ops } remove_ideas = SCR_timed_night_ops }
+			add_timed_idea = { idea = SCR_timed_night_ops days = 30 }
 		}
 		ai_will_do = { base = 10 }
 	}
@@ -1230,8 +1252,8 @@ SCR_corsica_category = {
 		visible = { has_completed_focus = SCR_switch_3 }
 		available = { has_completed_focus = SCR_switch_3 }
 		complete_effect = {
-			if = { limit = { has_idea = SCR_play_lullaby } remove_idea = SCR_play_lullaby }
-			add_timed_idea = { idea = SCR_play_lullaby days = 90 }
+			if = { limit = { has_idea = SCR_play_lullaby } remove_ideas = SCR_play_lullaby }
+			add_timed_idea = { idea = SCR_play_lullaby days = 30 }
 		}
 		ai_will_do = { base = 10 }
 	}
@@ -1244,8 +1266,8 @@ SCR_corsica_category = {
 		visible = { has_completed_focus = SCR_switch_5 }
 		available = { has_completed_focus = SCR_switch_5 }
 		complete_effect = {
-			if = { limit = { has_idea = SCR_play_heria } remove_idea = SCR_play_heria }
-			add_timed_idea = { idea = SCR_play_heria days = 90 }
+			if = { limit = { has_idea = SCR_play_heria } remove_ideas = SCR_play_heria }
+			add_timed_idea = { idea = SCR_play_heria days = 30 }
 		}
 		ai_will_do = { base = 10 }
 	}
@@ -1287,6 +1309,9 @@ SCR_march_victoria_category = {
 			}
 			set_country_flag = SCR_march_victoria_vfa_done
 			set_country_flag = { flag = SCR_march_victoria_cd days = 30 value = 1 }
+			# ---- 【精神整合】战争精神 起 ----
+			SCR_gaul_gaul_timed_effect = yes
+			# ---- 【精神整合】战争精神 止 ----
 		}
 
 		ai_will_do = { base = 1000 }

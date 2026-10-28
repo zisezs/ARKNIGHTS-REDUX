@@ -62,154 +62,13 @@ country_event = {
 }
 
 # 血钻低语 — Whisper of the Blood Diamond (路线一)
-country_event = {
-	id = scr.3
-	title = scr.3.t
-	desc = scr.3.d
-	picture = GFX_report_event_Generic_Letter
-
-	is_triggered_only = yes
-
-	option = {
-		name = scr.3.a
-		add_political_power = 50
-	}
-	option = {
-		name = scr.3.b
-		add_stability = 0.05
-	}
-}
-
 # 酒神的邀请 — The Invitation of Dionysus (路线二)
-country_event = {
-	id = scr.4
-	title = scr.4.t
-	desc = scr.4.d
-	picture = GFX_report_event_german_speech
-
-	is_triggered_only = yes
-
-	option = {
-		name = scr.4.a
-		add_stability = 0.03
-	}
-	option = {
-		name = scr.4.b
-		add_war_support = 0.03
-	}
-}
-
 # 高卢的灰烬 — Ashes of Gaul (路线三)
-country_event = {
-	id = scr.5
-	title = scr.5.t
-	desc = scr.5.d
-	picture = GFX_report_event_Generic_Letter
-
-	is_triggered_only = yes
-
-	option = {
-		name = scr.5.a
-		army_experience = 15
-	}
-	option = {
-		name = scr.5.b
-		add_stability = 0.02
-	}
-}
-
 # 血钻祭坛之夜 — Night at the Blood Diamond Altar
-country_event = {
-	id = scr.6
-	title = scr.6.t
-	desc = scr.6.d
-	picture = GFX_report_event_Generic_Wilderness
-
-	is_triggered_only = yes
-
-	option = {
-		name = scr.6.a
-		add_war_support = 0.03
-		add_to_variable = {
-			var = SCR_inspiration
-			value = 1
-		}
-		custom_effect_tooltip = SCR_inspiration_gain_tt
-	}
-	option = {
-		name = scr.6.b
-		add_manpower = 1000
-	}
-}
-
 # 与傀影的对话 — Dialogue with the Shadow (卢西恩)
-country_event = {
-	id = scr.7
-	title = scr.7.t
-	desc = scr.7.d
-	picture = GFX_report_event_german_speech
-
-	is_triggered_only = yes
-
-	option = {
-		name = scr.7.a
-		army_experience = 50
-	}
-	option = {
-		name = scr.7.b
-		add_stability = 0.03
-		add_political_power = 50
-	}
-}
-
 # 万物的归宿 — The Terminus of All Things (路线一终点)
-country_event = {
-	id = scr.8
-	title = scr.8.t
-	desc = scr.8.d
-	picture = GFX_report_event_Generic_Urban_Unrest_1
-
-	is_triggered_only = yes
-
-	option = {
-		name = scr.8.a
-		add_war_support = 0.05
-		army_experience = 30
-	}
-}
-
 # 万物的庆典 — The Celebration of All Things (路线二终点)
-country_event = {
-	id = scr.9
-	title = scr.9.t
-	desc = scr.9.d
-	picture = GFX_report_event_Generic_House
-
-	is_triggered_only = yes
-
-	option = {
-		name = scr.9.a
-		add_stability = 0.05
-		add_political_power = 100
-	}
-}
-
 # 凯旋 — Triumph (路线三终点)
-country_event = {
-	id = scr.10
-	title = scr.10.t
-	desc = scr.10.d
-	picture = GFX_report_event_Generic_Urban_Unrest_1
-
-	is_triggered_only = yes
-
-	option = {
-		name = scr.10.a
-		add_war_support = 0.05
-		add_political_power = 100
-	}
-}
-
 ######################
 ## 事件链：旧军团的加演 ##
 ## 由决议 SCR_encore_for_the_old_guard 开启
@@ -313,7 +172,7 @@ country_event = {
 		custom_effect_tooltip = SCR_inspiration_gain_2_tt
 		add_timed_idea = {
 			idea = SCR_gallic_martyrs
-			days = 365
+			days = 30
 		}
 		set_country_flag = SCR_old_guard_affair_done_flag
 	}
@@ -335,7 +194,7 @@ country_event = {
 		add_war_support = 0.02
 		add_timed_idea = {
 			idea = SCR_old_guard_broken
-			days = 365
+			days = 30
 		}
 		set_country_flag = SCR_old_guard_affair_done_flag
 	}
