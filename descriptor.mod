@@ -10,7 +10,7 @@ tags={
 	"Historical"
 }
 dependencies={
-	"明日方舟：重铸明日-Arknights:Recasting Future"
+	"重铸明日Arknights:Recasting Future"
 }
 name="重铸明日Redux Arknights:Recasting Future Redux"
 picture="thumbnail"
