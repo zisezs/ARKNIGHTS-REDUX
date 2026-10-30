@@ -1,7 +1,9 @@
 ######################################################
 # 猩红剧团 (SCR) 国策树 — 高卢的返场演出
+# 布局：本树由「核心圈式自动演出」自动完成，整树位于共享国策树下方（y 41..48）。
 # 四幕剧 · 每幕 12 国策 · 中轴对称 · 支线成组、主线成链
 # 幕1 领导权(左)  幕2 游击控制(中左)  幕3 陆军鼎盛(中右)  幕4 废墟国力(右)
+# 幕3/幕4 的三列支线横向间隔 2 格（x 10/12/14、16/18/20）；纵向间隔不变。
 # 采用真实 focus 前置链：y1 需 y0 → y2 需双翼 → y3 需 y2 → y4 需双翼 → y5 需 y4
 #   → y6(幕终) 需双翼 → y7 需 y6。每个国策都有独立、有形的奖励。
 ######################################################
@@ -26,7 +28,7 @@ focus_tree = {
 		id = SCR_the_curtain_rises
 		icon = GFX_focus_SCR_the_curtain_rises
 		x = 0
-		y = 0
+		y = 41
 		cost = 5
 		ai_will_do = {
 			base = 10
@@ -37,19 +39,18 @@ focus_tree = {
 			add_war_support = 0.05
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.03
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_lite = 0.015
+				SCR_dyn_leadership_lite = 0.02
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.002
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 			# ---- 【旧树自动演出】启动 起 ----
 			custom_effect_tooltip = SCR_legacy_auto_start_tt
 			SCR_legacy_auto_start = yes
@@ -61,7 +62,7 @@ focus_tree = {
 		id = SCR_crown_of_embers
 		icon = GFX_focus_SCR_crown_of_embers
 		x = -1
-		y = 1
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -93,19 +94,18 @@ focus_tree = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.03
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_lite = 0.015
+				SCR_dyn_leadership_lite = 0.02
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.002
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 		}
 	}
 
@@ -113,7 +113,7 @@ focus_tree = {
 		id = SCR_gather_the_displaced
 		icon = GFX_focus_SCR_gather_the_displaced
 		x = 1
-		y = 1
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -147,19 +147,18 @@ focus_tree = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.03
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_lite = 0.015
+				SCR_dyn_leadership_lite = 0.02
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.002
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 		}
 	}
 
@@ -167,7 +166,7 @@ focus_tree = {
 		id = SCR_sole_director
 		icon = GFX_focus_SCR_sole_director
 		x = 0
-		y = 2
+		y = 43
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -200,7 +199,7 @@ focus_tree = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.04
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
@@ -208,11 +207,10 @@ focus_tree = {
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.003
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 		}
 	}
 
@@ -220,7 +218,7 @@ focus_tree = {
 		id = SCR_archives_of_embers
 		icon = GFX_focus_SCR_archives_of_embers
 		x = -1
-		y = 3
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -252,19 +250,18 @@ focus_tree = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.03
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_lite = 0.015
+				SCR_dyn_leadership_lite = 0.02
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.002
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 		}
 	}
 
@@ -272,7 +269,7 @@ focus_tree = {
 		id = SCR_gallic_salon
 		icon = GFX_focus_SCR_gallic_salon
 		x = 1
-		y = 3
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -304,19 +301,18 @@ focus_tree = {
 			add_stability = 0.05
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.03
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_lite = 0.015
+				SCR_dyn_leadership_lite = 0.02
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.002
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 		}
 	}
 
@@ -324,7 +320,7 @@ focus_tree = {
 		id = SCR_crown_settled
 		icon = GFX_focus_SCR_crown_settled
 		x = 0
-		y = 4
+		y = 45
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -357,7 +353,7 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.04
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
@@ -365,11 +361,10 @@ focus_tree = {
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.003
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 		}
 	}
 
@@ -377,7 +372,7 @@ focus_tree = {
 		id = SCR_herald_on_the_road
 		icon = GFX_focus_SCR_herald_on_the_road
 		x = -1
-		y = 5
+		y = 46
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -409,20 +404,19 @@ focus_tree = {
 			add_war_support = 0.03
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.03
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_lite = 0.015
+				SCR_dyn_leadership_lite = 0.02
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = { var = SCR_dyn_leadership_int value = 1 }
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.002
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 		}
 	}
 
@@ -430,7 +424,7 @@ focus_tree = {
 		id = SCR_pillage_the_myth
 		icon = GFX_focus_SCR_pillage_the_myth
 		x = 1
-		y = 5
+		y = 46
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -462,19 +456,18 @@ focus_tree = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.03
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_lite = 0.015
+				SCR_dyn_leadership_lite = 0.02
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.002
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 		}
 	}
 
@@ -482,7 +475,7 @@ focus_tree = {
 		id = SCR_vanguard_state
 		icon = GFX_focus_SCR_vanguard_state
 		x = 0
-		y = 6
+		y = 47
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -517,19 +510,18 @@ focus_tree = {
 			add_political_power = 150
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.05
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_lite = 0.025
+				SCR_dyn_leadership_lite = 0.02
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.004
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 			custom_effect_tooltip = SCR_vanguard_state_tooltip
 			# 是否正式立国交给事件 scr.28 由玩家决定（见 events/SCR.txt）
 			country_event = { id = scr.28 }
@@ -540,7 +532,7 @@ focus_tree = {
 		id = SCR_first_decree
 		icon = GFX_focus_SCR_first_decree
 		x = -1
-		y = 7
+		y = 48
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -572,19 +564,18 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.03
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_lite = 0.015
+				SCR_dyn_leadership_lite = 0.02
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.002
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 		}
 	}
 
@@ -592,7 +583,7 @@ focus_tree = {
 		id = SCR_court_of_stages
 		icon = GFX_focus_SCR_court_of_stages
 		x = 1
-		y = 7
+		y = 48
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -625,19 +616,18 @@ focus_tree = {
 			add_stability = 0.03
 			custom_effect_tooltip = SCR_dyn_leadership_modify_tt
 			add_to_variable = {
-				SCR_dyn_leadership = 0.03
+				SCR_dyn_leadership = 0.02
 				tooltip = SCR_dyn_leadership_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_lite = 0.015
+				SCR_dyn_leadership_lite = 0.02
 				tooltip = SCR_dyn_leadership_lite_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_leadership_drift = 0.002
+				SCR_dyn_leadership_drift = 0.005
 				tooltip = SCR_dyn_leadership_drift_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_leadership }
-			custom_effect_tooltip = SCR_dyn_leadership_tooltip
 		}
 	}
 
@@ -648,7 +638,7 @@ focus_tree = {
 		id = SCR_roll_call_of_gaul
 		icon = GFX_focus_SCR_roll_call_of_gaul
 		x = 6
-		y = 0
+		y = 41
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -697,15 +687,15 @@ focus_tree = {
 			add_stability = 0.03
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.03
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.03
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
+			add_ideas = SCR_hidden_old_control
 		}
 	}
 
@@ -713,7 +703,7 @@ focus_tree = {
 		id = SCR_script_for_insurgents
 		icon = GFX_focus_SCR_script_for_insurgents
 		x = 5
-		y = 1
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -768,15 +758,14 @@ focus_tree = {
 				tooltip = SCR_dyn_control_int_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control = 0.03
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.03
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -784,7 +773,7 @@ focus_tree = {
 		id = SCR_no_improvisation
 		icon = GFX_focus_SCR_no_improvisation
 		x = 7
-		y = 1
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -835,15 +824,14 @@ focus_tree = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.03
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.03
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -851,7 +839,7 @@ focus_tree = {
 		id = SCR_stage_managers_of_the_wilds
 		icon = GFX_focus_SCR_stage_managers_of_the_wilds
 		x = 6
-		y = 2
+		y = 43
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -907,15 +895,14 @@ focus_tree = {
 				tooltip = SCR_dyn_control_int_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control = 0.04
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.04
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -923,7 +910,7 @@ focus_tree = {
 		id = SCR_ledger_of_names
 		icon = GFX_focus_SCR_ledger_of_names
 		x = 5
-		y = 3
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -975,15 +962,14 @@ focus_tree = {
 			add_stability = 0.03
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.03
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.03
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -991,7 +977,7 @@ focus_tree = {
 		id = SCR_kind_theaters
 		icon = GFX_focus_SCR_kind_theaters
 		x = 7
-		y = 3
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1044,15 +1030,14 @@ focus_tree = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.03
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.03
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -1060,7 +1045,7 @@ focus_tree = {
 		id = SCR_the_audience_sits_down
 		icon = GFX_focus_SCR_the_audience_sits_down
 		x = 6
-		y = 4
+		y = 45
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1114,15 +1099,14 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.04
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.04
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -1130,7 +1114,7 @@ focus_tree = {
 		id = SCR_loyalty_is_a_line
 		icon = GFX_focus_SCR_loyalty_is_a_line
 		x = 5
-		y = 5
+		y = 46
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1182,15 +1166,14 @@ focus_tree = {
 			add_war_support = 0.03
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.03
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.03
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -1198,7 +1181,7 @@ focus_tree = {
 		id = SCR_understudy_battalions
 		icon = GFX_focus_SCR_understudy_battalions
 		x = 7
-		y = 5
+		y = 46
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1251,15 +1234,14 @@ focus_tree = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.03
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.03
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -1267,7 +1249,7 @@ focus_tree = {
 		id = SCR_curtain_around_gaul
 		icon = GFX_focus_SCR_curtain_around_gaul
 		x = 6
-		y = 6
+		y = 47
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1321,15 +1303,14 @@ focus_tree = {
 			add_political_power = 100
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.04
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.04
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -1337,7 +1318,7 @@ focus_tree = {
 		id = SCR_whisper_networks
 		icon = GFX_focus_SCR_whisper_networks
 		x = 5
-		y = 7
+		y = 48
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1389,15 +1370,14 @@ focus_tree = {
 			add_war_support = 0.03
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.03
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.03
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -1405,7 +1385,7 @@ focus_tree = {
 		id = SCR_dont_clap_yet
 		icon = GFX_focus_SCR_dont_clap_yet
 		x = 7
-		y = 7
+		y = 48
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1458,15 +1438,14 @@ focus_tree = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.03
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_to_variable = {
-				SCR_dyn_control_neg = -0.03
+				SCR_dyn_control_neg = -0.02
 				tooltip = SCR_dyn_control_neg_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -1477,7 +1456,7 @@ focus_tree = {
 		id = SCR_march_music
 		icon = GFX_focus_SCR_march_music
 		x = 12
-		y = 0
+		y = 41
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1504,36 +1483,23 @@ focus_tree = {
 		}
 		completion_reward = {
 			army_experience = 10
-			add_war_support = 0.03
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.03
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.03
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.015
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
+			add_war_support = 0.02
+			add_political_power = -10
 			custom_effect_tooltip = SCR_vanguard_unlock_tt
-			hidden_effect = {
-				SCR_vanguard_guard_unlock_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_unlock_effect = yes }
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army_stab = 0.05 tooltip = SCR_dyn_army_stab_value_tt }
+			add_to_variable = { SCR_dyn_army_pp = -0.05 tooltip = SCR_dyn_army_pp_value_tt }
+			add_to_variable = { SCR_dyn_army_cg = 0.05 tooltip = SCR_dyn_army_cg_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
 	focus = {
 		id = SCR_rehearse_the_old_guard
 		icon = GFX_focus_SCR_rehearse_the_old_guard
-		x = 11
-		y = 1
+		x = 10
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1564,35 +1530,21 @@ focus_tree = {
 		completion_reward = {
 			add_manpower = 6000
 			army_experience = 10
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.03
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.03
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.015
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
+			add_political_power = -10
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army_training = -0.05 tooltip = SCR_dyn_army_training_value_tt }
+			add_to_variable = { SCR_dyn_army_reinforce = 0.05 tooltip = SCR_dyn_army_reinforce_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
 	focus = {
 		id = SCR_script_of_the_grand_campaign
 		icon = GFX_focus_SCR_script_of_the_grand_campaign
-		x = 13
-		y = 1
+		x = 14
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1623,27 +1575,13 @@ focus_tree = {
 		completion_reward = {
 			army_experience = 20
 			add_political_power = 25
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.03
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.03
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.015
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army_strength = 0.10 tooltip = SCR_dyn_army_strength_value_tt }
+			add_to_variable = { SCR_dyn_army_neg = -0.10 tooltip = justify_war_goal_time_tt }
+			add_to_variable = { SCR_dyn_army_pp = 0.05 tooltip = SCR_dyn_army_pp_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
@@ -1651,7 +1589,7 @@ focus_tree = {
 		id = SCR_veterans_choir
 		icon = GFX_focus_SCR_veterans_choir
 		x = 12
-		y = 2
+		y = 43
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1682,27 +1620,8 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_political_power = 25
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.04
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.04
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.02
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
 			custom_effect_tooltip = SCR_vanguard_support_recon_tt
 			hidden_effect = {
 				add_units_to_division_template = {
@@ -1712,14 +1631,19 @@ focus_tree = {
 					}
 				}
 			}
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army = 0.05 tooltip = SCR_dyn_army_value_tt }
+			add_to_variable = { SCR_dyn_army_stab = 0.05 tooltip = SCR_dyn_army_stab_value_tt }
+			add_to_variable = { SCR_dyn_army_xp_loss = -0.05 tooltip = SCR_dyn_army_xp_loss_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
 	focus = {
 		id = SCR_officers_school_on_wheels
 		icon = GFX_focus_SCR_officers_school_on_wheels
-		x = 11
-		y = 3
+		x = 10
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1750,35 +1674,21 @@ focus_tree = {
 		completion_reward = {
 			army_experience = 20
 			add_political_power = 25
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.03
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.03
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.015
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
+			add_manpower = -3000
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army_training = -0.05 tooltip = SCR_dyn_army_training_value_tt }
+			add_to_variable = { SCR_dyn_army_lite = 0.05 tooltip = SCR_dyn_army_lite_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
 	focus = {
 		id = SCR_artillery_interlude
 		icon = GFX_focus_SCR_artillery_interlude
-		x = 13
-		y = 3
+		x = 14
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1807,32 +1717,16 @@ focus_tree = {
 			focus = SCR_veterans_choir
 		}
 		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = artillery_equipment_0
-				amount = 300
-			}
+			add_equipment_to_stockpile = { type = artillery_equipment_0 amount = 300 }
 			army_experience = 5
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.03
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.03
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.015
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
+			add_political_power = -25
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army = 0.05 tooltip = SCR_dyn_army_value_tt }
+			add_to_variable = { SCR_dyn_army_supply = -0.10 tooltip = supply_consumption_factor_tt }
+			add_to_variable = { SCR_dyn_army_cg = 0.05 tooltip = SCR_dyn_army_cg_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
@@ -1840,7 +1734,7 @@ focus_tree = {
 		id = SCR_the_army_remembers
 		icon = GFX_focus_SCR_the_army_remembers
 		x = 12
-		y = 4
+		y = 45
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1870,29 +1764,11 @@ focus_tree = {
 			focus = SCR_artillery_interlude
 		}
 		completion_reward = {
-			add_ideas = SCR_armament_decree_1
 			army_experience = 10
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.04
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.04
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.02
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
+			add_war_support = 0.03
+			add_stability = -0.02
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
 			custom_effect_tooltip = SCR_vanguard_support_signal_tt
 			hidden_effect = {
 				add_units_to_division_template = {
@@ -1902,14 +1778,17 @@ focus_tree = {
 					}
 				}
 			}
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army_trickle = 0.10 tooltip = SCR_dyn_army_trickle_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
 	focus = {
 		id = SCR_gaulish_drill
 		icon = GFX_focus_SCR_gaulish_drill
-		x = 11
-		y = 5
+		x = 10
+		y = 46
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1938,35 +1817,23 @@ focus_tree = {
 			focus = SCR_the_army_remembers
 		}
 		completion_reward = {
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.03
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.03
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.015
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
+			add_war_support = 0.03
+			add_political_power = -25
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army_reinforce = 0.05 tooltip = SCR_dyn_army_reinforce_value_tt }
+			add_to_variable = { SCR_dyn_army_xp_loss = -0.05 tooltip = SCR_dyn_army_xp_loss_value_tt }
+			add_to_variable = { SCR_dyn_army_lite = 0.05 tooltip = SCR_dyn_army_lite_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
 	focus = {
 		id = SCR_supply_caravan_restored
 		icon = GFX_focus_SCR_supply_caravan_restored
-		x = 13
-		y = 5
+		x = 14
+		y = 46
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -1995,36 +1862,15 @@ focus_tree = {
 			focus = SCR_the_army_remembers
 		}
 		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = infantry_equipment_1
-				amount = 2000
-			}
-			add_equipment_to_stockpile = {
-				type = support_equipment
-				amount = 500
-			}
+			add_equipment_to_stockpile = { type = infantry_equipment_1 amount = 2000 }
+			add_equipment_to_stockpile = { type = support_equipment amount = 500 }
 			add_political_power = 25
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.03
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.03
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.015
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army_supply = -0.10 tooltip = supply_consumption_factor_tt }
+			add_to_variable = { SCR_dyn_army_speed = 0.10 tooltip = SCR_dyn_army_speed_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
@@ -2032,7 +1878,7 @@ focus_tree = {
 		id = SCR_encore_of_the_empire
 		icon = GFX_focus_SCR_encore_of_the_empire
 		x = 12
-		y = 6
+		y = 47
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2062,30 +1908,11 @@ focus_tree = {
 			focus = SCR_supply_caravan_restored
 		}
 		completion_reward = {
-			add_ideas = SCR_armament_decree_2
 			add_war_support = 0.05
 			army_experience = 25
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.04
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.04
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.02
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
+			add_stability = -0.03
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
 			custom_effect_tooltip = SCR_vanguard_support_logistics_tt
 			hidden_effect = {
 				add_units_to_division_template = {
@@ -2095,14 +1922,19 @@ focus_tree = {
 					}
 				}
 			}
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army = 0.10 tooltip = SCR_dyn_army_value_tt }
+			add_to_variable = { SCR_dyn_army_strength = 0.10 tooltip = SCR_dyn_army_strength_value_tt }
+			add_to_variable = { SCR_dyn_army_speed = 0.10 tooltip = SCR_dyn_army_speed_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
 	focus = {
 		id = SCR_old_guard_flag
 		icon = GFX_focus_SCR_old_guard_flag
-		x = 11
-		y = 7
+		x = 10
+		y = 48
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2132,35 +1964,20 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_war_support = 0.03
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.03
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.03
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.015
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
+			add_manpower = 4000
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army_reinforce = 0.10 tooltip = SCR_dyn_army_reinforce_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
 	focus = {
 		id = SCR_generals_box
 		icon = GFX_focus_SCR_generals_box
-		x = 13
-		y = 7
+		x = 14
+		y = 48
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2192,27 +2009,8 @@ focus_tree = {
 			add_political_power = 50
 			add_stability = 0.03
 			army_experience = 10
-			custom_effect_tooltip = SCR_dyn_army_modify_tt
-			add_to_variable = {
-				SCR_dyn_army_neg = -0.03
-				tooltip = justify_war_goal_time_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army = 0.03
-				tooltip = SCR_dyn_army_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_army_lite = 0.015
-				tooltip = SCR_dyn_army_lite_value_tt
-			}
-			add_dynamic_modifier = { modifier = SCR_dyn_army }
-			set_variable = { var = SCR_dyn_army_supply value = SCR_dyn_army }
-			multiply_variable = { var = SCR_dyn_army_supply value = -1 }
-			custom_effect_tooltip = SCR_dyn_army_tooltip
 			custom_effect_tooltip = SCR_vanguard_cap_up_tt
-			hidden_effect = {
-				SCR_vanguard_guard_cap_effect = yes
-			}
+			hidden_effect = { SCR_vanguard_guard_cap_effect = yes }
 			custom_effect_tooltip = SCR_vanguard_support_artillery_tt
 			hidden_effect = {
 				add_units_to_division_template = {
@@ -2222,6 +2020,9 @@ focus_tree = {
 					}
 				}
 			}
+			custom_effect_tooltip = SCR_dyn_army_modify_tt
+			add_to_variable = { SCR_dyn_army_pp = 0.10 tooltip = SCR_dyn_army_pp_value_tt }
+			add_dynamic_modifier = { modifier = SCR_dyn_army }
 		}
 	}
 
@@ -2232,7 +2033,7 @@ focus_tree = {
 		id = SCR_ledger_of_ruins
 		icon = GFX_focus_SCR_ledger_of_ruins
 		x = 18
-		y = 0
+		y = 41
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2258,30 +2059,19 @@ focus_tree = {
 			base = 10
 		}
 		completion_reward = {
-			add_political_power = 50
+			add_political_power = 25
+			add_stability = -0.02
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.03
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.01
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.015
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild_neg = -0.10 tooltip = SCR_dyn_rebuild_neg_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
 	focus = {
 		id = SCR_stage_of_iron
 		icon = GFX_focus_SCR_stage_of_iron
-		x = 17
-		y = 1
+		x = 16
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2311,43 +2101,21 @@ focus_tree = {
 		}
 		completion_reward = {
 			random_owned_controlled_state = {
-				limit = {
-					is_core_of = ROOT
-					free_building_slots = {
-						building = arms_factory
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
+				limit = { is_core_of = ROOT free_building_slots = { building = arms_factory size > 0 include_locked = yes } }
+				add_building_construction = { type = arms_factory level = 1 instant_build = yes }
 			}
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.03
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.01
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.015
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild_industry = 0.10 tooltip = SCR_dyn_rebuild_industry_value_tt }
+			add_to_variable = { SCR_dyn_rebuild_eff_gain = 0.05 tooltip = SCR_dyn_rebuild_eff_gain_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
 	focus = {
 		id = SCR_harvest_the_ruins
 		icon = GFX_focus_SCR_harvest_the_ruins
-		x = 19
-		y = 1
+		x = 20
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2376,30 +2144,13 @@ focus_tree = {
 			focus = SCR_ledger_of_ruins
 		}
 		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = infantry_equipment_1
-				amount = 2000
-			}
-			add_equipment_to_stockpile = {
-				type = artillery_equipment_0
-				amount = 200
-			}
+			add_equipment_to_stockpile = { type = infantry_equipment_1 amount = 2000 }
+			add_equipment_to_stockpile = { type = artillery_equipment_0 amount = 200 }
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.03
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.01
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.015
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild_res = 0.05 tooltip = SCR_dyn_rebuild_res_value_tt }
+			add_to_variable = { SCR_dyn_rebuild_people = 0.05 tooltip = SCR_dyn_rebuild_people_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
@@ -2407,7 +2158,7 @@ focus_tree = {
 		id = SCR_forge_chorus
 		icon = GFX_focus_SCR_forge_chorus
 		x = 18
-		y = 2
+		y = 43
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2439,28 +2190,17 @@ focus_tree = {
 		completion_reward = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.04
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.02
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.02
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild_eff_gain = 0.05 tooltip = SCR_dyn_rebuild_eff_gain_value_tt }
+			add_to_variable = { SCR_dyn_rebuild_eff_max = 0.10 tooltip = SCR_dyn_rebuild_eff_max_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
 	focus = {
 		id = SCR_rebuild_the_roads
 		icon = GFX_focus_SCR_rebuild_the_roads
-		x = 17
-		y = 3
+		x = 16
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2490,38 +2230,21 @@ focus_tree = {
 		}
 		completion_reward = {
 			random_owned_controlled_state = {
-				limit = {
-					is_core_of = ROOT
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
+				limit = { is_core_of = ROOT }
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
 			}
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.03
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.01
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.015
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild = 0.05 tooltip = SCR_dyn_rebuild_value_tt }
+			add_to_variable = { SCR_dyn_rebuild_res = 0.05 tooltip = SCR_dyn_rebuild_res_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
 	focus = {
 		id = SCR_light_in_the_basement
 		icon = GFX_focus_SCR_light_in_the_basement
-		x = 19
-		y = 3
+		x = 20
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2552,20 +2275,9 @@ focus_tree = {
 		completion_reward = {
 			add_political_power = 25
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.03
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.01
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.015
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild_lite = 0.05 tooltip = SCR_dyn_rebuild_lite_value_tt }
+			add_to_variable = { SCR_dyn_rebuild_people = 0.05 tooltip = SCR_dyn_rebuild_people_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
@@ -2573,7 +2285,7 @@ focus_tree = {
 		id = SCR_the_land_remembers
 		icon = GFX_focus_SCR_the_land_remembers
 		x = 18
-		y = 4
+		y = 45
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2604,44 +2316,23 @@ focus_tree = {
 		}
 		completion_reward = {
 			random_owned_controlled_state = {
-				limit = {
-					is_core_of = ROOT
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
+				limit = { is_core_of = ROOT free_building_slots = { building = industrial_complex size > 0 include_locked = yes } }
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
 			}
 			add_political_power = 25
+			add_stability = 0.03
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.04
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.02
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.02
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild_res = 0.05 tooltip = SCR_dyn_rebuild_res_value_tt }
+			add_to_variable = { SCR_dyn_rebuild_people = 0.05 tooltip = SCR_dyn_rebuild_people_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
 	focus = {
 		id = SCR_farmers_take_a_bow
 		icon = GFX_focus_SCR_farmers_take_a_bow
-		x = 17
-		y = 5
+		x = 16
+		y = 46
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2672,29 +2363,18 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.05
 			add_political_power = 25
+			add_manpower = 10000
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.03
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.01
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.015
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild_people = 0.05 tooltip = SCR_dyn_rebuild_people_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
 	focus = {
 		id = SCR_trade_on_old_roads
 		icon = GFX_focus_SCR_trade_on_old_roads
-		x = 19
-		y = 5
+		x = 20
+		y = 46
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2724,36 +2404,14 @@ focus_tree = {
 		}
 		completion_reward = {
 			random_owned_controlled_state = {
-				limit = {
-					is_core_of = ROOT
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
+				limit = { is_core_of = ROOT free_building_slots = { building = industrial_complex size > 0 include_locked = yes } }
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
 			}
 			add_political_power = 50
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.03
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.01
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.015
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild_industry = 0.05 tooltip = SCR_dyn_rebuild_industry_value_tt }
+			add_to_variable = { SCR_dyn_rebuild_res = 0.05 tooltip = SCR_dyn_rebuild_res_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
@@ -2761,7 +2419,7 @@ focus_tree = {
 		id = SCR_city_that_refuses_to_close
 		icon = GFX_focus_SCR_city_that_refuses_to_close
 		x = 18
-		y = 6
+		y = 47
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2793,29 +2451,18 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.05
 			add_political_power = 50
+			capital_scope = { add_extra_state_shared_building_slots = 2 }
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.04
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.02
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.02
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild = 0.05 tooltip = SCR_dyn_rebuild_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
 	focus = {
 		id = SCR_muses_exchange
 		icon = GFX_focus_SCR_muses_exchange
-		x = 17
-		y = 7
+		x = 16
+		y = 48
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2847,28 +2494,16 @@ focus_tree = {
 			add_political_power = 150
 			add_stability = 0.03
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.03
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.01
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.015
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild_industry = 0.05 tooltip = SCR_dyn_rebuild_industry_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
 	focus = {
 		id = SCR_archive_tower
 		icon = GFX_focus_SCR_archive_tower
-		x = 19
-		y = 7
+		x = 20
+		y = 48
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2898,21 +2533,10 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_political_power = 25
+			add_research_slot = 1
 			custom_effect_tooltip = SCR_dyn_rebuild_modify_tt
-			add_to_variable = {
-				SCR_dyn_rebuild = 0.03
-				tooltip = SCR_dyn_rebuild_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_neg = -0.01
-				tooltip = SCR_dyn_rebuild_neg_value_tt
-			}
-			add_to_variable = {
-				SCR_dyn_rebuild_lite = 0.015
-				tooltip = SCR_dyn_rebuild_lite_value_tt
-			}
+			add_to_variable = { SCR_dyn_rebuild_lite = 0.05 tooltip = SCR_dyn_rebuild_lite_value_tt }
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
@@ -2926,7 +2550,7 @@ focus_tree = {
 		id = SCR_shadow_over_salon
 		icon = GFX_focus_SCR_shadow_over_salon
 		x = 26
-		y = 0
+		y = 41
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -2958,11 +2582,10 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.01
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -2970,7 +2593,7 @@ focus_tree = {
 		id = SCR_ledger_of_old_blood
 		icon = GFX_focus_SCR_ledger_of_old_blood
 		x = 25
-		y = 1
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3009,7 +2632,7 @@ focus_tree = {
 		id = SCR_dressers_of_the_aristocracy
 		icon = GFX_focus_SCR_dressers_of_the_aristocracy
 		x = 27
-		y = 1
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3047,7 +2670,7 @@ focus_tree = {
 		id = SCR_puppets_in_the_salons
 		icon = GFX_focus_SCR_puppets_in_the_salons
 		x = 26
-		y = 2
+		y = 43
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3079,11 +2702,10 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.01
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -3091,7 +2713,7 @@ focus_tree = {
 		id = SCR_the_marriage_contract
 		icon = GFX_focus_SCR_the_marriage_contract
 		x = 25
-		y = 3
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3128,7 +2750,7 @@ focus_tree = {
 		id = SCR_forged_genealogy
 		icon = GFX_focus_SCR_forged_genealogy
 		x = 27
-		y = 3
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3165,7 +2787,7 @@ focus_tree = {
 		id = SCR_ministers_of_the_wing
 		icon = GFX_focus_SCR_ministers_of_the_wing
 		x = 26
-		y = 4
+		y = 45
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3198,11 +2820,10 @@ focus_tree = {
 			add_political_power = 50
 			custom_effect_tooltip = SCR_dyn_control_modify_tt
 			add_to_variable = {
-				SCR_dyn_control = 0.01
+				SCR_dyn_control = 0.02
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -3210,7 +2831,7 @@ focus_tree = {
 		id = SCR_voices_in_the_assembly
 		icon = GFX_focus_SCR_voices_in_the_assembly
 		x = 25
-		y = 5
+		y = 46
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3248,7 +2869,7 @@ focus_tree = {
 		id = SCR_the_chief_of_the_deep_office
 		icon = GFX_focus_SCR_the_chief_of_the_deep_office
 		x = 27
-		y = 5
+		y = 46
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3284,7 +2905,6 @@ focus_tree = {
 				tooltip = SCR_dyn_control_int_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -3292,7 +2912,7 @@ focus_tree = {
 		id = SCR_the_state_wears_a_mask
 		icon = GFX_focus_SCR_the_state_wears_a_mask
 		x = 26
-		y = 6
+		y = 47
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3330,7 +2950,6 @@ focus_tree = {
 				tooltip = SCR_dyn_control_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_control }
-			custom_effect_tooltip = SCR_dyn_control_tooltip
 		}
 	}
 
@@ -3338,7 +2957,7 @@ focus_tree = {
 		id = SCR_the_deep_government
 		icon = GFX_focus_SCR_the_deep_government
 		x = 26
-		y = 7
+		y = 48
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3367,7 +2986,6 @@ focus_tree = {
 			focus = SCR_the_state_wears_a_mask
 		}
 		completion_reward = {
-			add_ideas = SCR_deep_state
 			add_political_power = 100
 			if = {
 				limit = {
@@ -3390,7 +3008,7 @@ focus_tree = {
 		id = SCR_return_to_londinium
 		icon = GFX_focus_SCR_return_to_londinium
 		x = 34
-		y = 0
+		y = 41
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3426,7 +3044,6 @@ focus_tree = {
 				tooltip = SCR_dyn_rebuild_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
@@ -3434,7 +3051,7 @@ focus_tree = {
 		id = SCR_survey_the_rubble
 		icon = GFX_focus_SCR_survey_the_rubble
 		x = 33
-		y = 1
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3473,7 +3090,7 @@ focus_tree = {
 		id = SCR_requiem_for_the_capital
 		icon = GFX_focus_SCR_requiem_for_the_capital
 		x = 35
-		y = 1
+		y = 42
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3511,7 +3128,7 @@ focus_tree = {
 		id = SCR_forest_of_scaffolds
 		icon = GFX_focus_SCR_forest_of_scaffolds
 		x = 34
-		y = 2
+		y = 43
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3548,7 +3165,6 @@ focus_tree = {
 				tooltip = SCR_dyn_rebuild_value_tt
 			}
 			add_dynamic_modifier = { modifier = SCR_dyn_rebuild }
-			custom_effect_tooltip = SCR_dyn_rebuild_tooltip
 		}
 	}
 
@@ -3556,7 +3172,7 @@ focus_tree = {
 		id = SCR_foundation_of_the_grand_theatre
 		icon = GFX_focus_SCR_foundation_of_the_grand_theatre
 		x = 33
-		y = 3
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3600,7 +3216,7 @@ focus_tree = {
 		id = SCR_homeward_act
 		icon = GFX_focus_SCR_homeward_act
 		x = 35
-		y = 3
+		y = 44
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3638,7 +3254,7 @@ focus_tree = {
 		id = SCR_lights_of_londinium_again
 		icon = GFX_focus_SCR_lights_of_londinium_again
 		x = 34
-		y = 4
+		y = 45
 		cost = 5
 		# ---- 【旧树自动演出】自动推进锁 起 ----
 		available = {
@@ -3682,7 +3298,7 @@ focus_tree = {
 		completion_reward = {
 			add_timed_idea = {
 				idea = SCR_londinium_lights
-				days = 90
+				days = 30
 			}
 			add_political_power = 100
 			add_stability = 0.05
@@ -3709,6 +3325,107 @@ focus_tree = {
 		}
 	}
 
+	# ---- 【转线树】shared_focus 引用 自动生成 起 ----
+	shared_focus = SCR_switch_1
+	shared_focus = SCR_switch_2
+	shared_focus = SCR_switch_3
+	shared_focus = SCR_switch_4
+	shared_focus = SCR_switch_5
+	shared_focus = SCR_switch_6
+	# ---- 【转线树】shared_focus 引用 自动生成 止 ----
+	# ---- 发展度共享国策树（DEV）—— 猩红剧团暂时摘除（2026-10-19，位置由【皇帝的归来】取代）起 ----
+	# 恢复时把下面 25 行取消注释、并删掉【皇帝的归来】引用块即可。
+	# shared_focus = DEV_agri_1
+	# shared_focus = DEV_agri_2
+	# shared_focus = DEV_agri_3
+	# shared_focus = DEV_agri_4
+	# shared_focus = DEV_agri_5
+	# shared_focus = DEV_ind_1
+	# shared_focus = DEV_ind_2
+	# shared_focus = DEV_ind_3
+	# shared_focus = DEV_ind_4
+	# shared_focus = DEV_ind_5
+	# shared_focus = DEV_edu_1
+	# shared_focus = DEV_edu_2
+	# shared_focus = DEV_edu_3
+	# shared_focus = DEV_edu_4
+	# shared_focus = DEV_edu_5
+	# shared_focus = DEV_adm_1
+	# shared_focus = DEV_adm_2
+	# shared_focus = DEV_adm_3
+	# shared_focus = DEV_adm_4
+	# shared_focus = DEV_adm_5
+	# shared_focus = DEV_pov_1
+	# shared_focus = DEV_pov_2
+	# shared_focus = DEV_pov_3
+	# shared_focus = DEV_pov_4
+	# shared_focus = DEV_pov_5
+	# ---- 发展度共享国策树（DEV）—— 猩红剧团暂时摘除 止 ----
+	# ---- 【皇帝的归来】shared_focus 引用 起 ----
+	shared_focus = SCR_er_87
+	shared_focus = SCR_er_88
+	shared_focus = SCR_er_89
+	shared_focus = SCR_er_90
+	shared_focus = SCR_er_91
+	shared_focus = SCR_er_92
+	shared_focus = SCR_er_93
+	shared_focus = SCR_er_94
+	shared_focus = SCR_er_95
+	shared_focus = SCR_er_96
+	shared_focus = SCR_er_97
+	shared_focus = SCR_er_98
+	shared_focus = SCR_er_99
+	shared_focus = SCR_er_100
+	shared_focus = SCR_er_101
+	shared_focus = SCR_er_102
+	shared_focus = SCR_er_103
+	shared_focus = SCR_er_104
+	shared_focus = SCR_er_105
+	shared_focus = SCR_er_106
+	shared_focus = SCR_er_107
+	shared_focus = SCR_er_108
+	shared_focus = SCR_er_109
+	shared_focus = SCR_er_110
+	shared_focus = SCR_er_111
+	shared_focus = SCR_er_112
+	shared_focus = SCR_er_113
+	shared_focus = SCR_er_114
+	shared_focus = SCR_er_115
+	shared_focus = SCR_er_116
+	shared_focus = SCR_er_117
+	shared_focus = SCR_er_118
+	shared_focus = SCR_er_119
+	shared_focus = SCR_er_120
+	shared_focus = SCR_er_121
+	shared_focus = SCR_er_122
+	shared_focus = SCR_er_123
+	shared_focus = SCR_er_124
+	shared_focus = SCR_er_125
+	shared_focus = SCR_er_126
+	shared_focus = SCR_er_127
+	shared_focus = SCR_er_128
+	shared_focus = SCR_er_129
+	shared_focus = SCR_er_130
+	shared_focus = SCR_er_131
+	shared_focus = SCR_er_132
+	shared_focus = SCR_er_133
+	shared_focus = SCR_er_134
+	shared_focus = SCR_er_135
+	shared_focus = SCR_er_136
+	shared_focus = SCR_er_137
+	shared_focus = SCR_er_138
+	shared_focus = SCR_er_139
+	shared_focus = SCR_er_140
+	shared_focus = SCR_er_141
+	shared_focus = SCR_er_143
+	shared_focus = SCR_er_144
+	shared_focus = SCR_er_145
+	shared_focus = SCR_er_147
+	shared_focus = SCR_er_148
+	shared_focus = SCR_er_149
+	shared_focus = SCR_er_150
+	shared_focus = SCR_er_151
+	# ---- 【皇帝的归来】shared_focus 引用 止 ----
 	# ---- 【科西嘉线】shared_focus 引用 自动生成 起 ----
 	shared_focus = SCR_corsica_1
 	shared_focus = SCR_corsica_2
@@ -3789,39 +3506,4 @@ focus_tree = {
 	shared_focus = SCR_corsica_79
 	shared_focus = SCR_corsica_80
 	# ---- 【科西嘉线】shared_focus 引用 自动生成 止 ----
-	# ---- 【转线树】shared_focus 引用 自动生成 起 ----
-	shared_focus = SCR_switch_1
-	shared_focus = SCR_switch_2
-	shared_focus = SCR_switch_3
-	shared_focus = SCR_switch_4
-	shared_focus = SCR_switch_5
-	shared_focus = SCR_switch_6
-	# ---- 【转线树】shared_focus 引用 自动生成 止 ----
-	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----
-	shared_focus = DEV_agri_1
-	shared_focus = DEV_agri_2
-	shared_focus = DEV_agri_3
-	shared_focus = DEV_agri_4
-	shared_focus = DEV_agri_5
-	shared_focus = DEV_ind_1
-	shared_focus = DEV_ind_2
-	shared_focus = DEV_ind_3
-	shared_focus = DEV_ind_4
-	shared_focus = DEV_ind_5
-	shared_focus = DEV_edu_1
-	shared_focus = DEV_edu_2
-	shared_focus = DEV_edu_3
-	shared_focus = DEV_edu_4
-	shared_focus = DEV_edu_5
-	shared_focus = DEV_adm_1
-	shared_focus = DEV_adm_2
-	shared_focus = DEV_adm_3
-	shared_focus = DEV_adm_4
-	shared_focus = DEV_adm_5
-	shared_focus = DEV_pov_1
-	shared_focus = DEV_pov_2
-	shared_focus = DEV_pov_3
-	shared_focus = DEV_pov_4
-	shared_focus = DEV_pov_5
-	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 止 ----
 }

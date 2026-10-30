@@ -1,126 +1,69 @@
-# ==============================================================================
-#  大炎·奇迹工程 —— dynamic modifiers
-#  生成物，真源 docs/yan_miracle_data.cjs
-#
-#  · yan_mir_dm_<key>   竣工后永久挂在施工州的州级 BUFF（州 scope 挂载）
-#  · yan_miracle_spirit    全国精神：数值全是变量，靠 YAN_Mir_Recalc 原地成长
-#    （国家 dynamic_modifier 带 icon 即为「精神」）
-#  · 显示名 = loc 键 = 块 id，块内写 name 无效
-# ==============================================================================
+# 大炎 · 奇迹工程 —— 动态修正
+#  · 六项竣工奖励：每项一个，竣工才挂
+#  · yan_mir_workload：按已分配民用工厂抬高消费品需求（机会成本）
+#  · 诏令 wb / xx 的持续效果
+#  · 2026-10-26：以上全部去掉 icon，不再进政治面板；修正照常生效。
 
-# ---- 广厦万间（JZJ-01）----
-yan_mir_dm_guangsha = {
-	icon = GFX_YAN_mir_dmbuff_guangsha
-
+yan_mir_wonder_wall = { #龙脊移动壁垒
+	# 2026-10-26：竣工精神隐藏（无 icon 不进政治面板），修正照常生效
 	enable = { always = yes }
 
-	local_factories = 0.15
-	recruitable_population_factor = 0.1
-	local_building_slots = 1
+	army_core_defence_factor = 0.10
+	army_defence_factor = 0.05
 }
 
-# ---- 熔金巨炉（JZJ-02）----
-yan_mir_dm_rongjin = {
-	icon = GFX_YAN_mir_dmbuff_rongjin
-
+yan_mir_wonder_sisui = { #司岁镇岳台
 	enable = { always = yes }
 
-	local_factories = 0.2
-	local_resources_factor = 0.15
-	state_production_speed_buildings_factor = 0.1
+	stability_factor = 0.08
+	research_speed_factor = 0.05
 }
 
-# ---- 都江金堤（JZJ-03）----
-yan_mir_dm_dujiang = {
-	icon = GFX_YAN_mir_dmbuff_dujiang
-
+yan_mir_wonder_observatory = { #天枢观星阁
 	enable = { always = yes }
 
-	local_supplies = 0.15
-	local_factories = 0.1
-	state_production_speed_buildings_factor = 0.08
+	research_speed_factor = 0.08
+	decryption_factor = 0.10
 }
 
-# ---- 转漕长渠（JZJ-04）----
-yan_mir_dm_zhuancao = {
-	icon = GFX_YAN_mir_dmbuff_zhuancao
-
+yan_mir_wonder_canal = { #玉带南北水脉
 	enable = { always = yes }
 
-	local_supplies_for_controller = 0.2
-	local_building_slots = 1
-	state_production_speed_facility_factor = 0.1
+	production_speed_buildings_factor = 0.10
+	supply_consumption_factor = -0.10
 }
 
-# ---- 镇岳军械城（JZJ-05）----
-yan_mir_dm_zhenyue = {
-	icon = GFX_YAN_mir_dmbuff_zhenyue
-
+yan_mir_wonder_furnace = { #九鼎源石熔炉
 	enable = { always = yes }
 
-	local_factories = 0.25
-	local_building_slots = 2
-	state_production_speed_buildings_factor = 0.12
+	industrial_capacity_factory = 0.07
+	production_factory_efficiency_gain_factor = 0.10
 }
 
-# ---- 飞云船坞（JZJ-06）----
-yan_mir_dm_feiyun = {
-	icon = GFX_YAN_mir_dmbuff_feiyun
-
+yan_mir_wonder_palace = { #凌霄浮空宫阙
 	enable = { always = yes }
 
-	local_factories = 0.15
-	local_building_slots = 1
-	state_production_speed_facility_factor = 0.15
+	political_power_factor = 0.15
+	war_support_factor = 0.10
 }
 
-# ---- 司天观星台（JZJ-07）----
-yan_mir_dm_sitian = {
-	icon = GFX_YAN_mir_dmbuff_sitian
-
+yan_mir_workload = { #营造用工（民用工厂占用）
+	# 2026-10-26：隐藏（无 icon 不进政治面板）
 	enable = { always = yes }
 
-	local_factories = 0.1
-	recruitable_population_factor = 0.05
-	local_intel_to_enemies = -0.1
+	consumer_goods_factor = YAN_mir_cg
 }
 
-# ---- 玉门塞垣（JZJ-08）----
-yan_mir_dm_yumen = {
-	icon = GFX_YAN_mir_dmbuff_yumen
-
+yan_mir_edict_wb_dm = { #万邦来朝
+	# 2026-10-26：隐藏（无 icon 不进政治面板）
 	enable = { always = yes }
 
-	local_org_regain = 0.15
-	local_supplies = 0.1
-	local_building_slots = 1
+	political_power_factor = 0.20
 }
 
-# ---- 移动城市·龙门（JZJ-09）----
-yan_mir_dm_longmen = {
-	icon = GFX_YAN_mir_dmbuff_longmen
-
+yan_mir_edict_xx_dm = { #休养生息
+	# 2026-10-26：隐藏（无 icon 不进政治面板）
 	enable = { always = yes }
 
-	local_factories = 0.3
-	local_building_slots = 3
-	recruitable_population_factor = 0.15
-	local_supplies = 0.2
-}
-
-# ---- 将作监·百工：19 处奇迹工程累加出来的全国底数 ----
-yan_miracle_spirit = {
-	icon = GFX_YAN_mir_spirit_total
-
-	enable = { always = yes }
-
-	research_speed_factor = YAN_mir_np_rsd
-	political_power_factor = YAN_mir_np_pp
-	industrial_capacity_factory = YAN_mir_np_ifac
-	industrial_capacity_dockyard = YAN_mir_np_idoc
-	production_speed_buildings_factor = YAN_mir_np_bld
-	army_attack_factor = YAN_mir_np_atk
-	army_defence_factor = YAN_mir_np_def
-	supply_consumption_factor = YAN_mir_np_sup
-	stability_factor = YAN_mir_np_stab
+	stability_factor = 0.05
 }

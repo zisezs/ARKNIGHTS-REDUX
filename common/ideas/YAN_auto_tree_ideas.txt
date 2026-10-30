@@ -1,0 +1,62 @@
+# 大炎自动推进树 · 隐藏装备 idea（2026-10-26）
+# equipment_bonus 无法写进动态修正，【积甲成山】的装甲厚度由此隐藏 idea 实际生效。
+# 数值同时写进 YAN_auto_armor_thick 变量，仅用于精神 tooltip 显示。
+
+ideas = {
+	hidden_ideas = {
+
+		# 积甲成山：所有装甲单位 装甲厚度 +10%
+		YAN_auto_armor_thickness = {
+			removal_cost = -1
+
+			equipment_bonus = {
+				light_tank_chassis = {
+					instant = yes
+					armor_value = 0.10
+				}
+			}
+			equipment_bonus = {
+				medium_tank_chassis = {
+					instant = yes
+					armor_value = 0.10
+				}
+			}
+			equipment_bonus = {
+				heavy_tank_chassis = {
+					instant = yes
+					armor_value = 0.10
+				}
+			}
+			equipment_bonus = {
+				modern_tank_chassis = {
+					instant = yes
+					armor_value = 0.10
+				}
+			}
+			equipment_bonus = {
+				super_heavy_tank_chassis = {
+					instant = yes
+					armor_value = 0.10
+				}
+			}
+			equipment_bonus = {
+				landship_chassis = {
+					instant = yes
+					armor_value = 0.10
+				}
+			}
+			equipment_bonus = {
+				sp_artillery_chassis = {
+					instant = yes
+					armor_value = 0.10
+				}
+			}
+			equipment_bonus = {
+				sp_aa_chassis = {
+					instant = yes
+					armor_value = 0.10
+				}
+			}
+		}
+	}
+}

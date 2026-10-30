@@ -1,0 +1,73 @@
+######################################################
+# 大炎 · 军事国策树【大炎帝国军事改革】变量初始化
+# 由 YAN_mil_three_armies（懋戒三军）调用一次。
+#
+# 机制：
+#   · completion_reward 只做 add_to_variable，动态精神 YAN_mil_reform_spirit
+#     逐个修正符直读同名变量，数值原地成长，不换精神、不折算档位。
+#   · 本脚本只把全部变量归零；根部四项 -20% 的军改阵痛由
+#     YAN_mil_three_armies 用 add_to_variable 追加，避免重复叠加。
+#   · 决议次数计数器也在这里归零，避免 check_variable 读到未定义变量。
+#
+# 修正符归属见 common/dynamic_modifiers/YAN_mil_reform_dynamic_modifiers.txt
+######################################################
+
+YAN_mil_reform_init = {
+	# ---- 根部四项阵痛由 YAN_mil_three_armies 用 add_to_variable 追加；
+	#      这里只负责归零，避免与国策重复叠加 ----
+	set_variable = { YAN_mil_rf_army_xp = 0 }              # 陆军经验获取
+	set_variable = { YAN_mil_rf_air_xp = 0 }               # 空军经验获取
+	set_variable = { YAN_mil_rf_air_attack = 0 }           # 空军攻击
+	set_variable = { YAN_mil_rf_air_defence = 0 }          # 空军防御
+	set_variable = { YAN_mil_rf_air_agility = 0 }          # 空军机动
+	set_variable = { YAN_mil_rf_air_range = 0 }            # 空军航程
+	set_variable = { YAN_mil_rf_air_superiority = 0 }      # 制空效率
+	set_variable = { YAN_mil_rf_air_cas = 0 }              # 近距支援效率
+	set_variable = { YAN_mil_rf_air_mission = 0 }          # 空军任务效率
+	set_variable = { YAN_mil_rf_army_org = 0 }             # 陆军组织度
+	set_variable = { YAN_mil_rf_army_speed = 0 }           # 陆军移动速度
+
+	# ---- 后续国策 / 决议累加的修正 ----
+	set_variable = { YAN_mil_rf_training_time = 0 }        # 陆军训练时长
+	set_variable = { YAN_mil_rf_conscription = 0 }         # 可征募人口系数
+	set_variable = { YAN_mil_rf_war_support = 0 }          # 战争支持度
+	set_variable = { YAN_mil_rf_inf_defence = 0 }          # 步兵师防御
+	set_variable = { YAN_mil_rf_inf_attack = 0 }           # 步兵师攻击
+	set_variable = { YAN_mil_rf_supply = 0 }               # 陆军补给消耗
+	set_variable = { YAN_mil_rf_political_power = 0 }      # 政治点数获取
+	set_variable = { YAN_mil_rf_breakthrough = 0 }         # 突破
+	set_variable = { YAN_mil_rf_mil_factory_speed = 0 }    # 军用工厂建造速度
+	set_variable = { YAN_mil_rf_prod_cap = 0 }             # 生产效率上限
+	set_variable = { YAN_mil_rf_prod_growth = 0 }          # 生产效率增长速度
+	set_variable = { YAN_mil_rf_civ_factory_speed = 0 }    # 民用工厂建造速度
+	set_variable = { YAN_mil_rf_factory_output = 0 }       # 工厂产出
+	set_variable = { YAN_mil_rf_army_hp = 0 }              # 陆军HP
+	set_variable = { YAN_mil_rf_reinforce = 0 }            # 陆军增援率
+	set_variable = { YAN_mil_rf_planning_speed = 0 }       # 陆军计划速度
+	set_variable = { YAN_mil_rf_planning_cap = 0 }         # 陆军计划上限
+	set_variable = { YAN_mil_rf_trickleback = 0 }          # 伤兵复原
+	set_variable = { YAN_mil_rf_army_attack = 0 }          # 陆军攻击
+
+	# ---- 装备条款（真实效果在隐藏 idea 的 equipment_bonus；
+	#      这里只存一份数值，供民族精神的 custom_modifier_tooltip 显示） ----
+	set_variable = { YAN_mil_rf_equip_armor_cost = 0 }     # 所有装甲单位生产花费
+	set_variable = { YAN_mil_rf_equip_air_cost = 0 }       # 所有空军单位生产花费
+	set_variable = { YAN_mil_rf_equip_armor_value = 0 }    # 所有装甲单位装甲厚度
+	set_variable = { YAN_mil_rf_equip_armor_bt = 0 }       # 所有装甲单位突破
+	set_variable = { YAN_mil_rf_equip_inf_cost = 0 }       # 所有步兵装备生产花费
+	set_variable = { YAN_mil_rf_equip_inf_def = 0 }        # 所有步兵装备防御
+
+	# ---- 决议【大营演武】的使用次数 ----
+	set_variable = { YAN_mil_rf_dec_comfort_used = 0 }     # 安抚将官与士卒（上限 10）
+	set_variable = { YAN_mil_rf_dec_border_used = 0 }      # 干戈的边界（上限 5）
+	set_variable = { YAN_mil_rf_dec_attrition_used = 0 }   # 矛盾的损耗（上限 5）
+	set_variable = { YAN_mil_rf_dec_planning_used = 0 }    # 谋定而后动（上限 5）
+	set_variable = { YAN_mil_rf_dec_registry_used = 0 }    # 武籍点验（上限 5）
+	set_variable = { YAN_mil_rf_dec_rotation_used = 0 }    # 玉门轮戍（上限 5）
+	set_variable = { YAN_mil_rf_dec_arsenal_used = 0 }     # 军械清册（上限 5）
+	set_variable = { YAN_mil_rf_dec_pension_used = 0 }     # 伤亡抚恤（上限 5）
+	set_variable = { YAN_mil_rf_dec_drone_used = 0 }       # 无人机轮训（上限 5）
+	set_variable = { YAN_mil_rf_dec_air_supremacy_used = 0 } # 制空教范（上限 5）
+	set_variable = { YAN_mil_rf_dec_air_support_used = 0 }   # 对地支援条令（上限 5）
+	set_variable = { YAN_mil_rf_dec_air_range_used = 0 }     # 远程奔袭（上限 5）
+}

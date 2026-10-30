@@ -1,70 +1,12 @@
 # ==============================================================================
-#  大炎 · 四大机制事件链（骨架）
-#  · yan_sui.1 岁兽苏醒度进入警戒      yan_sui.2 岁兽之乱（触顶灾难）
-#  · yan_sui.3 书刀案（完整度 < 50）   yan_sui.4 代理人离心（信任 < 20）
-#  · yan_sui.10 岁陵决战结算           yan_sui.11 启动不反
-#  · 旧 yan_sui.5（「体验未完善内容」决议的入口）随旧树一并作废：
-#     它没有任何调用点，且 loc 从未写过（真弹出来只会显示原始键），2026-09-21 删除。
-#  · 前四条在【岁醒】开局树期间由 YAN_monthly_tick 触发，文案按《登临意》校对。
+#  大炎 · 岁陵事件（2026-10-25：岁醒树已删除，仅保留仍在使用的两条结算事件）
+#  · yan_sui.10 岁陵决战结算
+#  · yan_sui.11 启动不反
+#  · 原 yan_sui.1–4（岁兽警戒 / 岁兽之乱 / 书刀案 / 代理人离心）为【岁醒】月度事件，
+#    已随岁醒国策树一并删除；相关触发见 common/scripted_effects/YAN_scripted_effects.txt。
 # ==============================================================================
 
 add_namespace = yan_sui
-
-# 岁兽苏醒度进入警戒
-country_event = {
-	id = yan_sui.1
-	title = yan_sui.1.t
-	desc = yan_sui.1.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = yan_sui.1.a
-		add_political_power = -25
-	}
-}
-
-# 岁兽之乱
-country_event = {
-	id = yan_sui.2
-	title = yan_sui.2.t
-	desc = yan_sui.2.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = yan_sui.2.a
-		add_stability = -0.05
-	}
-}
-
-# 书刀案
-country_event = {
-	id = yan_sui.3
-	title = yan_sui.3.t
-	desc = yan_sui.3.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = yan_sui.3.a
-		add_political_power = -50
-	}
-}
-
-# 代理人离心
-country_event = {
-	id = yan_sui.4
-	title = yan_sui.4.t
-	desc = yan_sui.4.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = yan_sui.4.a
-		add_to_variable = { yan_agent_trust = 5 }
-	}
-}
 
 # 岁陵决战（国策 YAN_Suiling_Decisive 触发）
 country_event = {

@@ -1,0 +1,1466 @@
+######################################################
+# 大炎 · 十二岁片国策树 · 核心集团式自动推进
+# 出山完成 → 本线其余 6 格由宰府署理人自动完成（金光 + 定时事件）
+# 生成器：docs/gen_yan_shards_auto.cjs（勿手改本文件）
+######################################################
+
+# 重岳：出山 → 自动推进（席位 8 / 人物 1）
+YAN_shards_auto_start_zhongyue = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_zhongyue_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_8 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_8 = 1 }
+		set_country_flag = YAN_shards_zhongyue_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_zhongyue_done } }
+		YAN_shards_auto_next_zhongyue = yes
+	}
+}
+
+YAN_shards_auto_next_zhongyue = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_zhongyue_zb
+				has_shine_effect_on_focus = YAN_chc_zhongyue_a3
+				has_shine_effect_on_focus = YAN_chc_zhongyue_b3
+				has_shine_effect_on_focus = YAN_chc_zhongyue_c3
+				has_shine_effect_on_focus = YAN_chc_zhongyue_cri
+				has_shine_effect_on_focus = YAN_chc_zhongyue_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_zhongyue_zb } }
+		activate_shine_on_focus = YAN_chc_zhongyue_zb
+		set_country_flag = { flag = YAN_shards_zhongyue_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.1 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_zhongyue_a3 } }
+		activate_shine_on_focus = YAN_chc_zhongyue_a3
+		set_country_flag = { flag = YAN_shards_zhongyue_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_zhongyue_b3 } }
+		activate_shine_on_focus = YAN_chc_zhongyue_b3
+		set_country_flag = { flag = YAN_shards_zhongyue_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_zhongyue_c3 } }
+		activate_shine_on_focus = YAN_chc_zhongyue_c3
+		set_country_flag = { flag = YAN_shards_zhongyue_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.1 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_zhongyue_cri } }
+		activate_shine_on_focus = YAN_chc_zhongyue_cri
+		set_country_flag = { flag = YAN_shards_zhongyue_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.1 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_zhongyue_fin } }
+		activate_shine_on_focus = YAN_chc_zhongyue_fin
+		set_country_flag = { flag = YAN_shards_zhongyue_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.1 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_zhongyue_done
+		clr_country_flag = YAN_shards_zhongyue_prog
+	}
+}
+
+YAN_shards_auto_step_zhongyue = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_zhongyue_zb }
+		deactivate_shine_on_focus = YAN_chc_zhongyue_zb
+		complete_national_focus = { focus = YAN_chc_zhongyue_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_zhongyue_a3 }
+		deactivate_shine_on_focus = YAN_chc_zhongyue_a3
+		complete_national_focus = { focus = YAN_chc_zhongyue_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_zhongyue_b3 }
+		deactivate_shine_on_focus = YAN_chc_zhongyue_b3
+		complete_national_focus = { focus = YAN_chc_zhongyue_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_zhongyue_c3 }
+		deactivate_shine_on_focus = YAN_chc_zhongyue_c3
+		complete_national_focus = { focus = YAN_chc_zhongyue_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_zhongyue_cri }
+		deactivate_shine_on_focus = YAN_chc_zhongyue_cri
+		complete_national_focus = { focus = YAN_chc_zhongyue_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_zhongyue_fin }
+		deactivate_shine_on_focus = YAN_chc_zhongyue_fin
+		complete_national_focus = { focus = YAN_chc_zhongyue_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_zhongyue = yes
+}
+
+# 望：出山 → 自动推进（席位 11 / 人物 2）
+YAN_shards_auto_start_wang = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_wang_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_11 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_11 = 2 }
+		set_country_flag = YAN_shards_wang_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_wang_done } }
+		YAN_shards_auto_next_wang = yes
+	}
+}
+
+YAN_shards_auto_next_wang = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_wang_zb
+				has_shine_effect_on_focus = YAN_chc_wang_a3
+				has_shine_effect_on_focus = YAN_chc_wang_b3
+				has_shine_effect_on_focus = YAN_chc_wang_c3
+				has_shine_effect_on_focus = YAN_chc_wang_cri
+				has_shine_effect_on_focus = YAN_chc_wang_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_wang_zb } }
+		activate_shine_on_focus = YAN_chc_wang_zb
+		set_country_flag = { flag = YAN_shards_wang_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.2 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_wang_a3 } }
+		activate_shine_on_focus = YAN_chc_wang_a3
+		set_country_flag = { flag = YAN_shards_wang_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.2 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_wang_b3 } }
+		activate_shine_on_focus = YAN_chc_wang_b3
+		set_country_flag = { flag = YAN_shards_wang_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.2 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_wang_c3 } }
+		activate_shine_on_focus = YAN_chc_wang_c3
+		set_country_flag = { flag = YAN_shards_wang_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.2 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_wang_cri } }
+		activate_shine_on_focus = YAN_chc_wang_cri
+		set_country_flag = { flag = YAN_shards_wang_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.2 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_wang_fin } }
+		activate_shine_on_focus = YAN_chc_wang_fin
+		set_country_flag = { flag = YAN_shards_wang_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.2 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_wang_done
+		clr_country_flag = YAN_shards_wang_prog
+	}
+}
+
+YAN_shards_auto_step_wang = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_wang_zb }
+		deactivate_shine_on_focus = YAN_chc_wang_zb
+		complete_national_focus = { focus = YAN_chc_wang_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_wang_a3 }
+		deactivate_shine_on_focus = YAN_chc_wang_a3
+		complete_national_focus = { focus = YAN_chc_wang_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_wang_b3 }
+		deactivate_shine_on_focus = YAN_chc_wang_b3
+		complete_national_focus = { focus = YAN_chc_wang_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_wang_c3 }
+		deactivate_shine_on_focus = YAN_chc_wang_c3
+		complete_national_focus = { focus = YAN_chc_wang_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_wang_cri }
+		deactivate_shine_on_focus = YAN_chc_wang_cri
+		complete_national_focus = { focus = YAN_chc_wang_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_wang_fin }
+		deactivate_shine_on_focus = YAN_chc_wang_fin
+		complete_national_focus = { focus = YAN_chc_wang_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_wang = yes
+}
+
+# 令：出山 → 自动推进（席位 9 / 人物 3）
+YAN_shards_auto_start_ling = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_ling_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_9 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_9 = 3 }
+		set_country_flag = YAN_shards_ling_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_ling_done } }
+		YAN_shards_auto_next_ling = yes
+	}
+}
+
+YAN_shards_auto_next_ling = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_ling_zb
+				has_shine_effect_on_focus = YAN_chc_ling_a3
+				has_shine_effect_on_focus = YAN_chc_ling_b3
+				has_shine_effect_on_focus = YAN_chc_ling_c3
+				has_shine_effect_on_focus = YAN_chc_ling_cri
+				has_shine_effect_on_focus = YAN_chc_ling_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ling_zb } }
+		activate_shine_on_focus = YAN_chc_ling_zb
+		set_country_flag = { flag = YAN_shards_ling_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.3 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ling_a3 } }
+		activate_shine_on_focus = YAN_chc_ling_a3
+		set_country_flag = { flag = YAN_shards_ling_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.3 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ling_b3 } }
+		activate_shine_on_focus = YAN_chc_ling_b3
+		set_country_flag = { flag = YAN_shards_ling_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.3 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ling_c3 } }
+		activate_shine_on_focus = YAN_chc_ling_c3
+		set_country_flag = { flag = YAN_shards_ling_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.3 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ling_cri } }
+		activate_shine_on_focus = YAN_chc_ling_cri
+		set_country_flag = { flag = YAN_shards_ling_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.3 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ling_fin } }
+		activate_shine_on_focus = YAN_chc_ling_fin
+		set_country_flag = { flag = YAN_shards_ling_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.3 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_ling_done
+		clr_country_flag = YAN_shards_ling_prog
+	}
+}
+
+YAN_shards_auto_step_ling = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ling_zb }
+		deactivate_shine_on_focus = YAN_chc_ling_zb
+		complete_national_focus = { focus = YAN_chc_ling_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ling_a3 }
+		deactivate_shine_on_focus = YAN_chc_ling_a3
+		complete_national_focus = { focus = YAN_chc_ling_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ling_b3 }
+		deactivate_shine_on_focus = YAN_chc_ling_b3
+		complete_national_focus = { focus = YAN_chc_ling_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ling_c3 }
+		deactivate_shine_on_focus = YAN_chc_ling_c3
+		complete_national_focus = { focus = YAN_chc_ling_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ling_cri }
+		deactivate_shine_on_focus = YAN_chc_ling_cri
+		complete_national_focus = { focus = YAN_chc_ling_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ling_fin }
+		deactivate_shine_on_focus = YAN_chc_ling_fin
+		complete_national_focus = { focus = YAN_chc_ling_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_ling = yes
+}
+
+# 均：出山 → 自动推进（席位 2 / 人物 4）
+YAN_shards_auto_start_jun = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_jun_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_2 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_2 = 4 }
+		set_country_flag = YAN_shards_jun_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_jun_done } }
+		YAN_shards_auto_next_jun = yes
+	}
+}
+
+YAN_shards_auto_next_jun = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_jun_zb
+				has_shine_effect_on_focus = YAN_chc_jun_a3
+				has_shine_effect_on_focus = YAN_chc_jun_b3
+				has_shine_effect_on_focus = YAN_chc_jun_c3
+				has_shine_effect_on_focus = YAN_chc_jun_cri
+				has_shine_effect_on_focus = YAN_chc_jun_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jun_zb } }
+		activate_shine_on_focus = YAN_chc_jun_zb
+		set_country_flag = { flag = YAN_shards_jun_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.4 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jun_a3 } }
+		activate_shine_on_focus = YAN_chc_jun_a3
+		set_country_flag = { flag = YAN_shards_jun_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.4 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jun_b3 } }
+		activate_shine_on_focus = YAN_chc_jun_b3
+		set_country_flag = { flag = YAN_shards_jun_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.4 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jun_c3 } }
+		activate_shine_on_focus = YAN_chc_jun_c3
+		set_country_flag = { flag = YAN_shards_jun_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.4 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jun_cri } }
+		activate_shine_on_focus = YAN_chc_jun_cri
+		set_country_flag = { flag = YAN_shards_jun_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.4 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jun_fin } }
+		activate_shine_on_focus = YAN_chc_jun_fin
+		set_country_flag = { flag = YAN_shards_jun_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.4 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_jun_done
+		clr_country_flag = YAN_shards_jun_prog
+	}
+}
+
+YAN_shards_auto_step_jun = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jun_zb }
+		deactivate_shine_on_focus = YAN_chc_jun_zb
+		complete_national_focus = { focus = YAN_chc_jun_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jun_a3 }
+		deactivate_shine_on_focus = YAN_chc_jun_a3
+		complete_national_focus = { focus = YAN_chc_jun_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jun_b3 }
+		deactivate_shine_on_focus = YAN_chc_jun_b3
+		complete_national_focus = { focus = YAN_chc_jun_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jun_c3 }
+		deactivate_shine_on_focus = YAN_chc_jun_c3
+		complete_national_focus = { focus = YAN_chc_jun_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jun_cri }
+		deactivate_shine_on_focus = YAN_chc_jun_cri
+		complete_national_focus = { focus = YAN_chc_jun_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jun_fin }
+		deactivate_shine_on_focus = YAN_chc_jun_fin
+		complete_national_focus = { focus = YAN_chc_jun_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_jun = yes
+}
+
+# 颉：出山 → 自动推进（席位 7 / 人物 5）
+YAN_shards_auto_start_jie = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_jie_seated } }
+		# 老存档：旧核心集团可能把此人放在别席，先清空
+		if = {
+			limit = { check_variable = { YAN_court_seat_4 = 5 } }
+			set_variable = { YAN_court_seat_4 = 0 }
+		}
+		if = {
+			limit = { check_variable = { YAN_court_seat_7 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_7 = 5 }
+		set_country_flag = YAN_shards_jie_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_jie_done } }
+		YAN_shards_auto_next_jie = yes
+	}
+}
+
+YAN_shards_auto_next_jie = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_jie_zb
+				has_shine_effect_on_focus = YAN_chc_jie_a3
+				has_shine_effect_on_focus = YAN_chc_jie_b3
+				has_shine_effect_on_focus = YAN_chc_jie_c3
+				has_shine_effect_on_focus = YAN_chc_jie_cri
+				has_shine_effect_on_focus = YAN_chc_jie_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jie_zb } }
+		activate_shine_on_focus = YAN_chc_jie_zb
+		set_country_flag = { flag = YAN_shards_jie_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.5 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jie_a3 } }
+		activate_shine_on_focus = YAN_chc_jie_a3
+		set_country_flag = { flag = YAN_shards_jie_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.5 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jie_b3 } }
+		activate_shine_on_focus = YAN_chc_jie_b3
+		set_country_flag = { flag = YAN_shards_jie_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.5 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jie_c3 } }
+		activate_shine_on_focus = YAN_chc_jie_c3
+		set_country_flag = { flag = YAN_shards_jie_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.5 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jie_cri } }
+		activate_shine_on_focus = YAN_chc_jie_cri
+		set_country_flag = { flag = YAN_shards_jie_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.5 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_jie_fin } }
+		activate_shine_on_focus = YAN_chc_jie_fin
+		set_country_flag = { flag = YAN_shards_jie_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.5 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_jie_done
+		clr_country_flag = YAN_shards_jie_prog
+	}
+}
+
+YAN_shards_auto_step_jie = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jie_zb }
+		deactivate_shine_on_focus = YAN_chc_jie_zb
+		complete_national_focus = { focus = YAN_chc_jie_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jie_a3 }
+		deactivate_shine_on_focus = YAN_chc_jie_a3
+		complete_national_focus = { focus = YAN_chc_jie_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jie_b3 }
+		deactivate_shine_on_focus = YAN_chc_jie_b3
+		complete_national_focus = { focus = YAN_chc_jie_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jie_c3 }
+		deactivate_shine_on_focus = YAN_chc_jie_c3
+		complete_national_focus = { focus = YAN_chc_jie_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jie_cri }
+		deactivate_shine_on_focus = YAN_chc_jie_cri
+		complete_national_focus = { focus = YAN_chc_jie_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_jie_fin }
+		deactivate_shine_on_focus = YAN_chc_jie_fin
+		complete_national_focus = { focus = YAN_chc_jie_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_jie = yes
+}
+
+# 黍：出山 → 自动推进（席位 6 / 人物 6）
+YAN_shards_auto_start_shu = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_shu_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_6 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_6 = 6 }
+		set_country_flag = YAN_shards_shu_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_shu_done } }
+		YAN_shards_auto_next_shu = yes
+	}
+}
+
+YAN_shards_auto_next_shu = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_shu_zb
+				has_shine_effect_on_focus = YAN_chc_shu_a3
+				has_shine_effect_on_focus = YAN_chc_shu_b3
+				has_shine_effect_on_focus = YAN_chc_shu_c3
+				has_shine_effect_on_focus = YAN_chc_shu_cri
+				has_shine_effect_on_focus = YAN_chc_shu_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_shu_zb } }
+		activate_shine_on_focus = YAN_chc_shu_zb
+		set_country_flag = { flag = YAN_shards_shu_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.6 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_shu_a3 } }
+		activate_shine_on_focus = YAN_chc_shu_a3
+		set_country_flag = { flag = YAN_shards_shu_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.6 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_shu_b3 } }
+		activate_shine_on_focus = YAN_chc_shu_b3
+		set_country_flag = { flag = YAN_shards_shu_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.6 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_shu_c3 } }
+		activate_shine_on_focus = YAN_chc_shu_c3
+		set_country_flag = { flag = YAN_shards_shu_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.6 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_shu_cri } }
+		activate_shine_on_focus = YAN_chc_shu_cri
+		set_country_flag = { flag = YAN_shards_shu_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.6 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_shu_fin } }
+		activate_shine_on_focus = YAN_chc_shu_fin
+		set_country_flag = { flag = YAN_shards_shu_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.6 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_shu_done
+		clr_country_flag = YAN_shards_shu_prog
+	}
+}
+
+YAN_shards_auto_step_shu = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_shu_zb }
+		deactivate_shine_on_focus = YAN_chc_shu_zb
+		complete_national_focus = { focus = YAN_chc_shu_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_shu_a3 }
+		deactivate_shine_on_focus = YAN_chc_shu_a3
+		complete_national_focus = { focus = YAN_chc_shu_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_shu_b3 }
+		deactivate_shine_on_focus = YAN_chc_shu_b3
+		complete_national_focus = { focus = YAN_chc_shu_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_shu_c3 }
+		deactivate_shine_on_focus = YAN_chc_shu_c3
+		complete_national_focus = { focus = YAN_chc_shu_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_shu_cri }
+		deactivate_shine_on_focus = YAN_chc_shu_cri
+		complete_national_focus = { focus = YAN_chc_shu_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_shu_fin }
+		deactivate_shine_on_focus = YAN_chc_shu_fin
+		complete_national_focus = { focus = YAN_chc_shu_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_shu = yes
+}
+
+# 绩：出山 → 自动推进（席位 12 / 人物 7）
+YAN_shards_auto_start_ji = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_ji_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_12 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_12 = 7 }
+		set_country_flag = YAN_shards_ji_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_ji_done } }
+		YAN_shards_auto_next_ji = yes
+	}
+}
+
+YAN_shards_auto_next_ji = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_ji_zb
+				has_shine_effect_on_focus = YAN_chc_ji_a3
+				has_shine_effect_on_focus = YAN_chc_ji_b3
+				has_shine_effect_on_focus = YAN_chc_ji_c3
+				has_shine_effect_on_focus = YAN_chc_ji_cri
+				has_shine_effect_on_focus = YAN_chc_ji_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ji_zb } }
+		activate_shine_on_focus = YAN_chc_ji_zb
+		set_country_flag = { flag = YAN_shards_ji_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.7 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ji_a3 } }
+		activate_shine_on_focus = YAN_chc_ji_a3
+		set_country_flag = { flag = YAN_shards_ji_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.7 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ji_b3 } }
+		activate_shine_on_focus = YAN_chc_ji_b3
+		set_country_flag = { flag = YAN_shards_ji_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.7 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ji_c3 } }
+		activate_shine_on_focus = YAN_chc_ji_c3
+		set_country_flag = { flag = YAN_shards_ji_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.7 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ji_cri } }
+		activate_shine_on_focus = YAN_chc_ji_cri
+		set_country_flag = { flag = YAN_shards_ji_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.7 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_ji_fin } }
+		activate_shine_on_focus = YAN_chc_ji_fin
+		set_country_flag = { flag = YAN_shards_ji_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.7 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_ji_done
+		clr_country_flag = YAN_shards_ji_prog
+	}
+}
+
+YAN_shards_auto_step_ji = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ji_zb }
+		deactivate_shine_on_focus = YAN_chc_ji_zb
+		complete_national_focus = { focus = YAN_chc_ji_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ji_a3 }
+		deactivate_shine_on_focus = YAN_chc_ji_a3
+		complete_national_focus = { focus = YAN_chc_ji_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ji_b3 }
+		deactivate_shine_on_focus = YAN_chc_ji_b3
+		complete_national_focus = { focus = YAN_chc_ji_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ji_c3 }
+		deactivate_shine_on_focus = YAN_chc_ji_c3
+		complete_national_focus = { focus = YAN_chc_ji_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ji_cri }
+		deactivate_shine_on_focus = YAN_chc_ji_cri
+		complete_national_focus = { focus = YAN_chc_ji_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_ji_fin }
+		deactivate_shine_on_focus = YAN_chc_ji_fin
+		complete_national_focus = { focus = YAN_chc_ji_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_ji = yes
+}
+
+# 易：出山 → 自动推进（席位 1 / 人物 8）
+YAN_shards_auto_start_yi = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_yi_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_1 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_1 = 8 }
+		set_country_flag = YAN_shards_yi_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_yi_done } }
+		YAN_shards_auto_next_yi = yes
+	}
+}
+
+YAN_shards_auto_next_yi = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_yi_zb
+				has_shine_effect_on_focus = YAN_chc_yi_a3
+				has_shine_effect_on_focus = YAN_chc_yi_b3
+				has_shine_effect_on_focus = YAN_chc_yi_c3
+				has_shine_effect_on_focus = YAN_chc_yi_cri
+				has_shine_effect_on_focus = YAN_chc_yi_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yi_zb } }
+		activate_shine_on_focus = YAN_chc_yi_zb
+		set_country_flag = { flag = YAN_shards_yi_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.8 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yi_a3 } }
+		activate_shine_on_focus = YAN_chc_yi_a3
+		set_country_flag = { flag = YAN_shards_yi_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.8 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yi_b3 } }
+		activate_shine_on_focus = YAN_chc_yi_b3
+		set_country_flag = { flag = YAN_shards_yi_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.8 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yi_c3 } }
+		activate_shine_on_focus = YAN_chc_yi_c3
+		set_country_flag = { flag = YAN_shards_yi_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.8 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yi_cri } }
+		activate_shine_on_focus = YAN_chc_yi_cri
+		set_country_flag = { flag = YAN_shards_yi_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.8 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yi_fin } }
+		activate_shine_on_focus = YAN_chc_yi_fin
+		set_country_flag = { flag = YAN_shards_yi_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.8 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_yi_done
+		clr_country_flag = YAN_shards_yi_prog
+	}
+}
+
+YAN_shards_auto_step_yi = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yi_zb }
+		deactivate_shine_on_focus = YAN_chc_yi_zb
+		complete_national_focus = { focus = YAN_chc_yi_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yi_a3 }
+		deactivate_shine_on_focus = YAN_chc_yi_a3
+		complete_national_focus = { focus = YAN_chc_yi_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yi_b3 }
+		deactivate_shine_on_focus = YAN_chc_yi_b3
+		complete_national_focus = { focus = YAN_chc_yi_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yi_c3 }
+		deactivate_shine_on_focus = YAN_chc_yi_c3
+		complete_national_focus = { focus = YAN_chc_yi_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yi_cri }
+		deactivate_shine_on_focus = YAN_chc_yi_cri
+		complete_national_focus = { focus = YAN_chc_yi_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yi_fin }
+		deactivate_shine_on_focus = YAN_chc_yi_fin
+		complete_national_focus = { focus = YAN_chc_yi_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_yi = yes
+}
+
+# 年：出山 → 自动推进（席位 5 / 人物 9）
+YAN_shards_auto_start_nian = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_nian_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_5 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_5 = 9 }
+		set_country_flag = YAN_shards_nian_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_nian_done } }
+		YAN_shards_auto_next_nian = yes
+	}
+}
+
+YAN_shards_auto_next_nian = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_nian_zb
+				has_shine_effect_on_focus = YAN_chc_nian_a3
+				has_shine_effect_on_focus = YAN_chc_nian_b3
+				has_shine_effect_on_focus = YAN_chc_nian_c3
+				has_shine_effect_on_focus = YAN_chc_nian_cri
+				has_shine_effect_on_focus = YAN_chc_nian_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_nian_zb } }
+		activate_shine_on_focus = YAN_chc_nian_zb
+		set_country_flag = { flag = YAN_shards_nian_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.9 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_nian_a3 } }
+		activate_shine_on_focus = YAN_chc_nian_a3
+		set_country_flag = { flag = YAN_shards_nian_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.9 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_nian_b3 } }
+		activate_shine_on_focus = YAN_chc_nian_b3
+		set_country_flag = { flag = YAN_shards_nian_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.9 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_nian_c3 } }
+		activate_shine_on_focus = YAN_chc_nian_c3
+		set_country_flag = { flag = YAN_shards_nian_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.9 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_nian_cri } }
+		activate_shine_on_focus = YAN_chc_nian_cri
+		set_country_flag = { flag = YAN_shards_nian_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.9 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_nian_fin } }
+		activate_shine_on_focus = YAN_chc_nian_fin
+		set_country_flag = { flag = YAN_shards_nian_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.9 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_nian_done
+		clr_country_flag = YAN_shards_nian_prog
+	}
+}
+
+YAN_shards_auto_step_nian = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_nian_zb }
+		deactivate_shine_on_focus = YAN_chc_nian_zb
+		complete_national_focus = { focus = YAN_chc_nian_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_nian_a3 }
+		deactivate_shine_on_focus = YAN_chc_nian_a3
+		complete_national_focus = { focus = YAN_chc_nian_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_nian_b3 }
+		deactivate_shine_on_focus = YAN_chc_nian_b3
+		complete_national_focus = { focus = YAN_chc_nian_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_nian_c3 }
+		deactivate_shine_on_focus = YAN_chc_nian_c3
+		complete_national_focus = { focus = YAN_chc_nian_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_nian_cri }
+		deactivate_shine_on_focus = YAN_chc_nian_cri
+		complete_national_focus = { focus = YAN_chc_nian_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_nian_fin }
+		deactivate_shine_on_focus = YAN_chc_nian_fin
+		complete_national_focus = { focus = YAN_chc_nian_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_nian = yes
+}
+
+# 方：出山 → 自动推进（席位 10 / 人物 10）
+YAN_shards_auto_start_fang = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_fang_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_10 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_10 = 10 }
+		set_country_flag = YAN_shards_fang_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_fang_done } }
+		YAN_shards_auto_next_fang = yes
+	}
+}
+
+YAN_shards_auto_next_fang = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_fang_zb
+				has_shine_effect_on_focus = YAN_chc_fang_a3
+				has_shine_effect_on_focus = YAN_chc_fang_b3
+				has_shine_effect_on_focus = YAN_chc_fang_c3
+				has_shine_effect_on_focus = YAN_chc_fang_cri
+				has_shine_effect_on_focus = YAN_chc_fang_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_fang_zb } }
+		activate_shine_on_focus = YAN_chc_fang_zb
+		set_country_flag = { flag = YAN_shards_fang_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.10 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_fang_a3 } }
+		activate_shine_on_focus = YAN_chc_fang_a3
+		set_country_flag = { flag = YAN_shards_fang_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.10 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_fang_b3 } }
+		activate_shine_on_focus = YAN_chc_fang_b3
+		set_country_flag = { flag = YAN_shards_fang_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.10 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_fang_c3 } }
+		activate_shine_on_focus = YAN_chc_fang_c3
+		set_country_flag = { flag = YAN_shards_fang_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.10 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_fang_cri } }
+		activate_shine_on_focus = YAN_chc_fang_cri
+		set_country_flag = { flag = YAN_shards_fang_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.10 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_fang_fin } }
+		activate_shine_on_focus = YAN_chc_fang_fin
+		set_country_flag = { flag = YAN_shards_fang_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.10 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_fang_done
+		clr_country_flag = YAN_shards_fang_prog
+	}
+}
+
+YAN_shards_auto_step_fang = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_fang_zb }
+		deactivate_shine_on_focus = YAN_chc_fang_zb
+		complete_national_focus = { focus = YAN_chc_fang_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_fang_a3 }
+		deactivate_shine_on_focus = YAN_chc_fang_a3
+		complete_national_focus = { focus = YAN_chc_fang_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_fang_b3 }
+		deactivate_shine_on_focus = YAN_chc_fang_b3
+		complete_national_focus = { focus = YAN_chc_fang_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_fang_c3 }
+		deactivate_shine_on_focus = YAN_chc_fang_c3
+		complete_national_focus = { focus = YAN_chc_fang_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_fang_cri }
+		deactivate_shine_on_focus = YAN_chc_fang_cri
+		complete_national_focus = { focus = YAN_chc_fang_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_fang_fin }
+		deactivate_shine_on_focus = YAN_chc_fang_fin
+		complete_national_focus = { focus = YAN_chc_fang_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_fang = yes
+}
+
+# 夕：出山 → 自动推进（席位 4 / 人物 11）
+YAN_shards_auto_start_xi = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_xi_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_4 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_4 = 11 }
+		set_country_flag = YAN_shards_xi_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_xi_done } }
+		YAN_shards_auto_next_xi = yes
+	}
+}
+
+YAN_shards_auto_next_xi = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_xi_zb
+				has_shine_effect_on_focus = YAN_chc_xi_a3
+				has_shine_effect_on_focus = YAN_chc_xi_b3
+				has_shine_effect_on_focus = YAN_chc_xi_c3
+				has_shine_effect_on_focus = YAN_chc_xi_cri
+				has_shine_effect_on_focus = YAN_chc_xi_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_xi_zb } }
+		activate_shine_on_focus = YAN_chc_xi_zb
+		set_country_flag = { flag = YAN_shards_xi_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.11 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_xi_a3 } }
+		activate_shine_on_focus = YAN_chc_xi_a3
+		set_country_flag = { flag = YAN_shards_xi_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.11 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_xi_b3 } }
+		activate_shine_on_focus = YAN_chc_xi_b3
+		set_country_flag = { flag = YAN_shards_xi_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.11 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_xi_c3 } }
+		activate_shine_on_focus = YAN_chc_xi_c3
+		set_country_flag = { flag = YAN_shards_xi_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.11 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_xi_cri } }
+		activate_shine_on_focus = YAN_chc_xi_cri
+		set_country_flag = { flag = YAN_shards_xi_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.11 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_xi_fin } }
+		activate_shine_on_focus = YAN_chc_xi_fin
+		set_country_flag = { flag = YAN_shards_xi_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.11 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_xi_done
+		clr_country_flag = YAN_shards_xi_prog
+	}
+}
+
+YAN_shards_auto_step_xi = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_xi_zb }
+		deactivate_shine_on_focus = YAN_chc_xi_zb
+		complete_national_focus = { focus = YAN_chc_xi_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_xi_a3 }
+		deactivate_shine_on_focus = YAN_chc_xi_a3
+		complete_national_focus = { focus = YAN_chc_xi_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_xi_b3 }
+		deactivate_shine_on_focus = YAN_chc_xi_b3
+		complete_national_focus = { focus = YAN_chc_xi_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_xi_c3 }
+		deactivate_shine_on_focus = YAN_chc_xi_c3
+		complete_national_focus = { focus = YAN_chc_xi_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_xi_cri }
+		deactivate_shine_on_focus = YAN_chc_xi_cri
+		complete_national_focus = { focus = YAN_chc_xi_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_xi_fin }
+		deactivate_shine_on_focus = YAN_chc_xi_fin
+		complete_national_focus = { focus = YAN_chc_xi_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_xi = yes
+}
+
+# 余：出山 → 自动推进（席位 3 / 人物 12）
+YAN_shards_auto_start_yu = {
+	# 入阁：占住宰府朝议席位（同一人只记一次）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_yu_seated } }
+		if = {
+			limit = { check_variable = { YAN_court_seat_3 = 0 } }
+			add_to_variable = { YAN_court_seated = 1 }
+		}
+		set_variable = { YAN_court_seat_3 = 12 }
+		set_country_flag = YAN_shards_yu_seated
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = YAN_court_spirit } } }
+			add_dynamic_modifier = { modifier = YAN_court_spirit }
+		}
+		YAN_court_recalc = yes
+		custom_effect_tooltip = YAN_shards_auto_seat_tt
+	}
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shards_yu_done } }
+		YAN_shards_auto_next_yu = yes
+	}
+}
+
+YAN_shards_auto_next_yu = {
+	if = {
+		limit = {
+			OR = {
+				has_shine_effect_on_focus = YAN_chc_yu_zb
+				has_shine_effect_on_focus = YAN_chc_yu_a3
+				has_shine_effect_on_focus = YAN_chc_yu_b3
+				has_shine_effect_on_focus = YAN_chc_yu_c3
+				has_shine_effect_on_focus = YAN_chc_yu_cri
+				has_shine_effect_on_focus = YAN_chc_yu_fin
+			}
+		}
+		# 已在推进，什么都不做
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yu_zb } }
+		activate_shine_on_focus = YAN_chc_yu_zb
+		set_country_flag = { flag = YAN_shards_yu_prog days = 28 value = 1 }
+		country_event = { id = YAN_shards_auto.12 days = 28 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yu_a3 } }
+		activate_shine_on_focus = YAN_chc_yu_a3
+		set_country_flag = { flag = YAN_shards_yu_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.12 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yu_b3 } }
+		activate_shine_on_focus = YAN_chc_yu_b3
+		set_country_flag = { flag = YAN_shards_yu_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.12 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yu_c3 } }
+		activate_shine_on_focus = YAN_chc_yu_c3
+		set_country_flag = { flag = YAN_shards_yu_prog days = 35 value = 1 }
+		country_event = { id = YAN_shards_auto.12 days = 35 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yu_cri } }
+		activate_shine_on_focus = YAN_chc_yu_cri
+		set_country_flag = { flag = YAN_shards_yu_prog days = 14 value = 1 }
+		country_event = { id = YAN_shards_auto.12 days = 14 }
+	}
+	else_if = {
+		limit = { NOT = { has_completed_focus = YAN_chc_yu_fin } }
+		activate_shine_on_focus = YAN_chc_yu_fin
+		set_country_flag = { flag = YAN_shards_yu_prog days = 21 value = 1 }
+		country_event = { id = YAN_shards_auto.12 days = 21 }
+	}
+	else = {
+		set_country_flag = YAN_shards_yu_done
+		clr_country_flag = YAN_shards_yu_prog
+	}
+}
+
+YAN_shards_auto_step_yu = {
+	if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yu_zb }
+		deactivate_shine_on_focus = YAN_chc_yu_zb
+		complete_national_focus = { focus = YAN_chc_yu_zb use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yu_a3 }
+		deactivate_shine_on_focus = YAN_chc_yu_a3
+		complete_national_focus = { focus = YAN_chc_yu_a3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yu_b3 }
+		deactivate_shine_on_focus = YAN_chc_yu_b3
+		complete_national_focus = { focus = YAN_chc_yu_b3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yu_c3 }
+		deactivate_shine_on_focus = YAN_chc_yu_c3
+		complete_national_focus = { focus = YAN_chc_yu_c3 use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yu_cri }
+		deactivate_shine_on_focus = YAN_chc_yu_cri
+		complete_national_focus = { focus = YAN_chc_yu_cri use_side_message = yes }
+	}
+	else_if = {
+		limit = { has_shine_effect_on_focus = YAN_chc_yu_fin }
+		deactivate_shine_on_focus = YAN_chc_yu_fin
+		complete_national_focus = { focus = YAN_chc_yu_fin use_side_message = yes }
+	}
+	YAN_shards_auto_next_yu = yes
+}
+
+# 兜底：读档与每月检查一次；只对「已出山但未走完」的线重新排程
+YAN_shards_auto_resume = {
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_zhongyue_chu
+			NOT = { has_country_flag = YAN_shards_zhongyue_done }
+		}
+		YAN_shards_auto_start_zhongyue = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_wang_chu
+			NOT = { has_country_flag = YAN_shards_wang_done }
+		}
+		YAN_shards_auto_start_wang = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_ling_chu
+			NOT = { has_country_flag = YAN_shards_ling_done }
+		}
+		YAN_shards_auto_start_ling = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_jun_chu
+			NOT = { has_country_flag = YAN_shards_jun_done }
+		}
+		YAN_shards_auto_start_jun = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_jie_chu
+			NOT = { has_country_flag = YAN_shards_jie_done }
+		}
+		YAN_shards_auto_start_jie = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_shu_chu
+			NOT = { has_country_flag = YAN_shards_shu_done }
+		}
+		YAN_shards_auto_start_shu = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_ji_chu
+			NOT = { has_country_flag = YAN_shards_ji_done }
+		}
+		YAN_shards_auto_start_ji = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_yi_chu
+			NOT = { has_country_flag = YAN_shards_yi_done }
+		}
+		YAN_shards_auto_start_yi = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_nian_chu
+			NOT = { has_country_flag = YAN_shards_nian_done }
+		}
+		YAN_shards_auto_start_nian = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_fang_chu
+			NOT = { has_country_flag = YAN_shards_fang_done }
+		}
+		YAN_shards_auto_start_fang = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_xi_chu
+			NOT = { has_country_flag = YAN_shards_xi_done }
+		}
+		YAN_shards_auto_start_xi = yes
+	}
+	if = {
+		limit = {
+			has_completed_focus = YAN_chc_yu_chu
+			NOT = { has_country_flag = YAN_shards_yu_done }
+		}
+		YAN_shards_auto_start_yu = yes
+	}
+}

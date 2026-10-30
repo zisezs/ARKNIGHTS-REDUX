@@ -211,7 +211,7 @@ focus_tree = {
 		}
 	}
 
-	# 民众（占位：设计稿未给内容）
+	# 民众（2026-10-28 补：群众改革线入口）
 	focus = {
 		id = URS_dr_people
 		icon = GFX_goal_generic_propaganda
@@ -221,10 +221,16 @@ focus_tree = {
 		}
 		x = 8
 		y = 2
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_people = 8 tooltip = URS_rf_p_people_tt }
+			add_political_power = 25
+			add_stability = 0.03
+			custom_effect_tooltip = URS_dr_people_tt
+		}
 	}
 
-	# 资源（占位：设计稿未给内容）
+	# 资源（2026-10-28 补：资源改革线入口）
 	focus = {
 		id = URS_dr_resources
 		icon = GFX_goal_generic_oil_refinery
@@ -234,7 +240,13 @@ focus_tree = {
 		}
 		x = 15
 		y = 2
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_resource = 8 tooltip = URS_rf_p_resource_tt }
+			add_political_power = 25
+			add_stability = -0.02
+			custom_effect_tooltip = URS_dr_resources_tt
+		}
 	}
 
 	# 腐朽不堪（17天）
@@ -311,7 +323,7 @@ focus_tree = {
 		}
 	}
 
-	# 声势浩大（占位：设计稿未给内容）
+	# 声势浩大（2026-10-28 补：群众线第一档）
 	focus = {
 		id = URS_dr_clamor
 		icon = GFX_goal_generic_propaganda
@@ -321,10 +333,31 @@ focus_tree = {
 		}
 		x = 8
 		y = 3
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_people = 10 tooltip = URS_rf_p_people_tt }
+			add_war_support = 0.03
+			add_political_power = -25
+			# 「大叛乱的余波」往完成档方向走一档（底档→t2 / t2→t3）
+			if = {
+				limit = { has_idea = URS_dr_afterwave_of_rebellion_t2 }
+				swap_ideas = {
+					remove_idea = URS_dr_afterwave_of_rebellion_t2
+					add_idea = URS_dr_afterwave_of_rebellion_t3
+				}
+			}
+			else_if = {
+				limit = { has_idea = URS_dr_afterwave_of_rebellion }
+				swap_ideas = {
+					remove_idea = URS_dr_afterwave_of_rebellion
+					add_idea = URS_dr_afterwave_of_rebellion_t2
+				}
+			}
+			custom_effect_tooltip = URS_dr_clamor_tt
+		}
 	}
 
-	# 油已尽（占位：设计稿未给内容）
+	# 油已尽（2026-10-28 补：资源线油路）
 	focus = {
 		id = URS_dr_oil_gone
 		icon = GFX_goal_generic_oil_refinery
@@ -334,10 +367,24 @@ focus_tree = {
 		}
 		x = 14
 		y = 3
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_resource = 10 tooltip = URS_rf_p_resource_tt }
+			add_fuel = 500
+			add_stability = -0.03
+			# 「矿脉枯竭」先松一档（底档 → t2）
+			if = {
+				limit = { has_idea = URS_dr_originium_depletion }
+				swap_ideas = {
+					remove_idea = URS_dr_originium_depletion
+					add_idea = URS_dr_originium_depletion_t2
+				}
+			}
+			custom_effect_tooltip = URS_dr_oil_gone_tt
+		}
 	}
 
-	# 灯未枯（占位：设计稿未给内容）
+	# 灯未枯（2026-10-28 补：资源线电路）
 	focus = {
 		id = URS_dr_light_dim
 		icon = GFX_goal_generic_construct_infrastructure
@@ -347,7 +394,20 @@ focus_tree = {
 		}
 		x = 16
 		y = 3
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_resource = 8 tooltip = URS_rf_p_resource_tt }
+			add_stability = 0.03
+			# 「能源配给制」先松一档（底档 → t2）
+			if = {
+				limit = { has_idea = URS_dr_energy_rationing }
+				swap_ideas = {
+					remove_idea = URS_dr_energy_rationing
+					add_idea = URS_dr_energy_rationing_t2
+				}
+			}
+			custom_effect_tooltip = URS_dr_light_dim_tt
+		}
 	}
 
 	# 先是官员（17天）
@@ -450,7 +510,7 @@ focus_tree = {
 		}
 	}
 
-	# 被奴役的工人…（占位：设计稿未给内容）
+	# 被奴役的工人…（2026-10-28 补：群众线中段）
 	focus = {
 		id = URS_dr_slaved_workers
 		icon = GFX_goal_generic_consumer_goods
@@ -460,10 +520,17 @@ focus_tree = {
 		}
 		x = 8
 		y = 4
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_people = 8 tooltip = URS_rf_p_people_tt }
+			add_political_power = 25
+			add_stability = -0.03
+			add_war_support = 0.03
+			custom_effect_tooltip = URS_dr_slaved_workers_tt
+		}
 	}
 
-	# 去挖…（占位：设计稿未给内容）
+	# 去挖…（2026-10-28 补：资源线两路合流）
 	focus = {
 		id = URS_dr_dig
 		icon = GFX_goal_generic_construct_infrastructure
@@ -476,7 +543,43 @@ focus_tree = {
 		}
 		x = 15
 		y = 4
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_resource = 10 tooltip = URS_rf_p_resource_tt }
+			add_political_power = -25
+			add_war_support = 0.03
+			# 「矿脉枯竭」再落一档（t2 → t3；若还停在底档则直接 → t3）
+			if = {
+				limit = { has_idea = URS_dr_originium_depletion_t2 }
+				swap_ideas = {
+					remove_idea = URS_dr_originium_depletion_t2
+					add_idea = URS_dr_originium_depletion_t3
+				}
+			}
+			else_if = {
+				limit = { has_idea = URS_dr_originium_depletion }
+				swap_ideas = {
+					remove_idea = URS_dr_originium_depletion
+					add_idea = URS_dr_originium_depletion_t3
+				}
+			}
+			# 「能源配给制」再落一档（t2 → t3；若还停在底档则直接 → t3）
+			if = {
+				limit = { has_idea = URS_dr_energy_rationing_t2 }
+				swap_ideas = {
+					remove_idea = URS_dr_energy_rationing_t2
+					add_idea = URS_dr_energy_rationing_t3
+				}
+			}
+			else_if = {
+				limit = { has_idea = URS_dr_energy_rationing }
+				swap_ideas = {
+					remove_idea = URS_dr_energy_rationing
+					add_idea = URS_dr_energy_rationing_t3
+				}
+			}
+			custom_effect_tooltip = URS_dr_dig_tt
+		}
 	}
 
 	# 润滑油（设计稿未给天数，按同线 17 天取 cost 2）
@@ -537,7 +640,7 @@ focus_tree = {
 		}
 	}
 
-	# 平等（占位：设计稿未给内容）
+	# 平等（2026-10-28 补：群众线收口之一）
 	focus = {
 		id = URS_dr_equality
 		icon = GFX_goal_generic_propaganda
@@ -547,10 +650,38 @@ focus_tree = {
 		}
 		x = 5
 		y = 5
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_people = 10 tooltip = URS_rf_p_people_tt }
+			add_stability = 0.05
+			add_political_power = -25
+			# 「大叛乱的余波」推到四档（从 t3 / t2 / 底档任一档起跳）
+			if = {
+				limit = { has_idea = URS_dr_afterwave_of_rebellion_t3 }
+				swap_ideas = {
+					remove_idea = URS_dr_afterwave_of_rebellion_t3
+					add_idea = URS_dr_afterwave_of_rebellion_t4
+				}
+			}
+			else_if = {
+				limit = { has_idea = URS_dr_afterwave_of_rebellion_t2 }
+				swap_ideas = {
+					remove_idea = URS_dr_afterwave_of_rebellion_t2
+					add_idea = URS_dr_afterwave_of_rebellion_t4
+				}
+			}
+			else_if = {
+				limit = { has_idea = URS_dr_afterwave_of_rebellion }
+				swap_ideas = {
+					remove_idea = URS_dr_afterwave_of_rebellion
+					add_idea = URS_dr_afterwave_of_rebellion_t4
+				}
+			}
+			custom_effect_tooltip = URS_dr_equality_tt
+		}
 	}
 
-	# 面包（占位：设计稿未给内容）
+	# 面包（2026-10-28 补：群众线收口之一）
 	focus = {
 		id = URS_dr_bread
 		icon = GFX_goal_generic_consumer_goods
@@ -560,10 +691,16 @@ focus_tree = {
 		}
 		x = 8
 		y = 5
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_people = 8 tooltip = URS_rf_p_people_tt }
+			add_stability = 0.03
+			add_political_power = 25
+			custom_effect_tooltip = URS_dr_bread_tt
+		}
 	}
 
-	# 生存（占位：设计稿未给内容）
+	# 生存（2026-10-28 补：群众线收口之一）
 	focus = {
 		id = URS_dr_survival
 		icon = GFX_goal_generic_consumer_goods
@@ -573,7 +710,13 @@ focus_tree = {
 		}
 		x = 10
 		y = 5
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_people = 6 tooltip = URS_rf_p_people_tt }
+			add_war_support = 0.05
+			add_manpower = 20000
+			custom_effect_tooltip = URS_dr_survival_tt
+		}
 	}
 
 	# 孤家寡人（设计稿未给天数，按同线 17 天取 cost 2）
@@ -605,7 +748,7 @@ focus_tree = {
 		}
 	}
 
-	# 生存之需（占位：设计稿未给内容）
+	# 生存之需（2026-10-28 补：两条线合流）
 	focus = {
 		id = URS_dr_needs
 		icon = GFX_goal_generic_consumer_goods
@@ -624,10 +767,28 @@ focus_tree = {
 		}
 		x = 10
 		y = 6
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_people = 10 tooltip = URS_rf_p_people_tt }
+			add_to_variable = { URS_rf_p_resource = 10 tooltip = URS_rf_p_resource_tt }
+			add_political_power = 50
+			add_stability = 0.05
+			add_war_support = 0.05
+			# 群众与资源两条线都推满：额外一次性奖励
+			if = {
+				limit = {
+					NOT = { check_variable = { URS_rf_p_people < 100 } }
+					NOT = { check_variable = { URS_rf_p_resource < 100 } }
+				}
+				add_stability = 0.05
+				add_political_power = 50
+				custom_effect_tooltip = URS_dr_needs_both_tt
+			}
+			custom_effect_tooltip = URS_dr_needs_tt
+		}
 	}
 
-	# 拨动指针（占位：设计稿未给内容）
+	# 拨动指针（2026-10-28 补：阶段一收口，交出「乌萨斯还不能死！」）
 	focus = {
 		id = URS_dr_pointer
 		icon = GFX_goal_generic_secret_weapon
@@ -640,10 +801,24 @@ focus_tree = {
 		}
 		x = 4
 		y = 7
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_to_variable = { URS_rf_p_people = 5 tooltip = URS_rf_p_people_tt }
+			add_to_variable = { URS_rf_p_resource = 5 tooltip = URS_rf_p_resource_tt }
+			add_political_power = -50
+			# 阶段二「回到起点」的主容器在这里交到玩家手上；
+			# 阶段二根节点用 has_dynamic_modifier 判重，不会重复挂。
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = URS_ursus_shall_not_die } } }
+				add_dynamic_modifier = { modifier = URS_ursus_shall_not_die }
+				custom_effect_tooltip = URS_dr_pointer_container_tt
+			}
+			set_country_flag = URS_dr_reform_phase1_done
+			custom_effect_tooltip = URS_dr_pointer_tt
+		}
 	}
 
-	# 滴答…滴答…（占位：设计稿未给内容）
+	# 滴答…滴答…（2026-10-28 补：阶段一终局）
 	focus = {
 		id = URS_dr_tick
 		icon = GFX_goal_generic_secret_weapon
@@ -653,7 +828,18 @@ focus_tree = {
 		}
 		x = 4
 		y = 8
-		# desc / completion_reward 待填（留空等后续设计稿）
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_to_variable = { var = URS_shall_not_die_stability_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_stability_var_p5
+			add_to_variable = { var = URS_shall_not_die_industry_var value = 0.05 }
+			custom_effect_tooltip = URS_tt_pol_shall_not_die_industry_var_p5
+			set_country_flag = URS_dr_reform_complete
+			custom_effect_tooltip = URS_dr_tick_tt
+		}
 	}
 
 	# ---- 发展度共享国策树（DEV）shared_focus 引用 自动生成 起 ----

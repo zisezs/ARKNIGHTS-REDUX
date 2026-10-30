@@ -1,0 +1,103 @@
+######################################################
+# 大炎 · 军事国策树【大炎帝国军事改革】动态民族精神
+#
+# 机制：
+#   · 每个修正符直读变量 YAN_mil_rf_<键>；
+#     国策 / 决议只做 add_to_variable，数值原地成长。
+#   · 变量由 YAN_mil_reform_init（懋戒三军）初始化。
+#   · 终幕【大炎帝国三军阅兵式】把精神换名为【岁岁今朝·武】：
+#     remove_dynamic_modifier 旧的，add_dynamic_modifier 新的；
+#     两者共用同一组变量，所以累计数值不丢失。
+#
+# 无国家层面修正符的三项（装甲生产花费、装甲厚度、步兵装备防御/花费）
+# 拆到 common/ideas/YAN_mil_reform_equipment_ideas.txt 的隐藏 idea 里，
+# 用 equipment_bonus 精确落到装备原型；本文件用 custom_modifier_tooltip
+# 把这组数值显示回民族精神 tooltip（同原版苏联空军动态修正的做法）。
+######################################################
+
+YAN_mil_reform_spirit = {
+	icon = GFX_idea_YAN_mil_tianzhu_suiwu
+
+	enable = { always = yes }
+
+	experience_gain_army_factor = YAN_mil_rf_army_xp
+	experience_gain_air_factor = YAN_mil_rf_air_xp
+	air_attack_factor = YAN_mil_rf_air_attack
+	air_defence_factor = YAN_mil_rf_air_defence
+	air_agility_factor = YAN_mil_rf_air_agility
+	air_range_factor = YAN_mil_rf_air_range
+	air_superiority_efficiency = YAN_mil_rf_air_superiority
+	air_cas_efficiency = YAN_mil_rf_air_cas
+	air_mission_efficiency = YAN_mil_rf_air_mission
+	army_org_factor = YAN_mil_rf_army_org
+	army_speed_factor = YAN_mil_rf_army_speed
+
+	training_time_factor = YAN_mil_rf_training_time
+	conscription_factor = YAN_mil_rf_conscription
+	war_support_factor = YAN_mil_rf_war_support
+	army_infantry_defence_factor = YAN_mil_rf_inf_defence
+	army_infantry_attack_factor = YAN_mil_rf_inf_attack
+	supply_consumption_factor = YAN_mil_rf_supply
+	political_power_factor = YAN_mil_rf_political_power
+	breakthrough_factor = YAN_mil_rf_breakthrough
+
+	production_speed_arms_factory_factor = YAN_mil_rf_mil_factory_speed
+	production_factory_max_efficiency_factor = YAN_mil_rf_prod_cap
+	production_factory_efficiency_gain_factor = YAN_mil_rf_prod_growth
+	production_speed_industrial_complex_factor = YAN_mil_rf_civ_factory_speed
+	industrial_capacity_factory = YAN_mil_rf_factory_output
+
+	army_strength_factor = YAN_mil_rf_army_hp
+	land_reinforce_rate = YAN_mil_rf_reinforce
+	planning_speed = YAN_mil_rf_planning_speed
+	max_planning_factor = YAN_mil_rf_planning_cap
+	casualty_trickleback = YAN_mil_rf_trickleback
+	army_attack_factor = YAN_mil_rf_army_attack
+
+	# 装备条款（equipment_bonus 无法写进动态修正，数值另存变量只用于显示）
+	custom_modifier_tooltip = YAN_mil_reform_equip_tt
+}
+
+# 终幕改名版：数值、图标与说明完全一致，只换名字。
+YAN_mil_reform_spirit_final = {
+	icon = GFX_idea_YAN_mil_tianzhu_suiwu
+
+	enable = { always = yes }
+
+	experience_gain_army_factor = YAN_mil_rf_army_xp
+	experience_gain_air_factor = YAN_mil_rf_air_xp
+	air_attack_factor = YAN_mil_rf_air_attack
+	air_defence_factor = YAN_mil_rf_air_defence
+	air_agility_factor = YAN_mil_rf_air_agility
+	air_range_factor = YAN_mil_rf_air_range
+	air_superiority_efficiency = YAN_mil_rf_air_superiority
+	air_cas_efficiency = YAN_mil_rf_air_cas
+	air_mission_efficiency = YAN_mil_rf_air_mission
+	army_org_factor = YAN_mil_rf_army_org
+	army_speed_factor = YAN_mil_rf_army_speed
+
+	training_time_factor = YAN_mil_rf_training_time
+	conscription_factor = YAN_mil_rf_conscription
+	war_support_factor = YAN_mil_rf_war_support
+	army_infantry_defence_factor = YAN_mil_rf_inf_defence
+	army_infantry_attack_factor = YAN_mil_rf_inf_attack
+	supply_consumption_factor = YAN_mil_rf_supply
+	political_power_factor = YAN_mil_rf_political_power
+	breakthrough_factor = YAN_mil_rf_breakthrough
+
+	production_speed_arms_factory_factor = YAN_mil_rf_mil_factory_speed
+	production_factory_max_efficiency_factor = YAN_mil_rf_prod_cap
+	production_factory_efficiency_gain_factor = YAN_mil_rf_prod_growth
+	production_speed_industrial_complex_factor = YAN_mil_rf_civ_factory_speed
+	industrial_capacity_factory = YAN_mil_rf_factory_output
+
+	army_strength_factor = YAN_mil_rf_army_hp
+	land_reinforce_rate = YAN_mil_rf_reinforce
+	planning_speed = YAN_mil_rf_planning_speed
+	max_planning_factor = YAN_mil_rf_planning_cap
+	casualty_trickleback = YAN_mil_rf_trickleback
+	army_attack_factor = YAN_mil_rf_army_attack
+
+	# 装备条款（equipment_bonus 无法写进动态修正，数值另存变量只用于显示）
+	custom_modifier_tooltip = YAN_mil_reform_equip_tt
+}

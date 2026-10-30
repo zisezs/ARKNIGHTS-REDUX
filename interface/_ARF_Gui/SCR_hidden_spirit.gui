@@ -1,0 +1,685 @@
+guiTypes = {
+
+	# 独立浮窗
+	containerWindowType = {
+		name = "SCR_hidden_spirit_window"
+		position = { x = 0 y = 0 }
+		size = { width = 640 height = 380 }
+		orientation = center
+		origo = center
+		moveable = yes
+		click_to_front = yes
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_tiled_window_transparent"
+		}
+		instantTextBoxType = {
+			name = "SCR_hidden_spirit_title"
+			position = { x = 24 y = 14 }
+			font = "hoi_18mbs"
+			text_color_code = W
+			text = "SCR_HIDDEN_SPIRIT_TITLE"
+			maxWidth = 540
+			maxHeight = 28
+			format = left
+		}
+		instantTextBoxType = {
+			name = "SCR_hidden_spirit_subtitle"
+			position = { x = 24 y = 44 }
+			font = "hoi_16mbs"
+			text_color_code = W
+			text = "SCR_HIDDEN_SPIRIT_SUBTITLE"
+			maxWidth = 560
+			maxHeight = 20
+			format = left
+		}
+		buttonType = {
+			name = "SCR_hidden_spirit_close"
+			position = { x = 600 y = 12 }
+			quadTextureSprite = "GFX_close_button_small"
+			clicksound = click_default
+		}
+		instantTextBoxType = {
+			name = "SCR_hidden_spirit_col_0"
+			position = { x = 24 y = 70 }
+			font = "hoi_18mbs"
+			text_color_code = W
+			text = "SCR_HIDDEN_COL_0"
+			maxWidth = 190
+			maxHeight = 20
+			format = left
+		}
+		instantTextBoxType = {
+			name = "SCR_hidden_spirit_col_1"
+			position = { x = 224 y = 70 }
+			font = "hoi_18mbs"
+			text_color_code = W
+			text = "SCR_HIDDEN_COL_1"
+			maxWidth = 190
+			maxHeight = 20
+			format = left
+		}
+		instantTextBoxType = {
+			name = "SCR_hidden_spirit_col_2"
+			position = { x = 424 y = 70 }
+			font = "hoi_18mbs"
+			text_color_code = W
+			text = "SCR_HIDDEN_COL_2"
+			maxWidth = 190
+			maxHeight = 20
+			format = left
+		}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_army_attack_factor"
+				position = { x = 24 y = 96 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_ARMY_ATTACK_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_army_attack_factor"
+				position = { x = 156 y = 96 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_army_attack_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_army_defence_factor"
+				position = { x = 24 y = 116 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_ARMY_DEFENCE_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_army_defence_factor"
+				position = { x = 156 y = 116 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_army_defence_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_army_morale_factor"
+				position = { x = 24 y = 136 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_ARMY_MORALE_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_army_morale_factor"
+				position = { x = 156 y = 136 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_army_morale_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_army_core_attack_factor"
+				position = { x = 24 y = 156 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_ARMY_CORE_ATTACK_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_army_core_attack_factor"
+				position = { x = 156 y = 156 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_army_core_attack_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_army_core_defence_factor"
+				position = { x = 24 y = 176 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_ARMY_CORE_DEFENCE_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_army_core_defence_factor"
+				position = { x = 156 y = 176 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_army_core_defence_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_war_support_factor"
+				position = { x = 24 y = 196 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_WAR_SUPPORT_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_war_support_factor"
+				position = { x = 156 y = 196 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_war_support_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_conscription_factor"
+				position = { x = 24 y = 216 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_CONSCRIPTION_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_conscription_factor"
+				position = { x = 156 y = 216 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_conscription_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_experience_gain_army_factor"
+				position = { x = 24 y = 236 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_EXPERIENCE_GAIN_ARMY_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_experience_gain_army_factor"
+				position = { x = 156 y = 236 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_experience_gain_army_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_experience_loss_factor"
+				position = { x = 24 y = 256 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_EXPERIENCE_LOSS_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_experience_loss_factor"
+				position = { x = 156 y = 256 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_experience_loss_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_max_dig_in_factor"
+				position = { x = 24 y = 276 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_MAX_DIG_IN_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_max_dig_in_factor"
+				position = { x = 156 y = 276 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_max_dig_in_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_supply_consumption_factor"
+				position = { x = 24 y = 296 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_SUPPLY_CONSUMPTION_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_supply_consumption_factor"
+				position = { x = 156 y = 296 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_supply_consumption_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_justify_war_goal_time"
+				position = { x = 24 y = 316 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_JUSTIFY_WAR_GOAL_TIME"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_justify_war_goal_time"
+				position = { x = 156 y = 316 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_justify_war_goal_time|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_non_core_manpower"
+				position = { x = 224 y = 96 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_NON_CORE_MANPOWER"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_non_core_manpower"
+				position = { x = 356 y = 96 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_non_core_manpower|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_land_doctrine_cost_factor"
+				position = { x = 224 y = 116 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_LAND_DOCTRINE_COST_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_land_doctrine_cost_factor"
+				position = { x = 356 y = 116 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_land_doctrine_cost_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_resistance_growth"
+				position = { x = 224 y = 136 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_RESISTANCE_GROWTH"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_resistance_growth"
+				position = { x = 356 y = 136 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_resistance_growth|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_compliance_growth"
+				position = { x = 224 y = 156 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_COMPLIANCE_GROWTH"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_compliance_growth"
+				position = { x = 356 y = 156 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_compliance_growth|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_operation_outcome"
+				position = { x = 224 y = 176 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_OPERATION_OUTCOME"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_operation_outcome"
+				position = { x = 356 y = 176 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_operation_outcome|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_encryption"
+				position = { x = 224 y = 196 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_ENCRYPTION"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_encryption"
+				position = { x = 356 y = 196 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_encryption|0]"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_decryption"
+				position = { x = 224 y = 216 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_DECRYPTION"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_decryption"
+				position = { x = 356 y = 216 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_decryption|0]"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_political_power_gain"
+				position = { x = 424 y = 96 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_POLITICAL_POWER_GAIN"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_political_power_gain"
+				position = { x = 556 y = 96 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_political_power_gain|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_stability_factor"
+				position = { x = 424 y = 116 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_STABILITY_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_stability_factor"
+				position = { x = 556 y = 116 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_stability_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_consumer_goods_factor"
+				position = { x = 424 y = 136 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_CONSUMER_GOODS_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_consumer_goods_factor"
+				position = { x = 556 y = 136 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_consumer_goods_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_production_speed_buildings_factor"
+				position = { x = 424 y = 156 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_PRODUCTION_SPEED_BUILDINGS_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_production_speed_buildings_factor"
+				position = { x = 556 y = 156 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_production_speed_buildings_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_research_speed_factor"
+				position = { x = 424 y = 176 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_RESEARCH_SPEED_FACTOR"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_research_speed_factor"
+				position = { x = 556 y = 176 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_research_speed_factor|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_monthly_population"
+				position = { x = 424 y = 196 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_MONTHLY_POPULATION"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_monthly_population"
+				position = { x = 556 y = 196 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_monthly_population|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_equipment_infantry_build_cost"
+				position = { x = 424 y = 216 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_EQUIPMENT_INFANTRY_BUILD_COST"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_equipment_infantry_build_cost"
+				position = { x = 556 y = 216 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_equipment_infantry_build_cost|0]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_label_mysticism_drift"
+				position = { x = 424 y = 236 }
+				font = "hoi_16mbs"
+				text_color_code = W
+				text = "SCR_HIDDEN_LABEL_MYSTICISM_DRIFT"
+				maxWidth = 130
+				maxHeight = 20
+				format = left
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "SCR_hidden_value_mysticism_drift"
+				position = { x = 556 y = 236 }
+				font = "hoi_16mbs"
+				text_color_code = Y
+				text = "[?SCR_hidden_total_mysticism_drift|1]%"
+				maxWidth = 58
+				maxHeight = 20
+				format = right
+				alwaystransparent = yes
+			}
+		instantTextBoxType = {
+			name = "SCR_hidden_spirit_footer"
+			position = { x = 24 y = 342 }
+			font = "hoi_16mbs"
+			text_color_code = W
+			text = "SCR_HIDDEN_SPIRIT_FOOTER"
+			maxWidth = 430
+			maxHeight = 20
+			format = left
+		}
+		buttonType = {
+			name = "SCR_hidden_spirit_refresh"
+			position = { x = 470 y = 336 }
+			quadTextureSprite = "GFX_button_148x34"
+			buttonText = "SCR_HIDDEN_SPIRIT_REFRESH"
+			buttonFont = "hoi_16mbs"
+			clicksound = click_default
+		}
+	}
+}

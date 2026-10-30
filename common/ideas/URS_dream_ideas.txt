@@ -206,5 +206,176 @@ ideas = {
 			}
 		}
 
+		# 1d.大叛乱的余波 · 四档（平等）
+		URS_dr_afterwave_of_rebellion_t4 = {
+			picture = URS_afterwave_of_great_rebellion
+			modifier = {
+				stability_factor = -0.10
+				war_support_factor = -0.10
+				political_power_gain = -0.10
+				industrial_capacity_factory = -0.05
+				required_garrison_factor = 0.10
+			}
+		}
+
+		# ==========================================================
+		# 资源线分档（2026-10-28 加）
+		# ----------------------------------------------------------
+		# 矿脉枯竭 / 能源配给制原本只有底档；阶段一「油已尽 / 灯未枯 / 去挖」
+		# 各换一档，满 100 时由 URS_rf_finish_resource 换成完成档。
+		# 数值同样是**总值**，不叠加底档。
+		# ==========================================================
+
+		# 6b.矿脉枯竭 · 二档（油已尽）
+		URS_dr_originium_depletion_t2 = {
+			picture = URS_destroyed_economy
+			modifier = {
+				research_speed_factor = -0.15
+				industrial_capacity_factory = -0.12
+				local_resources_factor = -0.18
+				production_speed_buildings_factor = -0.12
+				consumer_goods_factor = 0.05
+			}
+		}
+
+		# 6c.矿脉枯竭 · 三档（去挖…）
+		URS_dr_originium_depletion_t3 = {
+			picture = URS_destroyed_economy
+			modifier = {
+				research_speed_factor = -0.10
+				industrial_capacity_factory = -0.08
+				local_resources_factor = -0.10
+				production_speed_buildings_factor = -0.08
+				consumer_goods_factor = 0.05
+			}
+		}
+
+		# 7b.能源配给制 · 二档（灯未枯）
+		URS_dr_energy_rationing_t2 = {
+			picture = Upheaval_increased_factory_output
+			modifier = {
+				industrial_capacity_factory = -0.06
+				production_speed_buildings_factor = -0.03
+				stability_factor = 0.05
+				war_support_factor = -0.03
+				army_speed_factor = -0.03
+			}
+		}
+
+		# 7c.能源配给制 · 三档（去挖…）
+		URS_dr_energy_rationing_t3 = {
+			picture = Upheaval_increased_factory_output
+			modifier = {
+				industrial_capacity_factory = -0.03
+				production_speed_buildings_factor = -0.02
+				stability_factor = 0.05
+				war_support_factor = -0.02
+				army_speed_factor = -0.02
+			}
+		}
+
+		# ==========================================================
+		# 改革完成档（2026-10-28 加）
+		# ----------------------------------------------------------
+		# 四条改革线各自在 URS_dream_scripted_effects.txt 的每周节拍里
+		# 判定「进度满 100」→ 一次性换档；底档与分档全部被换掉。
+		# 单项总量一律钳在 ±25%（项目口径）。
+		# ==========================================================
+
+		# 4f.政令通达（国家改革完成）
+		URS_dr_orders_delivered = {
+			picture = URS_stabilizing_social
+			modifier = {
+				political_power_gain = 0.10
+				production_speed_buildings_factor = 0.10
+				compliance_gain = 0.15
+				resistance_target = -0.10
+				decryption_factor = 0.25
+			}
+		}
+
+		# 3c.九军一心（军队改革完成）
+		URS_dr_nine_armies_one = {
+			picture = URS_reforming_army
+			modifier = {
+				command_power_gain = 0.25
+				army_org_factor = 0.10
+				breakthrough_factor = 0.10
+			}
+		}
+
+		# 1e.乌萨斯的黎明（群众改革完成）
+		URS_dr_dawn_of_ursus = {
+			picture = URS_stabilizing_social
+			modifier = {
+				stability_factor = 0.15
+				war_support_factor = 0.15
+				political_power_gain = 0.10
+				industrial_capacity_factory = 0.05
+				required_garrison_factor = -0.10
+			}
+		}
+
+		# 6d.矿脉复苏（资源改革完成）
+		URS_dr_veins_revived = {
+			picture = URS_recovering_economy
+			modifier = {
+				research_speed_factor = 0.10
+				industrial_capacity_factory = 0.10
+				local_resources_factor = 0.25
+				production_speed_buildings_factor = 0.10
+				consumer_goods_factor = -0.05
+			}
+		}
+
+		# 7d.灯火通明（资源改革完成）
+		URS_dr_lights_on = {
+			picture = URS_industrial_construction
+			modifier = {
+				industrial_capacity_factory = 0.05
+				production_speed_buildings_factor = 0.05
+				stability_factor = 0.05
+				war_support_factor = 0.05
+				army_speed_factor = 0.05
+			}
+		}
+
+
+		# ==========================================================
+		# 阶段二「回到起点」换档精神（2026-10-28 加）
+		# ==========================================================
+
+		# 2b.血峰之荣（第五集团军整装待发）
+		URS_dr_bloodpeak_honor = {
+			picture = URS_reforming_army
+			modifier = {
+				army_attack_factor = 0.10
+				army_defence_factor = 0.05
+				war_support_factor = 0.10
+				experience_gain_army_factor = 0.10
+				training_time_factor = -0.10
+			}
+		}
+
+		# 5b.新皇的晨光（砸碎凯旋丰碑）
+		URS_dr_new_dawn = {
+			picture = URS_stabilizing_social
+			modifier = {
+				stability_factor = 0.10
+				war_support_factor = 0.05
+				drift_defence_factor = 0.05
+			}
+		}
+
+		# 8b.圣愚的沉默（获取内卫的支持）
+		URS_dr_fools_silenced = {
+			picture = URS_ursus_demonic_campaign
+			modifier = {
+				army_defence_factor = 0.05
+				resistance_growth = -0.02
+				stability_factor = 0.05
+			}
+		}
+
 	}
 }

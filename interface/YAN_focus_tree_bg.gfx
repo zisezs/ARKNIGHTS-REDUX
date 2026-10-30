@@ -1,0 +1,16 @@
+# 大炎 · 国策树页面底图（仅 YAN 国策视角显示）
+# 贴图 2560x1440、25% alpha，由 1_开发资料/docs/_YAN_focus_bg_source.png 生成
+# 生成器：E:/tmp/lud/make_yan_focus_bg.cjs
+# 用 corneredTileSpriteType + borderSize 0 + tilingCenter no → 引擎把整张图拉伸铺满容器，
+# 与 GFX_frontend_bg 同款写法；这样在 1080p/1440p 下都自动铺满国策页。
+
+spriteTypes = {
+	corneredTileSpriteType = {
+		name = "GFX_YAN_focus_tree_bg"
+		size = { x = 2560 y = 1440 }
+		textureFile = "gfx/interface/focusview/YAN_focus_tree_bg.dds"
+		borderSize = { x = 0 y = 0 }
+		tilingCenter = no
+		alwaystransparent = yes
+	}
+}

@@ -1,0 +1,91 @@
+######################################################
+# 大炎 · 经济国策树【大炎前路黯淡...】动态民族精神
+#
+# 机制（同 YAN_mil_reform_spirit / YAN_civ_spirit）：
+#   · 每个修正符直读变量 YAN_eco_rf_<键>；国策只做 add_to_variable，数值原地成长。
+#   · 变量由 YAN_eco_spirit_init（国库空虚...）初始化；
+#     根格不挂精神，实际由【朽坏的货架与商品...】首次挂上。
+#   · 两条收尾各自改名：
+#       镇压邪魔污染 → YAN_eco_spirit_steady【大炎平稳航行...】
+#       大炎乘风破浪！ → YAN_eco_spirit_waves【大炎乘风破浪！】
+#     三者共用同一组变量，换名瞬间数值零跳变。
+#
+# 贸易法案【独善其身，兼济天下】的和平/战争两套加成不写进法案本身，
+# 由下面两个无图标的动态修正符按 has_war 自动切换（法案 on_add 时挂上）。
+######################################################
+
+YAN_eco_spirit = {
+	icon = GFX_idea_YAN_eco_reform_spirit
+
+	enable = { always = yes }
+
+	industrial_capacity_factory = YAN_eco_rf_factory_output
+	production_factory_efficiency_gain_factor = YAN_eco_rf_prod_growth
+	production_speed_industrial_complex_factor = YAN_eco_rf_civ_factory_speed
+	consumer_goods_factor = YAN_eco_rf_consumer_goods
+	stability_weekly = YAN_eco_rf_stability_weekly
+	monthly_population = YAN_eco_rf_monthly_population
+	political_power_factor = YAN_eco_rf_pp
+	local_resources_factor = YAN_eco_rf_resources
+	min_export = YAN_eco_rf_min_export
+	production_speed_arms_factory_factor = YAN_eco_rf_mil_factory_speed
+}
+
+# 收尾改名版：数值完全一致，只换名字与说明（三者共用同一图标）。
+YAN_eco_spirit_steady = {
+	icon = GFX_idea_YAN_eco_reform_spirit
+
+	enable = { always = yes }
+
+	industrial_capacity_factory = YAN_eco_rf_factory_output
+	production_factory_efficiency_gain_factor = YAN_eco_rf_prod_growth
+	production_speed_industrial_complex_factor = YAN_eco_rf_civ_factory_speed
+	consumer_goods_factor = YAN_eco_rf_consumer_goods
+	stability_weekly = YAN_eco_rf_stability_weekly
+	monthly_population = YAN_eco_rf_monthly_population
+	political_power_factor = YAN_eco_rf_pp
+	local_resources_factor = YAN_eco_rf_resources
+	min_export = YAN_eco_rf_min_export
+	production_speed_arms_factory_factor = YAN_eco_rf_mil_factory_speed
+}
+
+YAN_eco_spirit_waves = {
+	icon = GFX_idea_YAN_eco_reform_spirit
+
+	enable = { always = yes }
+
+	industrial_capacity_factory = YAN_eco_rf_factory_output
+	production_factory_efficiency_gain_factor = YAN_eco_rf_prod_growth
+	production_speed_industrial_complex_factor = YAN_eco_rf_civ_factory_speed
+	consumer_goods_factor = YAN_eco_rf_consumer_goods
+	stability_weekly = YAN_eco_rf_stability_weekly
+	monthly_population = YAN_eco_rf_monthly_population
+	political_power_factor = YAN_eco_rf_pp
+	local_resources_factor = YAN_eco_rf_resources
+	min_export = YAN_eco_rf_min_export
+	production_speed_arms_factory_factor = YAN_eco_rf_mil_factory_speed
+}
+
+# ---------------- 贸易法案：独善其身，兼济天下 ----------------
+# 无 icon：不进政治面板，只在法案生效时提供对应一套修正。
+YAN_eco_trade_peace = {
+	enable = {
+		has_idea = YAN_self_reliant_trade
+		NOT = { has_war = yes }
+	}
+
+	research_speed_factor = 0.20
+	industrial_capacity_factory = 0.20
+	min_export = 0.30
+}
+
+YAN_eco_trade_war = {
+	enable = {
+		has_idea = YAN_self_reliant_trade
+		has_war = yes
+	}
+
+	min_export = 0.10
+	production_speed_arms_factory_factor = 0.30
+	stability_weekly = -0.01
+}

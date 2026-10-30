@@ -1,0 +1,111 @@
+# ==============================================================================
+#  大炎 · 内政树事件
+#  · yan_civ.1 宣政司改革     —— 国策【垂拱而治...】（YAN_civ_rule_by_inaction）触发
+#  · yan_civ.2 落子无悔       —— 国策【恭听天裁】（YAN_civ_heaven_judgment）触发
+#  · yan_civ.3 皇帝轮流做     —— 决议【皇帝轮流做，今年到我家！】触发，选十二岁片之一
+#    出任国家领导人（ideology = eastern_authoritarianism_subtype，即大炎执政党）。
+#    换在任领袖必须两步：retire_country_leader 退掉在任者 + promote_character ——
+#    只写 promote_character 推不动台上那位（同 REU_Lyudmila_Take_Power_Decisions / KZM_resto_fix_leader）。
+#    十二岁片由【岁相的荒唐梦】各线「出山」格 recruit_character 入池，未入池的不进选项。
+#  文案见 localisation/simp_chinese/ARF_YAN_Civ_Internal_l_simp_chinese.yml
+# ==============================================================================
+
+add_namespace = yan_civ
+
+# 宣政司改革：国策点开之后，中枢第一次把手伸进十九司的账册
+country_event = {
+	id = yan_civ.1
+	title = yan_civ.1.t
+	desc = yan_civ.1.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_civ.1.a
+		# 先清账：改革进度往前走两步
+		add_to_variable = { YAN_civ_rf_progress = 2 }
+		custom_effect_tooltip = YAN_civ_reform_progress_p2_tt
+	}
+
+	option = {
+		name = yan_civ.1.b
+		# 先定章程：稳住朝局，换一笔政治点数
+		add_political_power = 50
+	}
+}
+
+# 落子无悔：棋局收束，岁陵之事到此为止
+country_event = {
+	id = yan_civ.2
+	title = yan_civ.2.t
+	desc = yan_civ.2.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_civ.2.a
+		add_stability = 0.05
+		add_political_power = 50
+	}
+}
+
+# 皇帝轮流做，今年到我家！ —— 十二岁片择主
+country_event = {
+	id = yan_civ.3
+	title = yan_civ.3.t
+	desc = yan_civ.3.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+
+	option = {
+		name = yan_civ.3.o1
+		# 2026-10-26 按要求：不再要求 YAN_auto_leader_* 旗标，在朝即可出任
+		trigger = { has_character = YAN_gen_zhongyue }
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_country_leader = { character = YAN_gen_zhongyue ruling_only = yes } }
+				}
+				retire_country_leader = yes
+			}
+		}
+		promote_character = { character = YAN_gen_zhongyue ideology = eastern_authoritarianism_subtype }
+	}
+
+	option = {
+		name = yan_civ.3.o6
+		trigger = { has_character = YAN_gen_shu }
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_country_leader = { character = YAN_gen_shu ruling_only = yes } }
+				}
+				retire_country_leader = yes
+			}
+		}
+		promote_character = { character = YAN_gen_shu ideology = eastern_authoritarianism_subtype }
+	}
+
+	option = {
+		name = yan_civ.3.o9
+		trigger = { has_character = YAN_gen_nian }
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_country_leader = { character = YAN_gen_nian ruling_only = yes } }
+				}
+				retire_country_leader = yes
+			}
+		}
+		promote_character = { character = YAN_gen_nian ideology = eastern_authoritarianism_subtype }
+	}
+
+	# 兜底：三人（重岳/年/黍）都未入朝时也能关掉这封信
+	option = {
+		name = yan_civ.3.oz
+		ai_chance = { factor = 0 }
+	}
+}

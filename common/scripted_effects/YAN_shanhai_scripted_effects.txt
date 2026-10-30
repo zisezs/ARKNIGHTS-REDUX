@@ -25,7 +25,11 @@ YAN_shanhai_check = {
 	YAN_shanhai_liberate = yes
 	YAN_shz_recount = yes
 	if = {
-		limit = { NOT = { has_country_flag = yan_sui_agreement_done } }
+		limit = {
+			NOT = { has_country_flag = yan_sui_agreement_done }
+			# 【岁陵之乱！】120 天任务结算后，山海众偃旗息鼓，不再起新波
+			NOT = { has_country_flag = yan_sui_banner_lowered }
+		}
 		YAN_shanhai_wave = yes
 	}
 }

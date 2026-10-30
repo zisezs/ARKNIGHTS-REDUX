@@ -1,292 +1,213 @@
-# ==============================================================================
-#  大炎·奇迹工程 —— 贴图与字体注册（生成物）
-#
-#  版式照明日方舟「RELINK」活动页的档案库骨架：等宽编号条 / 白卡片浮淡蓝阴影 /
-#  1px 灰线 / 蓝色翻页箭头 / 挂锁 / 实色按钮条；配色换成大炎的宣纸米白 + 朱印 + 描金。
-#
-#  ⚠️ 字体必须在顶层 bitmapfonts 块里 —— 塞进 spriteTypes 不报错但静默回退默认黑字。
-#  ⚠️ §T 在这三套字体里都是米白（给朱红底上的按钮字用），纸面次要文字一律用 §X。
-#  贴图由 docs/gen_yan_miracle_assets.cjs 烘焙。
-# ==============================================================================
-
+# 大炎 · 奇迹工程 —— 贴图与字体注册（生成物）
 spriteTypes = {
-
-	# ========================= 底版 =========================
 	spriteType = {
 		name = "GFX_YAN_mir_bg"
-		texturefile = "gfx/interface/YAN_miracle/bg_panel.png"
+		texturefile = "gfx/interface/YAN_miracle/mir_bg.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_entry_bg"
-		texturefile = "gfx/interface/YAN_miracle/bg_entry.png"
-		legacy_lazy_load = no
-	}
-	spriteType = {
-		name = "GFX_YAN_mir_roster_bg"
-		texturefile = "gfx/interface/YAN_miracle/bg_roster.png"
-		legacy_lazy_load = no
-	}
-
-	# ========================= 版式件 =========================
-	spriteType = {
-		name = "GFX_YAN_mir_idstrip"
-		texturefile = "gfx/interface/YAN_miracle/ui_idstrip.png"
-		legacy_lazy_load = no
-	}
-	spriteType = {
-		name = "GFX_YAN_mir_titlebar"
-		texturefile = "gfx/interface/YAN_miracle/ui_titlebar.png"
+		name = "GFX_YAN_mir_entry"
+		texturefile = "gfx/interface/YAN_miracle/mir_entry.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
 		name = "GFX_YAN_mir_card"
-		texturefile = "gfx/interface/YAN_miracle/ui_card.png"
+		texturefile = "gfx/interface/YAN_miracle/mir_card.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
 		name = "GFX_YAN_mir_card_sel"
-		texturefile = "gfx/interface/YAN_miracle/ui_card_sel.png"
+		texturefile = "gfx/interface/YAN_miracle/mir_card_sel.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_card_row"
-		texturefile = "gfx/interface/YAN_miracle/ui_card_row.png"
+		name = "GFX_YAN_mir_panel"
+		texturefile = "gfx/interface/YAN_miracle/mir_panel.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_plate_frame"
-		texturefile = "gfx/interface/YAN_miracle/ui_plate_frame.png"
+		name = "GFX_YAN_mir_panel_w"
+		texturefile = "gfx/interface/YAN_miracle/mir_panel_w.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_btn_go"
-		texturefile = "gfx/interface/YAN_miracle/ui_btn_go.png"
+		name = "GFX_YAN_mir_panel_m"
+		texturefile = "gfx/interface/YAN_miracle/mir_panel_m.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_btn_flat"
-		texturefile = "gfx/interface/YAN_miracle/ui_btn_flat.png"
+		name = "GFX_YAN_mir_panel_card"
+		texturefile = "gfx/interface/YAN_miracle/mir_panel_card.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_arrow_l"
-		texturefile = "gfx/interface/YAN_miracle/ui_arrow_l.png"
+		name = "GFX_YAN_mir_panel_s"
+		texturefile = "gfx/interface/YAN_miracle/mir_panel_s.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_arrow_r"
-		texturefile = "gfx/interface/YAN_miracle/ui_arrow_r.png"
+		name = "GFX_YAN_mir_panel_big"
+		texturefile = "gfx/interface/YAN_miracle/mir_panel_big.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_close"
-		texturefile = "gfx/interface/YAN_miracle/ui_close.png"
+		name = "GFX_YAN_mir_btn"
+		texturefile = "gfx/interface/YAN_miracle/mir_btn.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_lock"
-		texturefile = "gfx/interface/YAN_miracle/ui_lock.png"
+		name = "GFX_YAN_mir_btn_s"
+		texturefile = "gfx/interface/YAN_miracle/mir_btn_s.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_badge"
-		texturefile = "gfx/interface/YAN_miracle/ui_badge.png"
+		name = "GFX_YAN_mir_btn_light"
+		texturefile = "gfx/interface/YAN_miracle/mir_btn_light.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_chk_ok"
-		texturefile = "gfx/interface/YAN_miracle/ui_chk_ok.png"
+		name = "GFX_YAN_mir_btn_red"
+		texturefile = "gfx/interface/YAN_miracle/mir_btn_red.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_chk_no"
-		texturefile = "gfx/interface/YAN_miracle/ui_chk_no.png"
+		name = "GFX_YAN_mir_btn_gold"
+		texturefile = "gfx/interface/YAN_miracle/mir_btn_gold.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_pip_off"
-		texturefile = "gfx/interface/YAN_miracle/ui_pip_off.png"
+		name = "GFX_YAN_mir_tab"
+		texturefile = "gfx/interface/YAN_miracle/mir_tab.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_YAN_mir_tab_sel"
+		texturefile = "gfx/interface/YAN_miracle/mir_tab_sel.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
 		name = "GFX_YAN_mir_pip_on"
-		texturefile = "gfx/interface/YAN_miracle/ui_pip_on.png"
+		texturefile = "gfx/interface/YAN_miracle/mir_pip_on.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_seal"
-		texturefile = "gfx/interface/YAN_miracle/ui_seal.png"
+		name = "GFX_YAN_mir_pip_off"
+		texturefile = "gfx/interface/YAN_miracle/mir_pip_off.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_rule_384"
-		texturefile = "gfx/interface/YAN_miracle/ui_rule_384.png"
+		name = "GFX_YAN_mir_close"
+		texturefile = "gfx/interface/YAN_miracle/mir_close.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_rule_560"
-		texturefile = "gfx/interface/YAN_miracle/ui_rule_560.png"
+		name = "GFX_YAN_mir_emblem"
+		texturefile = "gfx/interface/YAN_miracle/mir_emblem.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_rule_890"
-		texturefile = "gfx/interface/YAN_miracle/ui_rule_890.png"
+		name = "GFX_YAN_mir_art_frame"
+		texturefile = "gfx/interface/YAN_miracle/mir_art_frame.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_rule_920"
-		texturefile = "gfx/interface/YAN_miracle/ui_rule_920.png"
-		legacy_lazy_load = no
-	}
-
-	# ========================= 入口面板专用小件（决议页宿主只有 ~502px）=========================
-	spriteType = {
-		name = "GFX_YAN_mir_titlebar_sm"
-		texturefile = "gfx/interface/YAN_miracle/ui_titlebar_320.png"
+		name = "GFX_YAN_mir_edict_on"
+		texturefile = "gfx/interface/YAN_miracle/mir_edict_on.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_btn_flat_sm"
-		texturefile = "gfx/interface/YAN_miracle/ui_btn_flat_230.png"
+		name = "GFX_YAN_mir_victory"
+		texturefile = "gfx/interface/YAN_miracle/mir_victory.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_pip_off_sm"
-		texturefile = "gfx/interface/YAN_miracle/ui_pip_off_22.png"
+		name = "GFX_YAN_mir_art_wall"
+		texturefile = "gfx/interface/YAN_miracle/art_wall.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_pip_on_sm"
-		texturefile = "gfx/interface/YAN_miracle/ui_pip_on_22.png"
+		name = "GFX_YAN_mir_art_sisui"
+		texturefile = "gfx/interface/YAN_miracle/art_sisui.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_seal_sm"
-		texturefile = "gfx/interface/YAN_miracle/ui_seal_40.png"
-		legacy_lazy_load = no
-	}
-
-	# ========================= 九份卷宗的工程制图 =========================
-	spriteType = {
-		name = "GFX_YAN_mir_plate_guangsha"
-		texturefile = "gfx/interface/YAN_miracle/plate_guangsha.png"
+		name = "GFX_YAN_mir_art_observatory"
+		texturefile = "gfx/interface/YAN_miracle/art_observatory.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_plate_rongjin"
-		texturefile = "gfx/interface/YAN_miracle/plate_rongjin.png"
+		name = "GFX_YAN_mir_art_canal"
+		texturefile = "gfx/interface/YAN_miracle/art_canal.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_plate_dujiang"
-		texturefile = "gfx/interface/YAN_miracle/plate_dujiang.png"
+		name = "GFX_YAN_mir_art_furnace"
+		texturefile = "gfx/interface/YAN_miracle/art_furnace.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_plate_zhuancao"
-		texturefile = "gfx/interface/YAN_miracle/plate_zhuancao.png"
+		name = "GFX_YAN_mir_art_palace"
+		texturefile = "gfx/interface/YAN_miracle/art_palace.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_plate_zhenyue"
-		texturefile = "gfx/interface/YAN_miracle/plate_zhenyue.png"
+		name = "GFX_idea_YAN_mir_wall"
+		texturefile = "gfx/interface/YAN_miracle/icon_wall.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_plate_feiyun"
-		texturefile = "gfx/interface/YAN_miracle/plate_feiyun.png"
+		name = "GFX_idea_YAN_mir_sisui"
+		texturefile = "gfx/interface/YAN_miracle/icon_sisui.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_plate_sitian"
-		texturefile = "gfx/interface/YAN_miracle/plate_sitian.png"
+		name = "GFX_idea_YAN_mir_observatory"
+		texturefile = "gfx/interface/YAN_miracle/icon_observatory.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_plate_yumen"
-		texturefile = "gfx/interface/YAN_miracle/plate_yumen.png"
+		name = "GFX_idea_YAN_mir_canal"
+		texturefile = "gfx/interface/YAN_miracle/icon_canal.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_plate_longmen"
-		texturefile = "gfx/interface/YAN_miracle/plate_longmen.png"
-		legacy_lazy_load = no
-	}
-
-	# ========================= 图标 =========================
-	# 州级 BUFF 用 32x32（原版 gfx/interface/state_modifiers/*.dds 全是这个规格，
-	# 60x60 是国家精神/idea 的，画到州视图里会偏大）；国家精神「将作监·百工」才是 60x60。
-	spriteType = {
-		name = "GFX_YAN_mir_dmbuff_guangsha"
-		texturefile = "gfx/interface/YAN_miracle/dmbuff_guangsha.png"
+		name = "GFX_idea_YAN_mir_furnace"
+		texturefile = "gfx/interface/YAN_miracle/icon_furnace.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_dmbuff_rongjin"
-		texturefile = "gfx/interface/YAN_miracle/dmbuff_rongjin.png"
+		name = "GFX_idea_YAN_mir_palace"
+		texturefile = "gfx/interface/YAN_miracle/icon_palace.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_dmbuff_dujiang"
-		texturefile = "gfx/interface/YAN_miracle/dmbuff_dujiang.png"
+		name = "GFX_idea_YAN_Miracle_Completed"
+		texturefile = "gfx/interface/YAN_miracle/icon_completed.png"
 		legacy_lazy_load = no
 	}
 	spriteType = {
-		name = "GFX_YAN_mir_dmbuff_zhuancao"
-		texturefile = "gfx/interface/YAN_miracle/dmbuff_zhuancao.png"
-		legacy_lazy_load = no
-	}
-	spriteType = {
-		name = "GFX_YAN_mir_dmbuff_zhenyue"
-		texturefile = "gfx/interface/YAN_miracle/dmbuff_zhenyue.png"
-		legacy_lazy_load = no
-	}
-	spriteType = {
-		name = "GFX_YAN_mir_dmbuff_feiyun"
-		texturefile = "gfx/interface/YAN_miracle/dmbuff_feiyun.png"
-		legacy_lazy_load = no
-	}
-	spriteType = {
-		name = "GFX_YAN_mir_dmbuff_sitian"
-		texturefile = "gfx/interface/YAN_miracle/dmbuff_sitian.png"
-		legacy_lazy_load = no
-	}
-	spriteType = {
-		name = "GFX_YAN_mir_dmbuff_yumen"
-		texturefile = "gfx/interface/YAN_miracle/dmbuff_yumen.png"
-		legacy_lazy_load = no
-	}
-	spriteType = {
-		name = "GFX_YAN_mir_dmbuff_longmen"
-		texturefile = "gfx/interface/YAN_miracle/dmbuff_longmen.png"
-		legacy_lazy_load = no
-	}
-	spriteType = {
-		name = "GFX_YAN_mir_spirit_total"
-		texturefile = "gfx/interface/YAN_miracle/spirit_total.png"
+		name = "GFX_idea_YAN_mir_edict_wb"
+		texturefile = "gfx/interface/YAN_miracle/mir_emblem.png"
 		legacy_lazy_load = no
 	}
 }
 
 bitmapfonts = {
-
-	# 拉丁=gfx/fonts/hoi_30header 中文=gfx/fonts/Arial_26s
 	bitmapfont = {
 		name = "YAN_Mir_title26"
 		fontfiles = {
 			"gfx/fonts/hoi_30header"
+			"gfx/fonts/Arial_26s"
 		}
-		color = 0xff2a2620
+		color = 0xfff2efe5
+
 		textcolors = {
-			G = { 44 96 62 }
-			B = { 40 88 158 }
-			Y = { 146 96 10 }
-			R = { 176 28 40 }
-			H = { 146 96 10 }
-			X = { 96 90 82 }
-			W = { 42 38 32 }
-			T = { 253 247 236 }
+			G = { 88 180 120 }
+			R = { 208 96 80 }
+			Y = { 216 196 143 }
+			T = { 100 216 204 }
+			W = { 242 239 229 }
+			B = { 120 200 230 }
 		}
 	}
 	bitmapfont_override = {
@@ -294,26 +215,51 @@ bitmapfonts = {
 		fontfiles = {
 			"gfx/fonts/hoi_30header"
 			"gfx/fonts/Arial_26s"
+			"gfx/fonts/Arial_14b"
 		}
 		languages = { "l_simp_chinese" }
 	}
+	bitmapfont = {
+		name = "YAN_Mir_title20"
+		fontfiles = {
+			"gfx/fonts/hoi_20bs"
+			"gfx/fonts/Arial_20b"
+		}
+		color = 0xfff2efe5
 
-	# 拉丁=gfx/fonts/hoi_20bs 中文=gfx/fonts/Arial_20b
+		textcolors = {
+			G = { 88 180 120 }
+			R = { 208 96 80 }
+			Y = { 216 196 143 }
+			T = { 100 216 204 }
+			W = { 242 239 229 }
+			B = { 120 200 230 }
+		}
+	}
+	bitmapfont_override = {
+		name = "YAN_Mir_title20"
+		fontfiles = {
+			"gfx/fonts/hoi_20bs"
+			"gfx/fonts/Arial_20b"
+			"gfx/fonts/Arial_14b"
+		}
+		languages = { "l_simp_chinese" }
+	}
 	bitmapfont = {
 		name = "YAN_Mir_text20"
 		fontfiles = {
 			"gfx/fonts/hoi_20bs"
+			"gfx/fonts/Arial_20b"
 		}
-		color = 0xff2a2620
+		color = 0xffe8e4d8
+
 		textcolors = {
-			G = { 44 96 62 }
-			B = { 40 88 158 }
-			Y = { 146 96 10 }
-			R = { 176 28 40 }
-			H = { 146 96 10 }
-			X = { 96 90 82 }
-			W = { 42 38 32 }
-			T = { 253 247 236 }
+			G = { 88 180 120 }
+			R = { 208 96 80 }
+			Y = { 216 196 143 }
+			T = { 100 216 204 }
+			W = { 242 239 229 }
+			B = { 120 200 230 }
 		}
 	}
 	bitmapfont_override = {
@@ -321,31 +267,237 @@ bitmapfonts = {
 		fontfiles = {
 			"gfx/fonts/hoi_20bs"
 			"gfx/fonts/Arial_20b"
+			"gfx/fonts/Arial_14b"
 		}
 		languages = { "l_simp_chinese" }
 	}
-
-	# 拉丁=gfx/fonts/hoi4_typewriter16 + gfx/fonts/hoi_16typewriter 中文=gfx/fonts/Arial_14b
 	bitmapfont = {
-		name = "YAN_Mir_text14"
+		name = "YAN_Mir_text16"
 		fontfiles = {
 			"gfx/fonts/hoi4_typewriter16"
 			"gfx/fonts/hoi_16typewriter"
 		}
-		color = 0xff3a352d
+		color = 0xffb8b2a2
+
 		textcolors = {
-			G = { 44 96 62 }
-			B = { 40 88 158 }
-			Y = { 146 96 10 }
-			R = { 176 28 40 }
-			H = { 146 96 10 }
-			X = { 96 90 82 }
-			W = { 42 38 32 }
-			T = { 253 247 236 }
+			G = { 88 180 120 }
+			R = { 208 96 80 }
+			Y = { 216 196 143 }
+			T = { 100 216 204 }
+			W = { 242 239 229 }
+			B = { 120 200 230 }
 		}
 	}
 	bitmapfont_override = {
-		name = "YAN_Mir_text14"
+		name = "YAN_Mir_text16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+			"gfx/fonts/Arial_14b"
+		}
+		languages = { "l_simp_chinese" }
+	}
+	bitmapfont = {
+		name = "YAN_Mir_gold16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+		}
+		color = 0xffd8c48f
+
+		textcolors = {
+			G = { 88 180 120 }
+			R = { 208 96 80 }
+			Y = { 216 196 143 }
+			T = { 100 216 204 }
+			W = { 242 239 229 }
+			B = { 120 200 230 }
+		}
+	}
+	bitmapfont_override = {
+		name = "YAN_Mir_gold16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+			"gfx/fonts/Arial_14b"
+		}
+		languages = { "l_simp_chinese" }
+	}
+	bitmapfont = {
+		name = "YAN_Mir_accent16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+		}
+		color = 0xff64d8cc
+
+		textcolors = {
+			G = { 88 180 120 }
+			R = { 208 96 80 }
+			Y = { 216 196 143 }
+			T = { 100 216 204 }
+			W = { 242 239 229 }
+			B = { 120 200 230 }
+		}
+	}
+	bitmapfont_override = {
+		name = "YAN_Mir_accent16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+			"gfx/fonts/Arial_14b"
+		}
+		languages = { "l_simp_chinese" }
+	}
+	bitmapfont = {
+		name = "YAN_Mir_ink_title26"
+		fontfiles = {
+			"gfx/fonts/hoi_30header"
+			"gfx/fonts/Arial_26s"
+		}
+		color = 0xff1c1f1e
+
+		textcolors = {
+			G = { 46 125 80 }
+			R = { 155 44 44 }
+			Y = { 140 100 30 }
+			T = { 90 90 84 }
+			W = { 28 31 30 }
+			B = { 31 119 114 }
+		}
+	}
+	bitmapfont_override = {
+		name = "YAN_Mir_ink_title26"
+		fontfiles = {
+			"gfx/fonts/hoi_30header"
+			"gfx/fonts/Arial_26s"
+			"gfx/fonts/Arial_14b"
+		}
+		languages = { "l_simp_chinese" }
+	}
+	bitmapfont = {
+		name = "YAN_Mir_ink_text20"
+		fontfiles = {
+			"gfx/fonts/hoi_20bs"
+			"gfx/fonts/Arial_20b"
+		}
+		color = 0xff1c1f1e
+
+		textcolors = {
+			G = { 46 125 80 }
+			R = { 155 44 44 }
+			Y = { 140 100 30 }
+			T = { 90 90 84 }
+			W = { 28 31 30 }
+			B = { 31 119 114 }
+		}
+	}
+	bitmapfont_override = {
+		name = "YAN_Mir_ink_text20"
+		fontfiles = {
+			"gfx/fonts/hoi_20bs"
+			"gfx/fonts/Arial_20b"
+			"gfx/fonts/Arial_14b"
+		}
+		languages = { "l_simp_chinese" }
+	}
+	bitmapfont = {
+		name = "YAN_Mir_ink_text16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+		}
+		color = 0xff2e3331
+
+		textcolors = {
+			G = { 46 125 80 }
+			R = { 155 44 44 }
+			Y = { 140 100 30 }
+			T = { 90 90 84 }
+			W = { 28 31 30 }
+			B = { 31 119 114 }
+		}
+	}
+	bitmapfont_override = {
+		name = "YAN_Mir_ink_text16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+			"gfx/fonts/Arial_14b"
+		}
+		languages = { "l_simp_chinese" }
+	}
+	bitmapfont = {
+		name = "YAN_Mir_ink_gold16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+		}
+		color = 0xff8c6b2e
+
+		textcolors = {
+			G = { 46 125 80 }
+			R = { 155 44 44 }
+			Y = { 140 100 30 }
+			T = { 90 90 84 }
+			W = { 28 31 30 }
+			B = { 31 119 114 }
+		}
+	}
+	bitmapfont_override = {
+		name = "YAN_Mir_ink_gold16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+			"gfx/fonts/Arial_14b"
+		}
+		languages = { "l_simp_chinese" }
+	}
+	bitmapfont = {
+		name = "YAN_Mir_ink_jade16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+		}
+		color = 0xff1f7772
+
+		textcolors = {
+			G = { 46 125 80 }
+			R = { 155 44 44 }
+			Y = { 140 100 30 }
+			T = { 90 90 84 }
+			W = { 28 31 30 }
+			B = { 31 119 114 }
+		}
+	}
+	bitmapfont_override = {
+		name = "YAN_Mir_ink_jade16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+			"gfx/fonts/Arial_14b"
+		}
+		languages = { "l_simp_chinese" }
+	}
+	bitmapfont = {
+		name = "YAN_Mir_ink_red16"
+		fontfiles = {
+			"gfx/fonts/hoi4_typewriter16"
+			"gfx/fonts/hoi_16typewriter"
+		}
+		color = 0xff9b2c2c
+
+		textcolors = {
+			G = { 46 125 80 }
+			R = { 155 44 44 }
+			Y = { 140 100 30 }
+			T = { 90 90 84 }
+			W = { 28 31 30 }
+			B = { 31 119 114 }
+		}
+	}
+	bitmapfont_override = {
+		name = "YAN_Mir_ink_red16"
 		fontfiles = {
 			"gfx/fonts/hoi4_typewriter16"
 			"gfx/fonts/hoi_16typewriter"

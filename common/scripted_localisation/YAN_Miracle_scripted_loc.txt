@@ -1,0 +1,226 @@
+# 大炎 · 奇迹工程 —— 动态文字 / 动态贴图（生成物）
+# ⚠️ defined_text 取第一条命中，兜底项必须最后
+
+defined_text = {
+	name = YAN_Mir_Season
+	text = { trigger = { check_variable = { YAN_mir_season = 0 compare = equals } } localization_key = YAN_MIR_SEASON_0 }
+	text = { trigger = { check_variable = { YAN_mir_season = 1 compare = equals } } localization_key = YAN_MIR_SEASON_1 }
+	text = { trigger = { check_variable = { YAN_mir_season = 2 compare = equals } } localization_key = YAN_MIR_SEASON_2 }
+	text = { trigger = { check_variable = { YAN_mir_season = 3 compare = equals } } localization_key = YAN_MIR_SEASON_3 }
+	text = { localization_key = YAN_MIR_SEASON_0 }
+}
+
+defined_text = {
+	name = YAN_Mir_Weather
+	text = { trigger = { check_variable = { YAN_mir_weather = 0 compare = equals } } localization_key = YAN_MIR_WEATHER_0 }
+	text = { trigger = { check_variable = { YAN_mir_weather = 1 compare = equals } } localization_key = YAN_MIR_WEATHER_1 }
+	text = { trigger = { check_variable = { YAN_mir_weather = 2 compare = equals } } localization_key = YAN_MIR_WEATHER_2 }
+	text = { trigger = { check_variable = { YAN_mir_weather = 3 compare = equals } } localization_key = YAN_MIR_WEATHER_3 }
+	text = { trigger = { check_variable = { YAN_mir_weather = 4 compare = equals } } localization_key = YAN_MIR_WEATHER_4 }
+	text = { localization_key = YAN_MIR_WEATHER_1 }
+}
+
+defined_text = {
+	name = YAN_Mir_GetArt
+	text = { trigger = { check_variable = { YAN_mir_sel = 1 compare = equals } } localization_key = GFX_YAN_mir_art_wall }
+	text = { trigger = { check_variable = { YAN_mir_sel = 2 compare = equals } } localization_key = GFX_YAN_mir_art_sisui }
+	text = { trigger = { check_variable = { YAN_mir_sel = 3 compare = equals } } localization_key = GFX_YAN_mir_art_observatory }
+	text = { trigger = { check_variable = { YAN_mir_sel = 4 compare = equals } } localization_key = GFX_YAN_mir_art_canal }
+	text = { trigger = { check_variable = { YAN_mir_sel = 5 compare = equals } } localization_key = GFX_YAN_mir_art_furnace }
+	text = { trigger = { check_variable = { YAN_mir_sel = 6 compare = equals } } localization_key = GFX_YAN_mir_art_palace }
+	text = { localization_key = GFX_YAN_mir_art_wall }
+}
+
+defined_text = {
+	name = YAN_Mir_GetName
+	text = { trigger = { check_variable = { YAN_mir_sel = 1 compare = equals } } localization_key = YAN_MIR_NAME_WALL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 2 compare = equals } } localization_key = YAN_MIR_NAME_SISUI }
+	text = { trigger = { check_variable = { YAN_mir_sel = 3 compare = equals } } localization_key = YAN_MIR_NAME_OBSERVATORY }
+	text = { trigger = { check_variable = { YAN_mir_sel = 4 compare = equals } } localization_key = YAN_MIR_NAME_CANAL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 5 compare = equals } } localization_key = YAN_MIR_NAME_FURNACE }
+	text = { trigger = { check_variable = { YAN_mir_sel = 6 compare = equals } } localization_key = YAN_MIR_NAME_PALACE }
+	text = { localization_key = YAN_MIR_NAME_WALL }
+}
+
+defined_text = {
+	name = YAN_Mir_GetCode
+	text = { trigger = { check_variable = { YAN_mir_sel = 1 compare = equals } } localization_key = YAN_MIR_CODE_WALL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 2 compare = equals } } localization_key = YAN_MIR_CODE_SISUI }
+	text = { trigger = { check_variable = { YAN_mir_sel = 3 compare = equals } } localization_key = YAN_MIR_CODE_OBSERVATORY }
+	text = { trigger = { check_variable = { YAN_mir_sel = 4 compare = equals } } localization_key = YAN_MIR_CODE_CANAL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 5 compare = equals } } localization_key = YAN_MIR_CODE_FURNACE }
+	text = { trigger = { check_variable = { YAN_mir_sel = 6 compare = equals } } localization_key = YAN_MIR_CODE_PALACE }
+	text = { localization_key = YAN_MIR_CODE_WALL }
+}
+
+defined_text = {
+	name = YAN_Mir_GetLoc
+	text = { trigger = { check_variable = { YAN_mir_sel = 1 compare = equals } } localization_key = YAN_MIR_LOC_WALL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 2 compare = equals } } localization_key = YAN_MIR_LOC_SISUI }
+	text = { trigger = { check_variable = { YAN_mir_sel = 3 compare = equals } } localization_key = YAN_MIR_LOC_OBSERVATORY }
+	text = { trigger = { check_variable = { YAN_mir_sel = 4 compare = equals } } localization_key = YAN_MIR_LOC_CANAL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 5 compare = equals } } localization_key = YAN_MIR_LOC_FURNACE }
+	text = { trigger = { check_variable = { YAN_mir_sel = 6 compare = equals } } localization_key = YAN_MIR_LOC_PALACE }
+	text = { localization_key = YAN_MIR_LOC_WALL }
+}
+
+defined_text = {
+	name = YAN_Mir_GetDesc
+	text = { trigger = { check_variable = { YAN_mir_sel = 1 compare = equals } } localization_key = YAN_MIR_DESC_WALL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 2 compare = equals } } localization_key = YAN_MIR_DESC_SISUI }
+	text = { trigger = { check_variable = { YAN_mir_sel = 3 compare = equals } } localization_key = YAN_MIR_DESC_OBSERVATORY }
+	text = { trigger = { check_variable = { YAN_mir_sel = 4 compare = equals } } localization_key = YAN_MIR_DESC_CANAL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 5 compare = equals } } localization_key = YAN_MIR_DESC_FURNACE }
+	text = { trigger = { check_variable = { YAN_mir_sel = 6 compare = equals } } localization_key = YAN_MIR_DESC_PALACE }
+	text = { localization_key = YAN_MIR_DESC_WALL }
+}
+
+defined_text = {
+	name = YAN_Mir_GetCost
+	text = { trigger = { check_variable = { YAN_mir_sel = 1 compare = equals } } localization_key = YAN_MIR_COST_WALL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 2 compare = equals } } localization_key = YAN_MIR_COST_SISUI }
+	text = { trigger = { check_variable = { YAN_mir_sel = 3 compare = equals } } localization_key = YAN_MIR_COST_OBSERVATORY }
+	text = { trigger = { check_variable = { YAN_mir_sel = 4 compare = equals } } localization_key = YAN_MIR_COST_CANAL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 5 compare = equals } } localization_key = YAN_MIR_COST_FURNACE }
+	text = { trigger = { check_variable = { YAN_mir_sel = 6 compare = equals } } localization_key = YAN_MIR_COST_PALACE }
+	text = { localization_key = YAN_MIR_COST_WALL }
+}
+
+defined_text = {
+	name = YAN_Mir_GetReward
+	text = { trigger = { check_variable = { YAN_mir_sel = 1 compare = equals } } localization_key = YAN_MIR_REWARD_WALL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 2 compare = equals } } localization_key = YAN_MIR_REWARD_SISUI }
+	text = { trigger = { check_variable = { YAN_mir_sel = 3 compare = equals } } localization_key = YAN_MIR_REWARD_OBSERVATORY }
+	text = { trigger = { check_variable = { YAN_mir_sel = 4 compare = equals } } localization_key = YAN_MIR_REWARD_CANAL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 5 compare = equals } } localization_key = YAN_MIR_REWARD_FURNACE }
+	text = { trigger = { check_variable = { YAN_mir_sel = 6 compare = equals } } localization_key = YAN_MIR_REWARD_PALACE }
+	text = { localization_key = YAN_MIR_REWARD_WALL }
+}
+
+defined_text = {
+	name = YAN_Mir_GetSup
+	text = { trigger = { check_variable = { YAN_mir_sel = 1 compare = equals } } localization_key = YAN_MIR_SUP_WALL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 2 compare = equals } } localization_key = YAN_MIR_SUP_SISUI }
+	text = { trigger = { check_variable = { YAN_mir_sel = 3 compare = equals } } localization_key = YAN_MIR_SUP_OBSERVATORY }
+	text = { trigger = { check_variable = { YAN_mir_sel = 4 compare = equals } } localization_key = YAN_MIR_SUP_CANAL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 5 compare = equals } } localization_key = YAN_MIR_SUP_FURNACE }
+	text = { trigger = { check_variable = { YAN_mir_sel = 6 compare = equals } } localization_key = YAN_MIR_SUP_PALACE }
+	text = { localization_key = YAN_MIR_SUP_WALL }
+}
+
+defined_text = {
+	name = YAN_Mir_GetEdict
+	text = { trigger = { check_variable = { YAN_mir_sel = 1 compare = equals } } localization_key = YAN_MIR_EDICT_WALL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 2 compare = equals } } localization_key = YAN_MIR_EDICT_SISUI }
+	text = { trigger = { check_variable = { YAN_mir_sel = 3 compare = equals } } localization_key = YAN_MIR_EDICT_OBSERVATORY }
+	text = { trigger = { check_variable = { YAN_mir_sel = 4 compare = equals } } localization_key = YAN_MIR_EDICT_CANAL }
+	text = { trigger = { check_variable = { YAN_mir_sel = 5 compare = equals } } localization_key = YAN_MIR_EDICT_FURNACE }
+	text = { trigger = { check_variable = { YAN_mir_sel = 6 compare = equals } } localization_key = YAN_MIR_EDICT_PALACE }
+	text = { localization_key = YAN_MIR_EDICT_WALL }
+}
+
+defined_text = {
+	name = YAN_Mir_GetStat
+	text = { trigger = { check_variable = { YAN_mir_stat_sel = 3 compare = equals } } localization_key = YAN_MIR_ST_DONE }
+	text = { trigger = { check_variable = { YAN_mir_stat_sel = 2 compare = equals } } localization_key = YAN_MIR_ST_PAUSE }
+	text = { trigger = { check_variable = { YAN_mir_short_sel = 1 compare = equals } } localization_key = YAN_MIR_ST_SHORT }
+	text = { trigger = { check_variable = { YAN_mir_stat_sel = 1 compare = equals } } localization_key = YAN_MIR_ST_BUILD }
+	text = { localization_key = YAN_MIR_ST_PLAN }
+}
+
+defined_text = {
+	name = YAN_Mir_GetStart
+	text = { trigger = { check_variable = { YAN_mir_stat_sel = 3 compare = equals } } localization_key = YAN_MIR_START_DONE }
+	text = { trigger = { check_variable = { YAN_mir_stat_sel = 1 compare = equals } } localization_key = YAN_MIR_START_PAUSE }
+	text = { localization_key = YAN_MIR_START_GO }
+}
+
+defined_text = {
+	name = YAN_Mir_Stat_wall
+	text = { trigger = { has_country_flag = yan_mir_done_wall } localization_key = YAN_MIR_ST_DONE }
+	text = { trigger = { check_variable = { YAN_mir_stat_wall = 2 compare = equals } } localization_key = YAN_MIR_ST_PAUSE }
+	text = { trigger = { has_country_flag = yan_mir_short_wall } localization_key = YAN_MIR_ST_SHORT }
+	text = { trigger = { check_variable = { YAN_mir_stat_wall = 1 compare = equals } } localization_key = YAN_MIR_ST_BUILD }
+	text = { localization_key = YAN_MIR_ST_PLAN }
+}
+
+defined_text = {
+	name = YAN_Mir_Stat_sisui
+	text = { trigger = { has_country_flag = yan_mir_done_sisui } localization_key = YAN_MIR_ST_DONE }
+	text = { trigger = { check_variable = { YAN_mir_stat_sisui = 2 compare = equals } } localization_key = YAN_MIR_ST_PAUSE }
+	text = { trigger = { has_country_flag = yan_mir_short_sisui } localization_key = YAN_MIR_ST_SHORT }
+	text = { trigger = { check_variable = { YAN_mir_stat_sisui = 1 compare = equals } } localization_key = YAN_MIR_ST_BUILD }
+	text = { localization_key = YAN_MIR_ST_PLAN }
+}
+
+defined_text = {
+	name = YAN_Mir_Stat_observatory
+	text = { trigger = { has_country_flag = yan_mir_done_observatory } localization_key = YAN_MIR_ST_DONE }
+	text = { trigger = { check_variable = { YAN_mir_stat_observatory = 2 compare = equals } } localization_key = YAN_MIR_ST_PAUSE }
+	text = { trigger = { has_country_flag = yan_mir_short_observatory } localization_key = YAN_MIR_ST_SHORT }
+	text = { trigger = { check_variable = { YAN_mir_stat_observatory = 1 compare = equals } } localization_key = YAN_MIR_ST_BUILD }
+	text = { localization_key = YAN_MIR_ST_PLAN }
+}
+
+defined_text = {
+	name = YAN_Mir_Stat_canal
+	text = { trigger = { has_country_flag = yan_mir_done_canal } localization_key = YAN_MIR_ST_DONE }
+	text = { trigger = { check_variable = { YAN_mir_stat_canal = 2 compare = equals } } localization_key = YAN_MIR_ST_PAUSE }
+	text = { trigger = { has_country_flag = yan_mir_short_canal } localization_key = YAN_MIR_ST_SHORT }
+	text = { trigger = { check_variable = { YAN_mir_stat_canal = 1 compare = equals } } localization_key = YAN_MIR_ST_BUILD }
+	text = { localization_key = YAN_MIR_ST_PLAN }
+}
+
+defined_text = {
+	name = YAN_Mir_Stat_furnace
+	text = { trigger = { has_country_flag = yan_mir_done_furnace } localization_key = YAN_MIR_ST_DONE }
+	text = { trigger = { check_variable = { YAN_mir_stat_furnace = 2 compare = equals } } localization_key = YAN_MIR_ST_PAUSE }
+	text = { trigger = { has_country_flag = yan_mir_short_furnace } localization_key = YAN_MIR_ST_SHORT }
+	text = { trigger = { check_variable = { YAN_mir_stat_furnace = 1 compare = equals } } localization_key = YAN_MIR_ST_BUILD }
+	text = { localization_key = YAN_MIR_ST_PLAN }
+}
+
+defined_text = {
+	name = YAN_Mir_Stat_palace
+	text = { trigger = { has_country_flag = yan_mir_done_palace } localization_key = YAN_MIR_ST_DONE }
+	text = { trigger = { check_variable = { YAN_mir_stat_palace = 2 compare = equals } } localization_key = YAN_MIR_ST_PAUSE }
+	text = { trigger = { has_country_flag = yan_mir_short_palace } localization_key = YAN_MIR_ST_SHORT }
+	text = { trigger = { check_variable = { YAN_mir_stat_palace = 1 compare = equals } } localization_key = YAN_MIR_ST_BUILD }
+	text = { localization_key = YAN_MIR_ST_PLAN }
+}
+
+defined_text = {
+	name = YAN_Mir_EdictBtn_dx
+	text = { trigger = { has_country_flag = yan_mir_edict_dx } localization_key = YAN_MIR_EDICT_OFF }
+	text = { localization_key = YAN_MIR_EDICT_ON }
+}
+
+defined_text = {
+	name = YAN_Mir_EdictBtn_qt
+	text = { trigger = { has_country_flag = yan_mir_edict_qt } localization_key = YAN_MIR_EDICT_OFF }
+	text = { localization_key = YAN_MIR_EDICT_ON }
+}
+
+defined_text = {
+	name = YAN_Mir_EdictBtn_wb
+	text = { trigger = { has_country_flag = yan_mir_edict_wb } localization_key = YAN_MIR_EDICT_OFF }
+	text = { localization_key = YAN_MIR_EDICT_ON }
+}
+
+defined_text = {
+	name = YAN_Mir_EdictBtn_qj
+	text = { trigger = { has_country_flag = yan_mir_edict_qj } localization_key = YAN_MIR_EDICT_OFF }
+	text = { localization_key = YAN_MIR_EDICT_ON }
+}
+
+defined_text = {
+	name = YAN_Mir_EdictBtn_xx
+	text = { trigger = { has_country_flag = yan_mir_edict_xx } localization_key = YAN_MIR_EDICT_OFF }
+	text = { localization_key = YAN_MIR_EDICT_ON }
+}
+
+defined_text = {
+	name = YAN_Mir_EdictBtn_jt
+	text = { trigger = { has_country_flag = yan_mir_edict_jt } localization_key = YAN_MIR_EDICT_OFF }
+	text = { localization_key = YAN_MIR_EDICT_ON }
+}

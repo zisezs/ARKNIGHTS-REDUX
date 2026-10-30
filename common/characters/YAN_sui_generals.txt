@@ -1,8 +1,12 @@
 # ==============================================================================
 #  大炎 · 岁家十二将领（【岁相的荒唐梦】出山格招募）
-#  · 不写进 history：完成各线首格「出山」时由国策 recruit_character 入池。
+#  · 2026-10-26：改为写进 history，开局直接 recruit_character 入池（旧出山格已随树删除）。
 #  · 与同名顾问（YAN_Chong_Yue 等）是两套角色，各自有头像与定位。
 #  · 生成器：E:/tmp/sui12/gen_sui_generals.js（勿手改产物）
+#  ⚠ 2026-10-25 本副本（Redux）手工追加：civilian 头像 + country_leader 块
+#    （内政树决议【皇帝轮流做，今年到我家！】要把十二岁片推上国家领导人位）。
+#  ⚠ 2026-10-26 再手工追加：望/颉/绩/易/方 的 advisor 块（内阁顾问）。
+#    母模组那台生成器重跑会抹掉以上手工内容，重跑后需照同样结构补回。
 # ==============================================================================
 characters = {
 
@@ -11,8 +15,12 @@ characters = {
 		name = YAN_gen_zhongyue
 		portraits = {
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_zhongyue.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_zhongyue_small.png"
+				large = "gfx/leaders/YAN/gen/YAN_gen_zhongyue.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_zhongyue_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_zhongyue.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_zhongyue_small.dds"
 			}
 		}
 		gender = male
@@ -25,6 +33,11 @@ characters = {
 			logistics_skill = 6
 			planning_skill = 7
 		}
+		country_leader = {
+			desc = YAN_gen_zhongyue_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_zhongyue }
+		}
 	}
 
 	# 望 —— 暗相 · 专属特质「落子无悔」
@@ -32,11 +45,24 @@ characters = {
 		name = YAN_gen_wang
 		portraits = {
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_wang.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_wang_small.png"
+				large = "gfx/leaders/YAN/gen/YAN_gen_wang.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_wang_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_wang.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_wang_small_advisor.dds"
 			}
 		}
 		gender = male
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_gen_wang_advisor_idea
+			allowed = { original_tag = YAN }
+			traits = { YAN_Wang_advisor }
+			desc = YAN_gen_wang_desc
+			cost = 150
+			ai_will_do = { factor = 100 }
+		}
 		field_marshal = {
 			desc = YAN_gen_wang_desc
 			traits = { YAN_sui_wang skilled_staffer }
@@ -46,6 +72,11 @@ characters = {
 			logistics_skill = 7
 			planning_skill = 10
 		}
+		country_leader = {
+			desc = YAN_gen_wang_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_wang }
+		}
 	}
 
 	# 令 —— 礼相 · 专属特质「尚蜀有主」
@@ -53,8 +84,12 @@ characters = {
 		name = YAN_gen_ling
 		portraits = {
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_ling.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_ling_small.png"
+				large = "gfx/leaders/YAN/gen/YAN_gen_ling.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_ling_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_ling.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_ling_small.dds"
 			}
 		}
 		gender = female
@@ -67,6 +102,11 @@ characters = {
 			logistics_skill = 7
 			planning_skill = 6
 		}
+		country_leader = {
+			desc = YAN_gen_ling_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_ling }
+		}
 	}
 
 	# 均 —— 律相 · 专属特质「律不循私」
@@ -74,8 +114,12 @@ characters = {
 		name = YAN_gen_jun
 		portraits = {
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_jun.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_jun_small.png"
+				large = "gfx/leaders/YAN/gen/YAN_gen_jun.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_jun_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_jun.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_jun_small.dds"
 			}
 		}
 		gender = female
@@ -88,6 +132,11 @@ characters = {
 			logistics_skill = 6
 			planning_skill = 8
 		}
+		country_leader = {
+			desc = YAN_gen_jun_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_jun }
+		}
 	}
 
 	# 颉 —— 史相 · 专属特质「笔削不欺」
@@ -95,11 +144,24 @@ characters = {
 		name = YAN_gen_jie
 		portraits = {
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_jie.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_jie_small.png"
+				large = "gfx/leaders/YAN/gen/YAN_gen_jie.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_jie_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_jie.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_jie_small_advisor.dds"
 			}
 		}
 		gender = female
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_gen_jie_advisor_idea
+			allowed = { original_tag = YAN }
+			traits = { YAN_Jie_advisor }
+			desc = YAN_gen_jie_desc
+			cost = 150
+			ai_will_do = { factor = 100 }
+		}
 		corps_commander = {
 			desc = YAN_gen_jie_desc
 			traits = { YAN_sui_jie }
@@ -109,6 +171,11 @@ characters = {
 			logistics_skill = 8
 			planning_skill = 8
 		}
+		country_leader = {
+			desc = YAN_gen_jie_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_jie }
+		}
 	}
 
 	# 黍 —— 农相 · 专属特质「农不失时」
@@ -116,8 +183,12 @@ characters = {
 		name = YAN_gen_shu
 		portraits = {
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_shu.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_shu_small.png"
+				large = "gfx/leaders/YAN/gen/YAN_gen_shu.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_shu_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_shu.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_shu_small.dds"
 			}
 		}
 		gender = female
@@ -130,18 +201,38 @@ characters = {
 			logistics_skill = 9
 			planning_skill = 6
 		}
+		country_leader = {
+			desc = YAN_gen_shu_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_shu }
+		}
 	}
 
 	# 绩 —— 贾相 · 专属特质「账无不平」
 	YAN_gen_ji = {
 		name = YAN_gen_ji
 		portraits = {
+			# 2026-10-26：绩的头像图（YAN_gen_ji*.dds/png）已按要求删除，
+			# 肖像回落到 404 占位，人物与顾问/将领功能保留。
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_ji.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_ji_small.png"
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+				small = "gfx/interface/yan_court/seat_blank.png"
 			}
 		}
 		gender = male
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_gen_ji_advisor_idea
+			allowed = { original_tag = YAN }
+			traits = { YAN_Ji_advisor }
+			desc = YAN_gen_ji_desc
+			cost = 150
+			ai_will_do = { factor = 100 }
+		}
 		corps_commander = {
 			desc = YAN_gen_ji_desc
 			traits = { YAN_sui_ji }
@@ -151,6 +242,11 @@ characters = {
 			logistics_skill = 9
 			planning_skill = 7
 		}
+		country_leader = {
+			desc = YAN_gen_ji_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_ji }
+		}
 	}
 
 	# 易 —— 博相 · 专属特质「博物多识」
@@ -158,11 +254,24 @@ characters = {
 		name = YAN_gen_yi
 		portraits = {
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_yi.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_yi_small.png"
+				large = "gfx/leaders/YAN/gen/YAN_gen_yi.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_yi_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_yi.dds"
+				small = "gfx/interface/yan_court/seat_blank.png"
 			}
 		}
 		gender = male
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_gen_yi_advisor_idea
+			allowed = { original_tag = YAN }
+			traits = { YAN_Yi_advisor }
+			desc = YAN_gen_yi_desc
+			cost = 150
+			ai_will_do = { factor = 100 }
+		}
 		corps_commander = {
 			desc = YAN_gen_yi_desc
 			traits = { YAN_sui_yi }
@@ -172,6 +281,11 @@ characters = {
 			logistics_skill = 6
 			planning_skill = 8
 		}
+		country_leader = {
+			desc = YAN_gen_yi_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_yi }
+		}
 	}
 
 	# 年 —— 工相 · 专属特质「洪炉百炼」
@@ -179,8 +293,12 @@ characters = {
 		name = YAN_gen_nian
 		portraits = {
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_nian.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_nian_small.png"
+				large = "gfx/leaders/YAN/gen/YAN_gen_nian.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_nian_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_nian.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_nian_small.dds"
 			}
 		}
 		gender = female
@@ -193,18 +311,38 @@ characters = {
 			logistics_skill = 7
 			planning_skill = 6
 		}
+		country_leader = {
+			desc = YAN_gen_nian_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_nian }
+		}
 	}
 
 	# 方 —— 医相 · 专属特质「分毫必称」
 	YAN_gen_fang = {
 		name = YAN_gen_fang
 		portraits = {
+			# 2026-10-26：方的将领头像图（YAN_gen_fang*.dds/png）取错了，已删除；
+			# 肖像回落到 404 占位，人物与顾问/将领功能保留。
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_fang.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_fang_small.png"
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+				small = "gfx/interface/yan_court/seat_blank.png"
 			}
 		}
 		gender = male
+		advisor = {
+			slot = political_advisor
+			idea_token = YAN_gen_fang_advisor_idea
+			allowed = { original_tag = YAN }
+			traits = { YAN_Fang_advisor }
+			desc = YAN_gen_fang_desc
+			cost = 150
+			ai_will_do = { factor = 100 }
+		}
 		corps_commander = {
 			desc = YAN_gen_fang_desc
 			traits = { YAN_sui_fang }
@@ -214,6 +352,11 @@ characters = {
 			logistics_skill = 8
 			planning_skill = 7
 		}
+		country_leader = {
+			desc = YAN_gen_fang_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_fang }
+		}
 	}
 
 	# 夕 —— 艺相 · 专属特质「画里江山」
@@ -221,8 +364,12 @@ characters = {
 		name = YAN_gen_xi
 		portraits = {
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_xi.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_xi_small.png"
+				large = "gfx/leaders/YAN/gen/YAN_gen_xi.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_xi_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_xi.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_xi_small.dds"
 			}
 		}
 		gender = female
@@ -235,6 +382,11 @@ characters = {
 			logistics_skill = 5
 			planning_skill = 8
 		}
+		country_leader = {
+			desc = YAN_gen_xi_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_xi }
+		}
 	}
 
 	# 余 —— 膳相 · 专属特质「桌无虚席」
@@ -242,8 +394,12 @@ characters = {
 		name = YAN_gen_yu
 		portraits = {
 			army = {
-				large = "gfx/leaders/YAN/gen/YAN_gen_yu.png"
-				small = "gfx/leaders/YAN/gen/YAN_gen_yu_small.png"
+				large = "gfx/leaders/YAN/gen/YAN_gen_yu.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_yu_small.dds"
+			}
+			civilian = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_yu.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_yu_small.dds"
 			}
 		}
 		gender = male
@@ -255,6 +411,11 @@ characters = {
 			defense_skill = 6
 			logistics_skill = 8
 			planning_skill = 6
+		}
+		country_leader = {
+			desc = YAN_gen_yu_leader_desc
+			ideology = eastern_authoritarianism_subtype
+			traits = { YAN_cl_yu }
 		}
 	}
 

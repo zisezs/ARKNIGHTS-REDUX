@@ -3,87 +3,110 @@
 
 add_namespace = yan_mil
 
+# ==============================================================================
+# 军事树重制版 · 剧情事件（20-23）
+# 由 common/national_focus/YAN_military_shared.txt 的 completion_reward 触发；
+# 纯叙事，不加修正——所有数值已经在国策里写进动态民族精神。
+# ==============================================================================
+
+# 重岳宗师莅临！
 country_event = {
-	id = yan_mil.1
-	title = yan_mil.1.t
-	desc = yan_mil.1.d
+	id = yan_mil.20
+	title = yan_mil.20.t
+	desc = yan_mil.20.d
 
 	is_triggered_only = yes
 
 	option = {
-		name = yan_mil.1.a
+		name = yan_mil.20.a
 	}
 }
 
+# 年的武侠影视基地！
 country_event = {
-	id = yan_mil.2
-	title = yan_mil.2.t
-	desc = yan_mil.2.d
+	id = yan_mil.21
+	title = yan_mil.21.t
+	desc = yan_mil.21.d
 
 	is_triggered_only = yes
 
 	option = {
-		name = yan_mil.2.a
+		name = yan_mil.21.a
 	}
 }
 
+# 臭棋篓子算尽一切！
 country_event = {
-	id = yan_mil.3
-	title = yan_mil.3.t
-	desc = yan_mil.3.d
+	id = yan_mil.22
+	title = yan_mil.22.t
+	desc = yan_mil.22.d
 
 	is_triggered_only = yes
 
 	option = {
-		name = yan_mil.3.a
+		name = yan_mil.22.a
 	}
 }
 
+# 北望邪魔
 country_event = {
-	id = yan_mil.4
-	title = yan_mil.4.t
-	desc = yan_mil.4.d
+	id = yan_mil.23
+	title = yan_mil.23.t
+	desc = yan_mil.23.d
 
 	is_triggered_only = yes
 
 	option = {
-		name = yan_mil.4.a
+		name = yan_mil.23.a
 	}
 }
 
+# 东陆演武仪典 —— 大炎帝国三军阅兵式
 country_event = {
-	id = yan_mil.10
-	title = yan_mil.10.t
-	desc = yan_mil.10.d
+	id = yan_mil.24
+	title = yan_mil.24.t
+	desc = yan_mil.24.d
 
 	is_triggered_only = yes
 
 	option = {
-		name = yan_mil.10.a
-	}
-}
-
-country_event = {
-	id = yan_mil.11
-	title = yan_mil.11.t
-	desc = yan_mil.11.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = yan_mil.11.a
-		custom_effect_tooltip = yan_mil.11_hap_tt
+		name = yan_mil.24.a
+		if = {
+			limit = { country_exists = DKK }
+			DKK = { YAN_donglu_parade_break_vassal = yes }
+			declare_war_on = { target = DKK type = annex_everything }
+			DKK = { YAN_donglu_parade_muster = yes }
+		}
 		if = {
 			limit = { country_exists = HAP }
-			create_wargoal = { type = take_state_focus target = HAP }
-			HAP = {
-				add_ideas = HAP_abuse_demon_power
-				load_oob = "HAP_demon_army"
-			}
+			HAP = { YAN_donglu_parade_break_vassal = yes }
+			declare_war_on = { target = HAP type = annex_everything }
+			HAP = { YAN_donglu_parade_muster = yes }
+		}
+		if = {
+			limit = { country_exists = HGS }
+			HGS = { YAN_donglu_parade_break_vassal = yes }
+			declare_war_on = { target = HGS type = annex_everything }
+			HGS = { YAN_donglu_parade_muster = yes }
+		}
+		if = {
+			limit = { country_exists = NHS }
+			NHS = { YAN_donglu_parade_break_vassal = yes }
+			declare_war_on = { target = NHS type = annex_everything }
+			NHS = { YAN_donglu_parade_muster = yes }
 		}
 		if = {
 			limit = { country_exists = TNT }
-			create_wargoal = { type = take_state_focus target = TNT }
+			TNT = { YAN_donglu_parade_break_vassal = yes }
+			declare_war_on = { target = TNT type = annex_everything }
+			TNT = { YAN_donglu_parade_muster = yes }
 		}
+		if = {
+			limit = { country_exists = VIE }
+			VIE = { YAN_donglu_parade_break_vassal = yes }
+			declare_war_on = { target = VIE type = annex_everything }
+			VIE = { YAN_donglu_parade_muster = yes }
+		}
+		SE_YAN_DONGLU_PARADE_EFFECT = yes
 	}
 }

@@ -1,0 +1,105 @@
+﻿l_simp_chinese:
+
+# ==============================================================================
+#  大炎 · 军事国策树重制版 —— 动态精神 / 决议 / 法案 / 事件
+#  国策名称与效果 tooltip 在 ARF_YAN_Military_Rework_l_simp_chinese.yml（生成器产物）
+#  国策描述（_desc）暂时留空；民族精神【大炎帝国军事改革】与终幕【岁岁今朝·武】共用同一段 banner 描述。
+# ==============================================================================
+
+# ---------------- 动态民族精神 ----------------
+YAN_mil_reform_spirit:0 "大炎帝国军事改革"
+YAN_mil_reform_spirit_desc:0 "\n\n\n\n\n\n£GFX_YAN_mil_suiwu_banner£\n\n\n\n\n\n\n\n§R“百氏之乱以来，天下烽烟未歇，经此战火百炼犹不灭不陨者，是为大炎。”§!\n\n岁陵之乱中，山海众、邪魔信徒、盗匪并起，陈旧的宣政司募兵制早已落伍，而玉门边军的操练成果与戡乱水平在战火的淬炼中展露锋芒。\n\n为此，太尉邀人类武道宗师§R重岳§!、精通军械的导演§R年§!、善算谋划的棋圣§R望§!主持大炎帝国陆军改革。"
+YAN_mil_reform_spirit_final:0 "岁岁今朝·武"
+YAN_mil_reform_spirit_final_desc:0 "\n\n\n\n\n\n£GFX_YAN_mil_suiwu_banner£\n\n\n\n\n\n\n\n§R“百氏之乱以来，天下烽烟未歇，经此战火百炼犹不灭不陨者，是为大炎。”§!\n\n岁陵之乱中，山海众、邪魔信徒、盗匪并起，陈旧的宣政司募兵制早已落伍，而玉门边军的操练成果与戡乱水平在战火的淬炼中展露锋芒。\n\n为此，太尉邀人类武道宗师§R重岳§!、精通军械的导演§R年§!、善算谋划的棋圣§R望§!主持大炎帝国陆军改革。"
+
+# 隐藏装备 idea 的显示名（不占政治面板；add_ideas 日志与调试用）
+YAN_mil_rf_equip_costume:0 "大炎帝国军事改革·服化道"
+YAN_mil_rf_equip_colossus:0 "大炎帝国军事改革·玄极巨兵"
+YAN_mil_rf_equip_holy_king:0 "大炎帝国军事改革·明王圣帝"
+
+# 民族精神里的装备条款：装备类效果由隐藏 idea 的 equipment_bonus 实际生效，
+# 这里用变量插值把当前数值显示在精神 tooltip 中（写法同猩红剧团/莱茵生命的 custom_modifier_tooltip）。
+YAN_mil_reform_equip_tt:0 "\n§Y装备条款：§!\n§Y所有装甲单位§!：生产花费 §G[?YAN_mil_rf_equip_armor_cost|+%0]§!，装甲厚度 §G[?YAN_mil_rf_equip_armor_value|+%0]§!，突破 §G[?YAN_mil_rf_equip_armor_bt|+%0]§!\n§Y所有空军单位§!：生产花费 §G[?YAN_mil_rf_equip_air_cost|+%0]§!\n§Y所有步兵装备§!：生产花费 §R[?YAN_mil_rf_equip_inf_cost|+%0]§!，防御 §G[?YAN_mil_rf_equip_inf_def|+%0]§!"
+
+# ---------------- 国策效果的特殊行 ----------------
+YAN_mil_costume_reform_equip_tt:0 "§G所有装甲单位生产花费 -10%，所有空军单位生产花费 -10%§!"
+YAN_mil_colossus_concept_equip_tt:0 "§G所有装甲单位生产花费 -10%，装甲厚度 +10%，突破 +10%§!"
+YAN_mil_holy_king_peace_equip_tt:0 "§R所有步兵装备生产花费 +20%§!，§G防御 +20%§!"
+
+YAN_mil_grand_parade_rename_tt:0 "§Y民族精神【大炎帝国军事改革】改名为【岁岁今朝·武】§!"
+YAN_mil_grand_parade_law_tt:0 "§Y解锁人力法案【旧炎新军】§!"
+
+# ---------------- 决议组 ----------------
+YAN_mil_great_drill:0 "大营演武"
+
+# ---------------- 决议：大营演武 ----------------
+YAN_mil_dec_comfort:0 "安抚将官与士卒"
+YAN_mil_dec_comfort_desc:0 "军改初行，将官怨、士卒疑。太尉亲赴各营，听他们说完，再把军令重新讲一遍。前后共十次。"
+YAN_mil_dec_comfort_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+YAN_mil_dec_border:0 "干戈的边界"
+YAN_mil_dec_border_desc:0 "把战争的边界划清楚：哪里打、打多久、打到什么程度停。最多五次。"
+YAN_mil_dec_border_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+YAN_mil_dec_attrition:0 "矛盾的损耗"
+YAN_mil_dec_attrition_desc:0 "新军要工厂，旧军要粮饷。把两边要的东西列清楚，再按月调配。最多五次。"
+YAN_mil_dec_attrition_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+YAN_mil_dec_planning:0 "谋定而后动"
+YAN_mil_dec_planning_desc:0 "先把补给线、兵力表、时间窗算清楚，再让部队动。最多五次。"
+YAN_mil_dec_planning_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+# ---------------- 决议：陆军改革 ----------------
+YAN_mil_dec_registry:0 "武籍点验"
+YAN_mil_dec_registry_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+YAN_mil_dec_rotation:0 "玉门轮戍"
+YAN_mil_dec_rotation_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+YAN_mil_dec_arsenal:0 "军械清册"
+YAN_mil_dec_arsenal_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+YAN_mil_dec_pension:0 "伤亡抚恤"
+YAN_mil_dec_pension_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+# ---------------- 决议：空军改革 ----------------
+YAN_mil_dec_drone:0 "无人机轮训"
+YAN_mil_dec_drone_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+YAN_mil_dec_air_supremacy:0 "制空教范"
+YAN_mil_dec_air_supremacy_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+YAN_mil_dec_air_support:0 "对地支援条令"
+YAN_mil_dec_air_support_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+YAN_mil_dec_air_range:0 "远程奔袭"
+YAN_mil_dec_air_range_tt:0 "§Y民族精神【大炎帝国军事改革】追加效果：§!"
+
+# 决议的自定义花费文案
+YAN_mil_cost_20_army_exp:0 "20 陆军经验"
+YAN_mil_cost_30_army_exp:0 "30 陆军经验"
+YAN_mil_cost_20_air_exp:0 "20 空军经验"
+
+# 陆军 HP 的自定义 tooltip（原版没有 army_strength_factor_tt）
+YAN_mil_army_strength_tt:0 "§Y陆军 HP§!：$RIGHT|+=%1$"
+
+# ---------------- 人力法案 ----------------
+YAN_old_yan_new_army:0 "旧炎新军"
+YAN_old_yan_new_army_desc:0 "沿用大炎旧制，编练新军。不搞全民皆兵，只留一支能长期维持的常备军。"
+
+# ---------------- 国策事件 ----------------
+yan_mil.20.t:0 "说话！"
+yan_mil.20.d:0 "【该事件未完成】"
+yan_mil.20.a:0 "让他问下去。"
+
+yan_mil.21.t:0 "大爆炸！"
+yan_mil.21.d:0 "【该事件未完成】"
+yan_mil.21.a:0 "叫她下回离军火库远点。"
+
+yan_mil.22.t:0 "搞么子？"
+yan_mil.22.d:0 "【该事件未完成】"
+yan_mil.22.a:0 "让他算。"
+
+yan_mil.23.t:0 "北望邪魔"
+yan_mil.23.d:0 "【该事件未完成】"
+yan_mil.23.a:0 "北望。"

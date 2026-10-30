@@ -17,7 +17,7 @@ YAN_Suiling_Affairs = {
 		available = { always = yes }
 
 		cost = 0
-		cooldown = 1
+		days_re_enable = 1
 
 		complete_effect = {
 			custom_effect_tooltip = YAN_Sui_Pressure_Status
@@ -34,27 +34,6 @@ YAN_Suiling_Affairs = {
 
 	# ---------------- 岁兽苏醒度 ----------------
 
-	# 司岁台警戒令
-	YAN_decision_sishuitai_alert = {
-		icon = GFX_decision_generic_police_action
-
-		available = {
-			check_variable = { yan_sui_awakening > 9 }
-		}
-
-		cost = 50
-		cooldown = 90
-
-		complete_effect = {
-			add_to_variable = { yan_sui_awakening = -10 }
-			add_stability = 0.02
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
 	# 秉烛人巡陵
 	YAN_decision_zenith_patrol = {
 		icon = GFX_decision_generic_intelligence_operation
@@ -62,7 +41,7 @@ YAN_Suiling_Affairs = {
 		available = { always = yes }
 
 		cost = 25
-		cooldown = 60
+		days_re_enable = 60
 
 		complete_effect = {
 			add_to_variable = { yan_sui_awakening = -3 }
@@ -83,7 +62,7 @@ YAN_Suiling_Affairs = {
 		}
 
 		cost = 100
-		cooldown = 120
+		days_re_enable = 120
 
 		complete_effect = {
 			add_to_variable = { yan_sui_awakening = -15 }
@@ -107,7 +86,7 @@ YAN_Suiling_Affairs = {
 		}
 
 		cost = 75
-		cooldown = 180
+		days_re_enable = 180
 
 		complete_effect = {
 			add_to_variable = { yan_shudao_integrity = -15 }
@@ -128,7 +107,7 @@ YAN_Suiling_Affairs = {
 		}
 
 		cost = 50
-		cooldown = 150
+		days_re_enable = 150
 
 		complete_effect = {
 			add_to_variable = { yan_shudao_integrity = 15 }
@@ -151,7 +130,7 @@ YAN_Suiling_Affairs = {
 		}
 
 		cost = 75
-		cooldown = 120
+		days_re_enable = 120
 
 		complete_effect = {
 			add_to_variable = { yan_bufan_prep = 20 }
@@ -201,7 +180,7 @@ YAN_Suiling_Affairs = {
 		}
 
 		cost = 25
-		cooldown = 60
+		days_re_enable = 60
 
 		complete_effect = {
 			add_to_variable = { yan_agent_trust = 8 }
@@ -219,7 +198,7 @@ YAN_Suiling_Affairs = {
 		available = { always = yes }
 
 		cost = 50
-		cooldown = 90
+		days_re_enable = 90
 
 		complete_effect = {
 			add_to_variable = { yan_agent_trust = -12 }
@@ -241,7 +220,7 @@ YAN_Suiling_Affairs = {
 		}
 
 		cost = 100
-		cooldown = 180
+		days_re_enable = 180
 
 		complete_effect = {
 			add_to_variable = { yan_agent_trust = 10 }
@@ -254,8 +233,8 @@ YAN_Suiling_Affairs = {
 		}
 	}
 
-	# 【岁醒】树已改为开局即载入（见 common/national_focus/YAN_Suixing.txt 的 country 因子），
-	# 原先手动载入第二棵树的决议「体验未完善内容」已删除；完成终格「岁陵之约」后自动切回主树。
+	# 【岁醒】树与主树 YAN.txt 已于 2026-10-25 删除，等待大重制；
+	# 岁陵司近况决议保留，继续读取 yan_sui_pressure / yan_sui_awakening 两个底层变量。
 
 	# ---------------- 北境 ----------------
 
@@ -280,6 +259,37 @@ YAN_Suiling_Affairs = {
 			declare_war_on = { target = URS type = annex_everything }
 			URS = { add_ideas = URS_Not_one_step_back }
 			custom_effect_tooltip = YAN_purge_demon_threat_tt
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	# 镇压被煽动的山海众（【岁陵之乱！】120 天任务）
+	YAN_mission_suppress_shanhai = {
+		icon = GFX_decision_generic_arrest
+
+		visible = {
+			has_country_flag = yan_sui_uprising_started
+			NOT = { has_country_flag = yan_sui_banner_lowered }
+		}
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		activation = {
+			has_country_flag = yan_sui_uprising_started
+			NOT = { has_country_flag = yan_sui_banner_lowered }
+		}
+
+		is_good = yes
+		priority = 999
+		days_mission_timeout = 120
+
+		timeout_effect = {
+			YAN_sui_ling_revolt_settle = yes
 		}
 
 		ai_will_do = {

@@ -1,0 +1,160 @@
+# ==============================================================================
+#  大炎 · 开局将领（不含岁家十二代理人）
+#  · 岁家十二将见 YAN_sui_generals.txt（国策出山招募）；本文件只收非代理人将领。
+#  · 头像：gfx/leaders/YAN/gen/YAN_gen_*.dds（156x210 大图 + 65x67 小图）
+#    出图器：1_开发资料/docs/_yan_starting_generals_portraits.cjs
+#  · 专属特质见 common/unit_leader/YAN_starting_generals_traits.txt
+#  · 入池：history/countries/YAN - Yan.txt 的 recruit_character
+#  · 五名已有顾问角色（左宣辽/魏彦吾/陈晖洁/老天师/左乐）的将领块写在 YAN.txt，
+#    不在此重复。
+# ==============================================================================
+characters = {
+
+	# 太合 —— 肃政院副监察御史，左宣辽旧部
+	YAN_Taihe = {
+		name = YAN_Taihe
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_taihe.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_taihe_small.dds"
+			}
+		}
+		gender = male
+		corps_commander = {
+			desc = YAN_Taihe_desc
+			traits = { YAN_gl_tiebi organizer }
+			skill = 6
+			attack_skill = 6
+			defense_skill = 7
+			logistics_skill = 5
+			planning_skill = 6
+		}
+	}
+
+	# 麟青砚（惊蛰）—— 大理寺少卿出身，后归天师府，雷法
+	YAN_Lin_Qingyan = {
+		name = YAN_Lin_Qingyan
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_lin_qingyan.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_lin_qingyan_small.dds"
+			}
+		}
+		gender = female
+		corps_commander = {
+			desc = YAN_Lin_Qingyan_desc
+			traits = { YAN_gl_leifa skilled_staffer }
+			skill = 7
+			attack_skill = 7
+			defense_skill = 6
+			logistics_skill = 4
+			planning_skill = 8
+		}
+	}
+
+	# 仇白 —— 重岳弟子，姜齐剑客
+	YAN_Qiubai = {
+		name = YAN_Qiubai
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_qiubai.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_qiubai_small.dds"
+			}
+		}
+		gender = female
+		corps_commander = {
+			desc = YAN_Qiubai_desc
+			traits = { YAN_gl_jianxin skirmisher }
+			skill = 6
+			attack_skill = 8
+			defense_skill = 6
+			logistics_skill = 4
+			planning_skill = 5
+		}
+	}
+
+	# 云青萍 —— 重岳录武官，《武典》执笔
+	YAN_Yun_Qingping = {
+		name = YAN_Yun_Qingping
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_yun_qingping.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_yun_qingping_small.dds"
+			}
+		}
+		gender = male
+		corps_commander = {
+			desc = YAN_Yun_Qingping_desc
+			traits = { YAN_gl_wudian skilled_staffer }
+			skill = 6
+			attack_skill = 5
+			defense_skill = 6
+			logistics_skill = 6
+			planning_skill = 9
+		}
+	}
+
+	# 星熊 —— 龙门近卫局
+	YAN_Xingxiong = {
+		name = YAN_Xingxiong
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_xingxiong.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_xingxiong_small.dds"
+			}
+		}
+		gender = female
+		corps_commander = {
+			desc = YAN_Xingxiong_desc
+			traits = { YAN_gl_longmen_dun organizer }
+			skill = 6
+			attack_skill = 6
+			defense_skill = 8
+			logistics_skill = 5
+			planning_skill = 5
+		}
+	}
+
+	# 郑清钺 —— 行裕镖局总镖头，问霜客
+	YAN_Zheng_Qingyue = {
+		name = YAN_Zheng_Qingyue
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_zheng_qingyue.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_zheng_qingyue_small.dds"
+			}
+		}
+		gender = male
+		corps_commander = {
+			desc = YAN_Zheng_Qingyue_desc
+			traits = { YAN_gl_wenshuang expert_improviser }
+			skill = 5
+			attack_skill = 6
+			defense_skill = 6
+			logistics_skill = 8
+			planning_skill = 5
+		}
+	}
+
+	# 截云 —— 阿纳萨弓手，游走大漠
+	YAN_Jieyun = {
+		name = YAN_Jieyun
+		portraits = {
+			army = {
+				large = "gfx/leaders/YAN/gen/YAN_gen_jieyun.dds"
+				small = "gfx/leaders/YAN/gen/YAN_gen_jieyun_small.dds"
+			}
+		}
+		gender = female
+		corps_commander = {
+			desc = YAN_Jieyun_desc
+			traits = { YAN_gl_damo desert_fox }
+			skill = 5
+			attack_skill = 7
+			defense_skill = 5
+			logistics_skill = 5
+			planning_skill = 4
+		}
+	}
+
+}

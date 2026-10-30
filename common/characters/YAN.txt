@@ -4,15 +4,17 @@ characters = {
 	#  · 领袖：魏遵礼（本家）
 	#  · 顾问：太傅/太尉/宁辞秋/梁洵/椿/左乐/魏彦吾/虞澄/老天师/
 	#          左宣辽/陈晖洁/重岳/均/令/年/夕/黍/余
-	#  · 立绘：魏遵礼用 dds；重岳/令/年/夕/黍/余/椿/左乐/魏彦吾/陈晖洁已接 prts 官方头像
-	#          （大 156x210 / 小 65x67，生成器 E:/tmp/sui12/adapt_yan_faces.js + wire_yan_faces.js），
-	#          其余仍用 gfx/leaders/_unknown/404_unknown_small.dds 占位，出图后照同规格补即可
+	#  · 立绘（2026-10-23 重制）：顾问/陆军部长统一用「档案卡」格式——大图 156x210、
+	#          小图 65x67（斜放照片 + 米色卷宗），两张都是未压缩 32 位 BGRA 的 .dds；
+	#          政治顾问写 civilian、陆军部长/参谋/理论家写 army，兼两职就两套都写。
+	#          出图器：docs/_yan_advisor_portraits.cjs（先预览，--write 落盘）
+	#          接线器：docs/_yan_wire_portraits.cjs；旧图备份在 docs/YAN_头像备份_20261023/
 	#  · 顾问必须先在 history/countries/YAN - Yan.txt 里 recruit_character
 	#    入池，否则政府面板里根本不会出现；入池后用 available 决定何时可雇。
 	#  · 每个 advisor 块都写 allowed = { original_tag = YAN }：
 	#    省略时该顾问可能被其他国家雇走（原版所有 advisor 都显式写 allowed）。
 	#  · 需求表里的「政治顾问 / 军事参谋 / 陆军部长 / 理论家」四档都是开局可雇，
-	#    不要另加国策门槛；只有「特殊顾问」一档需要解锁。
+	#    不要另加国策门槛；2026-10-26 起十二代理人全部开局可雇，不再有国策门槛。
 	#  · ⚠️ 2026-09-21 适配：旧主树被【岁相的荒唐梦】整树替换后，原先挂在 YAN_Agent_* /
 	#    YAN_Chen_Huijie_holds_shudao / YAN_Zuo_Le_takes_office 上的门槛全部落在 .bak 里
 	#    （引擎不读 .bak → has_completed_focus 恒假 → 这 8 个人从此雇不到）。现改挂到**生效**格子上：
@@ -21,11 +23,11 @@ characters = {
 	#        年  YAN_chc_nian_chu「与工部立约」      夕 YAN_chc_xi_chu「焚香启卷」
 	#        黍  YAN_chc_shu_chu「自大荒奉召」       余 YAN_chc_yu_chu「灶下受命」
 	#      陈晖洁·天喟之剑 → 颉线出山格 YAN_chc_jie_chu「太史阁启遗稿」（书刀随史官出山）
-	#      左乐·秉烛人监正 → 岁醒树 YAN_SX_Seal_Suiling「岁陵封禁」（该格文案就是「秉烛人换成了禁军」）；
-	#        同时给椿加 visible 反向锁：封禁之后她不再出现在可聘池里，接任关系由面板自己讲清楚。
-	#      老天师·天师支援参谋仍挂 YAN_mil_support_root「天枢整军」（军事共享树，本来就是活的）
-	#    出山格本身还要 has_country_flag = yan_sui_pact（【与岁同行】带完成才解锁），
-	#    所以这六位最早也在玩家走完那条约定之后才可能入阁。
+	#      左乐·秉烛人监正 → 2026-10-25 岁醒树删除后取消前置，开局即可聘用；椿不再加反向锁。
+	#    ✅ 2026-10-26：十二代理人顾问的 YAN_chc_*_chu 门槛已全部移除，开局即可雇用；
+	#       十二将领同时写进 history/countries/YAN - Yan.txt 入池。
+	#       陈晖洁·天喟之剑仍保留 YAN_chc_jie_chu 门槛（非十二代理人）。
+	#      老天师·天师支援参谋挂 YAN_mil_three_armies「懋戒三军」（军事共享树重制版根格）。
 	# ================================================================
 
 	YAN_Wei_Zunli = {
@@ -88,7 +90,12 @@ characters = {
 		name = YAN_Taifu
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Taifu.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Taifu_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Taifu.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Taifu_small.dds"
 			}
 		}
 		advisor = {
@@ -125,7 +132,12 @@ characters = {
 		name = YAN_Taiwei
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Taiwei.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Taiwei_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Taiwei.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Taiwei_small.dds"
 			}
 		}
 		advisor = {
@@ -161,7 +173,8 @@ characters = {
 		name = YAN_Ning_Chunqiu
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Ning_Chunqiu.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Ning_Chunqiu_small.dds"
 			}
 		}
 		advisor = {
@@ -184,7 +197,12 @@ characters = {
 		name = YAN_Liang_Xun
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Liang_Xun.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Liang_Xun_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Liang_Xun.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Liang_Xun_small.dds"
 			}
 		}
 		advisor = {
@@ -215,12 +233,13 @@ characters = {
 		}
 	}
 
-	# 椿 —— 司岁台监正（岁陵封禁后由左乐接任，之后不再进可聘池）
+	# 椿 —— 司岁台监正（岁醒树删除后不再有「岁陵封禁」接任门槛）
 	YAN_Chun = {
 		name = YAN_Chun
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/YAN/court/YAN_chun_small.png"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Chun.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Chun_small.dds"
 			}
 		}
 		advisor = {
@@ -228,9 +247,6 @@ characters = {
 			idea_token = YAN_Chun_advisor_idea
 			allowed = {
 				original_tag = YAN
-			}
-			visible = {
-				NOT = { has_completed_focus = YAN_SX_Seal_Suiling }
 			}
 			traits = { YAN_Chun_advisor }
 			desc = YAN_Chun_desc
@@ -241,12 +257,17 @@ characters = {
 		}
 	}
 
-	# 左乐 —— 秉烛人监正（需完成【岁醒】树「岁陵封禁」：禁军接管禁区，年轻人接手司岁台）
+	# 左乐 —— 秉烛人监正（岁醒树删除后取消「岁陵封禁」前置，开局即可聘用）
 	YAN_Zuo_Le = {
 		name = YAN_Zuo_Le
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/YAN/court/YAN_Zuo_Le_small.png"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Zuo_Le.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Zuo_Le_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Zuo_Le.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Zuo_Le_small.dds"
 			}
 		}
 		advisor = {
@@ -255,15 +276,22 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_SX_Seal_Suiling
-			}
 			traits = { YAN_Zuo_Le_advisor }
 			desc = YAN_Zuo_Le_desc
 			cost = 150
 			ai_will_do = {
 				factor = 100
 			}
+		}
+		# 2026-10-26 开局将领：司岁台秉烛人
+		corps_commander = {
+			desc = YAN_Zuo_Le_general_desc
+			traits = { YAN_gl_bingzhu camouflage_expert }
+			skill = 6
+			attack_skill = 5
+			defense_skill = 6
+			logistics_skill = 6
+			planning_skill = 8
 		}
 	}
 
@@ -272,7 +300,12 @@ characters = {
 		name = YAN_Wei_Yanwu
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/YAN/court/YAN_Wei_Yanwu_small.png"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Wei_Yanwu.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Wei_Yanwu_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Wei_Yanwu.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Wei_Yanwu_small.dds"
 			}
 		}
 		advisor = {
@@ -301,6 +334,16 @@ characters = {
 				factor = 100
 			}
 		}
+		# 2026-10-26 开局将领：龙门总督 / 炎武，元帅
+		field_marshal = {
+			desc = YAN_Wei_Yanwu_general_desc
+			traits = { YAN_gl_chixiao offensive_doctrine }
+			skill = 8
+			attack_skill = 8
+			defense_skill = 7
+			logistics_skill = 5
+			planning_skill = 8
+		}
 	}
 
 	# 虞澄 —— 司法改革者
@@ -308,7 +351,8 @@ characters = {
 		name = YAN_Yu_Cheng
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Yu_Cheng.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Yu_Cheng_small.dds"
 			}
 		}
 		advisor = {
@@ -331,7 +375,12 @@ characters = {
 		name = YAN_Lao_Tianshi
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Lao_Tianshi.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Lao_Tianshi_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Lao_Tianshi.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Lao_Tianshi_small.dds"
 			}
 		}
 		advisor = {
@@ -354,7 +403,7 @@ characters = {
 				original_tag = YAN
 			}
 			available = {
-				has_completed_focus = YAN_mil_support_root
+				has_completed_focus = YAN_mil_three_armies
 			}
 			traits = { YAN_Lao_Tianshi_high_command }
 			desc = YAN_Lao_Tianshi_desc
@@ -363,14 +412,25 @@ characters = {
 				factor = 100
 			}
 		}
+		# 2026-10-26 开局将领：天师府祖师，北境火法
+		corps_commander = {
+			desc = YAN_Lao_Tianshi_general_desc
+			traits = { YAN_gl_beiming winter_specialist }
+			skill = 8
+			attack_skill = 8
+			defense_skill = 6
+			logistics_skill = 4
+			planning_skill = 7
+		}
 	}
 
 	# 左宣辽 —— 玉门防御参谋 / 陆军部长
 	YAN_Zuo_Xuanliao = {
 		name = YAN_Zuo_Xuanliao
 		portraits = {
-			civilian = {
-				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Zuo_Xuanliao.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Zuo_Xuanliao_small.dds"
 			}
 		}
 		advisor = {
@@ -399,6 +459,16 @@ characters = {
 				factor = 100
 			}
 		}
+		# 2026-10-26 开局将领：玉门守将，元帅
+		field_marshal = {
+			desc = YAN_Zuo_Xuanliao_general_desc
+			traits = { YAN_gl_pingfeng defensive_doctrine }
+			skill = 8
+			attack_skill = 6
+			defense_skill = 9
+			logistics_skill = 7
+			planning_skill = 7
+		}
 	}
 
 	# 陈晖洁 —— 机动参谋（天喟之剑条目需颉出山：书刀随史官出山，刀才真正成为剑）
@@ -406,7 +476,12 @@ characters = {
 		name = YAN_Chen_Huijie
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/YAN/court/YAN_Chen_Huijie_small.png"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Chen_Huijie.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Chen_Huijie_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Chen_Huijie.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Chen_Huijie_small.dds"
 			}
 		}
 		advisor = {
@@ -438,6 +513,16 @@ characters = {
 				factor = 100
 			}
 		}
+		# 2026-10-26 开局将领：龙门近卫局，赤霄剑法
+		corps_commander = {
+			desc = YAN_Chen_Huijie_general_desc
+			traits = { YAN_gl_tiankui urban_assault_specialist }
+			skill = 7
+			attack_skill = 8
+			defense_skill = 6
+			logistics_skill = 5
+			planning_skill = 7
+		}
 	}
 
 	# 重岳 —— 练兵参谋 / 代理人顾问（需「解朔之籍」出山格）
@@ -445,7 +530,12 @@ characters = {
 		name = YAN_Chong_Yue
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/YAN/gen/YAN_gen_zhongyue_small.png"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Chong_Yue.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Chong_Yue_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Chong_Yue.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Chong_Yue_small.dds"
 			}
 		}
 		advisor = {
@@ -467,9 +557,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_zhongyue_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Chong_Yue_advisor }
 			desc = YAN_Chong_Yue_desc
 			cost = 150
@@ -483,8 +571,9 @@ characters = {
 	YAN_Jun = {
 		name = YAN_Jun
 		portraits = {
-			civilian = {
-				small = "gfx/leaders/_unknown/404_unknown_small.dds"
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Jun.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Jun_small.dds"
 			}
 		}
 		advisor = {
@@ -508,7 +597,12 @@ characters = {
 		name = YAN_Ling
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/YAN/gen/YAN_gen_ling_small.png"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Ling.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Ling_small.dds"
+			}
+			army = {
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Ling.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Ling_small.dds"
 			}
 		}
 		advisor = {
@@ -531,9 +625,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_ling_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Ling_advisor }
 			desc = YAN_Ling_desc
 			cost = 150
@@ -548,7 +640,8 @@ characters = {
 		name = YAN_Nian
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/YAN/gen/YAN_gen_nian_small.png"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Nian.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Nian_small.dds"
 			}
 		}
 		advisor = {
@@ -557,9 +650,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_nian_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Nian_advisor }
 			desc = YAN_Nian_desc
 			cost = 150
@@ -574,7 +665,8 @@ characters = {
 		name = YAN_Xi
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/YAN/gen/YAN_gen_xi_small.png"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Xi.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Xi_small.dds"
 			}
 		}
 		advisor = {
@@ -583,9 +675,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_xi_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Xi_advisor }
 			desc = YAN_Xi_desc
 			cost = 150
@@ -600,7 +690,8 @@ characters = {
 		name = YAN_Shu
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/YAN/gen/YAN_gen_shu_small.png"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Shu.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Shu_small.dds"
 			}
 		}
 		advisor = {
@@ -609,9 +700,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_shu_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Shu_advisor }
 			desc = YAN_Shu_desc
 			cost = 150
@@ -626,7 +715,8 @@ characters = {
 		name = YAN_Yu
 		portraits = {
 			civilian = {
-				small = "gfx/leaders/YAN/gen/YAN_gen_yu_small.png"
+				large = "gfx/leaders/YAN/court/Portrait_YAN_Yu.dds"
+				small = "gfx/leaders/YAN/court/Portrait_YAN_Yu_small.dds"
 			}
 		}
 		advisor = {
@@ -635,9 +725,7 @@ characters = {
 			allowed = {
 				original_tag = YAN
 			}
-			available = {
-				has_completed_focus = YAN_chc_yu_chu
-			}
+			# 2026-10-26：取消出山格门槛，开局即可雇
 			traits = { YAN_Yu_advisor }
 			desc = YAN_Yu_desc
 			cost = 150

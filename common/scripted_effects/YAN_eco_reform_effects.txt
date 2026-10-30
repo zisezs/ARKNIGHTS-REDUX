@@ -1,0 +1,61 @@
+######################################################
+# 大炎 · 经济国策树【大炎前路黯淡...】变量初始化与改名
+#
+# 由 YAN_eco_empty_treasury（国库空虚...）调用一次 YAN_eco_spirit_init；
+# 之后每格用 YAN_eco_spirit_ensure 补挂动态精神（根格不挂，首次挂在
+# 【朽坏的货架与商品...】），保证只走金融危机支线时也不会缺精神。
+#
+# 修正符归属见 common/dynamic_modifiers/YAN_eco_reform_dynamic_modifiers.txt
+######################################################
+
+YAN_eco_spirit_init = {
+	# ---- 成长账本：工厂与建造 ----
+	set_variable = { YAN_eco_rf_factory_output = 0 }        # 工厂产出
+	set_variable = { YAN_eco_rf_prod_growth = 0 }           # 生产线增长效率
+	set_variable = { YAN_eco_rf_civ_factory_speed = 0 }     # 民用工厂建造速度
+	set_variable = { YAN_eco_rf_mil_factory_speed = 0 }     # 军用工厂建造速度
+
+	# ---- 民生与财政 ----
+	set_variable = { YAN_eco_rf_consumer_goods = 0 }        # 消费品系数
+	set_variable = { YAN_eco_rf_stability_weekly = 0 }      # 每周稳定度
+	set_variable = { YAN_eco_rf_monthly_population = 0 }    # 月度人口增长速度
+	set_variable = { YAN_eco_rf_pp = 0 }                    # 政治点数获取
+	set_variable = { YAN_eco_rf_resources = 0 }             # 战略资源获取
+	set_variable = { YAN_eco_rf_min_export = 0 }            # 战略资源出口
+}
+
+YAN_eco_spirit_ensure = {
+	if = {
+		limit = {
+			NOT = { has_dynamic_modifier = { modifier = YAN_eco_spirit } }
+			NOT = { has_dynamic_modifier = { modifier = YAN_eco_spirit_steady } }
+			NOT = { has_dynamic_modifier = { modifier = YAN_eco_spirit_waves } }
+		}
+		add_dynamic_modifier = { modifier = YAN_eco_spirit }
+	}
+}
+
+# 镇压邪魔污染：改名为【大炎平稳航行...】；若已先走乘风破浪则不改名
+YAN_eco_rename_steady = {
+	if = {
+		limit = { has_dynamic_modifier = { modifier = YAN_eco_spirit } }
+		remove_dynamic_modifier = { modifier = YAN_eco_spirit }
+		add_dynamic_modifier = { modifier = YAN_eco_spirit_steady }
+	}
+}
+
+# 大炎乘风破浪！：最终改名，覆盖前两种状态
+YAN_eco_rename_waves = {
+	if = {
+		limit = { has_dynamic_modifier = { modifier = YAN_eco_spirit } }
+		remove_dynamic_modifier = { modifier = YAN_eco_spirit }
+	}
+	if = {
+		limit = { has_dynamic_modifier = { modifier = YAN_eco_spirit_steady } }
+		remove_dynamic_modifier = { modifier = YAN_eco_spirit_steady }
+	}
+	if = {
+		limit = { NOT = { has_dynamic_modifier = { modifier = YAN_eco_spirit_waves } } }
+		add_dynamic_modifier = { modifier = YAN_eco_spirit_waves }
+	}
+}

@@ -1,0 +1,121 @@
+######################################################
+# 大炎 · 内政国策树【岁陵之乱的余波】动态民族精神
+#
+# 机制（同 YAN_mil_reform_spirit）：
+#   · 每个修正符直读变量 YAN_civ_rf_<键>；国策只做 add_to_variable，数值原地成长。
+#   · 变量由 YAN_civ_spirit_init（重整朝纲）初始化。
+#   · 终幕【恭听天裁】把精神换名为【岁岁今朝】：
+#     remove_dynamic_modifier 旧的、add_dynamic_modifier 新的，两者共用同一组变量，
+#     所以累计数值不丢失。
+#
+# 分组：前两段是设计稿原有五条（稳定/建造/产出/动员/政治点数）与政治点数衍生；
+# 后两段是第二轮补的「其他维度」（经济效率 / 建筑槽 / 后勤 / 动员 / 军政）。
+#
+# 「无法解散部队或编制」不在修正符里 —— 引擎没有对应 key，改由国策置
+# country_lock_all_division_template = yes（巡视禁军营解除），精神里用
+# yan_civ_no_disband_tt 这个 yes/no 说明 token 显示当前状态。
+######################################################
+
+YAN_civ_spirit = {
+	icon = GFX_idea_YAN_civ_sui_jin_zhao
+
+	enable = { always = yes }
+
+	# —— 设计稿原有 ——
+	stability_factor = YAN_civ_rf_stability
+	stability_weekly = YAN_civ_rf_stability_weekly
+	production_speed_buildings_factor = YAN_civ_rf_construction
+	industrial_capacity_factory = YAN_civ_rf_factory_output
+	mobilization_speed = YAN_civ_rf_mobilization
+	political_power_factor = YAN_civ_rf_pp
+	research_speed_factor = YAN_civ_rf_research
+	political_advisor_cost_factor = YAN_civ_rf_advisor_cost
+	army_chief_cost_factor = YAN_civ_rf_army_chief_cost
+	war_support_factor = YAN_civ_rf_war_support
+
+	# —— 第二轮：经济效率与建设 ——
+	consumer_goods_factor = YAN_civ_rf_consumer_goods
+	production_factory_max_efficiency_factor = YAN_civ_rf_prod_cap
+	production_factory_efficiency_gain_factor = YAN_civ_rf_prod_growth
+	production_speed_infrastructure_factor = YAN_civ_rf_infrastructure
+	global_building_slots_factor = YAN_civ_rf_building_slots
+
+	# —— 第二轮：军政与后勤 ——
+	political_power_gain = YAN_civ_rf_pp_flat
+	command_power_gain = YAN_civ_rf_command_power
+	high_command_cost_factor = YAN_civ_rf_high_command_cost
+	experience_gain_army_factor = YAN_civ_rf_army_xp
+	army_org_factor = YAN_civ_rf_army_org
+	supply_consumption_factor = YAN_civ_rf_supply
+	conscription_factor = YAN_civ_rf_conscription
+	recruitable_population_factor = YAN_civ_rf_recruitable
+	training_time_factor = YAN_civ_rf_training_time
+	land_reinforce_rate = YAN_civ_rf_reinforce
+	army_defence_factor = YAN_civ_rf_army_defence
+
+	yan_civ_no_disband_tt = YAN_civ_rf_no_disband
+
+	# 宣政司改革进度：只做读数（累计值 / 每月增量）
+	custom_modifier_tooltip = YAN_civ_spirit_counters_tt
+}
+
+# 终幕改名版：数值、图标与说明完全一致，只换名字。
+YAN_civ_spirit_final = {
+	icon = GFX_idea_YAN_civ_sui_jin_zhao
+
+	enable = { always = yes }
+
+	# —— 设计稿原有 ——
+	stability_factor = YAN_civ_rf_stability
+	stability_weekly = YAN_civ_rf_stability_weekly
+	production_speed_buildings_factor = YAN_civ_rf_construction
+	industrial_capacity_factory = YAN_civ_rf_factory_output
+	mobilization_speed = YAN_civ_rf_mobilization
+	political_power_factor = YAN_civ_rf_pp
+	research_speed_factor = YAN_civ_rf_research
+	political_advisor_cost_factor = YAN_civ_rf_advisor_cost
+	army_chief_cost_factor = YAN_civ_rf_army_chief_cost
+	war_support_factor = YAN_civ_rf_war_support
+
+	# —— 第二轮：经济效率与建设 ——
+	consumer_goods_factor = YAN_civ_rf_consumer_goods
+	production_factory_max_efficiency_factor = YAN_civ_rf_prod_cap
+	production_factory_efficiency_gain_factor = YAN_civ_rf_prod_growth
+	production_speed_infrastructure_factor = YAN_civ_rf_infrastructure
+	global_building_slots_factor = YAN_civ_rf_building_slots
+
+	# —— 第二轮：军政与后勤 ——
+	political_power_gain = YAN_civ_rf_pp_flat
+	command_power_gain = YAN_civ_rf_command_power
+	high_command_cost_factor = YAN_civ_rf_high_command_cost
+	experience_gain_army_factor = YAN_civ_rf_army_xp
+	army_org_factor = YAN_civ_rf_army_org
+	supply_consumption_factor = YAN_civ_rf_supply
+	conscription_factor = YAN_civ_rf_conscription
+	recruitable_population_factor = YAN_civ_rf_recruitable
+	training_time_factor = YAN_civ_rf_training_time
+	land_reinforce_rate = YAN_civ_rf_reinforce
+	army_defence_factor = YAN_civ_rf_army_defence
+
+	yan_civ_no_disband_tt = YAN_civ_rf_no_disband
+
+	custom_modifier_tooltip = YAN_civ_spirit_counters_tt
+}
+
+######################################################
+# 大炎 · 内政国策树【当变则变】（哼！之后逐格养成）
+#   · 两条【行政重组】决议各自往 YAN_civ_bz_* 里加码，互斥。
+#   · 每月改革点数由 YAN_civ_spirit_monthly（挂在 YAN_monthly_tick）累加。
+######################################################
+
+YAN_civ_biangze_spirit = {
+	icon = GFX_idea_YAN_Bingzhu_new_system
+
+	enable = { always = yes }
+
+	political_power_factor = YAN_civ_bz_pp
+	political_advisor_cost_factor = YAN_civ_bz_advisor_cost
+	stability_factor = YAN_civ_bz_stability
+
+	custom_modifier_tooltip = YAN_civ_biangze_counters_tt
+}

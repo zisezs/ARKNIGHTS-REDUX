@@ -1,0 +1,47 @@
+######################################################
+# 大炎 · 人力法案【旧炎新军】
+#
+# 来源：国策【大炎帝国三军阅兵式】解锁（置旗 YAN_mil_old_army_law_unlocked）。
+# 定位：参照「非军事化国家」（disarmed_nation，conscription = 0.01）的低征募法案，
+#       但把省下来的兵额换成常备军的质量：
+#         陆军HP +5% / 陆军速度 +5% / 可征募人口系数 +10% / 陆军补给消耗 +5%
+# 槽位：mobilization_laws；level 8 排在 disarmed_nation（7）之后，表示征募规模最低。
+#       本模组另一条自定义法案 DUB_dead_fire_law 用 level 0 排在最前，先例可循。
+# 文案：localisation/simp_chinese/ARF_YAN_Military_Reform_l_simp_chinese.yml
+######################################################
+
+ideas = {
+	mobilization_laws = {
+		law = yes
+		use_list_view = yes
+
+		YAN_old_yan_new_army = {
+			cost = 150
+			removal_cost = -1
+			level = 8
+
+			allowed = {
+				original_tag = YAN
+			}
+
+			available = {
+				has_country_flag = YAN_mil_old_army_law_unlocked
+			}
+
+			modifier = {
+				conscription = 0.01			# 参照非军事化国家
+				conscription_factor = 0.10		# 可征募人口系数 +10%
+				army_strength_factor = 0.05		# 陆军HP +5%
+				army_speed_factor = 0.05		# 陆军速度 +5%
+				supply_consumption_factor = 0.05	# 陆军补给消耗 +5%（代价）
+			}
+
+			cancel_if_invalid = no
+
+			# AI 不主动把征募等级降下来；本法案是玩家向的低征募高质量选项。
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+}

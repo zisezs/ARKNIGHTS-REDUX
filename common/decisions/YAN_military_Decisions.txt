@@ -1,88 +1,401 @@
-# 大炎军改决议（精简：军改演习一组）
-# 生成器：docs/_yan_mil_build.py（改数据表重跑，勿手改产物）
-# 分类声明在 common/decisions/categories/YAN_military_categories.txt
+######################################################
+# 大炎 · 决议组【大营演武】
+#
+# 由国策【懋戒三军】解锁；后续国策逐条追加决议。
+#   1. 安抚将官与士卒  <- 懋戒三军（上限 10 次，20 陆军经验/次）
+#   2. 干戈的边界      <- 止戈为武（上限 5 次，30 政治点/次）
+#   3. 矛盾的损耗      <- 烘炉御者（上限 5 次，30 政治点/次）
+#   4. 谋定而后动      <- 天下共此劫（上限 5 次，30 陆军经验/次）
+#
+# 次数上限用变量计数器（YAN_mil_rf_dec_*_used，由 YAN_mil_reform_init 归零），
+# 冷却统一 30 天（days_re_enable）。
+# 所有效果都写进民族精神【大炎帝国军事改革】的同名动态变量，直接 add_to_variable，
+# 不额外发 idea，避免玩家面板出现一堆零碎小精神。
+######################################################
 
-YAN_Military_Reform = {
+YAN_mil_great_drill = {
 
-	# 校场秋点兵
-	YAN_mil_dec_army_exercise = {
+	# ---------------- 1. 安抚将官与士卒 ----------------
+	YAN_mil_dec_comfort = {
 		icon = GFX_decision_generic_army_support
+
+		# 次数用尽后直接隐藏，避免把 check_variable 的原始条件显示在 tooltip 里
 		visible = {
 			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_exercise_unlocked
+			check_variable = { YAN_mil_rf_dec_comfort_used < 10 }
 		}
+
 		available = {
-			has_country_flag = YAN_mil_exercises_unlocked
+			has_army_experience > 19
 		}
-		cost = 25
-		cooldown = 120
+
+		custom_cost_trigger = {
+			has_army_experience > 19
+		}
+		custom_cost_text = YAN_mil_cost_20_army_exp
+
+		priority = 100
+		days_re_enable = 30
+
 		complete_effect = {
-			army_experience = 25
-			add_war_support = 0.01
+			add_to_variable = { YAN_mil_rf_dec_comfort_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_comfort_tt
+			add_to_variable = { YAN_mil_rf_army_xp = 0.02 tooltip = experience_gain_army_factor_tt }
+			add_to_variable = { YAN_mil_rf_air_xp = 0.02 tooltip = experience_gain_air_factor_tt }
+			add_to_variable = { YAN_mil_rf_army_org = 0.02 tooltip = army_org_factor_tt }
+			add_to_variable = { YAN_mil_rf_army_speed = 0.02 tooltip = army_speed_factor_tt }
+			army_experience = -20
 		}
+
 		ai_will_do = {
 			factor = 10
 		}
 	}
 
-	# 楼船夜雪
-	YAN_mil_dec_navy_exercise = {
+	# ---------------- 2. 干戈的边界 ----------------
+	YAN_mil_dec_border = {
 		icon = GFX_decision_generic_military
+
 		visible = {
 			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_border_unlocked
+			check_variable = { YAN_mil_rf_dec_border_used < 5 }
 		}
-		available = {
-			has_country_flag = YAN_mil_exercises_unlocked
-		}
-		cost = 25
-		cooldown = 120
+
+		cost = 30
+		priority = 90
+		days_re_enable = 30
+
 		complete_effect = {
-			navy_experience = 25
-			add_war_support = 0.01
+			add_to_variable = { YAN_mil_rf_dec_border_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_border_tt
+			add_to_variable = { YAN_mil_rf_breakthrough = 0.02 tooltip = breakthrough_factor_tt }
+			add_to_variable = { YAN_mil_rf_inf_defence = 0.01 tooltip = army_infantry_defence_factor_tt }
 		}
+
 		ai_will_do = {
 			factor = 10
 		}
 	}
 
-	# 长空砺翼
-	YAN_mil_dec_air_exercise = {
-		icon = GFX_decision_generic_air
-		visible = {
-			has_country_flag = YAN_mil_reform_started
-		}
-		available = {
-			has_country_flag = YAN_mil_exercises_unlocked
-		}
-		cost = 25
-		cooldown = 120
-		complete_effect = {
-			air_experience = 25
-			add_war_support = 0.01
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	# 三军合演
-	YAN_mil_dec_grand_manoeuvre = {
+	# ---------------- 3. 矛盾的损耗 ----------------
+	YAN_mil_dec_attrition = {
 		icon = GFX_decision_generic_decision
+
 		visible = {
 			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_attrition_unlocked
+			check_variable = { YAN_mil_rf_dec_attrition_used < 5 }
 		}
-		available = {
-			has_country_flag = YAN_mil_exercises_unlocked
-			has_completed_focus = YAN_mil_joint
-		}
-		cost = 50
-		cooldown = 180
+
+		cost = 30
+		priority = 80
+		days_re_enable = 30
+
 		complete_effect = {
-			army_experience = 40
-			navy_experience = 40
-			air_experience = 40
-			add_war_support = 0.02
-			add_stability = 0.01
+			add_to_variable = { YAN_mil_rf_dec_attrition_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_attrition_tt
+			add_to_variable = { YAN_mil_rf_supply = -0.02 tooltip = supply_consumption_factor_tt }
+			add_to_variable = { YAN_mil_rf_civ_factory_speed = 0.02 tooltip = production_speed_industrial_complex_factor_tt }
 		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ---------------- 4. 谋定而后动 ----------------
+	YAN_mil_dec_planning = {
+		icon = GFX_decision_generic_political_discourse
+
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_planning_unlocked
+			check_variable = { YAN_mil_rf_dec_planning_used < 5 }
+		}
+
+		available = {
+			has_army_experience > 29
+		}
+
+		custom_cost_trigger = {
+			has_army_experience > 29
+		}
+		custom_cost_text = YAN_mil_cost_30_army_exp
+
+		priority = 70
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { YAN_mil_rf_dec_planning_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_planning_tt
+			add_to_variable = { YAN_mil_rf_supply = 0.01 tooltip = supply_consumption_factor_tt }
+			add_to_variable = { YAN_mil_rf_army_speed = 0.02 tooltip = army_speed_factor_tt }
+			army_experience = -30
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ---------------- 5. 武籍点验 ----------------
+	YAN_mil_dec_registry = {
+		icon = GFX_decision_generic_civil_support
+
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_registry_unlocked
+			NOT = { check_variable = { YAN_mil_rf_dec_registry_used > 4 } }
+		}
+
+		cost = 30
+		priority = 60
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { YAN_mil_rf_dec_registry_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_registry_tt
+			add_to_variable = { YAN_mil_rf_conscription = 0.02 tooltip = conscription_factor_tt }
+			add_to_variable = { YAN_mil_rf_army_hp = 0.01 tooltip = YAN_mil_army_strength_tt }
+			add_to_variable = { YAN_mil_rf_political_power = -0.01 tooltip = political_power_factor_tt }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ---------------- 6. 玉门轮戍 ----------------
+	YAN_mil_dec_rotation = {
+		icon = GFX_decision_generic_fortification
+
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_rotation_unlocked
+			NOT = { check_variable = { YAN_mil_rf_dec_rotation_used > 4 } }
+		}
+
+		available = {
+			has_army_experience > 19
+		}
+
+		custom_cost_trigger = {
+			has_army_experience > 19
+		}
+		custom_cost_text = YAN_mil_cost_20_army_exp
+
+		priority = 59
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { YAN_mil_rf_dec_rotation_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_rotation_tt
+			add_to_variable = { YAN_mil_rf_army_xp = 0.02 tooltip = experience_gain_army_factor_tt }
+			add_to_variable = { YAN_mil_rf_training_time = -0.02 tooltip = training_time_factor_tt }
+			add_to_variable = { YAN_mil_rf_army_org = -0.01 tooltip = army_org_factor_tt }
+			army_experience = -20
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ---------------- 7. 军械清册 ----------------
+	YAN_mil_dec_arsenal = {
+		icon = GFX_decision_generic_industry
+
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_arsenal_unlocked
+			NOT = { check_variable = { YAN_mil_rf_dec_arsenal_used > 4 } }
+		}
+
+		cost = 30
+		priority = 58
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { YAN_mil_rf_dec_arsenal_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_arsenal_tt
+			add_to_variable = { YAN_mil_rf_mil_factory_speed = 0.02 tooltip = production_speed_arms_factory_factor_tt }
+			add_to_variable = { YAN_mil_rf_factory_output = 0.01 tooltip = industrial_capacity_factory_tt }
+			add_to_variable = { YAN_mil_rf_civ_factory_speed = -0.01 tooltip = production_speed_industrial_complex_factor_tt }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ---------------- 8. 伤亡抚恤 ----------------
+	YAN_mil_dec_pension = {
+		icon = GFX_decision_generic_welfare
+
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_pension_unlocked
+			NOT = { check_variable = { YAN_mil_rf_dec_pension_used > 4 } }
+		}
+
+		cost = 30
+		priority = 57
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { YAN_mil_rf_dec_pension_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_pension_tt
+			add_to_variable = { YAN_mil_rf_trickleback = 0.02 tooltip = casualty_trickleback_tt }
+			add_to_variable = { YAN_mil_rf_reinforce = 0.02 tooltip = land_reinforce_rate_tt }
+			add_to_variable = { YAN_mil_rf_political_power = -0.01 tooltip = political_power_factor_tt }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ---------------- 9. 无人机轮训 ----------------
+	YAN_mil_dec_drone = {
+		icon = GFX_decision_generic_air
+
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_drone_unlocked
+			NOT = { check_variable = { YAN_mil_rf_dec_drone_used > 4 } }
+		}
+
+		available = {
+			has_air_experience > 19
+		}
+
+		custom_cost_trigger = {
+			has_air_experience > 19
+		}
+		custom_cost_text = YAN_mil_cost_20_air_exp
+
+		priority = 56
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { YAN_mil_rf_dec_drone_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_drone_tt
+			add_to_variable = { YAN_mil_rf_air_xp = 0.02 tooltip = experience_gain_air_factor_tt }
+			add_to_variable = { YAN_mil_rf_air_attack = 0.02 tooltip = air_attack_factor_tt }
+			add_to_variable = { YAN_mil_rf_army_xp = -0.01 tooltip = experience_gain_army_factor_tt }
+			air_experience = -20
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ---------------- 10. 制空教范 ----------------
+	YAN_mil_dec_air_supremacy = {
+		icon = GFX_decision_generic_merge_plant_aircraft
+
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_air_supremacy_unlocked
+			NOT = { check_variable = { YAN_mil_rf_dec_air_supremacy_used > 4 } }
+		}
+
+		available = {
+			has_air_experience > 19
+		}
+
+		custom_cost_trigger = {
+			has_air_experience > 19
+		}
+		custom_cost_text = YAN_mil_cost_20_air_exp
+
+		priority = 55
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { YAN_mil_rf_dec_air_supremacy_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_air_supremacy_tt
+			add_to_variable = { YAN_mil_rf_air_superiority = 0.02 tooltip = air_superiority_efficiency_tt }
+			add_to_variable = { YAN_mil_rf_air_agility = 0.01 tooltip = air_agility_factor_tt }
+			add_to_variable = { YAN_mil_rf_air_range = -0.01 tooltip = air_range_factor_tt }
+			air_experience = -20
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ---------------- 11. 对地支援条令 ----------------
+	YAN_mil_dec_air_support = {
+		icon = GFX_decision_generic_operation
+
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_air_support_unlocked
+			NOT = { check_variable = { YAN_mil_rf_dec_air_support_used > 4 } }
+		}
+
+		available = {
+			has_air_experience > 19
+		}
+
+		custom_cost_trigger = {
+			has_air_experience > 19
+		}
+		custom_cost_text = YAN_mil_cost_20_air_exp
+
+		priority = 54
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { YAN_mil_rf_dec_air_support_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_air_support_tt
+			add_to_variable = { YAN_mil_rf_air_cas = 0.02 tooltip = air_cas_efficiency_tt }
+			add_to_variable = { YAN_mil_rf_air_mission = 0.01 tooltip = air_mission_efficiency_tt }
+			add_to_variable = { YAN_mil_rf_air_defence = -0.01 tooltip = air_defence_factor_tt }
+			air_experience = -20
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	# ---------------- 12. 远程奔袭 ----------------
+	YAN_mil_dec_air_range = {
+		icon = GFX_decision_generic_planted_spear
+
+		visible = {
+			has_country_flag = YAN_mil_reform_started
+			has_country_flag = YAN_mil_dec_air_range_unlocked
+			NOT = { check_variable = { YAN_mil_rf_dec_air_range_used > 4 } }
+		}
+
+		available = {
+			has_air_experience > 19
+		}
+
+		custom_cost_trigger = {
+			has_air_experience > 19
+		}
+		custom_cost_text = YAN_mil_cost_20_air_exp
+
+		priority = 53
+		days_re_enable = 30
+
+		complete_effect = {
+			add_to_variable = { YAN_mil_rf_dec_air_range_used = 1 }
+			custom_effect_tooltip = YAN_mil_dec_air_range_tt
+			add_to_variable = { YAN_mil_rf_air_range = 0.02 tooltip = air_range_factor_tt }
+			add_to_variable = { YAN_mil_rf_air_attack = 0.01 tooltip = air_attack_factor_tt }
+			add_to_variable = { YAN_mil_rf_air_agility = -0.01 tooltip = air_agility_factor_tt }
+			air_experience = -20
+		}
+
 		ai_will_do = {
 			factor = 10
 		}
