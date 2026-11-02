@@ -1,10 +1,12 @@
 # ============================================================================
-# 本文件由 docs/gen_arf_warship_design.py 生成，手改会被覆盖。
-# ============================================================================
 # 高速战舰设计台 · 面板（1200x700）
+# 视觉：深空战术终端 / 冷青 HUD（贴图由 docs/gen_tactical_hud_panels.cjs 生成）
 #  · 显示条件：国家旗标 arf_ws_design_open
 #  · 后写的控件压在先写的上面：页签高亮块要写在页签按钮之后
 #  · iconType/buttonType 没有 size 键：显示尺寸 = 贴图原生尺寸
+#  · 三态按钮贴图 = 3 帧（常态 / 悬停 / 按下），必须带 noOfFrames = 3
+#  · 控件名与 common/scripted_guis/ARF_warship_design_gui.txt 严格一致
+# ============================================================================
 guiTypes = {
 
 	containerWindowType = {
@@ -23,48 +25,58 @@ guiTypes = {
 
 		iconType = {
 			name = "ARF_WSd_Seal"
-			position = { x = 1002 y = 20 }
+			position = { x = 1080 y = 18 }
 			spriteType = "GFX_ARF_WSD_seal"
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Title"
-			position = { x = 42 y = 24 }
+			position = { x = 38 y = 22 }
 			font = "ARF_WSD_title24"
 			text = "ARF_WSD_TITLE"
-			maxWidth = 460 maxHeight = 32
+			maxWidth = 700 maxHeight = 32
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
+			name = "ARF_WSd_HudTag"
+			position = { x = 748 y = 31 }
+			font = "ARF_WSD_text16"
+			text = "ARF_WSD_HUD_TAG"
+			maxWidth = 312 maxHeight = 20
+			format = right
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
 			name = "ARF_WSd_Subtitle"
-			position = { x = 42 y = 58 }
+			position = { x = 38 y = 60 }
 			font = "ARF_WSD_text16"
 			text = "ARF_WSD_SUBTITLE"
-			maxWidth = 900 maxHeight = 20
+			maxWidth = 760 maxHeight = 20
 			format = left
 			alwaystransparent = yes
 		}
 		buttonType = {
 			name = "ARF_WSd_Close"
-			position = { x = 1134 y = 22 }
+			position = { x = 1144 y = 26 }
 			quadTextureSprite = "GFX_ARF_WSD_close"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_CLOSE_TT
 		}
 
+		# ---------------- 左侧舰型导航 ----------------
 		buttonType = {
 			name = "ARF_WSd_Tab_1"
-			position = { x = 30 y = 104 }
+			position = { x = 30 y = 112 }
 			quadTextureSprite = "GFX_ARF_WSD_tab"
 			clicksound = click_default
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Tab_1_T"
-			position = { x = 44 y = 117 }
+			position = { x = 58 y = 124 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_TAB_1"
-			maxWidth = 192 maxHeight = 30
+			maxWidth = 156 maxHeight = 28
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -72,7 +84,7 @@ guiTypes = {
 		}
 		iconType = {
 			name = "ARF_WSd_Tab_1_Sel"
-			position = { x = 30 y = 104 }
+			position = { x = 30 y = 112 }
 			spriteType = "GFX_ARF_WSD_tab_sel"
 			alwaystransparent = yes
 		}
@@ -85,10 +97,10 @@ guiTypes = {
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Tab_2_T"
-			position = { x = 44 y = 181 }
+			position = { x = 58 y = 180 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_TAB_2"
-			maxWidth = 192 maxHeight = 30
+			maxWidth = 156 maxHeight = 28
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -103,16 +115,16 @@ guiTypes = {
 
 		buttonType = {
 			name = "ARF_WSd_Tab_3"
-			position = { x = 30 y = 232 }
+			position = { x = 30 y = 224 }
 			quadTextureSprite = "GFX_ARF_WSD_tab"
 			clicksound = click_default
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Tab_3_T"
-			position = { x = 44 y = 245 }
+			position = { x = 58 y = 236 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_TAB_3"
-			maxWidth = 192 maxHeight = 30
+			maxWidth = 156 maxHeight = 28
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -120,23 +132,23 @@ guiTypes = {
 		}
 		iconType = {
 			name = "ARF_WSd_Tab_3_Sel"
-			position = { x = 30 y = 232 }
+			position = { x = 30 y = 224 }
 			spriteType = "GFX_ARF_WSD_tab_sel"
 			alwaystransparent = yes
 		}
 
 		buttonType = {
 			name = "ARF_WSd_Tab_4"
-			position = { x = 30 y = 296 }
+			position = { x = 30 y = 280 }
 			quadTextureSprite = "GFX_ARF_WSD_tab"
 			clicksound = click_default
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Tab_4_T"
-			position = { x = 44 y = 309 }
+			position = { x = 58 y = 292 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_TAB_4"
-			maxWidth = 192 maxHeight = 30
+			maxWidth = 156 maxHeight = 28
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -144,85 +156,115 @@ guiTypes = {
 		}
 		iconType = {
 			name = "ARF_WSd_Tab_4_Sel"
-			position = { x = 30 y = 296 }
+			position = { x = 30 y = 280 }
 			spriteType = "GFX_ARF_WSD_tab_sel"
 			alwaystransparent = yes
 		}
 
 		instantTextBoxType = {
 			name = "ARF_WSd_LeftNote"
-			position = { x = 34 y = 384 }
+			position = { x = 34 y = 352 }
 			font = "ARF_WSD_text16"
 			text = "ARF_WSD_LEFT_NOTE"
-			maxWidth = 214 maxHeight = 262
+			maxWidth = 204 maxHeight = 320
 			format = left
 			alwaystransparent = yes
 		}
 
+		# ---------------- 舰型摘要 ----------------
 		iconType = {
 			name = "ARF_WSd_SumBg"
-			position = { x = 270 y = 104 }
+			position = { x = 262 y = 100 }
 			spriteType = "GFX_ARF_WSD_summary"
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
+			name = "ARF_WSd_SumKicker"
+			position = { x = 286 y = 111 }
+			font = "ARF_WSD_text16"
+			text = "ARF_WSD_SUM_KICKER"
+			maxWidth = 330 maxHeight = 18
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
 			name = "ARF_WSd_SumTitle"
-			position = { x = 292 y = 118 }
+			position = { x = 286 y = 131 }
 			font = "ARF_WSD_title24"
 			text = "[ARF_WSd_GetTitle]"
-			maxWidth = 300 maxHeight = 32
+			maxWidth = 470 maxHeight = 30
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SumDesc"
-			position = { x = 292 y = 154 }
+			position = { x = 286 y = 166 }
 			font = "ARF_WSD_text16"
 			text = "[ARF_WSd_GetDesc]"
-			maxWidth = 500 maxHeight = 88
+			maxWidth = 460 maxHeight = 74
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SumStats"
-			position = { x = 816 y = 112 }
+			position = { x = 780 y = 114 }
 			font = "ARF_WSD_text16"
 			text = "[ARF_WSd_GetStats]"
-			maxWidth = 330 maxHeight = 88
+			maxWidth = 384 maxHeight = 96
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SumCost"
-			position = { x = 816 y = 202 }
+			position = { x = 780 y = 209 }
 			font = "ARF_WSD_text20"
 			text = "[ARF_WSd_GetCost]"
-			maxWidth = 330 maxHeight = 26
+			maxWidth = 384 maxHeight = 24
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SumDays"
-			position = { x = 816 y = 228 }
+			position = { x = 780 y = 231 }
 			font = "ARF_WSD_text16"
 			text = "[ARF_WSd_GetDays]"
-			maxWidth = 330 maxHeight = 20
+			maxWidth = 384 maxHeight = 19
 			format = left
+			alwaystransparent = yes
+		}
+
+		# ---------------- 模块装配 ----------------
+		instantTextBoxType = {
+			name = "ARF_WSd_SectionSlots"
+			position = { x = 266 y = 258 }
+			font = "ARF_WSD_text16"
+			text = "ARF_WSD_SECTION_SLOTS"
+			maxWidth = 500 maxHeight = 18
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextBoxType = {
+			name = "ARF_WSd_SectionMeta"
+			position = { x = 900 y = 258 }
+			font = "ARF_WSD_text16"
+			text = "ARF_WSD_SECTION_META"
+			maxWidth = 278 maxHeight = 18
+			format = right
 			alwaystransparent = yes
 		}
 
 		iconType = {
 			name = "ARF_WSd_Row_gun"
-			position = { x = 270 y = 262 }
+			position = { x = 262 y = 282 }
 			spriteType = "GFX_ARF_WSD_row"
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SlotLbl_gun"
-			position = { x = 284 y = 272 }
+			position = { x = 284 y = 291 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_SLOT_gun"
-			maxWidth = 62 maxHeight = 28
+			maxWidth = 62 maxHeight = 26
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -230,49 +272,49 @@ guiTypes = {
 		}
 		buttonType = {
 			name = "ARF_WSd_Prev_gun"
-			position = { x = 352 y = 268 }
+			position = { x = 352 y = 286 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_l"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_PREV_TT
 		}
 		buttonType = {
 			name = "ARF_WSd_Next_gun"
-			position = { x = 1108 y = 268 }
+			position = { x = 1136 y = 286 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_r"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_NEXT_TT
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Name_gun"
-			position = { x = 398 y = 266 }
+			position = { x = 398 y = 288 }
 			font = "ARF_WSD_text20"
 			text = "[ARF_WSd_GetName_gun]"
-			maxWidth = 700 maxHeight = 24
+			maxWidth = 720 maxHeight = 24
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Eff_gun"
-			position = { x = 398 y = 288 }
+			position = { x = 398 y = 307 }
 			font = "ARF_WSD_text16"
 			text = "[ARF_WSd_GetEff_gun]"
-			maxWidth = 700 maxHeight = 20
+			maxWidth = 720 maxHeight = 18
 			format = left
 			alwaystransparent = yes
 		}
 
 		iconType = {
 			name = "ARF_WSd_Row_sec"
-			position = { x = 270 y = 316 }
+			position = { x = 262 y = 332 }
 			spriteType = "GFX_ARF_WSD_row"
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SlotLbl_sec"
-			position = { x = 284 y = 326 }
+			position = { x = 284 y = 341 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_SLOT_sec"
-			maxWidth = 62 maxHeight = 28
+			maxWidth = 62 maxHeight = 26
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -280,49 +322,49 @@ guiTypes = {
 		}
 		buttonType = {
 			name = "ARF_WSd_Prev_sec"
-			position = { x = 352 y = 322 }
+			position = { x = 352 y = 336 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_l"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_PREV_TT
 		}
 		buttonType = {
 			name = "ARF_WSd_Next_sec"
-			position = { x = 1108 y = 322 }
+			position = { x = 1136 y = 336 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_r"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_NEXT_TT
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Name_sec"
-			position = { x = 398 y = 320 }
+			position = { x = 398 y = 338 }
 			font = "ARF_WSD_text20"
 			text = "[ARF_WSd_GetName_sec]"
-			maxWidth = 700 maxHeight = 24
+			maxWidth = 720 maxHeight = 24
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Eff_sec"
-			position = { x = 398 y = 342 }
+			position = { x = 398 y = 357 }
 			font = "ARF_WSD_text16"
 			text = "[ARF_WSd_GetEff_sec]"
-			maxWidth = 700 maxHeight = 20
+			maxWidth = 720 maxHeight = 18
 			format = left
 			alwaystransparent = yes
 		}
 
 		iconType = {
 			name = "ARF_WSd_Row_arm"
-			position = { x = 270 y = 370 }
+			position = { x = 262 y = 382 }
 			spriteType = "GFX_ARF_WSD_row"
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SlotLbl_arm"
-			position = { x = 284 y = 380 }
+			position = { x = 284 y = 391 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_SLOT_arm"
-			maxWidth = 62 maxHeight = 28
+			maxWidth = 62 maxHeight = 26
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -330,49 +372,49 @@ guiTypes = {
 		}
 		buttonType = {
 			name = "ARF_WSd_Prev_arm"
-			position = { x = 352 y = 376 }
+			position = { x = 352 y = 386 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_l"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_PREV_TT
 		}
 		buttonType = {
 			name = "ARF_WSd_Next_arm"
-			position = { x = 1108 y = 376 }
+			position = { x = 1136 y = 386 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_r"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_NEXT_TT
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Name_arm"
-			position = { x = 398 y = 374 }
+			position = { x = 398 y = 388 }
 			font = "ARF_WSD_text20"
 			text = "[ARF_WSd_GetName_arm]"
-			maxWidth = 700 maxHeight = 24
+			maxWidth = 720 maxHeight = 24
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Eff_arm"
-			position = { x = 398 y = 396 }
+			position = { x = 398 y = 407 }
 			font = "ARF_WSD_text16"
 			text = "[ARF_WSd_GetEff_arm]"
-			maxWidth = 700 maxHeight = 20
+			maxWidth = 720 maxHeight = 18
 			format = left
 			alwaystransparent = yes
 		}
 
 		iconType = {
 			name = "ARF_WSd_Row_eng"
-			position = { x = 270 y = 424 }
+			position = { x = 262 y = 432 }
 			spriteType = "GFX_ARF_WSD_row"
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SlotLbl_eng"
-			position = { x = 284 y = 434 }
+			position = { x = 284 y = 441 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_SLOT_eng"
-			maxWidth = 62 maxHeight = 28
+			maxWidth = 62 maxHeight = 26
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -380,49 +422,49 @@ guiTypes = {
 		}
 		buttonType = {
 			name = "ARF_WSd_Prev_eng"
-			position = { x = 352 y = 430 }
+			position = { x = 352 y = 436 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_l"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_PREV_TT
 		}
 		buttonType = {
 			name = "ARF_WSd_Next_eng"
-			position = { x = 1108 y = 430 }
+			position = { x = 1136 y = 436 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_r"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_NEXT_TT
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Name_eng"
-			position = { x = 398 y = 428 }
+			position = { x = 398 y = 438 }
 			font = "ARF_WSD_text20"
 			text = "[ARF_WSd_GetName_eng]"
-			maxWidth = 700 maxHeight = 24
+			maxWidth = 720 maxHeight = 24
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Eff_eng"
-			position = { x = 398 y = 450 }
+			position = { x = 398 y = 457 }
 			font = "ARF_WSD_text16"
 			text = "[ARF_WSd_GetEff_eng]"
-			maxWidth = 700 maxHeight = 20
+			maxWidth = 720 maxHeight = 18
 			format = left
 			alwaystransparent = yes
 		}
 
 		iconType = {
 			name = "ARF_WSd_Row_fc"
-			position = { x = 270 y = 478 }
+			position = { x = 262 y = 482 }
 			spriteType = "GFX_ARF_WSD_row"
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SlotLbl_fc"
-			position = { x = 284 y = 488 }
+			position = { x = 284 y = 491 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_SLOT_fc"
-			maxWidth = 62 maxHeight = 28
+			maxWidth = 62 maxHeight = 26
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -430,49 +472,49 @@ guiTypes = {
 		}
 		buttonType = {
 			name = "ARF_WSd_Prev_fc"
-			position = { x = 352 y = 484 }
+			position = { x = 352 y = 486 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_l"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_PREV_TT
 		}
 		buttonType = {
 			name = "ARF_WSd_Next_fc"
-			position = { x = 1108 y = 484 }
+			position = { x = 1136 y = 486 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_r"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_NEXT_TT
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Name_fc"
-			position = { x = 398 y = 482 }
+			position = { x = 398 y = 488 }
 			font = "ARF_WSD_text20"
 			text = "[ARF_WSd_GetName_fc]"
-			maxWidth = 700 maxHeight = 24
+			maxWidth = 720 maxHeight = 24
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Eff_fc"
-			position = { x = 398 y = 504 }
+			position = { x = 398 y = 507 }
 			font = "ARF_WSD_text16"
 			text = "[ARF_WSd_GetEff_fc]"
-			maxWidth = 700 maxHeight = 20
+			maxWidth = 720 maxHeight = 18
 			format = left
 			alwaystransparent = yes
 		}
 
 		iconType = {
 			name = "ARF_WSd_Row_ammo"
-			position = { x = 270 y = 532 }
+			position = { x = 262 y = 532 }
 			spriteType = "GFX_ARF_WSD_row"
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SlotLbl_ammo"
-			position = { x = 284 y = 542 }
+			position = { x = 284 y = 541 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_SLOT_ammo"
-			maxWidth = 62 maxHeight = 28
+			maxWidth = 62 maxHeight = 26
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -480,49 +522,49 @@ guiTypes = {
 		}
 		buttonType = {
 			name = "ARF_WSd_Prev_ammo"
-			position = { x = 352 y = 538 }
+			position = { x = 352 y = 536 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_l"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_PREV_TT
 		}
 		buttonType = {
 			name = "ARF_WSd_Next_ammo"
-			position = { x = 1108 y = 538 }
+			position = { x = 1136 y = 536 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_r"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_NEXT_TT
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Name_ammo"
-			position = { x = 398 y = 536 }
+			position = { x = 398 y = 538 }
 			font = "ARF_WSD_text20"
 			text = "[ARF_WSd_GetName_ammo]"
-			maxWidth = 700 maxHeight = 24
+			maxWidth = 720 maxHeight = 24
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Eff_ammo"
-			position = { x = 398 y = 558 }
+			position = { x = 398 y = 557 }
 			font = "ARF_WSD_text16"
 			text = "[ARF_WSd_GetEff_ammo]"
-			maxWidth = 700 maxHeight = 20
+			maxWidth = 720 maxHeight = 18
 			format = left
 			alwaystransparent = yes
 		}
 
 		iconType = {
 			name = "ARF_WSd_Row_sp"
-			position = { x = 270 y = 586 }
+			position = { x = 262 y = 582 }
 			spriteType = "GFX_ARF_WSD_row"
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_SlotLbl_sp"
-			position = { x = 284 y = 596 }
+			position = { x = 284 y = 591 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_SLOT_sp"
-			maxWidth = 62 maxHeight = 28
+			maxWidth = 62 maxHeight = 26
 			fixedsize = yes
 			vertical_alignment = centre
 			format = left
@@ -530,47 +572,48 @@ guiTypes = {
 		}
 		buttonType = {
 			name = "ARF_WSd_Prev_sp"
-			position = { x = 352 y = 592 }
+			position = { x = 352 y = 586 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_l"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_PREV_TT
 		}
 		buttonType = {
 			name = "ARF_WSd_Next_sp"
-			position = { x = 1108 y = 592 }
+			position = { x = 1136 y = 586 }
 			quadTextureSprite = "GFX_ARF_WSD_arrow_r"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_NEXT_TT
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Name_sp"
-			position = { x = 398 y = 590 }
+			position = { x = 398 y = 588 }
 			font = "ARF_WSD_text20"
 			text = "[ARF_WSd_GetName_sp]"
-			maxWidth = 700 maxHeight = 24
+			maxWidth = 720 maxHeight = 24
 			format = left
 			alwaystransparent = yes
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Eff_sp"
-			position = { x = 398 y = 612 }
+			position = { x = 398 y = 607 }
 			font = "ARF_WSD_text16"
 			text = "[ARF_WSd_GetEff_sp]"
-			maxWidth = 700 maxHeight = 20
+			maxWidth = 720 maxHeight = 18
 			format = left
 			alwaystransparent = yes
 		}
 
+		# ---------------- 底部 ----------------
 		buttonType = {
 			name = "ARF_WSd_Reset"
-			position = { x = 270 y = 646 }
+			position = { x = 262 y = 646 }
 			quadTextureSprite = "GFX_ARF_WSD_btn"
 			clicksound = click_default
 			pdx_tooltip = ARF_WSD_RESET_TT
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_Reset_T"
-			position = { x = 270 y = 646 }
+			position = { x = 262 y = 646 }
 			font = "ARF_WSD_text20"
 			text = "ARF_WSD_RESET"
 			maxWidth = 200 maxHeight = 40
@@ -581,15 +624,16 @@ guiTypes = {
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_FootNote"
-			position = { x = 486 y = 654 }
+			position = { x = 482 y = 656 }
 			font = "ARF_WSD_text16"
 			text = "ARF_WSD_FOOT_NOTE"
-			maxWidth = 674 maxHeight = 24
+			maxWidth = 696 maxHeight = 22
 			format = left
 			alwaystransparent = yes
 		}
 	}
 
+	# ---------------- 决议分类页入口 ----------------
 	containerWindowType = {
 		name = "ARF_WS_Design_Entry_GUI"
 		size = { width = 100% height = 130 }
@@ -603,7 +647,7 @@ guiTypes = {
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_EntryTitle"
-			position = { x = 18 y = 8 }
+			position = { x = 18 y = 10 }
 			font = "ARF_WSD_title24"
 			text = "ARF_WSD_ENTRY_TITLE"
 			maxWidth = 280 maxHeight = 30
@@ -612,10 +656,10 @@ guiTypes = {
 		}
 		instantTextBoxType = {
 			name = "ARF_WSd_EntryDesc"
-			position = { x = 18 y = 50 }
+			position = { x = 18 y = 46 }
 			font = "ARF_WSD_text16"
 			text = "ARF_WSD_ENTRY_DESC"
-			maxWidth = 288 maxHeight = 72
+			maxWidth = 288 maxHeight = 76
 			format = left
 			alwaystransparent = yes
 		}

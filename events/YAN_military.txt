@@ -74,39 +74,47 @@ country_event = {
 		if = {
 			limit = { country_exists = DKK }
 			DKK = { YAN_donglu_parade_break_vassal = yes }
-			declare_war_on = { target = DKK type = annex_everything }
+			declare_war_on = { target = DKK type = puppet_wargoal_focus }
 			DKK = { YAN_donglu_parade_muster = yes }
 		}
 		if = {
 			limit = { country_exists = HAP }
 			HAP = { YAN_donglu_parade_break_vassal = yes }
-			declare_war_on = { target = HAP type = annex_everything }
+			declare_war_on = { target = HAP type = puppet_wargoal_focus }
 			HAP = { YAN_donglu_parade_muster = yes }
 		}
 		if = {
 			limit = { country_exists = HGS }
 			HGS = { YAN_donglu_parade_break_vassal = yes }
-			declare_war_on = { target = HGS type = annex_everything }
+			declare_war_on = { target = HGS type = puppet_wargoal_focus }
 			HGS = { YAN_donglu_parade_muster = yes }
 		}
 		if = {
 			limit = { country_exists = NHS }
 			NHS = { YAN_donglu_parade_break_vassal = yes }
-			declare_war_on = { target = NHS type = annex_everything }
+			declare_war_on = { target = NHS type = puppet_wargoal_focus }
 			NHS = { YAN_donglu_parade_muster = yes }
 		}
 		if = {
 			limit = { country_exists = TNT }
 			TNT = { YAN_donglu_parade_break_vassal = yes }
-			declare_war_on = { target = TNT type = annex_everything }
+			declare_war_on = { target = TNT type = puppet_wargoal_focus }
 			TNT = { YAN_donglu_parade_muster = yes }
 		}
 		if = {
 			limit = { country_exists = VIE }
 			VIE = { YAN_donglu_parade_break_vassal = yes }
-			declare_war_on = { target = VIE type = annex_everything }
+			declare_war_on = { target = VIE type = puppet_wargoal_focus }
 			VIE = { YAN_donglu_parade_muster = yes }
 		}
+		if = {
+			limit = { country_exists = ANA }
+			ANA = { YAN_donglu_parade_break_vassal = yes }
+			declare_war_on = { target = ANA type = puppet_wargoal_focus }
+			ANA = { YAN_donglu_parade_muster = yes }
+		}
+		# 2026-10-29：战后树【真龙托孤...】的可用前提——演武必须打完并吞并全部受演国
+		set_country_flag = YAN_donglu_parade_started
 		SE_YAN_DONGLU_PARADE_EFFECT = yes
 	}
 }

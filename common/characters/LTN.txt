@@ -138,4 +138,29 @@ characters = {
 			cost = 100
 		}
 	}
+
+	#圣洛夫基金会司辰 —— 由「司辰的到来」国策招入并任命为政治顾问
+	#（allowed 只在莱塔尼亚成立；她没有头像，暂用 404 占位，与本工程其余顾问同法）
+	LTN_Vertin = {
+		name = LTN_Vertin
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/_unknown/404_unknown.dds"
+			}
+		}
+		gender = female
+		advisor = {
+			allowed = {
+				original_tag = LTN
+			}
+			available = {
+				has_country_flag = LTN_vt_vertin_present
+			}
+			slot = political_advisor
+			idea_token = LTN_Vertin_advisor
+			traits = { LTN_adv_vertin }
+			desc = LTN_Vertin_advisor_desc
+			cost = 0
+		}
+	}
 }

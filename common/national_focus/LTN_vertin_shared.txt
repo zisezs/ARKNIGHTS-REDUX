@@ -1,0 +1,369 @@
+######################
+## 莱塔尼亚 (LTN) ·「司辰的暴雨」—— 维尔汀共享国策簇
+##
+## 起始格 LTN_vt_who_is_vertin（维尔汀是谁？）；版式全部走「列链」：
+##   中轴 x=0：维尔汀是谁 → 局部突发暴雨 → 司辰的到来 → 芝加哥的教训
+##   x=-4：建立学院（司辰的到来扇出的死头肩）
+##   x=-2 / x=+2：箱中的世界 / 阴影中的手（芝加哥的教训扇出的两肩）
+##   x=+6：暑假工 → 槲寄生 → 哥伦比亚商人 → 股票与神秘术 → 杜卡特的流通（一条直链）
+##   x=+4 / x=+8：源石的诅咒 / 梅福券的应用（杜卡特扇出的两肩）
+##   x=+8 y=50：企业加油（收尾格，两个 prerequisite 块 = 「与」）
+## 本版式挂在 LTN_political_focus 的既有内容**下方**：绝对坐标 y=41..50，
+## 既有带最深 y=39、DEV 簇 y=28..32，互不撞格（列链校验见 docs/_ltn_vertin_check.cjs）。
+##
+## 时长：cost 单位是周。7天=1 / 14天=2 / 20天=2.8571428 / 30天=4.2857142 / 34天=4.8571428。
+##
+## 配套文件：
+##   事件    events/LTN_vertin.txt                    （命名空间 LTN_vertin，6 个）
+##   精神    common/ideas/LTN vertin_ideas.txt        （9 条：维尔汀线 7 + 叛军专属 2）
+##   仪表    common/dynamic_modifiers/LTN_vertin_dynamic_modifiers.txt（对重塑之手两枚，enable 门 = 正在与之交战）
+##   决议    common/decisions/LTN_vertin_decisions.txt（五组 16 条）
+##   顾问    common/characters/LTN.txt + common/country_leader/LTN_traits.txt（LTN_Vertin / LTN_adv_vertin）
+##   脉冲    common/on_actions/LTN_on_actions.txt 的 on_civil_war_end → 司辰离开
+##   文案    localisation/simp_chinese/ARF_LTN_vertin_l_simp_chinese.yml
+##   图标    全部复用 interface/_ARF_goals/LTN_goals.gfx 已注册的 GFX_focus_LTN_*（不新出图）
+##
+## ⚠ 引擎实况（写这簇时核过，别当成 bug 再查）：
+##   · 「不可解散」只有模板锁：is_locked = yes 锁的是编制编辑，地图上的师仍可被玩家遣散。
+##   · 没有「情报卡」对象：阿尔卡纳档案做成国家精神（反间谍 + 政治点）。
+##   · 没有针对特定敌国的进攻修正键位可挂 idea：对重塑之手加成走 dynamic_modifier + enable 交战门。
+##   · 重塑之手不是既有 tag：用原生 start_civil_war 生成神秘主义叛军，外观名 LTN_vt_remake。
+######################
+
+shared_focus = {
+	id = LTN_vt_who_is_vertin
+	icon = GFX_focus_LTN_read_the_score
+	cost = 1
+	x = 0
+	y = 41
+	ai_will_do = {
+		base = 100
+	}
+	completion_reward = {
+		add_political_power = 30
+		add_war_support = 0.02
+	}
+}
+
+# ================= 内政线 =================
+
+shared_focus = {
+	id = LTN_vt_local_storm
+	icon = GFX_focus_LTN_storm_relief
+	cost = 1
+	prerequisite = {
+		focus = LTN_vt_who_is_vertin
+	}
+	x = 0
+	y = 42
+	ai_will_do = {
+		base = 95
+	}
+	completion_reward = {
+		add_stability = -0.03
+		custom_effect_tooltip = LTN_vt_storm_tt
+		hidden_effect = {
+			set_country_flag = LTN_vt_storm_seen
+			country_event = { id = LTN_vertin.1 days = 2 }
+		}
+	}
+}
+
+shared_focus = {
+	id = LTN_vt_arrival_of_timekeeper
+	icon = GFX_focus_LTN_voice_of_the_empress
+	cost = 2
+	prerequisite = {
+		focus = LTN_vt_local_storm
+	}
+	x = 0
+	y = 43
+	ai_will_do = {
+		base = 100
+	}
+	completion_reward = {
+		army_experience = 325
+		custom_effect_tooltip = LTN_vt_advisor_tt
+		hidden_effect = {
+			set_country_flag = LTN_vt_vertin_present
+			recruit_character = LTN_Vertin
+			activate_advisor = LTN_Vertin
+		}
+	}
+}
+
+# ---- 与芝加哥的教训并排的一肩（列首，前置为【司辰的到来】） ----
+shared_focus = {
+	id = LTN_vt_arcane_academy
+	icon = GFX_focus_LTN_trial_academy
+	cost = 2
+	prerequisite = {
+		focus = LTN_vt_arrival_of_timekeeper
+	}
+	x = -4
+	y = 44
+	ai_will_do = {
+		base = 85
+	}
+	completion_reward = {
+		add_stability = -0.05
+		add_dynamic_modifier = { modifier = LTN_vt_dyn_hunt_remake }
+		custom_effect_tooltip = LTN_vt_academy_units_tt
+		custom_effect_tooltip = LTN_vt_hunt_remake_tt
+		if = {
+			limit = {
+				NOT = { has_template = "司辰机动中队" }
+			}
+			division_template = {
+				name = "司辰机动中队"
+				division_names_group = LTN_INF_03
+				is_locked = yes
+				regiments = {
+					motorized = { x = 0 y = 0 }
+					motorized = { x = 0 y = 1 }
+					motorized = { x = 1 y = 0 }
+					motorized = { x = 1 y = 1 }
+					motorized = { x = 2 y = 0 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+					recon = { x = 0 y = 1 }
+				}
+			}
+		}
+		capital_scope = {
+			create_unit = {
+				division = "division_template = \"司辰机动中队\" start_experience_factor = 0.6 start_equipment_factor = 1"
+				owner = LTN
+				count = 5
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = LTN_vt_chicago_lesson
+	icon = GFX_focus_LTN_kill_at_the_start
+	cost = 1
+	prerequisite = {
+		focus = LTN_vt_arrival_of_timekeeper
+	}
+	x = 0
+	y = 44
+	ai_will_do = {
+		base = 90
+	}
+	completion_reward = {
+		add_manpower = -5000
+		custom_effect_tooltip = LTN_vt_arrest_tt
+		hidden_effect = {
+			country_event = { id = LTN_vertin.2 days = 2 }
+		}
+	}
+}
+
+# ---- 芝加哥的教训扇出的两肩 ----
+shared_focus = {
+	id = LTN_vt_world_in_suitcase
+	icon = GFX_focus_LTN_veil_ritual
+	cost = 2
+	prerequisite = {
+		focus = LTN_vt_chicago_lesson
+	}
+	x = -2
+	y = 45
+	ai_will_do = {
+		base = 80
+	}
+	completion_reward = {
+		add_ideas = LTN_vt_suitcase_sanctuary
+		custom_effect_tooltip = LTN_vt_embrace_tt
+		hidden_effect = {
+			country_event = { id = LTN_vertin.3 days = 3 }
+		}
+	}
+}
+
+shared_focus = {
+	id = LTN_vt_hand_in_shadow
+	icon = GFX_focus_LTN_gendarme_and_spy
+	cost = 2.8571428
+	prerequisite = {
+		focus = LTN_vt_chicago_lesson
+	}
+	x = 2
+	y = 45
+	ai_will_do = {
+		base = 90
+	}
+	completion_reward = {
+		add_war_support = 0.10
+		add_ideas = LTN_vt_arcana_archive
+		add_dynamic_modifier = { modifier = LTN_vt_dyn_hunt_remake }
+		custom_effect_tooltip = LTN_vt_civilwar_tt
+		hidden_effect = {
+			country_event = { id = LTN_vertin.5 days = 4 }
+		}
+	}
+}
+
+# ================= 经济线（司辰小金库 → 介质经济 → 源石 / 梅福券） =================
+
+shared_focus = {
+	id = LTN_vt_unpaid_summer_job
+	icon = GFX_focus_LTN_land_tax
+	cost = 1
+	prerequisite = {
+		focus = LTN_vt_arrival_of_timekeeper
+	}
+	available = {
+		has_idea = LTN_Vertin_advisor
+	}
+	x = 6
+	y = 44
+	ai_will_do = {
+		base = 80
+	}
+	completion_reward = {
+		add_political_power = 25
+		set_country_flag = LTN_vt_purse_open
+	}
+}
+
+shared_focus = {
+	id = LTN_vt_mistletoe_shares
+	icon = GFX_focus_LTN_trade_routes
+	cost = 2
+	prerequisite = {
+		focus = LTN_vt_unpaid_summer_job
+	}
+	x = 6
+	y = 45
+	ai_will_do = {
+		base = 75
+	}
+	completion_reward = {
+		add_ideas = LTN_vt_aid_network
+		add_political_power = 40
+	}
+}
+
+shared_focus = {
+	id = LTN_vt_columbia_merchant
+	icon = GFX_focus_LTN_instrument_export
+	cost = 2
+	prerequisite = {
+		focus = LTN_vt_mistletoe_shares
+	}
+	x = 6
+	y = 46
+	ai_will_do = {
+		base = 75
+	}
+	completion_reward = {
+		add_ideas = LTN_vt_columbia_backing
+		custom_effect_tooltip = LTN_vt_merchant_tt
+	}
+}
+
+shared_focus = {
+	id = LTN_vt_shares_and_arts
+	icon = GFX_focus_LTN_resonance_sigils
+	cost = 2
+	prerequisite = {
+		focus = LTN_vt_columbia_merchant
+	}
+	x = 6
+	y = 47
+	ai_will_do = {
+		base = 70
+	}
+	completion_reward = {
+		set_country_flag = LTN_vt_finance_open
+		add_political_power = 30
+		custom_effect_tooltip = LTN_vt_finance_tt
+	}
+}
+
+shared_focus = {
+	id = LTN_vt_ducat_circulation
+	icon = GFX_focus_LTN_ducat_standard
+	cost = 2
+	prerequisite = {
+		focus = LTN_vt_shares_and_arts
+	}
+	x = 6
+	y = 48
+	ai_will_do = {
+		base = 80
+	}
+	completion_reward = {
+		add_ideas = LTN_vt_ducat_reserve
+		add_political_power = 45
+	}
+}
+
+# ---- 杜卡特的流通扇出的两肩 ----
+shared_focus = {
+	id = LTN_vt_originium_curse
+	icon = GFX_focus_LTN_crystal_industry
+	cost = 4.8571428
+	prerequisite = {
+		focus = LTN_vt_ducat_circulation
+	}
+	x = 4
+	y = 49
+	ai_will_do = {
+		base = 85
+	}
+	completion_reward = {
+		add_dynamic_modifier = { modifier = LTN_vt_dyn_originium_war }
+		set_country_flag = LTN_vt_originium_open
+		add_political_power = 40
+		custom_effect_tooltip = LTN_vt_originium_tt
+	}
+}
+
+shared_focus = {
+	id = LTN_vt_mefo_bonds
+	icon = GFX_focus_LTN_imperial_bank
+	cost = 4.2857142
+	prerequisite = {
+		focus = LTN_vt_ducat_circulation
+	}
+	x = 8
+	y = 49
+	available = {
+		NOT = { date > 1099.1.1 }
+	}
+	ai_will_do = {
+		base = 80
+	}
+	completion_reward = {
+		add_timed_idea = { idea = LTN_vt_mefo_applied days = 1642 }
+		set_country_flag = LTN_vt_mefo_open
+	}
+}
+
+# ---- 收尾格：梅福券 + 杜卡特流通（两个 prerequisite 块 = 「与」） ----
+shared_focus = {
+	id = LTN_vt_corporate_refuelling
+	icon = GFX_focus_LTN_factory_zones
+	cost = 1
+	prerequisite = {
+		focus = LTN_vt_mefo_bonds
+	}
+	prerequisite = {
+		focus = LTN_vt_ducat_circulation
+	}
+	x = 8
+	y = 50
+	ai_will_do = {
+		base = 70
+	}
+	completion_reward = {
+		add_ideas = LTN_vt_era_stockpile
+		add_stability = 0.03
+		custom_effect_tooltip = LTN_vt_break_monopoly_tt
+	}
+}

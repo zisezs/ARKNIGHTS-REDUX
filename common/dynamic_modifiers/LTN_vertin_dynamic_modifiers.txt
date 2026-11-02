@@ -1,0 +1,36 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) ·「司辰的暴雨」—— 对重塑之手的两枚定向精神
+#
+# 引擎实况：dynamic_modifier 里不支持 targeted_modifier（本工程的既有条目也是这么写的），
+# 所以「只针对重塑之手」的加成用 enable 交战门实现 ——
+#   叛军由 events/LTN_vertin.txt 的 LTN_vertin.6 用原生 start_civil_war 生成，
+#   并在其作用域挂上 LTN_vt_remake_side 旗标；只有正在与之交战时这两枚精神才生效。
+# 数值写成常量（本簇不做成长），带 icon 即在政治栏显示为民族精神。
+# ============================================================================
+
+# ---- 【追捕重塑之手】：与之交战时陆军进攻 +20%、组织度 +5% ----
+LTN_vt_dyn_hunt_remake = {
+	icon = GFX_idea_LTN_dyn_ironlaw
+	enable = {
+		any_enemy_country = {
+			has_country_flag = LTN_vt_remake_side
+		}
+	}
+
+	army_attack_factor = 0.20
+	army_org_factor = 0.05
+	breakthrough_factor = 0.05
+}
+
+# ---- 【源石经济战】：与之交战时工厂产出 +25%、消费品需求 -5% ----
+LTN_vt_dyn_originium_war = {
+	icon = GFX_idea_LTN_dyn_treasury
+	enable = {
+		any_enemy_country = {
+			has_country_flag = LTN_vt_remake_side
+		}
+	}
+
+	industrial_capacity_factory = 0.25
+	consumer_goods_factor = -0.05
+}

@@ -19,6 +19,15 @@ on_actions = {
 				set_country_flag = RHL_corporate_state_se_fired
 				news_event = { id = rhlse.1 }
 			}
+
+			# 十科自动运转的月度兜底：换树/读档后重启尚未跑完的科（幂等）
+			every_country = {
+				limit = {
+					has_focus_tree = RHL_td
+					has_completed_focus = RHL_td_council
+				}
+				RHL_td_autoprog_start = yes
+			}
 		}
 	}
 

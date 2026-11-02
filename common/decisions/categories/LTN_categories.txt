@@ -120,3 +120,75 @@ LTN_atelier_decisions = {
 
 	priority = 5
 }
+
+# ---- 「司辰的暴雨」（维尔汀线）五个页签：正文见 common/decisions/LTN_vertin_decisions.txt ----
+# 页签一律挂在对应国策格完成后，不新增旗标。
+LTN_vt_purse_decisions = {
+	icon = GFX_decision_category_generic_economy
+
+	allowed = {
+		original_tag = LTN
+	}
+
+	visible = {
+		has_completed_focus = LTN_vt_unpaid_summer_job
+	}
+
+	priority = 4
+}
+
+LTN_vt_remake_decisions = {
+	icon = GFX_decision_category_generic_crisis
+
+	allowed = {
+		original_tag = LTN
+	}
+
+	visible = {
+		has_completed_focus = LTN_vt_hand_in_shadow
+	}
+
+	priority = 4
+}
+
+LTN_vt_finance_decisions = {
+	icon = GFX_decision_category_generic_political_actions
+
+	allowed = {
+		original_tag = LTN
+	}
+
+	visible = {
+		has_completed_focus = LTN_vt_shares_and_arts
+	}
+
+	priority = 3
+}
+
+LTN_vt_originium_decisions = {
+	icon = GFX_decision_category_military_operation
+
+	allowed = {
+		original_tag = LTN
+	}
+
+	visible = {
+		has_completed_focus = LTN_vt_originium_curse
+	}
+
+	priority = 3
+}
+
+LTN_vt_mefo_decisions = {
+	icon = GFX_decision_category_power_struggle
+
+	allowed = {
+		original_tag = LTN
+	}
+
+	visible = {
+		has_completed_focus = LTN_vt_mefo_bonds
+	}
+
+	priority = 3
+}

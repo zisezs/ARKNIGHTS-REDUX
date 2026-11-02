@@ -60,13 +60,16 @@ YAN_donglu_parade_muster = {
 # 解除受演国的附属与阵营关系：否则 declare_war_on 会被 can_not_declare_war / 同阵营规则静默挡掉
 YAN_donglu_parade_break_vassal = {
 	# THIS = 受演国
+	# 第一道：标准 end_puppet（对普通傀儡生效）
 	if = {
 		limit = { is_subject = yes }
 		overlord = { end_puppet = PREV }
 	}
+	# 第二道：朝贡国等自定义自治领不是 is_puppet，end_puppet 可能不生效；
+	# 直接设为 autonomy_free，确保目标在宣战前真正独立
 	if = {
-		limit = { is_subject = yes }
-		YAN = { release_puppet = PREV }
+		limit = { is_subject_of = YAN }
+		YAN = { set_autonomy = { target = PREV autonomy_state = autonomy_free } }
 	}
 	if = {
 		limit = { is_in_faction = yes }

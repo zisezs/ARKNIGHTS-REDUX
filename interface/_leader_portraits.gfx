@@ -401,4 +401,33 @@ spriteTypes = {
 		legacy_lazy_load = no
 	}
 
+	#YAN · 岁家七位领导人头像（所有意识形态通用：sprite 本身不绑 ideology，
+	#    任意 country_leader 块写 large = "GFX_YAN_leader_xxx" 即可引用）
+	#    2026-10-29 新增两位入库：陈晖洁、朔（先只登记头像，尚未挂到任何 country_leader 块）
+	spriteType = { name = "GFX_YAN_leader_zhongyue"       texturefile = "gfx/leaders/YAN/leader/YAN_leader_zhongyue.png"       legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_zhongyue_small" texturefile = "gfx/leaders/YAN/leader/YAN_leader_zhongyue_small.png" legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_wang"           texturefile = "gfx/leaders/YAN/leader/YAN_leader_wang.png"           legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_wang_small"     texturefile = "gfx/leaders/YAN/leader/YAN_leader_wang_small.png"     legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_ling"           texturefile = "gfx/leaders/YAN/leader/YAN_leader_ling.png"           legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_ling_small"     texturefile = "gfx/leaders/YAN/leader/YAN_leader_ling_small.png"     legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_shu"            texturefile = "gfx/leaders/YAN/leader/YAN_leader_shu.png"            legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_shu_small"      texturefile = "gfx/leaders/YAN/leader/YAN_leader_shu_small.png"      legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_nian"           texturefile = "gfx/leaders/YAN/leader/YAN_leader_nian.png"           legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_nian_small"     texturefile = "gfx/leaders/YAN/leader/YAN_leader_nian_small.png"     legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_xi"             texturefile = "gfx/leaders/YAN/leader/YAN_leader_xi.png"             legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_xi_small"       texturefile = "gfx/leaders/YAN/leader/YAN_leader_xi_small.png"       legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_yu"             texturefile = "gfx/leaders/YAN/leader/YAN_leader_yu.png"             legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_yu_small"       texturefile = "gfx/leaders/YAN/leader/YAN_leader_yu_small.png"       legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_chenhuijie"       texturefile = "gfx/leaders/YAN/leader/YAN_leader_chenhuijie.png"       legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_chenhuijie_small" texturefile = "gfx/leaders/YAN/leader/YAN_leader_chenhuijie_small.png" legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_shuo"             texturefile = "gfx/leaders/YAN/leader/YAN_leader_shuo.png"             legacy_lazy_load = no }
+	spriteType = { name = "GFX_YAN_leader_shuo_small"       texturefile = "gfx/leaders/YAN/leader/YAN_leader_shuo_small.png"       legacy_lazy_load = no }
+
+
+	# 原版 mapicons.gui 仍引用这个 GER 领袖头像；模组覆盖 _leader_portraits.gfx 时漏了注册，补回避免大量 Could not find sprite type
+	spriteType = {
+		name = "GFX_portrait_GER_oswald_lutz"
+		texturefile = "gfx/leaders/GER/portrait_GER_oswald_lutz.dds"
+	}
+
 }

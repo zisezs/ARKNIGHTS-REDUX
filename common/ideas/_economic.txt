@@ -207,6 +207,65 @@ ideas = {
 
 			cancel_if_invalid = no
 		}
+
+		# 【皇帝的归来】126 格解锁：大基建运动
+		# 参考总动员法案，但把重点放在民用工厂建设速度上。
+		SCR_great_infrastructure_campaign = {
+			available = {
+				original_tag = SCR
+				has_completed_focus = SCR_er_126
+			}
+
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_expected_value = 0.15
+				production_speed_industrial_complex_factor = 0.30
+				production_speed_arms_factory_factor = 0.20
+				conversion_cost_civ_to_mil_factor = -0.20
+				conversion_cost_mil_to_civ_factor = -0.20
+				factory_energy_consumption = 0.4
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = {
+				base = 5
+			}
+		}
+
+		# 大炎经济线【大炎平稳航行...】解锁：不烧心经济
+		# 数值照民用经济，只把民用工厂建造速度从 -30% 改成 +30%。
+		YAN_unburning_economy = {
+			allowed = {
+				original_tag = YAN
+			}
+
+			available = {
+				has_country_flag = YAN_eco_economy_law_unlocked
+			}
+
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_expected_value = 0.35
+				production_speed_industrial_complex_factor = 0.30
+				production_speed_arms_factory_factor = -0.30
+				conversion_cost_civ_to_mil_factor = 0.30
+				conversion_cost_mil_to_civ_factor = 0.30
+				max_fuel_factor = -0.25
+				fuel_gain_factor = -0.40
+				factory_energy_consumption = -0.30
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = {
+				base = 5
+			}
+		}
 	}
 
 	trade_laws = {
@@ -412,6 +471,41 @@ ideas = {
 					has_large_ally_not_pick_closed_economy = yes
 				}
    			}
+		}
+
+		# 大炎经济线【老陈的述职报告】解锁：独善其身，兼济天下
+		# 底子照封闭经济；和平 / 战时两套追加修正由
+		# YAN_eco_trade_peace / YAN_eco_trade_war 两个动态修正符按 has_war 切换，
+		# 国策完成时一起挂上（未选本 law 时 enable 为假，不生效）。
+		YAN_self_reliant_trade = {
+			allowed = {
+				original_tag = YAN
+			}
+
+			available = {
+				has_country_flag = YAN_eco_trade_law_unlocked
+			}
+
+			rule = {
+				can_access_market = no
+				desc = can_not_access_market_closed_economy
+			}
+
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				min_export = 0
+				lend_lease_tension = 0.40
+				cic_construction_boost = -0.1
+				custom_modifier_tooltip = YAN_self_reliant_trade_tt
+			}
+
+			cancel_if_invalid = no
+
+			ai_will_do = {
+				factor = 1
+			}
 		}
 	}
 }

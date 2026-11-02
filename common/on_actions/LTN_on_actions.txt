@@ -25,4 +25,21 @@ on_actions = {
 			LTN_budget_effect_tick = yes
 		}
 	}
+
+	# 「司辰的暴雨」：内战结束时司辰离场（ROOT = 胜方，FROM = 被吞并的败方）
+	# 只认「对面挂着重塑之手旗标」这一条，双向都可能命中，所以两边各自判 flag 后再发事件。
+	on_civil_war_end = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = LTN
+					has_country_flag = LTN_vt_vertin_present
+					FROM = {
+						has_country_flag = LTN_vt_remake_side
+					}
+				}
+				country_event = { id = LTN_vertin.7 days = 3 }
+			}
+		}
+	}
 }

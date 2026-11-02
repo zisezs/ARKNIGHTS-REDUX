@@ -1,0 +1,622 @@
+# ==============================================================================
+# 大炎 (YAN) 专属 AI 战略（2026-10-31）
+#
+# 目标：把大炎从"低配步兵海"掰成"重装拳头 + 满编步兵"。
+#   大炎开局 50 州 / 36 座军工 / 144 座民工厂 / 2.64 亿人口，
+#   还有重坦、机械化、火炮与防空的全套开局科技；
+#   但此前没有任何专属 ai_strategy，只能吃全局默认：
+#     infantry 40 / militia 5 / armor 20 / motorized 10，
+#     equipment_production_factor infantry 25 / artillery 20 / support 30 / armor 10。
+#   结果就是 AI 把产能继续喂给步枪与民兵，重装线停在开局那 2 个实验旅。
+#
+# 与全局层的关系（很重要，数值会算错）：
+#   common/ai_strategy 下各块是**叠加**的，同一个 type+id 的 value 相加，
+#   所以这里只写增量。基线来自：
+#     · default.txt        infantry 40 / militia 5 / armor 20 / motorized 10 /
+#                          mountaineers 4 / air_assault 3 / landship 2 /
+#                          equipment infantry 40、artillery 25
+#     · REC_global_ai      template_prio infantry 25、ai_wanted_divisions_factor 25、
+#                          equipment infantry 25 / artillery 20 / support 30 /
+#                          anti_tank 15 / anti_air 15 / armor 10 / motorized 10、
+#                          land_xp division_template 120、front_control 邻国 rush priority 60
+#
+# 编制模板见 common/ai_templates/YAN_templates.txt（步兵四档 / 重装三档 / 摩托化两档）。
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. 平时建军：步兵海为主力，装甲与机械化吃满，民兵归零
+# ------------------------------------------------------------------------------
+YAN_army_quality_first = {
+
+	allowed = {
+		original_tag = YAN
+	}
+	enable = {
+		original_tag = YAN
+	}
+	abort_when_not_enabled = yes
+
+	# —— 编制配额 ——
+	# 2026-11-01：改为步兵海为主力，配额从 -10 抬到 +20（基础 120%）。
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 20
+	}
+	# 36 座军工 + 重坦科技，装甲从 20% 抬到 35%。
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 15
+	}
+	# 机械化伴随群：15%。
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = 5
+	}
+	# 大炎不缺人，缺的是装备；民兵会稀释枪械与 XP，配额压到 0。
+	ai_strategy = {
+		type = role_ratio
+		id = militia
+		value = -5
+	}
+	# 没有空突/直升机与 landship 科技，去掉悬空配额，避免工业需求算虚。
+	ai_strategy = {
+		type = role_ratio
+		id = air_assault
+		value = -3
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = landship
+		value = -2
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = mountaineers
+		value = -4
+	}
+
+	# —— 换代优先级：XP 花在装甲与步兵上，别雕民兵 ——
+	ai_strategy = {
+		type = template_prio
+		id = heavy_armor
+		value = 40
+	}
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = 30
+	}
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = 10
+	}
+	ai_strategy = {
+		type = template_prio
+		id = militia
+		value = -60
+	}
+
+	# —— 陆军 XP：先改编制、再换装备改型、最后学说 ——
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = division_template
+		value = 80
+	}
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = equipment_variant
+		value = 40
+	}
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = upgrade_xp_cutoff
+		value = -10
+	}
+
+	# —— 数量：2.64 亿人口，常规扩军目标保持全局水平；3M 冲刺见第 7 节 ——
+	ai_strategy = {
+		type = ai_wanted_divisions_factor
+		value = 15
+	}
+	ai_strategy = {
+		type = build_army
+		id = heavy_armor
+		value = 30
+	}
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = 50
+	}
+	# 预备队不要蹲在后方：全局 +20，这里压回接近 0，让新师立刻上前线。
+	ai_strategy = {
+		type = spare_unit_factor
+		value = -15
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 2. 装备线：装甲/火炮/防空优先，步枪保底但不再吃满
+#    equipment_production_factor 是百分比增量（+40 = 需求上浮 40%）。
+# ------------------------------------------------------------------------------
+YAN_equipment_quality_lines = {
+
+	allowed = {
+		original_tag = YAN
+	}
+	enable = {
+		original_tag = YAN
+	}
+	abort_when_not_enabled = yes
+
+	# 重装是主攻方向：全局 armor 10 → 50。
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 40
+	}
+	# 炮兵与团属支援是步兵师的战斗力来源。
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 15
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = support
+		value = 10
+	}
+	# 防空/反坦：大炎面对的是装甲与空军强国，不能只堆软攻。
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_air
+		value = 10
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_tank
+		value = 5
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = motorized
+		value = 5
+	}
+	# 3M 扩军需要海量步枪：全局 25 再 +25，保底 15 座工厂。
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 25
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = infantry
+		value = 15
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = artillery
+		value = 2
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = support
+		value = 2
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = anti_air
+		value = 2
+	}
+
+	# 正偏移 = 不要求囤够旧型号就换代。
+	ai_strategy = {
+		type = production_upgrade_desire_offset
+		id = infantry_equipment_1
+		value = 100
+	}
+	ai_strategy = {
+		type = production_upgrade_desire_offset
+		id = artillery_equipment_1
+		value = 100
+	}
+	ai_strategy = {
+		type = production_upgrade_desire_offset
+		id = heavy_tank_chassis_1
+		value = 100
+	}
+	ai_strategy = {
+		type = production_upgrade_desire_offset
+		id = medium_tank_chassis_1
+		value = 100
+	}
+
+	# 需求满足后的溢出产能：重坦底盘、火炮、支援装备。
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = heavy_tank_chassis
+		value = 6
+	}
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = artillery_equipment
+		value = 6
+	}
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = support_equipment
+		value = 4
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 3. 研究：把重装/火炮/防空主链推到底，再补工业与支援连
+#    ai_focuses 是死文件，只能逐项给 research_weight_factor。
+# ------------------------------------------------------------------------------
+YAN_research_quality = {
+
+	allowed = {
+		original_tag = YAN
+	}
+	enable = {
+		original_tag = YAN
+	}
+	abort_when_not_enabled = yes
+
+	# 重装主链：heavy_tank_2/3 是玄极巨兵第三档的门槛。
+	ai_strategy = {
+		type = research_weight_factor
+		id = heavy_tank_2
+		value = 60
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = heavy_tank_3
+		value = 40
+	}
+	# 火炮与防空：步兵师与重装师都吃。
+	ai_strategy = {
+		type = research_weight_factor
+		id = artillery_2
+		value = 40
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = artillery_3
+		value = 30
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = antiair_2
+		value = 30
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = antiair_3
+		value = 20
+	}
+	# 机械化伴随群。
+	ai_strategy = {
+		type = research_weight_factor
+		id = mechanized_infantry_2
+		value = 30
+	}
+	# 开局没有的两个支援连：通信与野战医院。
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_signal_company
+		value = 25
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_field_hospital
+		value = 20
+	}
+	# 工业：144 座民工厂的底子要转成军工与效率。
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_shengchan_3
+		value = 40
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = LRD_tech_shengchan_4
+		value = 30
+	}
+	# 步兵武器只补到能跟上装甲的程度，不再抢重装的槽位。
+	ai_strategy = {
+		type = research_weight_factor
+		id = infantry_weapons_3
+		value = 20
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 4. 工业：民工厂转军工，优先把 36 座军工抬到能养 100 个师的规模
+# ------------------------------------------------------------------------------
+YAN_industry_war_machine = {
+
+	allowed = {
+		original_tag = YAN
+	}
+	enable = {
+		original_tag = YAN
+	}
+	abort_when_not_enabled = yes
+
+	# 全局 arms_factory 目标 60；大炎 144 民工厂，目标抬到 80。
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 80
+	}
+	# 全局军工/民工比例 +35，这里再加 25，加快民转军。
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 25
+	}
+	ai_strategy = {
+		type = factory_build_score_factor
+		value = 120
+	}
+	ai_strategy = {
+		type = building_target
+		id = originium_powerplant
+		value = 6
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 5. 前线：兵力向主攻方向集中，别在 50 州边境上平均撒
+#    全局 front_control 邻国 rush priority 60 已经够用，这里只加集中系数。
+# ------------------------------------------------------------------------------
+YAN_front_concentration = {
+
+	allowed = {
+		original_tag = YAN
+	}
+	enable = {
+		original_tag = YAN
+		has_war = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = force_concentration_factor
+		value = 30
+	}
+	ai_strategy = {
+		type = force_concentration_target_weight
+		country_trigger = {
+			always = yes
+		}
+		value = 40
+	}
+	ai_strategy = {
+		type = front_unit_request
+		country_trigger = {
+			always = yes
+		}
+		value = 30
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 6. 战时：补枪、补员、把预备队全部推上去
+# ------------------------------------------------------------------------------
+YAN_wartime_mobilization = {
+
+	allowed = {
+		original_tag = YAN
+	}
+	enable = {
+		original_tag = YAN
+		has_war = yes
+	}
+	abort_when_not_enabled = yes
+
+	# 战时枪械消耗大，把平时压下去的步枪需求加回来（全局 25 → 45）。
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 20
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 10
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = infantry
+		value = 12
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 12
+	}
+	ai_strategy = {
+		type = ai_wanted_divisions_factor
+		value = 10
+	}
+	ai_strategy = {
+		type = spare_unit_factor
+		value = -20
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 7. 疯狂扩军：陆军人力未到 3M 前，全力爆大编制步兵师
+#    has_army_manpower 统计已部署陆军人力；达到 3,000,000 后本策略自动停用，
+#    扩军意愿回落到第 1/6 节的常规值。
+# ------------------------------------------------------------------------------
+YAN_army_expansion_to_3m = {
+
+	allowed = {
+		original_tag = YAN
+	}
+	enable = {
+		original_tag = YAN
+		NOT = { has_army_manpower = { size > 2999999 } }
+	}
+	abort_when_not_enabled = yes
+
+	# 大幅抬高 AI 想要的师数，直到人力达到 3M。
+	ai_strategy = {
+		type = ai_wanted_divisions_factor
+		value = 800
+	}
+	ai_strategy = {
+		type = force_build_armies
+		value = 100
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 15
+	}
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = 60
+	}
+	# 大编制师吃枪更多，扩军期间步枪产能与保底工厂同步拉高。
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 30
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = infantry
+		value = 18
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 15
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 8. 后期：压缩装甲与摩托化，把产能转给步兵（燃油不够用）
+#    1100 年后装甲不再扩张，重装只维持现有规模。
+# ------------------------------------------------------------------------------
+YAN_late_game_infantry_focus = {
+
+	allowed = {
+		original_tag = YAN
+	}
+	enable = {
+		original_tag = YAN
+		date > 1100.1.1
+	}
+	abort_when_not_enabled = yes
+
+	# 配额：装甲与摩托化下调，步兵补上。
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = -25
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = -10
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 20
+	}
+
+	# 装备线：少造坦克/车辆，多造枪炮。
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = -35
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = motorized
+		value = -15
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 15
+	}
+
+	# 建军与换代：重装不再优先，步兵优先。
+	ai_strategy = {
+		type = build_army
+		id = heavy_armor
+		value = -30
+	}
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = 20
+	}
+	ai_strategy = {
+		type = template_prio
+		id = heavy_armor
+		value = -30
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 9. 燃油短缺：库存低于 25% 时进一步停掉装甲扩建，全面转步兵
+# ------------------------------------------------------------------------------
+YAN_low_fuel_infantry_shift = {
+
+	allowed = {
+		original_tag = YAN
+	}
+	enable = {
+		original_tag = YAN
+		fuel_ratio < 0.25
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = -20
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 10
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = -25
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 10
+	}
+	ai_strategy = {
+		type = build_army
+		id = heavy_armor
+		value = -20
+	}
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = 15
+	}
+	ai_strategy = {
+		type = template_prio
+		id = heavy_armor
+		value = -20
+	}
+}

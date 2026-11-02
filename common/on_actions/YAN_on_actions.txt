@@ -7,6 +7,12 @@ on_actions = {
 			#见 common/scripted_effects/YAN_scripted_effects.txt
 			YAN = {
 				YAN_init_mechanics = yes
+				# 2026-11-01：AI 大炎默认 volunteer_only 只能动员约 1M 人力，
+				# 3M 扩军目标会被卡住；开局直接给 AI 升到 5% 动员（玩家不受影响）。
+				if = {
+					limit = { is_ai = yes }
+					add_ideas = extensive_conscription
+				}
 			}
 			every_state = {
 				limit = { has_state_flag = yan_xzs_sulang_state }

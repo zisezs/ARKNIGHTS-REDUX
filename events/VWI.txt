@@ -1,49 +1,6 @@
 add_namespace = event_vwi
 
 #温德米尔是否死亡
-country_event = {
-	id = event_vwi.1
-	title = event_vwi.1.t
-	desc = event_vwi.1.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = event_vwi.1.a
-		
-		country_event = {
-			id = event_vwi.2
-		}
-
-		ai_chance = {
-			factor = 7
-		}
-	}
-
-	option = {
-		name = event_vwi.1.b
-
-		if = {
-			limit = {
-				power_balance_value = {
-					id = VWI_power_balance
-					value > 0
-				}
-			}
-			complete_national_focus = VWI_Terra_bless_the_Queen
-
-			activate_advisor = VWI_Anfilis_Windermere_second_in_command
-		}
-		else = {
-			complete_national_focus = VWI_keep_calm_and_carry_on
-		}
-
-		ai_chance = {
-			factor = 3
-		}
-	}
-}
-
 #温德米尔的继任者
 country_event = {
 	id = event_vwi.2

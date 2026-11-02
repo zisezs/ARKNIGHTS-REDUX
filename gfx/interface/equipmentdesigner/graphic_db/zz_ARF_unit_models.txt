@@ -1,0 +1,71 @@
+# ============================================================================
+# 重铸明日 Redux · 编制界面 3D 模型选择表
+# ----------------------------------------------------------------------------
+# 编制界面的“模型选择”不是直接枚举实体，而是按装备查 graphic_db：
+#   装备键 -> pool（可用 sub_units 过滤）-> models 里列出的实体才会进列表。
+# 所以除了 <sub_unit id>_entity，还必须在这里把实体登记到对应装备下。
+#
+# 本文件与 gfx/entities/zz_ARF_unit_models.asset 配套：
+#   · 合成化步兵营：装备 infantry_equipment，sub_units = synth_infantry
+#   · 四类高速战舰支援连：各自的装备 + 对应 sub_unit
+# ============================================================================
+
+default = {
+
+	# 合成化步兵营：只在编制里放了 synth_infantry 时才把这三套模型加入列表
+	infantry_equipment = {
+		pool = {
+			sub_units = { synth_infantry }
+			weight = 1000
+			models = {
+				synth_infantry_entity
+				synth_infantry_2_entity
+				synth_infantry_3_entity
+			}
+		}
+	}
+
+	# 高速战舰-无畏舰
+	arf_dreadnought_equipment = {
+		pool = {
+			sub_units = { arf_dreadnought_warship }
+			weight = 1000
+			models = {
+				arf_dreadnought_warship_entity
+			}
+		}
+	}
+
+	# 高速战舰-突击舰
+	arf_assault_ship_equipment = {
+		pool = {
+			sub_units = { arf_assault_warship }
+			weight = 1000
+			models = {
+				arf_assault_warship_entity
+			}
+		}
+	}
+
+	# 高速战舰-炮舰
+	arf_gunboat_equipment = {
+		pool = {
+			sub_units = { arf_gunboat_warship }
+			weight = 1000
+			models = {
+				arf_gunboat_warship_entity
+			}
+		}
+	}
+
+	# 高速战舰-辅助舰
+	arf_auxiliary_ship_equipment = {
+		pool = {
+			sub_units = { arf_auxiliary_warship }
+			weight = 1000
+			models = {
+				arf_auxiliary_warship_entity
+			}
+		}
+	}
+}

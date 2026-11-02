@@ -1,0 +1,684 @@
+######################
+## 大炎 战后国策树簇（共享国策）—— 框架实装（2026-10-29）
+## 由 common/national_focus/YAN_shared_tree.txt 的 YAN_national_focus 以 shared_focus 引用并入主树
+## 坐标区 x = -28..-6 / y = 11..20（军事簇正下方；原始框架 x 3..25 / y -3..6，整体 x-31 / y+14）
+## 根格【真龙托孤...】(-17,11) 紧贴军事终幕【大炎帝国三军阅兵式】(-17,10) 下方；
+## 2026-10-31：清空本树全部民族精神（dynamic modifier / 变量累积 / 配套决议），
+## completion_reward 仅保留领导人更替与【真龙托孤】事件；其余留空待重做。
+## 图标注册：interface/_ARF_goals/YAN_postwar_goals.gfx
+## 由一次性脚本同批产出（图标/本地化同批）；改表时请同步三处，勿只手改本文件。
+######################
+
+shared_focus = { #真龙托孤...
+	id = YAN_pw_dragon_entrust
+	icon = GFX_focus_YAN_pw_dragon_entrust
+	x = -17
+	y = 11
+	cost = 4
+	available_if_capitulated = yes
+	# 前提：东陆演武已完满结束——全部受演国（DKK/HAP/HGS/NHS/TNT/VIE/ANA）都已成为大炎附庸（或已不存在）
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = YAN_pw_donglu_victory_tt
+			AND = {
+				has_country_flag = YAN_donglu_parade_started
+				OR = {
+					NOT = { country_exists = DKK }
+					DKK = { is_subject_of = YAN }
+				}
+				OR = {
+					NOT = { country_exists = HAP }
+					HAP = { is_subject_of = YAN }
+				}
+				OR = {
+					NOT = { country_exists = HGS }
+					HGS = { is_subject_of = YAN }
+				}
+				OR = {
+					NOT = { country_exists = NHS }
+					NHS = { is_subject_of = YAN }
+				}
+				OR = {
+					NOT = { country_exists = TNT }
+					TNT = { is_subject_of = YAN }
+				}
+				OR = {
+					NOT = { country_exists = VIE }
+					VIE = { is_subject_of = YAN }
+				}
+				OR = {
+					NOT = { country_exists = ANA }
+					ANA = { is_subject_of = YAN }
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		hidden_effect = {
+			country_event = yan_pw.1
+		}
+	}
+}
+
+shared_focus = { #大炎人民的女儿
+	id = YAN_pw_daughter_of_yan
+	icon = GFX_focus_YAN_pw_daughter_of_yan
+	x = -22
+	y = 13
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_dragon_entrust
+	}
+	mutually_exclusive = {
+		focus = YAN_pw_garden_epiphany
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		hidden_effect = {
+			YAN_pw_civ_promote_chen = yes
+		}
+	}
+}
+
+shared_focus = { #真龙亦凡人
+	id = YAN_pw_dragon_is_mortal
+	icon = GFX_focus_YAN_pw_dragon_is_mortal
+	x = -17
+	y = 15
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_daughter_of_yan
+	}
+	prerequisite = {
+		focus = YAN_pw_garden_epiphany
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = { }
+}
+
+shared_focus = { #感染者摄政王？
+	id = YAN_pw_infected_regent
+	icon = GFX_focus_YAN_pw_infected_regent
+	x = -27
+	y = 15
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_daughter_of_yan
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #重返龙门之旅
+	id = YAN_pw_return_longmen
+	icon = GFX_focus_YAN_pw_return_longmen
+	x = -22
+	y = 15
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_daughter_of_yan
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #设立医政司
+	id = YAN_pw_medical_bureau
+	icon = GFX_focus_YAN_pw_medical_bureau
+	x = -28
+	y = 17
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_public_healthcare
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #安居乐业工程
+	id = YAN_pw_livelihood_project
+	icon = GFX_focus_YAN_pw_livelihood_project
+	x = -26
+	y = 16
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_infected_regent
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #公共医疗保障
+	id = YAN_pw_public_healthcare
+	icon = GFX_focus_YAN_pw_public_healthcare
+	x = -28
+	y = 16
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_infected_regent
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #魔族佬的好经验...
+	id = YAN_pw_demon_experience
+	icon = GFX_focus_YAN_pw_demon_experience
+	x = -26
+	y = 17
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_livelihood_project
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #近卫局改革
+	id = YAN_pw_guard_reform
+	icon = GFX_focus_YAN_pw_guard_reform
+	x = -23
+	y = 16
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_return_longmen
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #约见地下皇帝
+	id = YAN_pw_meet_underworld_king
+	icon = GFX_focus_YAN_pw_meet_underworld_king
+	x = -23
+	y = 17
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_guard_reform
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #肃政院大清洗
+	id = YAN_pw_purge_censorate
+	x = -21
+	y = 16
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_return_longmen
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #法治即人治
+	id = YAN_pw_rule_of_law
+	icon = GFX_focus_YAN_pw_rule_of_law
+	x = -21
+	y = 17
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_purge_censorate
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #新时代朝会章程
+	id = YAN_pw_court_charter
+	icon = GFX_focus_YAN_pw_court_charter
+	x = -16
+	y = 16
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_dragon_is_mortal
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #朝中制衡者
+	id = YAN_pw_court_balance
+	icon = GFX_focus_YAN_pw_court_balance
+	x = -16
+	y = 17
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_court_charter
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #平反冤假错案
+	id = YAN_pw_rehabilitate
+	icon = GFX_focus_YAN_pw_rehabilitate
+	x = -18
+	y = 16
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_dragon_is_mortal
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #岁陵改革
+	id = YAN_pw_suiling_reform
+	icon = GFX_focus_YAN_pw_suiling_reform
+	x = -18
+	y = 17
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_rehabilitate
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #真龙权力法案
+	id = YAN_pw_dragon_power_act
+	icon = GFX_focus_YAN_pw_dragon_power_act
+	x = -17
+	y = 18
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_court_balance
+	}
+	prerequisite = {
+		focus = YAN_pw_suiling_reform
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #文明大炎人
+	id = YAN_pw_civilized_yan
+	icon = GFX_focus_YAN_pw_civilized_yan
+	x = -27
+	y = 18
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_demon_experience
+	}
+	prerequisite = {
+		focus = YAN_pw_medical_bureau
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #懂法大炎人
+	id = YAN_pw_law_abiding_yan
+	icon = GFX_focus_YAN_pw_law_abiding_yan
+	x = -22
+	y = 18
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_rule_of_law
+	}
+	prerequisite = {
+		focus = YAN_pw_meet_underworld_king
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #天喟当明
+	id = YAN_pw_heaven_omen
+	icon = GFX_focus_YAN_pw_heaven_omen
+	x = -22
+	y = 20
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_law_abiding_yan
+	}
+	prerequisite = {
+		focus = YAN_pw_civilized_yan
+	}
+	prerequisite = {
+		focus = YAN_pw_dragon_power_act
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #界园顿悟
+	id = YAN_pw_garden_epiphany
+	icon = GFX_focus_YAN_pw_garden_epiphany
+	x = -12
+	y = 13
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_dragon_entrust
+	}
+	mutually_exclusive = {
+		focus = YAN_pw_daughter_of_yan
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = {
+		hidden_effect = {
+			YAN_pw_mil_promote_shuo = yes
+		}
+	}
+}
+
+shared_focus = { #玉门谈话
+	id = YAN_pw_yumen_talks
+	icon = GFX_focus_YAN_pw_yumen_talks
+	x = -12
+	y = 15
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_garden_epiphany
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #文韬武略兼备
+	id = YAN_pw_civil_and_martial
+	icon = GFX_focus_YAN_pw_civil_and_martial
+	x = -13
+	y = 16
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_yumen_talks
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #屏风卫普适化
+	id = YAN_pw_pingfeng_guard
+	icon = GFX_focus_YAN_pw_pingfeng_guard
+	x = -13
+	y = 17
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_civil_and_martial
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #到边疆去！
+	id = YAN_pw_to_frontier
+	icon = GFX_focus_YAN_pw_to_frontier
+	x = -11
+	y = 16
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_yumen_talks
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #守势国防
+	id = YAN_pw_defensive_defense
+	icon = GFX_focus_YAN_pw_defensive_defense
+	x = -11
+	y = 17
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_to_frontier
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #止戈为武
+	id = YAN_pw_stop_war
+	icon = GFX_focus_YAN_pw_stop_war
+	x = -12
+	y = 18
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_defensive_defense
+	}
+	prerequisite = {
+		focus = YAN_pw_pingfeng_guard
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #无非一念为苍生
+	id = YAN_pw_for_the_people
+	icon = GFX_focus_YAN_pw_for_the_people
+	x = -7
+	y = 15
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_garden_epiphany
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #肃清驰道祸害
+	id = YAN_pw_clear_roads
+	icon = GFX_focus_YAN_pw_clear_roads
+	x = -8
+	y = 16
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_for_the_people
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #炎土归炎
+	id = YAN_pw_yan_land
+	icon = GFX_focus_YAN_pw_yan_land
+	x = -8
+	y = 17
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_clear_roads
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #寒门贵士
+	id = YAN_pw_poor_scholars
+	icon = GFX_focus_YAN_pw_poor_scholars
+	x = -6
+	y = 16
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_for_the_people
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #惩戒贪官污吏
+	id = YAN_pw_punish_corruption
+	icon = GFX_focus_YAN_pw_punish_corruption
+	x = -6
+	y = 17
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_poor_scholars
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #岳不厌高
+	id = YAN_pw_mountain_high
+	icon = GFX_focus_YAN_pw_mountain_high
+	x = -7
+	y = 18
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_punish_corruption
+	}
+	prerequisite = {
+		focus = YAN_pw_yan_land
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}
+
+shared_focus = { #我无
+	id = YAN_pw_i_am_nothing
+	icon = GFX_focus_YAN_pw_i_am_nothing
+	x = -12
+	y = 20
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_pw_stop_war
+	}
+	prerequisite = {
+		focus = YAN_pw_mountain_high
+	}
+	prerequisite = {
+		focus = YAN_pw_dragon_power_act
+	}
+	ai_will_do = {
+		factor = 1
+	}
+
+	completion_reward = { }
+}

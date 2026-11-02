@@ -78,6 +78,8 @@ ideas = {
 				OR = {
 					has_government = fascism
 					has_government = communism
+					# 2026-11-01：大炎长期扩军，和平时期也允许升到广泛征兵（5% 动员）
+					original_tag = YAN
 					AND = {
 						has_war = yes
 						enemies_strength_ratio > 0.5
@@ -86,6 +88,8 @@ ideas = {
 				}
 				OR = {
 					has_war_support > 0.2
+					# 2026-11-01：同上，不让战争支持卡住大炎的动员升级
+					original_tag = YAN
 					surrender_progress > 0
 				}
 			}

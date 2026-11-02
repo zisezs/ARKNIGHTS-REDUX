@@ -1,0 +1,146 @@
+######################################################
+# 大炎 · 终局战争国策树效果
+# 变量归属：common/dynamic_modifiers/YAN_fw_dynamic_modifiers.txt
+# 装备类：common/ideas/YAN_fw_ideas.txt（隐藏 idea）
+######################################################
+
+YAN_fw_init = {
+	set_variable = { YAN_fw_rf_war_support = 0 }
+	set_variable = { YAN_fw_rf_stability = 0 }
+	set_variable = { YAN_fw_rf_core_attack = 0 }
+	set_variable = { YAN_fw_rf_core_defence = 0 }
+	set_variable = { YAN_fw_rf_consumer = 0 }
+	set_variable = { YAN_fw_rf_stability_weekly = 0 }
+	set_variable = { YAN_fw_rf_inf_attack = 0 }
+	set_variable = { YAN_fw_rf_supply = 0 }
+	set_variable = { YAN_fw_rf_reinforce = 0 }
+	set_variable = { YAN_fw_rf_org = 0 }
+	set_variable = { YAN_fw_rf_attrition = 0 }
+	set_variable = { YAN_fw_rf_support_org = 0 }
+	set_variable = { YAN_fw_rf_fuel = 0 }
+	set_variable = { YAN_fw_rf_training = 0 }
+	set_variable = { YAN_fw_rf_hp = 0 }
+	set_variable = { YAN_fw_rf_trickleback = 0 }
+	set_variable = { YAN_fw_rf_aa = 0 }
+	set_variable = { YAN_fw_rf_attack = 0 }
+	set_variable = { YAN_fw_rf_breakthrough = 0 }
+	set_variable = { YAN_fw_rf_defence = 0 }
+	set_variable = { YAN_fw_rf_factory = 0 }
+	set_variable = { YAN_fw_rf_equip_inf_cost = 0 }
+	set_variable = { YAN_fw_rf_equip_tank_cost = 0 }
+	set_variable = { YAN_fw_rf_equip_inf_reliability = 0 }
+	set_variable = { YAN_fw_rf_equip_army_reliability = 0 }
+}
+
+# 1 潜龙·山河义烈：基础狩猎精神
+YAN_fw_hunt_base = {
+	add_to_variable = { YAN_fw_rf_war_support = 0.10 }
+}
+
+# 2 联合军演
+YAN_fw_up_exercise = {
+	add_to_variable = { YAN_fw_rf_core_attack = 0.10 }
+	add_to_variable = { YAN_fw_rf_core_defence = 0.10 }
+}
+
+# 3 动员黎民百姓
+YAN_fw_up_people = {
+	add_to_variable = { YAN_fw_rf_equip_inf_cost = -0.20 }
+}
+
+# 4 动员天师府
+YAN_fw_up_priests = {
+	add_to_variable = { YAN_fw_rf_consumer = 0.10 }
+	add_to_variable = { YAN_fw_rf_stability_weekly = 0.01 }
+}
+
+# 5 动员江湖任侠
+YAN_fw_up_jianghu = {
+	add_to_variable = { YAN_fw_rf_inf_attack = 0.20 }
+	add_to_variable = { YAN_fw_rf_attrition = -0.10 }
+}
+
+# 6 保障补给线
+YAN_fw_up_supply = {
+	add_to_variable = { YAN_fw_rf_reinforce = 0.05 }
+	add_to_variable = { YAN_fw_rf_support_org = 10 }
+}
+
+# 7 粮草先行
+YAN_fw_up_grain = {
+	add_to_variable = { YAN_fw_rf_consumer = 0.10 }
+	add_to_variable = { YAN_fw_rf_supply = -0.10 }
+}
+
+# 8 液化源石管制
+YAN_fw_up_originium = {
+	add_to_variable = { YAN_fw_rf_fuel = -0.10 }
+}
+
+# 9 大炎武装力量总动员
+YAN_fw_up_armed = {
+	add_to_variable = { YAN_fw_rf_core_attack = 0.10 }
+	add_to_variable = { YAN_fw_rf_core_defence = 0.10 }
+	add_to_variable = { YAN_fw_rf_training = -0.25 }
+}
+
+# 10 调动医疗资源
+YAN_fw_up_medical = {
+	add_to_variable = { YAN_fw_rf_hp = 0.05 }
+	add_to_variable = { YAN_fw_rf_trickleback = 0.05 }
+}
+
+# 11 边境防空火力网
+YAN_fw_up_air_defense = {
+	add_to_variable = { YAN_fw_rf_aa = 0.10 }
+	every_owned_state = {
+		limit = { is_border_state = yes }
+		add_building_construction = { type = anti_air level = 1 instant_build = yes }
+	}
+}
+
+# 12 镇压动乱因素
+YAN_fw_up_unrest = {
+	add_to_variable = { YAN_fw_rf_stability = -0.10 }
+	add_to_variable = { YAN_fw_rf_defence = 0.10 }
+}
+
+# 13 巡视军械储备
+YAN_fw_up_arsenal = {
+	add_to_variable = { YAN_fw_rf_factory = 0.10 }
+}
+
+# 14 大炎民间力量总动员
+YAN_fw_up_civilian = {
+	add_to_variable = { YAN_fw_rf_core_attack = 0.10 }
+	add_to_variable = { YAN_fw_rf_core_defence = 0.10 }
+}
+
+# 15 联合作战体系：附庸获得【来自大炎的指挥】
+YAN_fw_up_joint = {
+	# 大炎自身永远不持有这份附庸精神
+	remove_ideas = YAN_fw_ally_command
+	every_other_country = {
+		limit = { is_subject_of = ROOT }
+		add_ideas = YAN_fw_ally_command
+	}
+}
+
+# 17 扶持盟国军工：附庸获得 10000 步兵装备
+YAN_fw_up_ally_industry = {
+	every_other_country = {
+		limit = { is_subject_of = ROOT }
+		add_equipment_to_stockpile = { type = infantry_equipment amount = 10000 producer = ROOT }
+	}
+	add_to_variable = { YAN_fw_rf_equip_inf_reliability = 0.10 }
+}
+
+# 18 检修高速战舰
+YAN_fw_up_warship = {
+	add_to_variable = { YAN_fw_rf_equip_army_reliability = 0.10 }
+}
+
+# 3 的重型坦克/陆行舰条款单独挂（与步兵装备同格）
+YAN_fw_up_people_tank = {
+	add_to_variable = { YAN_fw_rf_equip_tank_cost = -0.10 }
+}

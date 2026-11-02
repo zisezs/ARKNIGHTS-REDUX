@@ -109,3 +109,987 @@ RHL_td_monthly_tick = {
 		}
 	}
 }
+
+# ══════════════════════════════════════════════════════════════════════
+#  十科自动运转（核心集团式自推，2026-10-27）
+#
+#  根国策【十科合议厅】完成后调用 RHL_td_autoprog_start：十科并行，
+#  每 365 天自动完成一格，顺序 l1→l2→l3→l4→r1→r2→r3→r4→fN。
+#  RHL_td_grand（总终局）与四结局不进入自动链，仍由玩家手动点。
+#
+#  自动链只在当前国策树为 RHL_td 时推进；切走即停并清掉该科旗标，
+#  切回后由 RHL_td_on_actions 的月度兜底重新启动（RHL_td_autoprog_start 幂等）。
+#  s10（总辖科）的 l2..l4 / r1..r2 / r4 需要 RHL_rocket_first_light：
+#  火箭尚未首飞时停在原地，每 365 天重试一次，不会越级完成。
+#
+#  配套事件：events/RHL_td_auto_events.txt（RHL_td_auto.1 ~ .10，hidden）。
+#  改十科格子时，同步改这里的顺序表与事件编号。
+# ══════════════════════════════════════════════════════════════════════
+
+RHL_td_autoprog_start = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f1 }
+				NOT = { has_country_flag = RHL_td_auto_on_s1 }
+			}
+			set_country_flag = RHL_td_auto_on_s1
+			country_event = { id = RHL_td_auto.1 days = 365 }
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f2 }
+				NOT = { has_country_flag = RHL_td_auto_on_s2 }
+			}
+			set_country_flag = RHL_td_auto_on_s2
+			country_event = { id = RHL_td_auto.2 days = 365 }
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f3 }
+				NOT = { has_country_flag = RHL_td_auto_on_s3 }
+			}
+			set_country_flag = RHL_td_auto_on_s3
+			country_event = { id = RHL_td_auto.3 days = 365 }
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f4 }
+				NOT = { has_country_flag = RHL_td_auto_on_s4 }
+			}
+			set_country_flag = RHL_td_auto_on_s4
+			country_event = { id = RHL_td_auto.4 days = 365 }
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f5 }
+				NOT = { has_country_flag = RHL_td_auto_on_s5 }
+			}
+			set_country_flag = RHL_td_auto_on_s5
+			country_event = { id = RHL_td_auto.5 days = 365 }
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f6 }
+				NOT = { has_country_flag = RHL_td_auto_on_s6 }
+			}
+			set_country_flag = RHL_td_auto_on_s6
+			country_event = { id = RHL_td_auto.6 days = 365 }
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f7 }
+				NOT = { has_country_flag = RHL_td_auto_on_s7 }
+			}
+			set_country_flag = RHL_td_auto_on_s7
+			country_event = { id = RHL_td_auto.7 days = 365 }
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f8 }
+				NOT = { has_country_flag = RHL_td_auto_on_s8 }
+			}
+			set_country_flag = RHL_td_auto_on_s8
+			country_event = { id = RHL_td_auto.8 days = 365 }
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f9 }
+				NOT = { has_country_flag = RHL_td_auto_on_s9 }
+			}
+			set_country_flag = RHL_td_auto_on_s9
+			country_event = { id = RHL_td_auto.9 days = 365 }
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f10 }
+				NOT = { has_country_flag = RHL_td_auto_on_s10 }
+			}
+			set_country_flag = RHL_td_auto_on_s10
+			country_event = { id = RHL_td_auto.10 days = 365 }
+		}
+	}
+}
+
+RHL_td_auto_s1 = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f1 }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s1_l1 }
+				}
+				complete_national_focus = RHL_td_s1_l1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s1_l2 }
+				}
+				complete_national_focus = RHL_td_s1_l2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s1_l3 }
+				}
+				complete_national_focus = RHL_td_s1_l3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s1_l4 }
+				}
+				complete_national_focus = RHL_td_s1_l4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s1_r1 }
+				}
+				complete_national_focus = RHL_td_s1_r1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s1_r2 }
+				}
+				complete_national_focus = RHL_td_s1_r2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s1_r3 }
+				}
+				complete_national_focus = RHL_td_s1_r3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s1_r4 }
+				}
+				complete_national_focus = RHL_td_s1_r4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f1 }
+				}
+				complete_national_focus = RHL_td_f1
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f1 }
+				}
+				country_event = { id = RHL_td_auto.1 days = 365 }
+			}
+		}
+		else = {
+			clr_country_flag = RHL_td_auto_on_s1
+		}
+	}
+	else = {
+		clr_country_flag = RHL_td_auto_on_s1
+	}
+	if = {
+		limit = {
+			has_completed_focus = RHL_td_f1
+		}
+		clr_country_flag = RHL_td_auto_on_s1
+	}
+}
+
+RHL_td_auto_s2 = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f2 }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s2_l1 }
+				}
+				complete_national_focus = RHL_td_s2_l1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s2_l2 }
+				}
+				complete_national_focus = RHL_td_s2_l2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s2_l3 }
+				}
+				complete_national_focus = RHL_td_s2_l3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s2_l4 }
+				}
+				complete_national_focus = RHL_td_s2_l4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s2_r1 }
+				}
+				complete_national_focus = RHL_td_s2_r1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s2_r2 }
+				}
+				complete_national_focus = RHL_td_s2_r2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s2_r3 }
+				}
+				complete_national_focus = RHL_td_s2_r3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s2_r4 }
+				}
+				complete_national_focus = RHL_td_s2_r4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f2 }
+				}
+				complete_national_focus = RHL_td_f2
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f2 }
+				}
+				country_event = { id = RHL_td_auto.2 days = 365 }
+			}
+		}
+		else = {
+			clr_country_flag = RHL_td_auto_on_s2
+		}
+	}
+	else = {
+		clr_country_flag = RHL_td_auto_on_s2
+	}
+	if = {
+		limit = {
+			has_completed_focus = RHL_td_f2
+		}
+		clr_country_flag = RHL_td_auto_on_s2
+	}
+}
+
+RHL_td_auto_s3 = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f3 }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s3_l1 }
+				}
+				complete_national_focus = RHL_td_s3_l1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s3_l2 }
+				}
+				complete_national_focus = RHL_td_s3_l2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s3_l3 }
+				}
+				complete_national_focus = RHL_td_s3_l3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s3_l4 }
+				}
+				complete_national_focus = RHL_td_s3_l4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s3_r1 }
+				}
+				complete_national_focus = RHL_td_s3_r1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s3_r2 }
+				}
+				complete_national_focus = RHL_td_s3_r2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s3_r3 }
+				}
+				complete_national_focus = RHL_td_s3_r3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s3_r4 }
+				}
+				complete_national_focus = RHL_td_s3_r4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f3 }
+				}
+				complete_national_focus = RHL_td_f3
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f3 }
+				}
+				country_event = { id = RHL_td_auto.3 days = 365 }
+			}
+		}
+		else = {
+			clr_country_flag = RHL_td_auto_on_s3
+		}
+	}
+	else = {
+		clr_country_flag = RHL_td_auto_on_s3
+	}
+	if = {
+		limit = {
+			has_completed_focus = RHL_td_f3
+		}
+		clr_country_flag = RHL_td_auto_on_s3
+	}
+}
+
+RHL_td_auto_s4 = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f4 }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s4_l1 }
+				}
+				complete_national_focus = RHL_td_s4_l1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s4_l2 }
+				}
+				complete_national_focus = RHL_td_s4_l2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s4_l3 }
+				}
+				complete_national_focus = RHL_td_s4_l3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s4_l4 }
+				}
+				complete_national_focus = RHL_td_s4_l4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s4_r1 }
+				}
+				complete_national_focus = RHL_td_s4_r1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s4_r2 }
+				}
+				complete_national_focus = RHL_td_s4_r2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s4_r3 }
+				}
+				complete_national_focus = RHL_td_s4_r3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s4_r4 }
+				}
+				complete_national_focus = RHL_td_s4_r4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f4 }
+				}
+				complete_national_focus = RHL_td_f4
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f4 }
+				}
+				country_event = { id = RHL_td_auto.4 days = 365 }
+			}
+		}
+		else = {
+			clr_country_flag = RHL_td_auto_on_s4
+		}
+	}
+	else = {
+		clr_country_flag = RHL_td_auto_on_s4
+	}
+	if = {
+		limit = {
+			has_completed_focus = RHL_td_f4
+		}
+		clr_country_flag = RHL_td_auto_on_s4
+	}
+}
+
+RHL_td_auto_s5 = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f5 }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s5_l1 }
+				}
+				complete_national_focus = RHL_td_s5_l1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s5_l2 }
+				}
+				complete_national_focus = RHL_td_s5_l2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s5_l3 }
+				}
+				complete_national_focus = RHL_td_s5_l3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s5_l4 }
+				}
+				complete_national_focus = RHL_td_s5_l4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s5_r1 }
+				}
+				complete_national_focus = RHL_td_s5_r1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s5_r2 }
+				}
+				complete_national_focus = RHL_td_s5_r2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s5_r3 }
+				}
+				complete_national_focus = RHL_td_s5_r3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s5_r4 }
+				}
+				complete_national_focus = RHL_td_s5_r4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f5 }
+				}
+				complete_national_focus = RHL_td_f5
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f5 }
+				}
+				country_event = { id = RHL_td_auto.5 days = 365 }
+			}
+		}
+		else = {
+			clr_country_flag = RHL_td_auto_on_s5
+		}
+	}
+	else = {
+		clr_country_flag = RHL_td_auto_on_s5
+	}
+	if = {
+		limit = {
+			has_completed_focus = RHL_td_f5
+		}
+		clr_country_flag = RHL_td_auto_on_s5
+	}
+}
+
+RHL_td_auto_s6 = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f6 }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s6_l1 }
+				}
+				complete_national_focus = RHL_td_s6_l1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s6_l2 }
+				}
+				complete_national_focus = RHL_td_s6_l2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s6_l3 }
+				}
+				complete_national_focus = RHL_td_s6_l3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s6_l4 }
+				}
+				complete_national_focus = RHL_td_s6_l4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s6_r1 }
+				}
+				complete_national_focus = RHL_td_s6_r1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s6_r2 }
+				}
+				complete_national_focus = RHL_td_s6_r2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s6_r3 }
+				}
+				complete_national_focus = RHL_td_s6_r3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s6_r4 }
+				}
+				complete_national_focus = RHL_td_s6_r4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f6 }
+				}
+				complete_national_focus = RHL_td_f6
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f6 }
+				}
+				country_event = { id = RHL_td_auto.6 days = 365 }
+			}
+		}
+		else = {
+			clr_country_flag = RHL_td_auto_on_s6
+		}
+	}
+	else = {
+		clr_country_flag = RHL_td_auto_on_s6
+	}
+	if = {
+		limit = {
+			has_completed_focus = RHL_td_f6
+		}
+		clr_country_flag = RHL_td_auto_on_s6
+	}
+}
+
+RHL_td_auto_s7 = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f7 }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s7_l1 }
+				}
+				complete_national_focus = RHL_td_s7_l1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s7_l2 }
+				}
+				complete_national_focus = RHL_td_s7_l2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s7_l3 }
+				}
+				complete_national_focus = RHL_td_s7_l3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s7_l4 }
+				}
+				complete_national_focus = RHL_td_s7_l4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s7_r1 }
+				}
+				complete_national_focus = RHL_td_s7_r1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s7_r2 }
+				}
+				complete_national_focus = RHL_td_s7_r2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s7_r3 }
+				}
+				complete_national_focus = RHL_td_s7_r3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s7_r4 }
+				}
+				complete_national_focus = RHL_td_s7_r4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f7 }
+				}
+				complete_national_focus = RHL_td_f7
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f7 }
+				}
+				country_event = { id = RHL_td_auto.7 days = 365 }
+			}
+		}
+		else = {
+			clr_country_flag = RHL_td_auto_on_s7
+		}
+	}
+	else = {
+		clr_country_flag = RHL_td_auto_on_s7
+	}
+	if = {
+		limit = {
+			has_completed_focus = RHL_td_f7
+		}
+		clr_country_flag = RHL_td_auto_on_s7
+	}
+}
+
+RHL_td_auto_s8 = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f8 }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s8_l1 }
+				}
+				complete_national_focus = RHL_td_s8_l1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s8_l2 }
+				}
+				complete_national_focus = RHL_td_s8_l2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s8_l3 }
+				}
+				complete_national_focus = RHL_td_s8_l3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s8_l4 }
+				}
+				complete_national_focus = RHL_td_s8_l4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s8_r1 }
+				}
+				complete_national_focus = RHL_td_s8_r1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s8_r2 }
+				}
+				complete_national_focus = RHL_td_s8_r2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s8_r3 }
+				}
+				complete_national_focus = RHL_td_s8_r3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s8_r4 }
+				}
+				complete_national_focus = RHL_td_s8_r4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f8 }
+				}
+				complete_national_focus = RHL_td_f8
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f8 }
+				}
+				country_event = { id = RHL_td_auto.8 days = 365 }
+			}
+		}
+		else = {
+			clr_country_flag = RHL_td_auto_on_s8
+		}
+	}
+	else = {
+		clr_country_flag = RHL_td_auto_on_s8
+	}
+	if = {
+		limit = {
+			has_completed_focus = RHL_td_f8
+		}
+		clr_country_flag = RHL_td_auto_on_s8
+	}
+}
+
+RHL_td_auto_s9 = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f9 }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s9_l1 }
+				}
+				complete_national_focus = RHL_td_s9_l1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s9_l2 }
+				}
+				complete_national_focus = RHL_td_s9_l2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s9_l3 }
+				}
+				complete_national_focus = RHL_td_s9_l3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s9_l4 }
+				}
+				complete_national_focus = RHL_td_s9_l4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s9_r1 }
+				}
+				complete_national_focus = RHL_td_s9_r1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s9_r2 }
+				}
+				complete_national_focus = RHL_td_s9_r2
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s9_r3 }
+				}
+				complete_national_focus = RHL_td_s9_r3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s9_r4 }
+				}
+				complete_national_focus = RHL_td_s9_r4
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f9 }
+				}
+				complete_national_focus = RHL_td_f9
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f9 }
+				}
+				country_event = { id = RHL_td_auto.9 days = 365 }
+			}
+		}
+		else = {
+			clr_country_flag = RHL_td_auto_on_s9
+		}
+	}
+	else = {
+		clr_country_flag = RHL_td_auto_on_s9
+	}
+	if = {
+		limit = {
+			has_completed_focus = RHL_td_f9
+		}
+		clr_country_flag = RHL_td_auto_on_s9
+	}
+}
+
+RHL_td_auto_s10 = {
+	if = {
+		limit = {
+			has_focus_tree = RHL_td
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = RHL_td_f10 }
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s10_l1 }
+				}
+				complete_national_focus = RHL_td_s10_l1
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s10_l2 }
+				}
+				if = {
+					limit = {
+						has_country_flag = RHL_rocket_first_light
+					}
+					complete_national_focus = RHL_td_s10_l2
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s10_l3 }
+				}
+				if = {
+					limit = {
+						has_country_flag = RHL_rocket_first_light
+					}
+					complete_national_focus = RHL_td_s10_l3
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s10_l4 }
+				}
+				if = {
+					limit = {
+						has_country_flag = RHL_rocket_first_light
+					}
+					complete_national_focus = RHL_td_s10_l4
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s10_r1 }
+				}
+				if = {
+					limit = {
+						has_country_flag = RHL_rocket_first_light
+					}
+					complete_national_focus = RHL_td_s10_r1
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s10_r2 }
+				}
+				if = {
+					limit = {
+						has_country_flag = RHL_rocket_first_light
+					}
+					complete_national_focus = RHL_td_s10_r2
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s10_r3 }
+				}
+				complete_national_focus = RHL_td_s10_r3
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_s10_r4 }
+				}
+				if = {
+					limit = {
+						has_country_flag = RHL_rocket_first_light
+					}
+					complete_national_focus = RHL_td_s10_r4
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f10 }
+				}
+				complete_national_focus = RHL_td_f10
+			}
+			if = {
+				limit = {
+					NOT = { has_completed_focus = RHL_td_f10 }
+				}
+				country_event = { id = RHL_td_auto.10 days = 365 }
+			}
+		}
+		else = {
+			clr_country_flag = RHL_td_auto_on_s10
+		}
+	}
+	else = {
+		clr_country_flag = RHL_td_auto_on_s10
+	}
+	if = {
+		limit = {
+			has_completed_focus = RHL_td_f10
+		}
+		clr_country_flag = RHL_td_auto_on_s10
+	}
+}

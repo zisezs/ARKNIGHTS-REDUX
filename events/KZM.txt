@@ -708,33 +708,6 @@ country_event = {
 }
 
 #马克维茨希望辞职（暂未实装）
-country_event = {
-	id = kzm.14
-	title = kzm.14.t
-	desc = kzm.14.d
-
-	is_triggered_only = yes
-
-	#同意请求，让莫布担任发言人
-	option = {
-		name = kzm.14.a
-		ai_chance = {
-			base = 100
-		}
-		#移除马克维茨
-		retire_character = KZM_Malkiewicz
-	}
-	#极力挽留
-	option = {
-		name = kzm.14.b
-		ai_chance = {
-			base = 0
-		}
-		#花费政治点数以挽留他
-		add_political_power = -50
-	}
-}
-
 #监正会经济政策
 country_event = {
 	id = kzm.15
@@ -879,35 +852,7 @@ news_event = {
 }
 
 #第二十四届卡西米尔骑士竞技特锦赛的落幕
-news_event = {
-	id = worldnews_kzm.8
-	title = worldnews_kzm.8.t
-	desc = worldnews_kzm.8.d
-	picture = GFX_news_event_KZM_Nearl_the_Radiant_Knight
-
-	is_triggered_only = yes
-	major = yes 
-	
-	option = { 
-		name = worldnews_kzm.8.a
-	}
-}
-
 #第十一次乌卡战争
-news_event = {
-	id = worldnews_kzm.9
-	title = worldnews_kzm.9.t
-	desc = worldnews_kzm.9.d
-	picture = GFX_news_event_KZM_Army_1
-
-	is_triggered_only = yes
-	major = yes 
-	
-	option = { 
-		name = worldnews_kzm.9.a
-	}
-}
-
 #骑士蒙羞
 news_event = {
 	id = worldnews_kzm.10

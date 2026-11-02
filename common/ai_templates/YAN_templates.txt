@@ -1,0 +1,378 @@
+# ==============================================================================
+# 大炎 (YAN) 专属 AI 编制模板（2026-10-31）
+#
+# 为什么要有这份文件：
+#   common/ai_templates/generic.txt 的步兵阶梯是按"30 / 45 座军工"标定的大国档位，
+#   而大炎开局 50 州、36 座军工、144 座民工厂、2.64 亿人口，还有重坦 /
+#   机械化 / 重坦 / 火炮全套开局科技。通用模板只会把大炎往
+#   "9 步 + 2 炮"的步兵海里推，重装与机械化产能完全用不上。
+#
+# 本文件把大炎的编制改成"质量优先"：
+#   · 步兵只保留一个满编大编制档位（14 步 + 3 炮 + 反坦 + 防空），AI 不再训练小编制师；
+#   · 装甲走重装路线（heavy_armor + mechanized + 火炮/防空），对应开局 OOB 的
+#     「玄极巨兵实验旅」与国策【玄极巨兵构想】的装甲加成；
+#   · 摩托化在中后期转机械化，作为装甲的伴随与快速填线；
+#   · 不提供民兵模板：大炎人力充足，缺的是装备，民兵只会稀释装备与 XP。
+#
+# 与通用模板的互斥：
+#   generic.txt 的 armor_generic / infantry_generic / militia_generic /
+#   motorized_generic 的 blocked_for 已加入 YAN；一个 role 对一个国家
+#   只能命中一份 role 级条目，否则引擎行为未定义。
+#
+# 支援连科技核对（common/history/countries/YAN - Yan.txt 的 set_technology）：
+#   开局已有 tech_engineers / tech_recon / tech_military_police /
+#   tech_logistics_company / tech_maintenance_company / tech_support，
+#   artillery_0 / antitank_0 / antiair_0 齐全；开局没有
+#   tech_signal_company 与 tech_field_hospital，因此这两个支援连只在
+#   高一档、且用 has_tech 闸门，避免 AI 造出缺支援的师。
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 步兵：单一满编档位（14 步 + 3 炮 + 反坦 + 防空），不再训练 8-11 步小编制
+# ------------------------------------------------------------------------------
+infantry_YAN = {
+
+	available_for = {
+		YAN
+	}
+
+	role = infantry
+
+	upgrade_prio = {
+		base = 6
+
+		modifier = {
+			factor = 3
+			num_of_military_factories > 10
+		}
+		modifier = {
+			factor = 3
+			has_war = yes
+		}
+	}
+
+	# ---- 唯一档位：禁军镇·满编（14 步 + 3 炮 + 反坦 + 防空，团属火力全开）----
+	YAN_infantry_004 = {
+
+		upgrade_prio = {
+			base = 10
+
+			modifier = {
+				factor = 2
+				num_of_military_factories > 32
+			}
+			modifier = {
+				factor = 2
+				has_tech = antiair_1
+			}
+		}
+
+		can_upgrade_in_field = {
+			has_equipment = { artillery_equipment > 500 }
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				recon = 1
+				artillery = 1
+				anti_air = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 2
+				anti_tank_support = 1
+				anti_air_support = 1
+			}
+
+			regiments = {
+				infantry = 14
+				artillery_brigade = 3
+				anti_tank_brigade = 1
+				anti_air_brigade = 1
+			}
+		}
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 装甲：重装三档，对应「玄极巨兵」路线
+#   重坦科技 heavy_tank_0/1 开局已有，heavy_tank_2 由 AI 研究推进；
+#   机械化开局已有 mechanized_infantry_1；重坦 heavy_tank_0/1 开局已有。
+#   注意：本模组 common/units 里的自走炮营叫 medium_sp_artillery_brigade /
+#   medium_sp_anti_air_brigade，但科技 sp_artillery_1 / sp_antiair_1 的
+#   enable_subunits 仍写原版 id（sp_artillery_brigade / sp_anti_air_brigade），
+#   两者对不上，AI 模板若引用会缺编。因此这里一律用牵引炮/防空营。
+# ------------------------------------------------------------------------------
+armor_YAN = {
+
+	available_for = {
+		YAN
+	}
+
+	role = armor
+
+	upgrade_prio = {
+		base = 5
+
+		modifier = {
+			factor = 2
+			has_tech = heavy_tank_1
+		}
+		modifier = {
+			factor = 2
+			has_war = yes
+		}
+		modifier = {
+			factor = 0
+			num_of_military_factories < 6
+		}
+	}
+
+	# ---- 第 1 档：玄极巨兵实验旅（4 重装 + 4 机械化，开局即可）----
+	YAN_armor_001 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 6
+				num_of_military_factories < 18
+			}
+			modifier = {
+				factor = 0
+				NOT = { has_tech = heavy_tank_0 }
+			}
+		}
+
+		can_upgrade_in_field = {
+			has_equipment = { heavy_tank_chassis > 100 }
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regiments = {
+				heavy_armor = 4
+				mechanized = 4
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = YAN_armor_002
+		target_min_match = 0.5
+	}
+
+	# ---- 第 2 档：重装突击旅（6 重装 + 5 机械化 + 1 炮）----
+	YAN_armor_002 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 5
+				has_tech = heavy_tank_1
+			}
+			modifier = {
+				factor = 4
+				num_of_military_factories > 18
+			}
+			modifier = {
+				factor = 0
+				num_of_military_factories < 14
+			}
+		}
+
+		can_upgrade_in_field = {
+			has_equipment = { heavy_tank_chassis > 200 }
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				anti_air = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 1
+			}
+
+			regiments = {
+				heavy_armor = 6
+				mechanized = 5
+				artillery_brigade = 1
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = YAN_armor_003
+		target_min_match = 0.5
+	}
+
+	# ---- 第 3 档：玄极巨兵·成军（7 重装 + 6 机械化 + 炮 + 防空）----
+	YAN_armor_003 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 6
+				has_tech = heavy_tank_2
+			}
+			modifier = {
+				factor = 5
+				num_of_military_factories > 30
+			}
+			modifier = {
+				factor = 2
+				has_tech = mechanized_infantry_2
+			}
+		}
+
+		can_upgrade_in_field = {
+			has_equipment = { heavy_tank_chassis > 350 }
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				anti_air = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 1
+				anti_tank_support = 1
+			}
+
+			regiments = {
+				heavy_armor = 7
+				mechanized = 6
+				artillery_brigade = 2
+				anti_air_brigade = 1
+			}
+		}
+	}
+}
+
+# ------------------------------------------------------------------------------
+# 摩托化：两档，后期转机械化伴随装甲
+# ------------------------------------------------------------------------------
+motorized_YAN = {
+
+	available_for = {
+		YAN
+	}
+
+	role = motorized
+
+	upgrade_prio = {
+		base = 3
+
+		modifier = {
+			factor = 3
+			has_tech = mechanized_infantry_1
+		}
+	}
+
+	# ---- 第 1 档：摩托化步兵团（9 摩托 + 工兵/摩托侦察/炮兵/后勤）----
+	YAN_motorized_001 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 4
+				has_tech = motorized_infantry_1
+			}
+			modifier = {
+				factor = 0
+				num_of_military_factories < 10
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				logistics_company = 1
+			}
+
+			regiments = {
+				motorized = 9
+			}
+		}
+
+		replace_at_match = 1.5
+		replace_with = YAN_motorized_002
+		target_min_match = 0.5
+	}
+
+	# ---- 第 2 档：机械化伴随群（9 机械化 + 2 机动炮 + 1 机动反坦）----
+	YAN_motorized_002 = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 6
+				has_tech = mechanized_infantry_1
+			}
+			modifier = {
+				factor = 4
+				num_of_military_factories > 24
+			}
+			modifier = {
+				factor = 0
+				NOT = { has_tech = motorized_infantry_1 }
+			}
+		}
+
+		can_upgrade_in_field = {
+			has_equipment = { mechanized_equipment > 500 }
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+				anti_air = 1
+				logistics_company = 1
+				maintenance_company = 1
+			}
+
+			regimental_support = {
+				artillery_support = 1
+				anti_tank_support = 1
+			}
+
+			regiments = {
+				mechanized = 9
+				mot_artillery_brigade = 2
+				mot_anti_tank_brigade = 1
+			}
+		}
+	}
+}

@@ -1,0 +1,400 @@
+######################
+## 大炎 · 终局战争国策树簇（共享国策）—— 框架实装（2026-10-30）
+## 由 common/national_focus/YAN_shared_tree.txt 的 YAN_national_focus 以 shared_focus 引用并入主树
+## 坐标区 x = -22..-13 / y 21..30（战后簇正下方；原始框架 x -6..3 / y -2..7，整体 x-16 / y+23）
+## 只落布局、图标与名称；completion_reward 与 _desc 留空。
+## 图标注册：interface/_ARF_goals/YAN_finalwar_goals.gfx
+######################
+
+shared_focus = { #潜龙·山河义烈
+	id = YAN_fw_dragon_hill
+	icon = GFX_focus_YAN_fw_dragon_hill
+	x = -17
+	y = 21
+	cost = 4
+	available_if_capitulated = yes
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = YAN_fw_dragon_hill_req_tt
+			has_war = yes
+			any_country = {
+				is_at_war_with = ROOT
+				num_of_factories > 300
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_dragon_hill_tt
+		YAN_fw_init = yes
+		add_dynamic_modifier = { modifier = YAN_fw_hunt_spirit }
+		YAN_fw_hunt_base = yes
+		add_timed_idea = { idea = YAN_fw_prepare_exercise days = 60 }
+		hidden_effect = {
+			country_event = yan_fw.1
+		}
+	}
+}
+
+shared_focus = { #“止戈使命”联合军演
+	id = YAN_fw_joint_exercise
+	icon = GFX_focus_YAN_fw_joint_exercise
+	x = -17
+	y = 22
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_dragon_hill
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_joint_exercise_tt
+		YAN_fw_up_exercise = yes
+	}
+}
+
+shared_focus = { #动员黎民百姓
+	id = YAN_fw_mobilize_people
+	icon = GFX_focus_YAN_fw_mobilize_people
+	x = -20
+	y = 24
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_joint_exercise
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_mobilize_people_tt
+		YAN_fw_up_people = yes
+		YAN_fw_up_people_tank = yes
+		hidden_effect = {
+			add_ideas = YAN_fw_equip_inf_cost
+			add_ideas = YAN_fw_equip_tank_cost
+		}
+	}
+}
+
+shared_focus = { #粮草先行
+	id = YAN_fw_grain_first
+	icon = GFX_focus_YAN_fw_grain_first
+	x = -13
+	y = 24
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_joint_exercise
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_grain_first_tt
+		YAN_fw_up_grain = yes
+	}
+}
+
+shared_focus = { #动员天师府
+	id = YAN_fw_mobilize_priests
+	icon = GFX_focus_YAN_fw_mobilize_priests
+	x = -22
+	y = 24
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_joint_exercise
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_mobilize_priests_tt
+		YAN_fw_up_priests = yes
+	}
+}
+
+shared_focus = { #动员江湖任侠
+	id = YAN_fw_mobilize_jianghu
+	icon = GFX_focus_YAN_fw_mobilize_jianghu
+	x = -18
+	y = 24
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_joint_exercise
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_mobilize_jianghu_tt
+		YAN_fw_up_jianghu = yes
+	}
+}
+
+shared_focus = { #保障补给线
+	id = YAN_fw_supply_lines
+	icon = GFX_focus_YAN_fw_supply_lines
+	x = -15
+	y = 24
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_joint_exercise
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_supply_lines_tt
+		YAN_fw_up_supply = yes
+	}
+}
+
+shared_focus = { #液化源石管制
+	id = YAN_fw_originium_control
+	icon = GFX_focus_YAN_fw_originium_control
+	x = -13
+	y = 25
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_grain_first
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_originium_control_tt
+		YAN_fw_up_originium = yes
+	}
+}
+
+shared_focus = { #大炎武装力量总动员
+	id = YAN_fw_armed_forces
+	icon = GFX_focus_YAN_fw_armed_forces
+	x = -20
+	y = 28
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_ally_industry
+	}
+	prerequisite = {
+		focus = YAN_fw_border_air_defense
+	}
+	prerequisite = {
+		focus = YAN_fw_fast_warship
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_armed_forces_tt
+		YAN_fw_up_armed = yes
+	}
+}
+
+shared_focus = { #调动医疗资源
+	id = YAN_fw_medical_resources
+	icon = GFX_focus_YAN_fw_medical_resources
+	x = -15
+	y = 26
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_suppress_unrest
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_medical_resources_tt
+		YAN_fw_up_medical = yes
+	}
+}
+
+shared_focus = { #边境防空火力网
+	id = YAN_fw_border_air_defense
+	icon = GFX_focus_YAN_fw_border_air_defense
+	x = -22
+	y = 26
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_mobilize_priests
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_border_air_defense_tt
+		YAN_fw_up_air_defense = yes
+	}
+}
+
+shared_focus = { #镇压动乱因素
+	id = YAN_fw_suppress_unrest
+	icon = GFX_focus_YAN_fw_suppress_unrest
+	x = -15
+	y = 25
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_supply_lines
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_suppress_unrest_tt
+		YAN_fw_up_unrest = yes
+	}
+}
+
+shared_focus = { #巡视军械储备
+	id = YAN_fw_inspect_arsenal
+	icon = GFX_focus_YAN_fw_inspect_arsenal
+	x = -13
+	y = 26
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_originium_control
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_inspect_arsenal_tt
+		YAN_fw_up_arsenal = yes
+	}
+}
+
+shared_focus = { #大炎民间力量总动员
+	id = YAN_fw_civilian_forces
+	icon = GFX_focus_YAN_fw_civilian_forces
+	x = -14
+	y = 28
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_inspect_arsenal
+	}
+	prerequisite = {
+		focus = YAN_fw_medical_resources
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_civilian_forces_tt
+		YAN_fw_up_civilian = yes
+	}
+}
+
+shared_focus = { #联合作战体系
+	id = YAN_fw_joint_command
+	icon = GFX_focus_YAN_fw_joint_command
+	x = -17
+	y = 28
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_civilian_forces
+	}
+	prerequisite = {
+		focus = YAN_fw_armed_forces
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_joint_command_tt
+		YAN_fw_up_joint = yes
+	}
+}
+
+shared_focus = { #不反...
+	id = YAN_fw_no_rebellion
+	icon = GFX_focus_YAN_fw_no_rebellion
+	x = -17
+	y = 30
+	cost = 1
+	available_if_capitulated = yes
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = YAN_fw_no_rebellion_req_tt
+			surrender_progress > 0.7
+		}
+	}
+	prerequisite = {
+		focus = YAN_fw_joint_command
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_no_rebellion_tt
+		hidden_effect = {
+			country_event = yan_fw.2
+			country_event = yan_fw.3
+			country_event = yan_fw.4
+			country_event = yan_fw.5
+			country_event = yan_fw.6
+			country_event = yan_fw.7
+			country_event = yan_fw.8
+			country_event = yan_fw.9
+		}
+	}
+}
+
+shared_focus = { #扶持盟国军工
+	id = YAN_fw_ally_industry
+	icon = GFX_focus_YAN_fw_ally_industry
+	x = -20
+	y = 26
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_mobilize_people
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_ally_industry_tt
+		YAN_fw_up_ally_industry = yes
+		hidden_effect = {
+			add_ideas = YAN_fw_equip_inf_reliability
+		}
+	}
+}
+
+shared_focus = { #检修高速战舰
+	id = YAN_fw_fast_warship
+	icon = GFX_focus_YAN_fw_fast_warship
+	x = -18
+	y = 26
+	cost = 4
+	available_if_capitulated = yes
+	prerequisite = {
+		focus = YAN_fw_mobilize_jianghu
+	}
+	ai_will_do = {
+		factor = 1
+	}
+	completion_reward = {
+		custom_effect_tooltip = YAN_fw_fast_warship_tt
+		YAN_fw_up_warship = yes
+		hidden_effect = {
+			add_ideas = YAN_fw_equip_army_reliability
+		}
+	}
+}

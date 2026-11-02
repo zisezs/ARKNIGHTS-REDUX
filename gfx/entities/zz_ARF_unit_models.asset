@@ -1,0 +1,119 @@
+# ============================================================================
+# 重铸明日 Redux · 兵种 3D 实体
+# ----------------------------------------------------------------------------
+# 引擎按 sub_unit id 找同名实体：<sub_unit id>_entity。
+#   synth_infantry          -> synth_infantry_entity
+#   arf_dreadnought_warship -> arf_dreadnought_warship_entity
+#   arf_assault_warship     -> arf_assault_warship_entity
+#   arf_gunboat_warship     -> arf_gunboat_warship_entity
+#   arf_auxiliary_warship   -> arf_auxiliary_warship_entity
+#
+# 同时给四艘战舰的装备补了 <equipment>_entity / <equipment>_1_entity 克隆，
+# 让编制界面的“模型选择”按装备路径也能命中同一套陆上战舰模型。
+#
+# 模型选择说明
+#   · 合成化步兵营在编制里存在时，可选“合成化步兵营”模型；
+#   · 高速战舰支援连（四舰任一）存在时，该师默认显示“高速战舰集群”，
+#     模型选择里也可手动切回其它模型；
+#   · 没带高速战舰支援连的师仍走 Equipment Match（最常用装备模型）。
+# ============================================================================
+
+
+# ----------------------------------------------------------------------------
+# 合成化步兵营：白灰装甲 + 橙色警示条
+# ----------------------------------------------------------------------------
+entity = {
+	clone = "infantry_entity"
+	name = "synth_infantry_entity"
+	pdxmesh = "SYN_infantry_rifle_mesh"
+
+	attach = { 	name = "rifle1"	Right_Hand_node = "GER_infantry_weapon_rifle_right_entity" }
+	attach = { 	name = "rifle2"	Left_Hand_node = "GER_infantry_weapon_rifle_left_entity" }
+	attach = { 	name = "rifle3"	mid_back_node = "GER_infantry_weapon_rifle_long_idle_entity" }
+	attach = { 	name = "rifle4"	Root_node_2 = "GER_infantry_weapon_rifle_right_entity" }
+
+	scale = 0.84
+}
+
+entity = {
+	clone = "infantry_2_entity"
+	name = "synth_infantry_2_entity"
+	pdxmesh = "SYN_infantry_mg_mesh"
+
+	attach = { 	name = "rifle1"	Right_Hand_node = "GER_infantry_weapon_mg_right_entity" }
+	attach = { 	name = "rifle2"	Left_Hand_node = "GER_infantry_weapon_mg_left_entity" }
+	attach = { 	name = "rifle3"	mid_back_node = "GER_infantry_weapon_mg_long_idle_entity" }
+	attach = { 	name = "rifle4"	Root_node_2 = "GER_infantry_weapon_rifle_right_entity" }
+
+	scale = 0.84
+}
+
+entity = {
+	clone = "synth_infantry_2_entity"
+	name = "synth_infantry_3_entity"
+
+	scale = 0.82
+}
+
+
+# ----------------------------------------------------------------------------
+# 高速战舰集群：复用 generic_landship_mesh（灰黑工业涂装履带战舰）
+# ----------------------------------------------------------------------------
+entity = {
+	name = "arf_highspeed_battleship_group_entity"
+	pdxmesh = "generic_landship_mesh"
+
+	state = { name = "idle"				animation = "idle"   animation_blend_time = 0.3 }
+	state = { name = "move"				animation = "move"   animation_blend_time = 0.3
+		event = { time = 0 node="right_exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes }
+		event = { time = 0 node="left_exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes }
+		event = { time = 0 node="left_tracks" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { time = 0 node="right_tracks" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { trigger_once = yes sound = { soundeffect = "tank_engine_medium_move" } }
+	}
+	state = { name = "retreat"				animation = "move"   animation_blend_time = 0.3
+		event = { time = 0 node="right_exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes }
+		event = { time = 0 node="left_exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes }
+		event = { time = 0 node="left_tracks" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { time = 0 node="right_tracks" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { trigger_once = yes sound = { soundeffect = "tank_engine_medium_move" } }
+	}
+	state = { name = "attack"			animation = "attack" animation_blend_time = 0.3
+		event = { time = 0 node="barrel" particle = "light_tank_attack_barrel_particle"  keep_particle = yes sound = { soundeffect = heavy_armour_fire } }
+		event = { time = 0 node="barrel" particle = "light_tank_attack_barrel_smoke_particle"  keep_particle = yes sound = { soundeffect = heavy_armour_fire } }
+	}
+	state = { name = "defend"			animation = "attack" animation_blend_time = 0.3
+		event = { time = 0 node="barrel" particle = "light_tank_attack_barrel_particle"  keep_particle = yes sound = { soundeffect = heavy_armour_fire } }
+		event = { time = 0 node="barrel" particle = "light_tank_attack_barrel_smoke_particle"  keep_particle = yes sound = { soundeffect = heavy_armour_fire } }
+	}
+	state = { name = "support_attack"	animation = "attack" animation_blend_time = 0.3
+		event = { time = 0 node="barrel" particle = "light_tank_attack_barrel_particle"  keep_particle = yes sound = { soundeffect = heavy_armour_fire } }
+		event = { time = 0 node="barrel" particle = "light_tank_attack_barrel_smoke_particle"  keep_particle = yes sound = { soundeffect = heavy_armour_fire } }
+	}
+	state = { name = "training"				animation = "idle" 			animation_blend_time = 0.3 animation_speed = 1.0
+		event = { time = 0 node="right_exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes }
+		event = { time = 0 node="left_exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes }
+	}
+
+	scale = 0.85
+
+	game_data = {
+		texture_anim_speed = 0.5
+	}
+}
+
+# 四类高速战舰支援连：同一套“集群”模型，按舰种给不同体量
+entity = { clone = "arf_highspeed_battleship_group_entity" name = "arf_dreadnought_warship_entity"	scale = 1.00 }
+entity = { clone = "arf_highspeed_battleship_group_entity" name = "arf_assault_warship_entity"		scale = 0.82 }
+entity = { clone = "arf_highspeed_battleship_group_entity" name = "arf_gunboat_warship_entity"		scale = 0.62 }
+entity = { clone = "arf_highspeed_battleship_group_entity" name = "arf_auxiliary_warship_entity"	scale = 0.50 }
+
+# 装备路径克隆：编制模型选择按装备找模型时同样命中
+entity = { clone = "arf_dreadnought_warship_entity" name = "arf_dreadnought_equipment_entity"		scale = 1.00 }
+entity = { clone = "arf_dreadnought_warship_entity" name = "arf_dreadnought_equipment_1_entity"	scale = 1.00 }
+entity = { clone = "arf_assault_warship_entity"		name = "arf_assault_ship_equipment_entity"		scale = 0.82 }
+entity = { clone = "arf_assault_warship_entity"		name = "arf_assault_ship_equipment_1_entity"	scale = 0.82 }
+entity = { clone = "arf_gunboat_warship_entity"		name = "arf_gunboat_equipment_entity"			scale = 0.62 }
+entity = { clone = "arf_gunboat_warship_entity"		name = "arf_gunboat_equipment_1_entity"		scale = 0.62 }
+entity = { clone = "arf_auxiliary_warship_entity"	name = "arf_auxiliary_ship_equipment_entity"	scale = 0.50 }
+entity = { clone = "arf_auxiliary_warship_entity"	name = "arf_auxiliary_ship_equipment_1_entity"	scale = 0.50 }

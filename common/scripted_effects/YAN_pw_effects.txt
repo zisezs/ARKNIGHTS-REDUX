@@ -1,0 +1,30 @@
+######################################################
+# 大炎 · 战后国策树 非精神类效果
+#
+# 战后国策树的民族精神体系（dynamic modifier / 变量累积 / 配套决议）
+# 已于 2026-10-31 清空；本文件只保留与民族精神无关的领导人更替。
+######################################################
+
+# 2 大炎人民的女儿：陈晖洁成为国家领导人
+YAN_pw_civ_promote_chen = {
+	if = {
+		limit = { has_character = YAN_Chen_Huijie }
+		if = {
+			limit = { NOT = { has_country_leader = { character = YAN_Chen_Huijie ruling_only = yes } } }
+			retire_country_leader = yes
+		}
+		promote_character = { character = YAN_Chen_Huijie ideology = eastern_authoritarianism_subtype }
+	}
+}
+
+# 43 界园顿悟：朔成为国家领导人
+YAN_pw_mil_promote_shuo = {
+	if = {
+		limit = { has_character = YAN_Shuo }
+		if = {
+			limit = { NOT = { has_country_leader = { character = YAN_Shuo ruling_only = yes } } }
+			retire_country_leader = yes
+		}
+		promote_character = { character = YAN_Shuo ideology = eastern_authoritarianism_subtype }
+	}
+}

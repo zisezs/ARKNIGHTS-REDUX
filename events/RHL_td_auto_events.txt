@@ -1,0 +1,109 @@
+# ══════════════════════════════════════════════════════════════════════
+#  十科自动运转 · 定时事件 RHL_td_auto.1 ~ .10
+#
+#  每科一条独立链，由 RHL_td_autoprog_start 以 days = 365 首次投递；
+#  每次 immediate 调该科的 RHL_td_auto_sN（完成当前最先未完成的一格），
+#  该科未跑完时由 effect 再投递自己 365 天后。hidden = yes，不弹窗。
+#  与 common/scripted_effects/RHL_td_scripted_effects.txt 配套。
+# ══════════════════════════════════════════════════════════════════════
+add_namespace = RHL_td_auto
+
+country_event = {
+	id = RHL_td_auto.1
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		RHL_td_auto_s1 = yes
+	}
+}
+
+country_event = {
+	id = RHL_td_auto.2
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		RHL_td_auto_s2 = yes
+	}
+}
+
+country_event = {
+	id = RHL_td_auto.3
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		RHL_td_auto_s3 = yes
+	}
+}
+
+country_event = {
+	id = RHL_td_auto.4
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		RHL_td_auto_s4 = yes
+	}
+}
+
+country_event = {
+	id = RHL_td_auto.5
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		RHL_td_auto_s5 = yes
+	}
+}
+
+country_event = {
+	id = RHL_td_auto.6
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		RHL_td_auto_s6 = yes
+	}
+}
+
+country_event = {
+	id = RHL_td_auto.7
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		RHL_td_auto_s7 = yes
+	}
+}
+
+country_event = {
+	id = RHL_td_auto.8
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		RHL_td_auto_s8 = yes
+	}
+}
+
+country_event = {
+	id = RHL_td_auto.9
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		RHL_td_auto_s9 = yes
+	}
+}
+
+country_event = {
+	id = RHL_td_auto.10
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		RHL_td_auto_s10 = yes
+	}
+}

@@ -1,0 +1,122 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) ·「司辰的暴雨」—— 维尔汀线一次性民族精神
+#
+# 长期加成一律走 idea（国策 reward 里直接写修正符会被引擎静默吞掉）。
+# ⚠️ ideas 里不写 desc =（引擎报 Unexpected token: desc），描述走 loc 键 <id>_desc 自动取。
+# picture 复用 interface/ideas/LTN_ideas.gfx 已注册的 GFX_idea_LTN_*（不新出图）。
+# ============================================================================
+
+ideas = {
+
+	country = {
+		# 手提箱庇护：核心领土防御 +15%，稳定度 +5%
+		LTN_vt_suitcase_sanctuary = {
+			picture = GFX_idea_LTN_dyn_atelier
+			modifier = {
+				army_core_defence_factor = 0.15
+				stability_factor = 0.05
+			}
+		}
+	}
+
+	country = {
+		# 阿尔卡纳档案（引擎没有「情报卡」对象，做成反间谍精神）
+		LTN_vt_arcana_archive = {
+			picture = GFX_idea_LTN_dyn_outreach
+			modifier = {
+				intelligence_agency_defense = 0.20
+				political_power_gain = 0.05
+			}
+		}
+	}
+
+	country = {
+		# 外部资助网络：消费品工厂 -5%，稳定度 +3%
+		LTN_vt_aid_network = {
+			picture = GFX_idea_LTN_dyn_treasury
+			modifier = {
+				consumer_goods_factor = -0.05
+				stability_factor = 0.03
+			}
+		}
+	}
+
+	country = {
+		# 哥伦比亚商人的订货：民用产出 +20%，产线最大效率 +10%
+		LTN_vt_columbia_backing = {
+			picture = GFX_idea_LTN_dyn_golden_law
+			modifier = {
+				industrial_capacity_factory = 0.20
+				production_factory_max_efficiency_factor = 0.10
+			}
+		}
+	}
+
+	country = {
+		# 儿储备（杜卡特信用）：政治点数获取 +15%，战争支持度 +5%
+		LTN_vt_ducat_reserve = {
+			picture = GFX_idea_LTN_dyn_twin_rule
+			modifier = {
+				political_power_gain = 0.15
+				war_support_factor = 0.05
+			}
+		}
+	}
+
+	country = {
+		# 跨时代物资储备：消费品工厂 +10%，核心领土防御 +10%
+		LTN_vt_era_stockpile = {
+			picture = GFX_idea_LTN_dyn_host
+			modifier = {
+				consumer_goods_factor = 0.10
+				army_core_defence_factor = 0.10
+			}
+		}
+	}
+
+	# 梅福券的应用：由国策用 add_timed_idea 挂 1642 天（1099 年初到期）
+	country = {
+		LTN_vt_mefo_applied = {
+			picture = GFX_idea_LTN_dyn_ironlaw
+			modifier = {
+				consumer_goods_factor = -0.05
+				production_speed_arms_factory_factor = 0.25
+				production_speed_dockyard_factor = 0.25
+				production_speed_naval_base_factor = 0.25
+				production_speed_air_base_factor = 0.25
+				production_speed_bunker_factor = 0.25
+				production_speed_coastal_bunker_factor = 0.25
+				production_speed_anti_air_building_factor = 0.25
+				production_speed_radar_station_factor = 0.25
+				production_speed_fuel_silo_factor = 0.25
+				production_speed_synthetic_refinery_factor = 0.15
+				political_power_cost = 0.20
+			}
+		}
+	}
+
+	# ---- 重塑之手叛军专属（events/LTN_vertin.txt 的 LTN_vertin.6 建国时挂上） ----
+	country = {
+		# 改写乐章的人：能打但不稳
+		LTN_vt_remake_creed = {
+			picture = GFX_idea_LTN_dyn_old_echo
+			modifier = {
+				army_attack_factor = 0.05
+				conscription_factor = 0.05
+				war_support_factor = 0.10
+				stability_factor = -0.05
+			}
+		}
+	}
+
+	country = {
+		# 重塑之手的密网：面具、密码表与剧院后门
+		LTN_vt_remake_net = {
+			picture = GFX_idea_LTN_grimm_regency
+			modifier = {
+				intelligence_agency_defense = 0.15
+				drift_defence_factor = 0.10
+			}
+		}
+	}
+}

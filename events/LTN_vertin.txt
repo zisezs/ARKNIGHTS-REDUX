@@ -1,0 +1,193 @@
+# ============================================================================
+# 莱塔尼亚 (LTN) ·「司辰的暴雨」—— 维尔汀事件链
+#
+# 命名空间 LTN_vertin（工程惯例：事件一律 add_namespace + country_event = { }，
+# 裸写 LTN_vertin.1 = { } 会让整份文件静默不加载）。
+# 多选项事件的选项键用 .oa/.ob/.oc，避免第 4 个选项撞成 X.d 抢 desc 键。
+# picture 只用本工程已验证存在的 GFX_report_event_Generic_*。
+# ============================================================================
+add_namespace = LTN_vertin
+
+# ---- 1 · 圣洛夫基金会的到来 ----
+country_event = {
+	id = LTN_vertin.1
+	title = LTN_vertin.1.t
+	desc = LTN_vertin.1.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_vertin.1.oa
+		ai_chance = { factor = 70 }
+		add_political_power = 40
+		add_stability = 0.02
+		add_war_support = 0.02
+	}
+	option = {
+		name = LTN_vertin.1.ob
+		ai_chance = { factor = 30 }
+		add_political_power = 15
+		add_war_support = 0.04
+		custom_effect_tooltip = LTN_vertin_1_ob_tt
+	}
+}
+
+# ---- 2 · 「阿纳卡姆，你被捕了」 ----
+country_event = {
+	id = LTN_vertin.2
+	title = LTN_vertin.2.t
+	desc = LTN_vertin.2.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_vertin.2.oa
+		ai_chance = { factor = 60 }
+		add_stability = 0.02
+		add_political_power = 30
+		set_country_flag = LTN_vt_anakam_arrested
+	}
+	option = {
+		name = LTN_vertin.2.ob
+		ai_chance = { factor = 40 }
+		add_political_power = -25
+		add_war_support = 0.03
+		set_country_flag = LTN_vt_anakam_arrested
+		custom_effect_tooltip = LTN_vertin_2_ob_tt
+	}
+}
+
+# ---- 3 · 十四行诗的拥抱 ----
+country_event = {
+	id = LTN_vertin.3
+	title = LTN_vertin.3.t
+	desc = LTN_vertin.3.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_vertin.3.oa
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { NOT = { has_variable = LTN_vt_mood } }
+			set_variable = { LTN_vt_mood = 0 }
+		}
+		add_to_variable = { LTN_vt_mood = 5 }
+		add_stability = 0.02
+		custom_effect_tooltip = LTN_vertin_3_mood_tt
+	}
+}
+
+# ---- 5 · 阴影里的手伸了出来（引爆内战） ----
+country_event = {
+	id = LTN_vertin.5
+	title = LTN_vertin.5.t
+	desc = LTN_vertin.5.d
+	picture = GFX_report_event_Generic_Books
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = LTN_vertin.5.oa
+		ai_chance = { factor = 100 }
+		add_stability = -0.05
+		add_war_support = 0.05
+		hidden_effect = {
+			country_event = { id = LTN_vertin.6 days = 1 }
+		}
+	}
+}
+
+# ---- 6 · 重塑之手举旗（神秘主义叛军 · 原生内战） ----
+country_event = {
+	id = LTN_vertin.6
+	title = LTN_vertin.6.t
+	desc = LTN_vertin.6.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = LTN
+		has_civil_war = no
+	}
+
+	option = {
+		name = LTN_vertin.6.oa
+		ai_chance = { factor = 100 }
+		start_civil_war = {
+			ideology = mysticism
+			ruling_party = conservatism
+			size = 0.25
+			save_global_event_target_as = LTN_vt_remake_rebels
+		}
+		LTN_vt_remake_rebels = {
+			set_country_flag = LTN_vt_remake_side
+			set_cosmetic_tag = LTN_vt_remake
+			set_politics = {
+				ruling_party = mysticism
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = mysticism
+				popularity = 0.51
+			}
+			set_party_name = {
+				ideology = mysticism
+				name = LTN_vt_remake
+				long_name = LTN_vt_remake
+			}
+			# 叛军不该带着双塔的精神与维尔汀线的成果
+			remove_ideas = LTN_vt_suitcase_sanctuary
+			remove_ideas = LTN_vt_arcana_archive
+			remove_ideas = LTN_vt_aid_network
+			remove_ideas = LTN_vt_columbia_backing
+			remove_ideas = LTN_vt_ducat_reserve
+			remove_ideas = LTN_vt_era_stockpile
+			remove_ideas = LTN_vt_mefo_applied
+			remove_dynamic_modifier = { modifier = LTN_vt_dyn_hunt_remake }
+			remove_dynamic_modifier = { modifier = LTN_vt_dyn_originium_war }
+			# 重塑之手自己的家底
+			add_ideas = LTN_vt_remake_creed
+			add_ideas = LTN_vt_remake_net
+			create_country_leader = {
+				name = "阿尔卡纳"
+				desc = LTN_vt_arcana_leader_desc
+				expire = "1965.1.1.1"
+				ideology = mysticism_subtype
+				traits = { LTN_vt_remake_arcana }
+			}
+			LTN_Vertin = {
+				set_nationality = LTN
+			}
+		}
+	}
+}
+
+# ---- 7 · 司辰离开莱塔尼亚（内战结束，由 on_civil_war_end 触发） ----
+country_event = {
+	id = LTN_vertin.7
+	title = LTN_vertin.7.t
+	desc = LTN_vertin.7.d
+	picture = GFX_report_event_Generic_Letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = LTN_vertin.7.oa
+		ai_chance = { factor = 100 }
+		add_stability = 0.03
+		add_political_power = 30
+		custom_effect_tooltip = LTN_vertin_7_tt
+		retire_character = LTN_Vertin
+		clr_country_flag = LTN_vt_vertin_present
+	}
+}

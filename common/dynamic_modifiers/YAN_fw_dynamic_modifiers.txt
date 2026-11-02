@@ -1,0 +1,37 @@
+######################################################
+# 大炎 · 终局战争国策树【第二次大狩猎】动态民族精神
+#
+# 机制同既有改革体系：国策只做 add_to_variable，本文件每个修正符直读变量。
+# 变量由 YAN_fw_init（第一格【潜龙·山河义烈】）初始化。
+######################################################
+
+YAN_fw_hunt_spirit = {
+	icon = GFX_idea_YAN_Second_Great_Hunt
+
+	enable = { always = yes }
+
+	war_support_factor = YAN_fw_rf_war_support
+	stability_factor = YAN_fw_rf_stability
+	army_core_attack_factor = YAN_fw_rf_core_attack
+	army_core_defence_factor = YAN_fw_rf_core_defence
+	consumer_goods_factor = YAN_fw_rf_consumer
+	stability_weekly = YAN_fw_rf_stability_weekly
+	army_infantry_attack_factor = YAN_fw_rf_inf_attack
+	supply_consumption_factor = YAN_fw_rf_supply
+	land_reinforce_rate = YAN_fw_rf_reinforce
+	army_org_factor = YAN_fw_rf_org
+	army_attrition = YAN_fw_rf_attrition
+	support_company_org = YAN_fw_rf_support_org
+	fuel_consumption_factor = YAN_fw_rf_fuel
+	training_time_factor = YAN_fw_rf_training
+	army_strength_factor = YAN_fw_rf_hp
+	casualty_trickleback = YAN_fw_rf_trickleback
+	anti_air_attack_factor = YAN_fw_rf_aa
+	army_attack_factor = YAN_fw_rf_attack
+	army_breakthrough_factor = YAN_fw_rf_breakthrough
+	army_defence_factor = YAN_fw_rf_defence
+	industrial_capacity_factory = YAN_fw_rf_factory
+
+	# 装备条款（equipment_bonus 无法写进动态修正，数值由隐藏条款实际生效）
+	custom_modifier_tooltip = YAN_fw_hunt_equip_tt
+}

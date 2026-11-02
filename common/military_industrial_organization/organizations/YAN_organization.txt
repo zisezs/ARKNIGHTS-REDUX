@@ -1,9 +1,9 @@
 # ==============================================================================
 #  大炎帝国 · 军工企业组织（MIO）
 #  --------------------------------------------------------------------------
-#  9 家：工部监造司 / 天机阁 / 天师府·空间术法司 / 天师府·机关术造办 /
-#        源石火锻局 / 司岁台·巨兽兵器科 / 御林卫·禁军装备司 /
-#        北冥系术法军工局 / 钦天监·天灾兵器署
+#  10 家：工部监造司 / 天机阁 / 天师府·空间术法司 / 天师府·机关术造办 /
+#         源石火锻局 / 司岁台·巨兽兵器科 / 御林卫·禁军装备司 /
+#         北冥系术法军工局 / 钦天监·天灾兵器署 / 年的创意工坊
 #
 #  · 树骨架复用 00_generic_organization.txt 的 preset（include = ...），
 #    每家另有 initial_trait 与 4~6 条专属 add_trait（special_trait_background）。
@@ -1149,6 +1149,126 @@ YAN_Qintianjian_organization = {
 		production_bonus = {
 			production_capacity_factor = 0.10
 			production_efficiency_cap_factor = 0.05
+		}
+	}
+}
+
+
+# ==============================================================================
+# 10 · 年的创意工坊 —— 重型坦克（玄极系列）/ 陆行舰（巨兽舰体）
+#      年，岁家第九，执掌铸造；嫌工部的炉子太钝，索性自己开了一间。
+#      玄极巨兵的关节件从这里出去，重坦与陆行舰共用同一条铸造线。
+#  · 招牌特质「最强之矛与最强之盾」：装甲厚度 +20%，对装甲杀伤 +20%。
+#  · 树骨架复用 generic_heavy_tank_organization（重坦树）；
+#    专属特质挂在 wide_tracks / fully_cast_turret / one_piece 之下，y<=4。
+#  · 组织图标 = 用户提供的岁兽衔环徽记，64x64 RGBA（缩放自 1024 原图），
+#    精灵定义见 interface/military_industrial_organization/YAN_organization_icons.gfx。
+# ==============================================================================
+YAN_Nian_Workshop_organization = {
+	name = YAN_Nian_Workshop_organization
+	icon = GFX_yan_mio_nian
+	include = generic_heavy_tank_organization
+
+	allowed = { original_tag = YAN }
+
+	equipment_type = {
+		heavy_tank_chassis
+		mio_cat_eq_all_heavy_tank
+		landship_chassis
+	}
+	research_categories = {
+		mio_cat_tech_heavy_armor_and_modules
+		mio_cat_tech_all_armor_and_modules
+		landship
+	}
+
+	# 最强之矛与最强之盾 —— 年的招牌：攻防同炉，矛与盾一起出模
+	initial_trait = {
+		token = YAN_mio_initial_nian
+		name = YAN_mio_trait_nian_maodun
+
+		limit_to_equipment_type = { heavy_tank_chassis mio_cat_eq_all_heavy_tank landship_chassis }
+
+		equipment_bonus = {
+			armor_value = 0.20
+			ap_attack = 0.20
+		}
+	}
+
+	# 炉火不熄 —— 九妹的炉子从不熄
+	add_trait = {
+		token = YAN_mio_trait_nian_luhuo
+		name = YAN_mio_trait_nian_luhuo
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 2 }
+		relative_position_id = generic_mio_trait_wide_tracks
+		all_parents = { generic_mio_trait_wide_tracks }
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.10
+		}
+		production_bonus = {
+			production_capacity_factor = 0.08
+			production_efficiency_cap_factor = 0.05
+		}
+	}
+
+	# 玄极巨兵 —— 玄极巨兵的关节件从这条线上下来
+	add_trait = {
+		token = YAN_mio_trait_nian_xuanji
+		name = YAN_mio_trait_nian_xuanji
+		icon = GFX_generic_mio_department_icon_tank_heavy_tank_armor
+		special_trait_background = yes
+
+		position = { x = 0 y = 2 }
+		relative_position_id = generic_mio_trait_fully_cast_turret
+		all_parents = { generic_mio_trait_fully_cast_turret }
+
+		limit_to_equipment_type = { heavy_tank_chassis mio_cat_eq_all_heavy_tank landship_chassis }
+
+		equipment_bonus = {
+			armor_value = 0.10
+			breakthrough = 0.10
+		}
+	}
+
+	# 万锻玄锋 —— 千锤之后的矛尖
+	add_trait = {
+		token = YAN_mio_trait_nian_wanduan
+		name = YAN_mio_trait_nian_wanduan
+		icon = GFX_generic_mio_trait_icon_ap_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 2 }
+		relative_position_id = YAN_mio_trait_nian_xuanji
+		all_parents = { YAN_mio_trait_nian_xuanji }
+
+		limit_to_equipment_type = { heavy_tank_chassis mio_cat_eq_all_heavy_tank landship_chassis }
+
+		equipment_bonus = {
+			ap_attack = 0.15
+			hard_attack = 0.10
+		}
+	}
+
+	# 陆行巨构 —— 把重坦的铸造线拉长成舰体
+	add_trait = {
+		token = YAN_mio_trait_nian_luxing
+		name = YAN_mio_trait_nian_luxing
+		icon = GFX_generic_mio_trait_icon_armor_value
+		special_trait_background = yes
+
+		position = { x = 0 y = 4 }
+		relative_position_id = generic_mio_trait_one_piece_hull_side_coverings
+		all_parents = { generic_mio_trait_one_piece_hull_side_coverings }
+
+		limit_to_equipment_type = { landship_chassis }
+
+		equipment_bonus = {
+			armor_value = 0.15
+			max_strength = 0.10
 		}
 	}
 }

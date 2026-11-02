@@ -142,33 +142,6 @@ YAN_Suiling_Affairs = {
 		}
 	}
 
-	# 启动不反（需国策「启动不反」授权，且准备度满）
-	YAN_decision_launch_bufan = {
-		icon = GFX_decision_generic_ignite_civil_war
-
-		available = {
-			has_country_flag = yan_bufan_authorized
-			has_idea = YAN_Bufan_originium
-			check_variable = { yan_bufan_prep > 99 }
-		}
-
-		cost = 200
-		fire_only_once = yes
-
-		complete_effect = {
-			add_ideas = YAN_True_dragon_fallen
-			add_ideas = YAN_Sui_calamity_ended
-			add_war_support = 0.3
-			add_stability = -0.3
-			set_country_flag = yan_bufan_launched
-			country_event = { id = yan_sui.11 }
-		}
-
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
 	# ---------------- 代理人信任 ----------------
 
 	# 嘉奖代理人

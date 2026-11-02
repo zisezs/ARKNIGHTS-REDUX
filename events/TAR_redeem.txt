@@ -65,68 +65,7 @@ country_event = {
 }
 
 # ── .4 宵禁废除之后：探子与私刑 ──
-country_event = {
-	id = TAR_rd.4
-	title = TAR_rd.4.t
-	desc = TAR_rd.4.d
-	picture = GFX_report_event_Generic_Urban_Unrest_1
-	is_triggered_only = yes
-
-	option = { # 公开审判
-		name = TAR_rd.4.a
-		add_political_power = -25
-		add_stability = 0.05
-		set_country_flag = TAR_rd_trials_public
-		ai_chance = { factor = 50 }
-	}
-	option = { #  quietly 清账
-		name = TAR_rd.4.b
-		add_political_power = 15
-		add_stability = -0.05
-		add_war_support = 0.05
-		set_country_flag = TAR_rd_trials_quiet
-		custom_effect_tooltip = TAR_rd.4.b.tt
-		ai_chance = { factor = 50 }
-	}
-}
-
 # ── .5 收回借出的火：染火反弹 ──
-country_event = {
-	id = TAR_rd.5
-	title = TAR_rd.5.t
-	desc = TAR_rd.5.d
-	picture = GFX_report_event_Generic_explosion
-	is_triggered_only = yes
-
-	trigger = {
-		has_variable = TAR_rd_fire_stock
-		TAR_rd_fire_stock > 3
-	}
-
-	option = { # 办一场公共还火
-		name = TAR_rd.5.a
-		add_political_power = -35
-		add_stability = 0.05
-		custom_effect_tooltip = TAR_rd.5.a.tt
-		if = {
-			limit = { has_variable = TAR_rd_fire_stock }
-			add_to_variable = { TAR_rd_fire_stock = -2 }
-		}
-		ai_chance = { factor = 60 }
-	}
-	option = { # 让火继续烧
-		name = TAR_rd.5.b
-		add_war_support = 0.10
-		add_stability = -0.10
-		if = {
-			limit = { has_variable = TAR_rd_grudge }
-			add_to_variable = { TAR_rd_grudge = 1 }
-		}
-		custom_effect_tooltip = TAR_rd.5.b.tt
-		ai_chance = { factor = 40 }
-	}
-}
-
 # ── .6 召回圣物：被清洗者的账 ──
 country_event = {
 	id = TAR_rd.6

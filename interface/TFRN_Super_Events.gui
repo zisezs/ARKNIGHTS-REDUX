@@ -2454,4 +2454,62 @@ guiTypes = {
 		}
 	}
 	# <<< KZM_twelfth_war_se
+
+	# >>> YAN_donglu_parade_se
+	containerWindowType = {
+		name = "YAN_donglu_parade_super_event"
+		size = { width = 982 height = 594 }
+		position = { x=0 y=0 }
+		Orientation = center
+		Origo = center
+		clipping = no
+		moveable = yes
+
+		background = {
+			name = "YAN_donglu_parade_bg"
+			spriteType = "GFX_YAN_donglu_parade"
+			position = { x = 0 y = 0 }
+		}
+
+		iconType = {
+			name = "Super_Event_Frame"
+			spriteType = "GFX_Super_event_bg"
+			position = { x = 0 y = 0 }
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "Super_Event_Title_textbox"
+			position = { x = 36 y = 22 }
+			font = "IBR_se_title30"
+			borderSize = {x = 0 y = 0}
+			text = "YAN_donglu_parade_title"
+			maxWidth = 400
+			maxHeight = 30
+			fixedsize = yes
+			format = left
+		}
+
+		instantTextBoxType = {
+			name = "Super_Event_Quote_textbox"
+			position = { x = 256 y = 546 }
+			font = "IBR_se_text16"
+			borderSize = {x = 0 y = 0}
+			text = "YAN_donglu_parade_quote"
+			maxWidth = 470
+			maxHeight = 36
+			fixedsize = yes
+			format = center
+		}
+
+		buttonType = {
+			name = "Super_Event_Close"
+			position = { x = 348 y = 464 }
+			buttonText = "YAN_donglu_parade_close"
+			buttonFont = "IBR_se_text16"
+			quadTextureSprite = "GFX_spacebar"
+			clicksound = click_ok
+		}
+	}
+	# <<< YAN_donglu_parade_se
 }

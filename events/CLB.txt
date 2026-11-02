@@ -7,61 +7,8 @@ add_namespace = inauguration_clb
 add_namespace = military_clb
 
 #哥伦比亚吞并荒地
-country_event = {
-	id = test_clb.1
-	title = test_clb.1.t
-	desc = test_clb.1.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = test_clb.1.a
-
-		declare_war_on = {
-			target = CFC
-			type = annex_everything
-		}
-	}
-}
-
 #哥伦比亚邀请加入阵营
-country_event = {
-	id = test_clb.2
-	title = test_clb.2.t
-	desc = test_clb.2.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = test_clb.2.a
-
-		add_to_faction = VIC
-	}
-
-	option = {
-		name = test_clb.2.b
-
-		add_to_faction = GUL
-	}
-}
-
 #哥伦比亚邀请加入阵营
-country_event = {
-	id = test_clb.3
-	title = test_clb.3.t
-	desc = test_clb.3.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = test_clb.3.a
-		declare_war_on = {
-			target = LTN
-			type = annex_everything
-		}
-	}
-}
-
 #根据政党情况触发94年总统初选事件
 country_event = {
 	id = hidden_clb.1
@@ -228,38 +175,6 @@ country_event = {
 }
 
 #查尔斯选择1098年副总统候选人
-country_event = {
-	id = event_clb.114
-	title = event_clb.114.t
-	desc = event_clb.114.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = event_clb.114.a
-
-		set_country_flag = CLB_Charles_and_populist
-	}
-
-	option = {
-		name = event_clb.114.b
-
-		set_country_flag = CLB_Charles_and_conservatist
-	}
-
-	option = {
-		name = event_clb.114.c
-
-		trigger = {
-			NOT = {
-				has_government = socialism
-			}
-		}
-
-		set_country_flag = CLB_Charles_and_progressivist
-	}
-}
-
 #共和党提名候选人
 country_event = {
 	id = elec_prim_clb.1
@@ -1678,30 +1593,3 @@ country_event = {
 }
 
 #步兵装备竞标
-country_event = {
-	id = military_clb.1
-	title = military_clb.1.t
-	desc = military_clb.1.d
-
-	is_triggered_only = yes
-
-	option = {
-		name = military_clb.1.a
-
-		mio:CLB_Blacksteel_organization = {
-			add_mio_research_bonus = 0.1
-			add_mio_funds_gain_factor = 0.1
-			add_mio_funds = 1000
-		}
-	}
-
-	option = {
-		name = military_clb.1.b
-
-		mio:CLB_Raythean_organization = {
-			add_mio_research_bonus = 0.1
-			add_mio_funds_gain_factor = 0.1
-			add_mio_funds = 1000
-		}
-	}
-}
