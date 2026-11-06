@@ -1,0 +1,14 @@
+scripted_gui = {
+	se_state_image_panel = {
+		window_name = "se_state_image_panel"
+		context_type = selected_state_context
+		# 改挂明确的窗口名，不再用 selected_state_view 这个 token：
+		# 只有州界面存在时才创建，避免进图第一帧在没有 state 上下文时实例化面板。
+		parent_window_name = "state_info_window"
+		# 用真实 trigger 控制可见性：只有挂了玉门地块 flag 的州才显示，
+		# 取代原来的 always = no（常驻注册、永远不可见但照样创建窗口）。
+		visible = {
+			has_state_flag = se_buff_yumen_image
+		}
+	}
+}

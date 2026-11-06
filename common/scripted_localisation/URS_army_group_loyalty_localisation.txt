@@ -1,0 +1,197 @@
+# ==============================================================================
+#  乌萨斯帝国 ·「集团军的忠诚试炼」scripted localisation（固定七行）
+#  --------------------------------------------------------------------------
+#  面板不再使用 dynamic_lists 的 i 索引；七行各自读自己的变量：
+#        1 中央  2 第一  3 第二  4 第三  5 第四  6 第五  7 第七
+#  这里为每一行提供两个 defined_text：
+#        GetURSAGTier_N          状态词（忠诚 / 观望 / 不稳，带颜色）
+#        GetURSAGLoyaltyText_N   忠诚度数字（金 / 灰 / 红）
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 状态词
+# ------------------------------------------------------------------------------
+defined_text = {
+	name = GetURSAGTier_1
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_1 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_loyal
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_1 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_neutral
+	}
+	text = { localization_key = URS_agl_tier_rebel }
+}
+
+defined_text = {
+	name = GetURSAGTier_2
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_2 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_loyal
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_2 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_neutral
+	}
+	text = { localization_key = URS_agl_tier_rebel }
+}
+
+defined_text = {
+	name = GetURSAGTier_3
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_3 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_loyal
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_3 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_neutral
+	}
+	text = { localization_key = URS_agl_tier_rebel }
+}
+
+defined_text = {
+	name = GetURSAGTier_4
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_4 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_loyal
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_4 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_neutral
+	}
+	text = { localization_key = URS_agl_tier_rebel }
+}
+
+defined_text = {
+	name = GetURSAGTier_5
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_5 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_loyal
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_5 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_neutral
+	}
+	text = { localization_key = URS_agl_tier_rebel }
+}
+
+defined_text = {
+	name = GetURSAGTier_6
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_6 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_loyal
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_6 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_neutral
+	}
+	text = { localization_key = URS_agl_tier_rebel }
+}
+
+defined_text = {
+	name = GetURSAGTier_7
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_7 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_loyal
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_7 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_tier_neutral
+	}
+	text = { localization_key = URS_agl_tier_rebel }
+}
+
+# ------------------------------------------------------------------------------
+# 忠诚度数字（按档位上色）
+# ------------------------------------------------------------------------------
+defined_text = {
+	name = GetURSAGLoyaltyText_1
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_1 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gold_1
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_1 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gray_1
+	}
+	text = { localization_key = URS_agl_loyalty_red_1 }
+}
+
+defined_text = {
+	name = GetURSAGLoyaltyText_2
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_2 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gold_2
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_2 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gray_2
+	}
+	text = { localization_key = URS_agl_loyalty_red_2 }
+}
+
+defined_text = {
+	name = GetURSAGLoyaltyText_3
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_3 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gold_3
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_3 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gray_3
+	}
+	text = { localization_key = URS_agl_loyalty_red_3 }
+}
+
+defined_text = {
+	name = GetURSAGLoyaltyText_4
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_4 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gold_4
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_4 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gray_4
+	}
+	text = { localization_key = URS_agl_loyalty_red_4 }
+}
+
+defined_text = {
+	name = GetURSAGLoyaltyText_5
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_5 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gold_5
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_5 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gray_5
+	}
+	text = { localization_key = URS_agl_loyalty_red_5 }
+}
+
+defined_text = {
+	name = GetURSAGLoyaltyText_6
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_6 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gold_6
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_6 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gray_6
+	}
+	text = { localization_key = URS_agl_loyalty_red_6 }
+}
+
+defined_text = {
+	name = GetURSAGLoyaltyText_7
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_7 value = 61 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gold_7
+	}
+	text = {
+		trigger = { check_variable = { var = URS_agl_loyalty_7 value = 40 compare = greater_than_or_equals } }
+		localization_key = URS_agl_loyalty_gray_7
+	}
+	text = { localization_key = URS_agl_loyalty_red_7 }
+}

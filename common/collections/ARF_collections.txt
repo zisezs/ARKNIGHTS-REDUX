@@ -11,3 +11,27 @@ communist_socialist_ruling_party_countries = {
 		}
 	}
 }
+
+#东陆（eastland）全部州
+eastland_states = {
+	input = game:all_states
+	name = COLLECTION_EASTLAND_STATES
+	operators = {
+		limit = {
+			is_on_continent = eastland
+		}
+	}
+}
+
+#由阵营成员控制的东陆州
+faction_eastland_states = {
+	input = game:scope
+	name = COLLECTION_FACTION_EASTLAND_STATES
+	operators = {
+		faction_members
+		controlled_states
+		limit = {
+			is_on_continent = eastland
+		}
+	}
+}

@@ -1110,3 +1110,31 @@ faction_manifest_workers_of_the_world_unite = {
 		}
 	}
 }
+
+# 东陆防御公约 — 保证东陆集体利益
+faction_manifest_eastern_continent_defense = {
+	name = eastern_continent_defense_goal_name
+	description = eastern_continent_defense_goal_desc
+	is_manifest = yes
+	ratio_progress = {
+		total_amount_collection = collection:eastland_states
+		completed_amount_collection = collection:faction_eastland_states
+
+		scale = {
+			army_core_defence_factor = 0.15
+			stability_factor = 0.10
+		}
+
+		progress_sections = {
+			manifest_fulfilled = {
+				min = @manifest_fulfilled_value
+
+				modifier = {
+					army_core_defence_factor = 0.10
+					war_support_factor = 0.05
+					stability_factor = 0.05
+				}
+			}
+		}
+	}
+}

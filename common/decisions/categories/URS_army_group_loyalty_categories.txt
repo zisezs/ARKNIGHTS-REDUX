@@ -1,0 +1,23 @@
+# ==============================================================================
+#  乌萨斯帝国 ·「集团军的忠诚试炼」决议分类
+#  --------------------------------------------------------------------------
+#  分类页顶部挂 URS_army_group_loyalty_gui（三档名册面板），
+#  下方是该分类的 7 组展开式决议。只对乌萨斯帝国本体可见。
+# ==============================================================================
+
+URS_army_group_loyalty_decisions = {
+	icon = GFX_decision_category_army_reform
+
+	allowed = {
+		original_tag = URS
+	}
+
+	visible = {
+		always = yes
+	}
+
+	visible_when_empty = yes
+	priority = 11
+
+	scripted_gui = URS_army_group_loyalty_entry
+}

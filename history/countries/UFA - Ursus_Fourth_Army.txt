@@ -1,5 +1,8 @@
 capital = 37
 
+# 开局人力：保证 20 个师开局满编（每师约 1.5 万，余量用于补员）
+add_manpower = 400000
+
 oob = "UFA_Start"
 
 set_research_slots = 2
@@ -17,9 +20,46 @@ set_technology = {
 	motorized_infantry_0 = 1
 }
 
-add_ideas = {
-	
-}
+# 初始民族精神（4 个，动态修正版；定义在 common/dynamic_modifiers/U1A_army_group_dynamic_modifiers.txt）
+# 变量初值 = 原精神的常数；国策只往这些变量里加增量。
+set_variable = { Ursus_ag_slave_pp_var = -0.2 }
+set_variable = { Ursus_ag_slave_factory_var = 0.2 }
+set_variable = { Ursus_ag_slave_effgain_var = 0.2 }
+set_variable = { Ursus_ag_slave_milbuild_var = 0.2 }
+set_variable = { Ursus_ag_slave_civbuild_var = 0 }
+set_variable = { Ursus_ag_slave_cg_var = 0 }
+set_variable = { Ursus_ag_law_pp_var = -0.2 }
+set_variable = { Ursus_ag_law_cg_var = 0.2 }
+set_variable = { Ursus_ag_law_armyexp_var = 0.2 }
+set_variable = { Ursus_ag_law_org_var = 0.2 }
+set_variable = { Ursus_ag_law_breakthrough_var = 0.2 }
+set_variable = { Ursus_ag_law_trainingtime_var = -0.25 }
+set_variable = { Ursus_ag_law_stabweekly_var = 0 }
+set_variable = { Ursus_ag_law_equipcost_var = 0 }
+set_variable = { Ursus_ag_law_attack_var = 0 }
+set_variable = { Ursus_ag_law_stability_var = 0 }
+set_variable = { Ursus_ag_law_warsupport_var = 0 }
+set_variable = { Ursus_ag_law_infattack_var = 0 }
+set_variable = { Ursus_ag_law_infdefence_var = 0 }
+set_variable = { Ursus_ag_law_attrition_var = 0 }
+set_variable = { Ursus_ag_war_pp_var = -0.2 }
+set_variable = { Ursus_ag_war_manpower_var = 2000 }
+set_variable = { Ursus_ag_war_res_var = 0.2 }
+set_variable = { Ursus_ag_war_cg_var = -0.2 }
+set_variable = { Ursus_ag_war_pop_var = -0.5 }
+set_variable = { Ursus_ag_war_supply_var = -0.5 }
+set_variable = { Ursus_ag_war_stabweekly_var = -0.01 }
+set_variable = { Ursus_ag_watch_pp_var = -0.2 }
+set_variable = { Ursus_ag_watch_agent_var = -1 }
+set_variable = { Ursus_ag_watch_mic_var = 0.5 }
+
+add_dynamic_modifier = { modifier = Ursus_army_group_slave_economy }
+add_dynamic_modifier = { modifier = Ursus_army_group_permanent_martial_law }
+add_dynamic_modifier = { modifier = Ursus_army_group_scorched_means }
+add_dynamic_modifier = { modifier = Ursus_army_group_st_hulst_surveillance }
+
+# 【来自圣骏堡的监视】：无法训练、解散部队（编制模板锁）
+country_lock_all_division_template = yes
 
 set_politics = {
 	ruling_party = despotism

@@ -1,0 +1,254 @@
+# ==============================================================================
+#  大炎 · 山海众十九司 / 通用 —— 地方民族精神（2026-11-05）
+#  · 一格一司，随 YAN_shz_found_here 首次立国时 add_ideas
+#  · 图标沿用原版 generic_* 或本模组 YAN_Shanhaizhong
+#  · 生成器：docs/gen_yan_shanhai_identity.cjs（改表重跑，勿手改产物）
+# ==============================================================================
+
+ideas = {
+	country = {
+		# 肃廊 · 油煤黑道
+		YAN_shz_slg = {
+			picture = generic_exploit_mines
+
+			modifier = {
+				industrial_capacity_factory = 0.10
+				fuel_gain_factor = 0.15
+				equipment_capture_factor = 0.10
+				army_org_factor = -0.05
+			}
+		}
+
+		# 万原 · 万原饥民
+		YAN_shz_wyu = {
+			picture = generic_agrarian_society
+
+			modifier = {
+				recruitable_population_factor = 0.15
+				conscription_factor = 0.10
+				army_org_factor = -0.10
+				army_defence_factor = -0.05
+			}
+		}
+
+		# 桓江 · 桓江水寨
+		YAN_shz_huj = {
+			picture = generic_supply_line
+
+			modifier = {
+				supply_consumption_factor = -0.10
+				army_speed_factor = 0.10
+				army_defence_factor = 0.05
+				industrial_capacity_factory = -0.05
+			}
+		}
+
+		# 理塘 · 苍蕃坛口
+		YAN_shz_lta = {
+			picture = generic_mountain_defensive_training
+
+			modifier = {
+				army_defence_factor = 0.10
+				army_org_factor = 0.05
+				attrition = -0.10
+				conscription_factor = -0.10
+				special_forces_cap_flat = 60
+			}
+		}
+
+		# 祝云 · 夜郎猎户
+		YAN_shz_zyu = {
+			picture = generic_infantry_bonus
+
+			modifier = {
+				army_attack_factor = 0.05
+				army_speed_factor = 0.10
+				attrition = -0.05
+				army_defence_factor = -0.05
+				special_forces_cap_flat = 60
+			}
+		}
+
+		# 晋原 · 晋原武行
+		YAN_shz_jyu = {
+			picture = generic_army_war_college
+
+			modifier = {
+				experience_gain_army = 0.10
+				army_org_factor = 0.05
+				army_morale_factor = 0.05
+				industrial_capacity_factory = -0.05
+			}
+		}
+
+		# 楚昌 · 洪都船帮
+		YAN_shz_chc = {
+			picture = generic_logistics
+
+			modifier = {
+				supply_consumption_factor = -0.10
+				army_speed_factor = 0.05
+				convoy_raiding_efficiency_factor = 0.15
+				army_attack_factor = -0.05
+			}
+		}
+
+		# 冀州 · 冀州流寇
+		YAN_shz_jiz = {
+			picture = generic_reserve_divisions
+
+			modifier = {
+				cavalry_attack_factor = 0.10
+				cavalry_defence_factor = 0.10
+				army_speed_factor = 0.10
+				army_org_factor = -0.05
+			}
+		}
+
+		# 舒州 · 舒州盐枭
+		YAN_shz_szh = {
+			picture = generic_local_self_management
+
+			modifier = {
+				equipment_capture_factor = 0.10
+				supply_consumption_factor = -0.10
+				political_power_factor = 0.10
+				recruitable_population_factor = -0.05
+			}
+		}
+
+		# 尚蜀 · 尚蜀山城
+		YAN_shz_ssu = {
+			picture = generic_mountain_warfare
+
+			modifier = {
+				army_defence_factor = 0.10
+				army_org_factor = 0.05
+				supply_consumption_factor = -0.10
+				army_speed_factor = -0.05
+				special_forces_cap_flat = 60
+			}
+		}
+
+		# 珠洲 · 珠洲疍户
+		YAN_shz_zzh = {
+			picture = generic_coastal_navy
+
+			modifier = {
+				convoy_raiding_efficiency_factor = 0.20
+				naval_damage_factor = 0.10
+				army_speed_factor = 0.05
+				army_org_factor = -0.05
+			}
+		}
+
+		# 镇海 · 镇海盐丁
+		YAN_shz_zhl = {
+			picture = generic_coastal_defense_ships
+
+			modifier = {
+				army_defence_factor = 0.10
+				dig_in_speed_factor = 0.20
+				naval_damage_factor = 0.10
+				army_attack_factor = -0.05
+			}
+		}
+
+		# 兴铭 · 兴铭铸坊
+		YAN_shz_xmu = {
+			picture = generic_artillery_regiments
+
+			modifier = {
+				army_artillery_attack_factor = 0.10
+				equipment_capture_factor = 0.05
+				industrial_capacity_factory = 0.05
+				army_org_factor = 0.05
+				recruitable_population_factor = -0.05
+			}
+		}
+
+		# 吴江 · 琅珆旧怨
+		YAN_shz_wji = {
+			picture = generic_guerilla_warfare
+
+			modifier = {
+				army_defence_factor = 0.10
+				army_org_factor = 0.05
+				attrition = -0.10
+				war_support_factor = -0.05
+				special_forces_cap_flat = 60
+			}
+		}
+
+		# 齐州 · 齐州盐徒
+		YAN_shz_qzh = {
+			picture = generic_nationalization
+
+			modifier = {
+				equipment_capture_factor = 0.10
+				convoy_raiding_efficiency_factor = 0.10
+				army_attack_factor = 0.05
+				stability_factor = -0.05
+			}
+		}
+
+		# 永晏 · 梦津漕工
+		YAN_shz_yon = {
+			picture = generic_railroads
+
+			modifier = {
+				supply_consumption_factor = -0.15
+				army_speed_factor = 0.05
+				army_org_factor = 0.05
+				army_attack_factor = -0.05
+			}
+		}
+
+		# 承天 · 界园香火
+		YAN_shz_cti = {
+			picture = generic_deal_with_the_devil
+
+			modifier = {
+				political_power_factor = 0.15
+				army_morale_factor = 0.10
+				army_defence_factor = 0.05
+				stability_factor = -0.10
+			}
+		}
+
+		# 隆仓 · 隆仓开仓
+		YAN_shz_lch = {
+			picture = generic_agrarian_reform
+
+			modifier = {
+				recruitable_population_factor = 0.10
+				supply_consumption_factor = -0.10
+				army_org_factor = -0.05
+			}
+		}
+
+		# 苇江 · 苇荡伏兵
+		YAN_shz_wjg = {
+			picture = generic_fortify_the_borders
+
+			modifier = {
+				army_defence_factor = 0.10
+				dig_in_speed_factor = 0.25
+				army_speed_factor = 0.05
+				army_attack_factor = -0.05
+			}
+		}
+
+		# 其他 · 山海八荒
+		YAN_shz_sha = {
+			picture = YAN_Shanhaizhong
+
+			modifier = {
+				army_org_factor = 0.05
+				war_support_factor = 0.05
+				equipment_capture_factor = 0.05
+				stability_factor = -0.05
+			}
+		}
+	}
+}

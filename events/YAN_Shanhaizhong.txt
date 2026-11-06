@@ -2,8 +2,9 @@
 #  大炎 ·【岁醒】叛军循环 —— 山海众事件
 #  · yan_shz.1..19  地方急报（对应 19 宣政司，每波按被占州的旗标选对应那封）
 #  · yan_shz.20     通用：没有宣政司旗标的州，以及「占州已达上限、本波只增兵」
-#  · yan_shz.21     首次起事的全国新闻（旗标去重，只发一次）
-#  · yan_shz.22     【动员乡勇】每爆出一个**新**势力发一次：首都编 5 支四步乡勇
+#  · yan_shz.21     首次起事的全国新闻（2026-11-05 起不再触发，定义保留）
+#  · yan_shz.22     【动员乡勇】首建势力时编 5 支四步乡勇（已改为静默脚本 YAN_shz_militia，事件不再触发）
+#  · yan_shz.23     【起事冷却】静默计时事件：120 天后摘掉 YAN_shz_wave_cd，允许下一波
 #  效果本体在 common/scripted_effects/YAN_shanhai_scripted_effects.txt；
 #  事件只负责「叙事 + 玩家表态」，两个选项都是额外代价，不抵消脚本损失。
 #  生成器 E:/tmp/sui12/gen_shanhai.js
@@ -459,5 +460,18 @@ news_event = {
 
 	option = {
 		name = yan_shz.21.a
+	}
+}
+
+# 【起事冷却】静默计时器：整 120 天后摘旗并当场起下一波（不弹窗、无文本）
+country_event = {
+	id = yan_shz.23
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = YAN_shz_wave_cd
+		YAN_shanhai_check = yes
 	}
 }

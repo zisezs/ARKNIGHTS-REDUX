@@ -1,0 +1,50 @@
+add_namespace = ursus_army_group
+add_namespace = worldnews_ursus_ag
+
+# ==============================================================================
+#  乌萨斯集团军 · 国策事件（文本暂缺，统一用占位符，后续补写）
+#  · ursus_army_group.1  【乌萨斯的脊梁】—— NEW_focus_1
+#  · ursus_army_group.2  【忠诚试炼】—— NEW_focus_14
+#  · worldnews_ursus_ag.1【向东部进军】—— NEW_focus_15（国际新闻）
+# ==============================================================================
+
+# 【乌萨斯的脊梁】
+country_event = {
+	id = ursus_army_group.1
+	title = ursus_army_group.1.t
+	desc = ursus_army_group.1.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_army_group.1.a
+	}
+}
+
+# 【忠诚试炼】
+country_event = {
+	id = ursus_army_group.2
+	title = ursus_army_group.2.t
+	desc = ursus_army_group.2.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = ursus_army_group.2.a
+	}
+}
+
+# 【向东部进军】
+news_event = {
+	id = worldnews_ursus_ag.1
+	title = worldnews_ursus_ag.1.t
+	desc = worldnews_ursus_ag.1.d
+	picture = GFX_report_event_Generic_explosion
+
+	is_triggered_only = yes
+	major = no
+
+	option = {
+		name = worldnews_ursus_ag.1.a
+	}
+}

@@ -1,0 +1,36 @@
+# ==============================================================================
+# 大炎 · 变革树决议（2026-11-05）
+#  · YAN_mission_purge_infected  「龙门惨案」完成后的 60 天任务
+#    不可点击；超时触发 YAN_reform_longmen_uprising（龙门总督府易帜）
+# ==============================================================================
+
+YAN_Reform = {
+
+	YAN_mission_purge_infected = {
+		icon = GFX_decision_generic_arrest
+
+		visible = {
+			has_country_flag = yan_reform_longmen_case
+		}
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		activation = {
+			has_country_flag = yan_reform_longmen_case
+		}
+
+		is_good = no
+		priority = 998
+		days_mission_timeout = 60
+
+		timeout_effect = {
+			YAN_reform_longmen_uprising = yes
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

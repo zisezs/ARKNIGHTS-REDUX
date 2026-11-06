@@ -1,0 +1,72 @@
+# ==============================================================================
+#  乌萨斯集团军 · 开局民族精神（动态修正版）
+#  --------------------------------------------------------------------------
+#  · 这 4 条就是开局挂在三国身上的民族精神本体：原名、原图标、原描述。
+#    因为 idea 的 modifier 只吃常数，这里改为 dynamic_modifier + 变量，
+#    以便国策往变量里加数（写法同本工程 CYB_worker_unrest_modifier）。
+#  · 每个变量的初值 = 原精神的常数，由 history/countries 的 set_variable 写入；
+#    国策只用 add_to_variable 加增量。
+#  · 「地图外军用工厂 +5」「编制锁定」不是修正符，改在历史与 on_startup 里处理。
+# ==============================================================================
+
+# ---------------- 1 奴役经济 ----------------
+Ursus_army_group_slave_economy = {
+	icon = GFX_idea_Ursus_army_group_slave_economy
+
+	enable = { always = yes }
+
+	political_power_factor = Ursus_ag_slave_pp_var
+	industrial_capacity_factory = Ursus_ag_slave_factory_var
+	production_factory_efficiency_gain_factor = Ursus_ag_slave_effgain_var
+	production_speed_arms_factory_factor = Ursus_ag_slave_milbuild_var
+	production_speed_industrial_complex_factor = Ursus_ag_slave_civbuild_var
+	consumer_goods_factor = Ursus_ag_slave_cg_var
+}
+
+# ---------------- 2 永久军事管制区 ----------------
+Ursus_army_group_permanent_martial_law = {
+	icon = GFX_idea_Ursus_army_group_permanent_martial_law
+
+	enable = { always = yes }
+
+	political_power_factor = Ursus_ag_law_pp_var
+	consumer_goods_factor = Ursus_ag_law_cg_var
+	experience_gain_army_factor = Ursus_ag_law_armyexp_var
+	army_org_factor = Ursus_ag_law_org_var
+	breakthrough_factor = Ursus_ag_law_breakthrough_var
+	training_time_factor = Ursus_ag_law_trainingtime_var
+	stability_weekly = Ursus_ag_law_stabweekly_var
+	production_cost_factor = Ursus_ag_law_equipcost_var
+	army_attack_factor = Ursus_ag_law_attack_var
+	stability_factor = Ursus_ag_law_stability_var
+	war_support_factor = Ursus_ag_law_warsupport_var
+	army_infantry_attack_factor = Ursus_ag_law_infattack_var
+	army_infantry_defence_factor = Ursus_ag_law_infdefence_var
+	attrition = Ursus_ag_law_attrition_var
+}
+
+# ---------------- 3 为战争不择手段 ----------------
+Ursus_army_group_scorched_means = {
+	icon = GFX_idea_Ursus_army_group_scorched_means
+
+	enable = { always = yes }
+
+	political_power_factor = Ursus_ag_war_pp_var
+	weekly_manpower = Ursus_ag_war_manpower_var
+	local_resources_factor = Ursus_ag_war_res_var
+	consumer_goods_factor = Ursus_ag_war_cg_var
+	monthly_population = Ursus_ag_war_pop_var
+	supply_consumption_factor = Ursus_ag_war_supply_var
+	stability_weekly = Ursus_ag_war_stabweekly_var
+}
+
+# ---------------- 4 来自圣骏堡的监视 ----------------
+Ursus_army_group_st_hulst_surveillance = {
+	icon = GFX_idea_Ursus_army_group_st_hulst_surveillance
+
+	enable = { always = yes }
+
+	political_power_factor = Ursus_ag_watch_pp_var
+	operative_slot = Ursus_ag_watch_agent_var
+	mic_to_overlord_factor = Ursus_ag_watch_mic_var
+}

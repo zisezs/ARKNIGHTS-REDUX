@@ -1,0 +1,291 @@
+# ==============================================================================
+#  乌萨斯帝国 ·「集团军的忠诚试炼」
+#  --------------------------------------------------------------------------
+#  · URS_army_group_loyalty_entry：分类页 500×160 摘要条，
+#    按钮 URS_agl_open_button 打开完整名册。
+#  · URS_army_group_loyalty_gui：1000×900 独立窗口，固定七行；
+#    每行五个按钮（犒赏 / 巡视 / 输送 / 接见 / 剥夺）直接作用于对应 tag。
+#
+#  按钮不设 30 天冷却；每次扣除 50 政治点，政治点不足时按钮自动灰显。
+# ==============================================================================
+
+scripted_gui = {
+
+	URS_army_group_loyalty_entry = {
+		context_type = decision_category
+		window_name = "URS_army_group_loyalty_entry_window"
+
+		effects = {
+			URS_agl_open_button_click = {
+				set_variable = { URS_agl_panel_open = 1 }
+			}
+		}
+	}
+
+	URS_army_group_loyalty_gui = {
+		context_type = player_context
+		window_name = "URS_army_group_loyalty_window"
+
+		visible = {
+			check_variable = {
+				var = URS_agl_panel_open
+				value = 1
+				compare = equals
+			}
+		}
+
+		effects = {
+			URS_agl_close_button_click = {
+				set_variable = { URS_agl_panel_open = 0 }
+			}
+			URS_agl_row1_reward_click = {
+				URS_agl_action_reward = { INDEX = 1 COUNTRY = URS }
+				add_political_power = -50
+			}
+			URS_agl_row1_drill_click = {
+				URS_agl_action_drill = { INDEX = 1 COUNTRY = URS }
+				add_political_power = -50
+			}
+			URS_agl_row1_supply_click = {
+				URS_agl_action_supply = { INDEX = 1 COUNTRY = URS }
+				add_political_power = -50
+			}
+			URS_agl_row1_audience_click = {
+				URS_agl_action_audience = { INDEX = 1 COUNTRY = URS }
+				add_political_power = -50
+			}
+			URS_agl_row1_strip_click = {
+				URS_agl_action_strip = { INDEX = 1 COUNTRY = URS }
+				add_political_power = -50
+			}
+			URS_agl_row2_reward_click = {
+				URS_agl_action_reward = { INDEX = 2 COUNTRY = U1A }
+				add_political_power = -50
+			}
+			URS_agl_row2_drill_click = {
+				URS_agl_action_drill = { INDEX = 2 COUNTRY = U1A }
+				add_political_power = -50
+			}
+			URS_agl_row2_supply_click = {
+				URS_agl_action_supply = { INDEX = 2 COUNTRY = U1A }
+				add_political_power = -50
+			}
+			URS_agl_row2_audience_click = {
+				URS_agl_action_audience = { INDEX = 2 COUNTRY = U1A }
+				add_political_power = -50
+			}
+			URS_agl_row2_strip_click = {
+				URS_agl_action_strip = { INDEX = 2 COUNTRY = U1A }
+				add_political_power = -50
+			}
+			URS_agl_row3_reward_click = {
+				URS_agl_action_reward = { INDEX = 3 COUNTRY = U2A }
+				add_political_power = -50
+			}
+			URS_agl_row3_drill_click = {
+				URS_agl_action_drill = { INDEX = 3 COUNTRY = U2A }
+				add_political_power = -50
+			}
+			URS_agl_row3_supply_click = {
+				URS_agl_action_supply = { INDEX = 3 COUNTRY = U2A }
+				add_political_power = -50
+			}
+			URS_agl_row3_audience_click = {
+				URS_agl_action_audience = { INDEX = 3 COUNTRY = U2A }
+				add_political_power = -50
+			}
+			URS_agl_row3_strip_click = {
+				URS_agl_action_strip = { INDEX = 3 COUNTRY = U2A }
+				add_political_power = -50
+			}
+			URS_agl_row4_reward_click = {
+				URS_agl_action_reward = { INDEX = 4 COUNTRY = UTA }
+				add_political_power = -50
+			}
+			URS_agl_row4_drill_click = {
+				URS_agl_action_drill = { INDEX = 4 COUNTRY = UTA }
+				add_political_power = -50
+			}
+			URS_agl_row4_supply_click = {
+				URS_agl_action_supply = { INDEX = 4 COUNTRY = UTA }
+				add_political_power = -50
+			}
+			URS_agl_row4_audience_click = {
+				URS_agl_action_audience = { INDEX = 4 COUNTRY = UTA }
+				add_political_power = -50
+			}
+			URS_agl_row4_strip_click = {
+				URS_agl_action_strip = { INDEX = 4 COUNTRY = UTA }
+				add_political_power = -50
+			}
+			URS_agl_row5_reward_click = {
+				URS_agl_action_reward = { INDEX = 5 COUNTRY = UFA }
+				add_political_power = -50
+			}
+			URS_agl_row5_drill_click = {
+				URS_agl_action_drill = { INDEX = 5 COUNTRY = UFA }
+				add_political_power = -50
+			}
+			URS_agl_row5_supply_click = {
+				URS_agl_action_supply = { INDEX = 5 COUNTRY = UFA }
+				add_political_power = -50
+			}
+			URS_agl_row5_audience_click = {
+				URS_agl_action_audience = { INDEX = 5 COUNTRY = UFA }
+				add_political_power = -50
+			}
+			URS_agl_row5_strip_click = {
+				URS_agl_action_strip = { INDEX = 5 COUNTRY = UFA }
+				add_political_power = -50
+			}
+			URS_agl_row6_reward_click = {
+				URS_agl_action_reward = { INDEX = 6 COUNTRY = U5A }
+				add_political_power = -50
+			}
+			URS_agl_row6_drill_click = {
+				URS_agl_action_drill = { INDEX = 6 COUNTRY = U5A }
+				add_political_power = -50
+			}
+			URS_agl_row6_supply_click = {
+				URS_agl_action_supply = { INDEX = 6 COUNTRY = U5A }
+				add_political_power = -50
+			}
+			URS_agl_row6_audience_click = {
+				URS_agl_action_audience = { INDEX = 6 COUNTRY = U5A }
+				add_political_power = -50
+			}
+			URS_agl_row6_strip_click = {
+				URS_agl_action_strip = { INDEX = 6 COUNTRY = U5A }
+				add_political_power = -50
+			}
+			URS_agl_row7_reward_click = {
+				URS_agl_action_reward = { INDEX = 7 COUNTRY = U7A }
+				add_political_power = -50
+			}
+			URS_agl_row7_drill_click = {
+				URS_agl_action_drill = { INDEX = 7 COUNTRY = U7A }
+				add_political_power = -50
+			}
+			URS_agl_row7_supply_click = {
+				URS_agl_action_supply = { INDEX = 7 COUNTRY = U7A }
+				add_political_power = -50
+			}
+			URS_agl_row7_audience_click = {
+				URS_agl_action_audience = { INDEX = 7 COUNTRY = U7A }
+				add_political_power = -50
+			}
+			URS_agl_row7_strip_click = {
+				URS_agl_action_strip = { INDEX = 7 COUNTRY = U7A }
+				add_political_power = -50
+			}
+		}
+
+		triggers = {
+			URS_agl_row1_reward_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row1_drill_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row1_supply_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row1_audience_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row1_strip_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row2_reward_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row2_drill_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row2_supply_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row2_audience_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row2_strip_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row3_reward_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row3_drill_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row3_supply_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row3_audience_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row3_strip_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row4_reward_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row4_drill_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row4_supply_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row4_audience_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row4_strip_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row5_reward_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row5_drill_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row5_supply_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row5_audience_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row5_strip_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row6_reward_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row6_drill_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row6_supply_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row6_audience_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row6_strip_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row7_reward_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row7_drill_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row7_supply_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row7_audience_enabled = {
+				has_political_power = 50
+			}
+			URS_agl_row7_strip_enabled = {
+				has_political_power = 50
+			}
+		}
+	}
+}

@@ -1,0 +1,957 @@
+# ==============================================================================
+#  乌萨斯帝国 ·「集团军的忠诚试炼」
+#  --------------------------------------------------------------------------
+#  分类页入口：500×160 的摘要条 + 「查看完整名册」按钮。
+#  完整名册：1000×900 独立窗口，固定七行，每行 960×110。
+#  头像按原始 156×210 等比缩到 78×105（scale = 0.5），不再套正方形席位框。
+#
+#  不使用 dynamic_lists / 数组 / change_scope。
+# ==============================================================================
+guiTypes = {
+
+	# ==========================================================================
+	#  分类页入口条
+	# ==========================================================================
+	containerWindowType = {
+		name = "URS_army_group_loyalty_entry_window"
+		position = { x = 0 y = 0 }
+		size = { width = 500 height = 160 }
+
+		background = {
+			name = "URS_agl_entry_bg"
+			quadTextureSprite = "GFX_URS_agl_entry_bg"
+		}
+
+		instantTextBoxType = {
+			name = "URS_agl_entry_title"
+			position = { x = 12 y = -4 }
+			maxWidth = 400
+			maxHeight = 30
+			format = left
+			font = "hoi_24header"
+			text = "URS_agl_title_text"
+			alwaystransparent = yes
+		}
+
+		iconType = {
+			name = "URS_agl_entry_emblem"
+			position = { x = 448 y = -2 }
+			quadTextureSprite = "GFX_decision_category_army_reform"
+			scale = 0.5
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "URS_agl_entry_summary"
+			position = { x = 12 y = 34 }
+			maxWidth = 476
+			maxHeight = 20
+			format = left
+			font = "hoi_16mbs"
+			text = "URS_agl_summary_text"
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "URS_agl_entry_hint"
+			position = { x = 12 y = 58 }
+			maxWidth = 476
+			maxHeight = 20
+			format = left
+			font = "hoi_16mbs"
+			text = "URS_agl_entry_hint_text"
+			alwaystransparent = yes
+		}
+
+		buttonType = {
+			name = "URS_agl_open_button"
+			position = { x = 176 y = 92 }
+			quadTextureSprite = "GFX_button_148x34"
+			buttonFont = "hoi_16mbs"
+			buttonText = "URS_agl_open_button_text"
+			clicksound = click_default
+			pdx_tooltip = "URS_agl_open_button_text"
+		}
+	}
+
+	# ==========================================================================
+	#  完整名册窗口（固定七行）
+	# ==========================================================================
+	containerWindowType = {
+		name = "URS_army_group_loyalty_window"
+		position = { x = 0 y = 0 }
+		size = { width = 1000 height = 900 }
+
+		background = {
+			name = "URS_agl_window_bg"
+			quadTextureSprite = "GFX_URS_agl_panel_bg"
+		}
+
+		instantTextBoxType = {
+			name = "URS_agl_title"
+			position = { x = 20 y = 0 }
+			maxWidth = 760
+			maxHeight = 32
+			format = left
+			font = "hoi_24header"
+			text = "URS_agl_title_text"
+			alwaystransparent = yes
+		}
+
+		buttonType = {
+			name = "URS_agl_close_button"
+			position = { x = 958 y = 8 }
+			quadTextureSprite = "GFX_closebutton"
+			clicksound = click_close
+			pdx_tooltip = "CLOSE"
+		}
+
+		instantTextBoxType = {
+			name = "URS_agl_summary"
+			position = { x = 20 y = 34 }
+			maxWidth = 900
+			maxHeight = 20
+			format = left
+			font = "hoi_16mbs"
+			text = "URS_agl_summary_text"
+			alwaystransparent = yes
+		}
+
+		# ---------------- 第 1 行 · 中央集团军 ----------------
+		containerWindowType = {
+			name = "URS_agl_row1"
+			position = { x = 20 y = 70 }
+			size = { width = 960 height = 110 }
+			background = { name = "URS_agl_row1_bg" quadTextureSprite = "GFX_tiled_window_transparent_transparent" }
+			iconType = {
+				name = "URS_agl_row1_portrait"
+				position = { x = 8 y = 3 }
+				quadTextureSprite = "GFX_URS_agl_portrait_central"
+				scale = 0.5
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "URS_agl_row1_flag"
+				position = { x = 100 y = 8 }
+				quadTextureSprite = "GFX_URS_agl_flag_1"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row1_name"
+				position = { x = 150 y = 6 }
+				maxWidth = 200
+				maxHeight = 26
+				format = left
+				font = "hoi_18mbs"
+				text = "URS_agl_name_central"
+				pdx_tooltip = "URS_agl_tip_central"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row1_posting"
+				position = { x = 150 y = 40 }
+				maxWidth = 150
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "URS_agl_posting_central"
+				pdx_tooltip = "URS_agl_tip_central"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row1_status"
+				position = { x = 310 y = 40 }
+				maxWidth = 70
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "[GetURSAGTier_1]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row1_loyalty"
+				position = { x = 820 y = 6 }
+				maxWidth = 100
+				maxHeight = 32
+				format = right
+				font = "hoi_24header"
+				text = "[GetURSAGLoyaltyText_1]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row1_label"
+				position = { x = 820 y = 50 }
+				maxWidth = 100
+				maxHeight = 18
+				format = right
+				font = "hoi_16mbs"
+				text = "URS_agl_loyalty_label"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "URS_agl_row1_reward"
+				position = { x = 150 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_reward"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_reward_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row1_drill"
+				position = { x = 281 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_drill"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_drill_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row1_supply"
+				position = { x = 412 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_supply"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_supply_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row1_audience"
+				position = { x = 543 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_audience"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_audience_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row1_strip"
+				position = { x = 674 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_strip"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_strip_tt"
+			}
+		}
+
+		# ---------------- 第 2 行 · 第一集团军 ----------------
+		containerWindowType = {
+			name = "URS_agl_row2"
+			position = { x = 20 y = 184 }
+			size = { width = 960 height = 110 }
+			background = { name = "URS_agl_row2_bg" quadTextureSprite = "GFX_tiled_window_transparent_transparent" }
+			iconType = {
+				name = "URS_agl_row2_portrait"
+				position = { x = 8 y = 3 }
+				quadTextureSprite = "GFX_URS_agl_portrait_first"
+				scale = 0.5
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "URS_agl_row2_flag"
+				position = { x = 100 y = 8 }
+				quadTextureSprite = "GFX_URS_agl_flag_2"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row2_name"
+				position = { x = 150 y = 6 }
+				maxWidth = 200
+				maxHeight = 26
+				format = left
+				font = "hoi_18mbs"
+				text = "URS_agl_name_first"
+				pdx_tooltip = "URS_agl_tip_first"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row2_posting"
+				position = { x = 150 y = 40 }
+				maxWidth = 150
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "URS_agl_posting_first"
+				pdx_tooltip = "URS_agl_tip_first"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row2_status"
+				position = { x = 310 y = 40 }
+				maxWidth = 70
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "[GetURSAGTier_2]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row2_loyalty"
+				position = { x = 820 y = 6 }
+				maxWidth = 100
+				maxHeight = 32
+				format = right
+				font = "hoi_24header"
+				text = "[GetURSAGLoyaltyText_2]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row2_label"
+				position = { x = 820 y = 50 }
+				maxWidth = 100
+				maxHeight = 18
+				format = right
+				font = "hoi_16mbs"
+				text = "URS_agl_loyalty_label"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "URS_agl_row2_reward"
+				position = { x = 150 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_reward"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_reward_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row2_drill"
+				position = { x = 281 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_drill"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_drill_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row2_supply"
+				position = { x = 412 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_supply"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_supply_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row2_audience"
+				position = { x = 543 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_audience"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_audience_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row2_strip"
+				position = { x = 674 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_strip"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_strip_tt"
+			}
+		}
+
+		# ---------------- 第 3 行 · 第二集团军 ----------------
+		containerWindowType = {
+			name = "URS_agl_row3"
+			position = { x = 20 y = 298 }
+			size = { width = 960 height = 110 }
+			background = { name = "URS_agl_row3_bg" quadTextureSprite = "GFX_tiled_window_transparent_transparent" }
+			iconType = {
+				name = "URS_agl_row3_portrait"
+				position = { x = 8 y = 3 }
+				quadTextureSprite = "GFX_URS_agl_portrait_second"
+				scale = 0.5
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "URS_agl_row3_flag"
+				position = { x = 100 y = 8 }
+				quadTextureSprite = "GFX_URS_agl_flag_3"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row3_name"
+				position = { x = 150 y = 6 }
+				maxWidth = 200
+				maxHeight = 26
+				format = left
+				font = "hoi_18mbs"
+				text = "URS_agl_name_second"
+				pdx_tooltip = "URS_agl_tip_second"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row3_posting"
+				position = { x = 150 y = 40 }
+				maxWidth = 150
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "URS_agl_posting_second"
+				pdx_tooltip = "URS_agl_tip_second"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row3_status"
+				position = { x = 310 y = 40 }
+				maxWidth = 70
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "[GetURSAGTier_3]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row3_loyalty"
+				position = { x = 820 y = 6 }
+				maxWidth = 100
+				maxHeight = 32
+				format = right
+				font = "hoi_24header"
+				text = "[GetURSAGLoyaltyText_3]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row3_label"
+				position = { x = 820 y = 50 }
+				maxWidth = 100
+				maxHeight = 18
+				format = right
+				font = "hoi_16mbs"
+				text = "URS_agl_loyalty_label"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "URS_agl_row3_reward"
+				position = { x = 150 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_reward"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_reward_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row3_drill"
+				position = { x = 281 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_drill"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_drill_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row3_supply"
+				position = { x = 412 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_supply"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_supply_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row3_audience"
+				position = { x = 543 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_audience"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_audience_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row3_strip"
+				position = { x = 674 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_strip"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_strip_tt"
+			}
+		}
+
+		# ---------------- 第 4 行 · 第三集团军 ----------------
+		containerWindowType = {
+			name = "URS_agl_row4"
+			position = { x = 20 y = 412 }
+			size = { width = 960 height = 110 }
+			background = { name = "URS_agl_row4_bg" quadTextureSprite = "GFX_tiled_window_transparent_transparent" }
+			iconType = {
+				name = "URS_agl_row4_portrait"
+				position = { x = 8 y = 3 }
+				quadTextureSprite = "GFX_URS_agl_portrait_third"
+				scale = 0.5
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "URS_agl_row4_flag"
+				position = { x = 100 y = 8 }
+				quadTextureSprite = "GFX_URS_agl_flag_4"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row4_name"
+				position = { x = 150 y = 6 }
+				maxWidth = 200
+				maxHeight = 26
+				format = left
+				font = "hoi_18mbs"
+				text = "URS_agl_name_third"
+				pdx_tooltip = "URS_agl_tip_third"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row4_posting"
+				position = { x = 150 y = 40 }
+				maxWidth = 150
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "URS_agl_posting_third"
+				pdx_tooltip = "URS_agl_tip_third"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row4_status"
+				position = { x = 310 y = 40 }
+				maxWidth = 70
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "[GetURSAGTier_4]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row4_loyalty"
+				position = { x = 820 y = 6 }
+				maxWidth = 100
+				maxHeight = 32
+				format = right
+				font = "hoi_24header"
+				text = "[GetURSAGLoyaltyText_4]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row4_label"
+				position = { x = 820 y = 50 }
+				maxWidth = 100
+				maxHeight = 18
+				format = right
+				font = "hoi_16mbs"
+				text = "URS_agl_loyalty_label"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "URS_agl_row4_reward"
+				position = { x = 150 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_reward"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_reward_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row4_drill"
+				position = { x = 281 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_drill"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_drill_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row4_supply"
+				position = { x = 412 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_supply"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_supply_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row4_audience"
+				position = { x = 543 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_audience"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_audience_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row4_strip"
+				position = { x = 674 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_strip"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_strip_tt"
+			}
+		}
+
+		# ---------------- 第 5 行 · 第四集团军 ----------------
+		containerWindowType = {
+			name = "URS_agl_row5"
+			position = { x = 20 y = 526 }
+			size = { width = 960 height = 110 }
+			background = { name = "URS_agl_row5_bg" quadTextureSprite = "GFX_tiled_window_transparent_transparent" }
+			iconType = {
+				name = "URS_agl_row5_portrait"
+				position = { x = 8 y = 3 }
+				quadTextureSprite = "GFX_URS_agl_portrait_fourth"
+				scale = 0.5
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "URS_agl_row5_flag"
+				position = { x = 100 y = 8 }
+				quadTextureSprite = "GFX_URS_agl_flag_5"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row5_name"
+				position = { x = 150 y = 6 }
+				maxWidth = 200
+				maxHeight = 26
+				format = left
+				font = "hoi_18mbs"
+				text = "URS_agl_name_fourth"
+				pdx_tooltip = "URS_agl_tip_fourth"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row5_posting"
+				position = { x = 150 y = 40 }
+				maxWidth = 150
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "URS_agl_posting_fourth"
+				pdx_tooltip = "URS_agl_tip_fourth"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row5_status"
+				position = { x = 310 y = 40 }
+				maxWidth = 70
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "[GetURSAGTier_5]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row5_loyalty"
+				position = { x = 820 y = 6 }
+				maxWidth = 100
+				maxHeight = 32
+				format = right
+				font = "hoi_24header"
+				text = "[GetURSAGLoyaltyText_5]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row5_label"
+				position = { x = 820 y = 50 }
+				maxWidth = 100
+				maxHeight = 18
+				format = right
+				font = "hoi_16mbs"
+				text = "URS_agl_loyalty_label"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "URS_agl_row5_reward"
+				position = { x = 150 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_reward"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_reward_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row5_drill"
+				position = { x = 281 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_drill"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_drill_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row5_supply"
+				position = { x = 412 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_supply"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_supply_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row5_audience"
+				position = { x = 543 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_audience"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_audience_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row5_strip"
+				position = { x = 674 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_strip"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_strip_tt"
+			}
+		}
+
+		# ---------------- 第 6 行 · 第五集团军 ----------------
+		containerWindowType = {
+			name = "URS_agl_row6"
+			position = { x = 20 y = 640 }
+			size = { width = 960 height = 110 }
+			background = { name = "URS_agl_row6_bg" quadTextureSprite = "GFX_tiled_window_transparent_transparent" }
+			iconType = {
+				name = "URS_agl_row6_portrait"
+				position = { x = 8 y = 3 }
+				quadTextureSprite = "GFX_URS_agl_portrait_none"
+				scale = 0.5
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "URS_agl_row6_flag"
+				position = { x = 100 y = 8 }
+				quadTextureSprite = "GFX_URS_agl_flag_6"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row6_name"
+				position = { x = 150 y = 6 }
+				maxWidth = 200
+				maxHeight = 26
+				format = left
+				font = "hoi_18mbs"
+				text = "URS_agl_name_fifth"
+				pdx_tooltip = "URS_agl_tip_fifth"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row6_posting"
+				position = { x = 150 y = 40 }
+				maxWidth = 150
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "URS_agl_posting_fifth"
+				pdx_tooltip = "URS_agl_tip_fifth"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row6_status"
+				position = { x = 310 y = 40 }
+				maxWidth = 70
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "[GetURSAGTier_6]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row6_loyalty"
+				position = { x = 820 y = 6 }
+				maxWidth = 100
+				maxHeight = 32
+				format = right
+				font = "hoi_24header"
+				text = "[GetURSAGLoyaltyText_6]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row6_label"
+				position = { x = 820 y = 50 }
+				maxWidth = 100
+				maxHeight = 18
+				format = right
+				font = "hoi_16mbs"
+				text = "URS_agl_loyalty_label"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "URS_agl_row6_reward"
+				position = { x = 150 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_reward"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_reward_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row6_drill"
+				position = { x = 281 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_drill"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_drill_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row6_supply"
+				position = { x = 412 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_supply"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_supply_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row6_audience"
+				position = { x = 543 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_audience"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_audience_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row6_strip"
+				position = { x = 674 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_strip"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_strip_tt"
+			}
+		}
+
+		# ---------------- 第 7 行 · 第七集团军 ----------------
+		containerWindowType = {
+			name = "URS_agl_row7"
+			position = { x = 20 y = 754 }
+			size = { width = 960 height = 110 }
+			background = { name = "URS_agl_row7_bg" quadTextureSprite = "GFX_tiled_window_transparent_transparent" }
+			iconType = {
+				name = "URS_agl_row7_portrait"
+				position = { x = 8 y = 3 }
+				quadTextureSprite = "GFX_URS_agl_portrait_none"
+				scale = 0.5
+				alwaystransparent = yes
+			}
+			iconType = {
+				name = "URS_agl_row7_flag"
+				position = { x = 100 y = 8 }
+				quadTextureSprite = "GFX_URS_agl_flag_7"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row7_name"
+				position = { x = 150 y = 6 }
+				maxWidth = 200
+				maxHeight = 26
+				format = left
+				font = "hoi_18mbs"
+				text = "URS_agl_name_seventh"
+				pdx_tooltip = "URS_agl_tip_seventh"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row7_posting"
+				position = { x = 150 y = 40 }
+				maxWidth = 150
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "URS_agl_posting_seventh"
+				pdx_tooltip = "URS_agl_tip_seventh"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row7_status"
+				position = { x = 310 y = 40 }
+				maxWidth = 70
+				maxHeight = 20
+				format = left
+				font = "hoi_16mbs"
+				text = "[GetURSAGTier_7]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row7_loyalty"
+				position = { x = 820 y = 6 }
+				maxWidth = 100
+				maxHeight = 32
+				format = right
+				font = "hoi_24header"
+				text = "[GetURSAGLoyaltyText_7]"
+				alwaystransparent = yes
+			}
+			instantTextBoxType = {
+				name = "URS_agl_row7_label"
+				position = { x = 820 y = 50 }
+				maxWidth = 100
+				maxHeight = 18
+				format = right
+				font = "hoi_16mbs"
+				text = "URS_agl_loyalty_label"
+				alwaystransparent = yes
+			}
+			buttonType = {
+				name = "URS_agl_row7_reward"
+				position = { x = 150 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_reward"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_reward_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row7_drill"
+				position = { x = 281 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_drill"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_drill_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row7_supply"
+				position = { x = 412 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_supply"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_supply_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row7_audience"
+				position = { x = 543 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_audience"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_audience_tt"
+			}
+			buttonType = {
+				name = "URS_agl_row7_strip"
+				position = { x = 674 y = 70 }
+				quadTextureSprite = "GFX_button_123x34"
+				buttonFont = "hoi_16mbs"
+				buttonText = "URS_agl_btn_strip"
+				clicksound = click_default
+				pdx_tooltip = "URS_agl_btn_strip_tt"
+			}
+		}
+
+		instantTextBoxType = {
+			name = "URS_agl_footer"
+			position = { x = 20 y = 872 }
+			maxWidth = 940
+			maxHeight = 20
+			format = left
+			font = "hoi_16mbs"
+			text = "URS_agl_footer_text"
+			alwaystransparent = yes
+		}
+	}
+}

@@ -1,0 +1,29 @@
+# 圣骏堡规程 —— 阵营目标「维持秩序稳定」
+# 衡量口径与 faction_manifest_protector_of_peace 相同：世界上仍处于和平状态的国家比例。
+# 签约成员在阵营内的份量随进度累积；进度达到 75% 后全体成员获得稳定度加成。
+@manifest_fulfilled_value = 0.75
+
+faction_manifest_regulation_pact = {
+	name = regulation_pact_manifest_name
+	description = regulation_pact_manifest_desc
+	is_manifest = yes
+
+	ratio_progress = {
+		total_amount_collection = game:all_countries
+		completed_amount_collection = collection:world_at_peace_countries
+
+		scale = {
+			stability_factor = 0.08
+		}
+
+		progress_sections = {
+			manifest_fulfilled = {
+				min = @manifest_fulfilled_value
+
+				modifier = {
+					stability_factor = 0.05
+				}
+			}
+		}
+	}
+}

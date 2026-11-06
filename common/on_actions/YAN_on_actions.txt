@@ -134,4 +134,29 @@ on_actions = {
 
 	# 岁醒树「岁陵之约」死线已随该树于 2026-10-25 删除。
 	# 【岁的界园志异】模块已于 2026-10-25 归档，原 on_daily_YAN / YAN_Jy_Daily 一并移除。
+	# 变革树的感染者问题已改为动态民族精神（stability_weekly / war_support_weekly），
+	# 不再需要 on_weekly_YAN 脚本结算。
+
+	# 变革树：策划稿「完成龙门惨案后，该国策自动推进」
+	# 「山海众大串联！」与「感染者非法集结！」在龙门惨案完成后自动完成。
+	on_daily_YAN = {
+		effect = {
+			if = {
+				limit = {
+					has_focus_tree = YAN_reform_tree
+					has_completed_focus = YAN_reform_2
+					NOT = { has_completed_focus = YAN_reform_3 }
+				}
+				complete_national_focus = YAN_reform_3
+			}
+			if = {
+				limit = {
+					has_focus_tree = YAN_reform_tree
+					has_completed_focus = YAN_reform_2
+					NOT = { has_completed_focus = YAN_reform_4 }
+				}
+				complete_national_focus = YAN_reform_4
+			}
+		}
+	}
 }
