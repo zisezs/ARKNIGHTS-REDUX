@@ -141,6 +141,9 @@ on_actions = {
 	# 「山海众大串联！」与「感染者非法集结！」在龙门惨案完成后自动完成。
 	on_daily_YAN = {
 		effect = {
+			# 岁岁今朝：忠诚每 60 天 +1、80 个司×行动冷却递减、归零触发岁怒
+			YAN_suisui_daily_tick = yes
+
 			if = {
 				limit = {
 					has_focus_tree = YAN_reform_tree

@@ -1,0 +1,690 @@
+# ==============================================================================
+#  大炎 ·「岁岁今朝」—— 脚本效果
+#
+#  节点编号（YAN_suisui_sel）：
+#    1 sulang   2 wanyuan  3 huanjiang 4 litang   5 zhuyun
+#    6 jinyuan  7 chuchang 8 jizhou    9 shuzhou  10 shangshu
+#    11 zhuzhou 12 zhenhai 13 xingming 14 wujiang 15 qizhou
+#    16 yongan  17 chengtian 18 luochang 19 weijiang 20 zhenlong_direct
+#
+#  全局变量：
+#    YAN_suisui_loyalty   0..10   代理人忠诚（初始 10，每 60 天 +1）
+#    YAN_suisui_sel       0..20   当前选中节点
+#    YAN_suisui_days      0..59   忠诚增长计数器
+#    YAN_suisui_cd_<key>_<1..4>   每个司每个行动的独立冷却（天）
+#
+#  岁怒：忠诚归零 → YAN_suisui_locked（值锁 10，四行动全部禁用）+ news_event yanse.1
+# ==============================================================================
+
+# 开局/国策完成初始化：只在国策完成时调用一次；老存档由 daily tick 兜底。
+YAN_suisui_init = {
+	set_variable = { YAN_suisui_loyalty = 10 }
+	set_variable = { YAN_suisui_sel = 0 }
+	set_variable = { YAN_suisui_days = 0 }
+	set_variable = { YAN_suisui_flash_days = 0 }
+	# AI 使用系统的计数器（每年一次、行动 1..4 轮换）
+	set_variable = { YAN_suisui_ai_days = 0 }
+	set_variable = { YAN_suisui_ai_act = 0 }
+
+	# 20 个节点 × 4 个行动
+	set_variable = { YAN_suisui_cd_sulang_1 = 0 }
+	set_variable = { YAN_suisui_cd_sulang_2 = 0 }
+	set_variable = { YAN_suisui_cd_sulang_3 = 0 }
+	set_variable = { YAN_suisui_cd_sulang_4 = 0 }
+	set_variable = { YAN_suisui_cd_wanyuan_1 = 0 }
+	set_variable = { YAN_suisui_cd_wanyuan_2 = 0 }
+	set_variable = { YAN_suisui_cd_wanyuan_3 = 0 }
+	set_variable = { YAN_suisui_cd_wanyuan_4 = 0 }
+	set_variable = { YAN_suisui_cd_huanjiang_1 = 0 }
+	set_variable = { YAN_suisui_cd_huanjiang_2 = 0 }
+	set_variable = { YAN_suisui_cd_huanjiang_3 = 0 }
+	set_variable = { YAN_suisui_cd_huanjiang_4 = 0 }
+	set_variable = { YAN_suisui_cd_litang_1 = 0 }
+	set_variable = { YAN_suisui_cd_litang_2 = 0 }
+	set_variable = { YAN_suisui_cd_litang_3 = 0 }
+	set_variable = { YAN_suisui_cd_litang_4 = 0 }
+	set_variable = { YAN_suisui_cd_zhuyun_1 = 0 }
+	set_variable = { YAN_suisui_cd_zhuyun_2 = 0 }
+	set_variable = { YAN_suisui_cd_zhuyun_3 = 0 }
+	set_variable = { YAN_suisui_cd_zhuyun_4 = 0 }
+	set_variable = { YAN_suisui_cd_jinyuan_1 = 0 }
+	set_variable = { YAN_suisui_cd_jinyuan_2 = 0 }
+	set_variable = { YAN_suisui_cd_jinyuan_3 = 0 }
+	set_variable = { YAN_suisui_cd_jinyuan_4 = 0 }
+	set_variable = { YAN_suisui_cd_chuchang_1 = 0 }
+	set_variable = { YAN_suisui_cd_chuchang_2 = 0 }
+	set_variable = { YAN_suisui_cd_chuchang_3 = 0 }
+	set_variable = { YAN_suisui_cd_chuchang_4 = 0 }
+	set_variable = { YAN_suisui_cd_jizhou_1 = 0 }
+	set_variable = { YAN_suisui_cd_jizhou_2 = 0 }
+	set_variable = { YAN_suisui_cd_jizhou_3 = 0 }
+	set_variable = { YAN_suisui_cd_jizhou_4 = 0 }
+	set_variable = { YAN_suisui_cd_shuzhou_1 = 0 }
+	set_variable = { YAN_suisui_cd_shuzhou_2 = 0 }
+	set_variable = { YAN_suisui_cd_shuzhou_3 = 0 }
+	set_variable = { YAN_suisui_cd_shuzhou_4 = 0 }
+	set_variable = { YAN_suisui_cd_shangshu_1 = 0 }
+	set_variable = { YAN_suisui_cd_shangshu_2 = 0 }
+	set_variable = { YAN_suisui_cd_shangshu_3 = 0 }
+	set_variable = { YAN_suisui_cd_shangshu_4 = 0 }
+	set_variable = { YAN_suisui_cd_zhuzhou_1 = 0 }
+	set_variable = { YAN_suisui_cd_zhuzhou_2 = 0 }
+	set_variable = { YAN_suisui_cd_zhuzhou_3 = 0 }
+	set_variable = { YAN_suisui_cd_zhuzhou_4 = 0 }
+	set_variable = { YAN_suisui_cd_zhenhai_1 = 0 }
+	set_variable = { YAN_suisui_cd_zhenhai_2 = 0 }
+	set_variable = { YAN_suisui_cd_zhenhai_3 = 0 }
+	set_variable = { YAN_suisui_cd_zhenhai_4 = 0 }
+	set_variable = { YAN_suisui_cd_xingming_1 = 0 }
+	set_variable = { YAN_suisui_cd_xingming_2 = 0 }
+	set_variable = { YAN_suisui_cd_xingming_3 = 0 }
+	set_variable = { YAN_suisui_cd_xingming_4 = 0 }
+	set_variable = { YAN_suisui_cd_wujiang_1 = 0 }
+	set_variable = { YAN_suisui_cd_wujiang_2 = 0 }
+	set_variable = { YAN_suisui_cd_wujiang_3 = 0 }
+	set_variable = { YAN_suisui_cd_wujiang_4 = 0 }
+	set_variable = { YAN_suisui_cd_qizhou_1 = 0 }
+	set_variable = { YAN_suisui_cd_qizhou_2 = 0 }
+	set_variable = { YAN_suisui_cd_qizhou_3 = 0 }
+	set_variable = { YAN_suisui_cd_qizhou_4 = 0 }
+	set_variable = { YAN_suisui_cd_yongan_1 = 0 }
+	set_variable = { YAN_suisui_cd_yongan_2 = 0 }
+	set_variable = { YAN_suisui_cd_yongan_3 = 0 }
+	set_variable = { YAN_suisui_cd_yongan_4 = 0 }
+	set_variable = { YAN_suisui_cd_chengtian_1 = 0 }
+	set_variable = { YAN_suisui_cd_chengtian_2 = 0 }
+	set_variable = { YAN_suisui_cd_chengtian_3 = 0 }
+	set_variable = { YAN_suisui_cd_chengtian_4 = 0 }
+	set_variable = { YAN_suisui_cd_luochang_1 = 0 }
+	set_variable = { YAN_suisui_cd_luochang_2 = 0 }
+	set_variable = { YAN_suisui_cd_luochang_3 = 0 }
+	set_variable = { YAN_suisui_cd_luochang_4 = 0 }
+	set_variable = { YAN_suisui_cd_weijiang_1 = 0 }
+	set_variable = { YAN_suisui_cd_weijiang_2 = 0 }
+	set_variable = { YAN_suisui_cd_weijiang_3 = 0 }
+	set_variable = { YAN_suisui_cd_weijiang_4 = 0 }
+	set_variable = { YAN_suisui_cd_zhenlong_direct_1 = 0 }
+	set_variable = { YAN_suisui_cd_zhenlong_direct_2 = 0 }
+	set_variable = { YAN_suisui_cd_zhenlong_direct_3 = 0 }
+	set_variable = { YAN_suisui_cd_zhenlong_direct_4 = 0 }
+}
+
+# 每日结算：忠诚每 60 天 +1；80 个冷却各减 1；归零触发岁怒。
+YAN_suisui_daily_tick = {
+	# AI 大炎：主动使用岁岁今朝，并在 1098 年归零触发岁怒
+	YAN_suisui_ai_tick = yes
+
+	# 老存档：国策已完成但旗标缺失 → 补解锁并初始化
+	if = {
+		limit = {
+			has_completed_focus = YAN_reform_7
+			NOT = { has_country_flag = YAN_suisui_unlocked }
+		}
+		set_country_flag = YAN_suisui_unlocked
+		YAN_suisui_init = yes
+	}
+
+	if = {
+		limit = { has_country_flag = YAN_suisui_unlocked }
+		if = {
+			limit = {
+				OR = {
+					NOT = { has_variable = YAN_suisui_loyalty }
+					NOT = { has_variable = YAN_suisui_flash_days }
+				}
+			}
+			YAN_suisui_init = yes
+		}
+
+		if = {
+			limit = { NOT = { has_country_flag = YAN_suisui_locked } }
+			# 每 60 天忠诚 +1（上限 10）
+			add_to_variable = { YAN_suisui_days = 1 }
+			if = {
+				limit = { check_variable = { YAN_suisui_days > 59 } }
+				subtract_from_variable = { YAN_suisui_days = 60 }
+				add_to_variable = { YAN_suisui_loyalty = 1 }
+				clamp_variable = { var = YAN_suisui_loyalty min = 0 max = 10 }
+			}
+
+			# 80 个独立冷却
+			if = { limit = { check_variable = { YAN_suisui_cd_sulang_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_sulang_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_sulang_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_sulang_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_sulang_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_sulang_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_sulang_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_sulang_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_wanyuan_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_wanyuan_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_wanyuan_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_wanyuan_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_wanyuan_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_wanyuan_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_wanyuan_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_wanyuan_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_huanjiang_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_huanjiang_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_huanjiang_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_huanjiang_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_huanjiang_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_huanjiang_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_huanjiang_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_huanjiang_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_litang_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_litang_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_litang_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_litang_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_litang_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_litang_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_litang_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_litang_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhuyun_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhuyun_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhuyun_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhuyun_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhuyun_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhuyun_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhuyun_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhuyun_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_jinyuan_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_jinyuan_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_jinyuan_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_jinyuan_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_jinyuan_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_jinyuan_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_jinyuan_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_jinyuan_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_chuchang_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_chuchang_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_chuchang_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_chuchang_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_chuchang_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_chuchang_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_chuchang_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_chuchang_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_jizhou_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_jizhou_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_jizhou_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_jizhou_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_jizhou_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_jizhou_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_jizhou_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_jizhou_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_shuzhou_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_shuzhou_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_shuzhou_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_shuzhou_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_shuzhou_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_shuzhou_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_shuzhou_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_shuzhou_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_shangshu_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_shangshu_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_shangshu_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_shangshu_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_shangshu_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_shangshu_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_shangshu_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_shangshu_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhuzhou_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhuzhou_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhuzhou_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhuzhou_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhuzhou_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhuzhou_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhuzhou_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhuzhou_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhenhai_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhenhai_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhenhai_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhenhai_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhenhai_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhenhai_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhenhai_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhenhai_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_xingming_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_xingming_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_xingming_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_xingming_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_xingming_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_xingming_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_xingming_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_xingming_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_wujiang_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_wujiang_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_wujiang_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_wujiang_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_wujiang_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_wujiang_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_wujiang_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_wujiang_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_qizhou_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_qizhou_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_qizhou_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_qizhou_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_qizhou_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_qizhou_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_qizhou_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_qizhou_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_yongan_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_yongan_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_yongan_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_yongan_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_yongan_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_yongan_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_yongan_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_yongan_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_chengtian_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_chengtian_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_chengtian_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_chengtian_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_chengtian_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_chengtian_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_chengtian_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_chengtian_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_luochang_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_luochang_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_luochang_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_luochang_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_luochang_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_luochang_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_luochang_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_luochang_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_weijiang_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_weijiang_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_weijiang_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_weijiang_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_weijiang_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_weijiang_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_weijiang_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_weijiang_4 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhenlong_direct_1 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhenlong_direct_1 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhenlong_direct_2 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhenlong_direct_2 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhenlong_direct_3 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhenlong_direct_3 = 1 } }
+			if = { limit = { check_variable = { YAN_suisui_cd_zhenlong_direct_4 > 0 } } subtract_from_variable = { YAN_suisui_cd_zhenlong_direct_4 = 1 } }
+
+			# 「代理人忠诚 -1」红字提示倒计时
+			if = { limit = { check_variable = { YAN_suisui_flash_days > 0 } } subtract_from_variable = { YAN_suisui_flash_days = 1 } }
+
+			YAN_suisui_check_wrath = yes
+		}
+	}
+}
+
+# AI 大炎：模拟玩家使用岁岁今朝，并在 1098 年强制归零触发岁怒。
+# 玩家仍然走 GUI 按钮，不会被这段逻辑接管。
+YAN_suisui_ai_tick = {
+	if = {
+		limit = { is_ai = yes }
+		# 1092 年后自动解锁，不依赖 AI 是否点完国策
+		if = {
+			limit = {
+				date > 1092.1.1
+				NOT = { has_country_flag = YAN_suisui_unlocked }
+			}
+			set_country_flag = YAN_suisui_unlocked
+			YAN_suisui_init = yes
+		}
+
+		if = {
+			limit = {
+				has_country_flag = YAN_suisui_unlocked
+				NOT = { has_country_flag = YAN_suisui_locked }
+			}
+			# 老存档/AI 变量缺失时补初值
+			if = {
+				limit = { NOT = { has_variable = YAN_suisui_ai_days } }
+				set_variable = { YAN_suisui_ai_days = 0 }
+				set_variable = { YAN_suisui_ai_act = 0 }
+			}
+
+			# 每年主动使用一次：轮流选司、轮流用四个行动
+			add_to_variable = { YAN_suisui_ai_days = 1 }
+			if = {
+				limit = {
+					check_variable = { YAN_suisui_ai_days > 364 }
+					check_variable = { YAN_suisui_loyalty > 1 }
+				}
+				subtract_from_variable = { YAN_suisui_ai_days = 365 }
+				add_to_variable = { YAN_suisui_sel = 1 }
+				if = {
+					limit = { check_variable = { YAN_suisui_sel > 20 } }
+					set_variable = { YAN_suisui_sel = 1 }
+				}
+				add_to_variable = { YAN_suisui_ai_act = 1 }
+				if = {
+					limit = { check_variable = { YAN_suisui_ai_act > 4 } }
+					set_variable = { YAN_suisui_ai_act = 1 }
+				}
+				if = {
+					limit = { check_variable = { YAN_suisui_ai_act = 1 } }
+					YAN_suisui_act1 = yes
+				}
+				else_if = {
+					limit = { check_variable = { YAN_suisui_ai_act = 2 } }
+					YAN_suisui_act2 = yes
+				}
+				else_if = {
+					limit = { check_variable = { YAN_suisui_ai_act = 3 } }
+					YAN_suisui_act3 = yes
+				}
+				else = {
+					YAN_suisui_act4 = yes
+				}
+			}
+
+			# 1098 年后忠诚强制归零 → 岁怒（YNW 终幕 / yanse.1）
+			if = {
+				limit = {
+					date > 1098.1.1
+					check_variable = { YAN_suisui_loyalty > 0 }
+				}
+				set_variable = { YAN_suisui_loyalty = 0 }
+				YAN_suisui_check_wrath = yes
+			}
+		}
+	}
+}
+
+# 忠诚归零：触发岁怒，随后把忠诚锁定为 10，四行动全部禁用。
+# 岁国易帜 / 建军 / 宣战原本挂在西北都护府异变终幕；岁怒改由忠诚度触发后，
+# 这里必须显式让 YNW 走一遍终幕，否则只会弹新闻、岁国不会爆出来。
+YAN_suisui_check_wrath = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = YAN_suisui_locked }
+			check_variable = { YAN_suisui_loyalty < 1 }
+		}
+		set_country_flag = YAN_suisui_locked
+		set_variable = { YAN_suisui_loyalty = 10 }
+
+		if = {
+			limit = {
+				YNW = {
+					exists = yes
+					NOT = { has_country_flag = YNW_upheaval_done_flag }
+				}
+			}
+			YNW = {
+				YNW_upheaval_become_sui_state = yes
+			}
+		}
+
+		news_event = { id = yanse.1 }
+	}
+}
+
+YAN_suisui_spend_loyalty = {
+	subtract_from_variable = { YAN_suisui_loyalty = 1 }
+	clamp_variable = { var = YAN_suisui_loyalty min = 0 max = 10 }
+	# 顶部红字提示「代理人忠诚 -1」保持 10 天
+	set_variable = { YAN_suisui_flash_days = 10 }
+}
+
+# 行动 2 / 3 的州循环直接内联在各分支里：参数化 effect 的参数名位于
+# every_state 的 limit（trigger）中时，引擎解析调用会把参数名当成 effect。
+
+# ---------------------------------------------------------------------------
+# 行动 1：要求秉烛人加强管控 —— 忠诚 -1，政治点数 +100
+# ---------------------------------------------------------------------------
+YAN_suisui_act1 = {
+	add_political_power = 100
+	if = { limit = { check_variable = { YAN_suisui_sel = 1 } } set_variable = { YAN_suisui_cd_sulang_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 2 } } set_variable = { YAN_suisui_cd_wanyuan_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 3 } } set_variable = { YAN_suisui_cd_huanjiang_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 4 } } set_variable = { YAN_suisui_cd_litang_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 5 } } set_variable = { YAN_suisui_cd_zhuyun_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 6 } } set_variable = { YAN_suisui_cd_jinyuan_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 7 } } set_variable = { YAN_suisui_cd_chuchang_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 8 } } set_variable = { YAN_suisui_cd_jizhou_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 9 } } set_variable = { YAN_suisui_cd_shuzhou_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 10 } } set_variable = { YAN_suisui_cd_shangshu_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 11 } } set_variable = { YAN_suisui_cd_zhuzhou_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 12 } } set_variable = { YAN_suisui_cd_zhenhai_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 13 } } set_variable = { YAN_suisui_cd_xingming_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 14 } } set_variable = { YAN_suisui_cd_wujiang_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 15 } } set_variable = { YAN_suisui_cd_qizhou_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 16 } } set_variable = { YAN_suisui_cd_yongan_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 17 } } set_variable = { YAN_suisui_cd_chengtian_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 18 } } set_variable = { YAN_suisui_cd_luochang_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 19 } } set_variable = { YAN_suisui_cd_weijiang_1 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 20 } } set_variable = { YAN_suisui_cd_zhenlong_direct_1 = 30 } }
+
+	YAN_suisui_spend_loyalty = yes
+	YAN_suisui_check_wrath = yes
+}
+
+# ---------------------------------------------------------------------------
+# 行动 2：要求代理人协助治疗感染者 —— 忠诚 -1，该司每州 +1000 人口
+# ---------------------------------------------------------------------------
+YAN_suisui_act2 = {
+	if = {
+		limit = { check_variable = { YAN_suisui_sel = 1 } }
+		set_variable = { YAN_suisui_cd_sulang_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_sulang_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 2 } }
+		set_variable = { YAN_suisui_cd_wanyuan_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_wanyuan_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 3 } }
+		set_variable = { YAN_suisui_cd_huanjiang_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_huanjiang_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 4 } }
+		set_variable = { YAN_suisui_cd_litang_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_litang_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 5 } }
+		set_variable = { YAN_suisui_cd_zhuyun_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_zhuyun_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 6 } }
+		set_variable = { YAN_suisui_cd_jinyuan_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_jinyuan_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 7 } }
+		set_variable = { YAN_suisui_cd_chuchang_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_chuchang_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 8 } }
+		set_variable = { YAN_suisui_cd_jizhou_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_jizhou_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 9 } }
+		set_variable = { YAN_suisui_cd_shuzhou_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_shuzhou_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 10 } }
+		set_variable = { YAN_suisui_cd_shangshu_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_shangshu_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 11 } }
+		set_variable = { YAN_suisui_cd_zhuzhou_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_zhuzhou_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 12 } }
+		set_variable = { YAN_suisui_cd_zhenhai_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_zhenhai_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 13 } }
+		set_variable = { YAN_suisui_cd_xingming_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_xingming_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 14 } }
+		set_variable = { YAN_suisui_cd_wujiang_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_wujiang_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 15 } }
+		set_variable = { YAN_suisui_cd_qizhou_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_qizhou_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 16 } }
+		set_variable = { YAN_suisui_cd_yongan_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_yongan_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 17 } }
+		set_variable = { YAN_suisui_cd_chengtian_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_chengtian_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 18 } }
+		set_variable = { YAN_suisui_cd_luochang_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_luochang_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 19 } }
+		set_variable = { YAN_suisui_cd_weijiang_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_xzs_weijiang_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 20 } }
+		set_variable = { YAN_suisui_cd_zhenlong_direct_2 = 30 }
+		set_temp_variable = { YAN_suisui_tmp_pop = 0 }
+		every_state = { limit = { has_state_flag = yan_zhenlong_direct_state } add_to_temp_variable = { YAN_suisui_tmp_pop = 1 } }
+		multiply_temp_variable = { YAN_suisui_tmp_pop = 1000 }
+		add_manpower = YAN_suisui_tmp_pop
+	}
+
+	YAN_suisui_spend_loyalty = yes
+	YAN_suisui_check_wrath = yes
+}
+
+# ---------------------------------------------------------------------------
+# 行动 3：要求代理人帮助防御天灾 —— 忠诚 -1，该司随机一州 +1 建筑槽
+# ---------------------------------------------------------------------------
+YAN_suisui_act3 = {
+	if = {
+		limit = { check_variable = { YAN_suisui_sel = 1 } }
+		set_variable = { YAN_suisui_cd_sulang_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_sulang_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 2 } }
+		set_variable = { YAN_suisui_cd_wanyuan_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_wanyuan_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 3 } }
+		set_variable = { YAN_suisui_cd_huanjiang_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_huanjiang_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 4 } }
+		set_variable = { YAN_suisui_cd_litang_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_litang_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 5 } }
+		set_variable = { YAN_suisui_cd_zhuyun_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_zhuyun_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 6 } }
+		set_variable = { YAN_suisui_cd_jinyuan_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_jinyuan_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 7 } }
+		set_variable = { YAN_suisui_cd_chuchang_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_chuchang_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 8 } }
+		set_variable = { YAN_suisui_cd_jizhou_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_jizhou_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 9 } }
+		set_variable = { YAN_suisui_cd_shuzhou_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_shuzhou_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 10 } }
+		set_variable = { YAN_suisui_cd_shangshu_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_shangshu_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 11 } }
+		set_variable = { YAN_suisui_cd_zhuzhou_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_zhuzhou_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 12 } }
+		set_variable = { YAN_suisui_cd_zhenhai_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_zhenhai_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 13 } }
+		set_variable = { YAN_suisui_cd_xingming_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_xingming_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 14 } }
+		set_variable = { YAN_suisui_cd_wujiang_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_wujiang_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 15 } }
+		set_variable = { YAN_suisui_cd_qizhou_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_qizhou_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 16 } }
+		set_variable = { YAN_suisui_cd_yongan_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_yongan_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 17 } }
+		set_variable = { YAN_suisui_cd_chengtian_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_chengtian_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 18 } }
+		set_variable = { YAN_suisui_cd_luochang_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_luochang_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 19 } }
+		set_variable = { YAN_suisui_cd_weijiang_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_xzs_weijiang_state } add_extra_state_shared_building_slots = 1 }
+	}
+	else_if = {
+		limit = { check_variable = { YAN_suisui_sel = 20 } }
+		set_variable = { YAN_suisui_cd_zhenlong_direct_3 = 30 }
+		random_owned_state = { limit = { has_state_flag = yan_zhenlong_direct_state } add_extra_state_shared_building_slots = 1 }
+	}
+
+	YAN_suisui_spend_loyalty = yes
+	YAN_suisui_check_wrath = yes
+}
+
+# ---------------------------------------------------------------------------
+# 行动 4：要求代理人镇压盗贼与邪教 —— 忠诚 -1，陆军经验 +25%，稳定度 +1%
+# ---------------------------------------------------------------------------
+YAN_suisui_act4 = {
+	army_experience = 25
+	add_stability = 0.01
+	if = { limit = { check_variable = { YAN_suisui_sel = 1 } } set_variable = { YAN_suisui_cd_sulang_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 2 } } set_variable = { YAN_suisui_cd_wanyuan_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 3 } } set_variable = { YAN_suisui_cd_huanjiang_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 4 } } set_variable = { YAN_suisui_cd_litang_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 5 } } set_variable = { YAN_suisui_cd_zhuyun_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 6 } } set_variable = { YAN_suisui_cd_jinyuan_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 7 } } set_variable = { YAN_suisui_cd_chuchang_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 8 } } set_variable = { YAN_suisui_cd_jizhou_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 9 } } set_variable = { YAN_suisui_cd_shuzhou_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 10 } } set_variable = { YAN_suisui_cd_shangshu_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 11 } } set_variable = { YAN_suisui_cd_zhuzhou_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 12 } } set_variable = { YAN_suisui_cd_zhenhai_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 13 } } set_variable = { YAN_suisui_cd_xingming_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 14 } } set_variable = { YAN_suisui_cd_wujiang_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 15 } } set_variable = { YAN_suisui_cd_qizhou_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 16 } } set_variable = { YAN_suisui_cd_yongan_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 17 } } set_variable = { YAN_suisui_cd_chengtian_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 18 } } set_variable = { YAN_suisui_cd_luochang_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 19 } } set_variable = { YAN_suisui_cd_weijiang_4 = 30 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 20 } } set_variable = { YAN_suisui_cd_zhenlong_direct_4 = 30 } }
+
+	YAN_suisui_spend_loyalty = yes
+	YAN_suisui_check_wrath = yes
+}

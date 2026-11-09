@@ -6,6 +6,38 @@
 
 YAN_Reform = {
 
+	# ── 「岁岁今朝」入口：点一下打开宣政司舆图 ────────────────────
+	YAN_suisui_open_decision = {
+		icon = GFX_focus_YAN_reform_7
+
+		visible = {
+			OR = {
+				has_country_flag = YAN_suisui_unlocked
+				has_completed_focus = YAN_reform_7
+			}
+		}
+
+		available = {
+			NOT = { has_country_flag = YAN_suisui_open }
+		}
+
+		cost = 0
+		days_re_enable = 1
+
+		complete_effect = {
+			if = {
+				limit = { NOT = { has_variable = YAN_suisui_loyalty } }
+				YAN_suisui_init = yes
+			}
+			set_country_flag = YAN_suisui_open
+			set_variable = { YAN_suisui_sel = 0 }
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
 	YAN_mission_purge_infected = {
 		icon = GFX_decision_generic_arrest
 
@@ -19,7 +51,11 @@ YAN_Reform = {
 
 		activation = {
 			has_country_flag = yan_reform_longmen_case
+			NOT = { has_country_flag = yan_reform_longmen_uprising }
 		}
+
+		# 任务只能触发一次
+		fire_only_once = yes
 
 		is_good = no
 		priority = 998

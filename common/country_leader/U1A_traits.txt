@@ -1,0 +1,55 @@
+leader_traits = {
+	# 沉默的政治家
+	U1A_trait_silent_politician = {
+		sprite = 13
+		random = no
+		political_power_factor = 0.15
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 第一集团军纪律
+	U1A_trait_army_discipline = {
+		sprite = 12
+		random = no
+		army_org_regain = 0.1
+		stability_weekly = -0.01
+		mobilization_speed = 0.05
+		army_attack_factor = 0.1
+		# 要塞防御 +10% → 落到步兵营防御（兵种修正只有 attack/defence/speed/org 五种后缀）
+		modifier_army_sub_unit_category_all_infantry_defence_factor = 0.1
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 乌-卡边境之盾
+	U1A_trait_border_shield = {
+		sprite = 9
+		random = no
+		army_defence_factor = 0.1
+		army_org_factor = 0.1
+		# 要塞攻坚防御 +20% → 步兵营攻击；冬季移动惩罚 -30% → 步兵营速度
+		modifier_army_sub_unit_category_all_infantry_attack_factor = 0.2
+		modifier_army_sub_unit_category_all_infantry_speed_factor = 0.3
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+
+	# 嘘声母子问题
+	U1A_trait_hushed_mother_son = {
+		sprite = 15
+		random = no
+		army_org_factor = -0.05
+		political_power_factor = -0.05
+
+		ai_will_do = {
+			factor = 2
+		}
+	}
+}

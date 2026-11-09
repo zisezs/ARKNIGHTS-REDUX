@@ -83,13 +83,6 @@ YAN_monthly_tick = {
 	# 1098.1.1 硬日期门 → 起「西北都护府异变」事件链（不能更早）
 	YNW_upheaval_start_check = yes
 
-	# 「西北都护府异变」已完结 → 补发「岁怒」超事件（终幕当场已发过一次，旗标去重）
-	if = {
-		limit = {
-			has_global_flag = YNW_upheaval_complete
-			NOT = { has_country_flag = yan_sui_wrath_news_flag }
-		}
-		set_country_flag = yan_sui_wrath_news_flag
-		news_event = { id = yanse.1 }
-	}
+	# 岁怒改由「岁岁今朝」忠诚度归零触发（YAN_suisui_check_wrath），
+	# 不再由西北都护府异变完结兜底发新闻。
 }

@@ -1,0 +1,23 @@
+# 大炎 ·「岁岁今朝」决议分类
+# 由国策【司岁台在行动】（YAN_reform_7）解锁：置旗 YAN_suisui_unlocked
+# 分类页里的小面板（scripted_gui = YAN_Suisui_Entry）是舆图入口。
+YAN_Suisui_Category = {
+	icon = GFX_decision_category_generic_political_actions
+
+	allowed = {
+		original_tag = YAN
+	}
+
+	visible = {
+		OR = {
+			has_country_flag = YAN_suisui_unlocked
+			has_completed_focus = YAN_reform_7
+		}
+	}
+
+	visible_when_empty = yes
+
+	scripted_gui = YAN_Suisui_Entry
+
+	priority = 8
+}

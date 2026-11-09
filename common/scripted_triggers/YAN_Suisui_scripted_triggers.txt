@@ -1,0 +1,103 @@
+# 大炎 ·「岁岁今朝」—— 脚本触发器
+# 行动可用性：未锁定，且当前选中节点对应的冷却为 0。
+# 节点编号见 YAN_Suisui_scripted_effects.txt 文件头。
+
+YAN_suisui_act1_ready = {
+	NOT = { has_country_flag = YAN_suisui_locked }
+	if = { limit = { check_variable = { YAN_suisui_sel = 1 } } check_variable = { YAN_suisui_cd_sulang_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 2 } } check_variable = { YAN_suisui_cd_wanyuan_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 3 } } check_variable = { YAN_suisui_cd_huanjiang_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 4 } } check_variable = { YAN_suisui_cd_litang_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 5 } } check_variable = { YAN_suisui_cd_zhuyun_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 6 } } check_variable = { YAN_suisui_cd_jinyuan_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 7 } } check_variable = { YAN_suisui_cd_chuchang_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 8 } } check_variable = { YAN_suisui_cd_jizhou_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 9 } } check_variable = { YAN_suisui_cd_shuzhou_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 10 } } check_variable = { YAN_suisui_cd_shangshu_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 11 } } check_variable = { YAN_suisui_cd_zhuzhou_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 12 } } check_variable = { YAN_suisui_cd_zhenhai_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 13 } } check_variable = { YAN_suisui_cd_xingming_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 14 } } check_variable = { YAN_suisui_cd_wujiang_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 15 } } check_variable = { YAN_suisui_cd_qizhou_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 16 } } check_variable = { YAN_suisui_cd_yongan_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 17 } } check_variable = { YAN_suisui_cd_chengtian_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 18 } } check_variable = { YAN_suisui_cd_luochang_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 19 } } check_variable = { YAN_suisui_cd_weijiang_1 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 20 } } check_variable = { YAN_suisui_cd_zhenlong_direct_1 = 0 } }
+	else = { always = no }
+}
+
+YAN_suisui_act2_ready = {
+	NOT = { has_country_flag = YAN_suisui_locked }
+	if = { limit = { check_variable = { YAN_suisui_sel = 1 } } check_variable = { YAN_suisui_cd_sulang_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 2 } } check_variable = { YAN_suisui_cd_wanyuan_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 3 } } check_variable = { YAN_suisui_cd_huanjiang_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 4 } } check_variable = { YAN_suisui_cd_litang_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 5 } } check_variable = { YAN_suisui_cd_zhuyun_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 6 } } check_variable = { YAN_suisui_cd_jinyuan_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 7 } } check_variable = { YAN_suisui_cd_chuchang_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 8 } } check_variable = { YAN_suisui_cd_jizhou_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 9 } } check_variable = { YAN_suisui_cd_shuzhou_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 10 } } check_variable = { YAN_suisui_cd_shangshu_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 11 } } check_variable = { YAN_suisui_cd_zhuzhou_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 12 } } check_variable = { YAN_suisui_cd_zhenhai_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 13 } } check_variable = { YAN_suisui_cd_xingming_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 14 } } check_variable = { YAN_suisui_cd_wujiang_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 15 } } check_variable = { YAN_suisui_cd_qizhou_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 16 } } check_variable = { YAN_suisui_cd_yongan_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 17 } } check_variable = { YAN_suisui_cd_chengtian_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 18 } } check_variable = { YAN_suisui_cd_luochang_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 19 } } check_variable = { YAN_suisui_cd_weijiang_2 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 20 } } check_variable = { YAN_suisui_cd_zhenlong_direct_2 = 0 } }
+	else = { always = no }
+}
+
+YAN_suisui_act3_ready = {
+	NOT = { has_country_flag = YAN_suisui_locked }
+	if = { limit = { check_variable = { YAN_suisui_sel = 1 } } check_variable = { YAN_suisui_cd_sulang_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 2 } } check_variable = { YAN_suisui_cd_wanyuan_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 3 } } check_variable = { YAN_suisui_cd_huanjiang_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 4 } } check_variable = { YAN_suisui_cd_litang_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 5 } } check_variable = { YAN_suisui_cd_zhuyun_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 6 } } check_variable = { YAN_suisui_cd_jinyuan_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 7 } } check_variable = { YAN_suisui_cd_chuchang_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 8 } } check_variable = { YAN_suisui_cd_jizhou_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 9 } } check_variable = { YAN_suisui_cd_shuzhou_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 10 } } check_variable = { YAN_suisui_cd_shangshu_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 11 } } check_variable = { YAN_suisui_cd_zhuzhou_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 12 } } check_variable = { YAN_suisui_cd_zhenhai_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 13 } } check_variable = { YAN_suisui_cd_xingming_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 14 } } check_variable = { YAN_suisui_cd_wujiang_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 15 } } check_variable = { YAN_suisui_cd_qizhou_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 16 } } check_variable = { YAN_suisui_cd_yongan_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 17 } } check_variable = { YAN_suisui_cd_chengtian_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 18 } } check_variable = { YAN_suisui_cd_luochang_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 19 } } check_variable = { YAN_suisui_cd_weijiang_3 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 20 } } check_variable = { YAN_suisui_cd_zhenlong_direct_3 = 0 } }
+	else = { always = no }
+}
+
+YAN_suisui_act4_ready = {
+	NOT = { has_country_flag = YAN_suisui_locked }
+	if = { limit = { check_variable = { YAN_suisui_sel = 1 } } check_variable = { YAN_suisui_cd_sulang_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 2 } } check_variable = { YAN_suisui_cd_wanyuan_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 3 } } check_variable = { YAN_suisui_cd_huanjiang_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 4 } } check_variable = { YAN_suisui_cd_litang_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 5 } } check_variable = { YAN_suisui_cd_zhuyun_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 6 } } check_variable = { YAN_suisui_cd_jinyuan_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 7 } } check_variable = { YAN_suisui_cd_chuchang_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 8 } } check_variable = { YAN_suisui_cd_jizhou_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 9 } } check_variable = { YAN_suisui_cd_shuzhou_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 10 } } check_variable = { YAN_suisui_cd_shangshu_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 11 } } check_variable = { YAN_suisui_cd_zhuzhou_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 12 } } check_variable = { YAN_suisui_cd_zhenhai_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 13 } } check_variable = { YAN_suisui_cd_xingming_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 14 } } check_variable = { YAN_suisui_cd_wujiang_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 15 } } check_variable = { YAN_suisui_cd_qizhou_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 16 } } check_variable = { YAN_suisui_cd_yongan_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 17 } } check_variable = { YAN_suisui_cd_chengtian_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 18 } } check_variable = { YAN_suisui_cd_luochang_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 19 } } check_variable = { YAN_suisui_cd_weijiang_4 = 0 } }
+	else_if = { limit = { check_variable = { YAN_suisui_sel = 20 } } check_variable = { YAN_suisui_cd_zhenlong_direct_4 = 0 } }
+	else = { always = no }
+}
