@@ -1288,6 +1288,24 @@ REU_misc_decisions = {
 		}
 	}
 
+	REU_change_portraits_Alina = {
+		icon = GFX_decision_eng_trade_unions_demand
+
+		visible = {
+			has_idea = REU_Alina_second_in_command
+		}
+
+		available = {
+			has_idea = REU_Alina_second_in_command
+		}
+
+		complete_effect = {
+			country_event = {
+				id = event_reu.129
+			}
+		}
+	}
+
 	REU_hidden_misc_decisions = {
 		icon = GFX_decision_generic_break_treaty
 

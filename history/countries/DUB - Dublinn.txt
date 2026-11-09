@@ -27,20 +27,53 @@ recruit_character = DUB_Prisoner			# 「囚犯」
 recruit_character = DUB_Orator				# 「雄辩家」
 
 add_ideas = {
-	TAR_extinguished_bell
-	TAR_debt_of_blood
-	TAR_two_embers
-	DUB_dead_fire_risen		# 初始人力法案：死火复生（动员法槽，直接顶掉默认的 volunteer_only）
 	subsistence_agriculture
 	electric_tool_production
 	high_illiteracy_rate
 	inefficient_administration
 	rampant_poverty
+	DUB_tara_spark
+	DUB_tara_spark_victoria
 }
+
+add_dynamic_modifier = {
+	modifier = DUB_s1_army_dm
+}
+set_variable = { DUB_s1_conscription_var = 0.2 }
+set_variable = { DUB_s1_capture_var = 0.1 }
+set_variable = { DUB_s1_reinforce_var = 0.02 }
+set_variable = { DUB_s1_population_var = 0.3 }
+set_variable = { DUB_s1_army_attack_var = -0.15 }
+set_variable = { DUB_s1_army_defence_var = -0.15 }
+set_variable = { DUB_s1_breakthrough_var = -0.05 }
+set_variable = { DUB_s1_org_var = -0.1 }
+set_variable = { DUB_s1_morale_var = -0.1 }
+set_variable = { DUB_s1_strength_var = 0.05 }
+
+set_variable = { DUB_infiltrated_state_num = 0 }
+set_variable = { DUB_infiltrated_state_max_num = 2 }
+set_variable = { DUB_infiltration_cost = 50 }
+
+add_dynamic_modifier = {
+	modifier = DUB_s1_economy_dm
+}
+set_variable = { DUB_s1_ic_var = -0.25 }
+set_variable = { DUB_s1_research_var = -0.3 }
+set_variable = { DUB_s1_prod_eff_gain_var = -0.2 }
+set_variable = { DUB_s1_prod_eff_max_var = -0.2 }
+set_variable = { DUB_s1_build_speed_var = -0.2 }
+set_variable = { DUB_s1_consumer_goods_var = 0.1 }
+
+add_dynamic_modifier = {
+	modifier = DUB_s1_leader_dm
+}
+set_variable = { DUB_s1_stability_var = -0.15 }
+set_variable = { DUB_s1_war_support_var = 0 }
+set_variable = { DUB_s1_pp_var = -0.2 }
 
 set_stability = 0.4
 set_war_support = 0.6
-set_research_slots = 4
+set_research_slots = 2
 
 set_technology = {
 	infantry_weapons_0 = 1
@@ -56,19 +89,8 @@ set_technology = {
 	dub_dead_fire_walker_tech = 1
 }
 
-# 唯一的编制档在模板文件里定义；必须排在 set_technology 之后，
-# 否则「死火行尸师」的 12 个团是在兵种解锁前加载的。
+add_manpower = 400000
 oob = "DUB_Start"
-
-# ── 编制锁：深池只能造「死火行尸师」这一档 ──
-# 顺序有讲究：先挂科技与 oob（模板要存在、兵种要可用），再全国锁，最后单独把这一档解回来。
-# country_lock_all_division_template = yes 挡住"新建/改模板"，
-# set_division_template_lock 决定某一档模板当下能不能用（RHL 外勤部队就是这么锁的）。
-country_lock_all_division_template = yes
-set_division_template_lock = {
-	division_template = "死火行尸师"
-	is_locked = no
-}
 
 set_politics = {
 	ruling_party = despotism

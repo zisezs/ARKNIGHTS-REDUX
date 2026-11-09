@@ -51,6 +51,15 @@ focus_tree = {
 		completion_reward = {
 			set_country_flag = KAZ_side_with_grove
 			clr_country_flag = KAZ_side_with_davila
+			add_popularity = {
+				ideology = progressivism
+				popularity = 0.02
+			}
+			add_political_power = 50
+			add_power_balance_value = {
+				id = KAZ_dual_regime_bop
+				value = -0.05
+			}
 		}
 	}
 
@@ -73,6 +82,15 @@ focus_tree = {
 		completion_reward = {
 			set_country_flag = KAZ_side_with_davila
 			clr_country_flag = KAZ_side_with_grove
+			add_popularity = {
+				ideology = despotism
+				popularity = 0.02
+			}
+			add_political_power = 20
+			add_power_balance_value = {
+				id = KAZ_dual_regime_bop
+				value = 0.05
+			}
 		}
 	}
 
@@ -87,6 +105,20 @@ focus_tree = {
 			focus = KAZ_pledge_allegiance_to_theresia
 		}
 		completion_reward = {
+			add_political_power = 25
+			army_experience = 25
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1000
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 200
+			}
+			add_power_balance_value = {
+				id = KAZ_dual_regime_bop
+				value = -0.10
+			}
 		}
 	}
 
@@ -101,6 +133,28 @@ focus_tree = {
 			focus = KAZ_pledge_allegiance_to_theresia
 		}
 		completion_reward = {
+			702 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = KAZ_babel_modifier_tt
+			add_to_variable = {
+				KAZ_babel_industrial_capacity_factory_var = -0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_to_variable = {
+				KAZ_babel_consumer_goods_factor_var = 0.025
+				tooltip = consumer_goods_factor_tt
+			}
+			add_to_variable = {
+				KAZ_babel_production_factory_efficiency_gain_factor_var = 0.025
+				tooltip = production_factory_efficiency_gain_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_political_power = 100
 		}
 	}
 
@@ -135,6 +189,16 @@ focus_tree = {
 			focus = KAZ_sway_unions
 		}
 		completion_reward = {
+			custom_effect_tooltip = KAZ_babel_modifier_tt
+			add_to_variable = {
+				KAZ_babel_liberalism_drift_var = 0.01
+				tooltip = liberalism_drift_tt
+			}
+			add_to_variable = {
+				KAZ_babel_conservatism_drift_var = 0.01
+				tooltip = conservatism_drift_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
 		}
 	}
 
@@ -152,6 +216,22 @@ focus_tree = {
 			focus = KAZ_sway_unions
 		}
 		completion_reward = {
+			add_popularity = {
+				ideology = progressivism
+				popularity = 0.025
+			}
+			custom_effect_tooltip = KAZ_babel_modifier_tt
+			add_to_variable = {
+				KAZ_babel_authoritarianism_drift_var = 0.01
+				tooltip = authoritarianism_drift_tt
+			}
+			add_to_variable = {
+				KAZ_babel_production_speed_industrial_complex_factor_var = -0.075
+				tooltip = production_speed_industrial_complex_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_political_power = 100
+			add_stability = -0.2
 		}
 	}
 
@@ -169,6 +249,19 @@ focus_tree = {
 			focus = KAZ_win_petty_bourgeois_support
 		}
 		completion_reward = {
+			add_stability = 0.1
+			add_war_support = -0.2
+			add_political_power = 75
+			custom_effect_tooltip = KAZ_Kazdel_revanchism_modifier_tt
+			add_to_variable = {
+				KAZ_revanchism_army_attack_factor_var = -0.075
+				tooltip = army_attack_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_power_balance_value = {
+				id = KAZ_dual_regime_bop
+				value = -0.10
+			}
 		}
 	}
 

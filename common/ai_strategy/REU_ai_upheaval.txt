@@ -1,0 +1,365 @@
+# 东达利亚的步枪优先：早期工厂全压在枪上，火炮与支援装备先让路
+REU_ai_guns_before_bread = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		always = yes
+	}
+
+	abort = {
+		num_of_military_factories > 45
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = infantry
+		value = 15
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 100
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = -60
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = support
+		value = -60
+	}
+}
+
+# 大叛乱期间全员上阵：师越多越好，后方不留守备
+REU_ai_all_out_levy = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Upheaval_Enabled
+	}
+
+	ai_strategy = {
+		type = ai_wanted_divisions_factor
+		value = 100
+	}
+
+	ai_strategy = {
+		type = force_build_armies
+		value = 100
+	}
+
+	ai_strategy = {
+		type = garrison
+		value = -100
+	}
+
+	ai_strategy = {
+		type = land_xp_spend_priority
+		id = division_template
+		value = 100
+	}
+}
+
+# 政治点不花在改善关系上，全留给国策、顾问与决议
+REU_ai_no_schmoozing = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		always = yes
+	}
+
+	ai_strategy = {
+		type = pp_spend_priority
+		id = relation
+		value = -9999
+	}
+}
+
+# 大叛乱一开打，先把东乌萨斯各家都标成假想敌
+REU_ai_prepare_upheaval = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Upheaval_Enabled
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = UFE
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = SKH
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = KMG
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = BAK
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = SGT
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = OMN
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = NAX
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = UEA
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = UTA
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = UCM
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = ULB
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = UFS
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = CYB
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = IST
+		value = 200
+	}
+
+	ai_strategy = {
+		type = prepare_for_war
+		id = KRS
+		value = 200
+	}
+}
+
+# 统一东达利亚后，装甲逐级上量（一档：40 厂起，先把编制与产线搭起来）
+REU_ai_armor_tier_1 = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Unification_After
+		num_of_military_factories > 39
+	}
+
+	abort = {
+		num_of_military_factories > 69
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 15
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 60
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = armor
+		value = 15
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 60
+	}
+}
+
+# 二档：70 厂起，装甲成为主攻
+REU_ai_armor_tier_2 = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Unification_After
+		num_of_military_factories > 69
+	}
+
+	abort = {
+		num_of_military_factories > 99
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 25
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 100
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = armor
+		value = 25
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 100
+	}
+}
+
+# 三档：100 厂起，装甲拳头 + 大编制步炮并行
+REU_ai_armor_tier_3 = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Unification_After
+		num_of_military_factories > 99
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 35
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -10
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 150
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = heavy_armor
+		value = 50
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = armor
+		value = 40
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 150
+	}
+}
+
+# 大编制步炮：统一后火炮与反坦要跟上编制扩张
+REU_ai_grand_battery = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Unification_After
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = artillery
+		value = 20
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 80
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = anti_tank
+		value = 50
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = motorized
+		value = 40
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = infantry
+		value = 100
+	}
+}

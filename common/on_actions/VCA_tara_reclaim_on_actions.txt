@@ -1,0 +1,52 @@
+on_actions = {
+
+	on_daily_VCA = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_country_flag = VCA_tara_reclaim_fired }
+					is_subject = no
+					country_exists = TAR
+					country_exists = DUB
+					NOT = { has_war_with = TAR }
+					NOT = { is_in_faction_with = TAR }
+					TAR = {
+						NOT = { has_war_with = VIC }
+					}
+					NOT = { country_exists = VRA }
+					NOT = { country_exists = VRB }
+					OR = {
+						TAR = {
+							any_controlled_state = {
+								has_state_flag = Tara_state_flag
+							}
+						}
+						DUB = {
+							any_controlled_state = {
+								has_state_flag = Tara_state_flag
+							}
+						}
+					}
+				}
+				country_event = { id = vca_tara.1 }
+			}
+
+			if = {
+				limit = {
+					has_country_flag = VCA_tara_reclaim_war
+					has_war_with = TAR
+					surrender_progress > 0.2
+				}
+				country_event = { id = vca_tara.3 }
+			}
+
+			if = {
+				limit = {
+					has_country_flag = VCA_tara_reclaim_war
+					NOT = { has_war_with = TAR }
+				}
+				clr_country_flag = VCA_tara_reclaim_war
+			}
+		}
+	}
+}

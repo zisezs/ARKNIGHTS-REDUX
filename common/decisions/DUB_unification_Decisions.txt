@@ -1,0 +1,104 @@
+DUB_unification = {
+
+	DUB_declare_victoria_reunified = {
+		icon = GFX_decision_generic_form_nation
+		cost = 50
+		fire_only_once = yes
+
+		visible = {
+			original_tag = DUB
+			NOT = {
+				has_country_flag = DUB_victoria_reunified
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = DUB_victoria_reunified
+			}
+			VIC = {
+				exists = no
+			}
+			VDA = {
+				exists = no
+			}
+			TAR = {
+				exists = no
+			}
+			VCA = {
+				exists = no
+			}
+			VWI = {
+				exists = no
+			}
+			VGO = {
+				exists = no
+			}
+			VAB = {
+				exists = no
+			}
+			VFI = {
+				exists = no
+			}
+			VAS = {
+				exists = no
+			}
+			VCR = {
+				exists = no
+			}
+			VVI = {
+				exists = no
+			}
+			VAN = {
+				exists = no
+			}
+			VEA = {
+				exists = no
+			}
+			VWA = {
+				exists = no
+			}
+			VFA = {
+				exists = no
+			}
+			VSA = {
+				exists = no
+			}
+			VRN = {
+				exists = no
+			}
+			VRA = {
+				exists = no
+			}
+			VRB = {
+				exists = no
+			}
+			VRC = {
+				exists = no
+			}
+			VRD = {
+				exists = no
+			}
+			VRE = {
+				exists = no
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = DUB_victoria_reunified
+			every_state = {
+				limit = {
+					is_core_of = VIC
+					NOT = {
+						is_core_of = GUL
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

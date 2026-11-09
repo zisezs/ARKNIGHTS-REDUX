@@ -1,0 +1,121 @@
+DUB_infiltration_raise_level = {
+	if = {
+		limit = {
+			NOT = { is_controlled_by = DUB }
+			controller = { DUB_victorian_country = yes }
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = DUB_infiltrated_state_3_modifier
+					scope = DUB
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_dynamic_modifier = {
+					modifier = DUB_infiltrated_state_2_modifier
+					scope = DUB
+				}
+			}
+			remove_dynamic_modifier = {
+				modifier = DUB_infiltrated_state_2_modifier
+			}
+			add_dynamic_modifier = {
+				modifier = DUB_infiltrated_state_3_modifier
+				scope = DUB
+			}
+		}
+		else_if = {
+			limit = {
+				has_dynamic_modifier = {
+					modifier = DUB_infiltrated_state_1_modifier
+					scope = DUB
+				}
+			}
+			remove_dynamic_modifier = {
+				modifier = DUB_infiltrated_state_1_modifier
+			}
+			add_dynamic_modifier = {
+				modifier = DUB_infiltrated_state_2_modifier
+				scope = DUB
+			}
+		}
+		else = {
+			add_dynamic_modifier = {
+				modifier = DUB_infiltrated_state_1_modifier
+				scope = DUB
+			}
+		}
+	}
+}
+
+DUB_absorb_wellington_duchy = {
+	if = {
+		limit = { TAR = { exists = yes } }
+		every_state = {
+			limit = { is_core_of = TAR }
+			add_core_of = DUB
+			add_claim_by = DUB
+		}
+		TAR = {
+			transfer_units_fraction = {
+				target = ROOT
+				size = 1
+				stockpile_ratio = 1
+				army_ratio = 1
+				navy_ratio = 1
+				air_ratio = 1
+			}
+			every_character = {
+				limit = { NOT = { is_country_leader = yes } }
+				set_nationality = ROOT
+			}
+			if = {
+				limit = { TAR_Wesle_Wellington = { is_country_leader = yes } }
+				retire_country_leader = yes
+			}
+			TAR_Wesle_Wellington = {
+				set_nationality = ROOT
+			}
+			if = {
+				limit = {
+					is_faction_leader = yes
+				}
+				dismantle_faction = yes
+			}
+		}
+		annex_country = { target = TAR }
+		if = {
+			limit = {
+				is_faction_leader = yes
+			}
+			dismantle_faction = yes
+		}
+		set_capital = { state = 593 }
+		recruit_character = TAR_Wesle_Wellington
+		recruit_character = TAR_Mike_Clint
+		recruit_character = TAR_Taomaosi_Bala
+		recruit_character = TAR_John_McKee
+		recruit_character = TAR_Xiemos_McClure
+		recruit_character = TAR_Kolok_nox
+		recruit_character = TAR_Maylock_Bans
+		recruit_character = TAR_Joyce_Ouduff
+		recruit_character = TAR_Ouned_Bukel
+		recruit_character = TAR_Briley_Bruce
+		recruit_character = TAR_Thomas_ODonnellan
+		recruit_character = TAR_Bobbie_Hos
+		recruit_character = TAR_Ole_Fragan
+		recruit_character = TAR_Terri_Clay
+		recruit_character = TAR_Sean_Gere
+		recruit_character = TAR_Robert_B_McBidegh
+		recruit_character = TAR_James_Conlari
+		recruit_character = TAR_Jennifer_Ocan
+		recruit_character = TAR_Neil_Klock
+		set_cosmetic_tag = Tara_Provisional_Government
+		set_country_flag = DUB_provisional_government_flag
+		load_focus_tree = {
+			tree = DUB_stage2
+			keep_completed = yes
+		}
+	}
+}

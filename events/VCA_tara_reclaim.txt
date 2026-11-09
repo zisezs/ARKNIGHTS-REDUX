@@ -1,0 +1,98 @@
+add_namespace = vca_tara
+
+country_event = {
+	id = vca_tara.1
+	title = vca_tara.1.t
+	desc = vca_tara.1.d
+	picture = GFX_report_event_Generic_Palace_Hall
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		set_country_flag = VCA_tara_reclaim_fired
+		set_country_flag = VCA_tara_reclaim_war
+		declare_war_on = {
+			target = TAR
+			type = annex_everything
+		}
+	}
+
+	option = {
+		name = vca_tara.1.a
+		add_war_support = 0.05
+		add_stability = -0.03
+	}
+}
+
+country_event = {
+	id = vca_tara.2
+	title = vca_tara.2.t
+	desc = vca_tara.2.d
+	picture = GFX_report_event_Generic_Wilderness
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		if = {
+			limit = { has_war_with = TAR }
+			white_peace = TAR
+		}
+		clr_country_flag = VCA_tara_reclaim_war
+		if = {
+			limit = {
+				TAR = { exists = yes }
+				DUB = { exists = yes }
+			}
+			DUB = {
+				country_event = {
+					id = DUB_s1.4
+					days = 1
+				}
+			}
+		}
+	}
+
+	option = {
+		name = vca_tara.2.a
+		add_political_power = -50
+		add_war_support = -0.05
+	}
+}
+
+country_event = {
+	id = vca_tara.3
+	title = vca_tara.3.t
+	desc = vca_tara.3.d
+	picture = GFX_report_event_Generic_Mansion_Room
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		if = {
+			limit = { has_war_with = TAR }
+			white_peace = TAR
+		}
+		clr_country_flag = VCA_tara_reclaim_war
+		if = {
+			limit = {
+				TAR = { exists = yes }
+				DUB = { exists = yes }
+			}
+			DUB = {
+				country_event = {
+					id = DUB_s1.4
+					days = 1
+				}
+			}
+		}
+	}
+
+	option = {
+		name = vca_tara.3.a
+		add_political_power = -50
+		add_stability = -0.05
+	}
+}

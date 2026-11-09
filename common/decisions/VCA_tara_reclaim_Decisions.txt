@@ -1,0 +1,29 @@
+VCA_tara_reclaim_category = {
+
+	VCA_tara_reclaim_mission = {
+		icon = GFX_decision_generic_military
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			has_country_flag = VCA_tara_reclaim_war
+			has_war_with = TAR
+		}
+
+		is_good = no
+
+		days_mission_timeout = 45
+
+		priority = 600
+
+		cancel_trigger = {
+			NOT = { has_country_flag = VCA_tara_reclaim_war }
+		}
+
+		timeout_effect = {
+			country_event = { id = vca_tara.2 }
+		}
+	}
+}

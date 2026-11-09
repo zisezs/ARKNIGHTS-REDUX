@@ -44,6 +44,17 @@ country_event = {
 
 	option = {
 		name = kaz_civilwar.2.a
+
+		if = {
+			limit = {
+				VIC = { exists = yes }
+			}
+			VIC = {
+				remove_dynamic_modifier = {
+					modifier = VIC_Sarkaz_invation_dynamic_modifier
+				}
+			}
+		}
 	}
 }
 

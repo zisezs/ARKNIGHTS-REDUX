@@ -224,14 +224,6 @@ DUB_war_annex_tar_effect = {
 		}
 		annex_country = { target = TAR transfer_troops = yes }
 	}
-	else = {
-		# 公爵领还只是个零领土名分：地无从可取，人照单全收
-		TAR = {
-			every_character = {
-				set_nationality = ROOT
-			}
-		}
-	}
 	TAR_dip_core_held_effect = yes
 	add_political_power = 60
 	add_stability = 0.05
@@ -316,10 +308,12 @@ DUB_war_navy_fold_effect = {
 
 # ── 伦蒂尼姆：断水断粮（打不动的城就让它自己渴） ──
 DUB_war_cistern_effect = {
-	434 = {
-		limit = { NOT = { is_controlled_by = ROOT } }
-		damage_building = { type = industrial_complex damage = 2 }
-		damage_building = { type = infrastructure damage = 2 }
+	if = {
+		limit = { 434 = { NOT = { is_controlled_by = ROOT } } }
+		434 = {
+			damage_building = { type = industrial_complex damage = 2 }
+			damage_building = { type = infrastructure damage = 2 }
+		}
 	}
 	# 围城方也要喝水：我们的军工同样吃紧，这一笔记在自己账上
 	add_political_power = -20
@@ -357,10 +351,12 @@ DUB_war_harbor_effect = {
 	capital_scope = {
 		add_building_construction = { type = dockyard level = 2 instant_build = yes }
 	}
-	3081 = {
-		limit = { is_owned_and_controlled_by = ROOT }
-		add_core_of = ROOT
-		add_building_construction = { type = naval_base level = 2 instant_build = yes }
+	if = {
+		limit = { 3081 = { is_owned_and_controlled_by = ROOT } }
+		3081 = {
+			add_core_of = ROOT
+			add_building_construction = { type = naval_base level = 2 instant_build = yes }
+		}
 	}
 	navy_experience = 30
 	add_political_power = 30

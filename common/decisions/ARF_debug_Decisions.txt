@@ -1,0 +1,117 @@
+ARF_debug_Decisions = {
+	ARF_debug_dub_tara_takeover = {
+		allowed = {
+			original_tag = DUB
+		}
+		available = {
+			NOT = { has_country_flag = DUB_provisional_government_flag }
+		}
+		complete_effect = {
+			27 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			175 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			180 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			231 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			573 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			588 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			593 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			600 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			616 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			620 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			621 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			659 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			660 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			663 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			672 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			711 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			734 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			764 = {
+				transfer_state_to = DUB
+				add_core_of = DUB
+			}
+			if = {
+				limit = {
+					TAR = { exists = yes }
+				}
+				TAR = {
+					if = {
+						limit = {
+							is_faction_leader = yes
+						}
+						dismantle_faction = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					is_faction_leader = yes
+				}
+				dismantle_faction = yes
+			}
+			set_capital = { state = 593 }
+			set_cosmetic_tag = Tara_Provisional_Government
+			set_country_flag = DUB_provisional_government_flag
+			load_focus_tree = {
+				tree = DUB_stage2
+				keep_completed = yes
+			}
+			country_event = {
+				id = event_tar.10003
+				days = 14
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

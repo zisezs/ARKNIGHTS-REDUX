@@ -1,0 +1,48 @@
+on_actions = {
+	on_war = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = DUB
+					}
+				}
+				FROM = {
+					every_owned_state = {
+						limit = {
+							has_dynamic_modifier = {
+								modifier = DUB_infiltrated_state_3_modifier
+								scope = DUB
+							}
+						}
+						force_enable_resistance = FROM
+						start_resistance = FROM
+						set_resistance = 60
+						set_compliance = 0
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						original_tag = DUB
+					}
+				}
+				ROOT = {
+					every_owned_state = {
+						limit = {
+							has_dynamic_modifier = {
+								modifier = DUB_infiltrated_state_3_modifier
+								scope = DUB
+							}
+						}
+						force_enable_resistance = ROOT
+						start_resistance = ROOT
+						set_resistance = 60
+						set_compliance = 0
+					}
+				}
+			}
+		}
+	}
+}

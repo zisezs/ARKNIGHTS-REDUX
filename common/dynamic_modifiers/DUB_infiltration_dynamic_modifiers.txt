@@ -1,0 +1,51 @@
+DUB_infiltrated_state_1_modifier = {
+	icon = GFX_modifiers_generic_military_plans
+	enable = { always = yes }
+
+	remove_trigger = {
+		DUB = {
+			exists = no
+		}
+	}
+
+	enemy_attrition = 0.03
+	enemy_army_speed_factor = -0.03
+	local_intel_to_enemies = -0.1
+	compliance_growth = 0.05
+}
+
+DUB_infiltrated_state_2_modifier = {
+	icon = GFX_modifiers_generic_military_plans
+	enable = { always = yes }
+
+	remove_trigger = {
+		DUB = {
+			exists = no
+		}
+	}
+
+	enemy_attrition = 0.06
+	enemy_army_speed_factor = -0.06
+	enemy_local_supplies = -0.05
+	local_intel_to_enemies = -0.15
+	compliance_growth = 0.1
+}
+
+DUB_infiltrated_state_3_modifier = {
+	icon = GFX_modifiers_generic_military_plans
+	enable = { always = yes }
+
+	remove_trigger = {
+		DUB = {
+			exists = no
+		}
+	}
+
+	enemy_attrition = 0.1
+	enemy_army_speed_factor = -0.1
+	enemy_local_supplies = -0.1
+	local_intel_to_enemies = -0.2
+	compliance_growth = 0.1
+
+	custom_modifier_tooltip = DUB_infiltrated_state_3_modifier_tt
+}

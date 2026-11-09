@@ -86,7 +86,7 @@ country_event = {
 			inherit_technology = VIC
 			set_research_slots = 2
 		}
-		
+
 		#威灵顿
         TAR = {
 			division_template = {
@@ -97,7 +97,7 @@ country_event = {
 				regiments = {
 					militia = { x = 0 y = 0 }
 					militia = { x = 0 y = 1 }
-				
+
 					militia = { x = 1 y = 0 }
 					militia = { x = 1 y = 1 }
 				}
@@ -123,10 +123,113 @@ country_event = {
 			transfer_state = 734
 			transfer_state = 764
 
+			593 = {
+				add_extra_state_shared_building_slots = 6
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			27 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			573 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			616 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			620 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			711 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+
+			add_ideas = {
+				no_voting
+				working_law_14h
+				isolation_management
+				local_warlord
+				subsistence_agriculture
+				electric_tool_production
+				high_illiteracy_rate
+				inefficient_administration
+				rampant_poverty
+				TAR_military_debuff_idea
+				TAR_politics_debuff_idea
+				TAR_economy_debuff_idea
+			}
+
+			set_war_support = 0.65
+			add_ideas = { service_by_requirement }
+			add_manpower = 600000
+
 			inherit_technology = VIC
 			set_research_slots = 2
 
 			load_oob = "TAR_Start"
+
+			country_event = {
+				id = event_tar.10003
+				days = 14
+			}
 
 			if = {
 				limit = {
@@ -154,7 +257,7 @@ country_event = {
 				regiments = {
 					militia = { x = 0 y = 0 }
 					militia = { x = 0 y = 1 }
-				
+
 					militia = { x = 1 y = 0 }
 					militia = { x = 1 y = 1 }
 				}
@@ -209,7 +312,7 @@ country_event = {
 				regiments = {
 					militia = { x = 0 y = 0 }
 					militia = { x = 0 y = 1 }
-				
+
 					militia = { x = 1 y = 0 }
 					militia = { x = 1 y = 1 }
 				}
@@ -259,7 +362,7 @@ country_event = {
 				regiments = {
 					militia = { x = 0 y = 0 }
 					militia = { x = 0 y = 1 }
-				
+
 					militia = { x = 1 y = 0 }
 					militia = { x = 1 y = 1 }
 				}
@@ -269,7 +372,7 @@ country_event = {
 			set_variable = { VIC_Abercorn_support = 0.2 }
 
 			set_country_flag = VIC_add_group_support
-			
+
 			transfer_state = 22
 			transfer_state = 33
 			transfer_state = 572
@@ -316,7 +419,7 @@ country_event = {
 				regiments = {
 					militia = { x = 0 y = 0 }
 					militia = { x = 0 y = 1 }
-				
+
 					militia = { x = 1 y = 0 }
 					militia = { x = 1 y = 1 }
 				}
@@ -349,7 +452,7 @@ country_event = {
 				regiments = {
 					militia = { x = 0 y = 0 }
 					militia = { x = 0 y = 1 }
-				
+
 					militia = { x = 1 y = 0 }
 					militia = { x = 1 y = 1 }
 				}
@@ -383,7 +486,7 @@ country_event = {
 				regiments = {
 					militia = { x = 0 y = 0 }
 					militia = { x = 0 y = 1 }
-				
+
 					militia = { x = 1 y = 0 }
 					militia = { x = 1 y = 1 }
 				}
@@ -480,7 +583,7 @@ country_event = {
 			inherit_technology = VIC
 			set_research_slots = 2
 		}
-		
+
 		#皇家海军
 		VRN = {
 			transfer_state = 660
@@ -496,6 +599,44 @@ country_event = {
 
 			inherit_technology = VIC
 			set_research_slots = 2
+
+			country_event = {
+				id = event_tar.10003
+				days = 14
+			}
+		}
+
+		if = {
+			limit = {
+				TAR = {
+					exists = yes
+					NOT = { is_in_faction = yes }
+				}
+			}
+			TAR = {
+				set_rule = { can_create_factions = yes }
+				if = {
+					limit = { has_dlc = "No Compromise, No Surrender" }
+					create_faction_from_template = {
+						template = faction_template_taran_independence_front
+						name = faction_taran_independence_front
+						icon = GFX_faction_icon_terra_balance_committee
+					}
+				}
+				else = {
+					create_faction = faction_taran_independence_front
+				}
+				if = {
+					limit = {
+						DUB = {
+							exists = yes
+							is_subject = no
+							NOT = { is_in_faction = yes }
+						}
+					}
+					add_to_faction = DUB
+				}
+			}
 		}
 
 		VRA = {
@@ -517,7 +658,7 @@ country_event = {
 		}
 
 		VRB = {
-			
+
 			transfer_state = 550
 			transfer_state = 631
 			transfer_state = 132
@@ -603,6 +744,7 @@ country_event = {
 		every_country = {
 			limit = {
 				victoria_unifier = yes
+				NOT = { original_tag = TAR }
 			}
 			set_cosmetic_tag = VIC_color
 		}
@@ -1536,7 +1678,7 @@ country_event = {
 	picture = GFX_report_event_VIC_street_night
 
 	is_triggered_only = yes
-	
+
 	major = yes
 	show_major = {
 		OR = {
@@ -1779,7 +1921,7 @@ country_event = {
 				}
 			}
 		}
-		
+
 		hidden_effect = {
 			if = {
 				limit = {
@@ -2070,7 +2212,7 @@ country_event = {
 				transfer_state = 414
 				transfer_state = 434
 				transfer_state = 595
-	
+
 				load_oob = "VEA_Start"
 			}
 			39 = {
@@ -2399,13 +2541,13 @@ country_event = {
 			news_event = {
 				id = worldnews_vic.1
 			}
-	
+
 			set_global_flag = VIC_civil_war_start
-	
+
 			VGO = {
 				drop_cosmetic_tag = yes
 			}
-	
+
 			VCA = {
 				if = {
 					limit = {
@@ -2433,12 +2575,12 @@ country_event = {
 						type = civil_war
 					}
 				}
-				
+
 				declare_war_on = {
 					target = VWI
 					type = civil_war
 				}
-	
+
 				every_subject_country = {
 					add_to_war = {
 						targeted_alliance = PREV
@@ -2456,11 +2598,11 @@ country_event = {
 						hostility_reason = asked_to_join
 					}
 				}
-	
+
 				VIC_war_preparations_modifier = yes
-	
+
 				mark_focus_tree_layout_dirty = yes
-	
+
 				clr_country_flag = VIC_add_group_support
 			}
 			VWI = {
@@ -2476,7 +2618,7 @@ country_event = {
 					target = VGO
 					type = civil_war
 				}
-	
+
 				every_subject_country = {
 					add_to_war = {
 						targeted_alliance = PREV
@@ -2494,13 +2636,13 @@ country_event = {
 						hostility_reason = asked_to_join
 					}
 				}
-	
+
 				VIC_war_preparations_modifier = yes
-	
+
 				mark_focus_tree_layout_dirty = yes
-	
+
 				clr_country_flag = VIC_add_group_support
-	
+
 				complete_national_focus = VWI_the_second_march_Lentinium
 			}
 			TAR = {
@@ -2512,7 +2654,7 @@ country_event = {
 					target = VGO
 					type = civil_war
 				}
-	
+
 				every_subject_country = {
 					add_to_war = {
 						targeted_alliance = PREV
@@ -2530,13 +2672,17 @@ country_event = {
 						hostility_reason = asked_to_join
 					}
 				}
-	
+
 				VIC_war_preparations_modifier = yes
-	
+
 				mark_focus_tree_layout_dirty = yes
-	
+
 				clr_country_flag = VIC_add_group_support
 			}
+			DUB = {
+				load_oob = "DUB_War_Start"
+			}
+
 			VGO = {
 				declare_war_on = {
 					target = VWI
@@ -2546,7 +2692,7 @@ country_event = {
 					target = TAR
 					type = civil_war
 				}
-	
+
 				every_subject_country = {
 					add_to_war = {
 						targeted_alliance = PREV
@@ -2564,11 +2710,11 @@ country_event = {
 						hostility_reason = asked_to_join
 					}
 				}
-	
+
 				VIC_war_preparations_modifier = yes
-				
+
 				mark_focus_tree_layout_dirty = yes
-	
+
 				clr_country_flag = VIC_add_group_support
 			}
 			DCN = {

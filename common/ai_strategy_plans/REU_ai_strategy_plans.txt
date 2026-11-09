@@ -1,0 +1,156 @@
+# 东达利亚阶段：从冻原上的第一面红旗，一路点到统一
+REU_ai_plan_upheaval = {
+
+	name = "REU_ai_plan_upheaval_AT"
+	desc = "REU_ai_plan_upheaval_DESC"
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		NOT = { has_country_flag = East_Ursus_Unification_After }
+	}
+
+	ai_national_focuses = {
+		REU_Light_the_spark
+		REU_Promotion_team
+		REU_Make_recon_Squad
+		REU_Fire_kid
+		REU_Free
+		REU_Lost
+		REU_To_improve_the_conditions_of_the_campsite
+		REU_Establish_material_exchange_channels
+		REU_The_teacher_of_the_infected
+		REU_Prepare_the_city_propaganda_organization
+		REU_Chernobog_recon
+
+		REU_Light_from_Kazdel
+		REU_Communism_coming
+		REU_One_by_one
+		REU_One_by_more
+		REU_Unremitting
+		REU_Rely_on_transactions
+		REU_The_new_communists
+		REU_Mass_line
+		REU_Hug_each_other
+		REU_Let_the_soldiers_go_home
+		REU_Class_view
+		REU_Anti
+		REU_Public_trial_meeting
+		REU_Vanguard_organization
+		REU_Activist_study_class
+		REU_Political_commissar
+		REU_The_first_Congress
+		REU_The_experience_of_tundra
+		REU_Democratic_management
+		REU_Deal_with_the_white_area
+
+		REU_emergency_meeting
+		REU_Take_Everything
+		REU_whole_to_parts
+		REU_Light_Pack
+		REU_enter_Blagoveshchensk
+		REU_second_hometown
+		REU_reorganization_congress
+		REU_integrated_forces
+		REU_Sarkaz_and_Ursus
+		REU_Rase_experience
+		REU_deep_in_mass
+		REU_leaders_school
+		REU_group_command_system
+		REU_land_redistribution
+		REU_first_Soviets_Congress
+		REU_political_commissar_power
+		REU_establish_intelligence_system
+		REU_village_democracy_experiment
+
+		REU_ministry_of_finance
+		REU_ministry_of_industry
+		REU_ministry_of_foreign_affairs
+		REU_ministry_of_national_defense
+		REU_military_officers_school
+		REU_base_literacy_program
+		REU_production_campaign
+		REU_restore_transportation_system
+		REU_political_army
+		REU_local_militia
+		REU_reverse_engineering
+		REU_procurement_communication_equipment
+		REU_experimental_gunnery_unit
+		REU_industrial_recovery_plan
+		REU_reconstruct_backward_urban
+		REU_restore_educational_order
+		REU_Revise_grain_collection_system
+	}
+}
+
+# 统一之后：第三阶段与军事树。互斥的「最终进军 / 理想之曙光」交给游戏规则决定，不在此处指定
+REU_ai_plan_revolution = {
+
+	name = "REU_ai_plan_revolution_AT"
+	desc = "REU_ai_plan_revolution_DESC"
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Unification_After
+	}
+
+	abort = {
+		has_country_flag = Ursus_Unification
+	}
+
+	ai_national_focuses = {
+		REU_Phase_3
+
+		REU_Willing_to_sing
+		REU_Good_at_resisting
+		REU_Unify_the_thinking_within_the_party
+		REU_The_spirit_of_hard_work_and_simplicity
+		REU_Improved_vehicle_production
+		REU_Dare_to_dream
+		REU_Encourage_revolutionary_arts
+		REU_Agricultural_cooperatives
+		REU_Discover_Warlock_talent
+		REU_Artillery_fire_raid
+		REU_Defeat_Ursus_militarism
+		REU_Revolutionary_education
+		REU_Front_line_initiative
+		REU_Civil
+		REU_Modern_fortifications
+		REU_Large_corps_synergy
+		REU_Red_Night_raid
+
+		REU_Vanguard_Army
+		REU_Massive_armored_assault
+		REU_Modern_infantry_tactics
+		REU_Warriors
+		REU_Joint_operations_of_multiple_corps
+		REU_Loyal_soldiers
+		REU_Orders_and_prohibitions
+		REU_Militarization_of_plant_management
+		REU_Centralized_command_system
+		REU_Military_Academy
+		REU_Advanced_military_engineering_equipment
+		REU_Specialized_logistics_troops
+		REU_Special_Scouts
+		REU_Military_pickets
+		REU_Lead_by_example
+		REU_Movement_Annihilation_War
+		REU_Air
+
+		REU_Berserk_into_Saint_Grypherburg
+		REU_Contact_Metropolitan_Workers
+		REU_Reaching_out_to_ethnic_minorities
+		REU_Weapons_Design_Institute
+		REU_Call_for_the_infected
+		REU_Turn_to_large
+		REU_Support_the_front_line
+		REU_Encourage_voluntary_labor
+		REU_Suppression_of_counter
+		REU_War_communism
+	}
+}

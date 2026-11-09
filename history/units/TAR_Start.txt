@@ -1,20 +1,3 @@
-######################
-## 塔拉（威灵顿公爵领 → 深池战争期）开局编制
-##
-## 口径来源：docs/剧情拆解_维多利亚与塔拉/31_势力与制度总表.md:25（深池"受过一些训练，
-## 但纪律说不上好"、先杀哨所后夺市政厅、农用地块运军火）、:28（赤铁近卫队＝威灵顿系正规军）、
-## 12_塔拉_照我以火_剧情.md:11/76（加斯特里尔号高速战舰）
-##
-## 与旧版的差别：旧版 19 个师是 5 装甲＋4 机械化＋5 摩托化＋4 步兵＋1 陆行舰的"近代合成军队"，
-## 与流民武装的定性相反；现压到 8 个师，主力改民兵与术队，装甲洪流删除，
-## 番号组改用 common/units/names_divisions/TAR_names_divisions.txt（旧版把 motorized/mechanized
-## 塞进 VIC_INF_01，division_types 不匹配 → 番号静默退化成"第 N 步兵师"）。
-##
-## 支援连不在这里挂：本作支援连靠科技点亮后由玩家在编制界面添加（见
-## common/units/arf_special_support_units.txt 与 common/technologies/arf_special_unit_techs.txt）。
-######################
-
-# ── 深池流民大队：主力，装备靠外部长期资助，故装备系数低 ──
 division_template = {
 	name = "深池流民大队"
 	division_names_group = TAR_MLT_01
@@ -30,10 +13,9 @@ division_template = {
 	}
 }
 
-# ── 石柱术队：蔓德拉那一系，碎石结盾／凭空造石柱／荆棘之林区拒止 ──
 division_template = {
 	name = "深池石柱术队"
-	division_names_group = TAR_MLT_01
+	division_names_group = TAR_ART_01
 	priority = 4
 	regiments = {
 		militia = { x = 0 y = 0 }
@@ -46,7 +28,25 @@ division_template = {
 	}
 }
 
-# ── 威灵顿摩托化步兵师：公爵领的正规军底子，保留两支 ──
+division_template = {
+	name = "威灵顿线列步兵师"
+	division_names_group = TAR_LIN_01
+	priority = 5
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 0 y = 3 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+		infantry = { x = 1 y = 3 }
+
+		artillery_brigade = { x = 2 y = 0 }
+	}
+}
+
 division_template = {
 	name = "威灵顿摩托化步兵师"
 	division_names_group = TAR_MOT_01
@@ -62,8 +62,35 @@ division_template = {
 	}
 }
 
-# ── 赤铁近卫队：由【剑】线国策 create_unit 解锁，开局锁定 ──
-#     清洗双重效忠者时用 delete_unit_template_and_units 摘掉（照 events/VIC.txt:578-581 写法）
+division_template = {
+	name = "威灵顿近卫军"
+	division_names_group = TAR_GUA_01
+	priority = 9
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 0 y = 3 }
+		infantry = { x = 0 y = 4 }
+
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+		infantry = { x = 1 y = 3 }
+
+		medium_armor = { x = 2 y = 0 }
+		medium_armor = { x = 2 y = 1 }
+		medium_armor = { x = 2 y = 2 }
+		medium_armor = { x = 2 y = 3 }
+		medium_armor = { x = 2 y = 4 }
+	}
+	support = {
+		recon = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+		artillery = { x = 0 y = 2 }
+	}
+}
+
 division_template = {
 	name = "赤铁近卫队"
 	division_names_group = TAR_INF_01
@@ -79,7 +106,6 @@ division_template = {
 	}
 }
 
-# ── 「加斯特里尔」号：高速战舰的陆战载体，驻港口省而非内陆首都 ──
 division_template = {
 	name = "加斯特里尔号"
 	division_names_group = TAR_LSH_01
@@ -93,7 +119,6 @@ division_template = {
 }
 
 units = {
-	# 石高原野一带的流民武装（红脊镇、图拉镇方向）
 	division = {
 		name = "深池第一大队"
 		location = 18136
@@ -103,23 +128,29 @@ units = {
 	}
 	division = {
 		name = "深池第二大队"
-		location = 18043
+		location = 18154
 		division_template = "深池流民大队"
 		start_experience_factor = 0.15
 		start_equipment_factor = 0.45
 	}
 	division = {
 		name = "深池第三大队"
-		location = 17955
+		location = 17891
 		division_template = "深池流民大队"
 		start_experience_factor = 0.20
 		start_equipment_factor = 0.55
 	}
+	division = {
+		name = "深池第四大队"
+		location = 18255
+		division_template = "深池流民大队"
+		start_experience_factor = 0.15
+		start_equipment_factor = 0.45
+	}
 
-	# 石柱术队：小股、但每队都能改写一段街区的攻守
 	division = {
 		name = "石柱第一术队"
-		location = 18136
+		location = 18171
 		division_template = "深池石柱术队"
 		start_experience_factor = 0.30
 		start_equipment_factor = 0.60
@@ -131,29 +162,246 @@ units = {
 		start_experience_factor = 0.30
 		start_equipment_factor = 0.60
 	}
+	division = {
+		name = "石柱第三术队"
+		location = 17922
+		division_template = "深池石柱术队"
+		start_experience_factor = 0.30
+		start_equipment_factor = 0.60
+	}
 
-	# 公爵领正规军：只有两支摩托化，没有装甲洪流
 	division = {
 		name = "威灵顿第一摩托化师"
-		location = 17955
+		location = 18018
 		division_template = "威灵顿摩托化步兵师"
 		start_experience_factor = 0.45
 		start_equipment_factor = 0.80
 	}
 	division = {
 		name = "威灵顿第二摩托化师"
-		location = 18190
+		location = 18037
 		division_template = "威灵顿摩托化步兵师"
 		start_experience_factor = 0.45
 		start_equipment_factor = 0.80
 	}
 
-	# 加斯特里尔号停在 593 州的港口省（naval_base 所在地），不再占内陆首都
+	division = {
+		name = "威灵顿第一线列步兵师"
+		location = 1685
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第二线列步兵师"
+		location = 8239
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第三线列步兵师"
+		location = 4485
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第四线列步兵师"
+		location = 12246
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第五线列步兵师"
+		location = 7425
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第六线列步兵师"
+		location = 17988
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第七线列步兵师"
+		location = 3271
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第八线列步兵师"
+		location = 18224
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第九线列步兵师"
+		location = 18313
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第十线列步兵师"
+		location = 5097
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第十一线列步兵师"
+		location = 3827
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第十二线列步兵师"
+		location = 6351
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+
+	division = {
+		name = "威灵顿近卫第一军"
+		location = 18136
+		division_template = "威灵顿近卫军"
+		start_experience_factor = 0.55
+		start_equipment_factor = 0.90
+	}
+	division = {
+		name = "威灵顿近卫第二军"
+		location = 1685
+		division_template = "威灵顿近卫军"
+		start_experience_factor = 0.55
+		start_equipment_factor = 0.90
+	}
+	division = {
+		name = "威灵顿近卫第三军"
+		location = 18172
+		division_template = "威灵顿近卫军"
+		start_experience_factor = 0.50
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿近卫第四军"
+		location = 17922
+		division_template = "威灵顿近卫军"
+		start_experience_factor = 0.50
+		start_equipment_factor = 0.85
+	}
+
 	division = {
 		name = "加斯特里尔"
 		location = 3081
 		division_template = "加斯特里尔号"
 		start_experience_factor = 0.50
 		start_equipment_factor = 1.0
+	}
+	division = {
+		name = "威灵顿第十三线列步兵师"
+		location = 560
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第十四线列步兵师"
+		location = 4517
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第十五线列步兵师"
+		location = 18376
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第十六线列步兵师"
+		location = 8296
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第十七线列步兵师"
+		location = 10449
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第十八线列步兵师"
+		location = 12874
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.40
+		start_equipment_factor = 0.85
+	}
+	division = {
+		name = "威灵顿第十九线列步兵师"
+		location = 5427
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第二十线列步兵师"
+		location = 8628
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第二十一线列步兵师"
+		location = 10397
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第二十二线列步兵师"
+		location = 9497
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第二十三线列步兵师"
+		location = 11254
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿第二十四线列步兵师"
+		location = 5814
+		division_template = "威灵顿线列步兵师"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.80
+	}
+	division = {
+		name = "威灵顿近卫第五军"
+		location = 1685
+		division_template = "威灵顿近卫军"
+		start_experience_factor = 0.55
+		start_equipment_factor = 0.90
+	}
+	division = {
+		name = "威灵顿近卫第六军"
+		location = 18171
+		division_template = "威灵顿近卫军"
+		start_experience_factor = 0.50
+		start_equipment_factor = 0.85
 	}
 }

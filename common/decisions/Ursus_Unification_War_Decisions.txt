@@ -21,12 +21,13 @@
 #     战争结束后重新出现，故**不写 fire_only_once**，可反复使用。
 #   · 每条只花政治点，没有冷却；作战顺序完全由玩家自己决定。
 #
-# 解锁：1101.1.1 之后可用。日期门槛写在每条决议的 available 里（分类本身不隐藏），
-#       因此 1101 年前整组决议可见但点不动，tooltip 提示「需在 1101 年 1 月 1 日之后」。
+# 解锁：向乌萨斯帝国宣战一条仍为 1101.1.1 之后可用；其余 17 条宣战改为东达利亚统一
+#       （East_Ursus_Unification_After）后即可用，不再设日期门槛；18 条宣战另需与目标国接壤（is_neighbor_of）。
+#       18 条「整合核心」与 1 条吞并附庸保持原样：整合核心无可用条件，吞并只需未与目标交战。
 #
 # 与既有分类的区别（避免 UI 混淆，两处都保留了独立实现）：
 #   · 本分类   Ursus_Unification_War           中文名「乌萨斯全境统一」
-#              —— 18 个乌萨斯系 TAG 互宣，1101 年起，与方法/派系无关，任何乌萨斯势力都能点。
+#              —— 18 个乌萨斯系 TAG 互宣，需与目标国接壤，与方法/派系无关。
 #   · 既有分类 Ursus_Unification_War_Decisions_GUI  中文名「乌萨斯统一战争」
 #              —— 原 mod 东乌萨斯起义链的后续（ursus_unifier 8 国，需 East_Ursus_Unification_After
 #                 旗标 + 150 天，目标固定为 URS / 卡西米尔等），属于既有剧情流程，本次未改动。
@@ -55,6 +56,10 @@ Ursus_Unification_War = {
 			custom_trigger_tooltip = {
 				tooltip = Ursus_unify_war_tt_after_1101
 				date > 1101.1.1
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = URS
 			}
 		}
 
@@ -86,8 +91,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = UFA
 			}
 		}
 
@@ -119,8 +128,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = UEA
 			}
 		}
 
@@ -152,8 +165,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = UTA
 			}
 		}
 
@@ -185,8 +202,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = UCM
 			}
 		}
 
@@ -218,8 +239,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = ULB
 			}
 		}
 
@@ -251,8 +276,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = UFS
 			}
 		}
 
@@ -284,8 +313,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = UFE
 			}
 		}
 
@@ -317,8 +350,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = REU
 			}
 		}
 
@@ -350,8 +387,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = KMG
 			}
 		}
 
@@ -383,8 +424,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = OMN
 			}
 		}
 
@@ -416,8 +461,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = SKH
 			}
 		}
 
@@ -449,8 +498,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = BAK
 			}
 		}
 
@@ -482,8 +535,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = SGT
 			}
 		}
 
@@ -515,8 +572,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = NAX
 			}
 		}
 
@@ -548,8 +609,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = IST
 			}
 		}
 
@@ -581,8 +646,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = CYB
 			}
 		}
 
@@ -614,8 +683,12 @@ Ursus_Unification_War = {
 
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = Ursus_unify_war_tt_after_1101
-				date > 1101.1.1
+				tooltip = Ursus_unify_war_tt_unified
+				has_country_flag = East_Ursus_Unification_After
+			}
+			custom_trigger_tooltip = {
+				tooltip = Ursus_unify_war_tt_neighbor
+				is_neighbor_of = KZC
 			}
 		}
 

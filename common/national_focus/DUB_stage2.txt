@@ -1,0 +1,211 @@
+focus_tree = {
+	id = DUB_stage2
+	country = {
+		factor = 0
+		modifier = {
+			add = 5
+			tag = DUB
+		}
+	}
+	default = no
+
+	focus = {
+		id = DUB_s2_unexpected_easy_victory
+		icon = GFX_focus_TAR_rd_war_crown_settle
+		cost = 1
+		x = 0
+		y = 0
+
+		available = {
+			has_country_flag = DUB_provisional_government_flag
+			is_subject = no
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_leader_decree
+		icon = GFX_focus_TAR_the_kings_speech
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_unexpected_easy_victory
+		}
+		x = -2
+		y = 1
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_iron_duke_steps_back
+		icon = GFX_focus_TAR_rd_dukes_patience
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_unexpected_easy_victory
+		}
+		x = 2
+		y = 1
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_founding_charter
+		icon = GFX_focus_TAR_rd_name_of_tierra
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_leader_decree
+			focus = DUB_s2_iron_duke_steps_back
+		}
+		x = 0
+		y = 2
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_ghosts_of_brotherhood
+		icon = GFX_focus_TAR_rd_ghost_march
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_founding_charter
+		}
+		x = -2
+		y = 3
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_banner_of_independence
+		icon = GFX_focus_TAR_rd_war_banner
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_founding_charter
+		}
+		x = 2
+		y = 3
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_two_red_dragons
+		icon = GFX_focus_TAR_rd_two_dragons_regency
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_ghosts_of_brotherhood
+			focus = DUB_s2_banner_of_independence
+		}
+		x = 0
+		y = 4
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_nasirsha_night
+		icon = GFX_focus_TAR_rd_lantern_for_tierra
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_two_red_dragons
+		}
+		x = 0
+		y = 5
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_future_of_deep_pool
+		icon = GFX_focus_TAR_rd_army_of_embers
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_nasirsha_night
+		}
+		x = -2
+		y = 6
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_who_beneath_the_seat
+		icon = GFX_focus_TAR_rd_hero_unmasked
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_nasirsha_night
+		}
+		x = 2
+		y = 6
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_our_overseas_kin
+		icon = GFX_focus_TAR_rd_wake_of_exiled
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_future_of_deep_pool
+		}
+		x = -2
+		y = 7
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_reclaim_our_ashes
+		icon = GFX_focus_TAR_rd_burial_not_wire
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_who_beneath_the_seat
+		}
+		x = 2
+		y = 7
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = DUB_s2_draco_twilight
+		icon = GFX_focus_TAR_rd_crowned_ember
+		cost = 2
+		prerequisite = {
+			focus = DUB_s2_our_overseas_kin
+			focus = DUB_s2_reclaim_our_ashes
+		}
+		x = 0
+		y = 8
+		relative_position_id = DUB_s2_unexpected_easy_victory
+
+		completion_reward = {
+		}
+	}
+
+}

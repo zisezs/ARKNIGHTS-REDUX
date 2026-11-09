@@ -64,8 +64,14 @@ scripted_gui = {
 				AND = {
 					has_country_flag = HOG_veiw
 					has_idea = REU_Alina_second_in_command
-					NOT = { has_idea = REU_new_uniform }
-					NOT = { has_country_flag = Ursus_Unification }
+					OR = {
+						check_variable = { REU_alina_portrait = 1 }
+						AND = {
+							NOT = { check_variable = { REU_alina_portrait > 0 } }
+							NOT = { has_idea = REU_new_uniform }
+							NOT = { has_country_flag = Ursus_Unification }
+						}
+					}
 				}
 			}
 
@@ -73,8 +79,22 @@ scripted_gui = {
 				AND = {
 					has_country_flag = HOG_veiw
 					has_idea = REU_Alina_second_in_command
-					has_idea = REU_new_uniform
-					NOT = { has_country_flag = Ursus_Unification }
+					OR = {
+						check_variable = { REU_alina_portrait = 2 }
+						AND = {
+							NOT = { check_variable = { REU_alina_portrait > 0 } }
+							has_idea = REU_new_uniform
+							NOT = { has_country_flag = Ursus_Unification }
+						}
+					}
+				}
+			}
+
+			Alina_E1_visible = {
+				AND = {
+					has_country_flag = HOG_veiw
+					has_idea = REU_Alina_second_in_command
+					check_variable = { REU_alina_portrait = 3 }
 				}
 			}
 
@@ -82,7 +102,13 @@ scripted_gui = {
 				AND = {
 					has_country_flag = HOG_veiw
 					has_idea = REU_Alina_second_in_command
-					has_country_flag = Ursus_Unification
+					OR = {
+						check_variable = { REU_alina_portrait = 4 }
+						AND = {
+							NOT = { check_variable = { REU_alina_portrait > 0 } }
+							has_country_flag = Ursus_Unification
+						}
+					}
 				}
 			}
 

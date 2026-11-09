@@ -1,0 +1,418 @@
+focus_tree = {
+	id = DUB_stage1
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = DUB
+		}
+	}
+	default = no
+
+	focus = {
+		id = DUB_s1_song_of_dublinn
+		icon = GFX_focus_TAR_rd_gael_song
+		cost = 2
+		x = 0
+		y = 0
+
+		completion_reward = {
+			country_event = {
+				id = DUB_s1.2
+			}
+		}
+	}
+
+	focus = {
+		id = DUB_s1_burning_dead_fire
+		icon = GFX_focus_TAR_rd_living_flame
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_song_of_dublinn
+		}
+		x = -3
+		y = 1
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			country_event = {
+				id = DUB_s1.5
+			}
+			add_manpower = 5000
+		}
+	}
+
+	focus = {
+		id = DUB_s1_in_the_shadows
+		icon = GFX_focus_TAR_rd_codes_in_dark
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_song_of_dublinn
+		}
+		x = 3
+		y = 1
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			add_to_variable = { DUB_infiltrated_state_max_num = 1 }
+			custom_effect_tooltip = DUB_s1_army_dm_tt
+			add_to_variable = {
+				DUB_s1_army_attack_var = 0.03
+				tooltip = army_attack_factor_tt
+			}
+			add_to_variable = {
+				DUB_s1_army_defence_var = 0.03
+				tooltip = army_defence_factor_tt
+			}
+			add_to_variable = {
+				DUB_s1_org_var = 0.05
+				tooltip = army_org_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_command_power = 30
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = DUB_s1_reeds_of_the_wild
+		icon = GFX_focus_TAR_rd_winter_stores
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_burning_dead_fire
+		}
+		x = -5
+		y = 2
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			custom_effect_tooltip = DUB_s1_economy_dm_tt
+			add_to_variable = {
+				DUB_s1_ic_var = 0.05
+				tooltip = industrial_capacity_factory_tt
+			}
+			add_to_variable = {
+				DUB_s1_research_var = 0.05
+				tooltip = research_speed_factor_tt
+			}
+			add_to_variable = {
+				DUB_s1_prod_eff_gain_var = 0.05
+				tooltip = production_factory_efficiency_gain_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_command_power = 50
+		}
+	}
+
+	focus = {
+		id = DUB_s1_open_the_garrison
+		icon = GFX_focus_TAR_rd_dead_fire_guns
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_burning_dead_fire
+		}
+		x = -1
+		y = 2
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			if = {
+				limit = { 593 = { is_owned_and_controlled_by = ROOT } }
+				593 = {
+					add_manpower = -325
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1000
+				producer = VIC
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment_1
+				amount = 200
+				producer = VIC
+			}
+			add_equipment_to_stockpile = {
+				type = arts_equipment
+				amount = 500
+				producer = DUB
+			}
+		}
+	}
+
+	focus = {
+		id = DUB_s1_free_column
+		icon = GFX_focus_TAR_rd_army_of_embers
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_in_the_shadows
+		}
+		x = 1
+		y = 2
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			custom_effect_tooltip = DUB_s1_army_dm_tt
+			add_to_variable = {
+				DUB_s1_org_var = 0.05
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				DUB_s1_morale_var = 0.05
+				tooltip = army_morale_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_manpower = 20000
+			capital_scope = {
+				create_unit = {
+					division = "name = \"深池第四流民大队\" division_template = \"深池流民大队\" start_experience_factor = 0.2 start_equipment_factor = 0.9"
+					owner = DUB
+				}
+				create_unit = {
+					division = "name = \"深池第五流民大队\" division_template = \"深池流民大队\" start_experience_factor = 0.2 start_equipment_factor = 0.9"
+					owner = DUB
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = DUB_s1_streets_of_nasr
+		icon = GFX_focus_TAR_rd_dread_tactics
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_in_the_shadows
+		}
+		x = 5
+		y = 2
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			27 = { DUB_infiltration_raise_level = yes }
+			573 = { DUB_infiltration_raise_level = yes }
+			593 = { DUB_infiltration_raise_level = yes }
+			616 = { DUB_infiltration_raise_level = yes }
+			620 = { DUB_infiltration_raise_level = yes }
+			711 = { DUB_infiltration_raise_level = yes }
+			734 = { DUB_infiltration_raise_level = yes }
+			764 = { DUB_infiltration_raise_level = yes }
+			add_command_power = 25
+		}
+	}
+
+	focus = {
+		id = DUB_s1_march_of_the_dead
+		icon = GFX_focus_TAR_rd_ghost_march
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_reeds_of_the_wild
+		}
+		prerequisite = {
+			focus = DUB_s1_open_the_garrison
+		}
+		x = -3
+		y = 3
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			add_manpower = 30000
+			capital_scope = {
+				create_unit = {
+					division = "name = \"深池亡者行军大队\" division_template = \"死火行尸师\" start_experience_factor = 0.25 start_equipment_factor = 1"
+					owner = DUB
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = DUB_s1_potatoes_and_guns
+		icon = GFX_focus_TAR_rd_bread_and_fire
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_free_column
+		}
+		prerequisite = {
+			focus = DUB_s1_streets_of_nasr
+		}
+		x = 3
+		y = 3
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			custom_effect_tooltip = DUB_s1_economy_dm_tt
+			add_to_variable = {
+				DUB_s1_consumer_goods_var = -0.05
+				tooltip = consumer_goods_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			if = {
+				limit = { 621 = { is_owned_and_controlled_by = ROOT } }
+				621 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = DUB_s1_moran_did_you_see
+		icon = GFX_focus_TAR_rd_bell_stays
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_march_of_the_dead
+		}
+		x = -5
+		y = 4
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			custom_effect_tooltip = DUB_s1_leader_dm_tt
+			add_to_variable = {
+				DUB_s1_stability_var = 0.05
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				DUB_s1_war_support_var = 0.05
+				tooltip = war_support_factor_tt
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_manpower = 5000
+		}
+	}
+
+	focus = {
+		id = DUB_s1_littlehill_incident
+		icon = GFX_focus_TAR_rd_five_may_beacons
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_march_of_the_dead
+		}
+		x = -1
+		y = 4
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 100
+				producer = DUB
+			}
+			add_stability = -0.1
+		}
+	}
+
+	focus = {
+		id = DUB_s1_poetry_society
+		icon = GFX_focus_TAR_rd_theatre_reopened
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_potatoes_and_guns
+		}
+		x = 1
+		y = 4
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			add_stability = 0.05
+			add_popularity = {
+				ideology = progressivism
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = socialism
+				popularity = 0.03
+			}
+			add_political_power = 30
+		}
+	}
+
+	focus = {
+		id = DUB_s1_smuggled_aid
+		icon = GFX_focus_TAR_rd_smugglers_passage
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_potatoes_and_guns
+		}
+		x = 5
+		y = 4
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		completion_reward = {
+			add_offsite_building = {
+				type = industrial_complex
+				level = 2
+			}
+			add_equipment_to_stockpile = {
+				type = arts_equipment
+				amount = 1000
+				producer = LTN
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1000
+				producer = CLB
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment_1
+				amount = 200
+				producer = VIC
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment_1
+				amount = 50
+				producer = YAN
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 100
+				producer = URS
+			}
+		}
+	}
+
+	focus = {
+		id = DUB_s1_letter_from_iron_duke
+		icon = GFX_focus_TAR_rd_dukes_patience
+		cost = 2
+		prerequisite = {
+			focus = DUB_s1_moran_did_you_see
+		}
+		prerequisite = {
+			focus = DUB_s1_littlehill_incident
+		}
+		prerequisite = {
+			focus = DUB_s1_poetry_society
+		}
+		prerequisite = {
+			focus = DUB_s1_smuggled_aid
+		}
+		x = 0
+		y = 5
+		relative_position_id = DUB_s1_song_of_dublinn
+
+		available = {
+			TAR = {
+				exists = yes
+			}
+		}
+
+		completion_reward = {
+			set_country_flag = DUB_stage1_letter
+			add_political_power = 25
+			country_event = {
+				id = DUB_s1.3
+			}
+		}
+	}
+}

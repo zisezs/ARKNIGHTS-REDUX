@@ -406,7 +406,13 @@ defined_text = {
 		trigger = {
 			AND = {
 				has_idea = REU_Alina_second_in_command
-				has_country_flag = Ursus_Unification
+				OR = {
+					check_variable = { REU_alina_portrait = 4 }
+					AND = {
+						NOT = { check_variable = { REU_alina_portrait > 0 } }
+						has_country_flag = Ursus_Unification
+					}
+				}
 			}
 		}
 		localization_key = GFX_portrait_REU_Alina_stage_3
@@ -416,8 +422,24 @@ defined_text = {
 		trigger = {
 			AND = {
 				has_idea = REU_Alina_second_in_command
-				NOT = { has_country_flag = Ursus_Unification }
-				has_idea = REU_new_uniform
+				check_variable = { REU_alina_portrait = 3 }
+			}
+		}
+		localization_key = GFX_portrait_REU_Alina_E1
+	}
+
+	text = {
+		trigger = {
+			AND = {
+				has_idea = REU_Alina_second_in_command
+				OR = {
+					check_variable = { REU_alina_portrait = 2 }
+					AND = {
+						NOT = { check_variable = { REU_alina_portrait > 0 } }
+						NOT = { has_country_flag = Ursus_Unification }
+						has_idea = REU_new_uniform
+					}
+				}
 			}
 		}
 		localization_key = GFX_portrait_REU_Alina_stage_2
@@ -427,8 +449,14 @@ defined_text = {
 		trigger = {
 			AND = {
 				has_idea = REU_Alina_second_in_command
-				NOT = { has_country_flag = Ursus_Unification }
-				NOT = { has_idea = REU_new_uniform }
+				OR = {
+					check_variable = { REU_alina_portrait = 1 }
+					AND = {
+						NOT = { check_variable = { REU_alina_portrait > 0 } }
+						NOT = { has_country_flag = Ursus_Unification }
+						NOT = { has_idea = REU_new_uniform }
+					}
+				}
 			}
 		}
 		localization_key = GFX_portrait_REU_Alina_stage_1

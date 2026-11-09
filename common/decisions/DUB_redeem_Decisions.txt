@@ -49,13 +49,14 @@ TAR_rd_redeem = {
 		modifier = { stability_factor = -0.10 }
 		complete_effect = {
 			set_country_flag = TAR_redeem_open
-			load_focus_tree = { tree = DUB_restoration keep_completed = yes }
 			country_event = { id = TAR_rd.1 hours = 6 }
 			# 把名字挂回门牌：小丘郡的路口重新有人守
 			add_war_support = 0.05
-			621 = {
-				limit = { is_owned_and_controlled_by = ROOT }
-				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+			if = {
+				limit = { 621 = { is_owned_and_controlled_by = ROOT } }
+				621 = {
+					add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+				}
 			}
 		}
 		ai_will_do = { factor = 0 }
@@ -314,7 +315,6 @@ TAR_rd_redeem = {
 		}
 		complete_effect = {
 			set_country_flag = TAR_rd_curfew_off
-			remove_ideas = TAR_extinguished_bell
 			add_to_variable = { var = tar_pol_stab value = 0.10 }
 			add_to_variable = { var = tar_pol_resist value = 0.10 }
 			# 钟一停，驻军就没了理由：把各省肩上那份摊派一并卸下
@@ -344,6 +344,7 @@ TAR_rd_redeem = {
 		# 那样这条决议永远点不动。有地没地都由 vic_tar.3 内部分支处理。
 		available = {
 			NOT = { has_country_flag = TAR_pact_done }
+			TAR = { exists = yes }
 		}
 		complete_effect = {
 			country_event = { id = vic_tar.3 hours = 6 }
@@ -415,7 +416,6 @@ TAR_rd_redeem = {
 			OR = {
 				has_country_flag = TAR_rd_rite_first
 				has_country_flag = TAR_rd_rite_law
-				has_completed_focus = TAR_rd_ghost_march
 			}
 		}
 
@@ -437,10 +437,6 @@ TAR_rd_redeem = {
 			add_war_support = 0.10
 			# 法案本身已无门槛（100 政治点随时可立）；这条决议的意义是"替国家预付那 100 点"：
 			# 仪式走完直接把【死火复生】立上，省掉一次立法。已有则不重复挂（同一条法再 add 会报错且看似无效）。
-			if = {
-				limit = { NOT = { has_idea = DUB_dead_fire_risen } }
-				add_ideas = DUB_dead_fire_risen
-			}
 			custom_effect_tooltip = TAR_rd_dead_fire_tt
 		}
 

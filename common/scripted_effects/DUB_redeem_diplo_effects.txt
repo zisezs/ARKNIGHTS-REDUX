@@ -90,7 +90,13 @@ TAR_dip_deal_vca_effect = {
 	}
 	TAR_dip_core_held_effect = yes
 	add_political_power = 60
-	add_intel = { target = VCA amount = 40 }
+	add_intel = {
+		target = VCA
+		civilian_intel = 10
+		army_intel = 10
+		navy_intel = 10
+		airforce_intel = 10
+	}
 }
 
 # ── B 段：温德米尔（加拉瓦铁盾） ──
@@ -100,9 +106,11 @@ TAR_dip_deal_wki_effect = {
 		annex_country = { target = VWI transfer_troops = yes }
 	}
 	TAR_dip_core_held_effect = yes
-	581 = {
-		limit = { is_owned_and_controlled_by = ROOT }
-		add_building_construction = { type = fortress level = 3 instant_build = yes }
+	if = {
+		limit = { 581 = { is_owned_and_controlled_by = ROOT } }
+		581 = {
+			add_building_construction = { type = fortress level = 3 instant_build = yes }
+		}
 	}
 }
 

@@ -1874,6 +1874,11 @@ East_Ursus_Upheaval_Decisions_GUI = {
 					name = vp_NovoTundriskaya
 				}
 				set_cosmetic_tag = Soviet_Republic_of_Tundria
+
+				country_event = {
+					id = event_reu.124
+					days = 3
+				}
 			}
 			if = {
 				limit = {
@@ -2336,6 +2341,16 @@ Ursus_Unification_War_Decisions_GUI = {
 		cost = 25
 
 		days_remove = 15
+
+		complete_effect = {
+			if = {
+				limit = { original_tag = REU }
+				country_event = {
+					id = event_reu.123
+					days = 12
+				}
+			}
+		}
 
 		cancel_trigger = {
 			has_war_with = URS
@@ -2892,6 +2907,7 @@ Ursus_Unification_War_Decisions_GUI = {
 				limit = {
 				has_character = REU_Alina
 					}
+					set_variable = { REU_alina_portrait = 4 }
 					REU_Alina = {
 						set_portraits = {
 							civilian = { large = GFX_portrait_REU_Alina_stage_3 }
@@ -2915,6 +2931,21 @@ Ursus_Unification_War_Decisions_GUI = {
 					news_event = {
 						id = worldnews_reu.1
 					}
+				}
+
+				country_event = {
+					id = event_reu.125
+					days = 30
+				}
+
+				country_event = {
+					id = event_reu.127
+					days = 7
+				}
+
+				country_event = {
+					id = event_reu.128
+					days = 14
 				}
 			}
 			if = {

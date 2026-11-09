@@ -219,3 +219,40 @@ REU_Roar_Light_War_End_Check = {
 		}
 	}
 }
+
+REU_First_Congress_Renaming_effect = {
+	if = {
+		limit = { 110 = { is_owned_and_controlled_by = ROOT } }
+		110 = { set_state_name = STATE_110_Mazovgrad }
+		set_province_name = { id = 9435 name = vp_Mazovgrad }
+	}
+	if = {
+		limit = { 183 = { is_owned_and_controlled_by = ROOT } }
+		183 = { set_state_name = STATE_183_Talulagrad }
+		set_province_name = { id = 921 name = vp_Talulagrad }
+	}
+	if = {
+		limit = { 72 = { is_owned_and_controlled_by = ROOT } }
+		72 = { set_state_name = STATE_72_Talulanovka }
+		set_province_name = { id = 6788 name = vp_Talulanovka }
+	}
+	if = {
+		limit = { 159 = { is_owned_and_controlled_by = ROOT } }
+		159 = { set_state_name = STATE_159_Komsomolsk }
+		set_province_name = { id = 1530 name = vp_Komsomolsk }
+	}
+	if = {
+		limit = { 157 = { is_owned_and_controlled_by = ROOT } }
+		157 = { set_state_name = STATE_157_RedBanner }
+		set_province_name = { id = 14038 name = vp_RedBanner }
+	}
+	if = {
+		limit = { 48 = { is_owned_and_controlled_by = ROOT } }
+		48 = { set_state_name = STATE_48_RedArmyCity }
+		set_province_name = { id = 12905 name = vp_RedArmyCity }
+	}
+	if = {
+		limit = { 8 = { is_owned_and_controlled_by = ROOT } }
+		8 = { set_state_name = STATE_8_LiberationKrai }
+	}
+}

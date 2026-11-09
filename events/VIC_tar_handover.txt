@@ -25,9 +25,9 @@ country_event = {
 	mean_time_to_happen = { days = 90 random_days = 60 }
 
 	trigger = {
+		original_tag = VIC
 		NOT = { has_global_flag = VIC_civil_war_start }
 		NOT = { has_country_flag = TAR_handled_flag }
-		NOT = { original_tag = DUB }
 		custom_trigger_tooltip = {
 			tooltip = vic_tar.1.req
 			any_owned_state = { has_state_flag = Tara_state_flag }
@@ -50,7 +50,6 @@ country_event = {
 				set_capital = { state = 621 remember_old_capital = no }
 				# 不先给科技就 load_oob，DUB_Start 的营级单位全是 active = no → 静默空壳
 				inherit_technology = ROOT
-				set_research_slots = 4
 				load_oob = DUB_Start
 				set_country_flag = TAR_independence_flag
 				set_stability = 0.55
@@ -80,7 +79,6 @@ country_event = {
 			DUB = {
 				set_capital = { state = 621 remember_old_capital = no }
 				inherit_technology = ROOT
-				set_research_slots = 4
 				load_oob = DUB_Start
 				set_country_flag = TAR_independence_flag
 				set_stability = 0.5
@@ -89,7 +87,7 @@ country_event = {
 				set_cosmetic_tag = Kingdom_of_Tara
 			}
 		}
-		ai_chance = { factor = 35 }
+		ai_chance = { factor = 0 }
 	}
 
 	# c. 冠冕不许有缺口
@@ -144,14 +142,6 @@ country_event = {
 					}
 				}
 				annex_country = { target = TAR transfer_troops = yes }
-			}
-			else = {
-				# 公爵领还只是个零领土名分：地无从可取，人照单全收
-				TAR = {
-					every_character = {
-						set_nationality = ROOT
-					}
-				}
 			}
 			# 把「我们脚下、原属威灵顿名下」的省补成我们的核心（annex_country 只给地不给核心）
 			TAR_dip_core_held_effect = yes

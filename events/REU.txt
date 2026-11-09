@@ -2027,6 +2027,7 @@ country_event = {
 		#阿丽娜
 		if = {
 			limit = { NOT = { has_country_flag = Ursus_Unification } }
+			set_variable = { REU_alina_portrait = 2 }
 			REU_Alina = {
 				set_portraits = {
 					civilian = { large = GFX_portrait_REU_Alina_stage_2 }
@@ -2149,6 +2150,59 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = event_reu.129
+	title = event_reu.129.t
+	desc = event_reu.129.d
+	picture = GFX_report_event_REU_Alina
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.129.a
+		custom_effect_tooltip = REU_change_portraits_Alina_tt_stage_1
+		set_variable = { REU_alina_portrait = 1 }
+		REU_Alina = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Alina_stage_1 }
+			}
+		}
+	}
+
+	option = {
+		name = event_reu.129.b
+		custom_effect_tooltip = REU_change_portraits_Alina_tt_stage_2
+		set_variable = { REU_alina_portrait = 2 }
+		REU_Alina = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Alina_stage_2 }
+			}
+		}
+	}
+
+	option = {
+		name = event_reu.129.c
+		custom_effect_tooltip = REU_change_portraits_Alina_tt_E1
+		set_variable = { REU_alina_portrait = 3 }
+		REU_Alina = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Alina_E1 }
+			}
+		}
+	}
+
+	option = {
+		name = event_reu.129.e
+		custom_effect_tooltip = REU_change_portraits_Alina_tt_stage_3
+		set_variable = { REU_alina_portrait = 4 }
+		REU_Alina = {
+			set_portraits = {
+				civilian = { large = GFX_portrait_REU_Alina_stage_3 }
+			}
+		}
+	}
+}
+
 #阿丽娜致塔露拉
 country_event = {
 	id = event_reu.120
@@ -2224,11 +2278,86 @@ country_event = {
 	id = event_reu.125
 	title = event_reu.125.t
 	desc = event_reu.125.d
-	picture = GFX_report_event_REU_Alina
+	picture = GFX_report_event_Generic_Palace_Hall
 
 	is_triggered_only = yes
 
 	option = {
 		name = event_reu.125.a
+	}
+}
+
+#东达利亚苏维埃共和国告全国人民书
+country_event = {
+	id = event_reu.126
+	title = event_reu.126.t
+	desc = event_reu.126.d
+	picture = GFX_report_event_Generic_Socialist_Poster_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.126.a
+		custom_effect_tooltip = event_reu.126.a_tt
+	}
+}
+
+country_event = {
+	id = event_reu.127
+	title = event_reu.127.t
+	desc = event_reu.127.d
+	picture = GFX_report_event_REU_soviet_ursus
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.127.a
+	}
+}
+
+
+country_event = {
+	id = event_reu.128
+	title = event_reu.128.t
+	desc = event_reu.128.d
+	picture = GFX_report_event_Generic_Ursus_Duma
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.128.a
+		REU_First_Congress_Renaming_effect = yes
+		custom_effect_tooltip = event_reu.128.a_tt
+	}
+}
+
+country_event = {
+	id = event_reu.130
+	title = event_reu.130.t
+	desc = event_reu.130.d
+	picture = GFX_report_event_REU_Emperors_Blade_1
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_reu.130.a
+		custom_effect_tooltip = event_reu.130.a_tt
+		set_country_flag = REU_ursus_hell_mode_declined
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = event_reu.130.b
+		custom_effect_tooltip = event_reu.130.b_tt
+		set_global_flag = REU_ursus_hell_mode
+		set_country_flag = REU_ursus_hell_mode_enabled
+		ai_chance = {
+			base = 0
+		}
 	}
 }

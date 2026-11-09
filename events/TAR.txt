@@ -12,6 +12,8 @@ country_event = {
 		name = event_tar.1.a
 
 		set_country_flag = TAR_independence_flag
+		set_cosmetic_tag = Tara_Provisional_Government
+		set_research_slots = 3
 
 		ai_chance = {
 			factor = 5
@@ -69,5 +71,27 @@ country_event = {
 		name = event_tar.10002.a
 
 		drop_cosmetic_tag = yes
+	}
+}
+
+country_event = {
+	id = event_tar.10003
+	title = event_tar.10003.t
+	desc = event_tar.10003.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = event_tar.10003.a
+
+		if = {
+			limit = {
+				country_exists = VRA
+			}
+			declare_war_on = {
+				target = VRA
+				type = annex_everything
+			}
+		}
 	}
 }
