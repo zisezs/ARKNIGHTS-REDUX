@@ -1,0 +1,65 @@
+# ==============================================================================
+#  乌萨斯帝国 ·「集团军的忠诚试炼」动作模板（固定七行名册）
+#  --------------------------------------------------------------------------
+#  忠诚度全部在 URS 上：
+#        1 中央  2 第一  3 第二  4 第三  5 第四  6 第五  7 第七
+#        URS_agl_loyalty_1 .. URS_agl_loyalty_7（1..100）
+#
+#  初始化直接写在 common/on_actions/URS_army_groups_on_actions.txt，
+#  不再经过脚本效果；旧存档由 on_daily 检查变量是否存在后补写。
+#
+#  面板不再使用 dynamic_lists / 数组 / change_scope：
+#  GUI 固定七行，每行直接读自己的 URS_agl_loyalty_N。
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 在 URS 上增减某支集团军的忠诚度，并夹在 1..100。
+# 参数：INDEX = 1..7，VALUE = 增减值
+# ------------------------------------------------------------------------------
+URS_agl_add_loyalty = {
+	add_to_variable = { URS_agl_loyalty_$INDEX$ = $VALUE$ }
+	clamp_variable = { var = URS_agl_loyalty_$INDEX$ min = 1 max = 100 }
+}
+
+# ------------------------------------------------------------------------------
+# 五个动作模板。当前 scope 必须是 URS。
+#   INDEX   = 1..7，决定改哪一条忠诚度
+#   COUNTRY = 目标集团军 tag，决定战争支持度/经验/稳定度落在谁身上
+# ------------------------------------------------------------------------------
+
+# 犒赏士兵：忠诚 +2，对应 tag 战争支持度 +1%
+URS_agl_action_reward = {
+	URS_agl_add_loyalty = { INDEX = $INDEX$ VALUE = 2 }
+	$COUNTRY$ = {
+		add_war_support = 0.01
+	}
+}
+
+# 巡视军演：忠诚 +2，对应 tag 陆军经验 +10
+URS_agl_action_drill = {
+	URS_agl_add_loyalty = { INDEX = $INDEX$ VALUE = 2 }
+	$COUNTRY$ = {
+		add_army_experience = 10
+	}
+}
+
+# 输送物资：忠诚 +2，对应 tag 稳定度 +1%
+URS_agl_action_supply = {
+	URS_agl_add_loyalty = { INDEX = $INDEX$ VALUE = 2 }
+	$COUNTRY$ = {
+		add_stability = 0.01
+	}
+}
+
+# 接见军官：忠诚 +4
+URS_agl_action_audience = {
+	URS_agl_add_loyalty = { INDEX = $INDEX$ VALUE = 4 }
+}
+
+# 剥夺权利：忠诚 -10，对应 tag 战争支持度 -10%
+URS_agl_action_strip = {
+	URS_agl_add_loyalty = { INDEX = $INDEX$ VALUE = -10 }
+	$COUNTRY$ = {
+		add_war_support = -0.10
+	}
+}

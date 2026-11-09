@@ -1,0 +1,493 @@
+######################
+## 大炎 · 开局国策树「变革」（2026-11-05 重制）
+## 来源：新版策划稿 NEW_tree（15 格）
+## 15 格；完成「炎祚恢弘...」后 load_focus_tree 切回 YAN_national_focus
+## 2026-11-05 重制：按新版策划稿逐格重写前置/效果；龙门近卫局为新 TAG LGD
+## 文案见 localisation/simp_chinese/ARF_YAN_Reform_l_simp_chinese.yml
+######################
+
+focus_tree = {
+	id = YAN_reform_tree
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 100
+			tag = YAN
+			# 终格切回主树后不再被重选（读档/换 tag 重选树时也安全）
+			NOT = { has_country_flag = yan_reform_completed }
+		}
+	}
+
+	default = no
+
+	initial_show_position = {
+		x = 0
+		y = 0
+	}
+
+	focus = {
+		id = YAN_reform_1
+		icon = GFX_focus_YAN_reform_1
+		x = -1
+		y = -1
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_political_power = 200
+			country_event = { id = yan_reform.1 days = 0 }
+			country_event = { id = yan_reform.2 days = 0 }
+		}
+	}
+
+	focus = {
+		id = YAN_reform_2
+		icon = GFX_focus_YAN_reform_2
+		x = -1
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_1
+		}
+		# 策划稿：本国策仅能由事件解锁（yan_reform.2 置旗标）
+		available = {
+			has_country_flag = yan_reform_longmen_unlocked
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			set_country_flag = yan_reform_longmen_case
+			custom_effect_tooltip = YAN_reform_infected_crisis_tt
+			# 感染者问题：动态民族精神。固定层 -50%，每周层 -1%。
+			add_to_variable = {
+				YAN_reform_infected_stability_factor_var = -0.5
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				YAN_reform_infected_war_support_factor_var = -0.5
+				tooltip = war_support_factor_tt
+			}
+			add_to_variable = {
+				YAN_reform_infected_stability_weekly_var = -0.01
+				tooltip = stability_weekly_tt
+			}
+			add_to_variable = {
+				YAN_reform_infected_war_support_weekly_var = -0.01
+				tooltip = war_support_weekly_tt
+			}
+			hidden_effect = {
+				if = {
+					limit = { NOT = { has_dynamic_modifier = { modifier = YAN_reform_infected_crisis } } }
+					add_dynamic_modifier = { modifier = YAN_reform_infected_crisis }
+				}
+				force_update_dynamic_modifier = yes
+			}
+			country_event = { id = yan_reform.3 days = 0 }
+			activate_mission = YAN_mission_purge_infected
+		}
+	}
+
+	focus = {
+		id = YAN_reform_3
+		icon = GFX_focus_YAN_reform_3
+		x = -3
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_2
+		}
+		# 策划稿「完成龙门惨案后，该国策自动推进」：
+		# 由 common/on_actions/YAN_on_actions.txt 的 on_daily_YAN 自动完成。
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			country_event = { id = yan_reform.4 days = 0 }
+			add_stability = -0.10
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -5000
+			}
+			custom_effect_tooltip = YAN_reform_shanhai_stronger_tt
+		}
+	}
+
+	focus = {
+		id = YAN_reform_4
+		icon = GFX_focus_YAN_reform_4
+		x = 1
+		y = 2
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_2
+		}
+		# 策划稿「完成龙门惨案后，该国策自动推进」：
+		# 由 common/on_actions/YAN_on_actions.txt 的 on_daily_YAN 自动完成。
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			country_event = { id = yan_reform.5 days = 0 }
+			add_stability = -0.10
+			if = {
+				limit = { country_exists = LUM }
+				# 龙门（LUM）：陆军防御 +100%，陆军攻击力 -50%，180 天
+				LUM = {
+					add_dynamic_modifier = {
+						modifier = YAN_reform_tunnel_warfare
+						days = 180
+					}
+				}
+			}
+			custom_effect_tooltip = YAN_reform_tunnel_warfare_tt
+		}
+	}
+
+	focus = {
+		id = YAN_reform_5
+		icon = GFX_focus_YAN_reform_5
+		x = -1
+		y = 4
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_4
+		}
+		prerequisite = {
+			focus = YAN_reform_3
+		}
+		available = {
+			has_country_flag = yan_reform_longmen_uprising
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			# 感染者问题：每周层再 -1% 稳定度 / 战争支持度
+			custom_effect_tooltip = YAN_reform_infected_decay_tt
+			add_to_variable = {
+				YAN_reform_infected_stability_weekly_var = -0.01
+				tooltip = stability_weekly_tt
+			}
+			add_to_variable = {
+				YAN_reform_infected_war_support_weekly_var = -0.01
+				tooltip = war_support_weekly_tt
+			}
+			hidden_effect = { force_update_dynamic_modifier = yes }
+			if = {
+				limit = {
+					country_exists = LUM
+					NOT = { has_war_with = LUM }
+				}
+				declare_war_on = {
+					target = LUM
+					type = annex_everything
+				}
+			}
+			country_event = { id = yan_reform.6 days = 0 }
+		}
+	}
+
+	focus = {
+		id = YAN_reform_6
+		icon = GFX_focus_YAN_reform_6
+		x = -4
+		y = 6
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_5
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			if = {
+				limit = { country_exists = LGD }
+				LGD = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 5000
+						producer = YAN
+					}
+					add_manpower = 10000
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YAN_reform_7
+		icon = GFX_focus_YAN_reform_7
+		x = -1
+		y = 6
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_5
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			# 解锁「岁岁今朝」：决议分类 → 宣政司舆图
+			custom_effect_tooltip = YAN_suisui_unlock_tt
+			YAN_suisui_init = yes
+			set_country_flag = YAN_suisui_unlocked
+			unlock_decision_category_tooltip = YAN_Suisui_Category
+
+			# 感染者问题：每周层 +1% 稳定度 / 战争支持度
+			custom_effect_tooltip = YAN_reform_infected_recovery_tt
+			add_to_variable = {
+				YAN_reform_infected_stability_weekly_var = 0.01
+				tooltip = stability_weekly_tt
+			}
+			add_to_variable = {
+				YAN_reform_infected_war_support_weekly_var = 0.01
+				tooltip = war_support_weekly_tt
+			}
+			hidden_effect = { force_update_dynamic_modifier = yes }
+		}
+	}
+
+	focus = {
+		id = YAN_reform_8
+		icon = GFX_focus_YAN_reform_8
+		x = 2
+		y = 6
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_5
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			country_event = { id = yan_reform.7 days = 0 }
+		}
+	}
+
+	focus = {
+		id = YAN_reform_9
+		icon = GFX_focus_YAN_reform_9
+		x = -4
+		y = 8
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_10
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					214 = {
+						NOT = { controller = { tag = YAN } }
+					}
+				}
+				# state 214：补给 -50%（州级修正）；组织度 -90%（控制者国家修正）
+				214 = {
+					add_state_modifier = {
+						modifier = {
+							local_supplies = -0.5
+						}
+					}
+					controller = {
+						add_dynamic_modifier = {
+							modifier = YAN_reform_naval_bombardment_org
+						}
+					}
+				}
+			}
+			custom_effect_tooltip = YAN_reform_naval_bombardment_tt
+		}
+	}
+
+	focus = {
+		id = YAN_reform_10
+		icon = GFX_focus_YAN_reform_10
+		x = -4
+		y = 7
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_6
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					country_exists = LGD
+					LGD = { has_template = "玉门援军" }
+				}
+				LGD = {
+					# 龙门近卫局首都固定在 state 208
+					208 = {
+						create_unit = {
+							division = "division_template = \"玉门援军\" start_experience_factor = 0.5 start_equipment_factor = 1"
+							owner = LGD
+							count = 4
+						}
+					}
+				}
+			}
+			custom_effect_tooltip = YAN_reform_yumen_tt
+		}
+	}
+
+	focus = {
+		id = YAN_reform_11
+		icon = GFX_focus_YAN_reform_11
+		x = -1
+		y = 7
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_7
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			# 感染者问题：固定层 +30% 稳定度 / 战争支持度
+			custom_effect_tooltip = YAN_reform_infected_relief_tt
+			add_to_variable = {
+				YAN_reform_infected_stability_factor_var = 0.30
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				YAN_reform_infected_war_support_factor_var = 0.30
+				tooltip = war_support_factor_tt
+			}
+			hidden_effect = { force_update_dynamic_modifier = yes }
+		}
+	}
+
+	focus = {
+		id = YAN_reform_12
+		icon = GFX_focus_YAN_reform_12
+		x = -1
+		y = 8
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_11
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			# 每周层 +1% 稳定度 / 战争支持度；随后换名（两档共用同一组变量）
+			custom_effect_tooltip = YAN_reform_infected_solved_tt
+			add_to_variable = {
+				YAN_reform_infected_stability_weekly_var = 0.01
+				tooltip = stability_weekly_tt
+			}
+			add_to_variable = {
+				YAN_reform_infected_war_support_weekly_var = 0.01
+				tooltip = war_support_weekly_tt
+			}
+			# 共产主义支持率变化 +0.01
+			add_to_variable = {
+				YAN_reform_infected_communism_drift_var = 0.01
+				tooltip = communism_drift_tt
+			}
+			hidden_effect = {
+				remove_dynamic_modifier = { modifier = YAN_reform_infected_crisis }
+				add_dynamic_modifier = { modifier = YAN_reform_infected_solved }
+				force_update_dynamic_modifier = yes
+			}
+		}
+	}
+
+	focus = {
+		id = YAN_reform_13
+		icon = GFX_focus_YAN_reform_13
+		x = 2
+		y = 7
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_8
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			country_event = { id = yan_reform.8 days = 0 }
+		}
+	}
+
+	focus = {
+		id = YAN_reform_14
+		icon = GFX_focus_YAN_reform_14
+		x = 2
+		y = 8
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_13
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			country_event = { id = yan_reform.9 days = 0 }
+		}
+	}
+
+	focus = {
+		id = YAN_reform_15
+		icon = GFX_focus_YAN_reform_15
+		x = -1
+		y = 10
+		cost = 5
+		prerequisite = {
+			focus = YAN_reform_12
+		}
+		prerequisite = {
+			focus = YAN_reform_14
+		}
+		prerequisite = {
+			focus = YAN_reform_9
+		}
+		available = {
+			# 【龙门整合运动】不存在
+			NOT = { country_exists = LUM }
+		}
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_political_power = 500
+
+			if = {
+				limit = { country_exists = LGD }
+				annex_country = { target = LGD }
+			}
+
+			country_event = { id = yan_reform.10 days = 0 }
+			country_event = { id = yan_reform.11 days = 0 }
+
+			set_country_flag = yan_reform_completed
+			load_focus_tree = {
+				tree = YAN_national_focus
+				keep_completed = yes
+			}
+			custom_effect_tooltip = YAN_reform_switch_tree_tt
+		}
+	}
+}

@@ -1,0 +1,72 @@
+# ==============================================================================
+# 大炎 · 变革树决议（2026-11-05）
+#  · YAN_mission_purge_infected  「龙门惨案」完成后的 60 天任务
+#    不可点击；超时触发 YAN_reform_longmen_uprising（龙门总督府易帜）
+# ==============================================================================
+
+YAN_Reform = {
+
+	# ── 「岁岁今朝」入口：点一下打开宣政司舆图 ────────────────────
+	YAN_suisui_open_decision = {
+		icon = GFX_focus_YAN_reform_7
+
+		visible = {
+			OR = {
+				has_country_flag = YAN_suisui_unlocked
+				has_completed_focus = YAN_reform_7
+			}
+		}
+
+		available = {
+			NOT = { has_country_flag = YAN_suisui_open }
+		}
+
+		cost = 0
+		days_re_enable = 1
+
+		complete_effect = {
+			if = {
+				limit = { NOT = { has_variable = YAN_suisui_loyalty } }
+				YAN_suisui_init = yes
+			}
+			set_country_flag = YAN_suisui_open
+			set_variable = { YAN_suisui_sel = 0 }
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	YAN_mission_purge_infected = {
+		icon = GFX_decision_generic_arrest
+
+		visible = {
+			has_country_flag = yan_reform_longmen_case
+		}
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		activation = {
+			has_country_flag = yan_reform_longmen_case
+			NOT = { has_country_flag = yan_reform_longmen_uprising }
+		}
+
+		# 任务只能触发一次
+		fire_only_once = yes
+
+		is_good = no
+		priority = 998
+		days_mission_timeout = 60
+
+		timeout_effect = {
+			YAN_reform_longmen_uprising = yes
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

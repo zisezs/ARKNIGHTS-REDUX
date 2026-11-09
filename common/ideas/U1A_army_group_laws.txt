@@ -1,0 +1,68 @@
+# ==============================================================================
+#  乌萨斯集团军 · 国策解锁法案（NEW_focus_16 / NEW_focus_17）
+#  --------------------------------------------------------------------------
+#  · 【战争机器】经济法案：数值照抄 tot_economic_mobilisation，
+#    但去掉 conscription = -0.03 —— 按设计稿「参考总动员，但不会减少人力」。
+#  · 【全面战争】征兵法案：数值照抄 service_by_requirement（按需服役），
+#    训练时长由 +20% 改为 -20%。
+#  · 两者都靠 has_completed_focus 解锁，只有三个集团军点得出对应国策。
+# ==============================================================================
+
+ideas = {
+	economy = {
+		law = yes
+		use_list_view = yes
+
+		Ursus_ag_war_machine = {
+			available = {
+				OR = {
+					original_tag = U1A
+					original_tag = U2A
+					original_tag = UFA
+				}
+				has_completed_focus = NEW_focus_16
+			}
+
+			cost = 150
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_expected_value = 0.15
+				production_speed_arms_factory_factor = 0.3
+				conversion_cost_civ_to_mil_factor = -0.3
+				conversion_cost_mil_to_civ_factor = -0.3
+				factory_energy_consumption = 0.5
+			}
+
+			cancel_if_invalid = no
+		}
+	}
+
+	mobilization_laws = {
+
+		Ursus_ag_total_war = {
+			available = {
+				OR = {
+					original_tag = U1A
+					original_tag = U2A
+					original_tag = UFA
+				}
+				has_completed_focus = NEW_focus_17
+			}
+
+			cost = 150
+			removal_cost = -1
+			level = 4
+
+			modifier = {
+				conscription = 0.1
+				industrial_capacity_factory = -0.1
+				industrial_capacity_dockyard = -0.1
+				production_speed_buildings_factor = -0.1
+				training_time_factor = -0.2
+			}
+
+			cancel_if_invalid = no
+		}
+	}
+}

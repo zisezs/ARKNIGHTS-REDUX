@@ -1,0 +1,36 @@
+leader_traits = {
+
+	# ==============================================================================
+	#  安北都护府 · 谈天师
+	#  · 疯疯癫癫：陆军师攻击 +100%、防御 -100%；鏖战邪魔为纯叙事、无数值。
+	#  · 描述文本为红色（§R…§!），用 custom_modifier_tooltip 以效果行呈现，本地化见 ARF_YAB_l_simp_chinese.yml。
+	#  · sprite 沿用原版通用领袖图标编号（14 学者/理论、7 攻势）。
+	# ==============================================================================
+
+	YAB_madness = {
+		sprite = 14
+		random = no
+
+		army_attack_factor = 1.0
+		army_defence_factor = -1.0
+
+		# 领袖特质的 _desc 不会在 tooltip 里显示；用 custom_modifier_tooltip
+		# 让描述以「效果」行的形式出现（原版 BUL/ITA 特质同写法）。
+		custom_modifier_tooltip = YAB_madness_tt
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	YAB_fight_fiends = {
+		sprite = 7
+		random = no
+
+		custom_modifier_tooltip = YAB_fight_fiends_tt
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

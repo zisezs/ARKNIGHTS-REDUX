@@ -1,0 +1,27 @@
+# 圣骏堡规程（Регламентный Пакт）—— 乌萨斯帝国主导的国际军事组织
+# 开局即存在：由 history/countries/URS - Ursus.txt 的 create_faction_from_template 创建，
+# 乌萨斯自动成为领袖。图标见 gfx/interface/factions/faction_logos/faction_icon_regulation_pact.dds。
+faction_template_regulation_pact = {
+	name = faction_regulation_pact
+	manifest = faction_manifest_regulation_pact
+	icon = GFX_faction_icon_regulation_pact
+
+	# 圣骏堡不承认自己的成员可以同时效忠另一个阵营。
+	can_leader_join_other_factions = no
+
+	goals = {
+		# Short term goals
+
+		# Medium term goals
+
+		# Long term goals
+	}
+
+	default_rules = {
+		war_declaration_generated_tension_25
+		war_declaration_threat_75
+		change_leader_rule_industry
+		change_leader_rule_manpower
+		manpower_contribution_high
+	}
+}

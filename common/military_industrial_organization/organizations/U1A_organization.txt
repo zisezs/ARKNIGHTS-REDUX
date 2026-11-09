@@ -1,0 +1,473 @@
+# ==============================================================================
+#  乌萨斯集团军 · 军工企业组织（MIO）
+#  --------------------------------------------------------------------------
+#  5 家，供乌萨斯第一/第二/第四集团军（U1A / U2A / UFA）共用：
+#    1 集团军单兵武器生产商   2 集团军火炮生产商   3 集团军坦克生产商
+#    4 集团军装甲车辆生产商   5 集团军博尔京航空生产商
+#
+#  · 树骨架 include 自 00_generic_organization.txt 的 preset；
+#    每家另有 initial_trait 与 3 条专属 add_trait（special_trait_background）。
+#  · 专属特质一律是「大规模战争」取向：产能、上限、单位成本、可靠性，
+#    不加精锐属性。新增节点均挂在 preset 父节点正下方，y<=5（可视区）。
+#  · 组织图标 64x64 PNG：gfx/interface/military_industrial_organization/U1A/
+#    精灵定义：interface/military_industrial_organization/U1A_organization_icons.gfx
+#  · 本地化：localisation/simp_chinese/ARF_U1A_mio_l_simp_chinese.yml
+# ==============================================================================
+
+
+# ==============================================================================
+# 1 · 集团军单兵武器生产商 —— 枪械与单兵装备的战时流水线
+# ==============================================================================
+URS_AG_infantry_organization = {
+	name = URS_AG_infantry_organization
+	icon = GFX_urs_ag_mio_infantry
+	include = generic_infantry_equipment_organization
+
+	allowed = {
+		OR = {
+			original_tag = U1A
+			original_tag = U2A
+			original_tag = UFA
+		}
+	}
+
+	equipment_type = {
+		infantry_equipment
+		mio_cat_eq_all_infantry_and_support_equipment
+	}
+	research_categories = {
+		infantry_weapons
+		gun_weapons
+	}
+
+	initial_trait = {
+		token = URS_AG_mio_initial_infantry
+		name = URS_AG_mio_initial_infantry
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.10
+		}
+		production_bonus = {
+			production_capacity_factor = 0.08
+			production_efficiency_gain_factor = 0.08
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.05
+		}
+	}
+
+	# 战时步枪流水线 —— 三班倒，产能优先
+	add_trait = {
+		token = URS_AG_trait_infantry_line
+		name = URS_AG_trait_infantry_line
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_mass_rifle_production
+		any_parent = { generic_mio_trait_mass_rifle_production }
+
+		production_bonus = {
+			production_capacity_factor = 0.15
+			production_efficiency_cap_factor = 0.10
+		}
+	}
+
+	# 配给式简化工艺 —— 用良品率换数量
+	add_trait = {
+		token = URS_AG_trait_infantry_simplified
+		name = URS_AG_trait_infantry_simplified
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_quality_materials
+		any_parent = { generic_mio_trait_quality_materials }
+
+		production_bonus = {
+			production_cost_factor = -0.15
+		}
+		equipment_bonus = {
+			reliability = -0.05
+		}
+	}
+
+	# 弹药统配定额 —— 每个师都按基数配满
+	add_trait = {
+		token = URS_AG_trait_infantry_ammo
+		name = URS_AG_trait_infantry_ammo
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_bolt_action
+		any_parent = { generic_mio_trait_bolt_action }
+
+		equipment_bonus = {
+			soft_attack = 0.10
+		}
+	}
+}
+
+
+# ==============================================================================
+# 2 · 集团军火炮生产商 —— 炮群是消耗品
+# ==============================================================================
+URS_AG_artillery_organization = {
+	name = URS_AG_artillery_organization
+	icon = GFX_urs_ag_mio_artillery
+	include = generic_artillery_organization
+
+	allowed = {
+		OR = {
+			original_tag = U1A
+			original_tag = U2A
+			original_tag = UFA
+		}
+	}
+
+	equipment_type = {
+		artillery_equipment
+		anti_tank_equipment
+		anti_air_equipment
+	}
+	research_categories = {
+		cat_artillery
+		mio_cat_all_artillery_equipment
+		mio_cat_artillery
+	}
+
+	initial_trait = {
+		token = URS_AG_mio_initial_artillery
+		name = URS_AG_mio_initial_artillery
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		production_bonus = {
+			production_capacity_factor = 0.08
+			production_efficiency_cap_factor = 0.10
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.05
+		}
+	}
+
+	# 骡马与牵引具标准化 —— 炮架/前车通用件
+	add_trait = {
+		token = URS_AG_trait_artillery_traction
+		name = URS_AG_trait_artillery_traction
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_mobile_limbers
+		any_parent = { generic_mio_trait_mobile_limbers }
+
+		production_bonus = {
+			production_cost_factor = -0.12
+		}
+	}
+
+	# 炮闩总装流水线 —— 分段总装，压缩工时
+	add_trait = {
+		token = URS_AG_trait_artillery_line
+		name = URS_AG_trait_artillery_line
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_sliding_breech_block
+		any_parent = { generic_mio_trait_sliding_breech_block }
+
+		production_bonus = {
+			production_capacity_factor = 0.15
+		}
+	}
+
+	# 急速射弹药基数 —— 炮组按消耗量打
+	add_trait = {
+		token = URS_AG_trait_artillery_ammo
+		name = URS_AG_trait_artillery_ammo
+		icon = GFX_generic_mio_trait_icon_soft_attack
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_rapid_fire
+		any_parent = { generic_mio_trait_rapid_fire }
+
+		equipment_bonus = {
+			soft_attack = 0.10
+		}
+	}
+}
+
+
+# ==============================================================================
+# 3 · 集团军坦克生产商 —— 底盘标准化，流水线出车
+# ==============================================================================
+URS_AG_tank_organization = {
+	name = URS_AG_tank_organization
+	icon = GFX_urs_ag_mio_tank
+	include = generic_tank_organization
+
+	allowed = {
+		OR = {
+			original_tag = U1A
+			original_tag = U2A
+			original_tag = UFA
+		}
+	}
+
+	equipment_type = {
+		mio_cat_eq_all_light_tank
+		mio_cat_eq_all_medium_tank
+	}
+	research_categories = {
+		mio_cat_tech_light_armor_and_modules
+		mio_cat_tech_medium_armor_and_modules
+	}
+
+	initial_trait = {
+		token = URS_AG_mio_initial_tank
+		name = URS_AG_mio_initial_tank
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		production_bonus = {
+			production_capacity_factor = 0.08
+			production_efficiency_gain_factor = 0.08
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.05
+		}
+	}
+
+	# 标准化底盘 —— 一套底盘喂三条产线
+	add_trait = {
+		token = URS_AG_trait_tank_standard
+		name = URS_AG_trait_tank_standard
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_standardized_components
+		any_parent = { generic_mio_trait_standardized_components }
+
+		production_bonus = {
+			production_cost_factor = -0.12
+		}
+	}
+
+	# 总动员产线 —— 拖拉机厂改产坦克
+	add_trait = {
+		token = URS_AG_trait_tank_mobilization
+		name = URS_AG_trait_tank_mobilization
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_mass_production
+		any_parent = { generic_mio_trait_mass_production }
+
+		production_bonus = {
+			production_capacity_factor = 0.15
+			production_efficiency_cap_factor = 0.10
+		}
+	}
+
+	# 战损整备 —— 打得烂但修得快、开得回来
+	add_trait = {
+		token = URS_AG_trait_tank_maintenance
+		name = URS_AG_trait_tank_maintenance
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_improved_tooling
+		any_parent = { generic_mio_trait_improved_tooling }
+
+		equipment_bonus = {
+			reliability = 0.10
+		}
+	}
+}
+
+
+# ==============================================================================
+# 4 · 集团军装甲车辆生产商 —— 卡车底盘加钢板
+# ==============================================================================
+URS_AG_armored_car_organization = {
+	name = URS_AG_armored_car_organization
+	icon = GFX_urs_ag_mio_armored_car
+	include = generic_armored_car_organization
+
+	allowed = {
+		OR = {
+			original_tag = U1A
+			original_tag = U2A
+			original_tag = UFA
+		}
+	}
+
+	equipment_type = {
+		armored_car_equipment
+	}
+	research_categories = {
+		cat_armored_cars
+	}
+
+	initial_trait = {
+		token = URS_AG_mio_initial_armored_car
+		name = URS_AG_mio_initial_armored_car
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		production_bonus = {
+			production_capacity_factor = 0.08
+			production_efficiency_gain_factor = 0.08
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.05
+		}
+	}
+
+	# 民用卡车底盘 —— 直接征用民用总装线
+	add_trait = {
+		token = URS_AG_trait_ac_standard
+		name = URS_AG_trait_ac_standard
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_standardized_components
+		any_parent = { generic_mio_trait_standardized_components }
+
+		production_bonus = {
+			production_cost_factor = -0.12
+		}
+	}
+
+	# 巡逻编成量产 —— 一队一队地交车
+	add_trait = {
+		token = URS_AG_trait_ac_mobilization
+		name = URS_AG_trait_ac_mobilization
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_mass_production
+		any_parent = { generic_mio_trait_mass_production }
+
+		production_bonus = {
+			production_capacity_factor = 0.15
+		}
+	}
+
+	# 装甲运兵改装 —— 集团的兵得坐着车进城
+	add_trait = {
+		token = URS_AG_trait_ac_support
+		name = URS_AG_trait_ac_support
+		icon = GFX_generic_mio_trait_icon_reliability
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_officer_support_car
+		any_parent = { generic_mio_trait_officer_support_car }
+
+		equipment_bonus = {
+			defense = 0.10
+		}
+	}
+}
+
+
+# ==============================================================================
+# 5 · 集团军博尔京航空生产商 —— 会飞的都从这里出去
+# ==============================================================================
+URS_AG_aircraft_organization = {
+	name = URS_AG_aircraft_organization
+	icon = GFX_urs_ag_mio_aircraft
+	include = generic_light_aircraft_organization
+
+	allowed = {
+		OR = {
+			original_tag = U1A
+			original_tag = U2A
+			original_tag = UFA
+		}
+	}
+
+	equipment_type = {
+		mio_cat_eq_only_light_fighter
+	}
+	research_categories = {
+		mio_cat_all_light_fighter_and_modules
+	}
+
+	initial_trait = {
+		token = URS_AG_mio_initial_aircraft
+		name = URS_AG_mio_initial_aircraft
+
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.08
+		}
+		production_bonus = {
+			production_capacity_factor = 0.08
+			production_efficiency_gain_factor = 0.08
+		}
+		equipment_bonus = {
+			build_cost_ic = -0.05
+		}
+	}
+
+	# 扩大厂房 —— 飞机是流水线上攒出来的
+	add_trait = {
+		token = URS_AG_trait_air_factory
+		name = URS_AG_trait_air_factory
+		icon = GFX_generic_mio_trait_icon_production_capacity
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_expanded_production_facilities
+		any_parent = { generic_mio_trait_expanded_production_facilities }
+
+		production_bonus = {
+			production_capacity_factor = 0.15
+		}
+	}
+
+	# 木架帆布简化工艺 —— 够飞、够快、够便宜
+	add_trait = {
+		token = URS_AG_trait_air_simplified
+		name = URS_AG_trait_air_simplified
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_removable_wings
+		any_parent = { generic_mio_trait_removable_wings }
+
+		production_bonus = {
+			production_cost_factor = -0.15
+		}
+	}
+
+	# 消耗性编队 —— 损失表上的数字，不是王牌
+	add_trait = {
+		token = URS_AG_trait_air_attrition
+		name = URS_AG_trait_air_attrition
+		icon = GFX_generic_mio_trait_icon_build_cost_ic
+		special_trait_background = yes
+
+		position = { x = 0 y = 1 }
+		relative_position_id = generic_mio_trait_fighter_expertise
+		any_parent = { generic_mio_trait_fighter_expertise }
+
+		equipment_bonus = {
+			build_cost_ic = -0.10
+		}
+	}
+}

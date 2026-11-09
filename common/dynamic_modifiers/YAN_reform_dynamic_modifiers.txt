@@ -1,0 +1,52 @@
+# ==============================================================================
+# 大炎 · 变革树动态修正（2026-11-05 重制）
+#  · YAN_reform_infected_crisis / YAN_reform_infected_solved
+#      感染者问题的动态民族精神。两档共用同一组变量，改名时数值零跳变。
+#      stability_factor / war_support_factor = 固定层（初始 -50%）
+#      stability_weekly / war_support_weekly = 每周层（初始 -1%）
+#      communism_drift = 共产主义支持率变化（初始 0，皆为利往后 +0.01）
+#  · YAN_reform_tunnel_warfare         【地道战】由「感染者非法集结！」加给龙门（LUM），
+#      陆军防御 +100%、陆军攻击力 -50%，180 天。
+#  · YAN_reform_naval_bombardment_org  【遭到舰炮轰炸！】的组织度部分：国策给 state 214
+#      的当前控制者挂 -90% 组织度，与州级补给修正一起构成完整效果。
+# ==============================================================================
+
+YAN_reform_infected_crisis = {
+	icon = GFX_idea_YAN_reform_infected
+
+	enable = { always = yes }
+
+	stability_factor = YAN_reform_infected_stability_factor_var
+	war_support_factor = YAN_reform_infected_war_support_factor_var
+	stability_weekly = YAN_reform_infected_stability_weekly_var
+	war_support_weekly = YAN_reform_infected_war_support_weekly_var
+}
+
+YAN_reform_infected_solved = {
+	icon = GFX_idea_YAN_reform_infected
+
+	enable = { always = yes }
+
+	stability_factor = YAN_reform_infected_stability_factor_var
+	war_support_factor = YAN_reform_infected_war_support_factor_var
+	stability_weekly = YAN_reform_infected_stability_weekly_var
+	war_support_weekly = YAN_reform_infected_war_support_weekly_var
+	communism_drift = YAN_reform_infected_communism_drift_var
+}
+
+YAN_reform_tunnel_warfare = {
+	icon = GFX_idea_generic_guerilla_warfare
+
+	enable = { always = yes }
+
+	army_defence_factor = 1.0
+	army_attack_factor = -0.5
+}
+
+YAN_reform_naval_bombardment_org = {
+	icon = GFX_idea_generic_coastal_defense_ships
+
+	enable = { always = yes }
+
+	army_org_factor = -0.9
+}

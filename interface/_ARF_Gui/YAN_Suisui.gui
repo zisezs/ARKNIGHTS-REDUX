@@ -1,0 +1,422 @@
+# 大炎 ·「岁岁今朝」宣政司舆图面板
+# 由 common/scripted_guis/YAN_Suisui_GUI.txt 驱动
+# 美术：gfx/interface/YAN_suisui/ui_*.png（tools/yan_suisui_ui.cjs 从 source_ui.png 切出）
+# 司印复用 GFX_YAN_xzs_*；头像复用 GFX_court_portrait_*
+
+guiTypes = {
+
+	# ======================================================================
+	#  决议分类页入口
+	# ======================================================================
+	containerWindowType = {
+		name = "YAN_Suisui_Entry_GUI"
+		position = { x = 0 y = 0 }
+		size = { width = 500 height = 160 }
+
+		background = {
+			name = "YAN_Suisui_Entry_Bg"
+			quadTextureSprite = "GFX_YAN_suisui_bg_entry"
+		}
+
+		iconType = {
+			name = "YAN_Suisui_Entry_TitleBg"
+			position = { x = 10 y = 6 }
+			spriteType = "GFX_YAN_suisui_title"
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "YAN_Suisui_Entry_Title"
+			position = { x = 28 y = 16 }
+			font = "hoi_24header"
+			text = "YAN_suisui_title"
+			maxWidth = 260
+			maxHeight = 32
+			alwaystransparent = yes
+		}
+
+		iconType = {
+			name = "YAN_Suisui_Entry_Seal"
+			position = { x = 430 y = 10 }
+			spriteType = "GFX_YAN_xzs_zhenlong_direct"
+			scale = 2
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "YAN_Suisui_Entry_Sub"
+			position = { x = 10 y = 74 }
+			font = "hoi_16mbs"
+			text = "YAN_suisui_entry_sub"
+			maxWidth = 420
+			maxHeight = 22
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "YAN_Suisui_Entry_Loyalty"
+			position = { x = 10 y = 94 }
+			font = "hoi_16mbs"
+			text = "[YAN_Suisui_GetEntryLoyalty]"
+			maxWidth = 420
+			maxHeight = 22
+			alwaystransparent = yes
+		}
+
+		buttonType = {
+			name = "YAN_Suisui_Entry_Open"
+			position = { x = 10 y = 112 }
+			size = { x = 200 y = 44 }
+			quadTextureSprite = "GFX_YAN_suisui_btn_entry"
+			clicksound = click_default
+			pdx_tooltip = "YAN_suisui_entry_open_tt"
+		}
+
+		instantTextBoxType = {
+			name = "YAN_Suisui_Entry_Open_Text"
+			position = { x = 10 y = 112 }
+			font = "hoi_16mbs"
+			text = "YAN_suisui_entry_open"
+			maxWidth = 200
+			maxHeight = 44
+			format = center
+			vertical_alignment = centre
+			alwaystransparent = yes
+		}
+	}
+
+	# ======================================================================
+	#  舆图主面板
+	# ======================================================================
+	containerWindowType = {
+		name = "YAN_Suisui_Window"
+		position = { x = 0 y = 0 }
+		size = { width = 1320 height = 720 }
+		orientation = center
+		origo = center
+		moveable = no
+		click_to_front = yes
+
+		background = {
+			name = "YAN_Suisui_Bg"
+			quadTextureSprite = "GFX_YAN_suisui_bg_main"
+		}
+
+		iconType = {
+			name = "YAN_Suisui_TitleBg"
+			position = { x = 16 y = 6 }
+			spriteType = "GFX_YAN_suisui_title"
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "YAN_Suisui_Title"
+			position = { x = 36 y = 18 }
+			font = "hoi_24header"
+			text = "YAN_suisui_title"
+			maxWidth = 260
+			maxHeight = 32
+			alwaystransparent = yes
+		}
+
+		buttonType = {
+			name = "YAN_Suisui_Close"
+			position = { x = 1264 y = 12 }
+			size = { x = 40 y = 40 }
+			quadTextureSprite = "GFX_YAN_suisui_btn_close"
+			clicksound = click_close
+			pdx_tooltip = "CLOSE"
+		}
+
+		# ---------------- 顶部：代理人忠诚度 ----------------
+		iconType = {
+			name = "YAN_Suisui_LoyaltyFrame"
+			position = { x = 320 y = 22 }
+			spriteType = "GFX_YAN_suisui_loyalty_frame"
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "YAN_Suisui_LoyaltyLabel"
+			position = { x = 332 y = 30 }
+			font = "hoi_18mbs"
+			text = "YAN_suisui_loyalty_label"
+			maxWidth = 100
+			maxHeight = 24
+			alwaystransparent = yes
+		}
+
+		iconType = { name = "YAN_Suisui_PipOff_1"  position = { x = 440 y = 34 } spriteType = "GFX_YAN_suisui_pip_off" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_PipOff_2"  position = { x = 464 y = 34 } spriteType = "GFX_YAN_suisui_pip_off" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_PipOff_3"  position = { x = 488 y = 34 } spriteType = "GFX_YAN_suisui_pip_off" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_PipOff_4"  position = { x = 512 y = 34 } spriteType = "GFX_YAN_suisui_pip_off" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_PipOff_5"  position = { x = 536 y = 34 } spriteType = "GFX_YAN_suisui_pip_off" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_PipOff_6"  position = { x = 560 y = 34 } spriteType = "GFX_YAN_suisui_pip_off" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_PipOff_7"  position = { x = 584 y = 34 } spriteType = "GFX_YAN_suisui_pip_off" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_PipOff_8"  position = { x = 608 y = 34 } spriteType = "GFX_YAN_suisui_pip_off" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_PipOff_9"  position = { x = 632 y = 34 } spriteType = "GFX_YAN_suisui_pip_off" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_PipOff_10" position = { x = 656 y = 34 } spriteType = "GFX_YAN_suisui_pip_off" alwaystransparent = yes }
+
+		iconType = { name = "YAN_Suisui_Pip_1"  position = { x = 440 y = 34 } spriteType = "GFX_YAN_suisui_pip_on" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_Pip_2"  position = { x = 464 y = 34 } spriteType = "GFX_YAN_suisui_pip_on" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_Pip_3"  position = { x = 488 y = 34 } spriteType = "GFX_YAN_suisui_pip_on" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_Pip_4"  position = { x = 512 y = 34 } spriteType = "GFX_YAN_suisui_pip_on" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_Pip_5"  position = { x = 536 y = 34 } spriteType = "GFX_YAN_suisui_pip_on" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_Pip_6"  position = { x = 560 y = 34 } spriteType = "GFX_YAN_suisui_pip_on" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_Pip_7"  position = { x = 584 y = 34 } spriteType = "GFX_YAN_suisui_pip_on" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_Pip_8"  position = { x = 608 y = 34 } spriteType = "GFX_YAN_suisui_pip_on" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_Pip_9"  position = { x = 632 y = 34 } spriteType = "GFX_YAN_suisui_pip_on" alwaystransparent = yes }
+		iconType = { name = "YAN_Suisui_Pip_10" position = { x = 656 y = 34 } spriteType = "GFX_YAN_suisui_pip_on" alwaystransparent = yes }
+
+		instantTextBoxType = {
+			name = "YAN_Suisui_LoyaltyValue"
+			position = { x = 670 y = 24 }
+			font = "hoi_24header"
+			text = "[YAN_Suisui_GetLoyalty]"
+			maxWidth = 100
+			maxHeight = 30
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "YAN_Suisui_Flash"
+			position = { x = 440 y = 66 }
+			font = "hoi_16mbs"
+			text = "YAN_suisui_flash"
+			maxWidth = 300
+			maxHeight = 20
+			alwaystransparent = yes
+		}
+
+		instantTextBoxType = {
+			name = "YAN_Suisui_Subtitle"
+			position = { x = 24 y = 74 }
+			font = "hoi_16mbs"
+			text = "YAN_suisui_subtitle"
+			maxWidth = 380
+			maxHeight = 22
+			alwaystransparent = yes
+		}
+
+		# ---------------- 地图 ----------------
+		containerWindowType = {
+			name = "YAN_Suisui_Map"
+			position = { x = 16 y = 96 }
+			size = { width = 940 height = 600 }
+			clipping = no
+
+			iconType = {
+				name = "YAN_Suisui_MapImage"
+				position = { x = 0 y = 0 }
+				spriteType = "GFX_YAN_suisui_map"
+				alwaystransparent = yes
+			}
+
+			# 20 个司印：坐标由 tools/yan_suisui_map.cjs 生成
+			buttonType = { name = "YAN_Suisui_Select_sulang"          position = { x = 229 y = 165 } quadTextureSprite = "GFX_YAN_xzs_sulang"          clicksound = click_default pdx_tooltip = "YAN_suisui_sulang" }
+			buttonType = { name = "YAN_Suisui_Select_wanyuan"         position = { x = 332 y = 185 } quadTextureSprite = "GFX_YAN_xzs_wanyuan"         clicksound = click_default pdx_tooltip = "YAN_suisui_wanyuan" }
+			buttonType = { name = "YAN_Suisui_Select_huanjiang"       position = { x = 325 y = 196 } quadTextureSprite = "GFX_YAN_xzs_huanjiang"       clicksound = click_default pdx_tooltip = "YAN_suisui_huanjiang" }
+			buttonType = { name = "YAN_Suisui_Select_litang"          position = { x = 245 y = 253 } quadTextureSprite = "GFX_YAN_xzs_litang"          clicksound = click_default pdx_tooltip = "YAN_suisui_litang" }
+			buttonType = { name = "YAN_Suisui_Select_zhuyun"          position = { x = 333 y = 290 } quadTextureSprite = "GFX_YAN_xzs_zhuyun"          clicksound = click_default pdx_tooltip = "YAN_suisui_zhuyun" }
+			buttonType = { name = "YAN_Suisui_Select_jinyuan"         position = { x = 418 y = 184 } quadTextureSprite = "GFX_YAN_xzs_jinyuan"         clicksound = click_default pdx_tooltip = "YAN_suisui_jinyuan" }
+			buttonType = { name = "YAN_Suisui_Select_chuchang"        position = { x = 396 y = 221 } quadTextureSprite = "GFX_YAN_xzs_chuchang"        clicksound = click_default pdx_tooltip = "YAN_suisui_chuchang" }
+			buttonType = { name = "YAN_Suisui_Select_jizhou"          position = { x = 465 y = 226 } quadTextureSprite = "GFX_YAN_xzs_jizhou"          clicksound = click_default pdx_tooltip = "YAN_suisui_jizhou" }
+			buttonType = { name = "YAN_Suisui_Select_shuzhou"         position = { x = 519 y = 176 } quadTextureSprite = "GFX_YAN_xzs_shuzhou"         clicksound = click_default pdx_tooltip = "YAN_suisui_shuzhou" }
+			buttonType = { name = "YAN_Suisui_Select_shangshu"        position = { x = 371 y = 252 } quadTextureSprite = "GFX_YAN_xzs_shangshu"        clicksound = click_default pdx_tooltip = "YAN_suisui_shangshu" }
+			buttonType = { name = "YAN_Suisui_Select_zhuzhou"         position = { x = 395 y = 316 } quadTextureSprite = "GFX_YAN_xzs_zhuzhou"         clicksound = click_default pdx_tooltip = "YAN_suisui_zhuzhou" }
+			buttonType = { name = "YAN_Suisui_Select_zhenhai"         position = { x = 446 y = 306 } quadTextureSprite = "GFX_YAN_xzs_zhenhai"         clicksound = click_default pdx_tooltip = "YAN_suisui_zhenhai" }
+			buttonType = { name = "YAN_Suisui_Select_xingming"        position = { x = 434 y = 358 } quadTextureSprite = "GFX_YAN_xzs_xingming"        clicksound = click_default pdx_tooltip = "YAN_suisui_xingming" }
+			buttonType = { name = "YAN_Suisui_Select_wujiang"         position = { x = 514 y = 259 } quadTextureSprite = "GFX_YAN_xzs_wujiang"         clicksound = click_default pdx_tooltip = "YAN_suisui_wujiang" }
+			buttonType = { name = "YAN_Suisui_Select_qizhou"          position = { x = 511 y = 301 } quadTextureSprite = "GFX_YAN_xzs_qizhou"          clicksound = click_default pdx_tooltip = "YAN_suisui_qizhou" }
+			buttonType = { name = "YAN_Suisui_Select_yongan"          position = { x = 558 y = 214 } quadTextureSprite = "GFX_YAN_xzs_yongan"          clicksound = click_default pdx_tooltip = "YAN_suisui_yongan" }
+			buttonType = { name = "YAN_Suisui_Select_chengtian"       position = { x = 594 y = 209 } quadTextureSprite = "GFX_YAN_xzs_chengtian"       clicksound = click_default pdx_tooltip = "YAN_suisui_chengtian" }
+			buttonType = { name = "YAN_Suisui_Select_luochang"        position = { x = 584 y = 157 } quadTextureSprite = "GFX_YAN_xzs_luochang"        clicksound = click_default pdx_tooltip = "YAN_suisui_luochang" }
+			buttonType = { name = "YAN_Suisui_Select_weijiang"        position = { x = 655 y = 179 } quadTextureSprite = "GFX_YAN_xzs_weijiang"        clicksound = click_default pdx_tooltip = "YAN_suisui_weijiang" }
+			buttonType = { name = "YAN_Suisui_Select_zhenlong_direct" position = { x = 485 y = 199 } quadTextureSprite = "GFX_YAN_xzs_zhenlong_direct" clicksound = click_default pdx_tooltip = "YAN_suisui_zhenlong_direct" }
+		}
+
+		# ---------------- 图例 ----------------
+		instantTextBoxType = {
+			name = "YAN_Suisui_Legend"
+			position = { x = 16 y = 700 }
+			font = "hoi_14mbs"
+			text = "YAN_suisui_legend"
+			maxWidth = 940
+			maxHeight = 20
+			alwaystransparent = yes
+		}
+
+		# ---------------- 右侧详情 ----------------
+		containerWindowType = {
+			name = "YAN_Suisui_Detail"
+			position = { x = 964 y = 96 }
+			size = { width = 340 height = 620 }
+			clipping = no
+
+			background = {
+				name = "YAN_Suisui_Detail_Bg"
+				quadTextureSprite = "GFX_YAN_suisui_bg_detail"
+			}
+
+			iconType = {
+				name = "YAN_Suisui_Detail_TitleBg"
+				position = { x = 16 y = 0 }
+				spriteType = "GFX_YAN_suisui_title"
+				alwaystransparent = yes
+			}
+
+			instantTextBoxType = {
+				name = "YAN_Suisui_DetailName"
+				position = { x = 44 y = 16 }
+				font = "hoi_18mbs"
+				text = "[YAN_Suisui_GetName]"
+				maxWidth = 230
+				maxHeight = 26
+				alwaystransparent = yes
+			}
+
+			buttonType = {
+				name = "YAN_Suisui_Detail_Close"
+				position = { x = 276 y = 4 }
+				size = { x = 40 y = 40 }
+				quadTextureSprite = "GFX_YAN_suisui_btn_close"
+				clicksound = click_close
+				pdx_tooltip = "CLOSE"
+			}
+
+			iconType = {
+				name = "YAN_Suisui_Detail_Divider"
+				position = { x = 24 y = 64 }
+				spriteType = "GFX_YAN_suisui_divider"
+				alwaystransparent = yes
+			}
+
+			iconType = {
+				name = "YAN_Suisui_PortraitFrame"
+				position = { x = 84 y = 140 }
+				spriteType = "GFX_YAN_suisui_portrait_frame"
+				alwaystransparent = yes
+			}
+
+			iconType = {
+				name = "YAN_Suisui_Portrait"
+				position = { x = 92 y = 150 }
+				spriteType = "GFX_YAN_suisui_agent_zhongyue"
+				alwaystransparent = yes
+			}
+
+			instantTextBoxType = {
+				name = "YAN_Suisui_AgentName"
+				position = { x = 84 y = 372 }
+				font = "hoi_18mbs"
+				text = "[YAN_Suisui_GetAgentName]"
+				maxWidth = 172
+				maxHeight = 26
+				format = center
+				alwaystransparent = yes
+			}
+
+			instantTextBoxType = {
+				name = "YAN_Suisui_Cooldowns"
+				position = { x = 24 y = 398 }
+				font = "hoi_14mbs"
+				text = "[YAN_Suisui_GetCooldowns]"
+				maxWidth = 292
+				maxHeight = 20
+				alwaystransparent = yes
+			}
+
+			buttonType = {
+				name = "YAN_Suisui_Act1"
+				position = { x = 24 y = 420 }
+				size = { x = 292 y = 44 }
+				quadTextureSprite = "GFX_YAN_suisui_btn_action"
+				clicksound = click_default
+				pdx_tooltip = "YAN_suisui_act1_tt"
+			}
+			instantTextBoxType = {
+				name = "YAN_Suisui_Act1_Text"
+				position = { x = 24 y = 420 }
+				font = "hoi_16mbs"
+				text = "[YAN_Suisui_GetAct1Label]"
+				maxWidth = 292
+				maxHeight = 44
+				format = center
+				vertical_alignment = centre
+				alwaystransparent = yes
+			}
+
+			buttonType = {
+				name = "YAN_Suisui_Act2"
+				position = { x = 24 y = 472 }
+				size = { x = 292 y = 44 }
+				quadTextureSprite = "GFX_YAN_suisui_btn_action"
+				clicksound = click_default
+				pdx_tooltip = "YAN_suisui_act2_tt"
+			}
+			instantTextBoxType = {
+				name = "YAN_Suisui_Act2_Text"
+				position = { x = 24 y = 472 }
+				font = "hoi_16mbs"
+				text = "[YAN_Suisui_GetAct2Label]"
+				maxWidth = 292
+				maxHeight = 44
+				format = center
+				vertical_alignment = centre
+				alwaystransparent = yes
+			}
+
+			buttonType = {
+				name = "YAN_Suisui_Act3"
+				position = { x = 24 y = 524 }
+				size = { x = 292 y = 44 }
+				quadTextureSprite = "GFX_YAN_suisui_btn_action"
+				clicksound = click_default
+				pdx_tooltip = "YAN_suisui_act3_tt"
+			}
+			instantTextBoxType = {
+				name = "YAN_Suisui_Act3_Text"
+				position = { x = 24 y = 524 }
+				font = "hoi_16mbs"
+				text = "[YAN_Suisui_GetAct3Label]"
+				maxWidth = 292
+				maxHeight = 44
+				format = center
+				vertical_alignment = centre
+				alwaystransparent = yes
+			}
+
+			buttonType = {
+				name = "YAN_Suisui_Act4"
+				position = { x = 24 y = 576 }
+				size = { x = 292 y = 44 }
+				quadTextureSprite = "GFX_YAN_suisui_btn_action"
+				clicksound = click_default
+				pdx_tooltip = "YAN_suisui_act4_tt"
+			}
+			instantTextBoxType = {
+				name = "YAN_Suisui_Act4_Text"
+				position = { x = 24 y = 576 }
+				font = "hoi_16mbs"
+				text = "[YAN_Suisui_GetAct4Label]"
+				maxWidth = 292
+				maxHeight = 44
+				format = center
+				vertical_alignment = centre
+				alwaystransparent = yes
+			}
+		}
+
+		# 未选中任何司时的提示
+		instantTextBoxType = {
+			name = "YAN_Suisui_Hint"
+			position = { x = 980 y = 320 }
+			font = "hoi_16mbs"
+			text = "YAN_suisui_hint"
+			maxWidth = 308
+			maxHeight = 60
+			format = center
+			alwaystransparent = yes
+		}
+	}
+}

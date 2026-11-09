@@ -1,0 +1,1439 @@
+# ==============================================================================
+#  大炎 · 山海众十九司 / 通用 —— 地方身份（民族精神 + 编制 + 开局部队）
+#  · YAN_shz_apply_identity   首次立国：挂本司精神、建本司编制、补专业装备
+#  · YAN_shz_spawn_tiers      占州爆兵（按波次三档，使用本司编制）
+#  · YAN_shz_spawn_<tag>      各司三档爆兵
+#  · YAN_shz_fill_<tag>       封顶后每座山寨补兵
+#  生成器：docs/gen_yan_shanhai_identity.cjs（改表重跑，勿手改产物）
+# ==============================================================================
+
+YAN_shz_apply_identity = {
+	# THIS = 该股山海众：首次立国时挂本司精神、建本司编制、补专业装备。
+	# 用独立旗标守一次，旧存档在下一波补兵时也能补上。
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shz_identity_flag } }
+		set_country_flag = YAN_shz_identity_flag
+		if = {
+			limit = { tag = SLG }
+			add_ideas = YAN_shz_slg
+			add_equipment_to_stockpile = { type = artillery_equipment amount = 600 producer = YAN }
+			add_equipment_to_stockpile = { type = support_equipment amount = 400 producer = YAN }
+			division_template = {
+				name = "山海众·肃廊工兵"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 2 y = 1 }
+					artillery = { x = 0 y = 2 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = WYU }
+			add_ideas = YAN_shz_wyu
+			division_template = {
+				name = "山海众·万原饥军"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = HUJ }
+			add_ideas = YAN_shz_huj
+			division_template = {
+				name = "山海众·桓江水勇"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = LTA }
+			add_ideas = YAN_shz_lta
+			division_template = {
+				name = "山海众·苍蕃苦修"
+				is_locked = yes
+				regiments = {
+					mountaineers = { x = 0 y = 0 }
+					mountaineers = { x = 1 y = 0 }
+					mountaineers = { x = 2 y = 0 }
+					mountaineers = { x = 0 y = 1 }
+					cavalry = { x = 1 y = 1 }
+					cavalry = { x = 2 y = 1 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = ZYU }
+			add_ideas = YAN_shz_zyu
+			division_template = {
+				name = "山海众·夜郎猎手"
+				is_locked = yes
+				regiments = {
+					mountaineers = { x = 0 y = 0 }
+					mountaineers = { x = 1 y = 0 }
+					mountaineers = { x = 2 y = 0 }
+					mountaineers = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 2 y = 1 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = JYU }
+			add_ideas = YAN_shz_jyu
+			add_equipment_to_stockpile = { type = artillery_equipment amount = 600 producer = YAN }
+			add_equipment_to_stockpile = { type = support_equipment amount = 400 producer = YAN }
+			division_template = {
+				name = "山海众·晋原武行"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+					artillery = { x = 2 y = 1 }
+				}
+				support = {
+					recon = { x = 0 y = 0 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = CHC }
+			add_ideas = YAN_shz_chc
+			add_equipment_to_stockpile = { type = support_equipment amount = 400 producer = YAN }
+			division_template = {
+				name = "山海众·洪都船帮"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+					recon = { x = 0 y = 0 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = JIZ }
+			add_ideas = YAN_shz_jiz
+			division_template = {
+				name = "山海众·冀州骑匪"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					cavalry = { x = 2 y = 0 }
+					cavalry = { x = 0 y = 1 }
+					cavalry = { x = 1 y = 1 }
+					cavalry = { x = 2 y = 1 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = SZH }
+			add_ideas = YAN_shz_szh
+			division_template = {
+				name = "山海众·舒州盐队"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+					cavalry = { x = 2 y = 1 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = SSU }
+			add_ideas = YAN_shz_ssu
+			add_equipment_to_stockpile = { type = support_equipment amount = 400 producer = YAN }
+			division_template = {
+				name = "山海众·尚蜀山勇"
+				is_locked = yes
+				regiments = {
+					mountaineers = { x = 0 y = 0 }
+					mountaineers = { x = 1 y = 0 }
+					mountaineers = { x = 2 y = 0 }
+					mountaineers = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 2 y = 1 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = ZZH }
+			add_ideas = YAN_shz_zzh
+			add_equipment_to_stockpile = { type = support_equipment amount = 400 producer = YAN }
+			division_template = {
+				name = "山海众·珠洲疍户"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+					recon = { x = 0 y = 0 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = ZHL }
+			add_ideas = YAN_shz_zhl
+			add_equipment_to_stockpile = { type = artillery_equipment amount = 600 producer = YAN }
+			add_equipment_to_stockpile = { type = support_equipment amount = 400 producer = YAN }
+			division_template = {
+				name = "山海众·镇海盐丁"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+					artillery = { x = 2 y = 1 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = XMU }
+			add_ideas = YAN_shz_xmu
+			add_equipment_to_stockpile = { type = artillery_equipment amount = 600 producer = YAN }
+			add_equipment_to_stockpile = { type = support_equipment amount = 400 producer = YAN }
+			division_template = {
+				name = "山海众·兴铭匠兵"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 2 y = 1 }
+					artillery = { x = 0 y = 2 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = WJI }
+			add_ideas = YAN_shz_wji
+			division_template = {
+				name = "山海众·琅珆残部"
+				is_locked = yes
+				regiments = {
+					mountaineers = { x = 0 y = 0 }
+					mountaineers = { x = 1 y = 0 }
+					mountaineers = { x = 2 y = 0 }
+					mountaineers = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 2 y = 1 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = QZH }
+			add_ideas = YAN_shz_qzh
+			division_template = {
+				name = "山海众·齐州盐徒"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = YON }
+			add_ideas = YAN_shz_yon
+			add_equipment_to_stockpile = { type = support_equipment amount = 400 producer = YAN }
+			division_template = {
+				name = "山海众·梦津漕勇"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = CTI }
+			add_ideas = YAN_shz_cti
+			add_equipment_to_stockpile = { type = artillery_equipment amount = 600 producer = YAN }
+			add_equipment_to_stockpile = { type = support_equipment amount = 400 producer = YAN }
+			division_template = {
+				name = "山海众·承天旧军"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+					artillery = { x = 2 y = 1 }
+				}
+				support = {
+					military_police = { x = 0 y = 0 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = LCH }
+			add_ideas = YAN_shz_lch
+			division_template = {
+				name = "山海众·隆仓仓丁"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+				}
+			}
+		}
+		else_if = {
+			limit = { tag = WJG }
+			add_ideas = YAN_shz_wjg
+			add_equipment_to_stockpile = { type = artillery_equipment amount = 600 producer = YAN }
+			add_equipment_to_stockpile = { type = support_equipment amount = 400 producer = YAN }
+			division_template = {
+				name = "山海众·苇荡伏兵"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+					artillery = { x = 2 y = 1 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+				}
+			}
+		}
+		else = {
+			add_ideas = YAN_shz_sha
+			division_template = {
+				name = "山海众·乱兵"
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 0 y = 1 }
+				}
+			}
+		}
+	}
+}
+
+YAN_shz_spawn_slg = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·肃廊工兵\" start_experience_factor = 0.15 start_equipment_factor = 0.9"
+				owner = PREV
+				count = 11
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·肃廊工兵\" start_experience_factor = 0.15 start_equipment_factor = 0.9"
+				owner = PREV
+				count = 9
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·肃廊工兵\" start_experience_factor = 0.15 start_equipment_factor = 0.9"
+				owner = PREV
+				count = 7
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_wyu = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·万原饥军\" start_experience_factor = 0 start_equipment_factor = 0.5"
+				owner = PREV
+				count = 18
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·万原饥军\" start_experience_factor = 0 start_equipment_factor = 0.5"
+				owner = PREV
+				count = 14
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·万原饥军\" start_experience_factor = 0 start_equipment_factor = 0.5"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_huj = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·桓江水勇\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 16
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·桓江水勇\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 13
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·桓江水勇\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_lta = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·苍蕃苦修\" start_experience_factor = 0.15 start_equipment_factor = 0.8"
+				owner = PREV
+				count = 11
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·苍蕃苦修\" start_experience_factor = 0.15 start_equipment_factor = 0.8"
+				owner = PREV
+				count = 9
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·苍蕃苦修\" start_experience_factor = 0.15 start_equipment_factor = 0.8"
+				owner = PREV
+				count = 7
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_zyu = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·夜郎猎手\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 12
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·夜郎猎手\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·夜郎猎手\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 8
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_jyu = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·晋原武行\" start_experience_factor = 0.2 start_equipment_factor = 0.85"
+				owner = PREV
+				count = 12
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·晋原武行\" start_experience_factor = 0.2 start_equipment_factor = 0.85"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·晋原武行\" start_experience_factor = 0.2 start_equipment_factor = 0.85"
+				owner = PREV
+				count = 8
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_chc = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·洪都船帮\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 16
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·洪都船帮\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 13
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·洪都船帮\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_jiz = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·冀州骑匪\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 12
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·冀州骑匪\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·冀州骑匪\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 8
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_szh = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·舒州盐队\" start_experience_factor = 0.1 start_equipment_factor = 0.8"
+				owner = PREV
+				count = 15
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·舒州盐队\" start_experience_factor = 0.1 start_equipment_factor = 0.8"
+				owner = PREV
+				count = 12
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·舒州盐队\" start_experience_factor = 0.1 start_equipment_factor = 0.8"
+				owner = PREV
+				count = 9
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_ssu = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·尚蜀山勇\" start_experience_factor = 0.15 start_equipment_factor = 0.85"
+				owner = PREV
+				count = 11
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·尚蜀山勇\" start_experience_factor = 0.15 start_equipment_factor = 0.85"
+				owner = PREV
+				count = 9
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·尚蜀山勇\" start_experience_factor = 0.15 start_equipment_factor = 0.85"
+				owner = PREV
+				count = 7
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_zzh = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·珠洲疍户\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 16
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·珠洲疍户\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 13
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·珠洲疍户\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_zhl = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·镇海盐丁\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 12
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·镇海盐丁\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·镇海盐丁\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 8
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_xmu = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·兴铭匠兵\" start_experience_factor = 0.2 start_equipment_factor = 1"
+				owner = PREV
+				count = 11
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·兴铭匠兵\" start_experience_factor = 0.2 start_equipment_factor = 1"
+				owner = PREV
+				count = 9
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·兴铭匠兵\" start_experience_factor = 0.2 start_equipment_factor = 1"
+				owner = PREV
+				count = 7
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_wji = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·琅珆残部\" start_experience_factor = 0.15 start_equipment_factor = 0.8"
+				owner = PREV
+				count = 13
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·琅珆残部\" start_experience_factor = 0.15 start_equipment_factor = 0.8"
+				owner = PREV
+				count = 11
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·琅珆残部\" start_experience_factor = 0.15 start_equipment_factor = 0.8"
+				owner = PREV
+				count = 9
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_qzh = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·齐州盐徒\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 16
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·齐州盐徒\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 13
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·齐州盐徒\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_yon = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·梦津漕勇\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 15
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·梦津漕勇\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 12
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·梦津漕勇\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 9
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_cti = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·承天旧军\" start_experience_factor = 0.25 start_equipment_factor = 0.95"
+				owner = PREV
+				count = 11
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·承天旧军\" start_experience_factor = 0.25 start_equipment_factor = 0.95"
+				owner = PREV
+				count = 9
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·承天旧军\" start_experience_factor = 0.25 start_equipment_factor = 0.95"
+				owner = PREV
+				count = 7
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_lch = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·隆仓仓丁\" start_experience_factor = 0.05 start_equipment_factor = 0.55"
+				owner = PREV
+				count = 18
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·隆仓仓丁\" start_experience_factor = 0.05 start_equipment_factor = 0.55"
+				owner = PREV
+				count = 14
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·隆仓仓丁\" start_experience_factor = 0.05 start_equipment_factor = 0.55"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_wjg = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·苇荡伏兵\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 13
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·苇荡伏兵\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 11
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·苇荡伏兵\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+				owner = PREV
+				count = 9
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_spawn_sha = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·乱兵\" start_experience_factor = 0.05 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 18
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else_if = {
+		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·乱兵\" start_experience_factor = 0.05 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 14
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+	else = {
+		random_owned_state = {
+			limit = { has_state_flag = YAN_shz_spot_flag }
+			create_unit = {
+				division = "division_template = \"山海众·乱兵\" start_experience_factor = 0.05 start_equipment_factor = 0.7"
+				owner = PREV
+				count = 10
+			}
+			clr_state_flag = YAN_shz_spot_flag
+		}
+	}
+}
+
+YAN_shz_fill_slg = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·肃廊工兵\" start_experience_factor = 0.15 start_equipment_factor = 0.9"
+			owner = PREV
+			count = 4
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_wyu = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·万原饥军\" start_experience_factor = 0 start_equipment_factor = 0.5"
+			owner = PREV
+			count = 8
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_huj = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·桓江水勇\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+			owner = PREV
+			count = 6
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_lta = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·苍蕃苦修\" start_experience_factor = 0.15 start_equipment_factor = 0.8"
+			owner = PREV
+			count = 4
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_zyu = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·夜郎猎手\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+			owner = PREV
+			count = 6
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_jyu = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·晋原武行\" start_experience_factor = 0.2 start_equipment_factor = 0.85"
+			owner = PREV
+			count = 5
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_chc = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·洪都船帮\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+			owner = PREV
+			count = 6
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_jiz = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·冀州骑匪\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+			owner = PREV
+			count = 5
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_szh = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·舒州盐队\" start_experience_factor = 0.1 start_equipment_factor = 0.8"
+			owner = PREV
+			count = 6
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_ssu = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·尚蜀山勇\" start_experience_factor = 0.15 start_equipment_factor = 0.85"
+			owner = PREV
+			count = 4
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_zzh = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·珠洲疍户\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+			owner = PREV
+			count = 6
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_zhl = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·镇海盐丁\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+			owner = PREV
+			count = 5
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_xmu = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·兴铭匠兵\" start_experience_factor = 0.2 start_equipment_factor = 1"
+			owner = PREV
+			count = 4
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_wji = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·琅珆残部\" start_experience_factor = 0.15 start_equipment_factor = 0.8"
+			owner = PREV
+			count = 5
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_qzh = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·齐州盐徒\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+			owner = PREV
+			count = 6
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_yon = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·梦津漕勇\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+			owner = PREV
+			count = 6
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_cti = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·承天旧军\" start_experience_factor = 0.25 start_equipment_factor = 0.95"
+			owner = PREV
+			count = 4
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_lch = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·隆仓仓丁\" start_experience_factor = 0.05 start_equipment_factor = 0.55"
+			owner = PREV
+			count = 8
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_wjg = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·苇荡伏兵\" start_experience_factor = 0.1 start_equipment_factor = 0.75"
+			owner = PREV
+			count = 5
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_fill_sha = {
+	# THIS = 该股山海众：封顶波每座山寨补兵。
+	YAN_shz_apply_identity = yes
+	random_owned_state = {
+		create_unit = {
+			division = "division_template = \"山海众·乱兵\" start_experience_factor = 0.05 start_equipment_factor = 0.7"
+			owner = PREV
+			count = 6
+		}
+		YAN_shz_wreck = yes
+	}
+}
+
+YAN_shz_spawn_dispatch = {
+	# THIS = 该股山海众：按 tag 进入本司爆兵
+	if = { limit = { tag = SLG } YAN_shz_spawn_slg = yes }
+	else_if = { limit = { tag = WYU } YAN_shz_spawn_wyu = yes }
+	else_if = { limit = { tag = HUJ } YAN_shz_spawn_huj = yes }
+	else_if = { limit = { tag = LTA } YAN_shz_spawn_lta = yes }
+	else_if = { limit = { tag = ZYU } YAN_shz_spawn_zyu = yes }
+	else_if = { limit = { tag = JYU } YAN_shz_spawn_jyu = yes }
+	else_if = { limit = { tag = CHC } YAN_shz_spawn_chc = yes }
+	else_if = { limit = { tag = JIZ } YAN_shz_spawn_jiz = yes }
+	else_if = { limit = { tag = SZH } YAN_shz_spawn_szh = yes }
+	else_if = { limit = { tag = SSU } YAN_shz_spawn_ssu = yes }
+	else_if = { limit = { tag = ZZH } YAN_shz_spawn_zzh = yes }
+	else_if = { limit = { tag = ZHL } YAN_shz_spawn_zhl = yes }
+	else_if = { limit = { tag = XMU } YAN_shz_spawn_xmu = yes }
+	else_if = { limit = { tag = WJI } YAN_shz_spawn_wji = yes }
+	else_if = { limit = { tag = QZH } YAN_shz_spawn_qzh = yes }
+	else_if = { limit = { tag = YON } YAN_shz_spawn_yon = yes }
+	else_if = { limit = { tag = CTI } YAN_shz_spawn_cti = yes }
+	else_if = { limit = { tag = LCH } YAN_shz_spawn_lch = yes }
+	else_if = { limit = { tag = WJG } YAN_shz_spawn_wjg = yes }
+	else = { YAN_shz_spawn_sha = yes }
+}

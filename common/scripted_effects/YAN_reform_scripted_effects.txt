@@ -1,0 +1,286 @@
+# ==============================================================================
+# 大炎 · 变革树脚本效果（2026-11-05 重制）
+#  · YAN_reform_longmen_uprising  60 天任务超时：龙门总督府独立并易帜为龙门整合运动，
+#                                 随后龙门近卫局（LGD）夺取 state 208、宣战并入东陆公约
+#  · YAN_reform_longmen_guard_rise 建国/爆兵/宣战/入阵营（由上一效果调用）
+#  （感染者问题的每周结算已改为动态民族精神的 stability_weekly / war_support_weekly，
+#    不再使用 on_weekly_YAN 脚本结算）
+# ==============================================================================
+
+YAN_reform_longmen_uprising = {
+	# ROOT = YAN
+	set_country_flag = yan_reform_longmen_uprising
+
+	if = {
+		limit = { country_exists = LUM }
+		LUM = {
+			# 脱离大炎：照 YAN_donglu_parade_break_vassal 的两道保险
+			if = {
+				limit = { is_subject = yes }
+				overlord = { end_puppet = PREV }
+			}
+			if = {
+				limit = { is_subject_of = YAN }
+				YAN = { set_autonomy = { target = PREV autonomy_state = autonomy_free } }
+			}
+			if = {
+				limit = { is_in_faction = yes }
+				leave_faction = yes
+			}
+
+			set_politics = {
+				ruling_party = communism
+				elections_allowed = no
+			}
+			set_popularities = {
+				communism = 90
+				socialism = 0
+				progressivism = 0
+				liberalism = 0
+				conservatism = 0
+				authoritarianism = 0
+				despotism = 5
+				fascism = 5
+				mysticism = 0
+				special = 0
+			}
+
+			create_country_leader = {
+				name = YAN_reform_jiu
+				desc = YAN_reform_jiu_desc
+				picture = "gfx/leaders/YAN/YAN_Jiu.dds"
+				expire = "1965.1.1.1"
+				ideology = communism_subtype
+			}
+
+			set_cosmetic_tag = Longmen_Integration_Movement
+			add_ideas = YAN_reform_broken_shackles
+
+			# 起义军编制：12 步；只建一次
+			set_technology = { infantry_weapons_0 = 1 }
+			if = {
+				limit = { NOT = { has_country_flag = YAN_reform_longmen_army_flag } }
+				set_country_flag = YAN_reform_longmen_army_flag
+				division_template = {
+					name = "感染者起义军"
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 2 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 2 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 2 }
+						infantry = { x = 2 y = 2 }
+						infantry = { x = 0 y = 3 }
+						infantry = { x = 1 y = 3 }
+						infantry = { x = 2 y = 3 }
+					}
+				}
+			}
+
+			# 20 支 12 步起义军：补足人丁与轻武器，避免 create_unit 落地即缺编
+			add_manpower = 240000
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 24000
+			}
+
+			capital_scope = {
+				create_unit = {
+					division = "division_template = \"感染者起义军\" start_experience_factor = 0.2 start_equipment_factor = 0.8"
+					owner = PREV
+					count = 20
+				}
+			}
+		}
+	}
+
+	# 随后：state 208 由龙门近卫局占领，近卫局对整合运动宣战并加入东陆防御公约
+	YAN_reform_longmen_guard_rise = yes
+}
+
+YAN_reform_longmen_guard_rise = {
+	# ROOT = YAN
+	if = {
+		limit = { NOT = { has_country_flag = yan_reform_lgd_risen } }
+		set_country_flag = yan_reform_lgd_risen
+
+		LGD = {
+			# state 208 仍属龙门总督府时，转给龙门近卫局并定都
+			if = {
+				limit = { 208 = { owner = { tag = LUM } } }
+				transfer_state = 208
+			}
+			add_state_core = 208
+			set_capital = {
+				state = 208
+				remember_old_capital = no
+			}
+
+			# 领袖兜底：先确保保守主义执政，再确保陈晖洁在任
+			set_politics = {
+				ruling_party = conservatism
+				elections_allowed = no
+			}
+			set_popularities = {
+				communism = 0
+				socialism = 0
+				progressivism = 0
+				liberalism = 0
+				conservatism = 100
+				authoritarianism = 0
+				despotism = 0
+				fascism = 0
+				mysticism = 0
+				special = 0
+			}
+			if = {
+				limit = { NOT = { has_character = LGD_Chen_Huijie } }
+				# 运行时不允许 recruit_character（error.log 会报错），用 create_country_leader 兜底
+				create_country_leader = {
+					name = LGD_Chen_Huijie
+					desc = LGD_Chen_Huijie_desc
+					picture = "gfx/leaders/YAN/leader/YAN_leader_chenhuijie.png"
+					expire = "1965.1.1"
+					ideology = conservative_subtype
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_country_leader = {
+							character = LGD_Chen_Huijie
+							ruling_only = yes
+						}
+					}
+				}
+				retire_country_leader = yes
+				promote_character = {
+					character = LGD_Chen_Huijie
+					ideology = conservative_subtype
+				}
+			}
+
+			set_technology = {
+				infantry_weapons_0 = 1
+				motorized_infantry_0 = 1
+				heavy_tank_0 = 1
+			}
+
+			# 镇暴队：8 步兵
+			if = {
+				limit = { NOT = { has_template = "龙门镇暴队" } }
+				division_template = {
+					name = "龙门镇暴队"
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 2 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 2 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 2 }
+					}
+				}
+			}
+
+			# 玉门援军：8 机动步兵 + 4 重型坦克
+			if = {
+				limit = { NOT = { has_template = "玉门援军" } }
+				division_template = {
+					name = "玉门援军"
+					is_locked = yes
+					regiments = {
+						motorized = { x = 0 y = 0 }
+						motorized = { x = 1 y = 0 }
+						motorized = { x = 2 y = 0 }
+						motorized = { x = 0 y = 1 }
+						motorized = { x = 1 y = 1 }
+						motorized = { x = 2 y = 1 }
+						motorized = { x = 0 y = 2 }
+						motorized = { x = 1 y = 2 }
+						heavy_armor = { x = 2 y = 2 }
+						heavy_armor = { x = 0 y = 3 }
+						heavy_armor = { x = 1 y = 3 }
+						heavy_armor = { x = 2 y = 3 }
+					}
+				}
+			}
+
+			# 近卫局初始部队：20 支 8 步满编镇暴部队
+			if = {
+				limit = { NOT = { has_country_flag = LGD_reform_units_spawned } }
+				set_country_flag = LGD_reform_units_spawned
+
+				add_manpower = 220000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 30000
+					producer = YAN
+				}
+				add_equipment_to_stockpile = {
+					type = motorized_equipment
+					amount = 1300
+					producer = YAN
+				}
+				add_equipment_to_stockpile = {
+					type = heavy_tank_chassis_1
+					amount = 800
+					producer = YAN
+				}
+
+				# 定都 state 208；直接在该州生成，避免 capital_scope 在建国当帧尚未刷新
+				208 = {
+					create_unit = {
+						division = "division_template = \"龙门镇暴队\" start_experience_factor = 0.4 start_equipment_factor = 1"
+						owner = LGD
+						count = 20
+					}
+				}
+			}
+
+			# 立即对龙门整合运动宣战
+			if = {
+				limit = {
+					country_exists = LUM
+					NOT = { has_war_with = LUM }
+				}
+				declare_war_on = {
+					target = LUM
+					type = annex_everything
+				}
+			}
+
+			# 加入「东陆防御公约」；公约尚未成立时由近卫局按公约纲领组建
+			if = {
+				limit = { NOT = { is_in_faction = yes } }
+				if = {
+					limit = {
+						any_country = {
+							is_faction_leader = yes
+							has_faction_template = faction_shenzhou_league
+						}
+					}
+					random_country = {
+						limit = {
+							is_faction_leader = yes
+							has_faction_template = faction_shenzhou_league
+						}
+						add_to_faction = LGD
+					}
+				}
+				else = {
+					set_rule = { can_create_factions = yes }
+					create_faction_from_template = faction_template_shenzhou_league
+					add_faction_initiative = 1
+				}
+			}
+		}
+	}
+}
+

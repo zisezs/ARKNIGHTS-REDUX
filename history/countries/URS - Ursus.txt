@@ -155,6 +155,14 @@ set_popularities = {
 	special = 0
 }
 
+# ===== 开局阵营：圣骏堡规程（2026-11-06）BEGIN =====
+# 乌萨斯帝国开局即为「圣骏堡规程」的领袖；模板见
+# common/factions/templates/URS_regulation_pact_template.txt，目标见
+# common/factions/goals/URS_regulation_pact_manifest.txt。
+# 成员默认只有 URS，其余国家由玩家通过外交页面邀请加入。
+create_faction_from_template = faction_template_regulation_pact
+# ===== 开局阵营：圣骏堡规程 END =====
+
 create_equipment_variant = {
 	type = medium_tank_chassis_1
 	parent_version = 0
@@ -207,3 +215,20 @@ set_air_oob = "URS_Start_air_bba"
 set_technology = {
 	arf_imperial_blade_tech = 1
 }
+
+# ===== 集团军附庸（2026-11-01）BEGIN =====
+# 乌萨斯第一/第二集团军：帝国直属的军政府附庸，州权已从本文件对应的 9 个州移交
+# （154/111/135/1087/120/169 → U1A，213/198/488 → U2A），URS 保留这些州的核心。
+set_autonomy = {
+	target = U1A
+	autonomy_state = autonomy_ursus_combat_troops
+}
+set_autonomy = {
+	target = U2A
+	autonomy_state = autonomy_ursus_combat_troops
+}
+
+# 互相军事通行权（另一方向写在各集团军自己的历史文件里）
+give_military_access = U1A
+give_military_access = U2A
+# ===== 集团军附庸 END =====

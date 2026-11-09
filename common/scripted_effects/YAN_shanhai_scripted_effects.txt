@@ -3,21 +3,22 @@
 #  · YAN_shanhai_check     月度入口（YAN_monthly_tick 调用）：先平叛趟子，再起新波
 #  · YAN_shanhai_liberate  把「控制权已回到大炎手里」的州，所有权也交还，并锁定该区
 #  · YAN_shanhai_wave      一波：未达上限就占一州，达到就往既有山寨增兵
-#  · YAN_shanhai_seize     占州（THIS = 州）：立国/宣战/给地/爆兵/扣损失/弹急报
+#  · YAN_shanhai_seize     占州（THIS = 州）：立国/宣战/给地/爆兵/扣损失（不弹事件）
 #  · YAN_shz_found_here    建政（THIS = 该股叛军）：幂等，旗标去重
-#  · YAN_shz_spawn_tiers   爆兵（THIS = 州，PREV = 该 tag）：10 / 14 / 18 三档
+#  · YAN_shz_spawn_tiers   爆兵入口：转 YAN_shz_spawn_dispatch（各司编制/数量见 identity 文件）
 #  · YAN_shz_costs         全局损失（YAN 作用域）：稳定度/战争支持度/工厂/岁压/首次新闻
-#  · YAN_shanhai_disband   「岁陵之约」收束：交还所有州 + 遣散 + 停战
+#  · YAN_shanhai_disband   「岁陵之约」收束：交还所有州 + 遣散本司乱兵 + 停战
 #
-#  口径：每 30 天一波；同时在占 6 州封顶；每波 -0.1 稳定度 / -0.1 战争支持度 /
-#        破坏 2 民 1 军工厂 / 岁压 +2；爆兵 18/14/10 个 4 步填线师「山海众乱兵」
-#        （达到封顶那波改为每座山寨补 6 个）。
+#  口径：每 120 天一波（yan_shz.23 静默计时，到点即起下一波；起事全程不弹事件）；同时在占 6 州封顶；每波 -0.1 稳定度 / -0.1 战争支持度 /
+#        破坏 2 民 1 军工厂 / 岁压 +2。十九司各有民族精神与编制：首波 7–10 师，
+#        封顶波每座山寨补 4–8 师（详见 YAN_shanhai_identity_scripted_effects.txt）。
 #  两条引擎实证（v1 就是栽在这里，game.log 2026-09-21）：
 #    ① 零领土 tag 的 exists = no —— 叛军必须真的拿到州的所有权才存在，所以用 transfer_state_to；
 #    ② on_monthly 按现存国家各跑一次（本 mod 场上 101 国）—— 月度钩子已改 on_monthly_YAN。
 #  一地一经平定即挂 YAN_shz_region_done 永久锁死：既写"山海众在那一带散了"，
 #  也避免去给一个已经被吞掉的 tag 再递州（那种 scope 会静默什么都不发生）。
-#  生成器 E:/tmp/sui12/gen_shanhai.js
+#  生成器：占州/收束等本体 E:/tmp/sui12/gen_shanhai.js（旧）；
+#          found_here / spawn_tiers / reinforce / disband 由 docs/gen_yan_shanhai_identity.cjs 生成。
 # ==============================================================================
 
 YAN_shanhai_check = {
@@ -29,8 +30,12 @@ YAN_shanhai_check = {
 			NOT = { has_country_flag = yan_sui_agreement_done }
 			# 【岁陵之乱！】120 天任务结算后，山海众偃旗息鼓，不再起新波
 			NOT = { has_country_flag = yan_sui_banner_lowered }
+			# 起事冷却：起一波挂旗，120 天后由静默事件 yan_shz.23 摘旗并起下一波
+			NOT = { has_country_flag = YAN_shz_wave_cd }
 		}
 		YAN_shanhai_wave = yes
+		set_country_flag = YAN_shz_wave_cd
+		country_event = { id = yan_shz.23 days = 120 }
 	}
 }
 
@@ -521,7 +526,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = SLG type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.1 days = 0 }
 		}
 	}
 	else_if = {
@@ -537,7 +541,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = WYU type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.2 days = 0 }
 		}
 	}
 	else_if = {
@@ -553,7 +556,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = HUJ type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.3 days = 0 }
 		}
 	}
 	else_if = {
@@ -569,7 +571,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = LTA type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.4 days = 0 }
 		}
 	}
 	else_if = {
@@ -585,7 +586,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = ZYU type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.5 days = 0 }
 		}
 	}
 	else_if = {
@@ -601,7 +601,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = JYU type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.6 days = 0 }
 		}
 	}
 	else_if = {
@@ -617,7 +616,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = CHC type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.7 days = 0 }
 		}
 	}
 	else_if = {
@@ -633,7 +631,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = JIZ type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.8 days = 0 }
 		}
 	}
 	else_if = {
@@ -649,7 +646,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = SZH type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.9 days = 0 }
 		}
 	}
 	else_if = {
@@ -665,7 +661,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = SSU type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.10 days = 0 }
 		}
 	}
 	else_if = {
@@ -681,7 +676,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = ZZH type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.11 days = 0 }
 		}
 	}
 	else_if = {
@@ -697,7 +691,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = ZHL type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.12 days = 0 }
 		}
 	}
 	else_if = {
@@ -713,7 +706,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = XMU type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.13 days = 0 }
 		}
 	}
 	else_if = {
@@ -729,7 +721,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = WJI type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.14 days = 0 }
 		}
 	}
 	else_if = {
@@ -745,7 +736,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = QZH type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.15 days = 0 }
 		}
 	}
 	else_if = {
@@ -761,7 +751,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = YON type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.16 days = 0 }
 		}
 	}
 	else_if = {
@@ -777,7 +766,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = CTI type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.17 days = 0 }
 		}
 	}
 	else_if = {
@@ -793,7 +781,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = LCH type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.18 days = 0 }
 		}
 	}
 	else_if = {
@@ -809,7 +796,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = WJG type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.19 days = 0 }
 		}
 	}
 	else = {
@@ -823,7 +809,6 @@ YAN_shanhai_seize = {
 				declare_war_on = { target = SHA type = civil_war }
 			}
 			YAN_shz_costs = yes
-			country_event = { id = yan_shz.20 days = 0 }
 		}
 	}
 }
@@ -849,7 +834,6 @@ YAN_shz_found_here = {
 			mysticism = 90
 			special = 0
 		}
-		# 执政党与领袖 ideology 必须同组，否则没有执政领袖 → 地图上没有颜色（SRC 内战的教训）
 		create_country_leader = {
 			name = SHZ_leader
 			desc = SHZ_leader_desc
@@ -857,8 +841,42 @@ YAN_shz_found_here = {
 			expire = "1965.1.1.1"
 			ideology = mysticism_subtype
 		}
+		YAN_shz_apply_identity = yes
+		# 每爆出一个**新**势力，朝廷就在京畿动员一股本乡勇（原【动员乡勇】事件，现静默发放）
+		YAN = { YAN_shz_militia = yes }
+	}
+	# 每波补一次「缴获」的装备与人丁（producer = YAN）
+	add_equipment_to_stockpile = {
+		type = infantry_equipment
+		amount = 9000
+		producer = YAN
+	}
+	if = {
+		limit = { OR = { tag = SLG tag = JYU tag = ZHL tag = XMU tag = CTI tag = WJG } }
+		add_equipment_to_stockpile = { type = artillery_equipment amount = 300 producer = YAN }
+	}
+	if = {
+		limit = { OR = { tag = SLG tag = JYU tag = CHC tag = SSU tag = ZZH tag = ZHL tag = XMU tag = YON tag = CTI tag = WJG } }
+		add_equipment_to_stockpile = { type = support_equipment amount = 150 producer = YAN }
+	}
+	add_manpower = 80000
+}
+
+YAN_shz_spawn_tiers = {
+	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来。
+	# 各司的兵种/数量/装备见 YAN_shanhai_identity_scripted_effects.txt
+	YAN_shz_apply_identity = yes
+	YAN_shz_spawn_dispatch = yes
+}
+
+YAN_shz_militia = {
+	# THIS = YAN：新势力竖旗时在首都编 5 支四步乡勇
+	# （原 yan_shz.22 事件选项的效果，事件本身不再弹出）
+	if = {
+		limit = { NOT = { has_country_flag = YAN_shz_militia_template_flag } }
+		set_country_flag = YAN_shz_militia_template_flag
 		division_template = {
-			name = "山海众乱兵"
+			name = "乡勇"
 			is_locked = yes
 			regiments = {
 				infantry = { x = 0 y = 0 }
@@ -867,56 +885,12 @@ YAN_shz_found_here = {
 				infantry = { x = 1 y = 1 }
 			}
 		}
-		# 每爆出一个**新**势力，朝廷就在京畿动员一股本乡勇（【动员乡勇】yan_shz.22）
-		# 放在这面旗标的守卫里 ⇒ 一股叛军只触发一次，增援波与封顶波不会重复发
-		YAN = { country_event = { id = yan_shz.22 days = 0 } }
 	}
-	# 每波补一次「缴获」的装备与人丁（producer = YAN：原版 RKG 用 GER 当 producer 的同款写法）
-	add_equipment_to_stockpile = {
-		type = infantry_equipment
-		amount = 9000
-		producer = YAN
-	}
-	add_manpower = 80000
-}
-
-YAN_shz_spawn_tiers = {
-	# THIS = 该股山海众；被占的州用 YAN_shz_spot_flag 标出来（不再靠 PREV 层层透传——
-	# scripted effect 跳一层之后 PREV 还指不指向原来那个州，是没有日志可查的哑巴风险）。
-	# 落点写法照原版：random_owned_state 里 create_unit + owner = PREV（PREV = 这个 tag）✓
-	if = {
-		limit = { YAN = { check_variable = { YAN_shz_wave > 6 } } }
-		random_owned_state = {
-			limit = { has_state_flag = YAN_shz_spot_flag }
-			create_unit = {
-				division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-				owner = PREV
-				count = 18
-			}
-			clr_state_flag = YAN_shz_spot_flag
-		}
-	}
-	else_if = {
-		limit = { YAN = { check_variable = { YAN_shz_wave > 3 } } }
-		random_owned_state = {
-			limit = { has_state_flag = YAN_shz_spot_flag }
-			create_unit = {
-				division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-				owner = PREV
-				count = 14
-			}
-			clr_state_flag = YAN_shz_spot_flag
-		}
-	}
-	else = {
-		random_owned_state = {
-			limit = { has_state_flag = YAN_shz_spot_flag }
-			create_unit = {
-				division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-				owner = PREV
-				count = 10
-			}
-			clr_state_flag = YAN_shz_spot_flag
+	capital_scope = {
+		create_unit = {
+			division = "name = \"乡勇\" division_template = \"乡勇\" start_experience_factor = 0 start_equipment_factor = 0.5"
+			owner = YAN
+			count = 5
 		}
 	}
 }
@@ -927,12 +901,6 @@ YAN_shz_costs = {
 	add_war_support = -0.1
 	add_to_variable = { yan_sui_pressure = 2 }
 	YAN_sui_pressure_recalc = yes
-	# 首次起事：全国新闻（旗标去重）
-	if = {
-		limit = { NOT = { has_country_flag = YAN_shz_news_flag } }
-		set_country_flag = YAN_shz_news_flag
-		news_event = { id = yan_shz.21 days = 0 }
-	}
 }
 
 YAN_shz_wreck = {
@@ -952,567 +920,366 @@ YAN_shanhai_reinforce = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_slg = yes
 		}
 	}
 	WYU = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_wyu = yes
 		}
 	}
 	HUJ = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_huj = yes
 		}
 	}
 	LTA = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_lta = yes
 		}
 	}
 	ZYU = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_zyu = yes
 		}
 	}
 	JYU = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_jyu = yes
 		}
 	}
 	CHC = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_chc = yes
 		}
 	}
 	JIZ = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_jiz = yes
 		}
 	}
 	SZH = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_szh = yes
 		}
 	}
 	SSU = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_ssu = yes
 		}
 	}
 	ZZH = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_zzh = yes
 		}
 	}
 	ZHL = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_zhl = yes
 		}
 	}
 	XMU = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_xmu = yes
 		}
 	}
 	WJI = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_wji = yes
 		}
 	}
 	QZH = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_qzh = yes
 		}
 	}
 	YON = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_yon = yes
 		}
 	}
 	CTI = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_cti = yes
 		}
 	}
 	LCH = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_lch = yes
 		}
 	}
 	WJG = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_wjg = yes
 		}
 	}
 	SHA = {
 		if = {
 			limit = { exists = yes }
 			YAN_shz_found_here = yes
-			random_owned_state = {
-				create_unit = {
-					division = "division_template = \"山海众乱兵\" start_experience_factor = 0.05 start_equipment_factor = 1"
-					owner = PREV
-					count = 6
-				}
-				YAN_shz_wreck = yes
-			}
+			YAN_shz_fill_sha = yes
 		}
 	}
 	YAN_shz_costs = yes
-	country_event = { id = yan_shz.20 days = 0 }
 }
 
 YAN_shanhai_disband = {
-	# ROOT = YAN；「岁陵之约」后收束：交还所有州 + 遣散乱兵 + 停战
+	# ROOT = YAN；「岁陵之约」后收束：交还所有州 + 遣散本司乱兵 + 停战
 	SLG = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·肃廊工兵" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = SLG }
-		white_peace = SLG
+		if = {
+			limit = { has_war_with = SLG }
+			white_peace = SLG
+		}
 	}
 	WYU = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·万原饥军" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = WYU }
-		white_peace = WYU
+		if = {
+			limit = { has_war_with = WYU }
+			white_peace = WYU
+		}
 	}
 	HUJ = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·桓江水勇" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = HUJ }
-		white_peace = HUJ
+		if = {
+			limit = { has_war_with = HUJ }
+			white_peace = HUJ
+		}
 	}
 	LTA = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·苍蕃苦修" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = LTA }
-		white_peace = LTA
+		if = {
+			limit = { has_war_with = LTA }
+			white_peace = LTA
+		}
 	}
 	ZYU = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·夜郎猎手" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = ZYU }
-		white_peace = ZYU
+		if = {
+			limit = { has_war_with = ZYU }
+			white_peace = ZYU
+		}
 	}
 	JYU = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·晋原武行" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = JYU }
-		white_peace = JYU
+		if = {
+			limit = { has_war_with = JYU }
+			white_peace = JYU
+		}
 	}
 	CHC = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·洪都船帮" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = CHC }
-		white_peace = CHC
+		if = {
+			limit = { has_war_with = CHC }
+			white_peace = CHC
+		}
 	}
 	JIZ = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·冀州骑匪" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = JIZ }
-		white_peace = JIZ
+		if = {
+			limit = { has_war_with = JIZ }
+			white_peace = JIZ
+		}
 	}
 	SZH = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·舒州盐队" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = SZH }
-		white_peace = SZH
+		if = {
+			limit = { has_war_with = SZH }
+			white_peace = SZH
+		}
 	}
 	SSU = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·尚蜀山勇" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = SSU }
-		white_peace = SSU
+		if = {
+			limit = { has_war_with = SSU }
+			white_peace = SSU
+		}
 	}
 	ZZH = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·珠洲疍户" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = ZZH }
-		white_peace = ZZH
+		if = {
+			limit = { has_war_with = ZZH }
+			white_peace = ZZH
+		}
 	}
 	ZHL = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·镇海盐丁" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = ZHL }
-		white_peace = ZHL
+		if = {
+			limit = { has_war_with = ZHL }
+			white_peace = ZHL
+		}
 	}
 	XMU = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·兴铭匠兵" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = XMU }
-		white_peace = XMU
+		if = {
+			limit = { has_war_with = XMU }
+			white_peace = XMU
+		}
 	}
 	WJI = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·琅珆残部" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = WJI }
-		white_peace = WJI
+		if = {
+			limit = { has_war_with = WJI }
+			white_peace = WJI
+		}
 	}
 	QZH = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·齐州盐徒" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = QZH }
-		white_peace = QZH
+		if = {
+			limit = { has_war_with = QZH }
+			white_peace = QZH
+		}
 	}
 	YON = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·梦津漕勇" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = YON }
-		white_peace = YON
+		if = {
+			limit = { has_war_with = YON }
+			white_peace = YON
+		}
 	}
 	CTI = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·承天旧军" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = CTI }
-		white_peace = CTI
+		if = {
+			limit = { has_war_with = CTI }
+			white_peace = CTI
+		}
 	}
 	LCH = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·隆仓仓丁" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = LCH }
-		white_peace = LCH
+		if = {
+			limit = { has_war_with = LCH }
+			white_peace = LCH
+		}
 	}
 	WJG = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·苇荡伏兵" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = WJG }
-		white_peace = WJG
+		if = {
+			limit = { has_war_with = WJG }
+			white_peace = WJG
+		}
 	}
 	SHA = {
 		if = {
 			limit = { exists = yes }
 			every_owned_state = { transfer_state_to = YAN }
-			delete_units = {
-				division_template = "山海众乱兵"
-				disband = no
-			}
+			delete_units = { division_template = "山海众·乱兵" disband = no }
 		}
-	}
-	if = {
-		limit = { has_war_with = SHA }
-		white_peace = SHA
+		if = {
+			limit = { has_war_with = SHA }
+			white_peace = SHA
+		}
 	}
 	set_variable = { YAN_shz_held = 0 }
 	log = "YAN_shanhai: 岁陵之约后收束 —— 占领交还、乱兵遣散、停战"

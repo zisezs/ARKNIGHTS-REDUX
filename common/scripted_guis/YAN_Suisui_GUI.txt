@@ -1,0 +1,133 @@
+# ==============================================================================
+
+#  大炎 ·「岁岁今朝」—— scripted_gui
+#  · YAN_Suisui_Entry : 决议分类页入口
+#  · YAN_Suisui_GUI   : 宣政司舆图主面板
+#
+#  面板状态：
+#    YAN_suisui_open      0/1  面板是否打开（country flag）
+#    YAN_suisui_locked    0/1  岁怒已发、忠诚锁定（country flag）
+#    YAN_suisui_sel       0..20 当前选中的节点（0 = 未选）
+#    YAN_suisui_loyalty   0..10 全局代理人忠诚
+#    YAN_suisui_cd_<司>_<行动>  0..30 每个司每个行动的独立冷却
+#
+#  ⚠ 控件名必须与 interface/_ARF_Gui/YAN_Suisui.gui 完全一致。
+# ==============================================================================
+
+scripted_gui = {
+
+	# ---------------- 决议分类页入口 ----------------
+	YAN_Suisui_Entry = {
+		context_type = decision_category
+		window_name = "YAN_Suisui_Entry_GUI"
+
+		visible = {
+			OR = {
+				has_country_flag = YAN_suisui_unlocked
+				has_completed_focus = YAN_reform_7
+			}
+		}
+
+		effects = {
+			YAN_Suisui_Entry_Open_click = {
+				# 老存档/控制台测试：国策已完成但变量未初始化时补一次
+				if = {
+					limit = { NOT = { has_variable = YAN_suisui_loyalty } }
+					YAN_suisui_init = yes
+				}
+				set_country_flag = YAN_suisui_open
+				if = {
+					limit = { NOT = { has_variable = YAN_suisui_sel } }
+					set_variable = { YAN_suisui_sel = 0 }
+				}
+			}
+		}
+
+		triggers = {
+			YAN_Suisui_Entry_Open_click_enabled = {
+				NOT = { has_country_flag = YAN_suisui_open }
+			}
+		}
+	}
+
+
+	# ---------------- 舆图主面板 ----------------
+	YAN_Suisui_GUI = {
+		context_type = player_context
+		window_name = "YAN_Suisui_Window"
+
+		visible = {
+			is_ai = no
+			has_country_flag = YAN_suisui_open
+		}
+
+		effects = {
+			YAN_Suisui_Close_click = {
+				clr_country_flag = YAN_suisui_open
+				set_variable = { YAN_suisui_sel = 0 }
+			}
+
+			YAN_Suisui_Detail_Close_click = {
+				set_variable = { YAN_suisui_sel = 0 }
+			}
+
+			# ---- 20 个节点：点司印即选中 ----
+			YAN_Suisui_Select_sulang_click          = { set_variable = { YAN_suisui_sel = 1 } }
+			YAN_Suisui_Select_wanyuan_click         = { set_variable = { YAN_suisui_sel = 2 } }
+			YAN_Suisui_Select_huanjiang_click       = { set_variable = { YAN_suisui_sel = 3 } }
+			YAN_Suisui_Select_litang_click          = { set_variable = { YAN_suisui_sel = 4 } }
+			YAN_Suisui_Select_zhuyun_click          = { set_variable = { YAN_suisui_sel = 5 } }
+			YAN_Suisui_Select_jinyuan_click         = { set_variable = { YAN_suisui_sel = 6 } }
+			YAN_Suisui_Select_chuchang_click        = { set_variable = { YAN_suisui_sel = 7 } }
+			YAN_Suisui_Select_jizhou_click          = { set_variable = { YAN_suisui_sel = 8 } }
+			YAN_Suisui_Select_shuzhou_click         = { set_variable = { YAN_suisui_sel = 9 } }
+			YAN_Suisui_Select_shangshu_click        = { set_variable = { YAN_suisui_sel = 10 } }
+			YAN_Suisui_Select_zhuzhou_click         = { set_variable = { YAN_suisui_sel = 11 } }
+			YAN_Suisui_Select_zhenhai_click         = { set_variable = { YAN_suisui_sel = 12 } }
+			YAN_Suisui_Select_xingming_click        = { set_variable = { YAN_suisui_sel = 13 } }
+			YAN_Suisui_Select_wujiang_click         = { set_variable = { YAN_suisui_sel = 14 } }
+			YAN_Suisui_Select_qizhou_click          = { set_variable = { YAN_suisui_sel = 15 } }
+			YAN_Suisui_Select_yongan_click          = { set_variable = { YAN_suisui_sel = 16 } }
+			YAN_Suisui_Select_chengtian_click       = { set_variable = { YAN_suisui_sel = 17 } }
+			YAN_Suisui_Select_luochang_click        = { set_variable = { YAN_suisui_sel = 18 } }
+			YAN_Suisui_Select_weijiang_click        = { set_variable = { YAN_suisui_sel = 19 } }
+			YAN_Suisui_Select_zhenlong_direct_click = { set_variable = { YAN_suisui_sel = 20 } }
+
+			# ---- 4 个行动（具体效果在 YAN_Suisui_scripted_effects.txt） ----
+			YAN_Suisui_Act1_click = { YAN_suisui_act1 = yes }
+			YAN_Suisui_Act2_click = { YAN_suisui_act2 = yes }
+			YAN_Suisui_Act3_click = { YAN_suisui_act3 = yes }
+			YAN_Suisui_Act4_click = { YAN_suisui_act4 = yes }
+		}
+
+		triggers = {
+			# ---- 详情 / 提示互斥 ----
+			YAN_Suisui_Detail_visible = { check_variable = { YAN_suisui_sel > 0 } }
+			YAN_Suisui_Hint_visible   = { NOT = { check_variable = { YAN_suisui_sel > 0 } } }
+			YAN_Suisui_Flash_visible  = { check_variable = { YAN_suisui_flash_days > 0 } }
+
+			# ---- 行动可用性：未锁定，且该司该行动的冷却为 0 ----
+			YAN_Suisui_Act1_click_enabled = { YAN_suisui_act1_ready = yes }
+			YAN_Suisui_Act2_click_enabled = { YAN_suisui_act2_ready = yes }
+			YAN_Suisui_Act3_click_enabled = { YAN_suisui_act3_ready = yes }
+			YAN_Suisui_Act4_click_enabled = { YAN_suisui_act4_ready = yes }
+
+			# ---- 忠诚度 10 格：第 i 格在忠诚 >= i 时点亮（check_variable 不支持 >=，用 > i-1） ----
+			YAN_Suisui_Pip_1_visible  = { check_variable = { YAN_suisui_loyalty > 0 } }
+			YAN_Suisui_Pip_2_visible  = { check_variable = { YAN_suisui_loyalty > 1 } }
+			YAN_Suisui_Pip_3_visible  = { check_variable = { YAN_suisui_loyalty > 2 } }
+			YAN_Suisui_Pip_4_visible  = { check_variable = { YAN_suisui_loyalty > 3 } }
+			YAN_Suisui_Pip_5_visible  = { check_variable = { YAN_suisui_loyalty > 4 } }
+			YAN_Suisui_Pip_6_visible  = { check_variable = { YAN_suisui_loyalty > 5 } }
+			YAN_Suisui_Pip_7_visible  = { check_variable = { YAN_suisui_loyalty > 6 } }
+			YAN_Suisui_Pip_8_visible  = { check_variable = { YAN_suisui_loyalty > 7 } }
+			YAN_Suisui_Pip_9_visible  = { check_variable = { YAN_suisui_loyalty > 8 } }
+			YAN_Suisui_Pip_10_visible = { check_variable = { YAN_suisui_loyalty > 9 } }
+		}
+
+		properties = {
+			# 画像随选中节点切换（156x210 完整立绘）
+			YAN_Suisui_Portrait = { image = "[YAN_Suisui_GetPortrait]" }
+		}
+	}
+}

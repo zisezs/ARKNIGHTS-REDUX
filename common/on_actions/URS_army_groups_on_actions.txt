@@ -1,0 +1,64 @@
+on_actions = {
+
+	# 乌萨斯第一/第二集团军：开局把与宗主国（以及彼此）的关系钉到 200。
+	# ⚠️ on_startup 默认作用域是 none，必须自己点名国家。
+	on_startup = {
+		effect = {
+			# 集团军的忠诚试炼：直接写入 7 个索引变量。
+			# 不经过 scripted effect，避免旧存档/加载顺序导致变量缺失。
+			URS = {
+				set_variable = { URS_agl_loyalty_1 = 100 }
+				set_variable = { URS_agl_loyalty_2 = 60 }
+				set_variable = { URS_agl_loyalty_3 = 60 }
+				set_variable = { URS_agl_loyalty_4 = 40 }
+				set_variable = { URS_agl_loyalty_5 = 20 }
+				set_variable = { URS_agl_loyalty_6 = 20 }
+				set_variable = { URS_agl_loyalty_7 = 60 }
+				set_variable = { URS_agl_panel_open = 0 }
+			}
+
+			U1A = {
+				add_opinion_modifier = { target = URS modifier = URS_army_group_bond }
+				reverse_add_opinion_modifier = { target = URS modifier = URS_army_group_bond }
+				add_opinion_modifier = { target = U2A modifier = URS_army_group_bond }
+				reverse_add_opinion_modifier = { target = U2A modifier = URS_army_group_bond }
+			}
+			U2A = {
+				add_opinion_modifier = { target = URS modifier = URS_army_group_bond }
+				reverse_add_opinion_modifier = { target = URS modifier = URS_army_group_bond }
+			}
+
+			# 【为战争不择手段】自带「地图外军用工厂 +5」。
+			# 该效果不是修正符，动态精神又没有 on_add，所以改在开局统一发放。
+			U1A = { add_offsite_building = { type = arms_factory level = 5 } }
+			U2A = { add_offsite_building = { type = arms_factory level = 5 } }
+			UFA = { add_offsite_building = { type = arms_factory level = 5 } }
+		}
+	}
+
+	# 旧存档兜底：不再看 URS_agl_initialized（旧版旗标可能已存在），
+	# 而是直接检查新变量是否存在；缺一个就整组补写。
+	# 这样旧存档也能在第一天拿到七支集团军的忠诚度。
+	on_daily = {
+		effect = {
+			if = {
+				limit = {
+					URS = {
+						exists = yes
+						NOT = { has_variable = URS_agl_loyalty_1 }
+					}
+				}
+				URS = {
+					set_variable = { URS_agl_loyalty_1 = 100 }
+					set_variable = { URS_agl_loyalty_2 = 60 }
+					set_variable = { URS_agl_loyalty_3 = 60 }
+					set_variable = { URS_agl_loyalty_4 = 40 }
+					set_variable = { URS_agl_loyalty_5 = 20 }
+					set_variable = { URS_agl_loyalty_6 = 20 }
+					set_variable = { URS_agl_loyalty_7 = 60 }
+					set_variable = { URS_agl_panel_open = 0 }
+				}
+			}
+		}
+	}
+}

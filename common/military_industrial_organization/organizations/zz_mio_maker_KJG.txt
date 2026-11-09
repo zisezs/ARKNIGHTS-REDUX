@@ -1,0 +1,212 @@
+# ==============================================================================
+#  军工组织 · KJG（1 家）
+#  由「HOI4 军工组织工坊」生成 · 请勿手改
+#  改请在 tools/mio_maker 里编辑后重新生成；本文件只包含本工具创建的组织
+# ==============================================================================
+
+KJG_Tank_Refurbishment_Plant_organization = {
+	name = KJG_Tank_Refurbishment_Plant_organization
+	icon = GFX_mio_maker_KJG_Tank_Refurbishment_Plant_organization
+	allowed = { original_tag = KJG }
+	equipment_type = { armor }
+	research_categories = { armor }
+	tree_header_text = {
+		text = mio_header_armor
+		x = 1
+	}
+	tree_header_text = {
+		text = mio_header_weapons
+		x = 5
+	}
+	tree_header_text = {
+		text = mio_header_trains
+		x = 8
+	}
+
+	initial_trait = {
+		token = KJG_Tank_Refurbishment_Plant_organization_initialxp
+		name = KJG_Tank_Refurbishment_Plant_organization_initialxp
+		position = { x = 0 y = 0 }
+		limit_to_equipment_type = { armor }
+		equipment_bonus = {
+			breakthrough = 0.1
+			armor_value = 0.2
+		}
+		production_bonus = {
+			production_cost_factor = -0.1
+			production_resource_need_factor = 0.2
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.1
+			army_org_factor = 0.1
+			military_industrial_organization_funds_gain = 0.1
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organization_trait_1
+		name = KJG_Tank_Refurbishment_Plant_organization_trait_1
+		special_trait_background = yes
+		position = { x = 1 y = 0 }
+		equipment_bonus = {
+			reliability = 0.05
+		}
+		production_bonus = {
+			production_resource_need_factor = 0.05
+		}
+		organization_modifier = {
+			military_industrial_organization_size_up_requirement = -0.1
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organization_trait_2
+		name = KJG_Tank_Refurbishment_Plant_organization_trait_2
+		position = { x = 0 y = 1 }
+		relative_position_id = KJG_Tank_Refurbishment_Plant_organization_trait_1
+		any_parent = { KJG_Tank_Refurbishment_Plant_organization_trait_1 }
+		equipment_bonus = {
+			armor_value = 0.1
+			breakthrough = 0.1
+		}
+		production_bonus = {
+			production_capacity_factor = 0.1
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organization_trait_4
+		name = KJG_Tank_Refurbishment_Plant_organization_trait_4
+		position = { x = 0 y = 3 }
+		any_parent = { KJG_Tank_Refurbishment_Plant_organization_trait_3 }
+		equipment_bonus = {
+			breakthrough = 0.05
+			soft_attack = 0.05
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organization_trait_5
+		name = KJG_Tank_Refurbishment_Plant_organization_trait_5
+		position = { x = 1 y = 3 }
+		any_parent = { KJG_Tank_Refurbishment_Plant_organization_trait_3 }
+		equipment_bonus = {
+			hard_attack = 0.05
+			soft_attack = 0.05
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organization_trait_6
+		name = KJG_Tank_Refurbishment_Plant_organization_trait_6
+		position = { x = 2 y = 3 }
+		any_parent = { KJG_Tank_Refurbishment_Plant_organization_trait_3 }
+		equipment_bonus = {
+			hard_attack = 0.15
+			ap_attack = 0.2
+		}
+		production_bonus = {
+			production_cost_factor = 0.05
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organization_trait_7
+		name = KJG_Tank_Refurbishment_Plant_organization_trait_7
+		position = { x = 5 y = 3 }
+		equipment_bonus = {
+			reliability = 0.05
+		}
+		organization_modifier = {
+			offmap_military_factory = 2
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organization_trait_3
+		name = KJG_Tank_Refurbishment_Plant_organization_trait_3
+		position = { x = 1 y = 1 }
+		any_parent = { KJG_Tank_Refurbishment_Plant_organization_trait_1 }
+		equipment_bonus = {
+			reliability = 0.05
+		}
+		production_bonus = {
+			production_cost_factor = -0.05
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organizationsp_trait_1
+		name = KJG_Tank_Refurbishment_Plant_organizationsp_trait_1
+		position = { x = 5 y = 0 }
+		equipment_bonus = {
+			reliability = 0.05
+		}
+		organization_modifier = {
+			offmap_military_factory = 2
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organizationsp_trait_2
+		name = KJG_Tank_Refurbishment_Plant_organizationsp_trait_2
+		position = { x = 5 y = 1 }
+		any_parent = { KJG_Tank_Refurbishment_Plant_organizationsp_trait_1 }
+		equipment_bonus = {
+			defense = 0.2
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organizationsp_trait_3
+		name = KJG_Tank_Refurbishment_Plant_organizationsp_trait_3
+		position = { x = 5 y = 2 }
+		any_parent = { KJG_Tank_Refurbishment_Plant_organizationsp_trait_2 }
+		equipment_bonus = {
+			reliability = -0.05
+			armor_value = -0.05
+		}
+		production_bonus = {
+			production_cost_factor = -0.05
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organizationsp_trait_4
+		name = KJG_Tank_Refurbishment_Plant_organizationsp_trait_4
+		position = { x = 5 y = 3 }
+		any_parent = { KJG_Tank_Refurbishment_Plant_organizationsp_trait_3 }
+		equipment_bonus = {
+			reliability = -0.05
+			armor_value = 0.05
+		}
+		organization_modifier = {
+			offmap_civilian_factory = 2
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organizationsp_trait_5
+		name = KJG_Tank_Refurbishment_Plant_organizationsp_trait_5
+		position = { x = 4 y = 4 }
+		any_parent = { KJG_Tank_Refurbishment_Plant_organizationsp_trait_4 }
+		equipment_bonus = {
+			fuel_consumption = -0.25
+			maximum_speed = -0.1
+		}
+		organization_modifier = {
+			military_industrial_organization_research_bonus = 0.05
+		}
+	}
+
+	trait = {
+		token = KJG_Tank_Refurbishment_Plant_organizationsp_trait_9
+		name = KJG_Tank_Refurbishment_Plant_organizationsp_trait_9
+		position = { x = 6 y = 4 }
+		any_parent = { KJG_Tank_Refurbishment_Plant_organizationsp_trait_4 }
+		organization_modifier = {
+			industrial_capacity_factory = 0.15
+			offmap_military_factory = 2
+		}
+	}
+}

@@ -3,8 +3,9 @@
 #  · YNW_upheaval_start_check        在 YAN 作用域调用（挂在 YAN_monthly_tick 上）
 #  · YNW_upheaval_awakening_step     在 YNW 作用域调用，每步推高岁兽苏醒度
 #  · YNW_upheaval_become_sui_state   终幕：易帜山海众 / 改名岁国 / 蒙恩-睚上台 /
-#                                    建军 / 岁怒 / 对大炎宣战
-#  · 链完结 = global flag YNW_upheaval_complete，「岁怒」超事件以它为触发条件。
+#                                    建军 / 对大炎宣战
+#  · 链完结 = global flag YNW_upheaval_complete；「岁怒」超事件已与链脱钩，
+#    改由大炎「岁岁今朝」代理人忠诚归零触发（YAN_suisui_check_wrath）。
 #  · 三条硬约束（都踩过）：
 #     1) 换领袖只走 retire_country_leader + promote_character 两步。**不要**再调
 #        add_country_leader_role（角色文件已自带该角色，重复加会抛错）——抛错点
@@ -147,19 +148,8 @@ YNW_upheaval_become_sui_state = {
 			}
 		}
 
-		# 「岁怒」超事件：大炎与岁国各看一次，旗标去重
-		every_country = {
-			limit = {
-				exists = yes
-				OR = {
-					original_tag = YAN
-					original_tag = YNW
-				}
-				NOT = { has_country_flag = yan_sui_wrath_news_flag }
-			}
-			set_country_flag = yan_sui_wrath_news_flag
-			news_event = { id = yanse.1 }
-		}
+		# 岁怒改由「岁岁今朝」忠诚度归零触发（YAN_suisui_check_wrath）；
+		# 西北都护府异变完结不再发这条超事件。
 
 		# 祂的袍泽从雪里站起来：先模板、再库存、后生成，顺序不能反。
 		# 整块用旗标去重 —— 月度自愈重试时不能重复刷 100 个师或重复塞装备
