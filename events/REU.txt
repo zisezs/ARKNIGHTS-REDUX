@@ -2300,6 +2300,10 @@ country_event = {
 	option = {
 		name = event_reu.126.a
 		custom_effect_tooltip = event_reu.126.a_tt
+		if = {
+			limit = { has_global_flag = REU_ursus_hell_mode }
+			add_ideas = { REU_liberation_war_1 }
+		}
 	}
 }
 
@@ -2359,5 +2363,91 @@ country_event = {
 		ai_chance = {
 			base = 0
 		}
+	}
+}
+
+country_event = {
+	id = event_reu.131
+	title = event_reu.131.t
+	desc = event_reu.131.d
+	picture = GFX_report_event_REU_Frozen_River
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.131.a
+	}
+}
+
+country_event = {
+	id = event_reu.132
+	title = event_reu.132.t
+	desc = event_reu.132.d
+	picture = GFX_report_event_REU_Palace_Assault
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.132.a
+	}
+}
+
+country_event = {
+	id = event_reu.133
+	title = event_reu.133.t
+	desc = event_reu.133.d
+	picture = GFX_report_event_REU_Situation_Stalemate
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.133.a
+		if = {
+			limit = { has_idea = REU_liberation_war_1 }
+			remove_ideas = { REU_liberation_war_1 }
+		}
+		add_ideas = { REU_liberation_war_2 }
+	}
+}
+
+country_event = {
+	id = event_reu.134
+	title = event_reu.134.t
+	desc = event_reu.134.d
+	picture = GFX_report_event_REU_Situation_Counteroffensive
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.134.a
+		if = {
+			limit = { has_idea = REU_liberation_war_2 }
+			remove_ideas = { REU_liberation_war_2 }
+		}
+		add_ideas = { REU_liberation_war_3 }
+	}
+}
+
+country_event = {
+	id = event_reu.135
+	title = event_reu.135.t
+	desc = event_reu.135.d
+	picture = GFX_report_event_REU_Situation_Victory
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.135.a
+		custom_effect_tooltip = event_reu.135.a_tt
+		if = {
+			limit = { has_idea = REU_liberation_war_3 }
+			remove_ideas = { REU_liberation_war_3 }
+		}
+		add_ideas = { REU_liberation_war_4 }
 	}
 }

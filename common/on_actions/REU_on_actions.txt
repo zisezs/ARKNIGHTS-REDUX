@@ -15,6 +15,25 @@ on_actions = {
 			}
 			if = {
 				limit = {
+					OR = {
+						AND = { ROOT = { original_tag = REU } FROM = { original_tag = URS } }
+						AND = { ROOT = { original_tag = URS } FROM = { original_tag = REU } }
+					}
+					has_global_flag = REU_ursus_hell_mode
+				}
+				every_country = {
+					limit = {
+						original_tag = URS
+						NOT = { has_idea = URS_Eastern_Dalia_Pacification }
+					}
+					add_timed_idea = {
+						idea = URS_Eastern_Dalia_Pacification
+						days = 180
+					}
+				}
+			}
+			if = {
+				limit = {
 					ROOT = {
 						original_tag = REU
 					}

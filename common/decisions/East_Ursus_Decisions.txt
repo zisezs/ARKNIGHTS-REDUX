@@ -2444,7 +2444,7 @@ Ursus_Unification_War_Decisions_GUI = {
 			white_peace = BLT
 			every_owned_state = {
 				limit = {
-					is_Ursus_Kozacy_area = yes
+					KZC_uprising_area = yes
 				}
 				if = {
 					limit = {
@@ -2458,7 +2458,7 @@ Ursus_Unification_War_Decisions_GUI = {
 			}
 			every_owned_state = {
 				limit = {
-					is_Ursus_Belaursnia_area = yes
+					BUS_uprising_area = yes
 				}
 				if = {
 					limit = {
@@ -2472,7 +2472,7 @@ Ursus_Unification_War_Decisions_GUI = {
 			}
 			every_owned_state = {
 				limit = {
-					is_Ursus_Balti_area = yes
+					BLT_uprising_area = yes
 				}
 				if = {
 					limit = {
@@ -2493,7 +2493,7 @@ Ursus_Unification_War_Decisions_GUI = {
 			white_peace = BLT
 			every_owned_state = {
 				limit = {
-					is_Ursus_Kozacy_area = yes
+					KZC_uprising_area = yes
 				}
 				if = {
 					limit = {
@@ -2507,7 +2507,7 @@ Ursus_Unification_War_Decisions_GUI = {
 			}
 			every_owned_state = {
 				limit = {
-					is_Ursus_Belaursnia_area = yes
+					BUS_uprising_area = yes
 				}
 				if = {
 					limit = {
@@ -2521,7 +2521,7 @@ Ursus_Unification_War_Decisions_GUI = {
 			}
 			every_owned_state = {
 				limit = {
-					is_Ursus_Balti_area = yes
+					BLT_uprising_area = yes
 				}
 				if = {
 					limit = {
@@ -2877,10 +2877,9 @@ Ursus_Unification_War_Decisions_GUI = {
 
 		icon = GFX_decision_generic_form_nation
 		available = {
-			# 拥有圣骏堡（STATE_110，帝国本部）
+			owns_state = 58
 			owns_state = 110
-			# 工厂数量大于 300（num_of_factories = 民用 + 军用 + 船坞）
-			num_of_factories > 300
+			URS = { exists = no }
 		}
 
 		fire_only_once = yes

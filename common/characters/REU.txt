@@ -982,18 +982,28 @@ characters = {
 	REU_Reid = {
 		name = REU_Reid
 		portraits = {
+			civilian = {
+				large = "gfx/leaders/REU/Reid.png"
+				small = "gfx/leaders/REU/Reid_small.png"
+			}
 			army = {
-				#large = "gfx/leaders/REU/Reid.dds"
-				large = "gfx/leaders/_unknown/404_unknown.dds"
+				large = "gfx/leaders/REU/Reid.png"
+				small = "gfx/leaders/REU/Reid_small.png"
 			}
 		}
+		gender = male
+		advisor = {
+			slot = high_command
+			idea_token = REU_Reid_high_command
+			traits = { REU_avenger }
+		}
 		corps_commander = {
-			skill = 2
-			attack_skill = 2
-			defense_skill = 1
-			planning_skill = 1
-			logistics_skill = 1
-			traits = { CHI_military_officer ARF_infected }
+			skill = 3
+			attack_skill = 4
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 2
+			traits = { CHI_military_officer organisational_leader commando scavenger ARF_infected }
 		}
 	}
 
@@ -1184,6 +1194,216 @@ characters = {
 			defense_skill = 4
 			planning_skill = 4
 			logistics_skill = 4
+		}
+	}
+
+	REU_Anna_Morozova = {
+		name = REU_Anna_Morozova
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/REU/Anna_Morozova.png"
+				small = "gfx/leaders/REU/Anna_Morozova_small.png"
+			}
+			army = {
+				large = "gfx/leaders/REU/Anna_Morozova.png"
+				small = "gfx/leaders/REU/Anna_Morozova_small.png"
+			}
+		}
+		gender = female
+		advisor = {
+			slot = political_advisor
+			idea_token = REU_Anna_Morozova
+			traits = { REU_revolutionary_star }
+			desc = REU_Anna_Morozova_desc
+		}
+		corps_commander = {
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 3
+			traits = { CHI_commissar_officer guerilla_fighter inspirational_leader }
+		}
+	}
+
+	REU_Olga_Tripoleva = {
+		name = REU_Olga_Tripoleva
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/REU/Olga_Tripoleva.png"
+				small = "gfx/leaders/REU/Olga_Tripoleva_small.png"
+			}
+			army = {
+				large = "gfx/leaders/REU/Olga_Tripoleva.png"
+				small = "gfx/leaders/REU/Olga_Tripoleva_small.png"
+			}
+		}
+		gender = female
+		advisor = {
+			slot = political_advisor
+			idea_token = REU_Olga_Tripoleva
+			traits = { REU_foreign_commissar }
+			desc = REU_Olga_Tripoleva_desc
+		}
+		corps_commander = {
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 2
+			traits = { CHI_commissar_officer infantry_leader }
+		}
+	}
+
+	REU_Sonia = {
+		name = REU_Sonia
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/REU/Sonia.png"
+				small = "gfx/leaders/REU/Sonia_small.png"
+			}
+			army = {
+				large = "gfx/leaders/REU/Sonia.png"
+				small = "gfx/leaders/REU/Sonia_small.png"
+			}
+		}
+		gender = female
+		advisor = {
+			slot = political_advisor
+			idea_token = REU_Sonia
+			traits = { REU_winter_general }
+			desc = REU_Sonia_desc
+		}
+		corps_commander = {
+			skill = 2
+			attack_skill = 2
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 3
+			traits = { CHI_military_officer harsh_leader panzer_leader organisational_leader rising_star }
+		}
+	}
+
+	REU_Lev_Kadel = {
+		name = REU_Lev_Kadel
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/REU/Lev_Kadel.png"
+				small = "gfx/leaders/REU/Lev_Kadel_small.png"
+			}
+			army = {
+				large = "gfx/leaders/REU/Lev_Kadel.png"
+				small = "gfx/leaders/REU/Lev_Kadel_small.png"
+			}
+		}
+		gender = male
+		advisor = {
+			slot = political_advisor
+			idea_token = REU_Lev_Kadel
+			traits = { REU_red_accountant }
+			desc = REU_Lev_Kadel_desc
+		}
+		corps_commander = {
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 3
+			traits = { rising_star CHI_commissar_officer scavenger harsh_leader }
+		}
+	}
+
+	REU_Milana_Spiridonova = {
+		name = REU_Milana_Spiridonova
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/REU/Milana_Spiridonova.png"
+				small = "gfx/leaders/REU/Milana_Spiridonova_small.png"
+			}
+			army = {
+				large = "gfx/leaders/REU/Milana_Spiridonova.png"
+				small = "gfx/leaders/REU/Milana_Spiridonova_small.png"
+			}
+		}
+		gender = female
+		advisor = {
+			slot = political_advisor
+			idea_token = REU_Milana_Spiridonova
+			traits = { REU_syndicalist_new_generation }
+			desc = REU_Milana_Spiridonova_desc
+		}
+		corps_commander = {
+			skill = 1
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 2
+			traits = { CHI_commissar_officer scavenger ARF_infected CHI_staffer_officer }
+		}
+	}
+
+	REU_Shura_Matvey = {
+		name = REU_Shura_Matvey
+		portraits = {
+			army = {
+				large = "gfx/leaders/REU/Shura_Matvey.png"
+			}
+		}
+		gender = male
+		corps_commander = {
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+			traits = { CHI_commissar_officer CHI_military_officer ARF_infected ambusher }
+		}
+	}
+
+	REU_Vasily_Hellag = {
+		name = REU_Vasily_Hellag
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/REU/Vasily_Hellag.png"
+				small = "gfx/leaders/REU/Vasily_Hellag_small.png"
+			}
+			army = {
+				large = "gfx/leaders/REU/Vasily_Hellag.png"
+			}
+		}
+		gender = male
+		corps_commander = {
+			skill = 4
+			attack_skill = 4
+			defense_skill = 4
+			planning_skill = 3
+			logistics_skill = 3
+			traits = { CHI_military_officer CHI_staffer_officer trait_cautious war_hero ARF_infected commando }
+		}
+		advisor = {
+			slot = high_command
+			idea_token = REU_Vasily_Hellag_high_command
+			traits = { REU_venerable_old_general }
+		}
+	}
+	REU_Grigori_Antosha = {
+		name = REU_Grigori_Antosha
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/REU/Grigori_Antosha.png"
+				small = "gfx/leaders/REU/Grigori_Antosha_small.png"
+			}
+			army = {
+				large = "gfx/leaders/REU/Grigori_Antosha.png"
+				small = "gfx/leaders/REU/Grigori_Antosha_small.png"
+			}
+		}
+		gender = male
+		advisor = {
+			slot = political_advisor
+			idea_token = REU_Grigori_Antosha
+			traits = { REU_social_department_flagbearer }
+			desc = REU_Grigori_Antosha_desc
 		}
 	}
 }

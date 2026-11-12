@@ -1,0 +1,17 @@
+on_actions = {
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = {
+						tag = REU
+						controls_state = 110
+					}
+				}
+				ROOT = {
+					country_event = { id = event_reu.132 }
+				}
+			}
+		}
+	}
+}

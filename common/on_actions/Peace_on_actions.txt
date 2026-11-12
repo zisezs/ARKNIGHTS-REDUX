@@ -218,7 +218,57 @@ on_actions = {
 								original_tag = KZC
 								original_tag = BUS
 								original_tag = BLT
+								original_tag = U1A
+								original_tag = U2A
+								original_tag = UTA
+								original_tag = UFA
+								original_tag = U5A
+								original_tag = U7A
+								original_tag = UEA
+								original_tag = UEO
 								ursus_unifier = yes
+							}
+						}
+					}
+					if = {
+						limit = { KZC = { exists = yes } }
+						KZC = {
+							every_owned_state = {
+								limit = { KZC_uprising_area = yes }
+								transfer_state_to = KZM
+							}
+						}
+					}
+					if = {
+						limit = { BUS = { exists = yes } }
+						BUS = {
+							every_owned_state = {
+								limit = { BUS_uprising_area = yes }
+								transfer_state_to = KZM
+							}
+						}
+					}
+					if = {
+						limit = { BLT = { exists = yes } }
+						BLT = {
+							every_owned_state = {
+								limit = { BLT_uprising_area = yes }
+								transfer_state_to = KZM
+							}
+						}
+					}
+					if = {
+						limit = { URS = { exists = yes } }
+						URS = {
+							every_owned_state = {
+								limit = {
+									OR = {
+										KZC_uprising_area = yes
+										BUS_uprising_area = yes
+										BLT_uprising_area = yes
+									}
+								}
+								transfer_state_to = KZM
 							}
 						}
 					}
@@ -226,14 +276,75 @@ on_actions = {
 						every_owned_state = {
 							limit = {
 								OR = {
-									is_Ursus_Kozacy_area = yes
-									is_Ursus_Belaursnia_area = yes
-									is_Ursus_Balti_area = yes
+									KZC_uprising_area = yes
+									BUS_uprising_area = yes
+									BLT_uprising_area = yes
 								}
 							}
 							transfer_state_to = KZM
 						}
-						white_peace = KZM
+					}
+					if = {
+						limit = { URS = { exists = yes } }
+						URS = {
+							if = {
+								limit = { KZC = { exists = yes } }
+								annex_country = { target = KZC }
+							}
+							if = {
+								limit = { BUS = { exists = yes } }
+								annex_country = { target = BUS }
+							}
+							if = {
+								limit = { BLT = { exists = yes } }
+								annex_country = { target = BLT }
+							}
+						}
+					}
+					if = {
+						limit = {
+							ROOT = {
+								original_tag = URS
+								has_war_with = REU
+							}
+						}
+						ROOT = {
+							every_owned_state = {
+								transfer_state_to = REU
+							}
+						}
+					}
+					else_if = {
+						limit = {
+							ROOT = {
+								original_tag = URS
+								has_war_with = UFE
+							}
+						}
+						ROOT = {
+							every_owned_state = {
+								transfer_state_to = UFE
+							}
+						}
+					}
+					else_if = {
+						limit = {
+							ROOT = {
+								original_tag = URS
+								has_war_with = KMG
+							}
+						}
+						ROOT = {
+							every_owned_state = {
+								transfer_state_to = KMG
+							}
+						}
+					}
+					if = {
+						limit = { ROOT = { exists = yes } }
+						ROOT = {
+							white_peace = KZM
+						}
 					}
 
 					set_global_flag = skip_default_capitulation
