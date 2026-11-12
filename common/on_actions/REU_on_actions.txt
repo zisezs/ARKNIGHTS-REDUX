@@ -129,6 +129,34 @@ on_actions = {
 		}
 	}
 
+	# 解放战争阶段：地狱模式下乌萨斯投降度过线即推进（133 另有苦难摇篮后 90 天兜底）
+	on_daily_REU = {
+		effect = {
+			if = {
+				limit = {
+					has_global_flag = REU_ursus_hell_mode
+					has_idea = REU_liberation_war_1
+					any_country = {
+						limit = { original_tag = URS }
+						surrender_progress > 0.1
+					}
+				}
+				country_event = { id = event_reu.133 }
+			}
+			if = {
+				limit = {
+					has_global_flag = REU_ursus_hell_mode
+					has_idea = REU_liberation_war_2
+					any_country = {
+						limit = { original_tag = URS }
+						surrender_progress > 0.3
+					}
+				}
+				country_event = { id = event_reu.134 }
+			}
+		}
+	}
+
 	# 索科洛夫特训：每月兜一次费用变量（等级一变，核心效果已即时刷新；这里只作老档/异常保险）
 	on_monthly_REU = {
 		effect = {

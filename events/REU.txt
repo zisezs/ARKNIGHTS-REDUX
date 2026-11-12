@@ -2303,6 +2303,10 @@ country_event = {
 		if = {
 			limit = { has_global_flag = REU_ursus_hell_mode }
 			add_ideas = { REU_liberation_war_1 }
+			country_event = {
+				id = event_reu.133
+				days = 90
+			}
 		}
 	}
 }
@@ -2406,10 +2410,15 @@ country_event = {
 	option = {
 		name = event_reu.133.a
 		if = {
-			limit = { has_idea = REU_liberation_war_1 }
+			limit = {
+				has_idea = REU_liberation_war_1
+				NOT = { has_idea = REU_liberation_war_2 }
+				NOT = { has_idea = REU_liberation_war_3 }
+				NOT = { has_idea = REU_liberation_war_4 }
+			}
 			remove_ideas = { REU_liberation_war_1 }
+			add_ideas = { REU_liberation_war_2 }
 		}
-		add_ideas = { REU_liberation_war_2 }
 	}
 }
 
@@ -2425,10 +2434,14 @@ country_event = {
 	option = {
 		name = event_reu.134.a
 		if = {
-			limit = { has_idea = REU_liberation_war_2 }
+			limit = {
+				has_idea = REU_liberation_war_2
+				NOT = { has_idea = REU_liberation_war_3 }
+				NOT = { has_idea = REU_liberation_war_4 }
+			}
 			remove_ideas = { REU_liberation_war_2 }
+			add_ideas = { REU_liberation_war_3 }
 		}
-		add_ideas = { REU_liberation_war_3 }
 	}
 }
 
@@ -2445,9 +2458,20 @@ country_event = {
 		name = event_reu.135.a
 		custom_effect_tooltip = event_reu.135.a_tt
 		if = {
-			limit = { has_idea = REU_liberation_war_3 }
-			remove_ideas = { REU_liberation_war_3 }
+			limit = { NOT = { has_idea = REU_liberation_war_4 } }
+			if = {
+				limit = { has_idea = REU_liberation_war_1 }
+				remove_ideas = { REU_liberation_war_1 }
+			}
+			if = {
+				limit = { has_idea = REU_liberation_war_2 }
+				remove_ideas = { REU_liberation_war_2 }
+			}
+			if = {
+				limit = { has_idea = REU_liberation_war_3 }
+				remove_ideas = { REU_liberation_war_3 }
+			}
+			add_ideas = { REU_liberation_war_4 }
 		}
-		add_ideas = { REU_liberation_war_4 }
 	}
 }
