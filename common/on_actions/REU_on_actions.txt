@@ -20,6 +20,7 @@ on_actions = {
 						AND = { ROOT = { original_tag = URS } FROM = { original_tag = REU } }
 					}
 					has_global_flag = REU_ursus_hell_mode
+					NOT = { has_global_flag = REU_ursus_empowerment_cancelled }
 				}
 				every_country = {
 					limit = {
@@ -153,6 +154,39 @@ on_actions = {
 					}
 				}
 				country_event = { id = event_reu.134 }
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = REU_sarkaz_red_army_return_started }
+					KAC = { exists = yes }
+					has_character = REU_Conrad_Knecht
+					any_neighbor_country = {
+						original_tag = KAC
+					}
+				}
+				activate_decision = REU_sarkaz_red_army_return
+			}
+			if = {
+				limit = {
+					is_ai = yes
+					has_country_flag = East_Ursus_Upheaval_Enabled
+					NOT = { KMG = { is_ai = no } }
+					NOT = { UFE = { is_ai = no } }
+					NOT = { has_idea = REU_ai_upheaval_might_idea }
+				}
+				add_ideas = REU_ai_upheaval_might_idea
+			}
+			if = {
+				limit = {
+					has_idea = REU_ai_upheaval_might_idea
+					OR = {
+						NOT = { is_ai = yes }
+						NOT = { has_country_flag = East_Ursus_Upheaval_Enabled }
+						KMG = { is_ai = no }
+						UFE = { is_ai = no }
+					}
+				}
+				remove_ideas = REU_ai_upheaval_might_idea
 			}
 		}
 	}

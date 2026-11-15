@@ -18,29 +18,43 @@ KAC_red_army_go_home = {
 		set_nationality = KAC
 	}
 	KAC = {
-		promote_character = REU_Conrad_Knecht
+		if = {
+			limit = {
+				NOT = {
+					has_country_leader = {
+						character = REU_Conrad_Knecht
+						ruling_only = yes
+					}
+				}
+			}
+			retire_country_leader = yes
+			promote_character = {
+				character = REU_Conrad_Knecht
+				ideology = communism_subtype
+			}
+		}
 	}
 }
 
 KAC_red_army_come = {
 	KAC = {
 		REU_Conrad_Knecht = {
-			set_nationality = PREV.PREV
+			set_nationality = ROOT
 		}
 		REU_Gergo_Franz = {
-			set_nationality = PREV.PREV
+			set_nationality = ROOT
 		}
 		REU_Millanden_Engler = {
-			set_nationality = PREV.PREV
+			set_nationality = ROOT
 		}
 		REU_Rod_Bertharin = {
-			set_nationality = PREV.PREV
+			set_nationality = ROOT
 		}
 		REU_Ezemara_Umak = {
-			set_nationality = PREV.PREV
+			set_nationality = ROOT
 		}
 		REU_Bal_Kailin = {
-			set_nationality = PREV.PREV
+			set_nationality = ROOT
 		}
 	}
 }

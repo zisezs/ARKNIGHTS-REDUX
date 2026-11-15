@@ -2888,6 +2888,25 @@ Ursus_Unification_War_Decisions_GUI = {
 			if = {
 				limit = {
 					original_tag = REU
+					has_country_leader = { character = REU_Talulah ruling_only = yes }
+				}
+				REU_Talulah = {
+					remove_trait = {
+						trait = young_socialist
+						ideology = bolshevism_subtype
+					}
+					add_trait = {
+						trait = REU_undying_fighter
+						ideology = bolshevism_subtype
+					}
+				}
+				set_country_leader_description = {
+					desc = REU_Talulah_unification_desc
+				}
+			}
+			if = {
+				limit = {
+					original_tag = REU
 				}
 				set_cosmetic_tag = Soviet_Union
 			if = {
@@ -2950,6 +2969,18 @@ Ursus_Unification_War_Decisions_GUI = {
 				if = {
 					limit = { has_global_flag = REU_ursus_hell_mode }
 					country_event = { id = event_reu.135 }
+				}
+
+				country_event = {
+					id = event_reu.136
+					days = 90
+				}
+
+				hidden_effect = {
+					country_event = {
+						id = event_reu.137
+						days = 21
+					}
 				}
 			}
 			if = {

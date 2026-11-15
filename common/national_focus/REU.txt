@@ -875,6 +875,10 @@ focus_tree = {
 				id = event_reu.46
 				days = 10
 			}
+
+			country_event = {
+				id = event_reu.122
+			}
 		}
 	}
 
@@ -3972,15 +3976,9 @@ focus_tree = {
 		}
 		
 		historical_ai = {
-			OR = {
-				has_game_rule = {
-					rule = REU_ai_behavior
-					option = RIHGT
-				}
-				has_game_rule = {
-					rule = REU_ai_behavior
-					option = RANDOM
-				}
+			has_game_rule = {
+				rule = REU_ai_behavior
+				option = RIHGT
 			}
 		}
 		
@@ -6925,7 +6923,6 @@ focus = {
 		#苏维埃中央最高政治局就任共产主义国家领导人，替代塔露拉
 		custom_effect_tooltip = REU_democratic_centralism_leader_tt
 		hidden_effect = {
-			recruit_character = REU_supreme_politburo
 			if = {
 				limit = {
 					NOT = { has_country_flag = REU_supreme_politburo_role_added }

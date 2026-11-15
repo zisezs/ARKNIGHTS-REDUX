@@ -416,29 +416,33 @@ country_event = {
 	is_triggered_only = yes
 	
 	#同意
-	option = {
-		name = UFE_special_events.7.a
-		custom_effect_tooltip = It_means_game_over_tt
-		FROM = {
-			country_event = {
-				id = UFE_special_events.9
-				days = 1
-			}
-		}
-		ai_chance = {
-			base = 10
-			modifier = {
-				factor = 0
-				FROM = {
-					is_ai = yes
-				}
-				has_game_rule = {
-					rule = REU_and_UFE_ai_behavior
-					option = They_WAR
+		option = {
+			name = UFE_special_events.7.a
+			custom_effect_tooltip = It_means_game_over_tt
+			FROM = {
+				country_event = {
+					id = UFE_special_events.9
+					days = 1
 				}
 			}
+			ai_chance = {
+				base = 10
+				modifier = {
+					factor = 0
+					original_tag = REU
+				}
+				modifier = {
+					factor = 0
+					FROM = {
+						is_ai = yes
+					}
+					has_game_rule = {
+						rule = REU_and_UFE_ai_behavior
+						option = They_WAR
+					}
+				}
+			}
 		}
-	}
 	#拒绝
 	option = {
 		name = UFE_special_events.7.b
@@ -449,25 +453,29 @@ country_event = {
 				days = 1
 			}
 		}
-		ai_chance = {
-			base = 0
-			modifier = {
-				add = 10
-				FROM = {
-					is_ai = yes
+			ai_chance = {
+				base = 0
+				modifier = {
+					add = 100
+					original_tag = REU
 				}
-				OR = {
-					has_game_rule = {
-						rule = REU_and_UFE_ai_behavior
-						option = They_WAR
+				modifier = {
+					add = 10
+					FROM = {
+						is_ai = yes
 					}
-					has_game_rule = {
-						rule = REU_and_UFE_ai_behavior
-						option = RANDOM
+					OR = {
+						has_game_rule = {
+							rule = REU_and_UFE_ai_behavior
+							option = They_WAR
+						}
+						has_game_rule = {
+							rule = REU_and_UFE_ai_behavior
+							option = RANDOM
+						}
 					}
 				}
 			}
-		}
 	}
 }
 #远东和统（拒绝的答复）

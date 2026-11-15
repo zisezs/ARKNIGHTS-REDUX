@@ -161,6 +161,192 @@ country_event = {
 
 	option = {
 		name = kaz_civilwar.4.a
+
+		custom_effect_tooltip = kaz_civilwar.4.tt
+
+		KZT = {
+			transfer_state = 460
+			transfer_state = 395
+			transfer_state = 396
+			transfer_state = 379
+			transfer_state = 448
+			transfer_state = 459
+			transfer_state = 464
+
+			add_state_core = 460
+			add_state_core = 395
+			add_state_core = 396
+			add_state_core = 379
+			add_state_core = 448
+			add_state_core = 459
+			add_state_core = 464
+		}
+
+		if = {
+			limit = {
+				power_balance_value = {
+					id = KAZ_dual_regime_bop
+					value < -0.9
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				power_balance_value = {
+					id = KAZ_dual_regime_bop
+					value < -0.25
+				}
+			}
+			KZT = {
+				transfer_state = 398
+				transfer_state = 423
+				add_state_core = 398
+				add_state_core = 423
+			}
+		}
+		else_if = {
+			limit = {
+				power_balance_value = {
+					id = KAZ_dual_regime_bop
+					value < 0.5
+				}
+			}
+			KZT = {
+				transfer_state = 398
+				transfer_state = 423
+				transfer_state = 386
+				add_state_core = 398
+				add_state_core = 423
+				add_state_core = 386
+			}
+		}
+		else_if = {
+			limit = {
+				power_balance_value = {
+					id = KAZ_dual_regime_bop
+					value < 0.9
+				}
+			}
+			KZT = {
+				transfer_state = 398
+				transfer_state = 423
+				transfer_state = 386
+				transfer_state = 348
+				transfer_state = 333
+				add_state_core = 398
+				add_state_core = 423
+				add_state_core = 386
+				add_state_core = 348
+				add_state_core = 333
+			}
+		}
+		else = {
+			KZT = {
+				transfer_state = 398
+				transfer_state = 423
+				transfer_state = 386
+				transfer_state = 348
+				transfer_state = 333
+				transfer_state = 399
+				transfer_state = 1045
+				add_state_core = 398
+				add_state_core = 423
+				add_state_core = 386
+				add_state_core = 348
+				add_state_core = 333
+				add_state_core = 399
+				add_state_core = 1045
+			}
+		}
+
+		KZT = {
+			set_capital = {
+				state = 460
+				remember_old_capital = no
+			}
+			set_politics = {
+				ruling_party = despotism
+				elections_allowed = no
+			}
+			set_popularities = {
+				communism = 0
+				socialism = 0
+				progressivism = 5
+				liberalism = 0
+				conservatism = 10
+				authoritarianism = 15
+				despotism = 70
+				fascism = 0
+				mysticism = 0
+				special = 0
+			}
+		}
+
+		KAZ = {
+			set_nationality = {
+				target_country = KZT
+				character = KAZ_King_Theresis
+			}
+			set_nationality = {
+				target_country = KZT
+				character = KAZ_gen_Dukare
+			}
+			set_nationality = {
+				target_country = KZT
+				character = KAZ_gen_Niezilei
+			}
+			set_nationality = {
+				target_country = KZT
+				character = KAZ_gen_Manfred
+			}
+			set_nationality = {
+				target_country = KZT
+				character = KAZ_gen_Entelechy
+			}
+			set_nationality = {
+				target_country = KZT
+				character = KAZ_gen_Quizatoshita
+			}
+			set_nationality = {
+				target_country = KZT
+				character = KAZ_gen_Metamorphosis
+			}
+		}
+
+		KAZ = {
+			transfer_units_fraction = {
+				target = KZT
+				target_organization = 1
+				source_organization = 0.9
+				size = 0
+				stockpile_ratio = 0
+				army_ratio = 0.4
+				navy_ratio = 0
+				air_ratio = 0
+				keep_unit_leaders_trigger = {
+					always = yes
+				}
+			}
+			remove_ideas = KAZ_Theresis_second_in_command
+		}
+
+		KZT = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_leader = {
+							character = KAZ_King_Theresis
+							ruling_only = yes
+						}
+					}
+				}
+				retire_country_leader = yes
+				promote_character = {
+					character = KAZ_King_Theresis
+					ideology = military_junta_subtype
+				}
+			}
+		}
 	}
 }
 

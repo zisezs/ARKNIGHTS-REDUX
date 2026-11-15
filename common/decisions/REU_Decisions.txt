@@ -1222,6 +1222,48 @@ REU_propaganda_decisions = {
 
 #整合运动杂项决议
 REU_misc_decisions = {
+	REU_cancel_ursus_empowerment = {
+		icon = GFX_decision_generic_political_discourse
+
+		fire_only_once = yes
+
+		visible = {
+			has_global_flag = REU_ursus_hell_mode
+			NOT = { has_global_flag = REU_ursus_empowerment_cancelled }
+		}
+
+		available = {
+			any_country = {
+				original_tag = URS
+				OR = {
+					has_idea = URS_messianic_empire
+					has_idea = URS_Eastern_Dalia_Pacification
+				}
+			}
+		}
+
+		complete_effect = {
+			set_global_flag = REU_ursus_empowerment_cancelled
+			every_country = {
+				limit = {
+					original_tag = URS
+				}
+				if = {
+					limit = {
+						has_idea = URS_messianic_empire
+					}
+					remove_ideas = URS_messianic_empire
+				}
+				if = {
+					limit = {
+						has_idea = URS_Eastern_Dalia_Pacification
+					}
+					remove_ideas = URS_Eastern_Dalia_Pacification
+				}
+			}
+		}
+	}
+
 	REU_change_flag_original = {
 		icon = GFX_decision_generic_form_nation
 
@@ -1303,6 +1345,44 @@ REU_misc_decisions = {
 			country_event = {
 				id = event_reu.129
 			}
+		}
+	}
+
+	#萨卡兹红军归乡
+	REU_sarkaz_red_army_return = {
+		icon = GFX_decision_generic_army_support
+
+		fire_only_once = yes
+
+		visible = {
+			KAC = { exists = yes }
+			any_neighbor_country = {
+				original_tag = KAC
+			}
+			has_character = REU_Conrad_Knecht
+		}
+
+		available = {
+			any_neighbor_country = {
+				original_tag = KAC
+			}
+			has_character = REU_Conrad_Knecht
+		}
+
+		complete_effect = {
+			set_country_flag = REU_sarkaz_red_army_return_started
+		}
+
+		days_remove = 14
+
+		remove_effect = {
+			country_event = {
+				id = event_reu.114
+			}
+		}
+
+		ai_will_do = {
+			base = 0
 		}
 	}
 

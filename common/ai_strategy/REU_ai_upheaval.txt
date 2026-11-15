@@ -1,4 +1,4 @@
-# 东达利亚的步枪优先：早期工厂全压在枪上，火炮与支援装备先让路
+﻿# 东达利亚的步枪优先：早期工厂全压在枪上，火炮与支援装备先让路
 REU_ai_guns_before_bread = {
 
 	allowed = {
@@ -361,5 +361,917 @@ REU_ai_grand_battery = {
 		type = template_prio
 		id = infantry
 		value = 100
+	}
+}
+
+REU_ai_equipment_baseline = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		always = yes
+	}
+
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = infantry_equipment
+		value = 4
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = support_equipment
+		value = 2
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = artillery_equipment
+		value = 1
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = motorized_equipment
+		value = 1
+	}
+
+	ai_strategy = {
+		type = air_factory_balance
+		value = -60
+	}
+}
+
+REU_ai_infantry_stock_refill = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		or = {
+			and = {
+				set_temp_variable = { reu_stock_inf = num_equipment@infantry_equipment }
+				divide_temp_variable = { reu_stock_inf = 1000 }
+				check_variable = { num_target_equipment_in_armies_k@infantry_equipment > 0 }
+				divide_temp_variable = { reu_stock_inf = num_target_equipment_in_armies_k@infantry_equipment }
+				check_variable = { reu_stock_inf < 0.10 }
+			}
+			and = {
+				set_temp_variable = { reu_stock_sup = num_equipment@support_equipment }
+				divide_temp_variable = { reu_stock_sup = 1000 }
+				check_variable = { num_target_equipment_in_armies_k@support_equipment > 0 }
+				divide_temp_variable = { reu_stock_sup = num_target_equipment_in_armies_k@support_equipment }
+				check_variable = { reu_stock_sup < 0.10 }
+			}
+			and = {
+				set_temp_variable = { reu_stock_art = num_equipment@artillery_equipment }
+				divide_temp_variable = { reu_stock_art = 1000 }
+				check_variable = { num_target_equipment_in_armies_k@artillery_equipment > 0 }
+				divide_temp_variable = { reu_stock_art = num_target_equipment_in_armies_k@artillery_equipment }
+				check_variable = { reu_stock_art < 0.10 }
+			}
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = infantry_equipment
+		value = 100
+	}
+
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = support_equipment
+		value = 90
+	}
+
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = artillery_equipment
+		value = 80
+	}
+}
+
+REU_ai_infantry_stock_surplus = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		and = {
+			set_temp_variable = { reu_surplus_inf = num_equipment@infantry_equipment }
+			divide_temp_variable = { reu_surplus_inf = 1000 }
+			check_variable = { num_target_equipment_in_armies_k@infantry_equipment > 0 }
+			divide_temp_variable = { reu_surplus_inf = num_target_equipment_in_armies_k@infantry_equipment }
+			check_variable = { reu_surplus_inf > 0.50 }
+		}
+		and = {
+			set_temp_variable = { reu_surplus_art = num_equipment@artillery_equipment }
+			divide_temp_variable = { reu_surplus_art = 1000 }
+			check_variable = { num_target_equipment_in_armies_k@artillery_equipment > 0 }
+			divide_temp_variable = { reu_surplus_art = num_target_equipment_in_armies_k@artillery_equipment }
+			check_variable = { reu_surplus_art > 0.50 }
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = infantry_equipment
+		value = -45
+	}
+
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = artillery_equipment
+		value = -100
+	}
+}
+
+REU_ai_research_core = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		always = yes
+	}
+
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_machine_tools
+		value = 1000
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = construction1
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = electronic_mechanical_engineering
+		value = 800
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = support_weapons
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = radio
+		value = 650
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = artillery1
+		value = 600
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = antiair1
+		value = 650
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = antitank1
+		value = 750
+	}
+}
+
+REU_ai_research_upheaval = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Upheaval_Enabled
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_machine_tools
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = concentrated_industry
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = excavation1
+		value = 700
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = infantry_weapons2
+		value = 800
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = support_weapons2
+		value = 800
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = artillery2
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = antitank2
+		value = 1000
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = antiair2
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_engineers2
+		value = 850
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_field_hospital2
+		value = 800
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_logistics_company2
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_recon2
+		value = 750
+	}
+}
+
+REU_ai_research_war = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Unification_After
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = advanced_machine_tools
+		value = 1000
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = assembly_line_production
+		value = 1100
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = concentrated_industry3
+		value = 950
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = construction3
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = excavation3
+		value = 700
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_infantry_weapons
+		value = 1000
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = support_weapons3
+		value = 950
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = artillery3
+		value = 950
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = antiair3
+		value = 950
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = antitank3
+		value = 1050
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_engineers3
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_field_hospital3
+		value = 850
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_logistics_company3
+		value = 1000
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = tech_recon3
+		value = 800
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = mechanical_computing
+		value = 800
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_radio
+		value = 650
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = fuel_refining
+		value = 700
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = medium_tank_2
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = medium_tank_3
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = helicopter_0
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = air_assault_1
+		value = 950
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = utility_helicopter_1
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = armed_helicopter_1
+		value = 900
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = air_assault_2
+		value = 850
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = armed_helicopter_2
+		value = 850
+	}
+}
+
+REU_ai_build_economy = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		NOT = { has_country_flag = East_Ursus_Unification_After }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 120
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = infrastructure
+		value = 60
+	}
+
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = -40
+	}
+
+	ai_strategy = {
+		type = dockyard_to_military_factory_ratio
+		value = -100
+	}
+}
+
+REU_ai_build_war_industry = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Unification_After
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 250
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 60
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = infrastructure
+		value = 100
+	}
+
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 80
+	}
+
+	ai_strategy = {
+		type = dockyard_to_military_factory_ratio
+		value = -100
+	}
+}
+
+REU_ai_divisions_after_unification = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Unification_After
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = ai_wanted_divisions_factor
+		value = 60
+	}
+}
+
+REU_ai_pp_discipline = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		always = yes
+	}
+
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = pp_spend_priority
+		id = guarantee
+		value = -1000
+	}
+}
+
+REU_ai_front_rush_urs = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_war_with = URS
+		URS = { has_capitulated = no }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		tag = URS
+		ratio = 0.90
+		priority = 1500
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+	}
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = URS
+		value = 120
+	}
+
+	ai_strategy = {
+		type = front_armor_score
+		id = URS
+		value = 100
+	}
+
+	ai_strategy = {
+		type = force_concentration_front_factor
+		tag = URS
+		ratio = 0.70
+		value = 90
+	}
+}
+
+REU_ai_careful_if_no_guns = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_war_with = URS
+		check_variable = { num_equipment@infantry_equipment < 5000 }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		tag = URS
+		ratio = 0.75
+		priority = 2000
+		ordertype = front
+		execution_type = careful
+		execute_order = no
+	}
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = URS
+		value = 90
+	}
+}
+
+REU_ai_front_rush_skh = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_war_with = SKH
+		SKH = { has_capitulated = no }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		tag = SKH
+		ratio = 0.70
+		priority = 800
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+	}
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = SKH
+		value = 60
+	}
+}
+
+REU_ai_front_rush_kmg = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_war_with = KMG
+		KMG = { has_capitulated = no }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		tag = KMG
+		ratio = 0.70
+		priority = 800
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+	}
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = KMG
+		value = 60
+	}
+}
+
+REU_ai_front_rush_ufe = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_war_with = UFE
+		UFE = { has_capitulated = no }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		tag = UFE
+		ratio = 0.70
+		priority = 800
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+	}
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = UFE
+		value = 60
+	}
+}
+
+REU_ai_front_rush_bak = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_war_with = BAK
+		BAK = { has_capitulated = no }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		tag = BAK
+		ratio = 0.70
+		priority = 800
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+	}
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = BAK
+		value = 60
+	}
+}
+
+REU_ai_front_rush_omn = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_war_with = OMN
+		OMN = { has_capitulated = no }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		tag = OMN
+		ratio = 0.70
+		priority = 800
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+	}
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = OMN
+		value = 60
+	}
+}
+
+REU_ai_front_rush_nax = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_war_with = NAX
+		NAX = { has_capitulated = no }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		tag = NAX
+		ratio = 0.70
+		priority = 800
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+	}
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = NAX
+		value = 60
+	}
+}
+
+REU_ai_flexible_composition = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Upheaval_Enabled
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = 15
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = motorized
+		value = 60
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = mountaineers
+		value = 40
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 30
+	}
+
+	ai_strategy = {
+		type = equipment_production_min_factories
+		id = artillery
+		value = 6
+	}
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = motorized
+		value = 30
+	}
+}
+
+# 后期主力：大编制机坦与空输（统一东达利亚后、百厂以上）
+REU_ai_late_heliborne_armor = {
+
+	allowed = {
+		original_tag = REU
+	}
+
+	enable = {
+		has_country_flag = East_Ursus_Unification_After
+		num_of_military_factories > 99
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 70
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = air_assault
+		value = 60
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = paratroopers
+		value = -100
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = -30
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = medium_armor
+		value = 200
+	}
+
+	ai_strategy = {
+		type = template_prio
+		id = air_assault
+		value = 180
 	}
 }

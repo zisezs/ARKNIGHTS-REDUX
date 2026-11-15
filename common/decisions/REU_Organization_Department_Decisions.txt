@@ -1,0 +1,142 @@
+REU_Organization_Department = {
+
+	REU_promote_young_cadres = {
+		icon = GFX_decision_generic_political_rally
+
+		allowed = {
+			original_tag = REU
+		}
+
+		visible = {
+			always = yes
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = REU_promote_young_cadres_tt_after_1100
+				date > 1100.1.1
+			}
+		}
+
+		cost = 100
+
+		fire_only_once = yes
+
+		complete_effect = {
+			add_advisor_role = {
+				character = REU_Anna_Morozova
+				advisor = {
+					slot = political_advisor
+					idea_token = REU_Anna_Morozova
+					traits = { REU_revolutionary_star }
+					desc = REU_Anna_Morozova_desc
+				}
+				activate = no
+			}
+			add_corps_commander_role = {
+				character = REU_Anna_Morozova
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 2
+				logistics_skill = 3
+				traits = { CHI_commissar_officer guerilla_fighter inspirational_leader }
+			}
+			add_advisor_role = {
+				character = REU_Milana_Spiridonova
+				advisor = {
+					slot = political_advisor
+					idea_token = REU_Milana_Spiridonova
+					traits = { REU_syndicalist_new_generation }
+					desc = REU_Milana_Spiridonova_desc
+				}
+				activate = no
+			}
+			add_corps_commander_role = {
+				character = REU_Milana_Spiridonova
+				skill = 1
+				attack_skill = 2
+				defense_skill = 1
+				planning_skill = 2
+				logistics_skill = 2
+				traits = { CHI_commissar_officer scavenger ARF_infected CHI_staffer_officer }
+			}
+			add_advisor_role = {
+				character = REU_Sonia
+				advisor = {
+					slot = political_advisor
+					idea_token = REU_Sonia
+					traits = { REU_winter_general }
+					desc = REU_Sonia_desc
+				}
+				activate = no
+			}
+			add_corps_commander_role = {
+				character = REU_Sonia
+				skill = 2
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 3
+				traits = { CHI_military_officer harsh_leader panzer_leader organisational_leader rising_star }
+			}
+			add_advisor_role = {
+				character = REU_Grigori_Antosha
+				advisor = {
+					slot = political_advisor
+					idea_token = REU_Grigori_Antosha
+					traits = { REU_social_department_flagbearer }
+					desc = REU_Grigori_Antosha_desc
+				}
+				activate = no
+			}
+			add_advisor_role = {
+				character = REU_Lev_Kadel
+				advisor = {
+					slot = political_advisor
+					idea_token = REU_Lev_Kadel
+					traits = { REU_red_accountant }
+					desc = REU_Lev_Kadel_desc
+				}
+				activate = no
+			}
+			add_corps_commander_role = {
+				character = REU_Lev_Kadel
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 3
+				traits = { rising_star CHI_commissar_officer scavenger harsh_leader }
+			}
+			add_corps_commander_role = {
+				character = REU_Shura_Matvey
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+				traits = { CHI_commissar_officer CHI_military_officer ARF_infected ambusher }
+			}
+			add_advisor_role = {
+				character = REU_Olga_Tripoleva
+				advisor = {
+					slot = political_advisor
+					idea_token = REU_Olga_Tripoleva
+					traits = { REU_foreign_commissar }
+					desc = REU_Olga_Tripoleva_desc
+				}
+				activate = no
+			}
+			add_corps_commander_role = {
+				character = REU_Olga_Tripoleva
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 2
+				logistics_skill = 2
+				traits = { CHI_commissar_officer infantry_leader }
+			}
+		}
+	}
+}
