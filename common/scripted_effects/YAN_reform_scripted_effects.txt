@@ -1,8 +1,9 @@
 # ==============================================================================
 # 大炎 · 变革树脚本效果（2026-11-05 重制）
 #  · YAN_reform_longmen_uprising  60 天任务超时：龙门总督府独立并易帜为邪恶的非法组织，
-#                                 随后龙门近卫局（LGD）夺取 state 208、宣战并入东陆公约
-#  · YAN_reform_longmen_guard_rise 建国/爆兵/宣战/入阵营（由上一效果调用）
+#                                 随后龙门近卫局（LGD）夺取 state 208、成为大炎保护国、
+#                                 随宗主对整合运动宣战并入东陆公约
+#  · YAN_reform_longmen_guard_rise 建国/爆兵/成为大炎傀儡/宣战/入阵营（由上一效果调用）
 #  （感染者问题的每周结算已改为动态民族精神的 stability_weekly / war_support_weekly，
 #    不再使用 on_weekly_YAN 脚本结算）
 # ==============================================================================
@@ -244,22 +245,45 @@ YAN_reform_longmen_guard_rise = {
 				}
 			}
 
-			# 立即对邪恶的非法组织宣战
-			if = {
-				limit = {
-					country_exists = LUM
-					NOT = { has_war_with = LUM }
+			# 龙门近卫局不再自创阵营：建国后成为大炎的保护国（傀儡）。
+			# autonomy_yan_protectorate 带 can_not_declare_war，因此宣战由宗主大炎执行，
+			# 近卫局作为傀儡随宗主一同参战。
+			YAN = {
+				set_autonomy = {
+					target = LGD
+					autonomy_state = autonomy_yan_protectorate
+					end_wars = no
+					end_civil_wars = no
 				}
-				declare_war_on = {
-					target = LUM
-					type = annex_everything
+				if = {
+					limit = {
+						country_exists = LUM
+						NOT = { has_war_with = LUM }
+					}
+					declare_war_on = {
+						target = LUM
+						type = annex_everything
+					}
 				}
 			}
 
-			# 加入「东陆防御公约」；公约尚未成立时由近卫局按公约纲领组建
+			# 加入「东陆防御公约」：优先跟随宗主大炎。
+			# 公约不存在时由大炎按公约纲领组建，而不是由近卫局自建新阵营。
 			if = {
 				limit = { NOT = { is_in_faction = yes } }
 				if = {
+					limit = { YAN = { is_in_faction = yes } }
+					YAN = {
+						if = {
+							limit = { is_faction_leader = yes }
+							add_to_faction = LGD
+						}
+						else = {
+							faction_leader = { add_to_faction = LGD }
+						}
+					}
+				}
+				else_if = {
 					limit = {
 						any_country = {
 							is_faction_leader = yes
@@ -275,9 +299,12 @@ YAN_reform_longmen_guard_rise = {
 					}
 				}
 				else = {
-					set_rule = { can_create_factions = yes }
-					create_faction_from_template = faction_template_shenzhou_league
-					add_faction_initiative = 1
+					YAN = {
+						set_rule = { can_create_factions = yes }
+						create_faction_from_template = faction_template_shenzhou_league
+						add_faction_initiative = 1
+						add_to_faction = LGD
+					}
 				}
 			}
 		}
