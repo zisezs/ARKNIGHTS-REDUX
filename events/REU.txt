@@ -2357,6 +2357,10 @@ country_event = {
 		name = event_reu.128.a
 		REU_First_Congress_Renaming_effect = yes
 		custom_effect_tooltip = event_reu.128.a_tt
+		country_event = {
+			id = event_reu.143
+			days = 7
+		}
 	}
 }
 
@@ -2511,6 +2515,7 @@ country_event = {
 
 	immediate = {
 		set_cosmetic_tag = Soviet_Union_classic
+		set_country_flag = REU_dawn_of_tomorrow_fired
 		if = {
 			limit = { is_ai = no }
 			play_song = "REU_internationale"
@@ -2598,6 +2603,198 @@ country_event = {
 		country_event = {
 			id = event_reu.131
 			days = 30
+		}
+	}
+}
+
+country_event = {
+	id = event_reu.139
+	title = event_reu.139.t
+	desc = event_reu.139.d
+	picture = GFX_report_event_REU_black_dragon_18
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.139.a
+		custom_effect_tooltip = REU_red_army_modifier_tt
+		add_to_variable = {
+			army_strength_factor_var = 0.025
+			tooltip = REU_army_strength_tt
+		}
+		add_to_variable = {
+			army_org_factor_var = 0.025
+			tooltip = army_org_factor_tt
+		}
+	}
+}
+
+country_event = {
+	id = event_reu.140
+	title = event_reu.140.t
+	desc = event_reu.140.d
+	picture = GFX_report_event_REU_four_edge_bayonet
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = REU
+		has_war_with = KMG
+		war_length_with = {
+			tag = KMG
+			days > 10
+		}
+	}
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = event_reu.140.a
+	}
+}
+
+country_event = {
+	id = event_reu.141
+	title = event_reu.141.t
+	desc = event_reu.141.d
+	picture = GFX_report_event_REU_dawn_of_tomorrow
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.141.a
+		custom_effect_tooltip = event_reu.141.a_tt
+		set_variable = { REU_alina_portrait = 5 }
+		if = {
+			limit = { has_character = REU_Talulah }
+			REU_Talulah = {
+				set_portraits = {
+					civilian = { large = GFX_portrait_REU_Talulah_green }
+					army = { large = GFX_portrait_REU_Talulah_green }
+				}
+			}
+		}
+		if = {
+			limit = { has_character = REU_Alina }
+			REU_Alina = {
+				set_portraits = {
+					civilian = { large = GFX_portrait_REU_Alina_green }
+					army = { large = GFX_portrait_REU_Alina_green }
+				}
+			}
+		}
+		if = {
+			limit = { has_character = REU_Yelena }
+			REU_Yelena = {
+				set_portraits = {
+					civilian = { large = GFX_portrait_REU_Yelena_green }
+					army = { large = GFX_portrait_REU_Yelena_green }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = event_reu.141.b
+	}
+}
+
+country_event = {
+	id = event_reu.142
+	title = event_reu.142.t
+	desc = event_reu.142.d
+	picture = GFX_report_event_REU_east_dalia_bandit_cleanup
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.142.a
+	}
+}
+
+country_event = {
+	id = event_reu.143
+	title = event_reu.143.t
+	desc = event_reu.143.d
+	picture = GFX_report_event_REU_infected_shield
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.143.a
+		country_event = {
+			id = event_reu.144
+			days = 15
+		}
+	}
+}
+
+country_event = {
+	id = event_reu.144
+	title = event_reu.144.t
+	desc = event_reu.144.d
+	picture = GFX_report_event_REU_patriot_death
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.144.a
+		custom_effect_tooltip = event_reu.144.a_tt
+		custom_effect_tooltip = event_reu.144.a_eff_tt
+		hidden_effect = {
+			add_stability = -0.05
+			retire_character = REU_Buldrokkastee
+		}
+	}
+}
+
+country_event = {
+	id = event_reu.145
+	title = event_reu.145.t
+	desc = event_reu.145.d
+	picture = GFX_report_event_REU_capital_choice
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.145.a
+		custom_effect_tooltip = event_reu.145.a_tt
+		hidden_effect = {
+			set_capital = { state = 110 }
+		}
+	}
+
+	option = {
+		name = event_reu.145.b
+		custom_effect_tooltip = event_reu.145.b_tt
+		hidden_effect = {
+			set_capital = { state = 58 }
+		}
+	}
+}
+
+#国际纵队
+country_event = {
+	id = event_reu.146
+	title = event_reu.146.t
+	desc = event_reu.146.d
+	picture = GFX_report_event_REU_international_brigade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = event_reu.146.a
+		custom_effect_tooltip = event_reu.146.a_tt
+		hidden_effect = {
+			load_oob = "REU_international_brigade"
 		}
 	}
 }

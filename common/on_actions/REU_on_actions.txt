@@ -25,11 +25,23 @@ on_actions = {
 				every_country = {
 					limit = {
 						original_tag = URS
-						NOT = { has_idea = URS_Eastern_Dalia_Pacification }
+					}
+					if = {
+						limit = { has_idea = URS_Eastern_Dalia_Pacification }
+						remove_ideas = URS_Eastern_Dalia_Pacification
 					}
 					add_timed_idea = {
 						idea = URS_Eastern_Dalia_Pacification
-						days = 180
+						days = 365
+					}
+				}
+				if = {
+					limit = {
+						country_exists = URS
+						URS = { is_ai = yes }
+					}
+					URS = {
+						REU_hell_ursus_reinforcements_effect = yes
 					}
 				}
 			}

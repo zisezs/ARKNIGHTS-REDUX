@@ -2038,6 +2038,15 @@ focus_tree = {
 			}
 			custom_effect_tooltip = generic_skip_one_line_tt
 			set_country_flag = REU_ministry_of_foreign_affairs_flag
+			if = {
+				limit = {
+					has_country_flag = REU_third_army_absorbed
+				}
+				country_event = {
+					id = event_reu.146
+					days = 1
+				}
+			}
 			custom_effect_tooltip = unlock_political_advisor_tooltip
 			show_ideas_tooltip = REU_Inessa_dHerbenville_political_advisor
 			add_political_power = 75
@@ -2418,6 +2427,10 @@ focus_tree = {
 			}
 			custom_effect_tooltip = generic_skip_one_line_tt	
 			add_stability = 0.05
+			country_event = {
+				id = event_reu.139
+				days = 1
+			}
 			# custom_effect_tooltip = REU_local_militia_tt
 			# division_template = {
 			# 	name = "民兵队"
@@ -5121,7 +5134,7 @@ focus = {
 
 focus = {
 	id = REU_post_commune_wall_poster
-	icon = GFX_goals_REU_audience_and_guidance
+	icon = GFX_focus_REU_post_commune_wall_poster_alt
 	cost = 3
 	x = -5
 	y = 2
@@ -5164,7 +5177,7 @@ focus = {
 
 focus = {
 	id = REU_urge_social_construction
-	icon = GFX_goals_REU_disclosure_conference
+	icon = GFX_focus_REU_urge_social_construction_alt
 	cost = 3
 	x = -3
 	y = 2
@@ -5303,7 +5316,7 @@ focus = {
 
 focus = {
 	id = REU_decentralize_cadre_power
-	icon = GFX_focus_REU_reorganize_central_government
+	icon = GFX_focus_REU_decentralize_cadre_power_alt
 	cost = 3
 	x = -4
 	y = 3
@@ -5400,7 +5413,7 @@ focus = {
 
 focus = {
 	id = REU_liberate_the_poor_and_speak
-	icon = GFX_goals_REU_liberate_poor_people
+	icon = GFX_focus_REU_liberate_the_poor_and_speak_alt
 	cost = 3
 	x = -6
 	y = 3
@@ -5433,7 +5446,7 @@ focus = {
 
 focus = {
 	id = REU_seek_army_assistance
-	icon = GFX_goals_REU_able_to_act
+	icon = GFX_focus_REU_seek_army_assistance_alt
 	cost = 3
 	x = -2
 	y = 3
@@ -5532,7 +5545,7 @@ focus = {
 
 focus = {
 	id = REU_appeal_to_the_broad_left_front
-	icon = GFX_goals_REU_liberate_poor_people
+	icon = GFX_focus_REU_appeal_to_the_broad_left_front_alt
 	cost = 3
 	x = 6
 	y = 3
@@ -5723,7 +5736,7 @@ focus = {
 
 focus = {
 	id = REU_army_upholds_loyalty_tradition
-	icon = GFX_goals_REU_principal_of_organization
+	icon = GFX_focus_REU_army_upholds_loyalty_tradition_alt
 	cost = 3
 	x = -1
 	y = 4
@@ -5778,7 +5791,7 @@ focus = {
 
 focus = {
 	id = REU_compulsory_education
-	icon = GFX_goals_REU_audience_and_guidance
+	icon = GFX_focus_REU_compulsory_education_alt
 	cost = 3
 	x = 1
 	y = 4
@@ -5886,7 +5899,7 @@ focus = {
 
 focus = {
 	id = REU_socialist_league
-	icon = GFX_goals_REU_high_quality_decisions
+	icon = GFX_focus_REU_socialist_league_alt
 	cost = 3
 	x = 5
 	y = 4
@@ -5937,7 +5950,7 @@ focus = {
 
 focus = {
 	id = REU_strengthen_party_leadership
-	icon = GFX_goals_REU_clean_the_grass_roots
+	icon = GFX_focus_REU_strengthen_party_leadership_alt
 	cost = 3
 	x = 7
 	y = 4
@@ -5988,7 +6001,7 @@ focus = {
 
 focus = {
 	id = REU_this_is_the_final_struggle
-	icon = GFX_focus_REU_A_public_debate
+	icon = GFX_focus_REU_this_is_the_final_struggle_alt
 	cost = 3
 	x = -5
 	y = 5
@@ -6052,7 +6065,7 @@ focus = {
 
 focus = {
 	id = REU_plan_in_disadvantage
-	icon = GFX_goals_REU_all_honor_to_us
+	icon = GFX_focus_REU_plan_in_disadvantage_alt
 	cost = 3
 	x = -3
 	y = 5
@@ -6111,7 +6124,7 @@ focus = {
 
 focus = {
 	id = REU_greatest_common_divisor
-	icon = GFX_goals_REU_more_important_thing
+	icon = GFX_focus_REU_greatest_common_divisor_alt
 	cost = 3
 	x = 3
 	y = 5
@@ -6171,7 +6184,7 @@ focus = {
 
 focus = {
 	id = REU_walk_alone_in_silence
-	icon = GFX_goals_REU_principal_of_organization
+	icon = GFX_focus_REU_walk_alone_in_silence_alt
 	cost = 3
 	x = 5
 	y = 5
@@ -6308,7 +6321,7 @@ focus = {
 # ===== REU 民主改革后续三分支（紧急手段 / 稍有进步 / 大获成功） =====
 focus = {
 	id = REU_emergency_measures
-	icon = GFX_focus_REU_Buy_time
+	icon = GFX_focus_REU_emergency_measures_alt
 	cost = 3
 	x = -6
 	y = 7

@@ -222,6 +222,16 @@ East_Ursus_Upheaval_Decisions_GUI = {
 					transfer_state = 168
 					transfer_state = 165
 					transfer_state = 156
+					set_country_flag = REU_third_army_absorbed
+					if = {
+						limit = {
+							has_country_flag = REU_ministry_of_foreign_affairs_flag
+						}
+						country_event = {
+							id = event_reu.146
+							days = 1
+						}
+					}
 					country_event = {
 						id = event_reu.93
 					}
@@ -1879,6 +1889,11 @@ East_Ursus_Upheaval_Decisions_GUI = {
 					id = event_reu.124
 					days = 3
 				}
+
+				country_event = {
+					id = event_reu.142
+					days = 30
+				}
 			}
 			if = {
 				limit = {
@@ -2909,6 +2924,9 @@ Ursus_Unification_War_Decisions_GUI = {
 					original_tag = REU
 				}
 				set_cosmetic_tag = Soviet_Union
+				country_event = {
+					id = event_reu.145
+				}
 			if = {
 				limit = {
 					has_character = REU_Talulah
