@@ -1,5 +1,7 @@
 # 大炎自动推进树 · 15 格国策效果（2026-10-26）
 # 由国策 completion_reward 调用；变量累加，动态修正实时显示。
+# 2026-11-14：积甲成山三格（年大导演/工欲善其事/玄极巨兵）攻防 +5%→+10%，
+#              各追加装甲厚度 +5%（隐藏 idea 按格拆分，变量同步累加用于显示）。
 
 # ============================================================
 # 初始化 / 挂载
@@ -50,15 +52,25 @@ YAN_auto_ensure_green = {
 # 9 年大导演准备开机！
 YAN_auto_reward_9 = {
 	YAN_auto_ensure_armor = yes
-	add_to_variable = { YAN_auto_armor_atk = 0.05 }
-	add_to_variable = { YAN_auto_armor_def = 0.05 }
+	add_to_variable = { YAN_auto_armor_atk = 0.10 }
+	add_to_variable = { YAN_auto_armor_def = 0.10 }
+	add_to_variable = { YAN_auto_armor_thick = 0.05 }
+	if = {
+		limit = { NOT = { has_idea = YAN_auto_armor_thickness_auto_9 } }
+		add_ideas = YAN_auto_armor_thickness_auto_9
+	}
 }
 
 # 1 工欲善其事...
 YAN_auto_reward_1 = {
 	YAN_auto_ensure_armor = yes
-	add_to_variable = { YAN_auto_armor_atk = 0.05 }
-	add_to_variable = { YAN_auto_armor_def = 0.05 }
+	add_to_variable = { YAN_auto_armor_atk = 0.10 }
+	add_to_variable = { YAN_auto_armor_def = 0.10 }
+	add_to_variable = { YAN_auto_armor_thick = 0.05 }
+	if = {
+		limit = { NOT = { has_idea = YAN_auto_armor_thickness_auto_1 } }
+		add_ideas = YAN_auto_armor_thickness_auto_1
+	}
 }
 
 # 2 材料学大跳跃！
@@ -81,8 +93,13 @@ YAN_auto_reward_3 = {
 # 4 玄极巨兵入列！ —— 联动【皇帝轮流做，今年到我家！】：允许年出任领导人
 YAN_auto_reward_4 = {
 	YAN_auto_ensure_armor = yes
-	add_to_variable = { YAN_auto_armor_atk = 0.05 }
-	add_to_variable = { YAN_auto_armor_def = 0.05 }
+	add_to_variable = { YAN_auto_armor_atk = 0.10 }
+	add_to_variable = { YAN_auto_armor_def = 0.10 }
+	add_to_variable = { YAN_auto_armor_thick = 0.05 }
+	if = {
+		limit = { NOT = { has_idea = YAN_auto_armor_thickness_auto_4 } }
+		add_ideas = YAN_auto_armor_thickness_auto_4
+	}
 	if = {
 		limit = { NOT = { has_character = YAN_gen_nian } }
 		recruit_character = YAN_gen_nian

@@ -1,0 +1,18 @@
+on_actions = {
+
+	# 大炎【玩家须知】：开局 1 天后发给执掌大炎的玩家
+	on_startup = {
+		effect = {
+			every_country = {
+				limit = {
+					original_tag = YAN
+					is_ai = no
+				}
+				country_event = {
+					id = yan_intro.1
+					days = 1
+				}
+			}
+		}
+	}
+}

@@ -476,6 +476,15 @@ focus_tree = {
 
 			if = {
 				limit = { country_exists = LGD }
+				# 近卫局此时是大炎的保护国；先解除附属再吞并，
+				# 避免 annex_country 对傀儡静默失败、终格切树后残留 LGD。
+				if = {
+					limit = { LGD = { is_subject = yes } }
+					set_autonomy = {
+						target = LGD
+						autonomy_state = autonomy_free
+					}
+				}
 				annex_country = { target = LGD }
 			}
 

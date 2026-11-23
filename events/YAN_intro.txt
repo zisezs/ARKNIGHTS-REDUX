@@ -1,0 +1,22 @@
+# ==============================================================================
+#  大炎（YAN）· 开局事件【玩家须知】
+#  投递：common/on_actions/YAN_intro_on_actions.txt（on_startup，仅玩家）
+#  本地化：localisation/simp_chinese/ARF_YAN_Intro_l_simp_chinese.yml
+# ==============================================================================
+
+add_namespace = yan_intro
+
+# 玩家须知：开局告知本 TAG 的文案来源与内战设定
+country_event = {
+	id = yan_intro.1
+	title = yan_intro.1.t
+	desc = yan_intro.1.d
+	picture = GFX_report_event_Generic_Courthouse
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = yan_intro.1.a
+	}
+}
